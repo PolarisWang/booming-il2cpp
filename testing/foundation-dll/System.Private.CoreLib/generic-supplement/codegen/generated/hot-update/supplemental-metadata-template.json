@@ -1,0 +1,89 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+      "metadataToken": 33554435
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+      "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+      "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+      "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericSupplementSubjects",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+      "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+      "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

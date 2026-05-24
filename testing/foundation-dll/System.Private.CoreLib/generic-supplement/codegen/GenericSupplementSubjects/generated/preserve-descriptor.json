@@ -1,0 +1,72 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

@@ -1,0 +1,1182 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotCoreIr",
+  "methods": [
+    {
+      "methodId": "generic-supplement-subjects.generic-supplement-subjects.subject-0",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_0:System.Void()",
+      "signature": "System.Void GenericSupplementSubjects::Subject_0()",
+      "identity": {
+        "assemblyName": "GenericSupplementSubjects",
+        "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+        "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_0:System.Void()",
+        "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_0:System.Void()",
+        "methodId": "generic-supplement-subjects.generic-supplement-subjects.subject-0",
+        "signature": "System.Void GenericSupplementSubjects::Subject_0()"
+      },
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_0",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "callee": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "method",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "method",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "field",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "field",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericSupplementSubjects"
+    },
+    {
+      "methodId": "generic-supplement-subjects.generic-supplement-subjects.subject-1",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_1:System.Void()",
+      "signature": "System.Void GenericSupplementSubjects::Subject_1()",
+      "identity": {
+        "assemblyName": "GenericSupplementSubjects",
+        "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+        "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_1:System.Void()",
+        "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_1:System.Void()",
+        "methodId": "generic-supplement-subjects.generic-supplement-subjects.subject-1",
+        "signature": "System.Void GenericSupplementSubjects::Subject_1()"
+      },
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_1",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "callee": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "method",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "method",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "field",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "field",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericSupplementSubjects"
+    },
+    {
+      "methodId": "generic-supplement-subjects.generic-supplement-subjects.subject-2",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()",
+      "signature": "System.Void GenericSupplementSubjects::Subject_2()",
+      "identity": {
+        "assemblyName": "GenericSupplementSubjects",
+        "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+        "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()",
+        "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()",
+        "methodId": "generic-supplement-subjects.generic-supplement-subjects.subject-2",
+        "signature": "System.Void GenericSupplementSubjects::Subject_2()"
+      },
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_2",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "callee": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "method",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "method",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "field",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "field",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericSupplementSubjects"
+    },
+    {
+      "methodId": "generic-supplement-subjects.generic-supplement-subjects.subject-3",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()",
+      "signature": "System.Void GenericSupplementSubjects::Subject_3()",
+      "identity": {
+        "assemblyName": "GenericSupplementSubjects",
+        "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+        "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()",
+        "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()",
+        "methodId": "generic-supplement-subjects.generic-supplement-subjects.subject-3",
+        "signature": "System.Void GenericSupplementSubjects::Subject_3()"
+      },
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_3",
+      "isStatic": true,
+      "returnType": "System.Void",
+      "returnAbi": {
+        "carrierKindCode": 0,
+        "typeShape": 1
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 1,
+      "exceptionRegionCount": 1,
+      "exceptionRegions": [
+        {
+          "handlingKindCode": 1,
+          "tryOffset": 1,
+          "tryLength": 29,
+          "handlerOffset": 30,
+          "handlerLength": 11,
+          "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+        }
+      ],
+      "instructions": [
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 2,
+          "resultType": "System.Int32",
+          "callee": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "method",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 7,
+          "resultType": "System.Int32",
+          "callee": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "method",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 12,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ceq",
+          "opCode": 31,
+          "ilOffset": 15,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 17,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloc",
+          "opCode": 7,
+          "operand": 0,
+          "ilOffset": 18,
+          "isPreserveSig": false
+        },
+        {
+          "op": "brfalse",
+          "opCode": 19,
+          "operand": 27,
+          "ilOffset": 19,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 21,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "field",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 28,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 30,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 1,
+          "ilOffset": 32,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "stsfld",
+          "opCode": 13,
+          "operand": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+          "ilOffset": 33,
+          "resultType": "System.Void",
+          "reference": {
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectKind": "field",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode"
+          },
+          "targetReference": {
+            "kind": 2,
+            "assemblyName": "GenericSupplementSubjects",
+            "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+            "declaringTypeShape": 1,
+            "fieldTypeSubjectId": "System.Int32"
+          },
+          "runtimeServiceKind": 5,
+          "isPreserveSig": false
+        },
+        {
+          "op": "leave",
+          "opCode": 50,
+          "operand": 41,
+          "ilOffset": 39,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericSupplementSubjects"
+    },
+    {
+      "methodId": "generic-supplement-subjects.generic-supplement-native-entry.test-supplemental-metadata-roundtrip",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+      "signature": "System.Int32 GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip()",
+      "identity": {
+        "assemblyName": "GenericSupplementSubjects",
+        "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+        "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+        "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+        "methodId": "generic-supplement-subjects.generic-supplement-native-entry.test-supplemental-metadata-roundtrip",
+        "signature": "System.Int32 GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip()"
+      },
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericSupplementSubjects"
+    },
+    {
+      "methodId": "generic-supplement-subjects.generic-supplement-native-entry.test-type-lookup-by-subject-id",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+      "signature": "System.Int32 GenericSupplementNativeEntry::TestTypeLookupBySubjectId()",
+      "identity": {
+        "assemblyName": "GenericSupplementSubjects",
+        "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+        "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+        "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+        "methodId": "generic-supplement-subjects.generic-supplement-native-entry.test-type-lookup-by-subject-id",
+        "signature": "System.Int32 GenericSupplementNativeEntry::TestTypeLookupBySubjectId()"
+      },
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericSupplementSubjects"
+    },
+    {
+      "methodId": "generic-supplement-subjects.generic-supplement-native-entry.test-type-lookup-by-token",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+      "signature": "System.Int32 GenericSupplementNativeEntry::TestTypeLookupByToken()",
+      "identity": {
+        "assemblyName": "GenericSupplementSubjects",
+        "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+        "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+        "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+        "methodId": "generic-supplement-subjects.generic-supplement-native-entry.test-type-lookup-by-token",
+        "signature": "System.Int32 GenericSupplementNativeEntry::TestTypeLookupByToken()"
+      },
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericSupplementSubjects"
+    },
+    {
+      "methodId": "generic-supplement-subjects.generic-supplement-native-entry.test-generic-instantiation",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+      "signature": "System.Int32 GenericSupplementNativeEntry::TestGenericInstantiation()",
+      "identity": {
+        "assemblyName": "GenericSupplementSubjects",
+        "declaringTypeSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+        "definitionSubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+        "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+        "methodId": "generic-supplement-subjects.generic-supplement-native-entry.test-generic-instantiation",
+        "signature": "System.Int32 GenericSupplementNativeEntry::TestGenericInstantiation()"
+      },
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 0,
+      "parameterAbis": [],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 1,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "GenericSupplementSubjects"
+    }
+  ]
+}

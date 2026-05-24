@@ -2,77 +2,45 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-24T17:53:54",
-  "duration_ms": 27401,
-  "overall_status": "passed",
+  "timestamp": "2026-05-24T19:28:32",
+  "duration_ms": 53221,
+  "overall_status": "failed",
   "stages": {
     "codegen": {
       "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
+      "status": "failed",
+      "summary": "entry.exe build failed",
       "details": {
-        "methodCount": 18,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "OK",
+          "build_entry_exe": "FAILED"
+        }
       },
       "errors": [],
-      "duration_ms": 27283
+      "duration_ms": 26607
     },
     "jit_codegen": {
       "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "entry-jit.exe already exists, skipping rebuild",
+      "status": "failed",
+      "summary": "JIT codegen failed",
       "details": {},
       "errors": [],
-      "duration_ms": 0
-    },
-    "fact": {
-      "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (18/18)",
-      "details": {
-        "fact": {
-          "status": "passed",
-          "passed": 18,
-          "total": 18
-        }
-      },
-      "errors": [],
-      "duration_ms": 45
+      "duration_ms": 26611
     },
     "fact_jit": {
       "stage": "fact_jit",
-      "status": "passed",
-      "summary": "Fact JIT verify=passed (18/18)",
-      "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 18,
-          "total": 18,
-          "exit_code": 0
-        }
-      },
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT fact",
+      "details": {},
       "errors": [],
-      "duration_ms": 35
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "18/18 passed, 0 failed (stub=0)",
-      "details": {
-        "passedMethods": 18,
-        "failedMethods": 0,
-        "totalMethods": 18,
-        "realMethods": 18,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 34
+      "duration_ms": 0
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
+    "methodCoverage": 0.0,
     "testedRate": 0.0,
-    "overall": 100.0
+    "overall": 0.0
   },
   "dashboard": {
     "interpreter": {},
@@ -93,13 +61,7 @@
       }
     },
     "performance": {},
-    "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 18,
-        "failedMethods": 0,
-        "totalMethods": 18
-      }
-    },
+    "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.42,

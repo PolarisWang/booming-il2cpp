@@ -1,0 +1,68 @@
+﻿{
+  "schemaVersion": 2,
+  "assemblyName": "GenericSupplementSubjects",
+  "methodCount": 8,
+  "defaultStringId": 0,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    }
+  ]
+}

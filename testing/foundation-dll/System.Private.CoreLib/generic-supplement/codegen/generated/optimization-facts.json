@@ -1,0 +1,87 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
+}

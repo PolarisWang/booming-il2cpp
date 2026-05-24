@@ -32,6 +32,10 @@ extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectEntryIndices[];
 extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
+extern "C" const int kSubjectEntryCount;
+extern "C" const int kSubjectEntryIndices[];
 extern "C" int32_t kChaosExternalRuntimeCount;
 
 // ChaosJitRegisterAll is defined in native-aot.generated.cpp (no-op in AOT mode).

@@ -1,0 +1,31 @@
+{
+  "family": "convert-char",
+  "assembly": "System.Private.CoreLib",
+  "aot_method_count": 18,
+  "hotpatch_entry_count": 18,
+  "coverage_ratio": 1.0,
+  "covered_methods": [
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+    "ConvertCharSubjects_ConvertCharSubjects_Subject_9"
+  ],
+  "uncovered_methods": [],
+  "legitimate_uncovered": [],
+  "gap_uncovered": [],
+  "passed": true
+}

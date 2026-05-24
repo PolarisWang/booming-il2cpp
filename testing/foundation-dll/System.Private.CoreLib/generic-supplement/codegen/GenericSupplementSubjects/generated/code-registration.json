@@ -1,0 +1,60 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GenericSupplementSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_0",
+          "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_1",
+          "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_2",
+          "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_3",
+          "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip",
+          "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId",
+          "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken",
+          "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation",
+          "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}
