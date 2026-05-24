@@ -19,7 +19,7 @@ namespace chaos::il2cpp::jit {
 ///
 /// Thread safety:
 ///   - The T4 code registry (entries_[]) is protected by a spinlock (lock_).
-///   - The TLS lookup cache (g_t4_lookup_cache, not in class) provides O(1)
+///   - The TLS lookup cache (g_jit_lookup_cache, not in class) provides O(1)
 ///     repeated lookups within the same code page.
 ///   - A global generation counter (lookup_generation_) invalidates stale
 ///     TLS caches across threads when code is demoted.
@@ -44,16 +44,16 @@ private:
     // Maps code address ranges back to JitMethod for VEH lookup.
     // Fixed-size array (no heap allocation in exception context).
     // Thread-safe: entries are append-only, never removed.
-    static constexpr uint32_t kMaxT4CodeEntries = 2048;
+    static constexpr uint32_t kMaxJitCodeEntries = 2048;
 
-    struct T4CodeEntry {
+    struct JitCodeEntry {
         const void*       code_start = nullptr;   // RX code entry point
         uint32_t          code_size  = 0;          // bytes
         const JitMethod*  nm         = nullptr;
         uint32_t          patch_method_token = 0;  // PatchMethod token for hotpatch demotion
     };
 
-    T4CodeEntry entries_[kMaxT4CodeEntries];
+    JitCodeEntry entries_[kMaxJitCodeEntries];
     uint32_t    count_ = 0;
     std::atomic<long> lock_{0};  // spinlock: 0=free, 1=locked
 

@@ -20,8 +20,6 @@ namespace chaos::il2cpp::runtime_core {
 
 // ── Internal helpers ──────────────────────────────────────────────────
 
-namespace {
-
 /// Reader-writer lock guarding assemblies_ table and loaded_count_.
 /// Read paths (FindAssembly, FindByModuleId, GetStaticField) acquire shared_lock.
 /// Write paths (LoadAssembly, UnloadAssembly) acquire unique_lock.
@@ -30,6 +28,8 @@ static std::shared_mutex& s_asm_mutex() {
     static std::shared_mutex mutex;
     return mutex;
 }
+
+namespace {
 
 /// Default number of static fields to pre-allocate when the assembly
 /// doesn't specify a count. Grown on demand via GetStaticField.
@@ -342,9 +342,12 @@ void* AssemblyManager::GetStaticField(uint32_t module_id,
     // Grow the static field array if needed (realloc on the domain heap).
     if (field_offset >= alc->static_field_count) {
         // Prevent near-UINT32_MAX field_offset from wrapping to 0.
-        // kMaxStaticFieldCount check above already rejects near-wraparound values
-        // (1M << UINT32_MAX), but keep the explicit guard for defense-in-depth.
+        // Keep the explicit guard for defense-in-depth.
         if (field_offset >= UINT32_MAX - 1) {
+            return nullptr;
+        }
+
+        if (field_offset >= kMaxStaticFieldCount) {
             return nullptr;
         }
 

@@ -24,7 +24,7 @@ void TryOsrPromotion(RegisterFrame& frame,
     using PM = chaos::il2cpp::runtime_core::PatchMethod;
 
     // Don't re-promote if already at T4 (another thread got there first).
-    if (pm->tier_state.load(std::memory_order_acquire) >= PM::kT4Ready) {
+    if (pm->tier_state.load(std::memory_order_acquire) >= PM::kJitted) {
         // If the method already has a cached JitMethod with an OSR entry,
         // re-enter T4 via OSR directly.  This handles the deopt→T4
         // re-promotion loop: after deoptimization, the tier_state is still
@@ -68,8 +68,8 @@ void TryOsrPromotion(RegisterFrame& frame,
     if (nm->osr_entry_offset != 0) {
         // Set tier state BEFORE calling OSR entry so future calls also hit T4.
         pm->cached_native_method = nm;
-        pm->tier_state.store(PM::kT4Ready, std::memory_order_release);
-        chaos::il2cpp::jit::RegisterT4Code(nm->code, nm->code_size, nm);
+        pm->tier_state.store(PM::kJitted, std::memory_order_release);
+        chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
 
         // Set OSR resume PC to loop header before calling OSR entry.
         chaos::il2cpp::jit::t_deopt_state.osr_resume_pc = frame.pc;
@@ -91,8 +91,8 @@ void TryOsrPromotion(RegisterFrame& frame,
 
     // V1 fallback: cache for re-entry on next call
     pm->cached_native_method = nm;
-    pm->tier_state.store(PM::kT4Ready, std::memory_order_release);
-    chaos::il2cpp::jit::RegisterT4Code(nm->code, nm->code_size, nm);
+    pm->tier_state.store(PM::kJitted, std::memory_order_release);
+    chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
 }
 
 }  // namespace chaos::il2cpp::interpreter

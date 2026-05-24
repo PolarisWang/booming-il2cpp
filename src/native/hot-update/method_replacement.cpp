@@ -21,7 +21,7 @@
 // interpreter (which routes through method_replacement::Resolve).
 // Uses runtime_core callback slots to avoid circular dependency with
 // chaos_codegen (codegen → interpreter → hot_update → codegen).
-#include <t4_demotion.h>
+#include <jit_demotion.h>
 
 // TierManager::ResetMethodCallCount — after demotion, reset call_count so
 // the tiering system re-promotes the method through T1→T2→T3→T4.
@@ -82,11 +82,11 @@ bool Register(CHAOS_IL2CPP_UINT32 method_token, void* thunk) {
     // Demote T4-compiled code that references this method.
     // When a hotpatch replacement is registered, any T4 methods that call
     // the patched method must fall back to the interpreter (which routes
-    // through Resolve()).  DemoteT4ByToken handles methods whose own token
-    // matches (e.g., the patched method's own T4 code).  DemoteT4ByCallSiteToken
+    // through Resolve()).  DemoteJittedMethod handles methods whose own token
+    // matches (e.g., the patched method's own T4 code).  DemoteJittedCallSite
     // handles T4 methods whose call_sites reference the patched method.
-    chaos::il2cpp::runtime_core::DemoteT4ByToken(method_token);
-    chaos::il2cpp::runtime_core::DemoteT4ByCallSiteToken(method_token);
+    chaos::il2cpp::runtime_core::DemoteJittedMethod(method_token);
+    chaos::il2cpp::runtime_core::DemoteJittedCallSite(method_token);
 
     // Reset the method's call_count so tiering can re-trigger T4 compilation.
     // After demotion, the next calls will re-warm the method through T1→T2→T3,

@@ -36,16 +36,16 @@ public:
 
 private:
     // ── T4 Code Registry ──────────────────────────────────────────────────
-    static constexpr uint32_t kMaxT4CodeEntries = 2048;
+    static constexpr uint32_t kMaxJitCodeEntries = 2048;
 
-    struct T4CodeEntry {
+    struct JitCodeEntry {
         const void*       code_start = nullptr;
         uint32_t          code_size  = 0;
         const JitMethod*  nm         = nullptr;
         uint32_t          patch_method_token = 0;
     };
 
-    T4CodeEntry entries_[kMaxT4CodeEntries];
+    JitCodeEntry entries_[kMaxJitCodeEntries];
     uint32_t    count_ = 0;
     std::atomic<long> lock_{0};
 

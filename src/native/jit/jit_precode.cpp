@@ -32,6 +32,7 @@
 #include <jit_registration.h>    // JitT4Entry
 #include <tier_manager.h>        // TierManager::EnqueueJitRecompilation
 #include <chaos/log.h>           // CHAOS_IL2CPP_LOG_ERROR_M
+#include <chaos/eh.h>            // CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN
 
 #include <cstdlib>
 #include <cstring>
@@ -294,7 +295,7 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
         // PGO: increment call counter when profiling is enabled
         if (precode->config.enable_pgo) {
             uint32_t count = precode->pgo_call_count.fetch_add(1, std::memory_order_relaxed);
-            if (count > kPgoTier1Threshold && !precode->tier1_enqueued) {
+            if (count > kPgoFullJitThreshold && !precode->tier1_enqueued) {
                 precode->tier1_enqueued = true;
                 runtime_core::TierManager::Get().EnqueueJitRecompilation(precode, false);
             }
@@ -307,7 +308,14 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
     if (precode->state.compare_exchange_strong(expected, kPrecodeCompiling,
                                                 std::memory_order_acq_rel)) {
         // Winner — compile the method
-        auto* jit = Compile(precode->ir, precode->config);
+        JitMethod* jit = nullptr;
+        CHAOS_EH_TRY
+            jit = Compile(precode->ir, precode->config);
+        CHAOS_EH_CATCH_BEGIN
+            CHAOS_IL2CPP_LOG_ERROR_M("jit",
+                "JitStubDispatchImpl: Compile() threw managed exception");
+            jit = nullptr;
+        CHAOS_EH_END
         if (!jit) {
             // Compilation failed — reset state so we can retry
             precode->state.store(kPrecodeUncompiled, std::memory_order_release);
@@ -430,7 +438,7 @@ extern "C" void* HybridStubDispatchImpl(HybridPrecode* precode) noexcept {
         // PGO: increment call counter when profiling is enabled
         if (precode->config.enable_pgo) {
             uint32_t count = precode->pgo_call_count.fetch_add(1, std::memory_order_relaxed);
-            if (count > kPgoTier1Threshold && !precode->tier1_enqueued) {
+            if (count > kPgoFullJitThreshold && !precode->tier1_enqueued) {
                 precode->tier1_enqueued = true;
                 runtime_core::TierManager::Get().EnqueueJitRecompilation(precode, true);
             }
@@ -449,7 +457,14 @@ extern "C" void* HybridStubDispatchImpl(HybridPrecode* precode) noexcept {
         if (precode->state.compare_exchange_strong(expected, kPrecodeCompiling,
                                                     std::memory_order_acq_rel)) {
             // Winner — compile the method
-            auto* jit = Compile(precode->ir, precode->config);
+            JitMethod* jit = nullptr;
+            CHAOS_EH_TRY
+                jit = Compile(precode->ir, precode->config);
+            CHAOS_EH_CATCH_BEGIN
+                CHAOS_IL2CPP_LOG_ERROR_M("jit",
+                    "HybridStubDispatchImpl: Compile() threw managed exception");
+                jit = nullptr;
+            CHAOS_EH_END
             if (jit) {
                 // Store the AOT entry for deoptimization fallback.
                 // When JIT-compiled code deopts (kDeoptMagic), the runtime
@@ -490,7 +505,7 @@ extern "C" void* HybridStubDispatchImpl(HybridPrecode* precode) noexcept {
 //   1. Deserializes AotCoreIr JSON → IRMethod → AllocateRegisters → RegisterMethod
 //   2. Heap-allocates a HybridPrecode with the RegisterMethod + CompileConfig
 //   3. Saves the existing AOT entry (from HotpatchEntryV0::direct_ptr)
-//   4. Sets call_counter = kT4Threshold
+//   4. Sets call_counter = kJitUpgradeThreshold
 //   5. Allocates a PrecodeArena trampoline for the HybridPrecode
 //   6. Replaces HotpatchEntryV0::direct_ptr with the trampoline
 //
@@ -518,7 +533,7 @@ extern "C" void RegisterHybridMethods(const HybridT4Entry* entries, uint32_t cou
         auto* precode = new HybridPrecode();
         precode->ir = std::move(rm);
         precode->config = CompileConfig{};
-        precode->call_counter.store(kT4Threshold, std::memory_order_relaxed);
+        precode->call_counter.store(kJitUpgradeThreshold, std::memory_order_relaxed);
 
         // Step 4: Look up the HotpatchEntryV0 for this method
         precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(
@@ -562,7 +577,7 @@ extern "C" void* JitRecompileToTier1(void* precode, bool is_hybrid) noexcept {
     if (is_hybrid) {
         auto* hp = static_cast<HybridPrecode*>(precode);
         CompileConfig tier1_cfg = hp->config;
-        tier1_cfg.compile_tier = CompileTier::kTier1;
+        tier1_cfg.compile_tier = CompileTier::kFull;
         tier1_cfg.enable_pgo = false;  // Tier 1 is final — no further profiling
         auto* jit = Compile(hp->ir, tier1_cfg);
         if (!jit) {
@@ -581,7 +596,7 @@ extern "C" void* JitRecompileToTier1(void* precode, bool is_hybrid) noexcept {
     } else {
         auto* jp = static_cast<JitPrecode*>(precode);
         CompileConfig tier1_cfg = jp->config;
-        tier1_cfg.compile_tier = CompileTier::kTier1;
+        tier1_cfg.compile_tier = CompileTier::kFull;
         tier1_cfg.enable_pgo = false;  // Tier 1 is final — no further profiling
         auto* jit = Compile(jp->ir, tier1_cfg);
         if (!jit) {

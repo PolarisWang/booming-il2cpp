@@ -108,21 +108,21 @@ struct PatchMethod {
     //                     3=T3_lowering, 4=T3_ready, 5=T5_unloaded.
     // CAS-based transition, atomic with acquire/release ordering.
     mutable std::atomic<uint32_t> tier_state{0};
-    static constexpr uint32_t kT1Cold        = 0;
-    static constexpr uint32_t kT2Lowering    = 1;
-    static constexpr uint32_t kT2Ready       = 2;
-    static constexpr uint32_t kT3Lowering    = 3;
-    static constexpr uint32_t kT3Ready       = 4;
+    static constexpr uint32_t kStackInterpreted        = 0;
+    static constexpr uint32_t kRegisterLowering    = 1;
+    static constexpr uint32_t kRegisterMapped       = 2;
+    static constexpr uint32_t kOptimizeLowering    = 3;
+    static constexpr uint32_t kOptimizedRegister       = 4;
     static constexpr uint32_t kT5Unloaded    = 5;
-    static constexpr uint32_t kT4Ready       = 6;
-    static constexpr uint32_t kT4Skip        = 7;  // permanent: T4 codegen failed too many times
+    static constexpr uint32_t kJitted       = 6;
+    static constexpr uint32_t kJitSkip        = 7;  // permanent: JIT codegen failed too many times
 
     // Tier 1→2 transition threshold (matches kHotCallThreshold).
-    static constexpr uint32_t kT1HotThreshold = 100;
+    static constexpr uint32_t kStackInterpretedThreshold = 100;
     // Tier 2→3 transition threshold (requires profile data).
-    static constexpr uint32_t kT2HotThreshold = 500;
+    static constexpr uint32_t kRegisterMappedThreshold = 500;
     // Tier 3→4 transition threshold (hot → very hot, native codegen).
-    static constexpr uint32_t kT3NativeThreshold = 2000;
+    static constexpr uint32_t kJitThreshold = 2000;
 };
 
 // ── CallSiteProfile (PGO data collected during T2 execution) ──────────────

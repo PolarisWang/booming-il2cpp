@@ -31,8 +31,8 @@ namespace chaos::il2cpp::jit {
 /// no liveness, no deopt metadata, no SEH).  Tier 1 is the full pipeline with
 /// graph coloring, optimizer, liveness analysis, deopt, SEH, and OSR.
 enum class CompileTier : uint8_t {
-    kTier0 = 0,  // Quick JIT (<50µs target): stack-only, no optimizer/liveness/deopt/SEH
-    kTier1 = 1,  // Standard JIT: full pipeline with graph coloring + optimizations
+    kQuick = 0,  // Quick JIT (<50µs target): stack-only, no optimizer/liveness/deopt/SEH
+    kFull = 1,  // Standard JIT: full pipeline with graph coloring + optimizations
 };
 
 /// Configuration for native code generation.
@@ -79,7 +79,7 @@ struct CompileConfig {
     uint32_t    call_cache_count = 0;
 
     // This method's own AOT metadata token.
-    // Used by RegisterT4Code to associate the generated code with its token
+    // Used by RegisterNativeCodeSection to associate the generated code with its token
     // so method_replacement::Register can find and demote matching T4 entries.
     uint32_t method_token = 0;
     uint32_t method_module_id = 0;
@@ -114,8 +114,8 @@ struct CompileConfig {
     const PerInstrPicData* per_instr_pic = nullptr;
     uint32_t               per_instr_pic_count = 0;
 
-    /// Compilation tier.  kTier1 (full pipeline) by default.
-    CompileTier compile_tier = CompileTier::kTier1;
+    /// Compilation tier.  kFull (full pipeline) by default.
+    CompileTier compile_tier = CompileTier::kFull;
 
     /// If true, enable PGO (Profile-Guided Optimization).  When enabled, Tier 0
     /// compilation does NOT patch direct_ptr — calls continue through the dispatch

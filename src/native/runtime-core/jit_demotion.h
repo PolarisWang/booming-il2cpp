@@ -1,5 +1,5 @@
-#ifndef CHAOS_IL2CPP_RUNTIME_CORE_T4_DEMOTION_H_
-#define CHAOS_IL2CPP_RUNTIME_CORE_T4_DEMOTION_H_
+#ifndef CHAOS_IL2CPP_RUNTIME_CORE_JIT_DEMOTION_H_
+#define CHAOS_IL2CPP_RUNTIME_CORE_JIT_DEMOTION_H_
 
 // ── T4 Demotion Callback Registry ──────────────────────────────────────────
 //
@@ -23,7 +23,7 @@ using JitDemoteByTokenFn = uint32_t (*)(uint32_t);
 /// Signature: uint32_t(uint32_t method_token)
 using JitDemoteByCallSiteTokenFn = uint32_t (*)(uint32_t);
 
-/// Register demotion callbacks (called by codegen/t4_seh_handler.cpp at init).
+/// Register demotion callbacks (called by codegen/jit_seh.cpp at init).
 void RegisterJitDemotionCallbacks(
     JitDemoteByTokenFn demote_by_token,
     JitDemoteByCallSiteTokenFn demote_by_call_site_token) noexcept;
@@ -38,4 +38,4 @@ uint32_t DemoteJittedCallSite(uint32_t method_token) noexcept;
 
 }  // namespace chaos::il2cpp::runtime_core
 
-#endif  // CHAOS_IL2CPP_RUNTIME_CORE_T4_DEMOTION_H_
+#endif  // CHAOS_IL2CPP_RUNTIME_CORE_JIT_DEMOTION_H_

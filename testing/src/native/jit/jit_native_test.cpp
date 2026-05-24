@@ -56,9 +56,9 @@ using chaos::il2cpp::jit::JitMethod;
 using chaos::il2cpp::jit::CompileConfig;
 using chaos::il2cpp::jit::kDeoptMagic;
 using chaos::il2cpp::jit::t_deopt_state;
-using chaos::il2cpp::jit::RegisterT4Code;
+using chaos::il2cpp::jit::RegisterNativeCodeSection;
 using chaos::il2cpp::jit::UnregisterT4Code;
-using chaos::il2cpp::jit::FindT4CodeByAddress;
+using chaos::il2cpp::jit::FindNativeCodeByAddress;
 using chaos::il2cpp::interpreter::RegisterFrame;
 using chaos::il2cpp::interpreter::RegisterFile;
 using chaos::il2cpp::interpreter::RegisterExecute;
@@ -534,17 +534,17 @@ static bool Test_DeoptEntry_Registration() {
     if (nm == nullptr) { std::printf("    FAIL: null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
 
-    chaos::il2cpp::jit::RegisterT4Code(entry, nm->code_size, nm);
+    chaos::il2cpp::jit::RegisterNativeCodeSection(entry, nm->code_size, nm);
 
-    const auto* found = chaos::il2cpp::jit::FindT4CodeByAddress(entry);
+    const auto* found = chaos::il2cpp::jit::FindNativeCodeByAddress(entry);
     if (found != nm) { std::printf("    FAIL: entry point lookup\n"); return false; }
 
     auto* mid = static_cast<uint8_t*>(entry) + (nm->code_size > 4 ? 4 : 0);
-    found = chaos::il2cpp::jit::FindT4CodeByAddress(mid);
+    found = chaos::il2cpp::jit::FindNativeCodeByAddress(mid);
     if (found != nm) { std::printf("    FAIL: mid-range lookup\n"); return false; }
 
     auto* out_of_range = static_cast<uint8_t*>(entry) + nm->code_size + 256;
-    found = chaos::il2cpp::jit::FindT4CodeByAddress(out_of_range);
+    found = chaos::il2cpp::jit::FindNativeCodeByAddress(out_of_range);
     if (found != nullptr) { std::printf("    FAIL: out-of-range should be null\n"); return false; }
 
     std::printf("    nm=%p entry=%p code_size=%u\n", static_cast<const void*>(nm), entry, nm->code_size);
@@ -1039,8 +1039,8 @@ static bool Test_OsrPromote() {
 
     // Verify T4 promotion happened.
     uint32_t state = pm.tier_state.load(std::memory_order_acquire);
-    std::printf("    tier_state=%u (expected %u = kT4Ready)\n", state, PatchMethod::kT4Ready);
-    if (state < PatchMethod::kT4Ready) { std::printf("    FAIL: tier_state not promoted to T4\n"); return false; }
+    std::printf("    tier_state=%u (expected %u = kJitted)\n", state, PatchMethod::kJitted);
+    if (state < PatchMethod::kJitted) { std::printf("    FAIL: tier_state not promoted to T4\n"); return false; }
 
     if (pm.cached_native_method == nullptr) { std::printf("    FAIL: cached_native_method is null\n"); return false; }
     std::printf("    cached_native_method=%p code_size=%u\n",
@@ -1082,8 +1082,8 @@ static bool Test_OsrEntry() {
     std::printf("    osr_entry_offset=%u code_size=%u\n", nm->osr_entry_offset, nm->code_size);
 
     // Register T4 code for VEH/OSR lookup.  OSR entry stub calls
-    // OsrResolveLoopHeader() which needs FindT4CodeByAddress to succeed.
-    RegisterT4Code(nm->code, nm->code_size, nm);
+    // OsrResolveLoopHeader() which needs FindNativeCodeByAddress to succeed.
+    RegisterNativeCodeSection(nm->code, nm->code_size, nm);
 
     // Verify non-loop method has no OSR entry.
     RegisterMethod rm_simple;
@@ -1145,7 +1145,7 @@ static bool Test_DeoptOvfArithmetic() {
     auto* nm = Compile(rm, cfg);
     if (nm == nullptr) { std::printf("    FAIL: null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
-    chaos::il2cpp::jit::RegisterT4Code(entry, nm->code_size, nm);
+    chaos::il2cpp::jit::RegisterNativeCodeSection(entry, nm->code_size, nm);
 
     uint64_t result = ExecuteNative(entry);
     std::printf("    ret_buf[0]=0x%llX (expected 0x%llX = kDeoptMagic)\n",
@@ -1246,8 +1246,8 @@ static bool Test_OsrRepromotion() {
     if (!ok) { std::printf("    FAIL: RegisterExecute returned false\n"); return false; }
 
     uint32_t state = pm.tier_state.load(std::memory_order_acquire);
-    std::printf("    tier_state=%u (expected %u = kT4Ready)\n", state, PatchMethod::kT4Ready);
-    if (state < PatchMethod::kT4Ready) { std::printf("    FAIL: not promoted\n"); return false; }
+    std::printf("    tier_state=%u (expected %u = kJitted)\n", state, PatchMethod::kJitted);
+    if (state < PatchMethod::kJitted) { std::printf("    FAIL: not promoted\n"); return false; }
     if (pm.cached_native_method == nullptr) { std::printf("    FAIL: no cached native method\n"); return false; }
 
     std::printf("    native_method=%p osr_entry_offset=%u\n",
@@ -1691,7 +1691,7 @@ static bool Test_BrToSwitch() {
     auto* nm = Compile(rm);
     if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
-    RegisterT4Code(entry, nm->code_size, nm);
+    RegisterNativeCodeSection(entry, nm->code_size, nm);
 
     uint64_t result = ExecuteNative(entry);
     rm.instructions[0].imm.i4 = 0;  // restore
@@ -1774,7 +1774,7 @@ static bool Test_Switch_Dispatch() {
     auto* nm = Compile(rm);
     if (nm == nullptr) { std::printf("    FAIL: Compile null\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
-    RegisterT4Code(entry, nm->code_size, nm);
+    RegisterNativeCodeSection(entry, nm->code_size, nm);
 
     // T4 executes with r1=0 -> should hit case 0 -> 100
     uint64_t result = ExecuteNative(entry);
@@ -1865,10 +1865,10 @@ static bool Test_SehTryCatch() {
     std::printf("    SEH table at offset %u ✓\n", nm->seh_table_offset);
 
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
-    RegisterT4Code(nm->code, nm->code_size, nm);
+    RegisterNativeCodeSection(nm->code, nm->code_size, nm);
 
     // Verify VEH lookup works
-    const auto* found = FindT4CodeByAddress(nm->code);
+    const auto* found = FindNativeCodeByAddress(nm->code);
     if (found != nm) { std::printf("    FAIL: VEH lookup failed\n"); return false; }
     std::printf("    VEH lookup OK ✓\n");
 
@@ -1941,7 +1941,7 @@ static bool Test_LdVirtFtn() {
     auto* nm = Compile(rm);
     if (nm == nullptr) { std::printf("    FAIL: null JitMethod\n"); return false; }
     void* entry = SealAndGetEntry(nm); if (entry == nullptr) return false;
-    RegisterT4Code(entry, nm->code_size, nm);
+    RegisterNativeCodeSection(entry, nm->code_size, nm);
 
     uint64_t result = ExecuteNative(entry);
     std::printf("    T4 LdVirtFtn ret=0x%llx\n", (unsigned long long)result);
@@ -1975,7 +1975,7 @@ static bool Test_Ceq_ZeroExt() {
     if (nm == nullptr) return false;
     void* entry = SealAndGetEntry(nm);
     if (entry == nullptr) return false;
-    RegisterT4Code(entry, nm->code_size, nm);
+    RegisterNativeCodeSection(entry, nm->code_size, nm);
 
     RegisterFrame rf; std::memset(&rf, 0, sizeof(rf));
     bool re_ok = RegisterExecute(rf, rm.instructions.data(),
@@ -2320,7 +2320,7 @@ static bool Test_Fuzz() {
             if (nm == nullptr) continue;
             void* entry = SealAndGetEntry(nm);
             if (entry == nullptr) continue;
-            RegisterT4Code(entry, nm->code_size, nm);
+            RegisterNativeCodeSection(entry, nm->code_size, nm);
 
             uint64_t t4_ret;
             bool crashed = false;

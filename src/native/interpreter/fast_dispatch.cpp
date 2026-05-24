@@ -2129,32 +2129,32 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
     auto tier = pm->tier_state.load(std::memory_order_acquire);
 
     // ── T1→T2: Optimize to register IR ────────────────────────────────
-    if (tier == PM::kT1Cold && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
-        uint32_t expected = PM::kT1Cold;
-        if (pm->tier_state.compare_exchange_strong(expected, PM::kT2Lowering, std::memory_order_acq_rel)) {
+    if (tier == PM::kStackInterpreted && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {
+        uint32_t expected = PM::kStackInterpreted;
+        if (pm->tier_state.compare_exchange_strong(expected, PM::kRegisterLowering, std::memory_order_acq_rel)) {
             OptimizeToTier2(pm);
-            pm->tier_state.store(PM::kT2Ready, std::memory_order_release);
+            pm->tier_state.store(PM::kRegisterMapped, std::memory_order_release);
         }
     }
 
     // ── T2→T3: Enqueue for background optimization ────────────────────
     tier = pm->tier_state.load(std::memory_order_acquire);
-    if (tier == PM::kT2Ready && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
-        uint32_t expected = PM::kT2Ready;
-        if (pm->tier_state.compare_exchange_strong(expected, PM::kT3Lowering, std::memory_order_acq_rel)) {
+    if (tier == PM::kRegisterMapped && call_count >= TierManager::Get().GetAdaptiveT2Threshold()) {
+        uint32_t expected = PM::kRegisterMapped;
+        if (pm->tier_state.compare_exchange_strong(expected, PM::kOptimizeLowering, std::memory_order_acq_rel)) {
             if (!TierManager::Get().EnqueueOptimization(pm)) {
-                pm->tier_state.store(PM::kT2Ready, std::memory_order_release);
+                pm->tier_state.store(PM::kRegisterMapped, std::memory_order_release);
             }
         }
     }
 
     // ── T3→T4: Trigger native codegen + optional OSR ──────────────────
     tier = pm->tier_state.load(std::memory_order_acquire);
-    if (tier == PM::kT3Ready) {
-        uint32_t backoff_base = PM::kT3NativeThreshold + pm->codegen_fail_count * 1000;
+    if (tier == PM::kOptimizedRegister) {
+        uint32_t backoff_base = PM::kJitThreshold + pm->codegen_fail_count * 1000;
         if (call_count >= backoff_base) {
-            uint32_t t4_expected = PM::kT3Ready;
-            if (pm->tier_state.compare_exchange_strong(t4_expected, PM::kT4Ready, std::memory_order_acq_rel)) {
+            uint32_t t4_expected = PM::kOptimizedRegister;
+            if (pm->tier_state.compare_exchange_strong(t4_expected, PM::kJitted, std::memory_order_acq_rel)) {
                 auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
                 if (rm == nullptr) rm = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
                 if (rm != nullptr && rm->instructions.size() > 0) {
@@ -2165,7 +2165,7 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                     auto* nm = chaos::il2cpp::jit::Compile(*rm, cfg);
                     if (nm != nullptr) {
                         pm->cached_native_method = nm;
-                        chaos::il2cpp::jit::RegisterT4Code(nm->code, nm->code_size, nm);
+                        chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
 
                         // OSR V2: If native code has an OSR entry, transfer
                         // execution to native code with full frame state.
@@ -2236,9 +2236,9 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                     } else {
                         ++pm->codegen_fail_count;
                         if (pm->codegen_fail_count >= PM::kMaxCodegenFailures) {
-                            pm->tier_state.store(PM::kT4Skip, std::memory_order_release);
+                            pm->tier_state.store(PM::kJitSkip, std::memory_order_release);
                         } else {
-                            pm->tier_state.store(PM::kT3Ready, std::memory_order_release);
+                            pm->tier_state.store(PM::kOptimizedRegister, std::memory_order_release);
                         }
                     }
                 }

@@ -962,7 +962,7 @@ def _stage_jit_codegen(family_slug: str, assembly: str) -> StageResult:
             print(f"  [jit_codegen] generate_verification_dispatch not available (skip)")
 
         build_ok = _build_entry_exe(family_slug, verification=family_dir.parent,
-                                    output_name="entry-jit.exe")
+                                    output_name="entry-jit.exe", is_jit=True)
         if not build_ok:
             return StageResult(stage="jit_codegen", status="failed",
                                summary="entry-jit.exe build failed",

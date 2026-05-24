@@ -45,7 +45,7 @@ using chaos::il2cpp::jit::HybridStubDispatchImpl;
 using chaos::il2cpp::jit::kPrecodeUncompiled;
 using chaos::il2cpp::jit::kPrecodeCompiling;
 using chaos::il2cpp::jit::kPrecodeCompiled;
-using chaos::il2cpp::jit::kT4Threshold;
+using chaos::il2cpp::jit::kJitUpgradeThreshold;
 
 // ── Helpers (matching jit_mode_test.cpp pattern) ───────────────────
 
@@ -258,7 +258,7 @@ TEST_F(HybridModeTest, PrecodeArenaAllocatesHybridTrampoline) {
     PrecodeArena arena;
 
     HybridPrecode precode;
-    precode.call_counter.store(kT4Threshold, std::memory_order_relaxed);
+    precode.call_counter.store(kJitUpgradeThreshold, std::memory_order_relaxed);
     precode.ir = MakeReturnConstantMethod(42);
     precode.config = CompileConfig{};
     precode.aot_entry = reinterpret_cast<void*>(&AotReturn42);
@@ -279,7 +279,7 @@ TEST_F(HybridModeTest, HybridPrecodeArenaMultipleTrampolines) {
     HybridPrecode precodes[5];
     void* trampolines[5];
     for (int i = 0; i < 5; i++) {
-        precodes[i].call_counter.store(kT4Threshold, std::memory_order_relaxed);
+        precodes[i].call_counter.store(kJitUpgradeThreshold, std::memory_order_relaxed);
         precodes[i].ir = MakeReturnConstantMethod(i * 10);
         precodes[i].config = CompileConfig{};
         precodes[i].aot_entry = reinterpret_cast<void*>(&AotReturn42);

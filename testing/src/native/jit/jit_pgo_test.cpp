@@ -107,7 +107,7 @@ static CompileConfig MakeTier0Config(bool enable_pgo = false) noexcept {
     cfg.enable_optimizer = false;
     cfg.enable_liveness = false;
     cfg.enable_deopt = false;
-    cfg.compile_tier = CompileTier::kTier0;
+    cfg.compile_tier = CompileTier::kQuick;
     cfg.enable_pgo = enable_pgo;
     return cfg;
 }

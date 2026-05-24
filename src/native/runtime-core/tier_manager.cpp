@@ -124,8 +124,8 @@ void TierManager::ResetMethodCallCount(uint32_t method_token) noexcept {
                 // Only reset if currently at T3Ready or T4Skip — don't
                 // interfere with in-progress promotion.
                 uint32_t tier = data->methods[i]->tier_state.load(std::memory_order_acquire);
-                if (tier >= PatchMethod::kT3Ready) {
-                    data->methods[i]->tier_state.store(PatchMethod::kT1Cold, std::memory_order_release);
+                if (tier >= PatchMethod::kOptimizedRegister) {
+                    data->methods[i]->tier_state.store(PatchMethod::kStackInterpreted, std::memory_order_release);
                 }
                 return;
             }
@@ -287,7 +287,7 @@ void TierManager::BackgroundLoop() noexcept {
 
         // Verify the method still expects T3 promotion (not unloaded).
         auto tier = entry.method->tier_state.load(std::memory_order_acquire);
-        if (tier != PatchMethod::kT3Lowering) continue;
+        if (tier != PatchMethod::kOptimizeLowering) continue;
 
         // Check that the callback is registered (interpreter library loaded).
         auto fn = GetTier3PromotionCallback();
@@ -305,9 +305,9 @@ void TierManager::BackgroundLoop() noexcept {
         fn(entry.method);
 
         // Set T3 ready (only if still kT3Lowering — someone may have unloaded).
-        uint32_t expected = PatchMethod::kT3Lowering;
+        uint32_t expected = PatchMethod::kOptimizeLowering;
         entry.method->tier_state.compare_exchange_strong(
-            expected, PatchMethod::kT3Ready, std::memory_order_release);
+            expected, PatchMethod::kOptimizedRegister, std::memory_order_release);
 
         total_optimized_methods.fetch_add(1, std::memory_order_relaxed);
 

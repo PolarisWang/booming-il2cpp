@@ -202,7 +202,7 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
         // CodegenCallVirt in the generated code.  Use it to find the
         // JitMethod and its DeoptEntry, then copy per-register tags.
         void* ret_addr = _ReturnAddress();
-        const JitMethod* nm = FindT4CodeByAddress(ret_addr);
+        const JitMethod* nm = FindNativeCodeByAddress(ret_addr);
         if (nm != nullptr && nm->deopt_values != nullptr) {
             uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
             uint32_t native_off = static_cast<uint32_t>(
@@ -567,7 +567,7 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
     void* ret_addr = _ReturnAddress();
 
     // Find the JitMethod covering this code address.
-    const JitMethod* nm = FindT4CodeByAddress(ret_addr);
+    const JitMethod* nm = FindNativeCodeByAddress(ret_addr);
     if (nm == nullptr) return;
 
     uint64_t code_base = reinterpret_cast<uint64_t>(nm->code);
@@ -615,8 +615,10 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
 extern "C" void* OsrResolveLoopHeader() noexcept {
     using namespace chaos::il2cpp::jit;
     void* ret_addr = _ReturnAddress();
-    const JitMethod* nm = FindT4CodeByAddress(ret_addr);
+    const JitMethod* nm = FindNativeCodeByAddress(ret_addr);
     if (nm == nullptr) return nullptr;
+    if (nm->instr_offsets == nullptr) return nullptr;
+    if (nm->instr_offset_count == 0) return nullptr;
 
     uint32_t resume_pc = t_deopt_state.osr_resume_pc;
     if (resume_pc >= nm->instr_offset_count) {
@@ -639,7 +641,7 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
     void* ret_addr = _ReturnAddress();
 
     // 2. Find the JitMethod covering this code address.
-    const JitMethod* nm = FindT4CodeByAddress(ret_addr);
+    const JitMethod* nm = FindNativeCodeByAddress(ret_addr);
     if (nm == nullptr) {
         return;
     }

@@ -6,7 +6,7 @@
 //   3. direct_ptr patching after compilation
 //   4. PrecodeArena trampoline allocation and layout
 //
-// These tests exercise the same dispatch path used by RegisterT4JitMethods
+// These tests exercise the same dispatch path used by RegisterJitMethods
 // at startup, without requiring the full HotpatchNameRegistry bootstrap.
 
 #include <gtest/gtest.h>
@@ -250,7 +250,7 @@ TEST_F(JitModeTest, PrecodeArenaMultipleTrampolines) {
 TEST_F(JitModeTest, FullDispatchThroughPrecodeArena) {
     PrecodeArena arena;
 
-    // Set up precode + trampoline (same pattern as RegisterT4JitMethods)
+    // Set up precode + trampoline (same pattern as RegisterJitMethods)
     JitPrecode precode;
     precode.ir = MakeReturnConstantMethod(77);
     precode.config = CompileConfig{};
@@ -350,7 +350,7 @@ TEST_F(JitModeTest, Tier0CompilesAndReturnsCorrectCode) {
     cfg.enable_optimizer = false;
     cfg.enable_liveness = false;
     cfg.enable_deopt = false;
-    cfg.compile_tier = CompileTier::kTier0;
+    cfg.compile_tier = CompileTier::kQuick;
 
     auto* jm = Compile(rm, cfg);
     ASSERT_NE(jm, nullptr);
@@ -378,7 +378,7 @@ TEST_F(JitModeTest, Tier0CompilesAddMethod) {
     cfg.enable_optimizer = false;
     cfg.enable_liveness = false;
     cfg.enable_deopt = false;
-    cfg.compile_tier = CompileTier::kTier0;
+    cfg.compile_tier = CompileTier::kQuick;
 
     auto* jm = Compile(rm, cfg);
     ASSERT_NE(jm, nullptr);
@@ -400,7 +400,7 @@ TEST_F(JitModeTest, Tier0ReturnsNullptrForUnsupportedOpcodes) {
     cfg.enable_register_caching = false;
     cfg.enable_optimizer = false;
     cfg.enable_deopt = false;
-    cfg.compile_tier = CompileTier::kTier0;
+    cfg.compile_tier = CompileTier::kQuick;
 
     auto* jm = Compile(rm, cfg);
     EXPECT_EQ(jm, nullptr);  // Should fail, not emit deopt
@@ -414,7 +414,7 @@ TEST_F(JitModeTest, Tier0CompileTimeIsFast) {
     cfg.enable_optimizer = false;
     cfg.enable_liveness = false;
     cfg.enable_deopt = false;
-    cfg.compile_tier = CompileTier::kTier0;
+    cfg.compile_tier = CompileTier::kQuick;
 
     auto start = std::chrono::high_resolution_clock::now();
     constexpr int kIterations = 100;

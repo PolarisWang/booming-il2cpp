@@ -12,7 +12,7 @@
 
 // Register demotion callbacks with runtime_core so method_replacement
 // can demote T4 entries without creating a circular dependency.
-#include <t4_demotion.h>
+#include <jit_demotion.h>
 
 // GC event callbacks for deferred T4 code memory reclamation.
 #include <gc_events.h>
@@ -30,31 +30,31 @@
 // replaced with a different ISehHandler (e.g. a POSIX signal handler) without
 // touching callers.
 //
-// TLS variables (g_t4_exception_obj, g_t4_throw_ret_addr, g_t4_frame_rsp,
-// g_t4_unwind) are defined in WinSehHandler.cpp and declared extern in
+// TLS variables (g_jit_exception_obj, g_jit_throw_ret_addr, g_jit_frame_rsp,
+// g_jit_unwind) are defined in WinSehHandler.cpp and declared extern in
 // jit_seh.h.
 
 namespace chaos::il2cpp::jit {
 
-void RegisterT4Code(void* code_start, uint32_t code_size,
+void RegisterNativeCodeSection(void* code_start, uint32_t code_size,
                     const JitMethod* nm,
                     uint32_t patch_method_token) noexcept {
     GetSehHandler().RegisterCode(code_start, code_size, nm, patch_method_token);
 }
 
-void UnregisterT4Code(void* code_start) noexcept {
+void UnregisterNativeCodeSection(void* code_start) noexcept {
     GetSehHandler().UnregisterCode(code_start);
 }
 
-const JitMethod* FindT4CodeByAddress(const void* address) noexcept {
+const JitMethod* FindNativeCodeByAddress(const void* address) noexcept {
     return GetSehHandler().FindCodeByAddress(address);
 }
 
-uint32_t DemoteT4ByToken(uint32_t method_token) noexcept {
+uint32_t DemoteJittedMethod(uint32_t method_token) noexcept {
     return GetSehHandler().DemoteByToken(method_token);
 }
 
-uint32_t DemoteT4ByCallSiteToken(uint32_t method_token) noexcept {
+uint32_t DemoteJittedCallSite(uint32_t method_token) noexcept {
     return GetSehHandler().DemoteByCallSiteToken(method_token);
 }
 

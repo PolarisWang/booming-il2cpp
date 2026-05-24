@@ -1,7 +1,7 @@
 # Codegen 故障诊断指南
 
 > 适用版本: 2026-05  
-> 本指南覆盖 AOT 代码生成（NativeAotLoweringPlanner + NativeAotEmitter）和 T4 原生代码生成（code_generator）的常见故障排查方法。
+> 本指南覆盖 AOT 代码生成（NativeAotLoweringPlanner + NativeAotEmitter）和 JIT 原生代码生成（code_generator）的常见故障排查方法。
 
 ---
 
@@ -13,14 +13,14 @@
 [1. 确定故障层]
    ├── AOT 编译期: chaos-il2cpp convert-to-cpp 失败
    ├── AOT 生成期: 生成的 C++ 编译失败
-   ├── T4 生成期: GenerateNativeCode 返回 nullptr
+   ├── JIT 生成期: GenerateNativeCode 返回 nullptr
    ├── 运行时: 生成代码执行 crash/异常/结果错误
    └── 验证期: foundation-dll verification 失败
     ↓
 [2. 选择对应的排查工具]
    ├── convert-to-cpp 失败 → §2 AOT 编译期故障
    ├── C++ 编译失败 → §3 生成代码编译故障
-   ├── T4 生成失败 → §4 T4 原生代码生成故障
+   ├── JIT 生成失败 → §4 JIT 原生代码生成故障
    ├── 运行时 crash → §5 运行时故障
    └── verification 失败 → §6 验证管线故障
     ↓
@@ -121,11 +121,11 @@
 
 ---
 
-## 4. T4 原生代码生成故障
+## 4. JIT 原生代码生成故障
 
 ### 4.1 GenerateNativeCode 返回 nullptr
 
-**现象**: T4 调用 `GenerateNativeCode` 返回空指针，方法降级回解释器执行。
+**现象**: JIT 调用 `GenerateNativeCode` 返回空指针，方法降级回解释器执行。
 
 **排查步骤**:
 1. 调用 `CanGenerateNativeCode(rm)` 预检方法是否可生成原生代码。如果返回 false，检查原因：
@@ -135,9 +135,9 @@
 2. 检查 `code_generator.cpp` 中 `Generate()` 方法的各阶段 CheckFailed 输出
 3. 检查是否因方法体过大导致寄存器分配失败（超过 `kMaxLivenessInstrs` = 2048）
 
-### 4.2 T4 生成代码运行时 crash
+### 4.2 JIT 生成代码运行时 crash
 
-**现象**: T4 生成的 x64 代码执行时 segfault 或 illegal instruction。
+**现象**: JIT 生成的 x64 代码执行时 segfault 或 illegal instruction。
 
 **排查步骤**:
 1. 检查 `NativeMethod` 的 `slot_map_data` 是否已注册（GC 扫描时可能需要）
@@ -145,9 +145,9 @@
 3. 检查生成的 code buffer 边界：是否有 `Reserve()` / `Emit*` 写出界（OOM 安全已在 I-R11 中加固）
 4. 检查 deopt runtime 的 `DeoptTrap` 二分搜索是否因 `deopt_entries` 未排序而失败
 
-### 4.3 T4 GC Slot Map 问题
+### 4.3 JIT GC Slot Map 问题
 
-**现象**: T4 代码中的 GC 对象未被正确扫描，导致 dangling pointer 或 premature collection。
+**现象**: JIT 代码中的 GC 对象未被正确扫描，导致 dangling pointer 或 premature collection。
 
 **当前限制**（已知）:
 | 限制 | 影响 | 状态 |
@@ -160,7 +160,7 @@
 
 ### 4.4 Deoptimization 失败
 
-**现象**: T4 代码触发 deopt 时 crash 或状态异常。
+**现象**: JIT 代码触发 deopt 时 crash 或状态异常。
 
 **排查**:
 1. 检查 `deopt_entries[]` 是否按 `native_offset` 排序（`DeoptRuntime::FindEntry` 依赖二分搜索）
@@ -219,7 +219,7 @@
 | codegen | 生成 C++ 编译失败 | 检查生成的 .cpp 文件（见 §3） |
 | fact | 功能验证 FAIL | 检查 fact 测试代码与生成 C++ 的语义匹配 |
 | audit | false passing 或存根检测 | 检查是否有方法走存根路径而非原生路径 |
-| asm_compare | IR 扩展比异常 | 检查 AOT IR 到 T4 x64 的 opcode 映射是否正确 |
+| asm_compare | IR 扩展比异常 | 检查 AOT IR 到 JIT x64 的 opcode 映射是否正确 |
 
 ### 6.2 Snapshot test 基线不匹配
 
@@ -252,7 +252,7 @@
 | `NotSupportedException: native-aot lowering does not support opcode` | AOT emitter 遇到不认识的 opcode | §2.2 |
 | `NotSupportedException: native-aot structured EH linear` | AOT EH lowering 遇到不支持的指令 | §2.4 |
 | `IRFlatRegion` + `exception-shape-unhandled` | EH region 结构不被 5 种 shape 覆盖 | §2.4 |
-| `CanGenerateNativeCode` returns false | T4 预检失败 | §4.1 |
+| `CanGenerateNativeCode` returns false | JIT 预检失败 | §4.1 |
 | `CheckFailed()` | CodeBuffer OOM 或断言失败 | §4.1 |
 | `SnapshotMismatchException` | 快照测试基线不一致 | §6.2 |
 | `s_flatRegionCount` incremented | 方法回退到 flat goto 发射 | §2.4 |
@@ -299,13 +299,13 @@ cat testing/foundation-dll/System.Private.CoreLib/garbage-collection/codegen/nat
 | `src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs` | AOT emitter 入口 |
 | `src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs` | codegen-metrics 构建 |
 | `src/managed/Chaos.IL2CPP.Generator/Validation/NativeCodegenValidator.cs` | 9 条 C++ 代码规范校验 |
-| `src/native/codegen/code_generator.cpp` | T4 x64 代码生成器主文件 |
-| `src/native/codegen/t4_seh_handler.cpp` | T4 VEH 异常处理器 |
-| `src/native/codegen/deopt_runtime.cpp` | T4 deopt 运行时 |
+| `src/native/codegen/code_generator.cpp` | JIT x64 代码生成器主文件 |
+| `src/native/codegen/t4_seh_handler.cpp` | JIT VEH 异常处理器 |
+| `src/native/codegen/deopt_runtime.cpp` | JIT deopt 运行时 |
 | `src/native/codegen/native_method.h` | NativeMethod/GcPoint/GcSlot 数据结构 |
 | `src/native/runtime-core/gc/gc_root_scanner.cpp` | GC slot map 注册与扫描 |
 | `src/native/common/chaos/eh.h` | CHAOS_EH_TRY/CATCH/END 宏定义 |
 | `contracts/native/v0/codegen_bridge.h` | GcSlotMapV0、CodegenBridgeV0 ABI 合约 |
-| `testing/src/native/codegen/codegen_native_test.cpp` | T4 原生代码生成测试 |
+| `testing/src/native/codegen/codegen_native_test.cpp` | JIT 原生代码生成测试 |
 | `testing/src/native/codegen/codegen_abi_test.cpp` | Codegen ABI 合约测试 |
 | `testing/src/native/codegen/codegen_il_smoke_test.cpp` | IL 冒烟测试 |

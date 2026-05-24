@@ -53,7 +53,7 @@ extern "C" void RegisterJitMethods(const JitMethodEntry* entries, uint32_t count
 // Describes a single method for Hybrid mode JIT compilation.
 // Codegen emits AOT C++ function body + AotCoreIr JSON for each method.
 // At startup, RegisterHybridMethods() creates a HybridPrecode with the
-// AOT entry saved, call_counter = kT4Threshold, and a PrecodeArena
+// AOT entry saved, call_counter = kJitUpgradeThreshold, and a PrecodeArena
 // trampoline.  Cold calls go through AOT; when counter reaches 0, JIT
 // compilation triggers and subsequent calls use JIT-compiled code.
 extern "C" struct HybridT4Entry {
@@ -64,23 +64,19 @@ extern "C" struct HybridT4Entry {
 };
 
 // ── RegisterT4JitMethods ─────────────────────────────────────────────────
-// Called once at startup to register all methods for T4 JIT compilation.
-// For each entry:
-//   1. Deserializes AotCoreIr JSON → IRMethod → AllocateRegisters → RegisterMethod
-//   2. Heap-allocates a JitPrecode with the RegisterMethod + CompileConfig
-//   3. Allocates a PrecodeArena trampoline for the JitPrecode
-//   4. Sets HotpatchEntryV0::direct_ptr to the trampoline
-//
-// After this call, first invocation of each method triggers JitStubDispatchImpl
-// which calls Compile() and atomically replaces direct_ptr with compiled code.
-extern "C" void RegisterT4JitMethods(const JitT4Entry* entries, uint32_t count) noexcept;
+// Inline wrapper: forwards to RegisterJitMethods (the canonical implementation
+// in chaos_jit.lib) with a cast since JitT4Entry and JitMethodEntry have the
+// same memory layout ({json, json_len, token, module_id}).
+extern "C" inline void RegisterT4JitMethods(const JitT4Entry* entries, uint32_t count) noexcept {
+    RegisterJitMethods(reinterpret_cast<const JitMethodEntry*>(entries), count);
+}
 
 // ── RegisterHybridMethods ────────────────────────────────────────────────
 // Called once at startup to register all methods for Hybrid mode.
 // In Hybrid mode, AOT C++ code is already compiled into the binary.
 // This function:
 //   1. Deserializes AotCoreIr JSON → RegisterMethod
-//   2. Heap-allocates HybridPrecode with counter = kT4Threshold
+//   2. Heap-allocates HybridPrecode with counter = kJitUpgradeThreshold
 //   3. Saves the AOT entry from HotpatchEntryV0::direct_ptr
 //   4. Replaces direct_ptr with a PrecodeArena trampoline
 //

@@ -31,15 +31,15 @@ static constexpr uint32_t kPrecodeCompiling  = 1;
 static constexpr uint32_t kPrecodeCompiled   = 2;
 
 /// Initial call counter for HybridPrecode. Methods execute via AOT for the first
-/// kT4Threshold - 1 calls, then trigger JIT compilation on the kT4Threshold-th call.
-/// This threshold matches the existing T3→T4 tier promotion threshold from the
+/// kJitUpgradeThreshold - 1 calls, then trigger JIT compilation on the kJitUpgradeThreshold-th call.
+/// This threshold matches the JIT upgrade threshold from the
 /// interpreter tiering system.  Value 30 is a common JIT warmup detection constant.
-static constexpr uint32_t kT4Threshold = 30;
+static constexpr uint32_t kJitUpgradeThreshold = 30;
 
-/// PGO Tier 1 promotion threshold.  When enable_pgo is true and a method's
+/// PGO Full JIT promotion threshold.  When enable_pgo is true and a method's
 /// pgo_call_count exceeds this value, the method is enqueued for background
-/// Tier 1 recompilation.  Value 100 means 100 Tier 0 calls before upgrading.
-static constexpr uint32_t kPgoTier1Threshold = 100;
+/// Full JIT recompilation.  Value 100 means 100 Quick JIT calls before upgrading.
+static constexpr uint32_t kPgoFullJitThreshold = 100;
 
 // ── JitPrecode ─────────────────────────────────────────────────────────
 // Per-method state for JIT mode dispatch.
@@ -67,7 +67,7 @@ struct JitPrecode {
 // Cold calls go directly to AOT (atomic counter decrement).
 // When counter reaches 0, triggers JIT compilation (same state machine as JitPrecode).
 struct HybridPrecode {
-    std::atomic<uint32_t> call_counter;               // starts at kT4Threshold
+    std::atomic<uint32_t> call_counter;               // starts at kJitUpgradeThreshold
     std::atomic<uint32_t> state{kPrecodeUncompiled};  // state machine (shared with JitPrecode)
     interpreter::RegisterMethod  ir;                   // owned copy of the IR
     CompileConfig                config;               // compilation config

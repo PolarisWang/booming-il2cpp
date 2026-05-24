@@ -59,8 +59,8 @@ add_library(chaos_runtime_core STATIC
     instantiation_engine.h
     thread_state.cpp
     thread_state.h
-    t4_demotion.cpp
-    t4_demotion.h
+    jit_demotion.cpp
+    jit_demotion.h
     thread_pool.cpp
     thread_pool.h
     timer_queue.cpp

@@ -63,6 +63,26 @@ CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwQueryInterface(
         return outer_vtbl->QueryInterface(ccw->outer_unknown, iid, ppv);
     }
 
+    // Check for ITypeInfo/ITypeLib QI on IDispatch CCWs.
+    if (ccw->typelib_data != nullptr) {
+        if (CHAOS_IL2CPP_MEMCMP(iid, com_abi::kIidITypeInfo, 16) == 0) {
+            auto* type_info = runtime_core::GetComTypeInfoForCcw(ccw);
+            if (type_info != nullptr) {
+                *ppv = type_info;
+                ccw->refcount.fetch_add(1, std::memory_order_relaxed);
+                return kS_OK;
+            }
+        }
+        if (CHAOS_IL2CPP_MEMCMP(iid, com_abi::kIidITypeLib, 16) == 0) {
+            auto* type_lib = runtime_core::GetComTypeLibForCcw(ccw);
+            if (type_lib != nullptr) {
+                *ppv = type_lib;
+                ccw->refcount.fetch_add(1, std::memory_order_relaxed);
+                return kS_OK;
+            }
+        }
+    }
+
     // Non-aggregated: scan registered interfaces (entry 0 is always IUnknown).
     for (CHAOS_IL2CPP_SIZE i = 0; i < ccw->interface_count; ++i) {
         if (CHAOS_IL2CPP_MEMCMP(iid, ccw->interfaces[i].guid, 16) == 0) {
@@ -121,17 +141,26 @@ CHAOS_IL2CPP_UINT32 CHAOS_RUNTIME_ABI_CALL CcwRelease(void* self) noexcept {
 // ── IDispatch helper implementations ──
 
 CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfoCount(void* self, CHAOS_IL2CPP_UINT32* pctinfo) noexcept {
-    CHAOS_IL2CPP_LOG_WARN_M("COM", "CcwGetTypeInfoCount called — stub (returns 0)");
     if (pctinfo == nullptr) return kE_POINTER;
-    *pctinfo = 0;  // No type info available
+    auto* ccw = ResolveCcw(self);
+    // Return 1 if this CCW has TypeLib data (IDispatch interface), else 0.
+    *pctinfo = (ccw != nullptr && ccw->typelib_data != nullptr) ? 1u : 0u;
     return kS_OK;
 }
 
 CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL CcwGetTypeInfo(void* self, CHAOS_IL2CPP_UINT32 iTInfo, CHAOS_IL2CPP_UINT32 lcid, void** ppTInfo) noexcept {
-    CHAOS_IL2CPP_LOG_WARN_M("COM", "CcwGetTypeInfo called — stub (returns E_NOTIMPL)");
     if (ppTInfo == nullptr) return kE_POINTER;
     *ppTInfo = nullptr;
-    return kE_NOTIMPL;
+    auto* ccw = ResolveCcw(self);
+    if (ccw == nullptr || ccw->typelib_data == nullptr) return kE_NOTIMPL;
+    if (iTInfo != 0) return kE_NOTIMPL;  // Only one TypeLib (index 0).
+    (void)lcid;  // Locale ignored for V2.
+
+    auto* type_info = runtime_core::GetComTypeInfoForCcw(ccw);
+    if (type_info == nullptr) return kE_NOTIMPL;
+    *ppTInfo = type_info;
+    ccw->refcount.fetch_add(1, std::memory_order_relaxed);
+    return kS_OK;
 }
 
 // ── Static vtable ──────────────────────────────────────────────────

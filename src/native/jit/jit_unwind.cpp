@@ -111,7 +111,7 @@ uint32_t EmitUnwindInfo(
 
     // ── Emit personality routine JMP thunk (V2, UNW_FLAG_EHANDLER) ────
     // The ExceptionHandler RVA in UNWIND_INFO is relative to BaseAddress
-    // (code_start). The personality routine T4PersonalityRoutine is in
+    // (code_start). The personality routine JitPersonalityRoutine is in
     // chaos_codegen.dll which may be >2GB away from the dynamic code buffer,
     // too far for a 32-bit RVA.  Solution: embed a 12-byte absolute JMP thunk
     // in the code buffer and point the RVA to it.
@@ -120,7 +120,7 @@ uint32_t EmitUnwindInfo(
     //   REX.W MOV RAX, imm64 = 48 B8 <8-byte address>
     //   JMP RAX               = FF E0
     if (has_seh) {
-        uint64_t personality_addr = reinterpret_cast<uint64_t>(&T4PersonalityRoutine);
+        uint64_t personality_addr = reinterpret_cast<uint64_t>(&JitPersonalityRoutine);
         buf.EmitByte(0x48);  // REX.W prefix
         buf.EmitByte(0xB8);  // MOV RAX, imm64
         buf.Emit64(personality_addr);

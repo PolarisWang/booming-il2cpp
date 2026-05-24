@@ -99,8 +99,8 @@ target_compile_definitions(test_jit_unwind PRIVATE
 set_tests_properties(test_jit_unwind PROPERTIES TIMEOUT 30)
 
 # E-4 — Codegen SEH public API test
-# Tests RegisterT4Code, UnregisterT4Code, FindT4CodeByAddress, and
-# RegisterT4SehHandler through library linkage.
+# Tests RegisterNativeCodeSection, UnregisterNativeCodeSection, FindNativeCodeByAddress, and
+# RegisterJitSehHandler through library linkage.
 add_chaos_test(test_jit_seh
     jit_seh_test.cpp
     ../runtime-core/gc/gc_test_stubs.cpp

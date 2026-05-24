@@ -72,7 +72,7 @@ struct RuntimeFunction {
 /// @param sub_rsp_offset   Byte offset of the sub rsp instruction.
 /// @param set_fpreg_offset Byte offset of the mov rbp, rsp instruction.
 /// @param has_seh          If true, set UNW_FLAG_EHANDLER and emit a JMP thunk
-///                         to T4PersonalityRoutine after the unwind codes (V2).
+///                         to JitPersonalityRoutine after the unwind codes (V2).
 ///
 /// @return The byte offset from the start of the code buffer where UNWIND_INFO begins.
 ///         The caller stores this in JitMethod for RUNTIME_FUNCTION.UnwindInfoAddress.
@@ -100,7 +100,7 @@ RuntimeFunction* AllocRuntimeFunction(uint32_t unwind_info_offset,
 
 /// Personality routine for managed exception dispatch across T4 frames (V2).
 /// Declared extern "C" for stable ABI. Defined in t4_seh_handler.cpp.
-extern "C" void T4PersonalityRoutine();
+extern "C" void JitPersonalityRoutine();
 
 /// Size of the JMP thunk emitted after UNWIND_INFO when has_seh=true.
 /// Thunk: mov rax, imm64 (10 bytes) + jmp rax (2 bytes) = 12 bytes.
@@ -113,7 +113,7 @@ static constexpr uint32_t kPersonalityThunkSize = 12;
 //
 // Emit CIE (Common Information Entry) and FDE (Frame Description Entry) for
 // Linux x64 DWARF CFI stack unwinding.  Registered via __register_frame at
-// runtime in RegisterT4Code.
+// runtime in RegisterNativeCodeSection.
 //
 // Uses "zR" augmentation with DW_EH_PE_pcrel | DW_EH_PE_sdata4 (0x1B) encoding,
 // compatible with libgcc's __register_frame implementation.

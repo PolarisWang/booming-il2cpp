@@ -159,7 +159,7 @@ protected:
     }
 
     /// Register a minimal T4 code entry and return the registered code
-    /// pointer (for use with FindT4CodeByAddress) and JitMethod pointer.
+    /// pointer (for use with FindNativeCodeByAddress) and JitMethod pointer.
     std::pair<void*, const JitMethod*>
     RegisterFakeEntry(uint32_t code_size = 64) {
         auto* buf = new std::vector<uint8_t>(code_size, 0xCC);
@@ -173,18 +173,18 @@ protected:
         s_bufs.emplace_back(buf);
         s_nms.emplace_back(nm);
 
-        RegisterT4Code(nm->code, nm->code_size, nm, /*token=*/0);
+        RegisterNativeCodeSection(nm->code, nm->code_size, nm, /*token=*/0);
         return {buf->data(), nm};
     }
 };
 
 // ══════════════════════════════════════════════════════════════════════════════
-// FindT4CodeByAddress
+// FindNativeCodeByAddress
 // ══════════════════════════════════════════════════════════════════════════════
 
 TEST_F(T4SehHandlerTest, FindT4CodeByAddress_ReturnsNullptrWhenRegistryEmpty) {
     uint8_t fake_addr;
-    EXPECT_EQ(FindT4CodeByAddress(&fake_addr), nullptr);
+    EXPECT_EQ(FindNativeCodeByAddress(&fake_addr), nullptr);
 }
 
 TEST_F(T4SehHandlerTest,
@@ -192,11 +192,11 @@ TEST_F(T4SehHandlerTest,
     auto [code, nm] = RegisterFakeEntry(64);
     const auto* c = static_cast<const uint8_t*>(code);
     // Address at the start of the registered range.
-    EXPECT_EQ(FindT4CodeByAddress(code), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(code), nm);
     // Address in the middle of the range.
-    EXPECT_EQ(FindT4CodeByAddress(c + 32), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(c + 32), nm);
     // Address at the last byte of the range.
-    EXPECT_EQ(FindT4CodeByAddress(c + 63), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(c + 63), nm);
 }
 
 TEST_F(T4SehHandlerTest,
@@ -205,11 +205,11 @@ TEST_F(T4SehHandlerTest,
     (void)nm;
     const auto* c = static_cast<const uint8_t*>(code);
     // Just before the range.
-    EXPECT_EQ(FindT4CodeByAddress(c - 1), nullptr);
+    EXPECT_EQ(FindNativeCodeByAddress(c - 1), nullptr);
     // Just after the range (code_start + code_size).
-    EXPECT_EQ(FindT4CodeByAddress(c + 64), nullptr);
+    EXPECT_EQ(FindNativeCodeByAddress(c + 64), nullptr);
     // Far outside the range.
-    EXPECT_EQ(FindT4CodeByAddress(reinterpret_cast<void*>(0xDEADBEEF)),
+    EXPECT_EQ(FindNativeCodeByAddress(reinterpret_cast<void*>(0xDEADBEEF)),
               nullptr);
 }
 
@@ -218,20 +218,20 @@ TEST_F(T4SehHandlerTest,
     auto [code, nm] = RegisterFakeEntry(4096);  // 4 KiB = 1 page
     const auto* c = static_cast<const uint8_t*>(code);
     // First lookup populates the TLS cache (cold miss).
-    EXPECT_EQ(FindT4CodeByAddress(code), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(code), nm);
     // Second lookup within the same page should hit the cache.
     // The page is based on address >> 12, so any address within the same
     // 4 KiB page (offset < 4096) hits the cache.
-    EXPECT_EQ(FindT4CodeByAddress(c + 2000), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(c + 2000), nm);
     // Third lookup at a different offset within the same page.
-    EXPECT_EQ(FindT4CodeByAddress(c + 3999), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(c + 3999), nm);
 }
 
 TEST_F(T4SehHandlerTest,
        FindT4CodeByAddress_CacheInvalidatedWhenGenerationChanges) {
     auto [code, nm] = RegisterFakeEntry(64);
     // Populate cache.
-    EXPECT_EQ(FindT4CodeByAddress(code), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(code), nm);
     // Verify cache is populated.
     EXPECT_NE(g_t4_lookup_cache.nm, nullptr);
     EXPECT_EQ(g_t4_lookup_cache.generation, g_t4_lookup_generation);
@@ -241,13 +241,13 @@ TEST_F(T4SehHandlerTest,
 
     // Generation mismatch forces slow-path linear scan, which still succeeds
     // because the entry is still in the registry.
-    EXPECT_EQ(FindT4CodeByAddress(code), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(code), nm);
     // Cache is repopulated with new generation.
     EXPECT_EQ(g_t4_lookup_cache.generation, g_t4_lookup_generation);
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// RegisterT4Code / UnregisterT4Code
+// RegisterNativeCodeSection / UnregisterNativeCodeSection
 // ══════════════════════════════════════════════════════════════════════════════
 
 TEST_F(T4SehHandlerTest, RegisterT4Code_SetsUpValidEntry) {
@@ -256,11 +256,11 @@ TEST_F(T4SehHandlerTest, RegisterT4Code_SetsUpValidEntry) {
     nm.code      = fake_code;
     nm.code_size = sizeof(fake_code);
 
-    RegisterT4Code(nm.code, nm.code_size, &nm, /*token=*/42);
+    RegisterNativeCodeSection(nm.code, nm.code_size, &nm, /*token=*/42);
 
     // Verify the entry is findable.
-    EXPECT_EQ(FindT4CodeByAddress(fake_code), &nm);
-    EXPECT_EQ(FindT4CodeByAddress(fake_code + 64), &nm);
+    EXPECT_EQ(FindNativeCodeByAddress(fake_code), &nm);
+    EXPECT_EQ(FindNativeCodeByAddress(fake_code + 64), &nm);
 }
 
 TEST_F(T4SehHandlerTest, RegisterT4Code_RejectsNullParameters) {
@@ -270,15 +270,15 @@ TEST_F(T4SehHandlerTest, RegisterT4Code_RejectsNullParameters) {
     nm.code_size = 64;
 
     // nullptr code_start.
-    RegisterT4Code(nullptr, 64, &nm);
+    RegisterNativeCodeSection(nullptr, 64, &nm);
     EXPECT_EQ(g_t4_code_count, 0u);
 
     // zero code_size.
-    RegisterT4Code(fake_code, 0, &nm);
+    RegisterNativeCodeSection(fake_code, 0, &nm);
     EXPECT_EQ(g_t4_code_count, 0u);
 
     // nullptr JitMethod.
-    RegisterT4Code(fake_code, 64, nullptr);
+    RegisterNativeCodeSection(fake_code, 64, nullptr);
     EXPECT_EQ(g_t4_code_count, 0u);
 }
 
@@ -289,13 +289,13 @@ TEST_F(T4SehHandlerTest,
     nm.code      = fake_code;
     nm.code_size = sizeof(fake_code);
 
-    RegisterT4Code(nm.code, nm.code_size, &nm);
-    ASSERT_EQ(FindT4CodeByAddress(fake_code), &nm);
+    RegisterNativeCodeSection(nm.code, nm.code_size, &nm);
+    ASSERT_EQ(FindNativeCodeByAddress(fake_code), &nm);
 
-    UnregisterT4Code(fake_code);
+    UnregisterNativeCodeSection(fake_code);
 
     // Entry should no longer be findable.
-    EXPECT_EQ(FindT4CodeByAddress(fake_code), nullptr);
+    EXPECT_EQ(FindNativeCodeByAddress(fake_code), nullptr);
 
     // Verify the code was enqueued in the pending-free table.
     bool found = false;
@@ -313,7 +313,7 @@ TEST_F(T4SehHandlerTest,
 TEST_F(T4SehHandlerTest, UnregisterT4Code_NullCodeStartReturnsSafely) {
     // Should not crash or modify state.
     uint32_t count_before = g_t4_code_count;
-    UnregisterT4Code(nullptr);
+    UnregisterNativeCodeSection(nullptr);
     EXPECT_EQ(g_t4_code_count, count_before);
 }
 
@@ -323,11 +323,11 @@ TEST_F(T4SehHandlerTest, UnregisterT4Code_UnknownAddressReturnsSafely) {
     uint32_t count_before = g_t4_code_count;
 
     uint8_t unknown[16] = {};
-    UnregisterT4Code(unknown);
+    UnregisterNativeCodeSection(unknown);
 
     // Registry should be unchanged.
     EXPECT_EQ(g_t4_code_count, count_before);
-    EXPECT_EQ(FindT4CodeByAddress(code), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(code), nm);
 }
 
 TEST_F(T4SehHandlerTest, DoubleRegisterSameAddressDoesNotCrash) {
@@ -336,11 +336,11 @@ TEST_F(T4SehHandlerTest, DoubleRegisterSameAddressDoesNotCrash) {
     nm1.code = nm2.code = fake_code;
     nm1.code_size = nm2.code_size = 64;
 
-    RegisterT4Code(fake_code, 64, &nm1);
-    RegisterT4Code(fake_code, 64, &nm2);
+    RegisterNativeCodeSection(fake_code, 64, &nm1);
+    RegisterNativeCodeSection(fake_code, 64, &nm2);
 
-    // Both entries exist; FindT4CodeByAddress returns first match.
-    EXPECT_NE(FindT4CodeByAddress(fake_code), nullptr);
+    // Both entries exist; FindNativeCodeByAddress returns first match.
+    EXPECT_NE(FindNativeCodeByAddress(fake_code), nullptr);
     EXPECT_EQ(g_t4_code_count, 2u);
 }
 
@@ -355,12 +355,12 @@ TEST_F(T4SehHandlerTest,
     nm.code      = fake_code;
     nm.code_size = sizeof(fake_code);
 
-    RegisterT4Code(nm.code, nm.code_size, &nm);
-    UnregisterT4Code(fake_code);
+    RegisterNativeCodeSection(nm.code, nm.code_size, &nm);
+    UnregisterNativeCodeSection(fake_code);
     uint32_t count_after_first = g_pending_free_count;
 
     // Unregister again (second time through a different test path).
-    // Since the entry's nm is already nullptr, UnregisterT4Code won't
+    // Since the entry's nm is already nullptr, UnregisterNativeCodeSection won't
     // find it in the code registry.  We test deduplication by calling
     // EnqueueDemotedCode directly.
     EnqueueDemotedCode(fake_code, sizeof(fake_code));
@@ -417,7 +417,7 @@ TEST_F(T4SehHandlerTest, EnqueueDemotedCode_RejectsZeroSize) {
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
-// DemoteT4ByToken
+// DemoteJittedMethod
 // ══════════════════════════════════════════════════════════════════════════════
 
 TEST_F(T4SehHandlerTest, DemoteT4ByToken_DemotesMatchingEntries) {
@@ -427,30 +427,30 @@ TEST_F(T4SehHandlerTest, DemoteT4ByToken_DemotesMatchingEntries) {
     nm_a.code = fake_a; nm_a.code_size = 64;
     nm_b.code = fake_b; nm_b.code_size = 64;
 
-    RegisterT4Code(fake_a, 64, &nm_a, /*token=*/100);
-    RegisterT4Code(fake_b, 64, &nm_b, /*token=*/200);
+    RegisterNativeCodeSection(fake_a, 64, &nm_a, /*token=*/100);
+    RegisterNativeCodeSection(fake_b, 64, &nm_b, /*token=*/200);
 
     // Demote by token 100 — only entry A should be cleared.
-    uint32_t demoted = DemoteT4ByToken(100);
+    uint32_t demoted = DemoteJittedMethod(100);
     EXPECT_EQ(demoted, 1u);
-    EXPECT_EQ(FindT4CodeByAddress(fake_a), nullptr);
-    EXPECT_EQ(FindT4CodeByAddress(fake_b), &nm_b);
+    EXPECT_EQ(FindNativeCodeByAddress(fake_a), nullptr);
+    EXPECT_EQ(FindNativeCodeByAddress(fake_b), &nm_b);
 }
 
 TEST_F(T4SehHandlerTest, DemoteT4ByToken_ZeroTokenReturnsZero) {
     auto [code, nm] = RegisterFakeEntry(64);
     (void)nm;
-    uint32_t demoted = DemoteT4ByToken(0);
+    uint32_t demoted = DemoteJittedMethod(0);
     EXPECT_EQ(demoted, 0u);
-    EXPECT_EQ(FindT4CodeByAddress(code), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(code), nm);
 }
 
 TEST_F(T4SehHandlerTest, DemoteT4ByToken_NoMatchReturnsZero) {
     auto [code, nm] = RegisterFakeEntry(64);
     (void)nm;
-    uint32_t demoted = DemoteT4ByToken(999);
+    uint32_t demoted = DemoteJittedMethod(999);
     EXPECT_EQ(demoted, 0u);
-    EXPECT_EQ(FindT4CodeByAddress(code), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(code), nm);
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -634,7 +634,7 @@ TEST_F(T4SehHandlerTest,
 TEST_F(T4SehHandlerTest,
        T4EndFinallyHelper_WithExceptionAndCatchButNoRegisteredCode) {
     // Set up unwind state as if a catch was found but no T4 code is
-    // registered for FindT4CodeByAddress to locate.
+    // registered for FindNativeCodeByAddress to locate.
     ResetUnwindState();
     g_t4_unwind.exception_in_flight   = true;
     g_t4_unwind.has_catch             = true;
@@ -644,8 +644,8 @@ TEST_F(T4SehHandlerTest,
     // T4EndFinallyHelper will:
     //   1. Enter exception_in_flight branch
     //   2. unwind_index++ (0->1), 1 < 0 is false
-    //   3. has_catch is true → FindT4CodeByAddress(_ReturnAddress())
-    //   4. No T4 code registered → FindT4CodeByAddress returns nullptr
+    //   3. has_catch is true → FindNativeCodeByAddress(_ReturnAddress())
+    //   4. No T4 code registered → FindNativeCodeByAddress returns nullptr
     //   5. ResetUnwindState, return nullptr
     void* result = T4EndFinallyHelper();
     EXPECT_EQ(result, nullptr);
@@ -663,7 +663,7 @@ TEST_F(T4SehHandlerTest, DemoteT4ByCallSiteToken_ZeroTokenReturnsZero) {
     (void)nm;
     uint32_t demoted = DemoteT4ByCallSiteToken(0);
     EXPECT_EQ(demoted, 0u);
-    EXPECT_EQ(FindT4CodeByAddress(code), nm);
+    EXPECT_EQ(FindNativeCodeByAddress(code), nm);
 }
 
 TEST_F(T4SehHandlerTest,
@@ -678,10 +678,10 @@ TEST_F(T4SehHandlerTest,
     nm.call_sites      = &cs;
     nm.call_site_count = 1;
 
-    RegisterT4Code(fake_code, 64, &nm);
+    RegisterNativeCodeSection(fake_code, 64, &nm);
     uint32_t demoted = DemoteT4ByCallSiteToken(999);
     EXPECT_EQ(demoted, 0u);
-    EXPECT_EQ(FindT4CodeByAddress(fake_code), &nm);
+    EXPECT_EQ(FindNativeCodeByAddress(fake_code), &nm);
 }
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -697,8 +697,8 @@ TEST_F(T4SehHandlerTest, RegistryFull_LogsWarningAndRejectsEntry) {
 
     for (uint32_t i = 0; i < kMaxT4CodeEntries; ++i) {
         // Each entry needs a unique address for lookup to distinguish them.
-        // We reuse the same address but RegisterT4Code appends regardless.
-        RegisterT4Code(&dummy, 1, &dummy_nm, i);
+        // We reuse the same address but RegisterNativeCodeSection appends regardless.
+        RegisterNativeCodeSection(&dummy, 1, &dummy_nm, i);
     }
     ASSERT_EQ(g_t4_code_count, kMaxT4CodeEntries);
 
@@ -707,7 +707,7 @@ TEST_F(T4SehHandlerTest, RegistryFull_LogsWarningAndRejectsEntry) {
     JitMethod extra_nm;
     extra_nm.code      = &extra;
     extra_nm.code_size = 1;
-    RegisterT4Code(&extra, 1, &extra_nm);
+    RegisterNativeCodeSection(&extra, 1, &extra_nm);
 
     // Count should not increase.
     EXPECT_EQ(g_t4_code_count, kMaxT4CodeEntries);
@@ -740,18 +740,18 @@ TEST_F(T4SehHandlerTest, UnregisterT4Code_InvalidatesLookupCache) {
     nm.code      = fake_code;
     nm.code_size = sizeof(fake_code);
 
-    RegisterT4Code(nm.code, nm.code_size, &nm);
+    RegisterNativeCodeSection(nm.code, nm.code_size, &nm);
     // Populate cache.
-    FindT4CodeByAddress(fake_code);
+    FindNativeCodeByAddress(fake_code);
     ASSERT_NE(g_t4_lookup_cache.nm, nullptr);
     uint32_t gen_before = g_t4_lookup_generation;
 
-    UnregisterT4Code(fake_code);
+    UnregisterNativeCodeSection(fake_code);
 
     // Generation should be bumped.
     EXPECT_GT(g_t4_lookup_generation, gen_before);
     // Next lookup should fail (entry cleared).
-    EXPECT_EQ(FindT4CodeByAddress(fake_code), nullptr);
+    EXPECT_EQ(FindNativeCodeByAddress(fake_code), nullptr);
 }
 
 }  // namespace

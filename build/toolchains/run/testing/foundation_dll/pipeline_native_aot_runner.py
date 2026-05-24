@@ -799,18 +799,31 @@ def _inject_eha_directive(cmakelists: Path) -> None:
         cmakelists.write_text(text, encoding="utf-8")
 
 
-def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -> None:
+def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *, is_jit: bool = False) -> None:
     """Auto-generate or update native/CMakeLists.txt with the latest template.
 
     Uses the same template pattern as convert-char's verified CMakeLists.txt.
     The generated file references codegen/ and native/runtime-entry.cpp,
     plus verification_dispatch.generated.cpp (sentinel or real).
     Always regenerates to pick up template updates (e.g. new library dependencies).
+
+    When is_jit=True, generates a JIT-mode template that links chaos_jit instead
+    of chaos_codegen, adds jit include/lib dirs, and sets /FORCE:MULTIPLE.
     """
 
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
     codegen_rel = str((verification / family_slug / "codegen").resolve()).replace("\\", "/")
     native_build = str((_REPO_ROOT / "artifacts" / "presets" / "windows-x64-reference").resolve()).replace("\\", "/")
+
+    # ── Conditional JIT-mode additions ──────────────────────────────────
+    jit_include  = '    "${CHAOS_PROJECT_ROOT}/src/native/jit"\n' if is_jit else ''
+    jit_lib      = '    "${CHAOS_NATIVE_BUILD}/src/native/jit"\n' if is_jit else ''
+    debugger_lib = '    "${CHAOS_NATIVE_BUILD}/src/native/diagnostics/debugger"\n' if is_jit else ''
+    jit_remove   = '    "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"\n' if is_jit else ''
+    jit_lib_name = 'chaos_jit' if is_jit else 'chaos_codegen'
+    debugger_name = '\n    chaos_debugger' if is_jit else ''
+    force_multiple = '\ntarget_link_options(entry PRIVATE /FORCE:MULTIPLE)' if is_jit else ''
+
     cmake_content = (
         f'cmake_minimum_required(VERSION 3.20)\n'
         f'project(chaos_entry CXX)\n'
@@ -842,6 +855,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/runtime-entry.cpp"\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/runtime-patchdata.cpp"\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/verification_dispatch.generated.cpp"\n'
+        f'{jit_remove}'
         f')\n'
         f'set(CHAOS_ENTRY_SOURCES\n'
         f'    "runtime-entry.cpp"\n'
@@ -861,6 +875,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/interpreter"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/interpreter/generated"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/codegen"\n'
+        f'{jit_include}'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/support"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/hot-update"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native"\n'
@@ -879,9 +894,11 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    "${{CHAOS_NATIVE_BUILD}}/src/native/common"\n'
         f'    "${{CHAOS_NATIVE_BUILD}}/src/native/interpreter"\n'
         f'    "${{CHAOS_NATIVE_BUILD}}/src/native/codegen"\n'
+        f'{jit_lib}'
         f'    "${{CHAOS_NATIVE_BUILD}}/src/native/support"\n'
         f'    "${{CHAOS_NATIVE_BUILD}}/src/native/hot-update"\n'
         f'    "${{CHAOS_NATIVE_BUILD}}/src/native/diagnostics/eventpipe"\n'
+        f'{debugger_lib}'
         f'    "${{CHAOS_NATIVE_BUILD}}/fmt_build"\n'
         f')\n'
         f'\n'
@@ -891,18 +908,18 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path) -
         f'    chaos_bootstrap\n'
         f'    chaos_common\n'
         f'    chaos_interpreter\n'
-        f'    chaos_codegen\n'
+        f'    {jit_lib_name}\n'
         f'    chaos_support\n'
         f'    chaos_hot_update\n'
         f'    chaos_eventpipe\n'
-        f'    chaos_fmt\n'
+        f'    chaos_fmt{debugger_name}\n'
         f')\n'
         f'\n'
         f'add_executable(entry ${{CHAOS_ENTRY_SOURCES}})\n'
         f'target_include_directories(entry PRIVATE ${{CHAOS_ENTRY_INCLUDES}})\n'
         f'target_link_directories(entry PRIVATE ${{CHAOS_LIB_DIRS}})\n'
         f'target_compile_options(entry PRIVATE /EHa)\n'
-        f'target_link_libraries(entry PRIVATE ${{CHAOS_RUNTIME_LIBS}})\n'
+        f'target_link_libraries(entry PRIVATE ${{CHAOS_RUNTIME_LIBS}}){force_multiple}\n'
     )
     cmakelists.parent.mkdir(parents=True, exist_ok=True)
     cmakelists.write_text(cmake_content, encoding="utf-8")
@@ -1548,12 +1565,12 @@ def _fix_dispatch_externs(dispatch_cpp: Path) -> None:
         print(f"    [build_entry] fixed kSubjectEntryCount extern declarations in dispatch")
 
 
-def _build_entry_exe(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe") -> bool:
+def _build_entry_exe(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe", is_jit: bool = False) -> bool:
     v = verification or _VERIFICATION
     native_dir = v / family_slug / "native"
     cmakelists = native_dir / "CMakeLists.txt"
     # Auto-generate CMakeLists.txt if missing (e.g. after clean delete)
-    _ensure_cmakelists(cmakelists, family_slug, v)
+    _ensure_cmakelists(cmakelists, family_slug, v, is_jit=is_jit)
 
     # Inject config tier compile definition into CMakeLists.txt
     _inject_config_tier(cmakelists, config_tier)
@@ -1651,9 +1668,9 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
 
     # Ensure CMakeLists.txt exists — auto-generate from template if missing
     # (families deleted and regenerated from scratch won't have native/CMakeLists.txt)
-    _ensure_cmakelists(cmakelists, family_slug, v)
+    _ensure_cmakelists(cmakelists, family_slug, v, is_jit=is_jit)
 
-    # Ensure verification_dispatch.generated.cpp exists (sentinel or real)
+    # Ensure verification_dispatch.generated.cpp exists
     # The real file is generated by the orchestrator after codegen; the sentinel
     # ensures cmake configure can find the source file during initial build.
     dispatch_cpp = native_dir / "verification_dispatch.generated.cpp"
