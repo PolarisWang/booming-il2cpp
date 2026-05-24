@@ -42,6 +42,454 @@ extern "C" void ChaosEnumRegisterDispatchTable(
 
 namespace chaos { namespace il2cpp { namespace codegen {
 
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.InstructionOpCode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE[] = {
+    { "LdcI4", 0 },
+    { "LdcI8", 1 },
+    { "LdcR4", 2 },
+    { "LdcR8", 3 },
+    { "LdStr", 4 },
+    { "LdNull", 5 },
+    { "LdArg", 6 },
+    { "LdLoc", 7 },
+    { "StLoc", 8 },
+    { "StArg", 9 },
+    { "LdFld", 10 },
+    { "StFld", 11 },
+    { "LdSFld", 12 },
+    { "StSFld", 13 },
+    { "Call", 14 },
+    { "CallVirt", 15 },
+    { "CallBridge", 16 },
+    { "Br", 17 },
+    { "BrTrue", 18 },
+    { "BrFalse", 19 },
+    { "Beq", 20 },
+    { "Blt", 21 },
+    { "Bgt", 22 },
+    { "Ble", 23 },
+    { "Bge", 24 },
+    { "Add", 25 },
+    { "Sub", 26 },
+    { "Mul", 27 },
+    { "Div", 28 },
+    { "Rem", 29 },
+    { "Neg", 30 },
+    { "Ceq", 31 },
+    { "Clt", 32 },
+    { "Cgt", 33 },
+    { "NewObj", 34 },
+    { "Box", 35 },
+    { "Unbox", 36 },
+    { "CastClass", 37 },
+    { "IsInst", 38 },
+    { "Conv_I4", 39 },
+    { "Conv_I8", 40 },
+    { "Conv_R4", 41 },
+    { "Conv_R8", 42 },
+    { "NewArr", 43 },
+    { "LdElem", 44 },
+    { "StElem", 45 },
+    { "LdLen", 46 },
+    { "Pop", 47 },
+    { "Throw", 48 },
+    { "Rethrow", 49 },
+    { "Leave", 50 },
+    { "EndFinally", 51 },
+    { "EndFilter", 52 },
+    { "Ret", 53 },
+    { "Dup", 54 },
+    { "DivUn", 55 },
+    { "RemUn", 56 },
+    { "And", 57 },
+    { "Or", 58 },
+    { "Xor", 59 },
+    { "Not", 60 },
+    { "Shl", 61 },
+    { "Shr", 62 },
+    { "ShrUn", 63 },
+    { "ConvRUn", 64 },
+    { "ConvI", 65 },
+    { "ConvU", 66 },
+    { "LdInd", 67 },
+    { "StInd", 68 },
+    { "Switch", 69 },
+    { "LdToken", 70 },
+    { "InitObj", 71 },
+    { "SizeOf", 72 },
+    { "LdFtn", 73 },
+    { "LdVirtFtn", 74 },
+    { "LdArgA", 75 },
+    { "LdLocA", 76 },
+    { "LocAlloc", 77 },
+    { "Break", 78 },
+    { "BneUn", 79 },
+    { "BgeUn", 80 },
+    { "BgtUn", 81 },
+    { "BleUn", 82 },
+    { "BltUn", 83 },
+    { "AddOvf", 84 },
+    { "SubOvf", 85 },
+    { "MulOvf", 86 },
+    { "ConvOvfI", 87 },
+    { "ConvOvfI4", 88 },
+    { "ConvOvfI8", 89 },
+    { "ConvOvfU", 90 },
+    { "ConvOvfU4", 91 },
+    { "ConvOvfU8", 92 },
+    { "LdObj", 93 },
+    { "StObj", 94 },
+    { "LdElemA", 95 },
+    { "Cpblk", 96 },
+    { "InitBlk", 97 },
+    { "CallVirtConstrained", 98 },
+    { "Calli", 99 },
+    { "Abs", 100 },
+    { "Min", 101 },
+    { "Max", 102 },
+    { "StFldBarrier", 103 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE, 104
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.InstructionOpCode"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.CodegenMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE[] = {
+    { "Aot", 0 },
+    { "Jit", 1 },
+    { "Hybrid", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.CodegenMode"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.ManagedCallSiteKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND[] = {
+    { "FunctionPointer", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.ManagedCallSiteKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.BodyAvailabilityCode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE[] = {
+    { "None", 0 },
+    { "NativeGenerated", 1 },
+    { "InterpreterReady", 2 },
+    { "BridgeDispatch", 3 },
+    { "MetadataOnly", 4 },
+    { "ExternalRuntime", 5 },
+    { "Unsupported", 6 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE, 7
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.BodyAvailabilityCode"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.HybridDispatchKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND[] = {
+    { "None", 0 },
+    { "Direct", 1 },
+    { "Virtual", 2 },
+    { "Bridge", 3 },
+    { "ExternalRuntime", 4 },
+    { "Unsupported", 5 },
+    { "ComVtable", 6 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND, 7
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.HybridDispatchKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericContextKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND[] = {
+    { "TypeInstantiation", 1 },
+    { "MethodInstantiation", 2 },
+    { "TypeAndMethodInstantiation", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericContextKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSupportKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND[] = {
+    { "Legal", 1 },
+    { "Shared", 2 },
+    { "Specialized", 3 },
+    { "Forbidden", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSupportKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSpecializationKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND[] = {
+    { "SharedBody", 1 },
+    { "SpecializedBody", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSpecializationKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericDemandFamilyKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND[] = {
+    { "ClosedGenericType", 1 },
+    { "ClosedMethodOnGenericType", 2 },
+    { "ClosedGenericMethod", 3 },
+    { "ClosedGenericMethodOnGenericType", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericDemandFamilyKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrReferenceKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND[] = {
+    { "Type", 1 },
+    { "Field", 2 },
+    { "Method", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrReferenceKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrTypeShapeKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND[] = {
+    { "ReferenceType", 1 },
+    { "ValueType", 2 },
+    { "InterfaceType", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrTypeShapeKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrRuntimeServiceKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND[] = {
+    { "NewObject", 1 },
+    { "LoadInstanceField", 2 },
+    { "StoreInstanceField", 3 },
+    { "LoadStaticField", 4 },
+    { "StoreStaticField", 5 },
+    { "NewArray", 6 },
+    { "CastClass", 7 },
+    { "IsInst", 8 },
+    { "Box", 9 },
+    { "Unbox", 10 },
+    { "UnboxAny", 11 },
+    { "LoadArrayElement", 12 },
+    { "StoreArrayElement", 13 },
+    { "InitObject", 14 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND, 14
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrRuntimeServiceKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND[] = {
+    { "Catch", 1 },
+    { "Finally", 2 },
+    { "Fault", 3 },
+    { "Filter", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionKind"
+};
+
+// ── Enum: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrAbiCarrierKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND[] = {
+    { "Void", 0 },
+    { "Int32", 1 },
+    { "NativeInt", 2 },
+    { "ValueTypeByValue", 3 },
+    { "Int8", 4 },
+    { "UInt8", 5 },
+    { "Int16", 6 },
+    { "UInt16", 7 },
+    { "Float32", 8 },
+    { "Float64", 9 },
+    { "Int64", 10 },
+    { "UInt64", 11 },
+    { "ByRef", 12 },
+    { "MultiReturn", 13 },
+    { "ByRefToValueType", 14 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND = {
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND, 15
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrAbiCarrierKind"
+};
+
+// ── Enum: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeDispatchStyle ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE[] = {
+    { "ManagedArgs", 0 },
+    { "ByRefInt32", 1 },
+    { "PointerInt32", 2 },
+    { "ReadOnlySpanInt32", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE = {
+    kEnumFields_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeDispatchStyle"
+};
+
+// ── Enum: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeCarrierKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND[] = {
+    { "Void", 0 },
+    { "Int32", 1 },
+    { "String", 2 },
+    { "Object", 3 },
+    { "ByRefInt32", 4 },
+    { "PointerInt32", 5 },
+    { "ReadOnlySpanInt32", 6 },
+    { "Int64", 7 },
+    { "Float", 8 },
+    { "Double", 9 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND = {
+    kEnumFields_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND, 10
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeCarrierKind"
+};
+
+// ── Enum: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.RuntimeMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE[] = {
+    { "Aot", 0 },
+    { "Mixed", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE = {
+    kEnumFields_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.RuntimeMode"
+};
+
+// ── Enum: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeTargetEntry+TargetKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND[] = {
+    { "Managed", 0 },
+    { "Int32Unary", 1 },
+    { "AotInt32Binary", 2 },
+    { "ByRefInt32", 3 },
+    { "PointerInt32", 4 },
+    { "ReadOnlySpanInt32", 5 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND = {
+    kEnumFields_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND = {
+    0u,
+    0u,
+    "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeTargetEntry+TargetKind"
+};
+
 // ── Enum: System.Collections/System.Collections.Generic.NodeColor ──────────────────────────────
 static constexpr EnumFieldEntry kEnumFields_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR[] = {
     { "Black", 0 },
@@ -74,6 +522,89 @@ static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLL
     0u,
     0u,
     "System.Collections/System.Collections.Generic.TreeRotation"
+};
+
+// ── Enum: System.Linq/System.Linq.ExceptionArgument ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT[] = {
+    { "collectionSelector", 0 },
+    { "count", 1 },
+    { "elementSelector", 2 },
+    { "enumerable", 3 },
+    { "first", 4 },
+    { "func", 5 },
+    { "index", 6 },
+    { "inner", 7 },
+    { "innerKeySelector", 8 },
+    { "keySelector", 9 },
+    { "outer", 10 },
+    { "outerKeySelector", 11 },
+    { "predicate", 12 },
+    { "resultSelector", 13 },
+    { "second", 14 },
+    { "selector", 15 },
+    { "source", 16 },
+    { "third", 17 },
+    { "size", 18 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT = {
+    kEnumFields_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT, 19
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT = {
+    0u,
+    0u,
+    "System.Linq/System.Linq.ExceptionArgument"
+};
+
+// ── Enum: System.Memory/System.ExceptionArgument ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT[] = {
+    { "length", 0 },
+    { "start", 1 },
+    { "minimumBufferSize", 2 },
+    { "elementIndex", 3 },
+    { "comparable", 4 },
+    { "comparer", 5 },
+    { "destination", 6 },
+    { "offset", 7 },
+    { "startSegment", 8 },
+    { "endSegment", 9 },
+    { "startIndex", 10 },
+    { "endIndex", 11 },
+    { "array", 12 },
+    { "culture", 13 },
+    { "manager", 14 },
+    { "count", 15 },
+    { "writer", 16 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT = {
+    kEnumFields_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT, 17
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT = {
+    0u,
+    0u,
+    "System.Memory/System.ExceptionArgument"
+};
+
+// ── Enum: System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE[] = {
+    { "MultiSegment", 0 },
+    { "Array", 1 },
+    { "MemoryManager", 2 },
+    { "String", 3 },
+    { "Empty", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE = {
+    kEnumFields_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE = {
+    0u,
+    0u,
+    "System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType"
 };
 
 // ── Enum: System.Private.CoreLib/Interop+Globalization+ResultCode ──────────────────────────────
@@ -6677,6 +7208,2767 @@ static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_
     "System.Private.CoreLib/System.Collections.Generic.InsertionBehavior"
 };
 
+// ── Enum: System.Security.Cryptography/Interop+Advapi32+CryptCreateHashFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS[] = {
+    { "None", 0 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Advapi32+CryptCreateHashFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Advapi32+GetDefaultProviderFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS[] = {
+    { "CRYPT_MACHINE_DEFAULT", 1 },
+    { "CRYPT_USER_DEFAULT", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Advapi32+GetDefaultProviderFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Advapi32+CryptHashProperty ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY[] = {
+    { "HP_ALGID", 1 },
+    { "HP_HASHVAL", 2 },
+    { "HP_HASHSIZE", 4 },
+    { "HP_HMAC_INFO", 5 },
+    { "HP_TLS1PRF_LABEL", 6 },
+    { "HP_TLS1PRF_SEED", 7 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Advapi32+CryptHashProperty"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Advapi32+CryptGetKeyParamFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS[] = {
+    { "KP_IV", 1 },
+    { "CRYPT_EXPORT", 4 },
+    { "KP_PERMISSIONS", 6 },
+    { "KP_ALGID", 7 },
+    { "KP_KEYLEN", 9 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Advapi32+CryptGetKeyParamFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Advapi32+CryptProvParam ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM[] = {
+    { "PP_CLIENT_HWND", 1 },
+    { "PP_IMPTYPE", 3 },
+    { "PP_NAME", 4 },
+    { "PP_CONTAINER", 6 },
+    { "PP_PROVTYPE", 16 },
+    { "PP_KEYSET_TYPE", 27 },
+    { "PP_KEYEXCHANGE_PIN", 32 },
+    { "PP_SIGNATURE_PIN", 33 },
+    { "PP_UNIQUE_CONTAINER", 36 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM, 9
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Advapi32+CryptProvParam"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Advapi32+KeySpec ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC[] = {
+    { "AT_KEYEXCHANGE", 1 },
+    { "AT_SIGNATURE", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Advapi32+KeySpec"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Advapi32+CryptSignAndVerifyHashFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS[] = {
+    { "None", 0 },
+    { "CRYPT_NOHASHOID", 1 },
+    { "CRYPT_TYPE2_FORMAT", 2 },
+    { "CRYPT_X931_FORMAT", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Advapi32+CryptSignAndVerifyHashFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+BCryptAlgPseudoHandle ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE[] = {
+    { "BCRYPT_MD5_ALG_HANDLE", 33 },
+    { "BCRYPT_SHA1_ALG_HANDLE", 49 },
+    { "BCRYPT_SHA256_ALG_HANDLE", 65 },
+    { "BCRYPT_SHA384_ALG_HANDLE", 81 },
+    { "BCRYPT_SHA512_ALG_HANDLE", 97 },
+    { "BCRYPT_HMAC_MD5_ALG_HANDLE", 145 },
+    { "BCRYPT_HMAC_SHA1_ALG_HANDLE", 161 },
+    { "BCRYPT_HMAC_SHA256_ALG_HANDLE", 177 },
+    { "BCRYPT_HMAC_SHA384_ALG_HANDLE", 193 },
+    { "BCRYPT_HMAC_SHA512_ALG_HANDLE", 209 },
+    { "BCRYPT_PBKDF2_ALG_HANDLE", 817 },
+    { "BCRYPT_SHA3_256_ALG_HANDLE", 945 },
+    { "BCRYPT_SHA3_384_ALG_HANDLE", 961 },
+    { "BCRYPT_SHA3_512_ALG_HANDLE", 977 },
+    { "BCRYPT_HMAC_SHA3_256_ALG_HANDLE", 993 },
+    { "BCRYPT_HMAC_SHA3_384_ALG_HANDLE", 1009 },
+    { "BCRYPT_HMAC_SHA3_512_ALG_HANDLE", 1025 },
+    { "BCRYPT_CSHAKE128_ALG_HANDLE", 1041 },
+    { "BCRYPT_CSHAKE256_ALG_HANDLE", 1057 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE, 19
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+BCryptAlgPseudoHandle"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+BCryptCreateHashFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS[] = {
+    { "None", 0 },
+    { "BCRYPT_HASH_REUSABLE_FLAG", 32 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+BCryptCreateHashFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+BCryptEncryptFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS[] = {
+    { "BCRYPT_PAD_PKCS1", 2 },
+    { "BCRYPT_PAD_OAEP", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+BCryptEncryptFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+BCryptOpenAlgorithmProviderFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS[] = {
+    { "None", 0 },
+    { "BCRYPT_ALG_HANDLE_HMAC_FLAG", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+BCryptOpenAlgorithmProviderFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+BCryptSignVerifyFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS[] = {
+    { "BCRYPT_PAD_PKCS1", 2 },
+    { "BCRYPT_PAD_PSS", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+BCryptSignVerifyFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+KeyBlobMagicNumber ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER[] = {
+    { "BCRYPT_RSAPUBLIC_MAGIC", 826364754 },
+    { "BCRYPT_ECDH_PUBLIC_P256_MAGIC", 827016005 },
+    { "BCRYPT_ECDSA_PUBLIC_P256_MAGIC", 827540293 },
+    { "BCRYPT_RSAPRIVATE_MAGIC", 843141970 },
+    { "BCRYPT_DSA_PUBLIC_MAGIC_V2", 843206724 },
+    { "BCRYPT_ECDH_PRIVATE_P256_MAGIC", 843793221 },
+    { "BCRYPT_ECDSA_PRIVATE_P256_MAGIC", 844317509 },
+    { "BCRYPT_DSA_PRIVATE_MAGIC_V2", 844517444 },
+    { "BCRYPT_RSAFULLPRIVATE_MAGIC", 859919186 },
+    { "BCRYPT_ECDH_PUBLIC_P384_MAGIC", 860570437 },
+    { "BCRYPT_ECDSA_PUBLIC_P384_MAGIC", 861094725 },
+    { "BCRYPT_ECDH_PRIVATE_P384_MAGIC", 877347653 },
+    { "BCRYPT_ECDSA_PRIVATE_P384_MAGIC", 877871941 },
+    { "BCRYPT_ECDH_PUBLIC_P521_MAGIC", 894124869 },
+    { "BCRYPT_ECDSA_PUBLIC_P521_MAGIC", 894649157 },
+    { "BCRYPT_ECDH_PRIVATE_P521_MAGIC", 910902085 },
+    { "BCRYPT_ECDSA_PRIVATE_P521_MAGIC", 911426373 },
+    { "BCRYPT_DSA_PUBLIC_MAGIC", 1112560452 },
+    { "BCRYPT_KEY_DATA_BLOB_MAGIC", 1296188491 },
+    { "BCRYPT_ECDSA_PUBLIC_GENERIC_MAGIC", 1346650949 },
+    { "BCRYPT_ECDH_PUBLIC_GENERIC_MAGIC", 1347109701 },
+    { "BCRYPT_ECDSA_PRIVATE_GENERIC_MAGIC", 1447314245 },
+    { "BCRYPT_ECDH_PRIVATE_GENERIC_MAGIC", 1447772997 },
+    { "BCRYPT_DSA_PRIVATE_MAGIC", 1448104772 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER, 24
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+KeyBlobMagicNumber"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+HASHALGORITHM_ENUM ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM[] = {
+    { "DSA_HASH_ALGORITHM_SHA1", 0 },
+    { "DSA_HASH_ALGORITHM_SHA256", 1 },
+    { "DSA_HASH_ALGORITHM_SHA512", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+HASHALGORITHM_ENUM"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+DSAFIPSVERSION_ENUM ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM[] = {
+    { "DSA_FIPS186_2", 0 },
+    { "DSA_FIPS186_3", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+DSAFIPSVERSION_ENUM"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_TYPE_ENUM ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM[] = {
+    { "BCRYPT_ECC_PRIME_SHORT_WEIERSTRASS_CURVE", 1 },
+    { "BCRYPT_ECC_PRIME_TWISTED_EDWARDS_CURVE", 2 },
+    { "BCRYPT_ECC_PRIME_MONTGOMERY_CURVE", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_TYPE_ENUM"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_ALG_ID_ENUM ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM[] = {
+    { "BCRYPT_NO_CURVE_GENERATION_ALG_ID", 0 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_ALG_ID_ENUM"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+CngBufferDescriptors ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS[] = {
+    { "KDF_HASH_ALGORITHM", 0 },
+    { "KDF_SECRET_PREPEND", 1 },
+    { "KDF_SECRET_APPEND", 2 },
+    { "KDF_HMAC_KEY", 3 },
+    { "KDF_TLS_PRF_LABEL", 4 },
+    { "KDF_TLS_PRF_SEED", 5 },
+    { "KDF_SECRET_HANDLE", 6 },
+    { "KDF_TLS_PRF_PROTOCOL", 7 },
+    { "KDF_ALGORITHMID", 8 },
+    { "KDF_PARTYUINFO", 9 },
+    { "KDF_PARTYVINFO", 10 },
+    { "KDF_SUPPPUBINFO", 11 },
+    { "KDF_SUPPPRIVINFO", 12 },
+    { "KDF_LABEL", 13 },
+    { "KDF_CONTEXT", 14 },
+    { "KDF_SALT", 15 },
+    { "KDF_ITERATION_COUNT", 16 },
+    { "NCRYPTBUFFER_ECC_CURVE_NAME", 60 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS, 18
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+CngBufferDescriptors"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+BCrypt+NTSTATUS ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS[] = {
+    { "STATUS_SUCCESS", 0 },
+    { "STATUS_UNSUCCESSFUL", 3221225473 },
+    { "STATUS_INVALID_PARAMETER", 3221225485 },
+    { "STATUS_NO_MEMORY", 3221225495 },
+    { "STATUS_BUFFER_TOO_SMALL", 3221225507 },
+    { "STATUS_NOT_FOUND", 3221226021 },
+    { "STATUS_AUTH_TAG_MISMATCH", 3221266434 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS, 7
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+BCrypt+NTSTATUS"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertChainFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS[] = {
+    { "CERT_CHAIN_REVOCATION_CHECK_CACHE_ONLY", -2147483648 },
+    { "None", 0 },
+    { "CERT_CHAIN_DISABLE_AUTH_ROOT_AUTO_UPDATE", 256 },
+    { "CERT_CHAIN_DISABLE_AIA", 8192 },
+    { "CERT_CHAIN_REVOCATION_CHECK_END_CERT", 268435456 },
+    { "CERT_CHAIN_REVOCATION_CHECK_CHAIN", 536870912 },
+    { "CERT_CHAIN_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT", 1073741824 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS, 7
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertChainFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertContextPropId ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID[] = {
+    { "CERT_KEY_PROV_INFO_PROP_ID", 2 },
+    { "CERT_SHA1_HASH_PROP_ID", 3 },
+    { "CERT_KEY_CONTEXT_PROP_ID", 5 },
+    { "CERT_FRIENDLY_NAME_PROP_ID", 11 },
+    { "CERT_ARCHIVED_PROP_ID", 19 },
+    { "CERT_KEY_IDENTIFIER_PROP_ID", 20 },
+    { "CERT_PUBKEY_ALG_PARA_PROP_ID", 22 },
+    { "CERT_OCSP_RESPONSE_PROP_ID", 70 },
+    { "CERT_NCRYPT_KEY_HANDLE_PROP_ID", 78 },
+    { "CERT_DELETE_KEYSET_PROP_ID", 101 },
+    { "CERT_CLR_DELETE_KEY_PROP_ID", 125 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID, 11
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertContextPropId"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertControlStoreFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS[] = {
+    { "None", 0 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertControlStoreFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertControlStoreType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE[] = {
+    { "CERT_STORE_CTRL_AUTO_RESYNC", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertControlStoreType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertEncodingType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE[] = {
+    { "X509_ASN_ENCODING", 1 },
+    { "PKCS_7_ASN_ENCODING", 65536 },
+    { "All", 65537 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertEncodingType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertFindFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS[] = {
+    { "None", 0 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertFindFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertFindType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE[] = {
+    { "CERT_FIND_ANY", 0 },
+    { "CERT_FIND_HASH", 65536 },
+    { "CERT_FIND_ISSUER_STR", 524292 },
+    { "CERT_FIND_SUBJECT_STR", 524295 },
+    { "CERT_FIND_SUBJECT_CERT", 720896 },
+    { "CERT_FIND_EXISTING", 851968 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertFindType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertUsageMatchType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE[] = {
+    { "USAGE_MATCH_TYPE_AND", 0 },
+    { "USAGE_MATCH_TYPE_OR", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertUsageMatchType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertNameFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS[] = {
+    { "None", 0 },
+    { "CERT_NAME_ISSUER_FLAG", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertNameFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertNameStringType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE[] = {
+    { "CERT_X500_NAME_STR", 3 },
+    { "CERT_NAME_STR_REVERSE_FLAG", 33554432 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertNameStringType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertNameStrTypeAndFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS[] = {
+    { "CERT_SIMPLE_NAME_STR", 1 },
+    { "CERT_OID_NAME_STR", 2 },
+    { "CERT_X500_NAME_STR", 3 },
+    { "CERT_NAME_STR_DISABLE_IE4_UTF8_FLAG", 65536 },
+    { "CERT_NAME_STR_ENABLE_T61_UNICODE_FLAG", 131072 },
+    { "CERT_NAME_STR_ENABLE_UTF8_UNICODE_FLAG", 262144 },
+    { "CERT_NAME_STR_FORCE_UTF8_DIR_STR_FLAG", 524288 },
+    { "CERT_NAME_STR_REVERSE_FLAG", 33554432 },
+    { "CERT_NAME_STR_COMMA_FLAG", 67108864 },
+    { "CERT_NAME_STR_CRLF_FLAG", 134217728 },
+    { "CERT_NAME_STR_NO_QUOTING_FLAG", 268435456 },
+    { "CERT_NAME_STR_NO_PLUS_FLAG", 536870912 },
+    { "CERT_NAME_STR_SEMICOLON_FLAG", 1073741824 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS, 13
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertNameStrTypeAndFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertNameType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE[] = {
+    { "CERT_NAME_EMAIL_TYPE", 1 },
+    { "CERT_NAME_RDN_TYPE", 2 },
+    { "CERT_NAME_ATTR_TYPE", 3 },
+    { "CERT_NAME_SIMPLE_DISPLAY_TYPE", 4 },
+    { "CERT_NAME_FRIENDLY_DISPLAY_TYPE", 5 },
+    { "CERT_NAME_DNS_TYPE", 6 },
+    { "CERT_NAME_URL_TYPE", 7 },
+    { "CERT_NAME_UPN_TYPE", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE, 8
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertNameType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertSetPropertyFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS[] = {
+    { "None", 0 },
+    { "CERT_SET_PROPERTY_INHIBIT_PERSIST_FLAG", 1073741824 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertSetPropertyFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertStoreAddDisposition ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION[] = {
+    { "CERT_STORE_ADD_NEW", 1 },
+    { "CERT_STORE_ADD_USE_EXISTING", 2 },
+    { "CERT_STORE_ADD_REPLACE_EXISTING", 3 },
+    { "CERT_STORE_ADD_ALWAYS", 4 },
+    { "CERT_STORE_ADD_REPLACE_EXISTING_INHERIT_PROPERTIES", 5 },
+    { "CERT_STORE_ADD_NEWER", 6 },
+    { "CERT_STORE_ADD_NEWER_INHERIT_PROPERTIES", 7 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION, 7
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertStoreAddDisposition"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertStoreFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS[] = {
+    { "None", 0 },
+    { "CERT_STORE_NO_CRYPT_RELEASE_FLAG", 1 },
+    { "CERT_STORE_SET_LOCALIZED_NAME_FLAG", 2 },
+    { "CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG", 4 },
+    { "CERT_STORE_DELETE_FLAG", 16 },
+    { "CERT_STORE_UNSAFE_PHYSICAL_FLAG", 32 },
+    { "CERT_STORE_SHARE_STORE_FLAG", 64 },
+    { "CERT_STORE_SHARE_CONTEXT_FLAG", 128 },
+    { "CERT_STORE_MANIFOLD_FLAG", 256 },
+    { "CERT_STORE_ENUM_ARCHIVED_FLAG", 512 },
+    { "CERT_STORE_UPDATE_KEYID_FLAG", 1024 },
+    { "CERT_STORE_BACKUP_RESTORE_FLAG", 2048 },
+    { "CERT_STORE_MAXIMUM_ALLOWED_FLAG", 4096 },
+    { "CERT_STORE_CREATE_NEW_FLAG", 8192 },
+    { "CERT_STORE_OPEN_EXISTING_FLAG", 16384 },
+    { "CERT_STORE_READONLY_FLAG", 32768 },
+    { "CERT_SYSTEM_STORE_CURRENT_USER", 65536 },
+    { "CERT_SYSTEM_STORE_LOCAL_MACHINE", 131072 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS, 18
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertStoreFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertStoreSaveAs ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS[] = {
+    { "CERT_STORE_SAVE_AS_STORE", 1 },
+    { "CERT_STORE_SAVE_AS_PKCS7", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertStoreSaveAs"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertStoreSaveTo ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO[] = {
+    { "CERT_STORE_SAVE_TO_MEMORY", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertStoreSaveTo"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+ChainEngineConfigFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS[] = {
+    { "CERT_CHAIN_CACHE_END_CERT", 1 },
+    { "CERT_CHAIN_CACHE_ONLY_URL_RETRIEVAL", 4 },
+    { "CERT_CHAIN_USE_LOCAL_MACHINE_STORE", 8 },
+    { "CERT_CHAIN_ENABLE_CACHE_AUTO_UPDATE", 16 },
+    { "CERT_CHAIN_ENABLE_SHARE_STORE", 32 },
+    { "CERT_CHAIN_DISABLE_AIA", 8192 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+ChainEngineConfigFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+ContentType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE[] = {
+    { "CERT_QUERY_CONTENT_CERT", 1 },
+    { "CERT_QUERY_CONTENT_CTL", 2 },
+    { "CERT_QUERY_CONTENT_CRL", 3 },
+    { "CERT_QUERY_CONTENT_SERIALIZED_STORE", 4 },
+    { "CERT_QUERY_CONTENT_SERIALIZED_CERT", 5 },
+    { "CERT_QUERY_CONTENT_SERIALIZED_CTL", 6 },
+    { "CERT_QUERY_CONTENT_SERIALIZED_CRL", 7 },
+    { "CERT_QUERY_CONTENT_PKCS7_SIGNED", 8 },
+    { "CERT_QUERY_CONTENT_PKCS7_UNSIGNED", 9 },
+    { "CERT_QUERY_CONTENT_PKCS7_SIGNED_EMBED", 10 },
+    { "CERT_QUERY_CONTENT_PKCS10", 11 },
+    { "CERT_QUERY_CONTENT_PFX", 12 },
+    { "CERT_QUERY_CONTENT_CERT_PAIR", 13 },
+    { "CERT_QUERY_CONTENT_PFX_AND_LOAD", 14 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE, 14
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+ContentType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CryptAcquireCertificatePrivateKeyFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS[] = {
+    { "CRYPT_ACQUIRE_CACHE_FLAG", 1 },
+    { "CRYPT_ACQUIRE_USE_PROV_INFO_FLAG", 2 },
+    { "CRYPT_ACQUIRE_COMPARE_KEY_FLAG", 4 },
+    { "CRYPT_ACQUIRE_NO_HEALING", 8 },
+    { "CRYPT_ACQUIRE_SILENT_FLAG", 64 },
+    { "CRYPT_ACQUIRE_WINDOW_HANDLE_FLAG", 128 },
+    { "CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG", 65536 },
+    { "CRYPT_ACQUIRE_PREFER_NCRYPT_KEY_FLAG", 131072 },
+    { "CRYPT_ACQUIRE_ONLY_NCRYPT_KEY_FLAG", 262144 },
+    { "CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS_MASK", 458752 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS, 10
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CryptAcquireCertificatePrivateKeyFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CryptAcquireContextFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS[] = {
+    { "None", 0 },
+    { "CRYPT_DELETEKEYSET", 16 },
+    { "CRYPT_MACHINE_KEYSET", 32 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CryptAcquireContextFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CryptDecodeObjectFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS[] = {
+    { "None", 0 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CryptDecodeObjectFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CryptImportPublicKeyInfoFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS[] = {
+    { "NONE", 0 },
+    { "CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG", 1073741824 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CryptImportPublicKeyInfoFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CryptKeySpec ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC[] = {
+    { "CERT_NCRYPT_KEY_SPEC", -1 },
+    { "AT_KEYEXCHANGE", 1 },
+    { "AT_SIGNATURE", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CryptKeySpec"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CryptMsgParamType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE[] = {
+    { "CMSG_TYPE_PARAM", 1 },
+    { "CMSG_CONTENT_PARAM", 2 },
+    { "CMSG_BARE_CONTENT_PARAM", 3 },
+    { "CMSG_INNER_CONTENT_TYPE_PARAM", 4 },
+    { "CMSG_SIGNER_COUNT_PARAM", 5 },
+    { "CMSG_SIGNER_INFO_PARAM", 6 },
+    { "CMSG_SIGNER_CERT_INFO_PARAM", 7 },
+    { "CMSG_SIGNER_HASH_ALGORITHM_PARAM", 8 },
+    { "CMSG_SIGNER_AUTH_ATTR_PARAM", 9 },
+    { "CMSG_SIGNER_UNAUTH_ATTR_PARAM", 10 },
+    { "CMSG_CERT_COUNT_PARAM", 11 },
+    { "CMSG_CERT_PARAM", 12 },
+    { "CMSG_CRL_COUNT_PARAM", 13 },
+    { "CMSG_CRL_PARAM", 14 },
+    { "CMSG_ENVELOPE_ALGORITHM_PARAM", 15 },
+    { "CMSG_RECIPIENT_COUNT_PARAM", 17 },
+    { "CMSG_RECIPIENT_INDEX_PARAM", 18 },
+    { "CMSG_RECIPIENT_INFO_PARAM", 19 },
+    { "CMSG_HASH_ALGORITHM_PARAM", 20 },
+    { "CMSG_HASH_DATA_PARAM", 21 },
+    { "CMSG_COMPUTED_HASH_PARAM", 22 },
+    { "CMSG_ENCRYPT_PARAM", 26 },
+    { "CMSG_ENCRYPTED_DIGEST", 27 },
+    { "CMSG_ENCODED_SIGNER", 28 },
+    { "CMSG_ENCODED_MESSAGE", 29 },
+    { "CMSG_VERSION_PARAM", 30 },
+    { "CMSG_ATTR_CERT_COUNT_PARAM", 31 },
+    { "CMSG_ATTR_CERT_PARAM", 32 },
+    { "CMSG_CMS_RECIPIENT_COUNT_PARAM", 33 },
+    { "CMSG_CMS_RECIPIENT_INDEX_PARAM", 34 },
+    { "CMSG_CMS_RECIPIENT_ENCRYPTED_KEY_INDEX_PARAM", 35 },
+    { "CMSG_CMS_RECIPIENT_INFO_PARAM", 36 },
+    { "CMSG_UNPROTECTED_ATTR_PARAM", 37 },
+    { "CMSG_SIGNER_CERT_ID_PARAM", 38 },
+    { "CMSG_CMS_SIGNER_INFO_PARAM", 39 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE, 35
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CryptMsgParamType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CertQueryObjectType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE[] = {
+    { "CERT_QUERY_OBJECT_FILE", 1 },
+    { "CERT_QUERY_OBJECT_BLOB", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CertQueryObjectType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+ExpectedContentTypeFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS[] = {
+    { "CERT_QUERY_CONTENT_FLAG_CERT", 2 },
+    { "CERT_QUERY_CONTENT_FLAG_CTL", 4 },
+    { "CERT_QUERY_CONTENT_FLAG_CRL", 8 },
+    { "CERT_QUERY_CONTENT_FLAG_SERIALIZED_STORE", 16 },
+    { "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CERT", 32 },
+    { "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CTL", 64 },
+    { "CERT_QUERY_CONTENT_FLAG_SERIALIZED_CRL", 128 },
+    { "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED", 256 },
+    { "CERT_QUERY_CONTENT_FLAG_PKCS7_UNSIGNED", 512 },
+    { "CERT_QUERY_CONTENT_FLAG_PKCS7_SIGNED_EMBED", 1024 },
+    { "CERT_QUERY_CONTENT_FLAG_PKCS10", 2048 },
+    { "CERT_QUERY_CONTENT_FLAG_PFX", 4096 },
+    { "CERT_QUERY_CONTENT_FLAG_CERT_PAIR", 8192 },
+    { "CERT_QUERY_CONTENT_FLAG_ALL", 16382 },
+    { "CERT_QUERY_CONTENT_FLAG_PFX_AND_LOAD", 16384 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS, 15
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+ExpectedContentTypeFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+ExpectedFormatTypeFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS[] = {
+    { "CERT_QUERY_FORMAT_FLAG_BINARY", 2 },
+    { "CERT_QUERY_FORMAT_FLAG_BASE64_ENCODED", 4 },
+    { "CERT_QUERY_FORMAT_FLAG_ASN_ASCII_HEX_ENCODED", 8 },
+    { "CERT_QUERY_FORMAT_FLAG_ALL", 14 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+ExpectedFormatTypeFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+CryptOidInfoKeyType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE[] = {
+    { "CRYPT_OID_INFO_OID_KEY", 1 },
+    { "CRYPT_OID_INFO_NAME_KEY", 2 },
+    { "CRYPT_OID_INFO_ALGID_KEY", 3 },
+    { "CRYPT_OID_INFO_SIGN_KEY", 4 },
+    { "CRYPT_OID_INFO_CNG_ALGID_KEY", 5 },
+    { "CRYPT_OID_INFO_CNG_SIGN_KEY", 6 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+CryptOidInfoKeyType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+FormatType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE[] = {
+    { "CERT_QUERY_FORMAT_BINARY", 1 },
+    { "CERT_QUERY_FORMAT_BASE64_ENCODED", 2 },
+    { "CERT_QUERY_FORMAT_ASN_ASCII_HEX_ENCODED", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+FormatType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+MsgEncodingType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE[] = {
+    { "X509_ASN_ENCODING", 1 },
+    { "PKCS_7_ASN_ENCODING", 65536 },
+    { "All", 65537 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+MsgEncodingType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+PfxCertStoreFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS[] = {
+    { "None", 0 },
+    { "CRYPT_EXPORTABLE", 1 },
+    { "CRYPT_USER_PROTECTED", 2 },
+    { "PKCS12_INCLUDE_EXTENDED_PROPERTIES", 16 },
+    { "CRYPT_MACHINE_KEYSET", 32 },
+    { "PKCS12_PREFER_CNG_KSP", 256 },
+    { "PKCS12_ALWAYS_CNG_KSP", 512 },
+    { "CRYPT_USER_KEYSET", 4096 },
+    { "PKCS12_ALLOW_OVERWRITE_KEY", 16384 },
+    { "PKCS12_NO_PERSIST_KEY", 32768 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS, 10
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+PfxCertStoreFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+PFXExportFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS[] = {
+    { "None", 0 },
+    { "REPORT_NO_PRIVATE_KEY", 1 },
+    { "REPORT_NOT_ABLE_TO_EXPORT_PRIVATE_KEY", 2 },
+    { "EXPORT_PRIVATE_KEYS", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+PFXExportFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+Crypt32+X509KeyUsageFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS[] = {
+    { "None", 0 },
+    { "EncipherOnly", 1 },
+    { "CrlSign", 2 },
+    { "KeyCertSign", 4 },
+    { "KeyAgreement", 8 },
+    { "DataEncipherment", 16 },
+    { "KeyEncipherment", 32 },
+    { "NonRepudiation", 64 },
+    { "DigitalSignature", 128 },
+    { "DecipherOnly", 32768 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS, 10
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+Crypt32+X509KeyUsageFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+NCrypt+AsymmetricPaddingMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE[] = {
+    { "None", 0 },
+    { "NCRYPT_NO_PADDING_FLAG", 1 },
+    { "NCRYPT_PAD_PKCS1_FLAG", 2 },
+    { "NCRYPT_PAD_OAEP_FLAG", 4 },
+    { "NCRYPT_PAD_PSS_FLAG", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+NCrypt+AsymmetricPaddingMode"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+NCrypt+ErrorCode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE[] = {
+    { "E_FAIL", -2147467259 },
+    { "NTE_BAD_SIGNATURE", -2146893818 },
+    { "NTE_NOT_FOUND", -2146893807 },
+    { "NTE_BAD_KEYSET", -2146893802 },
+    { "NTE_INVALID_PARAMETER", -2146893785 },
+    { "NTE_BUFFER_TOO_SMALL", -2146893784 },
+    { "NTE_NOT_SUPPORTED", -2146893783 },
+    { "NTE_NO_MORE_ITEMS", -2146893782 },
+    { "TPM_E_PCP_BUFFER_TOO_SMALL", -2144795642 },
+    { "STATUS_UNSUCCESSFUL", -1073741823 },
+    { "ERROR_SUCCESS", 0 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE, 11
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+NCrypt+ErrorCode"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+NCrypt+BufferType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE[] = {
+    { "KdfHashAlgorithm", 0 },
+    { "KdfSecretPrepend", 1 },
+    { "KdfSecretAppend", 2 },
+    { "KdfHmacKey", 3 },
+    { "KdfTlsLabel", 4 },
+    { "KdfTlsSeed", 5 },
+    { "PkcsAlgOid", 41 },
+    { "PkcsAlgParam", 42 },
+    { "PkcsSecret", 46 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE, 9
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+NCrypt+BufferType"
+};
+
+// ── Enum: System.Security.Cryptography/Interop+NCrypt+SecretAgreementFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS[] = {
+    { "None", 0 },
+    { "UseSecretAsHmacKey", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Interop+NCrypt+SecretAgreementFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Internal.NativeCrypto.Cng+OpenAlgorithmProviderFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS[] = {
+    { "NONE", 0 },
+    { "BCRYPT_ALG_HANDLE_HMAC_FLAG", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Internal.NativeCrypto.Cng+OpenAlgorithmProviderFlags"
+};
+
+// ── Enum: System.Security.Cryptography/Microsoft.Win32.SafeHandles.SafeNCryptHandle+OwnershipState ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE[] = {
+    { "Owner", 0 },
+    { "Duplicate", 1 },
+    { "Holder", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/Microsoft.Win32.SafeHandles.SafeNCryptHandle+OwnershipState"
+};
+
+// ── Enum: System.Security.Cryptography/System.HexConverter+Casing ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING[] = {
+    { "Upper", 0 },
+    { "Lower", 8224 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.HexConverter+Casing"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.FromBase64TransformMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE[] = {
+    { "IgnoreWhiteSpaces", 0 },
+    { "DoNotIgnoreWhiteSpaces", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.FromBase64TransformMode"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.ThrowHelper+ExceptionArgument ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT[] = {
+    { "inputBuffer", 0 },
+    { "outputBuffer", 1 },
+    { "inputOffset", 2 },
+    { "inputCount", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.ThrowHelper+ExceptionArgument"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CipherMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE[] = {
+    { "CBC", 1 },
+    { "ECB", 2 },
+    { "OFB", 3 },
+    { "CFB", 4 },
+    { "CTS", 5 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CipherMode"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CngExportPolicies ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES[] = {
+    { "None", 0 },
+    { "AllowExport", 1 },
+    { "AllowPlaintextExport", 2 },
+    { "AllowArchiving", 4 },
+    { "AllowPlaintextArchiving", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CngExportPolicies"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CngKeyCreationOptions ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS[] = {
+    { "None", 0 },
+    { "MachineKey", 32 },
+    { "OverwriteExistingKey", 128 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CngKeyCreationOptions"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CngKeyHandleOpenOptions ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS[] = {
+    { "None", 0 },
+    { "EphemeralKey", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CngKeyHandleOpenOptions"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CngKeyOpenOptions ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS[] = {
+    { "None", 0 },
+    { "UserKey", 0 },
+    { "MachineKey", 32 },
+    { "Silent", 64 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CngKeyOpenOptions"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CngKeyUsages ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES[] = {
+    { "None", 0 },
+    { "Decryption", 1 },
+    { "Signing", 2 },
+    { "KeyAgreement", 4 },
+    { "AllUsages", 16777215 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CngKeyUsages"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CngPropertyOptions ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS[] = {
+    { "Persist", -2147483648 },
+    { "None", 0 },
+    { "CustomProperty", 1073741824 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CngPropertyOptions"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CngUIProtectionLevels ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS[] = {
+    { "None", 0 },
+    { "ProtectKey", 1 },
+    { "ForceHighProtection", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CngUIProtectionLevels"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CryptoStreamMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE[] = {
+    { "Read", 0 },
+    { "Write", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CryptoStreamMode"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CspProviderFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS[] = {
+    { "NoFlags", 0 },
+    { "UseMachineKeyStore", 1 },
+    { "UseDefaultKeyContainer", 2 },
+    { "UseNonExportableKey", 4 },
+    { "UseExistingKey", 8 },
+    { "UseArchivableKey", 16 },
+    { "UseUserProtectedKey", 32 },
+    { "NoPrompt", 64 },
+    { "CreateEphemeralKey", 128 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS, 9
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CspProviderFlags"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.DSASignatureFormat ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT[] = {
+    { "IeeeP1363FixedFieldConcatenation", 0 },
+    { "Rfc3279DerSequence", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.DSASignatureFormat"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.ECCurve+ECCurveType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE[] = {
+    { "Implicit", 0 },
+    { "PrimeShortWeierstrass", 1 },
+    { "PrimeTwistedEdwards", 2 },
+    { "PrimeMontgomery", 3 },
+    { "Characteristic2", 4 },
+    { "Named", 5 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.ECCurve+ECCurveType"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION[] = {
+    { "Hash", 0 },
+    { "Hmac", 1 },
+    { "Tls", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.ECKeyXmlFormat ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT[] = {
+    { "Rfc4050", 0 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.ECKeyXmlFormat"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.KeyNumber ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER[] = {
+    { "Exchange", 1 },
+    { "Signature", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.KeyNumber"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.OidGroup ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP[] = {
+    { "All", 0 },
+    { "HashAlgorithm", 1 },
+    { "EncryptionAlgorithm", 2 },
+    { "PublicKeyAlgorithm", 3 },
+    { "SignatureAlgorithm", 4 },
+    { "Attribute", 5 },
+    { "ExtensionOrAttribute", 6 },
+    { "EnhancedKeyUsage", 7 },
+    { "Policy", 8 },
+    { "Template", 9 },
+    { "KeyDerivationFunction", 10 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP, 11
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.OidGroup"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.PaddingMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE[] = {
+    { "None", 1 },
+    { "PKCS7", 2 },
+    { "Zeros", 3 },
+    { "ANSIX923", 4 },
+    { "ISO10126", 5 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.PaddingMode"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.PbeEncryptionAlgorithm ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM[] = {
+    { "Unknown", 0 },
+    { "Aes128Cbc", 1 },
+    { "Aes192Cbc", 2 },
+    { "Aes256Cbc", 3 },
+    { "TripleDes3KeyPkcs12", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.PbeEncryptionAlgorithm"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.RSAEncryptionPaddingMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE[] = {
+    { "Pkcs1", 0 },
+    { "Oaep", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.RSAEncryptionPaddingMode"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.RSASignaturePaddingMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE[] = {
+    { "Pkcs1", 0 },
+    { "Pss", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.RSASignaturePaddingMode"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CryptGetKeyParamQueryType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE[] = {
+    { "KP_IV", 1 },
+    { "KP_MODE", 4 },
+    { "KP_MODE_BITS", 5 },
+    { "KP_ALGID", 7 },
+    { "KP_KEYLEN", 9 },
+    { "KP_EFFECTIVE_KEYLEN", 19 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CryptGetKeyParamQueryType"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CspAlgorithmType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE[] = {
+    { "Rsa", 0 },
+    { "Dss", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CspAlgorithmType"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.CapiHelper+ClrPropertyId ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID[] = {
+    { "CLR_KEYLEN", 1 },
+    { "CLR_PUBLICKEYONLY", 2 },
+    { "CLR_EXPORTABLE", 3 },
+    { "CLR_REMOVABLE", 4 },
+    { "CLR_HARDWARE", 5 },
+    { "CLR_ACCESSIBLE", 6 },
+    { "CLR_PROTECTED", 7 },
+    { "CLR_UNIQUE_CONTAINER", 8 },
+    { "CLR_ALGID", 9 },
+    { "CLR_PP_CLIENT_HWND", 10 },
+    { "CLR_PP_PIN", 11 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID, 11
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.CapiHelper+ClrPropertyId"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS[] = {
+    { "Default", 0 },
+    { "SkipSignatureValidation", 1 },
+    { "UnsafeLoadCertificateExtensions", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.OpenFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS[] = {
+    { "ReadOnly", 0 },
+    { "ReadWrite", 1 },
+    { "MaxAllowed", 2 },
+    { "OpenExistingOnly", 4 },
+    { "IncludeArchived", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.OpenFlags"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreLocation ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION[] = {
+    { "CurrentUser", 1 },
+    { "LocalMachine", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreLocation"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreName ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME[] = {
+    { "AddressBook", 1 },
+    { "AuthRoot", 2 },
+    { "CertificateAuthority", 3 },
+    { "Disallowed", 4 },
+    { "My", 5 },
+    { "Root", 6 },
+    { "TrustedPeople", 7 },
+    { "TrustedPublisher", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME, 8
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreName"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS[] = {
+    { "None", 0 },
+    { "Reversed", 1 },
+    { "UseSemicolons", 16 },
+    { "DoNotUsePlusSign", 32 },
+    { "DoNotUseQuotes", 64 },
+    { "UseCommas", 128 },
+    { "UseNewLines", 256 },
+    { "UseUTF8Encoding", 4096 },
+    { "UseT61Encoding", 8192 },
+    { "ForceUTF8Encoding", 16384 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS, 10
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainStatusFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS[] = {
+    { "NoError", 0 },
+    { "NotTimeValid", 1 },
+    { "NotTimeNested", 2 },
+    { "Revoked", 4 },
+    { "NotSignatureValid", 8 },
+    { "NotValidForUsage", 16 },
+    { "UntrustedRoot", 32 },
+    { "RevocationStatusUnknown", 64 },
+    { "Cyclic", 128 },
+    { "InvalidExtension", 256 },
+    { "InvalidPolicyConstraints", 512 },
+    { "InvalidBasicConstraints", 1024 },
+    { "InvalidNameConstraints", 2048 },
+    { "HasNotSupportedNameConstraint", 4096 },
+    { "HasNotDefinedNameConstraint", 8192 },
+    { "HasNotPermittedNameConstraint", 16384 },
+    { "HasExcludedNameConstraint", 32768 },
+    { "PartialChain", 65536 },
+    { "CtlNotTimeValid", 131072 },
+    { "CtlNotSignatureValid", 262144 },
+    { "CtlNotValidForUsage", 524288 },
+    { "HasWeakSignature", 1048576 },
+    { "OfflineRevocation", 16777216 },
+    { "NoIssuanceChainPolicy", 33554432 },
+    { "ExplicitDistrust", 67108864 },
+    { "HasNotSupportedCriticalExtension", 134217728 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS, 26
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainStatusFlags"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainTrustMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE[] = {
+    { "System", 0 },
+    { "CustomRootTrust", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainTrustMode"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ContentType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE[] = {
+    { "Unknown", 0 },
+    { "Cert", 1 },
+    { "SerializedCert", 2 },
+    { "Pfx", 3 },
+    { "Pkcs12", 3 },
+    { "SerializedStore", 4 },
+    { "Pkcs7", 5 },
+    { "Authenticode", 6 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE, 8
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ContentType"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509FindType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE[] = {
+    { "FindByThumbprint", 0 },
+    { "FindBySubjectName", 1 },
+    { "FindBySubjectDistinguishedName", 2 },
+    { "FindByIssuerName", 3 },
+    { "FindByIssuerDistinguishedName", 4 },
+    { "FindBySerialNumber", 5 },
+    { "FindByTimeValid", 6 },
+    { "FindByTimeNotYetValid", 7 },
+    { "FindByTimeExpired", 8 },
+    { "FindByTemplateName", 9 },
+    { "FindByApplicationPolicy", 10 },
+    { "FindByCertificatePolicy", 11 },
+    { "FindByExtension", 12 },
+    { "FindByKeyUsage", 13 },
+    { "FindBySubjectKeyIdentifier", 14 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE, 15
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509FindType"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509IncludeOption ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION[] = {
+    { "None", 0 },
+    { "ExcludeRoot", 1 },
+    { "EndCertOnly", 2 },
+    { "WholeChain", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509IncludeOption"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyStorageFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS[] = {
+    { "DefaultKeySet", 0 },
+    { "UserKeySet", 1 },
+    { "MachineKeySet", 2 },
+    { "Exportable", 4 },
+    { "UserProtected", 8 },
+    { "PersistKeySet", 16 },
+    { "EphemeralKeySet", 32 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS, 7
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS[] = {
+    { "None", 0 },
+    { "EncipherOnly", 1 },
+    { "CrlSign", 2 },
+    { "KeyCertSign", 4 },
+    { "KeyAgreement", 8 },
+    { "DataEncipherment", 16 },
+    { "KeyEncipherment", 32 },
+    { "NonRepudiation", 64 },
+    { "DigitalSignature", 128 },
+    { "DecipherOnly", 32768 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS, 10
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageFlags"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509NameType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE[] = {
+    { "SimpleName", 0 },
+    { "EmailName", 1 },
+    { "UpnName", 2 },
+    { "DnsName", 3 },
+    { "DnsFromAlternativeName", 4 },
+    { "UrlName", 5 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509NameType"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationFlag ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG[] = {
+    { "EndCertificateOnly", 0 },
+    { "EntireChain", 1 },
+    { "ExcludeRoot", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationFlag"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE[] = {
+    { "NoCheck", 0 },
+    { "Online", 1 },
+    { "Offline", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationMode"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationReason ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON[] = {
+    { "Unspecified", 0 },
+    { "KeyCompromise", 1 },
+    { "CACompromise", 2 },
+    { "AffiliationChanged", 3 },
+    { "Superseded", 4 },
+    { "CessationOfOperation", 5 },
+    { "CertificateHold", 6 },
+    { "RemoveFromCrl", 8 },
+    { "PrivilegeWithdrawn", 9 },
+    { "AACompromise", 10 },
+    { "WeakAlgorithmOrKey", 11 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON, 11
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationReason"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM[] = {
+    { "Sha1", 0 },
+    { "ShortSha1", 1 },
+    { "CapiSha1", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509VerificationFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS[] = {
+    { "NoFlag", 0 },
+    { "IgnoreNotTimeValid", 1 },
+    { "IgnoreCtlNotTimeValid", 2 },
+    { "IgnoreNotTimeNested", 4 },
+    { "IgnoreInvalidBasicConstraints", 8 },
+    { "AllowUnknownCertificateAuthority", 16 },
+    { "IgnoreWrongUsage", 32 },
+    { "IgnoreInvalidName", 64 },
+    { "IgnoreInvalidPolicy", 128 },
+    { "IgnoreEndRevocationUnknown", 256 },
+    { "IgnoreCtlSignerRevocationUnknown", 512 },
+    { "IgnoreCertificateAuthorityRevocationUnknown", 1024 },
+    { "IgnoreRootRevocationUnknown", 2048 },
+    { "AllFlags", 4095 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS, 14
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509VerificationFlags"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertStoreProvider ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER[] = {
+    { "CERT_STORE_PROV_MEMORY", 2 },
+    { "CERT_STORE_PROV_SYSTEM_W", 10 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertStoreProvider"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CryptDecodeObjectStructType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE[] = {
+    { "X509_BASIC_CONSTRAINTS", 13 },
+    { "X509_KEY_USAGE", 14 },
+    { "X509_BASIC_CONSTRAINTS2", 15 },
+    { "X509_CERT_POLICIES", 16 },
+    { "X509_UNICODE_ANY_STRING", 24 },
+    { "X509_ENHANCED_KEY_USAGE", 36 },
+    { "X509_DSS_PUBLICKEY", 38 },
+    { "X509_DSS_PARAMETERS", 39 },
+    { "X509_CERTIFICATE_TEMPLATE", 64 },
+    { "CNG_RSA_PUBLIC_KEY_BLOB", 72 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE, 10
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CryptDecodeObjectStructType"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustErrorStatus ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS[] = {
+    { "CERT_TRUST_NO_ERROR", 0 },
+    { "CERT_TRUST_IS_NOT_TIME_VALID", 1 },
+    { "CERT_TRUST_IS_NOT_TIME_NESTED", 2 },
+    { "CERT_TRUST_IS_REVOKED", 4 },
+    { "CERT_TRUST_IS_NOT_SIGNATURE_VALID", 8 },
+    { "CERT_TRUST_IS_NOT_VALID_FOR_USAGE", 16 },
+    { "CERT_TRUST_IS_UNTRUSTED_ROOT", 32 },
+    { "CERT_TRUST_REVOCATION_STATUS_UNKNOWN", 64 },
+    { "CERT_TRUST_IS_CYCLIC", 128 },
+    { "CERT_TRUST_INVALID_EXTENSION", 256 },
+    { "CERT_TRUST_INVALID_POLICY_CONSTRAINTS", 512 },
+    { "CERT_TRUST_INVALID_BASIC_CONSTRAINTS", 1024 },
+    { "CERT_TRUST_INVALID_NAME_CONSTRAINTS", 2048 },
+    { "CERT_TRUST_HAS_NOT_SUPPORTED_NAME_CONSTRAINT", 4096 },
+    { "CERT_TRUST_HAS_NOT_DEFINED_NAME_CONSTRAINT", 8192 },
+    { "CERT_TRUST_HAS_NOT_PERMITTED_NAME_CONSTRAINT", 16384 },
+    { "CERT_TRUST_HAS_EXCLUDED_NAME_CONSTRAINT", 32768 },
+    { "CERT_TRUST_IS_PARTIAL_CHAIN", 65536 },
+    { "CERT_TRUST_CTL_IS_NOT_TIME_VALID", 131072 },
+    { "CERT_TRUST_CTL_IS_NOT_SIGNATURE_VALID", 262144 },
+    { "CERT_TRUST_CTL_IS_NOT_VALID_FOR_USAGE", 524288 },
+    { "CERT_TRUST_HAS_WEAK_SIGNATURE", 1048576 },
+    { "CERT_TRUST_IS_OFFLINE_REVOCATION", 16777216 },
+    { "CERT_TRUST_NO_ISSUANCE_CHAIN_POLICY", 33554432 },
+    { "CERT_TRUST_IS_EXPLICIT_DISTRUST", 67108864 },
+    { "CERT_TRUST_HAS_NOT_SUPPORTED_CRITICAL_EXT", 134217728 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS, 26
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustErrorStatus"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustInfoStatus ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS[] = {
+    { "CERT_TRUST_HAS_EXACT_MATCH_ISSUER", 1 },
+    { "CERT_TRUST_HAS_KEY_MATCH_ISSUER", 2 },
+    { "CERT_TRUST_HAS_NAME_MATCH_ISSUER", 4 },
+    { "CERT_TRUST_IS_SELF_SIGNED", 8 },
+    { "CERT_TRUST_HAS_PREFERRED_ISSUER", 256 },
+    { "CERT_TRUST_HAS_ISSUANCE_CHAIN_POLICY", 512 },
+    { "CERT_TRUST_HAS_VALID_NAME_CONSTRAINTS", 1024 },
+    { "CERT_TRUST_IS_COMPLEX_CHAIN", 65536 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS, 8
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustInfoStatus"
+};
+
+// ── Enum: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ChainPolicy ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY[] = {
+    { "CERT_CHAIN_POLICY_BASE", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY = {
+    kEnumFields_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY, 1
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY = {
+    0u,
+    0u,
+    "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ChainPolicy"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.JsonCommentHandling ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING[] = {
+    { "Disallow", 0 },
+    { "Skip", 1 },
+    { "Allow", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.JsonCommentHandling"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.JsonSeparatorNamingPolicy+SeparatorState ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE[] = {
+    { "NotStarted", 0 },
+    { "UppercaseLetter", 1 },
+    { "LowercaseLetterOrDigit", 2 },
+    { "SpaceSeparator", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.JsonSeparatorNamingPolicy+SeparatorState"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.JsonSerializerDefaults ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS[] = {
+    { "General", 0 },
+    { "Web", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.JsonSerializerDefaults"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.JsonValueKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND[] = {
+    { "Undefined", 0 },
+    { "Object", 1 },
+    { "Array", 2 },
+    { "String", 3 },
+    { "Number", 4 },
+    { "True", 5 },
+    { "False", 6 },
+    { "Null", 7 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND, 8
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.JsonValueKind"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.JsonTokenType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE[] = {
+    { "None", 0 },
+    { "StartObject", 1 },
+    { "EndObject", 2 },
+    { "StartArray", 3 },
+    { "EndArray", 4 },
+    { "PropertyName", 5 },
+    { "Comment", 6 },
+    { "String", 7 },
+    { "Number", 8 },
+    { "True", 9 },
+    { "False", 10 },
+    { "Null", 11 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE, 12
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.JsonTokenType"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.ConsumeNumberResult ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT[] = {
+    { "Success", 0 },
+    { "OperationIncomplete", 1 },
+    { "NeedMoreData", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.ConsumeNumberResult"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.ConsumeTokenResult ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT[] = {
+    { "Success", 0 },
+    { "NotEnoughDataRollBackState", 1 },
+    { "IncompleteNoRollBackNecessary", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.ConsumeTokenResult"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.PolymorphicSerializationState ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE[] = {
+    { "None", 0 },
+    { "PolymorphicReEntryStarted", 1 },
+    { "PolymorphicReEntrySuspended", 2 },
+    { "PolymorphicReEntryNotFound", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.PolymorphicSerializationState"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.ConverterStrategy ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY[] = {
+    { "None", 0 },
+    { "Object", 1 },
+    { "Value", 2 },
+    { "Enumerable", 8 },
+    { "Dictionary", 16 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.ConverterStrategy"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.MetadataPropertyName ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME[] = {
+    { "None", 0 },
+    { "Values", 1 },
+    { "Id", 2 },
+    { "Ref", 4 },
+    { "Type", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME, 5
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.MetadataPropertyName"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.StackFrameObjectState ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE[] = {
+    { "None", 0 },
+    { "StartToken", 1 },
+    { "ReadMetadata", 2 },
+    { "ConstructorArguments", 3 },
+    { "CreatedObject", 4 },
+    { "ReadElements", 5 },
+    { "EndToken", 6 },
+    { "EndTokenValidation", 7 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE, 8
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.StackFrameObjectState"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.StackFramePropertyState ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE[] = {
+    { "None", 0 },
+    { "ReadName", 1 },
+    { "Name", 2 },
+    { "ReadValue", 3 },
+    { "ReadValueIsEnd", 4 },
+    { "TryRead", 5 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.StackFramePropertyState"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.ExceptionResource ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE[] = {
+    { "ArrayDepthTooLarge", 0 },
+    { "EndOfCommentNotFound", 1 },
+    { "EndOfStringNotFound", 2 },
+    { "RequiredDigitNotFoundAfterDecimal", 3 },
+    { "RequiredDigitNotFoundAfterSign", 4 },
+    { "RequiredDigitNotFoundEndOfData", 5 },
+    { "ExpectedEndAfterSingleJson", 6 },
+    { "ExpectedEndOfDigitNotFound", 7 },
+    { "ExpectedFalse", 8 },
+    { "ExpectedNextDigitEValueNotFound", 9 },
+    { "ExpectedNull", 10 },
+    { "ExpectedSeparatorAfterPropertyNameNotFound", 11 },
+    { "ExpectedStartOfPropertyNotFound", 12 },
+    { "ExpectedStartOfPropertyOrValueNotFound", 13 },
+    { "ExpectedStartOfPropertyOrValueAfterComment", 14 },
+    { "ExpectedStartOfValueNotFound", 15 },
+    { "ExpectedTrue", 16 },
+    { "ExpectedValueAfterPropertyNameNotFound", 17 },
+    { "FoundInvalidCharacter", 18 },
+    { "InvalidCharacterWithinString", 19 },
+    { "InvalidCharacterAfterEscapeWithinString", 20 },
+    { "InvalidHexCharacterWithinString", 21 },
+    { "InvalidEndOfJsonNonPrimitive", 22 },
+    { "MismatchedObjectArray", 23 },
+    { "ObjectDepthTooLarge", 24 },
+    { "ZeroDepthAtEnd", 25 },
+    { "DepthTooLarge", 26 },
+    { "CannotStartObjectArrayWithoutProperty", 27 },
+    { "CannotStartObjectArrayAfterPrimitiveOrClose", 28 },
+    { "CannotWriteValueWithinObject", 29 },
+    { "CannotWriteValueAfterPrimitiveOrClose", 30 },
+    { "CannotWritePropertyWithinArray", 31 },
+    { "ExpectedJsonTokens", 32 },
+    { "TrailingCommaNotAllowedBeforeArrayEnd", 33 },
+    { "TrailingCommaNotAllowedBeforeObjectEnd", 34 },
+    { "InvalidCharacterAtStartOfComment", 35 },
+    { "UnexpectedEndOfDataWhileReadingComment", 36 },
+    { "UnexpectedEndOfLineSeparator", 37 },
+    { "ExpectedOneCompleteToken", 38 },
+    { "NotEnoughData", 39 },
+    { "InvalidLeadingZeroInNumber", 40 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE, 41
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.ExceptionResource"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.NumericType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE[] = {
+    { "Byte", 0 },
+    { "SByte", 1 },
+    { "Int16", 2 },
+    { "Int32", 3 },
+    { "Int64", 4 },
+    { "Int128", 5 },
+    { "UInt16", 6 },
+    { "UInt32", 7 },
+    { "UInt64", 8 },
+    { "UInt128", 9 },
+    { "Half", 10 },
+    { "Single", 11 },
+    { "Double", 12 },
+    { "Decimal", 13 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE, 14
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.NumericType"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.DataType ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE[] = {
+    { "Boolean", 0 },
+    { "DateOnly", 1 },
+    { "DateTime", 2 },
+    { "DateTimeOffset", 3 },
+    { "TimeOnly", 4 },
+    { "TimeSpan", 5 },
+    { "Base64String", 6 },
+    { "Guid", 7 },
+    { "Version", 8 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE, 9
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.DataType"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION[] = {
+    { "Never", 0 },
+    { "Always", 1 },
+    { "WhenWritingDefault", 2 },
+    { "WhenWritingNull", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.JsonKnownNamingPolicy ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY[] = {
+    { "Unspecified", 0 },
+    { "CamelCase", 1 },
+    { "SnakeCaseLower", 2 },
+    { "SnakeCaseUpper", 3 },
+    { "KebabCaseLower", 4 },
+    { "KebabCaseUpper", 5 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY, 6
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.JsonKnownNamingPolicy"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING[] = {
+    { "Strict", 0 },
+    { "AllowReadingFromString", 1 },
+    { "WriteAsString", 2 },
+    { "AllowNamedFloatingPointLiterals", 4 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING[] = {
+    { "Replace", 0 },
+    { "Populate", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING[] = {
+    { "Skip", 0 },
+    { "Disallow", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.JsonSourceGenerationMode ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE[] = {
+    { "Default", 0 },
+    { "Metadata", 1 },
+    { "Serialization", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.JsonSourceGenerationMode"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING[] = {
+    { "JsonElement", 0 },
+    { "JsonNode", 1 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.JsonUnknownDerivedTypeHandling ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING[] = {
+    { "FailSerialization", 0 },
+    { "FallBackToBaseType", 1 },
+    { "FallBackToNearestAncestor", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.JsonUnknownDerivedTypeHandling"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.ReferenceHandlingStrategy ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY[] = {
+    { "None", 0 },
+    { "Preserve", 1 },
+    { "IgnoreCycles", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.ReferenceHandlingStrategy"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND[] = {
+    { "None", 0 },
+    { "Object", 1 },
+    { "Enumerable", 2 },
+    { "Dictionary", 3 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND, 4
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoKind"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND[] = {
+    { "Unrecognized", 0 },
+    { "Option", 1 },
+    { "ValueOption", 2 },
+    { "List", 3 },
+    { "Set", 4 },
+    { "Map", 5 },
+    { "Record", 6 },
+    { "Union", 7 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND, 8
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+SourceConstructFlags ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS[] = {
+    { "None", 0 },
+    { "SumType", 1 },
+    { "RecordType", 2 },
+    { "ObjectType", 3 },
+    { "Field", 4 },
+    { "Exception", 5 },
+    { "Closure", 6 },
+    { "Module", 7 },
+    { "UnionCase", 8 },
+    { "Value", 9 },
+    { "KindMask", 31 },
+    { "NonPublicRepresentation", 32 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS, 12
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+SourceConstructFlags"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+ConfigurationState ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE[] = {
+    { "NotConfigured", 0 },
+    { "Configuring", 1 },
+    { "Configured", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE, 3
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+ConfigurationState"
+};
+
+// ── Enum: System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions ──────────────────────────────
+static constexpr EnumFieldEntry kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS[] = {
+    { "AllowStrings", 1 },
+    { "AllowNumbers", 2 },
+};
+
+static constexpr EnumMetadataTable kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS = {
+    kEnumFields_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS, 2
+};
+
+static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS = {
+    0u,
+    0u,
+    "System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions"
+};
+
 /// Lookup enum metadata by subject_id FNV-1a 32-bit hash.
 /// Returns nullptr if the type is unknown (fallback to reflection API).
 inline static const EnumMetadataTable* chaos_find_enum_metadata(
@@ -6728,10 +10020,20 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.CALLCONV") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV;
         }
+        case 0x09114136u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+PFXExportFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+PFXExportFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS;
+        }
         case 0x092690F2u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND;
+        }
+        case 0x0988EBF3u: {
+            // Verify: System.Text.Json/System.Text.Json.JsonTokenType
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonTokenType") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE;
         }
         case 0x09C21197u: {
             // Verify: System.Private.CoreLib/System.Resources.ResourceTypeCode
@@ -6753,6 +10055,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.SYSKIND") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_SYSKIND;
         }
+        case 0x0C07203Cu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertControlStoreFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertControlStoreFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS;
+        }
         case 0x0C4317C5u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.MarshalMode
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.MarshalMode") != 0) break;
@@ -6772,6 +10079,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Threading.ThreadState
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ThreadState") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE;
+        }
+        case 0x0DF2A801u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptKeySpec
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptKeySpec") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC;
         }
         case 0x0DFDE806u: {
             // Verify: System.Private.CoreLib/System.Runtime.Serialization.StreamingContextStates
@@ -6793,6 +10105,16 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.DateTimeFormatInfoScanner+FoundDatePattern") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATINFOSCANNER_FOUNDDATEPATTERN;
         }
+        case 0x10A41633u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+PfxCertStoreFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+PfxCertStoreFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS;
+        }
+        case 0x1180F43Cu: {
+            // Verify: System.Security.Cryptography/Interop+NCrypt+BufferType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+NCrypt+BufferType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE;
+        }
         case 0x11AC7745u: {
             // Verify: System.Private.CoreLib/System.IO.FileOptions
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileOptions") != 0) break;
@@ -6803,20 +10125,55 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.BindingFlags") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_BINDINGFLAGS;
         }
+        case 0x12D54799u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertNameStringType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertNameStringType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE;
+        }
+        case 0x1319865Bu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertNameFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertNameFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS;
+        }
+        case 0x131FD541u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertStoreSaveAs
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertStoreSaveAs") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS;
+        }
         case 0x14CEEA24u: {
             // Verify: System.Private.CoreLib/System.Guid+GuidParseThrowStyle
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Guid+GuidParseThrowStyle") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_GUIDPARSETHROWSTYLE;
+        }
+        case 0x1508254Eu: {
+            // Verify: System.Security.Cryptography/Interop+NCrypt+AsymmetricPaddingMode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+NCrypt+AsymmetricPaddingMode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE;
+        }
+        case 0x15591819u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ContentType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ContentType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE;
         }
         case 0x15D6DCDCu: {
             // Verify: System.Private.CoreLib/System.Guid+ParseFailure
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Guid+ParseFailure") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE;
         }
+        case 0x163DDB74u: {
+            // Verify: System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType
+            if (std::strcmp(subject_id, "System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType") != 0) break;
+            return &kEnumTable_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE;
+        }
         case 0x16AD7532u: {
             // Verify: System.Private.CoreLib/System.IO.FileMode
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileMode") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEMODE;
+        }
+        case 0x16D02A70u: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSupportKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSupportKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND;
         }
         case 0x17316DFCu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.LayoutKind
@@ -6828,6 +10185,16 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TplEventSource+TaskWaitBehavior") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TPLEVENTSOURCE_TASKWAITBEHAVIOR;
         }
+        case 0x179942DFu: {
+            // Verify: System.Memory/System.ExceptionArgument
+            if (std::strcmp(subject_id, "System.Memory/System.ExceptionArgument") != 0) break;
+            return &kEnumTable_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT;
+        }
+        case 0x17C3BBE1u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.RSAEncryptionPaddingMode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.RSAEncryptionPaddingMode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE;
+        }
         case 0x18CE8119u: {
             // Verify: System.Private.CoreLib/System.Threading.OpenExistingResult
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.OpenExistingResult") != 0) break;
@@ -6837,6 +10204,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Reflection.Emit.DynamicResolver+SecurityControlFlags
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.DynamicResolver+SecurityControlFlags") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS;
+        }
+        case 0x1A702B6Cu: {
+            // Verify: System.Text.Json/System.Text.Json.DataType
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.DataType") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE;
         }
         case 0x1AF95E40u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.GCHandleType
@@ -6858,15 +10230,55 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Versioning.SxSRequirements") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS;
         }
+        case 0x1CE31F89u: {
+            // Verify: System.Security.Cryptography/Interop+NCrypt+SecretAgreementFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+NCrypt+SecretAgreementFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS;
+        }
+        case 0x1CF7902Du: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.OidGroup
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.OidGroup") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP;
+        }
         case 0x1EEE04BBu: {
             // Verify: System.Private.CoreLib/Interop+NtDll+CreateOptions
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+CreateOptions") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS;
         }
+        case 0x1EFA0AC6u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION;
+        }
+        case 0x1F0411A8u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertStoreSaveTo
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertStoreSaveTo") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO;
+        }
+        case 0x1F6B7F60u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CryptDecodeObjectStructType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CryptDecodeObjectStructType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE;
+        }
         case 0x1FA7B368u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES;
+        }
+        case 0x1FE7040Bu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptAcquireContextFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptAcquireContextFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS;
+        }
+        case 0x21762609u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CspAlgorithmType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CspAlgorithmType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE;
+        }
+        case 0x2182F1DDu: {
+            // Verify: System.Text.Json/System.Text.Json.ConverterStrategy
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.ConverterStrategy") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY;
         }
         case 0x233B39AAu: {
             // Verify: System.Private.CoreLib/System.DateTimeParse+DTT
@@ -6878,10 +10290,20 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.StringSplitOptions") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS;
         }
+        case 0x2429FDC6u: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND;
+        }
         case 0x24D6D3CFu: {
             // Verify: System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS;
+        }
+        case 0x261EA7CFu: {
+            // Verify: System.Text.Json/System.Text.Json.MetadataPropertyName
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.MetadataPropertyName") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME;
         }
         case 0x2622F4A3u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEFLAGS
@@ -6903,6 +10325,16 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.ScopeAction") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_SCOPEACTION;
         }
+        case 0x27928BBAu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS;
+        }
+        case 0x279DABBBu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertUsageMatchType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertUsageMatchType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE;
+        }
         case 0x282CBE79u: {
             // Verify: System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterSpinLockReason
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterSpinLockReason") != 0) break;
@@ -6917,6 +10349,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Reflection.PropertyAttributes
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.PropertyAttributes") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES;
+        }
+        case 0x2A835B9Eu: {
+            // Verify: System.Security.Cryptography/Microsoft.Win32.SafeHandles.SafeNCryptHandle+OwnershipState
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Microsoft.Win32.SafeHandles.SafeNCryptHandle+OwnershipState") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE;
         }
         case 0x2C1FCBE1u: {
             // Verify: System.Private.CoreLib/System.AttributeTargets
@@ -6958,10 +10395,35 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+BOOLEAN") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN;
         }
+        case 0x2FA75B7Bu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.OpenFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.OpenFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS;
+        }
+        case 0x3023AB67u: {
+            // Verify: System.Text.Json/System.Text.Json.NumericType
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.NumericType") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE;
+        }
         case 0x307FF573u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP;
+        }
+        case 0x309A76E9u: {
+            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptCreateHashFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptCreateHashFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS;
+        }
+        case 0x30D7EB67u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509NameType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509NameType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE;
+        }
+        case 0x315D6AD1u: {
+            // Verify: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeCarrierKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeCarrierKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND;
         }
         case 0x3270C0FBu: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags
@@ -6983,6 +10445,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+BOOL") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL;
         }
+        case 0x3774521Au: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CryptGetKeyParamQueryType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CryptGetKeyParamQueryType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE;
+        }
         case 0x37757E73u: {
             // Verify: System.Private.CoreLib/System.Reflection.MethodSemanticsAttributes
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodSemanticsAttributes") != 0) break;
@@ -6993,20 +10460,40 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.PortableThreadPool+HillClimbing+StateOrTransition") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION;
         }
+        case 0x37A25884u: {
+            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptSignAndVerifyHashFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptSignAndVerifyHashFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS;
+        }
         case 0x385C362Du: {
             // Verify: System.Private.CoreLib/System.ParseFlags
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.ParseFlags") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS;
+        }
+        case 0x3AB7DD37u: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptOpenAlgorithmProviderFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptOpenAlgorithmProviderFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS;
         }
         case 0x3AC190AAu: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.TaskStatus
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TaskStatus") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKSTATUS;
         }
+        case 0x3ACD4FBEu: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.ManagedCallSiteKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.ManagedCallSiteKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND;
+        }
         case 0x3BD1C617u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.Architecture
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.Architecture") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE;
+        }
+        case 0x3C05930Eu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertContextPropId
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertContextPropId") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID;
         }
         case 0x3C129112u: {
             // Verify: System.Private.CoreLib/System.Globalization.CalendricalCalculationsHelper+CorrectionAlgorithm
@@ -7058,6 +10545,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Collections/System.Collections.Generic.NodeColor") != 0) break;
             return &kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR;
         }
+        case 0x43574C54u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CspProviderFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CspProviderFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS;
+        }
         case 0x437EAD33u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG") != 0) break;
@@ -7093,15 +10585,40 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TimeZoneInfo+StringSerializer+State") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE;
         }
+        case 0x4581A306u: {
+            // Verify: System.Security.Cryptography/Interop+Advapi32+KeySpec
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+KeySpec") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC;
+        }
+        case 0x45956DA8u: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptEncryptFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptEncryptFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS;
+        }
         case 0x45C71C51u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.TypeKind
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.TypeKind") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND;
         }
+        case 0x470766A3u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.PbeEncryptionAlgorithm
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.PbeEncryptionAlgorithm") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM;
+        }
+        case 0x4718BAABu: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING;
+        }
         case 0x47BE5D30u: {
             // Verify: System.Private.CoreLib/System.Threading.PortableThreadPool+PendingBlockingAdjustment
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.PortableThreadPool+PendingBlockingAdjustment") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT;
+        }
+        case 0x47E90EACu: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_TYPE_ENUM
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_TYPE_ENUM") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM;
         }
         case 0x489A818Du: {
             // Verify: System.Private.CoreLib/System.Reflection.MdSigCallingConvention
@@ -7133,6 +10650,16 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.UnixFileMode") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE;
         }
+        case 0x4BF97897u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngKeyOpenOptions
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngKeyOpenOptions") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS;
+        }
+        case 0x4C11478Cu: {
+            // Verify: System.Text.Json/System.Text.Json.JsonSeparatorNamingPolicy+SeparatorState
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonSeparatorNamingPolicy+SeparatorState") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE;
+        }
         case 0x4C86F999u: {
             // Verify: System.Private.CoreLib/Interop+NtDll+DesiredAccess
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+DesiredAccess") != 0) break;
@@ -7142,6 +10669,26 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL;
+        }
+        case 0x4DAC37E6u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+X509KeyUsageFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+X509KeyUsageFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS;
+        }
+        case 0x4DBA3939u: {
+            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptGetKeyParamFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptGetKeyParamFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS;
+        }
+        case 0x4EDF9DE7u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngKeyUsages
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngKeyUsages") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES;
+        }
+        case 0x511738DBu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertNameStrTypeAndFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertNameStrTypeAndFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS;
         }
         case 0x512353DAu: {
             // Verify: System.Private.CoreLib/System.Security.PartialTrustVisibilityLevel
@@ -7158,6 +10705,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.SignatureCallingConvention") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION;
         }
+        case 0x53D7C4BCu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngExportPolicies
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngExportPolicies") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES;
+        }
         case 0x53EDDA05u: {
             // Verify: System.Private.CoreLib/System.Buffers.Utilities+MemoryPressure
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.Utilities+MemoryPressure") != 0) break;
@@ -7172,6 +10724,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.GC+RefreshMemoryStatus
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+RefreshMemoryStatus") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS;
+        }
+        case 0x54F6BD9Fu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.ThrowHelper+ExceptionArgument
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.ThrowHelper+ExceptionArgument") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT;
         }
         case 0x55342577u: {
             // Verify: System.Private.CoreLib/System.MidpointRounding
@@ -7203,6 +10760,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeKind") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND;
         }
+        case 0x595CE97Au: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptAlgPseudoHandle
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptAlgPseudoHandle") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE;
+        }
         case 0x59827356u: {
             // Verify: System.Private.CoreLib/System.TypeCode
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TypeCode") != 0) break;
@@ -7218,10 +10780,25 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ExceptionHandlingClauseOptions") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS;
         }
+        case 0x5C66BA62u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertStoreProvider
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertStoreProvider") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER;
+        }
+        case 0x5C8C98BCu: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericContextKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericContextKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND;
+        }
         case 0x5CC85E16u: {
             // Verify: System.Private.CoreLib/Interop+NtDll+CreateDisposition
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+CreateDisposition") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION;
+        }
+        case 0x5E1B9D29u: {
+            // Verify: System.Security.Cryptography/Interop+Advapi32+GetDefaultProviderFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+GetDefaultProviderFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS;
         }
         case 0x5E87E290u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCKIND
@@ -7233,10 +10810,35 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CallingConvention") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CALLINGCONVENTION;
         }
+        case 0x5F736963u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ChainPolicy
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ChainPolicy") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY;
+        }
+        case 0x5F7FA645u: {
+            // Verify: System.Security.Cryptography/System.HexConverter+Casing
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.HexConverter+Casing") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING;
+        }
+        case 0x5F9481C2u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+FormatType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+FormatType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE;
+        }
+        case 0x5FD98933u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertFindFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertFindFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS;
+        }
         case 0x60C509DBu: {
             // Verify: System.Private.CoreLib/System.DateTimeParse+DS
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeParse+DS") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DS;
+        }
+        case 0x60CA2B6Fu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.DSASignatureFormat
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.DSASignatureFormat") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT;
         }
         case 0x60D8C295u: {
             // Verify: System.Private.CoreLib/System.Globalization.DateTimeStyles
@@ -7258,6 +10860,26 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Permissions.SecurityAction") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION;
         }
+        case 0x627FE925u: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrReferenceKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrReferenceKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND;
+        }
+        case 0x62D60BBBu: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION;
+        }
+        case 0x635A8AF5u: {
+            // Verify: System.Text.Json/System.Text.Json.JsonValueKind
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonValueKind") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND;
+        }
+        case 0x63F96FCFu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertSetPropertyFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertSetPropertyFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS;
+        }
         case 0x640981AFu: {
             // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.CompilationRelaxations
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.CompilationRelaxations") != 0) break;
@@ -7267,6 +10889,16 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Configuration.Assemblies.AssemblyVersionCompatibility
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Configuration.Assemblies.AssemblyVersionCompatibility") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY;
+        }
+        case 0x66E51F31u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptMsgParamType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptMsgParamType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE;
+        }
+        case 0x67716A83u: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING;
         }
         case 0x6878DAA3u: {
             // Verify: System.Private.CoreLib/System.Globalization.TimeSpanFormat+StandardFormat
@@ -7278,15 +10910,30 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+DispatchWrapperType") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE;
         }
+        case 0x69769152u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+ContentType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+ContentType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE;
+        }
         case 0x69D8BE39u: {
             // Verify: System.Private.CoreLib/System.LoaderOptimization
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.LoaderOptimization") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION;
         }
+        case 0x6A16366Bu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationMode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationMode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE;
+        }
         case 0x6A695F22u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldFormat
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldFormat") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT;
+        }
+        case 0x6AF3569Du: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM;
         }
         case 0x6B149D6Au: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.INVOKEKIND
@@ -7308,15 +10955,35 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ParseNumberOptions") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS;
         }
+        case 0x6DC8437Fu: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptCreateHashFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptCreateHashFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS;
+        }
         case 0x6E98EEDAu: {
             // Verify: System.Private.CoreLib/System.ComponentModel.EditorBrowsableState
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.ComponentModel.EditorBrowsableState") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE;
         }
+        case 0x6F9EBA6Fu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertStoreFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertStoreFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS;
+        }
         case 0x700D0154u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.OperandType
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.OperandType") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPERANDTYPE;
+        }
+        case 0x70A097A4u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.RSASignaturePaddingMode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.RSASignaturePaddingMode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE;
+        }
+        case 0x70B241ECu: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING;
         }
         case 0x71AB6FAAu: {
             // Verify: System.Private.CoreLib/System.Reflection.MethodImplAttributes
@@ -7332,6 +10999,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.PosixSignal
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.PosixSignal") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_POSIXSIGNAL;
+        }
+        case 0x7336D0E9u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptImportPublicKeyInfoFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptImportPublicKeyInfoFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS;
         }
         case 0x73C78E6Au: {
             // Verify: System.Private.CoreLib/System.Globalization.CultureData+LocaleGroupingData
@@ -7353,10 +11025,45 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+RuntimeTypeCache+CacheType") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_RUNTIMETYPECACHE_CACHETYPE;
         }
+        case 0x75CDC688u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertFindType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertFindType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE;
+        }
+        case 0x7671CE3Au: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreLocation
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreLocation") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION;
+        }
+        case 0x76D557E1u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptDecodeObjectFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptDecodeObjectFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS;
+        }
         case 0x7766AFD2u: {
             // Verify: System.Private.CoreLib/System.Threading.ApartmentState
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ApartmentState") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE;
+        }
+        case 0x77D9F0DDu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+ChainEngineConfigFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+ChainEngineConfigFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS;
+        }
+        case 0x7882A5BCu: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonSourceGenerationMode
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonSourceGenerationMode") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE;
+        }
+        case 0x7A7E11FCu: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+KeyBlobMagicNumber
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+KeyBlobMagicNumber") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER;
+        }
+        case 0x7AD75124u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.PaddingMode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.PaddingMode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE;
         }
         case 0x7AF0D34Eu: {
             // Verify: System.Private.CoreLib/Interop+Globalization+ResultCode
@@ -7368,6 +11075,16 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.ExceptionArgument") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONARGUMENT;
         }
+        case 0x7D55736Du: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonKnownNamingPolicy
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonKnownNamingPolicy") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY;
+        }
+        case 0x7D686189u: {
+            // Verify: System.Security.Cryptography/Interop+NCrypt+ErrorCode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+NCrypt+ErrorCode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE;
+        }
         case 0x7D7E0E81u: {
             // Verify: System.Private.CoreLib/System.Text.Unicode.GraphemeClusterBreakType
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Text.Unicode.GraphemeClusterBreakType") != 0) break;
@@ -7378,15 +11095,30 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+EnableNoGCRegionCallbackStatus") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS;
         }
+        case 0x7E5A8108u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustErrorStatus
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustErrorStatus") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS;
+        }
         case 0x7F05DE79u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.TaskCreationOptions
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TaskCreationOptions") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCREATIONOPTIONS;
         }
+        case 0x805634A2u: {
+            // Verify: System.Security.Cryptography/Internal.NativeCrypto.Cng+OpenAlgorithmProviderFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Internal.NativeCrypto.Cng+OpenAlgorithmProviderFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS;
+        }
         case 0x80617111u: {
             // Verify: System.Private.CoreLib/System.RuntimeType+CheckValueStatus
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+CheckValueStatus") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS;
+        }
+        case 0x80C63118u: {
+            // Verify: System.Linq/System.Linq.ExceptionArgument
+            if (std::strcmp(subject_id, "System.Linq/System.Linq.ExceptionArgument") != 0) break;
+            return &kEnumTable_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT;
         }
         case 0x811582D0u: {
             // Verify: System.Private.CoreLib/System.Security.Permissions.SecurityPermissionFlag
@@ -7397,6 +11129,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS;
+        }
+        case 0x81805E6Eu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertQueryObjectType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertQueryObjectType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE;
         }
         case 0x81D9A6FEu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.RuntimeEventSource+EventId
@@ -7423,6 +11160,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CODEANALYSIS_DYNAMICALLYACCESSEDMEMBERTYPES;
         }
+        case 0x853E964Du: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngKeyHandleOpenOptions
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngKeyHandleOpenOptions") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS;
+        }
         case 0x862972CDu: {
             // Verify: System.Private.CoreLib/System.Globalization.UnicodeCategory
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.UnicodeCategory") != 0) break;
@@ -7438,10 +11180,35 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventChannelType") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE;
         }
+        case 0x871AF722u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertEncodingType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertEncodingType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE;
+        }
+        case 0x87306E28u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CryptoStreamMode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CryptoStreamMode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE;
+        }
+        case 0x87C0EA01u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+ExpectedFormatTypeFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+ExpectedFormatTypeFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS;
+        }
+        case 0x87E6C643u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyStorageFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyStorageFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS;
+        }
         case 0x87F25CC0u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.AsyncCausalityStatus
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.AsyncCausalityStatus") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_ASYNCCAUSALITYSTATUS;
+        }
+        case 0x88BC3873u: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptSignVerifyFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptSignVerifyFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS;
         }
         case 0x89116E2Bu: {
             // Verify: System.Private.CoreLib/System.Globalization.IcuLocaleDataParts
@@ -7457,6 +11224,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Reflection.NullabilityState
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.NullabilityState") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE;
+        }
+        case 0x8A5D0BA6u: {
+            // Verify: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeTargetEntry+TargetKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeTargetEntry+TargetKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND;
         }
         case 0x8AE75260u: {
             // Verify: System.Private.CoreLib/System.Runtime.GCLatencyMode
@@ -7478,6 +11250,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ThreadPriority") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADPRIORITY;
         }
+        case 0x8D16BC9Au: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationFlag
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationFlag") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG;
+        }
         case 0x8DFF0696u: {
             // Verify: System.Private.CoreLib/System.Threading.LazyThreadSafetyMode
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.LazyThreadSafetyMode") != 0) break;
@@ -7487,6 +11264,16 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.EnvironmentVariableTarget
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.EnvironmentVariableTarget") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENTVARIABLETARGET;
+        }
+        case 0x8E9305F4u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.KeyNumber
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.KeyNumber") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER;
+        }
+        case 0x8E962F90u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngKeyCreationOptions
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngKeyCreationOptions") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS;
         }
         case 0x8F2C6B47u: {
             // Verify: System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ComponentParseResult
@@ -7517,6 +11304,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Globalization.TimeSpanStyles
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TimeSpanStyles") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES;
+        }
+        case 0x948DCF6Du: {
+            // Verify: System.Text.Json/System.Text.Json.ExceptionResource
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.ExceptionResource") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE;
         }
         case 0x94BDCA52u: {
             // Verify: System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS
@@ -7573,10 +11365,20 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.LockRecursionPolicy") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY;
         }
+        case 0x99CACDB4u: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSpecializationKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSpecializationKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND;
+        }
         case 0x9A189910u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.VarEnum
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.VarEnum") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_VARENUM;
+        }
+        case 0x9A89B6EEu: {
+            // Verify: System.Text.Json/System.Text.Json.ConsumeTokenResult
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.ConsumeTokenResult") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT;
         }
         case 0x9AE37DA4u: {
             // Verify: System.Private.CoreLib/System.Runtime.GCSettings+SetLatencyModeStatus
@@ -7593,10 +11395,25 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarWeekRule") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE;
         }
+        case 0x9D96E4DAu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreName
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreName") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME;
+        }
         case 0x9E92B1C3u: {
             // Verify: System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TIMEZONEINFORESULT;
+        }
+        case 0x9E97E73Cu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptOidInfoKeyType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptOidInfoKeyType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE;
+        }
+        case 0x9EB04086u: {
+            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptProvParam
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptProvParam") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM;
         }
         case 0xA041F77Cu: {
             // Verify: System.Private.CoreLib/System.Globalization.FORMATFLAGS
@@ -7613,10 +11430,40 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodBase+InvokerStrategy") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY;
         }
+        case 0xA1F06941u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.ECKeyXmlFormat
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.ECKeyXmlFormat") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT;
+        }
+        case 0xA1FF20A1u: {
+            // Verify: System.Text.Json/System.Text.Json.StackFramePropertyState
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.StackFramePropertyState") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE;
+        }
         case 0xA2611655u: {
             // Verify: System.Private.CoreLib/System.Globalization.CalendarId
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarId") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID;
+        }
+        case 0xA3435A46u: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_ALG_ID_ENUM
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_ALG_ID_ENUM") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM;
+        }
+        case 0xA4194B48u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.FromBase64TransformMode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.FromBase64TransformMode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE;
+        }
+        case 0xA5722627u: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrRuntimeServiceKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrRuntimeServiceKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND;
+        }
+        case 0xA5929B03u: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.ReferenceHandlingStrategy
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.ReferenceHandlingStrategy") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY;
         }
         case 0xA5ABCC22u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction
@@ -7627,6 +11474,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Globalization.HebrewNumber+HebrewToken
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.HebrewNumber+HebrewToken") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HEBREWTOKEN;
+        }
+        case 0xA62C4308u: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.BodyAvailabilityCode
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.BodyAvailabilityCode") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE;
         }
         case 0xA698B412u: {
             // Verify: System.Private.CoreLib/System.GC+GC_ALLOC_FLAGS
@@ -7642,6 +11494,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS;
+        }
+        case 0xAA30318Fu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509FindType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509FindType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE;
         }
         case 0xAB076184u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.Task+TaskStateFlags
@@ -7673,6 +11530,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.InvocationFlags") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS;
         }
+        case 0xAE00ED7Du: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertControlStoreType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertControlStoreType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE;
+        }
         case 0xAE3F2B49u: {
             // Verify: System.Private.CoreLib/System.Reflection.FieldAttributes
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.FieldAttributes") != 0) break;
@@ -7687,6 +11549,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.DateTimeParse+TM
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeParse+TM") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM;
+        }
+        case 0xAF65A67Du: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS;
         }
         case 0xB0EE334Bu: {
             // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.LoadHint
@@ -7713,6 +11580,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.AssemblyBuilderAccess") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS;
         }
+        case 0xB5886A40u: {
+            // Verify: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeDispatchStyle
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeDispatchStyle") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE;
+        }
         case 0xB6463128u: {
             // Verify: System.Private.CoreLib/System.Security.Principal.TokenImpersonationLevel
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Principal.TokenImpersonationLevel") != 0) break;
@@ -7738,6 +11610,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Number+NumberBufferKind") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_NUMBERBUFFERKIND;
         }
+        case 0xB740C315u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.ECCurve+ECCurveType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.ECCurve+ECCurveType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE;
+        }
         case 0xB769D93Au: {
             // Verify: System.Private.CoreLib/System.StubHelpers.AsAnyMarshaler+BackPropAction
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.StubHelpers.AsAnyMarshaler+BackPropAction") != 0) break;
@@ -7752,6 +11629,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Reflection.MetadataTokenType
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MetadataTokenType") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METADATATOKENTYPE;
+        }
+        case 0xB975A58Eu: {
+            // Verify: System.Text.Json/System.Text.Json.JsonCommentHandling
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonCommentHandling") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING;
         }
         case 0xB9B9E5EEu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.LIBFLAGS
@@ -7772,6 +11654,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS;
+        }
+        case 0xBC5817ACu: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.HybridDispatchKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.HybridDispatchKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND;
         }
         case 0xBCB6DC0Bu: {
             // Verify: System.Private.CoreLib/System.IO.FileAccess
@@ -7843,6 +11730,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Number+ParsingStatus") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS;
         }
+        case 0xC1DD8FF6u: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+NTSTATUS
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+NTSTATUS") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS;
+        }
         case 0xC3197A07u: {
             // Verify: System.Private.CoreLib/System.Buffers.OperationStatus
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.OperationStatus") != 0) break;
@@ -7858,10 +11750,25 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureData+LocaleNumberData") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA;
         }
+        case 0xC47700F9u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+ExpectedContentTypeFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+ExpectedContentTypeFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS;
+        }
         case 0xC4DFC1B5u: {
             // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.MethodImplOptions
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.MethodImplOptions") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODIMPLOPTIONS;
+        }
+        case 0xC62BB2BBu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertChainFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertChainFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS;
+        }
+        case 0xC69CB48Eu: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrAbiCarrierKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrAbiCarrierKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND;
         }
         case 0xC6A9EB01u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.StackTrace+TraceFormat
@@ -7878,20 +11785,55 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.SearchTarget") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET;
         }
+        case 0xCA274D91u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509IncludeOption
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509IncludeOption") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION;
+        }
         case 0xCA2C73B5u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.StringMarshalling
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.StringMarshalling") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING;
+        }
+        case 0xCC5F91B8u: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.InstructionOpCode
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.InstructionOpCode") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE;
         }
         case 0xCC731390u: {
             // Verify: System.Private.CoreLib/System.Reflection.CallingConventions
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.CallingConventions") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CALLINGCONVENTIONS;
         }
+        case 0xCC908537u: {
+            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptHashProperty
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptHashProperty") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY;
+        }
+        case 0xCCAD5B51u: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND;
+        }
+        case 0xCD25C4FEu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngUIProtectionLevels
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngUIProtectionLevels") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS;
+        }
         case 0xCE4AC3A5u: {
             // Verify: System.Private.CoreLib/System.Reflection.TypeAttributes
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.TypeAttributes") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES;
+        }
+        case 0xCF01B762u: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericDemandFamilyKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericDemandFamilyKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND;
+        }
+        case 0xCF586EF1u: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+ConfigurationState
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+ConfigurationState") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE;
         }
         case 0xCF8B85EEu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CreateObjectFlags
@@ -7918,6 +11860,16 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventOpcode") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTOPCODE;
         }
+        case 0xD1312F7Du: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrTypeShapeKind
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrTypeShapeKind") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND;
+        }
+        case 0xD33CF18Eu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertStoreAddDisposition
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertStoreAddDisposition") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION;
+        }
         case 0xD3CFB0F0u: {
             // Verify: System.Private.CoreLib/System.Threading.Tasks.CausalitySynchronousWork
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.CausalitySynchronousWork") != 0) break;
@@ -7927,6 +11879,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceResult
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceResult") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACERESULT;
+        }
+        case 0xD56E1D76u: {
+            // Verify: System.Text.Json/System.Text.Json.ConsumeNumberResult
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.ConsumeNumberResult") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT;
         }
         case 0xD5F6AC77u: {
             // Verify: System.Private.CoreLib/System.Runtime.Versioning.ComponentGuaranteesOptions
@@ -7948,6 +11905,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.ConstrainedExecution.Cer") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER;
         }
+        case 0xDA62ADC6u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustInfoStatus
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustInfoStatus") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS;
+        }
         case 0xDA822A59u: {
             // Verify: System.Private.CoreLib/Interop+ContextTrackingMode
             if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+ContextTrackingMode") != 0) break;
@@ -7957,6 +11919,16 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.Reflection.MemberTypes
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MemberTypes") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES;
+        }
+        case 0xDC8F029Eu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CipherMode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CipherMode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE;
+        }
+        case 0xDDAB29C6u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509VerificationFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509VerificationFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS;
         }
         case 0xDDE7A5CDu: {
             // Verify: System.Private.CoreLib/System.Reflection.Associates+Attributes
@@ -7988,15 +11960,40 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.DllImportSearchPath") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH;
         }
+        case 0xE333C2C8u: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS;
+        }
         case 0xE3699697u: {
             // Verify: System.Private.CoreLib/System.DefaultBinder+Primitives
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.DefaultBinder+Primitives") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES;
         }
+        case 0xE4254900u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CertNameType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertNameType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE;
+        }
+        case 0xE4C62746u: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonUnknownDerivedTypeHandling
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonUnknownDerivedTypeHandling") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING;
+        }
         case 0xE53A620Eu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ContentionFlagsMap
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ContentionFlagsMap") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_CONTENTIONFLAGSMAP;
+        }
+        case 0xE5B2D957u: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+SourceConstructFlags
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+SourceConstructFlags") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS;
+        }
+        case 0xE5D3FA77u: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoKind
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoKind") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND;
         }
         case 0xE608DBCBu: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CreateComInterfaceFlags
@@ -8008,15 +12005,30 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventKeywords") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTKEYWORDS;
         }
+        case 0xE68A9FC7u: {
+            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING;
+        }
         case 0xE6F09D9Eu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventTags
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventTags") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS;
         }
+        case 0xE7118A49u: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptAcquireCertificatePrivateKeyFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptAcquireCertificatePrivateKeyFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS;
+        }
         case 0xE782C1B5u: {
             // Verify: System.Private.CoreLib/System.Globalization.CultureTypes
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureTypes") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES;
+        }
+        case 0xE8B841EBu: {
+            // Verify: System.Security.Cryptography/Interop+Crypt32+MsgEncodingType
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+MsgEncodingType") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE;
         }
         case 0xE9093830u: {
             // Verify: System.Private.CoreLib/System.DelegateBindingFlags
@@ -8027,6 +12039,11 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             // Verify: System.Private.CoreLib/System.StringComparison
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.StringComparison") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON;
+        }
+        case 0xEBFC9DBDu: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+HASHALGORITHM_ENUM
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+HASHALGORITHM_ENUM") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM;
         }
         case 0xEC06DE8Du: {
             // Verify: System.Private.CoreLib/System.Reflection.AssemblyNameParser+AttributeKind
@@ -8043,10 +12060,20 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Configuration.Assemblies.AssemblyHashAlgorithm") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM;
         }
+        case 0xEFB6B852u: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+DSAFIPSVERSION_ENUM
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+DSAFIPSVERSION_ENUM") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM;
+        }
         case 0xEFDA7B73u: {
             // Verify: System.Private.CoreLib/System.Security.Principal.PrincipalPolicy
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Principal.PrincipalPolicy") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY;
+        }
+        case 0xEFE95F73u: {
+            // Verify: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.RuntimeMode
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.RuntimeMode") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE;
         }
         case 0xF1D5A67Eu: {
             // Verify: System.Private.CoreLib/System.TypeNameFormatFlags
@@ -8073,10 +12100,20 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComWrappersScenario") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMWRAPPERSSCENARIO;
         }
+        case 0xF4AF6F34u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationReason
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationReason") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON;
+        }
         case 0xF5ADD0B0u: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS;
+        }
+        case 0xF64AFB31u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngPropertyOptions
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngPropertyOptions") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS;
         }
         case 0xF67C68ABu: {
             // Verify: System.Collections/System.Collections.Generic.TreeRotation
@@ -8088,15 +12125,35 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventTask") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTASK;
         }
+        case 0xF74FA550u: {
+            // Verify: System.Security.Cryptography/Interop+BCrypt+CngBufferDescriptors
+            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+CngBufferDescriptors") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS;
+        }
         case 0xF7CFFA84u: {
             // Verify: System.Private.CoreLib/System.Reflection.Emit.StackBehaviour
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.StackBehaviour") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_STACKBEHAVIOUR;
         }
+        case 0xF7D17E9Au: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainTrustMode
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainTrustMode") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE;
+        }
+        case 0xF8501125u: {
+            // Verify: System.Text.Json/System.Text.Json.PolymorphicSerializationState
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.PolymorphicSerializationState") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE;
+        }
         case 0xF88D7997u: {
             // Verify: System.Private.CoreLib/System.Runtime.Intrinsics.X86.FloatComparisonMode
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Intrinsics.X86.FloatComparisonMode") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTRINSICS_X86_FLOATCOMPARISONMODE;
+        }
+        case 0xF8C0EF6Eu: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainStatusFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainStatusFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS;
         }
         case 0xF95F14D7u: {
             // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.DESCKIND
@@ -8108,10 +12165,35 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.AssemblyNameParser+Token") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN;
         }
+        case 0xF9F6BDECu: {
+            // Verify: System.Text.Json/System.Text.Json.JsonSerializerDefaults
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonSerializerDefaults") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS;
+        }
         case 0xFA31A8BAu: {
             // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventProviderType
             if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventProviderType") != 0) break;
             return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDERTYPE;
+        }
+        case 0xFB7F7963u: {
+            // Verify: System.Text.Json/System.Text.Json.StackFrameObjectState
+            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.StackFrameObjectState") != 0) break;
+            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE;
+        }
+        case 0xFBAA6CECu: {
+            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.CodegenMode
+            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.CodegenMode") != 0) break;
+            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE;
+        }
+        case 0xFC685799u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS;
+        }
+        case 0xFD53AEA9u: {
+            // Verify: System.Security.Cryptography/System.Security.Cryptography.CapiHelper+ClrPropertyId
+            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CapiHelper+ClrPropertyId") != 0) break;
+            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID;
         }
         case 0xFDF59BEDu: {
             // Verify: System.Private.CoreLib/System.Globalization.CompareOptions
@@ -8131,12 +12213,19 @@ inline static const EnumMetadataTable* chaos_find_enum_metadata(
 // ── Dispatch table: sorted by FNV-24 for binary search ──
 static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x000695u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYCONTENTTYPE },
+    { 0x00ED7Du, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE },
+    { 0x01B762u, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND },
     { 0x01FBC5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_EVENTRESETMODE },
     { 0x02673Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_HANDLEINHERITABILITY },
+    { 0x0411A8u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO },
     { 0x05614Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METADATATOKENTYPE },
+    { 0x05930Eu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID },
     { 0x05DE79u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCREATIONOPTIONS },
     { 0x06DE8Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_ATTRIBUTEKIND },
+    { 0x07203Cu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS },
     { 0x076184u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASK_TASKSTATEFLAGS },
+    { 0x0766A3u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM },
+    { 0x08254Eu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE },
     { 0x08AF95u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_MONTHNAMESTYLES },
     { 0x08DBCBu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATECOMINTERFACEFLAGS },
     { 0x093830u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DELEGATEBINDINGFLAGS },
@@ -8149,49 +12238,74 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x0F47D8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILESHARE },
     { 0x10298Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_BINDINGFLAGS },
     { 0x10F4F5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PEFILEKINDS },
+    { 0x114136u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS },
+    { 0x11478Cu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE },
     { 0x116E2Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_ICULOCALEDATAPARTS },
     { 0x1172F2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEFLAGS },
+    { 0x118A49u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS },
     { 0x129112u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDRICALCALCULATIONSHELPER_CORRECTIONALGORITHM },
     { 0x149D6Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_INVOKEKIND },
     { 0x14A2C7u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONARGUMENT },
     { 0x14A7B3u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYRULESET },
     { 0x1582D0u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYPERMISSIONFLAG },
     { 0x15C52Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TOKENTYPE },
+    { 0x16366Bu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE },
+    { 0x16BC9Au, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG },
+    { 0x1738DBu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS },
     { 0x175241u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTOPCODE },
     { 0x189910u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_VARENUM },
+    { 0x18BAABu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING },
     { 0x18F5D5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_NUMBERSTYLES },
+    { 0x194B48u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE },
     { 0x197A07u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS },
+    { 0x19865Bu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS },
     { 0x1A7F8Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GCCONFIGURATIONTYPE },
+    { 0x1AF722u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE },
+    { 0x1B9D29u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS },
     { 0x1BBDB1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY },
     { 0x1D8B23u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION },
     { 0x1D97C2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH },
     { 0x1E1A98u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_WAITERSTATES },
     { 0x1E4DCFu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CODEANALYSIS_DYNAMICALLYACCESSEDMEMBERTYPES },
+    { 0x1EA7CFu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME },
     { 0x1F138Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HEBREWTOKEN },
     { 0x1FCBE1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ATTRIBUTETARGETS },
+    { 0x1FD541u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS },
     { 0x205F0Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODEVALUES },
     { 0x221B2Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALESTRINGDATA },
     { 0x22539Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTASK },
     { 0x22F4A3u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEFLAGS },
     { 0x2353DAu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PARTIALTRUSTVISIBILITYLEVEL },
+    { 0x23AB67u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE },
     { 0x24EBF0u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CHARSET },
+    { 0x254900u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE },
     { 0x2592F2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFOOPTIONS },
+    { 0x25C4FEu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS },
     { 0x2690F2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND },
     { 0x26A8B1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS },
     { 0x26C185u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PINVOKEATTRIBUTES },
+    { 0x274D91u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION },
     { 0x2972CDu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY },
+    { 0x29FDC6u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND },
+    { 0x2BB2BBu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS },
+    { 0x2C4308u, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE },
     { 0x2C6B47u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_COMPONENTPARSERESULT },
     { 0x2C73B5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING },
     { 0x2CBE79u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERSPINLOCKREASON },
     { 0x2F322Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHOPTION },
+    { 0x30318Fu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE },
+    { 0x306E28u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE },
     { 0x3094ABu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON },
     { 0x30BDACu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_UNMANAGEDTYPE },
     { 0x30DE5Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONRESOURCE },
+    { 0x312F7Du, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND },
     { 0x316DFCu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_LAYOUTKIND },
     { 0x31A8BAu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDERTYPE },
     { 0x321D70u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYINFOCONTEXT_NOTANNOTATEDSTATUS },
+    { 0x33C2C8u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS },
     { 0x342577u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_MIDPOINTROUNDING },
     { 0x344490u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_ULTIMATERESOURCEFALLBACKLOCATION },
+    { 0x36D0E9u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS },
     { 0x3999E5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERLOCKTYPE },
     { 0x39E3DAu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODCODETYPE },
     { 0x3A59C2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL },
@@ -8199,48 +12313,74 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x3B39AAu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DTT },
     { 0x3C071Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_NUMBERBUFFERKIND },
     { 0x3CE704u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODATTRIBUTES },
+    { 0x3CF18Eu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION },
     { 0x3D711Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LAZYSTATE },
     { 0x3D7F7Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCKIND },
+    { 0x3DDB74u, &kEnumTable_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE },
     { 0x3E17DDu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_PERMISSIONSTATE },
+    { 0x3E964Du, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS },
     { 0x3ECD44u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS },
     { 0x3F2B49u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES },
     { 0x3FD939u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION },
     { 0x401F33u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE },
+    { 0x40C315u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE },
     { 0x41F77Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_FORMATFLAGS },
     { 0x42696Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_NORMALIZATIONFORM },
     { 0x4311A8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY },
     { 0x4317C5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_MARSHALMODE },
+    { 0x435A46u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM },
     { 0x457B10u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_MEMBERLISTTYPE },
     { 0x463128u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_TOKENIMPERSONATIONLEVEL },
     { 0x4AC3A5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES },
+    { 0x4AFB31u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS },
     { 0x4D32E3u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONFIGUREAWAITOPTIONS },
     { 0x4DFFEDu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES },
     { 0x4E2A6Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGERBROWSABLESTATE },
     { 0x4ED2B2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_TRIMTYPE },
     { 0x4EE7B9u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCFLAGS },
     { 0x4F8D65u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IDLFLAG },
+    { 0x4FA550u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS },
+    { 0x501125u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE },
     { 0x50534Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES },
     { 0x512204u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYRELATION },
     { 0x517214u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_CASTRESULT },
     { 0x538B85u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS },
+    { 0x53AEA9u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID },
     { 0x53E981u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_INTERNALTASKOPTIONS },
     { 0x552C72u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFAILUREKIND },
+    { 0x55736Du, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY },
+    { 0x5634A2u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS },
+    { 0x574C54u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS },
     { 0x57DFB0u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENDNOGCREGIONSTATUS },
+    { 0x5817ACu, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND },
     { 0x58486Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_STACKCRAWLMARK },
+    { 0x586EF1u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE },
+    { 0x591819u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE },
     { 0x5A7820u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HS },
+    { 0x5A8108u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS },
+    { 0x5A8AF5u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND },
     { 0x5AB28Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA },
     { 0x5C362Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS },
+    { 0x5CE97Au, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE },
+    { 0x5D0BA6u, &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND },
+    { 0x5D6AD1u, &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND },
     { 0x5DB2F6u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS },
     { 0x5E7F97u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS },
     { 0x5F14D7u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DESCKIND },
+    { 0x5F91B8u, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE },
     { 0x60E12Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV },
     { 0x611107u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES },
     { 0x611655u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID },
     { 0x617111u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS },
     { 0x61A896u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL },
+    { 0x62ADC6u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS },
     { 0x64927Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_PROCESSINGMODE },
+    { 0x65A67Du, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS },
     { 0x66AFD2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE },
+    { 0x66BA62u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER },
     { 0x67C078u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDER },
+    { 0x685799u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS },
+    { 0x686189u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE },
     { 0x68A964u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_MANIFESTENVELOPE_MANIFESTFORMATS },
     { 0x695F22u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT },
     { 0x699697u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES },
@@ -8248,18 +12388,30 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x6A19ADu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_RUNTIMETYPECACHE_CACHETYPE },
     { 0x6A755Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_SCOPEACTION },
     { 0x6AF1D4u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL },
+    { 0x6B7F60u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE },
     { 0x6C4647u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARKIND },
+    { 0x6E1D76u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT },
     { 0x6E5227u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCELOCATION },
+    { 0x702B6Cu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE },
     { 0x70C0FBu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCEONCOMPLETEDFLAGS },
     { 0x713599u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLARGEOBJECTHEAPCOMPACTIONMODE },
     { 0x714DC1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENTVARIABLETARGET },
     { 0x715B4Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_SYSKIND },
+    { 0x716A83u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING },
     { 0x716F8Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMMEMBERTYPE },
+    { 0x71CE3Au, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION },
     { 0x71F9ADu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARALGORITHMTYPE },
+    { 0x722627u, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND },
     { 0x731390u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CALLINGCONVENTIONS },
+    { 0x736963u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY },
     { 0x7421A2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCCOLLECTIONMODE },
+    { 0x74521Au, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE },
     { 0x757E73u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODSEMANTICSATTRIBUTES },
+    { 0x75A58Eu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING },
+    { 0x762609u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE },
     { 0x76676Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTKEYWORDS },
+    { 0x769152u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE },
+    { 0x7700F9u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS },
     { 0x770593u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACEMODE },
     { 0x78DAA3u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANFORMAT_STANDARDFORMAT },
     { 0x7A11CEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE },
@@ -8267,16 +12419,26 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x7C68ABu, &kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION },
     { 0x7D6640u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS },
     { 0x7E0E81u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE },
+    { 0x7E11FCu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER },
     { 0x7E83BEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYCRITICALSCOPE },
     { 0x7EAD33u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_PARAMFLAG },
     { 0x7F5639u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEEKORIGIN },
+    { 0x7F7963u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE },
+    { 0x7FA645u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING },
+    { 0x7FE925u, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND },
     { 0x7FF573u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP },
+    { 0x805E6Eu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE },
     { 0x80A94Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DIGITSHAPES },
     { 0x80B7BEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS },
+    { 0x80F43Cu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE },
+    { 0x81A306u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC },
     { 0x822A59u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE },
     { 0x827356u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE },
+    { 0x82A5BCu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE },
     { 0x82C1B5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES },
+    { 0x82F1DDu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY },
     { 0x832793u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_TRACELOGGINGDATATYPE },
+    { 0x835B9Eu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE },
     { 0x855036u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET },
     { 0x85C5C3u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCONTINUATIONOPTIONS },
     { 0x85D069u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_STARTNOGCREGIONSTATUS },
@@ -8286,56 +12448,96 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0x86F999u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS },
     { 0x87E290u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND },
     { 0x8817F8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CUSTOMATTRIBUTEENCODING },
+    { 0x886A40u, &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE },
     { 0x88EA4Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN },
+    { 0x88EBF3u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE },
     { 0x88F92Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERDROPPEDREASON },
     { 0x8994A7u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPENAMEBUILDER_FORMAT },
+    { 0x89B6EEu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT },
+    { 0x8A9FC7u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING },
     { 0x8B6257u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TPLEVENTSOURCE_TASKWAITBEHAVIOR },
     { 0x8B85EEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATEOBJECTFLAGS },
     { 0x8C168Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTION_EXCEPTIONMESSAGEKIND },
     { 0x8C51ECu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CORELEMENTTYPE },
+    { 0x8C98BCu, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND },
     { 0x8CE4DCu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMINTERFACETYPE },
     { 0x8D7997u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTRINSICS_X86_FLOATCOMPARISONMODE },
+    { 0x8DCF6Du, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE },
+    { 0x8F029Eu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE },
     { 0x8F181Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPIPESERIALIZATIONFORMAT },
+    { 0x908537u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY },
     { 0x91778Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PARAMETERATTRIBUTES },
     { 0x924D7Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTSOURCESETTINGS },
+    { 0x928BBAu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS },
+    { 0x929B03u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY },
     { 0x92B1C3u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TIMEZONEINFORESULT },
+    { 0x9305F4u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER },
     { 0x934014u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCNOTIFICATIONSTATUS },
     { 0x93BC81u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TIMESPANSTANDARDSTYLES },
+    { 0x9481C2u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE },
     { 0x956273u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROCESSORARCHITECTURE },
+    { 0x956DA8u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS },
+    { 0x962F90u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS },
     { 0x96825Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE },
+    { 0x96E4DAu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME },
     { 0x977136u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPENAMEPARSER_TOKENTYPE },
+    { 0x97E73Cu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE },
     { 0x98B412u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS },
     { 0x98EEDAu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE },
+    { 0x9942DFu, &kEnumTable_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT },
+    { 0x9A76E9u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS },
     { 0x9A818Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MDSIGCALLINGCONVENTION },
     { 0x9CA01Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHCASING },
+    { 0x9CB48Eu, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND },
+    { 0x9DABBBu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE },
     { 0x9E8D3Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_LOADER_ASSEMBLYLOADCONTEXT_INTERNALSTATE },
+    { 0x9EBA6Fu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS },
     { 0x9F0B27u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BASE64FORMATTINGOPTIONS },
     { 0x9F82E6u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DTSUBSTRINGTYPE },
+    { 0xA097A4u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE },
     { 0xA0F7ADu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PLATFORMID },
     { 0xA10731u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDEROPTION },
     { 0xA247D5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBERPARSINGSTATE },
+    { 0xA25884u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS },
+    { 0xA41633u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS },
     { 0xA50EA1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS },
     { 0xA7057Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTACTIVITYOPTIONS },
+    { 0xA75B7Bu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS },
     { 0xA7B368u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES },
     { 0xA9EB01u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT },
+    { 0xAA6CECu, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE },
+    { 0xAB29C6u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS },
     { 0xAB6FAAu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODIMPLATTRIBUTES },
     { 0xABCC22u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_OBJECTIVEC_OBJECTIVECMARSHAL_MESSAGESENDFUNCTION },
+    { 0xAC37E6u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS },
     { 0xAC7745u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEOPTIONS },
+    { 0xAD5B51u, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND },
     { 0xAD7532u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEMODE },
     { 0xADD0B0u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS },
+    { 0xAF6F34u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON },
     { 0xB038F0u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARFLAGS },
+    { 0xB04086u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM },
     { 0xB0D003u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS },
+    { 0xB241ECu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING },
+    { 0xB2D957u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS },
     { 0xB43E05u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES },
     { 0xB60CDCu, &kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR },
+    { 0xB6B852u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM },
     { 0xB6DC0Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS },
+    { 0xB7DD37u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS },
+    { 0xB841EBu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE },
     { 0xB9E5EEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS },
+    { 0xBA3939u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS },
     { 0xBB0FE9u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES },
     { 0xBC0F28u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY },
+    { 0xBC3873u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS },
     { 0xBDCA52u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS },
     { 0xBDEC8Fu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS },
     { 0xBE5D30u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT },
     { 0xBE97D4u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS },
     { 0xBFF842u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERARGFLAGS },
+    { 0xC0EA01u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS },
+    { 0xC0EF6Eu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS },
     { 0xC0F5CBu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CALLINGCONVENTION },
     { 0xC190AAu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKSTATUS },
     { 0xC1BCE9u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS },
@@ -8343,17 +12545,25 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xC283FEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PORTABLEEXECUTABLEKINDS },
     { 0xC31CE8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCOMMAND },
     { 0xC34F8Cu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERALLOCATEDREASON },
+    { 0xC3BBE1u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE },
     { 0xC509DBu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DS },
     { 0xC58962u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DAYOFWEEK },
     { 0xC5BD9Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_RESOURCESCOPE },
     { 0xC616BAu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE },
+    { 0xC62746u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING },
+    { 0xC63118u, &kEnumTable_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT },
     { 0xC71C51u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND },
     { 0xC78E6Au, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALEGROUPINGDATA },
+    { 0xC8437Fu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS },
     { 0xC85E16u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION },
     { 0xC96144u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHTYPE },
+    { 0xCA2B6Fu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT },
+    { 0xCACDB4u, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND },
     { 0xCC1B24u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM },
     { 0xCC828Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTLEVEL },
+    { 0xCD4FBEu, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND },
     { 0xCD94D5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_UNSAFEACCESSORKIND },
+    { 0xCDC688u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE },
     { 0xCDED50u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_FLOWCONTROL },
     { 0xCE6651u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODETYPE },
     { 0xCE8119u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_OPENEXISTINGRESULT },
@@ -8361,20 +12571,33 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xCF687Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PACKINGSIZE },
     { 0xCFB0F0u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYSYNCHRONOUSWORK },
     { 0xCFFA84u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_STACKBEHAVIOUR },
+    { 0xD02A70u, &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND },
     { 0xD0C7C6u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEKIND },
     { 0xD0D2D8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARDATATYPE },
+    { 0xD17E9Au, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE },
     { 0xD1C617u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE },
+    { 0xD3FA77u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND },
+    { 0xD54799u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE },
+    { 0xD557E1u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS },
     { 0xD5A67Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS },
+    { 0xD60BBBu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION },
     { 0xD6D3CFu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS },
     { 0xD6DCDCu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE },
+    { 0xD75124u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE },
+    { 0xD7C4BCu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES },
+    { 0xD7EB67u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE },
     { 0xD8BD93u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS },
     { 0xD8BE39u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION },
     { 0xD8C295u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMESTYLES },
+    { 0xD98933u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS },
     { 0xD9A6FEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_RUNTIMEEVENTSOURCE_EVENTID },
+    { 0xD9F0DDu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS },
     { 0xDA7B73u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY },
     { 0xDCC476u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES },
     { 0xDD5C31u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDER_WRITEEVENTERRORCODE },
+    { 0xDD8FF6u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS },
     { 0xDEC631u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS },
+    { 0xDF9DE7u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES },
     { 0xDFB3ABu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_STRONGBIDICATEGORY },
     { 0xDFC1B5u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODIMPLOPTIONS },
     { 0xE0C990u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS },
@@ -8382,12 +12605,18 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xE2236Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COLLECTIONS_GENERIC_INSERTIONBEHAVIOR },
     { 0xE27BB8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN },
     { 0xE2C6CFu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATFLAGS },
+    { 0xE31F89u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS },
     { 0xE37DA4u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS },
     { 0xE3F3CEu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE },
     { 0xE4DD51u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_GREGORIANCALENDARTYPES },
+    { 0xE51F31u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE },
+    { 0xE6C643u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS },
+    { 0xE7040Bu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS },
     { 0xE716D2u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE },
     { 0xE75260u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLATENCYMODE },
     { 0xE7A5CDu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSOCIATES_ATTRIBUTES },
+    { 0xE90EACu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM },
+    { 0xE95F73u, &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE },
     { 0xEA5932u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE },
     { 0xEAE405u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_GENERICPARAMETERATTRIBUTES },
     { 0xEC9415u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM },
@@ -8397,27 +12626,38 @@ static constexpr EnumDispatchEntry kEnumDispatchTable[] = {
     { 0xEE334Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_LOADHINT },
     { 0xEE8B97u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS },
     { 0xEF7DC8u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CONTRACTS_CONTRACTFAILUREKIND },
+    { 0xF06941u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT },
     { 0xF09D9Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS },
     { 0xF09E30u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS },
     { 0xF0C259u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACERESULT },
     { 0xF0D34Eu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_RESULTCODE },
     { 0xF25CC0u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_ASYNCCAUSALITYSTATUS },
+    { 0xF2A801u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC },
+    { 0xF3569Du, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM },
     { 0xF47058u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCESTATUS },
     { 0xF53829u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATINFOSCANNER_FOUNDDATEPATTERN },
     { 0xF59BEDu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_COMPAREOPTIONS },
     { 0xF5E2B4u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEATTRIBUTES },
     { 0xF66DECu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_IMAGEFILEMACHINE },
     { 0xF6AC77u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_COMPONENTGUARANTEESOPTIONS },
+    { 0xF6BD9Fu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT },
+    { 0xF6BDECu, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS },
+    { 0xF7902Du, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP },
     { 0xF95E40u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_GCHANDLETYPE },
+    { 0xF96FCFu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS },
+    { 0xF97897u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS },
+    { 0xFA0AC6u, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION },
+    { 0xFC9DBDu, &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM },
     { 0xFD14EBu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER },
     { 0xFDE806u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_SERIALIZATION_STREAMINGCONTEXTSTATES },
     { 0xFE353Bu, &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS },
     { 0xFECC6Du, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS },
     { 0xFF0696u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE },
+    { 0xFF20A1u, &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE },
     { 0xFF31C4u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TEXTINFO_TRISTATE },
     { 0xFFBFF1u, &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TTT },
 };
-static constexpr CHAOS_IL2CPP_UINT32 kEnumDispatchCount = 286u;
+static constexpr CHAOS_IL2CPP_UINT32 kEnumDispatchCount = 444u;
 
 /// Binary search lookup on the sorted dispatch table.
 /// Returns nullptr if fnv24 not found (fallback to resolve_type_arg +
@@ -8489,9 +12729,17 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+PFXExportFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonTokenType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Resources.ResourceTypeCode"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8509,6 +12757,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_SYSKIND));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertControlStoreFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.MarshalMode"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_MARSHALMODE));
@@ -8524,6 +12776,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Threading.ThreadState"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptKeySpec"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.Serialization.StreamingContextStates"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8541,6 +12797,14 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATINFOSCANNER_FOUNDDATEPATTERN));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+PfxCertStoreFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+BufferType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.IO.FileOptions"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEOPTIONS));
@@ -8549,17 +12813,45 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_BINDINGFLAGS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameStringType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreSaveAs"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Guid+GuidParseThrowStyle"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_GUIDPARSETHROWSTYLE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+AsymmetricPaddingMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ContentType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Guid+ParseFailure"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.IO.FileMode"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSupportKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.LayoutKind"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8569,6 +12861,14 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TPLEVENTSOURCE_TASKWAITBEHAVIOR));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Memory/System.ExceptionArgument"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.RSAEncryptionPaddingMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.OpenExistingResult"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_OPENEXISTINGRESULT));
@@ -8576,6 +12876,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.DynamicResolver+SecurityControlFlags"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.DataType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.GCHandleType"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8593,13 +12897,45 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+SecretAgreementFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.OidGroup"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+CreateOptions"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreSaveTo"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CryptDecodeObjectStructType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptAcquireContextFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CspAlgorithmType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.ConverterStrategy"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+DTT"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8609,9 +12945,17 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.MetadataPropertyName"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEFLAGS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8629,6 +12973,14 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_SCOPEACTION));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertUsageMatchType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterSpinLockReason"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERSPINLOCKREASON));
@@ -8640,6 +12992,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.PropertyAttributes"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Microsoft.Win32.SafeHandles.SafeNCryptHandle+OwnershipState"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.AttributeTargets"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8673,9 +13029,29 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.OpenFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.NumericType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptCreateHashFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509NameType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeCarrierKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8693,6 +13069,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CryptGetKeyParamQueryType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodSemanticsAttributes"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODSEMANTICSATTRIBUTES));
@@ -8701,17 +13081,33 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptSignAndVerifyHashFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.ParseFlags"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptOpenAlgorithmProviderFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TaskStatus"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKSTATUS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.ManagedCallSiteKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.Architecture"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertContextPropId"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendricalCalculationsHelper+CorrectionAlgorithm"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8753,6 +13149,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CspProviderFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_PARAMFLAG));
@@ -8781,13 +13181,33 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+KeySpec"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptEncryptFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.TypeKind"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.PbeEncryptionAlgorithm"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.PortableThreadPool+PendingBlockingAdjustment"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_TYPE_ENUM"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.MdSigCallingConvention"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8813,6 +13233,14 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyOpenOptions"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonSeparatorNamingPolicy+SeparatorState"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+DesiredAccess"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS));
@@ -8820,6 +13248,22 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+X509KeyUsageFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptGetKeyParamFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyUsages"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameStrTypeAndFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Security.PartialTrustVisibilityLevel"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8833,6 +13277,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngExportPolicies"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Buffers.Utilities+MemoryPressure"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_UTILITIES_MEMORYPRESSURE));
@@ -8844,6 +13292,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.GC+RefreshMemoryStatus"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ThrowHelper+ExceptionArgument"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.MidpointRounding"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8869,6 +13321,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptAlgPseudoHandle"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.TypeCode"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE));
@@ -8881,9 +13337,21 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertStoreProvider"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericContextKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+CreateDisposition"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+GetDefaultProviderFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCKIND"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8893,9 +13361,29 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CALLINGCONVENTION));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ChainPolicy"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.HexConverter+Casing"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+FormatType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertFindFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+DS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.DSASignatureFormat"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.DateTimeStyles"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8913,6 +13401,22 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION));
         ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrReferenceKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonValueKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertSetPropertyFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.CompilationRelaxations"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_COMPILATIONRELAXATIONS));
@@ -8920,6 +13424,14 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Configuration.Assemblies.AssemblyVersionCompatibility"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptMsgParamType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanFormat+StandardFormat"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8929,13 +13441,25 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ContentType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.LoaderOptimization"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldFormat"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.INVOKEKIND"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8953,13 +13477,29 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptCreateHashFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.ComponentModel.EditorBrowsableState"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.OperandType"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPERANDTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.RSASignaturePaddingMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodImplAttributes"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8972,6 +13512,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.PosixSignal"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_POSIXSIGNAL));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptImportPublicKeyInfoFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureData+LocaleGroupingData"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -8989,9 +13533,37 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_RUNTIMETYPECACHE_CACHETYPE));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertFindType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreLocation"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptDecodeObjectFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.ApartmentState"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ChainEngineConfigFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonSourceGenerationMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+KeyBlobMagicNumber"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.PaddingMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/Interop+Globalization+ResultCode"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9001,6 +13573,14 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONARGUMENT));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonKnownNamingPolicy"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+ErrorCode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Text.Unicode.GraphemeClusterBreakType"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE));
@@ -9009,13 +13589,25 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustErrorStatus"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TaskCreationOptions"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCREATIONOPTIONS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Internal.NativeCrypto.Cng+OpenAlgorithmProviderFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+CheckValueStatus"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Linq/System.Linq.ExceptionArgument"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Security.Permissions.SecurityPermissionFlag"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9024,6 +13616,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertQueryObjectType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.RuntimeEventSource+EventId"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9045,6 +13641,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CODEANALYSIS_DYNAMICALLYACCESSEDMEMBERTYPES));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyHandleOpenOptions"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.UnicodeCategory"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY));
@@ -9057,9 +13657,29 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertEncodingType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CryptoStreamMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ExpectedFormatTypeFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.AsyncCausalityStatus"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_ASYNCCAUSALITYSTATUS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptSignVerifyFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.IcuLocaleDataParts"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9072,6 +13692,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.NullabilityState"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeTargetEntry+TargetKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.GCLatencyMode"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9089,6 +13713,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADPRIORITY));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationFlag"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.LazyThreadSafetyMode"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE));
@@ -9096,6 +13724,14 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.EnvironmentVariableTarget"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENTVARIABLETARGET));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.KeyNumber"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyCreationOptions"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ComponentParseResult"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9120,6 +13756,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanStyles"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.ExceptionResource"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9165,9 +13805,17 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY));
         ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSpecializationKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.VarEnum"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_VARENUM));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.ConsumeTokenResult"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.GCSettings+SetLatencyModeStatus"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9181,9 +13829,21 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreName"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TIMEZONEINFORESULT));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptOidInfoKeyType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptProvParam"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.FORMATFLAGS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9197,9 +13857,33 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ECKeyXmlFormat"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.StackFramePropertyState"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarId"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_ALG_ID_ENUM"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.FromBase64TransformMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrRuntimeServiceKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.ReferenceHandlingStrategy"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9208,6 +13892,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.HebrewNumber+HebrewToken"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HEBREWTOKEN));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.BodyAvailabilityCode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.GC+GC_ALLOC_FLAGS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9220,6 +13908,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509FindType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.Task+TaskStateFlags"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9245,6 +13937,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertControlStoreType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.FieldAttributes"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES));
@@ -9256,6 +13952,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+TM"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.LoadHint"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9277,6 +13977,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeDispatchStyle"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Security.Principal.TokenImpersonationLevel"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_TOKENIMPERSONATIONLEVEL));
@@ -9297,6 +14001,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_NUMBERBUFFERKIND));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ECCurve+ECCurveType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.StubHelpers.AsAnyMarshaler+BackPropAction"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STUBHELPERS_ASANYMARSHALER_BACKPROPACTION));
@@ -9308,6 +14016,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.MetadataTokenType"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METADATATOKENTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonCommentHandling"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.LIBFLAGS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9324,6 +14036,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.HybridDispatchKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.IO.FileAccess"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9381,6 +14097,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+NTSTATUS"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Buffers.OperationStatus"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS));
@@ -9393,9 +14113,21 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ExpectedContentTypeFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.MethodImplOptions"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODIMPLOPTIONS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertChainFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrAbiCarrierKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.StackTrace+TraceFormat"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9409,17 +14141,45 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509IncludeOption"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.StringMarshalling"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.InstructionOpCode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.CallingConventions"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CALLINGCONVENTIONS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptHashProperty"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngUIProtectionLevels"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.TypeAttributes"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericDemandFamilyKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+ConfigurationState"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CreateObjectFlags"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9441,6 +14201,14 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTOPCODE));
         ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrTypeShapeKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreAddDisposition"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.CausalitySynchronousWork"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYSYNCHRONOUSWORK));
@@ -9448,6 +14216,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceResult"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACERESULT));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.ConsumeNumberResult"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.Versioning.ComponentGuaranteesOptions"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9465,6 +14237,10 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustInfoStatus"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/Interop+ContextTrackingMode"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE));
@@ -9472,6 +14248,14 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.MemberTypes"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CipherMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509VerificationFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.Associates+Attributes"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9497,13 +14281,33 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.DefaultBinder+Primitives"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonUnknownDerivedTypeHandling"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ContentionFlagsMap"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_CONTENTIONFLAGSMAP));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+SourceConstructFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoKind"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CreateComInterfaceFlags"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9513,13 +14317,25 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTKEYWORDS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventTags"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptAcquireCertificatePrivateKeyFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureTypes"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+MsgEncodingType"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.DelegateBindingFlags"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9528,6 +14344,10 @@ struct _EnumMetadataRegistrar {
             compute_enum_hash24("System.Private.CoreLib/System.StringComparison"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+HASHALGORITHM_ENUM"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.AssemblyNameParser+AttributeKind"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9541,9 +14361,17 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+DSAFIPSVERSION_ENUM"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Security.Principal.PrincipalPolicy"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.RuntimeMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.TypeNameFormatFlags"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9565,9 +14393,17 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMWRAPPERSSCENARIO));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationReason"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngPropertyOptions"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Collections/System.Collections.Generic.TreeRotation"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9577,13 +14413,29 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTASK));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+CngBufferDescriptors"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.StackBehaviour"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_STACKBEHAVIOUR));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainTrustMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.PolymorphicSerializationState"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.Intrinsics.X86.FloatComparisonMode"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTRINSICS_X86_FLOATCOMPARISONMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainStatusFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.DESCKIND"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
@@ -9593,9 +14445,29 @@ struct _EnumMetadataRegistrar {
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN));
         ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonSerializerDefaults"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS));
+        ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventProviderType"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
                 &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDERTYPE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Text.Json/System.Text.Json.StackFrameObjectState"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.CodegenMode"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS));
+        ChaosRegisterExternalType(
+            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CapiHelper+ClrPropertyId"),
+            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID));
         ChaosRegisterExternalType(
             compute_enum_hash24("System.Private.CoreLib/System.Globalization.CompareOptions"),
             reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(

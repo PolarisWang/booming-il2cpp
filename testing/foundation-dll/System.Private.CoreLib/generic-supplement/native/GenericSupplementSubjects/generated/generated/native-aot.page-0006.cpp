@@ -10,6 +10,7 @@
 #include "runtime_vtable.h"
 #include "runtime_instantiation.h"
 #include "reflection_query_model.h"
+#include "eeclass.h"
 #include "load_store_chaos_bridge.h"
 #include "interpreter_entry.h"
 #include <gc/gc_bgc_inline.h>
@@ -3832,13115 +3833,6 @@ extern "C" CHAOS_IL2CPP_INT32 GenericSupplementSubjects_GenericSupplementNativeE
 
 
 
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_NamespaceName()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_ManagedTypeModel_get_NamespaceName(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___NamespaceName_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_SubjectId()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_ManagedTypeModel_get_SubjectId(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___SubjectId_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_ManagedTypeModel_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	CHAOS_IL2CPP_INTPTR _s41{};
-	CHAOS_IL2CPP_INTPTR _s42{};
-	CHAOS_IL2CPP_INTPTR _s43{};
-	CHAOS_IL2CPP_INTPTR _s44{};
-	CHAOS_IL2CPP_INTPTR _s45{};
-	CHAOS_IL2CPP_INTPTR _s46{};
-	CHAOS_IL2CPP_INTPTR _s47{};
-	CHAOS_IL2CPP_INTPTR _s48{};
-	CHAOS_IL2CPP_INTPTR _s49{};
-	CHAOS_IL2CPP_INTPTR _s50{};
-	CHAOS_IL2CPP_INTPTR _s51{};
-	CHAOS_IL2CPP_INTPTR _s52{};
-	CHAOS_IL2CPP_INTPTR _s53{};
-	CHAOS_IL2CPP_INTPTR _s54{};
-	CHAOS_IL2CPP_INTPTR _s55{};
-	CHAOS_IL2CPP_INTPTR _s56{};
-	CHAOS_IL2CPP_INTPTR _s57{};
-	CHAOS_IL2CPP_INTPTR _s58{};
-	CHAOS_IL2CPP_INTPTR _s59{};
-	CHAOS_IL2CPP_INTPTR _s60{};
-	CHAOS_IL2CPP_INTPTR _s61{};
-	CHAOS_IL2CPP_INTPTR _s62{};
-	CHAOS_IL2CPP_INTPTR _s63{};
-	CHAOS_IL2CPP_INTPTR _s64{};
-	CHAOS_IL2CPP_INTPTR _s65{};
-	CHAOS_IL2CPP_INTPTR _s66{};
-	CHAOS_IL2CPP_INTPTR _s67{};
-	CHAOS_IL2CPP_INTPTR _s68{};
-	CHAOS_IL2CPP_INTPTR _s69{};
-	CHAOS_IL2CPP_INTPTR _s70{};
-	CHAOS_IL2CPP_INTPTR _s71{};
-	CHAOS_IL2CPP_INTPTR _s72{};
-	CHAOS_IL2CPP_INTPTR _s73{};
-	CHAOS_IL2CPP_INTPTR _s74{};
-	CHAOS_IL2CPP_INTPTR _s75{};
-	CHAOS_IL2CPP_INTPTR _s76{};
-	CHAOS_IL2CPP_INTPTR _s77{};
-	CHAOS_IL2CPP_INTPTR _s78{};
-	CHAOS_IL2CPP_INTPTR _s79{};
-	CHAOS_IL2CPP_INTPTR _s80{};
-	CHAOS_IL2CPP_INTPTR _s81{};
-	CHAOS_IL2CPP_INTPTR _s82{};
-	CHAOS_IL2CPP_INTPTR _s83{};
-	CHAOS_IL2CPP_INTPTR _s84{};
-	CHAOS_IL2CPP_INTPTR _s85{};
-	CHAOS_IL2CPP_INTPTR _s86{};
-	CHAOS_IL2CPP_INTPTR _s87{};
-	CHAOS_IL2CPP_INTPTR _s88{};
-	CHAOS_IL2CPP_INTPTR _s89{};
-	CHAOS_IL2CPP_INTPTR _s90{};
-	CHAOS_IL2CPP_INTPTR _s91{};
-	CHAOS_IL2CPP_INTPTR _s92{};
-	CHAOS_IL2CPP_INTPTR _s93{};
-	CHAOS_IL2CPP_INTPTR _s94{};
-	CHAOS_IL2CPP_INTPTR _s95{};
-	CHAOS_IL2CPP_INTPTR _s96{};
-	CHAOS_IL2CPP_INTPTR _s97{};
-	CHAOS_IL2CPP_INTPTR _s98{};
-	CHAOS_IL2CPP_INTPTR _s99{};
-	CHAOS_IL2CPP_INTPTR _s100{};
-	CHAOS_IL2CPP_INTPTR _s101{};
-	CHAOS_IL2CPP_INTPTR _s102{};
-	CHAOS_IL2CPP_INTPTR _s103{};
-	CHAOS_IL2CPP_INTPTR _s104{};
-	CHAOS_IL2CPP_INTPTR _s105{};
-	CHAOS_IL2CPP_INTPTR _s106{};
-	CHAOS_IL2CPP_INTPTR _s107{};
-	CHAOS_IL2CPP_INTPTR _s108{};
-	CHAOS_IL2CPP_INTPTR _s109{};
-	CHAOS_IL2CPP_INTPTR _s110{};
-	CHAOS_IL2CPP_INTPTR _s111{};
-	CHAOS_IL2CPP_INTPTR _s112{};
-	CHAOS_IL2CPP_INTPTR _s113{};
-	CHAOS_IL2CPP_INTPTR _s114{};
-	CHAOS_IL2CPP_INTPTR _s115{};
-	CHAOS_IL2CPP_INTPTR _s116{};
-	CHAOS_IL2CPP_INTPTR _s117{};
-	CHAOS_IL2CPP_INTPTR _s118{};
-	CHAOS_IL2CPP_INTPTR _s119{};
-	CHAOS_IL2CPP_INTPTR _s120{};
-	CHAOS_IL2CPP_INTPTR _s121{};
-	CHAOS_IL2CPP_INTPTR _s122{};
-	CHAOS_IL2CPP_INTPTR _s123{};
-	CHAOS_IL2CPP_INTPTR _s124{};
-	CHAOS_IL2CPP_INTPTR _s125{};
-	CHAOS_IL2CPP_INTPTR _s126{};
-	CHAOS_IL2CPP_INTPTR _s127{};
-	CHAOS_IL2CPP_INTPTR _s128{};
-	CHAOS_IL2CPP_INTPTR _s129{};
-	CHAOS_IL2CPP_INTPTR _s130{};
-	CHAOS_IL2CPP_INTPTR _s131{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(40588415u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___AssemblyName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___NamespaceName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s5);
-		_s5 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___Name_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s6);
-		_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___SubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s7);
-		_s7 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___DefinitionSubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s7;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s8);
-		_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___DisplayName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s8;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s7), static_cast<CHAOS_IL2CPP_INT32>(_s8)));
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s7), static_cast<CHAOS_IL2CPP_INT32>(_s8)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[89])();
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s9);
-		_s9 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsInterface_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s9;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[99])(chaos_arg_0);
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s8), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s8), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[89])();
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s10);
-		_s10 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsValueType_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s10;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[99])(chaos_arg_0);
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s10)));
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s10)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[89])();
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s11);
-		_s11 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsSealed_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s11;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[99])(chaos_arg_0);
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s10), static_cast<CHAOS_IL2CPP_INT32>(_s11)));
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s10), static_cast<CHAOS_IL2CPP_INT32>(_s11)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[89])();
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s12);
-		_s12 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsComImport_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s12;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[99])(chaos_arg_0);
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s11), static_cast<CHAOS_IL2CPP_INT32>(_s12)));
-	_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s11), static_cast<CHAOS_IL2CPP_INT32>(_s12)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s13 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s13);
-		_s13 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ComInterfaceGuid_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s13;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s12), static_cast<CHAOS_IL2CPP_INT32>(_s13)));
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s12), static_cast<CHAOS_IL2CPP_INT32>(_s13)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[47])();
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s14 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s14);
-		_s14 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ComInterfaceTypeKind_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s14;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[53])(chaos_arg_0);
-		_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s13), static_cast<CHAOS_IL2CPP_INT32>(_s14)));
-	_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s13), static_cast<CHAOS_IL2CPP_INT32>(_s14)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s15 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s15);
-		_s15 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___BaseTypeSubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s15;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s14), static_cast<CHAOS_IL2CPP_INT32>(_s15)));
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s14), static_cast<CHAOS_IL2CPP_INT32>(_s15)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[163])();
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s16 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s16);
-		_s16 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ImplementedInterfaceSubjectIds_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s16;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[177])(chaos_arg_0);
-		_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s15), static_cast<CHAOS_IL2CPP_INT32>(_s16)));
-	_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s15), static_cast<CHAOS_IL2CPP_INT32>(_s16)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[89])();
-		_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s17 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s17);
-		_s17 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsPreserved_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s17;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[99])(chaos_arg_0);
-		_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s16), static_cast<CHAOS_IL2CPP_INT32>(_s17)));
-	_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s16), static_cast<CHAOS_IL2CPP_INT32>(_s17)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[47])();
-		_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s18 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s18);
-		_s18 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___MetadataToken_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s18;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[53])(chaos_arg_0);
-		_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s17), static_cast<CHAOS_IL2CPP_INT32>(_s18)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s17);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/ManagedTypeModel::op_Equality:System.Boolean(ManagedTypeModel,ManagedTypeModel)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_ManagedTypeModel_op_Equality_ManagedTypeModel_ManagedTypeModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::op_Inequality(ManagedTypeModel,ManagedTypeModel)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_ManagedTypeModel_op_Inequality_ManagedTypeModel_ManagedTypeModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1539 = s_hotpatch_entries[1539];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1539)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1539))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1539.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_ManagedTypeModel_op_Equality_ManagedTypeModel_ManagedTypeModel(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_ManagedTypeModel_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	CHAOS_IL2CPP_INTPTR _s41{};
-	CHAOS_IL2CPP_INTPTR _s42{};
-	CHAOS_IL2CPP_INTPTR _s43{};
-	CHAOS_IL2CPP_INTPTR _s44{};
-	CHAOS_IL2CPP_INTPTR _s45{};
-	CHAOS_IL2CPP_INTPTR _s46{};
-	CHAOS_IL2CPP_INTPTR _s47{};
-	CHAOS_IL2CPP_INTPTR _s48{};
-	CHAOS_IL2CPP_INTPTR _s49{};
-	CHAOS_IL2CPP_INTPTR _s50{};
-	CHAOS_IL2CPP_INTPTR _s51{};
-	CHAOS_IL2CPP_INTPTR _s52{};
-	CHAOS_IL2CPP_INTPTR _s53{};
-	CHAOS_IL2CPP_INTPTR _s54{};
-	CHAOS_IL2CPP_INTPTR _s55{};
-	CHAOS_IL2CPP_INTPTR _s56{};
-	CHAOS_IL2CPP_INTPTR _s57{};
-	CHAOS_IL2CPP_INTPTR _s58{};
-	CHAOS_IL2CPP_INTPTR _s59{};
-	CHAOS_IL2CPP_INTPTR _s60{};
-	CHAOS_IL2CPP_INTPTR _s61{};
-	CHAOS_IL2CPP_INTPTR _s62{};
-	CHAOS_IL2CPP_INTPTR _s63{};
-	CHAOS_IL2CPP_INTPTR _s64{};
-	CHAOS_IL2CPP_INTPTR _s65{};
-	CHAOS_IL2CPP_INTPTR _s66{};
-	CHAOS_IL2CPP_INTPTR _s67{};
-	CHAOS_IL2CPP_INTPTR _s68{};
-	CHAOS_IL2CPP_INTPTR _s69{};
-	CHAOS_IL2CPP_INTPTR _s70{};
-	CHAOS_IL2CPP_INTPTR _s71{};
-	CHAOS_IL2CPP_INTPTR _s72{};
-	CHAOS_IL2CPP_INTPTR _s73{};
-	CHAOS_IL2CPP_INTPTR _s74{};
-	CHAOS_IL2CPP_INTPTR _s75{};
-	CHAOS_IL2CPP_INTPTR _s76{};
-	CHAOS_IL2CPP_INTPTR _s77{};
-	CHAOS_IL2CPP_INTPTR _s78{};
-	CHAOS_IL2CPP_INTPTR _s79{};
-	CHAOS_IL2CPP_INTPTR _s80{};
-	CHAOS_IL2CPP_INTPTR _s81{};
-	CHAOS_IL2CPP_INTPTR _s82{};
-	CHAOS_IL2CPP_INTPTR _s83{};
-	CHAOS_IL2CPP_INTPTR _s84{};
-	CHAOS_IL2CPP_INTPTR _s85{};
-	CHAOS_IL2CPP_INTPTR _s86{};
-	CHAOS_IL2CPP_INTPTR _s87{};
-	CHAOS_IL2CPP_INTPTR _s88{};
-	CHAOS_IL2CPP_INTPTR _s89{};
-	CHAOS_IL2CPP_INTPTR _s90{};
-	CHAOS_IL2CPP_INTPTR _s91{};
-	CHAOS_IL2CPP_INTPTR _s92{};
-	CHAOS_IL2CPP_INTPTR _s93{};
-	CHAOS_IL2CPP_INTPTR _s94{};
-	CHAOS_IL2CPP_INTPTR _s95{};
-	CHAOS_IL2CPP_INTPTR _s96{};
-	CHAOS_IL2CPP_INTPTR _s97{};
-	CHAOS_IL2CPP_INTPTR _s98{};
-	CHAOS_IL2CPP_INTPTR _s99{};
-	CHAOS_IL2CPP_INTPTR _s100{};
-	CHAOS_IL2CPP_INTPTR _s101{};
-	CHAOS_IL2CPP_INTPTR _s102{};
-	CHAOS_IL2CPP_INTPTR _s103{};
-	CHAOS_IL2CPP_INTPTR _s104{};
-	CHAOS_IL2CPP_INTPTR _s105{};
-	CHAOS_IL2CPP_INTPTR _s106{};
-	CHAOS_IL2CPP_INTPTR _s107{};
-	CHAOS_IL2CPP_INTPTR _s108{};
-	CHAOS_IL2CPP_INTPTR _s109{};
-	CHAOS_IL2CPP_INTPTR _s110{};
-	CHAOS_IL2CPP_INTPTR _s111{};
-	CHAOS_IL2CPP_INTPTR _s112{};
-	CHAOS_IL2CPP_INTPTR _s113{};
-	CHAOS_IL2CPP_INTPTR _s114{};
-	CHAOS_IL2CPP_INTPTR _s115{};
-	CHAOS_IL2CPP_INTPTR _s116{};
-	CHAOS_IL2CPP_INTPTR _s117{};
-	CHAOS_IL2CPP_INTPTR _s118{};
-	CHAOS_IL2CPP_INTPTR _s119{};
-	CHAOS_IL2CPP_INTPTR _s120{};
-	CHAOS_IL2CPP_INTPTR _s121{};
-	CHAOS_IL2CPP_INTPTR _s122{};
-	CHAOS_IL2CPP_INTPTR _s123{};
-	CHAOS_IL2CPP_INTPTR _s124{};
-	CHAOS_IL2CPP_INTPTR _s125{};
-	CHAOS_IL2CPP_INTPTR _s126{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("AssemblyName = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_AssemblyName:System.String()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___AssemblyName_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", NamespaceName = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_NamespaceName:System.String()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___NamespaceName_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[1];
-	{{
-		_s5 = CHAOS_IL2CPP_STRING_ID(", Name = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[1];
-	_s6 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_Name:System.String()
-		auto chaos_inline_arg_0 = _s6;
-		_s6 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s6);
-			_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___Name_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[1];
-	{{
-		_s7 = CHAOS_IL2CPP_STRING_ID(", SubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s7;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[1];
-	_s8 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_SubjectId:System.String()
-		auto chaos_inline_arg_0 = _s8;
-		_s8 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s8);
-			_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___SubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s8;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = chaos_args[1];
-	{{
-		_s9 = CHAOS_IL2CPP_STRING_ID(", DefinitionSubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s9;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = chaos_args[1];
-	_s10 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_DefinitionSubjectId:System.String()
-		auto chaos_inline_arg_0 = _s10;
-		_s10 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s10);
-			_s10 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___DefinitionSubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s10;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = chaos_args[1];
-	{{
-		_s11 = CHAOS_IL2CPP_STRING_ID(", DisplayName = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s11;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = chaos_args[1];
-	_s12 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_DisplayName:System.String()
-		auto chaos_inline_arg_0 = _s12;
-		_s12 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s12);
-			_s12 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___DisplayName_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s12;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = chaos_args[1];
-	{{
-		_s13 = CHAOS_IL2CPP_STRING_ID(", IsInterface = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s13;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s13 = chaos_args[1];
-	_s14 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_IsInterface:System.Boolean()
-		auto chaos_inline_arg_0 = _s14;
-		_s14 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s14);
-			_s14 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsInterface_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s14;
-	_s14 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[103])();
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s15;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s15 = chaos_args[1];
-	{{
-		_s16 = CHAOS_IL2CPP_STRING_ID(", IsValueType = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s16;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s16 = chaos_args[1];
-	_s17 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_IsValueType:System.Boolean()
-		auto chaos_inline_arg_0 = _s17;
-		_s17 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s17);
-			_s17 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsValueType_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s17;
-	_s17 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[103])();
-		_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s18;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s18 = chaos_args[1];
-	{{
-		_s19 = CHAOS_IL2CPP_STRING_ID(", IsSealed = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s19;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s19 = chaos_args[1];
-	_s20 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_IsSealed:System.Boolean()
-		auto chaos_inline_arg_0 = _s20;
-		_s20 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s20);
-			_s20 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsSealed_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s20;
-	_s20 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[103])();
-		_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s21;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s21 = chaos_args[1];
-	{{
-		_s22 = CHAOS_IL2CPP_STRING_ID(", IsComImport = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s22;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s22 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s22 = chaos_args[1];
-	_s23 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_IsComImport:System.Boolean()
-		auto chaos_inline_arg_0 = _s23;
-		_s23 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s23);
-			_s23 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsComImport_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s23;
-	_s23 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[103])();
-		_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s24;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s24 = chaos_args[1];
-	{{
-		_s25 = CHAOS_IL2CPP_STRING_ID(", ComInterfaceGuid = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s25;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s25 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s25 = chaos_args[1];
-	_s26 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_ComInterfaceGuid:System.String()
-		auto chaos_inline_arg_0 = _s26;
-		_s26 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s26);
-			_s26 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ComInterfaceGuid_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s26;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s26 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s26 = chaos_args[1];
-	{{
-		_s27 = CHAOS_IL2CPP_STRING_ID(", ComInterfaceTypeKind = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s27;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s27 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s27 = chaos_args[1];
-	_s28 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_ComInterfaceTypeKind:System.Int32()
-		auto chaos_inline_arg_0 = _s28;
-		_s28 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s28);
-			_s28 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ComInterfaceTypeKind_k__BackingField;
-		}
-	}
-	chaos_locals[1] = _s28;
-	_s28 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_arg_0 = _s28;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Int32__ToString_System_String__(chaos_arg_0);
-		_s28 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s28;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s28 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s28 = chaos_args[1];
-	{{
-		_s29 = CHAOS_IL2CPP_STRING_ID(", BaseTypeSubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s29;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s29 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s29 = chaos_args[1];
-	_s30 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_BaseTypeSubjectId:System.String()
-		auto chaos_inline_arg_0 = _s30;
-		_s30 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s30);
-			_s30 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___BaseTypeSubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s30;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s30 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s30 = chaos_args[1];
-	{{
-		_s31 = CHAOS_IL2CPP_STRING_ID(", ImplementedInterfaceSubjectIds = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s31;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s31 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s31 = chaos_args[1];
-	_s32 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_ImplementedInterfaceSubjectIds:System.Collections.Generic.IReadOnlyList<System.String>()
-		auto chaos_inline_arg_0 = _s32;
-		_s32 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s32);
-			_s32 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ImplementedInterfaceSubjectIds_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s32;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s32 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s32 = chaos_args[1];
-	{{
-		_s33 = CHAOS_IL2CPP_STRING_ID(", IsPreserved = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s33;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s33 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s33 = chaos_args[1];
-	_s34 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_IsPreserved:System.Boolean()
-		auto chaos_inline_arg_0 = _s34;
-		_s34 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s34);
-			_s34 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsPreserved_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s34;
-	_s34 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[103])();
-		_s35 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s35;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s35 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s35 = chaos_args[1];
-	{{
-		_s36 = CHAOS_IL2CPP_STRING_ID(", MetadataToken = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s36;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s36 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s36 = chaos_args[1];
-	_s37 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/ManagedTypeModel::get_MetadataToken:System.Int32()
-		auto chaos_inline_arg_0 = _s37;
-		_s37 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s37);
-			_s37 = chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___MetadataToken_k__BackingField;
-		}
-	}
-	chaos_locals[1] = _s37;
-	_s37 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_arg_0 = _s37;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Int32__ToString_System_String__(chaos_arg_0);
-		_s37 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s37;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s37 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s37 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s37;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_AssemblyName(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_AssemblyName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___AssemblyName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___AssemblyName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_BaseTypeSubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_BaseTypeSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___BaseTypeSubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___BaseTypeSubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_ComInterfaceGuid(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_ComInterfaceGuid_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ComInterfaceGuid_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ComInterfaceGuid_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_ComInterfaceTypeKind(System.Int32)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_ComInterfaceTypeKind_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ComInterfaceTypeKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ComInterfaceTypeKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_DefinitionSubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_DefinitionSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___DefinitionSubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___DefinitionSubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_DisplayName(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_DisplayName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___DisplayName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___DisplayName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_ImplementedInterfaceSubjectIds(System.Collections.Generic.IReadOnlyList<System.String>)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_ImplementedInterfaceSubjectIds_System_Collections_Generic_IReadOnlyList_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ImplementedInterfaceSubjectIds_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___ImplementedInterfaceSubjectIds_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_IsComImport(System.Boolean)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_IsComImport_System_Boolean(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsComImport_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsComImport_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_IsInterface(System.Boolean)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_IsInterface_System_Boolean(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsInterface_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsInterface_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_IsPreserved(System.Boolean)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_IsPreserved_System_Boolean(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsPreserved_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsPreserved_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_IsSealed(System.Boolean)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_IsSealed_System_Boolean(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsSealed_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsSealed_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_IsValueType(System.Boolean)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_IsValueType_System_Boolean(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsValueType_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___IsValueType_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_MetadataToken(System.Int32)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_MetadataToken_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___MetadataToken_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___MetadataToken_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_Name(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_Name_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___Name_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___Name_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_NamespaceName(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_NamespaceName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___NamespaceName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___NamespaceName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::set_SubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_ManagedTypeModel_set_SubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_ManagedTypeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___SubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_ManagedTypeModel___SubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/ManagedTypeModel::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_ManagedTypeModel_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("ManagedTypeModel");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_1 = _s3;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s3);
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s2);
-		auto& _d1541 = s_hotpatch_entries[1541];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1541)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1541))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1541.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_ManagedTypeModel_PrintMembers_System_Text_StringBuilder(chaos_arg_0, chaos_arg_1);
-		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		if (_s2 != 0)
-		{
-			_s2 = chaos_locals[0];
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::.ctor()
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("v0");
-	}}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("metadataRegistration");
-	}}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::.ctor(MetadataRegistrationArtifact)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact__ctor_MetadataRegistrationArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___Registrations_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___Registrations_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___Registrations_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact.hot;
-		Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact__ctor_MetadataRegistrationArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::Equals:System.Boolean(MetadataRegistrationArtifact)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_Equals_MetadataRegistrationArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1562 = s_hotpatch_entries[1562];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1562)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1562))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1562.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_Equals_MetadataRegistrationArtifact(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_ArtifactKind()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_get_ArtifactKind(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(46569395u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_FormatVersion()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_get_FormatVersion(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_Registrations()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_get_Registrations(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___Registrations_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(46569395u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[844])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s5);
-		_s5 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___Registrations_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[847])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s4);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::op_Equality:System.Boolean(MetadataRegistrationArtifact,MetadataRegistrationArtifact)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_op_Equality_MetadataRegistrationArtifact_MetadataRegistrationArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::op_Inequality(MetadataRegistrationArtifact,MetadataRegistrationArtifact)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_op_Inequality_MetadataRegistrationArtifact_MetadataRegistrationArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1569 = s_hotpatch_entries[1569];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1569)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1569))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1569.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_op_Equality_MetadataRegistrationArtifact_MetadataRegistrationArtifact(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("FormatVersion = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_FormatVersion:System.String()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", ArtifactKind = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_ArtifactKind:System.String()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[1];
-	{{
-		_s5 = CHAOS_IL2CPP_STRING_ID(", Registrations = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[1];
-	_s6 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_Registrations:System.Collections.Generic.IReadOnlyList<MetadataRegistrationEntry>()
-		auto chaos_inline_arg_0 = _s6;
-		_s6 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s6);
-			_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___Registrations_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s6;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::set_ArtifactKind(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_set_ArtifactKind_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::set_FormatVersion(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_set_FormatVersion_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::set_Registrations(System.Collections.Generic.IReadOnlyList<MetadataRegistrationEntry>)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_set_Registrations_System_Collections_Generic_IReadOnlyList_MetadataRegistrationEntry(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___Registrations_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___Registrations_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("MetadataRegistrationArtifact");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)
-		auto chaos_inline_arg_1 = _s3;
-		auto chaos_inline_arg_0 = _s2;
-		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-		}
-		_s2 = chaos_inline_arg_1;
-		{{
-			_s3 = CHAOS_IL2CPP_STRING_ID("FormatVersion = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s3;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s3 = chaos_inline_arg_1;
-		_s4 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_FormatVersion:System.String()
-			auto chaos_inline_arg_0 = _s4;
-			_s4 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s4);
-				_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___FormatVersion_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s4 = chaos_inline_arg_1;
-		{{
-			_s5 = CHAOS_IL2CPP_STRING_ID(", ArtifactKind = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s5;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s5 = chaos_inline_arg_1;
-		_s6 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_ArtifactKind:System.String()
-			auto chaos_inline_arg_0 = _s6;
-			_s6 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s6);
-				_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___ArtifactKind_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s6;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s6 = chaos_inline_arg_1;
-		{{
-			_s7 = CHAOS_IL2CPP_STRING_ID(", Registrations = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_inline_arg_1;
-		_s8 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::get_Registrations:System.Collections.Generic.IReadOnlyList<MetadataRegistrationEntry>()
-			auto chaos_inline_arg_0 = _s8;
-			_s8 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact*>(_s8);
-				_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationArtifact___Registrations_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s8;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	}
-	{
-		if (_s8 != 0)
-		{
-			_s8 = chaos_locals[0];
-			_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s9;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::.ctor()
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::.ctor(MetadataRegistrationEntry)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry__ctor_MetadataRegistrationEntry(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	CHAOS_IL2CPP_INTPTR _s41{};
-	CHAOS_IL2CPP_INTPTR _s42{};
-	CHAOS_IL2CPP_INTPTR _s43{};
-	CHAOS_IL2CPP_INTPTR _s44{};
-	CHAOS_IL2CPP_INTPTR _s45{};
-	CHAOS_IL2CPP_INTPTR _s46{};
-	CHAOS_IL2CPP_INTPTR _s47{};
-	CHAOS_IL2CPP_INTPTR _s48{};
-	CHAOS_IL2CPP_INTPTR _s49{};
-	CHAOS_IL2CPP_INTPTR _s50{};
-	CHAOS_IL2CPP_INTPTR _s51{};
-	CHAOS_IL2CPP_INTPTR _s52{};
-	CHAOS_IL2CPP_INTPTR _s53{};
-	CHAOS_IL2CPP_INTPTR _s54{};
-	CHAOS_IL2CPP_INTPTR _s55{};
-	CHAOS_IL2CPP_INTPTR _s56{};
-	CHAOS_IL2CPP_INTPTR _s57{};
-	CHAOS_IL2CPP_INTPTR _s58{};
-	CHAOS_IL2CPP_INTPTR _s59{};
-	CHAOS_IL2CPP_INTPTR _s60{};
-	CHAOS_IL2CPP_INTPTR _s61{};
-	CHAOS_IL2CPP_INTPTR _s62{};
-	CHAOS_IL2CPP_INTPTR _s63{};
-	CHAOS_IL2CPP_INTPTR _s64{};
-	CHAOS_IL2CPP_INTPTR _s65{};
-	CHAOS_IL2CPP_INTPTR _s66{};
-	CHAOS_IL2CPP_INTPTR _s67{};
-	CHAOS_IL2CPP_INTPTR _s68{};
-	CHAOS_IL2CPP_INTPTR _s69{};
-	CHAOS_IL2CPP_INTPTR _s70{};
-	CHAOS_IL2CPP_INTPTR _s71{};
-	CHAOS_IL2CPP_INTPTR _s72{};
-	CHAOS_IL2CPP_INTPTR _s73{};
-	CHAOS_IL2CPP_INTPTR _s74{};
-	CHAOS_IL2CPP_INTPTR _s75{};
-	CHAOS_IL2CPP_INTPTR _s76{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___RegistrationKind_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___RegistrationKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___RegistrationKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Slot_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Slot_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Slot_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___SubjectId_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___SubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___SubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Name_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Name_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Name_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___NamespaceName_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___NamespaceName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___NamespaceName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DisplayName_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DisplayName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DisplayName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DefinitionSubjectId_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DefinitionSubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DefinitionSubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringTypeSubjectId_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringTypeSubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringTypeSubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringMethodSubjectId_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringMethodSubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringMethodSubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MemberType_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MemberType_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MemberType_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterIndex_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterIndex_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterIndex_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterAttributes_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterAttributes_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterAttributes_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterCount_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterCount_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterCount_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___IsImported_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___IsImported_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___IsImported_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportModuleName_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportModuleName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportModuleName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportEntryPointName_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportEntryPointName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportEntryPointName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCallingConvention_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCallingConvention_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCallingConvention_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCharSet_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCharSet_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCharSet_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MetadataToken_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MetadataToken_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MetadataToken_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry.hot;
-		Chaos_IL2CPP_Contracts_MetadataRegistrationEntry__ctor_MetadataRegistrationEntry(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::Equals:System.Boolean(MetadataRegistrationEntry)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_Equals_MetadataRegistrationEntry(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1579 = s_hotpatch_entries[1579];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1579)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1579))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1579.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_Equals_MetadataRegistrationEntry(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_DeclaringMethodSubjectId()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_DeclaringMethodSubjectId(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringMethodSubjectId_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_DeclaringTypeSubjectId()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_DeclaringTypeSubjectId(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringTypeSubjectId_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_DefinitionSubjectId()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_DefinitionSubjectId(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DefinitionSubjectId_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_DisplayName()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_DisplayName(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DisplayName_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42953475u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ImportCallingConvention()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_ImportCallingConvention(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCallingConvention_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ImportCharSet()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_ImportCharSet(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCharSet_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ImportEntryPointName()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_ImportEntryPointName(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportEntryPointName_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ImportModuleName()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_ImportModuleName(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportModuleName_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_IsImported()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_IsImported(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___IsImported_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_MemberType()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_MemberType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MemberType_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_MetadataToken()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_MetadataToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MetadataToken_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_Name()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_Name(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Name_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_NamespaceName()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_NamespaceName(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___NamespaceName_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ParameterAttributes()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_ParameterAttributes(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterAttributes_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ParameterCount()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_ParameterCount(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterCount_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ParameterIndex()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_ParameterIndex(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterIndex_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_RegistrationKind()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_RegistrationKind(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___RegistrationKind_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_Slot()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_Slot(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Slot_k__BackingField;
-	}
-	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_SubjectId()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_get_SubjectId(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___SubjectId_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	CHAOS_IL2CPP_INTPTR _s41{};
-	CHAOS_IL2CPP_INTPTR _s42{};
-	CHAOS_IL2CPP_INTPTR _s43{};
-	CHAOS_IL2CPP_INTPTR _s44{};
-	CHAOS_IL2CPP_INTPTR _s45{};
-	CHAOS_IL2CPP_INTPTR _s46{};
-	CHAOS_IL2CPP_INTPTR _s47{};
-	CHAOS_IL2CPP_INTPTR _s48{};
-	CHAOS_IL2CPP_INTPTR _s49{};
-	CHAOS_IL2CPP_INTPTR _s50{};
-	CHAOS_IL2CPP_INTPTR _s51{};
-	CHAOS_IL2CPP_INTPTR _s52{};
-	CHAOS_IL2CPP_INTPTR _s53{};
-	CHAOS_IL2CPP_INTPTR _s54{};
-	CHAOS_IL2CPP_INTPTR _s55{};
-	CHAOS_IL2CPP_INTPTR _s56{};
-	CHAOS_IL2CPP_INTPTR _s57{};
-	CHAOS_IL2CPP_INTPTR _s58{};
-	CHAOS_IL2CPP_INTPTR _s59{};
-	CHAOS_IL2CPP_INTPTR _s60{};
-	CHAOS_IL2CPP_INTPTR _s61{};
-	CHAOS_IL2CPP_INTPTR _s62{};
-	CHAOS_IL2CPP_INTPTR _s63{};
-	CHAOS_IL2CPP_INTPTR _s64{};
-	CHAOS_IL2CPP_INTPTR _s65{};
-	CHAOS_IL2CPP_INTPTR _s66{};
-	CHAOS_IL2CPP_INTPTR _s67{};
-	CHAOS_IL2CPP_INTPTR _s68{};
-	CHAOS_IL2CPP_INTPTR _s69{};
-	CHAOS_IL2CPP_INTPTR _s70{};
-	CHAOS_IL2CPP_INTPTR _s71{};
-	CHAOS_IL2CPP_INTPTR _s72{};
-	CHAOS_IL2CPP_INTPTR _s73{};
-	CHAOS_IL2CPP_INTPTR _s74{};
-	CHAOS_IL2CPP_INTPTR _s75{};
-	CHAOS_IL2CPP_INTPTR _s76{};
-	CHAOS_IL2CPP_INTPTR _s77{};
-	CHAOS_IL2CPP_INTPTR _s78{};
-	CHAOS_IL2CPP_INTPTR _s79{};
-	CHAOS_IL2CPP_INTPTR _s80{};
-	CHAOS_IL2CPP_INTPTR _s81{};
-	CHAOS_IL2CPP_INTPTR _s82{};
-	CHAOS_IL2CPP_INTPTR _s83{};
-	CHAOS_IL2CPP_INTPTR _s84{};
-	CHAOS_IL2CPP_INTPTR _s85{};
-	CHAOS_IL2CPP_INTPTR _s86{};
-	CHAOS_IL2CPP_INTPTR _s87{};
-	CHAOS_IL2CPP_INTPTR _s88{};
-	CHAOS_IL2CPP_INTPTR _s89{};
-	CHAOS_IL2CPP_INTPTR _s90{};
-	CHAOS_IL2CPP_INTPTR _s91{};
-	CHAOS_IL2CPP_INTPTR _s92{};
-	CHAOS_IL2CPP_INTPTR _s93{};
-	CHAOS_IL2CPP_INTPTR _s94{};
-	CHAOS_IL2CPP_INTPTR _s95{};
-	CHAOS_IL2CPP_INTPTR _s96{};
-	CHAOS_IL2CPP_INTPTR _s97{};
-	CHAOS_IL2CPP_INTPTR _s98{};
-	CHAOS_IL2CPP_INTPTR _s99{};
-	CHAOS_IL2CPP_INTPTR _s100{};
-	CHAOS_IL2CPP_INTPTR _s101{};
-	CHAOS_IL2CPP_INTPTR _s102{};
-	CHAOS_IL2CPP_INTPTR _s103{};
-	CHAOS_IL2CPP_INTPTR _s104{};
-	CHAOS_IL2CPP_INTPTR _s105{};
-	CHAOS_IL2CPP_INTPTR _s106{};
-	CHAOS_IL2CPP_INTPTR _s107{};
-	CHAOS_IL2CPP_INTPTR _s108{};
-	CHAOS_IL2CPP_INTPTR _s109{};
-	CHAOS_IL2CPP_INTPTR _s110{};
-	CHAOS_IL2CPP_INTPTR _s111{};
-	CHAOS_IL2CPP_INTPTR _s112{};
-	CHAOS_IL2CPP_INTPTR _s113{};
-	CHAOS_IL2CPP_INTPTR _s114{};
-	CHAOS_IL2CPP_INTPTR _s115{};
-	CHAOS_IL2CPP_INTPTR _s116{};
-	CHAOS_IL2CPP_INTPTR _s117{};
-	CHAOS_IL2CPP_INTPTR _s118{};
-	CHAOS_IL2CPP_INTPTR _s119{};
-	CHAOS_IL2CPP_INTPTR _s120{};
-	CHAOS_IL2CPP_INTPTR _s121{};
-	CHAOS_IL2CPP_INTPTR _s122{};
-	CHAOS_IL2CPP_INTPTR _s123{};
-	CHAOS_IL2CPP_INTPTR _s124{};
-	CHAOS_IL2CPP_INTPTR _s125{};
-	CHAOS_IL2CPP_INTPTR _s126{};
-	CHAOS_IL2CPP_INTPTR _s127{};
-	CHAOS_IL2CPP_INTPTR _s128{};
-	CHAOS_IL2CPP_INTPTR _s129{};
-	CHAOS_IL2CPP_INTPTR _s130{};
-	CHAOS_IL2CPP_INTPTR _s131{};
-	CHAOS_IL2CPP_INTPTR _s132{};
-	CHAOS_IL2CPP_INTPTR _s133{};
-	CHAOS_IL2CPP_INTPTR _s134{};
-	CHAOS_IL2CPP_INTPTR _s135{};
-	CHAOS_IL2CPP_INTPTR _s136{};
-	CHAOS_IL2CPP_INTPTR _s137{};
-	CHAOS_IL2CPP_INTPTR _s138{};
-	CHAOS_IL2CPP_INTPTR _s139{};
-	CHAOS_IL2CPP_INTPTR _s140{};
-	CHAOS_IL2CPP_INTPTR _s141{};
-	CHAOS_IL2CPP_INTPTR _s142{};
-	CHAOS_IL2CPP_INTPTR _s143{};
-	CHAOS_IL2CPP_INTPTR _s144{};
-	CHAOS_IL2CPP_INTPTR _s145{};
-	CHAOS_IL2CPP_INTPTR _s146{};
-	CHAOS_IL2CPP_INTPTR _s147{};
-	CHAOS_IL2CPP_INTPTR _s148{};
-	CHAOS_IL2CPP_INTPTR _s149{};
-	CHAOS_IL2CPP_INTPTR _s150{};
-	CHAOS_IL2CPP_INTPTR _s151{};
-	CHAOS_IL2CPP_INTPTR _s152{};
-	CHAOS_IL2CPP_INTPTR _s153{};
-	CHAOS_IL2CPP_INTPTR _s154{};
-	CHAOS_IL2CPP_INTPTR _s155{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42953475u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___RegistrationKind_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[47])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Slot_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[53])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s5);
-		_s5 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___SubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s6);
-		_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Name_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s7);
-		_s7 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___NamespaceName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s7;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s8);
-		_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DisplayName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s8;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s7), static_cast<CHAOS_IL2CPP_INT32>(_s8)));
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s7), static_cast<CHAOS_IL2CPP_INT32>(_s8)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s9);
-		_s9 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DefinitionSubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s9;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s8), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s8), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s10);
-		_s10 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringTypeSubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s10;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s10)));
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s10)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s11);
-		_s11 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringMethodSubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s11;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s10), static_cast<CHAOS_IL2CPP_INT32>(_s11)));
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s10), static_cast<CHAOS_IL2CPP_INT32>(_s11)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s12);
-		_s12 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MemberType_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s12;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s11), static_cast<CHAOS_IL2CPP_INT32>(_s12)));
-	_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s11), static_cast<CHAOS_IL2CPP_INT32>(_s12)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s13 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s13);
-		_s13 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterIndex_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s13;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s12), static_cast<CHAOS_IL2CPP_INT32>(_s13)));
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s12), static_cast<CHAOS_IL2CPP_INT32>(_s13)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s14 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s14);
-		_s14 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterAttributes_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s14;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s13), static_cast<CHAOS_IL2CPP_INT32>(_s14)));
-	_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s13), static_cast<CHAOS_IL2CPP_INT32>(_s14)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s15 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s15);
-		_s15 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterCount_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s15;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s14), static_cast<CHAOS_IL2CPP_INT32>(_s15)));
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s14), static_cast<CHAOS_IL2CPP_INT32>(_s15)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[867])();
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s16 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s16);
-		_s16 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___IsImported_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s16;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[870])(chaos_arg_0);
-		_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s15), static_cast<CHAOS_IL2CPP_INT32>(_s16)));
-	_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s15), static_cast<CHAOS_IL2CPP_INT32>(_s16)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s17 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s17);
-		_s17 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportModuleName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s17;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s16), static_cast<CHAOS_IL2CPP_INT32>(_s17)));
-	_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s16), static_cast<CHAOS_IL2CPP_INT32>(_s17)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s18 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s18);
-		_s18 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportEntryPointName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s18;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s17), static_cast<CHAOS_IL2CPP_INT32>(_s18)));
-	_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s17), static_cast<CHAOS_IL2CPP_INT32>(_s18)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s19 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s19);
-		_s19 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCallingConvention_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s19;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s18), static_cast<CHAOS_IL2CPP_INT32>(_s19)));
-	_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s18), static_cast<CHAOS_IL2CPP_INT32>(_s19)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s20 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s20);
-		_s20 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCharSet_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s20;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s19), static_cast<CHAOS_IL2CPP_INT32>(_s20)));
-	_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s19), static_cast<CHAOS_IL2CPP_INT32>(_s20)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s21 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s21);
-		_s21 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MetadataToken_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s21;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s20), static_cast<CHAOS_IL2CPP_INT32>(_s21)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s20);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::op_Equality:System.Boolean(MetadataRegistrationEntry,MetadataRegistrationEntry)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_op_Equality_MetadataRegistrationEntry_MetadataRegistrationEntry(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::op_Inequality(MetadataRegistrationEntry,MetadataRegistrationEntry)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_op_Inequality_MetadataRegistrationEntry_MetadataRegistrationEntry(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1602 = s_hotpatch_entries[1602];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1602)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1602))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1602.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_op_Equality_MetadataRegistrationEntry_MetadataRegistrationEntry(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	CHAOS_IL2CPP_INTPTR _s41{};
-	CHAOS_IL2CPP_INTPTR _s42{};
-	CHAOS_IL2CPP_INTPTR _s43{};
-	CHAOS_IL2CPP_INTPTR _s44{};
-	CHAOS_IL2CPP_INTPTR _s45{};
-	CHAOS_IL2CPP_INTPTR _s46{};
-	CHAOS_IL2CPP_INTPTR _s47{};
-	CHAOS_IL2CPP_INTPTR _s48{};
-	CHAOS_IL2CPP_INTPTR _s49{};
-	CHAOS_IL2CPP_INTPTR _s50{};
-	CHAOS_IL2CPP_INTPTR _s51{};
-	CHAOS_IL2CPP_INTPTR _s52{};
-	CHAOS_IL2CPP_INTPTR _s53{};
-	CHAOS_IL2CPP_INTPTR _s54{};
-	CHAOS_IL2CPP_INTPTR _s55{};
-	CHAOS_IL2CPP_INTPTR _s56{};
-	CHAOS_IL2CPP_INTPTR _s57{};
-	CHAOS_IL2CPP_INTPTR _s58{};
-	CHAOS_IL2CPP_INTPTR _s59{};
-	CHAOS_IL2CPP_INTPTR _s60{};
-	CHAOS_IL2CPP_INTPTR _s61{};
-	CHAOS_IL2CPP_INTPTR _s62{};
-	CHAOS_IL2CPP_INTPTR _s63{};
-	CHAOS_IL2CPP_INTPTR _s64{};
-	CHAOS_IL2CPP_INTPTR _s65{};
-	CHAOS_IL2CPP_INTPTR _s66{};
-	CHAOS_IL2CPP_INTPTR _s67{};
-	CHAOS_IL2CPP_INTPTR _s68{};
-	CHAOS_IL2CPP_INTPTR _s69{};
-	CHAOS_IL2CPP_INTPTR _s70{};
-	CHAOS_IL2CPP_INTPTR _s71{};
-	CHAOS_IL2CPP_INTPTR _s72{};
-	CHAOS_IL2CPP_INTPTR _s73{};
-	CHAOS_IL2CPP_INTPTR _s74{};
-	CHAOS_IL2CPP_INTPTR _s75{};
-	CHAOS_IL2CPP_INTPTR _s76{};
-	CHAOS_IL2CPP_INTPTR _s77{};
-	CHAOS_IL2CPP_INTPTR _s78{};
-	CHAOS_IL2CPP_INTPTR _s79{};
-	CHAOS_IL2CPP_INTPTR _s80{};
-	CHAOS_IL2CPP_INTPTR _s81{};
-	CHAOS_IL2CPP_INTPTR _s82{};
-	CHAOS_IL2CPP_INTPTR _s83{};
-	CHAOS_IL2CPP_INTPTR _s84{};
-	CHAOS_IL2CPP_INTPTR _s85{};
-	CHAOS_IL2CPP_INTPTR _s86{};
-	CHAOS_IL2CPP_INTPTR _s87{};
-	CHAOS_IL2CPP_INTPTR _s88{};
-	CHAOS_IL2CPP_INTPTR _s89{};
-	CHAOS_IL2CPP_INTPTR _s90{};
-	CHAOS_IL2CPP_INTPTR _s91{};
-	CHAOS_IL2CPP_INTPTR _s92{};
-	CHAOS_IL2CPP_INTPTR _s93{};
-	CHAOS_IL2CPP_INTPTR _s94{};
-	CHAOS_IL2CPP_INTPTR _s95{};
-	CHAOS_IL2CPP_INTPTR _s96{};
-	CHAOS_IL2CPP_INTPTR _s97{};
-	CHAOS_IL2CPP_INTPTR _s98{};
-	CHAOS_IL2CPP_INTPTR _s99{};
-	CHAOS_IL2CPP_INTPTR _s100{};
-	CHAOS_IL2CPP_INTPTR _s101{};
-	CHAOS_IL2CPP_INTPTR _s102{};
-	CHAOS_IL2CPP_INTPTR _s103{};
-	CHAOS_IL2CPP_INTPTR _s104{};
-	CHAOS_IL2CPP_INTPTR _s105{};
-	CHAOS_IL2CPP_INTPTR _s106{};
-	CHAOS_IL2CPP_INTPTR _s107{};
-	CHAOS_IL2CPP_INTPTR _s108{};
-	CHAOS_IL2CPP_INTPTR _s109{};
-	CHAOS_IL2CPP_INTPTR _s110{};
-	CHAOS_IL2CPP_INTPTR _s111{};
-	CHAOS_IL2CPP_INTPTR _s112{};
-	CHAOS_IL2CPP_INTPTR _s113{};
-	CHAOS_IL2CPP_INTPTR _s114{};
-	CHAOS_IL2CPP_INTPTR _s115{};
-	CHAOS_IL2CPP_INTPTR _s116{};
-	CHAOS_IL2CPP_INTPTR _s117{};
-	CHAOS_IL2CPP_INTPTR _s118{};
-	CHAOS_IL2CPP_INTPTR _s119{};
-	CHAOS_IL2CPP_INTPTR _s120{};
-	CHAOS_IL2CPP_INTPTR _s121{};
-	CHAOS_IL2CPP_INTPTR _s122{};
-	CHAOS_IL2CPP_INTPTR _s123{};
-	CHAOS_IL2CPP_INTPTR _s124{};
-	CHAOS_IL2CPP_INTPTR _s125{};
-	CHAOS_IL2CPP_INTPTR _s126{};
-	CHAOS_IL2CPP_INTPTR _s127{};
-	CHAOS_IL2CPP_INTPTR _s128{};
-	CHAOS_IL2CPP_INTPTR _s129{};
-	CHAOS_IL2CPP_INTPTR _s130{};
-	CHAOS_IL2CPP_INTPTR _s131{};
-	CHAOS_IL2CPP_INTPTR _s132{};
-	CHAOS_IL2CPP_INTPTR _s133{};
-	CHAOS_IL2CPP_INTPTR _s134{};
-	CHAOS_IL2CPP_INTPTR _s135{};
-	CHAOS_IL2CPP_INTPTR _s136{};
-	CHAOS_IL2CPP_INTPTR _s137{};
-	CHAOS_IL2CPP_INTPTR _s138{};
-	CHAOS_IL2CPP_INTPTR _s139{};
-	CHAOS_IL2CPP_INTPTR _s140{};
-	CHAOS_IL2CPP_INTPTR _s141{};
-	CHAOS_IL2CPP_INTPTR _s142{};
-	CHAOS_IL2CPP_INTPTR _s143{};
-	CHAOS_IL2CPP_INTPTR _s144{};
-	CHAOS_IL2CPP_INTPTR _s145{};
-	CHAOS_IL2CPP_INTPTR _s146{};
-	CHAOS_IL2CPP_INTPTR _s147{};
-	CHAOS_IL2CPP_INTPTR _s148{};
-	CHAOS_IL2CPP_INTPTR _s149{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("RegistrationKind = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_RegistrationKind:System.String()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___RegistrationKind_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", Slot = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_Slot:System.Int32()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Slot_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s4;
-	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_arg_0 = _s4;
-		if (chaos_arg_0 == 0)
-		{
-			::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-		}
-		const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Int32__ToString_System_String__(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[1];
-	{{
-		_s5 = CHAOS_IL2CPP_STRING_ID(", SubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[1];
-	_s6 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_SubjectId:System.String()
-		auto chaos_inline_arg_0 = _s6;
-		_s6 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s6);
-			_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___SubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[1];
-	{{
-		_s7 = CHAOS_IL2CPP_STRING_ID(", Name = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s7;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[1];
-	_s8 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_Name:System.String()
-		auto chaos_inline_arg_0 = _s8;
-		_s8 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s8);
-			_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Name_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s8;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = chaos_args[1];
-	{{
-		_s9 = CHAOS_IL2CPP_STRING_ID(", NamespaceName = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s9;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = chaos_args[1];
-	_s10 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_NamespaceName:System.String()
-		auto chaos_inline_arg_0 = _s10;
-		_s10 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s10);
-			_s10 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___NamespaceName_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s10;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = chaos_args[1];
-	{{
-		_s11 = CHAOS_IL2CPP_STRING_ID(", DisplayName = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s11;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = chaos_args[1];
-	_s12 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_DisplayName:System.String()
-		auto chaos_inline_arg_0 = _s12;
-		_s12 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s12);
-			_s12 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DisplayName_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s12;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = chaos_args[1];
-	{{
-		_s13 = CHAOS_IL2CPP_STRING_ID(", DefinitionSubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s13;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s13 = chaos_args[1];
-	_s14 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_DefinitionSubjectId:System.String()
-		auto chaos_inline_arg_0 = _s14;
-		_s14 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s14);
-			_s14 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DefinitionSubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s14;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s14 = chaos_args[1];
-	{{
-		_s15 = CHAOS_IL2CPP_STRING_ID(", DeclaringTypeSubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s15;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s15 = chaos_args[1];
-	_s16 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_DeclaringTypeSubjectId:System.String()
-		auto chaos_inline_arg_0 = _s16;
-		_s16 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s16);
-			_s16 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringTypeSubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s16;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s16 = chaos_args[1];
-	{{
-		_s17 = CHAOS_IL2CPP_STRING_ID(", DeclaringMethodSubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s17;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s17 = chaos_args[1];
-	_s18 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_DeclaringMethodSubjectId:System.String()
-		auto chaos_inline_arg_0 = _s18;
-		_s18 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s18);
-			_s18 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringMethodSubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s18;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s18 = chaos_args[1];
-	{{
-		_s19 = CHAOS_IL2CPP_STRING_ID(", MemberType = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s19;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s19 = chaos_args[1];
-	_s20 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_MemberType:System.String()
-		auto chaos_inline_arg_0 = _s20;
-		_s20 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s20);
-			_s20 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MemberType_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s20;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s20 = chaos_args[1];
-	{{
-		_s21 = CHAOS_IL2CPP_STRING_ID(", ParameterIndex = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s21;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s21 = chaos_args[1];
-	_s22 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ParameterIndex:System.Nullable<System.Int32>()
-		auto chaos_inline_arg_0 = _s22;
-		_s22 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s22);
-			_s22 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterIndex_k__BackingField;
-		}
-	}
-	chaos_locals[1] = _s22;
-	_s22 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[57])();
-		_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s23;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s23 = chaos_args[1];
-	{{
-		_s24 = CHAOS_IL2CPP_STRING_ID(", ParameterAttributes = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s24;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s24 = chaos_args[1];
-	_s25 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ParameterAttributes:System.Nullable<System.Int32>()
-		auto chaos_inline_arg_0 = _s25;
-		_s25 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s25);
-			_s25 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterAttributes_k__BackingField;
-		}
-	}
-	chaos_locals[1] = _s25;
-	_s25 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[57])();
-		_s26 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s26;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s26 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s26 = chaos_args[1];
-	{{
-		_s27 = CHAOS_IL2CPP_STRING_ID(", ParameterCount = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s27;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s27 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s27 = chaos_args[1];
-	_s28 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ParameterCount:System.Nullable<System.Int32>()
-		auto chaos_inline_arg_0 = _s28;
-		_s28 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s28);
-			_s28 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterCount_k__BackingField;
-		}
-	}
-	chaos_locals[1] = _s28;
-	_s28 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[57])();
-		_s29 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s29;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s29 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s29 = chaos_args[1];
-	{{
-		_s30 = CHAOS_IL2CPP_STRING_ID(", IsImported = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s30;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s30 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s30 = chaos_args[1];
-	_s31 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_IsImported:System.Nullable<System.Boolean>()
-		auto chaos_inline_arg_0 = _s31;
-		_s31 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s31);
-			_s31 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___IsImported_k__BackingField;
-		}
-	}
-	chaos_locals[2] = _s31;
-	_s31 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[2]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[871])();
-		_s32 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s32;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s32 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s32 = chaos_args[1];
-	{{
-		_s33 = CHAOS_IL2CPP_STRING_ID(", ImportModuleName = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s33;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s33 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s33 = chaos_args[1];
-	_s34 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ImportModuleName:System.String()
-		auto chaos_inline_arg_0 = _s34;
-		_s34 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s34);
-			_s34 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportModuleName_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s34;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s34 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s34 = chaos_args[1];
-	{{
-		_s35 = CHAOS_IL2CPP_STRING_ID(", ImportEntryPointName = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s35;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s35 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s35 = chaos_args[1];
-	_s36 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ImportEntryPointName:System.String()
-		auto chaos_inline_arg_0 = _s36;
-		_s36 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s36);
-			_s36 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportEntryPointName_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s36;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s36 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s36 = chaos_args[1];
-	{{
-		_s37 = CHAOS_IL2CPP_STRING_ID(", ImportCallingConvention = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s37;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s37 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s37 = chaos_args[1];
-	_s38 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ImportCallingConvention:System.Nullable<System.Int32>()
-		auto chaos_inline_arg_0 = _s38;
-		_s38 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s38);
-			_s38 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCallingConvention_k__BackingField;
-		}
-	}
-	chaos_locals[1] = _s38;
-	_s38 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[57])();
-		_s39 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s39;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s39 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s39 = chaos_args[1];
-	{{
-		_s40 = CHAOS_IL2CPP_STRING_ID(", ImportCharSet = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s40;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s40 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s40 = chaos_args[1];
-	_s41 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_ImportCharSet:System.Nullable<System.Int32>()
-		auto chaos_inline_arg_0 = _s41;
-		_s41 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s41);
-			_s41 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCharSet_k__BackingField;
-		}
-	}
-	chaos_locals[1] = _s41;
-	_s41 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[57])();
-		_s42 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s42;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s42 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s42 = chaos_args[1];
-	{{
-		_s43 = CHAOS_IL2CPP_STRING_ID(", MetadataToken = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s43;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s43 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s43 = chaos_args[1];
-	_s44 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::get_MetadataToken:System.Nullable<System.Int32>()
-		auto chaos_inline_arg_0 = _s44;
-		_s44 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s44);
-			_s44 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MetadataToken_k__BackingField;
-		}
-	}
-	chaos_locals[1] = _s44;
-	_s44 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[57])();
-		_s45 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s45;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s45 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s45 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s45;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_DeclaringMethodSubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_DeclaringMethodSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringMethodSubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringMethodSubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_DeclaringTypeSubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_DeclaringTypeSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringTypeSubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DeclaringTypeSubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_DefinitionSubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_DefinitionSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DefinitionSubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DefinitionSubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_DisplayName(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_DisplayName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DisplayName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___DisplayName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_ImportCallingConvention(System.Nullable<System.Int32>)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_ImportCallingConvention_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCallingConvention_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCallingConvention_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_ImportCharSet(System.Nullable<System.Int32>)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_ImportCharSet_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCharSet_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportCharSet_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_ImportEntryPointName(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_ImportEntryPointName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportEntryPointName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportEntryPointName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_ImportModuleName(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_ImportModuleName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportModuleName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ImportModuleName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_IsImported(System.Nullable<System.Boolean>)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_IsImported_System_Nullable_System_Boolean(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___IsImported_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___IsImported_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_MemberType(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_MemberType_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MemberType_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MemberType_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_MetadataToken(System.Nullable<System.Int32>)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_MetadataToken_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MetadataToken_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___MetadataToken_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_Name(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_Name_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Name_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Name_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_NamespaceName(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_NamespaceName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___NamespaceName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___NamespaceName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_ParameterAttributes(System.Nullable<System.Int32>)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_ParameterAttributes_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterAttributes_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterAttributes_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_ParameterCount(System.Nullable<System.Int32>)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_ParameterCount_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterCount_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterCount_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_ParameterIndex(System.Nullable<System.Int32>)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_ParameterIndex_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterIndex_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___ParameterIndex_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_RegistrationKind(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_RegistrationKind_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___RegistrationKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___RegistrationKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_Slot(System.Int32)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_Slot_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Slot_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___Slot_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::set_SubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_set_SubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___SubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataRegistrationEntry___SubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("MetadataRegistrationEntry");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_1 = _s3;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s3);
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s2);
-		auto& _d1604 = s_hotpatch_entries[1604];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1604)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1604))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1604.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MetadataRegistrationEntry_PrintMembers_System_Text_StringBuilder(chaos_arg_0, chaos_arg_1);
-		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		if (_s2 != 0)
-		{
-			_s2 = chaos_locals[0];
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::.ctor()
-extern "C" void Chaos_IL2CPP_Contracts_MetadataWriterOutput__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::.ctor(MetadataWriterOutput)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataWriterOutput__ctor_MetadataWriterOutput(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___AotManifest_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___AotManifest_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___AotManifest_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___MetadataRegistration_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___MetadataRegistration_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___MetadataRegistration_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___SupplementalMetadataTemplate_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___SupplementalMetadataTemplate_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___SupplementalMetadataTemplate_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MetadataWriterOutput.hot;
-		Chaos_IL2CPP_Contracts_MetadataWriterOutput__ctor_MetadataWriterOutput(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MetadataWriterOutput::Equals:System.Boolean(MetadataWriterOutput)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_Equals_MetadataWriterOutput(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MetadataWriterOutput.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1628 = s_hotpatch_entries[1628];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1628)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1628))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1628.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MetadataWriterOutput_Equals_MetadataWriterOutput(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_AotManifest()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_get_AotManifest(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___AotManifest_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(44992414u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_MetadataRegistration()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_get_MetadataRegistration(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___MetadataRegistration_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_SupplementalMetadataTemplate()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_get_SupplementalMetadataTemplate(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___SupplementalMetadataTemplate_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_MetadataWriterOutput_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(44992414u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[612])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___AotManifest_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[631])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[614])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___MetadataRegistration_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[632])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[616])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s5);
-		_s5 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___SupplementalMetadataTemplate_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[633])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s4);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MetadataWriterOutput::op_Equality:System.Boolean(MetadataWriterOutput,MetadataWriterOutput)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_op_Equality_MetadataWriterOutput_MetadataWriterOutput(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::op_Inequality(MetadataWriterOutput,MetadataWriterOutput)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_op_Inequality_MetadataWriterOutput_MetadataWriterOutput(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1635 = s_hotpatch_entries[1635];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1635)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1635))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1635.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MetadataWriterOutput_op_Equality_MetadataWriterOutput_MetadataWriterOutput(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("AotManifest = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_AotManifest:AotManifestArtifact()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___AotManifest_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", MetadataRegistration = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_MetadataRegistration:MetadataRegistrationArtifact()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___MetadataRegistration_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[1];
-	{{
-		_s5 = CHAOS_IL2CPP_STRING_ID(", SupplementalMetadataTemplate = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[1];
-	_s6 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_SupplementalMetadataTemplate:SupplementalMetadataTemplateArtifact()
-		auto chaos_inline_arg_0 = _s6;
-		_s6 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s6);
-			_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___SupplementalMetadataTemplate_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s6;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::set_AotManifest(AotManifestArtifact)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataWriterOutput_set_AotManifest_AotManifestArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___AotManifest_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___AotManifest_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::set_MetadataRegistration(MetadataRegistrationArtifact)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataWriterOutput_set_MetadataRegistration_MetadataRegistrationArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___MetadataRegistration_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___MetadataRegistration_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::set_SupplementalMetadataTemplate(SupplementalMetadataTemplateArtifact)
-extern "C" void Chaos_IL2CPP_Contracts_MetadataWriterOutput_set_SupplementalMetadataTemplate_SupplementalMetadataTemplateArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___SupplementalMetadataTemplate_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___SupplementalMetadataTemplate_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MetadataWriterOutput::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MetadataWriterOutput_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("MetadataWriterOutput");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MetadataWriterOutput::PrintMembers:System.Boolean(System.Text.StringBuilder)
-		auto chaos_inline_arg_1 = _s3;
-		auto chaos_inline_arg_0 = _s2;
-		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-		}
-		_s2 = chaos_inline_arg_1;
-		{{
-			_s3 = CHAOS_IL2CPP_STRING_ID("AotManifest = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s3;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s3 = chaos_inline_arg_1;
-		_s4 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_AotManifest:AotManifestArtifact()
-			auto chaos_inline_arg_0 = _s4;
-			_s4 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s4);
-				_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___AotManifest_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s4 = chaos_inline_arg_1;
-		{{
-			_s5 = CHAOS_IL2CPP_STRING_ID(", MetadataRegistration = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s5;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s5 = chaos_inline_arg_1;
-		_s6 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_MetadataRegistration:MetadataRegistrationArtifact()
-			auto chaos_inline_arg_0 = _s6;
-			_s6 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s6);
-				_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___MetadataRegistration_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s6;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s6 = chaos_inline_arg_1;
-		{{
-			_s7 = CHAOS_IL2CPP_STRING_ID(", SupplementalMetadataTemplate = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_inline_arg_1;
-		_s8 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MetadataWriterOutput::get_SupplementalMetadataTemplate:SupplementalMetadataTemplateArtifact()
-			auto chaos_inline_arg_0 = _s8;
-			_s8 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MetadataWriterOutput*>(_s8);
-				_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_MetadataWriterOutput___SupplementalMetadataTemplate_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s8;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	}
-	{
-		if (_s8 != 0)
-		{
-			_s8 = chaos_locals[0];
-			_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s9;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::.ctor()
-extern "C" void Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::.ctor(MethodCapabilityBundleModel)
-extern "C" void Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel__ctor_MethodCapabilityBundleModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___SubjectId_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___SubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___SubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___Capabilities_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___Capabilities_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___Capabilities_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel.hot;
-		Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel__ctor_MethodCapabilityBundleModel(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::Equals:System.Boolean(MethodCapabilityBundleModel)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_Equals_MethodCapabilityBundleModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1645 = s_hotpatch_entries[1645];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1645)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1645))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1645.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_Equals_MethodCapabilityBundleModel(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::get_Capabilities()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_get_Capabilities(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___Capabilities_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(35029767u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::get_SubjectId()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_get_SubjectId(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___SubjectId_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(35029767u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___SubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[163])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___Capabilities_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[177])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s3);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::op_Equality:System.Boolean(MethodCapabilityBundleModel,MethodCapabilityBundleModel)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_op_Equality_MethodCapabilityBundleModel_MethodCapabilityBundleModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::op_Inequality(MethodCapabilityBundleModel,MethodCapabilityBundleModel)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_op_Inequality_MethodCapabilityBundleModel_MethodCapabilityBundleModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1651 = s_hotpatch_entries[1651];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1651)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1651))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1651.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_op_Equality_MethodCapabilityBundleModel_MethodCapabilityBundleModel(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("SubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::get_SubjectId:System.String()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___SubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", Capabilities = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::get_Capabilities:System.Collections.Generic.IReadOnlyList<System.String>()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___Capabilities_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s4;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::set_Capabilities(System.Collections.Generic.IReadOnlyList<System.String>)
-extern "C" void Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_set_Capabilities_System_Collections_Generic_IReadOnlyList_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___Capabilities_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___Capabilities_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::set_SubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_set_SubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___SubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___SubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("MethodCapabilityBundleModel");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::PrintMembers:System.Boolean(System.Text.StringBuilder)
-		auto chaos_inline_arg_1 = _s3;
-		auto chaos_inline_arg_0 = _s2;
-		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-		}
-		_s2 = chaos_inline_arg_1;
-		{{
-			_s3 = CHAOS_IL2CPP_STRING_ID("SubjectId = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s3;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s3 = chaos_inline_arg_1;
-		_s4 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::get_SubjectId:System.String()
-			auto chaos_inline_arg_0 = _s4;
-			_s4 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s4);
-				_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___SubjectId_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s4 = chaos_inline_arg_1;
-		{{
-			_s5 = CHAOS_IL2CPP_STRING_ID(", Capabilities = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s5;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s5 = chaos_inline_arg_1;
-		_s6 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MethodCapabilityBundleModel::get_Capabilities:System.Collections.Generic.IReadOnlyList<System.String>()
-			auto chaos_inline_arg_0 = _s6;
-			_s6 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel*>(_s6);
-				_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodCapabilityBundleModel___Capabilities_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s6;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	}
-	{
-		if (_s6 != 0)
-		{
-			_s6 = chaos_locals[0];
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s7;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::.ctor()
-extern "C" void Chaos_IL2CPP_Contracts_MethodShapeModel__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::.ctor(MethodShapeModel)
-extern "C" void Chaos_IL2CPP_Contracts_MethodShapeModel__ctor_MethodShapeModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___SubjectId_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___SubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___SubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___MethodRole_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___MethodRole_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___MethodRole_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailability_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailability_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailability_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailabilityCode_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailabilityCode_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailabilityCode_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MethodShapeModel.hot;
-		Chaos_IL2CPP_Contracts_MethodShapeModel__ctor_MethodShapeModel(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MethodShapeModel::Equals:System.Boolean(MethodShapeModel)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_Equals_MethodShapeModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MethodShapeModel.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1660 = s_hotpatch_entries[1660];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1660)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1660))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1660.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MethodShapeModel_Equals_MethodShapeModel(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::get_BodyAvailability()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_get_BodyAvailability(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailability_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::get_BodyAvailabilityCode()
-extern "C" chaos_valuetype_Chaos_IL2CPP_Contracts_BodyAvailabilityCode Chaos_IL2CPP_Contracts_MethodShapeModel_get_BodyAvailabilityCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailabilityCode_k__BackingField;
-	}
-	return *chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_IL2CPP_Contracts_BodyAvailabilityCode>(_s0);
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(35557902u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::get_MethodRole()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_get_MethodRole(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___MethodRole_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::get_SubjectId()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_get_SubjectId(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___SubjectId_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_MethodShapeModel_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MethodShapeModel::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(35557902u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___SubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___MethodRole_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s5);
-		_s5 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailability_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[883])();
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s6);
-		_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailabilityCode_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[886])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s5);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MethodShapeModel::op_Equality:System.Boolean(MethodShapeModel,MethodShapeModel)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_op_Equality_MethodShapeModel_MethodShapeModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::op_Inequality(MethodShapeModel,MethodShapeModel)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_op_Inequality_MethodShapeModel_MethodShapeModel(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1668 = s_hotpatch_entries[1668];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1668)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1668))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1668.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MethodShapeModel_op_Equality_MethodShapeModel_MethodShapeModel(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("SubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MethodShapeModel::get_SubjectId:System.String()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___SubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", MethodRole = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MethodShapeModel::get_MethodRole:System.String()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___MethodRole_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[1];
-	{{
-		_s5 = CHAOS_IL2CPP_STRING_ID(", BodyAvailability = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[1];
-	_s6 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MethodShapeModel::get_BodyAvailability:System.String()
-		auto chaos_inline_arg_0 = _s6;
-		_s6 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s6);
-			_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailability_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[1];
-	{{
-		_s7 = CHAOS_IL2CPP_STRING_ID(", BodyAvailabilityCode = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s7;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[1];
-	_s8 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MethodShapeModel::get_BodyAvailabilityCode:BodyAvailabilityCode()
-		auto chaos_inline_arg_0 = _s8;
-		_s8 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s8);
-			_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailabilityCode_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s8;
-	_s8 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[887])();
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s9;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s9;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::set_BodyAvailability(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MethodShapeModel_set_BodyAvailability_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailability_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailability_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::set_BodyAvailabilityCode(BodyAvailabilityCode)
-extern "C" void Chaos_IL2CPP_Contracts_MethodShapeModel_set_BodyAvailabilityCode_BodyAvailabilityCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, chaos_valuetype_Chaos_IL2CPP_Contracts_BodyAvailabilityCode chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	auto chaos_abi_param_1 = chaos_fn_arg_1;
-	chaos_args[1] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_abi_param_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailabilityCode_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___BodyAvailabilityCode_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::set_MethodRole(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MethodShapeModel_set_MethodRole_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___MethodRole_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___MethodRole_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::set_SubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MethodShapeModel_set_SubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MethodShapeModel*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___SubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MethodShapeModel___SubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MethodShapeModel::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MethodShapeModel_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("MethodShapeModel");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_1 = _s3;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s3);
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s2);
-		auto& _d1670 = s_hotpatch_entries[1670];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1670)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1670))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1670.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MethodShapeModel_PrintMembers_System_Text_StringBuilder(chaos_arg_0, chaos_arg_1);
-		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		if (_s2 != 0)
-		{
-			_s2 = chaos_locals[0];
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::.ctor(MultiAssemblyClosureRequest)
-extern "C" void Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest__ctor_MultiAssemblyClosureRequest(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::.ctor(System.Collections.Generic.IReadOnlyList<System.String>,System.String,System.String,System.Collections.Generic.IReadOnlyList<System.String>)
-extern "C" void Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest__ctor_System_Collections_Generic_IReadOnlyList_System_String_System_String_System_String_System_Collections_Generic_IReadOnlyList_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	chaos_args[4] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_4);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[2];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[3];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[4];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest.hot;
-		Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest__ctor_MultiAssemblyClosureRequest(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::Deconstruct(System.Collections.Generic.IReadOnlyList<System.String>&,System.String&,System.String&,System.Collections.Generic.IReadOnlyList<System.String>&)
-extern "C" void Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_Deconstruct_System_Collections_Generic_IReadOnlyList_System_String_System_String_System_String_System_Collections_Generic_IReadOnlyList_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2, CHAOS_IL2CPP_INTPTR chaos_fn_arg_3, CHAOS_IL2CPP_INTPTR chaos_fn_arg_4)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	chaos_args[3] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_3);
-	chaos_args[4] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_4);
-
-	_s0 = chaos_args[1];
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_InputAssemblyPaths:System.Collections.Generic.IReadOnlyList<System.String>()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s1);
-			_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField;
-		}
-	}
-	{
-		auto chaos_value_raw = _s1;
-		if (chaos_is_string_id(chaos_value_raw))
-		{
-			chaos_value_raw = chaos_string_materialize(chaos_value_raw);
-		}
-		const auto chaos_value = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_value_raw);
-		const auto chaos_address = _s0;
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_address));
-		chaos_store_indirect<CHAOS_IL2CPP_INTPTR>(chaos_address, chaos_value);
-		chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));
-	}
-	_s0 = chaos_args[2];
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_OutputRootPath:System.String()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s1);
-			_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField;
-		}
-	}
-	{
-		auto chaos_value_raw = _s1;
-		if (chaos_is_string_id(chaos_value_raw))
-		{
-			chaos_value_raw = chaos_string_materialize(chaos_value_raw);
-		}
-		const auto chaos_value = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_value_raw);
-		const auto chaos_address = _s0;
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_address));
-		chaos_store_indirect<CHAOS_IL2CPP_INTPTR>(chaos_address, chaos_value);
-		chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));
-	}
-	_s0 = chaos_args[3];
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_EntryPointSubjectIdOverride:System.String()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s1);
-			_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField;
-		}
-	}
-	{
-		auto chaos_value_raw = _s1;
-		if (chaos_is_string_id(chaos_value_raw))
-		{
-			chaos_value_raw = chaos_string_materialize(chaos_value_raw);
-		}
-		const auto chaos_value = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_value_raw);
-		const auto chaos_address = _s0;
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_address));
-		chaos_store_indirect<CHAOS_IL2CPP_INTPTR>(chaos_address, chaos_value);
-		chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));
-	}
-	_s0 = chaos_args[4];
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_AdditionalAssemblyPaths:System.Collections.Generic.IReadOnlyList<System.String>()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s1);
-			_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField;
-		}
-	}
-	{
-		auto chaos_value_raw = _s1;
-		if (chaos_is_string_id(chaos_value_raw))
-		{
-			chaos_value_raw = chaos_string_materialize(chaos_value_raw);
-		}
-		const auto chaos_value = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_value_raw);
-		const auto chaos_address = _s0;
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_address));
-		chaos_store_indirect<CHAOS_IL2CPP_INTPTR>(chaos_address, chaos_value);
-		chaos_gc_dirty_card(reinterpret_cast<void*>(chaos_address));
-	}
-	return;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::Equals:System.Boolean(MultiAssemblyClosureRequest)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_Equals_MultiAssemblyClosureRequest(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1680 = s_hotpatch_entries[1680];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1680)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1680))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1680.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_Equals_MultiAssemblyClosureRequest(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_AdditionalAssemblyPaths()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_get_AdditionalAssemblyPaths(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_EntryPointSubjectIdOverride()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_get_EntryPointSubjectIdOverride(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41010056u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_InputAssemblyPaths()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_get_InputAssemblyPaths(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_OutputRootPath()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_get_OutputRootPath(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(41010056u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[163])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[177])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s5);
-		_s5 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[163])();
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s6);
-		_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[177])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s5);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::op_Equality:System.Boolean(MultiAssemblyClosureRequest,MultiAssemblyClosureRequest)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_op_Equality_MultiAssemblyClosureRequest_MultiAssemblyClosureRequest(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::op_Inequality(MultiAssemblyClosureRequest,MultiAssemblyClosureRequest)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_op_Inequality_MultiAssemblyClosureRequest_MultiAssemblyClosureRequest(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1688 = s_hotpatch_entries[1688];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1688)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1688))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1688.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_op_Equality_MultiAssemblyClosureRequest_MultiAssemblyClosureRequest(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("InputAssemblyPaths = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_InputAssemblyPaths:System.Collections.Generic.IReadOnlyList<System.String>()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", OutputRootPath = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_OutputRootPath:System.String()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[1];
-	{{
-		_s5 = CHAOS_IL2CPP_STRING_ID(", EntryPointSubjectIdOverride = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[1];
-	_s6 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_EntryPointSubjectIdOverride:System.String()
-		auto chaos_inline_arg_0 = _s6;
-		_s6 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s6);
-			_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[1];
-	{{
-		_s7 = CHAOS_IL2CPP_STRING_ID(", AdditionalAssemblyPaths = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s7;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[1];
-	_s8 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_AdditionalAssemblyPaths:System.Collections.Generic.IReadOnlyList<System.String>()
-		auto chaos_inline_arg_0 = _s8;
-		_s8 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s8);
-			_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s8;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s8;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::set_AdditionalAssemblyPaths(System.Collections.Generic.IReadOnlyList<System.String>)
-extern "C" void Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_set_AdditionalAssemblyPaths_System_Collections_Generic_IReadOnlyList_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::set_EntryPointSubjectIdOverride(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_set_EntryPointSubjectIdOverride_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::set_InputAssemblyPaths(System.Collections.Generic.IReadOnlyList<System.String>)
-extern "C" void Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_set_InputAssemblyPaths_System_Collections_Generic_IReadOnlyList_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::set_OutputRootPath(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_set_OutputRootPath_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("MultiAssemblyClosureRequest");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::PrintMembers:System.Boolean(System.Text.StringBuilder)
-		auto chaos_inline_arg_1 = _s3;
-		auto chaos_inline_arg_0 = _s2;
-		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-		}
-		_s2 = chaos_inline_arg_1;
-		{{
-			_s3 = CHAOS_IL2CPP_STRING_ID("InputAssemblyPaths = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s3;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s3 = chaos_inline_arg_1;
-		_s4 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_InputAssemblyPaths:System.Collections.Generic.IReadOnlyList<System.String>()
-			auto chaos_inline_arg_0 = _s4;
-			_s4 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s4);
-				_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___InputAssemblyPaths_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s4 = chaos_inline_arg_1;
-		{{
-			_s5 = CHAOS_IL2CPP_STRING_ID(", OutputRootPath = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s5;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s5 = chaos_inline_arg_1;
-		_s6 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_OutputRootPath:System.String()
-			auto chaos_inline_arg_0 = _s6;
-			_s6 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s6);
-				_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___OutputRootPath_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s6;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s6 = chaos_inline_arg_1;
-		{{
-			_s7 = CHAOS_IL2CPP_STRING_ID(", EntryPointSubjectIdOverride = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_inline_arg_1;
-		_s8 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_EntryPointSubjectIdOverride:System.String()
-			auto chaos_inline_arg_0 = _s8;
-			_s8 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s8);
-				_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___EntryPointSubjectIdOverride_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s8;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s8 = chaos_inline_arg_1;
-		{{
-			_s9 = CHAOS_IL2CPP_STRING_ID(", AdditionalAssemblyPaths = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s9;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s9 = chaos_inline_arg_1;
-		_s10 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/MultiAssemblyClosureRequest::get_AdditionalAssemblyPaths:System.Collections.Generic.IReadOnlyList<System.String>()
-			auto chaos_inline_arg_0 = _s10;
-			_s10 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest*>(_s10);
-				_s10 = chaos_object->field_Chaos_IL2CPP_Contracts_MultiAssemblyClosureRequest___AdditionalAssemblyPaths_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s10;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	}
-	{
-		if (_s10 != 0)
-		{
-			_s10 = chaos_locals[0];
-			_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s11;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::.ctor()
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::.ctor(NativeAotGeneratedArtifactRef)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef__ctor_NativeAotGeneratedArtifactRef(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Kind_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Kind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Kind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Path_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Path_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Path_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef.hot;
-		Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef__ctor_NativeAotGeneratedArtifactRef(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::Equals:System.Boolean(NativeAotGeneratedArtifactRef)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_Equals_NativeAotGeneratedArtifactRef(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1699 = s_hotpatch_entries[1699];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1699)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1699))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1699.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_Equals_NativeAotGeneratedArtifactRef(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42118358u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Kind()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_get_Kind(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Kind_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Path()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_get_Path(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Path_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42118358u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Kind_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Path_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s3);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::op_Equality:System.Boolean(NativeAotGeneratedArtifactRef,NativeAotGeneratedArtifactRef)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_op_Equality_NativeAotGeneratedArtifactRef_NativeAotGeneratedArtifactRef(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::op_Inequality(NativeAotGeneratedArtifactRef,NativeAotGeneratedArtifactRef)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_op_Inequality_NativeAotGeneratedArtifactRef_NativeAotGeneratedArtifactRef(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1705 = s_hotpatch_entries[1705];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1705)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1705))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1705.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_op_Equality_NativeAotGeneratedArtifactRef_NativeAotGeneratedArtifactRef(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("Kind = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Kind:System.String()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Kind_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", Path = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Path:System.String()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Path_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s4;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::set_Kind(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_set_Kind_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Kind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Kind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::set_Path(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_set_Path_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Path_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Path_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("NativeAotGeneratedArtifactRef");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::PrintMembers:System.Boolean(System.Text.StringBuilder)
-		auto chaos_inline_arg_1 = _s3;
-		auto chaos_inline_arg_0 = _s2;
-		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-		}
-		_s2 = chaos_inline_arg_1;
-		{{
-			_s3 = CHAOS_IL2CPP_STRING_ID("Kind = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s3;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s3 = chaos_inline_arg_1;
-		_s4 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Kind:System.String()
-			auto chaos_inline_arg_0 = _s4;
-			_s4 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s4);
-				_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Kind_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s4 = chaos_inline_arg_1;
-		{{
-			_s5 = CHAOS_IL2CPP_STRING_ID(", Path = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s5;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s5 = chaos_inline_arg_1;
-		_s6 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Path:System.String()
-			auto chaos_inline_arg_0 = _s6;
-			_s6 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef*>(_s6);
-				_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedArtifactRef___Path_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s6;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	}
-	{
-		if (_s6 != 0)
-		{
-			_s6 = chaos_locals[0];
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s7;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::.ctor()
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotGeneratedSource__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::.ctor(NativeAotGeneratedSource)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotGeneratedSource__ctor_NativeAotGeneratedSource(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___RelativePath_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___RelativePath_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___RelativePath_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___Contents_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___Contents_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___Contents_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource.hot;
-		Chaos_IL2CPP_Contracts_NativeAotGeneratedSource__ctor_NativeAotGeneratedSource(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::Equals:System.Boolean(NativeAotGeneratedSource)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_Equals_NativeAotGeneratedSource(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1714 = s_hotpatch_entries[1714];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1714)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1714))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1714.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_Equals_NativeAotGeneratedSource(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::get_Contents()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_get_Contents(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___Contents_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(34259226u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::get_RelativePath()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_get_RelativePath(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___RelativePath_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(34259226u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___RelativePath_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___Contents_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s3);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::op_Equality:System.Boolean(NativeAotGeneratedSource,NativeAotGeneratedSource)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_op_Equality_NativeAotGeneratedSource_NativeAotGeneratedSource(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::op_Inequality(NativeAotGeneratedSource,NativeAotGeneratedSource)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_op_Inequality_NativeAotGeneratedSource_NativeAotGeneratedSource(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1720 = s_hotpatch_entries[1720];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1720)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1720))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1720.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_op_Equality_NativeAotGeneratedSource_NativeAotGeneratedSource(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("RelativePath = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::get_RelativePath:System.String()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___RelativePath_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", Contents = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::get_Contents:System.String()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___Contents_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s4;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::set_Contents(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_set_Contents_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___Contents_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___Contents_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::set_RelativePath(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_set_RelativePath_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___RelativePath_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___RelativePath_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotGeneratedSource_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("NativeAotGeneratedSource");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::PrintMembers:System.Boolean(System.Text.StringBuilder)
-		auto chaos_inline_arg_1 = _s3;
-		auto chaos_inline_arg_0 = _s2;
-		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-		}
-		_s2 = chaos_inline_arg_1;
-		{{
-			_s3 = CHAOS_IL2CPP_STRING_ID("RelativePath = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s3;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s3 = chaos_inline_arg_1;
-		_s4 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::get_RelativePath:System.String()
-			auto chaos_inline_arg_0 = _s4;
-			_s4 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s4);
-				_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___RelativePath_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s4 = chaos_inline_arg_1;
-		{{
-			_s5 = CHAOS_IL2CPP_STRING_ID(", Contents = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s5;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s5 = chaos_inline_arg_1;
-		_s6 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeAotGeneratedSource::get_Contents:System.String()
-			auto chaos_inline_arg_0 = _s6;
-			_s6 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource*>(_s6);
-				_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotGeneratedSource___Contents_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s6;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	}
-	{
-		if (_s6 != 0)
-		{
-			_s6 = chaos_locals[0];
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s7;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::.ctor()
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("v0");
-	}}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("nativeAotLoweringPlan");
-	}}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::.ctor(NativeAotLoweringPlanArtifact)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact__ctor_NativeAotLoweringPlanArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	CHAOS_IL2CPP_INTPTR _s41{};
-	CHAOS_IL2CPP_INTPTR _s42{};
-	CHAOS_IL2CPP_INTPTR _s43{};
-	CHAOS_IL2CPP_INTPTR _s44{};
-	CHAOS_IL2CPP_INTPTR _s45{};
-	CHAOS_IL2CPP_INTPTR _s46{};
-	CHAOS_IL2CPP_INTPTR _s47{};
-	CHAOS_IL2CPP_INTPTR _s48{};
-	CHAOS_IL2CPP_INTPTR _s49{};
-	CHAOS_IL2CPP_INTPTR _s50{};
-	CHAOS_IL2CPP_INTPTR _s51{};
-	CHAOS_IL2CPP_INTPTR _s52{};
-	CHAOS_IL2CPP_INTPTR _s53{};
-	CHAOS_IL2CPP_INTPTR _s54{};
-	CHAOS_IL2CPP_INTPTR _s55{};
-	CHAOS_IL2CPP_INTPTR _s56{};
-	CHAOS_IL2CPP_INTPTR _s57{};
-	CHAOS_IL2CPP_INTPTR _s58{};
-	CHAOS_IL2CPP_INTPTR _s59{};
-	CHAOS_IL2CPP_INTPTR _s60{};
-	CHAOS_IL2CPP_INTPTR _s61{};
-	CHAOS_IL2CPP_INTPTR _s62{};
-	CHAOS_IL2CPP_INTPTR _s63{};
-	CHAOS_IL2CPP_INTPTR _s64{};
-	CHAOS_IL2CPP_INTPTR _s65{};
-	CHAOS_IL2CPP_INTPTR _s66{};
-	CHAOS_IL2CPP_INTPTR _s67{};
-	CHAOS_IL2CPP_INTPTR _s68{};
-	CHAOS_IL2CPP_INTPTR _s69{};
-	CHAOS_IL2CPP_INTPTR _s70{};
-	CHAOS_IL2CPP_INTPTR _s71{};
-	CHAOS_IL2CPP_INTPTR _s72{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___PlanKind_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___PlanKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___PlanKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AssemblyName_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AssemblyName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AssemblyName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySubjectId_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySymbol_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySymbol_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySymbol_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntryMethodToken_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntryMethodToken_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntryMethodToken_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___WorkloadAbi_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___WorkloadAbi_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___WorkloadAbi_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMode_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMode_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMode_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodSubjectIds_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodSubjectIds_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodSubjectIds_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodCount_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodCount_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodCount_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageSize_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageSize_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageSize_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageCount_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageCount_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageCount_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPages_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPages_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPages_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditStatus_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditStatus_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditStatus_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditMessage_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditMessage_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditMessage_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___GlobalSharingCanonicalMap_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___GlobalSharingCanonicalMap_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___GlobalSharingCanonicalMap_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact.hot;
-		Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact__ctor_NativeAotLoweringPlanArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::Equals:System.Boolean(NativeAotLoweringPlanArtifact)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_Equals_NativeAotLoweringPlanArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1729 = s_hotpatch_entries[1729];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1729)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1729))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1729.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_Equals_NativeAotLoweringPlanArtifact(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_ArtifactKind()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_ArtifactKind(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_AssemblyName()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_AssemblyName(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AssemblyName_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_AuditMessage()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_AuditMessage(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditMessage_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_AuditStatus()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_AuditStatus(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditStatus_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_EntryMethodToken()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_EntryMethodToken(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntryMethodToken_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_EntrySubjectId()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_EntrySubjectId(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySubjectId_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_EntrySymbol()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_EntrySymbol(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySymbol_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(33898568u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_FormatVersion()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_FormatVersion(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_GlobalSharingCanonicalMap()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_GlobalSharingCanonicalMap(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___GlobalSharingCanonicalMap_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_NativeEntryFunctionName()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_NativeEntryFunctionName(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_PlanKind()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_PlanKind(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___PlanKind_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitMethodCount()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_TranslationUnitMethodCount(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodCount_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitMethodSubjectIds()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_TranslationUnitMethodSubjectIds(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodSubjectIds_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitMode()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_TranslationUnitMode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMode_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitPageCount()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_TranslationUnitPageCount(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageCount_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitPages()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_TranslationUnitPages(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPages_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitPageSize()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_TranslationUnitPageSize(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageSize_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_WorkloadAbi()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_get_WorkloadAbi(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___WorkloadAbi_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	CHAOS_IL2CPP_INTPTR _s41{};
-	CHAOS_IL2CPP_INTPTR _s42{};
-	CHAOS_IL2CPP_INTPTR _s43{};
-	CHAOS_IL2CPP_INTPTR _s44{};
-	CHAOS_IL2CPP_INTPTR _s45{};
-	CHAOS_IL2CPP_INTPTR _s46{};
-	CHAOS_IL2CPP_INTPTR _s47{};
-	CHAOS_IL2CPP_INTPTR _s48{};
-	CHAOS_IL2CPP_INTPTR _s49{};
-	CHAOS_IL2CPP_INTPTR _s50{};
-	CHAOS_IL2CPP_INTPTR _s51{};
-	CHAOS_IL2CPP_INTPTR _s52{};
-	CHAOS_IL2CPP_INTPTR _s53{};
-	CHAOS_IL2CPP_INTPTR _s54{};
-	CHAOS_IL2CPP_INTPTR _s55{};
-	CHAOS_IL2CPP_INTPTR _s56{};
-	CHAOS_IL2CPP_INTPTR _s57{};
-	CHAOS_IL2CPP_INTPTR _s58{};
-	CHAOS_IL2CPP_INTPTR _s59{};
-	CHAOS_IL2CPP_INTPTR _s60{};
-	CHAOS_IL2CPP_INTPTR _s61{};
-	CHAOS_IL2CPP_INTPTR _s62{};
-	CHAOS_IL2CPP_INTPTR _s63{};
-	CHAOS_IL2CPP_INTPTR _s64{};
-	CHAOS_IL2CPP_INTPTR _s65{};
-	CHAOS_IL2CPP_INTPTR _s66{};
-	CHAOS_IL2CPP_INTPTR _s67{};
-	CHAOS_IL2CPP_INTPTR _s68{};
-	CHAOS_IL2CPP_INTPTR _s69{};
-	CHAOS_IL2CPP_INTPTR _s70{};
-	CHAOS_IL2CPP_INTPTR _s71{};
-	CHAOS_IL2CPP_INTPTR _s72{};
-	CHAOS_IL2CPP_INTPTR _s73{};
-	CHAOS_IL2CPP_INTPTR _s74{};
-	CHAOS_IL2CPP_INTPTR _s75{};
-	CHAOS_IL2CPP_INTPTR _s76{};
-	CHAOS_IL2CPP_INTPTR _s77{};
-	CHAOS_IL2CPP_INTPTR _s78{};
-	CHAOS_IL2CPP_INTPTR _s79{};
-	CHAOS_IL2CPP_INTPTR _s80{};
-	CHAOS_IL2CPP_INTPTR _s81{};
-	CHAOS_IL2CPP_INTPTR _s82{};
-	CHAOS_IL2CPP_INTPTR _s83{};
-	CHAOS_IL2CPP_INTPTR _s84{};
-	CHAOS_IL2CPP_INTPTR _s85{};
-	CHAOS_IL2CPP_INTPTR _s86{};
-	CHAOS_IL2CPP_INTPTR _s87{};
-	CHAOS_IL2CPP_INTPTR _s88{};
-	CHAOS_IL2CPP_INTPTR _s89{};
-	CHAOS_IL2CPP_INTPTR _s90{};
-	CHAOS_IL2CPP_INTPTR _s91{};
-	CHAOS_IL2CPP_INTPTR _s92{};
-	CHAOS_IL2CPP_INTPTR _s93{};
-	CHAOS_IL2CPP_INTPTR _s94{};
-	CHAOS_IL2CPP_INTPTR _s95{};
-	CHAOS_IL2CPP_INTPTR _s96{};
-	CHAOS_IL2CPP_INTPTR _s97{};
-	CHAOS_IL2CPP_INTPTR _s98{};
-	CHAOS_IL2CPP_INTPTR _s99{};
-	CHAOS_IL2CPP_INTPTR _s100{};
-	CHAOS_IL2CPP_INTPTR _s101{};
-	CHAOS_IL2CPP_INTPTR _s102{};
-	CHAOS_IL2CPP_INTPTR _s103{};
-	CHAOS_IL2CPP_INTPTR _s104{};
-	CHAOS_IL2CPP_INTPTR _s105{};
-	CHAOS_IL2CPP_INTPTR _s106{};
-	CHAOS_IL2CPP_INTPTR _s107{};
-	CHAOS_IL2CPP_INTPTR _s108{};
-	CHAOS_IL2CPP_INTPTR _s109{};
-	CHAOS_IL2CPP_INTPTR _s110{};
-	CHAOS_IL2CPP_INTPTR _s111{};
-	CHAOS_IL2CPP_INTPTR _s112{};
-	CHAOS_IL2CPP_INTPTR _s113{};
-	CHAOS_IL2CPP_INTPTR _s114{};
-	CHAOS_IL2CPP_INTPTR _s115{};
-	CHAOS_IL2CPP_INTPTR _s116{};
-	CHAOS_IL2CPP_INTPTR _s117{};
-	CHAOS_IL2CPP_INTPTR _s118{};
-	CHAOS_IL2CPP_INTPTR _s119{};
-	CHAOS_IL2CPP_INTPTR _s120{};
-	CHAOS_IL2CPP_INTPTR _s121{};
-	CHAOS_IL2CPP_INTPTR _s122{};
-	CHAOS_IL2CPP_INTPTR _s123{};
-	CHAOS_IL2CPP_INTPTR _s124{};
-	CHAOS_IL2CPP_INTPTR _s125{};
-	CHAOS_IL2CPP_INTPTR _s126{};
-	CHAOS_IL2CPP_INTPTR _s127{};
-	CHAOS_IL2CPP_INTPTR _s128{};
-	CHAOS_IL2CPP_INTPTR _s129{};
-	CHAOS_IL2CPP_INTPTR _s130{};
-	CHAOS_IL2CPP_INTPTR _s131{};
-	CHAOS_IL2CPP_INTPTR _s132{};
-	CHAOS_IL2CPP_INTPTR _s133{};
-	CHAOS_IL2CPP_INTPTR _s134{};
-	CHAOS_IL2CPP_INTPTR _s135{};
-	CHAOS_IL2CPP_INTPTR _s136{};
-	CHAOS_IL2CPP_INTPTR _s137{};
-	CHAOS_IL2CPP_INTPTR _s138{};
-	CHAOS_IL2CPP_INTPTR _s139{};
-	CHAOS_IL2CPP_INTPTR _s140{};
-	CHAOS_IL2CPP_INTPTR _s141{};
-	CHAOS_IL2CPP_INTPTR _s142{};
-	CHAOS_IL2CPP_INTPTR _s143{};
-	CHAOS_IL2CPP_INTPTR _s144{};
-	CHAOS_IL2CPP_INTPTR _s145{};
-	CHAOS_IL2CPP_INTPTR _s146{};
-	CHAOS_IL2CPP_INTPTR _s147{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(33898568u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s5);
-		_s5 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___PlanKind_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s6);
-		_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AssemblyName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s7);
-		_s7 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s7;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s8);
-		_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s8;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s7), static_cast<CHAOS_IL2CPP_INT32>(_s8)));
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s7), static_cast<CHAOS_IL2CPP_INT32>(_s8)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s9);
-		_s9 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySymbol_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s9;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s8), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s8), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s10);
-		_s10 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntryMethodToken_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s10;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s10)));
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s10)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s11);
-		_s11 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___WorkloadAbi_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s11;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s10), static_cast<CHAOS_IL2CPP_INT32>(_s11)));
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s10), static_cast<CHAOS_IL2CPP_INT32>(_s11)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s12);
-		_s12 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMode_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s12;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s11), static_cast<CHAOS_IL2CPP_INT32>(_s12)));
-	_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s11), static_cast<CHAOS_IL2CPP_INT32>(_s12)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[163])();
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s13 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s13);
-		_s13 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodSubjectIds_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s13;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[177])(chaos_arg_0);
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s12), static_cast<CHAOS_IL2CPP_INT32>(_s13)));
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s12), static_cast<CHAOS_IL2CPP_INT32>(_s13)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s14 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s14);
-		_s14 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodCount_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s14;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s13), static_cast<CHAOS_IL2CPP_INT32>(_s14)));
-	_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s13), static_cast<CHAOS_IL2CPP_INT32>(_s14)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s15 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s15);
-		_s15 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageSize_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s15;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s14), static_cast<CHAOS_IL2CPP_INT32>(_s15)));
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s14), static_cast<CHAOS_IL2CPP_INT32>(_s15)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s16 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s16);
-		_s16 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageCount_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s16;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s15), static_cast<CHAOS_IL2CPP_INT32>(_s16)));
-	_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s15), static_cast<CHAOS_IL2CPP_INT32>(_s16)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[917])();
-		_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s17 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s17);
-		_s17 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPages_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s17;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[922])(chaos_arg_0);
-		_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s16), static_cast<CHAOS_IL2CPP_INT32>(_s17)));
-	_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s16), static_cast<CHAOS_IL2CPP_INT32>(_s17)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s18 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s18);
-		_s18 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditStatus_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s18;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s17), static_cast<CHAOS_IL2CPP_INT32>(_s18)));
-	_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s17), static_cast<CHAOS_IL2CPP_INT32>(_s18)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s19 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s19);
-		_s19 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditMessage_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s19;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s18), static_cast<CHAOS_IL2CPP_INT32>(_s19)));
-	_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s18), static_cast<CHAOS_IL2CPP_INT32>(_s19)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[919])();
-		_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s20 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s20);
-		_s20 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___GlobalSharingCanonicalMap_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s20;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[923])(chaos_arg_0);
-		_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s19), static_cast<CHAOS_IL2CPP_INT32>(_s20)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s19);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::op_Equality:System.Boolean(NativeAotLoweringPlanArtifact,NativeAotLoweringPlanArtifact)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_op_Equality_NativeAotLoweringPlanArtifact_NativeAotLoweringPlanArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::op_Inequality(NativeAotLoweringPlanArtifact,NativeAotLoweringPlanArtifact)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_op_Inequality_NativeAotLoweringPlanArtifact_NativeAotLoweringPlanArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1751 = s_hotpatch_entries[1751];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1751)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1751))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1751.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_op_Equality_NativeAotLoweringPlanArtifact_NativeAotLoweringPlanArtifact(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::PrintMembers(System.Text.StringBuilder)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	CHAOS_IL2CPP_INTPTR _s41{};
-	CHAOS_IL2CPP_INTPTR _s42{};
-	CHAOS_IL2CPP_INTPTR _s43{};
-	CHAOS_IL2CPP_INTPTR _s44{};
-	CHAOS_IL2CPP_INTPTR _s45{};
-	CHAOS_IL2CPP_INTPTR _s46{};
-	CHAOS_IL2CPP_INTPTR _s47{};
-	CHAOS_IL2CPP_INTPTR _s48{};
-	CHAOS_IL2CPP_INTPTR _s49{};
-	CHAOS_IL2CPP_INTPTR _s50{};
-	CHAOS_IL2CPP_INTPTR _s51{};
-	CHAOS_IL2CPP_INTPTR _s52{};
-	CHAOS_IL2CPP_INTPTR _s53{};
-	CHAOS_IL2CPP_INTPTR _s54{};
-	CHAOS_IL2CPP_INTPTR _s55{};
-	CHAOS_IL2CPP_INTPTR _s56{};
-	CHAOS_IL2CPP_INTPTR _s57{};
-	CHAOS_IL2CPP_INTPTR _s58{};
-	CHAOS_IL2CPP_INTPTR _s59{};
-	CHAOS_IL2CPP_INTPTR _s60{};
-	CHAOS_IL2CPP_INTPTR _s61{};
-	CHAOS_IL2CPP_INTPTR _s62{};
-	CHAOS_IL2CPP_INTPTR _s63{};
-	CHAOS_IL2CPP_INTPTR _s64{};
-	CHAOS_IL2CPP_INTPTR _s65{};
-	CHAOS_IL2CPP_INTPTR _s66{};
-	CHAOS_IL2CPP_INTPTR _s67{};
-	CHAOS_IL2CPP_INTPTR _s68{};
-	CHAOS_IL2CPP_INTPTR _s69{};
-	CHAOS_IL2CPP_INTPTR _s70{};
-	CHAOS_IL2CPP_INTPTR _s71{};
-	CHAOS_IL2CPP_INTPTR _s72{};
-	CHAOS_IL2CPP_INTPTR _s73{};
-	CHAOS_IL2CPP_INTPTR _s74{};
-	CHAOS_IL2CPP_INTPTR _s75{};
-	CHAOS_IL2CPP_INTPTR _s76{};
-	CHAOS_IL2CPP_INTPTR _s77{};
-	CHAOS_IL2CPP_INTPTR _s78{};
-	CHAOS_IL2CPP_INTPTR _s79{};
-	CHAOS_IL2CPP_INTPTR _s80{};
-	CHAOS_IL2CPP_INTPTR _s81{};
-	CHAOS_IL2CPP_INTPTR _s82{};
-	CHAOS_IL2CPP_INTPTR _s83{};
-	CHAOS_IL2CPP_INTPTR _s84{};
-	CHAOS_IL2CPP_INTPTR _s85{};
-	CHAOS_IL2CPP_INTPTR _s86{};
-	CHAOS_IL2CPP_INTPTR _s87{};
-	CHAOS_IL2CPP_INTPTR _s88{};
-	CHAOS_IL2CPP_INTPTR _s89{};
-	CHAOS_IL2CPP_INTPTR _s90{};
-	CHAOS_IL2CPP_INTPTR _s91{};
-	CHAOS_IL2CPP_INTPTR _s92{};
-	CHAOS_IL2CPP_INTPTR _s93{};
-	CHAOS_IL2CPP_INTPTR _s94{};
-	CHAOS_IL2CPP_INTPTR _s95{};
-	CHAOS_IL2CPP_INTPTR _s96{};
-	CHAOS_IL2CPP_INTPTR _s97{};
-	CHAOS_IL2CPP_INTPTR _s98{};
-	CHAOS_IL2CPP_INTPTR _s99{};
-	CHAOS_IL2CPP_INTPTR _s100{};
-	CHAOS_IL2CPP_INTPTR _s101{};
-	CHAOS_IL2CPP_INTPTR _s102{};
-	CHAOS_IL2CPP_INTPTR _s103{};
-	CHAOS_IL2CPP_INTPTR _s104{};
-	CHAOS_IL2CPP_INTPTR _s105{};
-	CHAOS_IL2CPP_INTPTR _s106{};
-	CHAOS_IL2CPP_INTPTR _s107{};
-	CHAOS_IL2CPP_INTPTR _s108{};
-	CHAOS_IL2CPP_INTPTR _s109{};
-	CHAOS_IL2CPP_INTPTR _s110{};
-	CHAOS_IL2CPP_INTPTR _s111{};
-	CHAOS_IL2CPP_INTPTR _s112{};
-	CHAOS_IL2CPP_INTPTR _s113{};
-	CHAOS_IL2CPP_INTPTR _s114{};
-	CHAOS_IL2CPP_INTPTR _s115{};
-	CHAOS_IL2CPP_INTPTR _s116{};
-	CHAOS_IL2CPP_INTPTR _s117{};
-	CHAOS_IL2CPP_INTPTR _s118{};
-	CHAOS_IL2CPP_INTPTR _s119{};
-	CHAOS_IL2CPP_INTPTR _s120{};
-	CHAOS_IL2CPP_INTPTR _s121{};
-	CHAOS_IL2CPP_INTPTR _s122{};
-	CHAOS_IL2CPP_INTPTR _s123{};
-	CHAOS_IL2CPP_INTPTR _s124{};
-	CHAOS_IL2CPP_INTPTR _s125{};
-	CHAOS_IL2CPP_INTPTR _s126{};
-	CHAOS_IL2CPP_INTPTR _s127{};
-	CHAOS_IL2CPP_INTPTR _s128{};
-	CHAOS_IL2CPP_INTPTR _s129{};
-	CHAOS_IL2CPP_INTPTR _s130{};
-	CHAOS_IL2CPP_INTPTR _s131{};
-	CHAOS_IL2CPP_INTPTR _s132{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	{
-		reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
-	}
-	_s0 = chaos_args[1];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("FormatVersion = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[1];
-	_s2 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_FormatVersion:System.String()
-		auto chaos_inline_arg_0 = _s2;
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s2);
-			_s2 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[1];
-	{{
-		_s3 = CHAOS_IL2CPP_STRING_ID(", ArtifactKind = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[1];
-	_s4 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_ArtifactKind:System.String()
-		auto chaos_inline_arg_0 = _s4;
-		_s4 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s4);
-			_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[1];
-	{{
-		_s5 = CHAOS_IL2CPP_STRING_ID(", PlanKind = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[1];
-	_s6 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_PlanKind:System.String()
-		auto chaos_inline_arg_0 = _s6;
-		_s6 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s6);
-			_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___PlanKind_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[1];
-	{{
-		_s7 = CHAOS_IL2CPP_STRING_ID(", AssemblyName = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s7;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[1];
-	_s8 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_AssemblyName:System.String()
-		auto chaos_inline_arg_0 = _s8;
-		_s8 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s8);
-			_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AssemblyName_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s8;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = chaos_args[1];
-	{{
-		_s9 = CHAOS_IL2CPP_STRING_ID(", EntrySubjectId = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s9;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = chaos_args[1];
-	_s10 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_EntrySubjectId:System.String()
-		auto chaos_inline_arg_0 = _s10;
-		_s10 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s10);
-			_s10 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySubjectId_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s10;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = chaos_args[1];
-	{{
-		_s11 = CHAOS_IL2CPP_STRING_ID(", NativeEntryFunctionName = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s11;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = chaos_args[1];
-	_s12 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_NativeEntryFunctionName:System.String()
-		auto chaos_inline_arg_0 = _s12;
-		_s12 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s12);
-			_s12 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s12;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = chaos_args[1];
-	{{
-		_s13 = CHAOS_IL2CPP_STRING_ID(", EntrySymbol = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s13;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s13 = chaos_args[1];
-	_s14 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_EntrySymbol:System.String()
-		auto chaos_inline_arg_0 = _s14;
-		_s14 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s14);
-			_s14 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySymbol_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s14;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s14 = chaos_args[1];
-	{{
-		_s15 = CHAOS_IL2CPP_STRING_ID(", EntryMethodToken = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s15;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s15 = chaos_args[1];
-	_s16 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_EntryMethodToken:System.String()
-		auto chaos_inline_arg_0 = _s16;
-		_s16 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s16);
-			_s16 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntryMethodToken_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s16;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s16 = chaos_args[1];
-	{{
-		_s17 = CHAOS_IL2CPP_STRING_ID(", WorkloadAbi = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s17;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s17 = chaos_args[1];
-	_s18 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_WorkloadAbi:System.String()
-		auto chaos_inline_arg_0 = _s18;
-		_s18 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s18);
-			_s18 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___WorkloadAbi_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s18;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s18 = chaos_args[1];
-	{{
-		_s19 = CHAOS_IL2CPP_STRING_ID(", TranslationUnitMode = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s19;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s19 = chaos_args[1];
-	_s20 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitMode:System.String()
-		auto chaos_inline_arg_0 = _s20;
-		_s20 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s20);
-			_s20 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMode_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s20;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s20 = chaos_args[1];
-	{{
-		_s21 = CHAOS_IL2CPP_STRING_ID(", TranslationUnitMethodSubjectIds = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s21;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s21 = chaos_args[1];
-	_s22 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitMethodSubjectIds:System.Collections.Generic.IReadOnlyList<System.String>()
-		auto chaos_inline_arg_0 = _s22;
-		_s22 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s22);
-			_s22 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodSubjectIds_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s22;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s22 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s22 = chaos_args[1];
-	{{
-		_s23 = CHAOS_IL2CPP_STRING_ID(", TranslationUnitMethodCount = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s23;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s23 = chaos_args[1];
-	_s24 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitMethodCount:System.Nullable<System.Int32>()
-		auto chaos_inline_arg_0 = _s24;
-		_s24 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s24);
-			_s24 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodCount_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s24;
-	_s24 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[57])();
-		_s25 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s25;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s25 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s25 = chaos_args[1];
-	{{
-		_s26 = CHAOS_IL2CPP_STRING_ID(", TranslationUnitPageSize = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s26;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s26 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s26 = chaos_args[1];
-	_s27 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitPageSize:System.Nullable<System.Int32>()
-		auto chaos_inline_arg_0 = _s27;
-		_s27 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s27);
-			_s27 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageSize_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s27;
-	_s27 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[57])();
-		_s28 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s28;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s28 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s28 = chaos_args[1];
-	{{
-		_s29 = CHAOS_IL2CPP_STRING_ID(", TranslationUnitPageCount = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s29;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s29 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s29 = chaos_args[1];
-	_s30 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitPageCount:System.Nullable<System.Int32>()
-		auto chaos_inline_arg_0 = _s30;
-		_s30 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s30);
-			_s30 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageCount_k__BackingField;
-		}
-	}
-	chaos_locals[0] = _s30;
-	_s30 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[57])();
-		_s31 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		const auto chaos_arg_0 = _s31;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s31 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s31 = chaos_args[1];
-	{{
-		_s32 = CHAOS_IL2CPP_STRING_ID(", TranslationUnitPages = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s32;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s32 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s32 = chaos_args[1];
-	_s33 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_TranslationUnitPages:System.Collections.Generic.IReadOnlyList<AuditTranslationUnitPageArtifact>()
-		auto chaos_inline_arg_0 = _s33;
-		_s33 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s33);
-			_s33 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPages_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s33;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s33 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s33 = chaos_args[1];
-	{{
-		_s34 = CHAOS_IL2CPP_STRING_ID(", AuditStatus = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s34;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s34 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s34 = chaos_args[1];
-	_s35 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_AuditStatus:System.String()
-		auto chaos_inline_arg_0 = _s35;
-		_s35 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s35);
-			_s35 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditStatus_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s35;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s35 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s35 = chaos_args[1];
-	{{
-		_s36 = CHAOS_IL2CPP_STRING_ID(", AuditMessage = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s36;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s36 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s36 = chaos_args[1];
-	_s37 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_AuditMessage:System.String()
-		auto chaos_inline_arg_0 = _s37;
-		_s37 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s37);
-			_s37 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditMessage_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s37;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s37 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s37 = chaos_args[1];
-	{{
-		_s38 = CHAOS_IL2CPP_STRING_ID(", GlobalSharingCanonicalMap = ");
-	}}
-	{
-		const auto chaos_arg_0 = _s38;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s38 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s38 = chaos_args[1];
-	_s39 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::get_GlobalSharingCanonicalMap:System.Collections.Generic.IReadOnlyDictionary<System.String,System.String>()
-		auto chaos_inline_arg_0 = _s39;
-		_s39 = chaos_inline_arg_0;
-		{
-			auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s39);
-			_s39 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___GlobalSharingCanonicalMap_k__BackingField;
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s39;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-		_s39 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s39 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	return _s39;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_ArtifactKind(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_ArtifactKind_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___ArtifactKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_AssemblyName(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_AssemblyName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AssemblyName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AssemblyName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_AuditMessage(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_AuditMessage_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditMessage_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditMessage_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_AuditStatus(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_AuditStatus_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditStatus_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___AuditStatus_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_EntryMethodToken(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_EntryMethodToken_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntryMethodToken_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntryMethodToken_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_EntrySubjectId(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_EntrySubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_EntrySymbol(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_EntrySymbol_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySymbol_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___EntrySymbol_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_FormatVersion(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_FormatVersion_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___FormatVersion_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_GlobalSharingCanonicalMap(System.Collections.Generic.IReadOnlyDictionary<System.String,System.String>)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_GlobalSharingCanonicalMap_System_Collections_Generic_IReadOnlyDictionary_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___GlobalSharingCanonicalMap_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___GlobalSharingCanonicalMap_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_NativeEntryFunctionName(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_NativeEntryFunctionName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_PlanKind(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_PlanKind_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___PlanKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___PlanKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_TranslationUnitMethodCount(System.Nullable<System.Int32>)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_TranslationUnitMethodCount_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodCount_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodCount_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_TranslationUnitMethodSubjectIds(System.Collections.Generic.IReadOnlyList<System.String>)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_TranslationUnitMethodSubjectIds_System_Collections_Generic_IReadOnlyList_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodSubjectIds_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMethodSubjectIds_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_TranslationUnitMode(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_TranslationUnitMode_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMode_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitMode_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_TranslationUnitPageCount(System.Nullable<System.Int32>)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_TranslationUnitPageCount_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageCount_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageCount_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_TranslationUnitPages(System.Collections.Generic.IReadOnlyList<AuditTranslationUnitPageArtifact>)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_TranslationUnitPages_System_Collections_Generic_IReadOnlyList_AuditTranslationUnitPageArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPages_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPages_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_TranslationUnitPageSize(System.Nullable<System.Int32>)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_TranslationUnitPageSize_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageSize_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___TranslationUnitPageSize_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::set_WorkloadAbi(System.String)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_set_WorkloadAbi_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___WorkloadAbi_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact___WorkloadAbi_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotLoweringPlanArtifact::ToString()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_ToString(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	chaos_locals[0] = _s0;
-	_s0 = chaos_locals[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("NativeAotLoweringPlanArtifact");
-	}}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_locals[0];
-	{{
-		_s2 = CHAOS_IL2CPP_STRING_ID(" { ");
-	}}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_locals[0];
-	{
-		const auto chaos_raw_arg_1 = _s3;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s3);
-		const auto chaos_raw_arg_0 = _s2;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s2);
-		auto& _d1753 = s_hotpatch_entries[1753];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1753)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1753))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1753.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotLoweringPlanArtifact_PrintMembers_System_Text_StringBuilder(chaos_arg_0, chaos_arg_1);
-		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	{
-		if (_s2 != 0)
-		{
-			_s2 = chaos_locals[0];
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
-			{
-				const auto chaos_arg_0 = _s3;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		_s6 = chaos_locals[0];
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(125);
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_locals[0];
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = ChaosObjectToString(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		return _s7;
-	}
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::.ctor()
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotManifestArtifact__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("v0");
-	}}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___FormatVersion_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___FormatVersion_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	{{
-		_s1 = CHAOS_IL2CPP_STRING_ID("nativeAotManifest");
-	}}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ArtifactKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ArtifactKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::.ctor(NativeAotManifestArtifact)
-extern "C" void Chaos_IL2CPP_Contracts_NativeAotManifestArtifact__ctor_NativeAotManifestArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_arg_0 = _s0;
-		ChaosObjectCtor(chaos_arg_0);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___FormatVersion_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___FormatVersion_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___FormatVersion_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ArtifactKind_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ArtifactKind_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ArtifactKind_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___AssemblyName_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___AssemblyName_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___AssemblyName_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___EntrySubjectId_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___EntrySubjectId_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___EntrySubjectId_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ManagedClosureRootPath_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ManagedClosureRootPath_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ManagedClosureRootPath_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___PlanArtifactPath_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___PlanArtifactPath_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___PlanArtifactPath_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageSize_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageSize_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageSize_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageCount_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageCount_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageCount_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPages_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPages_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPages_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s1);
-		_s1 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___GeneratedArtifacts_k__BackingField;
-	}
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___GeneratedArtifacts_k__BackingField));
-		chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___GeneratedArtifacts_k__BackingField = chaos_value;
-		chaos_gc_dirty_card(chaos_object);
-	}
-	return;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::<Clone>$()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_Clone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		const auto chaos_raw_arg_1 = _s0;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact.hot;
-		Chaos_IL2CPP_Contracts_NativeAotManifestArtifact__ctor_NativeAotManifestArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
-		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-	}
-	return _s0;
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::Equals:System.Boolean(NativeAotManifestArtifact)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_Equals_NativeAotManifestArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_value = _s1;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact.hot);
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1776 = s_hotpatch_entries[1776];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1776)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1776))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1776.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_Equals_NativeAotManifestArtifact(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_ArtifactKind()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_ArtifactKind(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ArtifactKind_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_AssemblyName()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_AssemblyName(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___AssemblyName_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_EntrySubjectId()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_EntrySubjectId(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___EntrySubjectId_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_EqualityContract()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_EqualityContract(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(46468889u);
-	{
-		const auto chaos_arg_0 = _s0;
-		const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_FormatVersion()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_FormatVersion(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___FormatVersion_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_GeneratedArtifacts()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_GeneratedArtifacts(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___GeneratedArtifacts_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_ManagedClosureRootPath()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_ManagedClosureRootPath(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ManagedClosureRootPath_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_PlanArtifactPath()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_PlanArtifactPath(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___PlanArtifactPath_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_TranslationUnitPageCount()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_TranslationUnitPageCount(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageCount_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_TranslationUnitPages()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_TranslationUnitPages(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPages_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_TranslationUnitPageSize()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_get_TranslationUnitPageSize(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s0);
-		_s0 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageSize_k__BackingField;
-	}
-	return _s0;
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
-	CHAOS_IL2CPP_INTPTR _s17{};
-	CHAOS_IL2CPP_INTPTR _s18{};
-	CHAOS_IL2CPP_INTPTR _s19{};
-	CHAOS_IL2CPP_INTPTR _s20{};
-	CHAOS_IL2CPP_INTPTR _s21{};
-	CHAOS_IL2CPP_INTPTR _s22{};
-	CHAOS_IL2CPP_INTPTR _s23{};
-	CHAOS_IL2CPP_INTPTR _s24{};
-	CHAOS_IL2CPP_INTPTR _s25{};
-	CHAOS_IL2CPP_INTPTR _s26{};
-	CHAOS_IL2CPP_INTPTR _s27{};
-	CHAOS_IL2CPP_INTPTR _s28{};
-	CHAOS_IL2CPP_INTPTR _s29{};
-	CHAOS_IL2CPP_INTPTR _s30{};
-	CHAOS_IL2CPP_INTPTR _s31{};
-	CHAOS_IL2CPP_INTPTR _s32{};
-	CHAOS_IL2CPP_INTPTR _s33{};
-	CHAOS_IL2CPP_INTPTR _s34{};
-	CHAOS_IL2CPP_INTPTR _s35{};
-	CHAOS_IL2CPP_INTPTR _s36{};
-	CHAOS_IL2CPP_INTPTR _s37{};
-	CHAOS_IL2CPP_INTPTR _s38{};
-	CHAOS_IL2CPP_INTPTR _s39{};
-	CHAOS_IL2CPP_INTPTR _s40{};
-	CHAOS_IL2CPP_INTPTR _s41{};
-	CHAOS_IL2CPP_INTPTR _s42{};
-	CHAOS_IL2CPP_INTPTR _s43{};
-	CHAOS_IL2CPP_INTPTR _s44{};
-	CHAOS_IL2CPP_INTPTR _s45{};
-	CHAOS_IL2CPP_INTPTR _s46{};
-	CHAOS_IL2CPP_INTPTR _s47{};
-	CHAOS_IL2CPP_INTPTR _s48{};
-	CHAOS_IL2CPP_INTPTR _s49{};
-	CHAOS_IL2CPP_INTPTR _s50{};
-	CHAOS_IL2CPP_INTPTR _s51{};
-	CHAOS_IL2CPP_INTPTR _s52{};
-	CHAOS_IL2CPP_INTPTR _s53{};
-	CHAOS_IL2CPP_INTPTR _s54{};
-	CHAOS_IL2CPP_INTPTR _s55{};
-	CHAOS_IL2CPP_INTPTR _s56{};
-	CHAOS_IL2CPP_INTPTR _s57{};
-	CHAOS_IL2CPP_INTPTR _s58{};
-	CHAOS_IL2CPP_INTPTR _s59{};
-	CHAOS_IL2CPP_INTPTR _s60{};
-	CHAOS_IL2CPP_INTPTR _s61{};
-	CHAOS_IL2CPP_INTPTR _s62{};
-	CHAOS_IL2CPP_INTPTR _s63{};
-	CHAOS_IL2CPP_INTPTR _s64{};
-	CHAOS_IL2CPP_INTPTR _s65{};
-	CHAOS_IL2CPP_INTPTR _s66{};
-	CHAOS_IL2CPP_INTPTR _s67{};
-	CHAOS_IL2CPP_INTPTR _s68{};
-	CHAOS_IL2CPP_INTPTR _s69{};
-	CHAOS_IL2CPP_INTPTR _s70{};
-	CHAOS_IL2CPP_INTPTR _s71{};
-	CHAOS_IL2CPP_INTPTR _s72{};
-	CHAOS_IL2CPP_INTPTR _s73{};
-	CHAOS_IL2CPP_INTPTR _s74{};
-	CHAOS_IL2CPP_INTPTR _s75{};
-	CHAOS_IL2CPP_INTPTR _s76{};
-	CHAOS_IL2CPP_INTPTR _s77{};
-	CHAOS_IL2CPP_INTPTR _s78{};
-	CHAOS_IL2CPP_INTPTR _s79{};
-	CHAOS_IL2CPP_INTPTR _s80{};
-	CHAOS_IL2CPP_INTPTR _s81{};
-	CHAOS_IL2CPP_INTPTR _s82{};
-	CHAOS_IL2CPP_INTPTR _s83{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[14])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_EqualityContract:System.Type()
-		auto chaos_inline_arg_0 = _s1;
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(46468889u);
-		{
-			const auto chaos_arg_0 = _s1;
-			const auto chaos_result = ChaosReflectionGetTypeFromHandle(chaos_arg_0);
-			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-	}
-	{
-		const auto chaos_arg_0 = _s1;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_arg_0);
-		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s1), static_cast<CHAOS_IL2CPP_INT32>(_s2)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s3);
-		_s3 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___FormatVersion_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s3;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s2), static_cast<CHAOS_IL2CPP_INT32>(_s3)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s4);
-		_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ArtifactKind_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s4;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s5);
-		_s5 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___AssemblyName_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s5;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s6);
-		_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___EntrySubjectId_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s6;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s7);
-		_s7 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___ManagedClosureRootPath_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s7;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[8])();
-		_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s8);
-		_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___PlanArtifactPath_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s8;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s7), static_cast<CHAOS_IL2CPP_INT32>(_s8)));
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s7), static_cast<CHAOS_IL2CPP_INT32>(_s8)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s9);
-		_s9 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageSize_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s9;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s8), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s8), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[49])();
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s10);
-		_s10 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPageCount_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s10;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[54])(chaos_arg_0);
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s10)));
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s10)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[917])();
-		_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s11);
-		_s11 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___TranslationUnitPages_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s11;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[922])(chaos_arg_0);
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s10), static_cast<CHAOS_IL2CPP_INT32>(_s11)));
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s10), static_cast<CHAOS_IL2CPP_INT32>(_s11)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[934])();
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s12 = chaos_args[0];
-	{
-		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact*>(_s12);
-		_s12 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotManifestArtifact___GeneratedArtifacts_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s12;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[937])(chaos_arg_0);
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s11), static_cast<CHAOS_IL2CPP_INT32>(_s12)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s11);
-}
-
-// AOT-unreachable stub: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::op_Equality:System.Boolean(NativeAotManifestArtifact,NativeAotManifestArtifact)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_op_Equality_NativeAotManifestArtifact_NativeAotManifestArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	return {};
-}
-
-// Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::op_Inequality(NativeAotManifestArtifact,NativeAotManifestArtifact)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_op_Inequality_NativeAotManifestArtifact_NativeAotManifestArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_raw_arg_1 = _s1;
-		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s1);
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d1790 = s_hotpatch_entries[1790];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1790)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1790))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d1790.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_op_Equality_NativeAotManifestArtifact_NativeAotManifestArtifact(chaos_arg_0, chaos_arg_1);
-		}
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
-	return _s0;
-}
-
 // Managed method: Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::PrintMembers(System.Text.StringBuilder)
 extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_PrintMembers_System_Text_StringBuilder(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
 {
@@ -17580,7 +4472,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotManifestArtifact_
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_System_Private_CoreLib_System_Text_StringBuilder)));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -17814,7 +4706,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotRequest_Clone(CHA
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotRequest, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotRequest.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeAotRequest)));
 		Chaos_IL2CPP_Contracts_NativeAotRequest__ctor_NativeAotRequest(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -17933,7 +4825,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotRequest_Equals_Sy
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotRequest.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeAotRequest))));
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -18419,7 +5311,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotRequest_ToString(
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_System_Private_CoreLib_System_Text_StringBuilder)));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -18646,7 +5538,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotResult_Clone(CHAO
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeAotResult, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotResult.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeAotResult)));
 		Chaos_IL2CPP_Contracts_NativeAotResult__ctor_NativeAotResult(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -18680,7 +5572,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotResult_Equals_Sys
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeAotResult.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeAotResult))));
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -19359,7 +6251,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotResult_ToString(C
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_System_Private_CoreLib_System_Text_StringBuilder)));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -19384,148 +6276,37 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeAotResult_ToString(C
 	_s2 = chaos_args[0];
 	_s3 = chaos_locals[0];
 	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeAotResult::PrintMembers:System.Boolean(System.Text.StringBuilder)
-		auto chaos_inline_arg_1 = _s3;
-		auto chaos_inline_arg_0 = _s2;
+		const auto chaos_raw_arg_1 = _s3;
+		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s3);
+		const auto chaos_raw_arg_0 = _s2;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s2);
+		auto& _d1836 = s_hotpatch_entries[1836];
+		CHAOS_IL2CPP_INTPTR _d_hpresult{};
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1836)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1836))
 		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
+			alignas(16) uint8_t _d_ab[16];
+			ArgBuffer _d_bw(_d_ab);
+			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
+			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
+			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+				_d1836.method_key, _d_ab, &_d_hpresult);
 		}
-		_s2 = chaos_inline_arg_1;
-		{{
-			_s3 = CHAOS_IL2CPP_STRING_ID("OutputRootPath = ");
-		}}
+		else
 		{
-			const auto chaos_arg_0 = _s3;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			_d_hpresult = Chaos_IL2CPP_Contracts_NativeAotResult_PrintMembers_System_Text_StringBuilder(chaos_arg_0, chaos_arg_1);
 		}
-		_s3 = chaos_inline_arg_1;
-		_s4 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeAotResult::get_OutputRootPath:System.String()
-			auto chaos_inline_arg_0 = _s4;
-			_s4 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotResult*>(_s4);
-				_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotResult___OutputRootPath_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s4 = chaos_inline_arg_1;
-		{{
-			_s5 = CHAOS_IL2CPP_STRING_ID(", LoweringPlan = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s5;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s5 = chaos_inline_arg_1;
-		_s6 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeAotResult::get_LoweringPlan:NativeAotLoweringPlanArtifact()
-			auto chaos_inline_arg_0 = _s6;
-			_s6 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotResult*>(_s6);
-				_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotResult___LoweringPlan_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s6;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s6 = chaos_inline_arg_1;
-		{{
-			_s7 = CHAOS_IL2CPP_STRING_ID(", Manifest = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s7;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s7 = chaos_inline_arg_1;
-		_s8 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeAotResult::get_Manifest:NativeAotManifestArtifact()
-			auto chaos_inline_arg_0 = _s8;
-			_s8 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotResult*>(_s8);
-				_s8 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotResult___Manifest_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s8;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s8 = chaos_inline_arg_1;
-		{{
-			_s9 = CHAOS_IL2CPP_STRING_ID(", CodegenMetrics = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s9;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s9 = chaos_inline_arg_1;
-		_s10 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeAotResult::get_CodegenMetrics:NativeCodegenMetricsArtifact()
-			auto chaos_inline_arg_0 = _s10;
-			_s10 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotResult*>(_s10);
-				_s10 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotResult___CodegenMetrics_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s10;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s10 = chaos_inline_arg_1;
-		{{
-			_s11 = CHAOS_IL2CPP_STRING_ID(", GeneratedSources = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s11;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s11 = chaos_inline_arg_1;
-		_s12 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeAotResult::get_GeneratedSources:System.Collections.Generic.IReadOnlyList<NativeAotGeneratedSource>()
-			auto chaos_inline_arg_0 = _s12;
-			_s12 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeAotResult*>(_s12);
-				_s12 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeAotResult___GeneratedSources_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s12;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
 	{
-		if (_s12 != 0)
+		if (_s2 != 0)
 		{
-			_s12 = chaos_locals[0];
-			_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
+			_s2 = chaos_locals[0];
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
 			{
-				const auto chaos_arg_0 = _s13;
+				const auto chaos_arg_0 = _s3;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 		}
 		_s6 = chaos_locals[0];
@@ -19983,7 +6764,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifa
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact)));
 		Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact__ctor_NativeCodegenMetricsArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -20017,7 +6798,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifa
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact))));
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -22044,7 +8825,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifa
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_System_Private_CoreLib_System_Text_StringBuilder)));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -22208,7 +8989,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedAr
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef)));
 		Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef__ctor_NativeReferenceGeneratedArtifactRef(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -22242,7 +9023,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedAr
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef))));
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -22618,7 +9399,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedAr
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_System_Private_CoreLib_System_Text_StringBuilder)));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -22643,73 +9424,37 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedAr
 	_s2 = chaos_args[0];
 	_s3 = chaos_locals[0];
 	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::PrintMembers:System.Boolean(System.Text.StringBuilder)
-		auto chaos_inline_arg_1 = _s3;
-		auto chaos_inline_arg_0 = _s2;
+		const auto chaos_raw_arg_1 = _s3;
+		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s3);
+		const auto chaos_raw_arg_0 = _s2;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s2);
+		auto& _d1899 = s_hotpatch_entries[1899];
+		CHAOS_IL2CPP_INTPTR _d_hpresult{};
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1899)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1899))
 		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
+			alignas(16) uint8_t _d_ab[16];
+			ArgBuffer _d_bw(_d_ab);
+			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
+			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
+			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+				_d1899.method_key, _d_ab, &_d_hpresult);
 		}
-		_s2 = chaos_inline_arg_1;
-		{{
-			_s3 = CHAOS_IL2CPP_STRING_ID("Kind = ");
-		}}
+		else
 		{
-			const auto chaos_arg_0 = _s3;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			_d_hpresult = Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef_PrintMembers_System_Text_StringBuilder(chaos_arg_0, chaos_arg_1);
 		}
-		_s3 = chaos_inline_arg_1;
-		_s4 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::get_Kind:System.String()
-			auto chaos_inline_arg_0 = _s4;
-			_s4 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef*>(_s4);
-				_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef___Kind_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s4 = chaos_inline_arg_1;
-		{{
-			_s5 = CHAOS_IL2CPP_STRING_ID(", Path = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s5;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s5 = chaos_inline_arg_1;
-		_s6 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::get_Path:System.String()
-			auto chaos_inline_arg_0 = _s6;
-			_s6 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef*>(_s6);
-				_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedArtifactRef___Path_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s6;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
 	{
-		if (_s6 != 0)
+		if (_s2 != 0)
 		{
-			_s6 = chaos_locals[0];
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
+			_s2 = chaos_locals[0];
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
 			{
-				const auto chaos_arg_0 = _s7;
+				const auto chaos_arg_0 = _s3;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 		}
 		_s6 = chaos_locals[0];
@@ -22818,7 +9563,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSo
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource)));
 		Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource__ctor_NativeReferenceGeneratedSource(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -22852,7 +9597,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSo
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource))));
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -23228,7 +9973,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSo
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Text_StringBuilder, {});
-		chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Text_StringBuilder.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_System_Private_CoreLib_System_Text_StringBuilder)));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
 	chaos_locals[0] = _s0;
@@ -23253,73 +9998,37 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSo
 	_s2 = chaos_args[0];
 	_s3 = chaos_locals[0];
 	{
-		// Inlined: Chaos.IL2CPP.Contracts/NativeReferenceGeneratedSource::PrintMembers:System.Boolean(System.Text.StringBuilder)
-		auto chaos_inline_arg_1 = _s3;
-		auto chaos_inline_arg_0 = _s2;
+		const auto chaos_raw_arg_1 = _s3;
+		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s3);
+		const auto chaos_raw_arg_0 = _s2;
+		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s2);
+		auto& _d1914 = s_hotpatch_entries[1914];
+		CHAOS_IL2CPP_INTPTR _d_hpresult{};
+		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d1914)
+			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d1914))
 		{
-			reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[19])();
+			alignas(16) uint8_t _d_ab[16];
+			ArgBuffer _d_bw(_d_ab);
+			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
+			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
+			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+				_d1914.method_key, _d_ab, &_d_hpresult);
 		}
-		_s2 = chaos_inline_arg_1;
-		{{
-			_s3 = CHAOS_IL2CPP_STRING_ID("RelativePath = ");
-		}}
+		else
 		{
-			const auto chaos_arg_0 = _s3;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			_d_hpresult = Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource_PrintMembers_System_Text_StringBuilder(chaos_arg_0, chaos_arg_1);
 		}
-		_s3 = chaos_inline_arg_1;
-		_s4 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeReferenceGeneratedSource::get_RelativePath:System.String()
-			auto chaos_inline_arg_0 = _s4;
-			_s4 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource*>(_s4);
-				_s4 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource___RelativePath_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s4;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s4 = chaos_inline_arg_1;
-		{{
-			_s5 = CHAOS_IL2CPP_STRING_ID(", Contents = ");
-		}}
-		{
-			const auto chaos_arg_0 = _s5;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_arg_0);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s5 = chaos_inline_arg_1;
-		_s6 = chaos_inline_arg_0;
-		{
-			// Inlined: Chaos.IL2CPP.Contracts/NativeReferenceGeneratedSource::get_Contents:System.String()
-			auto chaos_inline_arg_0 = _s6;
-			_s6 = chaos_inline_arg_0;
-			{
-				auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource*>(_s6);
-				_s6 = chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceGeneratedSource___Contents_k__BackingField;
-			}
-		}
-		{
-			const auto chaos_arg_0 = _s6;
-			const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_arg_0);
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 	}
 	{
-		if (_s6 != 0)
+		if (_s2 != 0)
 		{
-			_s6 = chaos_locals[0];
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
+			_s2 = chaos_locals[0];
+			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(32);
 			{
-				const auto chaos_arg_0 = _s7;
+				const auto chaos_arg_0 = _s3;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[25])(chaos_arg_0);
-				_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 		}
 		_s6 = chaos_locals[0];
@@ -25415,7 +12124,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceLoweringPla
 		const auto chaos_raw_arg_1 = _s0;
 		const auto chaos_arg_1 = chaos_normalize_native_int_argument(_s0);
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact, {});
-		chaos_object->header.type_info = &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact.hot;
+		chaos_object->header.type_info = &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact)));
 		Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact__ctor_NativeReferenceLoweringPlanArtifact(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -25449,7 +12158,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeReferenceLoweringPla
 		if (chaos_value != 0)
 		{
 			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact.hot);
+			chaos_matches = chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &(*reinterpret_cast<const TypeInfoHot*>(static_cast<const void*>(&chaos_mt_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact))));
 		}
 		_s1 = chaos_matches ? chaos_value : 0;
 	}
@@ -33622,6 +20331,1254 @@ extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_E
 		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
 		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EchoLiteral_k__BackingField));
 		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EchoLiteral_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoLiteralByteCount(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_EchoLiteralByteCount_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EchoLiteralByteCount_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EchoLiteralByteCount_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoMethodSymbol(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_EchoMethodSymbol_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EchoMethodSymbol_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EchoMethodSymbol_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoMethodToken(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_EchoMethodToken_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EchoMethodToken_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EchoMethodToken_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EngineBindings(EngineBindingsArtifact)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_EngineBindings_EngineBindingsArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EngineBindings_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EngineBindings_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EntryMethodToken(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_EntryMethodToken_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EntryMethodToken_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EntryMethodToken_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EntrySubjectId(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_EntrySubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EntrySubjectId_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EntrySubjectId_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EntrySymbol(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_EntrySymbol_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EntrySymbol_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___EntrySymbol_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ExpectedOutput(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ExpectedOutput_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ExpectedOutput_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ExpectedOutput_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ExpectedOutputByteCount(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ExpectedOutputByteCount_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ExpectedOutputByteCount_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ExpectedOutputByteCount_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FieldQueryName(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_FieldQueryName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FieldQueryName_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FieldQueryName_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FieldSubjectId(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_FieldSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FieldSubjectId_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FieldSubjectId_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FinallyLiteral(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_FinallyLiteral_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FinallyLiteral_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FinallyLiteral_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FinallyLiteralByteCount(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_FinallyLiteralByteCount_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FinallyLiteralByteCount_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FinallyLiteralByteCount_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FormatVersion(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_FormatVersion_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FormatVersion_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___FormatVersion_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_GenericTypeDefinitionName(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_GenericTypeDefinitionName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GenericTypeDefinitionName_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GenericTypeDefinitionName_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_GenericTypeDefinitionSubjectId(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_GenericTypeDefinitionSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GenericTypeDefinitionSubjectId_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GenericTypeDefinitionSubjectId_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_GenericTypeDefinitionToken(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_GenericTypeDefinitionToken_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GenericTypeDefinitionToken_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GenericTypeDefinitionToken_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_GetterMethodToken(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_GetterMethodToken_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GetterMethodToken_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GetterMethodToken_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_GetterSymbol(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_GetterSymbol_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GetterSymbol_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___GetterSymbol_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_HostBindings(HostBindingsArtifact)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_HostBindings_HostBindingsArtifact(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___HostBindings_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___HostBindings_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportArgument0(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ImportArgument0_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportArgument0_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportArgument0_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportArgument1(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ImportArgument1_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportArgument1_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportArgument1_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportArgument2(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ImportArgument2_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportArgument2_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportArgument2_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportEntryPointName(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ImportEntryPointName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportEntryPointName_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportEntryPointName_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportMethodSubjectId(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ImportMethodSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportMethodSubjectId_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportMethodSubjectId_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportMethodSymbol(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ImportMethodSymbol_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportMethodSymbol_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportMethodSymbol_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportModuleName(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ImportModuleName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportModuleName_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ImportModuleName_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_IncludeHeader(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_IncludeHeader_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___IncludeHeader_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___IncludeHeader_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_InstanceMethodSymbol(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_InstanceMethodSymbol_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___InstanceMethodSymbol_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___InstanceMethodSymbol_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_InstanceMethodToken(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_InstanceMethodToken_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___InstanceMethodToken_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___InstanceMethodToken_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessagePrefixLiteral(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_MessagePrefixLiteral_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MessagePrefixLiteral_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MessagePrefixLiteral_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessagePrefixLiteralByteCount(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_MessagePrefixLiteralByteCount_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MessagePrefixLiteralByteCount_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MessagePrefixLiteralByteCount_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessageSuffixLiteral(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_MessageSuffixLiteral_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MessageSuffixLiteral_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MessageSuffixLiteral_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessageSuffixLiteralByteCount(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_MessageSuffixLiteralByteCount_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MessageSuffixLiteralByteCount_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MessageSuffixLiteralByteCount_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MethodParameterCount(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_MethodParameterCount_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MethodParameterCount_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MethodParameterCount_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MethodQueryName(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_MethodQueryName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MethodQueryName_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MethodQueryName_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MethodSubjectId(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_MethodSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MethodSubjectId_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___MethodSubjectId_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_NativeEntryFunctionName(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_NativeEntryFunctionName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___NativeEntryFunctionName_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_OutputPrefix(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_OutputPrefix_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___OutputPrefix_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___OutputPrefix_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ParameterAttributes(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ParameterAttributes_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ParameterAttributes_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ParameterAttributes_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ParameterIndex(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ParameterIndex_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ParameterIndex_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ParameterIndex_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ParameterSubjectId(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ParameterSubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ParameterSubjectId_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ParameterSubjectId_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_PlanKind(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_PlanKind_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___PlanKind_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___PlanKind_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_PropertyQueryName(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_PropertyQueryName_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___PropertyQueryName_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___PropertyQueryName_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_PropertySubjectId(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_PropertySubjectId_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___PropertySubjectId_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___PropertySubjectId_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ReferenceTypeToken(System.String)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ReferenceTypeToken_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ReferenceTypeToken_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ReferenceTypeToken_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ReverseLength(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ReverseLength_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ReverseLength_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ReverseLength_k__BackingField = chaos_value;
+		chaos_gc_dirty_card(chaos_object);
+	}
+	return;
+}
+
+// Managed method: Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ReverseStartIndex(System.Nullable<System.Int32>)
+extern "C" void Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact_set_ReverseStartIndex_System_Nullable_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+
+	_s0 = chaos_args[0];
+	_s1 = chaos_args[1];
+	{
+		auto chaos_value = _s1;
+		if (chaos_is_string_id(chaos_value))
+		{
+			chaos_value = chaos_string_materialize(chaos_value);
+		}
+		auto* chaos_object = reinterpret_cast<chaos_type_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact*>(_s0);
+		BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ReverseStartIndex_k__BackingField));
+		chaos_object->field_Chaos_IL2CPP_Contracts_NativeReferenceLoweringPlanArtifact___ReverseStartIndex_k__BackingField = chaos_value;
 		chaos_gc_dirty_card(chaos_object);
 	}
 	return;

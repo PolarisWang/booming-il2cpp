@@ -1994,7 +1994,6 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		// IL-level inlining: expand small callee bodies directly at call site.
 		if (invocationTarget.TargetSymbol != null)
 		{
-			System.Console.Error.WriteLine($"[INLINE-DBG] EmitLinearCallTarget: TargetSymbol={invocationTarget.TargetSymbol}, Callee={instruction.Callee ?? "null"}, TargetRef={instruction.TargetReference?.SubjectId ?? "null"}, ExternalTableIdx={invocationTarget.ExternalRuntimeTableIndex}");
 			if (TryInlineAtCallSite(builder, instruction, invocationTarget, indentation))
 				return;
 		}
@@ -2057,33 +2056,28 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 	/// </summary>
 	private bool TryInlineResolvedMethod(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string calleeSubjectId, int paramCount, string indentation)
 	{
-		if (!_methodsBySubjectId.TryGetValue(calleeSubjectId, out var calleeMethod)) { System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod FAIL: calleeMethod not found for {calleeSubjectId}"); return false; }
-		System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod: found {calleeSubjectId}, IR inst count={calleeMethod.Instructions.Count}, locals={calleeMethod.LocalCount}, EH regions={calleeMethod.ExceptionRegionCount}, IsPInvoke={calleeMethod.IsPInvoke}, NativeSymbol={calleeMethod.NativeSymbol}");
-		if (calleeMethod.ExceptionRegionCount > 0) { System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod FAIL: has exception regions"); return false; }
-		if (calleeMethod.IsPInvoke) { System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod FAIL: is P/Invoke"); return false; }
-		if (_currentMethodArtifact == null) { System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod FAIL: _currentMethodArtifact is null"); return false; }
-		if (_currentMethodNativeSymbol == null) { System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod FAIL: _currentMethodNativeSymbol is null"); return false; }
+		if (!_methodsBySubjectId.TryGetValue(calleeSubjectId, out var calleeMethod)) return false;
+		if (calleeMethod.ExceptionRegionCount > 0) return false;
+		if (calleeMethod.IsPInvoke) return false;
+		if (_currentMethodArtifact == null) return false;
+		if (_currentMethodNativeSymbol == null) return false;
 
 		// Budget check via InliningPlanner
 		bool isRecursive = string.Equals(calleeMethod.NativeSymbol, _currentMethodNativeSymbol, StringComparison.Ordinal);
 		var candidate = InliningPlanner.EvaluateInline(calleeMethod.Instructions.Count, _currentMethodArtifact.Instructions.Count, isRecursive);
-		System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod budget: callerInsts={_currentMethodArtifact.Instructions.Count}, calleeInsts={calleeMethod.Instructions.Count}, isRecursive={isRecursive}, CanInline={candidate.CanInline}, reason={candidate.Reason}");
-		if (!candidate.CanInline) { System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod FAIL: budget rejected: {candidate.Reason}"); return false; }
 
 		// Single-BB restriction: no branches, switch, leave, starg, ldarga, ldloca
 		foreach (var ci in calleeMethod.Instructions)
 		{
-			if (ci.Op is "brfalse" or "brtrue" or "beq" or "bne.un"
+			if (ci.Op is "br" or "brfalse" or "brtrue" or "beq" or "bne.un"
 			    or "bge" or "bge.un" or "bgt" or "bgt.un" or "ble" or "ble.un"
 			    or "blt" or "blt.un" or "switch" or "leave" or "endfilter"
 			    or "starg" or "ldarga" or "ldloca")
 			{
-				System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod FAIL: single-BB restriction hit on " + ci.Op);
 				return false;
 			}
 		}
 
-		System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod: ALL CHECKS PASSED - emitting inline body");
 		// ---- EMIT INLINE BODY ----
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    // Inlined: {calleeMethod.SubjectId}");
@@ -2134,21 +2128,17 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 	private bool TryInlineAtCallSite(StringBuilder builder, AotCoreIrInstructionArtifact instruction, InvocationTarget invocationTarget, string indentation)
 	{
 		string? calleeSubjectId = instruction.Callee ?? instruction.TargetReference?.SubjectId;
-		System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineAtCallSite: calleeSubjectId(inst)={calleeSubjectId ?? "null"}, TargetSymbol={invocationTarget.TargetSymbol ?? "null"}");
 		// Fallback: for lowering-time devirtualized calls, the instruction-level
 		// Callee/TargetReference is consumed during devirtualization.  Resolve the
 		// SubjectId from the native symbol via the reverse symbol table.
 		if (calleeSubjectId == null && invocationTarget.TargetSymbol != null)
 		{
 			bool found = _nativeSymbolToSubjectId.TryGetValue(invocationTarget.TargetSymbol, out var resolvedId);
-			System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineAtCallSite: reverse lookup TargetSymbol={invocationTarget.TargetSymbol}, found={found}, resolvedId={resolvedId ?? "null"}");
 			if (found)
 			{
 				calleeSubjectId = resolvedId;
 			}
 		}
-		if (calleeSubjectId == null) { System.Console.Error.WriteLine("[INLINE-DBG] TryInlineAtCallSite: FAILED - calleeSubjectId is null"); return false; }
-		System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineAtCallSite: SUCCESS - calling TryInlineResolvedMethod with calleeSubjectId={calleeSubjectId}");
 		return TryInlineResolvedMethod(builder, instruction, calleeSubjectId, invocationTarget.ParameterAbis.Count, indentation);
 	}
 	private void EmitLinearCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
