@@ -13,7 +13,7 @@
 #include <cstring>
 
 #include "code_buffer.h"
-#include "unwind_info.h"
+#include "jit_unwind.h"
 
 using chaos::il2cpp::jit::CodeBuffer;
 using chaos::il2cpp::jit::EmitUnwindInfo;

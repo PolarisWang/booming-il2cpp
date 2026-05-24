@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Chaos.IL2CPP.Tests.MetadataWriter</RootNamespace>
+    <AssemblyName>Chaos.IL2CPP.Tests.MetadataWriter</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\src\managed\Chaos.IL2CPP.MetadataWriter\Chaos.IL2CPP.MetadataWriter.csproj" />
+    <ProjectReference Include="..\Chaos.IL2CPP.Tests.Shared\Chaos.IL2CPP.Tests.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="coverlet.msbuild" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

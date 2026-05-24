@@ -83,9 +83,8 @@ class NativeCodeGenerator {
 public:
     NativeCodeGenerator(const interpreter::RegisterMethod& rm,
                         const CompileConfig& config,
-                        IEncoder& encoder,
                         ISehHandler& seh)
-        : rm_(rm), config_(config), enc_(encoder), seh_(seh) {
+        : rm_(rm), config_(config), encoder_(buf_), enc_(encoder_), seh_(seh) {
         is_tier0_ = (config_.compile_tier == CompileTier::kTier0);
     }
 
@@ -95,7 +94,8 @@ private:
     const interpreter::RegisterMethod& rm_;
     CompileConfig config_;
     CodeBuffer buf_;
-    IEncoder& enc_;
+    X64Encoder encoder_;    // Concrete encoder writing to buf_
+    IEncoder& enc_;          // Interface reference to encoder_
     ISehHandler& seh_;
 
     // When true, use quick JIT path: stack-only, no optimizer, no liveness, no deopt.
@@ -606,8 +606,19 @@ void NativeCodeGenerator::EmitGprArithmetic(
             if (c != 0xFF) src2_reg = c;
         }
     }
+    // When op_reg and src2_reg share the same colored register (dst and src2
+    // assigned the same x64 register by graph coloring) and src1 != src2,
+    // loading src1 into op_reg destroys src2's value.  Load src2 into a
+    // scratch register FIRST, then load src1, so the computation reads the
+    // correct src2 value even after op_reg overwrites the shared register.
+    bool src2_loaded = false;
+    if (has_graph_coloring_ && !has_implicit && op_reg == src2_reg && src1 != src2) {
+        src2_reg = (op_reg == kRCX) ? kRAX : kRCX;
+        LoadGpr(src2_reg, src2);
+        src2_loaded = true;
+    }
     LoadGpr(op_reg, src1);
-    if (src2 != UINT32_MAX) LoadGpr(src2_reg, src2);
+    if (src2 != UINT32_MAX && !src2_loaded) LoadGpr(src2_reg, src2);
     if (opc == IROpCode::Add) {
         enc_.EmitAdd32RR(op_reg, src2_reg);
     } else if (opc == IROpCode::Sub) {
@@ -670,11 +681,19 @@ void NativeCodeGenerator::EmitBitwise(
             if (c != 0xFF) src2_reg = c;
         }
     }
+    // Same collision guard as EmitGprArithmetic: when op_reg and src2_reg
+    // share a color and src1 != src2, load src2 into a scratch register first.
+    bool src2_loaded = false;
+    if (has_graph_coloring_ && op_reg == src2_reg && src1 != src2) {
+        src2_reg = (op_reg == kRCX) ? kRAX : kRCX;
+        LoadGpr(src2_reg, src2);
+        src2_loaded = true;
+    }
     LoadGpr(op_reg, src1);
     if (opc == IROpCode::Not) enc_.EmitNot32(op_reg);
-    else if (opc == IROpCode::And) { if (src2 != UINT32_MAX) { LoadGpr(src2_reg, src2); enc_.EmitAnd32RR(op_reg, src2_reg); } }
-    else if (opc == IROpCode::Or)  { if (src2 != UINT32_MAX) { LoadGpr(src2_reg, src2); enc_.EmitOr32RR(op_reg, src2_reg); } }
-    else if (opc == IROpCode::Xor) { if (src2 != UINT32_MAX) { LoadGpr(src2_reg, src2); enc_.EmitXor32RR(op_reg, src2_reg); } }
+    else if (opc == IROpCode::And) { if (src2 != UINT32_MAX && !src2_loaded) { LoadGpr(src2_reg, src2); } enc_.EmitAnd32RR(op_reg, src2_reg); }
+    else if (opc == IROpCode::Or)  { if (src2 != UINT32_MAX && !src2_loaded) { LoadGpr(src2_reg, src2); } enc_.EmitOr32RR(op_reg, src2_reg); }
+    else if (opc == IROpCode::Xor) { if (src2 != UINT32_MAX && !src2_loaded) { LoadGpr(src2_reg, src2); } enc_.EmitXor32RR(op_reg, src2_reg); }
     StoreGpr(op_reg, dst);
 }
 
@@ -933,7 +952,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::LdcI4: {
         if (!instr.has_dst()) return false;
-        enc_.EmitMovRI32(kRAX, instr.imm.i4);
+        enc_.EmitMovRIImm32(kRAX, static_cast<uint32_t>(instr.imm.i4));
         StoreGpr(kRAX, instr.dst_reg());
         return true;
     }
@@ -1117,7 +1136,29 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         return true;
     }
 
-    case IROpCode::Beq: case IROpCode::BneUn:
+    case IROpCode::Beq: case IROpCode::BneUn: {
+        if (!instr.has_src1() || !instr.has_src2()) return false;
+        uint8_t cmp_a = kRAX, cmp_b = kRCX;
+        if (has_graph_coloring_) {
+            if (instr.src1_reg() < interpreter::kGPRegisters) {
+                uint8_t c = gcr_.gpr_color[instr.src1_reg()];
+                if (c != 0xFF) cmp_a = c;
+            }
+            if (instr.src2_reg() < interpreter::kGPRegisters) {
+                uint8_t c = gcr_.gpr_color[instr.src2_reg()];
+                if (c != 0xFF) cmp_b = c;
+            }
+            if (cmp_a == cmp_b) cmp_b = (cmp_a == kRAX) ? kRCX : kRAX;
+        }
+        LoadGpr(cmp_a, instr.src1_reg()); LoadGpr(cmp_b, instr.src2_reg());
+        enc_.EmitCmpRR(cmp_a, cmp_b);
+        uint8_t jcc = (instr.op_code() == IROpCode::Beq) ? kCC_E : kCC_NE;
+        uint32_t patch_off = buf_.pos() + 2;
+        enc_.EmitJccRel32(jcc, 0);
+        branch_patches_.push_back({patch_off, instr.imm.branch_target});
+        return true;
+    }
+
     case IROpCode::Blt: case IROpCode::Bgt:
     case IROpCode::Ble: case IROpCode::Bge:
     case IROpCode::BltUn: case IROpCode::BgtUn:
@@ -1136,7 +1177,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             if (cmp_a == cmp_b) cmp_b = (cmp_a == kRAX) ? kRCX : kRAX;
         }
         LoadGpr(cmp_a, instr.src1_reg()); LoadGpr(cmp_b, instr.src2_reg());
-        enc_.EmitCmpRR(cmp_a, cmp_b);
+        enc_.EmitCmp32RR(cmp_a, cmp_b);
         uint8_t jcc = CmpToJccSigned(instr.op_code());
         uint32_t patch_off = buf_.pos() + 2;
         enc_.EmitJccRel32(jcc, 0);
@@ -1344,28 +1385,19 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
     case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt: {
         if (!instr.has_src1() || !instr.has_src2() || !instr.has_dst()) return false;
+        // Use fixed scratch registers RAX/RCX, NOT graph-colored registers,
+        // because the setcc sequence (MovRIImm32 + Setcc) destroys the
+        // register used as cmp_a.  Using src1's colored register would
+        // silently corrupt src1's value for any subsequent read of src1
+        // through LoadGpr (which returns the colored register, not the stack).
         uint8_t cmp_a = kRAX, cmp_b = kRCX;
-        if (has_graph_coloring_) {
-            if (instr.src1_reg() < interpreter::kGPRegisters) {
-                uint8_t c = gcr_.gpr_color[instr.src1_reg()];
-                if (c != 0xFF) cmp_a = c;
-            }
-            if (instr.src2_reg() < interpreter::kGPRegisters) {
-                uint8_t c = gcr_.gpr_color[instr.src2_reg()];
-                if (c != 0xFF) cmp_b = c;
-            }
-            if (cmp_a == cmp_b) cmp_b = (cmp_a == kRAX) ? kRCX : kRAX;
-        }
         LoadGpr(cmp_a, instr.src1_reg()); LoadGpr(cmp_b, instr.src2_reg());
         // Ceq: 64-bit compare (uint64_t equality, RegisterExecute uses == on uint64_t).
         // Clt/Cgt: 32-bit compare (RegisterExecute casts to int32_t first).
         if (opc == IROpCode::Ceq) {
             enc_.EmitCmpRR(cmp_a, cmp_b);
         } else {
-            uint8_t rex_byte = REX(false, cmp_a, 0, cmp_b);
-            if (rex_byte != 0x40) buf_.EmitByte(rex_byte);
-            buf_.EmitByte(0x3B);
-            buf_.EmitByte(ModRM(3, cmp_a, cmp_b));
+            enc_.EmitCmp32RR(cmp_a, cmp_b);
         }
         uint8_t cc = (opc == IROpCode::Ceq) ? kCC_E : (opc == IROpCode::Clt) ? kCC_L : kCC_G;
         // IMPORTANT: use mov reg, 0 (NOT xor reg, reg) to preserve CMP flags.
@@ -3691,10 +3723,8 @@ JitMethod* Compile(
     const interpreter::RegisterMethod& rm,
     const CompileConfig& config) noexcept {
     if (rm.instructions.empty()) return nullptr;
-    CodeBuffer buf;
-    X64Encoder encoder(buf);
     ISehHandler& seh = GetSehHandler();
-    NativeCodeGenerator gen(rm, config, encoder, seh);
+    NativeCodeGenerator gen(rm, config, seh);
     return gen.Generate();
 }
 

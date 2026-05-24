@@ -451,6 +451,13 @@ inline void EmitMovsxd(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
 
 // ── Compare ──────────────────────────────────────────────────────────────
 
+/// cmp r32, r32 (32-bit comparison, no REX.W)
+inline void EmitCmp32RR(CodeBuffer& buf, uint8_t lhs, uint8_t rhs) noexcept {
+    EmitREX(buf, false, lhs, rhs);
+    buf.EmitByte(0x3B);
+    buf.EmitByte(ModRM(3, lhs, rhs));
+}
+
 /// cmp r64, r/m64
 inline void EmitCmpRR(CodeBuffer& buf, uint8_t lhs, uint8_t rhs) noexcept {
     EmitREX(buf, true, lhs, rhs);
