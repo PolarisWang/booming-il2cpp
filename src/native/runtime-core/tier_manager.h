@@ -58,7 +58,7 @@ struct OptimizationEntry {
 // When a Tier 0 method's PGO call count exceeds kPgoTier1Threshold, it is
 // enqueued for background Tier 1 recompilation via the TierManager thread.
 struct JitRecompilationEntry {
-    JitPrecode* precode;
+    jit::JitPrecode* precode;
 };
 
 // Queue depth limit to prevent unbounded memory growth.
@@ -114,7 +114,7 @@ public:
     // pgo_call_count exceeds kPgoTier1Threshold.
     // @param precode   Pointer to JitPrecode*
     // @return true if enqueued, false if queue is full
-    bool EnqueueJitRecompilation(JitPrecode* precode) noexcept;
+    bool EnqueueJitRecompilation(jit::JitPrecode* precode) noexcept;
 
     // Start/stop the background optimization thread.
     void StartBackgroundThread() noexcept;
