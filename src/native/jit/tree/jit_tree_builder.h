@@ -74,6 +74,11 @@ public:
     /// Access the VNTable (for CSE mutator to query computed flags).
     VNTable& VN() noexcept { return vn_; }
 
+    /// Find the defining ExprNode for a vreg (nullptr if unknown/not defined in BB).
+    ExprNode* FindVRegDef(uint32_t vreg) const noexcept {
+        return (vreg < 64) ? vreg_to_node_[vreg] : nullptr;
+    }
+
 private:
     /// Ensure arena has at least `bytes` free.
     bool EnsureArena(uint32_t bytes) noexcept;

@@ -6,11 +6,13 @@
 #include "jit_unwind.h"
 #include "slot_map.h"
 #include "tree/jit_optimizer.h"
+#include "jit_inline.h"        // g_inline_reverse_map
 #include "IEncoder.h"
 #include "ISehHandler.h"
 #include "X64Encoder.h"
 
 #include <gc_root_scanner.h>
+#include <gc/gc_bgc.h>
 
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/interpreter_vm.h"
@@ -593,6 +595,7 @@ void NativeCodeGenerator::PropagateTypes(
     case IROpCode::Shl: case IROpCode::Shr: case IROpCode::ShrUn:
     case IROpCode::Ceq: case IROpCode::Clt: case IROpCode::Cgt:
     case IROpCode::AddOvf: case IROpCode::SubOvf: case IROpCode::MulOvf:
+    case IROpCode::Abs: case IROpCode::Min: case IROpCode::Max:
         if (instr.has_src1() && instr.src1_reg() < vreg_types_.size())
             SetVregType(dst, vreg_types_[instr.src1_reg()]);
         else
@@ -1071,6 +1074,40 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         else
             EmitGprArithmetic(opc, instr.dst_reg(), instr.src1_reg(),
                               instr.has_src2() ? instr.src2_reg() : UINT32_MAX);
+        return true;
+    }
+
+    // ── Intrinsic: Abs / Min / Max (int32) ─────────────────────────
+    case IROpCode::Abs: {
+        // int32 abs: cdq (sign-extend eax→edx:eax), xor eax, edx, sub eax, edx
+        if (!instr.has_src1() || !instr.has_dst()) return false;
+        LoadGpr(kRAX, instr.src1_reg());
+        buf_.EmitByte(0x99);                          // cdq
+        enc_.EmitXor32RR(kRAX, kRDX);                 // eax ^= edx
+        enc_.EmitSub32RR(kRAX, kRDX);                 // eax -= edx
+        StoreGpr(kRAX, instr.dst_reg());
+        return true;
+    }
+
+    case IROpCode::Min: {
+        // int32 min: dst = (src1 > src2) ? src2 : src1 → cmovg
+        if (!instr.has_src1() || !instr.has_src2() || !instr.has_dst()) return false;
+        LoadGpr(kRAX, instr.src1_reg());
+        LoadGpr(kRCX, instr.src2_reg());
+        enc_.EmitCmpRR(kRAX, kRCX);
+        enc_.EmitCmovcc(kCC_G, kRAX, kRCX);          // if a > b, a = b
+        StoreGpr(kRAX, instr.dst_reg());
+        return true;
+    }
+
+    case IROpCode::Max: {
+        // int32 max: dst = (src1 < src2) ? src2 : src1 → cmovl
+        if (!instr.has_src1() || !instr.has_src2() || !instr.has_dst()) return false;
+        LoadGpr(kRAX, instr.src1_reg());
+        LoadGpr(kRCX, instr.src2_reg());
+        enc_.EmitCmpRR(kRAX, kRCX);
+        enc_.EmitCmovcc(kCC_L, kRAX, kRCX);          // if a < b, a = b
+        StoreGpr(kRAX, instr.dst_reg());
         return true;
     }
 
@@ -1578,13 +1615,48 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         return true;
     }
 
-    case IROpCode::StFld: {
+        case IROpCode::StFld: {
         if (!instr.has_src1() || !instr.has_src2()) return false;
+        // Simple path -- always call CodegenStFld (full SATB barrier).
         LoadGpr(kRCX, instr.src1_reg());
         enc_.EmitMovRIImm32(kRDX, instr.imm.field_offset);
         LoadGpr(kR8, instr.src2_reg());
         enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(::CodegenStFld));
         EmitCallWithSpill(kRAX);
+        return true;;
+    }
+
+    case IROpCode::StFldBarrier: {
+        // Inline g_bgc_is_marking check + conditional barrier.
+        // Fast path (not marking): call CodegenStFldNoBarrier (store + card mark).
+        // Slow path (marking): call CodegenStFld (full SATB pre-write barrier).
+        if (!instr.has_src1() || !instr.has_src2()) return false;
+        LoadGpr(kRCX, instr.src1_reg());           // obj
+        enc_.EmitMovRIImm32(kRDX, instr.imm.field_offset);  // field_idx
+        LoadGpr(kR8, instr.src2_reg());            // value
+        // Inline g_bgc_is_marking check (preserves RCX/RDX/R8)
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(&chaos::il2cpp::runtime_core::g_bgc_is_marking));
+        buf_.EmitByte(0x80);                          // cmp r/m8, imm8
+        buf_.EmitByte(0x38);                          // ModRM: mod=00, reg=7, rm=0 → [rax]
+        buf_.EmitByte(0x00);                          // imm8 = 0
+        uint32_t marking_jmp_pos = buf_.pos();
+        enc_.EmitJccRel32(kCC_NE, 0);              // jne .marking
+        // Fast path: not marking → CodegenStFldNoBarrier
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(::CodegenStFldNoBarrier));
+        EmitCallWithSpill(kRAX);
+        uint32_t done_jmp_pos = buf_.pos();
+        enc_.EmitJmpRel32(0);                       // jmp .done
+        // Slow path: marking → CodegenStFld (full SATB barrier)
+        uint32_t marking_pos = buf_.pos();
+        buf_.Patch32(marking_jmp_pos + 2, marking_pos - (marking_jmp_pos + 6));
+        // Reload args (spilled/colored regs may differ in slow path)
+        LoadGpr(kRCX, instr.src1_reg());
+        enc_.EmitMovRIImm32(kRDX, instr.imm.field_offset);
+        LoadGpr(kR8, instr.src2_reg());
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(::CodegenStFld));
+        EmitCallWithSpill(kRAX);
+        uint32_t done_pos = buf_.pos();
+        buf_.Patch32(done_jmp_pos + 1, done_pos - (done_jmp_pos + 5));
         return true;
     }
 
@@ -1596,10 +1668,10 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         // InterpreterObject size (64 bytes: SmallFieldArray 56 + type_token 4 + padding 4)
         static constexpr int32_t kObjSize = static_cast<int32_t>(sizeof(interpreter::InterpreterObject));
 
-        if (kObjSize <= static_cast<int32_t>(kMaxTlabInlineSize)) {
+        if (false) {
             // ═══ TLAB inline allocation path ═══
-            enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(::CodegenGetTlab));
-            EmitCallWithSpill(kRAX);           // rax = &tls_tlab
+            if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
+            EmitLoadTlsTlab(buf_);           // rax = &tls_tlab
 
             enc_.EmitMovRM(kRCX, kRAX, 8);   // rcx = tls_tlab.current
             enc_.EmitLeaRM(kRBX, kRCX, kObjSize); // rbx = new current
@@ -1687,8 +1759,8 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         static constexpr int32_t kBoxSize = static_cast<int32_t>(sizeof(interpreter::BoxedValue));
 
         // ═══ TLAB inline allocation path ═══
-        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(::CodegenGetTlab));
-        EmitCallWithSpill(kRAX);           // rax = &tls_tlab
+        if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
+        EmitLoadTlsTlab(buf_);           // rax = &tls_tlab
 
         enc_.EmitMovRM(kRCX, kRAX, 8);   // rcx = tls_tlab.current
         enc_.EmitLeaRM(kRBX, kRCX, kBoxSize); // rbx = new current
@@ -1784,8 +1856,8 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         static constexpr int32_t kArrSize = static_cast<int32_t>(sizeof(interpreter::ArrayStorage));
 
         // ═══ TLAB inline allocation path ═══
-        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(::CodegenGetTlab));
-        EmitCallWithSpill(kRAX);           // rax = &tls_tlab
+        if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
+        EmitLoadTlsTlab(buf_);           // rax = &tls_tlab
 
         enc_.EmitMovRM(kRCX, kRAX, 8);   // rcx = tls_tlab.current
         enc_.EmitLeaRM(kRBX, kRCX, kArrSize); // rbx = new current
@@ -3169,6 +3241,9 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     slot_patches_.reserve(slot_count_);
     slot_count_used_ = 0;
 
+    // Initialize cached TLS info for inline TLAB access
+    InitTlsTlabInfo();
+
     // ── Register allocation: Tier 0 skips entirely (stack-only) ───────────
     if (is_tier0_) {
         num_cache_regs_ = 0;
@@ -3332,17 +3407,62 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             enc_.EmitXorRR(x64r, x64r);
     }
 
+    // ── GC mode switch: EnterCooperativeMode ──────────────────────────
+    // Switch the thread to cooperative GC mode before any instruction
+    // that allocates or accesses the managed heap.  This must happen
+    // after the frame is set up (stack walking works) but before the
+    // first managed object access.
+    if (config_.cooperative_fn != nullptr) {
+        enc_.EmitSubRI(kRSP, 32);  // shadow space for Win64 ABI
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(config_.cooperative_fn));
+        uint32_t call_pos = buf_.pos();
+        enc_.EmitCallReg(kRAX);
+        enc_.EmitAddRI(kRSP, 32);
+        // Record as GC point so stack is walkable during mode switch
+        call_sites_.push_back({UINT32_MAX, call_pos});
+        RecordGcPoint(call_pos);
+    }
+
     // Bail out early if any emit above hit an OOM
     if (CheckFailed()) return nullptr;
 
     // ── Optimize instructions (tree IR pipeline + linear fallback) ──────
     // Creates a mutable copy of rm_.instructions for the optimizer.
-    // Non-SEH methods: tree IR pipeline (ConstFold + CSE + linearize).
+    // Non-SEH methods: tree IR pipeline (Inliner → ConstFold → CSE → linearize).
     // SEH methods: existing linear OptimizeInstructions fallback.
     auto opt_instrs = rm_.instructions;
     std::vector<uint8_t> removed_mask;
+    InlineResultBuffer inline_results;
     if (!is_tier0_ && config_.enable_optimizer) {
-        OptimizeInstructions(opt_instrs, removed_mask, !rm_.seh_clauses.empty());
+        if (!rm_.seh_clauses.empty()) {
+            // SEH methods: use the existing linear optimizer
+            OptimizeInstructions(opt_instrs, removed_mask, true);
+        } else {
+            // Non-SEH methods: tree IR pipeline with optional inlining.
+            // Produces a clean instruction sequence (no removed_mask needed).
+            std::vector<interpreter::RegisterInstruction> tree_opt;
+            if (tree::OptimizeWithTreeIR(opt_instrs, tree_opt, false,
+                                          rm_.max_regs, config_.enable_inlining,
+                                          &inline_results)) {
+                opt_instrs = std::move(tree_opt);
+                n_instrs = static_cast<uint32_t>(opt_instrs.size());
+                // Re-count call slots: inlining may have removed call instructions.
+                slot_count_ = 0;
+                for (const auto& instr : opt_instrs) {
+                    auto opc = instr.op_code();
+                    if (opc == interpreter::IROpCode::Call ||
+                        opc == interpreter::IROpCode::CallBridge) {
+                        slot_count_++;
+                    }
+                }
+                slot_patches_.clear();
+                slot_patches_.reserve(slot_count_);
+                slot_count_used_ = 0;
+            } else {
+                // Fallback: linear optimizer (tree IR build failed or empty BBs)
+                OptimizeInstructions(opt_instrs, removed_mask, false);
+            }
+        }
     }
 
     // ── Liveness analysis for precise GC slot maps ─────────────────────────
@@ -3476,6 +3596,21 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // jump here.  The epilogue restores the stack frame and returns so that
     // InterpreterEntryDirect can check t_deopt_state.deopt_happened.
     deopt_return_pos_ = buf_.pos();
+
+    // ── GC mode switch: EnterPreemptiveMode ───────────────────────────
+    // Switch to preemptive mode before returning to native code.
+    // In preemptive mode, safepoint requests don't spin — the thread
+    // acknowledges and returns immediately, so the GC won't wait for it.
+    if (config_.preemptive_fn != nullptr) {
+        enc_.EmitSubRI(kRSP, 32);  // shadow space for Win64 ABI
+        enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(config_.preemptive_fn));
+        uint32_t call_pos = buf_.pos();
+        enc_.EmitCallReg(kRAX);
+        enc_.EmitAddRI(kRSP, 32);
+        call_sites_.push_back({UINT32_MAX, call_pos});
+        RecordGcPoint(call_pos);
+    }
+
     // Restore callee-saved XMMs before deallocating frame
     for (uint32_t si = 0; si < num_fpr_callee_; ++si) {
         int32_t off = static_cast<int32_t>(kFrameSize + frame_align_adj_ + si * 16);
@@ -3672,6 +3807,19 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
                 enc_.EmitMovUPSMR(kRSP, save_off, xmm_reg);
             }
 
+            // ── GC mode switch: EnterCooperativeMode (OSR entry) ───────
+            // OSR resumes mid-execution in a hot loop.  The thread must be
+            // in cooperative mode before the first managed object access.
+            if (config_.cooperative_fn != nullptr) {
+                enc_.EmitSubRI(kRSP, 32);
+                enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(config_.cooperative_fn));
+                uint32_t call_pos = buf_.pos();
+                enc_.EmitCallReg(kRAX);
+                enc_.EmitAddRI(kRSP, 32);
+                call_sites_.push_back({UINT32_MAX, call_pos});
+                RecordGcPoint(call_pos);
+            }
+
             // Resolve loop header target and jump there.
             // Since OSR always restarts at the backward branch target
             // (loop header), we call OsrResolveLoopHeader() which reads
@@ -3762,6 +3910,23 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             if (callee_token != 0) {
                 g_reverse_slot_map.Add(callee_token, nm, si);
             }
+        }
+    }
+
+    // ── Populate inlined callee info ──────────────────────────────────
+    // Records callee tokens and version snapshots for hot-update staleness
+    // detection.  If a callee is later hotpatched, InlineReverseMap sets
+    // nm->stale = true, triggering recompilation on next dispatch.
+    if (inline_results.count > 0) {
+        nm->inlined_callees = static_cast<JitMethod::InlinedCallee*>(
+            CHAOS_IL2CPP_MALLOC(inline_results.count * sizeof(JitMethod::InlinedCallee)));
+        if (nm->inlined_callees) {
+            for (uint32_t ri = 0; ri < inline_results.count; ++ri) {
+                nm->inlined_callees[ri].callee_token     = inline_results.callee_tokens[ri];
+                nm->inlined_callees[ri].snapshot_version = inline_results.snapshot_versions[ri];
+                g_inline_reverse_map.Add(inline_results.callee_tokens[ri], nm);
+            }
+            nm->inlined_callee_count = inline_results.count;
         }
     }
 

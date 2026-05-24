@@ -1,8 +1,8 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "timestamp": "2026-05-24T00:40:34Z",
-  "duration_ms": 6389,
+  "timestamp": "2026-05-24T07:42:18Z",
+  "duration_ms": 12418,
   "config": {
     "requested_runtimes": [
       "net8-jit",
@@ -25,23 +25,23 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 3911.315,
-          "stddev_ns": 0.0,
-          "samples": 20000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 822.45,
+          "mean_ns": 3252.027,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
           "error": ""
         },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "error",
+          "error": "exit_code=3221225477"
+        },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 1303.5300000000002,
+          "mean_ns": 1276.642,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -56,15 +56,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 1.88,
+          "mean_ns": 1.889,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 2.05,
+          "mean_ns": 2.66,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -72,7 +72,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.002,
+          "mean_ns": 3.04,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -87,15 +87,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.065,
+          "mean_ns": 1.883,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 2.33,
+          "mean_ns": 2.64,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -103,7 +103,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.001,
+          "mean_ns": 3.037,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -118,23 +118,23 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 4090.6,
-          "stddev_ns": 0.0,
-          "samples": 20000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 802.61,
+          "mean_ns": 3184.353,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
           "error": ""
         },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "error",
+          "error": "exit_code=3221225477"
+        },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 1232.609,
+          "mean_ns": 1210.088,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -149,23 +149,23 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 3160.035,
-          "stddev_ns": 0.0,
-          "samples": 20000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 186.33,
+          "mean_ns": 4010.514,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
           "error": ""
         },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "error",
+          "error": "exit_code=3221225477"
+        },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 1272.016,
+          "mean_ns": 1264.312,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -180,15 +180,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 3047.385,
+          "mean_ns": 3997.442,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 3.77,
+          "mean_ns": 4.4,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -196,7 +196,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 1251.87,
+          "mean_ns": 1267.59,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -211,15 +211,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 1.88,
+          "mean_ns": 2.635,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 2.07,
+          "mean_ns": 2.82,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -227,7 +227,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 2.991,
+          "mean_ns": 3.003,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -242,15 +242,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.065,
+          "mean_ns": 3.235,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 2.07,
+          "mean_ns": 2.89,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -258,7 +258,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 2.991,
+          "mean_ns": 2.999,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -273,15 +273,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 1.88,
+          "mean_ns": 3.349,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 3.61,
+          "mean_ns": 4.14,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -289,7 +289,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 2.991,
+          "mean_ns": 3.003,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -304,23 +304,23 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 5.955,
-          "stddev_ns": 0.0,
-          "samples": 20000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 2.06,
+          "mean_ns": 10.133000000000001,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
           "error": ""
         },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "error",
+          "error": "exit_code=3221225477"
+        },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 7.139,
+          "mean_ns": 11.402,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -337,17 +337,17 @@
           "runtime": "net8-jit",
           "mean_ns": 0.0,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "stub",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 173.38,
+          "mean_ns": 0.0,
           "stddev_ns": 0.0,
           "samples": 100000,
-          "status": "ok",
-          "error": ""
+          "status": "error",
+          "error": "exit_code=3221225477"
         },
         "net10-jit": {
           "runtime": "net10-jit",
@@ -366,15 +366,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.065,
+          "mean_ns": 2.764,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 2.07,
+          "mean_ns": 2.79,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -382,7 +382,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 2.999,
+          "mean_ns": 4.682,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -397,23 +397,23 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 3058.945,
-          "stddev_ns": 0.0,
-          "samples": 20000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 5.26,
+          "mean_ns": 3896.955,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
           "error": ""
         },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "error",
+          "error": "exit_code=3221225477"
+        },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 1267.103,
+          "mean_ns": 1277.145,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -428,23 +428,23 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.43,
-          "stddev_ns": 0.0,
-          "samples": 20000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 13.49,
+          "mean_ns": 3.844,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
           "error": ""
         },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 0.0,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "error",
+          "error": "exit_code=3221225477"
+        },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.225,
+          "mean_ns": 3.214,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -461,17 +461,17 @@
           "runtime": "net8-jit",
           "mean_ns": 0.0,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "stub",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 8.77,
+          "mean_ns": 0.0,
           "stddev_ns": 0.0,
           "samples": 100000,
-          "status": "ok",
-          "error": ""
+          "status": "error",
+          "error": "exit_code=3221225477"
         },
         "net10-jit": {
           "runtime": "net10-jit",
@@ -490,15 +490,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.055,
+          "mean_ns": 3.096,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 2.06,
+          "mean_ns": 2.44,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -506,7 +506,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.039,
+          "mean_ns": 3.021,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -521,15 +521,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.06,
+          "mean_ns": 3.052,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 2.06,
+          "mean_ns": 2.45,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -537,7 +537,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.032,
+          "mean_ns": 3.023,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -552,15 +552,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.06,
+          "mean_ns": 3.222,
           "stddev_ns": 0.0,
-          "samples": 20000,
+          "samples": 100000,
           "status": "ok",
           "error": ""
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 3.66,
+          "mean_ns": 4.14,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -568,7 +568,7 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.222,
+          "mean_ns": 3.214,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -580,10 +580,10 @@
   "summaries": [
     {
       "runtime": "net8-jit",
-      "geometric_mean_ns": 22.19974800931549,
-      "min_ns": 1.88,
-      "max_ns": 4090.6,
-      "median_ns": 2.065,
+      "geometric_mean_ns": 28.72890741070054,
+      "min_ns": 1.883,
+      "max_ns": 4010.514,
+      "median_ns": 3.349,
       "method_count": 18,
       "ok_count": 16,
       "stub_count": 2,
@@ -592,22 +592,22 @@
     },
     {
       "runtime": "chaos-aot",
-      "geometric_mean_ns": 9.247981638245232,
-      "min_ns": 2.05,
-      "max_ns": 822.45,
-      "median_ns": 3.66,
+      "geometric_mean_ns": 3.0600223514467877,
+      "min_ns": 2.44,
+      "max_ns": 4.4,
+      "median_ns": 2.82,
       "method_count": 18,
-      "ok_count": 18,
+      "ok_count": 10,
       "stub_count": 0,
       "throws_count": 0,
-      "unsupported_count": 0
+      "unsupported_count": 8
     },
     {
       "runtime": "net10-jit",
-      "geometric_mean_ns": 21.149084055902527,
-      "min_ns": 2.991,
-      "max_ns": 1303.5300000000002,
-      "median_ns": 3.222,
+      "geometric_mean_ns": 22.385465002251834,
+      "min_ns": 2.999,
+      "max_ns": 1277.145,
+      "median_ns": 3.214,
       "method_count": 18,
       "ok_count": 16,
       "stub_count": 2,
@@ -620,36 +620,289 @@
       "label": "Chaos AOT / .NET 8 JIT",
       "numerator": "chaos-aot",
       "denominator": "net8-jit",
-      "geometric_mean_ratio": 2.873559063691911,
-      "min_ratio": 0.18013343217197925,
-      "max_ratio": 808.3249336870027,
-      "faster_count": 6,
-      "slower_count": 6,
-      "equal_count": 4,
+      "geometric_mean_ratio": 1.851926545902488,
+      "min_ratio": 0.7101503759398496,
+      "max_ratio": 908.5095454545453,
+      "faster_count": 4,
+      "slower_count": 5,
+      "equal_count": 1,
       "chaos_classification": ""
     },
     {
       "label": ".NET 10 JIT / .NET 8 JIT",
       "numerator": "net10-jit",
       "denominator": "net8-jit",
-      "geometric_mean_ratio": 1.0496789341153396,
-      "min_ratio": 0.6262491672218521,
-      "max_ratio": 3.318651737899042,
-      "faster_count": 5,
-      "slower_count": 11,
-      "equal_count": 0,
+      "geometric_mean_ratio": 1.2833732695662385,
+      "min_ratio": 0.5903460059803501,
+      "max_ratio": 3.1720920152620558,
+      "faster_count": 8,
+      "slower_count": 5,
+      "equal_count": 3,
       "chaos_classification": ""
     }
   ],
   "regression_alerts": [
     {
-      "method_index": 13,
-      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+      "method_index": 1,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
       "runtime": "chaos-aot",
       "metric": "mean_ns",
-      "before_value": 8.71,
-      "after_value": 13.49,
-      "delta_pct": 54.88,
+      "before_value": 2.05,
+      "after_value": 2.66,
+      "delta_pct": 29.76,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 2,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
+      "runtime": "chaos-aot",
+      "metric": "mean_ns",
+      "before_value": 2.33,
+      "after_value": 2.64,
+      "delta_pct": 13.3,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 4,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 3160.035,
+      "after_value": 4010.514,
+      "delta_pct": 26.91,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 5,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 3047.385,
+      "after_value": 3997.442,
+      "delta_pct": 31.18,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 5,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
+      "runtime": "chaos-aot",
+      "metric": "mean_ns",
+      "before_value": 3.77,
+      "after_value": 4.4,
+      "delta_pct": 16.71,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 6,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 1.88,
+      "after_value": 2.635,
+      "delta_pct": 40.16,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 6,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
+      "runtime": "chaos-aot",
+      "metric": "mean_ns",
+      "before_value": 2.07,
+      "after_value": 2.82,
+      "delta_pct": 36.23,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 7,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 2.065,
+      "after_value": 3.235,
+      "delta_pct": 56.66,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 7,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
+      "runtime": "chaos-aot",
+      "metric": "mean_ns",
+      "before_value": 2.07,
+      "after_value": 2.89,
+      "delta_pct": 39.61,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 8,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 1.88,
+      "after_value": 3.349,
+      "delta_pct": 78.14,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 8,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
+      "runtime": "chaos-aot",
+      "metric": "mean_ns",
+      "before_value": 3.61,
+      "after_value": 4.14,
+      "delta_pct": 14.68,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 9,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 5.955,
+      "after_value": 10.133000000000001,
+      "delta_pct": 70.16,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 9,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
+      "runtime": "net10-jit",
+      "metric": "mean_ns",
+      "before_value": 7.139,
+      "after_value": 11.402,
+      "delta_pct": 59.71,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 11,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 2.065,
+      "after_value": 2.764,
+      "delta_pct": 33.85,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 11,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+      "runtime": "chaos-aot",
+      "metric": "mean_ns",
+      "before_value": 2.07,
+      "after_value": 2.79,
+      "delta_pct": 34.78,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 11,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
+      "runtime": "net10-jit",
+      "metric": "mean_ns",
+      "before_value": 2.999,
+      "after_value": 4.682,
+      "delta_pct": 56.12,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 12,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 3058.945,
+      "after_value": 3896.955,
+      "delta_pct": 27.4,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 13,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 2.43,
+      "after_value": 3.844,
+      "delta_pct": 58.19,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 15,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 2.055,
+      "after_value": 3.096,
+      "delta_pct": 50.66,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 15,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
+      "runtime": "chaos-aot",
+      "metric": "mean_ns",
+      "before_value": 2.06,
+      "after_value": 2.44,
+      "delta_pct": 18.45,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 16,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 2.06,
+      "after_value": 3.052,
+      "delta_pct": 48.16,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 16,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+      "runtime": "chaos-aot",
+      "metric": "mean_ns",
+      "before_value": 2.06,
+      "after_value": 2.45,
+      "delta_pct": 18.93,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 17,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
+      "runtime": "net8-jit",
+      "metric": "mean_ns",
+      "before_value": 2.06,
+      "after_value": 3.222,
+      "delta_pct": 56.41,
+      "threshold_pct": 10.0,
+      "alert": true
+    },
+    {
+      "method_index": 17,
+      "subject_id": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
+      "runtime": "chaos-aot",
+      "metric": "mean_ns",
+      "before_value": 3.66,
+      "after_value": 4.14,
+      "delta_pct": 13.11,
       "threshold_pct": 10.0,
       "alert": true
     }
@@ -661,10 +914,10 @@
   ],
   "runtimes_unavailable": [],
   "chaos_classification_breakdown": {
-    "chaos_faster_than_all": 6,
-    "chaos_faster_than_jit": 1,
-    "chaos_midfield": 8,
-    "chaos_slower_than_jit": 1,
-    "not_benchmarked": 2
+    "chaos_faster_than_all": 1,
+    "chaos_faster_than_jit": 3,
+    "chaos_midfield": 6,
+    "chaos_slower_than_jit": 0,
+    "not_benchmarked": 8
   }
 }

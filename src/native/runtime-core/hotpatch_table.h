@@ -99,8 +99,9 @@ void RegisterReversePInvokeWrappers(void* const* wrappers, uint32_t count) noexc
 
 // Callback type for slot update notifications during hotpatch.
 // Invoked by SetPatchedBySlot when a method is patched/unpatched.
-// Parameters: callee_token, new_direct_ptr.
-typedef void (*SlotUpdateCallback)(uint32_t, void*);
+// Parameters: callee_token, new_direct_ptr, callee_HotpatchEntryV0_ptr.
+// The callee entry pointer enables inline version-staleness checks.
+typedef void (*SlotUpdateCallback)(uint32_t, void*, HotpatchEntryV0*);
 
 // Register a global callback fired from SetPatchedBySlot on version bump.
 void RegisterSlotUpdateCallback(SlotUpdateCallback cb) noexcept;

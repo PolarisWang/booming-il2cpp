@@ -728,3 +728,31 @@ opcodes:
     has_src: true
     operands: [call_target, arg_count, is_instance_call]
     description: Indirect call (calli) — reads fnptr + args from src regs, writes return to dst
+
+  - name: Abs
+    value: 100
+    has_dst: true
+    has_src: true
+    operands: []
+    description: Absolute value (int32) — dst = abs(src1)
+
+  - name: Min
+    value: 101
+    has_dst: true
+    has_src: true
+    operands: []
+    description: Minimum (int32) — dst = min(src1, src2)
+
+  - name: Max
+    value: 102
+    has_dst: true
+    has_src: true
+    operands: []
+    description: Maximum (int32) — dst = max(src1, src2)
+
+  - name: StFldBarrier
+    value: 103
+    has_dst: false
+    has_src: true
+    operands: [field_offset, immediate_i4]
+    description: Store field with inline GC write barrier (SATB pre-write + card mark)

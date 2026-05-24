@@ -141,7 +141,7 @@
 
 **排查步骤**:
 1. 检查 `NativeMethod` 的 `slot_map_data` 是否已注册（GC 扫描时可能需要）
-2. 检查 `t4_seh_handler.cpp` 中 VEH handler 是否已注册（`RegisterT4SehHandler` 调用）
+2. 检查 `WinSehHandler` 中 VEH handler 是否已注册（`WinSehHandler::Initialize()` 调用）
 3. 检查生成的 code buffer 边界：是否有 `Reserve()` / `Emit*` 写出界（OOM 安全已在 I-R11 中加固）
 4. 检查 deopt runtime 的 `DeoptTrap` 二分搜索是否因 `deopt_entries` 未排序而失败
 
@@ -300,7 +300,8 @@ cat testing/foundation-dll/System.Private.CoreLib/garbage-collection/codegen/nat
 | `src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs` | codegen-metrics 构建 |
 | `src/managed/Chaos.IL2CPP.Generator/Validation/NativeCodegenValidator.cs` | 9 条 C++ 代码规范校验 |
 | `src/native/codegen/code_generator.cpp` | JIT x64 代码生成器主文件 |
-| `src/native/codegen/t4_seh_handler.cpp` | JIT VEH 异常处理器 |
+| `src/native/jit/WinSehHandler.cpp` | JIT VEH 异常处理器 (Windows) |
+| `src/native/jit/LinuxSehHandler.cpp` | JIT SEH 信号处理器 (Linux) |
 | `src/native/codegen/deopt_runtime.cpp` | JIT deopt 运行时 |
 | `src/native/codegen/native_method.h` | NativeMethod/GcPoint/GcSlot 数据结构 |
 | `src/native/runtime-core/gc/gc_root_scanner.cpp` | GC slot map 注册与扫描 |

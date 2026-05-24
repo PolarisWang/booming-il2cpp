@@ -10,6 +10,7 @@ add_library(chaos_jit STATIC
     code_buffer.cpp
     jit_engine.cpp
     jit_helpers.cpp
+    jit_inline.cpp
     jit_deopt.cpp
     jit_seh.cpp
     jit_unwind.cpp
@@ -17,6 +18,7 @@ add_library(chaos_jit STATIC
     jit_precode.cpp
     WinSehHandler.cpp
     $<$<PLATFORM_ID:Linux>:LinuxSehHandler.cpp>
+    tree/jit_intrinsics.cpp
     tree/jit_tree_builder.cpp
     tree/jit_tree_mutator.cpp
     tree/jit_linearizer.cpp

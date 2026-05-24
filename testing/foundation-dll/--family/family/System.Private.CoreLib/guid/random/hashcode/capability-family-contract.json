@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "--family",
+  "ownerSubjectId": "SolutionCorePack",
+  "familyId": "family/--family/family/System.Private.CoreLib/guid/random/hashcode",
+  "displayName": "Guid Random Hashcode",
+  "methodSubjectIds": []
+}

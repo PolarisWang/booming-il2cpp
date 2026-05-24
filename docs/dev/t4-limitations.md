@@ -129,4 +129,4 @@ Notes:
 | `src/native/codegen/codegen_helpers.h/cpp` | C helper functions (LdFld, StFld, Box, NewObj, CallVirt, LdObj, LocAlloc, LdVirtFtn, InitObj) |
 | `src/native/codegen/native_method.h` | NativeMethod struct (code, size, metadata) |
 | `src/native/codegen/deopt_runtime.cpp` | Deoptimization runtime (stub — not yet functional) |
-| `src/native/codegen/t4_seh_handler.h/cpp` | T4 code registry + VEH handler for SEH dispatch |
+| `src/native/jit/WinSehHandler.cpp` / `LinuxSehHandler.cpp` | JIT code registry + SEH handler for EH dispatch |

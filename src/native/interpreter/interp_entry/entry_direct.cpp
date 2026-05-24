@@ -668,6 +668,8 @@ void InterpreterEntryDirect(
                             cfg.enable_safepoint_polls = true;
                             cfg.enable_liveness = true;
                             cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
+                            cfg.cooperative_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterCooperativeMode);
+                            cfg.preemptive_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterPreemptiveMode);
                             cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
                             cfg.dispatch_ctx = &reg_dispatch_ctx;
                             cfg.call_cache = patch_method->call_cache;
@@ -791,6 +793,8 @@ void InterpreterEntryDirect(
                               cfg.enable_safepoint_polls = true;
                               cfg.enable_liveness = true;
                               cfg.safepoint_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::SafepointPoll);
+                              cfg.cooperative_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterCooperativeMode);
+                              cfg.preemptive_fn = reinterpret_cast<void*>(&chaos::il2cpp::runtime_core::threading::EnterPreemptiveMode);
                               cfg.pic_dispatch_data = patch_method->pic_dispatch_data;
                               cfg.dispatch_ctx = &reg_dispatch_ctx;
                               cfg.call_cache = patch_method->call_cache;

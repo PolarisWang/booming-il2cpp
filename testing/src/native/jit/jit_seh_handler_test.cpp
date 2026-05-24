@@ -2,7 +2,7 @@
 //
 // P3-A of the EH industrialization roadmap.  Validates the T4 code registry,
 // demotion queue, lookup cache, SEH clause table parsing, and finally unwind
-// state machine from t4_seh_handler.cpp.
+// state machine from jit_seh_handler_internal.cpp.
 //
 // Strategy:
 //   The source file is included directly so static functions
@@ -28,10 +28,10 @@
 // compiled but never called — tests focus on the logic-level functions.
 
 // clang-format off
-#include "t4_seh_handler.cpp"
+#include "jit_seh_handler_internal.cpp"
 // clang-format on
 
-// Stub destructor: required because the test includes t4_seh_handler.cpp directly
+// Stub destructor: required because the test includes jit_seh_handler_internal.cpp directly
 // without linking chaos_codegen.lib (avoids duplicate symbols from the direct
 // #include).  ~JitMethod() is normally defined in code_generator.cpp.
 // In tests, all pointer fields are nullptr (default-initialized), so the stub

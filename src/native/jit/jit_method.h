@@ -13,6 +13,7 @@
 #include <cstdint>
 #include <cstddef>
 #include <cstddef>
+#include <atomic>
 
 // Forward declaration: GcSlotMapV0 is defined in codegen_bridge.h
 // We use a pointer member only, so no full definition is needed here.
@@ -166,6 +167,21 @@ struct JitMethod {
     JitMethod& operator=(const JitMethod&) = delete;
     JitMethod(JitMethod&& other) noexcept;
     JitMethod& operator=(JitMethod&& other) noexcept;
+
+    // ── Inline tracking (for hotupdate-aware inliner) ──────────────────────
+    // Records callee tokens and their version snapshots so the runtime can
+    // detect stale inline caches after hotpatch and trigger recompilation.
+    struct InlinedCallee {
+        uint32_t callee_token;
+        uint32_t snapshot_version;
+    };
+    InlinedCallee* inlined_callees  = nullptr;
+    uint32_t       inlined_callee_count = 0;
+
+    /// Atomic stale flag: set by InlineReverseMap::InvalidateCallers when a
+    /// callee is hotpatched after it was inlined into this method.  Checked
+    /// in JitStubDispatchImpl — when true, triggers recompilation.
+    std::atomic<bool> stale{false};
 };
 
 }  // namespace chaos::il2cpp::jit

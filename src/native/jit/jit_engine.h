@@ -46,6 +46,11 @@ struct CompileConfig {
     // If true, run the IR optimizer (constant folding + DCE) before codegen.
     bool enable_optimizer = true;
 
+    // If true, enable method inlining during tree IR optimization.
+    // Only applies when enable_optimizer is true and the method has no SEH.
+    // Requires the tree IR pipeline (non-SEH methods only).
+    bool enable_inlining = false;
+
     // If true, record deoptimization metadata at call sites.
     bool enable_deopt = true;
 
@@ -122,6 +127,23 @@ struct CompileConfig {
     /// function which counts calls and triggers background Tier 1 recompilation
     /// when the call count exceeds kPgoTier1Threshold.
     bool enable_pgo = false;
+
+    // ── GC mode switching ────────────────────────────────────────────────
+    // Function pointer to EnterCooperativeMode (thread_state.h).
+    // Set by the caller (entry_direct.cpp) before calling Compile.
+    // When non-null, the prologue emits a call to switch the thread to
+    // cooperative GC mode before accessing managed objects.
+    // Required for GC safety: GcAllocate, GcAllocateAtomic, and all managed
+    // heap access must happen in cooperative mode.
+    void* cooperative_fn = nullptr;
+
+    // Function pointer to EnterPreemptiveMode (thread_state.h).
+    // Set by the caller (entry_direct.cpp) before calling Compile.
+    // When non-null, the epilogue emits a call to switch the thread to
+    // preemptive GC mode before returning to native code.
+    // In preemptive mode, a safepoint request does NOT spin — the thread
+    // acknowledges immediately and the GC does not wait for it.
+    void* preemptive_fn = nullptr;
 };
 
 /// Generate native x64 code from a RegisterMethod.

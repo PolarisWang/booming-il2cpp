@@ -184,13 +184,13 @@ TreeBuildResult TreeBuilder::Build(const interpreter::RegisterInstruction* instr
             // Arguments are passed in consecutive registers starting at src1_reg.
             ExprNode* call_node = AllocNode(nk, kInt32);
             if (call_node) {
-                call_node->method_token = static_cast<uint32_t>(
+                call_node->call_method_token = static_cast<uint32_t>(
                     reinterpret_cast<uintptr_t>(ri.imm.ptr));
-                call_node->module_id = 0;  // filled by caller context if needed
+                call_node->call_arg0_vreg = ri.has_src1() ? ri.src1_reg() : 0;
                 // For simplicity, store arg_count and first arg reg in payload
                 call_node->arg_count = arg_count;
-                // Args are implicit — stored as a reference to the first arg's vreg
-                // for reconstruction during linearization
+                // Args are implicit — store first arg vreg for intrinsic
+                // reconstruction during linearization
             }
             node = call_node;
             is_root = true;

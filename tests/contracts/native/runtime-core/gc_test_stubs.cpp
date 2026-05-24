@@ -74,5 +74,5 @@ NativeMethod* GenerateNativeCode(
 }
 #endif
 
-// RegisterT4SehHandler is provided by chaos_codegen.lib (t4_seh_handler.cpp)
+// RegisterJitSehHandler is provided by chaos_jit.lib (WinSehHandler.cpp)
 // which is linked by all test targets via CHAOS_GC_COMMON_LIBS.  No stub needed.

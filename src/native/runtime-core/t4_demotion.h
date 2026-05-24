@@ -23,7 +23,7 @@ using JitDemoteByTokenFn = uint32_t (*)(uint32_t);
 /// Signature: uint32_t(uint32_t method_token)
 using JitDemoteByCallSiteTokenFn = uint32_t (*)(uint32_t);
 
-/// Register demotion callbacks (called by codegen/t4_seh_handler.cpp at init).
+/// Register demotion callbacks (called by jit/WinSehHandler.cpp at init).
 void RegisterJitDemotionCallbacks(
     JitDemoteByTokenFn demote_by_token,
     JitDemoteByCallSiteTokenFn demote_by_call_site_token) noexcept;

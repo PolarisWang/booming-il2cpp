@@ -1,21 +1,21 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-24T08:40:28.712495",
+  "generated_at": "2026-05-24T15:42:11.497219",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "CONCERN",
-      "summary": "avg_aot_speedup=-49.66%, avg_jit_speedup=-325020.39% (9/11 methods where native is slower than managed (82%); average AOT speedup -49.66% (native slightly slower overall); JIT speedup -325020.39% (interpreter significantly slower than managed JIT))",
+      "summary": "avg_aot_speedup=3.66%, avg_jit_speedup=0.0% (4/11 methods where native is slower than managed (36%))",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -49.66,
-        "average_native_jit_speedup_percent": -325020.39,
-        "managed_faster_count": 9,
-        "native_aot_faster_count": 2,
+        "average_speedup_percent": 3.66,
+        "average_native_jit_speedup_percent": 0.0,
+        "managed_faster_count": 4,
+        "native_aot_faster_count": 7,
         "native_jit_faster_count": 0,
         "matched_count": 11,
-        "regression_ratio": 0.818
+        "regression_ratio": 0.364
       }
     },
     "p1_lowering": {
@@ -27,10 +27,442 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 54,
-        "methods_total": 54
+        "methods_with_lowering": 162,
+        "methods_total": 162
       },
       "per_method": [
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "has_lowering": true
+        },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
           "has_lowering": true
@@ -287,10 +719,192 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "NOT_APPLICABLE",
-      "summary": "No changed source files detected",
-      "details": [],
-      "evidence": {}
+      "status": "CONCERN",
+      "summary": "21 of 35 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "schemas/ir_opcodes.yaml",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/LinuxSehHandler.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/LinuxSehHandler.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/WinSehHandler.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/WinSehHandler.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_engine.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_engine.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_helpers.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_helpers.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_method.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_precode.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_unwind.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/tree/jit_linearizer.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/tree/jit_optimizer.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/tree/jit_optimizer.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/tree/jit_tree_builder.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/tree/jit_tree_builder.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/tree/jit_tree_node.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_seh_handler_test.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/native/jit/jit_seh_test.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/04-工具与集成/codegen-troubleshooting-guide.md",
+          "reason": "outside expected architecture layers"
+        }
+      ],
+      "evidence": {
+        "changed_source_count": 35,
+        "layer_distribution": {
+          "TestInfra": 1,
+          "ManagedContracts": 1,
+          "Driver": 2,
+          "Interpreter": 3,
+          "BuildConfig": 2,
+          "RuntimeCore": 4,
+          "Contracts": 1
+        },
+        "violations": [
+          {
+            "file": "schemas/ir_opcodes.yaml",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/LinuxSehHandler.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/LinuxSehHandler.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/WinSehHandler.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/WinSehHandler.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_engine.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_engine.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_helpers.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_helpers.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_method.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_precode.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_unwind.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/tree/jit_linearizer.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/tree/jit_optimizer.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/tree/jit_optimizer.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/tree/jit_tree_builder.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/tree/jit_tree_builder.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/tree/jit_tree_node.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_seh_handler_test.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/native/jit/jit_seh_test.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/04-工具与集成/codegen-troubleshooting-guide.md",
+            "reason": "outside expected architecture layers"
+          }
+        ]
+      }
     },
     "p2_no_bare_new": {
       "check_id": "p2_no_bare_new",
@@ -349,9 +963,9 @@
   "summary": {
     "total": 12,
     "aligned": 7,
-    "concern": 2,
+    "concern": 3,
     "violation": 0,
-    "not_applicable": 3,
+    "not_applicable": 2,
     "overall": "CONCERN"
   }
 }
