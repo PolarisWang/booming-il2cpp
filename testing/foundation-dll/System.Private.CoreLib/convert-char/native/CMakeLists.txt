@@ -71,7 +71,6 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
-    "${CHAOS_PROJECT_ROOT}/src/native/jit"
 )
 
 add_executable(entry ${CHAOS_ENTRY_SOURCES})

@@ -708,10 +708,10 @@ public sealed partial class NativeAotLoweringPlanner
             moduleRegSb.Append(BuildMethodTableInitialization());
         }
 
-        // Step 1: Emit hotpatch-aware dispatch table + entry points.
-        // This replaces the Scriban-native_entry_function_name path, producing
-        // RunNativeAot, RunNativeAotAll, RunNativeAotBench, BenchmarkMethod, and kAotMethods[]
-        // natively from codegen — matching the real host dispatch flow.
+        // Step 1: Emit pure-data dispatch tables.
+        // Produces kMethodTable[], kDefaultArgThunks[], kSubjectSlotMap[] as data-only arrays.
+        // Dispatch routing (hotpatch check, interpreter fallback) lives in
+        // <chaos/hotpatch_dispatch.h> (runtime library), not in generated code.
         var dispatchEntryCode = BuildDispatchEntryCode(methodsForLowering);
         if (!string.IsNullOrEmpty(dispatchEntryCode))
         {
@@ -748,7 +748,7 @@ public sealed partial class NativeAotLoweringPlanner
             moduleRegSb.Append(reflectionQueryCode);
         }
 
-        // Build extern "C" kAotMethodCount at file scope for runtime-entry.cpp link-time visibility.
+        // Build extern "C" kAotMethodCount at file scope for Python-generated runtime-entry.cpp link-time visibility.
         var methodCount = methodsForLowering.Count;
         var globalDeclarations = methodCount > 0
             ? $"// extern \"C\" definition for link-time visibility from runtime-entry.cpp\nextern \"C\" const int kAotMethodCount = {methodCount};\n"

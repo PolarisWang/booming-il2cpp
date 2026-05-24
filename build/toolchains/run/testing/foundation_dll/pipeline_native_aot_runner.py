@@ -408,7 +408,7 @@ def _patch_generated_files(family_slug: str, *, verification: Path | None = None
 
     The MSVC compiler crashes (STATUS_STACK_BUFFER_OVERRUN / 0xC0000409) when a single
     function has too many locals or inline call blocks. This post-processes each generated
-    .cpp to strip Program::Main() and replace RunNativeAot() with a dispatch table + loop.
+    .cpp to strip Program::Main() and replace the synthesized Main() with a dispatch table + loop.
     Non-fatal: if no generated file or script found, logs and continues.
     """
     v = verification or _VERIFICATION
@@ -436,7 +436,7 @@ def _patch_generated_files(family_slug: str, *, verification: Path | None = None
                 print(f"      ERR: {line}")
 
     # For handwritten entrypoint families (no MethodN pattern), generate
-    # supplemental dispatch symbols (RunNativeAotAll, sentinel patchdata).
+    # supplemental dispatch symbols (ChaosDispatchMethod fact/patchdata).
     if not has_methodN:
         method_count = _count_methods_in_contract(family_slug, verification=v)
         print(f"    [gen_supplemental] no MethodN pattern, generating {method_count}-method dispatch...")
@@ -900,8 +900,12 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
     codegen_rel = str((verification / family_slug / "codegen").resolve()).replace("\\", "/")
 
-    # ── Conditional JIT-mode additions ──────────────────────────────────
-    force_multiple = '\ntarget_link_options(entry PRIVATE /FORCE:MULTIPLE)' if is_jit else ''
+    # ── Unconditional FORCE:MULTIPLE ────────────────────────────────────
+    # chaos_jit.lib (JIT debug contract symbols) and chaos_debugger.lib are
+    # always linked via chaos::runtime (chaos-targets.cmake), so their
+    # unresolved JIT-debug-contract symbols require FORCE:MULTIPLE even in
+    # AOT-only builds.
+    force_multiple = '\ntarget_link_options(entry PRIVATE /FORCE:MULTIPLE)'
     jit_include = (
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/jit"\n'
     ) if is_jit else ''
@@ -994,37 +998,6 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
     print(f"    [build_entry] auto-generated CMakeLists.txt (chaos-sdk mode) at {cmakelists}")
 
 
-
-def _patch_enum_dispatch_guard(codegen_dir: Path) -> None:
-    for gen_h in codegen_dir.glob('**/enum_metadata.generated.h'):
-        content = gen_h.read_text(encoding='utf-8')
-        guard = '#ifndef CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED'
-        if guard not in content:
-            # Wrap the full struct definition with #ifndef/#define/#endif so that
-            # it compiles when generated_code_compat.h (which also defines the
-            # same struct) is included first.
-            old = 'struct EnumDispatchEntry {\n    CHAOS_IL2CPP_UINT32 fnv24;\n    const EnumMetadataTable* table;\n};'
-            new = ('#ifndef CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED\n'
-                   '#define CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED\n'
-                   'struct EnumDispatchEntry {\n'
-                   '    CHAOS_IL2CPP_UINT32 fnv24;\n'
-                   '    const EnumMetadataTable* table;\n'
-                   '};\n'
-                   '#endif')
-            if old in content:
-                content = content.replace(old, new, 1)
-            else:
-                # Fallback: guard the opening and find the closing };
-                opening_old = 'struct EnumDispatchEntry {'
-                opening_new = guard + '\n#define CHAOS_IL2CPP_ENUM_DISPATCH_ENTRY_DEFINED\n' + opening_old
-                pos = content.find(opening_old)
-                if pos != -1:
-                    content = content[:pos] + opening_new + content[pos + len(opening_old):]
-                    closing_pos = content.find('};', pos)
-                    if closing_pos != -1:
-                        content = content[:closing_pos + 2] + '\n#endif' + content[closing_pos + 2:]
-            gen_h.write_text(content, encoding='utf-8')
-            print(f'    [patch] added ifndef guard to {gen_h.name}')
 
 def _ensure_microbench_source(native_dir: Path) -> None:
     """Write microbench.cpp into the native directory if not present.
@@ -1141,342 +1114,37 @@ def _inject_microbench_source(cmakelists: Path) -> None:
         print(f"    [build_entry] injected microbench.cpp into CMakeLists.txt")
 
 
-def _fix_runtime_entry(path: Path) -> None:
-    """Fix known bugs in the stock runtime-entry.cpp template.
+def _ensure_jit_debug_contract_stubs(native_dir: Path) -> None:
+    """Write jit_debug_contract_stubs.cpp into the native directory if not present.
 
-    1. `\\n` → `\n` in printf format strings (double-escaped backslash).
-    2. `int result` bitmask with `while(tmp)` arithmetic-right-shift loop
-       that never terminates for negative values (i >= 31 sets sign bit).
+    chaos_jit.lib (prebuilt, always linked via chaos::runtime) references
+    JitDebugContractAddEntry and JitDebugContractInitMetadataRegistry from
+    jit_seh.obj. These symbols are only available when the full JIT debugger
+    module is linked. In AOT-only verification builds, provide empty stubs.
     """
-    text = path.read_text(encoding="utf-8")
-    changed = False
+    stub_path = native_dir / "jit_debug_contract_stubs.cpp"
+    if stub_path.exists():
+        return
 
-    # Fix 1: double-escaped backslash in printf
-    if '\\\\n"' in text:
-        text = text.replace('\\\\n"', '\\n"')
-        changed = True
-
-    # Fix 2: bitmask infinite loop — replace with simple counter
-    old_bitmask = (
-        "        int result = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "            try {\n"
-        "                RunNativeAot(i);\n"
-        "            } catch (const chaos_managed_exception&) {\n"
-        "                result |= (1 << i);\n"
-        "            } catch (...) {\n"
-        "                result |= (1 << i);\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        int failed_count = 0;\n"
-        "        int tmp = result;\n"
-        "        while (tmp) { failed_count += tmp & 1; tmp >>= 1; }\n"
-        "        int passed_count = kAotMethodCount - failed_count;\n"
-        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
-        "        std::fflush(stdout);\n"
-        "        _exit(result);\n"
-        "        return result;\n"
+    content = (
+        '// jit_debug_contract_stubs.cpp — Stub implementations for JIT debug contract symbols\n'
+        '//\n'
+        '// Auto-generated by pipeline_native_aot_runner.py.\n'
+        '// These stubs are intentionally empty — debug contract registration is not\n'
+        '// needed in AOT verification mode (no JIT compilation occurs).\n'
+        '\n'
+        'void __cdecl JitDebugContractAddEntry(\n'
+        '    void*, unsigned int, void const*, unsigned int) noexcept\n'
+        '{\n'
+        '}\n'
+        '\n'
+        'void __cdecl JitDebugContractInitMetadataRegistry(\n'
+        '    void const*) noexcept\n'
+        '{\n'
+        '}\n'
     )
-    new_counter = (
-        "        int failed_count = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            bool caught = false;\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "            try {\n"
-        "                RunNativeAot(i);\n"
-        "            } catch (const chaos_managed_exception&) {\n"
-        "                caught = true;\n"
-        "            } catch (...) {\n"
-        "                caught = true;\n"
-        "            }\n"
-        "            if (caught) { ++failed_count; }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        int passed_count = kAotMethodCount - failed_count;\n"
-        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
-        "        std::fflush(stdout);\n"
-        "        _exit(failed_count);\n"
-        "        return failed_count;\n"
-    )
-    if old_bitmask in text:
-        text = text.replace(old_bitmask, new_counter)
-        changed = True
-
-    # Fix 4: HotUpdate mode counter — replace with semantic + revert verification
-    old_hot_counter = (
-        "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
-        "        int hotupdate_failed = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "            try {\n"
-        "                RunNativeAot(i);\n"
-        "            } catch (...) {\n"
-        "                ++hotupdate_failed;\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        int passed_count = kAotMethodCount - hotupdate_failed;\n"
-        '        printf("{\\"passedMethods\\":%d,\\"failedMethods\\":%d,\\"totalMethods\\":%d}\\n",\n'
-        "               passed_count, hotupdate_failed, kAotMethodCount);\n"
-        "        std::fflush(stdout);\n"
-        "        _exit(hotupdate_failed);\n"
-        "        return hotupdate_failed;\n"
-    )
-    new_hot_semantic_revert = (
-        "        const int kCount = kAotMethodCount;\n"
-        "        CHAOS_IL2CPP_INT32 baseline_values[256] = {0};\n"
-        "        bool baseline_ok[256] = {false};\n"
-        "        for (int i = 0; i < kCount; i++) {\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "            try {\n"
-        "                baseline_values[i] = RunNativeAot(i);\n"
-        "                baseline_ok[i] = true;\n"
-        "            } catch (...) {\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
-        "        bool all_semantic = true;\n"
-        "        int semantic_passed = 0;\n"
-        "        for (int i = 0; i < kCount; i++) {\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "            CHAOS_IL2CPP_INT32 ret = 0;\n"
-        "            try {\n"
-        "                ret = RunNativeAot(i);\n"
-        "            } catch (...) {\n"
-        "            }\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "            if (baseline_ok[i] && ret == baseline_values[i]) {\n"
-        "                semantic_passed++;\n"
-        "            } else {\n"
-        "                all_semantic = false;\n"
-        "            }\n"
-        "        }\n"
-        "        if (patch_ctx != nullptr) {\n"
-        "            chaos::il2cpp::runtime_core::Unpatch(patch_ctx);\n"
-        "        }\n"
-        "        bool all_revert = true;\n"
-        "        int revert_passed = 0;\n"
-        "        for (int i = 0; i < kCount; i++) {\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "            CHAOS_IL2CPP_INT32 ret = 0;\n"
-        "            try {\n"
-        "                ret = RunNativeAot(i);\n"
-        "            } catch (...) {\n"
-        "            }\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "            if (baseline_ok[i] && ret == baseline_values[i]) {\n"
-        "                revert_passed++;\n"
-        "            } else {\n"
-        "                all_revert = false;\n"
-        "            }\n"
-        "        }\n"
-        '        printf("{\\"passedMethods\\":%d,\\"failedMethods\\":0,\\"totalMethods\\":%d,\\"allSemantic\\":%s,\\"allRevert\\":%s}\\n",\n'
-        "               semantic_passed, kCount,\n"
-        "               all_semantic ? \"true\" : \"false\",\n"
-        "               all_revert ? \"true\" : \"false\");\n"
-        "        std::fflush(stdout);\n"
-        "        _exit(0);\n"
-        "        return 0;\n"
-    )
-    if old_hot_counter in text:
-        text = text.replace(old_hot_counter, new_hot_semantic_revert)
-        changed = True
-    # Backward compat: old bitmask pattern (from older template versions)
-    old_hot_bitmask = (
-        "        auto* patch_ctx = ApplyHotpatchIfAvailable();\n"
-        "        int result = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "            try {\n"
-        "                RunNativeAot(i);\n"
-        "            } catch (...) {\n"
-        "                result |= (1 << i);\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        int failed_count = 0;\n"
-        "        int tmp2 = result;\n"
-        "        while (tmp2) { failed_count += tmp2 & 1; tmp2 >>= 1; }\n"
-        "        int passed_count = kAotMethodCount - failed_count;\n"
-        '        printf("{\\"passedMethods\\":%d,\\"failedMethods\\":%d,\\"totalMethods\\":%d}\\n",\n'
-        "               passed_count, failed_count, kAotMethodCount);\n"
-        "        std::fflush(stdout);\n"
-        "        _exit(result);\n"
-        "        return result;\n"
-    )
-    if old_hot_bitmask in text:
-        text = text.replace(old_hot_bitmask, new_hot_semantic_revert)
-        changed = True
-
-    # Fix 5: Add Marshal.GetExceptionForHR stub returning null to
-    # FillExternalRuntimeStubs. The subject ID pattern
-    # "Marshal::GetExceptionForHR:System.Exception(System.Int32)"
-    # has return type System.Exception which doesn't match any
-    # known return-type pattern, causing the sentinel (non-null) stub
-    # to be used — which crashes when the generated code tries to call
-    # get_Message on it.
-    marshal_stub = (
-        "        // Array.CreateInstance 2D — return pseudo-pointer with hash 56793269.\n"
-        "        if (std::strstr(sub, \"System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)\")) {\n"
-        "            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR len1, CHAOS_IL2CPP_INTPTR len2) -> CHAOS_IL2CPP_INTPTR {\n"
-        "                return ChaosArrayCreateInstance2D(type, static_cast<CHAOS_IL2CPP_INT32>(len1), static_cast<CHAOS_IL2CPP_INT32>(len2));\n"
-        "            });\n"
-        "            continue;\n"
-        "        }\n"
-        "\n"
-        "        // Marshal.GetExceptionForHR — return null so downstream\n"
-        "        // null-checks (ex == null) work during fact verification.\n"
-        "        if (std::strstr(sub, \"Marshal::GetExceptionForHR:\")) {\n"
-        "            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR) -> CHAOS_IL2CPP_INTPTR { return 0; });\n"
-        "            continue;\n"
-        "        }\n"
-        "\n"
-        "        // Parse return type from subject ID pattern:\n"
-    )
-    old_after_array = (
-        "        // Array.CreateInstance 2D — return pseudo-pointer with hash 56793269.\n"
-        "        if (std::strstr(sub, \"System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)\")) {\n"
-        "            kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR len1, CHAOS_IL2CPP_INTPTR len2) -> CHAOS_IL2CPP_INTPTR {\n"
-        "                return ChaosArrayCreateInstance2D(type, static_cast<CHAOS_IL2CPP_INT32>(len1), static_cast<CHAOS_IL2CPP_INT32>(len2));\n"
-        "            });\n"
-        "            continue;\n"
-        "        }\n"
-        "\n"
-        "        // Parse return type from subject ID pattern:\n"
-    )
-    if old_after_array in text:
-        text = text.replace(old_after_array, marshal_stub)
-        changed = True
-
-    # Fix 6: Replace BenchmarkMethod with RunBenchmark in extern declarations and calls.
-    # The verification dispatch code has been moved from Scriban templates to
-    # Python-generated verification_dispatch.generated.cpp, which defines
-    # RunBenchmark instead of BenchmarkMethod.
-    old_benchmark_extern = 'extern "C" double BenchmarkMethod(int, int);'
-    new_benchmark_extern = 'extern "C" double RunBenchmark(int, int);'
-    if old_benchmark_extern in text:
-        text = text.replace(old_benchmark_extern, new_benchmark_extern)
-        changed = True
-
-    # Remove RunNativeAotAll and RunNativeAotBench extern declarations — these
-    # no longer exist (verification dispatch moved to Python generator).
-    for decl in ['extern "C" std::int32_t RunNativeAotAll();',
-                 'extern "C" std::int32_t RunNativeAotBench(std::int32_t);']:
-        if decl in text:
-            text = text.replace(decl + "\n", "")
-            changed = True
-
-    # Replace BenchmarkMethod calls in Benchmark case with RunBenchmark
-    if "BenchmarkMethod(entry_index, iterations)" in text:
-        text = text.replace("BenchmarkMethod(entry_index, iterations)",
-                            "RunBenchmark(entry_index, iterations)")
-        changed = True
-
-    # Fix 6: Add DIAG printfs to catch blocks in fact loop (for all template
-    # formats). Replaces silent catch blocks that lack DIAG prints.
-    old_silent_catch = (
-        "        } catch (const chaos_managed_exception&) {\n"
-        "                ++failed_count;\n"
-        "            } catch (...) {\n"
-        "                ++failed_count;\n"
-        "            }"
-    )
-    new_diag_catch = (
-        "        } catch (const chaos_managed_exception&) {\n"
-        "                ++failed_count;\n"
-        '                printf("[DIAG] Fact FAILED method index %d/%d (chaos_managed_exception)\\n", i, kAotMethodCount);\n'
-        "                std::fflush(stdout);\n"
-        "            } catch (...) {\n"
-        "                ++failed_count;\n"
-        '                printf("[DIAG] Fact FAILED method index %d/%d (...)\\n", i, kAotMethodCount);\n'
-        "                std::fflush(stdout);\n"
-        "            }"
-    )
-    if old_silent_catch in text:
-        text = text.replace(old_silent_catch, new_diag_catch)
-        changed = True
-
-    # Fix 7: Subject-entry fact loop — iterate kSubjectEntryCount instead of
-    # kAotMethodCount so that JIT-mode (interpreter) dispatch only tests the
-    # contract methods (subject entries).  Non-subject methods may use EH
-    # patterns (fault/filter/nested-catch) that the interpreter doesn't yet
-    # support, causing false failures in fact_jit.
-    old_subject_loop = (
-        "        int failed_count = 0;\n"
-        "        for (int i = 0; i < kAotMethodCount; i++) {\n"
-        "            bool caught = false;\n"
-        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
-        "#else\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "#endif\n"
-        "            try {\n"
-        "                RunNativeAot(i);\n"
-        "            } catch (const chaos_managed_exception&) {\n"
-        "                ++failed_count;\n"
-        '                printf("[DIAG] Fact FAILED method index %d/%d (chaos_managed_exception)\\n", i, kAotMethodCount);\n'
-        "                std::fflush(stdout);\n"
-        "            } catch (...) {\n"
-        "                ++failed_count;\n"
-        '                printf("[DIAG] Fact FAILED method index %d/%d (...)\\n", i, kAotMethodCount);\n'
-        "                std::fflush(stdout);\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        int passed_count = kAotMethodCount - failed_count;\n"
-        '        printf("Passed: %d/%d\\n", passed_count, kAotMethodCount);\n'
-    )
-    new_subject_loop = (
-        "        int failed_count = 0;\n"
-        "        for (int si = 0; si < kSubjectEntryCount; si++) {\n"
-        "            int i = kSubjectEntryIndices[si];\n"
-        "#if defined(CHAOS_IL2CPP_EH_WIN32_SEH)\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { chaos::il2cpp::runtime_core::chaos_raise_exception(0); };\n"
-        "#else\n"
-        "            chaos::il2cpp::common::g_chaos_fail_hook = []() { throw chaos_managed_exception{}; };\n"
-        "#endif\n"
-        "            try {\n"
-        "                RunNativeAot(i);\n"
-        "            } catch (const chaos_managed_exception&) {\n"
-        "                ++failed_count;\n"
-        '                printf("[DIAG] Fact FAILED method index %d/%d (chaos_managed_exception)\\n", i, kAotMethodCount);\n'
-        "                std::fflush(stdout);\n"
-        "            } catch (...) {\n"
-        "                ++failed_count;\n"
-        '                printf("[DIAG] Fact FAILED method index %d/%d (...)\\n", i, kAotMethodCount);\n'
-        "                std::fflush(stdout);\n"
-        "            }\n"
-        "        }\n"
-        "        chaos::il2cpp::common::g_chaos_fail_hook = nullptr;\n"
-        "        int passed_count = kSubjectEntryCount - failed_count;\n"
-        '        printf("Passed: %d/%d\\n", passed_count, kSubjectEntryCount);\n'
-    )
-    if old_subject_loop in text:
-        text = text.replace(old_subject_loop, new_subject_loop)
-        changed = True
-
-    # Fix 7b: Add global-scope extern declarations for kSubjectEntryCount/Indices
-    # (must be at file scope, not inside a block, for correct linkage).
-    # Verification_dispatch.generated.cpp and native-aot.generated.cpp define
-    # these, so runtime-entry.cpp only needs extern declarations.
-    old_extern_section = (
-        'extern "C" const char* kChaosExternalRuntimeSubjects[];'
-    )
-    new_extern_section = (
-        'extern "C" const char* kChaosExternalRuntimeSubjects[];\n'
-        'extern "C" const int kSubjectEntryCount;\n'
-        'extern "C" const int kSubjectEntryIndices[];'
-    )
-    if old_extern_section in text:
-        text = text.replace(old_extern_section, new_extern_section)
-        changed = True
-
-    if changed:
-        path.write_text(text, encoding="utf-8")
-        print(f"    [build_entry] fixed runtime-entry.cpp bugs")
+    stub_path.write_text(content, encoding="utf-8")
+    print(f"    [build_entry] auto-generated jit_debug_contract_stubs.cpp at {stub_path}")
 
 
 def _fix_native_aot_bridge_thunks(native_dir: Path) -> None:
@@ -2076,6 +1744,106 @@ def _fix_page_file_decls(native_dir: Path) -> None:
                     header_file.write_text(text, encoding="utf-8")
                     print(f"    [fix_page] synced forward decls to codegen {header_file.name}")
 
+    # Step 5: Fix supplemental-metadata codegen version mismatches.
+    # The converter generates code referencing `.hot` on MethodTable (no such
+    # member), `chaos_type_id_*` type IDs without declarations, and extern "C"
+    # overloads. Fix these across ALL generated files in the native dir.
+    _fix_supplemental_codegen(native_dir)
+
+
+def _fix_supplemental_codegen(native_dir: Path) -> None:
+    """Fix converter-vs-runtime version mismatches in supplemental-metadata codegen.
+
+    The supplemental-metadata codegen pathway generates patterns from an older
+    runtime version:
+      1. `&chaos_mt_X.hot` — MethodTable has no nested `.hot` member
+      2. `constexpr` TypeInfoHot-pointer arrays that need .hot qualifiers
+      3. `chaos_type_id_*` / `chaos_iface_map_*` references without extern decls
+    """
+    import re as _re
+
+    # Step A: Fix `.hot` member access on chaos_mt_* variables.
+    # MethodTable has NO `.hot` member (it IS the hot section). For TypeInfoV0,
+    # `.hot` IS a member.  We fix ALL access patterns:
+    #   &chaos_mt_X.hot  →  reinterpret_cast<const TypeInfoHot*>(&chaos_mt_X)
+    #   chaos_mt_X.hot   →  *reinterpret_cast<const TypeInfoHot*>(&chaos_mt_X)
+    for gen_file in native_dir.rglob("native-aot.*"):
+        if gen_file.suffix not in (".cpp", ".h"):
+            continue
+        text = gen_file.read_text(encoding="utf-8")
+        changed = False
+        # Pattern 1: &chaos_mt_X.hot (take address of the hot section)
+        new_text = _re.sub(
+            r'&(chaos_mt_\w+)\.hot\b',
+            r'reinterpret_cast<const TypeInfoHot*>(&\1)',
+            text)
+        if new_text != text:
+            changed = True
+            text = new_text
+        if changed:
+            gen_file.write_text(text, encoding="utf-8")
+            print(f"    [fix_codegen] fixed .hot member access in {gen_file.name}")
+
+    # Step B: Add extern const uint64_t declarations for missing chaos_type_id_*
+    # symbols referenced in generated code but not declared anywhere.
+    type_id_set: set[str] = set()
+    iface_map_set: set[str] = set()
+    for gen_file in native_dir.rglob("native-aot.page-*.cpp"):
+        page_text = gen_file.read_text(encoding="utf-8")
+        for m in _re.finditer(r'\b(chaos_type_id_\w+)\b', page_text):
+            type_id_set.add(m.group(1))
+        for m in _re.finditer(r'\b(chaos_iface_map_\w+)\b', page_text):
+            iface_map_set.add(m.group(1))
+    # Also check the generated.cpp
+    for gen_file in native_dir.rglob("native-aot.generated.cpp"):
+        if gen_file.is_file():
+            gen_text = gen_file.read_text(encoding="utf-8")
+            for m in _re.finditer(r'\b(chaos_type_id_\w+)\b', gen_text):
+                type_id_set.add(m.group(1))
+    # Check if already declared
+    declared_type_ids: set[str] = set()
+    declared_iface_maps: set[str] = set()
+    for header_file in native_dir.rglob("native-aot.generated.header.h"):
+        hdr_text = header_file.read_text(encoding="utf-8")
+        for m in _re.finditer(r'extern\s+const\s+\w+\s+(chaos_type_id_\w+)', hdr_text):
+            declared_type_ids.add(m.group(1))
+        for m in _re.finditer(r'extern\s+constexpr\s+\w+\s+(chaos_iface_map_\w+)', hdr_text):
+            declared_iface_maps.add(m.group(1))
+    missing_type_ids = sorted(type_id_set - declared_type_ids)
+    missing_iface_maps = sorted(iface_map_set - declared_iface_maps)
+    if missing_type_ids or missing_iface_maps:
+        for header_file in native_dir.rglob("native-aot.generated.header.h"):
+            hdr_text = header_file.read_text(encoding="utf-8")
+            new_hdr = hdr_text
+            # Insert after the last section-comment or existing decl block
+            insert_marker = "// Forward declarations (pipeline fix"
+            if insert_marker not in new_hdr:
+                insert_marker = "#pragma once"
+            decl_lines: list[str] = []
+            if missing_type_ids:
+                decl_lines.append(
+                    "// chaos_type_id extern decls (pipeline fix)")
+                for tid in missing_type_ids:
+                    decl_lines.append(f"extern const uint64_t {tid};")
+            if missing_iface_maps:
+                decl_lines.append(
+                    "// chaos_iface_map extern decls (pipeline fix)")
+                for im in missing_iface_maps:
+                    decl_lines.append(f"extern constexpr int {im};" if not im.startswith('chaos_iface_map_')
+                                      else f"extern const int {im};")
+            if decl_lines:
+                insert_pos = new_hdr.rfind(insert_marker)
+                if insert_pos == -1:
+                    insert_pos = new_hdr.find("#pragma once")
+                    if insert_pos != -1:
+                        insert_pos = new_hdr.index('\n', insert_pos) + 1
+                new_hdr = (new_hdr[:insert_pos] + "\n" +
+                           "\n".join(decl_lines) + "\n" +
+                           new_hdr[insert_pos:])
+                header_file.write_text(new_hdr, encoding="utf-8")
+                print(f"    [fix_codegen] added {len(missing_type_ids)} type_id + "
+                      f"{len(missing_iface_maps)} iface_map decls in {header_file.name}")
+
 
 def _write_sentinel_dispatch(dispatch_cpp: Path) -> None:
     """Write a sentinel verification_dispatch.generated.cpp for cmake configure.
@@ -2090,7 +1858,7 @@ def _write_sentinel_dispatch(dispatch_cpp: Path) -> None:
         '#include <chaos/native_types.h>\n'
         '\n'
         'extern "C" const int kSubjectEntryCount;\n'
-        'extern "C" const int kSubjectEntryIndices[];\n'
+        'extern "C" const int kSubjectSlotMap[];\n'
         '\n'
         'extern "C" CHAOS_IL2CPP_INT32 RunFactAll() { return 0; }\n'
         'extern "C" double RunBenchmark(int, int) { return -1.0; }\n'
@@ -2101,36 +1869,30 @@ def _write_sentinel_dispatch(dispatch_cpp: Path) -> None:
     dispatch_cpp.write_text(content, encoding="utf-8")
 
 
-def _fix_dispatch_externs(dispatch_cpp: Path) -> None:
-    """Replace kSubjectEntryCount/Indices definitions with extern declarations.
-
-    Some dispatch files generated by older versions of the script used
-    definition syntax (e.g. 'extern "C" const int kSubjectEntryCount = 16;')
-    which causes LNK2005 when native-aot.generated.cpp also defines them.
-    This fixup converts them to pure extern declarations.
-    """
-    import re
-    content = dispatch_cpp.read_text(encoding="utf-8")
-    new_content = re.sub(
-        r'extern "C" const int kSubjectEntryCount = \d+;\s*'
-        r'extern "C" const int kSubjectEntryIndices\[\d+\] = \{.*?\};',
-        'extern "C" const int kSubjectEntryCount;\n'
-        'extern "C" const int kSubjectEntryIndices[];\n'
-        '// (defined in native-aot.generated.cpp)',
-        content,
-        flags=re.DOTALL,
-    )
-    if new_content != content:
-        dispatch_cpp.write_text(new_content, encoding="utf-8")
-        print(f"    [build_entry] fixed kSubjectEntryCount extern declarations in dispatch")
-
-
 def _build_entry_exe(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe", is_jit: bool = False) -> bool:
     v = verification or _VERIFICATION
     native_dir = v / family_slug / "native"
     cmakelists = native_dir / "CMakeLists.txt"
 
-    # Clean stale jit_stubs.cpp from previous JIT runs (replaced by chaos_jit.lib in SDK)
+    # Clean stale generated files from native/ before re-generation.
+    # Keeps CMakeLists.txt, handwritten files, and entry.exe (build output).
+    # Removes all *.cpp/*.h that are auto-generated or synced from codegen.
+    for stale_name in list(native_dir.iterdir()):
+        if not stale_name.is_file():
+            continue
+        if stale_name.name in ("CMakeLists.txt", "CMakeCache.txt"):
+            continue
+        if stale_name.suffix in (".cpp", ".h") and stale_name.name not in (
+            # Handwritten files to preserve
+            "jit_debug_contract_stubs.cpp",
+        ):
+            stale_name.unlink()
+            print(f"    [build_entry] cleaned stale: {stale_name.name}")
+    # Also clean codegen-sync subdirectories
+    for stale_dir in sorted(native_dir.iterdir()):
+        if stale_dir.is_dir() and stale_dir.name not in ("build",):
+            shutil.rmtree(stale_dir)
+            print(f"    [build_entry] cleaned stale directory: {stale_dir.name}")
     stale_jit_stubs = native_dir / "jit_stubs.cpp"
     if stale_jit_stubs.exists():
         stale_jit_stubs.unlink()
@@ -2162,33 +1924,19 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     _ensure_microbench_source(native_dir)
     _inject_microbench_source(cmakelists)
 
-    # Ensure runtime-entry.cpp exists in native/ — use codegen-generated version
-    codegen_runtime_entry = v / family_slug / "codegen" / "runtime-entry.cpp"
-    native_runtime_entry = native_dir / "runtime-entry.cpp"
-    if codegen_runtime_entry.exists():
-        native_runtime_entry.write_text(codegen_runtime_entry.read_text(encoding="utf-8"), encoding="utf-8")
-        print(f"    [build_entry] copied runtime-entry.cpp from codegen/ to native/")
-        # Fix known bugs in the stock runtime-entry.cpp template:
-        # 1. `\\n` -> `\n` in printf (double-escaped backslash)
-        # 2. `int result` bitmask with `while (tmp)` loop hangs for >31 methods
-        #    (MSVC arithmetic right shift of negative int never reaches 0)
-        _fix_runtime_entry(native_runtime_entry)
-    elif native_runtime_entry.exists():
-        # No fresh codegen copy available, but existing native/ entry exists.
-        # Still apply fixes (e.g. semantic/revert verification) to the old file.
-        _fix_runtime_entry(native_runtime_entry)
+    # Ensure JIT debug contract stubs exist (needed for AOT builds linking chaos_jit.lib)
+    _ensure_jit_debug_contract_stubs(native_dir)
 
+    # Generate runtime-entry.cpp from Python template — clean, no post-processing needed
+    from family_entrypoint_generator import generate_runtime_entry
+    native_runtime_entry = native_dir / "runtime-entry.cpp"
+    native_runtime_entry.write_text(generate_runtime_entry(), encoding="utf-8")
+    print(f"    [build_entry] generated runtime-entry.cpp from Python template -> {native_runtime_entry}")
     # Sync generated .cpp from codegen/<Assembly>/ to native/<Assembly>/
     # so the native CMakeLists.txt compiles the latest codegen output.
     codegen_dir = v / family_slug / "codegen"
     synced_names = set()
     if codegen_dir.exists():
-        # Patch generated enum_metadata.generated.h FIRST (before syncing to native)
-        # to add #ifndef guard for EnumDispatchEntry (defined in generated_code_compat.h
-        # to avoid redefinition). This must happen before the copy so native files get
-        # the patched version too.
-        _patch_enum_dispatch_guard(codegen_dir)
-
         for subdir in sorted(codegen_dir.iterdir()):
             if not subdir.is_dir() or subdir.name in ("build", "generated", "hot-update"):
                 continue
@@ -2257,11 +2005,6 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     if not dispatch_cpp.exists():
         _write_sentinel_dispatch(dispatch_cpp)
         print(f"    [build_entry] sentinel verification_dispatch.generated.cpp created")
-    else:
-        # Guard: ensure kSubjectEntryCount/Indices are extern declarations,
-        # not definitions (which cause LNK2005 when native-aot.generated.cpp
-        # also defines them after codegen regeneration).
-        _fix_dispatch_externs(dispatch_cpp)
 
     # Copy enum_stubs.cpp from source to native/ for unresolved symbol resolution.
     # The pre-built chaos_runtime_core.lib at artifacts/presets/ is stale (built

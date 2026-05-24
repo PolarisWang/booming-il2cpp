@@ -3,15 +3,15 @@
 Reads the methods-manifest.json emitted by codegen (NativeAotLoweringPlanner)
 and produces verification_dispatch.generated.cpp containing:
 
-  - kSubjectEntryIndices[]   — subject→kAotMethod index mapping
-  - RunFactAll()             — all-methods fact loop (uses RunNativeAot)
-  - RunBenchmark(idx, iters) — timing loop via RunNativeAot
-  - RunHotpatchAll()         — all-methods loop via RunNativeAot
-  - RunHotpatchBenchmark()   — timing loop via RunNativeAot
+  - kSubjectSlotMap[]       — subject→kMethodTable index mapping (extern decl)
+  - RunFactAll()            — all-methods fact loop via ChaosDispatchMethod
+  - RunBenchmark(idx, iters)— timing loop via ChaosDispatchMethod
+  - RunHotpatchAll()        — post-patch all-methods loop via ChaosDispatchMethod
+  - RunHotpatchBenchmark()  — post-patch timing loop via ChaosDispatchMethod
 
-All functions delegate to RunNativeAot (defined in native-aot.generated.cpp as
-extern "C"), avoiding direct dependency on static symbols (kAotMethods[],
-s_hotpatch_entries) that are file-scoped in the codegen output.
+All functions delegate to ChaosDispatchMethod (from <chaos/hotpatch_dispatch.h>)
+and GetHotpatchEntries() (from the hotpatch-table generated TU), avoiding any
+dependency on static symbols in the codegen output.
 
 The generated file is compiled into entry.exe for use by the family
 verification orchestrator stages.
@@ -21,14 +21,14 @@ from __future__ import annotations
 
 import json
 import os
-import re
 from pathlib import Path
 from typing import Any
 
 
-def _cpp_string_literal(s: str) -> str:
-    """Escape a string for use as a C++ string literal."""
-    return '"' + s.replace('\\', '\\\\').replace('"', '\\"').replace('\n', '\\n') + '"'
+def _is_jit_mode_from_manifest(manifest: dict[str, Any]) -> bool:
+    """Check manifest for JIT-related flags to determine mode."""
+    mode = manifest.get("codegenMode", "")
+    return mode == "jit"
 
 
 def generate_verification_dispatch(
@@ -58,6 +58,7 @@ def generate_verification_dispatch(
 
     assembly_name: str = manifest.get("assemblyName", "Unknown")
     method_count: int = manifest.get("methodCount", len(methods))
+    is_jit = _is_jit_mode_from_manifest(manifest)
 
     lines: list[str] = []
 
@@ -66,19 +67,32 @@ def generate_verification_dispatch(
 
     # ── File header ─────────────────────────────────────────────────
     write("// verification_dispatch.generated.cpp — auto-generated")
-    write(f"// Assembly: {assembly_name}, Methods: {method_count}")
+    write(f"// Assembly: {assembly_name}, Methods: {method_count}, Mode: {'JIT' if is_jit else 'AOT'}")
+    write('')
     write('#include <cstdint>')
     write('#include <chrono>')
-    write('#include <chaos/native_types.h>')
+    write('#include <chaos/eh.h>')
+    write('#include <chaos/hotpatch_dispatch.h>')
     write('')
 
-    # Extern declarations (provided by native-aot.generated.cpp)
+    # Extern declarations (defined in native-aot.generated.cpp and hotpatch-table.generated.cpp)
     write('extern "C" const int kAotMethodCount;')
-    write('extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32);')
+    write('extern "C" const int kSubjectEntryCount;')
+    write('extern "C" const int kSubjectSlotMap[];')
+    write('// kSubjectEntryCount/kSubjectSlotMap defined in native-aot.generated.cpp (DispatchEntryCode template)')
+    write('')
+    if not is_jit:
+        write('// kDefaultArgThunks defined in native-aot.generated.cpp (AOT-only)')
+        write('extern "C" void (*kDefaultArgThunks[])();')
+        write('')
+    # GetHotpatchEntries/GetHotpatchEntryCount: extern "C" defined in hotpatch-table.generated.cpp
+    write('extern "C" const chaos::il2cpp::runtime_core::HotpatchEntryV0* GetHotpatchEntries() noexcept;')
+    write('extern "C" int32_t GetHotpatchEntryCount() noexcept;')
     write('')
 
-    # ── Build subject entry indices ─────────────────────────────────
-    # Extract subjectIndex from each method and build kSubjectEntryIndices[]
+    # ── Build subject slot map ──────────────────────────────────────
+    # Extract subjectIndex from each method — this is a local build used
+    # for debug output only. The actual kSubjectSlotMap is in native-aot.generated.cpp.
     subject_indices: list[int] = []
     for m in methods:
         si = m.get("subjectIndex", -1)
@@ -94,47 +108,47 @@ def generate_verification_dispatch(
             subject_indices[i] = i
 
     if subject_indices:
-        # NOTE: kSubjectEntryCount / kSubjectEntryIndices are defined in
-        # native-aot.generated.cpp (with actual values).  We declare them
-        # extern here to avoid multiply-defined-symbol linker errors when
-        # both TUs are compiled into entry.exe.
-        write(f'extern "C" const int kSubjectEntryCount;')
-        write(f'extern "C" const int kSubjectEntryIndices[];')
-        write('// (defined in native-aot.generated.cpp)')
+        write(f'// Subject entry count: {len(subject_indices)} (from manifest)')
         write('')
         write('')
 
     # ── RunFactAll ──────────────────────────────────────────────────
-    # Uses RunNativeAot for each subject entry, catching exceptions.
-    # Iterates kSubjectEntryIndices (subject methods only) rather than
-    # all kAotMethodCount methods, to avoid false failures from
+    # Uses ChaosDispatchMethod for each subject entry, catching exceptions.
+    # Iterates kSubjectSlotMap (subject methods only) rather than all
+    # kAotMethodCount methods, to avoid false failures from
     # interpreter-unsupported EH patterns (fault/filter/nested-catch).
-    write("// ── RunFactAll: run every subject entry via RunNativeAot, return failure count ──")
+    if not is_jit:
+        fact_thunks = 'kDefaultArgThunks'
+    else:
+        fact_thunks = 'nullptr'
+
+    write("// ── RunFactAll: run every subject entry via ChaosDispatchMethod, return failure count ──")
     write('extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {')
     write('    int failed_count = 0;')
     write('    for (int si = 0; si < kSubjectEntryCount; si++) {')
-    write('        int i = kSubjectEntryIndices[si];')
-    write('        try {')
-    write('            RunNativeAot(i);')
-    write('        } catch (...) {')
+    write('        int i = kSubjectSlotMap[si];')
+    write('        CHAOS_EH_TRY')
+    write(f'            ChaosDispatchMethod(GetHotpatchEntries(), kAotMethodCount, i, {fact_thunks});')
+    write('        CHAOS_EH_CATCH_BEGIN')
     write('            ++failed_count;')
-    write('        }')
+    write('        CHAOS_EH_END')
     write('    }')
     write('    return failed_count;')
     write('}')
     write('')
 
     # ── RunBenchmark ────────────────────────────────────────────────
-    # Uses RunNativeAot in the timing loop.  This measures the native path
+    # Uses ChaosDispatchMethod in the timing loop.  This measures the native path
     # when no hotpatch is active, or the interpreter path after a hotpatch.
-    # RunNativeAot handles all hotpatch routing internally.
-    write("// ── RunBenchmark: timing loop via RunNativeAot ───────────────────")
+    # ChaosDispatchMethod handles all hotpatch routing internally.
+    write("// ── RunBenchmark: timing loop via ChaosDispatchMethod ───────────────────")
     write('extern "C" double RunBenchmark(int entry_index, int iterations) {')
     write('    if (entry_index < 0 || entry_index >= kAotMethodCount)')
     write('        return -1.0;')
+    write('    auto* entries = GetHotpatchEntries();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
-    write('        RunNativeAot(entry_index);')
+    write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {fact_thunks});')
     write('    }')
     write('    auto end = std::chrono::steady_clock::now();')
     write('    return std::chrono::duration<double, std::milli>(end - start).count();')
@@ -142,33 +156,34 @@ def generate_verification_dispatch(
     write('')
 
     # ── RunHotpatchAll ──────────────────────────────────────────────
-    # Same as RunFactAll but semantically "after hotpatch".  RunNativeAot
+    # Same as RunFactAll but semantically "after hotpatch".  ChaosDispatchMethod
     # checks the hotpatch dispatch table internally.  Iterates subject
     # entries only (same reason as RunFactAll).
-    write("// ── RunHotpatchAll: all-subject-entries loop via RunNativeAot (post-patch) ──")
+    write("// ── RunHotpatchAll: all-subject-entries loop via ChaosDispatchMethod (post-patch) ──")
     write('extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {')
     write('    int failed_count = 0;')
     write('    for (int si = 0; si < kSubjectEntryCount; si++) {')
-    write('        int i = kSubjectEntryIndices[si];')
-    write('        try {')
-    write('            RunNativeAot(i);')
-    write('        } catch (...) {')
+    write('        int i = kSubjectSlotMap[si];')
+    write('        CHAOS_EH_TRY')
+    write(f'            ChaosDispatchMethod(GetHotpatchEntries(), kAotMethodCount, i, {fact_thunks});')
+    write('        CHAOS_EH_CATCH_BEGIN')
     write('            ++failed_count;')
-    write('        }')
+    write('        CHAOS_EH_END')
     write('    }')
     write('    return failed_count;')
     write('}')
     write('')
 
     # ── RunHotpatchBenchmark ────────────────────────────────────────
-    # Timing loop via RunNativeAot, semantically for post-hotpatch measurement.
-    write("// ── RunHotpatchBenchmark: timing loop via RunNativeAot (post-patch) ──")
+    # Timing loop via ChaosDispatchMethod, semantically for post-hotpatch measurement.
+    write("// ── RunHotpatchBenchmark: timing loop via ChaosDispatchMethod (post-patch) ──")
     write('extern "C" double RunHotpatchBenchmark(int entry_index, int iterations) {')
     write('    if (entry_index < 0 || entry_index >= kAotMethodCount)')
     write('        return -1.0;')
+    write('    auto* entries = GetHotpatchEntries();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
-    write('        RunNativeAot(entry_index);')
+    write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {fact_thunks});')
     write('    }')
     write('    auto end = std::chrono::steady_clock::now();')
     write('    return std::chrono::duration<double, std::milli>(end - start).count();')

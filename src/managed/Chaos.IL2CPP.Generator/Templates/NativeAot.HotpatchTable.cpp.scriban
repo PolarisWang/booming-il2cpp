@@ -28,11 +28,20 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[{{ slot_count }}] = {
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[{{ total_method_count }}] = {
+// s_hotpatch_entries — external linkage for verification_dispatch
+// NOTE: `static` is deliberately omitted so that the verification dispatch
+// TU (verification_dispatch.generated.cpp) can access this array via
+// GetHotpatchEntries(). Without external linkage, the linker cannot resolve
+// the symbol across translation units.
+extern "C" HotpatchEntryV0 s_hotpatch_entries[{{ total_method_count }}] = {
 {{~ for entry in entries ~}}
     { reinterpret_cast<void*>(&{{ entry.native_symbol }}), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, {{ entry.flags }} },  // {{ entry.type_name }}::{{ entry.method_name }}
 {{~ end ~}}
 };
+
+// Accessor functions for verification_dispatch.generated.cpp
+extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpatch_entries; }
+extern "C" int32_t GetHotpatchEntryCount() noexcept { return {{ total_method_count }}; }
 
 // Module hotpatch bundle
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
