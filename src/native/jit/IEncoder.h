@@ -233,6 +233,17 @@ public:
     // Bit manipulation
     virtual void EmitPopcntRR(uint8_t dst, uint8_t src) = 0;
     virtual void EmitLzcntRR(uint8_t dst, uint8_t src) = 0;
+
+    // ── FMA (VEX.66.0F38 3-operand fused multiply-add) ──────────────
+    // Semantics (231 form): acc = src1 * src2 + acc
+    virtual void EmitVfmadd231psRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
+    virtual void EmitVfmadd231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
+    virtual void EmitVfmsub231psRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
+    virtual void EmitVfmsub231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
+    virtual void EmitVfnmadd231psRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
+    virtual void EmitVfnmadd231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
+    virtual void EmitVfnmsub231psRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
+    virtual void EmitVfnmsub231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) = 0;
 };
 
 }  // namespace chaos::il2cpp::jit

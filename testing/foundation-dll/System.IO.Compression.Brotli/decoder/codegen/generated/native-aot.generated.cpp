@@ -37,6 +37,11 @@ extern "C" void DecoderSubjects_DecoderSubjects_Subject_0(void);
 extern "C" void DecoderSubjects_DecoderSubjects_Subject_1(void);
 extern "C" void DecoderSubjects_DecoderSubjects_Subject_2(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void DecoderSubjects_DecoderSubjects_Subject_0(void);
+extern "C" void DecoderSubjects_DecoderSubjects_Subject_1(void);
+extern "C" void DecoderSubjects_DecoderSubjects_Subject_2(void);
+
 namespace chaos::il2cpp::codegen::DecoderSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

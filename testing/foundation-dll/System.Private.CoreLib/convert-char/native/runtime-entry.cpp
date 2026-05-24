@@ -59,7 +59,10 @@ extern "C" void RunMicrobench();
 // SetExceptionFallback is declared at global scope in exception_helpers.h.
 extern "C" void SetExceptionFallback(void (*fn)());
 
-enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark, Microbench };
+// RunSimdTests is defined in simd_tests.cpp.
+extern "C" void RunSimdTests();
+
+enum class RunMode { Fact, Benchmark, HotUpdate, HotUpdateAndBenchmark, PatchAndBenchmark, Microbench, Simd };
 
 // ── Shared helper: apply hotpatch and print diagnostic ─────────────────────
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
@@ -219,6 +222,8 @@ int main(int argc, char** argv) {
         if (argc >= 4) iterations = std::atoi(argv[3]);
     } else if (argc >= 2 && std::strcmp(argv[1], "--microbench") == 0) {
         mode = RunMode::Microbench;
+    } else if (argc >= 2 && std::strcmp(argv[1], "--simd") == 0) {
+        mode = RunMode::Simd;
     } else if (argc >= 2) {
         entry_index = std::atoi(argv[1]);  // backward compat: numeric entry index
     }
@@ -387,6 +392,12 @@ int main(int argc, char** argv) {
     }
     case RunMode::Microbench: {
         RunMicrobench();
+        std::fflush(stdout);
+        _exit(0);
+        return 0;
+    }
+    case RunMode::Simd: {
+        RunSimdTests();
         std::fflush(stdout);
         _exit(0);
         return 0;

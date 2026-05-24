@@ -73,6 +73,7 @@ struct alignas(8) RegisterInstruction {
     inline bool has_dst()  const noexcept { return (flags() & kRegHasDst)  != 0; }
     inline bool has_src1() const noexcept { return (flags() & kRegHasSrc1) != 0; }
     inline bool has_src2() const noexcept { return (flags() & kRegHasSrc2) != 0; }
+    inline bool has_src3() const noexcept { return (flags() & kRegHasSrc3) != 0; }
     inline bool has_imm()  const noexcept { return (flags() & kRegHasImm)  != 0; }
     inline bool is_call()  const noexcept { return (flags() & kRegIsCall)  != 0; }
     inline bool is_branch()const noexcept { return (flags() & kRegIsBranch)!= 0; }

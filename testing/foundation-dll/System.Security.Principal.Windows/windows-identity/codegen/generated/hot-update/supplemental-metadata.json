@@ -1,0 +1,174 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadata",
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  },
+  "types": [
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "methods": [
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_0:System.Void()",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_1:System.Void()",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_2:System.Void()",
+      "metadataToken": 100663299,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_3:System.Void()",
+      "metadataToken": 100663300,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_4:System.Void()",
+      "metadataToken": 100663301,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_5:System.Void()",
+      "metadataToken": 100663302,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_6:System.Void()",
+      "metadataToken": 100663303,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_7:System.Void()",
+      "metadataToken": 100663304,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_8:System.Void()",
+      "metadataToken": 100663305,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_9:System.Void()",
+      "metadataToken": 100663306,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_10:System.Void()",
+      "metadataToken": 100663307,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_11:System.Void()",
+      "metadataToken": 100663308,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_12:System.Void()",
+      "metadataToken": 100663309,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_13:System.Void()",
+      "metadataToken": 100663310,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_14:System.Void()",
+      "metadataToken": 100663311,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_15:System.Void()",
+      "metadataToken": 100663312,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_16:System.Void()",
+      "metadataToken": 100663313,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_17:System.Void()",
+      "metadataToken": 100663314,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_18:System.Void()",
+      "metadataToken": 100663315,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_19:System.Void()",
+      "metadataToken": 100663316,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_20:System.Void()",
+      "metadataToken": 100663317,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_21:System.Void()",
+      "metadataToken": 100663318,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_22:System.Void()",
+      "metadataToken": 100663319,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_23:System.Void()",
+      "metadataToken": 100663320,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_24:System.Void()",
+      "metadataToken": 100663321,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_25:System.Void()",
+      "metadataToken": 100663322,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_26:System.Void()",
+      "metadataToken": 100663323,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_27:System.Void()",
+      "metadataToken": 100663324,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_28:System.Void()",
+      "metadataToken": 100663325,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_29:System.Void()",
+      "metadataToken": 100663326,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_30:System.Void()",
+      "metadataToken": 100663327,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "genericInstantiations": []
+}

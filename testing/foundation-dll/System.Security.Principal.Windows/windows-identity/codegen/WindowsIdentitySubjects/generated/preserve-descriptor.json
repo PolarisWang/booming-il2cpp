@@ -1,0 +1,204 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::_exitCode",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_0:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_1:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_2:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_3:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_4:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_5:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_6:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_7:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_8:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_9:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_10:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_11:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_12:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_13:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_14:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_15:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_16:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_17:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_18:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_19:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_20:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_21:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_22:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_23:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_24:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_25:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_26:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_27:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_28:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_29:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_30:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

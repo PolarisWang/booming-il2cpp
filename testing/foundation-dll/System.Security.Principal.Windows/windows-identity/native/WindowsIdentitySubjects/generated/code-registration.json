@@ -1,0 +1,198 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "WindowsIdentitySubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_0",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_1",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_2",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_3",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_4",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_5",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_6",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_7",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_8",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_9",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_10",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_11",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_12",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_12:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_13",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_13:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_14",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_14:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_15",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_15:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_16",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_16:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_17",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_17:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_18",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_18:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_19",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_19:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_20",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_20:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_CustomEntrySubject_21",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_21:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_CustomEntrySubject_22",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_22:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_CustomEntrySubject_23",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_23:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_CustomEntrySubject_24",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::CustomEntrySubject_24:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_25",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_25:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_26",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_26:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_27",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_27:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_28",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_28:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_29",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_29:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "WindowsIdentitySubjects_WindowsIdentitySubjects_Subject_30",
+          "subjectId": "WindowsIdentitySubjects/WindowsIdentitySubjects::Subject_30:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

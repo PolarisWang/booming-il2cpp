@@ -1,0 +1,44 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "NativeMemoryPointersSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "NativeMemoryPointersSubjects",
+      "owningAssemblyName": "System.Runtime.InteropServices",
+      "subjectKind": "method",
+      "subjectId": "System.Runtime.InteropServices/Marshal::UnsafeAddrOfPinnedArrayElement\u003CSystem.Byte\u003E:System.IntPtr(System.Byte[],System.Int32)",
+      "definitionSubjectId": "System.Runtime.InteropServices/Marshal::UnsafeAddrOfPinnedArrayElement:System.IntPtr(!!0[],System.Int32)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Runtime.InteropServices/Marshal::UnsafeAddrOfPinnedArrayElement:System.IntPtr(!!0[],System.Int32)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    }
+  ]
+}

@@ -1,0 +1,2423 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "optimizationFacts",
+  "closedWorldSpecializations": [
+    {
+      "subjectKind": "type",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_0:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_1:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_2:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_3:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_4:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_5:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_6:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_7:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_8:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_9:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_10:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_11:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_12:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_13:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_14:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_15:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_16:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_17:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_18:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_19:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_20:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_21:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_22:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_23:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_24:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_25:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_27:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_28:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_29:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_30:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_31:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_32:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_33:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_36:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_37:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_38:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_41:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_42:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_43:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_45:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_47:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_49:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_50:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_51:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_52:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_53:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_54:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_55:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_57:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_58:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_59:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_60:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_63:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_64:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_65:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_67:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_69:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_71:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_72:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_73:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_74:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_76:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_77:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_78:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_80:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_81:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_82:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_83:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_84:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_85:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_86:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_89:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_90:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_91:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_92:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_93:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_94:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_95:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_96:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_97:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_98:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_99:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_100:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_101:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_102:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_103:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_104:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_105:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_106:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_107:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_108:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_109:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_110:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_111:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_112:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_113:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_114:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_115:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_116:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_117:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_118:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_119:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_120:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_123:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_124:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_125:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_126:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_127:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_128:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_129:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_130:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_131:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_132:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_133:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_134:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_135:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_136:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_137:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_138:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_139:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_140:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_141:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_142:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_143:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_144:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_145:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_146:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_147:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_148:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_149:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_150:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_151:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_152:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_153:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_154:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_155:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_156:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_157:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_158:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_159:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_160:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_161:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_162:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_163:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_167:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_168:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_172:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_173:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_174:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_175:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_176:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_177:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_178:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_179:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_180:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_181:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_182:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_183:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_184:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_185:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_186:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_187:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_188:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_189:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_190:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_191:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_192:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_193:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_195:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_196:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_197:System.Void()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_198:System.Void()",
+      "reason": "closed-world-method"
+    }
+  ],
+  "dispatchFacts": [
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_5:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_45:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_45:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_69:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_69:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_71:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_71:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_80:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_80:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_81:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_81:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_82:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_82:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_83:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_83:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_84:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_84:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_85:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_85:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_86:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_86:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_163:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Dispose:System.Void()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanRead:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanRead:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanWrite:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanWrite:System.Boolean()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_Capacity:System.Int64()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_Capacity:System.Int64()",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadBoolean:System.Boolean(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadBoolean:System.Boolean(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadByte:System.Byte(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadByte:System.Byte(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadChar:System.Char(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadChar:System.Char(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_172:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDecimal:System.Decimal(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_172:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDecimal:System.Decimal(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_173:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDouble:System.Double(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_173:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDouble:System.Double(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_174:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt16:System.Int16(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_174:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt16:System.Int16(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_175:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt32:System.Int32(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_175:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt32:System.Int32(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_176:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt64:System.Int64(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_176:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt64:System.Int64(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_177:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSByte:System.SByte(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_177:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSByte:System.SByte(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_178:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSingle:System.Single(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_178:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSingle:System.Single(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_179:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt16:System.UInt16(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_179:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt16:System.UInt16(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_180:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt32:System.UInt32(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_180:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt32:System.UInt32(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_181:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt64:System.UInt64(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_181:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt64:System.UInt64(System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_182:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Boolean)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_183:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Byte)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_184:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Char)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_185:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int16)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_186:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int32)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_187:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int64)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_188:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Decimal)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_189:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Single)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_190:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Double)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_191:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.SByte)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_192:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt16)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_193:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt32)",
+      "devirtualized": false
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()",
+      "dispatchKind": "callvirt",
+      "targetSubjectId": "System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt64)",
+      "devirtualized": false
+    }
+  ],
+  "layoutFacts": [
+    {
+      "subjectKind": "field",
+      "subjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::_exitCode",
+      "dataKind": "value",
+      "requiresBoxing": true
+    }
+  ],
+  "exceptionFacts": [
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_0:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_1:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_2:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_3:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_4:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_5:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_6:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_7:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_24:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_26:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_28:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_30:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_31:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_32:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_33:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_34:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_35:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_36:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_38:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_39:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_40:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_42:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_43:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_44:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_45:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_46:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_47:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_48:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_50:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_51:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_52:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_53:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_54:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_55:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_56:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_57:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_58:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_59:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_61:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_62:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_64:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_66:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_67:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_68:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_69:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_70:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_71:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_72:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_73:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_74:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_75:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_77:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_78:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_79:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_80:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_81:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_82:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_83:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_84:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_85:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_86:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_87:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_88:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_89:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_93:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_94:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_95:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_96:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_97:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_98:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_99:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_100:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_101:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_102:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_103:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_104:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_105:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_106:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_107:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_108:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_109:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_110:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_111:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_112:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_113:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_114:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_115:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_116:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_117:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_118:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_119:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_120:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_122:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_124:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_125:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_126:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_127:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_128:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_129:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_130:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_131:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_132:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_134:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_135:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_137:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_139:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_140:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_141:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_142:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_143:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_144:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_145:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_146:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_147:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_148:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_149:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_150:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_151:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_152:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_153:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_154:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_155:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_156:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_157:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_158:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_159:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_160:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_161:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_162:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_163:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_164:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_165:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_166:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_169:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_170:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_171:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_172:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_173:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_174:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_175:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_176:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_177:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_178:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_179:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_180:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_181:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_182:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_183:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_184:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_185:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_186:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_187:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_188:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_189:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_190:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_191:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_192:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_193:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_194:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_197:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    },
+    {
+      "methodSubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::Subject_198:System.Void()",
+      "handlingKind": "catch",
+      "catchTypeSubjectId": "System.Private.CoreLib/System.Object"
+    }
+  ]
+}

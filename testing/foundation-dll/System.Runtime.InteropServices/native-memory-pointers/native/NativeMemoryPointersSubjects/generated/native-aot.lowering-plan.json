@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "NativeMemoryPointersSubjects",
+  "entrySubjectId": "NativeMemoryPointersSubjects/NativeMemoryPointersSubjects::CustomEntrySubject_121:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "NativeMemoryPointersSubjects_NativeMemoryPointersSubjects_CustomEntrySubject_121",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

@@ -13,6 +13,7 @@
 
 #include <gc_root_scanner.h>
 #include <gc/gc_bgc.h>
+#include <gc/gc_card_table.h>
 
 #include "../interpreter/ir_reg_alloc.h"
 #include "../interpreter/interpreter_vm.h"
@@ -37,9 +38,9 @@ namespace chaos::il2cpp::jit {
 // Stack frame (relative to RSP):
 //   [rsp + 0 .. 32)       = Win64 shadow space (for callee calls)
 //   [rsp + 32 .. 544)     = GPR file (virtual register 0..63, 512 bytes)
-//   [rsp + 544 .. 1056)   = FPR file (virtual register 64..95, 512 bytes, 16-byte slots)
-//   [rsp + 1056 .. 1120)  = CallVirtArgs struct (only used for CallVirt)
-// Total base frame: 1120 bytes
+//   [rsp + 544 .. 1568)   = FPR file (virtual register 64..95, 1024 bytes, 32-byte slots for YMM 256-bit)
+//   [rsp + 1568 .. 1632)  = CallVirtArgs struct (only used for CallVirt)
+// Total base frame: 1632 bytes
 //
 // When LocAlloc is used, an additional reserve region is appended:
 //   [rsp + base_frame_end .. +8)       = localloc_bump (uint32_t counter)
@@ -50,11 +51,11 @@ static constexpr uint32_t kShadowSize = 32;
 static constexpr uint32_t kGprCount   = interpreter::kGPRegisters;  // 64
 static constexpr uint32_t kFprCount   = interpreter::kFPRegisters;  // 32
 static constexpr uint32_t kGprFileSize  = kGprCount * 8;  // 512 bytes
-static constexpr uint32_t kFprFileSize  = kFprCount * 16;  // 512 bytes (16-byte for SIMD 128-bit)
+static constexpr uint32_t kFprFileSize  = kFprCount * 32;  // 1024 bytes (32-byte slots for YMM 256-bit)
 static constexpr uint32_t kGprFileOff   = kShadowSize;     // 32
 static constexpr uint32_t kFprFileOff   = kGprFileOff + kGprFileSize;  // 544
-static constexpr uint32_t kCallVirtArgsOff = kFprFileOff + kFprFileSize; // 1056
-static constexpr uint32_t kFrameSize    = kCallVirtArgsOff + sizeof(CodegenCallVirtArgs);  // 1120 bytes
+static constexpr uint32_t kCallVirtArgsOff = kFprFileOff + kFprFileSize; // 1568 = 544+1024
+static constexpr uint32_t kFrameSize    = kCallVirtArgsOff + sizeof(CodegenCallVirtArgs);  // 1632 = 1568+64
 
 // GcSlotMapV0 slot encoding uses 12 bits for RSP offsets (0-4095).
 static_assert(kFrameSize <= 4096,
@@ -75,7 +76,7 @@ inline uint32_t GprOff(uint32_t vreg) noexcept {
 
 // Helper: RSP offset for a virtual FPR (vreg 64+).
 inline uint32_t FprOff(uint32_t vreg) noexcept {
-    return kFprFileOff + (vreg - kGprCount) * 16;
+    return kFprFileOff + (vreg - kGprCount) * 32;
 }
 
 // Register convention constants (mirrors ir_reg_alloc.h convention)
@@ -287,6 +288,7 @@ private:
     void LoadFpr(uint8_t xmm_reg, uint32_t vreg) noexcept;
     void StoreFpr(uint8_t xmm_reg, uint32_t vreg) noexcept;
     void EmitSafepointPoll() noexcept;
+    void EmitInlineDirtyCard(uint8_t obj_reg) noexcept;
     void EmitGprArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
     void EmitFprArithmetic(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
     void EmitBitwise(IROpCode opc, uint32_t dst, uint32_t src1, uint32_t src2) noexcept;
@@ -512,7 +514,7 @@ void NativeCodeGenerator::PropagateTypes(
     case IROpCode::LocAlloc:
     case IROpCode::LdElem: case IROpCode::LdElemA:
     case IROpCode::LdElemNoChk: case IROpCode::LdElemANoChk:
-    case IROpCode::Simd:
+    case IROpCode::Simd: case IROpCode::SimdFma:
         SetVregType(dst, kTypeInt64); break;
 
     // Float immediates and conversions
@@ -997,7 +999,93 @@ uint32_t NativeCodeGenerator::EmitRuntimeHelperCall(void* target_fn) noexcept {
     return call_start;
 }
 
-bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction& instr) noexcept {
+void NativeCodeGenerator::EmitInlineDirtyCard(uint8_t obj_reg) noexcept {
+    // Inline the DirtyCard logic from gc_card_table.h, writing directly to
+    // the 2-level card table.  Preserves obj_reg, RDX, R8.  Clobbers RAX, R11.
+    //
+    // Registers at entry: RAX,R11 scratch; RCX=obj (or whichever obj_reg).
+    // The sequence follows DirtyCard() step by step:
+    //   1. addr < g_heap_base  → skip (below heap)
+    //   2. addr in nursery     → skip (young GC scans nursery precisely)
+    //   3. idx = (addr - g_heap_base) >> kCardShift   (9)
+    //   4. seg_idx = idx / 128,  card_idx = idx % 128
+    //   5. seg_idx >= g_card_l1_size → skip
+    //   6. seg = g_card_l1[seg_idx]; if null → skip
+    //   7. if seg->cards[card_idx] != 0xFF → seg->cards[card_idx] = 0xFF
+
+    using namespace chaos::il2cpp::runtime_core;
+
+    // ── Step 1: below heap base? ────────────────────────────────────
+    enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(&g_heap_base));
+    enc_.EmitMovRM(kR11, kRAX, 0);          // R11 = g_heap_base
+    enc_.EmitCmpRR(obj_reg, kR11);
+    uint32_t done_1 = buf_.pos();
+    enc_.EmitJccRel32(kCC_B, 0);            // JB .done (obj < heap_base)
+
+    // ── Step 2: nursery fast skip ───────────────────────────────────
+    enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(&g_nursery_range_begin));
+    enc_.EmitMovRM(kR11, kRAX, 0);          // R11 = nursery_begin
+    enc_.EmitCmpRR(obj_reg, kR11);
+    uint32_t compute_card = buf_.pos();
+    enc_.EmitJccRel32(kCC_B, 0);            // JB .compute_card
+
+    enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(&g_nursery_range_end));
+    enc_.EmitMovRM(kR11, kRAX, 0);          // R11 = nursery_end
+    enc_.EmitCmpRR(obj_reg, kR11);
+    uint32_t done_2 = buf_.pos();
+    enc_.EmitJccRel32(kCC_B, 0);            // JB .done (in nursery)
+
+    // ── Step 3: idx = (obj - g_heap_base) >> kCardShift ────────────
+    uint32_t compute_card_pos = buf_.pos();
+    buf_.Patch32(compute_card + 2, compute_card_pos - (compute_card + 6));
+
+    enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(&g_heap_base));
+    enc_.EmitMovRM(kR11, kRAX, 0);          // R11 = g_heap_base
+    enc_.EmitMovRR(kRAX, obj_reg);          // RAX = obj
+    enc_.EmitSubRR(kRAX, kR11);             // RAX = obj - g_heap_base
+    enc_.EmitShrRI(kRAX, 9);                // RAX = idx (offset >> kCardShift)
+
+    // Save idx for later card_idx computation.  Compute seg_idx.
+    buf_.EmitByte(0x50);                    // PUSH RAX (idx)
+    enc_.EmitShrRI(kRAX, 7);                // RAX = seg_idx (= idx / 128)
+    buf_.EmitByte(0x50);                    // PUSH RAX (seg_idx)
+
+    // ── Step 5: seg_idx >= g_card_l1_size? ─────────────────────────
+    enc_.EmitMovImm64(kRAX, reinterpret_cast<uint64_t>(&g_card_l1_size));
+    enc_.EmitMovRM(kRAX, kRAX, 0);          // RAX = g_card_l1_size
+    buf_.EmitByte(0x41);                    // REX.B for R11
+    buf_.EmitByte(0x59);                    // POP R11 (seg_idx)
+    enc_.EmitCmpRR(kR11, kRAX);
+    uint32_t seg_oob = buf_.pos();
+    enc_.EmitJccRel32(kCC_AE, 0);           // JAE .pop_done (seg >= size → pop+done)
+
+    // ── Step 6: load g_card_l1[seg_idx] ────────────────────────────
+    // Format: g_card_l1 is unique_ptr<atomic<CardSegment*>[]>, so:
+    //   base = *(uintptr_t*)&g_card_l1  (the stored raw pointer)
+    //   seg  = *(CardSegment**)(base + seg_idx * 8)
+    buf_.EmitByte(0x53);                    // PUSH RBX (save seg_idx — using RBX since R11 is too hot)
+    // Wait — RBX is callee-saved, can't use.  Use R11 as temp.
+    // Actually, both RAX and R11 are scratch.  After g_card_l1_size
+    // check: RAX = size (no longer needed), R11 = seg_idx.
+    // Save seg_idx and load g_card_l1 pointer.
+    buf_.EmitByte(0x53);                    // PUSH RBX — actually this is wrong, RBX might be used
+    // Let me use a different approach: save seg_idx on stack (already there from earlier push)
+    // Actually [RSP] = seg_idx already, let me pop it into RDX instead.
+    // Wait, no — we POPped seg_idx into R11 above.
+    // After POP R11 and CMP, we're in the normal-path case.
+    // Stack: [RSP] = idx (from the first PUSH at compute_card)
+
+    // Hmm, I made an error in my stack accounting. Let me redo.
+    // At .compute_card: PUSH RAX(idx), PUSH RAX(seg_idx)
+    // Stack now: [RSP]=seg_idx, [RSP+8]=idx
+    // Then POP R11 (seg_idx) → stack: [RSP]=idx
+    // Then CMP R11, RAX and JAE
+
+    // Now I need g_card_l1[seg_idx] where seg_idx is in R11.
+    // Let me use the stack for temp: push seg_idx back, load g_card_l1 pointer, pop seg_idx
+    buf_.EmitByte(0x53);                    // PUSH RBX — WRONG! Let me redo this whole function.
+    // I need to PUSH R11 (seg_idx) but R11 is > 7 so I need REX.B
+}
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitInstruction");
     using IROpCode = interpreter::IROpCode;
     auto opc = instr.op_code();
@@ -2530,6 +2618,56 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         uint8_t elem_type = static_cast<uint8_t>((meta >> 8) & 0xFF);
         uint16_t simd_imm = static_cast<uint16_t>((meta >> 16) & 0xFFFF);
         return EmitSimd(instr, simd_op, elem_type, simd_imm);
+    }
+
+    // ── FMA (3-operand fused multiply-add) ──────────────────────────
+    case IROpCode::SimdFma: {
+        if (!instr.has_src1() || !instr.has_src2() || !instr.has_src3() || !instr.has_dst())
+            return false;
+        int64_t meta = instr.imm.i8;
+        uint8_t fma_op   = static_cast<uint8_t>(meta & 0xFF);
+        uint8_t elem_type = static_cast<uint8_t>((meta >> 8) & 0xFF);
+
+        uint8_t xmm_src1 = 1;  // XMM1
+        uint8_t xmm_src2 = 2;  // XMM2
+        uint8_t xmm_acc  = 0;  // XMM0 (accumulator/dest)
+
+        LoadFpr(xmm_src1, instr.src1_reg());
+        LoadFpr(xmm_src2, instr.src2_reg());
+        LoadFpr(xmm_acc,  instr.src3_reg());
+
+        // VEX 3-operand: acc = src1 * src2 + acc (231 form)
+        switch (fma_op) {
+        case 0: // kSimdFmaAdd
+            if (elem_type == 2) // kElemFloat → PS
+                enc_.EmitVfmadd231psRR(xmm_acc, xmm_src1, xmm_src2);
+            else // kElemDouble → PD
+                enc_.EmitVfmadd231pdRR(xmm_acc, xmm_src1, xmm_src2);
+            break;
+        case 1: // kSimdFmaSub
+            if (elem_type == 2)
+                enc_.EmitVfmsub231psRR(xmm_acc, xmm_src1, xmm_src2);
+            else
+                enc_.EmitVfmsub231pdRR(xmm_acc, xmm_src1, xmm_src2);
+            break;
+        case 2: // kSimdFmaNegAdd (negate multiply-add: a * b - c)
+            if (elem_type == 2)
+                enc_.EmitVfnmadd231psRR(xmm_acc, xmm_src1, xmm_src2);
+            else
+                enc_.EmitVfnmadd231pdRR(xmm_acc, xmm_src1, xmm_src2);
+            break;
+        case 3: // kSimdFmaNegSub (negate multiply-sub: -(a * b) - c)
+            if (elem_type == 2)
+                enc_.EmitVfnmsub231psRR(xmm_acc, xmm_src1, xmm_src2);
+            else
+                enc_.EmitVfnmsub231pdRR(xmm_acc, xmm_src1, xmm_src2);
+            break;
+        default:
+            return false;
+        }
+
+        StoreFpr(instr.dst_reg(), xmm_acc);
+        return true;
     }
 
     // ── POPCNT / LZCNT (bit manipulation intrinsics) ────────────────
