@@ -403,104 +403,6 @@ def _codegen_patch_undefined_labels(family_slug: str, *, verification: Path | No
                 print(f"      chaos_label_{lbl} → chaos_label_{mapped}")
 
 
-def _patch_generated_files(family_slug: str, *, verification: Path | None = None) -> None:
-    """Apply 0xC0000409 bypass patch to all generated native-aot.generated.cpp files.
-
-    The MSVC compiler crashes (STATUS_STACK_BUFFER_OVERRUN / 0xC0000409) when a single
-    function has too many locals or inline call blocks. This post-processes each generated
-    .cpp to strip Program::Main() and replace the synthesized Main() with a dispatch table + loop.
-    Non-fatal: if no generated file or script found, logs and continues.
-    """
-    v = verification or _VERIFICATION
-    genuine_out = v / family_slug / "il2cpp_dist" / "genuine"
-    patch_script = _HERE / "_patch_bypass_0xC0000409.py"
-    supp_script = _HERE / "_gen_supplemental_dispatch.py"
-    if not patch_script.exists() or not supp_script.exists():
-        print(f"    [patch_bypass] script not found")
-        return
-
-    has_methodN = False
-    for gen_cpp in sorted(genuine_out.rglob("native-aot.generated.cpp")):
-        content = gen_cpp.read_text(encoding="utf-8")
-        if re.search(r'Method\d+\(void\)', content):
-            has_methodN = True
-        print(f"    [patch_bypass] patching {gen_cpp.relative_to(genuine_out)}...")
-        r = subprocess.run(
-            [sys.executable, str(patch_script), str(gen_cpp)],
-            capture_output=True, text=True, timeout=60,
-        )
-        for line in r.stdout.splitlines():
-            print(f"      {line}")
-        if r.stderr:
-            for line in r.stderr.splitlines():
-                print(f"      ERR: {line}")
-
-    # For handwritten entrypoint families (no MethodN pattern), generate
-    # supplemental dispatch symbols (ChaosDispatchMethod fact/patchdata).
-    if not has_methodN:
-        method_count = _count_methods_in_contract(family_slug, verification=v)
-        print(f"    [gen_supplemental] no MethodN pattern, generating {method_count}-method dispatch...")
-        r = subprocess.run(
-            [sys.executable, str(supp_script), str(genuine_out), str(method_count)],
-            capture_output=True, text=True, timeout=30,
-        )
-        for line in r.stdout.splitlines():
-            print(f"      {line}")
-        if r.stderr:
-            for line in r.stderr.splitlines():
-                print(f"      ERR: {line}")
-
-    # ── Post-processing: valuetype forward declarations ────────────
-    # Some families (e.g. reflection-binding) reference chaos_valuetype_* types
-    # from external assemblies via extern "C" declarations. Add typedef-int
-    # forward declarations to satisfy the compiler.
-    fwd_script = _HERE / "_gen_valuetype_forward_decls.py"
-    if fwd_script.exists():
-        for gen_cpp in sorted(genuine_out.rglob("native-aot.generated.cpp")):
-            r = subprocess.run(
-                [sys.executable, str(fwd_script), str(gen_cpp)],
-                capture_output=True, text=True, timeout=30,
-            )
-            for line in r.stdout.splitlines():
-                print(f"      {line}")
-            if r.stderr:
-                for line in r.stderr.splitlines():
-                    print(f"      ERR: {line}")
-
-    # ── Post-processing: weak stub generation ──────────────────────
-    # Families pulling in vtable refs to external assembly functions
-    # (e.g. Chaos.TestFramework.Sdk attributes) need stub definitions
-    # to resolve linker errors.
-    stub_script = _HERE / "_gen_weak_stubs.py"
-    if stub_script.exists():
-        for gen_cpp in sorted(genuine_out.rglob("native-aot.generated.cpp")):
-            r = subprocess.run(
-                [sys.executable, str(stub_script), str(gen_cpp), str(genuine_out), family_slug],
-                capture_output=True, text=True, timeout=30,
-            )
-            for line in r.stdout.splitlines():
-                print(f"      {line}")
-            if r.stderr:
-                for line in r.stderr.splitlines():
-                    print(f"      ERR: {line}")
-
-    # ── Post-processing: external runtime stub generation ────────────
-    # Families with missing chaos_external_runtime_* function definitions
-    # need auto-generated stubs to resolve C3861 compile errors. These stubs
-    # are appended directly to native-aot.generated.cpp (no CMake change).
-    ext_stub_script = _HERE / "_gen_external_runtime_stubs.py"
-    if ext_stub_script.exists():
-        for gen_cpp in sorted(genuine_out.rglob("native-aot.generated.cpp")):
-            r = subprocess.run(
-                [sys.executable, str(ext_stub_script), str(gen_cpp)],
-                capture_output=True, text=True, timeout=30,
-            )
-            for line in r.stdout.splitlines():
-                print(f"      {line}")
-            if r.stderr:
-                for line in r.stderr.splitlines():
-                    print(f"      ERR: {line}")
-
 
 def _generate_coverage_json(family_slug: str, assembly_name: str,
                              method_subject_ids: list[str], *,
@@ -909,6 +811,9 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
     jit_include = (
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/jit"\n'
     ) if is_jit else ''
+    jit_define = (
+        f'add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)\n'
+    ) if is_jit else ''
 
     cmake_content = (
         f'cmake_minimum_required(VERSION 3.20)\n'
@@ -920,6 +825,7 @@ def _ensure_cmakelists(cmakelists: Path, family_slug: str, verification: Path, *
         f'add_compile_options(/utf-8 /GS- /FS)\n'
         f'add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)\n'
         f'add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)\n'
+        f'{jit_define}'
         f'\n'
         f'# Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and\n'
         f'# chaos::codegen (precompiled generated code) via find_package(chaos).\n'
@@ -1147,256 +1053,9 @@ def _ensure_jit_debug_contract_stubs(native_dir: Path) -> None:
     print(f"    [build_entry] auto-generated jit_debug_contract_stubs.cpp at {stub_path}")
 
 
-def _fix_native_aot_bridge_thunks(native_dir: Path) -> None:
-    """Patch generated native-aot.generated.cpp to fix known codegen bugs.
-
-    The codegen emits bridge/import thunks that reference statically-defined
-    'chaos_external_runtime_*' wrapper functions, but doesn't always generate
-    those wrappers for every method.  This function:
-      1. Fixes p0 -> chaos_fn_arg_0 undeclared identifier
-      2. Fixes chaos_gc_try_start_no_gc_region arg count (needs 2 args)
-      3. Adds variadic forward declarations for missing bridge thunk targets
-    """
-    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
-        text = gen_cpp.read_text(encoding="utf-8")
-        changed = False
-
-        # Fix 1: p0 -> chaos_fn_arg_0 in bridge thunk bodies
-        if "(p0)" in text:
-            text = text.replace("(p0)", "(chaos_fn_arg_0)")
-            changed = True
-
-        # Fix 2: chaos_gc_try_start_no_gc_region(chaos_fn_arg_0) -> add 0 for 2nd arg
-        old_try = "chaos_gc_try_start_no_gc_region(chaos_fn_arg_0)"
-        new_try = "chaos_gc_try_start_no_gc_region(chaos_fn_arg_0, 0)"
-        if old_try in text:
-            text = text.replace(old_try, new_try)
-            changed = True
-
-        # Also fix subject-body calls where the arg is ChaosLoadInt64(chaos_arg_0)
-        # — match chaos_gc_try_start_no_gc_region(...) with any single-arg pattern
-        # using paren-counting to find the matching close paren.
-        idx = 0
-        while True:
-            pos = text.find("chaos_gc_try_start_no_gc_region(", idx)
-            if pos == -1:
-                break
-            call_start = pos + len("chaos_gc_try_start_no_gc_region(")
-            depth = 1
-            end = call_start
-            while end < len(text) and depth > 0:
-                if text[end] == '(':
-                    depth += 1
-                elif text[end] == ')':
-                    depth -= 1
-                end += 1
-            # end now points past the closing ')'
-            inner = text[call_start:end - 1]  # exclude the closing )
-            if ',' not in inner:
-                # Single-arg call — insert ", 0" before closing paren
-                text = text[:end - 1] + ', 0' + text[end - 1:]
-                changed = True
-                idx = end + 2  # skip past the inserted ", 0"
-            else:
-                idx = end
-
-        # Fix 3: Add stubs for missing external runtime functions
-        import re as _re
-        bridge_marker = "// ── Bridge/import thunks ──"
-        if bridge_marker in text:
-            refs = set(_re.findall(r'chaos_external_runtime_[\w_]+', text))
-            defined = set(_re.findall(r'\b(?:static|extern)\s+.*?\b(chaos_external_runtime_[\w_]+)\s*\(', text, _re.MULTILINE))
-            missing = refs - defined
-            if missing:
-                # Use C-style variadic (...) to accept any caller arguments,
-                # and int return type since all bridge thunk return types are
-                # integral (int, int64, or pointer — all implicitly convertible).
-                stubs = ["// ── Bridge thunk stubs (pipeline fix) ──"]
-                for fn_name in sorted(missing):
-                    stubs.append(f"static int {fn_name}(...) {{ return 0; }}")
-                stubs.append("")
-                insert_pos = text.find(bridge_marker)
-                text = text[:insert_pos] + "\n".join(stubs) + "\n\n" + text[insert_pos:]
-                changed = True
-
-        if changed:
-            gen_cpp.write_text(text, encoding="utf-8")
-            print(f"    [build_entry] fixed bridge thunks in {gen_cpp.name}")
 
 
-def _fix_t4_jit_include(native_dir: Path) -> None:
-    """Inject #include \"jit_registration.h\" into generated files that
-    reference RegisterT4JitMethods, RegisterJitEntryMethods, JitT4Entry, or
-    JitEntry but don't include the header.
-    """
-    import re as _re
-    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
-        text = gen_cpp.read_text(encoding="utf-8")
-        # Skip if already has the include
-        if '#include "jit_registration.h"' in text:
-            continue
-        # Only inject if the file references T4 JIT types or functions
-        if not _re.search(r'\bRegisterT4JitMethods\b|\bJitT4Entry\b|\bRegisterJitEntryMethods\b|\bJitEntry\b', text):
-            continue
-        # Find the last #include line and insert after it
-        lines = text.splitlines(keepends=True)
-        last_include_idx = -1
-        for i, line in enumerate(lines):
-            if line.startswith('#include'):
-                last_include_idx = i
-        if last_include_idx >= 0:
-            lines.insert(last_include_idx + 1, '#include "jit_registration.h"\n')
-            gen_cpp.write_text("".join(lines), encoding="utf-8")
-            print(f"    [build_entry] added #include \"jit_registration.h\" in {gen_cpp.name}")
 
-
-def _fix_aot_chaos_jit_register_all(native_dir: Path) -> None:
-    """Replace ChaosJitRegisterAll() body with empty no-op in AOT mode.
-
-    In AOT mode, the generated code sometimes emits a non-empty
-    ChaosJitRegisterAll() that calls RegisterT4JitMethods().  This requires JIT
-    engine initialization and crashes when the JIT is not linked/initialized.
-    The AOT dispatch uses direct_ptr directly — JIT trampolines are not needed.
-    """
-    import re as _re
-    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
-        text = gen_cpp.read_text(encoding="utf-8")
-        # Match ChaosJitRegisterAll with a non-empty body (i.e. not "{}" alone)
-        match = _re.search(
-            r'(extern\s+"C"\s+void\s+ChaosJitRegisterAll\s*\(\s*\)\s*)\{([^}]*)\}',
-            text)
-        if not match:
-            continue
-        body = match.group(2)
-        if not body.strip():
-            continue  # already a no-op
-        # Replace with empty body — use raw match string (including newlines)
-        # The regex captures everything between { and } so body includes leading/trailing
-        # whitespace/newlines. Replace the full match, not a reconstructed string.
-        start, end = match.start(), match.end()
-        text = text[:start] + match.group(1) + '{}' + text[end:]
-        gen_cpp.write_text(text, encoding="utf-8")
-        print(f"    [build_entry] stripped ChaosJitRegisterAll() body in {gen_cpp.name}")
-
-
-def _fix_eeclass_strings(native_dir: Path) -> None:
-    """Fix unquoted string fields in EEClass initializers.
-
-    The converter emits `/*name_utf8=*/       System.Object,` instead of
-    `/*name_utf8=*/       "System.Object",` for certain type patterns.
-    """
-    import re
-    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
-        text = gen_cpp.read_text(encoding="utf-8")
-        changed = False
-
-        def _mark_changed() -> None:
-            nonlocal changed
-            changed = True
-
-        # Pattern 1: /*name_utf8=*/       UnquotedName,
-        text = re.sub(
-            r'(/\*\s*name_utf8\s*\*/\s+)([^"\s][^,]*),',
-            lambda m: (_mark_changed(), m.group(1) + '"' + m.group(2) + '",')[1], text)
-
-        # Pattern 2: /*namespace_utf8=*/  ,  (empty — no value at all)
-        text = re.sub(
-            r'(/\*\s*namespace_utf8\s*\*/\s+),',
-            lambda m: (_mark_changed(), m.group(1) + '"",')[1], text)
-
-        # Pattern 3: /*namespace_utf8=*/  UnquotedNamespace,
-        text = re.sub(
-            r'(/\*\s*namespace_utf8\s*\*/\s+)([^",][^,]*),',
-            lambda m: (_mark_changed(), m.group(1) + '"' + m.group(2) + '",')[1], text)
-
-        if changed:
-            gen_cpp.write_text(text, encoding="utf-8")
-            print(f"    [fix_eeclass] patched unquoted EEClass strings in {gen_cpp.relative_to(native_dir)}")
-
-
-def _fix_eeclass_registration(native_dir: Path) -> None:
-    """Fix TypeInfoV0<->MethodTable type mismatches in ChaosRegisterAotEEClasses().
-
-    The converter may emit either inline MethodTable or TypeInfoV0 for chaos_mt_*
-    variables depending on generator version.  ChaosRegisterAotEEClasses() accesses
-    `.cold_delta` and `.mt` on these variables; the fix depends on the actual type:
-
-    - MethodTable has flat layout (.cold_delta directly, no .hot/.warm nesting)
-    - TypeInfoV0 has nested layout (.warm.cold_delta)
-
-    Fix by:
-    1. Only converting .cold_delta -> .warm.cold_delta for TypeInfoV0-declared vars
-    2. Adding reinterpret_cast<MethodTable*> for .mt assignments
-    3. Adding missing declarations for types referenced in ChaosRegisterAotEEClasses()
-       but not declared anywhere in the TU (e.g. static types with no instance data).
-    """
-    import re as _re
-    for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
-        text = gen_cpp.read_text(encoding="utf-8")
-        changed = False
-
-        # Collect type info for each chaos_mt_* variable
-        # declared_type[varname] = 'MethodTable' | 'TypeInfoV0' | None
-        declared_type: dict[str, str] = {}
-        for m in _re.finditer(r'\b(?:inline\s+)?(MethodTable|TypeInfoV0)\s+(chaos_mt_\w+)', text):
-            declared_type[m.group(2)] = m.group(1)
-
-        # Step 1: Fix .cold_delta -> .warm.cold_delta ONLY for TypeInfoV0 variables
-        def _fix_cold_delta(m: _re.Match) -> str:
-            varname = m.group(1)
-            if declared_type.get(varname) == 'TypeInfoV0':
-                return f'{varname}.warm.cold_delta'
-            return m.group(0)  # Keep as-is for MethodTable
-
-        text2 = _re.sub(
-            r'(chaos_mt_\w+)\.cold_delta',
-            _fix_cold_delta, text)
-        if text2 != text:
-            changed = True
-            text = text2
-
-        # Step 2: Fix .mt = &chaos_mt_* to reinterpret_cast (safe for both types)
-        text2 = _re.sub(
-            r'(kEEClass_\w+)\.mt\s*=\s*&(chaos_mt_\w+)',
-            r'\1.mt = reinterpret_cast<MethodTable*>(&\2)', text)
-        if text2 != text:
-            changed = True
-            text = text2
-
-        # Step 3: Add missing declarations for types referenced in
-        # ChaosRegisterAotEEClasses() but not declared in this TU.
-        if 'ChaosRegisterAotEEClasses' in text:
-            # Find ChaosRegisterAotEEClasses function body
-            fn_match = _re.search(r'extern\s+"C"\s+void\s+ChaosRegisterAotEEClasses\s*\(\s*\)', text)
-            if fn_match:
-                fn_body_start = text.find('{', fn_match.end())
-                if fn_body_start != -1:
-                    depth = 0
-                    fn_body_end = -1
-                    for ci in range(fn_body_start, len(text)):
-                        c = text[ci]
-                        if c == '{':
-                            depth += 1
-                        elif c == '}':
-                            depth -= 1
-                            if depth == 0:
-                                fn_body_end = ci
-                                break
-                    if fn_body_end != -1:
-                        fn_body = text[fn_body_start:fn_body_end]
-                        referenced = set(_re.findall(r'\b(chaos_mt_\w+)\b', fn_body))
-                        missing = referenced - declared_type.keys()
-                        if missing:
-                            insert_pos = text.rfind('\n', 0, fn_match.start()) + 1
-                            decls = [f'inline MethodTable {name} = {{}};' for name in sorted(missing)]
-                            dummy_block = '\n' + '\n'.join(decls) + '\n'
-                            text = text[:insert_pos] + dummy_block + text[insert_pos:]
-                            changed = True
-                            print(f"    [fix_eeclass_reg] added {len(missing)} MethodTable decls in {gen_cpp.relative_to(native_dir)}: {', '.join(sorted(missing))}")
-
-        if changed:
-            gen_cpp.write_text(text, encoding="utf-8")
-            print(f"    [fix_eeclass_reg] patched {gen_cpp.relative_to(native_dir)}")
 
 
 def _fix_forward_declarations(native_dir: Path) -> None:
@@ -2023,32 +1682,11 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
                     print(f"    [build_entry] copied enum_stubs.h to native/ for include resolution")
             print(f"    [build_entry] copied enum_stubs.cpp to native/ for link resolution")
 
-    # Patch native-aot.generated.cpp bridge thunks — the codegen may not emit
-    # all wrapper functions that bridge thunks reference, and has known bugs
-    # (p0 undeclared, TryStartNoGCRegion arg count mismatch).
-    # Patch BOTH native_dir (synced copy) and codegen_dir (source compiled by cmake).
-    _fix_native_aot_bridge_thunks(native_dir)
-    # Add jit_registration.h include for RegisterT4JitMethods() calls
-    _fix_t4_jit_include(native_dir)
-    # Make ChaosJitRegisterAll() a no-op in AOT mode (codegen may emit non-empty
-    # T4 JIT registration that requires JIT engine initialization)
-    if not is_jit:
-        _fix_aot_chaos_jit_register_all(native_dir)
     # Add forward declarations for functions referenced before their extern "C" decl.
-    # This happens when generic dispatch wrappers call instantiated function bodies
-    # declared later in the file.
-    _fix_eeclass_strings(native_dir)
-    _fix_eeclass_registration(native_dir)
     _fix_forward_declarations(native_dir)
     _fix_page_file_decls(native_dir)
     codegen_native_dir = v / family_slug / "codegen"
     if codegen_native_dir.exists():
-        _fix_eeclass_strings(codegen_native_dir)
-        _fix_eeclass_registration(codegen_native_dir)
-        _fix_native_aot_bridge_thunks(codegen_native_dir)
-        _fix_t4_jit_include(codegen_native_dir)
-        if not is_jit:
-            _fix_aot_chaos_jit_register_all(codegen_native_dir)
         _fix_forward_declarations(codegen_native_dir)
 
     build_dir = native_dir / "build"

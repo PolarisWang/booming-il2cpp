@@ -40,21 +40,26 @@ phase: completed
 
 SDK 清理改动自身验证通过：entry.exe 编译链接正常，Fact AOT 18/18，HotUpdate Fact 18/18。
 
-### 保留的 _fix_* 函数（待 codegen 根因修复）
+### 消除 _fix_* 函数进展
 
-| 函数 | 计划编号 | 状态 |
-|------|---------|------|
-| `_patch_generated_files` | 10 | 保留 — MSVC 0xC0000409 编译崩溃绕过后处理 |
-| `_fix_native_aot_bridge_thunks` | 2 | 保留 — codegen 未 emit 静态 bridge thunk 符号 |
-| `_fix_t4_jit_include` | 3 | 保留 — JIT 模式缺少 include |
-| `_fix_aot_chaos_jit_register_all` | 4 | 保留 — AOT 模式 ChaosJitRegisterAll 非空 |
-| `_fix_eeclass_strings` | 5 | 保留 — 字符串字段引号包裹 |
-| `_fix_eeclass_registration` | 6 | 保留 — TypeInfoV0→MethodTable 类型不匹配 |
-| `_fix_forward_declarations` | 7 | 保留 — 缺少泛型分发包装器前向声明 |
-| `_fix_page_file_decls` | 8 | 保留 — 分页文件 include 路径错误 |
-| `_fix_supplemental_codegen` | — | 保留 — 补充分发代码生成修复 |
-| `_ensure_cmakelists` | 12 | 保留简化版（已改为 SDK 模式模板） |
-| `_ensure_microbench_source` | 13 | 保留简化版 |
+原 10 个 `_fix_*`/`_patch_*` 后处理函数已完成根因分析。6 个确认为死代码（当前 C# codegen 不再产生有问题的模式）已删除，1 个确认 C# codegen 已修复后删除，3 个确认仍需保留。
+
+**已删除（死代码，当前 codegen 已修复）：**
+| 函数 | 原因 |
+|------|------|
+| `_patch_generated_files` | 无调用点 |
+| `_fix_native_aot_bridge_thunks` | codegen 使用 `chaos_fn_arg_N` + 调度表路由 |
+| `_fix_t4_jit_include` | codegen 已正确包含 `jit_registration.h` |
+| `_fix_eeclass_strings` | codegen 使用 `EscapeCppStringLiteral` |
+| `_fix_eeclass_registration` | codegen 使用 flat `MethodTable` inline 变量 |
+| `_fix_aot_chaos_jit_register_all` | C# codegen AOT 模式已产生空体 `{}` |
+
+**仍需保留（仍需保留）：**
+| 函数 | 原因 |
+|------|------|
+| `_fix_forward_declarations` | 泛型分发包装器在 `object_model_section` 中引用 subject 函数地址，早于 `method_declarations` |
+| `_fix_page_file_decls` | 分页文件缺少 header include、`TypeInfoV0` 歧义、`chaos_valuetype` typedef 缺失 |
+| `_fix_supplemental_codegen` | `.hot` 成员访问修复、`chaos_type_id`/`chaos_iface_map` 声明缺失 |
 
 ### 本轮新增的 pipeline 改动
 
@@ -91,7 +96,7 @@ SDK 清理改动自身验证通过：entry.exe 编译链接正常，Fact AOT 18/
 
 ## 最近摘要
 
-SDK 输出清理全部完成。全部 7 个 Task 均已完成。Task 7 验证通过：entry.exe 构建成功，Fact AOT 18/18，HotUpdate 18/18。3 个失败阶段（Fact JIT、Audit CONCERN、Benchmark）均为预存问题，非 SDK 清理引入。10 个 `_fix_*` 函数因 codegen 根因未修复而保留。
+SDK 输出清理全部完成。全部 7 个 Task 均已完成。Task 7 验证通过：entry.exe 构建成功，Fact AOT 18/18，HotUpdate 18/18。3 个失败阶段（Fact JIT、Audit CONCERN、Benchmark）均为预存问题，非 SDK 清理引入。原 10 个 `_fix_*` 函数已完成根因分析：6 个已确认为死代码（codegen 已修复）并删除，3 个确认仍需保留（`_fix_forward_declarations`、`_fix_page_file_decls`、`_fix_supplemental_codegen`），1 个（`_fix_aot_chaos_jit_register_all`）已确认 C# codegen 在 AOT 模式产生空体后删除。
 
 ## 设计摘要
 
