@@ -747,6 +747,124 @@ inline void EmitDivSSRR(CodeBuffer& buf, uint8_t dst, uint8_t src) noexcept {
     buf.EmitByte(ModRM(3, dst, src));
 }
 
+// ═══════════════════════════════════════════════════════════════════════════
+// SSE packed floating-point (VEX.0F for PS, VEX.66.0F for PD)
+// ═══════════════════════════════════════════════════════════════════════════
+
+/// vaddps xmm_dest, xmm_src1, xmm_src2 (packed single)
+inline void EmitVAddpsRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_0F(dest, src2, src1);  // VEX.0F.0F (pp=00)
+    buf.EmitByte(0x58);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vaddpd xmm_dest, xmm_src1, xmm_src2 (packed double)
+inline void EmitVAddpdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src2, src1);  // VEX.66.0F (pp=01)
+    buf.EmitByte(0x58);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vsubps xmm_dest, xmm_src1, xmm_src2
+inline void EmitVSubpsRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_0F(dest, src2, src1);
+    buf.EmitByte(0x5C);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vsubpd xmm_dest, xmm_src1, xmm_src2
+inline void EmitVSubpdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src2, src1);
+    buf.EmitByte(0x5C);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vmulps xmm_dest, xmm_src1, xmm_src2
+inline void EmitVMulpsRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_0F(dest, src2, src1);
+    buf.EmitByte(0x59);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vmulpd xmm_dest, xmm_src1, xmm_src2
+inline void EmitVMulpdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src2, src1);
+    buf.EmitByte(0x59);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vdivps xmm_dest, xmm_src1, xmm_src2
+inline void EmitVDivpsRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_0F(dest, src2, src1);
+    buf.EmitByte(0x5E);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vdivpd xmm_dest, xmm_src1, xmm_src2
+inline void EmitVDivpdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src2, src1);
+    buf.EmitByte(0x5E);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vminps xmm_dest, xmm_src1, xmm_src2
+inline void EmitVMinpsRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_0F(dest, src2, src1);
+    buf.EmitByte(0x5D);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vminpd xmm_dest, xmm_src1, xmm_src2
+inline void EmitVMinpdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src2, src1);
+    buf.EmitByte(0x5D);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vmaxps xmm_dest, xmm_src1, xmm_src2
+inline void EmitVMaxpsRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_0F(dest, src2, src1);
+    buf.EmitByte(0x5F);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vmaxpd xmm_dest, xmm_src1, xmm_src2
+inline void EmitVMaxpdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src2, src1);
+    buf.EmitByte(0x5F);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+/// vsqrtps xmm_dest, xmm_src (2-operand: dest = src)
+inline void EmitVSqrtpsRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
+    buf.EmitVEX_0F(dest, 0, src);
+    buf.EmitByte(0x51);
+    buf.EmitByte(ModRM(3, dest, src));
+}
+
+/// vsqrtpd xmm_dest, xmm_src
+inline void EmitVSqrtpdRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
+    buf.EmitVEX_66_0F(dest, 0, src);
+    buf.EmitByte(0x51);
+    buf.EmitByte(ModRM(3, dest, src));
+}
+
+/// vshufps xmm_dest, xmm_src1, xmm_src2, imm8
+inline void EmitVShufpsRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2, uint8_t imm) noexcept {
+    buf.EmitVEX_0F(dest, src2, src1);
+    buf.EmitByte(0xC6);
+    buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitByte(imm);
+}
+
+/// vshufpd xmm_dest, xmm_src1, xmm_src2, imm8
+inline void EmitVShufpdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2, uint8_t imm) noexcept {
+    buf.EmitVEX_66_0F(dest, src2, src1);
+    buf.EmitByte(0xC6);
+    buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitByte(imm);
+}
+
 /// cvtsi2sd xmm, r/m64 (convert int64 → double)
 inline void EmitCvtsi2sd(CodeBuffer& buf, uint8_t xmm, uint8_t reg) noexcept {
     buf.EmitByte(0xF2);
@@ -1069,7 +1187,170 @@ inline void EmitVPabsdRR(CodeBuffer& buf, uint8_t dest, uint8_t src) noexcept {
 #undef CHAOS_VEX3_0F3A
 
 // ═══════════════════════════════════════════════════════════════════════════
-// FMA (Fused Multiply-Add) — VEX.66.0F38.W0, 3-operand
+// SSSE3/SSE4.1 VEX packed integer — Shuffle, Unpack, Pack, Shift, Extract,
+// Insert, MoveMask
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// These use inline VEX encoding directly (bypassing the token-paste macros
+// which are fragile with MSVC on certain hex opcodes).
+
+// ── SSSE3: pshufb — VEX.66.0F38.WIG + 0x00 ──────────────────────────
+inline void EmitVPshufbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F38(dest, src1, src2);
+    buf.EmitByte(0x00);
+    buf.EmitByte(ModRM(3, dest, src2));
+}
+
+// ── SSE2: unpack low — VEX.66.0F.WIG ────────────────────────────────
+inline void EmitVPunpcklbwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x60); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPunpcklwdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x61); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPunpckldqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x62); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPunpcklqdqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x63); buf.EmitByte(ModRM(3, dest, src2));
+}
+
+// ── SSE2: unpack high — VEX.66.0F.WIG ───────────────────────────────
+inline void EmitVPunpckhbwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x68); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPunpckhwdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x69); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPunpckhdqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x6A); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPunpckhqdqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x6B); buf.EmitByte(ModRM(3, dest, src2));
+}
+
+// ── SSE2: pack with signed saturation — VEX.66.0F.WIG ───────────────
+inline void EmitVPacksswbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x63); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPackssdwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x6B); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPackuswbRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0x67); buf.EmitByte(ModRM(3, dest, src2));
+}
+
+// ── SSE2: packed shift left — VEX.66.0F.WIG ─────────────────────────
+inline void EmitVPsllwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xF1); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPslldRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xF2); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPsllqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xF3); buf.EmitByte(ModRM(3, dest, src2));
+}
+
+// ── SSE2: packed shift right logical — VEX.66.0F.WIG ────────────────
+inline void EmitVPsrlwRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xD1); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPsrldRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xD2); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPsrlqRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xD3); buf.EmitByte(ModRM(3, dest, src2));
+}
+
+// ── SSE2: packed shift right arithmetic — VEX.66.0F.WIG ─────────────
+inline void EmitVPsrawRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xE1); buf.EmitByte(ModRM(3, dest, src2));
+}
+inline void EmitVPsradRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2); buf.EmitByte(0xE2); buf.EmitByte(ModRM(3, dest, src2));
+}
+
+// ── SSE4.1: Extract (element → GPR) — VEX.66.0F3A.WIG ──────────────
+// Note: For pextrb/pextrd, ModRM.reg = GPR, ModRM.rm = XMM,
+// VEX.vvvv = 1111 (ignored).  We inline the encoding directly since
+// the VEX macros expect parameter names dest/src1/src2.
+inline void EmitVPextrbRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm) noexcept {
+    buf.EmitVEX_66_0F3A(reg, 0, xmm);
+    buf.EmitByte(0x14);
+    buf.EmitByte(ModRM(3, reg, xmm));
+    buf.EmitByte(imm);
+}
+inline void EmitVPextrdRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm) noexcept {
+    buf.EmitVEX_66_0F3A(reg, 0, xmm);
+    buf.EmitByte(0x16);
+    buf.EmitByte(ModRM(3, reg, xmm));
+    buf.EmitByte(imm);
+}
+/// pextrw is in 0F map (not 0F3A) with explicit imm8.
+inline void EmitVPextrwRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm, uint8_t imm) noexcept {
+    buf.EmitVEX_66_0F(reg, 0, xmm);
+    buf.EmitByte(0xC5);
+    buf.EmitByte(ModRM(3, reg, xmm));
+    buf.EmitByte(imm);
+}
+
+// ── SSE4.1: Insert (GPR → element) — VEX.66.0F3A.WIG ───────────────
+// For pinsrb/pinsrd, ModRM.reg = XMM, ModRM.rm = GPR, VEX.vvvv = src1.
+// The macro passes (dest=xmm, src1=src1, src2=reg): ModRM.reg = xmm,
+// ModRM.rm = reg (GPR), VEX.vvvv = src1.
+inline void EmitVPinsrbRR(CodeBuffer& buf, uint8_t xmm, uint8_t src1, uint8_t reg, uint8_t imm) noexcept {
+    buf.EmitVEX_66_0F3A(xmm, src1, reg);
+    buf.EmitByte(0x20);
+    buf.EmitByte(ModRM(3, xmm, reg));
+    buf.EmitByte(imm);
+}
+inline void EmitVPinsrdRR(CodeBuffer& buf, uint8_t xmm, uint8_t src1, uint8_t reg, uint8_t imm) noexcept {
+    buf.EmitVEX_66_0F3A(xmm, src1, reg);
+    buf.EmitByte(0x22);
+    buf.EmitByte(ModRM(3, xmm, reg));
+    buf.EmitByte(imm);
+}
+/// pinsrw is in 0F map (0xC4) with explicit imm8.
+inline void EmitVPinsrwRR(CodeBuffer& buf, uint8_t xmm, uint8_t src1, uint8_t reg, uint8_t imm) noexcept {
+    buf.EmitVEX_66_0F(xmm, src1, reg);
+    buf.EmitByte(0xC4);
+    buf.EmitByte(ModRM(3, xmm, reg));
+    buf.EmitByte(imm);
+}
+
+// ── SSE2: Move byte mask (XMM → GPR) — VEX.66.0F.WIG ───────────────
+// ModRM.reg = GPR, ModRM.rm = XMM, VEX.vvvv = ignored.
+inline void EmitVPmovmskbRR(CodeBuffer& buf, uint8_t reg, uint8_t xmm) noexcept {
+    buf.EmitVEX_66_0F(reg, 0, xmm);
+    buf.EmitByte(0xD7);
+    buf.EmitByte(ModRM(3, reg, xmm));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// VEX packed compare (for float/double compare in EmitSimd)
+// ═══════════════════════════════════════════════════════════════════════════
+//
+// cmpps / cmppd with imm8 predicate.
+// PS: VEX.0F.WIG (pp=00), PD: VEX.66.0F.WIG (pp=01).
+// Imm8 predicates: 0=EQ_OQ, 1=LT_OS, 2=LE_OS, 3=UNORD_Q, etc.
+
+inline void EmitVCmppsRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2, uint8_t pred) noexcept {
+    buf.EmitVEX_0F(dest, src1, src2);
+    buf.EmitByte(0xC2);
+    buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitByte(pred);
+}
+
+inline void EmitVCmppdRR(CodeBuffer& buf, uint8_t dest, uint8_t src1, uint8_t src2, uint8_t pred) noexcept {
+    buf.EmitVEX_66_0F(dest, src1, src2);
+    buf.EmitByte(0xC2);
+    buf.EmitByte(ModRM(3, dest, src2));
+    buf.EmitByte(pred);
+}
+
+#undef CHAOS_VEX3_0F
+#undef CHAOS_VEX3_0F38
+#undef CHAOS_VEX3_0F3A
 // ═══════════════════════════════════════════════════════════════════════════
 // VEX.3-operand mapping: ModRM.reg=acc, VEX.vvvv=src1, ModRM.rm=src2
 // Semantics (231 form): acc = src1 * src2 + acc (or -/+ variants)

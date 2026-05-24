@@ -49,13 +49,13 @@ struct CompileConfig {
     // If true, enable method inlining during tree IR optimization.
     // Only applies when enable_optimizer is true and the method has no SEH.
     // Requires the tree IR pipeline (non-SEH methods only).
-    bool enable_inlining = false;
+    bool enable_inlining = true;
 
     // If true, record deoptimization metadata at call sites.
     bool enable_deopt = true;
 
     // If true, perform register liveness analysis to refine GC/deopt metadata.
-    bool enable_liveness = false;
+    bool enable_liveness = true;
 
     // Max instructions allowed before we emit a safepoint poll
     // (as a fallback when no loop back edges are detected).

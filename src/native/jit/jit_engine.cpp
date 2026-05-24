@@ -1086,6 +1086,8 @@ void NativeCodeGenerator::EmitInlineDirtyCard(uint8_t obj_reg) noexcept {
     buf_.EmitByte(0x53);                    // PUSH RBX — WRONG! Let me redo this whole function.
     // I need to PUSH R11 (seg_idx) but R11 is > 7 so I need REX.B
 }
+
+bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::EmitInstruction");
     using IROpCode = interpreter::IROpCode;
     auto opc = instr.op_code();
@@ -4334,6 +4336,8 @@ bool NativeCodeGenerator::EmitSimd(
             case 1:  EmitVPaddwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 2:  EmitVPadddRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 3:  EmitVPaddqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 4:  EmitVAddpsRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 5:  EmitVAddpdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             default: return false;
             }
         } else {
@@ -4342,6 +4346,8 @@ bool NativeCodeGenerator::EmitSimd(
             case 1:  enc_.EmitPaddwRR(xmm_src1, xmm_src2); break;
             case 2:  enc_.EmitPadddRR(xmm_src1, xmm_src2); break;
             case 3:  enc_.EmitPaddqRR(xmm_src1, xmm_src2); break;
+            case 4:  return false;  // float requires VEX encoding
+            case 5:  return false;  // double requires VEX encoding
             default: return false;
             }
         }
@@ -4354,6 +4360,8 @@ bool NativeCodeGenerator::EmitSimd(
             case 1:  EmitVPsubwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 2:  EmitVPsubdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 3:  EmitVPsubqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 4:  EmitVSubpsRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 5:  EmitVSubpdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             default: return false;
             }
         } else {
@@ -4362,6 +4370,8 @@ bool NativeCodeGenerator::EmitSimd(
             case 1:  enc_.EmitPsubwRR(xmm_src1, xmm_src2); break;
             case 2:  enc_.EmitPsubdRR(xmm_src1, xmm_src2); break;
             case 3:  enc_.EmitPsubqRR(xmm_src1, xmm_src2); break;
+            case 4:  return false;  // float requires VEX encoding
+            case 5:  return false;  // double requires VEX encoding
             default: return false;
             }
         }
@@ -4372,12 +4382,16 @@ bool NativeCodeGenerator::EmitSimd(
             switch (elem_type) {
             case 1:  EmitVPmullwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 2:  EmitVPmuludqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 4:  EmitVMulpsRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 5:  EmitVMulpdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             default: return false;
             }
         } else {
             switch (elem_type) {
             case 1:  enc_.EmitPmullwRR(xmm_src1, xmm_src2); break;
             case 2:  enc_.EmitPmuludqRR(xmm_src1, xmm_src2); break;
+            case 4:  return false;  // float requires VEX encoding
+            case 5:  return false;  // double requires VEX encoding
             default: return false;
             }
         }
@@ -4401,7 +4415,7 @@ bool NativeCodeGenerator::EmitSimd(
         else enc_.EmitPandnRR(xmm_src1, xmm_src2);
         break;
 
-    // ── Compare ────────────────────────────────────────────────────
+    // ── Compare (integer + float/double) ─────────────────────────────
     case 8:  // kSimdEq
         if (kUseVexEncoding) {
             switch (elem_type) {
@@ -4409,6 +4423,8 @@ bool NativeCodeGenerator::EmitSimd(
             case 1:  EmitVPcmpeqwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 2:  EmitVPcmpeqdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 3:  EmitVPcmpeqqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 4:  EmitVCmppsRR(buf_, xmm_dst, xmm_src1, xmm_src2, 0); break;  // EQ_OQ
+            case 5:  EmitVCmppdRR(buf_, xmm_dst, xmm_src1, xmm_src2, 0); break;  // EQ_OQ
             default: return false;
             }
         } else {
@@ -4417,6 +4433,8 @@ bool NativeCodeGenerator::EmitSimd(
             case 1:  enc_.EmitPcmpeqwRR(xmm_src1, xmm_src2); break;
             case 2:  enc_.EmitPcmpeqdRR(xmm_src1, xmm_src2); break;
             case 3:  enc_.EmitPcmpeqqRR(xmm_src1, xmm_src2); break;
+            case 4:  return false;  // float requires VEX encoding
+            case 5:  return false;  // double requires VEX encoding
             default: return false;
             }
         }
@@ -4429,6 +4447,10 @@ bool NativeCodeGenerator::EmitSimd(
             case 1:  EmitVPcmpgtwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 2:  EmitVPcmpgtdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
             case 3:  EmitVPcmpgtqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            // SSE compare has no direct GT predicate; use LT_OS with swapped operands:
+            // vcmpps dest, src2, src1, 1  =>  src2 < src1  =>  src1 > src2
+            case 4:  EmitVCmppsRR(buf_, xmm_dst, xmm_src2, xmm_src1, 1); break;
+            case 5:  EmitVCmppdRR(buf_, xmm_dst, xmm_src2, xmm_src1, 1); break;
             default: return false;
             }
         } else {
@@ -4437,19 +4459,87 @@ bool NativeCodeGenerator::EmitSimd(
             case 1:  enc_.EmitPcmpgtwRR(xmm_src1, xmm_src2); break;
             case 2:  enc_.EmitPcmpgtdRR(xmm_src1, xmm_src2); break;
             case 3:  enc_.EmitPcmpgtqRR(xmm_src1, xmm_src2); break;
+            case 4:  return false;  // float requires VEX encoding
+            case 5:  return false;  // double requires VEX encoding
             default: return false;
             }
         }
         break;
 
     // ── Shuffle ─────────────────────────────────────────────────────
-    case 10:  // kSimdShuffle
+    case 10:  // kSimdShuffle (pshufd — dword shuffle with imm8)
         if (kUseVexEncoding)
             EmitVPshufdRR(buf_, xmm_dst, xmm_src1,
                           static_cast<uint8_t>(simd_imm & 0xFF));
         else
             enc_.EmitPshufdRR(xmm_src1, xmm_src1,
                               static_cast<uint8_t>(simd_imm & 0xFF));
+        break;
+
+    case 11:  // kSimdShuffleB (pshufb — SSSE3 byte shuffle)
+        if (elem_type != 0) return false;
+        if (kUseVexEncoding)
+            EmitVPshufbRR(buf_, xmm_dst, xmm_src1, xmm_src2);
+        else
+            EmitPshufbRR(buf_, xmm_src1, xmm_src2);
+        break;
+
+    // ── Unpack / Interleave ─────────────────────────────────────────
+    case 12:  // kSimdUnpackLo
+        if (kUseVexEncoding) {
+            switch (elem_type) {
+            case 0:  EmitVPunpcklbwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 1:  EmitVPunpcklwdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 2:  EmitVPunpckldqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 3:  EmitVPunpcklqdqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        } else {
+            switch (elem_type) {
+            case 0:  EmitPunpcklbwRR(buf_, xmm_src1, xmm_src2); break;
+            case 1:  EmitPunpcklwdRR(buf_, xmm_src1, xmm_src2); break;
+            case 2:  EmitPunpckldqRR(buf_, xmm_src1, xmm_src2); break;
+            case 3:  EmitPunpcklqdqRR(buf_, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        }
+        break;
+
+    case 13:  // kSimdUnpackHi
+        if (kUseVexEncoding) {
+            switch (elem_type) {
+            case 0:  EmitVPunpckhbwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 1:  EmitVPunpckhwdRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 2:  EmitVPunpckhdqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 3:  EmitVPunpckhqdqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        } else {
+            switch (elem_type) {
+            case 0:  EmitPunpckhbwRR(buf_, xmm_src1, xmm_src2); break;
+            case 1:  EmitPunpckhwdRR(buf_, xmm_src1, xmm_src2); break;
+            case 2:  EmitPunpckhdqRR(buf_, xmm_src1, xmm_src2); break;
+            case 3:  EmitPunpckhqdqRR(buf_, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        }
+        break;
+
+    // ── Pack with signed saturation ─────────────────────────────────
+    case 14:  // kSimdPackS
+        if (kUseVexEncoding) {
+            switch (elem_type) {
+            case 1:  EmitVPacksswbRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 2:  EmitVPackssdwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        } else {
+            switch (elem_type) {
+            case 1:  EmitPacksswbRR(buf_, xmm_src1, xmm_src2); break;
+            case 2:  EmitPackssdwRR(buf_, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        }
         break;
 
     // ── Absolute value ──────────────────────────────────────────────
@@ -4471,6 +4561,132 @@ bool NativeCodeGenerator::EmitSimd(
         }
         break;
 
+    // ── Packed shift by XMM count ───────────────────────────────────
+    case 16:  // kSimdShl (shift left logical)
+        if (kUseVexEncoding) {
+            switch (elem_type) {
+            case 1:  EmitVPsllwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 2:  EmitVPslldRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 3:  EmitVPsllqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        } else {
+            switch (elem_type) {
+            case 1:  EmitPsllwRR(buf_, xmm_src1, xmm_src2); break;
+            case 2:  EmitPslldRR(buf_, xmm_src1, xmm_src2); break;
+            case 3:  EmitPsllqRR(buf_, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        }
+        break;
+
+    case 17:  // kSimdShr (shift right logical)
+        if (kUseVexEncoding) {
+            switch (elem_type) {
+            case 1:  EmitVPsrlwRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 2:  EmitVPsrldRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 3:  EmitVPsrlqRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        } else {
+            switch (elem_type) {
+            case 1:  EmitPsrlwRR(buf_, xmm_src1, xmm_src2); break;
+            case 2:  EmitPsrldRR(buf_, xmm_src1, xmm_src2); break;
+            case 3:  EmitPsrlqRR(buf_, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        }
+        break;
+
+    case 18:  // kSimdSar (shift right arithmetic)
+        if (kUseVexEncoding) {
+            switch (elem_type) {
+            case 1:  EmitVPsrawRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            case 2:  EmitVPsradRR(buf_, xmm_dst, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        } else {
+            switch (elem_type) {
+            case 1:  EmitPsrawRR(buf_, xmm_src1, xmm_src2); break;
+            case 2:  EmitPsradRR(buf_, xmm_src1, xmm_src2); break;
+            default: return false;
+            }
+        }
+        break;
+
+    // ── Extract element to GPR ──────────────────────────────────────
+    case 19: {  // kSimdExtract
+        // Load XMM source (already in xmm_src1 from the top of this function).
+        // Extract the element at index simd_imm into RAX, then store to reg file.
+        switch (elem_type) {
+        case 0:
+            if (kUseVexEncoding)
+                EmitVPextrbRR(buf_, kRAX, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
+            else
+                EmitPextrbRR(buf_, kRAX, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
+            break;
+        case 1:
+            if (kUseVexEncoding)
+                EmitVPextrwRR(buf_, kRAX, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
+            else
+                EmitPextrwRR(buf_, kRAX, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
+            break;
+        case 2:
+            if (kUseVexEncoding)
+                EmitVPextrdRR(buf_, kRAX, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
+            else
+                EmitPextrdRR(buf_, kRAX, xmm_src1, static_cast<uint8_t>(simd_imm & 0xFF));
+            break;
+        default:
+            return false;
+        }
+        StoreGpr(kRAX, instr.dst_reg());
+        return true;
+    }
+
+    // ── Insert scalar from GPR ──────────────────────────────────────
+    case 20: {  // kSimdInsert
+        // Load destination XMM, load source GPR, insert, store back.
+        LoadFpr(xmm_src1, instr.dst_reg());  // re-load dest as source
+        uint32_t gpr_vreg = instr.src2_reg();
+        LoadGpr(kRAX, gpr_vreg);
+        switch (elem_type) {
+        case 0:
+            if (kUseVexEncoding)
+                EmitVPinsrbRR(buf_, xmm_src1, xmm_src1, kRAX, static_cast<uint8_t>(simd_imm & 0xFF));
+            else
+                EmitPinsrbRR(buf_, xmm_src1, kRAX, static_cast<uint8_t>(simd_imm & 0xFF));
+            break;
+        case 1:
+            if (kUseVexEncoding)
+                EmitVPinsrwRR(buf_, xmm_src1, xmm_src1, kRAX, static_cast<uint8_t>(simd_imm & 0xFF));
+            else
+                EmitPinsrwRR(buf_, xmm_src1, kRAX, static_cast<uint8_t>(simd_imm & 0xFF));
+            break;
+        case 2:
+            if (kUseVexEncoding)
+                EmitVPinsrdRR(buf_, xmm_src1, xmm_src1, kRAX, static_cast<uint8_t>(simd_imm & 0xFF));
+            else
+                EmitPinsrdRR(buf_, xmm_src1, kRAX, static_cast<uint8_t>(simd_imm & 0xFF));
+            break;
+        default:
+            return false;
+        }
+        StoreFpr(instr.dst_reg(), xmm_src1);
+        return true;
+    }
+
+    // ── Move byte mask to GPR ───────────────────────────────────────
+    case 21: {  // kSimdMoveMask
+        if (elem_type != 0) return false;
+        if (kUseVexEncoding)
+            EmitVPmovmskbRR(buf_, kRAX, xmm_src1);
+        else
+            EmitPmovmskbRR(buf_, kRAX, xmm_src1);
+        StoreGpr(kRAX, instr.dst_reg());
+        return true;
+    }
+
     // ── Zero XMM ────────────────────────────────────────────────────
     case 24:  // kSimdZero
         if (kUseVexEncoding)
@@ -4479,6 +4695,35 @@ bool NativeCodeGenerator::EmitSimd(
             enc_.EmitPxorRR(xmm_dst, xmm_dst);
         StoreFpr(instr.dst_reg(), xmm_dst);
         return true;
+
+    // ── Load/Store (movdqa) ─────────────────────────────────────────
+    case 22: {  // kSimdLoad — load from memory at address in src1
+        uint32_t addr_vreg = instr.src1_reg();
+        // Load address into RAX from the register file
+        LoadGpr(kRAX, addr_vreg);
+        if (kUseVexEncoding) {
+            buf_.EmitVEX_66_0F(xmm_dst, 0, xmm_dst);
+            buf_.EmitByte(0x6F);  // vmovdqa
+            buf_.EmitByte(ModRM(0, xmm_dst, kRAX));
+        } else {
+            enc_.EmitMovdqaRM(xmm_dst, kRAX, 0);
+        }
+        StoreFpr(instr.dst_reg(), xmm_dst);
+        return true;
+    }
+
+    case 23: {  // kSimdStore — store to memory at address in src1
+        uint32_t addr_vreg = instr.src1_reg();
+        LoadGpr(kRAX, addr_vreg);
+        if (kUseVexEncoding) {
+            buf_.EmitVEX_66_0F(xmm_src1, 0, xmm_src1);
+            buf_.EmitByte(0x7F);  // vmovdqa store
+            buf_.EmitByte(ModRM(0, xmm_src1, kRAX));
+        } else {
+            enc_.EmitMovdqaMR(kRAX, 0, xmm_src1);
+        }
+        return true;
+    }
 
     default:
         return false;  // unsupported SIMD operation

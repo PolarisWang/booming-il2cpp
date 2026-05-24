@@ -18,10 +18,12 @@ static uint8_t IntrinsicToSimdOp(IntrinsicId id) noexcept {
     case IntrinsicId::kVector128AndNot:  return kSimdAndNot;
     case IntrinsicId::kVector128Equals:  return kSimdEq;
     case IntrinsicId::kVector128Abs:     return kSimdAbs;
-    case IntrinsicId::kVector128Shuffle: return kSimdShuffle;
+    case IntrinsicId::kVector128Shuffle: return kSimdShuffleB;
     case IntrinsicId::kVector128Zero:    return kSimdZero;
     case IntrinsicId::kVector128Extract: return kSimdExtract;
     case IntrinsicId::kVector128Insert:  return kSimdInsert;
+    case IntrinsicId::kVector128Load:    return kSimdLoad;
+    case IntrinsicId::kVector128Store:   return kSimdStore;
     default: return kSimdInvalid;
     }
 }
@@ -30,8 +32,11 @@ static uint8_t IntrinsicToSimdOp(IntrinsicId id) noexcept {
 /// IntrinsicId context; a more precise implementation would read the generic
 /// instantiation from metadata.
 static uint8_t DefaultSimdElemType(IntrinsicId id) noexcept {
-    (void)id;
-    return kElemInt32;  // default for Phase 1
+    // Vector128<byte> / sbyte
+    if (id == IntrinsicId::kVector128Shuffle)
+        return kElemInt8;
+    // Default to Int32 for most integer SIMD ops
+    return kElemInt32;
 }
 
 // ── Intrinsic table (Phase 1) ─────────────────────────────────────────
@@ -39,7 +44,8 @@ static uint8_t DefaultSimdElemType(IntrinsicId id) noexcept {
 // per assembly. These must be updated with real tokens from the target
 // benchmark assembly before intrinsic expansion takes effect.
 //
-// Phase 1 entries: Math.*, Array.Length, BitOperations.PopCount/LeadingZeroCount
+// Phase 1 entries: Math.*, Array.Length, BitOperations.PopCount/LeadingZeroCount,
+//                  Vector128<T> operations (token wildcard for dev-mode testing).
 const IntrinsicEntry kIntrinsicTable[] = {
     // Math.Abs(int32)
     { 0xFFFFFFFF, IntrinsicId::kMathAbsInt32,  kAbs,     1, kInt32 },
@@ -53,8 +59,33 @@ const IntrinsicEntry kIntrinsicTable[] = {
     { 0xFFFFFFFF, IntrinsicId::kBitOpsPopCount, kPopcnt, 1, kInt32 },
     // BitOperations.LeadingZeroCount (unary, GPR)
     { 0xFFFFFFFF, IntrinsicId::kBitOpsLeadingZeroCount, kLzcnt, 1, kInt32 },
-    // Vector128<T>.Zero (static, no args → zero XMM)
-    { 0xFFFFFFFF, IntrinsicId::kVector128Zero,  kSimd,   0, kInt32 },
+
+    // ── Vector128<T> intrinsics (all use token wildcard for dev mode) ──
+    // Arithmetic (binary: vec, vec)
+    { 0xFFFFFFFF, IntrinsicId::kVector128Add,     kSimd, 2, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128Sub,     kSimd, 2, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128Mul,     kSimd, 2, kInt32 },
+    // Bitwise (binary: vec, vec)
+    { 0xFFFFFFFF, IntrinsicId::kVector128And,     kSimd, 2, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128Or,      kSimd, 2, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128Xor,     kSimd, 2, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128AndNot,  kSimd, 2, kInt32 },
+    // Compare (binary: vec, vec)
+    { 0xFFFFFFFF, IntrinsicId::kVector128Equals,  kSimd, 2, kInt32 },
+    // Shuffle (binary: vec, mask)
+    { 0xFFFFFFFF, IntrinsicId::kVector128Shuffle, kSimd, 2, kInt32 },
+    // Unary ops
+    { 0xFFFFFFFF, IntrinsicId::kVector128Abs,     kSimd, 1, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128Negate,  kSimd, 1, kInt32 },
+    // Create / load
+    { 0xFFFFFFFF, IntrinsicId::kVector128Zero,          kSimd, 0, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128Create,        kSimd, 1, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128CreateScalar,  kSimd, 1, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128Load,          kSimd, 1, kInt32 },
+    // Extract / insert / store (index carried via simd_imm = 0 for Phase 1)
+    { 0xFFFFFFFF, IntrinsicId::kVector128Extract, kSimd, 1, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128Insert,  kSimd, 2, kInt32 },
+    { 0xFFFFFFFF, IntrinsicId::kVector128Store,   kSimd, 2, kInt32 },
 };
 
 const uint32_t kIntrinsicTableSize =
@@ -147,6 +178,7 @@ ExprNode* IntrinsicMutator::Visit(ExprNode* node) noexcept {
             result->set_simd_meta(kSimdZero, DefaultSimdElemType(match->id), 0);
         break;
 
+    // ── Binary/unary SIMD ops covered by IntrinsicToSimdOp ─────────
     case IntrinsicId::kVector128Add:
     case IntrinsicId::kVector128Sub:
     case IntrinsicId::kVector128Mul:
@@ -156,10 +188,15 @@ ExprNode* IntrinsicMutator::Visit(ExprNode* node) noexcept {
     case IntrinsicId::kVector128AndNot:
     case IntrinsicId::kVector128Equals:
     case IntrinsicId::kVector128Abs:
+    case IntrinsicId::kVector128Shuffle:
+    case IntrinsicId::kVector128Extract:
+    case IntrinsicId::kVector128Insert:
+    case IntrinsicId::kVector128Load:
+    case IntrinsicId::kVector128Store:
         // Binary/unary SIMD operation
         {
             uint8_t simd_op = IntrinsicToSimdOp(match->id);
-            TypeTag result_tag = kInt32;  // most SIMD ops produce vector → stored as int
+            TypeTag result_tag = kInt32;
             if (match->arg_count >= 2) {
                 result = Binary(arena_pos_, arena_end_, kSimd, arg0, arg1, result_tag);
             } else {
@@ -167,6 +204,46 @@ ExprNode* IntrinsicMutator::Visit(ExprNode* node) noexcept {
             }
             if (result)
                 result->set_simd_meta(simd_op, DefaultSimdElemType(match->id), 0);
+        }
+        break;
+
+    case IntrinsicId::kVector128Negate:
+        // Lower as: sub(zero, arg) = 0 - arg = -arg
+        {
+            TypeTag result_tag = kInt32;
+            ExprNode* zero = AllocNode(arena_pos_, arena_end_, kSimd, result_tag);
+            if (zero)
+                zero->set_simd_meta(kSimdZero, DefaultSimdElemType(match->id), 0);
+            if (zero && arg0) {
+                result = Binary(arena_pos_, arena_end_, kSimd, zero, arg0, result_tag);
+                if (result)
+                    result->set_simd_meta(kSimdSub, DefaultSimdElemType(match->id), 0);
+            }
+        }
+        break;
+
+    case IntrinsicId::kVector128Create:
+        // Broadcast scalar to all lanes: treat as kSimdLoad from scalar addr
+        // (codegen will movd + pshufd for Phase 1)
+        {
+            result = Unary(arena_pos_, arena_end_, kSimd, arg0, kInt32);
+            if (result)
+                result->set_simd_meta(kSimdLoad, DefaultSimdElemType(match->id), 0);
+        }
+        break;
+
+    case IntrinsicId::kVector128CreateScalar:
+        // Insert scalar into lane 0 of zero vector
+        {
+            TypeTag result_tag = kInt32;
+            ExprNode* zero = AllocNode(arena_pos_, arena_end_, kSimd, result_tag);
+            if (zero)
+                zero->set_simd_meta(kSimdZero, DefaultSimdElemType(match->id), 0);
+            if (zero && arg0) {
+                result = Binary(arena_pos_, arena_end_, kSimd, zero, arg0, result_tag);
+                if (result)
+                    result->set_simd_meta(kSimdInsert, DefaultSimdElemType(match->id), 0);
+            }
         }
         break;
 
