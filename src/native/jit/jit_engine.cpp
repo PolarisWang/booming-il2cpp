@@ -4072,6 +4072,36 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         }
     }
 
+    // ── Emit JitDebugInfo footer (before Seal, while buffer is RW) ──────
+    uint32_t debug_info_offset = 0;
+    if (!is_tier0_) {
+        debug_info_offset = buf_.pos();
+
+        // 1. Emit instr_offsets array (uint32_t[])
+        uint32_t offsets_off = debug_info_offset;
+        for (auto off : instr_offsets_) {
+            buf_.Emit32(off);
+        }
+
+        // 2. Emit method name placeholder: "T4_{module_id}_{token}"
+        uint32_t name_off = buf_.pos();
+        char name_buf[128];
+        int name_len = std::snprintf(name_buf, sizeof(name_buf),
+            "T4_%08X_%08X", config_.method_module_id, config_.method_token);
+        buf_.EmitBytes(name_buf, static_cast<uint32_t>(name_len + 1));
+
+        // 3. Emit JitDebugInfo header
+        JitDebugInfo di;
+        di.magic              = JitDebugInfo::kMagic;
+        di.version            = JitDebugInfo::kVersion;
+        di.code_size          = buf_.pos();
+        di.instr_offset_count = static_cast<uint32_t>(instr_offsets_.size());
+        di.instr_offsets_off  = offsets_off;
+        di.method_name_off    = name_off;
+        di.method_name_len    = static_cast<uint32_t>(name_len);
+        buf_.EmitBytes(&di, sizeof(di));
+    }
+
     // Seal code buffer — returns nullptr on OOM or failure
     if (CheckFailed()) return nullptr;
     uint32_t code_bytes = buf_.pos();
@@ -4092,6 +4122,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     nm->instr_count = n_instrs;
     nm->seh_table_offset = seh_offset;
     nm->osr_entry_offset = osr_entry;
+    nm->debug_info_offset = debug_info_offset;
 
     // Wire up call-site slot table (embedded in the RX code buffer).
     // call_site_slots points into the sealed buffer after buf_.Seal().

@@ -26,6 +26,8 @@
 #include <cstdint>
 #include <cstdio>
 
+#include "sos_common.h"
+
 // ══════════════════════════════════════════════════════════════════════════
 // POD mirror of GcStats (gc_stats.h)
 //
@@ -85,16 +87,16 @@ static constexpr int kGcBucketCount  = 6;
 // DbgEng interface pointers
 // ══════════════════════════════════════════════════════════════════════════
 
-static IDebugClient*    g_client   = nullptr;
-static IDebugControl*   g_control  = nullptr;
-static IDebugSymbols*   g_symbols  = nullptr;
-static IDebugDataSpaces* g_data    = nullptr;
+IDebugClient*    g_client   = nullptr;
+IDebugControl*   g_control  = nullptr;
+IDebugSymbols*   g_symbols  = nullptr;
+IDebugDataSpaces* g_data    = nullptr;
 
 // ══════════════════════════════════════════════════════════════════════════
 // Helpers
 // ══════════════════════════════════════════════════════════════════════════
 
-static void DbgPrint(PCSTR fmt, ...) {
+void SosPrint(PCSTR fmt, ...) noexcept {
     if (!g_control) return;
     char buf[4096];
     va_list args;
@@ -104,7 +106,7 @@ static void DbgPrint(PCSTR fmt, ...) {
     g_control->Output(DEBUG_OUTPUT_NORMAL, "%s", buf);
 }
 
-static bool ReadTarget(ULONG64 offset, void* buf, ULONG size) {
+bool SosReadTarget(ULONG64 offset, void* buf, ULONG size) noexcept {
     if (!g_data) return false;
     ULONG bytes_read = 0;
     return SUCCEEDED(g_data->ReadVirtual(offset, buf, size, &bytes_read))
@@ -114,13 +116,13 @@ static bool ReadTarget(ULONG64 offset, void* buf, ULONG size) {
 /// Resolve an extern "C" pointer variable in the target:
 /// 1. GetOffsetByName to find the variable's address
 /// 2. ReadVirtual to get the pointer value stored in the variable
-static ULONG64 ResolvePointer(PCSTR name) {
+ULONG64 SosResolvePointer(PCSTR name) noexcept {
     ULONG64 var_addr = 0;
     if (!SUCCEEDED(g_symbols->GetOffsetByName(name, &var_addr))) {
         return 0;
     }
     ULONG64 ptr_val = 0;
-    if (!ReadTarget(var_addr, &ptr_val, sizeof(ptr_val))) {
+    if (!SosReadTarget(var_addr, &ptr_val, sizeof(ptr_val))) {
         return 0;
     }
     return ptr_val;
@@ -151,7 +153,7 @@ DebugExtensionInitialize(PDEBUG_CLIENT pDebugClient, void*, void*) {
         reinterpret_cast<void**>(&g_data));
     if (FAILED(hr)) return hr;
 
-    DbgPrint("CRAG GC SOS extension loaded. Use !gc.help for commands.\n");
+    SosPrint("CRAG GC SOS extension loaded. Use !gc.help for commands.\n");
     return S_OK;
 }
 
@@ -172,7 +174,7 @@ DebugExtensionUninitialize() {
 
 extern "C" HRESULT CALLBACK
 help(PDEBUG_CLIENT, PCSTR) {
-    DbgPrint("\n"
+    SosPrint("\n"
              "CRAG GC SOS Debugger Extension\n"
              "═══════════════════════════════\n"
              "Commands:\n"
@@ -192,16 +194,16 @@ help(PDEBUG_CLIENT, PCSTR) {
 
 extern "C" HRESULT CALLBACK
 info(PDEBUG_CLIENT, PCSTR) {
-    ULONG64 stats_addr = ResolvePointer("g_chaos_gc_stats_ptr");
+    ULONG64 stats_addr = SosResolvePointer("g_chaos_gc_stats_ptr");
     if (stats_addr == 0) {
-        DbgPrint("ERROR: Cannot locate g_chaos_gc_stats_ptr. Ensure the\n"
+        SosPrint("ERROR: Cannot locate g_chaos_gc_stats_ptr. Ensure the\n"
                  "target was built with gc_debug_contract enabled.\n");
         return E_FAIL;
     }
 
     GcStatsPod stats;
-    if (!ReadTarget(stats_addr, &stats, sizeof(stats))) {
-        DbgPrint("ERROR: Cannot read GcStats from target at 0x%llx.\n",
+    if (!SosReadTarget(stats_addr, &stats, sizeof(stats))) {
+        SosPrint("ERROR: Cannot read GcStats from target at 0x%llx.\n",
                  stats_addr);
         return E_FAIL;
     }
@@ -218,7 +220,7 @@ info(PDEBUG_CLIENT, PCSTR) {
     else if (stats.last_gc_generation == 1) last_gen = "Gen1";
     else if (stats.last_gc_generation == 2) last_gen = "Full";
 
-    DbgPrint("\n"
+    SosPrint("\n"
              "CRAG GC Subsystem State\n"
              "═══════════════════════\n"
              "  GC Index:         %llu\n"
@@ -247,15 +249,15 @@ info(PDEBUG_CLIENT, PCSTR) {
 
 extern "C" HRESULT CALLBACK
 stats(PDEBUG_CLIENT, PCSTR) {
-    ULONG64 stats_addr = ResolvePointer("g_chaos_gc_stats_ptr");
+    ULONG64 stats_addr = SosResolvePointer("g_chaos_gc_stats_ptr");
     if (stats_addr == 0) {
-        DbgPrint("ERROR: Cannot locate g_chaos_gc_stats_ptr.\n");
+        SosPrint("ERROR: Cannot locate g_chaos_gc_stats_ptr.\n");
         return E_FAIL;
     }
 
     GcStatsPod stats;
-    if (!ReadTarget(stats_addr, &stats, sizeof(stats))) {
-        DbgPrint("ERROR: Cannot read GcStats from target.\n");
+    if (!SosReadTarget(stats_addr, &stats, sizeof(stats))) {
+        SosPrint("ERROR: Cannot read GcStats from target.\n");
         return E_FAIL;
     }
 
@@ -266,7 +268,7 @@ stats(PDEBUG_CLIENT, PCSTR) {
     uint64_t gen1_avg = stats.gen1_collections > 0
         ? stats.gen1_pause_ns / stats.gen1_collections : 0;
 
-    DbgPrint("\n"
+    SosPrint("\n"
              "CRAG GC Statistics\n"
              "══════════════════\n"
              "── Young Collection ──\n"
@@ -324,11 +326,11 @@ stats(PDEBUG_CLIENT, PCSTR) {
 
 extern "C" HRESULT CALLBACK
 events(PDEBUG_CLIENT, PCSTR) {
-    ULONG64 ring_addr   = ResolvePointer("g_chaos_gc_event_ring_ptr");
-    ULONG64 head_addr   = ResolvePointer("g_chaos_gc_event_ring_head_ptr");
+    ULONG64 ring_addr   = SosResolvePointer("g_chaos_gc_event_ring_ptr");
+    ULONG64 head_addr   = SosResolvePointer("g_chaos_gc_event_ring_head_ptr");
 
     if (ring_addr == 0 || head_addr == 0) {
-        DbgPrint("ERROR: Cannot locate GC event ring symbols.\n");
+        SosPrint("ERROR: Cannot locate GC event ring symbols.\n");
         return E_FAIL;
     }
 
@@ -337,13 +339,13 @@ events(PDEBUG_CLIENT, PCSTR) {
     int32_t ring_size = kGcRingSize;
     if (SUCCEEDED(g_symbols->GetOffsetByName("g_chaos_gc_event_ring_size",
                                              &size_var_addr))) {
-        ReadTarget(size_var_addr, &ring_size, sizeof(ring_size));
+        SosReadTarget(size_var_addr, &ring_size, sizeof(ring_size));
     }
 
     // Read ring head index.
     int ring_head = 0;
-    if (!ReadTarget(head_addr, &ring_head, sizeof(ring_head))) {
-        DbgPrint("WARNING: Cannot read ring head, assuming 0.\n");
+    if (!SosReadTarget(head_addr, &ring_head, sizeof(ring_head))) {
+        SosPrint("WARNING: Cannot read ring head, assuming 0.\n");
     }
 
     // Read ring entries.
@@ -351,13 +353,13 @@ events(PDEBUG_CLIENT, PCSTR) {
     ULONG entries_to_read = (ring_size > 64) ? 64
                           : (ring_size <= 0) ? 64 : ring_size;
 
-    if (!ReadTarget(ring_addr, ring_buf,
+    if (!SosReadTarget(ring_addr, ring_buf,
                     entries_to_read * sizeof(GcEventEntryPod))) {
-        DbgPrint("ERROR: Cannot read GC event ring buffer.\n");
+        SosPrint("ERROR: Cannot read GC event ring buffer.\n");
         return E_FAIL;
     }
 
-    DbgPrint("\n"
+    SosPrint("\n"
              "GC Event Ring Buffer (cap=%d, head=%d)\n"
              "══════════════════════════════════════\n"
              "  #  | Type     | Pause (ns) | Processed | Reclaimed\n"
@@ -371,7 +373,7 @@ events(PDEBUG_CLIENT, PCSTR) {
         if (e.pause_ns == 0 && e.bytes_reclaimed == 0) {
             continue;
         }
-        DbgPrint("  %2d | %-8s | %10llu | %9llu | %llu\n",
+        SosPrint("  %2d | %-8s | %10llu | %9llu | %llu\n",
                  i,
                  e.is_full_gc ? "Full" : "Young",
                  e.pause_ns,
@@ -380,9 +382,9 @@ events(PDEBUG_CLIENT, PCSTR) {
         printed++;
     }
     if (printed == 0) {
-        DbgPrint("  (no events recorded yet)\n");
+        SosPrint("  (no events recorded yet)\n");
     }
-    DbgPrint("\n");
+    SosPrint("\n");
 
     return S_OK;
 }
@@ -398,11 +400,11 @@ static const char* kBucketNames[] = {
 
 extern "C" HRESULT CALLBACK
 histogram(PDEBUG_CLIENT, PCSTR) {
-    ULONG64 hist_addr   = ResolvePointer("g_chaos_gc_pause_histogram_ptr");
-    ULONG64 bounds_addr = ResolvePointer("g_chaos_gc_pause_bucket_bounds_ptr");
+    ULONG64 hist_addr   = SosResolvePointer("g_chaos_gc_pause_histogram_ptr");
+    ULONG64 bounds_addr = SosResolvePointer("g_chaos_gc_pause_bucket_bounds_ptr");
 
     if (hist_addr == 0) {
-        DbgPrint("ERROR: Cannot locate GC pause histogram.\n");
+        SosPrint("ERROR: Cannot locate GC pause histogram.\n");
         return E_FAIL;
     }
 
@@ -411,15 +413,15 @@ histogram(PDEBUG_CLIENT, PCSTR) {
     ULONG64 count_var_addr = 0;
     if (SUCCEEDED(g_symbols->GetOffsetByName("g_chaos_gc_pause_bucket_count",
                                              &count_var_addr))) {
-        ReadTarget(count_var_addr, &bucket_count, sizeof(bucket_count));
+        SosReadTarget(count_var_addr, &bucket_count, sizeof(bucket_count));
     }
     if (bucket_count > kGcBucketCount) bucket_count = kGcBucketCount;
 
     // Read histogram bucket values (atomic<uint64_t> = plain uint64_t layout).
     uint64_t hist_values[6] = {};
-    if (!ReadTarget(hist_addr, hist_values,
+    if (!SosReadTarget(hist_addr, hist_values,
                     bucket_count * sizeof(uint64_t))) {
-        DbgPrint("ERROR: Cannot read pause histogram values.\n");
+        SosPrint("ERROR: Cannot read pause histogram values.\n");
         return E_FAIL;
     }
 
@@ -427,22 +429,22 @@ histogram(PDEBUG_CLIENT, PCSTR) {
     uint64_t total = 0;
     for (int i = 0; i < bucket_count; i++) total += hist_values[i];
 
-    DbgPrint("\n"
+    SosPrint("\n"
              "GC Pause Time Histogram (total samples: %llu)\n"
              "══════════════════════════════════════════════\n",
              total);
 
     if (total == 0) {
-        DbgPrint("  (no GC pauses recorded yet)\n\n");
+        SosPrint("  (no GC pauses recorded yet)\n\n");
         return S_OK;
     }
 
     for (int i = 0; i < bucket_count && i < 6; i++) {
         double pct = 100.0 * hist_values[i] / total;
-        DbgPrint("  %-12s: %5llu  (%5.1f%%)\n",
+        SosPrint("  %-12s: %5llu  (%5.1f%%)\n",
                  kBucketNames[i], hist_values[i], pct);
     }
-    DbgPrint("  ────────────\n"
+    SosPrint("  ────────────\n"
              "  Total       : %5llu  (100.0%%)\n"
              "\n",
              total);

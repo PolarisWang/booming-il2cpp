@@ -61,6 +61,7 @@ add_library(chaos_runtime_core STATIC
     thread_state.h
     jit_demotion.cpp
     jit_demotion.h
+    jit/jit_debug_contract.cpp
     thread_pool.cpp
     thread_pool.h
     timer_queue.cpp

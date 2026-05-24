@@ -297,11 +297,29 @@ const char* MetadataRegistry::GetMethodName(uint64_t method_handle) noexcept
     if (method_handle == 0) return nullptr;
 
     // MethodHandle composite: (module_id<<32) | method_token.
-    // The patch_data.h MethodDef entries carry names in the string heap.
-    // For AOT methods, names are in the module's type descriptor chain.
-    // For now, return nullptr — Phase 2 (register VM) will add a method
-    // name table to the MetadataRegistry.
-    (void)method_handle;
+    uint32_t module_id = static_cast<uint32_t>(method_handle >> 32);
+    uint32_t method_token = static_cast<uint32_t>(method_handle & 0xFFFFFFFFu);
+
+    // Path 1: HotpatchNameRegistry — scan method_entries for matching token.
+    auto& hp_registry = GetHotpatchNameRegistry();
+    if (module_id < hp_registry.ModuleCount()) {
+        const char* name = hp_registry.GetMethodName(module_id, method_token);
+        if (name != nullptr) return name;
+    }
+
+    // Path 2: AOT module — scan ReflectionQueryModel method descriptors.
+    const auto* mod = LookupModule(module_id);
+    if (mod != nullptr && !mod->tombstone && mod->image != nullptr) {
+        ImageHandle image = EncodeReflectionQueryImageHandle(mod->image);
+        const auto* img = TryDecodeReflectionQueryImageHandle(image);
+        if (img != nullptr) {
+            const auto* md = FindReflectionQueryMethodByToken(img, method_token);
+            if (md != nullptr && md->name_utf8 != nullptr) {
+                return md->name_utf8;
+            }
+        }
+    }
+
     return nullptr;
 }
 
