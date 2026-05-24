@@ -1,0 +1,2172 @@
+﻿{
+  "schemaVersion": 2,
+  "assemblyName": "GenericSupplementSubjects",
+  "methodCount": 148,
+  "defaultStringId": 4893213157301567879,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_1",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 1
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_2",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 2
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementSubjects_Subject_3",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 3
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1__ctor_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_ICollection_T__Add_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_ICollection_T__Clear",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_ICollection_T__Contains_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_ICollection_T__CopyTo_0_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_ICollection_T__get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_ICollection_T__get_IsReadOnly",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 11,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_ICollection_T__Remove_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 12,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_IEnumerable_T__GetEnumerator",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 13,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_IList_T__get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_IList_T__IndexOf_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_IList_T__Insert_System_Int32_0",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 16,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_IList_T__RemoveAt_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 17,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_IList_T__set_Item_System_Int32_0",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 18,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_IReadOnlyCollection_T__get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 19,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_Generic_IReadOnlyList_T__get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 20,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_ICollection_CopyTo_System_Array_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 21,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_ICollection_get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 22,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_ICollection_get_IsSynchronized",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 23,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_ICollection_get_SyncRoot",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 24,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IEnumerable_GetEnumerator",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 25,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_Add_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 26,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_Clear",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 27,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_Contains_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 28,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_get_IsFixedSize",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 29,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_get_IsReadOnly",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 30,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 31,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_IndexOf_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 32,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_Insert_System_Int32_System_Object",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 33,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_Remove_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 34,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_RemoveAt_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 35,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_System_Collections_IList_set_Item_System_Int32_System_Object",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 36,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_Enumerator__ctor_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 37,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_Enumerator_System_Collections_Generic_IEnumerator_T__get_Current",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 38,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_Enumerator_System_Collections_IEnumerator_get_Current",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 39,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_Enumerator_System_Collections_IEnumerator_MoveNext",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 40,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_Enumerator_System_Collections_IEnumerator_Reset",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 41,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_1_Enumerator_System_IDisposable_Dispose",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 42,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_Enumerator__0__ctor_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 43,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_Enumerator__0_System_Collections_Generic_IEnumerator_T__get_Current",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 44,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_Enumerator__0_System_Collections_IEnumerator_get_Current",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 45,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_Enumerator__0_System_Collections_IEnumerator_MoveNext",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 46,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_Enumerator__0_System_Collections_IEnumerator_Reset",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 47,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_Enumerator__0_System_IDisposable_Dispose",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 48,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0__ctor_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 49,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_ICollection_T__Add_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 50,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_ICollection_T__Clear",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 51,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_ICollection_T__Contains_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 52,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_ICollection_T__CopyTo_0_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 53,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_ICollection_T__get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 54,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_ICollection_T__get_IsReadOnly",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 55,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_ICollection_T__Remove_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 56,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_IEnumerable_T__GetEnumerator",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 57,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_IList_T__get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 58,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_IList_T__IndexOf_0",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 59,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_IList_T__Insert_System_Int32_0",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 60,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_IList_T__RemoveAt_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 61,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_IList_T__set_Item_System_Int32_0",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 62,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_IReadOnlyCollection_T__get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 63,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_Generic_IReadOnlyList_T__get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 64,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_ICollection_CopyTo_System_Array_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 65,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_ICollection_get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 66,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_ICollection_get_IsSynchronized",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 67,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_ICollection_get_SyncRoot",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 68,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IEnumerable_GetEnumerator",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 69,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_Add_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 70,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_Clear",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 71,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_Contains_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 72,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_get_IsFixedSize",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 73,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_get_IsReadOnly",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 74,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 75,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_IndexOf_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 76,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_Insert_System_Int32_System_Object",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 77,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_Remove_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 78,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_RemoveAt_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 79,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList__0_System_Collections_IList_set_Item_System_Int32_System_Object",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 80,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry__ctor_SupplementalMetadataTypeTemplateEntry",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 81,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_ICollection_T__Add_SupplementalMetadataTypeTemplateEntry",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 82,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_ICollection_T__Clear",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 83,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_ICollection_T__Contains_SupplementalMetadataTypeTemplateEntry",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 84,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_ICollection_T__CopyTo_SupplementalMetadataTypeTemplateEntry_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 85,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_ICollection_T__get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 86,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_ICollection_T__get_IsReadOnly",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 87,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_ICollection_T__Remove_SupplementalMetadataTypeTemplateEntry",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 88,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_IEnumerable_T__GetEnumerator",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 89,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_IList_T__get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 90,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_IList_T__IndexOf_SupplementalMetadataTypeTemplateEntry",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 91,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_IList_T__Insert_System_Int32_SupplementalMetadataTypeTemplateEntry",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 92,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_IList_T__RemoveAt_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 93,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_IList_T__set_Item_System_Int32_SupplementalMetadataTypeTemplateEntry",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 94,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_IReadOnlyCollection_T__get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 95,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_Generic_IReadOnlyList_T__get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 96,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_ICollection_CopyTo_System_Array_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 97,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_ICollection_get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 98,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_ICollection_get_IsSynchronized",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 99,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_ICollection_get_SyncRoot",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 100,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IEnumerable_GetEnumerator",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 101,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_Add_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 102,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_Clear",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 103,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_Contains_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 104,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_get_IsFixedSize",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 105,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_get_IsReadOnly",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 106,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 107,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_IndexOf_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 108,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_Insert_System_Int32_System_Object",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 109,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_Remove_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 110,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_RemoveAt_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 111,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_SupplementalMetadataTypeTemplateEntry_System_Collections_IList_set_Item_System_Int32_System_Object",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 112,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String__ctor_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 113,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_ICollection_T__Add_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 114,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_ICollection_T__Clear",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 115,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_ICollection_T__Contains_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 116,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_ICollection_T__CopyTo_System_String_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 117,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_ICollection_T__get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 118,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_ICollection_T__get_IsReadOnly",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 119,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_ICollection_T__Remove_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 120,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_IEnumerable_T__GetEnumerator",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 121,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_IList_T__get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 122,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_IList_T__IndexOf_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 123,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_IList_T__Insert_System_Int32_System_String",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 124,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_IList_T__RemoveAt_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 125,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_IList_T__set_Item_System_Int32_System_String",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 126,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_IReadOnlyCollection_T__get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 127,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_Generic_IReadOnlyList_T__get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 128,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_ICollection_CopyTo_System_Array_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 129,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_ICollection_get_Count",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 130,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_ICollection_get_IsSynchronized",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 131,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_ICollection_get_SyncRoot",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 132,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IEnumerable_GetEnumerator",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 133,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_Add_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 134,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_Clear",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 135,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_Contains_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 136,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_get_IsFixedSize",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 137,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_get_IsReadOnly",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 138,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_get_Item_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 139,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_IndexOf_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 140,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_Insert_System_Int32_System_Object",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 141,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_Remove_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 142,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_RemoveAt_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 143,
+      "nativeSymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_System_String_System_Collections_IList_set_Item_System_Int32_System_Object",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 144,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 145,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestSupplementalMetadataRoundtrip",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 146,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupBySubjectId",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 147,
+      "nativeSymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestTypeLookupByToken",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    }
+  ]
+}

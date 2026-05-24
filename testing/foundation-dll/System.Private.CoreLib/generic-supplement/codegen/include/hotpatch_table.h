@@ -63,6 +63,12 @@ public:
     HotpatchEntryV0* GetDispatchEntry(uint32_t module_id, uint32_t token) const noexcept;
     HotpatchEntryV0* GetDispatchEntryBySlot(size_t module_index, uint32_t slot) const noexcept;
 
+    // ── Method name resolution (for debugger/SOS) ─────────────────
+    // Given (module_id, method_token), scan method_entries and return
+    // the UTF-8 method name from codegen-emitted .rodata.
+    // Returns nullptr if not found (e.g. AOT-only method without hotpatch entry).
+    const char* GetMethodName(uint32_t module_id, uint32_t method_token) const noexcept;
+
     // ── Patch management ────────────────────────────────────────────
     // Module-scoped patch: set/unset patch on (module_id, slot) — O(1).
     void SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched, void* method_key) noexcept;

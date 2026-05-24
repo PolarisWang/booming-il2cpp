@@ -272,12 +272,20 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\code_buffer.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\jit_engine.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\jit_helpers.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\jit_inline.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\jit_deopt.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\jit_seh.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\jit_unwind.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\jit_binary_reader.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\jit_precode.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\WinSehHandler.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\tree\jit_intrinsics.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\tree\jit_bounds_check.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\tree\jit_cfg.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\tree\jit_tree_builder.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\tree\jit_tree_mutator.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\tree\jit_linearizer.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\jit\tree\jit_optimizer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\bootstrap\chaos_bootstrap.vcxproj">

@@ -215,6 +215,7 @@ public sealed partial class NativeAotLoweringPlanner
 		EmitStaticInitializationPrologue(builder, method);
 		builder.AppendLine();
 		_currentMethodNativeSymbol = method.NativeSymbol;
+		_currentMethodArtifact = method;
 		try
 		{
 			EmitViaStructuredIR(builder, method, instructions, offsets, body);
@@ -222,6 +223,7 @@ public sealed partial class NativeAotLoweringPlanner
 		finally
 		{
 			_currentMethodNativeSymbol = null;
+			_currentMethodArtifact = null;
 		}
 		builder.AppendLine("}");
 	}

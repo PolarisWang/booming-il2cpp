@@ -1991,6 +1991,14 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 
 		InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
+		// IL-level inlining: expand small callee bodies directly at call site.
+		if (invocationTarget.TargetSymbol != null)
+		{
+			System.Console.Error.WriteLine($"[INLINE-DBG] EmitLinearCallTarget: TargetSymbol={invocationTarget.TargetSymbol}, Callee={instruction.Callee ?? "null"}, TargetRef={instruction.TargetReference?.SubjectId ?? "null"}, ExternalTableIdx={invocationTarget.ExternalRuntimeTableIndex}");
+			if (TryInlineAtCallSite(builder, instruction, invocationTarget, indentation))
+				return;
+		}
+
 
 		// Inline shape expansion: substitute args into expression template at call site.
 		if (invocationTarget.InlineCppExpression is { } inlineExpr)
@@ -2043,6 +2051,106 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 	}
 
+	/// <summary>
+	/// Try to inline a resolved callee method at the call site.
+	/// Used by both direct calls and devirtualized callvirt.
+	/// </summary>
+	private bool TryInlineResolvedMethod(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string calleeSubjectId, int paramCount, string indentation)
+	{
+		if (!_methodsBySubjectId.TryGetValue(calleeSubjectId, out var calleeMethod)) { System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod FAIL: calleeMethod not found for {calleeSubjectId}"); return false; }
+		System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod: found {calleeSubjectId}, IR inst count={calleeMethod.Instructions.Count}, locals={calleeMethod.LocalCount}, EH regions={calleeMethod.ExceptionRegionCount}, IsPInvoke={calleeMethod.IsPInvoke}, NativeSymbol={calleeMethod.NativeSymbol}");
+		if (calleeMethod.ExceptionRegionCount > 0) { System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod FAIL: has exception regions"); return false; }
+		if (calleeMethod.IsPInvoke) { System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod FAIL: is P/Invoke"); return false; }
+		if (_currentMethodArtifact == null) { System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod FAIL: _currentMethodArtifact is null"); return false; }
+		if (_currentMethodNativeSymbol == null) { System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod FAIL: _currentMethodNativeSymbol is null"); return false; }
+
+		// Budget check via InliningPlanner
+		bool isRecursive = string.Equals(calleeMethod.NativeSymbol, _currentMethodNativeSymbol, StringComparison.Ordinal);
+		var candidate = InliningPlanner.EvaluateInline(calleeMethod.Instructions.Count, _currentMethodArtifact.Instructions.Count, isRecursive);
+		System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod budget: callerInsts={_currentMethodArtifact.Instructions.Count}, calleeInsts={calleeMethod.Instructions.Count}, isRecursive={isRecursive}, CanInline={candidate.CanInline}, reason={candidate.Reason}");
+		if (!candidate.CanInline) { System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineResolvedMethod FAIL: budget rejected: {candidate.Reason}"); return false; }
+
+		// Single-BB restriction: no branches, switch, leave, starg, ldarga, ldloca
+		foreach (var ci in calleeMethod.Instructions)
+		{
+			if (ci.Op is "brfalse" or "brtrue" or "beq" or "bne.un"
+			    or "bge" or "bge.un" or "bgt" or "bgt.un" or "ble" or "ble.un"
+			    or "blt" or "blt.un" or "switch" or "leave" or "endfilter"
+			    or "starg" or "ldarga" or "ldloca")
+			{
+				System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod FAIL: single-BB restriction hit on " + ci.Op);
+				return false;
+			}
+		}
+
+		System.Console.Error.WriteLine("[INLINE-DBG] TryInlineResolvedMethod: ALL CHECKS PASSED - emitting inline body");
+		// ---- EMIT INLINE BODY ----
+		builder.AppendLine($"{indentation}{{");
+		builder.AppendLine($"{indentation}    // Inlined: {calleeMethod.SubjectId}");
+
+		// Consume arguments from eval stack into local C++ variables
+		for (int i = paramCount - 1; i >= 0; i--)
+		{
+			string argExpr = ConsumeEvalStackValueExpression();
+			builder.AppendLine($"{indentation}    auto chaos_inline_arg_{i} = {argExpr};");
+		}
+
+		int localOffset = _currentMethodArtifact.LocalCount;
+
+		foreach (var calleeInstruction in calleeMethod.Instructions)
+		{
+			if (calleeInstruction.Op == "ret") continue;
+
+			if (calleeInstruction.Op == "ldarg")
+			{
+				int argIndex = GetRequiredIntOperand(calleeInstruction);
+				EmitEvalStackPush(builder, indentation + "    ", $"chaos_inline_arg_{argIndex}");
+				continue;
+			}
+
+			if (calleeInstruction.Op == "ldloc")
+			{
+				int localIndex = GetRequiredIntOperand(calleeInstruction);
+				EmitEvalStackPush(builder, indentation + "    ", $"chaos_locals[{localOffset + localIndex}]");
+				continue;
+			}
+
+			if (calleeInstruction.Op == "stloc")
+			{
+				string valueExpr = ConsumeEvalStackValueExpression();
+				int localIndex = GetRequiredIntOperand(calleeInstruction);
+				builder.AppendLine($"{indentation}    chaos_locals[{localOffset + localIndex}] = {valueExpr};");
+				continue;
+			}
+
+			EmitInstruction(builder, calleeInstruction, indentation + "    ");
+		}
+
+		builder.AppendLine($"{indentation}}}");
+		return true;
+	}
+
+	/// <summary>Try to inline the callee method identified by the invocation target.</summary>
+	private bool TryInlineAtCallSite(StringBuilder builder, AotCoreIrInstructionArtifact instruction, InvocationTarget invocationTarget, string indentation)
+	{
+		string? calleeSubjectId = instruction.Callee ?? instruction.TargetReference?.SubjectId;
+		System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineAtCallSite: calleeSubjectId(inst)={calleeSubjectId ?? "null"}, TargetSymbol={invocationTarget.TargetSymbol ?? "null"}");
+		// Fallback: for lowering-time devirtualized calls, the instruction-level
+		// Callee/TargetReference is consumed during devirtualization.  Resolve the
+		// SubjectId from the native symbol via the reverse symbol table.
+		if (calleeSubjectId == null && invocationTarget.TargetSymbol != null)
+		{
+			bool found = _nativeSymbolToSubjectId.TryGetValue(invocationTarget.TargetSymbol, out var resolvedId);
+			System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineAtCallSite: reverse lookup TargetSymbol={invocationTarget.TargetSymbol}, found={found}, resolvedId={resolvedId ?? "null"}");
+			if (found)
+			{
+				calleeSubjectId = resolvedId;
+			}
+		}
+		if (calleeSubjectId == null) { System.Console.Error.WriteLine("[INLINE-DBG] TryInlineAtCallSite: FAILED - calleeSubjectId is null"); return false; }
+		System.Console.Error.WriteLine($"[INLINE-DBG] TryInlineAtCallSite: SUCCESS - calling TryInlineResolvedMethod with calleeSubjectId={calleeSubjectId}");
+		return TryInlineResolvedMethod(builder, instruction, calleeSubjectId, invocationTarget.ParameterAbis.Count, indentation);
+	}
 	private void EmitLinearCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 		EmitLinearCallTarget(builder, instruction, indentation, enforceInstanceNullCheck: false);
@@ -2065,6 +2173,10 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 			// If the devirtualized method has a hotpatch dispatch slot, use
 			// hotpatch-aware dispatch so method_replacement can intercept at runtime.
+			// Try inlining before hotpatch — skip hotpatch entirely if inlined.
+			if (TryInlineResolvedMethod(builder, instruction, devirtHint.ImplementationMethodSubjectId, GetMethodAbiParameterSlots(devirtMethod).Count, indentation))
+				return;
+
 			if (_nativeSymbolToDispatchSlot?.TryGetValue(devirtSymbol, out int devirtSlot) == true)
 			{
 				EmitHotpatchResolvedInvocation(
@@ -2114,6 +2226,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 						? (callerIsShared ? "chaos_generic_context" : "0")
 						: (callerIsShared ? ", chaos_generic_context" : ", 0");
 				}
+				// Try inlining the devirtualized method
+				if (TryInlineResolvedMethod(builder, instruction, devirtHint.ImplementationMethodSubjectId, devirtParams.Count, indentation))
+					return;
 				if (string.Equals(devirtRet, "void", StringComparison.Ordinal))
 				{
 					builder.AppendLine($"{indentation}        {devirtSymbol}({devirtArgs}{devirtCtxArg});");
@@ -2145,6 +2260,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 						? (callerIsShared ? "chaos_generic_context" : "0")
 						: (callerIsShared ? ", chaos_generic_context" : ", 0");
 				}
+				// Try inlining the devirtualized method (sealed/monomorphic path)
+				if (TryInlineResolvedMethod(builder, instruction, devirtHint.ImplementationMethodSubjectId, devirtParams.Count, indentation))
+					return;
 				if (string.Equals(devirtRet, "void", StringComparison.Ordinal))
 				{
 					builder.AppendLine($"{indentation}    {devirtSymbol}({devirtArgs}{devirtCtxArg2});");

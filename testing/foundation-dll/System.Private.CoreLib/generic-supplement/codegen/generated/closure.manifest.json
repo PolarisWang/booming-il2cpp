@@ -4,19 +4,50 @@
   "assemblyName": "GenericSupplementSubjects",
   "entrySubjectId": "",
   "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/generic-supplement/managed/subjects/build-output/GenericSupplementSubjects.dll",
-  "additionalAssemblyPaths": [],
+  "additionalAssemblyPaths": [
+    "testing/foundation-dll/System.Private.CoreLib/generic-supplement/managed/subjects/build-output/Chaos.IL2CPP.Contracts.dll",
+    "testing/foundation-dll/System.Private.CoreLib/generic-supplement/managed/subjects/build-output/Chaos.IL2CPP.HotUpdate.dll"
+  ],
   "resolvedAssemblies": [
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "path": "testing/foundation-dll/System.Private.CoreLib/generic-supplement/managed/subjects/build-output/Chaos.IL2CPP.Contracts.dll"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.HotUpdate",
+      "path": "testing/foundation-dll/System.Private.CoreLib/generic-supplement/managed/subjects/build-output/Chaos.IL2CPP.HotUpdate.dll"
+    },
     {
       "assemblyName": "GenericSupplementSubjects",
       "path": "testing/foundation-dll/System.Private.CoreLib/generic-supplement/managed/subjects/build-output/GenericSupplementSubjects.dll"
     },
     {
+      "assemblyName": "System.Collections",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Collections.dll"
+    },
+    {
+      "assemblyName": "System.Linq",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Linq.dll"
+    },
+    {
+      "assemblyName": "System.Memory",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Memory.dll"
+    },
+    {
       "assemblyName": "System.Private.CoreLib",
       "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Private.CoreLib.dll"
+    },
+    {
+      "assemblyName": "System.Security.Cryptography",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Security.Cryptography.dll"
+    },
+    {
+      "assemblyName": "System.Text.Json",
+      "path": "C:/Program Files/dotnet/shared/Microsoft.NETCore.App/8.0.11/System.Text.Json.dll"
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "3dfe8022-f519-4e47-8013-026d6ee7825e",
+  "inputModuleVersionId": "1c08f711-8a18-47a0-bcb6-340eb6e106e1",
   "artifacts": [
     {
       "kind": "typedIlIr",

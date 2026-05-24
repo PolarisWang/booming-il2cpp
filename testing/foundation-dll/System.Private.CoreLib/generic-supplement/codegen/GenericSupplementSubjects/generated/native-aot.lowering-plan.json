@@ -3,9 +3,41 @@
   "artifactKind": "nativeAotLoweringPlan",
   "planKind": "full-assembly-entry",
   "assemblyName": "GenericSupplementSubjects",
-  "entrySubjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+  "entrySubjectId": "Chaos.IL2CPP.Contracts/AotCoreIrAbiSlotArtifact::.ctor:System.Void()",
   "nativeEntryFunctionName": "",
-  "entrySymbol": "GenericSupplementSubjects_GenericSupplementNativeEntry_TestGenericInstantiation",
+  "entrySymbol": "Chaos_IL2CPP_Contracts_AotCoreIrAbiSlotArtifact__ctor",
   "entryMethodToken": "0u",
-  "workloadAbi": "full-assembly"
+  "workloadAbi": "full-assembly",
+  "translationUnitPageSize": 512,
+  "translationUnitPageCount": 4,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 1024,
+      "path": "generated/native-aot.page-0001.cpp",
+      "firstMethodSubjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::.ctor:System.Void(!0)",
+      "lastMethodSubjectId": "Chaos.IL2CPP.HotUpdate/HotUpdatePackage::get_Signature:System.String()"
+    },
+    {
+      "pageNumber": 2,
+      "methodCount": 1024,
+      "path": "generated/native-aot.page-0002.cpp",
+      "firstMethodSubjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_CodegenKind:System.Void(System.String)",
+      "lastMethodSubjectId": "Chaos.IL2CPP.Contracts/ManagedFieldModel::get_Name:System.String()"
+    },
+    {
+      "pageNumber": 3,
+      "methodCount": 1024,
+      "path": "generated/native-aot.page-0003.cpp",
+      "firstMethodSubjectId": "Chaos.IL2CPP.Contracts/ManagedFieldModel::set_Name:System.Void(System.String)",
+      "lastMethodSubjectId": "Chaos.IL2CPP.Contracts/LayoutFact::get_ElementType:System.String()"
+    },
+    {
+      "pageNumber": 4,
+      "methodCount": 710,
+      "path": "generated/native-aot.page-0004.cpp",
+      "firstMethodSubjectId": "Chaos.IL2CPP.Contracts/LayoutFact::set_ElementType:System.Void(System.String)",
+      "lastMethodSubjectId": "Chaos.IL2CPP.HotUpdate/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.Object\u003E::System.Collections.Generic.IList\u003CT\u003E.RemoveAt:System.Void(System.Int32)"
+    }
+  ]
 }

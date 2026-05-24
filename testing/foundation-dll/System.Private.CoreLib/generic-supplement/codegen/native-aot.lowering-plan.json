@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "GenericSupplementSubjects",
+  "entrySubjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::.ctor:System.Void(!0)",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "GenericSupplementSubjects_z__ReadOnlySingleElementList_Enumerator__0__ctor_0",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

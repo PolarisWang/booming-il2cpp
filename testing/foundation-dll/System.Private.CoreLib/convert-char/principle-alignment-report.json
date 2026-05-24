@@ -1,12 +1,12 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-24T16:17:35.438402",
+  "generated_at": "2026-05-24T20:34:14.905591",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
-      "status": "NOT_APPLICABLE",
-      "summary": "avg_aot_speedup=3.4%, avg_jit_speedup=-714.09% (2/11 methods where native is slower than managed (18%); JIT speedup -714.09% (interpreter significantly slower than managed JIT)) [overridden — benchmark stage was skipped]",
+      "status": "CONCERN",
+      "summary": "avg_aot_speedup=3.4%, avg_jit_speedup=-714.09% (2/11 methods where native is slower than managed (18%); JIT speedup -714.09% (interpreter significantly slower than managed JIT))",
       "details": [],
       "evidence": {
         "average_speedup_percent": 3.4,
@@ -20,11 +20,12 @@
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "ALIGNED",
-      "summary": "All methods have lowering [OK]",
+      "status": "VIOLATION",
+      "summary": "0/0 methods with lowering",
       "details": [],
       "evidence": {
-        "has_lowering": true,
+        "has_lowering": false,
+        "file_has_lowering": false,
         "stub_count": 0,
         "simple_forward_count": 0,
         "methods_with_lowering": 0,
@@ -54,11 +55,11 @@
       "details": [
         {
           "function": "ChaosDatetimeGetUtcNow",
-          "call_count": 3
+          "call_count": 1
         }
       ],
       "evidence": {
-        "stub_call_count": 3
+        "stub_call_count": 1
       }
     },
     "p2_abstraction_balance": {
@@ -71,14 +72,18 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "10 of 15 changed source files are outside expected architecture layers",
+      "summary": "7 of 11 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": ".github/workflows/codegen-regression.yml",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "build/check_foundation_dll_pipeline.py",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
           "reason": "outside expected architecture layers"
         },
         {
@@ -86,50 +91,35 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/jit_helpers.cpp",
+          "file": "src/native/jit/jit_method.h",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/jit_helpers.h",
+          "file": "src/native/jit/jit_precode.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/tree/jit_linearizer.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/tree/jit_optimizer.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/tree/jit_tree_builder.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/tree/jit_tree_builder.h",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/tree/jit_tree_node.h",
+          "file": "src/native/jit/jit_seh.cpp",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 15,
+        "changed_source_count": 11,
         "layer_distribution": {
           "TestInfra": 1,
-          "Driver": 1,
-          "Interpreter": 1,
-          "BuildConfig": 1,
-          "RuntimeCore": 1
+          "RuntimeCore": 3
         },
         "violations": [
           {
-            "file": ".github/workflows/codegen-regression.yml",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "build/check_foundation_dll_pipeline.py",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
             "reason": "outside expected architecture layers"
           },
           {
@@ -137,31 +127,15 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/jit_helpers.cpp",
+            "file": "src/native/jit/jit_method.h",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/jit_helpers.h",
+            "file": "src/native/jit/jit_precode.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/tree/jit_linearizer.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/tree/jit_optimizer.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/tree/jit_tree_builder.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/tree/jit_tree_builder.h",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/tree/jit_tree_node.h",
+            "file": "src/native/jit/jit_seh.cpp",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -223,10 +197,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 7,
+    "aligned": 6,
     "concern": 3,
-    "violation": 0,
+    "violation": 1,
     "not_applicable": 2,
-    "overall": "CONCERN"
+    "overall": "VIOLATION"
   }
 }

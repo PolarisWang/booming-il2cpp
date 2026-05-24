@@ -4,6 +4,12 @@
   "entries": [
     {
       "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
       "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects",
       "preserve": "all",
       "reason": "full-assembly-closure"
@@ -15,9 +21,585 @@
       "reason": "full-assembly-closure"
     },
     {
+      "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::_item",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
       "subjectKind": "field",
       "subjectId": "GenericSupplementSubjects/GenericSupplementSubjects::_exitCode",
       "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::AotListInt32SubjectId",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::HotUpdateTypeSubjectId",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::AotListInt32Token",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::_item",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::_moveNextCalled",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::_item",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::_item",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::_moveNextCalled",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::_item",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::_item",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.ICollection.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.ICollection.IsSynchronized",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.ICollection.SyncRoot",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.IList.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.IList.IsFixedSize",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.IList.IsReadOnly",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.Generic.IReadOnlyCollection\u003CT\u003E.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.Generic.IReadOnlyList\u003CT\u003E.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.Generic.ICollection\u003CT\u003E.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.Generic.ICollection\u003CT\u003E.IsReadOnly",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::property:System.Collections.Generic.IList\u003CT\u003E.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::property:System.Collections.IEnumerator.Current",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::property:System.Collections.Generic.IEnumerator\u003CT\u003E.Current",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.ICollection.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.ICollection.IsSynchronized",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.ICollection.SyncRoot",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.IList.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.IList.IsFixedSize",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.IList.IsReadOnly",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.Generic.IReadOnlyCollection\u003CT\u003E.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.Generic.IReadOnlyList\u003CT\u003E.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.Generic.ICollection\u003CT\u003E.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.Generic.ICollection\u003CT\u003E.IsReadOnly",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::property:System.Collections.Generic.IList\u003CT\u003E.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::property:System.Collections.IEnumerator.Current",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::property:System.Collections.Generic.IEnumerator\u003CT\u003E.Current",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.ICollection.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.ICollection.IsSynchronized",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.ICollection.SyncRoot",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.IList.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.IList.IsFixedSize",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.IList.IsReadOnly",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.Generic.IReadOnlyCollection\u003CT\u003E.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.Generic.IReadOnlyList\u003CT\u003E.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.Generic.ICollection\u003CT\u003E.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.Generic.ICollection\u003CT\u003E.IsReadOnly",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::property:System.Collections.Generic.IList\u003CT\u003E.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.ICollection.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.ICollection.IsSynchronized",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.ICollection.SyncRoot",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.IList.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.IList.IsFixedSize",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.IList.IsReadOnly",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.Generic.IReadOnlyCollection\u003CT\u003E.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.Generic.IReadOnlyList\u003CT\u003E.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.Generic.ICollection\u003CT\u003E.Count",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.Generic.ICollection\u003CT\u003E.IsReadOnly",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::property:System.Collections.Generic.IList\u003CT\u003E.this[][System.Int32]",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::.ctor:System.Void(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IEnumerable.GetEnumerator:System.Collections.IEnumerator()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.ICollection.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.ICollection.get_IsSynchronized:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.ICollection.get_SyncRoot:System.Object()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.ICollection.CopyTo:System.Void(System.Array,System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.get_Item:System.Object(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.set_Item:System.Void(System.Int32,System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.get_IsFixedSize:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.get_IsReadOnly:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.Add:System.Int32(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.Clear:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.Contains:System.Boolean(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.IndexOf:System.Int32(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.Insert:System.Void(System.Int32,System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.Remove:System.Void(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.IList.RemoveAt:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.IEnumerable\u003CT\u003E.GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.IReadOnlyCollection\u003CT\u003E.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.IReadOnlyList\u003CT\u003E.get_Item:!0(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.ICollection\u003CT\u003E.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.ICollection\u003CT\u003E.get_IsReadOnly:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.ICollection\u003CT\u003E.Add:System.Void(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.ICollection\u003CT\u003E.Clear:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.ICollection\u003CT\u003E.Contains:System.Boolean(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.ICollection\u003CT\u003E.CopyTo:System.Void(!0[],System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.ICollection\u003CT\u003E.Remove:System.Boolean(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.IList\u003CT\u003E.get_Item:!0(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.IList\u003CT\u003E.set_Item:System.Void(System.Int32,!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.IList\u003CT\u003E.IndexOf:System.Int32(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.IList\u003CT\u003E.Insert:System.Void(System.Int32,!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601::System.Collections.Generic.IList\u003CT\u003E.RemoveAt:System.Void(System.Int32)",
+      "preserve": "signature",
       "reason": "full-assembly-closure"
     },
     {
@@ -65,6 +647,654 @@
     {
       "subjectKind": "method",
       "subjectId": "GenericSupplementSubjects/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::.ctor:System.Void(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::System.Collections.IEnumerator.get_Current:System.Object()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::System.Collections.Generic.IEnumerator\u003CT\u003E.get_Current:!0()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::System.Collections.IEnumerator.MoveNext:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::System.Collections.IEnumerator.Reset:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u00601\u002BEnumerator::System.IDisposable.Dispose:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::.ctor:System.Void(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IEnumerable.GetEnumerator:System.Collections.IEnumerator()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.ICollection.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.ICollection.get_IsSynchronized:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.ICollection.get_SyncRoot:System.Object()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.ICollection.CopyTo:System.Void(System.Array,System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.get_Item:System.Object(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.set_Item:System.Void(System.Int32,System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.get_IsFixedSize:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.get_IsReadOnly:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.Add:System.Int32(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.Clear:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.Contains:System.Boolean(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.IndexOf:System.Int32(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.Insert:System.Void(System.Int32,System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.Remove:System.Void(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.IList.RemoveAt:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.IEnumerable\u003CT\u003E.GetEnumerator:System.Collections.Generic.IEnumerator\u003C!0\u003E()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.IReadOnlyCollection\u003CT\u003E.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.IReadOnlyList\u003CT\u003E.get_Item:!0(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.ICollection\u003CT\u003E.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.ICollection\u003CT\u003E.get_IsReadOnly:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Add:System.Void(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Clear:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Contains:System.Boolean(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.ICollection\u003CT\u003E.CopyTo:System.Void(!0[],System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Remove:System.Boolean(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.IList\u003CT\u003E.get_Item:!0(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.IList\u003CT\u003E.set_Item:System.Void(System.Int32,!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.IList\u003CT\u003E.IndexOf:System.Int32(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.IList\u003CT\u003E.Insert:System.Void(System.Int32,!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003C!0\u003E::System.Collections.Generic.IList\u003CT\u003E.RemoveAt:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::.ctor:System.Void(!0)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::System.Collections.IEnumerator.get_Current:System.Object()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::System.Collections.Generic.IEnumerator\u003CT\u003E.get_Current:!0()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::System.Collections.IEnumerator.MoveNext:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::System.Collections.IEnumerator.Reset:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u002BEnumerator\u003C!0\u003E::System.IDisposable.Dispose:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::.ctor:System.Void(System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IEnumerable.GetEnumerator:System.Collections.IEnumerator()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.ICollection.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.ICollection.get_IsSynchronized:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.ICollection.get_SyncRoot:System.Object()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.ICollection.CopyTo:System.Void(System.Array,System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.get_Item:System.Object(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.set_Item:System.Void(System.Int32,System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.get_IsFixedSize:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.get_IsReadOnly:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.Add:System.Int32(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.Clear:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.Contains:System.Boolean(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.IndexOf:System.Int32(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.Insert:System.Void(System.Int32,System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.Remove:System.Void(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.IList.RemoveAt:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.IEnumerable\u003CT\u003E.GetEnumerator:System.Collections.Generic.IEnumerator\u003CSystem.String\u003E()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.IReadOnlyCollection\u003CT\u003E.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.IReadOnlyList\u003CT\u003E.get_Item:System.String(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.ICollection\u003CT\u003E.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.ICollection\u003CT\u003E.get_IsReadOnly:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Add:System.Void(System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Clear:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Contains:System.Boolean(System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.ICollection\u003CT\u003E.CopyTo:System.Void(System.String[],System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Remove:System.Boolean(System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.IList\u003CT\u003E.get_Item:System.String(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.IList\u003CT\u003E.set_Item:System.Void(System.Int32,System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.IList\u003CT\u003E.IndexOf:System.Int32(System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.IList\u003CT\u003E.Insert:System.Void(System.Int32,System.String)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSystem.String\u003E::System.Collections.Generic.IList\u003CT\u003E.RemoveAt:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::.ctor:System.Void(SupplementalMetadataTypeTemplateEntry)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IEnumerable.GetEnumerator:System.Collections.IEnumerator()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.ICollection.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.ICollection.get_IsSynchronized:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.ICollection.get_SyncRoot:System.Object()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.ICollection.CopyTo:System.Void(System.Array,System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.get_Item:System.Object(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.set_Item:System.Void(System.Int32,System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.get_IsFixedSize:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.get_IsReadOnly:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.Add:System.Int32(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.Clear:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.Contains:System.Boolean(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.IndexOf:System.Int32(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.Insert:System.Void(System.Int32,System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.Remove:System.Void(System.Object)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.IList.RemoveAt:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.IEnumerable\u003CT\u003E.GetEnumerator:System.Collections.Generic.IEnumerator\u003CSupplementalMetadataTypeTemplateEntry\u003E()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.IReadOnlyCollection\u003CT\u003E.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.IReadOnlyList\u003CT\u003E.get_Item:SupplementalMetadataTypeTemplateEntry(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.ICollection\u003CT\u003E.get_Count:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.ICollection\u003CT\u003E.get_IsReadOnly:System.Boolean()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Add:System.Void(SupplementalMetadataTypeTemplateEntry)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Clear:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Contains:System.Boolean(SupplementalMetadataTypeTemplateEntry)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.ICollection\u003CT\u003E.CopyTo:System.Void(SupplementalMetadataTypeTemplateEntry[],System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.ICollection\u003CT\u003E.Remove:System.Boolean(SupplementalMetadataTypeTemplateEntry)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.IList\u003CT\u003E.get_Item:SupplementalMetadataTypeTemplateEntry(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.IList\u003CT\u003E.set_Item:System.Void(System.Int32,SupplementalMetadataTypeTemplateEntry)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.IList\u003CT\u003E.IndexOf:System.Int32(SupplementalMetadataTypeTemplateEntry)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.IList\u003CT\u003E.Insert:System.Void(System.Int32,SupplementalMetadataTypeTemplateEntry)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "GenericSupplementSubjects/\u003C\u003Ez__ReadOnlySingleElementList\u003CSupplementalMetadataTypeTemplateEntry\u003E::System.Collections.Generic.IList\u003CT\u003E.RemoveAt:System.Void(System.Int32)",
       "preserve": "signature",
       "reason": "full-assembly-closure"
     }
