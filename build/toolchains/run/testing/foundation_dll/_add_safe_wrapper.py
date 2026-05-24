@@ -2,7 +2,7 @@
 import subprocess, os
 
 REPO = r'D:\agent\booming-il2cpp'
-WRAPPER_PATH = REPO + r'\verification\foundation-dll\System.Private.CoreLib\convert-char\native\subject0_safe_wrapper.cpp'
+WRAPPER_PATH = REPO + r'\testing\foundation-dll\System.Private.CoreLib\convert-char\native\subject0_safe_wrapper.cpp'
 
 wrapper_source = '''
 #include <cstdio>
@@ -27,7 +27,7 @@ with open(WRAPPER_PATH, 'w', encoding='utf-8') as f:
 print(f"Wrote {WRAPPER_PATH}")
 
 # Add to native CMakeLists.txt
-cmake_path = REPO + r'\verification\foundation-dll\System.Private.CoreLib\convert-char\native\CMakeLists.txt'
+cmake_path = REPO + r'\testing\foundation-dll\System.Private.CoreLib\convert-char\native\CMakeLists.txt'
 with open(cmake_path, 'r', encoding='utf-8') as f:
     cmake = f.read()
 
@@ -43,7 +43,7 @@ else:
     print("Already in CMakeLists.txt")
 
 # Now reconfigure and build
-build_dir = REPO + r'\verification\foundation-dll\System.Private.CoreLib\convert-char\native\build'
+build_dir = REPO + r'\testing\foundation-dll\System.Private.CoreLib\convert-char\native\build'
 r = subprocess.run(['cmake', '-S', os.path.dirname(cmake_path), '-B', build_dir,
                     '-G', 'Visual Studio 17 2022', '-A', 'x64'],
                    capture_output=True, text=True, timeout=120)

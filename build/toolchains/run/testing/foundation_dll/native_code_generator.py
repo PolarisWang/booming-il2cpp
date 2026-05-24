@@ -94,7 +94,7 @@ def generate_hotupdate_native_skeleton(
     ns_slug = family_namespace_slug(family_id)
     target_suffix = family_slug.replace("-", "_")
     subdir = "hotupdate"  # Always output to native_test/hotupdate/
-    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "native_test" / subdir
+    output_root = repo_root / "testing" / "foundation-dll" / assembly_name / family_slug / "native_test" / subdir
     artifacts: list[str] = []
 
     if not method_subject_ids:
@@ -476,7 +476,7 @@ def generate_benchmark_managed_bodies(
     family_id = _string(family.get("familyId"))
     family_slug = slug_from_family_id(family_id)
     ns_slug = family_namespace_slug(family_id)
-    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "managed_test" / "benchmarks"
+    output_root = repo_root / "testing" / "foundation-dll" / assembly_name / family_slug / "managed_test" / "benchmarks"
     artifacts: list[str] = []
 
     if not method_subject_ids:
@@ -738,7 +738,7 @@ def generate_benchmark_native_entry(
     family_id = _string(family.get("familyId"))
     family_slug = slug_from_family_id(family_id)
     ns_slug = family_namespace_slug(family_id)
-    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug / "native_test" / "benchmark"
+    output_root = repo_root / "testing" / "foundation-dll" / assembly_name / family_slug / "native_test" / "benchmark"
     artifacts: list[str] = []
 
     if not method_subject_ids:

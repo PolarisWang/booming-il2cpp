@@ -14,7 +14,7 @@ from pathlib import Path
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 _REVIEWER = _HERE / "ai_codegen_reviewer.py"
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 
 REVIEW_TYPES = ["codegen", "hotupdate"]
 

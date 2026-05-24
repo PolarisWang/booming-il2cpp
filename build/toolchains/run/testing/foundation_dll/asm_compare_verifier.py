@@ -29,7 +29,7 @@ from typing import Any
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 _CHAOS_CSPROJ = _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "Chaos.IL2CPP.Driver.csproj"
 
 _CACHE_DIR = _VERIFICATION_BASE / ".asm-compare-cache"

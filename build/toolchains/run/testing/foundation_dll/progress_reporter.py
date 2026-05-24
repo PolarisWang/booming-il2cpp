@@ -28,8 +28,8 @@ LEDGER_PATH = (
     / "foundation-dll-audit"
     / "capability-family-ledger.json"
 )
-TESTS_ROOT = REPO_ROOT / "verification" / "foundation-dll"
-VERIFICATION_ROOT = REPO_ROOT / "verification" / "foundation-dll"
+TESTS_ROOT = REPO_ROOT / "testing" / "foundation-dll"
+VERIFICATION_ROOT = REPO_ROOT / "testing" / "foundation-dll"
 
 
 # ---------------------------------------------------------------------------

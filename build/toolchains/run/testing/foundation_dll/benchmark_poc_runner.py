@@ -90,7 +90,7 @@ def run_benchmark_poc(
 ) -> dict[str, Any]:
     _info(f"Starting benchmark POC for {family_id}")
     family_slug = _slug_from_family_id(family_id)
-    family_dir = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug
+    family_dir = repo_root / "testing" / "foundation-dll" / assembly_name / family_slug
     native_dir = family_dir / "native"
     benchmark_dir = family_dir / "benchmark"
 

@@ -22,7 +22,7 @@ def _family_slug(family_id: str) -> str:
 
 
 def load_family_case_indexes(repo_root: Path, *, assembly_name: str, family_id: str) -> dict[str, list[dict[str, Any]]]:
-    family_root = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id)
+    family_root = repo_root / "testing" / "foundation-dll" / assembly_name / _family_slug(family_id)
     test_payload = _read_json(family_root / "method-test-case-index.json") or {}
     benchmark_payload = _read_json(family_root / "method-benchmark-case-index.json") or {}
     hotupdate_payload = _read_json(family_root / "method-hotupdate-case-index.json") or {}
@@ -34,5 +34,5 @@ def load_family_case_indexes(repo_root: Path, *, assembly_name: str, family_id: 
 
 
 def load_family_review_bundle(repo_root: Path, *, assembly_name: str, family_id: str) -> dict[str, Any]:
-    family_root = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id)
+    family_root = repo_root / "testing" / "foundation-dll" / assembly_name / _family_slug(family_id)
     return _read_json(family_root / "review" / "bundle.json") or {}

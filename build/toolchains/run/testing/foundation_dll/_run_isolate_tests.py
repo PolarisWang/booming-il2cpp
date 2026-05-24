@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 VCVARS = r"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars64.bat"
-BD = Path(r"D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\native_test\fact-verify\build")
+BD = Path(r"D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\native_test\fact-verify\build")
 REPO = Path(r"D:\agent\booming-il2cpp")
 
 INCL = (

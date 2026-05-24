@@ -242,7 +242,7 @@ def write_patch_source(patch_path, fid, cname, mids, enum_val):
 def generate(aname, fid, contract_path):
     slug = family_slug(fid)
     cname = class_name(fid)
-    family_root = REPO / "verification" / "foundation-dll" / aname / slug
+    family_root = REPO / "testing" / "foundation-dll" / aname / slug
 
     contract = json.loads(contract_path.read_text(encoding="utf-8"))
     mids = [str(m) for m in contract.get("methodSubjectIds", []) if str(m)]

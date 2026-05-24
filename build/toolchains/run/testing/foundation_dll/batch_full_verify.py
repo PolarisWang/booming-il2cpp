@@ -12,7 +12,7 @@ import subprocess, sys, os, time, json
 from pathlib import Path
 
 REPO = Path(r"D:\agent\booming-il2cpp")
-VERIFICATION = REPO / "verification" / "foundation-dll" / "System.Private.CoreLib"
+VERIFICATION = REPO / "testing" / "foundation-dll" / "System.Private.CoreLib"
 DRIVER = REPO / "src" / "managed" / "Chaos.IL2CPP.Driver"
 SKIP_FAMILIES = {"reports", "System.Private.CoreLib"}
 

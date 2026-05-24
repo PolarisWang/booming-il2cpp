@@ -62,7 +62,7 @@ def _scan_source(path: Path) -> dict[str, Any]:
 
 def scan_case_indexes(repo_root: Path, *, assembly_name: str, family_id: str) -> dict[str, Any]:
     family_slug = "-".join(family_id.split("/")[2:])
-    family_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug
+    family_root = repo_root / "testing" / "foundation-dll" / assembly_name / family_slug
 
     cases_test: list[dict[str, Any]] = []
     for path in sorted((family_root / "test").glob("*.cs")):

@@ -3,7 +3,7 @@ import sys, subprocess
 
 REPO = r'D:\agent\booming-il2cpp'
 GEN_PATH = (
-    REPO + r'\verification\foundation-dll\System.Private.CoreLib'
+    REPO + r'\testing\foundation-dll\System.Private.CoreLib'
     r'\convert-char\codegen\ConvertCharSubjects\generated\native-aot.generated.cpp'
 )
 
@@ -14,11 +14,11 @@ def run_codegen():
         'dotnet', 'run', '--no-build',
         '--project', REPO + r'\src\managed\Chaos.IL2CPP.Driver',
         '--', 'convert-to-cpp',
-        '--assembly', REPO + r'\verification\foundation-dll\System.Private.CoreLib'
+        '--assembly', REPO + r'\testing\foundation-dll\System.Private.CoreLib'
                       r'\convert-char\managed\subjects\build-output\ConvertCharSubjects.dll',
-        '--assembly-dir', REPO + r'\verification\foundation-dll\System.Private.CoreLib'
+        '--assembly-dir', REPO + r'\testing\foundation-dll\System.Private.CoreLib'
                         r'\convert-char\managed\subjects\build-output',
-        '--output', REPO + r'\verification\foundation-dll\System.Private.CoreLib'
+        '--output', REPO + r'\testing\foundation-dll\System.Private.CoreLib'
                     r'\convert-char\codegen',
     ], capture_output=True, text=True, timeout=300)
     if r.returncode != 0:
@@ -91,7 +91,7 @@ def inject_debug():
 def build():
     """Build entry.exe."""
     print("Building entry.exe...")
-    build_dir = REPO + r'\verification\foundation-dll\System.Private.CoreLib\convert-char\native\build'
+    build_dir = REPO + r'\testing\foundation-dll\System.Private.CoreLib\convert-char\native\build'
     r = subprocess.run(
         ['cmake', '--build', build_dir, '--config', 'Release', '--target', 'entry'],
         capture_output=True, text=True, timeout=300,
@@ -105,7 +105,7 @@ def build():
 
 def run():
     """Run entry.exe and capture output."""
-    exe = REPO + r'\verification\foundation-dll\System.Private.CoreLib\convert-char\native\build\Release\entry.exe'
+    exe = REPO + r'\testing\foundation-dll\System.Private.CoreLib\convert-char\native\build\Release\entry.exe'
     r = subprocess.run([exe], capture_output=False, text=True, timeout=120)
     print(f"EXIT: {r.returncode}")
 

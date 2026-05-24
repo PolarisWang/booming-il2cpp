@@ -2,7 +2,7 @@
 Hypothesis: MSVC corrupts EH table when throw is in `const auto = (throw..., value)` pattern."""
 import sys
 
-path = r'D:\agent\booming-il2cpp\verification\foundation-dll\System.Private.CoreLib\convert-char\codegen\ConvertCharSubjects\generated\native-aot.generated.cpp'
+path = r'D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\convert-char\codegen\ConvertCharSubjects\generated\native-aot.generated.cpp'
 with open(path, 'rb') as f:
     data = f.read()
 

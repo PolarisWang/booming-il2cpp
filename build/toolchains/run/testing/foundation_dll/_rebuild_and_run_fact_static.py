@@ -4,7 +4,7 @@ from pathlib import Path
 
 VCVARS = r"C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvarsall.bat"
 REPO_ROOT = Path(r"D:\agent\booming-il2cpp")
-BUILD_DIR = REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib" / "convert-char" / "native_test" / "fact-verify" / "build"
+BUILD_DIR = REPO_ROOT / "testing" / "foundation-dll" / "System.Private.CoreLib" / "convert-char" / "native_test" / "fact-verify" / "build"
 NATIVE_LIB = REPO_ROOT / "build" / "native"
 CONFIG = "RelWithDebInfo"
 

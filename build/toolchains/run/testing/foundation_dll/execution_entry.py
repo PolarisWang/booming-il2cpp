@@ -39,7 +39,7 @@ def execute_entry(
     if normalized_kind not in _KIND_TO_PROJECT:
         allowed = ", ".join(sorted(_KIND_TO_PROJECT))
         raise ValueError(f"unsupported foundation-dll execution kind '{kind}'. expected one of: {allowed}")
-    family_root = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id)
+    family_root = repo_root / "testing" / "foundation-dll" / assembly_name / _family_slug(family_id)
     project_dir, project_name = _KIND_TO_PROJECT[normalized_kind]
     project_base = _project_basename(family_id)
     actual_project_name = f"{project_base}.{project_name}" if "." in project_name else project_name

@@ -314,6 +314,18 @@ def run_convert_to_cpp(
             print(f"      {line}")
         return False
 
+    # Print diagnostics from stderr (hotpatch coverage, etc.)
+    # Skip verbose TRACE: lines; only show [hotpatch], warnings, and errors
+    if result.stderr:
+        for line in result.stderr.splitlines():
+            stripped = line.strip()
+            if not stripped or stripped.startswith("TRACE:"):
+                continue
+            try:
+                print(f"      {stripped}")
+            except UnicodeEncodeError:
+                pass
+
     # Sync flat codegen/generated/ -> codegen/<AssemblyName>/generated/
     # The converter writes to the flat layout; the rest of the pipeline
     # expects per-assembly layout.
@@ -330,18 +342,20 @@ def run_convert_to_cpp(
                 src = Path(root) / f
                 (target_dir / f).write_bytes(src.read_bytes())
 
-    # Check output
+    # Check output — use rglob to handle potential double-nested paths
+    # (outputRoot = sdkRoot/generated/ + RelativePath "generated/file.cpp")
     cpp_found = False
     for d in sorted(codegen_out.iterdir()):
         if d.is_dir() and d.name not in ("build", "generated"):
-            per_asm_cpp = d / "generated" / "native-aot.generated.cpp"
-            if per_asm_cpp.exists():
-                if not cpp_found:
-                    cpp_found = True
-                    size = per_asm_cpp.stat().st_size
-                    print(f"    convert-to-cpp OK: {size} bytes -> {per_asm_cpp.relative_to(v / family_slug)}")
-                else:
-                    print(f"      + {per_asm_cpp}")
+            cpp_files = list(d.rglob("native-aot.generated.cpp"))
+            if cpp_files:
+                for per_asm_cpp in cpp_files:
+                    if not cpp_found:
+                        cpp_found = True
+                        size = per_asm_cpp.stat().st_size
+                        print(f"    convert-to-cpp OK: {size} bytes -> {per_asm_cpp.relative_to(v / family_slug)}")
+                    else:
+                        print(f"      + {per_asm_cpp}")
     if not cpp_found:
         print(f"    convert-to-cpp OK (no .cpp output found)")
     return True
@@ -417,7 +431,7 @@ def generate_coverage_json(family_slug: str, assembly_name: str,
     coverage_dir.mkdir(parents=True, exist_ok=True)
     coverage_path = coverage_dir / "native-reference.runtime-skeleton.coverage.json"
     family_id = f"family/{assembly_name}/{family_slug.replace('-', '/')}"
-    from native_code_generator import generate_coverage_json as _gen_cov
+    from native_code_generator import _generate_coverage_json as _gen_cov
     payload = _gen_cov(
         assembly_name=assembly_name,
         family_id=family_id,
@@ -815,19 +829,28 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     if is_jit:
         codegen_glob = (
             f'file(GLOB CHAOS_CODEGEN_CPP\n'
+            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
             f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/native-aot.generated.cpp"\n'
             f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/native-aot.page-*.cpp"\n'
             f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/chaos_generated_module.cpp"\n'
+            f'    "${{CHAOS_CODEGEN_DIR}}/generated/generated/native-aot.generated.cpp"\n'
+            f'    "${{CHAOS_CODEGEN_DIR}}/generated/generated/native-aot.page-*.cpp"\n'
+            f'    "${{CHAOS_CODEGEN_DIR}}/generated/generated/chaos_generated_module.cpp"\n'
             f')\n'
             f'file(GLOB CHAOS_CODEGEN_NATIVE_CPP\n'
+            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
             f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/native-aot.generated.cpp"\n'
             f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/native-aot.page-*.cpp"\n'
             f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/chaos_generated_module.cpp"\n'
+            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/generated/generated/native-aot.generated.cpp"\n'
+            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/generated/generated/native-aot.page-*.cpp"\n'
+            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/generated/generated/chaos_generated_module.cpp"\n'
             f')\n'
         )
         glob_comment = (
-            f'# JIT mode: exclude flat layout (stale AOT output with empty\n'
-            f'# ChaosJitRegisterAll stub would conflict with JIT implementation)\n'
+            f'# JIT mode: exclude codegen/generated/native-aot.generated.cpp (stale flat\n'
+            f'# layout from old --output runs, has empty ChaosJitRegisterAll stub).\n'
+            f'# Keep *Subjects/generated/native-aot.generated.cpp (current --sdk-out output).\n'
         )
     else:
         codegen_glob = (
@@ -1261,7 +1284,7 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
             # Add forward declarations after the last #include in the header
             decl_lines = ["", "// Forward declarations (pipeline fix: page-file extern \"C\" functions)"]
             for fn_name in sorted(fwd_decls):
-                decl_lines.append(f'extern "C" void {fn_name}();')
+                decl_lines.append(f'extern "C" void {fn_name}(...);')
             text += "\n".join(decl_lines) + "\n"
             header_file.write_text(text, encoding="utf-8")
             print(f"    [fix_page] added {len(fwd_decls)} forward decls in {header_file.name}")
@@ -1405,17 +1428,74 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
                 rename_map.clear()
                 body = m.group(3)
                 fixed_body = _uniquify_block(body)
+                closing = "} " + m.group(4) + ";"
                 if rename_map:
                     marker = ("\n    // overload rename (pipeline fix): "
                               + ", ".join(f"{k}→{v}"
                                           for k, v in rename_map.items()))
-                    fixed_body += marker
-                return m.group(1) + fixed_body + "} " + m.group(4) + ";"
+                    return m.group(1) + fixed_body + closing + marker
+                return m.group(1) + fixed_body + closing
             fixed_text = block_pattern.sub(_fix_block, fixed_text)
             if fixed_text != text:
                 module_h_file.write_text(fixed_text, encoding="utf-8")
                 print(f"    [fix_page] deduplicated overloaded members in"
                       f" {module_h_file.name}")
+
+        # Step 3e: Deduplicate entire struct type definitions within
+        # struct Functions. The converter generates the same nested struct
+        # type (e.g. __z__ReadOnlySingleElementList_Enumerator__0_) twice
+        # when generic instantiations produce identical mangled names.
+        # C++ forbids defining the same struct tag twice in the same scope.
+        for module_h_file in module_h_files:
+            text = module_h_file.read_text(encoding="utf-8")
+            if "// duplicate struct skipped (pipeline fix)" in text:
+                continue
+            seen_struct_types: set[str] = set()
+            lines = text.split("\n")
+            i = 0
+            result: list[str] = []
+            dedup_count = 0
+            while i < len(lines):
+                line = lines[i]
+                # Match first-level nested struct inside Functions:
+                #   `struct Name {`
+                m = _re.match(r'^(    )struct\s+(\w+)\s*\{$', line)
+                if m and m.group(2) != "Functions":
+                    indent = m.group(1)
+                    struct_name = m.group(2)
+                    # Find matching `};` by counting braces
+                    brace_count = 1
+                    # Check if this struct has a trailing member variable:
+                    # `struct Name { ... } var;` — A1 pattern with _t suffix
+                    # We only dedup standalone `struct Name { ... };` (A2 pattern)
+                    # by checking if `}` is followed by `;` or ` var;`
+                    j = i + 1
+                    while j < len(lines) and brace_count > 0:
+                        brace_count += lines[j].count("{")
+                        brace_count -= lines[j].count("}")
+                        if brace_count <= 0:
+                            break
+                        j += 1
+                    if brace_count == 0 and j < len(lines):
+                        # Check that this is a TYPE definition (no trailing member var)
+                        # by verifying the closing is `};` not `} name;`
+                        closing = lines[j].strip()
+                        # Only dedup if closing is `};` (type definition, no member variable)
+                        if closing == "};" and struct_name in seen_struct_types:
+                            dedup_count += 1
+                            result.append(
+                                f"{indent}/* struct {struct_name}: "
+                                f"duplicate struct skipped (pipeline fix) */")
+                            i = j + 1
+                            continue
+                        else:
+                            seen_struct_types.add(struct_name)
+                result.append(line)
+                i += 1
+            if dedup_count:
+                module_h_file.write_text("\n".join(result), encoding="utf-8")
+                print(f"    [fix_page] deduplicated {dedup_count} struct type"
+                      f" redefinitions in {module_h_file.name}")
 
     # Step 4: Also update the codegen copy of the header (if exists)
     codegen_dir = native_dir.parent / "codegen"
@@ -1535,6 +1615,20 @@ def remediate_supplemental_codegen(native_dir: Path) -> None:
                 print(f"    [fix_codegen] added {len(missing_type_ids)} type_id + "
                       f"{len(missing_iface_maps)} iface_map decls in {header_file.name}")
 
+    # Step C: Fix constexpr InterfaceMapEntry arrays that reference extern
+    # chaos_type_id_* symbols (which are only extern const, not constexpr).
+    # Change `static constexpr InterfaceMapEntry` to `static const InterfaceMapEntry`
+    # so non-constexpr extern symbols can be used in initializers.
+    for page_file in native_dir.rglob("native-aot.page-*.cpp"):
+        text = page_file.read_text(encoding="utf-8")
+        new_text = _re.sub(
+            r'(static\s+)constexpr\s+(InterfaceMapEntry\s+\w+\[\]\s*=\s*\{)',
+            r'\1const \2',
+            text)
+        if new_text != text:
+            page_file.write_text(new_text, encoding="utf-8")
+            print(f"    [fix_codegen] relaxed constexpr→const for iface_map in {page_file.name}")
+
 
 def write_sentinel_dispatch(dispatch_cpp: Path) -> None:
     """Write a sentinel verification_dispatch.generated.cpp for cmake configure.
@@ -1621,7 +1715,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     # Generate runtime-entry.cpp from Python template — clean, no post-processing needed
     from family_entrypoint_generator import generate_runtime_entry
     native_runtime_entry = native_dir / "runtime-entry.cpp"
-    native_runtime_entry.write_text(generate_runtime_entry(), encoding="utf-8")
+    native_runtime_entry.write_text(generate_runtime_entry(is_jit=is_jit), encoding="utf-8")
     print(f"    [build_entry] generated runtime-entry.cpp from Python template -> {native_runtime_entry}")
     # Sync generated .cpp from codegen/<Assembly>/ to native/<Assembly>/
     # so the native CMakeLists.txt compiles the latest codegen output.
@@ -1632,9 +1726,16 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             if not subdir.is_dir() or subdir.name in ("build", "generated", "hot-update"):
                 continue
             # Sync ALL generated files (.cpp, .h) from codegen to native
+            # Handle potential double-nested path: converter writes to
+            # sdkRoot/generated/ + RelativePath "generated/..." → generated/generated/
             src = subdir / "generated"
             if not src.exists():
+                print(f"    [build_entry] skipping {subdir.name}: no generated/ subdir")
                 continue
+            # Detect double-nested generated/generated/ layout
+            inner_gen = src / "generated"
+            if inner_gen.exists() and not any(f.suffix in ('.cpp', '.h') for f in src.iterdir() if f.is_file()):
+                src = inner_gen
             dst = native_dir / subdir.name / "generated"
             # Clean stale native files before sync — the converter may change
             # output layout (e.g. switched to page-split output), and stale files
@@ -1670,6 +1771,8 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                 expected_native = native_dir / expected / "generated" / "native-aot.generated.cpp"
                 # Check if a corresponding codegen source exists
                 expected_codegen = codegen_dir / expected / "generated" / "native-aot.generated.cpp"
+                if not expected_codegen.exists():
+                    expected_codegen = codegen_dir / expected / "generated" / "generated" / "native-aot.generated.cpp"
                 if expected_codegen.exists():
                     # Already has its own codegen output — sync it
                     expected_native.parent.mkdir(parents=True, exist_ok=True)
@@ -1677,9 +1780,14 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                     print(f"    [build_entry] synced {expected_codegen.relative_to(codegen_dir)} to native/ (delayed)")
                 else:
                     # Assembly name mismatch — find best source (most recently modified)
+                    def _find_cpp_source(s):
+                        p = codegen_dir / s / "generated" / "native-aot.generated.cpp"
+                        if p.exists():
+                            return p
+                        return codegen_dir / s / "generated" / "generated" / "native-aot.generated.cpp"
                     best_src = max(
-                        (codegen_dir / s / "generated" / "native-aot.generated.cpp" for s in synced_names),
-                        key=lambda p: p.stat().st_mtime,
+                        (_find_cpp_source(s) for s in synced_names),
+                        key=lambda p: p.stat().st_mtime if p.exists() else 0,
                     )
                     expected_native.parent.mkdir(parents=True, exist_ok=True)
                     expected_native.write_text(best_src.read_text(encoding="utf-8"), encoding="utf-8")
@@ -2023,7 +2131,7 @@ def find_assembly_dll(assembly_name: str) -> str | None:
     search_dirs = [
         _VERIFICATION_BASE / assembly_name,
         _REPO_ROOT / "src" / "managed" / assembly_name / "bin" / "Debug" / "net8.0",
-        _REPO_ROOT / "verification" / "foundation-dll" / assembly_name,
+        _REPO_ROOT / "testing" / "foundation-dll" / assembly_name,
         Path(os.environ.get("DOTNET_ROOT", "C:/Program Files/dotnet")) / "shared" / "Microsoft.NETCore.App" / "8.0",
     ]
     for d in search_dirs:

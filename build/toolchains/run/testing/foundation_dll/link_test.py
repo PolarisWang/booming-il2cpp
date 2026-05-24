@@ -3,7 +3,7 @@ import subprocess, os, sys
 from pathlib import Path
 
 repo = Path(r"D:\agent\booming-il2cpp")
-obj_dir = repo / "verification" / "foundation-dll" / "System.Private.CoreLib" / "convert-char" / "native_test" / "benchmark" / "build"
+obj_dir = repo / "testing" / "foundation-dll" / "System.Private.CoreLib" / "convert-char" / "native_test" / "benchmark" / "build"
 exe_path = obj_dir / "benchmark_convert-char.exe"
 
 # Find link.exe
