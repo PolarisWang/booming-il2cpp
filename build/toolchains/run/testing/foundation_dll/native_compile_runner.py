@@ -30,7 +30,7 @@ from typing import Any
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll" / "System.Private.CoreLib"
 
 from testing.trace import trace_init, trace
 
@@ -97,7 +97,7 @@ def _find_chaos_include_dirs() -> list[Path]:
         _REPO_ROOT / "contracts" / "native" / "v0",  # must precede runtime-core
         _REPO_ROOT / "src" / "native" / "runtime-core",
         _REPO_ROOT / "third_party" / "fmt" / "include",
-        _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib",
+        _REPO_ROOT / "testing" / "foundation-dll" / "System.Private.CoreLib",
     ]
     for c in candidates:
         if c.exists():

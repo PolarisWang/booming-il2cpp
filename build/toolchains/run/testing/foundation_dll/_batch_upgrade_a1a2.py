@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[5]
-VERIFICATION = REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
+VERIFICATION = REPO_ROOT / "testing" / "foundation-dll" / "System.Private.CoreLib"
 
 # Template for the ChaosRuntimeHost-based init block (replaces old manual init + FillExternalRuntimeStubs)
 INIT_BLOCK = '''\

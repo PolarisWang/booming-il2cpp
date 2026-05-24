@@ -30,7 +30,7 @@ def generate_review_bundle(
     generated_artifacts: list[str],
     solution_path: str,
 ) -> dict[str, Any]:
-    review_root = repo_root / "verification" / "foundation-dll" / assembly_name / _family_slug(family_id) / "review"
+    review_root = repo_root / "testing" / "foundation-dll" / assembly_name / _family_slug(family_id) / "review"
     bundle_path = review_root / "bundle.json"
     payload = {
         "schemaVersion": 1,

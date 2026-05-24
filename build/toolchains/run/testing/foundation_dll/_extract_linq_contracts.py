@@ -387,7 +387,7 @@ def main():
         return 1
 
     # Create verification directories and generate contracts
-    asm_dir = _REPO_ROOT / "verification" / "foundation-dll" / "System.Linq"
+    asm_dir = _REPO_ROOT / "testing" / "foundation-dll" / "System.Linq"
 
     total_mids = 0
     for fam_entry in linq_entry.get("families", []):

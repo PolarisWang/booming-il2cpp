@@ -18,7 +18,7 @@ from typing import Any
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]  # D:/agent/booming-il2cpp
-_VERIFICATION = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION = _REPO_ROOT / "testing" / "foundation-dll"
 _TRACKING_PATH = _REPO_ROOT / "docs" / "verification" / "foundation-dll-audit" / "development-tracking.json"
 
 sys.path.insert(0, str(_HERE))

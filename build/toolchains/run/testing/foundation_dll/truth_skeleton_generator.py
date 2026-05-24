@@ -34,7 +34,7 @@ def generate_truth_skeleton(
 ) -> dict[str, Any]:
     family_id = _string(family.get("familyId"))
     family_slug = _slug_from_family_id(family_id)
-    output_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug
+    output_root = repo_root / "testing" / "foundation-dll" / assembly_name / family_slug
 
     dll_manifest = {
         "schemaVersion": 1,

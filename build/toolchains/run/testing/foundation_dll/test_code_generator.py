@@ -2191,7 +2191,7 @@ def readme_source(family_id: str, display_name: str) -> str:
 def generate_family_skeleton(repo_root: Path, *, assembly_name: str, family: dict[str, Any]) -> dict[str, Any]:
     family_id = str(family.get("familyId") or "")
     display_name = str(family.get("displayName") or family_id)
-    family_root = repo_root / "verification" / "foundation-dll" / assembly_name / family_slug(family_id)
+    family_root = repo_root / "testing" / "foundation-dll" / assembly_name / family_slug(family_id)
 
     prod_name = production_class_name(family_id)
     class_name = class_name(family_id)

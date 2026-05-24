@@ -27,7 +27,7 @@ from typing import Any
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll" / "System.Private.CoreLib"
 
 
 def _check_signature_alignment(cpp_content: str, csil_content: str) -> list[str]:

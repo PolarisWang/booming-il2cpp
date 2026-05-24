@@ -140,7 +140,7 @@ def generate_per_family_reports(
 def main() -> None:
     parser = argparse.ArgumentParser(description="Generate per-family D3 hotupdate verification reports")
     parser.add_argument("--results-dir", type=Path,
-                        default=Path.cwd() / "verification" / "foundation-dll" / "hotupdate-results",
+                        default=Path.cwd() / "testing" / "foundation-dll" / "hotupdate-results",
                         help="Directory containing per-family .json files from D3 exes")
     parser.add_argument("--verification-root", type=Path, default=Path.cwd() / "verification",
                         help="Root of the verification directory")

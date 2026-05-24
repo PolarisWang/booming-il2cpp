@@ -18,7 +18,7 @@ from pathlib import Path
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 _DEFAULT_ASSEMBLY = "System.Private.CoreLib"
 
 # Files/directories to remove (relative to family root)

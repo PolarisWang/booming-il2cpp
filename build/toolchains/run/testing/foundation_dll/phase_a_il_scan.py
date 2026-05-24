@@ -19,7 +19,7 @@ from typing import Any
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
+_VERIFICATION = _REPO_ROOT / "testing" / "foundation-dll" / "System.Private.CoreLib"
 sys.path.insert(0, str(_HERE))
 
 from emitter_coverage_known import EMITTER_KNOWN_OPCODES, LOADER_HANDLED_OPCODES, EMITTER_ALL_KNOWN

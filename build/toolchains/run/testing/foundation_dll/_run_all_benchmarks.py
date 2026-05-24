@@ -8,9 +8,9 @@ import time
 from pathlib import Path
 
 REPO_ROOT = Path("D:/agent/booming-il2cpp")
-FAMILIES_DIR = REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
+FAMILIES_DIR = REPO_ROOT / "testing" / "foundation-dll" / "System.Private.CoreLib"
 RUNNER = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "foundation_dll" / "native_benchmark_runner.py"
-REPORT_DIR = REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib" / "reports"
+REPORT_DIR = REPO_ROOT / "testing" / "foundation-dll" / "System.Private.CoreLib" / "reports"
 REPORT_DIR.mkdir(parents=True, exist_ok=True)
 
 families = sorted(

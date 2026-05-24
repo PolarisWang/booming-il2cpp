@@ -71,8 +71,12 @@ def generate_verification_dispatch(
     write('')
     write('#include <cstdint>')
     write('#include <chrono>')
+    write('#include <chaos/native_types.h>')
+    write('#include <runtime_core.h>')
     write('#include <chaos/eh.h>')
     write('#include <chaos/hotpatch_dispatch.h>')
+    write('')
+    write('using chaos::il2cpp::runtime_core::ChaosDispatchMethod;')
     write('')
 
     # Extern declarations (defined in native-aot.generated.cpp and hotpatch-table.generated.cpp)
@@ -86,7 +90,7 @@ def generate_verification_dispatch(
         write('extern "C" void (*kDefaultArgThunks[])();')
         write('')
     # GetHotpatchEntries/GetHotpatchEntryCount: extern "C" defined in hotpatch-table.generated.cpp
-    write('extern "C" const chaos::il2cpp::runtime_core::HotpatchEntryV0* GetHotpatchEntries() noexcept;')
+    write('extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;')
     write('extern "C" int32_t GetHotpatchEntryCount() noexcept;')
     write('')
 

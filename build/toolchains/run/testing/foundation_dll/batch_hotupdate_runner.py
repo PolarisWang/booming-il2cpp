@@ -29,7 +29,7 @@ from pathlib import Path
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]  # D:/agent/booming-il2cpp
-_VERIFICATION = _REPO_ROOT / "verification" / "foundation-dll" / "System.Private.CoreLib"
+_VERIFICATION = _REPO_ROOT / "testing" / "foundation-dll" / "System.Private.CoreLib"
 sys.path.insert(0, str(_HERE))
 sys.path.insert(0, str(_HERE.parent.parent))  # for testing.trace (parent of run/testing/)
 

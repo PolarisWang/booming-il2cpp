@@ -21,7 +21,7 @@ from typing import Any
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
-_VERIFICATION_BASE = _REPO_ROOT / "verification" / "foundation-dll"
+_VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 _TEST_CODE_GENERATOR = _HERE / "test_code_generator.py"
 
 DEFAULT_SKIP_REGISTRY_PATH = _VERIFICATION_BASE.parent / "projections" / "foundation-dll-audit" / "skip-registry.json"

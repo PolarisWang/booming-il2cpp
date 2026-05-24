@@ -503,7 +503,7 @@ def write_contracts(
     family_data: dict[str, dict[str, Any]],
 ) -> None:
     """Write capability-family-contract.json files for each family."""
-    asm_dir = _REPO_ROOT / "verification" / "foundation-dll" / asm_name
+    asm_dir = _REPO_ROOT / "testing" / "foundation-dll" / asm_name
     for slug, contract in family_data.items():
         fam_dir = asm_dir / slug
         fam_dir.mkdir(parents=True, exist_ok=True)
