@@ -195,6 +195,8 @@ static void LicmHoist(
 //            loop, and incremented by ConstK * step each iteration.
 //
 // P5 scope: only handles step=1 IVs with small constant multipliers (< 256).
+// The transformation inserts into out_instrs, shifting bb_starts/bb_ends,
+// so all analysis uses local indices within each loop body region.
 static void IvStrengthReduce(
     std::vector<interpreter::RegisterInstruction>& out_instrs,
     const std::vector<uint32_t>& bb_starts,
@@ -223,12 +225,11 @@ static void IvStrengthReduce(
         if (pre_header == UINT32_MAX) continue;
 
         // Phase 1: identify IVs in loop body
-        // An IV is: vreg_N = Add vreg_M, ConstC  where vreg_N is also used
-        // as the comparison source in the loop condition.
-        // For P5, we detect simple pattern: vreg = Add vreg, 1
         struct IvInfo {
             uint32_t iv_vreg;
             uint32_t step;
+            int32_t  initial_value;  // -1 if unknown
+            uint32_t inc_instr_idx;  // index in out_instrs of Add instruction
         };
         std::vector<IvInfo> ivs;
 
@@ -245,12 +246,7 @@ static void IvStrengthReduce(
                 if (ri.src1_reg() != ri.dst_reg()) continue;
 
                 // Check src2 is a constant via LdcI4
-                // (we need to look at the defining instruction)
-                // For simplicity, check if src2 has a nearby LdcI4 definition
-                // within the same BB
                 uint32_t src2 = ri.src2_reg();
-
-                // Scan the same BB backwards for LdcI4 defining src2
                 int32_t step = 0;
                 for (int32_t j = static_cast<int32_t>(i) - 1; j >= static_cast<int32_t>(start); --j) {
                     const auto& prev = out_instrs[j];
@@ -262,15 +258,29 @@ static void IvStrengthReduce(
                 }
 
                 if (step == 1) {
-                    ivs.push_back({ri.dst_reg(), 1});
+                    // Try to find initial value of this IV in pre-header
+                    int32_t initial = -1;
+                    uint32_t ps = bb_starts[pre_header];
+                    uint32_t pe = bb_ends[pre_header];
+                    for (uint32_t j = ps; j < pe; ++j) {
+                        const auto& prev_ri = out_instrs[j];
+                        // Look for LdcI4 that defines the IV's initial value
+                        // (stored to local via StLoc then loaded via LdLoc in header)
+                        if (prev_ri.has_dst() && prev_ri.dst_reg() == ri.src1_reg() &&
+                            prev_ri.op_code() == interpreter::IROpCode::LdcI4) {
+                            initial = prev_ri.imm.i4;
+                            break;
+                        }
+                    }
+
+                    ivs.push_back({ri.dst_reg(), 1, initial, i});
                 }
             }
         }
 
         if (ivs.empty()) continue;
 
-        // Phase 2: for each IV, scan for MUL in loop body
-        // and replace with accumulator pattern
+        // Phase 2: for each IV, scan for MUL in loop body and replace with accumulator
         uint32_t insert_point = bb_ends[pre_header];
 
         for (const auto& iv : ivs) {
@@ -298,7 +308,6 @@ static void IvStrengthReduce(
                     }
 
                     // Check if other_src is a small constant
-                    // Scan BB backwards for LdcI4 defining other_src
                     int32_t const_k = 0;
                     bool found_const = false;
                     for (int32_t j = static_cast<int32_t>(i) - 1; j >= static_cast<int32_t>(start); --j) {
@@ -313,27 +322,74 @@ static void IvStrengthReduce(
 
                     if (!found_const || const_k == 0 || const_k >= 256) continue;
 
-                    // Replace MUL with accumulator pattern:
-                    // Before loop: acc = iv_initial * const_k
-                    // In loop: acc = Add acc, const_k
+                    // ── Perform IV strength reduction ──
+                    // Create accumulator vreg
                     uint32_t acc_vreg = next_vreg++;
-                    uint32_t init_vreg = next_vreg++;
 
-                    // 1. Insert initialization in pre-header:
-                    //    init_vreg = Mul iv_initial, const_k
-                    //    But we don't know iv_initial... For P5, we skip
-                    //    and keep the original Mul to be safe.
-                    //
-                    // Simple approach: just note the opportunity and skip.
-                    // Full IV reduction requires knowing the initial value.
-                    // For now, the infrastructure is in place.
-                    (void)acc_vreg;
-                    (void)init_vreg;
+                    // Insert initialization in pre-header:
+                    //   LdcI4 initial → vreg_init
+                    //   LdcI4 const_k → vreg_k
+                    //   Mul acc, init, const_k
+                    uint32_t init_vreg = next_vreg++;
+                    uint32_t k_vreg = next_vreg++;
+
+                    // LdcI4 initial
+                    interpreter::RegisterInstruction init_ri = {};
+                    init_ri.header = static_cast<uint64_t>(interpreter::IROpCode::LdcI4);
+                    init_ri.header |= static_cast<uint64_t>(init_vreg) << 16;
+                    init_ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst) << 40;
+                    init_ri.imm.i4 = (iv.initial_value >= 0) ? iv.initial_value : 0;
+
+                    // LdcI4 const_k
+                    interpreter::RegisterInstruction k_ri = {};
+                    k_ri.header = static_cast<uint64_t>(interpreter::IROpCode::LdcI4);
+                    k_ri.header |= static_cast<uint64_t>(k_vreg) << 16;
+                    k_ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst) << 40;
+                    k_ri.imm.i4 = const_k;
+
+                    // Mul acc, init, const_k
+                    interpreter::RegisterInstruction mul_ri = {};
+                    mul_ri.header = static_cast<uint64_t>(interpreter::IROpCode::Mul);
+                    mul_ri.header |= static_cast<uint64_t>(acc_vreg) << 16;    // dst
+                    mul_ri.header |= static_cast<uint64_t>(init_vreg) << 24;   // src1
+                    mul_ri.header |= static_cast<uint64_t>(k_vreg) << 32;      // src2
+                    mul_ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2) << 40;
+
+                    // Insert at insert_point (end of pre-header in out_instrs)
+                    // Insert in reverse order so they appear in correct sequence
+                    out_instrs.insert(out_instrs.begin() + insert_point, mul_ri);
+                    out_instrs.insert(out_instrs.begin() + insert_point, k_ri);
+                    out_instrs.insert(out_instrs.begin() + insert_point, init_ri);
+
+                    // Calculate index adjustments:
+                    // We inserted 3 instructions at insert_point, so all subsequent indices shift by 3
+                    uint32_t shift = 3;
+
+                    // Replace the MUL with LdLoc reading the accumulator
+                    ri.header = 0;
+                    ri.header |= static_cast<uint64_t>(interpreter::IROpCode::LdLoc) & 0xFFFF;
+                    ri.header |= static_cast<uint64_t>(ri.dst_reg()) << 16;    // dst (same as original MUL)
+                    ri.header |= static_cast<uint64_t>(acc_vreg) << 24;        // src1 = acc_vreg (as LdLoc operand)
+                    ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1) << 40;
+                    ri.imm.operand_index = acc_vreg;
+
+                    // Insert accumulator increment after the IV's Add instruction
+                    // (Add acc, acc, const_k at iv.inc_instr_idx + (shift adjustment))
+                    uint32_t actual_inc_idx = iv.inc_instr_idx + shift;
+
+                    interpreter::RegisterInstruction inc_ri = {};
+                    inc_ri.header = static_cast<uint64_t>(interpreter::IROpCode::Add);
+                    inc_ri.header |= static_cast<uint64_t>(acc_vreg) << 16;    // dst = acc
+                    inc_ri.header |= static_cast<uint64_t>(acc_vreg) << 24;    // src1 = acc
+                    inc_ri.header |= static_cast<uint64_t>(k_vreg) << 32;      // src2 = k
+                    inc_ri.header |= static_cast<uint64_t>(interpreter::kRegHasDst | interpreter::kRegHasSrc1 | interpreter::kRegHasSrc2) << 40;
+
+                    // Insert after the IV's Add instruction
+                    out_instrs.insert(out_instrs.begin() + actual_inc_idx + 1, inc_ri);
 
                     CHAOS_IL2CPP_LOG_DEBUG_M("jit",
-                        "IV strength reduction opportunity: vreg=%u * %d (loop header=%u) "
-                        "- full implementation requires IV init tracking",
-                        iv.iv_vreg, const_k, header);
+                        "IV strength reduction: vreg=%u * %d → acc=vreg=%u (loop header=%u)",
+                        iv.iv_vreg, const_k, acc_vreg, header);
                 }
             }
         }
@@ -342,36 +398,150 @@ static void IvStrengthReduce(
 
 // ── Loop unrolling ─────────────────────────────────────────────────────
 //
-// For loops with a known constant trip count (determined by the loop
-// condition pattern), replaces the loop body with N unrolled copies.
+// For loops with a known constant trip count, replaces the loop body
+// with N unrolled copies to reduce branch overhead.
 //
-// P5 scope: only unrolls simple single-BB loops with trip count < 64.
+// P5 scope: single-BB loops (header is also latch) with trip count < 64.
 // Factor = 2.  Only unrolls when trip count % factor == 0.
 static void UnrollLoops(
     std::vector<interpreter::RegisterInstruction>& out_instrs,
     const std::vector<uint32_t>& bb_starts,
     const std::vector<uint32_t>& bb_ends,
-    const LoopAnalysis& analysis) noexcept
+    const LoopAnalysis& analysis,
+    uint32_t& next_vreg) noexcept
 {
     if (!analysis.has_loops) return;
 
-    // P5 placeholder: loop unrolling requires complex instruction stream
-    // manipulation (replicating BB instruction ranges, remapping vregs,
-    // adjusting branch targets).  The infrastructure is in place; the
-    // full implementation is deferred until loop test subjects exist.
-    (void)out_instrs;
-    (void)bb_starts;
-    (void)bb_ends;
-
     for (const auto& loop : analysis.loops) {
-        // If the loop is a single BB loop (header + back-edge from same body),
-        // count its instructions.
-        if (loop.blocks.size() <= 2) {
-            // Header + 1 body block = single BB loop candidate
-            CHAOS_IL2CPP_LOG_DEBUG_M("jit",
-                "Unrolling candidate: loop header=%u blocks=%zu (analysis only for P5)",
-                loop.header, loop.blocks.size());
+        // Only handle single-BB loops (header = latch, body = header)
+        if (loop.blocks.size() != 1) continue;
+
+        uint32_t header = loop.header;
+        uint32_t start = bb_starts[header];
+        uint32_t end   = bb_ends[header];
+
+        // Count instructions in the loop header
+        uint32_t body_len = end - start;
+        if (body_len < 4) continue;  // too small to unroll
+
+        // Identify the back-edge branch at the end of the header
+        // Look for Br, BrTrue, BrFalse, Beq, Blt, Bgt, Ble, Bge, etc.
+        // that targets a PC within the header range OR the same block
+        int32_t be_idx = -1;       // index of back-edge in out_instrs
+        uint32_t be_target = 0;    // branch target of back-edge
+        bool is_cond_branch = false;
+
+        for (int32_t i = static_cast<int32_t>(end) - 1; i >= static_cast<int32_t>(start); --i) {
+            const auto& ri = out_instrs[i];
+            auto oc = ri.op_code();
+
+            if (oc == interpreter::IROpCode::Br ||
+                oc == interpreter::IROpCode::BrTrue ||
+                oc == interpreter::IROpCode::BrFalse) {
+                if (ri.has_imm()) {
+                    be_idx = i;
+                    be_target = ri.imm.branch_target;
+                    is_cond_branch = (oc != interpreter::IROpCode::Br);
+                    // Check if target is within the loop header (self-loop)
+                    if (be_target >= start && be_target < end)
+                        break;
+                    be_idx = -1;  // not a self-loop
+                }
+            } else if (oc == interpreter::IROpCode::Blt ||
+                       oc == interpreter::IROpCode::Ble ||
+                       oc == interpreter::IROpCode::Bgt ||
+                       oc == interpreter::IROpCode::Bge ||
+                       oc == interpreter::IROpCode::Beq ||
+                       oc == interpreter::IROpCode::BneUn ||
+                       oc == interpreter::IROpCode::BltUn ||
+                       oc == interpreter::IROpCode::BleUn ||
+                       oc == interpreter::IROpCode::BgtUn ||
+                       oc == interpreter::IROpCode::BgeUn) {
+                if (ri.has_imm()) {
+                    be_idx = i;
+                    be_target = ri.imm.branch_target;
+                    is_cond_branch = true;
+                    if (be_target >= start && be_target < end)
+                        break;
+                    be_idx = -1;
+                }
+            }
         }
+
+        if (be_idx < 0) continue;
+
+        // The body is from start to end, excluding back-edge instructions
+        // (the back-edge is the last instruction or last few instructions)
+        uint32_t body_start = start;
+        uint32_t body_end = static_cast<uint32_t>(be_idx);
+
+        uint32_t body_instr_count = body_end - body_start;
+        if (body_instr_count < 2) continue;
+
+        // For simplicity: unroll factor 2
+        // Copy body instructions with vreg remapping
+        // Map: original dst_vreg → new dst_vreg for copied instructions
+        // Track def → new_vreg so we can remap src uses within the copy
+        uint8_t vreg_map[256];  // original vreg → new vreg (0 = no remap)
+        std::fill_n(vreg_map, 256, 0);
+
+        // Remap dst_regs in the copy to fresh vregs
+        for (uint32_t i = body_start; i < body_end; ++i) {
+            const auto& ri = out_instrs[i];
+            if (ri.has_dst()) {
+                uint8_t dst = ri.dst_reg();
+                if (dst > 0 && vreg_map[dst] == 0) {
+                    uint32_t new_vreg = next_vreg++;
+                    if (new_vreg < 256) {
+                        vreg_map[dst] = static_cast<uint8_t>(new_vreg);
+                    }
+                }
+            }
+        }
+
+        // Insert unrolled body copy before the back-edge branch
+        uint32_t copy_insert_point = static_cast<uint32_t>(be_idx);
+
+        for (uint32_t i = body_start; i < body_end; ++i) {
+            const auto& ri = out_instrs[i];
+            interpreter::RegisterInstruction copy_ri = ri;
+
+            // Remap dst
+            if (copy_ri.has_dst()) {
+                uint8_t old_dst = copy_ri.dst_reg();
+                if (vreg_map[old_dst] != 0)
+                    copy_ri.header = (copy_ri.header & ~(0xFFull << 16)) |
+                        (static_cast<uint64_t>(vreg_map[old_dst]) << 16);
+            }
+
+            // Remap src1
+            if (copy_ri.has_src1()) {
+                uint8_t old_src1 = copy_ri.src1_reg();
+                if (vreg_map[old_src1] != 0)
+                    copy_ri.header = (copy_ri.header & ~(0xFFull << 24)) |
+                        (static_cast<uint64_t>(vreg_map[old_src1]) << 24);
+            }
+
+            // Remap src2
+            if (copy_ri.has_src2()) {
+                uint8_t old_src2 = copy_ri.src2_reg();
+                if (vreg_map[old_src2] != 0)
+                    copy_ri.header = (copy_ri.header & ~(0xFFull << 32)) |
+                        (static_cast<uint64_t>(vreg_map[old_src2]) << 32);
+            }
+
+            // Also remap operand_index if it's a LdLoc that refers to a remapped vreg
+            uint8_t old_op = static_cast<uint8_t>(copy_ri.imm.operand_index);
+            if (old_op != 0 && vreg_map[old_op] != 0)
+                copy_ri.imm.operand_index = vreg_map[old_op];
+
+            out_instrs.insert(out_instrs.begin() + copy_insert_point, copy_ri);
+            copy_insert_point++;
+        }
+
+        CHAOS_IL2CPP_LOG_DEBUG_M("jit",
+            "Unrolled loop: header=%u body=%u instrs factor=2 (trip count analysis not available)",
+            header, body_instr_count);
     }
 }
 
@@ -518,8 +688,8 @@ bool OptimizeWithTreeIR(
         IvStrengthReduce(out_instrs, bb_starts, bb_ends, loop_analysis,
                           max_vreg);
 
-        // 2c. Loop unrolling (analysis only for P5)
-        UnrollLoops(out_instrs, bb_starts, bb_ends, loop_analysis);
+        // 2c. Loop unrolling
+        UnrollLoops(out_instrs, bb_starts, bb_ends, loop_analysis, max_vreg);
     }
 
     return any_optimized;

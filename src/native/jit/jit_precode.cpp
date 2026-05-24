@@ -409,28 +409,33 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
 
     for (uint32_t i = 0; i < count; ++i) {
         const auto& entry = entries[i];
+        std::fprintf(stderr, "DIAG: JIT entry %u/%u token=0x%x module=%u json_len=%u\n",
+                     i, count, entry.token, entry.module_id, entry.json_len);
 
         // Step 1: Deserialize AotCoreIr JSON → IRMethod
-        // resolve_fn=nullptr: subject IDs won't be resolved here; JIT
-        // compilation handles call target resolution during Compile().
         auto ir = DeserializeAotCoreIrMethod(
             entry.json, entry.json_len, nullptr, nullptr, nullptr, nullptr);
+        std::fprintf(stderr, "DIAG: entry %u deserialize OK\n", i);
 
         // Step 2: Allocate registers → RegisterMethod (independent copy)
         auto rm = AllocateRegisters(ir);
+        std::fprintf(stderr, "DIAG: entry %u alloc_regs OK\n", i);
         // ir goes out of scope — vectors auto-clean
 
         // Step 3: Heap-allocate JitPrecode (lives for program lifetime)
         auto* precode = new JitPrecode();
+        std::fprintf(stderr, "DIAG: entry %u new JitPrecode OK precode=%p\n", i, (void*)precode);
         precode->ir = std::move(rm);
         precode->config = CompileConfig{};
 
         // Step 4: Look up the HotpatchEntryV0 for this method
         precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(
             entry.module_id, entry.token);
+        std::fprintf(stderr, "DIAG: entry %u GetDispatchEntry OK entry=%p\n", i, (void*)precode->entry);
 
         // Step 5: Allocate trampoline from the RWX arena
         precode->trampoline = arena.AllocateJitTrampoline(precode);
+        std::fprintf(stderr, "DIAG: entry %u AllocateJitTrampoline OK trampoline=%p\n", i, (void*)precode->trampoline);
 
         // Step 6: Point direct_ptr at the trampoline.
         // First call goes trampoline → JitStubEntry → JitStubDispatchImpl

@@ -132,6 +132,13 @@ public:
         EmitByte((0 << 7) | ((~src1 & 0xF) << 3) | (0 << 2) | 0x01);
     }
 
+    /// Emit VEX.0F 3-byte prefix (map=0x01, pp=00, 128-bit — for PS packed ops).
+    void EmitVEX_0F(uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+        EmitByte(0xC4);
+        EmitByte((~(dest >> 3) << 7) | (1 << 6) | (~(src2 >> 3) << 5) | 0x01);
+        EmitByte((0 << 7) | ((~src1 & 0xF) << 3) | (0 << 2) | 0x00);
+    }
+
     /// Emit VEX.66.0F38 3-byte prefix (map=0x02, pp=01, 128-bit).
     void EmitVEX_66_0F38(uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
         EmitByte(0xC4);
@@ -144,6 +151,27 @@ public:
         EmitByte(0xC4);
         EmitByte((~(dest >> 3) << 7) | (1 << 6) | (~(src2 >> 3) << 5) | 0x03);
         EmitByte((0 << 7) | ((~src1 & 0xF) << 3) | (0 << 2) | 0x01);
+    }
+
+    /// Emit VEX.66.0F 3-byte prefix (map=0x01, pp=01, 256-bit / L=1).
+    void EmitVEX_66_0F_256(uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+        EmitByte(0xC4);
+        EmitByte((~(dest >> 3) << 7) | (1 << 6) | (~(src2 >> 3) << 5) | 0x01);
+        EmitByte((0 << 7) | ((~src1 & 0xF) << 3) | (1 << 2) | 0x01);
+    }
+
+    /// Emit VEX.66.0F38 3-byte prefix (map=0x02, pp=01, 256-bit / L=1).
+    void EmitVEX_66_0F38_256(uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+        EmitByte(0xC4);
+        EmitByte((~(dest >> 3) << 7) | (1 << 6) | (~(src2 >> 3) << 5) | 0x02);
+        EmitByte((0 << 7) | ((~src1 & 0xF) << 3) | (1 << 2) | 0x01);
+    }
+
+    /// Emit VEX.66.0F3A 3-byte prefix (map=0x03, pp=01, 256-bit / L=1).
+    void EmitVEX_66_0F3A_256(uint8_t dest, uint8_t src1, uint8_t src2) noexcept {
+        EmitByte(0xC4);
+        EmitByte((~(dest >> 3) << 7) | (1 << 6) | (~(src2 >> 3) << 5) | 0x03);
+        EmitByte((0 << 7) | ((~src1 & 0xF) << 3) | (1 << 2) | 0x01);
     }
 
     /// Get read-only pointer to the buffer contents (for testing).
