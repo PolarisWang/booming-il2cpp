@@ -23,10 +23,8 @@
 
 namespace chaos::il2cpp::runtime_core {
 
-// ── Debugger frame chain ──────────────────────────────────────────────
-// Thread-local pointer to the current interpreter frame.
-// Used by the debugger to walk the call stack.
-thread_local void* tls_current_frame = nullptr;
+// Forward declaration of the interpreter frame scanner registration.
+void RegisterInterpFrameScanner() noexcept;
 
 // ── Tier hit counters (profile instrumentation) ─────────────────────────
 struct TierCounters {
@@ -369,6 +367,9 @@ void InterpreterEntryDirect(
 
     CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect");
     std::call_once(g_tier3_cb_once, RegisterTier3CallbackFn);
+    // Register the interpreter frame scanner for precise GC root scanning.
+    static std::once_flag g_interp_scanner_once;
+    std::call_once(g_interp_scanner_once, RegisterInterpFrameScanner);
     if (method_key == 0) return;
 
     CHAOS_IL2CPP_ASSERT(threading::tls_this_thread != nullptr
@@ -455,14 +456,14 @@ void InterpreterEntryDirect(
                 auto native_entry = reinterpret_cast<NativeEntry>(nm->code);
                 native_entry(args_buf, ret_buf);
 
-                if (chaos::il2cpp::jit::t_deopt_state.deopt_happened) {
+                if (chaos::il2cpp::jit::g_jit_deopt_state.deopt_happened) {
                     GetTierCounters().deopt_t4.fetch_add(1, std::memory_order_relaxed);
                     ++patch_method->deopt_count;
 
                     // Hybrid mode AOT fallback: redirect to AOT instead of interpreter
                     if (nm != nullptr && nm->aot_entry != nullptr) {
                         void* aot_entry = nm->aot_entry;
-                        chaos::il2cpp::jit::UnregisterT4Code(nm->code);
+                        chaos::il2cpp::jit::UnregisterNativeCodeSection(nm->code);
                         chaos::il2cpp::runtime_core::GcUnregisterSlotMap(nm->code);
                         patch_method->cached_native_method = nullptr;
                         patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
@@ -471,16 +472,16 @@ void InterpreterEntryDirect(
                             patch_method->module_id, patch_method->token);
                         if (entry != nullptr) entry->direct_ptr = aot_entry;
                         reinterpret_cast<NativeEntry>(aot_entry)(args_buf, ret_buf);
-                        chaos::il2cpp::jit::t_deopt_state.deopt_happened = false;
+                        chaos::il2cpp::jit::g_jit_deopt_state.deopt_happened = false;
                         return;
                     }
 
                     if (patch_method->deopt_count > PatchMethod::kMaxDeoptBeforeDemote) {
-                        // Permanently skip T4: overflow/OSR deopts would recur on re-promotion.
+                        // Permanently skip JIT: overflow/OSR deopts would recur on re-promotion.
                         patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
                         auto* nm = patch_method->cached_native_method;
                         if (nm != nullptr) {
-                            chaos::il2cpp::jit::UnregisterT4Code(nm->code);
+                            chaos::il2cpp::jit::UnregisterNativeCodeSection(nm->code);
                             chaos::il2cpp::runtime_core::GcUnregisterSlotMap(nm->code);
                             patch_method->cached_native_method = nullptr;
                         }
@@ -499,28 +500,28 @@ void InterpreterEntryDirect(
         auto* reg_m = static_cast<interpreter::RegisterMethod*>(
             patch_method->cached_reg_method);
         if (reg_m != nullptr &&
-            chaos::il2cpp::jit::t_deopt_state.instr_pc <
+            chaos::il2cpp::jit::g_jit_deopt_state.instr_pc <
                 static_cast<uint32_t>(reg_m->stack_map.entries.size()))
         {
             auto& stack_entry =
-                reg_m->stack_map.entries[chaos::il2cpp::jit::t_deopt_state.instr_pc];
+                reg_m->stack_map.entries[chaos::il2cpp::jit::g_jit_deopt_state.instr_pc];
 
             interpreter::OsrState osr;
             interpreter::CaptureNativeFrame(osr,
-                chaos::il2cpp::jit::t_deopt_state.gpr_file,
-                chaos::il2cpp::jit::t_deopt_state.fpr_file,
+                chaos::il2cpp::jit::g_jit_deopt_state.gpr_file,
+                chaos::il2cpp::jit::g_jit_deopt_state.fpr_file,
                 stack_entry,
                 patch_method->cached_arg_count,
                 interpreter::OsrState::kMaxLocals,
-                chaos::il2cpp::jit::t_deopt_state.gpr_tags);
-            osr.pc = chaos::il2cpp::jit::t_deopt_state.instr_pc;
+                chaos::il2cpp::jit::g_jit_deopt_state.gpr_tags);
+            osr.pc = chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
 
             FastFrame* ff = tls_frame_pool.Acquire();
             FastFrame ff_fallback;
             bool using_pool = (ff != nullptr);
             if (!using_pool) { ff = &ff_fallback; memset(ff, 0, sizeof(*ff)); }
 
-            void* a5_prev_frame = tls_current_frame;
+            void* a5_prev_frame = threading::GetCurrentInterpFrame();
             ff->prev_frame = a5_prev_frame;
 
             interpreter::RestoreOsrToFastFrame(osr, *ff);
@@ -535,7 +536,7 @@ void InterpreterEntryDirect(
                     &a5_dispatch_ctx);
             }
 
-            tls_current_frame = ff;
+            threading::SetCurrentInterpFrame(ff);
             bool ok = FastExecute(*ff,
                 ir->instructions.data(),
                 static_cast<uint32_t>(ir->instructions.size()));
@@ -547,22 +548,22 @@ void InterpreterEntryDirect(
                 case interpreter::ValueTag::Int32:
                     ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val));
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::t_deopt_state = {};
-                    tls_current_frame = a5_prev_frame;
+                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 case interpreter::ValueTag::Int64:
                     ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val));
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::t_deopt_state = {};
-                    tls_current_frame = a5_prev_frame;
+                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 case interpreter::ValueTag::Float32: {
                     float v;
                     std::memcpy(&v, &ff->ret_val, sizeof(float));
                     ret_writer.WriteF32(v);
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::t_deopt_state = {};
-                    tls_current_frame = a5_prev_frame;
+                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 }
                 case interpreter::ValueTag::Float64: {
@@ -570,21 +571,21 @@ void InterpreterEntryDirect(
                     std::memcpy(&v, &ff->ret_val, sizeof(double));
                     ret_writer.WriteF64(v);
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::t_deopt_state = {};
-                    tls_current_frame = a5_prev_frame;
+                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 }
                 default:
                     ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val));
                     if (using_pool) tls_frame_pool.Release(ff);
-                    chaos::il2cpp::jit::t_deopt_state = {};
-                    tls_current_frame = a5_prev_frame;
+                    chaos::il2cpp::jit::g_jit_deopt_state = {};
+                    threading::SetCurrentInterpFrame(a5_prev_frame);
                     return;
                 }
             }
 
             if (using_pool) tls_frame_pool.Release(ff);
-            tls_current_frame = a5_prev_frame;
+            threading::SetCurrentInterpFrame(a5_prev_frame);
             // Fall through to RegisterExecute (t_deopt_state preserved for Step B)
         }
     }
@@ -618,8 +619,8 @@ void InterpreterEntryDirect(
         rf.call_cache = patch_method->call_cache;
         rf.call_count = static_cast<uint32_t>(instr_count);
         rf.patch_method = patch_method;
-        rf.prev_frame = tls_current_frame;
-        tls_current_frame = &rf;
+        rf.prev_frame = threading::GetCurrentInterpFrame();
+        threading::SetCurrentInterpFrame(&rf);
 
         auto call_count = patch_method->call_count.fetch_add(1, std::memory_order_relaxed) + 1;
         auto tier = patch_method->tier_state.load(std::memory_order_acquire);
@@ -709,15 +710,15 @@ void InterpreterEntryDirect(
         }
 
         // Deoptimization-aware RegisterFrame setup
-        bool t4_deopt_happened = chaos::il2cpp::jit::t_deopt_state.deopt_happened;
+        bool t4_deopt_happened = chaos::il2cpp::jit::g_jit_deopt_state.deopt_happened;
         if (t4_deopt_happened) {
-            std::memcpy(rf.regs.gpr, chaos::il2cpp::jit::t_deopt_state.gpr_file, 64 * sizeof(uint64_t));
-            std::memcpy(rf.regs.fpr, chaos::il2cpp::jit::t_deopt_state.fpr_file, 32 * sizeof(double));
-            std::memcpy(rf.regs.gpr_tags, chaos::il2cpp::jit::t_deopt_state.gpr_tags, 64);
-            std::memcpy(rf.regs.fpr_tags, chaos::il2cpp::jit::t_deopt_state.fpr_tags, 32);
-            rf.pc = chaos::il2cpp::jit::t_deopt_state.instr_pc;
+            std::memcpy(rf.regs.gpr, chaos::il2cpp::jit::g_jit_deopt_state.gpr_file, 64 * sizeof(uint64_t));
+            std::memcpy(rf.regs.fpr, chaos::il2cpp::jit::g_jit_deopt_state.fpr_file, 32 * sizeof(double));
+            std::memcpy(rf.regs.gpr_tags, chaos::il2cpp::jit::g_jit_deopt_state.gpr_tags, 64);
+            std::memcpy(rf.regs.fpr_tags, chaos::il2cpp::jit::g_jit_deopt_state.fpr_tags, 32);
+            rf.pc = chaos::il2cpp::jit::g_jit_deopt_state.instr_pc;
             rf.osr_reenable = true;  // trigger immediate OSR on first backedge
-            chaos::il2cpp::jit::t_deopt_state = {};
+            chaos::il2cpp::jit::g_jit_deopt_state = {};
         }
 
         CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: before RegisterExecute");
@@ -729,14 +730,14 @@ void InterpreterEntryDirect(
                 auto ret_tag = static_cast<interpreter::ValueTag>(rf.ret_tag);
                 ArgBuffer ret_writer(ret_buf);
                 switch (ret_tag) {
-                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(rf.ret_val)); tls_current_frame = rf.prev_frame; return;
-                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(rf.ret_val)); tls_current_frame = rf.prev_frame; return;
-                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &rf.ret_val, sizeof(float)); ret_writer.WriteF32(v); tls_current_frame = rf.prev_frame; return; }
-                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &rf.ret_val, sizeof(double)); ret_writer.WriteF64(v); tls_current_frame = rf.prev_frame; return; }
-                default: ret_writer.WritePtr(reinterpret_cast<void*>(rf.ret_val)); tls_current_frame = rf.prev_frame; return;
+                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(rf.ret_val)); threading::SetCurrentInterpFrame(rf.prev_frame); return;
+                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(rf.ret_val)); threading::SetCurrentInterpFrame(rf.prev_frame); return;
+                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &rf.ret_val, sizeof(float)); ret_writer.WriteF32(v); threading::SetCurrentInterpFrame(rf.prev_frame); return; }
+                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &rf.ret_val, sizeof(double)); ret_writer.WriteF64(v); threading::SetCurrentInterpFrame(rf.prev_frame); return; }
+                default: ret_writer.WritePtr(reinterpret_cast<void*>(rf.ret_val)); threading::SetCurrentInterpFrame(rf.prev_frame); return;
                 }
             }
-            tls_current_frame = rf.prev_frame;
+            threading::SetCurrentInterpFrame(rf.prev_frame);
             return;
         }
     }
@@ -877,10 +878,10 @@ void InterpreterEntryDirect(
         FastFrame ff_fallback;
         bool using_pool = true;
         if (ff == nullptr) { ff = &ff_fallback; memset(ff, 0, sizeof(*ff)); using_pool = false; }
-        ff->prev_frame = tls_current_frame;
+        ff->prev_frame = threading::GetCurrentInterpFrame();
         ff->ir_instrs = ir->instructions.data();
         ff->instr_count = static_cast<uint32_t>(ir->instructions.size());
-        tls_current_frame = ff;
+        threading::SetCurrentInterpFrame(ff);
         void* step_c_prev_frame = ff->prev_frame;
 
         { CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.SetupFrame");
@@ -898,19 +899,19 @@ void InterpreterEntryDirect(
                 auto ret_tag = static_cast<interpreter::ValueTag>(ff->ret_tag);
                 ArgBuffer ret_writer(ret_buf);
                 switch (ret_tag) {
-                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return;
-                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return;
-                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &ff->ret_val, sizeof(float)); ret_writer.WriteF32(v); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return; }
-                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &ff->ret_val, sizeof(double)); ret_writer.WriteF64(v); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return; }
-                default: ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); tls_current_frame = step_c_prev_frame; return;
+                case interpreter::ValueTag::Int32: ret_writer.WriteI32(static_cast<int32_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return;
+                case interpreter::ValueTag::Int64: ret_writer.WriteI64(static_cast<int64_t>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return;
+                case interpreter::ValueTag::Float32: { float v; std::memcpy(&v, &ff->ret_val, sizeof(float)); ret_writer.WriteF32(v); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return; }
+                case interpreter::ValueTag::Float64: { double v; std::memcpy(&v, &ff->ret_val, sizeof(double)); ret_writer.WriteF64(v); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return; }
+                default: ret_writer.WritePtr(reinterpret_cast<void*>(ff->ret_val)); if (using_pool) tls_frame_pool.Release(ff); threading::SetCurrentInterpFrame(step_c_prev_frame); return;
                 }
             }
             if (using_pool) tls_frame_pool.Release(ff);
-            tls_current_frame = step_c_prev_frame;
+            threading::SetCurrentInterpFrame(step_c_prev_frame);
             return;
         }
         if (using_pool) tls_frame_pool.Release(ff);
-        tls_current_frame = step_c_prev_frame;
+        threading::SetCurrentInterpFrame(step_c_prev_frame);
     }
 
     CHAOS_IL2CPP_LOG_DEBUG("diag", "Step D (InterpreterVM) entering");

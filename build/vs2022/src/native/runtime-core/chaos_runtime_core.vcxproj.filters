@@ -106,7 +106,7 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\thread_state.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\t4_demotion.cpp">
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\jit_demotion.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\thread_pool.cpp">
@@ -318,7 +318,7 @@
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\thread_state.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\t4_demotion.h">
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\jit_demotion.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\thread_pool.h">

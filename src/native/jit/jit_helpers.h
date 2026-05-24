@@ -1,6 +1,6 @@
-// codegen_helpers.h — Runtime helper functions for T4 generated native code
+// jit_helpers.h — Runtime helper functions for JIT generated native code
 //
-// These helpers are called by T4-generated x64 native code to perform
+// These helpers are called by JIT-generated x64 native code to perform
 // operations that are too complex to inline (vector access, GC allocation, etc.).
 // They are extern "C" for stable ABI from generated code.
 #ifndef CHAOS_IL2CPP_CODEGEN_HELPERS_H_
@@ -16,7 +16,7 @@ namespace chaos::il2cpp::jit {
 
 /// Magic value written to ret_buf[0] by the deopt trampoline to signal that
 /// deoptimization occurred.  InterpreterEntryDirect checks for this value
-/// after the T4 native call returns.
+/// after the JIT native call returns.
 static constexpr uint64_t kDeoptMagic = 0xDE0D7FA57A11ULL;
 
 /// Thread-local deoptimization state: written by DeoptTrapEntry (called from
@@ -32,7 +32,7 @@ struct DeoptTlsState {
     bool     deopt_happened = false; // Set to true when deopt trampoline fires
 };
 
-extern thread_local DeoptTlsState t_deopt_state;
+extern thread_local DeoptTlsState g_jit_deopt_state;
 
 }  // namespace chaos::il2cpp::jit
 

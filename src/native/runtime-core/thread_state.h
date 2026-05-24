@@ -142,6 +142,11 @@ struct ManagedThread {
     void* stack_base{nullptr};   // High address of the thread's stack
     void* stack_limit{nullptr};  // Low address of the thread's stack
 
+    /// Root of the interpreter frame chain (FastFrame or RegisterFrame).
+    /// Set by entry_direct.cpp on frame entry, restored on exit.
+    /// Read without synchronization during STW GC (target thread is suspended).
+    std::atomic<void*> current_interp_frame{nullptr};
+
     /// Safepoint wait start timestamp (ns since epoch), for timeout detection.
     uint64_t safepoint_wait_start_ns{0};
 
@@ -201,6 +206,23 @@ inline int32_t GetCurrentThreadId() noexcept {
 /// Current thread's ManagedThread descriptor (nullptr for unregistered).
 inline ManagedThread* GetCurrentThread() noexcept {
     return tls_this_thread;
+}
+
+/// Set the current thread's interpreter frame chain root.
+/// Only the owning thread should call this (on frame entry/exit).
+/// GC reads this during STW while the thread is suspended.
+inline void SetCurrentInterpFrame(void* frame) noexcept {
+    if (auto* t = tls_this_thread) {
+        t->current_interp_frame.store(frame, std::memory_order_relaxed);
+    }
+}
+
+/// Get the current thread's interpreter frame chain root.
+inline void* GetCurrentInterpFrame() noexcept {
+    if (auto* t = tls_this_thread) {
+        return t->current_interp_frame.load(std::memory_order_relaxed);
+    }
+    return nullptr;
 }
 
 // ── Lock-free thread registry ────────────────────────────────────────

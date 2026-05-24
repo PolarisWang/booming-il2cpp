@@ -739,15 +739,15 @@ public sealed partial class NativeAotLoweringPlanner
             : string.Empty;
 
         // Always define ChaosJitRegisterAll so runtime-entry.cpp can call it unconditionally.
-        // In AOT mode it's a no-op; in JIT mode it registers all methods for T4 JIT dispatch;
+        // In AOT mode it's a no-op; in JIT mode it registers all methods for JIT dispatch;
         // in Hybrid mode it registers all methods for Hybrid (AOT→JIT upgrade) dispatch.
         // This avoids linker errors in AOT builds where JIT symbols don't exist.
         if (_codegenMode == CodegenMode.Jit && methodCount > 0)
         {
-            globalDeclarations += "\n" + BuildT4JitMethodRegistration(methodsForLowering, metadataRegistration);
+            globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
             globalDeclarations += @"
 extern ""C"" void ChaosJitRegisterAll() {
-    RegisterT4JitMethods(kChaosT4JitEntries, kChaosT4JitEntryCount);
+    RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount);
 }
 ";
         }

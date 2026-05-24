@@ -2250,7 +2250,7 @@ static void TryOsrPromotion(RegisterFrame& frame,
         if (existing_nm != nullptr && existing_nm->osr_entry_offset != 0) {
             // Set OSR resume PC to loop header (frame.pc is the backward branch
             // target after the branch handler executed).
-            chaos::il2cpp::jit::t_deopt_state.osr_resume_pc = frame.pc;
+            chaos::il2cpp::jit::g_jit_deopt_state.osr_resume_pc = frame.pc;
 
             using OsrEntry = void (*)(void*, void*);
             auto osr_entry = reinterpret_cast<OsrEntry>(
@@ -2288,7 +2288,7 @@ static void TryOsrPromotion(RegisterFrame& frame,
         chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
 
         // Set OSR resume PC to loop header before calling OSR entry.
-        chaos::il2cpp::jit::t_deopt_state.osr_resume_pc = frame.pc;
+        chaos::il2cpp::jit::g_jit_deopt_state.osr_resume_pc = frame.pc;
 
         using OsrEntry = void (*)(void*, void*);
         auto osr_entry = reinterpret_cast<OsrEntry>(

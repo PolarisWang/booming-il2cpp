@@ -55,9 +55,9 @@ using chaos::il2cpp::jit::CanCompile;
 using chaos::il2cpp::jit::JitMethod;
 using chaos::il2cpp::jit::CompileConfig;
 using chaos::il2cpp::jit::kDeoptMagic;
-using chaos::il2cpp::jit::t_deopt_state;
+using chaos::il2cpp::jit::g_jit_deopt_state;
 using chaos::il2cpp::jit::RegisterNativeCodeSection;
-using chaos::il2cpp::jit::UnregisterT4Code;
+using chaos::il2cpp::jit::UnregisterNativeCodeSection;
 using chaos::il2cpp::jit::FindNativeCodeByAddress;
 using chaos::il2cpp::interpreter::RegisterFrame;
 using chaos::il2cpp::interpreter::RegisterFile;
@@ -1113,7 +1113,7 @@ static bool Test_OsrEntry() {
     if (ret_buf[0] != 0) { std::printf("    FAIL: wrong return value\n"); return false; }
 
     // Clean up.
-    UnregisterT4Code(nm->code);
+    UnregisterNativeCodeSection(nm->code);
     CHAOS_IL2CPP_FREE(nm);
     CHAOS_IL2CPP_FREE(nm_simple);
 
@@ -1128,7 +1128,7 @@ static bool Test_OsrEntry() {
 // returns kDeoptMagic via native entry.
 static bool Test_DeoptOvfArithmetic() {
     std::printf("  Test_DeoptOvfArithmetic...\n");
-    t_deopt_state.deopt_happened = false;
+    g_jit_deopt_state.deopt_happened = false;
 
     RegisterMethod rm;
     rm.instructions = {
@@ -1152,9 +1152,9 @@ static bool Test_DeoptOvfArithmetic() {
                 (unsigned long long)result, (unsigned long long)kDeoptMagic);
     if (result != kDeoptMagic) { std::printf("    FAIL: expected kDeoptMagic\n"); return false; }
 
-    if (!t_deopt_state.deopt_happened) { std::printf("    FAIL: deopt_happened should be true\n"); return false; }
-    std::printf("    deopt_happened=true, instr_pc=%u\n", t_deopt_state.instr_pc);
-    t_deopt_state.deopt_happened = false;
+    if (!g_jit_deopt_state.deopt_happened) { std::printf("    FAIL: deopt_happened should be true\n"); return false; }
+    std::printf("    deopt_happened=true, instr_pc=%u\n", g_jit_deopt_state.instr_pc);
+    g_jit_deopt_state.deopt_happened = false;
     return true;
 }
 
@@ -1162,7 +1162,7 @@ static bool Test_DeoptOvfArithmetic() {
 // still run the method correctly (no state corruption).
 static bool Test_DeoptThenRegisterExecute() {
     std::printf("  Test_DeoptThenRegisterExecute...\n");
-    t_deopt_state.deopt_happened = false;
+    g_jit_deopt_state.deopt_happened = false;
 
     // Method: with overflow on AddOvf, but normal Add below.
     // T4 deopts on AddOvf overflow, then we verify RegisterExecute works for
@@ -1209,7 +1209,7 @@ static bool Test_DeoptThenRegisterExecute() {
                 (unsigned long long)rf.ret_val);
     if (rf.ret_val != 42) { std::printf("    FAIL: wrong result\n"); return false; }
 
-    t_deopt_state.deopt_happened = false;
+    g_jit_deopt_state.deopt_happened = false;
     return true;
 }
 

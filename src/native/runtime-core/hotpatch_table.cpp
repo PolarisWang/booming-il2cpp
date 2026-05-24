@@ -174,6 +174,25 @@ uint64_t HotpatchNameRegistry::FindToken(uint32_t method_token) const noexcept {
     return 0;
 }
 
+/// Reverse of TokenToSlot: given a dispatch table slot index, find the
+/// metadata token.  Linear scan (token_slot_entries are sorted by token,
+/// not by slot), but only called during hotpatch — not performance-critical.
+uint32_t HotpatchNameRegistry::SlotToToken(uint32_t module_id, uint32_t slot) const noexcept {
+    if (module_id >= modules_.size()) return ~0u;
+    const auto* mod = modules_[module_id];
+    if (mod == nullptr || mod->token_slot_entries == nullptr) return ~0u;
+    for (uint32_t i = 0; i < mod->token_slot_entry_count; ++i) {
+        if (mod->token_slot_entries[i].slot == slot)
+            return mod->token_slot_entries[i].token;
+    }
+    return ~0u;
+}
+
+// Free-function wrapper for callers without a registry reference.
+uint32_t SlotToToken(uint32_t module_id, uint32_t slot) noexcept {
+    return GetHotpatchNameRegistry().SlotToToken(module_id, slot);
+}
+
 // ── Dispatch entry access ─────────────────────────────────────────────
 
 HotpatchEntryV0* HotpatchNameRegistry::GetDispatchEntry(uint32_t module_id, uint32_t token) const noexcept {
@@ -202,6 +221,13 @@ HotpatchEntryV0* HotpatchNameRegistry::GetDispatchEntryBySlot(
 
 // ── Patch management ──────────────────────────────────────────────────
 
+// Global slot update callback (registered by JIT for ReverseSlotMap updates).
+static SlotUpdateCallback g_slot_update_cb = nullptr;
+
+void RegisterSlotUpdateCallback(SlotUpdateCallback cb) noexcept {
+    g_slot_update_cb = cb;
+}
+
 void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched,
                                              void* method_key) noexcept {
     HotpatchEntryV0* entry = GetDispatchEntryBySlot(module_id, slot);
@@ -215,6 +241,19 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
         _InterlockedAnd(reinterpret_cast<volatile long*>(&entry->flags), ~kHotpatchActive);
         // release: method_key visible before flags (reader uses acquire fence)
         entry->method_key = 0;
+    }
+
+    // Version bump: signals to JIT-compiled callers that the target may have changed.
+    // Paired with acquire load in the dispatch path.
+    _InterlockedIncrement(reinterpret_cast<volatile long*>(&entry->version));
+
+    // Notify the JIT slot update callback so ReverseSlotMap can patch RX slot tables.
+    if (g_slot_update_cb && entry->direct_ptr) {
+        // Find the callee token for this slot.
+        uint32_t token = SlotToToken(module_id, slot);
+        if (token != ~0u) {
+            g_slot_update_cb(token, entry->direct_ptr);
+        }
     }
 }
 

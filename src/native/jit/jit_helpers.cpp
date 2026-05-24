@@ -1,4 +1,4 @@
-// codegen_helpers.cpp — Runtime helper implementations for T4 generated code
+// jit_helpers.cpp — Runtime helper implementations for JIT generated code
 
 #include "jit_helpers.h"
 #include "jit_deopt.h"
@@ -18,7 +18,7 @@
 
 // ── Thread-local deoptimization state ───────────────────────────────────────
 namespace chaos::il2cpp::jit {
-thread_local DeoptTlsState t_deopt_state;
+thread_local DeoptTlsState g_jit_deopt_state;
 }
 
 // InterpreterObject and InterpreterValue access for LdFld/StFld.
@@ -190,11 +190,11 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
         using namespace chaos::il2cpp::jit;
 
         // Copy all 64 GPR values from the register file directly.
-        std::memcpy(t_deopt_state.gpr_file, gpr_base,
+        std::memcpy(g_jit_deopt_state.gpr_file, gpr_base,
                     64 * sizeof(uint64_t));
 
         // Copy all 32 FPR values (starting after GPRs in the register file).
-        std::memcpy(t_deopt_state.fpr_file, gpr_base + 64,
+        std::memcpy(g_jit_deopt_state.fpr_file, gpr_base + 64,
                     32 * sizeof(double));
 
         // Extract type tags from the DeoptEntry for this call site.
@@ -211,24 +211,24 @@ extern "C" uint64_t CodegenCallVirt(const CodegenCallVirtArgs* args) noexcept {
             if (entry != nullptr) {
                 // Initialize all GPR tags to Int64, then overwrite with
                 // actual tags from the DeoptValue entries.
-                std::memset(t_deopt_state.gpr_tags,
+                std::memset(g_jit_deopt_state.gpr_tags,
                     static_cast<int>(ValueTag::Int64), 64);
-                std::memset(t_deopt_state.fpr_tags,
+                std::memset(g_jit_deopt_state.fpr_tags,
                     static_cast<int>(ValueTag::Float64), 32);
                 for (uint32_t i = 0; i < entry->num_values; ++i) {
                     const auto& dv = nm->deopt_values[entry->values_offset + i];
                     if (dv.reg_index < 64) {
-                        t_deopt_state.gpr_tags[dv.reg_index] = dv.value_tag;
+                        g_jit_deopt_state.gpr_tags[dv.reg_index] = dv.value_tag;
                     } else {
-                        t_deopt_state.fpr_tags[dv.reg_index - 64] = dv.value_tag;
+                        g_jit_deopt_state.fpr_tags[dv.reg_index - 64] = dv.value_tag;
                     }
                 }
             }
         }
 
         // Signal deoptimization to the caller.
-        t_deopt_state.instr_pc = args->instruction_idx;
-        t_deopt_state.deopt_happened = true;
+        g_jit_deopt_state.instr_pc = args->instruction_idx;
+        g_jit_deopt_state.deopt_happened = true;
         *static_cast<uint64_t*>(args->ret_buf) = kDeoptMagic;
     }
     return 0;
@@ -577,37 +577,37 @@ extern "C" void DeoptSaveFrameState(uint64_t codegen_rsp) noexcept {
     // Batch-copy all 64 GPR values from stack frame spill slots.
     // GPR file starts at codegen_rsp + kGprFileOff (= codegen_rsp + 32).
     for (uint32_t vr = 0; vr < 64; ++vr) {
-        t_deopt_state.gpr_file[vr] = *reinterpret_cast<const uint64_t*>(
+        g_jit_deopt_state.gpr_file[vr] = *reinterpret_cast<const uint64_t*>(
             codegen_rsp + 32 + vr * 8);
     }
 
     // Batch-copy all 32 FPR values from stack frame spill slots.
     // FPR file starts at codegen_rsp + kFprFileOff (= codegen_rsp + 544).
     for (uint32_t vr = 0; vr < 32; ++vr) {
-        t_deopt_state.fpr_file[vr] = *reinterpret_cast<const double*>(
+        g_jit_deopt_state.fpr_file[vr] = *reinterpret_cast<const double*>(
             codegen_rsp + 544 + vr * 8);
     }
 
     // Look up type tags from the DeoptEntry for this native offset.
     const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_off);
     if (entry != nullptr && nm->deopt_values != nullptr) {
-        std::memset(t_deopt_state.gpr_tags,
+        std::memset(g_jit_deopt_state.gpr_tags,
             static_cast<int>(ValueTag::Int64), 64);
-        std::memset(t_deopt_state.fpr_tags,
+        std::memset(g_jit_deopt_state.fpr_tags,
             static_cast<int>(ValueTag::Float64), 32);
         for (uint32_t i = 0; i < entry->num_values; ++i) {
             const auto& dv = nm->deopt_values[entry->values_offset + i];
             if (dv.reg_index < 64) {
-                t_deopt_state.gpr_tags[dv.reg_index] = dv.value_tag;
+                g_jit_deopt_state.gpr_tags[dv.reg_index] = dv.value_tag;
             } else {
-                t_deopt_state.fpr_tags[dv.reg_index - 64] = dv.value_tag;
+                g_jit_deopt_state.fpr_tags[dv.reg_index - 64] = dv.value_tag;
             }
         }
-        t_deopt_state.instr_pc = entry->instr_pc;
-        t_deopt_state.osr_resume_pc = entry->osr_resume_pc;
+        g_jit_deopt_state.instr_pc = entry->instr_pc;
+        g_jit_deopt_state.osr_resume_pc = entry->osr_resume_pc;
     }
 
-    t_deopt_state.deopt_happened = true;
+    g_jit_deopt_state.deopt_happened = true;
 }
 
 // ── OSR loop header resolver ─────────────────────────────────────────────────
@@ -620,7 +620,7 @@ extern "C" void* OsrResolveLoopHeader() noexcept {
     if (nm->instr_offsets == nullptr) return nullptr;
     if (nm->instr_offset_count == 0) return nullptr;
 
-    uint32_t resume_pc = t_deopt_state.osr_resume_pc;
+    uint32_t resume_pc = g_jit_deopt_state.osr_resume_pc;
     if (resume_pc >= nm->instr_offset_count) {
         resume_pc = 0;  // fall back to instruction 0
     }
@@ -658,10 +658,10 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
         native_offset,
         *nctx,
         codegen_rsp,
-        t_deopt_state.gpr_file,
-        t_deopt_state.fpr_file,
-        t_deopt_state.gpr_tags,
-        t_deopt_state.fpr_tags);
+        g_jit_deopt_state.gpr_file,
+        g_jit_deopt_state.fpr_file,
+        g_jit_deopt_state.gpr_tags,
+        g_jit_deopt_state.fpr_tags);
 
     // 5. Find the DeoptEntry to get the instruction pc.
     const DeoptEntry* entry = DeoptRuntime::FindEntry(nm, native_offset);
@@ -673,7 +673,7 @@ extern "C" void DeoptTrapEntry(const void* ctx, uint64_t codegen_rsp) noexcept {
     // 6. Set TLS state: the trampoline will write kDeoptMagic to ret_buf[0]
     //    and return.  InterpreterEntryDirect reads this state to reconstruct
     //    the RegisterFrame for RegisterExecute.
-    t_deopt_state.instr_pc = entry->instr_pc;
-    t_deopt_state.osr_resume_pc = entry->osr_resume_pc;
-    t_deopt_state.deopt_happened = true;
+    g_jit_deopt_state.instr_pc = entry->instr_pc;
+    g_jit_deopt_state.osr_resume_pc = entry->osr_resume_pc;
+    g_jit_deopt_state.deopt_happened = true;
 }

@@ -37,7 +37,7 @@ using chaos::il2cpp::jit::JitPrecode;
 using chaos::il2cpp::jit::PrecodeArena;
 using chaos::il2cpp::jit::JitRecompileToTier1;
 using chaos::il2cpp::jit::kPrecodeCompiled;
-using chaos::il2cpp::jit::kPgoTier1Threshold;
+using chaos::il2cpp::jit::kPgoFullJitThreshold;
 
 // ── Helpers ──────────────────────────────────────────────────────────
 
@@ -156,7 +156,7 @@ TEST_F(PgoTest, PgoCallCountIncrements) {
 }
 
 TEST_F(PgoTest, PgoTriggersTier1Enqueue) {
-    // When pgo_call_count exceeds kPgoTier1Threshold, tier1_enqueued is set
+    // When pgo_call_count exceeds kPgoFullJitThreshold, tier1_enqueued is set
     auto rm = MakeReturnConstantMethod(55);
     auto cfg = MakeTier0Config(true);
     auto* jm = Compile(rm, cfg);
@@ -169,17 +169,17 @@ TEST_F(PgoTest, PgoTriggersTier1Enqueue) {
     precode.state.store(kPrecodeCompiled, std::memory_order_release);
 
     // Simulate calls beyond the threshold
-    for (uint32_t i = 0; i <= kPgoTier1Threshold + 10; i++) {
+    for (uint32_t i = 0; i <= kPgoFullJitThreshold + 10; i++) {
         precode.pgo_call_count.fetch_add(1, std::memory_order_relaxed);
         // Simulate the dispatch check: when count > threshold, set tier1_enqueued
-        if (precode.pgo_call_count.load(std::memory_order_relaxed) > kPgoTier1Threshold
+        if (precode.pgo_call_count.load(std::memory_order_relaxed) > kPgoFullJitThreshold
             && !precode.tier1_enqueued) {
             precode.tier1_enqueued = true;
         }
     }
 
     EXPECT_TRUE(precode.tier1_enqueued);
-    EXPECT_GT(precode.pgo_call_count.load(), kPgoTier1Threshold);
+    EXPECT_GT(precode.pgo_call_count.load(), kPgoFullJitThreshold);
 }
 
 TEST_F(PgoTest, Tier1CodeCorrectness) {

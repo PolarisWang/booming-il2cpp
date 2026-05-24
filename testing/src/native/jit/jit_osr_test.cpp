@@ -23,10 +23,10 @@
 // OsrResolveLoopHeader is extern "C" — declare it here for direct calls.
 extern "C" void* OsrResolveLoopHeader() noexcept;
 
-using chaos::il2cpp::jit::t_deopt_state;
+using chaos::il2cpp::jit::g_jit_deopt_state;
 using chaos::il2cpp::jit::DeoptTlsState;
 using chaos::il2cpp::jit::RegisterNativeCodeSection;
-using chaos::il2cpp::jit::UnregisterT4Code;
+using chaos::il2cpp::jit::UnregisterNativeCodeSection;
 using chaos::il2cpp::jit::FindNativeCodeByAddress;
 using chaos::il2cpp::jit::JitMethod;
 
@@ -50,7 +50,7 @@ public:
         nm_->instr_offset_count = instr_count;
     }
     ~NativeMethodGuard() {
-        UnregisterT4Code(code_);
+        UnregisterNativeCodeSection(code_);
         // Clear all heap pointers so ~JitMethod() doesn't free them.
         std::memset(nm_, 0, sizeof(JitMethod));
         delete nm_;
@@ -70,24 +70,24 @@ TEST(CodegenOsr, ResolveLoopHeaderReturnsNullWhenNotInT4Code) {
 }
 
 TEST(CodegenOsr, DeoptTlsStateDefaults) {
-    EXPECT_EQ(t_deopt_state.osr_resume_pc, 0u);
-    EXPECT_EQ(t_deopt_state.instr_pc, 0u);
-    EXPECT_FALSE(t_deopt_state.deopt_happened);
+    EXPECT_EQ(g_jit_deopt_state.osr_resume_pc, 0u);
+    EXPECT_EQ(g_jit_deopt_state.instr_pc, 0u);
+    EXPECT_FALSE(g_jit_deopt_state.deopt_happened);
 }
 
 TEST(CodegenOsr, DeoptTlsStateSetAndClear) {
-    t_deopt_state.osr_resume_pc = 42;
-    t_deopt_state.instr_pc = 100;
-    t_deopt_state.deopt_happened = true;
+    g_jit_deopt_state.osr_resume_pc = 42;
+    g_jit_deopt_state.instr_pc = 100;
+    g_jit_deopt_state.deopt_happened = true;
 
-    EXPECT_EQ(t_deopt_state.osr_resume_pc, 42u);
-    EXPECT_EQ(t_deopt_state.instr_pc, 100u);
-    EXPECT_TRUE(t_deopt_state.deopt_happened);
+    EXPECT_EQ(g_jit_deopt_state.osr_resume_pc, 42u);
+    EXPECT_EQ(g_jit_deopt_state.instr_pc, 100u);
+    EXPECT_TRUE(g_jit_deopt_state.deopt_happened);
 
-    t_deopt_state = DeoptTlsState{};
-    EXPECT_EQ(t_deopt_state.osr_resume_pc, 0u);
-    EXPECT_EQ(t_deopt_state.instr_pc, 0u);
-    EXPECT_FALSE(t_deopt_state.deopt_happened);
+    g_jit_deopt_state = DeoptTlsState{};
+    EXPECT_EQ(g_jit_deopt_state.osr_resume_pc, 0u);
+    EXPECT_EQ(g_jit_deopt_state.instr_pc, 0u);
+    EXPECT_FALSE(g_jit_deopt_state.deopt_happened);
 }
 
 TEST(CodegenOsr, RegisterThenUnregisterEntry) {
@@ -98,7 +98,7 @@ TEST(CodegenOsr, RegisterThenUnregisterEntry) {
     RegisterNativeCodeSection(fake_code, sizeof(fake_code), nmg.get(), /*token=*/0);
     EXPECT_NE(FindNativeCodeByAddress(fake_code), nullptr);
 
-    UnregisterT4Code(fake_code);
+    UnregisterNativeCodeSection(fake_code);
     EXPECT_EQ(FindNativeCodeByAddress(fake_code), nullptr);
 }
 
@@ -110,7 +110,7 @@ TEST(CodegenOsr, OsrResumePcBoundsCheckUt) {
     nmg.register_t4(/*token=*/0);
     EXPECT_NE(FindNativeCodeByAddress(fake_code), nullptr);
 
-    t_deopt_state = DeoptTlsState{};
+    g_jit_deopt_state = DeoptTlsState{};
 }
 
 }  // namespace

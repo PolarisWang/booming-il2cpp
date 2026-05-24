@@ -13,6 +13,7 @@ add_library(chaos_interpreter STATIC
     token_resolver.h
     ir_reg_alloc.cpp
     ir_reg_alloc.h
+    interp_frame_scanner.cpp
     osr_state.cpp
     osr_state.h
     register_vm.h

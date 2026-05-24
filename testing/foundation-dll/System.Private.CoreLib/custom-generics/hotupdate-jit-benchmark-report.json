@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/custom/generics",
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/CustomGenerics.Box`1::Get:T()",
+      "status": "failed",
+      "error": "[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 0\n[2026-05-24T09:10:59][WARN][CRAG] young_collection_no_region\n[2026-05-24T09:10:59][INFO][NUMA] numa_init count=%d\n[2026-05-24T09:10:59][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T09:10:59][INFO][OldGen] emergency_reserve_allocated base=0x1551110897664 size=65536\n[2026-05-24T09:10:59][INFO][OldGen] init done base=0x1551109193728 pages=8\n[2026-05-24T09:10:59][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 1\n[2026-05-24T09:10:59][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/CustomGenerics.Box`1::Set:(T)",
+      "status": "failed",
+      "error": "[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 0\n[2026-05-24T09:10:59][WARN][CRAG] young_collection_no_region\n[2026-05-24T09:10:59][INFO][NUMA] numa_init count=%d\n[2026-05-24T09:10:59][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T09:10:59][INFO][OldGen] emergency_reserve_allocated base=0x1851045445632 size=65536\n[2026-05-24T09:10:59][INFO][OldGen] init done base=0x1851020214272 pages=8\n[2026-05-24T09:10:59][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 1\n[2026-05-24T09:10:59][DEBUG][Finalizer] thread_started id={0}\n[2026-05-24T09:10:59][DEBUG][BGC] thread_started\n"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/CustomGenerics.Pair`2::Deconstruct:(T1&,T2&)",
+      "status": "failed",
+      "error": "[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 0\n[2026-05-24T09:10:59][WARN][CRAG] young_collection_no_region\n[2026-05-24T09:10:59][INFO][NUMA] numa_init count=%d\n[2026-05-24T09:10:59][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T09:10:59][INFO][OldGen] emergency_reserve_allocated base=0x2124727320576 size=65536\n[2026-05-24T09:10:59][INFO][OldGen] init done base=0x2124701958144 pages=8\n[2026-05-24T09:10:59][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 1\n"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/CustomGenerics.Util::Echo:T(T)",
+      "status": "failed",
+      "error": "[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 0\n[2026-05-24T09:10:59][WARN][CRAG] young_collection_no_region\n[2026-05-24T09:10:59][INFO][NUMA] numa_init count=%d\n[2026-05-24T09:10:59][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T09:10:59][INFO][OldGen] emergency_reserve_allocated base=0x2279709736960 size=65536\n[2026-05-24T09:10:59][INFO][OldGen] init done base=0x2279679590400 pages=8\n[2026-05-24T09:10:59][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 1\n[2026-05-24T09:10:59][DEBUG][BGC] thread_started\n[2026-05-24T09:10:59][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/CustomGenerics.Util::Equal:bool(T,T)",
+      "status": "failed",
+      "error": "[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 0\n[2026-05-24T09:10:59][WARN][CRAG] young_collection_no_region\n[2026-05-24T09:10:59][INFO][NUMA] numa_init count=%d\n[2026-05-24T09:10:59][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T09:10:59][INFO][OldGen] emergency_reserve_allocated base=0x2238484643840 size=65536\n[2026-05-24T09:10:59][INFO][OldGen] init done base=0x2238454497280 pages=8\n[2026-05-24T09:10:59][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 1\n[2026-05-24T09:10:59][DEBUG][BGC] thread_started\n[2026-05-24T09:10:59][DEBUG][Finalizer] thread_started id={0}\n"
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/CustomGenerics.Wrapper`1::GetRefType:System.Type()",
+      "status": "failed",
+      "error": "[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 0\n[2026-05-24T09:10:59][WARN][CRAG] young_collection_no_region\n[2026-05-24T09:10:59][INFO][NUMA] numa_init count=%d\n[2026-05-24T09:10:59][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T09:10:59][INFO][OldGen] emergency_reserve_allocated base=0x2174592745472 size=65536\n[2026-05-24T09:10:59][INFO][OldGen] init done base=0x2174563385344 pages=8\n[2026-05-24T09:10:59][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T09:10:59][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T09:10:59][DEBUG][GcEvents] registered callback 0x7ff76c5a1b80 at slot 1\n[2026-05-24T09:10:59][DEBUG][Finalizer] thread_started id={0}\n[2026-05-24T09:10:59][DEBUG][BGC] thread_started\n"
+    }
+  ],
+  "summary": {
+    "totalMethods": 6,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
+    "slowdownThresholdX": 50.0
+  }
+}

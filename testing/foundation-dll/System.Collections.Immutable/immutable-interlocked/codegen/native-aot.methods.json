@@ -1,0 +1,51 @@
+﻿{
+  "schemaVersion": 2,
+  "assemblyName": "ImmutableInterlockedSubjects",
+  "methodCount": 4,
+  "defaultStringId": 6500971301520520093,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects_CustomEntrySubject_0",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false,
+      "subjectIndex": 0
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c_CustomEntrySubject_0_b__1_0_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "ImmutableInterlockedSubjects_ImmutableInterlockedSubjects___c__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    }
+  ]
+}

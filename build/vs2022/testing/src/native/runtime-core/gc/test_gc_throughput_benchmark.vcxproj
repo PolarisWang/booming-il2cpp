@@ -1,0 +1,387 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <PreferredToolArchitecture>x64</PreferredToolArchitecture>
+  </PropertyGroup>
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="MinSizeRel|x64">
+      <Configuration>MinSizeRel</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="RelWithDebInfo|x64">
+      <Configuration>RelWithDebInfo</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E30FF7EC-7BA6-39D8-95C3-DBBCCCF34CF4}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>10.0.22621.0</WindowsTargetPlatformVersion>
+    <Platform>x64</Platform>
+    <ProjectName>test_gc_throughput_benchmark</ProjectName>
+    <VCProjectUpgraderObjectName>NoUpgrade</VCProjectUpgraderObjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>10.0.20506.1</_ProjectFileVersion>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\agent\booming-il2cpp\build\vs2022\testing\src\native\runtime-core\gc\Debug\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">test_gc_throughput_benchmark.dir\Debug\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">test_gc_throughput_benchmark</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\agent\booming-il2cpp\build\vs2022\testing\src\native\runtime-core\gc\Release\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">test_gc_throughput_benchmark.dir\Release\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">test_gc_throughput_benchmark</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\agent\booming-il2cpp\build\vs2022\testing\src\native\runtime-core\gc\MinSizeRel\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">test_gc_throughput_benchmark.dir\MinSizeRel\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">test_gc_throughput_benchmark</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\agent\booming-il2cpp\build\vs2022\testing\src\native\runtime-core\gc\RelWithDebInfo\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">test_gc_throughput_benchmark.dir\RelWithDebInfo\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">test_gc_throughput_benchmark</TargetName>
+    <TargetExt Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">.exe</TargetExt>
+    <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</LinkIncremental>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/agent/booming-il2cpp/build/vs2022/_deps/googletest-src/googletest/include" /external:I "D:/agent/booming-il2cpp/build/vs2022/_deps/googletest-src/googletest" /utf-8 /w</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <Optimization>Disabled</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_CHECK;NOMINMAX;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_CHECK;NOMINMAX;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest\include;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest\include;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\..\..\..\lib\Debug\gtest_main.lib;..\..\..\..\..\src\native\runtime-core\Debug\chaos_runtime_core.lib;..\..\..\..\..\src\native\bootstrap\Debug\chaos_bootstrap.lib;..\..\..\..\..\src\native\interpreter\Debug\chaos_interpreter.lib;..\..\..\..\..\src\native\jit\Debug\chaos_jit.lib;..\..\..\..\..\src\native\diagnostics\debugger\Debug\chaos_debugger.lib;..\..\..\..\..\src\native\hot-update\Debug\chaos_hot_update.lib;..\..\..\..\..\src\native\common\Debug\chaos_common.lib;..\..\..\..\..\src\native\support\Debug\chaos_support.lib;..\..\..\..\..\fmt_build\Debug\chaos_fmt.lib;..\..\..\..\..\lib\Debug\gtest.lib;..\..\..\..\..\src\native\bootstrap\Debug\chaos_bootstrap.lib;..\..\..\..\..\src\native\interpreter\Debug\chaos_interpreter.lib;..\..\..\..\..\src\native\jit\Debug\chaos_jit.lib;..\..\..\..\..\src\native\support\Debug\chaos_support.lib;..\..\..\..\..\src\native\hot-update\Debug\chaos_hot_update.lib;..\..\..\..\..\src\native\runtime-core\Debug\chaos_runtime_core.lib;..\..\..\..\..\src\native\diagnostics\debugger\Debug\chaos_debugger.lib;..\..\..\..\..\src\native\common\Debug\chaos_common.lib;..\..\..\..\..\fmt_build\Debug\chaos_fmt.lib;..\..\..\..\..\src\native\diagnostics\eventpipe\Debug\chaos_eventpipe.lib;bcrypt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/Debug/test_gc_throughput_benchmark.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/Debug/test_gc_throughput_benchmark.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/agent/booming-il2cpp/build/vs2022/_deps/googletest-src/googletest/include" /external:I "D:/agent/booming-il2cpp/build/vs2022/_deps/googletest-src/googletest" /utf-8 /w</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_CHECK;NOMINMAX;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_CHECK;NOMINMAX;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest\include;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest\include;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\..\..\..\lib\Release\gtest_main.lib;..\..\..\..\..\src\native\runtime-core\Release\chaos_runtime_core.lib;..\..\..\..\..\src\native\bootstrap\Release\chaos_bootstrap.lib;..\..\..\..\..\src\native\interpreter\Release\chaos_interpreter.lib;..\..\..\..\..\src\native\jit\Release\chaos_jit.lib;..\..\..\..\..\src\native\diagnostics\debugger\Release\chaos_debugger.lib;..\..\..\..\..\src\native\hot-update\Release\chaos_hot_update.lib;..\..\..\..\..\src\native\common\Release\chaos_common.lib;..\..\..\..\..\src\native\support\Release\chaos_support.lib;..\..\..\..\..\fmt_build\Release\chaos_fmt.lib;..\..\..\..\..\lib\Release\gtest.lib;..\..\..\..\..\src\native\bootstrap\Release\chaos_bootstrap.lib;..\..\..\..\..\src\native\interpreter\Release\chaos_interpreter.lib;..\..\..\..\..\src\native\jit\Release\chaos_jit.lib;..\..\..\..\..\src\native\support\Release\chaos_support.lib;..\..\..\..\..\src\native\hot-update\Release\chaos_hot_update.lib;..\..\..\..\..\src\native\runtime-core\Release\chaos_runtime_core.lib;..\..\..\..\..\src\native\diagnostics\debugger\Release\chaos_debugger.lib;..\..\..\..\..\src\native\common\Release\chaos_common.lib;..\..\..\..\..\fmt_build\Release\chaos_fmt.lib;..\..\..\..\..\src\native\diagnostics\eventpipe\Release\chaos_eventpipe.lib;bcrypt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/Release/test_gc_throughput_benchmark.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/Release/test_gc_throughput_benchmark.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/agent/booming-il2cpp/build/vs2022/_deps/googletest-src/googletest/include" /external:I "D:/agent/booming-il2cpp/build/vs2022/_deps/googletest-src/googletest" /utf-8 /w</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <Optimization>MinSpace</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_CHECK;NOMINMAX;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <DebugInformationFormat>
+      </DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_CHECK;NOMINMAX;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest\include;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest\include;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\..\..\..\lib\MinSizeRel\gtest_main.lib;..\..\..\..\..\src\native\runtime-core\MinSizeRel\chaos_runtime_core.lib;..\..\..\..\..\src\native\bootstrap\MinSizeRel\chaos_bootstrap.lib;..\..\..\..\..\src\native\interpreter\MinSizeRel\chaos_interpreter.lib;..\..\..\..\..\src\native\jit\MinSizeRel\chaos_jit.lib;..\..\..\..\..\src\native\diagnostics\debugger\MinSizeRel\chaos_debugger.lib;..\..\..\..\..\src\native\hot-update\MinSizeRel\chaos_hot_update.lib;..\..\..\..\..\src\native\common\MinSizeRel\chaos_common.lib;..\..\..\..\..\src\native\support\MinSizeRel\chaos_support.lib;..\..\..\..\..\fmt_build\MinSizeRel\chaos_fmt.lib;..\..\..\..\..\lib\MinSizeRel\gtest.lib;..\..\..\..\..\src\native\bootstrap\MinSizeRel\chaos_bootstrap.lib;..\..\..\..\..\src\native\interpreter\MinSizeRel\chaos_interpreter.lib;..\..\..\..\..\src\native\jit\MinSizeRel\chaos_jit.lib;..\..\..\..\..\src\native\support\MinSizeRel\chaos_support.lib;..\..\..\..\..\src\native\hot-update\MinSizeRel\chaos_hot_update.lib;..\..\..\..\..\src\native\runtime-core\MinSizeRel\chaos_runtime_core.lib;..\..\..\..\..\src\native\diagnostics\debugger\MinSizeRel\chaos_debugger.lib;..\..\..\..\..\src\native\common\MinSizeRel\chaos_common.lib;..\..\..\..\..\fmt_build\MinSizeRel\chaos_fmt.lib;..\..\..\..\..\src\native\diagnostics\eventpipe\MinSizeRel\chaos_eventpipe.lib;bcrypt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/MinSizeRel/test_gc_throughput_benchmark.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/MinSizeRel/test_gc_throughput_benchmark.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /external:I "D:/agent/booming-il2cpp/build/vs2022/_deps/googletest-src/googletest/include" /external:I "D:/agent/booming-il2cpp/build/vs2022/_deps/googletest-src/googletest" /utf-8 /w</AdditionalOptions>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <ExternalWarningLevel>TurnOffAllWarnings</ExternalWarningLevel>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <Optimization>MaxSpeed</Optimization>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <UseFullPaths>false</UseFullPaths>
+      <WarningLevel>Level1</WarningLevel>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_CHECK;NOMINMAX;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_CHECK;NOMINMAX;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest\include;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Midl>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\testing\..\src\native;D:\agent\booming-il2cpp\testing\..\src\native\common;D:\agent\booming-il2cpp\testing\..\src\native\interpreter;D:\agent\booming-il2cpp\testing\..\src\native\interpreter\generated;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core;D:\agent\booming-il2cpp\testing\..\src\native\bootstrap;D:\agent\booming-il2cpp\testing\..\src\native\hot-update;D:\agent\booming-il2cpp\testing\..\src\native\support;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\threading;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\tiering;D:\agent\booming-il2cpp\testing\..\src\native\runtime-core\gc;D:\agent\booming-il2cpp\testing\..\src\native\jit;D:\agent\booming-il2cpp\testing\..\src\native\engine-bridge;D:\agent\booming-il2cpp\testing\..\contracts\native\v0;D:\agent\booming-il2cpp\testing\..\contracts\engine\v0;D:\agent\booming-il2cpp\testing\..\third_party\unordered_dense\include;D:\agent\booming-il2cpp\testing\..\third_party\fmt\include;D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\jit;D:\agent\booming-il2cpp\src\native\hot-update;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest\include;D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-src\googletest;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
+      <HeaderFileName>%(Filename).h</HeaderFileName>
+      <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
+      <InterfaceIdentifierFileName>%(Filename)_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>%(Filename)_p.c</ProxyFileName>
+    </Midl>
+    <Link>
+      <AdditionalDependencies>..\..\..\..\..\lib\RelWithDebInfo\gtest_main.lib;..\..\..\..\..\src\native\runtime-core\RelWithDebInfo\chaos_runtime_core.lib;..\..\..\..\..\src\native\bootstrap\RelWithDebInfo\chaos_bootstrap.lib;..\..\..\..\..\src\native\interpreter\RelWithDebInfo\chaos_interpreter.lib;..\..\..\..\..\src\native\jit\RelWithDebInfo\chaos_jit.lib;..\..\..\..\..\src\native\diagnostics\debugger\RelWithDebInfo\chaos_debugger.lib;..\..\..\..\..\src\native\hot-update\RelWithDebInfo\chaos_hot_update.lib;..\..\..\..\..\src\native\common\RelWithDebInfo\chaos_common.lib;..\..\..\..\..\src\native\support\RelWithDebInfo\chaos_support.lib;..\..\..\..\..\fmt_build\RelWithDebInfo\chaos_fmt.lib;..\..\..\..\..\lib\RelWithDebInfo\gtest.lib;..\..\..\..\..\src\native\bootstrap\RelWithDebInfo\chaos_bootstrap.lib;..\..\..\..\..\src\native\interpreter\RelWithDebInfo\chaos_interpreter.lib;..\..\..\..\..\src\native\jit\RelWithDebInfo\chaos_jit.lib;..\..\..\..\..\src\native\support\RelWithDebInfo\chaos_support.lib;..\..\..\..\..\src\native\hot-update\RelWithDebInfo\chaos_hot_update.lib;..\..\..\..\..\src\native\runtime-core\RelWithDebInfo\chaos_runtime_core.lib;..\..\..\..\..\src\native\diagnostics\debugger\RelWithDebInfo\chaos_debugger.lib;..\..\..\..\..\src\native\common\RelWithDebInfo\chaos_common.lib;..\..\..\..\..\fmt_build\RelWithDebInfo\chaos_fmt.lib;..\..\..\..\..\src\native\diagnostics\eventpipe\RelWithDebInfo\chaos_eventpipe.lib;bcrypt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
+      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <ImportLibrary>D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/RelWithDebInfo/test_gc_throughput_benchmark.lib</ImportLibrary>
+      <ProgramDataBaseFile>D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/RelWithDebInfo/test_gc_throughput_benchmark.pdb</ProgramDataBaseFile>
+      <SubSystem>Console</SubSystem>
+    </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\testing\src\native\runtime-core\gc\CMakeLists.txt">
+      <UseUtf8Encoding>Always</UseUtf8Encoding>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule D:/agent/booming-il2cpp/testing/src/native/runtime-core/gc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp -BD:/agent/booming-il2cpp/build/vs2022 --check-stamp-file D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">D:\agent\booming-il2cpp\build\vs2022\testing\src\native\runtime-core\gc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule D:/agent/booming-il2cpp/testing/src/native/runtime-core/gc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp -BD:/agent/booming-il2cpp/build/vs2022 --check-stamp-file D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">D:\agent\booming-il2cpp\build\vs2022\testing\src\native\runtime-core\gc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule D:/agent/booming-il2cpp/testing/src/native/runtime-core/gc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp -BD:/agent/booming-il2cpp/build/vs2022 --check-stamp-file D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">D:\agent\booming-il2cpp\build\vs2022\testing\src\native\runtime-core\gc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule D:/agent/booming-il2cpp/testing/src/native/runtime-core/gc/CMakeLists.txt</Message>
+      <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SD:/agent/booming-il2cpp -BD:/agent/booming-il2cpp/build/vs2022 --check-stamp-file D:/agent/booming-il2cpp/build/vs2022/testing/src/native/runtime-core/gc/CMakeFiles/generate.stamp
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd</Command>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">D:\agent\booming-il2cpp\build\vs2022\testing\src\native\runtime-core\gc\CMakeFiles\generate.stamp</Outputs>
+      <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="D:\agent\booming-il2cpp\testing\src\native\runtime-core\gc\gc_throughput_benchmark.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\testing\src\native\runtime-core\gc\gc_test_stubs.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\testing\src\native\runtime-core\gc\gc_test_base.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\ZERO_CHECK.vcxproj">
+      <Project>{6F87BB35-D72A-3554-81D6-B174B77587EC}</Project>
+      <Name>ZERO_CHECK</Name>
+      <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\common\chaos_common.vcxproj">
+      <Project>{9E8CE054-3831-387A-88CD-8D4B9D09F82D}</Project>
+      <Name>chaos_common</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\diagnostics\debugger\chaos_debugger.vcxproj">
+      <Project>{FBCC9814-82B9-3C34-90A8-94A91B087080}</Project>
+      <Name>chaos_debugger</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\diagnostics\eventpipe\chaos_eventpipe.vcxproj">
+      <Project>{ABFDF2D3-C400-3CA4-A755-60279707CBD3}</Project>
+      <Name>chaos_eventpipe</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\fmt_build\chaos_fmt.vcxproj">
+      <Project>{F792CCB2-420D-30D2-87DC-8524F6551F98}</Project>
+      <Name>chaos_fmt</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\hot-update\chaos_hot_update.vcxproj">
+      <Project>{E26E10BE-6C96-3B99-BF6F-E5BFB695006A}</Project>
+      <Name>chaos_hot_update</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\interpreter\chaos_interpreter.vcxproj">
+      <Project>{284E8D3F-2827-3BDE-AD17-E3519A24045E}</Project>
+      <Name>chaos_interpreter</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\runtime-core\chaos_runtime_core.vcxproj">
+      <Project>{96DB3B83-11B7-3D1C-AAE1-977B305BB8CB}</Project>
+      <Name>chaos_runtime_core</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\src\native\support\chaos_support.vcxproj">
+      <Project>{237C1DB5-5B7C-390D-BEC9-8857B17B932B}</Project>
+      <Name>chaos_support</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-build\googletest\gtest.vcxproj">
+      <Project>{C9FFF140-9696-3D9C-BED6-DED71B334779}</Project>
+      <Name>gtest</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\vs2022\_deps\googletest-build\googletest\gtest_main.vcxproj">
+      <Project>{EC043717-C2C5-3D8D-880D-90DF6CE8F522}</Project>
+      <Name>gtest_main</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

@@ -740,6 +740,21 @@ void GcScanAllThreadRoots(void (*callback)(void* root_addr, bool is_interior, vo
             GcScanPreciseFrame(info, *sm, s_callback, s_user_data);
         }
 
+        // ── Phase 2b: Interpreter frame precise scanning ─────────
+        // Walk the interpreter frame chain (FastFrame/RegisterFrame) and
+        // precisely scan each frame using runtime type tags.
+        // Unlike JIT frames (which have static GcSlotMaps), interpreter
+        // frames have dynamic stack/locals arrays where each slot carries
+        // a ValueTag byte indicating whether it's an ObjectRef.
+        auto* interp_scanner = GcGetInterpFrameScanner();
+        if (interp_scanner != nullptr) {
+            void* interp_root = thread->current_interp_frame.load(
+                std::memory_order_acquire);
+            if (interp_root != nullptr) {
+                interp_scanner(interp_root, s_callback, s_user_data);
+            }
+        }
+
         return true;  // continue enumeration
     });
 

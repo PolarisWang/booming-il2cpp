@@ -7,6 +7,7 @@
 
 #include <cstdint>
 #include <cstring>
+#include <atomic>
 #include <mutex>
 
 namespace chaos::il2cpp::runtime_core {
@@ -169,6 +170,20 @@ void GcScanFrameHybrid(
         CHAOS_IL2CPP_LOG_DEBUG("CRAG", "conservative_scan_fallback");
         GcScanConservativeFrame(frame, conservative_callback, user_data);
     }
+}
+
+// ── Interpreter frame scanner callback ───────────────────────────
+
+namespace {
+    std::atomic<GcScanInterpFramesFn> s_interp_frame_scanner{nullptr};
+}
+
+void GcSetInterpFrameScanner(GcScanInterpFramesFn fn) noexcept {
+    s_interp_frame_scanner.store(fn, std::memory_order_release);
+}
+
+GcScanInterpFramesFn GcGetInterpFrameScanner() noexcept {
+    return s_interp_frame_scanner.load(std::memory_order_acquire);
 }
 
 }  // namespace chaos::il2cpp::runtime_core

@@ -1015,8 +1015,8 @@ static bool Test_OsrPromote() {
 
     // Verify T4 promotion happened.
     uint32_t state = pm.tier_state.load(std::memory_order_acquire);
-    std::printf("    tier_state=%u (expected %u = kT4Ready)\n", state, PatchMethod::kT4Ready);
-    if (state < PatchMethod::kT4Ready) { std::printf("    FAIL: tier_state not promoted to T4\n"); return false; }
+    std::printf("    tier_state=%u (expected %u = kJitted)\n", state, PatchMethod::kJitted);
+    if (state < PatchMethod::kJitted) { std::printf("    FAIL: tier_state not promoted to JIT\n"); return false; }
 
     if (pm.cached_native_method == nullptr) { std::printf("    FAIL: cached_native_method is null\n"); return false; }
     std::printf("    cached_native_method=%p code_size=%u\n",
@@ -1216,8 +1216,8 @@ static bool Test_OsrRepromotion() {
     if (!ok) { std::printf("    FAIL: RegisterExecute returned false\n"); return false; }
 
     uint32_t state = pm.tier_state.load(std::memory_order_acquire);
-    std::printf("    tier_state=%u (expected %u = kT4Ready)\n", state, PatchMethod::kT4Ready);
-    if (state < PatchMethod::kT4Ready) { std::printf("    FAIL: not promoted\n"); return false; }
+    std::printf("    tier_state=%u (expected %u = kJitted)\n", state, PatchMethod::kJitted);
+    if (state < PatchMethod::kJitted) { std::printf("    FAIL: not promoted\n"); return false; }
     if (pm.cached_native_method == nullptr) { std::printf("    FAIL: no cached native method\n"); return false; }
 
     std::printf("    native_method=%p osr_entry_offset=%u\n",

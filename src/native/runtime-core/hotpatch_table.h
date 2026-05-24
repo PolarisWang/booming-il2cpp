@@ -67,6 +67,10 @@ public:
     // Module-scoped patch: set/unset patch on (module_id, slot) — O(1).
     void SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched, void* method_key) noexcept;
 
+    // Reverse lookup: slot index → metadata token. Linear scan, only
+    // called during hotpatch (non-critical path).
+    uint32_t SlotToToken(uint32_t module_id, uint32_t slot) const noexcept;
+
 private:
     std::vector<const HotpatchModuleV0*> modules_;
 
@@ -92,6 +96,18 @@ void RegisterHotpatchModule(const HotpatchModuleV0* module) noexcept;
 void RegisterReversePInvokeWrappers(void* const* wrappers, uint32_t count) noexcept;
 
 // ── Dispatch helpers ──────────────────────────────────────────────────
+
+// Callback type for slot update notifications during hotpatch.
+// Invoked by SetPatchedBySlot when a method is patched/unpatched.
+// Parameters: callee_token, new_direct_ptr.
+typedef void (*SlotUpdateCallback)(uint32_t, void*);
+
+// Register a global callback fired from SetPatchedBySlot on version bump.
+void RegisterSlotUpdateCallback(SlotUpdateCallback cb) noexcept;
+
+// Reverse lookup: given module_id + token, find the slot index.
+// Returns ~0u if not found.
+uint32_t SlotToToken(uint32_t module_id, uint32_t method_token) noexcept;
 
 inline HotpatchEntryV0* HotpatchLookup(uint32_t module_id, uint32_t token) noexcept {
     return GetHotpatchNameRegistry().GetDispatchEntry(module_id, token);

@@ -151,6 +151,13 @@ struct JitMethod {
     // the interpreter.  Null for pure JIT mode or AOT mode methods.
     void*         aot_entry = nullptr;
 
+    // ── Call-site slot table (for hotpatch-safe indirect calls) ──────────
+    // Each entry is a void* in the RX code buffer, accessed via call [rip+off].
+    // Updated by ReverseSlotMap::UpdateAll() during hotpatch.
+    void**        call_site_slots      = nullptr;  // points into the RX code buffer
+    uint32_t      call_site_slot_count = 0;
+    uint32_t      call_site_capacity   = 0;
+
     // Destructor: frees all allocations.
     ~JitMethod() noexcept;
 
