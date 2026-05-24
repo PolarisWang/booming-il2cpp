@@ -47,19 +47,17 @@ set(CHAOS_ENTRY_SOURCES
 # SDK include/ (via chaos::runtime) provides most headers. runtime-core/ is
 # retained because runtime_core.h uses quoted includes for ~20 sibling headers
 # (exception_jmp.h, marshal_abi.h, etc.) not distributed in the SDK.
-# Add per-assembly codegen dirs so paginated files can #include "generated/...".
-file(GLOB CHAOS_CODEGEN_ASM_DIRS "${CHAOS_CODEGEN_DIR}/*")
 set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"  # runtime_stubs for enum_stubs.h
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
-    ${CHAOS_CODEGEN_ASM_DIRS}
+    "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
 )
 

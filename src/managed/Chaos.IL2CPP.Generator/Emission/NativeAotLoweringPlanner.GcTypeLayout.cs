@@ -141,18 +141,18 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
-        // ── Phase 4: Register TypeInfoV0 address ranges ──
+        // ── Phase 4: Register MethodTable address ranges ──
         // IsValidTypeInfoPointer() checks if a candidate TypeInfo* falls within
         // a registered address range. Without this, the young collector's Phase 2
-        // candidate validation rejects valid codegen-emitted TypeInfoV0 pointers,
+        // candidate validation rejects valid codegen-emitted MethodTable pointers,
         // forcing a fallback to conservative scanning.
         builder.AppendLine();
-        builder.AppendLine("    // Register TypeInfoV0 address ranges for IsValidTypeInfoPointer.");
+        builder.AppendLine("    // Register MethodTable address ranges for IsValidTypeInfoPointer.");
         foreach (var (SubjectId, _, _, _) in entries)
         {
             string mtSymbol = GetNativeMethodTableSymbol(SubjectId);
-            // TypeInfoV0 = chaos_mt_X (the struct itself). The .hot member aliases
-            // the first 32 bytes as TypeInfoHot. Register the full struct range.
+            // MethodTable = chaos_mt_X (the struct itself). The first 32 bytes alias
+            // as TypeInfoHot. Register the full struct range.
             builder.AppendLine($"    registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&{mtSymbol}), reinterpret_cast<uintptr_t>(&{mtSymbol}) + sizeof({mtSymbol}));");
         }
 
