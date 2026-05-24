@@ -458,7 +458,7 @@ public sealed partial class NativeAotLoweringPlanner
 			string parentExpr = "nullptr";
 			if (referenceTypeBaseSubjectIds.TryGetValue(item, out string? baseTypeId) && !string.IsNullOrEmpty(baseTypeId))
 			{
-				parentExpr = "&" + GetNativeTypeInfoSymbol(baseTypeId);
+				parentExpr = "reinterpret_cast<const MethodTable*>(&" + GetNativeMethodTableSymbol(baseTypeId) + ")";
 			}
 			// ── iface_map (InterfaceMapEntry array with vtable_offset) ──
 			bool hasIfaceMap = _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item, out var ifaceSubjectIds) && ifaceSubjectIds.Count > 0;
@@ -504,10 +504,10 @@ public sealed partial class NativeAotLoweringPlanner
 					if (TypeHasFinalizer(item))
 					    flags |= 0x04; // kTypeInfoHasFinalizer
 				_vtableLengths.TryGetValue(item, out int vtLen);
-				// TypeInfoV0 = hot(32B) + warm(32B) nested initializer
-				handler.AppendLiteral("inline TypeInfoV0 ");
+				// MethodTable = hot(32B) + warm(32B) flat initializer
+				handler.AppendLiteral("inline MethodTable ");
 				handler.AppendFormatted(GetNativeMethodTableSymbol(item));
-				handler.AppendLiteral(" = {{");
+				handler.AppendLiteral(" = {");
 				handler.AppendFormatted(parentExpr);
 				handler.AppendLiteral(", ");
 				string vtableArrayExpr = (vtLen > 0) ? GetNativeVTableSymbol(item) : "nullptr";
@@ -518,11 +518,11 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(vtLen.ToString());
 				handler.AppendLiteral("u, 32, 1, ");
 				handler.AppendFormatted(flags.ToString());
-				handler.AppendLiteral("}, {");
+				handler.AppendLiteral(", ");
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 0, 0}};");
+				handler.AppendLiteral(", 0, 0, 0};");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -543,11 +543,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoV0 ");
+				handler.AppendLiteral("inline MethodTable ");
 				handler.AppendFormatted(GetNativeMethodTableSymbol(item2));
-				handler.AppendLiteral(" = {{nullptr, nullptr, ");
+				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32, 3, 0}, {nullptr, nullptr, 0, 0, 0, 0}};");
+				handler.AppendLiteral(", 0u, 32, 3, 0, nullptr, nullptr, 0, 0, 0, 0};");
 				stringBuilder.AppendLine(ref handler);
 			}
 
@@ -571,11 +571,11 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoV0 ");
+				handler.AppendLiteral("inline MethodTable ");
 				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
-				handler.AppendLiteral(" = {{nullptr, nullptr, ");
+				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};");
+				handler.AppendLiteral(", 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
@@ -633,15 +633,15 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				StringBuilder stringBuilder = builder;
 				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline TypeInfoV0 ");
+				handler.AppendLiteral("inline MethodTable ");
 				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
-				handler.AppendLiteral(" = {{nullptr, nullptr, ");
+				handler.AppendLiteral(" = {nullptr, nullptr, ");
 				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32, 2, 0}, {");
+				handler.AppendLiteral(", 0u, 32, 2, 0, ");
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 0, 0}};");
+				handler.AppendLiteral(", 0, 0, 0};");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{

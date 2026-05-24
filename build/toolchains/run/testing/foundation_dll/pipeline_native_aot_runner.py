@@ -162,6 +162,15 @@ def _build_subjects_dll(
     extra_refs = None
     if family_slug in ("snapshot-prover",):
         extra_refs = ["../../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
+    # generic-supplement: copy real NativeEntry (with HotUpdate/Contracts refs) so
+    # codegen produces non-trivial C++ bridge stubs. Mock entries produce no output.
+    if family_slug == "generic-supplement":
+        managed_dir = v / family_slug / "managed"
+        src = managed_dir / "GenericSupplementNativeEntry.cs"
+        if src.exists():
+            subjects_native = subjects_dir / "GenericSupplementNativeEntry.cs"
+            subjects_native.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+        extra_refs = ["../../../../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj"]
     # frozen-collections requires FrozenDictionary.Create which needs net10.0+
     tfm = "net10.0"
     result = generate_and_build(
@@ -313,9 +322,13 @@ def _run_convert_to_cpp(
     if flat_gen.exists():
         per_asm_dir = codegen_out / asm_name / "generated"
         per_asm_dir.mkdir(parents=True, exist_ok=True)
-        for f in flat_gen.iterdir():
-            if f.is_file():
-                (per_asm_dir / f.name).write_bytes(f.read_bytes())
+        for root, dirs, files in os.walk(flat_gen):
+            rel_path = Path(root).relative_to(flat_gen)
+            target_dir = per_asm_dir / rel_path
+            target_dir.mkdir(parents=True, exist_ok=True)
+            for f in files:
+                src = Path(root) / f
+                (target_dir / f).write_bytes(src.read_bytes())
 
     # Check output
     cpp_found = False
@@ -1529,7 +1542,8 @@ def _fix_native_aot_bridge_thunks(native_dir: Path) -> None:
 
 def _fix_t4_jit_include(native_dir: Path) -> None:
     """Inject #include \"jit_registration.h\" into generated files that
-    reference RegisterT4JitMethods or JitT4Entry but don't include the header.
+    reference RegisterT4JitMethods, RegisterJitEntryMethods, JitT4Entry, or
+    JitEntry but don't include the header.
     """
     import re as _re
     for gen_cpp in native_dir.glob("**/native-aot.generated.cpp"):
@@ -1538,7 +1552,7 @@ def _fix_t4_jit_include(native_dir: Path) -> None:
         if '#include "jit_registration.h"' in text:
             continue
         # Only inject if the file references T4 JIT types or functions
-        if not _re.search(r'\bRegisterT4JitMethods\b|\bJitT4Entry\b', text):
+        if not _re.search(r'\bRegisterT4JitMethods\b|\bJitT4Entry\b|\bRegisterJitEntryMethods\b|\bJitEntry\b', text):
             continue
         # Find the last #include line and insert after it
         lines = text.splitlines(keepends=True)
@@ -1874,7 +1888,8 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     _fix_t4_jit_include(native_dir)
     # Make ChaosJitRegisterAll() a no-op in AOT mode (codegen may emit non-empty
     # T4 JIT registration that requires JIT engine initialization)
-    _fix_aot_chaos_jit_register_all(native_dir)
+    if not is_jit:
+        _fix_aot_chaos_jit_register_all(native_dir)
     # Add forward declarations for functions referenced before their extern "C" decl.
     # This happens when generic dispatch wrappers call instantiated function bodies
     # declared later in the file.
@@ -1883,7 +1898,8 @@ def _build_entry_exe(family_slug: str, *, verification: Path | None = None, conf
     if codegen_native_dir.exists():
         _fix_native_aot_bridge_thunks(codegen_native_dir)
         _fix_t4_jit_include(codegen_native_dir)
-        _fix_aot_chaos_jit_register_all(codegen_native_dir)
+        if not is_jit:
+            _fix_aot_chaos_jit_register_all(codegen_native_dir)
         _fix_forward_declarations(codegen_native_dir)
 
     build_dir = native_dir / "build"

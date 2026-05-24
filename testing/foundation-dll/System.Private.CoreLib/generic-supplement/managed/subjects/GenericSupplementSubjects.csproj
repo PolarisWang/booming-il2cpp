@@ -16,6 +16,9 @@
     <Compile Include="GenericSupplementNativeEntry.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="../../../../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />
     <PackageReference Remove="xunit" />
     <PackageReference Remove="xunit.runner.visualstudio" />
