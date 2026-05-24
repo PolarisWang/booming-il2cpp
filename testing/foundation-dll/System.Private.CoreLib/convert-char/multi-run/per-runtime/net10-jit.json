@@ -1,0 +1,146 @@
+{
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)": {
+    "runtime": "net10-jit",
+    "mean_ns": 1303.5300000000002,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)": {
+    "runtime": "net10-jit",
+    "mean_ns": 3.002,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)": {
+    "runtime": "net10-jit",
+    "mean_ns": 3.001,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)": {
+    "runtime": "net10-jit",
+    "mean_ns": 1232.609,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)": {
+    "runtime": "net10-jit",
+    "mean_ns": 1272.016,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)": {
+    "runtime": "net10-jit",
+    "mean_ns": 1251.87,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)": {
+    "runtime": "net10-jit",
+    "mean_ns": 2.991,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)": {
+    "runtime": "net10-jit",
+    "mean_ns": 2.991,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)": {
+    "runtime": "net10-jit",
+    "mean_ns": 2.991,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)": {
+    "runtime": "net10-jit",
+    "mean_ns": 7.139,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)": {
+    "runtime": "net10-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)": {
+    "runtime": "net10-jit",
+    "mean_ns": 2.999,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)": {
+    "runtime": "net10-jit",
+    "mean_ns": 1267.103,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)": {
+    "runtime": "net10-jit",
+    "mean_ns": 3.225,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)": {
+    "runtime": "net10-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)": {
+    "runtime": "net10-jit",
+    "mean_ns": 3.039,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)": {
+    "runtime": "net10-jit",
+    "mean_ns": 3.032,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)": {
+    "runtime": "net10-jit",
+    "mean_ns": 3.222,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

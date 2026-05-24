@@ -1,0 +1,724 @@
+{
+  "family": "primitive-numeric-conversions",
+  "assembly": "System.Private.CoreLib",
+  "timestamp": "2026-05-23T10:56:38Z",
+  "duration_ms": 3708,
+  "config": {
+    "requested_runtimes": [
+      "net8-jit",
+      "chaos-aot",
+      "chaos-jit",
+      "chaos-hu-aot"
+    ],
+    "available_runtimes": [
+      "net8-jit",
+      "chaos-aot",
+      "chaos-jit",
+      "chaos-hu-aot"
+    ],
+    "unavailable_runtimes": [],
+    "iterations": 100000
+  },
+  "methods": [
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)",
+      "method_index": 0,
+      "label": "ToBoolean:System.Boolean(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 4.995,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 13.45,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 13.78,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 8.83,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)",
+      "method_index": 1,
+      "label": "ToByte:System.Byte(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 15.2,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 45.31,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 30.91,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 34.2,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)",
+      "method_index": 2,
+      "label": "ToInt16:System.Int16(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 20.145,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 37.52,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 27.13,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 34.84,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)",
+      "method_index": 3,
+      "label": "ToInt32:System.Int32(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 19.378,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 24.28,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 12.73,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 24.95,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)",
+      "method_index": 4,
+      "label": "ToInt64:System.Int64(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 22.244,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 34.29,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 36.88,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 29.79,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)",
+      "method_index": 5,
+      "label": "ToSingle:System.Single(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 53.228,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 45.96,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 50.68,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 51.26,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)",
+      "method_index": 6,
+      "label": "ToDouble:System.Double(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 61.384,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 32.44,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 37.59,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 43.03,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)",
+      "method_index": 7,
+      "label": "ToDecimal:System.Decimal(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 61.035,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 41.7,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 38.28,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 38.58,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)",
+      "method_index": 8,
+      "label": "ToString:System.String(System.Int32)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 18.053,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 11.7,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 10.87,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 11.59,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)",
+      "method_index": 9,
+      "label": "ToString:System.String(System.Double)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 83.01,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 58.49,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 60.34,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 66.13,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)",
+      "method_index": 10,
+      "label": "ToDecimal:System.Decimal(System.Double)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 10.977,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 7.96,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 8.44,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 8.6,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)",
+      "method_index": 11,
+      "label": "ToInt32:System.Int32(System.Double)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 4.204,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 4.91,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 5.07,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 5.3,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)",
+      "method_index": 12,
+      "label": "Parse:System.Int32(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 28.044,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 22.05,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 15.18,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 29.17,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)",
+      "method_index": 13,
+      "label": "Parse:System.Int64(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 19.298,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 34.38,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 36.46,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 38.51,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    },
+    {
+      "subject_id": "System.Private.CoreLib/System.Double::Parse:System.Double(System.String)",
+      "method_index": 14,
+      "label": "Parse:System.Double(System.String)",
+      "samples": {
+        "net8-jit": {
+          "runtime": "net8-jit",
+          "mean_ns": 33.824,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 36.19,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 25.15,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-hu-aot": {
+          "runtime": "chaos-hu-aot",
+          "mean_ns": 34.27,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        }
+      }
+    }
+  ],
+  "summaries": [
+    {
+      "runtime": "net8-jit",
+      "geometric_mean_ns": 22.288613727508917,
+      "min_ns": 4.204,
+      "max_ns": 83.01,
+      "median_ns": 20.145,
+      "method_count": 15,
+      "ok_count": 15,
+      "stub_count": 0,
+      "throws_count": 0,
+      "unsupported_count": 0
+    },
+    {
+      "runtime": "chaos-aot",
+      "geometric_mean_ns": 24.88382606993586,
+      "min_ns": 4.91,
+      "max_ns": 58.49,
+      "median_ns": 34.29,
+      "method_count": 15,
+      "ok_count": 15,
+      "stub_count": 0,
+      "throws_count": 0,
+      "unsupported_count": 0
+    },
+    {
+      "runtime": "chaos-jit",
+      "geometric_mean_ns": 22.178933477093995,
+      "min_ns": 5.07,
+      "max_ns": 60.34,
+      "median_ns": 27.13,
+      "method_count": 15,
+      "ok_count": 15,
+      "stub_count": 0,
+      "throws_count": 0,
+      "unsupported_count": 0
+    },
+    {
+      "runtime": "chaos-hu-aot",
+      "geometric_mean_ns": 24.933690681456966,
+      "min_ns": 5.3,
+      "max_ns": 66.13,
+      "median_ns": 34.2,
+      "method_count": 15,
+      "ok_count": 15,
+      "stub_count": 0,
+      "throws_count": 0,
+      "unsupported_count": 0
+    }
+  ],
+  "ratios": [
+    {
+      "label": "Chaos AOT / .NET 8 JIT",
+      "numerator": "chaos-aot",
+      "denominator": "net8-jit",
+      "geometric_mean_ratio": 0.8957068605473647,
+      "min_ratio": 0.33546678437431027,
+      "max_ratio": 1.8922318125770654,
+      "faster_count": 7,
+      "slower_count": 8,
+      "equal_count": 0,
+      "chaos_classification": ""
+    },
+    {
+      "label": "Chaos AOT / Chaos JIT",
+      "numerator": "chaos-aot",
+      "denominator": "chaos-jit",
+      "geometric_mean_ratio": 0.8912991681729417,
+      "min_ratio": 0.5242998352553542,
+      "max_ratio": 1.1587546239210853,
+      "faster_count": 5,
+      "slower_count": 7,
+      "equal_count": 3,
+      "chaos_classification": ""
+    },
+    {
+      "label": "Chaos JIT / .NET 8 JIT",
+      "numerator": "chaos-jit",
+      "denominator": "net8-jit",
+      "geometric_mean_ratio": 1.0049452445731082,
+      "min_ratio": 0.3624818577648767,
+      "max_ratio": 1.8474308300395257,
+      "faster_count": 9,
+      "slower_count": 6,
+      "equal_count": 0,
+      "chaos_classification": ""
+    },
+    {
+      "label": "Chaos HotUpdate (post-patch) / Chaos AOT",
+      "numerator": "chaos-hu-aot",
+      "denominator": "chaos-aot",
+      "geometric_mean_ratio": 0.9980001110883203,
+      "min_ratio": 0.7538926330467115,
+      "max_ratio": 1.52321630804077,
+      "faster_count": 6,
+      "slower_count": 7,
+      "equal_count": 2,
+      "chaos_classification": ""
+    }
+  ],
+  "regression_alerts": [],
+  "runtimes_available": [
+    "net8-jit",
+    "chaos-aot",
+    "chaos-jit",
+    "chaos-hu-aot"
+  ],
+  "runtimes_unavailable": [],
+  "chaos_classification_breakdown": {
+    "chaos_faster_than_all": 0,
+    "chaos_faster_than_jit": 7,
+    "chaos_midfield": 6,
+    "chaos_slower_than_jit": 2,
+    "not_benchmarked": 0
+  }
+}

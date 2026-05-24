@@ -1,0 +1,114 @@
+{
+  "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 15.984,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()": {
+    "runtime": "net8-jit",
+    "mean_ns": 48.458,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Guid::ToString:System.String()": {
+    "runtime": "net8-jit",
+    "mean_ns": 97.028,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::.ctor:System.Void()": {
+    "runtime": "net8-jit",
+    "mean_ns": 86.428,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::Next:System.Int32()": {
+    "runtime": "net8-jit",
+    "mean_ns": 76.061,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)": {
+    "runtime": "net8-jit",
+    "mean_ns": 71.928,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::NextDouble:System.Double()": {
+    "runtime": "net8-jit",
+    "mean_ns": 83.70100000000001,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])": {
+    "runtime": "net8-jit",
+    "mean_ns": 86.194,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()": {
+    "runtime": "net8-jit",
+    "mean_ns": 3.089,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)": {
+    "runtime": "net8-jit",
+    "mean_ns": 4.523,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

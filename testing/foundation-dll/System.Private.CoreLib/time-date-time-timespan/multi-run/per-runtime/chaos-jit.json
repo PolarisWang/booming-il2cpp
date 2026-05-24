@@ -1,0 +1,130 @@
+{
+  "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 95.96,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 98.52,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 3.43,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 2.71,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::ToString:System.String()": {
+    "runtime": "chaos-jit",
+    "mean_ns": 3.58,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 3.61,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 4.25,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 2.12,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 3.49,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 3.65,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 3.72,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 90.59,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 2.13,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 2.86,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 3.7,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)": {
+    "runtime": "chaos-jit",
+    "mean_ns": 3.75,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)": {
+    "runtime": "net8-jit",
+    "mean_ns": 3911.315,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)": {
+    "runtime": "net8-jit",
+    "mean_ns": 1.88,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)": {
+    "runtime": "net8-jit",
+    "mean_ns": 2.065,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)": {
+    "runtime": "net8-jit",
+    "mean_ns": 4090.6,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)": {
+    "runtime": "net8-jit",
+    "mean_ns": 3160.035,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)": {
+    "runtime": "net8-jit",
+    "mean_ns": 3047.385,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)": {
+    "runtime": "net8-jit",
+    "mean_ns": 1.88,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)": {
+    "runtime": "net8-jit",
+    "mean_ns": 2.065,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)": {
+    "runtime": "net8-jit",
+    "mean_ns": 1.88,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)": {
+    "runtime": "net8-jit",
+    "mean_ns": 5.955,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)": {
+    "runtime": "net8-jit",
+    "mean_ns": 2.065,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)": {
+    "runtime": "net8-jit",
+    "mean_ns": 3058.945,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 2.43,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)": {
+    "runtime": "net8-jit",
+    "mean_ns": 2.055,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)": {
+    "runtime": "net8-jit",
+    "mean_ns": 2.06,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)": {
+    "runtime": "net8-jit",
+    "mean_ns": 2.06,
+    "stddev_ns": 0.0,
+    "samples": 20000,
+    "status": "ok",
+    "error": ""
+  }
+}

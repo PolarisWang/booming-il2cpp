@@ -1,0 +1,162 @@
+{
+  "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 196.27,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 2.87,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 3.9,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 157.19,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 168.03,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 3.04,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 47.55,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 98.36,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 157.17,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 165.07000000000002,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 150.56,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 306.62,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Split:System.String[](System.Char)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 2.85,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::ToUpper:System.String()": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 166.72,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::ToLower:System.String()": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 150.35,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Trim:System.String()": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 169.4,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 143.82,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 5.72,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 2.85,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)": {
+    "runtime": "chaos-hu-aot",
+    "mean_ns": 2.85,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

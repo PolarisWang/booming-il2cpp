@@ -28,7 +28,6 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-entry.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -48,7 +47,6 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
     "${CHAOS_PROJECT_ROOT}/src/native/codegen"
-    "${CHAOS_PROJECT_ROOT}/src/native/jit"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/src/native"
@@ -67,21 +65,18 @@ set(CHAOS_LIB_DIRS
     "${CHAOS_NATIVE_BUILD}/src/native/common"
     "${CHAOS_NATIVE_BUILD}/src/native/interpreter"
     "${CHAOS_NATIVE_BUILD}/src/native/codegen"
-    "${CHAOS_NATIVE_BUILD}/src/native/jit"
     "${CHAOS_NATIVE_BUILD}/src/native/support"
     "${CHAOS_NATIVE_BUILD}/src/native/hot-update"
     "${CHAOS_NATIVE_BUILD}/src/native/diagnostics/eventpipe"
     "${CHAOS_NATIVE_BUILD}/fmt_build"
 )
 
-# Runtime libs to link — chaos_jit provides RegisterJitSehHandler etc.
-# for runtime-core/bootstrap JIT hooks, even in AOT mode.
+# Runtime libs to link
 set(CHAOS_RUNTIME_LIBS
     chaos_runtime_core
     chaos_bootstrap
     chaos_common
     chaos_interpreter
-    chaos_jit
     chaos_codegen
     chaos_support
     chaos_hot_update
@@ -93,5 +88,4 @@ add_executable(entry ${CHAOS_ENTRY_SOURCES})
 target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_link_directories(entry PRIVATE ${CHAOS_LIB_DIRS})
 target_compile_options(entry PRIVATE /EHa)
-target_link_options(entry PRIVATE /FORCE:MULTIPLE)
 target_link_libraries(entry PRIVATE ${CHAOS_RUNTIME_LIBS})

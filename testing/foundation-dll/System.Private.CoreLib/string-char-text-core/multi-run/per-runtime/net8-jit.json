@@ -1,0 +1,162 @@
+{
+  "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Substring:System.String(System.Int32)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Compare:System.Int32(System.String,System.Int32,System.String,System.Int32,System.Int32)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Format:System.String(System.String,System.Object[])": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Contains:System.Boolean(System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Replace:System.String(System.String,System.String)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Split:System.String[](System.Char)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::ToUpper:System.String()": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::ToLower:System.String()": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Trim:System.String()": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.String::Join:System.String(System.String,System.String[])": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)": {
+    "runtime": "net8-jit",
+    "mean_ns": 0.0,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "stub",
+    "error": ""
+  }
+}

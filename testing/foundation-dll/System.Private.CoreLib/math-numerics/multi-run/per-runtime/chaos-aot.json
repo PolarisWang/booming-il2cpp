@@ -1,0 +1,146 @@
+{
+  "System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 4.25,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 6.73,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 7.32,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 7.84,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Round:System.Double(System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 9.34,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Round:System.Double(System.Double,System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 7.78,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 6.24,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 7.99,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 4.43,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 6.42,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 21.92,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 12.02,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 18.29,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 5.9,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 194.05,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 5.36,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 216.64,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  },
+  "System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)": {
+    "runtime": "chaos-aot",
+    "mean_ns": 222.81,
+    "stddev_ns": 0.0,
+    "samples": 100000,
+    "status": "ok",
+    "error": ""
+  }
+}

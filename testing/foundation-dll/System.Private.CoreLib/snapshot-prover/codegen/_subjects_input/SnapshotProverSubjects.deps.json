@@ -1,0 +1,39 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "SnapshotProverSubjects/1.0.0": {
+        "dependencies": {
+          "SnapshotTestFixtures": "1.0.0"
+        },
+        "runtime": {
+          "SnapshotProverSubjects.dll": {}
+        }
+      },
+      "SnapshotTestFixtures/1.0.0": {
+        "runtime": {
+          "SnapshotTestFixtures.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "SnapshotProverSubjects/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "SnapshotTestFixtures/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
