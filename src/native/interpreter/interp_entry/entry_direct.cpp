@@ -460,22 +460,6 @@ void InterpreterEntryDirect(
                     GetTierCounters().deopt_t4.fetch_add(1, std::memory_order_relaxed);
                     ++patch_method->deopt_count;
 
-                    // Hybrid mode AOT fallback: redirect to AOT instead of interpreter
-                    if (nm != nullptr && nm->aot_entry != nullptr) {
-                        void* aot_entry = nm->aot_entry;
-                        chaos::il2cpp::jit::UnregisterNativeCodeSection(nm->code);
-                        chaos::il2cpp::runtime_core::GcUnregisterSlotMap(nm->code);
-                        patch_method->cached_native_method = nullptr;
-                        patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);
-                        patch_method->deopt_count = 0;
-                        auto* entry = GetHotpatchNameRegistry().GetDispatchEntry(
-                            patch_method->module_id, patch_method->token);
-                        if (entry != nullptr) entry->direct_ptr = aot_entry;
-                        reinterpret_cast<NativeEntry>(aot_entry)(args_buf, ret_buf);
-                        chaos::il2cpp::jit::g_jit_deopt_state.deopt_happened = false;
-                        return;
-                    }
-
                     if (patch_method->deopt_count > PatchMethod::kMaxDeoptBeforeDemote) {
                         // Permanently skip JIT: overflow/OSR deopts would recur on re-promotion.
                         patch_method->tier_state.store(PatchMethod::kJitSkip, std::memory_order_release);

@@ -123,7 +123,7 @@ struct JitMethod {
     // When non-null, the GC can use this instead of conservative scanning.
     GcSlotMapV0* gc_slot_map = nullptr;
 
-    // GcSlotMapV0: precise GC root map for hybrid stack scanning
+    // GcSlotMapV0: precise GC root map for stack scanning
     void*         slot_map_data   = nullptr;   // serialized GcSlotMapV0 blob
     uint32_t      slot_map_size   = 0;
 
@@ -151,12 +151,6 @@ struct JitMethod {
     // Used by GC stack walker to compute frame_ptr from the native RBP
     // for T4 frames.  Varies per-method with register caching.
     uint32_t      rbp_to_rsp_offset = 0;
-
-    // Hybrid mode: AOT function entry point for deoptimization fallback.
-    // When non-null and a deoptimization occurs (T4 code signals kDeoptMagic),
-    // the runtime redirects to this AOT entry instead of falling through to
-    // the interpreter.  Null for pure JIT mode or AOT mode methods.
-    void*         aot_entry = nullptr;
 
     // ── Call-site slot table (for hotpatch-safe indirect calls) ──────────
     // Each entry is a void* in the RX code buffer, accessed via call [rip+off].

@@ -29,6 +29,8 @@
 
 #include <chaos/unordered_dense.h>
 
+namespace chaos::il2cpp { namespace jit { struct JitPrecode; } }
+
 namespace chaos::il2cpp::runtime_core {
 
 struct PatchMethod;
@@ -56,8 +58,7 @@ struct OptimizationEntry {
 // When a Tier 0 method's PGO call count exceeds kPgoTier1Threshold, it is
 // enqueued for background Tier 1 recompilation via the TierManager thread.
 struct JitRecompilationEntry {
-    void* precode;      // JitPrecode* or HybridPrecode* (type determined by is_hybrid)
-    bool  is_hybrid;    // true = HybridPrecode, false = JitPrecode
+    JitPrecode* precode;
 };
 
 // Queue depth limit to prevent unbounded memory growth.
@@ -109,12 +110,11 @@ public:
 
     // ── JIT recompilation queue ───────────────────────────────────────────
     // Enqueue a Tier 0 method for background Tier 1 recompilation.
-    // Called from JitStubDispatchImpl / HybridStubDispatchImpl when
-    // enable_pgo is true and pgo_call_count exceeds kPgoTier1Threshold.
-    // @param precode   Pointer to JitPrecode* (is_hybrid=false) or HybridPrecode*
-    // @param is_hybrid True if precode is a HybridPrecode, false for JitPrecode
+    // Called from JitStubDispatchImpl when enable_pgo is true and
+    // pgo_call_count exceeds kPgoTier1Threshold.
+    // @param precode   Pointer to JitPrecode*
     // @return true if enqueued, false if queue is full
-    bool EnqueueJitRecompilation(void* precode, bool is_hybrid) noexcept;
+    bool EnqueueJitRecompilation(JitPrecode* precode) noexcept;
 
     // Start/stop the background optimization thread.
     void StartBackgroundThread() noexcept;

@@ -212,7 +212,6 @@ public IReadOnlyList<NativeAotResult> GeneratePerAssembly(
 - [`04-NativeAotLoweringPlanner文件布局.md`](./04-NativeAotLoweringPlanner%E6%96%87%E4%BB%B6%E5%B8%83%E5%B1%80.md) — LoweringPlanner 20+ partial 文件分布
 - [`18-热更新架构.md`](./18-%E7%83%AD%E6%9B%B4%E6%96%B0%E6%9E%B6%E6%9E%84.md) — Hotpatch dispatch + PatchLoader
 - [`15-泛型上下文运行时.md`](./15-%E6%B3%9B%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E8%BF%90%E8%A1%8C%E6%97%B6.md) — RuntimeInstantiationBridgeV0
-- [`27-T4原生代码生成器架构.md`](./27-T4%E5%8E%9F%E7%94%9F%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E6%9E%B6%E6%9E%84.md) — JIT T4 编译体系（含三模式编译体系附录）
-- [`28-Hybrid模式架构.md`](./28-Hybrid%E6%A8%A1%E5%BC%8F%E6%9E%B6%E6%9E%84.md) — Hybrid 模式架构详情
-- [`29-三模式选择决策树.md`](./29-%E4%B8%89%E6%A8%A1%E5%BC%8F%E9%80%89%E6%8B%A9%E5%86%B3%E7%AD%96%E6%A0%91.md) — 模式选择场景指南
+- [`27-T4原生代码生成器架构.md`](./27-T4%E5%8E%9F%E7%94%9F%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E6%9E%B6%E6%9E%84.md) — JIT T4 编译体系
+- [`29-模式选择决策树.md`](./29-%E6%A8%A1%E5%BC%8F%E9%80%89%E6%8B%A9%E5%86%B3%E7%AD%96%E6%A0%91.md) — 模式选择场景指南
 - `wiki/04-历史决策/` — 方案 C、HybridCLR 对齐等历史决策

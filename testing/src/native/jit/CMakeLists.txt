@@ -156,20 +156,6 @@ target_compile_definitions(test_jit_mode PRIVATE
 )
 set_tests_properties(test_jit_mode PROPERTIES TIMEOUT 30)
 
-# P-3 — Hybrid mode end-to-end test
-# Tests HybridPrecode counter-based dispatch, HybridStubDispatchImpl,
-# PrecodeArena hybrid trampoline allocation, and AOT→JIT upgrade.
-add_chaos_test(test_jit_hybrid_mode
-    jit_hybrid_mode_test.cpp
-    ../runtime-core/gc/gc_test_stubs.cpp
-    LIBS ${CHAOS_CODEGEN_LIBS}
-    LABELS "unit;jit;hybrid"
-)
-target_compile_definitions(test_jit_hybrid_mode PRIVATE
-    CHAOS_IL2CPP_JIT_TEST_ACTIVE=1
-)
-set_tests_properties(test_jit_hybrid_mode PROPERTIES TIMEOUT 30)
-
 # P-4 — PGO Tier 0→Tier 1 upgrade test
 # Tests PGO call counting, Tier 1 recompilation, and direct_ptr patching
 # behavior with enable_pgo=true/false.
