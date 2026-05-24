@@ -23,7 +23,7 @@ _TRACKING_PATH = _REPO_ROOT / "docs" / "verification" / "foundation-dll-audit" /
 
 sys.path.insert(0, str(_HERE))
 
-from native_codegen_generator import _slug_from_family_id
+from native_code_generator import slug_from_family_id
 
 # CoreLib — 31 families tracked currently
 ASSEMBLY_NAME = "System.Private.CoreLib"

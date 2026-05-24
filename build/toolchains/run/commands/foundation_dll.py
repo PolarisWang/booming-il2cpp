@@ -8,10 +8,10 @@ try:
     from ..core.result import CommandResult
     from ..testing import foundation_dll_audit_generator as audit_generator_module
     from ..testing.foundation_dll import execution_entry as execution_entry_module
-    from ..testing.foundation_dll import derive as denominator_derive_module
-    from ..testing.foundation_dll import promote as denominator_promote_module
+    from ..testing.foundation_dll import candidate_ledger_generator as denominator_derive_module
+    from ..testing.foundation_dll import candidate_ledger_promoter as denominator_promote_module
     from ..testing import inventory_generator as inventory_generator_module
-    from ..testing.foundation_dll import consistency as projection_consistency_module
+    from ..testing.foundation_dll import projection_consistency_verifier as projection_consistency_module
     from ..testing.events import build_event
 except ImportError:
     root = Path(__file__).resolve().parents[1]
@@ -19,10 +19,10 @@ except ImportError:
     from core.result import CommandResult
     from testing import foundation_dll_audit_generator as audit_generator_module
     from testing.foundation_dll import execution_entry as execution_entry_module
-    from testing.foundation_dll import derive as denominator_derive_module
-    from testing.foundation_dll import promote as denominator_promote_module
+    from testing.foundation_dll import candidate_ledger_generator as denominator_derive_module
+    from testing.foundation_dll import candidate_ledger_promoter as denominator_promote_module
     from testing import inventory_generator as inventory_generator_module
-    from testing.foundation_dll import consistency as projection_consistency_module
+    from testing.foundation_dll import projection_consistency_verifier as projection_consistency_module
     from testing.events import build_event
 
 

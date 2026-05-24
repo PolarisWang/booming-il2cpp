@@ -7,109 +7,109 @@
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:21][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:21][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:21][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:21][INFO][OldGen] emergency_reserve_allocated base=0x2191666905088 size=65536\n[2026-05-24T22:29:21][INFO][OldGen] init done base=0x2191664480256 pages=8\n[2026-05-24T22:29:21][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=000001FE49880080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:21][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:21][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:21][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:21][INFO][OldGen] emergency_reserve_allocated base=0x3164999319552 size=65536\n[2026-05-24T22:29:21][INFO][OldGen] init done base=0x3164969107456 pages=8\n[2026-05-24T22:29:21][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\n[2026-05-24T22:29:21][DEBUG][BGC] thread_startedDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=000002E0E8AA0080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:21][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:21][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:21][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:21][INFO][OldGen] emergency_reserve_allocated base=0x2500098916352 size=65536\n[2026-05-24T22:29:21][INFO][OldGen] init done base=0x2500073684992 pages=8\n[2026-05-24T22:29:21][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=0000024619830080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:21][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:21][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:21][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:21][INFO][OldGen] emergency_reserve_allocated base=0x2439992573952 size=65536\n[2026-05-24T22:29:21][INFO][OldGen] init done base=0x2439967211520 pages=8\n[2026-05-24T22:29:21][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=000002381AF50080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:21][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:21][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:21][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:21][INFO][OldGen] emergency_reserve_allocated base=0x2230892625920 size=65536\n[2026-05-24T22:29:21][INFO][OldGen] init done base=0x2230867394560 pages=8\n[2026-05-24T22:29:21][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=000002076BA20080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:21][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:21][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:21][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:21][INFO][OldGen] emergency_reserve_allocated base=0x2099149078528 size=65536\n[2026-05-24T22:29:21][INFO][OldGen] init done base=0x2099123781632 pages=8\n[2026-05-24T22:29:21][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:21][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:21][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=000001E8BF0A0080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:22][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:22][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:22][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:22][INFO][OldGen] emergency_reserve_allocated base=0x1589590360064 size=65536\n[2026-05-24T22:29:22][INFO][OldGen] init done base=0x1589565980672 pages=8\n[2026-05-24T22:29:22][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\n[2026-05-24T22:29:22][DEBUG][BGC] thread_started\n[2026-05-24T22:29:22][DEBUG][Finalizer] thread_started id={0}\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=000001721AF90080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:22][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:22][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:22][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:22][INFO][OldGen] emergency_reserve_allocated base=0x2838358589440 size=65536\n[2026-05-24T22:29:22][INFO][OldGen] init done base=0x2838328115200 pages=8\n[2026-05-24T22:29:22][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=00000294DB5C0080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:22][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:22][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:22][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:22][INFO][OldGen] emergency_reserve_allocated base=0x2419212877824 size=65536\n[2026-05-24T22:29:22][INFO][OldGen] init done base=0x2419211304960 pages=8\n[2026-05-24T22:29:22][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\n[2026-05-24T22:29:22][DEBUG][Finalizer] thread_started id={0}DIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=0000023344640080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:22][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:22][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:22][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:22][INFO][OldGen] emergency_reserve_allocated base=0x2336253607936 size=65536\n[2026-05-24T22:29:22][INFO][OldGen] init done base=0x2336223395840 pages=8\n[2026-05-24T22:29:22][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=0000021FF3920080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:22][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:22][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:22][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:22][INFO][OldGen] emergency_reserve_allocated base=0x2598884147200 size=65536\n[2026-05-24T22:29:22][INFO][OldGen] init done base=0x2598858784768 pages=8\n[2026-05-24T22:29:22][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=0000025D19A20080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:22][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:22][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:22][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:22][INFO][OldGen] emergency_reserve_allocated base=0x1820539879424 size=65536\n[2026-05-24T22:29:22][INFO][OldGen] init done base=0x1820514582528 pages=8\n[2026-05-24T22:29:22][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=000001A7E0A30080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:22][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:22][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:22][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:22][INFO][OldGen] emergency_reserve_allocated base=0x2785527595008 size=65536\n[2026-05-24T22:29:22][INFO][OldGen] init done base=0x2785502232576 pages=8\n[2026-05-24T22:29:22][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=000002888E730080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:22][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:22][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:22][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:22][INFO][OldGen] emergency_reserve_allocated base=0x2490792411136 size=65536\n[2026-05-24T22:29:22][INFO][OldGen] init done base=0x2490762264576 pages=8\n[2026-05-24T22:29:22][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:22][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:22][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=00000243EECE0080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:23][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:23][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:23][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:23][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:23][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:23][INFO][OldGen] emergency_reserve_allocated base=0x1576244740096 size=65536\n[2026-05-24T22:29:23][INFO][OldGen] init done base=0x1576236154880 pages=8\n[2026-05-24T22:29:23][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:23][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:23][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\n[2026-05-24T22:29:23][DEBUG][Finalizer] thread_started id={0}\n[2026-05-24T22:29:23][DEBUG][BGC] thread_started\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=0000016EFF930080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:23][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:23][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:23][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:23][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:23][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:23][INFO][OldGen] emergency_reserve_allocated base=0x2427278196736 size=65536\n[2026-05-24T22:29:23][INFO][OldGen] init done base=0x2427252834304 pages=8\n[2026-05-24T22:29:23][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:23][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:23][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=00000235251F0080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 16,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:23][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:23][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:23][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:23][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:23][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:23][INFO][OldGen] emergency_reserve_allocated base=0x2637764231168 size=65536\n[2026-05-24T22:29:23][INFO][OldGen] init done base=0x2637734019072 pages=8\n[2026-05-24T22:29:23][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:23][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:23][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\nDIAG: hotpatch modules=1\nDIAG: module[0] entry_table=00007FF6D6FB4210 entry0=00007FF6D6FB4210 direct_ptr=0000026627110080\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 17,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
       "status": "failed",
-      "error": "[2026-05-24T22:29:23][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:23][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 0\n[2026-05-24T22:29:23][WARN][CRAG] young_collection_no_region\n[2026-05-24T22:29:23][INFO][NUMA] numa_init count=%d\n[2026-05-24T22:29:23][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T22:29:23][INFO][OldGen] emergency_reserve_allocated base=0x2234344079360 size=65536\n[2026-05-24T22:29:23][INFO][OldGen] init done base=0x2234342309888 pages=8\n[2026-05-24T22:29:23][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T22:29:23][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T22:29:23][DEBUG][GcEvents] registered callback 0x7ff6d6ec0200 at slot 1\n[2026-05-24T22:29:23][DEBUG][BGC] thread_started\n[2026-05-24T22:29:23][DEBUG][Finalizer] thread_started id={0}\n"
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     }
   ],
   "summary": {

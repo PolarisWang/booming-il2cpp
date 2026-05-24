@@ -27,17 +27,17 @@ _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]
 sys.path.insert(0, str(_HERE))
 
-from test_code_generator import (_METHOD_OVERRIDES, _build_call_expr, _build_call_expr_with_refs,
-                                 _build_call_expr_with_ref_locals, _cast_return_to_int,
-                                 _default_expr, _get_skip_reason, _has_blocked_param, _has_ref_param,
-                                 _is_auto_callable,
-                                 _parse_method_subject_id, _ref_return_expr,
+from test_code_generator import (METHOD_OVERRIDES, build_call_expr, build_call_expr_with_refs,
+                                 build_call_expr_with_ref_locals, cast_return_to_int,
+                                 default_expr, get_skip_reason, has_blocked_param, has_ref_param,
+                                 is_auto_callable,
+                                 parse_method_subject_id, ref_return_expr,
                                  INSTANCE_ALTERNATIVE_EXPR_MAP, TYPE_ALTERNATIVE_MAP)
-from native_codegen_generator import _slug_from_family_id, _family_namespace_slug, _method_slot_name
+from native_code_generator import slug_from_family_id, family_namespace_slug, method_slot_name
 
 
 
-def _collect_required_usings(method_subject_ids: list[str]) -> set[str]:
+def collect_required_usings(method_subject_ids: list[str]) -> set[str]:
     """Collect the using directives needed by the generated code."""
     usings = set()
 
@@ -47,24 +47,24 @@ def _collect_required_usings(method_subject_ids: list[str]) -> set[str]:
     usings.add("System.Linq")
 
     for subject_id in method_subject_ids:
-        parsed = _parse_method_subject_id(subject_id)
+        parsed = parse_method_subject_id(subject_id)
 
         # Extract namespace from the method's own type path
-        _add_type_using_from_full_path(parsed.get("type_path", ""), usings)
+        add_type_using_from_full_path(parsed.get("type_path", ""), usings)
 
         # Extract namespace from parameter types
         for pt in parsed.get("param_types", []):
-            _add_type_using(pt, usings)
+            add_type_using(pt, usings)
 
         # Extract namespace from return type
         ret = parsed.get("return_type", "")
         if ret:
-            _add_type_using(ret, usings)
+            add_type_using(ret, usings)
 
     return usings
 
 
-def _add_type_using_from_full_path(full_type_path: str, usings: set[str]) -> None:
+def add_type_using_from_full_path(full_type_path: str, usings: set[str]) -> None:
     """Extract and add using from a full type path like 'System.Private.CoreLib/System.Reflection.MemberInfo'."""
     if "/" not in full_type_path:
         return
@@ -80,7 +80,7 @@ def _add_type_using_from_full_path(full_type_path: str, usings: set[str]) -> Non
             usings.add(assembly_part)
 
 
-def _add_type_using(t: str, usings: set[str]) -> None:
+def add_type_using(t: str, usings: set[str]) -> None:
     """Add using directive based on a CLR type string (parameter or return type)."""
     bare = t.rstrip("&*?()").strip()
     # Strip CLR generic argument braces: Action{System.Threading.Tasks.Task} -> Action
@@ -103,7 +103,7 @@ def _add_type_using(t: str, usings: set[str]) -> None:
         usings.add(ns)
 
 
-def _looks_like_property_read(expr: str) -> bool:
+def looks_like_property_read(expr: str) -> bool:
     """Check if a call_expr is a property read (not a method call).
 
     Property reads end with a name/chain like '.Name' or '.Value',
@@ -116,20 +116,20 @@ def _looks_like_property_read(expr: str) -> bool:
     return True
 
 
-def _build_call_expr_for_benchmark(subject_id: str) -> tuple[str, str]:
+def build_call_expr_for_benchmark(subject_id: str) -> tuple[str, str]:
     """Build a C# call expression for a benchmark method subject ID.
 
     Returns (prelude, call_expr) where prelude contains local variable
     declarations for ref params (empty string if none).
     """
-    parsed = _parse_method_subject_id(subject_id)
+    parsed = parse_method_subject_id(subject_id)
 
-    if not _is_auto_callable(parsed):
+    if not is_auto_callable(parsed):
         return ("", "")
 
     # Check override map first — known problematic signatures bypass param checks
     param_count = len(parsed["param_types"])
-    override = _METHOD_OVERRIDES.get((parsed["type_name"], parsed["method_name"], param_count))
+    override = METHOD_OVERRIDES.get((parsed["type_name"], parsed["method_name"], param_count))
     if override is not None and override != "skip":
         # Convert.ToXxx(string) and Guid..ctor(string) overrides apply to
         # ALL 1-param overloads. Only apply when param IS System.String.
@@ -149,27 +149,27 @@ def _build_call_expr_for_benchmark(subject_id: str) -> tuple[str, str]:
         # the override (it has the same type-aware logic).
         pass
 
-    if _has_blocked_param(parsed["param_types"]):
+    if has_blocked_param(parsed["param_types"]):
         return ("", "")
 
-    if _has_ref_param(parsed["param_types"]):
+    if has_ref_param(parsed["param_types"]):
         try:
             # Use ref_locals (named vars) for true ref params where post-call
             # values matter; fall back to out _ discard if that fails.
-            return _build_call_expr_with_ref_locals(parsed)
+            return build_call_expr_with_ref_locals(parsed)
         except Exception:
             try:
-                return _build_call_expr_with_refs(parsed)
+                return build_call_expr_with_refs(parsed)
             except Exception:
                 return ("", "")
 
     try:
-        return ("", _build_call_expr(parsed))
+        return ("", build_call_expr(parsed))
     except Exception:
         return ("", "")
 
 
-def _build_call_expr_for_semantic_patch(subject_id: str) -> tuple[str, str]:
+def build_call_expr_for_semantic_patch(subject_id: str) -> tuple[str, str]:
     """Build a C# call expression for a semantic-patch variant.
 
     Uses TYPE_ALTERNATIVE_MAP and INSTANCE_ALTERNATIVE_EXPR_MAP to produce
@@ -178,28 +178,28 @@ def _build_call_expr_for_semantic_patch(subject_id: str) -> tuple[str, str]:
 
     Returns (prelude, call_expr).
     """
-    parsed = _parse_method_subject_id(subject_id)
+    parsed = parse_method_subject_id(subject_id)
 
-    if not _is_auto_callable(parsed):
+    if not is_auto_callable(parsed):
         return ("", "")
 
     # Check override map first — known problematic signatures bypass param checks
     param_count = len(parsed["param_types"])
-    override = _METHOD_OVERRIDES.get((parsed["type_name"], parsed["method_name"], param_count))
+    override = METHOD_OVERRIDES.get((parsed["type_name"], parsed["method_name"], param_count))
     if override is not None and override != "skip":
         return ("", override)
 
-    if _has_blocked_param(parsed["param_types"]):
+    if has_blocked_param(parsed["param_types"]):
         return ("", "")
 
-    if _has_ref_param(parsed["param_types"]):
+    if has_ref_param(parsed["param_types"]):
         try:
-            return _build_call_expr_with_refs(parsed, type_map=TYPE_ALTERNATIVE_MAP, instance_map=INSTANCE_ALTERNATIVE_EXPR_MAP)
+            return build_call_expr_with_refs(parsed, type_map=TYPE_ALTERNATIVE_MAP, instance_map=INSTANCE_ALTERNATIVE_EXPR_MAP)
         except Exception:
             return ("", "")
 
     try:
-        return ("", _build_call_expr(parsed, type_map=TYPE_ALTERNATIVE_MAP, instance_map=INSTANCE_ALTERNATIVE_EXPR_MAP))
+        return ("", build_call_expr(parsed, type_map=TYPE_ALTERNATIVE_MAP, instance_map=INSTANCE_ALTERNATIVE_EXPR_MAP))
     except Exception:
         return ("", "")
 
@@ -228,12 +228,12 @@ _SYSTEM_TYPE_TO_CSHARP: dict[str, str] = {
 }
 
 
-def _csharp_param_decls(param_types: list[str]) -> str:
+def csharp_param_declarations(param_types: list[str]) -> str:
     """Convert System type names to C# parameter declarations.
 
-    >>> _csharp_param_decls(["System.Int32"])
+    >>> csharp_param_declarations(["System.Int32"])
     'int p0'
-    >>> _csharp_param_decls(["System.Int32", "System.String"])
+    >>> csharp_param_declarations(["System.Int32", "System.String"])
     'int p0, string p1'
     """
     parts: list[str] = []
@@ -244,7 +244,7 @@ def _csharp_param_decls(param_types: list[str]) -> str:
     return ", ".join(parts)
 
 
-def _generate_entrypoint_source(
+def generate_entrypoint_source(
     assembly_name: str,
     family_id: str,
     method_subject_ids: list[str],
@@ -270,16 +270,16 @@ def _generate_entrypoint_source(
         expected_values: Dict mapping method index -> {"value": int|None, "exception": str|None}.
                          Only used when probe_mode=False.
     """
-    family_slug = _slug_from_family_id(family_id)
-    ns_slug = _family_namespace_slug(family_id)
+    family_slug = slug_from_family_id(family_id)
+    ns_slug = family_namespace_slug(family_id)
 
     if variant == "patch":
         usings: set[str] = set()
     elif variant == "subjects":
-        usings = _collect_required_usings(method_subject_ids)
+        usings = collect_required_usings(method_subject_ids)
         # subjects DLL is pure il2cpp input — no Chaos.TestFramework dependency
     else:
-        usings = _collect_required_usings(method_subject_ids)
+        usings = collect_required_usings(method_subject_ids)
         usings.add("Chaos.TestFramework")
 
     # Normal mode: void entry with inlined assertion logic.
@@ -362,9 +362,9 @@ def _generate_entrypoint_source(
             # Must be public so Program.cs can call it
             lines.append(f"{ns_indent}    public static int {method_prefix}{idx}()")
             lines.append(f"{ns_indent}    {{")
-            prelude, call_expr = _build_call_expr_for_benchmark(subject_id)
+            prelude, call_expr = build_call_expr_for_benchmark(subject_id)
             if call_expr:
-                parsed = _parse_method_subject_id(subject_id)
+                parsed = parse_method_subject_id(subject_id)
                 if prelude:
                     lines.append(prelude)
                 ret = parsed["return_type"]
@@ -372,7 +372,7 @@ def _generate_entrypoint_source(
                     lines.append(f"{ns_indent}        {call_expr};")
                     lines.append(f"{ns_indent}        return 0;")
                 else:
-                    cast_expr = _cast_return_to_int(ret, call_expr)
+                    cast_expr = cast_return_to_int(ret, call_expr)
                     lines.append(f"{ns_indent}        return {cast_expr};")
             else:
                 lines.append(f"{ns_indent}        return -1;  // cannot auto-generate call")
@@ -384,10 +384,10 @@ def _generate_entrypoint_source(
         # entry class itself (CodegenEdgeCasesSubjects::Subject_1), the auto-
         # generated wrapper must match the method's parameter signature and use
         # an empty try/catch body — no self-call (which would recurse infinitely).
-        parsed = _parse_method_subject_id(subject_id)
+        parsed = parse_method_subject_id(subject_id)
         is_self_ref = (variant == "subjects" and parsed["type_name"] == class_name)
         if is_self_ref:
-            param_decls = _csharp_param_decls(parsed["param_types"]) if parsed["param_types"] else ""
+            param_decls = csharp_param_declarations(parsed["param_types"]) if parsed["param_types"] else ""
             ret_type = parsed["return_type"]
             if ret_type == "System.Void":
                 cs_return = "void"
@@ -416,9 +416,9 @@ def _generate_entrypoint_source(
         lines.append(f"{ns_indent}    {{")
 
         ev = (expected_values or {}).get(idx)
-        prelude, call_expr = _build_call_expr_for_benchmark(subject_id)
+        prelude, call_expr = build_call_expr_for_benchmark(subject_id)
         if call_expr:
-            parsed = _parse_method_subject_id(subject_id)
+            parsed = parse_method_subject_id(subject_id)
             if prelude:
                 lines.append(prelude)
             ret = parsed["return_type"]
@@ -432,7 +432,7 @@ def _generate_entrypoint_source(
                     "SecurityException": "System.Security.SecurityException",
                 }
                 exc_type = _EXCEPTION_FULL_NAMES.get(exc_type, exc_type)
-                if _looks_like_property_read(call_expr):
+                if looks_like_property_read(call_expr):
                     lines.append(f"{ns_indent}        try {{ _ = {call_expr}; _exitCode = 1; }}")
                 else:
                     lines.append(f"{ns_indent}        try {{ {call_expr}; _exitCode = 1; }}")
@@ -444,7 +444,7 @@ def _generate_entrypoint_source(
                 if ret == "System.Void" or not ret:
                     lines.append(f"{ns_indent}        {call_expr};")
                 else:
-                    cast_expr = _cast_return_to_int(ret, call_expr)
+                    cast_expr = cast_return_to_int(ret, call_expr)
                     lines.append(f"{ns_indent}        if ({cast_expr} != {ev['value']}) _exitCode = 1;")
             else:
                 # Fallback: void or unknown. Wrapped in try/catch — probe failed so
@@ -454,12 +454,12 @@ def _generate_entrypoint_source(
                     lines.append(f"{ns_indent}        try {{ {call_expr}; }}")
                     lines.append(f"{ns_indent}        catch {{ _exitCode = 1; }}")
                 else:
-                    cast_expr = _cast_return_to_int(ret, call_expr)
+                    cast_expr = cast_return_to_int(ret, call_expr)
                     lines.append(f"{ns_indent}        try {{ if ({cast_expr} != {cast_expr}) _exitCode = 1; }}")
                     lines.append(f"{ns_indent}        catch {{ _exitCode = 1; }}")
         else:
-            parsed = _parse_method_subject_id(subject_id)
-            skip_reason = _get_skip_reason(parsed)
+            parsed = parse_method_subject_id(subject_id)
+            skip_reason = get_skip_reason(parsed)
             if skip_reason.startswith("IMPLEMENTABLE"):
                 # IMPLEMENTABLE gap: generate a stub that passes but records the gap
                 lines.append(f"{ns_indent}        // IMPLEMENTABLE gap: {skip_reason}")
@@ -505,7 +505,7 @@ def _generate_entrypoint_source(
     return "\n".join(lines)
 
 
-def _generate_program_source(
+def generate_program_source(
     class_name: str,
     namespace_name: str | None,
     *,
@@ -590,7 +590,7 @@ def _generate_program_source(
     return "\n".join(parts) + "\n"
 
 
-def _generate_csproj(
+def generate_project_file(
     assembly_name: str,
     class_name: str,
     cs_file_name: str,
@@ -714,7 +714,7 @@ def _generate_csproj(
     )
 
 
-def _generate_subject_manifest(
+def generate_subject_manifest(
     class_name: str,
     entry_point_subject_id: str,
     output_dir: str,
@@ -730,7 +730,7 @@ def _generate_subject_manifest(
     }
 
 
-def _compute_entry_point_subject_id(
+def compute_entry_point_subject_id(
     class_name: str,
     namespace_name: str | None,
     *,
@@ -759,7 +759,7 @@ def _compute_entry_point_subject_id(
     return f"{class_name}/Program::Main:System.Int32()"
 
 
-def _build_csproj_safe(csproj_path: Path, build_out: Path) -> subprocess.CompletedProcess:
+def build_project_safe(csproj_path: Path, build_out: Path) -> subprocess.CompletedProcess:
     """Build a .csproj, working around MSBuild comma-in-path limitation on Windows.
 
     MSBuild's argument parser splits on commas within paths, so any path
@@ -816,7 +816,7 @@ def _build_csproj_safe(csproj_path: Path, build_out: Path) -> subprocess.Complet
     return result
 
 
-def _run_probe_and_capture(
+def run_probe_and_capture(
     output_dir: Path,
     class_name: str,
     method_subject_ids: list[str],
@@ -860,7 +860,7 @@ def _run_probe_and_capture(
             callable_idx = idx not in cmi and idx < len(method_subject_ids)
             if callable_idx:
                 # Check if this method was auto-callable in the probe build
-                _, call_expr = _build_call_expr_for_benchmark(method_subject_ids[idx])
+                _, call_expr = build_call_expr_for_benchmark(method_subject_ids[idx])
                 if call_expr:
                     expected[idx] = {"value": value, "exception": None}
                     continue
@@ -908,7 +908,7 @@ def generate_and_build(
     custom method indices from contract customEntryIndices.
     """
     if class_name is None:
-        class_name = f"{_family_namespace_slug(family_id).title().replace('_', '').replace(',', '')}NativeEntry"
+        class_name = f"{family_namespace_slug(family_id).title().replace('_', '').replace(',', '')}NativeEntry"
 
     if variant == "subjects":
         class_name = class_name.replace("NativeEntry", "Subjects")
@@ -930,7 +930,7 @@ def generate_and_build(
     # emits empty method stubs so the subjects DLL builds (the methods will be
     # no-ops until handwritten Custom.cs is added later).
     custom_method_indices: set[int] | None = None
-    family_slug = _slug_from_family_id(family_id)
+    family_slug = slug_from_family_id(family_id)
     contract_path = _REPO_ROOT / "testing" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json"
     if contract_path.exists():
         with open(contract_path, encoding="utf-8") as f:
@@ -954,7 +954,7 @@ def generate_and_build(
         or {} on failure."""
         # Determine method prefix used by the probe source generation
         probe_prefix = "Subject_" if variant in ("subjects", "patch") else "Method"
-        probe_source = _generate_entrypoint_source(
+        probe_source = generate_entrypoint_source(
             assembly_name=assembly_name,
             family_id=family_id,
             method_subject_ids=method_subject_ids,
@@ -964,7 +964,7 @@ def generate_and_build(
             custom_method_indices=custom_method_indices,
             probe_mode=True,
         )
-        probe_program = _generate_program_source(
+        probe_program = generate_program_source(
             class_name, namespace_name,
             probe_mode=True,
             method_count=len(method_subject_ids),
@@ -972,7 +972,7 @@ def generate_and_build(
             method_prefix=probe_prefix,
         )
         # Probe must be an EXE (not Library), so use "benchmark" variant for csproj
-        probe_csproj = _generate_csproj(
+        probe_csproj = generate_project_file(
             assembly_name=assembly_name,
             class_name=class_name,
             cs_file_name=cs_file_name,
@@ -988,11 +988,11 @@ def generate_and_build(
 
         print(f"[probe] Building {class_name} probe...")
         build_out = output_dir / "build-output"
-        build_result = _build_csproj_safe(output_dir / csproj_name, build_out)
+        build_result = build_project_safe(output_dir / csproj_name, build_out)
         if build_result.returncode != 0:
             print(f"[probe] Build FAILED: {build_result.stderr[:200]}")
             return {}
-        return _run_probe_and_capture(
+        return run_probe_and_capture(
             output_dir,
             class_name,
             method_subject_ids,
@@ -1005,7 +1005,7 @@ def generate_and_build(
         expected_values = {}
 
     # ── Pass 2: Emit final entry EXE with proper assertions ──
-    final_source = _generate_entrypoint_source(
+    final_source = generate_entrypoint_source(
         assembly_name=assembly_name,
         family_id=family_id,
         method_subject_ids=method_subject_ids,
@@ -1022,7 +1022,7 @@ def generate_and_build(
     output_dir.mkdir(parents=True, exist_ok=True)
     source_path.write_text(final_source, encoding="utf-8")
 
-    entry_point_subject_id = _compute_entry_point_subject_id(class_name, namespace_name, variant=variant)
+    entry_point_subject_id = compute_entry_point_subject_id(class_name, namespace_name, variant=variant)
 
     # ── Subjects variant: Library, no Program.cs, build as DLL ──
     if variant == "subjects":
@@ -1037,7 +1037,7 @@ def generate_and_build(
             shutil.rmtree(probe_build_out)
 
         (output_dir / csproj_name).write_text(
-            _generate_csproj(
+            generate_project_file(
                 assembly_name=assembly_name,
                 class_name=class_name,
                 cs_file_name=cs_file_name,
@@ -1051,7 +1051,7 @@ def generate_and_build(
         )
         print(f"[subjects] Building {class_name} DLL...")
         build_out = output_dir / "build-output"
-        result = _build_csproj_safe(csproj_path, build_out)
+        result = build_project_safe(csproj_path, build_out)
         if result.returncode != 0:
             print(f"[subjects] Build FAILED for {class_name}:")
             if result.stdout:
@@ -1091,14 +1091,14 @@ def generate_and_build(
         }
 
     # ── Non-subjects variants: Exe with Program.cs ──
-    final_program = _generate_program_source(
+    final_program = generate_program_source(
         class_name, namespace_name,
         method_count=len(method_subject_ids),
         custom_method_indices=custom_method_indices,
     )
     (output_dir / "Program.cs").write_text(final_program, encoding="utf-8")
     (output_dir / csproj_name).write_text(
-        _generate_csproj(
+        generate_project_file(
             assembly_name=assembly_name,
             class_name=class_name,
             cs_file_name=cs_file_name,
@@ -1111,7 +1111,7 @@ def generate_and_build(
 
     print(f"[entrypoint] Building {class_name} (final)...")
     build_out = output_dir / "build-output"
-    result = _build_csproj_safe(csproj_path, build_out)
+    result = build_project_safe(csproj_path, build_out)
     if result.returncode != 0:
         print(f"[entrypoint] Build FAILED for {class_name}:")
         if result.stdout:
@@ -1415,7 +1415,7 @@ def main() -> None:
         method_subject_ids = args.method_subject_ids
     else:
         # Read from capability family contract
-        family_slug = _slug_from_family_id(args.family_id)
+        family_slug = slug_from_family_id(args.family_id)
         contract_path = repo_root / "testing" / "foundation-dll" / args.assembly_name / family_slug / "capability-family-contract.json"
         if not contract_path.exists():
             print(f"FATAL: contract not found at {contract_path}", file=sys.stderr)
@@ -1433,7 +1433,7 @@ def main() -> None:
     if args.output_dir:
         output_dir = args.output_dir
     else:
-        family_slug = _slug_from_family_id(args.family_id)
+        family_slug = slug_from_family_id(args.family_id)
         output_dir = repo_root / "verification" / "foundation-dll" / args.assembly_name / family_slug / "il2cpp_dist" / "entrypoint"
 
     result = generate_and_build(

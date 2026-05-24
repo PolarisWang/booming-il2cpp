@@ -321,7 +321,33 @@ public sealed class NativeAotEmitter
         });
 
         var pages = loweringPlan.TranslationUnitPages;
-        if (pages is { Count: > 0 } && loweringPlan.TranslationUnitPageSize is > 0)
+        int? pageSize = loweringPlan.TranslationUnitPageSize;
+
+        // Auto-paging: when the plan doesn't specify pages but the method count
+        // exceeds the threshold, create synthetic pages to split the output into
+        // multiple translation units. This prevents oversized generated files
+        // for test subjects with many methods (e.g. coverage subjects).
+        const int autoPageSize = 150;
+        if (pages is not { Count: > 0 } && templateModel.Methods.Count > autoPageSize)
+        {
+            int totalMethods = templateModel.Methods.Count;
+            int pageCount = (totalMethods + autoPageSize - 1) / autoPageSize;
+            var autoPages = new List<AuditTranslationUnitPageArtifact>(pageCount);
+            for (int i = 0; i < pageCount; i++)
+            {
+                string pageSuffix = i == 0 ? "" : $".page{i + 1}";
+                autoPages.Add(new AuditTranslationUnitPageArtifact
+                {
+                    PageNumber = i + 1,
+                    MethodCount = Math.Min(autoPageSize, totalMethods - i * autoPageSize),
+                    Path = $"generated/native-aot.generated{pageSuffix}.cpp",
+                });
+            }
+            pages = autoPages;
+            pageSize = autoPageSize;
+        }
+
+        if (pages is { Count: > 0 } && pageSize is > 0)
         {
             // Paged output: split methods across multiple translation units
             int pageSize = loweringPlan.TranslationUnitPageSize!.Value;

@@ -8,17 +8,14 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
-      "iterations": 100000,
-      "status": "failed"
+      "elapsedMilliseconds": -1.0,
+      "status": "throws"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -26,8 +23,8 @@
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -35,35 +32,26 @@
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
-      "iterations": 100000,
-      "status": "failed"
+      "elapsedMilliseconds": -1.0,
+      "status": "throws"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
-      "iterations": 100000,
-      "status": "failed"
+      "elapsedMilliseconds": -1.0,
+      "status": "throws"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
-      "iterations": 100000,
-      "status": "failed"
+      "elapsedMilliseconds": -1.0,
+      "status": "throws"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -71,8 +59,8 @@
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -80,8 +68,8 @@
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -89,8 +77,8 @@
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -98,8 +86,8 @@
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -107,8 +95,8 @@
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -116,17 +104,14 @@
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
-      "iterations": 100000,
-      "status": "failed"
+      "elapsedMilliseconds": -1.0,
+      "status": "throws"
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -134,8 +119,8 @@
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -143,8 +128,8 @@
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -152,8 +137,8 @@
     {
       "methodIndex": 16,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"
@@ -161,8 +146,8 @@
     {
       "methodIndex": 17,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
       "opsPerSecond": 0.0,
       "iterations": 100000,
       "status": "failed"

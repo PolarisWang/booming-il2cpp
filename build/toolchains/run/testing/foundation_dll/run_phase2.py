@@ -12,10 +12,10 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path("build/toolchains/run").resolve()))
 from testing.foundation_dll.test_code_generator import (
-    _parse_method_subject_id, _is_simple_method, _has_unsafe_param,
-    _build_call_expr, _class_name, _family_slug, _enum_name,
-    _member_name, _relative, _BASE_USINGS,
-    _is_auto_callable, _method_skip_reason,
+    parse_method_subject_id, is_simple_method, has_unsafe_param,
+    build_call_expr, class_name, family_slug, enum_name,
+    member_name, relative, BASE_USINGS,
+    is_auto_callable, method_skip_reason,
 )
 
 REPO = Path(".")
@@ -25,12 +25,12 @@ LEDGER = REPO / "verification" / "projections" / "foundation-dll-audit" / "capab
 def classify_methods(mids):
     simple, mixed, unsafe, needs_manual = [], [], [], []
     for mid in mids:
-        parsed = _parse_method_subject_id(mid)
-        if not _is_auto_callable(parsed):
+        parsed = parse_method_subject_id(mid)
+        if not is_auto_callable(parsed):
             needs_manual.append((mid, parsed))
-        elif _has_unsafe_param(parsed["param_types"]):
+        elif has_unsafe_param(parsed["param_types"]):
             unsafe.append((mid, parsed))
-        elif _is_simple_method(parsed):
+        elif is_simple_method(parsed):
             simple.append((mid, parsed))
         else:
             mixed.append((mid, parsed))
@@ -38,10 +38,10 @@ def classify_methods(mids):
 
 
 def needs_manual_entry(mid, p):
-    reason = _method_skip_reason(p)
+    reason = method_skip_reason(p)
     return f"""
     [Fact(Skip = "{reason}")]
-    public void {_member_name("", mid)}()
+    public void {member_name("", mid)}()
     {{
         // TODO: {p['type_name']}.{p['method_name']} needs manual impl
     }}"""
@@ -54,8 +54,8 @@ def write_test_source(hw_path, fid, cname, simple, mixed, unsafe, needs_manual):
     if simple:
         parts.append("    // === simple (all-primitive) ===")
         for mid, p in simple:
-            mname = _member_name("", mid)
-            call = _build_call_expr(p)
+            mname = member_name("", mid)
+            call = build_call_expr(p)
             ret = p["return_type"]
             if ret in ("System.Void", ""):
                 body = f"            {call};"
@@ -73,8 +73,8 @@ def write_test_source(hw_path, fid, cname, simple, mixed, unsafe, needs_manual):
     if mixed:
         parts.append("    // === mixed (smoke) ===")
         for mid, p in mixed:
-            mname = _member_name("", mid)
-            call = _build_call_expr(p)
+            mname = member_name("", mid)
+            call = build_call_expr(p)
             ret = p["return_type"]
             body = f"            _ = {call};" if ret not in ("System.Void", "") else f"            {call};"
             parts.append(f"""
@@ -89,7 +89,7 @@ def write_test_source(hw_path, fid, cname, simple, mixed, unsafe, needs_manual):
     if unsafe:
         parts.append("    // === needs-manual (ref/pointer/generic) ===")
         for mid, p in unsafe:
-            mname = _member_name("", mid)
+            mname = member_name("", mid)
             parts.append(f"""
     [Fact(Skip = "needs-manual — ref/pointer parameter requires unsafe context")]
     public void {mname}()
@@ -101,8 +101,8 @@ def write_test_source(hw_path, fid, cname, simple, mixed, unsafe, needs_manual):
     if needs_manual:
         parts.append("    // === needs-manual (operator/protected/etc) ===")
         for mid, p in needs_manual:
-            reason = _method_skip_reason(p)
-            mname = _member_name("", mid)
+            reason = method_skip_reason(p)
+            mname = member_name("", mid)
             parts.append(f"""
     [Fact(Skip = "{reason}")]
     public void {mname}()
@@ -113,7 +113,7 @@ def write_test_source(hw_path, fid, cname, simple, mixed, unsafe, needs_manual):
 
     joined = "\n".join(parts)
     source = (
-        f"{_BASE_USINGS}\n"
+        f"{BASE_USINGS}\n"
         "using Chaos.TestFramework;\n"
         "using Xunit;\n"
         "\n"
@@ -130,7 +130,7 @@ def write_benchmark_source(bm_path, fid, cname, mids, enum_val):
     bm_class = cname.replace("Tests", "Benchmarks")
     if not mids:
         source = (
-            f"{_BASE_USINGS}\n"
+            f"{BASE_USINGS}\n"
             "using Chaos.TestFramework;\n\n"
             f"// Benchmark stubs for {fid}\n"
             f"public static class {bm_class}\n"
@@ -141,11 +141,11 @@ def write_benchmark_source(bm_path, fid, cname, mids, enum_val):
     else:
         parts = []
         for mid in mids:
-            parsed = _parse_method_subject_id(mid)
-            call_expr = _build_call_expr(parsed)
-            mname = _member_name("Benchmark", mid)
+            parsed = parse_method_subject_id(mid)
+            call_expr = build_call_expr(parsed)
+            mname = member_name("Benchmark", mid)
             purpose = f"// Benchmark {parsed['type_name']}.{parsed['method_name']} native-runtime throughput"
-            if not _is_auto_callable(parsed) or _has_unsafe_param(parsed["param_types"]):
+            if not is_auto_callable(parsed) or has_unsafe_param(parsed["param_types"]):
                 parts.append(
                     f"    {purpose}\n"
                     f'    [BenchmarkSubjectId("{mid}")]\n'
@@ -165,7 +165,7 @@ def write_benchmark_source(bm_path, fid, cname, mids, enum_val):
                 )
         members = "\n".join(parts)
         source = (
-            f"{_BASE_USINGS}\n"
+            f"{BASE_USINGS}\n"
             "using Chaos.TestFramework;\n\n"
             f"// Benchmark stubs for {fid}\n"
             f"public static class {bm_class}\n"
@@ -181,7 +181,7 @@ def write_hotupdate_source(hu_path, fid, cname, mids, enum_val, direction="HostT
     dir_label = "patch" if direction == "HostToPatch" else "host"
     if not mids:
         source = (
-            f"{_BASE_USINGS}\n"
+            f"{BASE_USINGS}\n"
             "using Chaos.TestFramework;\n\n"
             f"// Hot-update stubs for {fid}\n"
             f"public static class {hu_class}\n"
@@ -192,12 +192,12 @@ def write_hotupdate_source(hu_path, fid, cname, mids, enum_val, direction="HostT
     else:
         parts = []
         for mid in mids:
-            parsed = _parse_method_subject_id(mid)
-            call_expr = _build_call_expr(parsed)
-            mname = _member_name("HotUpdate", mid)
+            parsed = parse_method_subject_id(mid)
+            call_expr = build_call_expr(parsed)
+            mname = member_name("HotUpdate", mid)
             purpose = f"// Verify {parsed['type_name']}.{parsed['method_name']} after hot-update ({dir_label} side)"
             direction_attr = f"HotUpdateDirection(HotUpdateDirection.{direction})"
-            if not _is_auto_callable(parsed) or _has_unsafe_param(parsed["param_types"]):
+            if not is_auto_callable(parsed) or has_unsafe_param(parsed["param_types"]):
                 parts.append(
                     f"    {purpose}\n"
                     f'    [HotUpdateSubjectId("{mid}")]\n'
@@ -217,7 +217,7 @@ def write_hotupdate_source(hu_path, fid, cname, mids, enum_val, direction="HostT
                 )
         members = "\n".join(parts)
         source = (
-            f"{_BASE_USINGS}\n"
+            f"{BASE_USINGS}\n"
             "using Chaos.TestFramework;\n\n"
             f"// Hot-update stubs for {fid}\n"
             f"public static class {hu_class}\n"
@@ -240,8 +240,8 @@ def write_patch_source(patch_path, fid, cname, mids, enum_val):
 
 
 def generate(aname, fid, contract_path):
-    slug = _family_slug(fid)
-    cname = _class_name(fid)
+    slug = family_slug(fid)
+    cname = class_name(fid)
     family_root = REPO / "verification" / "foundation-dll" / aname / slug
 
     contract = json.loads(contract_path.read_text(encoding="utf-8"))
@@ -251,7 +251,7 @@ def generate(aname, fid, contract_path):
 
     # Build a minimal family dict for _enum_name
     fam_dict = {"familyId": fid, "capabilityFamilyEnum": ""}
-    enum_val = _enum_name(fam_dict)
+    enum_val = enum_name(fam_dict)
 
     simple, mixed, unsafe, needs_manual = classify_methods(mids)
 
@@ -287,7 +287,7 @@ def main():
             fid = fam.get("familyId", "")
             if int(fam.get("methodCount", 0)) <= 0:
                 continue
-            slug = _family_slug(fid)
+            slug = family_slug(fid)
             contract_path = REPO / "testing" / "foundation-dll" / aname / slug / "capability-family-contract.json"
             if not contract_path.exists():
                 print(f"  SKIP {aname}/{slug} — no contract")
