@@ -6,7 +6,7 @@
   "failed": 1,
   "results": [
     {
-      "family": "generic-supplement",
+      "family": "convert-char",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
@@ -14,11 +14,11 @@
         "build_entry_exe": "FAILED"
       },
       "success": false,
-      "methodCount": 4,
+      "methodCount": 18,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\generic-supplement\\managed\\subjects\\build-output\\GenericSupplementSubjects.dll",
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll",
       "error": "entry.exe build failed"
     }
   ],
-  "timestamp": "2026-05-24T21:41:21"
+  "timestamp": "2026-05-24T22:21:33"
 }

@@ -3399,6 +3399,7 @@ static void OptimizeInstructions(
 
 JitMethod* NativeCodeGenerator::Generate() noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Generate");
+    std::fprintf(stderr, "DIAG-PASS: Generate start\n"); std::fflush(stderr);
     uint32_t n_instrs = static_cast<uint32_t>(rm_.instructions.size());
     if (n_instrs == 0) return nullptr;
     instr_offsets_.resize(n_instrs, 0);
@@ -3431,6 +3432,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     // Initialize cached TLS info for inline TLAB access
     InitTlsTlabInfo();
+
+    std::fprintf(stderr, "DIAG-PASS: pre-scan done (n_instrs=%u)\n", n_instrs);
 
     // ── Register allocation: Tier 0 skips entirely (stack-only) ───────────
     if (is_tier0_) {
@@ -3529,6 +3532,8 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     } else {
         SelectCacheableRegs();
     }
+    std::fprintf(stderr, "DIAG-PASS: register alloc done (coloring=%d, cache=%u)\n",
+                 (int)has_graph_coloring_, num_cache_regs_);
     frame_align_adj_ = ((num_cache_regs_ + 1) % 2) * 8;  // 16-byte alignment for Win64 ABI
 
     // Prologue — push callee-saved regs, establish frame pointer
@@ -3618,6 +3623,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     // Bail out early if any emit above hit an OOM
     if (CheckFailed()) return nullptr;
+    std::fprintf(stderr, "DIAG-PASS: prologue + cooperative mode done\n");
 
     // ── Optimize instructions (tree IR pipeline + linear fallback) ──────
     // Creates a mutable copy of rm_.instructions for the optimizer.
@@ -3657,6 +3663,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             }
         }
     }
+    std::fprintf(stderr, "DIAG-PASS: optimization done (n_instrs=%u)\n", n_instrs);
 
     // ── Liveness analysis for precise GC slot maps ─────────────────────────
     // Computes per-instruction live-in bitmasks used by RecordGcPoint() to
@@ -3761,7 +3768,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             "Liveness computed for %u instructions, use_liveness=%d",
             n_instrs, (int)use_liveness_);
     }
-
+    std::fprintf(stderr, "DIAG-PASS: liveness analysis done\n");
 
     // Emit instructions
     for (uint32_t i = 0; i < n_instrs; ++i) {
@@ -3781,6 +3788,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         }
         PropagateTypes(instr);
     }
+    std::fprintf(stderr, "DIAG-PASS: instruction emission done\n");
 
     // Bail out if any instruction emit failed (OOM).
     if (CheckFailed()) return nullptr;
@@ -3821,6 +3829,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     // Sentinel entry for instr_offsets_ — SEH clause end indices may point
     // one past the last instruction (exclusive-end convention).
     instr_offsets_.push_back(buf_.pos());
+    std::fprintf(stderr, "DIAG-PASS: epilogue done\n");
 
     // ── Cold section (Throw/Rethrow handlers) ────────────────────────────
     // Emitted after the epilogue so hot-path instructions stay contiguous
@@ -3845,6 +3854,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 
     if (CheckFailed()) return nullptr;
     if (buf_.pos() == 0 || instr_offsets_.empty()) return nullptr;
+    std::fprintf(stderr, "DIAG-PASS: cold section done\n");
 
     // Resolve branches (including deopt jump patches)
     ResolveBranches();
@@ -3895,6 +3905,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         // Overwrite count with actual emitted count (skipped malformed clauses)
         buf_.Patch32(seh_offset, emitted_count);
     }
+    std::fprintf(stderr, "DIAG-PASS: branch resolution + SEH done\n");
 
     // ── Emit .pdata/.xdata unwind info ──────────────────────────────────
     // Win64 RUNTIME_FUNCTION for OS stack unwinding (debugger, backtrace).
@@ -4103,12 +4114,16 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
         di.method_name_len    = static_cast<uint32_t>(name_len);
         buf_.EmitBytes(&di, sizeof(di));
     }
+    std::fprintf(stderr, "DIAG-PASS: debug info done\n");
 
     // Seal code buffer — returns nullptr on OOM or failure
     if (CheckFailed()) return nullptr;
     uint32_t code_bytes = buf_.pos();
+    std::fprintf(stderr, "DIAG-PASS: before buf_.Seal (code_bytes=%u)\n", code_bytes);
     void* code = buf_.Seal();
     if (code == nullptr) return nullptr;
+    std::fprintf(stderr, "DIAG-PASS: after buf_.Seal (code=%p)\n", code);
+    std::fprintf(stderr, "DIAG-PASS: JitMethod malloc phase start\n");
 
     CHAOS_IL2CPP_LOG_DEBUG_M("codegen",
         "Compile: {} instrs, {} bytes code, {} call sites",
@@ -4237,9 +4252,13 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
 JitMethod* Compile(
     const ::chaos::il2cpp::interpreter::RegisterMethod& rm,
     const CompileConfig& config) noexcept {
+    std::fprintf(stderr, "DIAG: Compile free fn enter (n_instrs=%zu)\n", rm.instructions.size()); std::fflush(stderr);
     if (rm.instructions.empty()) return nullptr;
+    std::fprintf(stderr, "DIAG: Compile before GetSehHandler\n"); std::fflush(stderr);
     ISehHandler& seh = GetSehHandler();
+    std::fprintf(stderr, "DIAG: Compile before NativeCodeGenerator ctor\n"); std::fflush(stderr);
     NativeCodeGenerator gen(rm, config, seh);
+    std::fprintf(stderr, "DIAG: Compile before gen.Generate\n"); std::fflush(stderr);
     return gen.Generate();
 }
 

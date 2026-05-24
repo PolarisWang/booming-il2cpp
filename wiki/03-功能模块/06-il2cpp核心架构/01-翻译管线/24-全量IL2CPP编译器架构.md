@@ -184,8 +184,25 @@ public IReadOnlyList<NativeAotResult> GeneratePerAssembly(
 | **Phase 1** | 每程序集 NativeAot Emission：CreateForAssembly()、GeneratePerAssembly()、每程序集 ModuleDescriptor | ✅ 完成 |
 | **Phase 2** | 跨程序集调用决议：MethodTableAllocator、同程序集 direct call / 跨程序集 method table | ✅ 完成 |
 | **Phase 3** | 构建系统 + 运行时集成：CMakeLists.txt 生成、runtime-entry.cpp、TypeInfo extern 声明 | ✅ 完成 |
-| **Phase 4** | HotUpdate 完整性：每方法 Hotpatch dispatch entry、interpreter 回退、PatchLoader 多模块 | ⬜ 未开始 |
-| **Phase 5** | 性能优化：内联、去虚拟化、LTO、大程序集分页 | ⬜ 未开始 |
+| **Phase 4** | HotUpdate 完整性：每方法 Hotpatch dispatch entry、interpreter 回退、PatchLoader 多模块 | ✅ 已完成 |
+| **Phase 5** | 性能优化：内联、去虚拟化、LTO、大程序集分页 | ✅ 已完成 |
+
+### Phase 4 交付摘要
+
+| 子项 | 交付内容 |
+|------|----------|
+| p4-hotpatch | dispatch slot 覆盖全部 IL 方法（含无 ECMA token 方法），HotpatchNameRegistry 支持按名称查找 |
+| p4-multimodule | PatchData 格式扩展（v1 增加 `dependency_count`/`PatchDataDependency`），跨模块 ResolveToken 实现 |
+| p4-interpreter | EH/泛型/PInvoke 三条 interpreter 回退路径压力验证（`eh-stress`/`generics-stress`/`pinvoke-stress` 家族各 3-4 个方法，无 CHAOS_IL2CPP_FAIL） |
+
+### Phase 5 交付摘要
+
+| 子项 | 交付内容 |
+|------|----------|
+| p5-inline | 方法内联优化（热点小函数的内联翻译路径选择） |
+| p5-devirt | 去虚拟化优化（CallVirt → direct Call 的静态决议） |
+| p5-lto | LTO（Link-Time Optimization）集成适配 |
+| p5-paging | 大程序集分页输出（page-*.cpp + module.cpp 分段编译避免单文件编译 OOM） |
 
 ---
 
@@ -195,4 +212,7 @@ public IReadOnlyList<NativeAotResult> GeneratePerAssembly(
 - [`04-NativeAotLoweringPlanner文件布局.md`](./04-NativeAotLoweringPlanner%E6%96%87%E4%BB%B6%E5%B8%83%E5%B1%80.md) — LoweringPlanner 20+ partial 文件分布
 - [`18-热更新架构.md`](./18-%E7%83%AD%E6%9B%B4%E6%96%B0%E6%9E%B6%E6%9E%84.md) — Hotpatch dispatch + PatchLoader
 - [`15-泛型上下文运行时.md`](./15-%E6%B3%9B%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E8%BF%90%E8%A1%8C%E6%97%B6.md) — RuntimeInstantiationBridgeV0
+- [`27-T4原生代码生成器架构.md`](./27-T4%E5%8E%9F%E7%94%9F%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E6%9E%B6%E6%9E%84.md) — JIT T4 编译体系（含三模式编译体系附录）
+- [`28-Hybrid模式架构.md`](./28-Hybrid%E6%A8%A1%E5%BC%8F%E6%9E%B6%E6%9E%84.md) — Hybrid 模式架构详情
+- [`29-三模式选择决策树.md`](./29-%E4%B8%89%E6%A8%A1%E5%BC%8F%E9%80%89%E6%8B%A9%E5%86%B3%E7%AD%96%E6%A0%91.md) — 模式选择场景指南
 - `wiki/04-历史决策/` — 方案 C、HybridCLR 对齐等历史决策

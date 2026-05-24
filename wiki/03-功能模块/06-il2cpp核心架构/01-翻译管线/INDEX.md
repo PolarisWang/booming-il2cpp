@@ -48,3 +48,10 @@
 | [`29-ModuleRegistry运行时参考.md`](./29-ModuleRegistry%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%82%E8%80%83.md) | 模块注册/查找/墓碑/回收、TypeInfoHandle、并发安全 |
 | [`30-PatchLoader运行时参考.md`](./30-PatchLoader%E8%BF%90%E8%A1%8C%E6%97%B6%E5%8F%82%E8%80%83.md) | .patchdata 加载验证、PatchContext/PatchMetadataCache 生命周期、溢出保护 |
 | [`27-JIT原生代码生成器架构.md#附录aotjithybrid-三模式编译体系`](./27-T4%E5%8E%9F%E7%94%9F%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E6%9E%B6%E6%9E%84.md) | JIT/Hybrid 编译模式架构、Precode Stub 分派、PGO 重编译 |
+
+### 模式选择与切换（29-31）
+| 文档 | 说明 |
+|------|------|
+| [`29-三模式选择决策树.md`](./29-%E4%B8%89%E6%A8%A1%E5%BC%8F%E9%80%89%E6%8B%A9%E5%86%B3%E7%AD%96%E6%A0%91.md) | AOT/JIT/Hybrid 三种编译模式的适用场景对比、决策树流程图、典型场景推荐 |
+| [`30-模式间切换指南.md`](./30-%E6%A8%A1%E5%BC%8F%E9%97%B4%E5%88%87%E6%8D%A2%E6%8C%87%E5%8D%97.md) | 构建期 --mode 配置、运行时模式检测、跨模式 dispatch 路由、平台约束 |
+| [`31-故障诊断指南.md`](./31-%E6%95%85%E9%9A%9C%E8%AF%8A%E6%96%AD%E6%8C%87%E5%8D%97.md) | 按模式分类的常见故障诊断、排查框架、定位工具使用 |
