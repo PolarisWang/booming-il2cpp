@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct ExceptionThrowDiagnosticsSubjects_t {
+    struct ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -87,7 +87,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } exceptionThrowDiagnosticsSubjects;
+    } exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects;
     int32_t method_count;
 };
 
@@ -106,90 +106,90 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct ExceptionThrowDiagnosticsSubjects {
+struct ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_0(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_10(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_11(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_12(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_12(
         );
     }
     static inline void Subject_13(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_13(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_13(
         );
     }
     static inline void Subject_14(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_14(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_14(
         );
     }
     static inline void Subject_15(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_15(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_15(
         );
     }
     static inline void Subject_16(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_16(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_16(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_1(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_2(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_3(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_4(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_5(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_6(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_7(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_8(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.exceptionThrowDiagnosticsSubjects.Subject_9(
+        return kFunctions.exceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

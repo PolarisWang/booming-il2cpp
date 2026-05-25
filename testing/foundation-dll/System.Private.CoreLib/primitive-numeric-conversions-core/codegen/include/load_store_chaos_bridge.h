@@ -30,6 +30,12 @@ inline float chaos_load_float32(CHAOS_IL2CPP_INTPTR value) noexcept
     return chaos::il2cpp::common::load_float32(value);
 }
 
+// PascalCase alias for naming consistency with ChaosLoadFloat64 etc.
+inline float ChaosLoadFloat32(CHAOS_IL2CPP_INTPTR value) noexcept
+{
+    return chaos::il2cpp::common::load_float32(value);
+}
+
 inline CHAOS_IL2CPP_INTPTR chaos_store_float64(double value) noexcept
 {
     return chaos::il2cpp::common::store_float64(value);
@@ -76,6 +82,7 @@ inline CHAOS_IL2CPP_INT32 chaos_shift_right_int32(CHAOS_IL2CPP_INT32 value, CHAO
 // can call these as bare identifiers.
 using chaos::il2cpp::runtime_core::chaos_store_float32;
 using chaos::il2cpp::runtime_core::chaos_load_float32;
+using chaos::il2cpp::runtime_core::ChaosLoadFloat32;
 using chaos::il2cpp::runtime_core::chaos_store_float64;
 using chaos::il2cpp::runtime_core::chaos_load_float64;
 using chaos::il2cpp::runtime_core::chaos_store_int64;

@@ -66,6 +66,123 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubject
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8(void);
 extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod0(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod1(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod10(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod11(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod12(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod14(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod2(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod3(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod4(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod5(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod6(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod7(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod8(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod9(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod0_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod11_b__13_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod1_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod3_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod7_b__9_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod7_b__9_1_System_Threading_Tasks_Task(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_cctor(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_13(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod0(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod1(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod10(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod11(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod12(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod14(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod2(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod3(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod4(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod5(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod6(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod7(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod8(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod9(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod0_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod11_b__13_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod1_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod3_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod7_b__9_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod7_b__9_1_System_Threading_Tasks_Task(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_cctor(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_13(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod0(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod1(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod10(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod11(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod12(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod14(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod2(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod3(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod4(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod5(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod6(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod7(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod8(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry_CustomEntryMethod9(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod0_b__2_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod11_b__13_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod1_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod3_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod7_b__9_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_CustomEntryMethod7_b__9_1_System_Threading_Tasks_Task(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c_cctor(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_13(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8(void);
+extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9(void);
+
 namespace chaos::il2cpp::codegen::ThreadingTasksPrimitivesSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -77,15 +194,15 @@ using namespace chaos::il2cpp::runtime_core;
 const void* chaos_vtable_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c[];
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&chaos_mt_System_Private_CoreLib_System_Delegate.hot, nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Delegate), nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Action = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 14722794505377461205ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Action = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), nullptr, 14722794505377461205ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Action = static_cast<CHAOS_IL2CPP_INTPTR>(14722794505377461205ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 3665167686475733763ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_ = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), nullptr, 3665167686475733763ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_ = static_cast<CHAOS_IL2CPP_INTPTR>(3665167686475733763ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8866194404114377402ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
@@ -101,11 +218,11 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nul
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 inline TypeInfoV0 chaos_mt_System_Threading_Thread_System_Threading_Thread = {{nullptr, nullptr, 11502368789179341480ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Threading_Thread_System_Threading_Thread = static_cast<CHAOS_IL2CPP_INTPTR>(11502368789179341480ULL);
-inline TypeInfoV0 chaos_mt_System_Threading_Thread_System_Threading_ThreadStart = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 17186843898991579444ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Threading_Thread_System_Threading_ThreadStart = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), nullptr, 17186843898991579444ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Threading_Thread_System_Threading_ThreadStart = static_cast<CHAOS_IL2CPP_INTPTR>(17186843898991579444ULL);
 inline TypeInfoV0 chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry = {{nullptr, nullptr, 2186445116007965406ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry = static_cast<CHAOS_IL2CPP_INTPTR>(2186445116007965406ULL);
-inline TypeInfoV0 chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c, 16753052439711259458ULL, 7u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c, 16753052439711259458ULL, 7u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c = static_cast<CHAOS_IL2CPP_INTPTR>(16753052439711259458ULL);
 
 // ── Virtual method table arrays ──
@@ -153,7 +270,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -367,7 +484,7 @@ void chaos_ensure_type_initialized_ThreadingTasksPrimitivesSubjects_ThreadingTas
 	if (chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c____9 == 0)
 	{
 	    auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c);
-	    chaos_object->header.type_info = &chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c.hot;
+	    chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c);
 		const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 		ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c__ctor(chaos_arg_0);
 	    chaos_static_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c____9 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -739,8 +856,8 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 	static const TypeInfoHot* const s_type_info_ptrs[4] = {
 		nullptr,
 		nullptr,
-		&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry.hot,
-		&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry),
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c),
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
@@ -1971,7 +2088,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeE
 				const auto chaos_method_ptr = _s1;
 				const auto chaos_target = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2043,7 +2160,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeE
 				const auto chaos_method_ptr = _s1;
 				const auto chaos_target = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Func_System_Int32_);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2172,7 +2289,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeE
 				const auto chaos_method_ptr = _s1;
 				const auto chaos_target = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Threading_Thread_System_Threading_ThreadStart, {});
-				chaos_object->header.type_info = &chaos_mt_System_Threading_Thread_System_Threading_ThreadStart.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Threading_Thread_System_Threading_ThreadStart);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2187,7 +2304,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeE
 		{
 			const auto chaos_arg_1 = _s0;
 			auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Threading_Thread_System_Threading_Thread, {});
-			chaos_object->header.type_info = &chaos_mt_System_Threading_Thread_System_Threading_Thread.hot;
+			chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Threading_Thread_System_Threading_Thread);
 			chaos_external_runtime_System_Threading_Thread_System_Threading_Thread___ctor_System_Void_System_Threading_ThreadStart_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 		}
@@ -2343,7 +2460,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeE
 				const auto chaos_method_ptr = _s1;
 				const auto chaos_target = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2549,7 +2666,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeE
 				const auto chaos_method_ptr = _s1;
 				const auto chaos_target = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2597,7 +2714,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeE
 					const auto chaos_method_ptr = _s2;
 					const auto chaos_target = _s1;
 					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_, {});
-					chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_.hot;
+					chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action_System_Threading_Tasks_Task_);
 					chaos_object->chaos_delegate_target = chaos_target;
 					chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2717,7 +2834,7 @@ extern "C" void ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeE
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c, {});
-		chaos_object->header.type_info = &chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c.hot;
+		chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c);
 		ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesNativeEntry___c__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}

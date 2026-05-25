@@ -1,4 +1,4 @@
-"""Family Verification Orchestrator — 9-stage unified verification pipeline.
+"""Family Verification Orchestrator — 15-stage unified verification pipeline.
 
 Usage (via run.py manifest):
     run foundation-dll verify-family <family-slug>
@@ -6,16 +6,22 @@ Usage (via run.py manifest):
     run foundation-dll verify-family <family-slug> --skip benchmark
 
 Stage overview:
-  0. Preflight    — contract integrity, custom entry discovery
-  1. Codegen      — entrypoint generation + IL2CPP compile
-  2. Fact         — Fact Static verify + Fact Runtime verify
-  3. Audit        — Mechanism + Principle audit
-  4. AsmCompare   — JIT vs AOT instruction-level analysis (deterministic)
-  4.5 Microbench  — Interpreter internal metrics (FramePool, FastExecute, CallVirt dispatch)
-  5. Benchmark    — managed vs native performance baseline
-  6. HotUpdate    — patch data generation + verify
-  7. PostHotBench — performance under hotpatch (interpreter path)
-  8. Aggregate    — scoring, regression, pass/fail gate
+  0.  Preflight       — contract integrity, custom entry discovery
+  1.  Codegen (AOT)   — entrypoint generation + IL2CPP compile (entry-aot.exe)
+  2.  JitCodegen      — build entry-jit.exe (interpreter path)
+  3.  Fact (.NET8)    — managed .NET8 fact verification via dotnet run
+  4.  Fact (AOT)      — Chaos AOT fact verification (entry-aot.exe)
+  5.  Fact (JIT)      — Chaos JIT fact verification (entry-jit.exe)
+  6.  Audit           — Mechanism + Principle audit
+  7.  AsmCompare      — JIT vs AOT instruction-level analysis
+  8.  Microbench      — Interpreter internal metrics
+  9.  Benchmark (5-way) — .NET8/.NET10/Mono/Chaos AOT/Chaos JIT
+  10. HotUpdate AOT Fact     — entry-aot.exe --hotupdate -> verify
+  11. HotUpdate AOT Bench    — pre vs post patch performance (AOT)
+  12. HotUpdate JIT Fact     — entry-jit.exe --hotupdate -> verify
+  13. HotUpdate JIT Bench    — pre vs post patch performance (JIT)
+  14. Dashboard       — cross-family summary (JSON + console)
+  15. Aggregate       — scoring, regression, pass/fail gate
 """
 
 from __future__ import annotations
@@ -42,6 +48,7 @@ if str(_HERE.parent.parent) not in sys.path:
 
 from multi_benchmark_runner import (
     MultiRunReport,
+    adapt_csproj_for_multitarget,
     detect_available_runtimes,
     run_multi_benchmark,
     save_report,
@@ -213,7 +220,11 @@ def auto_generate_managed_benchmark(family_slug: str, assembly: str,
     Instead of calling entrypoint methods (which get JIT-elided due to provably
     dead _exitCode side-effects), generates inline Convert.ToChar() calls with
     varying loop-index inputs and a static accumulator to prevent dead-code elimination.
+
+    Uses the shared managed_harness_generator module for call expression generation.
     """
+    from managed_harness_generator import generate_call_expr, CallExprMode
+
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     harness_dir = family_dir / "managed_test" / "benchmarks"
     harness_dir.mkdir(parents=True, exist_ok=True)
@@ -252,317 +263,16 @@ def auto_generate_managed_benchmark(family_slug: str, assembly: str,
         'Decimal': lambda _:     'Convert.ToDecimal("123.45")',
     }
 
-    def _extract_param_types(mid: str) -> list[str]:
-        m = _param_re.search(mid)
-        if not m:
-            return []
-        raw = m.group(1)
-        # Split on ',' that is NOT inside a nested '<>' (generic params not expected here)
-        parts = []
-        depth = 0
-        cur: list[str] = []
-        for ch in raw:
-            if ch == ',' and depth == 0:
-                parts.append(''.join(cur).strip())
-                cur = []
-            else:
-                if ch == '<': depth += 1
-                elif ch == '>': depth -= 1
-                cur.append(ch)
-        if cur:
-            parts.append(''.join(cur).strip())
-        return parts
-
     # ── Always-throwing param types for Convert.ToChar ──────────────
-    # Boolean, DateTime, Decimal, Double, Single, Object always throw
-    # InvalidCastException when passed to Convert.ToChar, regardless of value.
-    _tochar_always_throws = {"System.Boolean", "System.DateTime", "System.Decimal",
-                             "System.Double", "System.Single", "System.Object"}
-
-    def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
-        """Generate a C# call expression for benchmarking a method by parsing its methodSubjectId.
-
-        Returns (call_expression, always_throws_bool).
-
-        Supports patterns:
-          - Convert.ToXxx(string)     -> Convert.ToXxx("literal")
-          - Convert.ToXxx(nonstring)  -> Convert.ToXxx(loop_var) for ANY primitive type
-          - Convert.ToString(xxx)     -> Convert.ToString(loop_var)
-          - Xxx.Parse(string)         -> Xxx.Parse("literal")
-          - Convert.ToDecimal(double) -> Convert.ToDecimal(loop_var)
-        """
-        ipart = f'(i + {idx})' if idx > 0 else 'i'
-
-        m = re.match(r'[^/]+/([^:]+)::([^:]+):[^(]+\(([^)]*)\)', mid)
-        if not m:
-            return '', False
-        declaring_type = m.group(1)
-        method_name = m.group(2)
-        param_str = m.group(3)
-        param_types = [p.strip() for p in param_str.split(',') if p.strip()]
-
-        # ── Xxx.Parse(string) pattern ────────────────────────────────
-        if method_name == 'Parse' and param_types == ['System.String']:
-            parse_tbl = {
-                'System.Double': f'Double.Parse("3.14159")',
-                'System.Int32': f'Int32.Parse((({ipart}) % 100000 + 1).ToString())',
-                'System.Int64': f'Int64.Parse((({ipart}) % 100000 + 1).ToString())',
-            }
-            if declaring_type in parse_tbl:
-                return parse_tbl[declaring_type], False
-            return '', False
-
-        # ── Convert.ToString(xxx) pattern ────────────────────────────
-        if declaring_type == 'System.Convert' and method_name == 'ToString' and len(param_types) == 1:
-            t = param_types[0]
-            if 'Int32' in t:
-                return f'Convert.ToString({ipart})', False
-            elif 'Int64' in t:
-                return f'Convert.ToString((long)({ipart} & 0xFF))', False
-            elif 'Double' in t:
-                return f'Convert.ToString((double)({ipart} & 0xFF))', False
-            elif 'Single' in t:
-                return f'Convert.ToString((float)({ipart} & 0xFF))', False
-            return '', False
-
-        # ── Convert.ToXxx(string) — use string literal ───────────────
-        if declaring_type == 'System.Convert' and method_name.startswith('To') and param_types == ['System.String']:
-            rt = method_name[2:]
-            if rt in _toxxx_string_literals:
-                return _toxxx_string_literals[rt](ipart), False
-            return '', False
-
-        # ── Convert.ToXxx(non-string, 1 param) — use loop variable ─────
-        if declaring_type == 'System.Convert' and method_name.startswith('To') and len(param_types) == 1:
-            t = param_types[0]
-            # Map .NET type names to C# cast expressions with safe input range
-            type_to_cast = {
-                'System.Byte':    f'(byte)({ipart} & 0xFF)',
-                'System.SByte':   f'(sbyte)({ipart} & 0x7F)',
-                'System.Char':    f'(char)({ipart} & 0xFF)',
-                'System.Int16':   f'(short)({ipart} & 0xFF)',
-                'System.Int32':   f'({ipart} & 0xFF)',
-                'System.Int64':   f'({ipart} & 0xFF)',
-                'System.UInt16':  f'(ushort)({ipart} & 0xFF)',
-                'System.UInt32':  f'(uint)({ipart} & 0xFF)',
-                'System.UInt64':  f'(ulong)({ipart} & 0xFF)',
-                'System.Double':  f'(double)({ipart} & 0xFF)',
-                'System.Single':  f'(float)({ipart} & 0xFF)',
-                'System.Decimal': f'(decimal)({ipart} & 0xFF)',
-                'System.Boolean': f'({ipart} % 2 == 0)',
-                'System.Object':  f'(object)({ipart} & 0xFF)',
-                'System.DateTime': f'System.DateTime.Now',
-            }
-            if t in type_to_cast:
-                # Determine if this (method, param) combination always throws
-                always_throws = (method_name == 'ToChar' and t in _tochar_always_throws)
-                return f'Convert.{method_name}({type_to_cast[t]})', always_throws
-            if t == 'System.String':
-                # Convert.ToChar(string) works if string length == 1
-                # Convert.ToDecimal(string) works, etc.
-                return f'Convert.{method_name}((({ipart} & 1) == 0) ? "A" : "B")', False
-            return '', False
-
-        # ── Collection generic type patterns (List<T>, Dictionary<K,V>, HashSet<T>) ──
-        # Generic type args (T, TKey, TValue) can't be directly instantiated, so we
-        # substitute concrete types (int, int) for benchmarking the runtime helpers.
-        coll_match = re.match(r'System\.Collections\.Generic\.(\w+)`\d+', declaring_type)
-        if coll_match:
-            coll_type = coll_match.group(1)
-            if coll_type == 'List':
-                if method_name == 'Add':
-                    return f'new System.Collections.Generic.List<int>().Add({ipart})', False
-                elif method_name == 'Clear':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.Clear()', False
-                elif method_name == 'Contains':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.Contains({ipart})', False
-                elif method_name == 'IndexOf':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.IndexOf({ipart})', False
-                elif method_name == 'Remove':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.Remove({ipart})', False
-                elif method_name == 'RemoveAt':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.RemoveAt(0)', False
-                elif method_name == 'Sort':
-                    return f'new System.Collections.Generic.List<int>{{3, 1, 2}}.Sort()', False
-                elif method_name == 'ToArray':
-                    return f'new System.Collections.Generic.List<int>{{{ipart}}}.ToArray()', False
-            elif coll_type == 'Dictionary':
-                if method_name == 'Add':
-                    return f'new System.Collections.Generic.Dictionary<int, int>().Add({ipart}, {ipart})', False
-                elif method_name == 'get_Count':
-                    # Property access can't be a statement expression; wrap in discard
-                    return f'_ = new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.Count', False
-                elif method_name == 'TryGetValue':
-                    return f'new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.TryGetValue({ipart}, out _)', False
-                elif method_name == 'ContainsKey':
-                    return f'new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.ContainsKey({ipart})', False
-                elif method_name == 'Remove':
-                    return f'new System.Collections.Generic.Dictionary<int, int>{{{{{ipart}, {ipart}}}}}.Remove({ipart})', False
-            elif coll_type == 'HashSet':
-                if method_name == 'Add':
-                    return f'new System.Collections.Generic.HashSet<int>().Add({ipart})', False
-                elif method_name == 'Contains':
-                    return f'new System.Collections.Generic.HashSet<int>{{{ipart}}}.Contains({ipart})', False
-                elif method_name == 'Remove':
-                    return f'new System.Collections.Generic.HashSet<int>{{{ipart}}}.Remove({ipart})', False
-            return '', False
-
-        # ── System.Array methods ──────────────────────────────────────
-        if declaring_type == 'System.Array':
-            if method_name == 'Copy' and len(param_types) == 3:
-                return 'System.Array.Copy(new byte[]{1,2,3,4,5}, new byte[5], 3)', False
-            elif method_name == 'Copy' and len(param_types) == 5:
-                return 'System.Array.Copy(new byte[]{1,2,3,4,5}, 1, new byte[3], 0, 3)', False
-            elif method_name == 'Clear':
-                return 'System.Array.Clear(new byte[]{1,2,3,4,5}, 0, 3)', False
-            elif method_name == 'Sort' and len(param_types) == 1:
-                return 'System.Array.Sort(new byte[]{3,1,4,1,5})', False
-            elif method_name == 'Sort' and len(param_types) == 2:
-                return 'System.Array.Sort(new byte[]{3,1,2}, (System.Collections.IComparer)null)', False
-            elif method_name == 'BinarySearch' and len(param_types) == 2:
-                return 'System.Array.BinarySearch(new byte[]{10,20,30,40}, (object)(byte)30)', False
-            elif method_name == 'BinarySearch' and len(param_types) == 4:
-                return 'System.Array.BinarySearch(new byte[]{10,20,30,40}, 0, 3, (object)(byte)20)', False
-            elif method_name == 'IndexOf':
-                return 'System.Array.IndexOf(new byte[]{5,3,5,3}, (object)(byte)3)', False
-            elif method_name == 'LastIndexOf':
-                return 'System.Array.LastIndexOf(new byte[]{5,3,5,3}, (object)(byte)3)', False
-            elif method_name == 'Reverse':
-                return 'System.Array.Reverse(new byte[]{1,2,3,4,5})', False
-            elif method_name == 'GetLength':
-                return 'System.Array.CreateInstance(typeof(byte), 3).GetLength(0)', False
-            elif method_name == 'GetValue':
-                return 'new byte[]{10,20,30}.GetValue(0)', False
-            return '', False
-
-        # ── System.Guid methods ─────────────────────────────────────────
-        if declaring_type == 'System.Guid':
-            if method_name == 'NewGuid' and len(param_types) == 0:
-                return 'Guid.NewGuid()', False
-            elif method_name == 'Parse' and param_types == ['System.String']:
-                return 'Guid.Parse("00000000-0000-0000-0000-000000000000")', False
-            elif method_name == 'GetHashCode' and len(param_types) == 0:
-                return 'Guid.NewGuid().GetHashCode()', False
-            elif method_name == 'ToString' and len(param_types) == 0:
-                return 'Guid.NewGuid().ToString()', False
-            elif method_name == '.ctor' and param_types == ['System.String']:
-                return 'new Guid("00000000-0000-0000-0000-000000000000")', False
-            return '', False
-
-        # ── System.Random methods ───────────────────────────────────────
-        if declaring_type == 'System.Random':
-            if method_name == '.ctor' and len(param_types) == 0:
-                return 'new Random()', False
-            elif method_name == 'Next' and len(param_types) == 0:
-                return 'new Random().Next()', False
-            elif method_name == 'Next' and param_types == ['System.Int32']:
-                return f'new Random().Next({ipart})', False
-            elif method_name == 'NextBytes' and param_types == ['System.Byte[]']:
-                return 'new Random().NextBytes(new byte[16])', False
-            elif method_name == 'NextDouble' and len(param_types) == 0:
-                return 'new Random().NextDouble()', False
-            return '', False
-
-        # ── System.HashCode methods ─────────────────────────────────────
-        if declaring_type == 'System.HashCode':
-            if method_name == 'ToHashCode' and len(param_types) == 0:
-                return 'default(HashCode).ToHashCode()', False
-            elif method_name.startswith('Combine') and len(param_types) == 2:
-                return f'HashCode.Combine({ipart}, {ipart})', False
-            return '', False
-
-        # ── System.Threading.Thread methods ─────────────────────────────
-        if declaring_type == 'System.Threading.Thread':
-            if method_name == 'get_CurrentThread' and len(param_types) == 0:
-                return '_ = System.Threading.Thread.CurrentThread.GetHashCode()', False
-            elif method_name == 'get_ManagedThreadId' and len(param_types) == 0:
-                return '_ = System.Threading.Thread.CurrentThread.ManagedThreadId', False
-            elif method_name == 'Sleep' and param_types == ['System.Int32']:
-                # Sleep(0) yields without actually blocking
-                return 'System.Threading.Thread.Sleep(0)', False
-            elif method_name == 'Start' and len(param_types) == 0:
-                # Start a thread that immediately exits
-                return 'new System.Threading.Thread(() => {}).Start()', False
-            return '', False
-
-        # ── System.Threading.Tasks.Task methods ─────────────────────────
-        if declaring_type == 'System.Threading.Tasks.Task':
-            if method_name == 'get_IsCompleted' and len(param_types) == 0:
-                return '_ = System.Threading.Tasks.Task.CompletedTask.IsCompleted', False
-            elif method_name == 'get_Status' and len(param_types) == 0:
-                return '_ = (int)System.Threading.Tasks.Task.CompletedTask.Status', False
-            elif method_name == 'Run' and param_types == ['System.Action']:
-                return 'System.Threading.Tasks.Task.Run(() => { _g++; })', False
-            elif method_name == 'Run' and param_types == ['System.Func`1']:
-                return 'System.Threading.Tasks.Task.FromResult(42)', False
-            elif method_name == 'Delay' and param_types == ['System.Int32']:
-                return 'System.Threading.Tasks.Task.Delay(0).Wait()', False
-            elif method_name == 'Wait' and len(param_types) == 0:
-                return 'System.Threading.Tasks.Task.FromResult(42).Wait()', False
-            elif method_name == 'Wait' and param_types == ['System.Boolean', 'System.Int32']:
-                return 'System.Threading.Tasks.Task.FromResult(42).Wait(true, System.Threading.Timeout.Infinite)', False
-            elif method_name == 'ContinueWith' and param_types == ['System.Action`1']:
-                return 'System.Threading.Tasks.Task.CompletedTask.ContinueWith(_ => { _g++; })', False
-            elif method_name == 'WhenAll' and param_types == ['System.Threading.Tasks.Task[]']:
-                return 'System.Threading.Tasks.Task.WhenAll(System.Threading.Tasks.Task.CompletedTask)', False
-            elif method_name == 'WhenAny' and param_types == ['System.Threading.Tasks.Task[]']:
-                return '_ = System.Threading.Tasks.Task.WhenAny(System.Threading.Tasks.Task.CompletedTask)', False
-            elif method_name == 'FromResult':
-                return '_ = System.Threading.Tasks.Task.FromResult(42)', False
-            return '', False
-
-        # ── System.Enum methods ─────────────────────────────────────────
-        if declaring_type == 'System.Enum':
-            if method_name == 'Format' and param_types == ['System.Type', 'System.Object', 'System.String']:
-                return 'System.Enum.Format(typeof(System.StringComparison), System.StringComparison.Ordinal, "G")', False
-            elif method_name == 'GetName' and param_types == ['System.RuntimeType', 'System.UInt64']:
-                return 'System.Enum.GetName(typeof(System.StringComparison), System.StringComparison.Ordinal)', False
-            elif method_name == 'GetName' and param_types == ['System.Type', 'System.Object']:
-                return 'System.Enum.GetName(typeof(System.StringComparison), System.StringComparison.Ordinal)', False
-            elif method_name == 'GetNames' and param_types == ['System.Type']:
-                return '_ = System.Enum.GetNames(typeof(System.StringComparison))', False
-            elif method_name == 'GetValues' and param_types == ['System.Type']:
-                return '_ = System.Enum.GetValues(typeof(System.StringComparison))', False
-            elif method_name == 'IsDefined' and param_types == ['System.Type', 'System.Object']:
-                return 'System.Enum.IsDefined(typeof(System.StringComparison), System.StringComparison.Ordinal)', False
-            elif method_name == 'Parse' and param_types == ['System.Type', 'System.String']:
-                return 'System.Enum.Parse(typeof(System.StringComparison), "Ordinal")', False
-            elif method_name == 'Parse' and param_types == ['System.Type', 'System.String', 'System.Boolean']:
-                return 'System.Enum.Parse(typeof(System.StringComparison), "Ordinal", true)', False
-            elif method_name == 'ToString' and len(param_types) == 0:
-                return 'System.StringComparison.Ordinal.ToString()', False
-            elif method_name == 'ToString' and param_types == ['System.String']:
-                return 'System.StringComparison.Ordinal.ToString("G")', False
-            elif method_name == 'TryParse' and param_types == ['System.Type', 'System.String', 'System.Boolean', 'System.Object&']:
-                return 'System.Enum.TryParse(typeof(System.StringComparison), "Ordinal", true, out _)', False
-            elif method_name == 'TryParse' and param_types == ['System.Type', 'System.String', 'System.Object&']:
-                return 'System.Enum.TryParse(typeof(System.StringComparison), "Ordinal", out _)', False
-            return '', False
-
-        return '', False
-
-    def _return_type_from_mid(mid: str) -> str:
-        """Extract the return type from a methodSubjectId.
-        Format: Assembly/Type::Method:ReturnType(Params)
-        """
-        m = re.match(r'[^/]+/[^:]+::[^:]+:([^(]+)\(', mid)
-        if m:
-            return m.group(1).strip()
-        return ''
-
     # Detect trivial types: cast-only, no range check, no exception
     # These map to simple static_cast in C++ and are at risk of JIT elision
-    _trivial_types = {"System.Byte", "System.Char", "System.Int16", "System.Int32",
-                      "System.Int64", "System.SByte", "System.UInt16", "System.UInt32",
-                      "System.UInt64", "System.Object"}
-
     # ── Generate NoInlining helper methods ──────────────────────────
     # Every method uses a volatile side-effect to prevent JIT dead-code
     # elimination, regardless of return type (bool, string, int, etc.).
     helper_methods: list[str] = []
     helper_names: list[str] = []
     for idx, mid in enumerate(method_subject_ids):
-        call_expr, always_throws = _generate_call_expr(mid, idx)
+        call_expr, always_throws = generate_call_expr(mid, idx, CallExprMode.BENCHMARK)
         if not call_expr:
             helper_names.append('')
             continue
@@ -595,7 +305,7 @@ def auto_generate_managed_benchmark(family_slug: str, assembly: str,
     iterations = 100000
     method_sections: list[str] = []
     for idx, mid in enumerate(method_subject_ids):
-        call_expr, always_throws = _generate_call_expr(mid, idx)
+        call_expr, always_throws = generate_call_expr(mid, idx, CallExprMode.BENCHMARK)
         hname = helper_names[idx] if idx < len(helper_names) else ''
 
         if not call_expr:
@@ -711,70 +421,6 @@ def auto_generate_managed_benchmark(family_slug: str, assembly: str,
         return None
 
 
-def run_native_benchmarks(family_slug: str, assembly: str,
-                           method_subject_ids: list[str],
-                           stub_mask: int, throwing_mask: int = 0,
-                           iterations: int = 10000,
-                           exe_path: Path | None = None,
-                           output_name: str = "native-benchmark.json"
-                           ) -> tuple[list[dict], Path]:
-    """Run native benchmark for each non-stub, non-throwing method.
-
-    Args:
-        exe_path: Optional explicit path to entry.exe. If None, uses locate_entry_executable().
-        output_name: Output filename (e.g. native-aot-benchmark.json).
-    """
-    from fact_verifier import verify_benchmark
-
-    family_dir = _VERIFICATION_BASE / assembly / family_slug
-    native_dir = family_dir / "native"
-    native_dir.mkdir(parents=True, exist_ok=True)
-
-    results: list[dict] = []
-    for idx, mid in enumerate(method_subject_ids):
-        if stub_mask and ((stub_mask >> idx) & 1):
-            results.append({
-                "methodIndex": idx,
-                "methodSubjectId": mid,
-                "elapsedMilliseconds": -1.0,
-                "status": "stub",
-            })
-            continue
-        if throwing_mask and ((throwing_mask >> idx) & 1):
-            results.append({
-                "methodIndex": idx,
-                "methodSubjectId": mid,
-                "elapsedMilliseconds": -1.0,
-                "status": "throws",
-            })
-            continue
-        bench = verify_benchmark(family_slug, assembly=assembly,
-                                 entry_index=idx, iterations=iterations, verbose=False,
-                                 exe_path=exe_path)
-        results.append({
-            "methodIndex": idx,
-            "methodSubjectId": mid,
-            "elapsedMilliseconds": bench.get("elapsed_ms", -1.0),
-            "calibratedMs": bench.get("calibrated_ms", bench.get("elapsed_ms", -1.0)),
-            "opsPerSecond": bench.get("ops_per_sec", 0.0),
-            "iterations": bench.get("iterations", iterations),
-            "status": bench.get("status", "failed"),
-        })
-
-    native_path = native_dir / output_name
-    with open(native_path, "w", encoding="utf-8") as f:
-        json.dump({
-            "schemaVersion": 1,
-            "assemblyName": assembly,
-            "familyId": f"family/{assembly}/{family_slug.replace('-', '/')}",
-            "warmupIterations": 100,
-            "measureIterations": iterations,
-            "results": results,
-        }, f, indent=2, ensure_ascii=False)
-
-    return results, native_path
-
-
 def stage_preflight(family_slug: str, assembly: str) -> StageResult:
     """Stage 0: Verify contract integrity, discover custom entries."""
     start = time.perf_counter()
@@ -863,11 +509,12 @@ def stage_code_generation(family_slug: str, assembly: str, preflight: StageResul
 
             family_dir = _VERIFICATION_BASE / assembly / family_slug
             codegen_dir = family_dir / "codegen"
-            # The manifest is emitted alongside subject files (e.g. *Subjects/native-aot.methods.json)
+            # The manifest is emitted under *Subjects/generated/ (e.g. *Subjects/generated/native-aot.methods.json)
             manifest_path = None
             for d in codegen_dir.iterdir():
                 if d.is_dir() and d.name.endswith("Subjects"):
-                    candidate = d / "native-aot.methods.json"
+                    # Check under generated/ subdirectory
+                    candidate = d / "generated" / "native-aot.methods.json"
                     if candidate.exists():
                         manifest_path = candidate
                         break
@@ -880,7 +527,7 @@ def stage_code_generation(family_slug: str, assembly: str, preflight: StageResul
                 if not rebuild_ok:
                     print(f"    [codegen] WARNING: entry.exe rebuild with dispatch code FAILED")
             else:
-                print(f"    [codegen] manifest not found at {manifest_path} (skip dispatch generation)")
+                print(f"    [codegen] manifest not found (skip dispatch generation)")
         except ImportError:
             print(f"    [codegen] generate_verification_dispatch not available (skip)")
         except Exception as e:
@@ -950,13 +597,13 @@ def stage_jit_code_generation(family_slug: str, assembly: str) -> StageResult:
             manifest_path = None
             for d in codegen_dir.iterdir():
                 if d.is_dir() and d.name.endswith("Subjects"):
-                    candidate = d / "native-aot.methods.json"
+                    candidate = d / "generated" / "native-aot.methods.json"
                     if candidate.exists():
                         manifest_path = candidate
                         break
             if manifest_path is not None:
                 dispatch_output = family_dir / "native" / "verification_dispatch.generated.cpp"
-                generate_verification_dispatch(str(manifest_path), str(dispatch_output))
+                generate_verification_dispatch(str(manifest_path), str(dispatch_output), jit_mode=True)
                 print(f"  [jit_codegen] regenerated verification_dispatch.generated.cpp")
         except ImportError:
             print(f"  [jit_codegen] generate_verification_dispatch not available (skip)")
@@ -984,6 +631,44 @@ def stage_jit_code_generation(family_slug: str, assembly: str) -> StageResult:
         return StageResult(stage="jit_codegen", status="failed",
                            summary=f"JIT codegen error: {e}",
                            duration_ms=int((time.perf_counter() - start) * 1000))
+
+
+def stage_managed_fact(family_slug: str, assembly: str,
+                       tfm: str = "net8.0") -> StageResult:
+    """Stage 3: .NET8 Fact verification via managed harness.
+
+    Uses managed_fact_runner to generate a C# harness and run with dotnet.
+    """
+    start = time.perf_counter()
+
+    try:
+        subprocess.run(["dotnet", "--version"], capture_output=True, text=True, timeout=30)
+    except (OSError, subprocess.TimeoutExpired):
+        return StageResult(
+            stage="managed_fact", status="skipped",
+            summary="dotnet CLI not available",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    from managed_fact_runner import run_managed_fact_for_family
+    result = run_managed_fact_for_family(family_slug, assembly, tfm=tfm)
+
+    status_map = {"passed": "passed", "failed": "failed", "skipped": "skipped", "error": "error"}
+    status = status_map.get(result.get("status", "error"), "error")
+
+    return StageResult(
+        stage="managed_fact", status=status,
+        summary=result.get("summary", ""),
+        details={
+            "totalMethods": result.get("totalMethods", 0),
+            "passedMethods": result.get("passedMethods", 0),
+            "failedMethods": result.get("failedMethods", 0),
+            "skippedMethods": result.get("skippedMethods", 0),
+            "tfm": tfm,
+            "methodResults": result.get("methodResults", []),
+        },
+        duration_ms=result.get("duration_ms", int((time.perf_counter() - start) * 1000)),
+    )
 
 
 def stage_fact_verification(family_slug: str, assembly: str) -> StageResult:
@@ -1320,18 +1005,13 @@ def stage_micro_benchmark(family_slug: str, assembly: str) -> StageResult:
 
 
 def stage_performance_benchmark(family_slug: str, assembly: str) -> StageResult:
-    """Stage 5: 3-way benchmark — managed (.NET JIT) vs native-aot vs native-jit.
+    """Stage 9: 5-way benchmark — .NET8/.NET10/Mono/Chaos AOT/Chaos JIT.
 
-    Self-contained: runs managed harness, builds JIT entry if needed, runs AOT
-    and JIT benchmarks for each non-stub method, compares all three.
+    Uses multi_benchmark_runner to orchestrate across all available runtimes,
+    auto-generating the managed benchmark harness if needed.
     """
     start = time.perf_counter()
-    from benchmark_comparator import compare
-
-    stub_mask = parse_stub_mask(family_slug, assembly)
-    stub_total = stub_mask.bit_count() if stub_mask else 0
     family_dir = _VERIFICATION_BASE / assembly / family_slug
-    report_path = family_dir / "benchmark-comparison-report.json"
 
     mids = load_contract_methods(family_slug, assembly)
     if not mids:
@@ -1341,6 +1021,9 @@ def stage_performance_benchmark(family_slug: str, assembly: str) -> StageResult:
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    stub_mask = parse_stub_mask(family_slug, assembly)
+    stub_total = stub_mask.bit_count() if stub_mask else 0
+
     # If all methods are stubs, skip
     if stub_total == len(mids):
         return StageResult(
@@ -1349,204 +1032,96 @@ def stage_performance_benchmark(family_slug: str, assembly: str) -> StageResult:
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # Both entry-aot.exe and entry-jit.exe are now built by earlier stages
+    # ── Step 1: Generate managed benchmark harness ────────────────────
     native_dir = family_dir / "native"
     aot_exe = native_dir / "entry-aot.exe"
     jit_exe = native_dir / "entry-jit.exe"
 
-    # ── Step 1: Auto-generate managed benchmark harness ────────────────
-    managed_path = None
-    if mids:
-        managed_path = auto_generate_managed_benchmark(family_slug, assembly, mids)
+    managed_path = auto_generate_managed_benchmark(family_slug, assembly, mids)
+    harness_dir = family_dir / "managed_test" / "benchmarks"
+    if managed_path and harness_dir.exists():
+        # Adapt csproj for multi-target (net8.0 + net10.0 for .NET JIT runs)
+        csproj = harness_dir / "ManagedBenchmarkHarness.csproj"
+        if csproj.exists():
+            adapt_csproj_for_multitarget(csproj, ["net8.0", "net10.0"])
 
-    # Build throwing_mask from managed results
-    throwing_mask = 0
-    if managed_path and managed_path.exists():
-        try:
-            with open(managed_path, encoding="utf-8") as f:
-                managed_data = json.load(f)
-            for r in managed_data.get("results", []):
-                idx = r.get("methodIndex", -1)
-                if idx >= 0 and r.get("isException", False):
-                    throwing_mask |= (1 << idx)
-        except (OSError, json.JSONDecodeError):
-            pass
+    # ── Step 2: Multi-runtime benchmark (5-way) ──────────────────────
+    all_runtimes = ["net8-jit", "net10-jit", "mono", "chaos-aot", "chaos-jit"]
+    avail, unavail = detect_available_runtimes(all_runtimes)
 
-    # ── Step 2a: Run native-AOT benchmarks ─────────────────────────────
-    aot_available = aot_exe.exists()
-    if aot_available:
-        aot_results, aot_path = run_native_benchmarks(
-            family_slug, assembly, mids, stub_mask, throwing_mask,
-            iterations=100000, exe_path=aot_exe, output_name="native-aot-benchmark.json")
-    else:
-        print(f"  [benchmark] entry-aot.exe not found, AOT benchmarks skipped")
-        aot_path = None
+    multi_report = run_multi_benchmark(
+        family_dir=family_dir,
+        family_slug=family_slug,
+        assembly=assembly,
+        method_subject_ids=mids,
+        runtimes=all_runtimes,
+        iterations=100000,
+        exe_aot=aot_exe,
+        exe_jit=jit_exe,
+        baseline_path=family_dir / "multi-run" / "multi-run-report.json",
+    )
+    multi_output_dir = family_dir / "multi-run"
+    save_report(multi_report, multi_output_dir)
+    print_report_summary(multi_report)
 
-    # ── Step 2b: Run native-JIT (interpreter) benchmarks ───────────────
-    jit_available = jit_exe.exists()
-    if jit_available:
-        jit_results, jit_path = run_native_benchmarks(
-            family_slug, assembly, mids, stub_mask, throwing_mask,
-            iterations=100000, exe_path=jit_exe, output_name="native-jit-benchmark.json")
-    else:
-        print(f"  [benchmark] entry-jit.exe not found, JIT benchmarks skipped")
-        jit_path = None
+    # ── Step 3: Quality gate ─────────────────────────────────────────
+    bm_status = "passed"
+    bm_reason = ""
 
-    # ── Step 3: 3-way comparison ───────────────────────────────────────
-    if managed_path and managed_path.exists():
-        report = compare(
-            managed_path=managed_path,
-            aot_path=aot_path,
-            jit_path=jit_path,
-            output_path=report_path,
-        )
-    else:
-        # Native-only info report (no managed harness)
-        report = {
-            "schemaVersion": 2,
-            "assemblyName": assembly,
-            "familyId": f"family/{assembly}/{family_slug.replace('-', '/')}",
-            "summary": {
-                "totalMethods": len(mids),
-                "matchedCount": 0,
-                "unmatchedCount": 0,
-                "invalidCount": len(mids),
-                "nativeAotFasterCount": 0,
-                "nativeJitFasterCount": 0,
-                "managedFasterCount": 0,
-                "equalCount": 0,
-                "averageSpeedupPercent": 0.0,
-                "averageNativeAotSpeedupPercent": 0.0,
-                "averageNativeJitSpeedupPercent": None,
-                "nativeJitSlowdownFactor": None,
-            },
-            "methodResults": [
-                {"methodSubjectId": m, "status": "managed_harness_unavailable"}
-                for m in mids
-            ],
-        }
-        report_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(report_path, "w", encoding="utf-8") as f:
-            json.dump(report, f, indent=2, ensure_ascii=False)
-
-    summary = report.get("summary", {})
-    avg_aot_speedup = summary.get("averageNativeAotSpeedupPercent") or summary.get("averageSpeedupPercent", 0)
-    avg_jit_speedup = summary.get("averageNativeJitSpeedupPercent")
-    native_aot_faster = summary.get("nativeAotFasterCount", 0)
-    native_jit_faster = summary.get("nativeJitFasterCount", 0)
-    managed_faster = summary.get("managedFasterCount", 0)
-    matched_count = summary.get("matchedCount", 0)
-    total = summary.get("totalMethods", len(mids))
-    invalid_count = summary.get("invalidCount", 0)
-
-    # ── Early skip: all methods are invalid ────────────────────────────
-    if invalid_count >= total - stub_total > 0:
-        report_path.parent.mkdir(parents=True, exist_ok=True)
-        with open(report_path, "w", encoding="utf-8") as f:
-            json.dump(report, f, indent=2, ensure_ascii=False)
-        return StageResult(
-            stage="benchmark", status="skipped",
-            summary=f"All {invalid_count} non-stub methods are invalid (no managed harness)",
-            duration_ms=int((time.perf_counter() - start) * 1000),
-        )
-
-    # ── Step 4: Multi-runtime benchmark extension ──────────────────────────
-    multi_report = None
-    try:
-        # Detect which additional runtimes are available
-        extra_runtimes = ["net8-jit", "net10-jit", "chaos-aot"]
-        avail, _unavail = detect_available_runtimes(extra_runtimes)
-        # Always include the core runtimes + any extra that are available
-        multi_runtimes = ["net8-jit", "chaos-aot"]
-        for a in avail:
-            if a not in multi_runtimes:
-                multi_runtimes.append(a)
-
-        multi_report = run_multi_benchmark(
-            family_dir=family_dir,
-            family_slug=family_slug,
-            assembly=assembly,
-            method_subject_ids=mids,
-            runtimes=multi_runtimes,
-            iterations=100000,
-            exe_aot=aot_exe,
-            exe_jit=jit_exe,
-            baseline_path=family_dir / "multi-run" / "multi-run-report.json",
-        )
-        multi_output_dir = family_dir / "multi-run"
-        save_report(multi_report, multi_output_dir)
-        print_report_summary(multi_report)
-    except Exception as e:
-        print(f"  [benchmark] Multi-runtime benchmark skipped: {e}")
-
-    # ── Quality gate ──────────────────────────────────────────────────
-    effective_total = max(total - stub_total - invalid_count, 1)
-    min_match_ratio = 0.5
-    match_ok = matched_count >= effective_total * min_match_ratio
-    avg_aot_is_catastrophic = avg_aot_speedup is not None and avg_aot_speedup < -400.0
-
-    if not match_ok:
+    # Check: chaos-aot must have data
+    chaos_aot_summary = next(
+        (s for s in multi_report.summaries if s.runtime == "chaos-aot"), None)
+    if chaos_aot_summary is None or chaos_aot_summary.ok_count == 0:
         bm_status = "failed"
-        bm_reason = (f"matchedCount={matched_count}/{total} "
-                     f"below threshold {min_match_ratio*100:.0f}%")
-    elif avg_aot_is_catastrophic:
-        bm_status = "failed"
-        bm_reason = (f"avg_native_aot_speedup={avg_aot_speedup}% below -400% — "
-                     f"native translation severely underperforms managed JIT")
-    else:
-        bm_status = "passed"
-        bm_reason = ""
+        bm_reason = "chaos-aot benchmark produced no valid results"
 
-    # Build summary line(s)
-    summary_parts = [f"avg_aot_speedup={avg_aot_speedup}%"]
-    if avg_jit_speedup is not None:
-        summary_parts.append(f"avg_jit_speedup={avg_jit_speedup}%")
-    summary_parts.append(f"native_aot_faster={native_aot_faster}/{matched_count}")
-    if native_jit_faster > 0:
-        summary_parts.append(f"native_jit_faster={native_jit_faster}")
-    if managed_faster > 0:
-        summary_parts.append(f"managed_faster={managed_faster}")
+    # Check: net8-jit must have data
+    net8_summary = next(
+        (s for s in multi_report.summaries if s.runtime == "net8-jit"), None)
+    if net8_summary is None or net8_summary.ok_count == 0:
+        bm_status = "failed"
+        bm_reason = "net8-jit benchmark produced no valid results"
+
+    # Build summary
+    summary_parts = []
+    for s in multi_report.summaries:
+        summary_parts.append(f"{s.runtime}={s.geometric_mean_ns:.0f}ns")
     bm_summary = bm_reason or ", ".join(summary_parts)
 
-    multi_benchmark_info = {}
-    if multi_report is not None:
-        multi_benchmark_info = {
-            "runtimesAvailable": multi_report.runtimes_available,
-            "runtimesUnavailable": multi_report.runtimes_unavailable,
-            "multiRunReportPath": "multi-run/multi-run-report.json",
-            "chaosClassification": multi_report.chaos_classification_breakdown,
-        }
-        if multi_report.summaries:
-            # Add key ratios to details for dashboard
-            chaos_vs_net8 = next(
-                (r for r in multi_report.ratios
-                 if r.numerator == "chaos-aot" and r.denominator == "net8-jit"),
-                None,
-            )
-            if chaos_vs_net8 is not None:
-                multi_benchmark_info["multiRuntimeSpeedup"] = chaos_vs_net8.geometric_mean_ratio
-                multi_benchmark_info["multiRuntimeFasterCount"] = chaos_vs_net8.faster_count
-                multi_benchmark_info["multiRuntimeSlowerCount"] = chaos_vs_net8.slower_count
+    # ── Build details for dashboard ──────────────────────────────────
+    chaos_vs_net8 = next(
+        (r for r in multi_report.ratios
+         if r.numerator == "chaos-aot" and r.denominator == "net8-jit"),
+        None,
+    )
 
-    trace("benchmark", family=family_slug, avg_aot_speedup=avg_aot_speedup,
-          avg_jit_speedup=avg_jit_speedup, status=bm_status)
+    details = {
+        "runtimesAvailable": multi_report.runtimes_available,
+        "runtimesUnavailable": multi_report.runtimes_unavailable,
+        "multiRunReportPath": "multi-run/multi-run-report.json",
+        "chaosClassification": multi_report.chaos_classification_breakdown,
+        "summaries": {s.runtime: {
+            "geometricMeanNs": s.geometric_mean_ns,
+            "okCount": s.ok_count,
+            "totalMethods": s.method_count,
+        } for s in multi_report.summaries},
+    }
+    if chaos_vs_net8 is not None:
+        details["chaosAotVsNet8Speedup"] = chaos_vs_net8.geometric_mean_ratio
+        details["chaosAotFasterCount"] = chaos_vs_net8.faster_count
+        details["chaosAotSlowerCount"] = chaos_vs_net8.slower_count
+
+    if chaos_aot_summary is not None:
+        details["chaosAotGeometricMeanNs"] = chaos_aot_summary.geometric_mean_ns
+
+    trace("benchmark", family=family_slug,
+          runtimes_available=multi_report.runtimes_available,
+          status=bm_status)
 
     return StageResult(
         stage="benchmark", status=bm_status,
         summary=bm_summary,
-        details={
-            "averageSpeedupPercent": avg_aot_speedup,
-            "averageNativeAotSpeedupPercent": avg_aot_speedup,
-            "averageNativeJitSpeedupPercent": avg_jit_speedup,
-            "nativeAotFasterCount": native_aot_faster,
-            "nativeJitFasterCount": native_jit_faster,
-            "managedFasterCount": managed_faster,
-            "matchedCount": matched_count,
-            "totalMethods": total,
-            "invalidCount": invalid_count,
-            "benchmarkQuality": bm_reason or "ok",
-            **multi_benchmark_info,
-        },
+        details=details,
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
 
@@ -1989,6 +1564,48 @@ def stage_hot_update_jit_benchmark(family_slug: str, assembly: str) -> StageResu
 
 
 # ── Dashboard Builder ──────────────────────────────────────────────
+def stage_dashboard(family_slug: str, assembly: str,
+                    stage_results: list[StageResult],
+                    mode: str = "standard") -> StageResult:
+    """Stage 14: Build cross-family dashboard (JSON + console + HTML).
+
+    Aggregates data from all stages and produces a unified dashboard
+    entry in the stage results, plus a standalone HTML page.
+    """
+    start = time.perf_counter()
+    stages_map = {sr.stage: sr for sr in stage_results}
+
+    dashboard = build_dashboard(family_slug, assembly, stages_map)
+
+    # Also generate standalone HTML dashboard
+    try:
+        from dashboard_html_generator import generate_html
+        html = generate_html({
+            "family": family_slug,
+            "assembly": assembly,
+            "overall_status": "passed",  # will be corrected by aggregate
+            "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "duration_ms": int((time.perf_counter() - start) * 1000),
+            "stages": {sr.stage: sr.to_dict() for sr in stage_results},
+            "dashboard": dashboard,
+            "coverage": {},
+            "regression": {},
+        })
+        family_dir = _VERIFICATION_BASE / assembly / family_slug
+        html_path = family_dir / "dashboard.html"
+        html_path.write_text(html, encoding="utf-8")
+        print(f"  [dashboard] HTML dashboard → {html_path}")
+    except Exception as e:
+        print(f"  [dashboard] HTML generation skipped: {e}")
+
+    return StageResult(
+        stage="dashboard", status="passed",
+        summary=f"Dashboard built: {len(dashboard)} sections",
+        details=dashboard,
+        duration_ms=int((time.perf_counter() - start) * 1000),
+    )
+
+
 
 def build_dashboard(family_slug: str, assembly: str,
                      stages: dict[str, StageResult]) -> dict[str, Any]:
@@ -2010,6 +1627,17 @@ def build_dashboard(family_slug: str, assembly: str,
         "performance": {},
         "hotupdate": {},
     }
+
+    # ── 0. Managed fact results ────────────────────────────────────────
+    managed_fact = stages.get("managed_fact")
+    if managed_fact and managed_fact.details:
+        dashboard["managedFact"] = {
+            "totalMethods": managed_fact.details.get("totalMethods", 0),
+            "passedMethods": managed_fact.details.get("passedMethods", 0),
+            "failedMethods": managed_fact.details.get("failedMethods", 0),
+            "skippedMethods": managed_fact.details.get("skippedMethods", 0),
+            "tfm": managed_fact.details.get("tfm", "net8.0"),
+        }
 
     # ── 1. Interpreter internals (from microbench stage result details) ──
     microbench = stages.get("microbench")
@@ -2131,12 +1759,18 @@ def compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
     if preflight and preflight.details:
         total_methods = preflight.details.get("methodCount", 0)
 
-    # Method coverage from fact stage (as percentage)
-    fact = stages.get("fact")
+    # Method coverage from managed_fact stage (as percentage)
+    fact = stages.get("managed_fact") or stages.get("fact")
     if fact and fact.details:
-        fact_obj = fact.details.get("fact", {})
-        total = fact_obj.get("total", 0)
-        passed = fact_obj.get("passed", 0)
+        if "totalMethods" in fact.details:
+            # managed_fact format: direct fields
+            total = fact.details.get("totalMethods", 0)
+            passed = fact.details.get("passedMethods", 0)
+        else:
+            # Old fact stage format: nested "fact" key
+            fact_obj = fact.details.get("fact", {})
+            total = fact_obj.get("total", 0)
+            passed = fact_obj.get("passed", 0)
         scores["methodCoverage"] = round((passed / total) * 100, 2) if total > 0 else 0.0
     else:
         scores["methodCoverage"] = 0.0
@@ -2178,7 +1812,7 @@ def aggregate_stage_results(family_slug: str, assembly: str,
     regression = detect_regression(family_slug, assembly, stage_results)
 
     # Determine overall pass/fail
-    required_stages = {"preflight", "codegen", "jit_codegen", "fact", "audit"}
+    required_stages = {"preflight", "codegen", "jit_codegen", "managed_fact", "fact", "fact_jit", "audit"}
     if mode == "strict":
         required_stages.update({"hotupdate", "hotupdate_aot_benchmark",
                                 "hotupdate_jit_fact", "hotupdate_jit_benchmark"})
@@ -2314,11 +1948,22 @@ def detect_regression(family_slug: str, assembly: str,
 
 
 def write_report(report: UnifiedReport, family_slug: str, assembly: str) -> Path:
-    """Write the unified report JSON to the family directory."""
+    """Write the unified report JSON + HTML dashboard to the family directory."""
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     report_path = family_dir / "unified-verification-report.json"
     report_path.parent.mkdir(parents=True, exist_ok=True)
     report_path.write_text(report.to_json(), encoding="utf-8")
+
+    # Regenerate HTML dashboard with final aggregate data
+    try:
+        from dashboard_html_generator import generate_html
+        html = generate_html(json.loads(report.to_json()))
+        html_path = family_dir / "dashboard.html"
+        html_path.write_text(html, encoding="utf-8")
+        print(f"  [report] HTML dashboard → {html_path}")
+    except Exception as e:
+        print(f"  [report] HTML dashboard skipped: {e}")
+
     return report_path
 
 
@@ -2330,23 +1975,25 @@ def verify_family(family_slug: str,
                   skip_stages: list[str] | None = None,
                   verbose: bool = False,
                   codegen_mode: str | None = None) -> dict[str, Any]:
-    """Run the full 13-stage verification pipeline for a single family.
+    """Run the full 15-stage verification pipeline for a single family.
 
     Stages:
         [0]  Preflight
         [1]  Codegen (AOT + save entry-aot.exe)
         [2]  JitCodegen (build entry-jit.exe, restore entry.exe)
-        [3]  Fact AOT (entry.exe)
-        [4]  Fact JIT (entry-jit.exe)
-        [5]  Audit (mechanism + principle)
-        [6]  AsmCompare (JIT vs AOT instruction-level)
-        [7]  Microbench (interpreter internals)
-        [8]  Benchmark (3-way: managed vs AOT vs JIT)
-        [9]  HotUpdate AOT Fact (entry-aot.exe --hotupdate)
-        [10] HotUpdate AOT Bench (entry-aot.exe --hotupdate-and-benchmark)
-        [11] HotUpdate JIT Fact (entry-jit.exe --hotupdate)
-        [12] HotUpdate JIT Bench (entry-jit.exe --hotupdate-and-benchmark)
-        [13] Aggregate
+        [3]  Fact (.NET8) — managed dotnet fact verification
+        [4]  Fact AOT — Chaos AOT (entry-aot.exe)
+        [5]  Fact JIT — Chaos JIT (entry-jit.exe)
+        [6]  Audit (mechanism + principle)
+        [7]  AsmCompare (JIT vs AOT instruction-level)
+        [8]  Microbench (interpreter internals)
+        [9]  Benchmark (5-way: .NET8/.NET10/Mono/Chaos AOT/Chaos JIT)
+        [10] HotUpdate AOT Fact (entry-aot.exe --hotupdate)
+        [11] HotUpdate AOT Bench (entry-aot.exe --hotupdate-and-benchmark)
+        [12] HotUpdate JIT Fact (entry-jit.exe --hotupdate)
+        [13] HotUpdate JIT Bench (entry-jit.exe --hotupdate-and-benchmark)
+        [14] Dashboard (cross-family summary)
+        [15] Aggregate
 
     Args:
         family_slug:  e.g. "convert-char"
@@ -2370,9 +2017,11 @@ def verify_family(family_slug: str,
     print(f"Family Verify: {family_slug} [{assembly}] mode={mode}")
     print(f"{'='*60}\n")
 
+    total_stages = 15
+
     # Stage 0: Preflight
     if "preflight" not in skip:
-        print(f"[0/13] Preflight...")
+        print(f"[0/{total_stages}] Preflight...")
         sr = stage_preflight(family_slug, assembly)
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
@@ -2391,11 +2040,11 @@ def verify_family(family_slug: str,
             write_report(report, family_slug, assembly)
             return report.to_dict()
     else:
-        print(f"[0/13] Preflight... skipped")
+        print(f"[0/{total_stages}] Preflight... skipped")
 
     # Stage 1: Codegen (AOT)
     if "codegen" not in skip:
-        print(f"[1/13] Codegen (AOT)...")
+        print(f"[1/{total_stages}] Codegen (AOT)...")
         sr = stage_code_generation(family_slug, assembly, stage_results[0] if stage_results else StageResult("preflight", "passed"), codegen_mode=codegen_mode)
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
@@ -2406,20 +2055,34 @@ def verify_family(family_slug: str,
             write_report(report, family_slug, assembly)
             return report.to_dict()
     else:
-        print(f"[1/13] Codegen... skipped")
+        print(f"[1/{total_stages}] Codegen... skipped")
 
     # Stage 2: JitCodegen (build entry-jit.exe)
     if "jit_codegen" not in skip:
-        print(f"[2/13] JitCodegen...")
+        print(f"[2/{total_stages}] JitCodegen...")
         sr = stage_jit_code_generation(family_slug, assembly)
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[2/13] JitCodegen... skipped")
+        print(f"[2/{total_stages}] JitCodegen... skipped")
 
-    # Stage 3: Fact AOT
+    # Stage 3: Fact (.NET8) — managed dotnet
+    if "managed_fact" not in skip:
+        print(f"[3/{total_stages}] Fact (.NET8)...")
+        try:
+            sr = stage_managed_fact(family_slug, assembly)
+        except Exception as e:
+            trace("managed_fact", family=family_slug, error=str(e))
+            sr = StageResult(stage="managed_fact", status="error",
+                             summary=f"Managed fact stage crashed: {e}")
+        stage_results.append(sr)
+        print(f"  {sr.status}: {sr.summary}")
+    else:
+        print(f"[3/{total_stages}] Fact (.NET8)... skipped")
+
+    # Stage 4: Fact AOT (Chaos AOT)
     if "fact" not in skip:
-        print(f"[3/13] Fact AOT...")
+        print(f"[4/{total_stages}] Fact AOT...")
         try:
             sr = stage_fact_verification(family_slug, assembly)
         except Exception as e:
@@ -2429,11 +2092,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[3/13] Fact... skipped")
+        print(f"[4/{total_stages}] Fact AOT... skipped")
 
-    # Stage 4: Fact JIT
+    # Stage 5: Fact JIT (Chaos JIT)
     if "fact_jit" not in skip:
-        print(f"[4/13] Fact JIT...")
+        print(f"[5/{total_stages}] Fact JIT...")
         try:
             sr = stage_jit_fact_verification(family_slug, assembly)
         except Exception as e:
@@ -2443,11 +2106,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[4/13] Fact JIT... skipped")
+        print(f"[5/{total_stages}] Fact JIT... skipped")
 
-    # Stage 5: Audit
+    # Stage 6: Audit
     if "audit" not in skip:
-        print(f"[5/13] Mechanism + Principle Audit...")
+        print(f"[6/{total_stages}] Mechanism + Principle Audit...")
         try:
             sr = stage_principle_audit(family_slug, assembly, skip, codegen_mode=codegen_mode)
         except Exception as e:
@@ -2457,11 +2120,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[5/13] Audit... skipped")
+        print(f"[6/{total_stages}] Audit... skipped")
 
-    # Stage 6: AsmCompare
+    # Stage 7: AsmCompare
     if "asm_compare" not in skip:
-        print(f"[6/13] AsmCompare (JIT vs AOT instruction-level)...")
+        print(f"[7/{total_stages}] AsmCompare (JIT vs AOT instruction-level)...")
         try:
             sr = stage_assembly_comparison(family_slug, assembly)
         except Exception as e:
@@ -2471,11 +2134,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[6/13] AsmCompare... skipped")
+        print(f"[7/{total_stages}] AsmCompare... skipped")
 
-    # Stage 7: Microbench
+    # Stage 8: Microbench
     if "microbench" not in skip:
-        print(f"[7/13] Microbench (interpreter internal metrics)...")
+        print(f"[8/{total_stages}] Microbench (interpreter internal metrics)...")
         try:
             sr = stage_micro_benchmark(family_slug, assembly)
         except Exception as e:
@@ -2485,11 +2148,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[7/13] Microbench... skipped")
+        print(f"[8/{total_stages}] Microbench... skipped")
 
-    # Stage 8: Benchmark (3-way)
+    # Stage 9: Benchmark (5-way)
     if "benchmark" not in skip:
-        print(f"[8/13] Benchmark (3-way)...")
+        print(f"[9/{total_stages}] Benchmark (5-way)...")
         try:
             sr = stage_performance_benchmark(family_slug, assembly)
         except Exception as e:
@@ -2499,11 +2162,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[8/13] Benchmark... skipped")
+        print(f"[9/{total_stages}] Benchmark... skipped")
 
-    # Stage 9: HotUpdate AOT Fact
+    # Stage 10: HotUpdate AOT Fact
     if "hotupdate" not in skip:
-        print(f"[9/13] HotUpdate AOT Fact...")
+        print(f"[10/{total_stages}] HotUpdate AOT Fact...")
         try:
             sr = stage_hot_update_fact(family_slug, assembly)
         except Exception as e:
@@ -2513,11 +2176,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[9/13] HotUpdate AOT Fact... skipped")
+        print(f"[10/{total_stages}] HotUpdate AOT Fact... skipped")
 
-    # Stage 10: HotUpdate AOT Bench
+    # Stage 11: HotUpdate AOT Bench
     if "hotupdate_aot_benchmark" not in skip:
-        print(f"[10/13] HotUpdate AOT Bench...")
+        print(f"[11/{total_stages}] HotUpdate AOT Bench...")
         try:
             sr = stage_hot_update_aot_benchmark(family_slug, assembly)
         except Exception as e:
@@ -2527,11 +2190,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[10/13] HotUpdate AOT Bench... skipped")
+        print(f"[11/{total_stages}] HotUpdate AOT Bench... skipped")
 
-    # Stage 11: HotUpdate JIT Fact
+    # Stage 12: HotUpdate JIT Fact
     if "hotupdate_jit_fact" not in skip:
-        print(f"[11/13] HotUpdate JIT Fact...")
+        print(f"[12/{total_stages}] HotUpdate JIT Fact...")
         try:
             sr = stage_hot_update_jit_fact(family_slug, assembly)
         except Exception as e:
@@ -2541,11 +2204,11 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[11/13] HotUpdate JIT Fact... skipped")
+        print(f"[12/{total_stages}] HotUpdate JIT Fact... skipped")
 
-    # Stage 12: HotUpdate JIT Bench
+    # Stage 13: HotUpdate JIT Bench
     if "hotupdate_jit_benchmark" not in skip:
-        print(f"[12/13] HotUpdate JIT Bench...")
+        print(f"[13/{total_stages}] HotUpdate JIT Bench...")
         try:
             sr = stage_hot_update_jit_benchmark(family_slug, assembly)
         except Exception as e:
@@ -2555,10 +2218,24 @@ def verify_family(family_slug: str,
         stage_results.append(sr)
         print(f"  {sr.status}: {sr.summary}")
     else:
-        print(f"[12/13] HotUpdate JIT Bench... skipped")
+        print(f"[13/{total_stages}] HotUpdate JIT Bench... skipped")
 
-    # Stage 13: Aggregate
-    print(f"[13/13] Aggregating...")
+    # Stage 14: Dashboard
+    if "dashboard" not in skip:
+        print(f"[14/{total_stages}] Dashboard...")
+        try:
+            sr = stage_dashboard(family_slug, assembly, stage_results, mode=mode)
+        except Exception as e:
+            trace("dashboard", family=family_slug, error=str(e))
+            sr = StageResult(stage="dashboard", status="error",
+                             summary=f"Dashboard stage crashed: {e}")
+        stage_results.append(sr)
+        print(f"  {sr.status}: {sr.summary}")
+    else:
+        print(f"[14/{total_stages}] Dashboard... skipped")
+
+    # Stage 15: Aggregate
+    print(f"[15/{total_stages}] Aggregating...")
     report = aggregate_stage_results(family_slug, assembly, stage_results, mode,
                         int((time.perf_counter() - overall_start) * 1000))
     report_path = write_report(report, family_slug, assembly)
@@ -2579,6 +2256,10 @@ def verify_family(family_slug: str,
             print(f"  interpreter: {interp.get('fastExecuteNsPerInstr', '?')} ns/instr | "
                   f"CallVirt dispatch={interp.get('callVirtHandlerDispatchNs', '?')} ns | "
                   f"MIC hit≈{interp.get('callVirtMicHitNs', '?')}ns")
+        # Print managed fact summary
+        mf = d.get("managedFact", {})
+        if mf:
+            print(f"  managed_fact: passed={mf.get('passedMethods', 0)} failed={mf.get('failedMethods', 0)}")
     print(f"Report: {report_path}")
     print(f"{'='*60}")
 

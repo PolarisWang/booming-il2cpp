@@ -43,6 +43,30 @@ extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2(void
 extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3(void);
 extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_CustomEntrySubject_5(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_0(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_1(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_2(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_3(void);
+extern "C" void ReflectionModuleSubjects_ReflectionModuleSubjects_Subject_4(void);
+
 namespace chaos::il2cpp::codegen::ReflectionModuleSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

@@ -2,8 +2,8 @@
   "family": "string-construction",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T08:39:23",
-  "duration_ms": 110727,
+  "timestamp": "2026-05-25T01:37:36",
+  "duration_ms": 69838,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\string-construction\\managed\\subjects\\build-output\\StringConstructionSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 51826
+      "duration_ms": 35398
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -50,7 +50,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 1030
+      "duration_ms": 1053
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -65,12 +65,12 @@
         }
       },
       "errors": [],
-      "duration_ms": 63
+      "duration_ms": 26
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "summary": "false_passing=0, principle=ALIGNED (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
@@ -79,38 +79,57 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 3329
+      "duration_ms": 2224
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
+      "status": "passed",
+      "summary": "asm-compare: 8/8 methods OK, avg JIT=44.0 instr, avg AOT IR=17.8 instr, expansion=0.4x",
+      "details": {
+        "totalMethods": 8,
+        "okCount": 8,
+        "failedCount": 0,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 44,
+          "avg": 44.0,
+          "total": 352
+        },
+        "aotInstructionCount": {
+          "min": 9,
+          "max": 26,
+          "avg": 17.8,
+          "total": 142
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {
+          "external_runtime_call": 18
+        },
+        "overallIrExpansionRatio": 0.4,
+        "averageExpansionRatio": 0.4,
+        "maxExpansionRatio": 0.59,
+        "minExpansionRatio": 0.2
+      },
       "errors": [],
-      "duration_ms": 49
+      "duration_ms": 6396
     },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=4.5ns/op | FastExecute=129.0ns/op | CallVirt dispatch=136.6ns",
+      "summary": "FramePool=4.5ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
       "details": {
         "framePool": {
           "acquireReleaseNsPerOp": 4.5,
           "batchCount": 1000,
           "framesPerBatch": 32
         },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 129.0
-        },
-        "callVirt": {
-          "handlerDispatchNs": 136.6,
-          "emptyStackNs": 150.2
-        },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 121
+      "duration_ms": 33
     },
     "benchmark": {
       "stage": "benchmark",
@@ -118,7 +137,7 @@
       "summary": "All 8 non-stub methods are invalid (no managed harness)",
       "details": {},
       "errors": [],
-      "duration_ms": 50016
+      "duration_ms": 23101
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -132,20 +151,20 @@
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 58
+      "duration_ms": 31
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=13.81% (1.1x) over 8 methods (AOT patched path)",
+      "summary": "avg_slowdown=-14.84% (0.9x) over 8 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": 13.81,
-        "slowdownFactor": 1.1381000000000001,
+        "averageSlowdownPercent": -14.84,
+        "slowdownFactor": 0.8515999999999999,
         "threshold": 50.0,
         "nonStubMethods": 8
       },
       "errors": [],
-      "duration_ms": 608
+      "duration_ms": 178
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -157,20 +176,20 @@
         "total": 8
       },
       "errors": [],
-      "duration_ms": 70
+      "duration_ms": 22
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=29.7% (1.3x) over 8 methods (JIT patched path)",
+      "summary": "avg_slowdown=-6.82% (0.9x) over 8 methods (JIT patched path)",
       "details": {
-        "averageSlowdownPercent": 29.7,
-        "slowdownFactor": 1.297,
+        "averageSlowdownPercent": -6.82,
+        "slowdownFactor": 0.9318000000000001,
         "threshold": 50.0,
         "nonStubMethods": 8
       },
       "errors": [],
-      "duration_ms": 3548
+      "duration_ms": 1367
     }
   },
   "coverage": {
@@ -182,7 +201,7 @@
     "interpreter": {
       "fastFramePoolNsPerOp": 4.5,
       "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 136.6,
+      "callVirtHandlerDispatchNs": 0,
       "callVirtMicHitNs": 0,
       "callVirtRawFallbackNs": 0,
       "poolSize": 32
@@ -211,8 +230,8 @@
         "totalMethods": 8
       },
       "aotOverhead": {
-        "averageSlowdownPercent": 13.81,
-        "slowdownFactor": 1.1381000000000001,
+        "averageSlowdownPercent": -14.84,
+        "slowdownFactor": 0.8515999999999999,
         "nonStubMethods": 8
       },
       "jitFunctional": {
@@ -221,15 +240,15 @@
         "totalMethods": 8
       },
       "jitOverhead": {
-        "averageSlowdownPercent": 29.7,
-        "slowdownFactor": 1.297,
+        "averageSlowdownPercent": -6.82,
+        "slowdownFactor": 0.9318000000000001,
         "nonStubMethods": 8
       }
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.4,
-      "interpreterSlowdownFactor": 1.1381000000000001,
+      "interpreterSlowdownFactor": 0.8515999999999999,
       "asmPassRate": 100.0
     }
   },

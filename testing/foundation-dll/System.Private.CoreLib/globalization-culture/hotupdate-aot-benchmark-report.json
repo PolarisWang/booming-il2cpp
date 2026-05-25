@@ -7,112 +7,112 @@
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_CurrentCulture:System.Globalization.CultureInfo()",
       "status": "passed",
-      "prePatchNsPerOp": 6.44,
-      "postPatchNsPerOp": 6.5,
-      "slowdownPercent": 0.93
+      "prePatchNsPerOp": 3.66,
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 3.83
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_InvariantCulture:System.Globalization.CultureInfo()",
       "status": "passed",
-      "prePatchNsPerOp": 6.34,
-      "postPatchNsPerOp": 6.9,
-      "slowdownPercent": 8.83
+      "prePatchNsPerOp": 3.64,
+      "postPatchNsPerOp": 6.6,
+      "slowdownPercent": 81.32
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::GetCultureInfo:System.Globalization.CultureInfo(System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 119.8,
-      "postPatchNsPerOp": 110.5,
-      "slowdownPercent": -7.76
+      "prePatchNsPerOp": 79.14,
+      "postPatchNsPerOp": 81.3,
+      "slowdownPercent": 2.73
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_Name:System.String()",
       "status": "passed",
-      "prePatchNsPerOp": 7.69,
-      "postPatchNsPerOp": 8.0,
-      "slowdownPercent": 4.03
+      "prePatchNsPerOp": 4.6,
+      "postPatchNsPerOp": 4.8,
+      "slowdownPercent": 4.35
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DisplayName:System.String()",
       "status": "passed",
-      "prePatchNsPerOp": 7.4,
-      "postPatchNsPerOp": 7.7,
-      "slowdownPercent": 4.05
+      "prePatchNsPerOp": 5.61,
+      "postPatchNsPerOp": 5.5,
+      "slowdownPercent": -1.96
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_DateTimeFormat:System.Globalization.DateTimeFormatInfo()",
       "status": "passed",
-      "prePatchNsPerOp": 8.05,
-      "postPatchNsPerOp": 8.1,
-      "slowdownPercent": 0.62
+      "prePatchNsPerOp": 4.41,
+      "postPatchNsPerOp": 4.6,
+      "slowdownPercent": 4.31
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CultureInfo::get_NumberFormat:System.Globalization.NumberFormatInfo()",
       "status": "passed",
-      "prePatchNsPerOp": 7.84,
-      "postPatchNsPerOp": 8.3,
-      "slowdownPercent": 5.87
+      "prePatchNsPerOp": 7.49,
+      "postPatchNsPerOp": 7.9,
+      "slowdownPercent": 5.47
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 238.75,
-      "postPatchNsPerOp": 215.3,
-      "slowdownPercent": -9.82
+      "prePatchNsPerOp": 158.2,
+      "postPatchNsPerOp": 151.5,
+      "slowdownPercent": -4.24
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)",
       "status": "passed",
-      "prePatchNsPerOp": 9.94,
-      "postPatchNsPerOp": 7.2,
-      "slowdownPercent": -27.57
+      "prePatchNsPerOp": 4.33,
+      "postPatchNsPerOp": 4.4,
+      "slowdownPercent": 1.62
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 218.76,
-      "postPatchNsPerOp": 214.2,
-      "slowdownPercent": -2.08
+      "prePatchNsPerOp": 168.11,
+      "postPatchNsPerOp": 153.2,
+      "slowdownPercent": -8.87
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 9.63,
-      "postPatchNsPerOp": 9.3,
-      "slowdownPercent": -3.43
+      "prePatchNsPerOp": 6.21,
+      "postPatchNsPerOp": 5.3,
+      "slowdownPercent": -14.65
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)",
       "status": "passed",
-      "prePatchNsPerOp": 8.84,
-      "postPatchNsPerOp": 9.3,
-      "slowdownPercent": 5.2
+      "prePatchNsPerOp": 5.49,
+      "postPatchNsPerOp": 5.6,
+      "slowdownPercent": 2.0
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()",
       "status": "passed",
-      "prePatchNsPerOp": 8.73,
-      "postPatchNsPerOp": 9.4,
-      "slowdownPercent": 7.67
+      "prePatchNsPerOp": 5.27,
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": 2.47
     }
   ],
   "summary": {
     "totalMethods": 13,
     "nonStubMethods": 13,
-    "averageSlowdownPercent": -1.04,
-    "slowdownFactor": 0.9895999999999999,
+    "averageSlowdownPercent": 6.03,
+    "slowdownFactor": 1.0603,
     "slowdownThresholdX": 50.0
   }
 }

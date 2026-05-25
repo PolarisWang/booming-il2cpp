@@ -51,6 +51,42 @@ extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subjec
 extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_8(void);
 extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_0(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_1(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_2(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_3(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_4(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_5(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_6(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_7(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_8(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_9(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_0(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_1(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_2(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_3(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_4(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_5(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_6(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_7(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_8(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_9(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_0(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_1(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_2(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_3(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_4(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_5(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_6(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_7(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_8(void);
+extern "C" void ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::ReflectionParametersSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

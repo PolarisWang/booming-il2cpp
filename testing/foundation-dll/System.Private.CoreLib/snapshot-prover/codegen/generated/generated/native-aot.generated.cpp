@@ -39,6 +39,42 @@ extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_6(void);
 extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_7(void);
 extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_0(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_1(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_2(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_3(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_4(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_5(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_6(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_7(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_9(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_0(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_1(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_2(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_3(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_4(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_5(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_6(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_7(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_9(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_0(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_1(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_2(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_3(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_4(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_5(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_6(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_7(void);
+extern "C" void SnapshotProverSubjects_SnapshotProverSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::SnapshotProverSubjects {
 
 // Bring runtime_core and jit declarations into scope for unqualified lookup

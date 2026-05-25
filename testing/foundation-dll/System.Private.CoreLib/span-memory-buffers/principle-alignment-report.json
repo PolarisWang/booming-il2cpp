@@ -1,14 +1,22 @@
 {
   "family": "span-memory-buffers",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-22T07:08:00.880835",
+  "generated_at": "2026-05-25T01:33:25.133621",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available — benchmarks not run for this family",
+      "summary": "14/14 methods are stubs — benchmark data not meaningful",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "average_native_jit_speedup_percent": null,
+        "managed_faster_count": 0,
+        "native_aot_faster_count": 0,
+        "native_jit_faster_count": 0,
+        "invalid_count": 14,
+        "total_methods": 14
+      }
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -19,123 +27,10 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 28,
-        "methods_total": 28
+        "methods_with_lowering": 0,
+        "methods_total": 0
       },
-      "per_method": [
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_13",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_10",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_11",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_12",
-          "has_lowering": true
-        },
-        {
-          "name": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_13",
-          "has_lowering": true
-        }
-      ]
+      "per_method": []
     },
     "p1_no_redundant_branch": {
       "check_id": "p1_no_redundant_branch",
@@ -169,14 +64,10 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "22 of 53 changed source files are outside expected architecture layers",
+      "summary": "15 of 21 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/vs2022/testing/Temporary/LastTest.log",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
+          "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
           "reason": "outside expected architecture layers"
         },
         {
@@ -184,7 +75,15 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
           "reason": "outside expected architecture layers"
         },
         {
@@ -192,93 +91,52 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
+          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
+          "file": "src/native/jit/jit_engine.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
+          "file": "src/native/jit/jit_precode.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/entry.exe",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+          "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 53,
+        "changed_source_count": 21,
         "layer_distribution": {
-          "TestInfra": 3,
-          "Codegen": 4,
-          "HotUpdate": 1,
-          "Interpreter": 5,
-          "RuntimeCore": 10,
-          "BuildConfig": 1,
-          "Contracts": 1,
-          "Tests": 6
+          "TestInfra": 2,
+          "ManagedContracts": 1,
+          "RuntimeCore": 3
         },
         "violations": [
           {
-            "file": "build/vs2022/testing/Temporary/LastTest.log",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
+            "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
             "reason": "outside expected architecture layers"
           },
           {
@@ -286,7 +144,15 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
             "reason": "outside expected architecture layers"
           },
           {
@@ -294,71 +160,39 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
+            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
+            "file": "src/native/jit/jit_engine.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
+            "file": "src/native/jit/jit_precode.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/entry.exe",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+            "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
             "reason": "outside expected architecture layers"
           }
         ]

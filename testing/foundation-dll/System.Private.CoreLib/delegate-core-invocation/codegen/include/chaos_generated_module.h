@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct DelegateCoreInvocationSubjects_t {
+    struct DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -66,8 +66,8 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } delegateCoreInvocationSubjects;
-    struct DelegateCoreInvocationSubjects___c_t {
+    } delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects;
+    struct DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_t {
         void (*cctor)(
                 void
         );
@@ -98,7 +98,7 @@ struct Functions {
         void (*_Subject_7_b__8_1)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } delegateCoreInvocationSubjects___c;
+    } delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c;
     int32_t method_count;
 };
 
@@ -117,127 +117,127 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct DelegateCoreInvocationSubjects {
+struct DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_0(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_1(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_2(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_3(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_4(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_5(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_6(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_7(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_8(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects.Subject_9(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 10;
 };
 
-struct DelegateCoreInvocationSubjects___c {
+struct DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c {
     static inline void cctor(
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.cctor(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c.cctor(
         );
     }
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c.ctor(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c.ctor(
                     arg_0
         );
     }
     static inline void _Subject_2_b__3_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_2_b__3_0(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c._Subject_2_b__3_0(
                     arg_0
         );
     }
     static inline void _Subject_2_b__3_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_2_b__3_1(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c._Subject_2_b__3_1(
                     arg_0
         );
     }
     static inline void _Subject_3_b__4_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_3_b__4_0(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c._Subject_3_b__4_0(
                     arg_0
         );
     }
     static inline void _Subject_3_b__4_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_3_b__4_1(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c._Subject_3_b__4_1(
                     arg_0
         );
     }
     static inline void _Subject_4_b__5_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_4_b__5_0(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c._Subject_4_b__5_0(
                     arg_0
         );
     }
     static inline void _Subject_4_b__5_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_4_b__5_1(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c._Subject_4_b__5_1(
                     arg_0
         );
     }
     static inline void _Subject_7_b__8_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_7_b__8_0(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c._Subject_7_b__8_0(
                     arg_0
         );
     }
     static inline void _Subject_7_b__8_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.delegateCoreInvocationSubjects___c._Subject_7_b__8_1(
+        return kFunctions.delegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c._Subject_7_b__8_1(
                     arg_0
         );
     }

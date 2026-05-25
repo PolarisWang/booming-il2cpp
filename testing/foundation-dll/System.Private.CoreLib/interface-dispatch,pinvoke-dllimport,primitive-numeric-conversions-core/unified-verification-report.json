@@ -2,74 +2,272 @@
   "family": "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-23T18:48:28",
-  "duration_ms": 6250,
+  "timestamp": "2026-05-25T01:48:42",
+  "duration_ms": 31171,
   "overall_status": "failed",
   "stages": {
-    "codegen": {
-      "stage": "codegen",
-      "status": "failed",
-      "summary": "C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(18,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(18,106): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(25,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(25,121): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(32,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(32,122): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(39,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(39,118): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(46,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(46,112): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(53,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(53,112): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(60,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(60,116): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(67,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(67,119): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(74,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(74,117): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(81,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(81,122): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(88,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(88,121): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(95,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(95,117): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(102,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(102,120): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(109,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(109,114): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(116,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(116,114): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(123,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(123,115): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(130,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(130,114): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(137,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(137,118): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(144,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(144,118): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(151,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(151,116): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(158,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(158,116): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(165,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(165,115): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(172,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(172,114): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\n\nBuild FAILED.\n\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(18,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(18,106): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(25,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(25,121): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(32,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(32,122): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(39,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(39,118): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(46,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(46,112): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(53,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(53,112): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(60,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(60,116): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(67,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(67,119): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(74,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(74,117): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(81,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(81,122): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(88,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(88,121): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(95,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(95,117): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(102,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(102,120): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(109,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(109,114): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(116,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(116,114): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(123,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(123,115): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(130,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(130,114): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(137,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(137,118): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(144,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(144,118): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(151,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(151,116): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(158,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(158,116): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(165,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(165,115): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(172,19): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\nC:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.cs(172,114): error CS0103: The name 'InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry' does not exist in the current context [C:\\Users\\haochuan.wang\\AppData\\Local\\Temp\\compound_build_eu3ssv4m\\InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.csproj]\n    0 Warning(s)\n    46 Error(s)\n\nTime Elapsed 00:00:01.09\n",
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "23 methods, 0 custom entries",
       "details": {
-        "steps": {
-          "build_subjects": "FAILED"
-        }
-      },
-      "errors": [],
-      "duration_ms": 3167
-    },
-    "jit_codegen": {
-      "stage": "jit_codegen",
-      "status": "failed",
-      "summary": "JIT codegen failed",
-      "details": {},
-      "errors": [],
-      "duration_ms": 3079
-    },
-    "fact": {
-      "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=skip (0/0)",
-      "details": {
-        "fact": {
-          "status": "skip",
-          "passed": 0,
-          "total": 0
-        }
+        "methodCount": 23,
+        "customMethodCount": 0,
+        "hasCustomEntryFile": false,
+        "customMethods": []
       },
       "errors": [],
       "duration_ms": 1
     },
-    "fact_jit": {
-      "stage": "fact_jit",
-      "status": "skipped",
-      "summary": "entry-jit.exe not found — cannot run JIT fact",
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "entry.exe build failed",
+      "details": {
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "OK",
+          "build_entry_exe": "FAILED"
+        }
+      },
+      "errors": [],
+      "duration_ms": 19784
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "entry-jit.exe already exists, skipping rebuild",
       "details": {},
       "errors": [],
       "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "passed",
+      "summary": "Fact verify=passed (23/23)",
+      "details": {
+        "fact": {
+          "status": "passed",
+          "passed": 23,
+          "total": 23
+        }
+      },
+      "errors": [],
+      "duration_ms": 34
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "failed",
+      "summary": "Fact JIT verify=failed (0/0)",
+      "details": {
+        "fact_jit": {
+          "status": "failed",
+          "passed": 0,
+          "total": 0,
+          "exit_code": 3221225477
+        }
+      },
+      "errors": [],
+      "duration_ms": 24
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED (mech_passed=True, strict_on_CONCERN=False)",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "ALIGNED",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 4513
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "passed",
+      "summary": "asm-compare: 23/23 methods OK, avg JIT=44.0 instr, avg AOT IR=16.1 instr, expansion=0.37x",
+      "details": {
+        "totalMethods": 23,
+        "okCount": 23,
+        "failedCount": 0,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 44,
+          "avg": 44.0,
+          "total": 1012
+        },
+        "aotInstructionCount": {
+          "min": 16,
+          "max": 18,
+          "avg": 16.1,
+          "total": 370
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0.37,
+        "averageExpansionRatio": 0.36,
+        "maxExpansionRatio": 0.41,
+        "minExpansionRatio": 0.36
+      },
+      "errors": [],
+      "duration_ms": 2637
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=3.1ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 3.1,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 28
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "All 23 non-stub methods are invalid (no managed harness)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 2944
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "67/67 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 67,
+        "failedMethods": 0,
+        "totalMethods": 67,
+        "realMethods": 67,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 29
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 554
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "failed",
+      "summary": "0/0 passed, 0 failed",
+      "details": {
+        "passed": 0,
+        "failed": 0,
+        "total": 0
+      },
+      "errors": [],
+      "duration_ms": 27
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 590
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
-    "testedRate": 0.0,
-    "overall": 0.0
+    "methodCoverage": 100.0,
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {},
-    "irTranslation": {},
+    "interpreter": {
+      "fastFramePoolNsPerOp": 3.1,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
+    "irTranslation": {
+      "totalMethods": 23,
+      "okCount": 23,
+      "failedCount": 0,
+      "overallIrExpansionRatio": 0.37,
+      "averageExpansionRatio": 0.36,
+      "maxExpansionRatio": 0.41,
+      "jitInstructionAvg": 44.0,
+      "aotInstructionAvg": 16.1,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
+    },
     "performance": {},
-    "hotupdate": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 67,
+        "failedMethods": 0,
+        "totalMethods": 67
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      },
+      "jitFunctional": {
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "totalMethods": 0
+      },
+      "jitOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      }
+    },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 0,
-      "asmPassRate": 0.0
+      "irExpansionRatio": 0.37,
+      "interpreterSlowdownFactor": 1.0,
+      "asmPassRate": 100.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 23,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 23,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []

@@ -59,10 +59,6 @@ extern const char* const kPatchDataHostClassName;
 extern "C" void RunMicrobench();
 
 
-// Defined in native-aot.generated.cpp (JIT mode) — registers all methods
-// for precode dispatch.  In AOT mode this is a no-op stub.
-extern "C" void ChaosJitRegisterAll();
-
 
 // ── Shared helper: apply hotpatch and print diagnostic ─────────────
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
@@ -205,11 +201,6 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 
 // ── Main ───────────────────────────────────────────────────────────
 int main(int argc, char* argv[]) {
-
-    // Register all methods for JIT precode dispatch.
-    // After this, each method's first call triggers JitStubDispatchImpl
-    // → jit::Compile().  Subsequent calls go directly to compiled code.
-    ChaosJitRegisterAll();
 
 
     if (argc < 2) {

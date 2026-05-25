@@ -2770,10 +2770,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -2844,40 +2843,77 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
-				auto& _d48 = s_hotpatch_entries[48];
-				CHAOS_IL2CPP_INT32 _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d48)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d48))
+				// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplSimple:System.Int32()
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
 				{
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d48.method_key, nullptr, &_d_hpresult);
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple, {});
+					chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.AsTypeInfoHot();
+					InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+					_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 				}
-				else
+				chaos_locals[1] = _s0;
+				_s0 = chaos_locals[1];
 				{
-					_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplSimple();
+					const auto chaos_raw_arg_0 = _s0;
+					const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+					if (chaos_arg_0 == 0)
+					{
+						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+					}
+					CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+					chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 				}
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				chaos_locals[2] = _s0;
+				goto chaos_inline_label_0_0;
+			chaos_inline_label_0_0:
+			{
+				_s0 = chaos_locals[2];
+			}
+				chaos_inline_retval0 = _s0;
+				goto chaos_inline_end0;
+			chaos_inline_end0:
+				;
+				_s0 = chaos_inline_retval0;
 			}
 			{
-				auto& _d48 = s_hotpatch_entries[48];
-				CHAOS_IL2CPP_INT32 _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d48)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d48))
+				// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplSimple:System.Int32()
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval1{};
 				{
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d48.method_key, nullptr, &_d_hpresult);
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple, {});
+					chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.AsTypeInfoHot();
+					InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 				}
-				else
+				chaos_locals[1] = _s1;
+				_s1 = chaos_locals[1];
 				{
-					_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplSimple();
+					const auto chaos_raw_arg_0 = _s1;
+					const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+					if (chaos_arg_0 == 0)
+					{
+						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+					}
+					CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+					chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 				}
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				chaos_locals[2] = _s1;
+				goto chaos_inline_label_1_0;
+			chaos_inline_label_1_0:
+			{
+				_s1 = chaos_locals[2];
+			}
+				chaos_inline_retval1 = _s1;
+				goto chaos_inline_end1;
+			chaos_inline_end1:
+				;
+				_s1 = chaos_inline_retval1;
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -2908,40 +2944,77 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
-				auto& _d47 = s_hotpatch_entries[47];
-				CHAOS_IL2CPP_INT32 _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d47)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d47))
+				// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplDefault:System.Int32()
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
 				{
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d47.method_key, nullptr, &_d_hpresult);
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault, {});
+					chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault.AsTypeInfoHot();
+					InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+					_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 				}
-				else
+				chaos_locals[1] = _s0;
+				_s0 = chaos_locals[1];
 				{
-					_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplDefault();
+					const auto chaos_raw_arg_0 = _s0;
+					const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+					if (chaos_arg_0 == 0)
+					{
+						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+					}
+					CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+					chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 				}
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				chaos_locals[2] = _s0;
+				goto chaos_inline_label_0_0;
+			chaos_inline_label_0_0:
+			{
+				_s0 = chaos_locals[2];
+			}
+				chaos_inline_retval0 = _s0;
+				goto chaos_inline_end0;
+			chaos_inline_end0:
+				;
+				_s0 = chaos_inline_retval0;
 			}
 			{
-				auto& _d47 = s_hotpatch_entries[47];
-				CHAOS_IL2CPP_INT32 _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d47)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d47))
+				// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplDefault:System.Int32()
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval1{};
 				{
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d47.method_key, nullptr, &_d_hpresult);
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault, {});
+					chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault.AsTypeInfoHot();
+					InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 				}
-				else
+				chaos_locals[1] = _s1;
+				_s1 = chaos_locals[1];
 				{
-					_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplDefault();
+					const auto chaos_raw_arg_0 = _s1;
+					const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+					if (chaos_arg_0 == 0)
+					{
+						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+					}
+					CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+					chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 				}
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				chaos_locals[2] = _s1;
+				goto chaos_inline_label_1_0;
+			chaos_inline_label_1_0:
+			{
+				_s1 = chaos_locals[2];
+			}
+				chaos_inline_retval1 = _s1;
+				goto chaos_inline_end1;
+			chaos_inline_end1:
+				;
+				_s1 = chaos_inline_retval1;
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -2972,10 +3045,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d46 = s_hotpatch_entries[46];
@@ -3036,10 +3108,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d44 = s_hotpatch_entries[44];
@@ -3100,10 +3171,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d28 = s_hotpatch_entries[28];
@@ -3164,40 +3234,77 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
-				auto& _d30 = s_hotpatch_entries[30];
-				CHAOS_IL2CPP_INT32 _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d30)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d30))
+				// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondBase:System.Int32()
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
 				{
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d30.method_key, nullptr, &_d_hpresult);
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
+					chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
+					InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+					_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 				}
-				else
+				chaos_locals[1] = _s0;
+				_s0 = chaos_locals[1];
 				{
-					_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondBase();
+					const auto chaos_raw_arg_0 = _s0;
+					const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+					if (chaos_arg_0 == 0)
+					{
+						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+					}
+					CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+					chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 				}
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				chaos_locals[2] = _s0;
+				goto chaos_inline_label_0_0;
+			chaos_inline_label_0_0:
+			{
+				_s0 = chaos_locals[2];
+			}
+				chaos_inline_retval0 = _s0;
+				goto chaos_inline_end0;
+			chaos_inline_end0:
+				;
+				_s0 = chaos_inline_retval0;
 			}
 			{
-				auto& _d30 = s_hotpatch_entries[30];
-				CHAOS_IL2CPP_INT32 _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d30)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d30))
+				// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondBase:System.Int32()
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval1{};
 				{
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d30.method_key, nullptr, &_d_hpresult);
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
+					chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
+					InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 				}
-				else
+				chaos_locals[1] = _s1;
+				_s1 = chaos_locals[1];
 				{
-					_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondBase();
+					const auto chaos_raw_arg_0 = _s1;
+					const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+					if (chaos_arg_0 == 0)
+					{
+						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+					}
+					CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+					chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 				}
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				chaos_locals[2] = _s1;
+				goto chaos_inline_label_1_0;
+			chaos_inline_label_1_0:
+			{
+				_s1 = chaos_locals[2];
+			}
+				chaos_inline_retval1 = _s1;
+				goto chaos_inline_end1;
+			chaos_inline_end1:
+				;
+				_s1 = chaos_inline_retval1;
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -3228,40 +3335,77 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
-				auto& _d31 = s_hotpatch_entries[31];
-				CHAOS_IL2CPP_INT32 _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d31)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d31))
+				// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondDerived:System.Int32()
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
 				{
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d31.method_key, nullptr, &_d_hpresult);
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
+					chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
+					InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+					_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 				}
-				else
+				chaos_locals[1] = _s0;
+				_s0 = chaos_locals[1];
 				{
-					_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondDerived();
+					const auto chaos_raw_arg_0 = _s0;
+					const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+					if (chaos_arg_0 == 0)
+					{
+						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+					}
+					CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+					chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
+					_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 				}
-				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				chaos_locals[2] = _s0;
+				goto chaos_inline_label_0_0;
+			chaos_inline_label_0_0:
+			{
+				_s0 = chaos_locals[2];
+			}
+				chaos_inline_retval0 = _s0;
+				goto chaos_inline_end0;
+			chaos_inline_end0:
+				;
+				_s0 = chaos_inline_retval0;
 			}
 			{
-				auto& _d31 = s_hotpatch_entries[31];
-				CHAOS_IL2CPP_INT32 _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d31)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d31))
+				// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondDerived:System.Int32()
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval1{};
 				{
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d31.method_key, nullptr, &_d_hpresult);
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
+					chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
+					InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+					_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 				}
-				else
+				chaos_locals[1] = _s1;
+				_s1 = chaos_locals[1];
 				{
-					_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondDerived();
+					const auto chaos_raw_arg_0 = _s1;
+					const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+					if (chaos_arg_0 == 0)
+					{
+						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+					}
+					CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+					chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
+					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 				}
-				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				chaos_locals[2] = _s1;
+				goto chaos_inline_label_1_0;
+			chaos_inline_label_1_0:
+			{
+				_s1 = chaos_locals[2];
+			}
+				chaos_inline_retval1 = _s1;
+				goto chaos_inline_end1;
+			chaos_inline_end1:
+				;
+				_s1 = chaos_inline_retval1;
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -3292,10 +3436,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d32 = s_hotpatch_entries[32];
@@ -3356,10 +3499,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d36 = s_hotpatch_entries[36];
@@ -3420,10 +3562,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d37 = s_hotpatch_entries[37];
@@ -3484,10 +3625,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d39 = s_hotpatch_entries[39];
@@ -3548,10 +3688,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d38 = s_hotpatch_entries[38];
@@ -3612,10 +3751,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d29 = s_hotpatch_entries[29];
@@ -3676,10 +3814,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d42 = s_hotpatch_entries[42];
@@ -3740,10 +3877,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d43 = s_hotpatch_entries[43];
@@ -3804,10 +3940,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d40 = s_hotpatch_entries[40];
@@ -3868,10 +4003,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d35 = s_hotpatch_entries[35];
@@ -3932,10 +4066,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d33 = s_hotpatch_entries[33];
@@ -3996,10 +4129,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d41 = s_hotpatch_entries[41];
@@ -4060,10 +4192,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d34 = s_hotpatch_entries[34];
@@ -4124,10 +4255,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d49 = s_hotpatch_entries[49];
@@ -4188,10 +4318,9 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d45 = s_hotpatch_entries[45];
@@ -4276,14 +4405,15 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 23) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
-
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s5{};
+	CHAOS_IL2CPP_INTPTR _s6{};
+	CHAOS_IL2CPP_INTPTR _s7{};
 	_s0 = chaos_args[0];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -4716,19 +4846,84 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 																else
 																{
 																	{
-																		auto& _d32 = s_hotpatch_entries[32];
-																		CHAOS_IL2CPP_INT32 _d_hpresult{};
-																		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d32)
-																			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d32))
+																		// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondMulti:System.Int32()
+																		CHAOS_IL2CPP_INTPTR chaos_inline_retval14{};
 																		{
-																			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-																				_d32.method_key, nullptr, &_d_hpresult);
+																			auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
+																			chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
+																			InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+																			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 																		}
-																		else
+																		chaos_locals[23] = _s4;
 																		{
-																			_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondMulti();
+																			auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2, {});
+																			chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2.AsTypeInfoHot();
+																			InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+																			_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 																		}
-																		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+																		chaos_locals[24] = _s4;
+																		_s4 = chaos_locals[23];
+																		{
+																			const auto chaos_raw_arg_0 = _s4;
+																			const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+																			if (chaos_arg_0 == 0)
+																			{
+																				::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+																			}
+																			CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+																			chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
+																			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+																		}
+																		_s5 = chaos_locals[23];
+																		{
+																			const auto chaos_raw_arg_0 = _s5;
+																			const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+																			if (chaos_arg_0 == 0)
+																			{
+																				::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+																			}
+																			CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+																			chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
+																			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+																		}
+																		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
+																		_s5 = chaos_locals[24];
+																		{
+																			const auto chaos_raw_arg_0 = _s5;
+																			const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+																			if (chaos_arg_0 == 0)
+																			{
+																				::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+																			}
+																			CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+																			chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
+																			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+																		}
+																		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
+																		_s5 = chaos_locals[24];
+																		{
+																			const auto chaos_raw_arg_0 = _s5;
+																			const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+																			if (chaos_arg_0 == 0)
+																			{
+																				::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+																			}
+																			CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+																			chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
+																			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+																		}
+																		_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
+																		chaos_locals[25] = _s4;
+																		goto chaos_inline_label_14_0;
+																	chaos_inline_label_14_0:
+																	{
+																		_s4 = chaos_locals[25];
+																	}
+																		chaos_inline_retval14 = _s4;
+																		goto chaos_inline_end14;
+																	chaos_inline_end14:
+																		;
+																		_s4 = chaos_inline_retval14;
 																	}
 																	chaos_locals[1] = _s4;
 																}
@@ -4737,19 +4932,38 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 														else
 														{
 															{
-																auto& _d31 = s_hotpatch_entries[31];
-																CHAOS_IL2CPP_INT32 _d_hpresult{};
-																if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d31)
-																	&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d31))
+																// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondDerived:System.Int32()
+																CHAOS_IL2CPP_INTPTR chaos_inline_retval15{};
 																{
-																	::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-																		_d31.method_key, nullptr, &_d_hpresult);
+																	auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
+																	chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
+																	InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+																	_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 																}
-																else
+																chaos_locals[23] = _s4;
+																_s4 = chaos_locals[23];
 																{
-																	_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondDerived();
+																	const auto chaos_raw_arg_0 = _s4;
+																	const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+																	if (chaos_arg_0 == 0)
+																	{
+																		::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+																	}
+																	CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+																	chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 4u)))(chaos_arg_0);
+																	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 																}
-																_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+																chaos_locals[24] = _s4;
+																goto chaos_inline_label_15_0;
+															chaos_inline_label_15_0:
+															{
+																_s4 = chaos_locals[24];
+															}
+																chaos_inline_retval15 = _s4;
+																goto chaos_inline_end15;
+															chaos_inline_end15:
+																;
+																_s4 = chaos_inline_retval15;
 															}
 															chaos_locals[1] = _s4;
 														}
@@ -4758,19 +4972,38 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 												else
 												{
 													{
-														auto& _d30 = s_hotpatch_entries[30];
-														CHAOS_IL2CPP_INT32 _d_hpresult{};
-														if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d30)
-															&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d30))
+														// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondBase:System.Int32()
+														CHAOS_IL2CPP_INTPTR chaos_inline_retval16{};
 														{
-															::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-																_d30.method_key, nullptr, &_d_hpresult);
+															auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
+															chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
+															InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+															_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 														}
-														else
+														chaos_locals[23] = _s4;
+														_s4 = chaos_locals[23];
 														{
-															_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondBase();
+															const auto chaos_raw_arg_0 = _s4;
+															const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+															if (chaos_arg_0 == 0)
+															{
+																::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+															}
+															CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+															chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 3u)))(chaos_arg_0);
+															_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 														}
-														_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+														chaos_locals[24] = _s4;
+														goto chaos_inline_label_16_0;
+													chaos_inline_label_16_0:
+													{
+														_s4 = chaos_locals[24];
+													}
+														chaos_inline_retval16 = _s4;
+														goto chaos_inline_end16;
+													chaos_inline_end16:
+														;
+														_s4 = chaos_inline_retval16;
 													}
 													chaos_locals[1] = _s4;
 												}
@@ -4821,19 +5054,70 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 						else
 						{
 							{
-								auto& _d46 = s_hotpatch_entries[46];
-								CHAOS_IL2CPP_INT32 _d_hpresult{};
-								if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d46)
-									&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d46))
+								// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestMultiImplCalc:System.Int32()
+								CHAOS_IL2CPP_INTPTR chaos_inline_retval19{};
 								{
-									::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-										_d46.method_key, nullptr, &_d_hpresult);
+									auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd, {});
+									chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd.AsTypeInfoHot();
+									InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+									_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 								}
-								else
+								chaos_locals[23] = _s4;
 								{
-									_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestMultiImplCalc();
+									auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul, {});
+									chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul.AsTypeInfoHot();
+									InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+									_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 								}
-								_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+								chaos_locals[24] = _s4;
+								_s4 = chaos_locals[23];
+								_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(10);
+								_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
+								{
+									const auto chaos_raw_arg_2 = _s6;
+									const auto chaos_arg_2 = chaos_raw_arg_2;
+									const auto chaos_raw_arg_1 = _s5;
+									const auto chaos_arg_1 = chaos_raw_arg_1;
+									const auto chaos_raw_arg_0 = _s4;
+									const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+									if (chaos_arg_0 == 0)
+									{
+										::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+									}
+									CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+									chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 1u)))(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+									_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+								}
+								_s5 = chaos_locals[24];
+								_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+								_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+								{
+									const auto chaos_raw_arg_2 = _s7;
+									const auto chaos_arg_2 = chaos_raw_arg_2;
+									const auto chaos_raw_arg_1 = _s6;
+									const auto chaos_arg_1 = chaos_raw_arg_1;
+									const auto chaos_raw_arg_0 = _s5;
+									const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+									if (chaos_arg_0 == 0)
+									{
+										::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+									}
+									CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+									chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 2u)))(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
+									_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
+								}
+								_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s5)));
+								chaos_locals[25] = _s4;
+								goto chaos_inline_label_19_0;
+							chaos_inline_label_19_0:
+							{
+								_s4 = chaos_locals[25];
+							}
+								chaos_inline_retval19 = _s4;
+								goto chaos_inline_end19;
+							chaos_inline_end19:
+								;
+								_s4 = chaos_inline_retval19;
 							}
 							chaos_locals[1] = _s4;
 						}
@@ -4842,19 +5126,38 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 				else
 				{
 					{
-						auto& _d47 = s_hotpatch_entries[47];
-						CHAOS_IL2CPP_INT32 _d_hpresult{};
-						if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d47)
-							&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d47))
+						// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplDefault:System.Int32()
+						CHAOS_IL2CPP_INTPTR chaos_inline_retval20{};
 						{
-							::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-								_d47.method_key, nullptr, &_d_hpresult);
+							auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault, {});
+							chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault.AsTypeInfoHot();
+							InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+							_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 						}
-						else
+						chaos_locals[23] = _s4;
+						_s4 = chaos_locals[23];
 						{
-							_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplDefault();
+							const auto chaos_raw_arg_0 = _s4;
+							const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+							if (chaos_arg_0 == 0)
+							{
+								::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+							}
+							CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+							chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
+							_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 						}
-						_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+						chaos_locals[24] = _s4;
+						goto chaos_inline_label_20_0;
+					chaos_inline_label_20_0:
+					{
+						_s4 = chaos_locals[24];
+					}
+						chaos_inline_retval20 = _s4;
+						goto chaos_inline_end20;
+					chaos_inline_end20:
+						;
+						_s4 = chaos_inline_retval20;
 					}
 					chaos_locals[1] = _s4;
 				}
@@ -4863,19 +5166,38 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 		else
 		{
 			{
-				auto& _d48 = s_hotpatch_entries[48];
-				CHAOS_IL2CPP_INT32 _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d48)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d48))
+				// Inlined: InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplSimple:System.Int32()
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval21{};
 				{
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d48.method_key, nullptr, &_d_hpresult);
+					auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple, {});
+					chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.AsTypeInfoHot();
+					InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
+					_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 				}
-				else
+				chaos_locals[23] = _s2;
+				_s2 = chaos_locals[23];
 				{
-					_d_hpresult = InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplSimple();
+					const auto chaos_raw_arg_0 = _s2;
+					const auto chaos_arg_0 = chaos_normalize_native_int_argument(chaos_raw_arg_0);
+					if (chaos_arg_0 == 0)
+					{
+						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
+					}
+					CHAOS_IL2CPP_INT32 chaos_callvirt_result{};
+					chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 5u)))(chaos_arg_0);
+					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_callvirt_result);
 				}
-				_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
+				chaos_locals[24] = _s2;
+				goto chaos_inline_label_21_0;
+			chaos_inline_label_21_0:
+			{
+				_s2 = chaos_locals[24];
+			}
+				chaos_inline_retval21 = _s2;
+				goto chaos_inline_end21;
+			chaos_inline_end21:
+				;
+				_s2 = chaos_inline_retval21;
 			}
 			chaos_locals[1] = _s2;
 		}
@@ -4889,13 +5211,11 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple, {});
 		chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.AsTypeInfoHot();
@@ -4948,10 +5268,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
 	{
@@ -4976,9 +5295,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-
-
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
 		chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
@@ -5008,9 +5326,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-
-
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
 		chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
@@ -5040,10 +5357,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond, {});
 		chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.AsTypeInfoHot();
@@ -5119,13 +5435,11 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-
 	_s0 = ChaosStoreFloat64(2.71828);
 	_s0 = ChaosStoreFloat32(static_cast<float>(_s0));
 	_s0 = ChaosStoreFloat64(static_cast<double>(_s0));
@@ -5153,10 +5467,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	_s0 = ChaosStoreFloat64(3.99);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s0)));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
@@ -5182,12 +5495,10 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
-
 	_s0 = ChaosStoreFloat32(3.14f);
 	_s0 = ChaosStoreFloat64(static_cast<double>(_s0));
 	_s0 = ChaosStoreFloat32(static_cast<float>(_s0));
@@ -5214,11 +5525,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	{
 		auto& _d23 = s_hotpatch_entries[23];
 		CHAOS_IL2CPP_INTPTR _d_hpresult{};
@@ -5258,11 +5567,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	{
 		auto& _d24 = s_hotpatch_entries[24];
 		CHAOS_IL2CPP_INTPTR _d_hpresult{};
@@ -5302,11 +5609,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
-
 	_s0 = 0;
 	{
 		const auto chaos_arg_0 = _s0;
@@ -5347,11 +5652,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
-
 	{
 		auto& _d23 = s_hotpatch_entries[23];
 		CHAOS_IL2CPP_INTPTR _d_hpresult{};
@@ -5406,10 +5709,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(298);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(_s0));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -5435,12 +5737,10 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
-
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	_s0 = ChaosStoreFloat64(static_cast<double>(_s0));
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
@@ -5467,12 +5767,10 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
-
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
 	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
@@ -5499,10 +5797,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(65535);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(_s0));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(-1);
@@ -5528,6 +5825,7 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 7) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
@@ -5535,9 +5833,6 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
 	CHAOS_IL2CPP_INTPTR _s6{};
-
-
-
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple, {});
 		chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.AsTypeInfoHot();
@@ -5631,10 +5926,9 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	_s0 = ChaosStoreInt64(4294967297LL);
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -5660,12 +5954,11 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd, {});
 		chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd.AsTypeInfoHot();
@@ -5727,9 +6020,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-
-
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault, {});
 		chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault.AsTypeInfoHot();
@@ -5759,9 +6051,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-
-
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple, {});
 		chaos_object->header.type_info = chaos_mt_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.AsTypeInfoHot();
@@ -5791,12 +6082,10 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
-
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT32));
 	_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(CHAOS_IL2CPP_NUMERIC_LIMITS_MIN(CHAOS_IL2CPP_INT32));
@@ -5823,9 +6112,8 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -5839,12 +6127,11 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[1];
 	_s1 = chaos_args[2];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
@@ -5856,12 +6143,11 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[1];
 	_s1 = chaos_args[2];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
@@ -5873,9 +6159,8 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -5889,12 +6174,11 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[1];
 	_s1 = chaos_args[2];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
@@ -5908,12 +6192,11 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[1];
 	_s1 = chaos_args[2];
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
@@ -5927,9 +6210,8 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -5943,9 +6225,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
@@ -5955,9 +6236,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(200);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
@@ -5967,9 +6247,8 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -5983,9 +6262,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(300);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
@@ -5995,9 +6273,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(400);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
@@ -6007,9 +6284,8 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -6023,9 +6299,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
@@ -6035,9 +6310,8 @@ extern "C" void InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCore
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -6051,9 +6325,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
@@ -6063,9 +6336,8 @@ extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchPinvokeDllimportPrimitiveNumericC
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }

@@ -33,6 +33,24 @@ extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_Syst
 extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void);
 extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0(void);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void);
+extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0(void);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void);
+extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0(void);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void);
+extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+
 namespace chaos::il2cpp::codegen::CodegenEdgeCasesSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

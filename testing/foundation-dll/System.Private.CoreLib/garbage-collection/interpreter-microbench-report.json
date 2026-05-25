@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/garbage/collection",
-  "capturedAt": "2026-05-23T15:11:51",
+  "capturedAt": "2026-05-25T01:25:36",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 2.7,
+      "acquireReleaseNsPerOp": 2.6,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-23T15:11:51][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T15:11:51][DEBUG][GcEvents] registered callback 0x7ff75a4425b0 at slot 0\n[2026-05-23T15:11:51][WARN][CRAG] young_collection_no_region\n[2026-05-23T15:11:51][INFO][NUMA] numa_init count=%d\n[2026-05-23T15:11:51][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-23T15:11:51][INFO][OldGen] emergency_reserve_allocated base=0x2881994096640 size=65536\n[2026-05-23T15:11:51][INFO][OldGen] init done base=0x2881963884544 pages=8\n[2026-05-23T15:11:51][DEBUG][codegen] T4 VEH handler registered\n[2026-05-23T15:11:51][DEBUG][GcEvents] registered callback 0x7ff75a4425b0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.7 ns/op (1000 batches x 32 frames)\n[2026-05-23T15:11:51][DEBUG][CRAG] chaos_gc_collect requested\n[2026-05-23T15:11:51][INFO][OldGen] collect_start page_count=8\n[2026-05-23T15:11:51][INFO][OldGen] collect_done reclaimed=524288 pause_ns=236100\n[2026-05-23T15:11:51][DEBUG][CRAG] chaos_gc_collect completed\n[2026-05-23T15:11:51][DEBUG][CRAG] chaos_gc_collect requested\n[2026-05-23T15:11:51][INFO][OldGen] collect_start page_count=0\n"
+  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.6 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\nGC|region|active=0|total_allocated=0\n"
 }

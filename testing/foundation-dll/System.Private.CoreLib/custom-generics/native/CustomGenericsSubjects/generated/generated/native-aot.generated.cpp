@@ -1776,7 +1776,7 @@ extern "C" void (*kDefaultArgThunks[35])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[19])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })(),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })());},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[20])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),0,0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[21])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })(),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })());},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[22])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),0,chaos_make_string_id_value(385996094756309509ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[22])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),0,chaos_make_string_id_value(1875936269717626031ULL));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[23])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })(),([](){ static CHAOS_IL2CPP_UINT8 __b[sizeof(CHAOS_IL2CPP_INTPTR)] = {}; return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(__b); })());},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[24])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[25])(0);},
@@ -1787,7 +1787,7 @@ extern "C" void (*kDefaultArgThunks[35])() = {
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[30])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[31])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),0);},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[32])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
-	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[33])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),chaos_make_string_id_value(385996094756309509ULL));},
+	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kMethodTable[33])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance),chaos_make_string_id_value(1875936269717626031ULL));},
 	[]() {reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kMethodTable[34])(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&__g_null_instance));},
 };
 
@@ -2707,10 +2707,9 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -2725,11 +2724,17 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_0(void)
 			{
 				// Inlined: CustomGenericsSubjects/CustomGenerics.Box<System.Int32>::Get:System.Int32()
 				auto chaos_inline_arg_0 = _s0;
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
 				_s0 = chaos_inline_arg_0;
 				{
 					auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_*>(_s0);
 					_s0 = chaos_object->field_CustomGenericsSubjects_CustomGenerics_Box_System_Int32____value;
 				}
+				chaos_inline_retval0 = _s0;
+				goto chaos_inline_end0;
+			chaos_inline_end0:
+				;
+				_s0 = chaos_inline_retval0;
 			}
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -2761,10 +2766,9 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -2794,16 +2798,25 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_1(void)
 					chaos_object->field_CustomGenericsSubjects_CustomGenerics_Box_System_Int32____value = chaos_value;
 					chaos_gc_dirty_card(chaos_object);
 				}
+				goto chaos_inline_end0;
+			chaos_inline_end0:
+				;
 			}
 			_s0 = chaos_locals[0];
 			{
 				// Inlined: CustomGenericsSubjects/CustomGenerics.Box<System.Int32>::Get:System.Int32()
 				auto chaos_inline_arg_0 = _s0;
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval1{};
 				_s0 = chaos_inline_arg_0;
 				{
 					auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_*>(_s0);
 					_s0 = chaos_object->field_CustomGenericsSubjects_CustomGenerics_Box_System_Int32____value;
 				}
+				chaos_inline_retval1 = _s0;
+				goto chaos_inline_end1;
+			chaos_inline_end1:
+				;
+				_s0 = chaos_inline_retval1;
 			}
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(100);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -2835,14 +2848,12 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
-
-
-
 	CHAOS_EH_TRY
 			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -2884,6 +2895,9 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_2(void)
 						chaos_gc_dirty_card(chaos_value_owner);
 					}
 				}
+				goto chaos_inline_end0;
+			chaos_inline_end0:
+				;
 			}
 			_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
 			_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
@@ -2915,6 +2929,9 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_2(void)
 					auto* chaos_destination = chaos_resolve_managed_value_pointer<CHAOS_IL2CPP_INTPTR>(_s0);
 					*chaos_destination = chaos_value;
 				}
+				goto chaos_inline_end1;
+			chaos_inline_end1:
+				;
 			}
 			_s0 = chaos_locals[1];
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -2957,16 +2974,21 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_3(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
 				// Inlined: CustomGenericsSubjects/CustomGenerics.Util::Echo<System.Int32>:System.Int32(System.Int32)
 				auto chaos_inline_arg_0 = _s0;
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
 				_s0 = chaos_inline_arg_0;
+				chaos_inline_retval0 = _s0;
+				goto chaos_inline_end0;
+			chaos_inline_end0:
+				;
+				_s0 = chaos_inline_retval0;
 			}
 			chaos_locals[0] = _s0;
 			_s0 = chaos_locals[0];
@@ -3000,12 +3022,10 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_4(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 4) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
@@ -3063,12 +3083,10 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("data");
@@ -3085,6 +3103,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void)
 			{
 				// Inlined: CustomGenericsSubjects/CustomGenerics.Wrapper<System.String>::GetRefType:System.Type()
 				auto chaos_inline_arg_0 = _s0;
+				CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
 				_s0 = chaos_inline_arg_0;
 				{
 					auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_*>(_s0);
@@ -3101,6 +3120,11 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void)
 					const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[21])();
 					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 				}
+				chaos_inline_retval0 = _s1;
+				goto chaos_inline_end0;
+			chaos_inline_end0:
+				;
+				_s1 = chaos_inline_retval0;
 			}
 			chaos_locals[1] = _s1;
 			_s1 = chaos_locals[1];
@@ -3142,11 +3166,10 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1__ctor_0(CHAOS_IL2CPP
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -3173,9 +3196,8 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_Get(C
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Box__0_*>(_s0);
@@ -3189,13 +3211,11 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_IsDef
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
 	_s0 = chaos_args[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Box__0_*>(_s0);
@@ -3267,11 +3287,10 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1_Set_0(CHAOS_IL2CPP_I
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
 	{
@@ -3293,11 +3312,10 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0__ctor_0(CHAOS_IL2CP
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -3324,9 +3342,8 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_Get(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Box__0_*>(_s0);
@@ -3340,13 +3357,11 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_IsDe
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
 	_s0 = chaos_args[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Box__0_*>(_s0);
@@ -3419,11 +3434,10 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0_Set_0(CHAOS_IL2CPP_
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
 	{
@@ -3446,11 +3460,10 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32__ctor_Sys
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -3485,9 +3498,8 @@ extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Box_System_I
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_*>(_s0);
@@ -3508,13 +3520,11 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_System_
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
 	_s0 = chaos_args[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_*>(_s0);
@@ -3588,11 +3598,10 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Set_Syste
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
 	{
@@ -3621,12 +3630,11 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2__ctor_0_1(CHAOS_IL2
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
 	{
@@ -3665,12 +3673,11 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2_Deconstruct_0_1(CHA
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[1];
 	_s1 = chaos_args[0];
 	{
@@ -3701,12 +3708,11 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1__ctor_0_1(CHAOS
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
 	{
@@ -3745,12 +3751,11 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1_Deconstruct_0_1
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[1];
 	_s1 = chaos_args[0];
 	{
@@ -3782,12 +3787,11 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_S
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	_s1 = chaos_args[1];
 	{
@@ -3834,12 +3838,11 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_S
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
 	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[1];
 	_s1 = chaos_args[0];
 	{
@@ -3877,9 +3880,8 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Util__ctor(CHAOS_IL2CPP_IN
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -3893,9 +3895,8 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Echo_0
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	return _s0;
 }
@@ -3906,9 +3907,8 @@ extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Util_Echo_Sy
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
@@ -3925,11 +3925,10 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_args[0]);
 	_s1 = chaos_args[1];
 	{
@@ -3946,11 +3945,10 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_args[0]);
 	_s1 = chaos_args[1];
 	{
@@ -3973,11 +3971,10 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_1__ctor_0(CHAOS_IL
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -4004,10 +4001,9 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_1_G
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
 	_s0 = chaos_args[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Wrapper__0_*>(_s0);
@@ -4032,11 +4028,10 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper__0__ctor_0(CHAOS_I
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -4063,10 +4058,9 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper__0_
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
 	_s0 = chaos_args[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Wrapper__0_*>(_s0);
@@ -4092,11 +4086,10 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_System_String__cto
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_arg_0 = _s0;
@@ -4131,10 +4124,9 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_Sys
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
 	_s0 = chaos_args[0];
 	{
 		auto* chaos_object = reinterpret_cast<chaos_type_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_*>(_s0);

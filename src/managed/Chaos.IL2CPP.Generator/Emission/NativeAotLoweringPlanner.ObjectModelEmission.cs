@@ -1121,6 +1121,11 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		{
 			builder.AppendLine();
 		}
+		// Capture static field and value type data for shared header generation
+		_staticFieldDeclarations = hashSet2.Count > 0
+		    ? new Dictionary<string, string?>(hashSet2, StringComparer.Ordinal)
+		    : new Dictionary<string, string?>(StringComparer.Ordinal);
+		_emittedValueTypeSubjectIds = new HashSet<string>(valueTypeSubjectIds, StringComparer.Ordinal);
 		// Capture emitted type subject IDs for Phase 0 ModuleRegistry Tier 0 arrays
 		_allEmittedTypeSubjectIds = new HashSet<string>(referenceTypeSubjectIds, StringComparer.Ordinal);
 		_allEmittedTypeSubjectIds.UnionWith(interfaceTypeSubjectIds);

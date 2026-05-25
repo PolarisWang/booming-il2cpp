@@ -242,6 +242,24 @@ public sealed partial class NativeAotLoweringPlanner
     private readonly List<string> _moduleTypeSubjectIds = new();
     private bool _hasCustomAttributeBlob;
 
+    /// <summary>
+    /// Static field declarations (subjectId → fieldTypeSubjectId) captured during
+    /// EmitObjectModelDeclarations for extern declarations in the shared header.
+    /// </summary>
+    private Dictionary<string, string?>? _staticFieldDeclarations;
+
+    /// <summary>
+    /// Value type subject IDs captured during EmitObjectModelDeclarations for
+    /// chaos_valuetype_* forward declarations in the shared header.
+    /// </summary>
+    private HashSet<string>? _emittedValueTypeSubjectIds;
+
+    /// <summary>
+    /// External runtime helper definitions captured during Create, used by
+    /// BuildTypeDeclarationsCode to emit extern declarations in the shared header.
+    /// </summary>
+    private IReadOnlyList<ExternalRuntimeHelperDefinition>? _externalRuntimeHelpers;
+
     private readonly RuntimeHelperShapeRegistry _shapeRegistry = RuntimeHelperShapeRegistry.BuildDefault();
 
     /// <summary>
@@ -617,6 +635,7 @@ public sealed partial class NativeAotLoweringPlanner
             methodsForLowering,
             closureManifest);
         var externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport);
+        _externalRuntimeHelpers = externalRuntimeHelpers;
         CollectExternalRuntimeDispatchEntries(methodsForLowering);
         CollectBridgeImportThunks(methodsForLowering);
         var objectModelBuilder = new StringBuilder(65536);
@@ -932,9 +951,23 @@ extern ""C"" void ChaosJitRegisterAll() {}
     }
 
     /// <summary>
-    /// Builds C++ extern declarations for all TypeInfoV0 symbols emitted in the
-    /// object model section. These are placed in the shared header when TU paging
-    /// is active, so each translation unit can reference types from other pages.
+    /// Builds C++ declarations for the shared header (native-aot.generated.header.h).
+    /// When TU paging is active, each translation unit page needs visibility to
+    /// all type symbols, static variables, and runtime helpers defined on other
+    /// pages without ODR violations. This method emits:
+    ///   - struct chaos_type_&lt;id&gt;; forward declarations
+    ///   - struct chaos_boxed_type_&lt;id&gt;; forward declarations
+    ///   - struct chaos_valuetype_&lt;id&gt;; forward declarations
+    ///   - extern MethodTable chaos_mt_&lt;id&gt;; (not TypeInfoV0 — MethodTable is the
+    ///     actual definition type; &lt;chaos/type_info.h&gt; brings it into scope)
+    ///   - extern "C" kChaosExternalRuntimeFnTable[]; (if bridge thunks use it)
+    ///   - extern "C" HotpatchEntryV0 s_hotpatch_entries[]; (if dispatch slots exist)
+    ///   - extern CHAOS_IL2CPP_INTPTR chaos_static_&lt;id&gt;; for each static field
+    ///   - extern CHAOS_IL2CPP_INTPTR chaos_string_materialize(...); (if string IDs)
+    ///   - extern bool chaos_is_array_store_compatible(...);
+    ///   - extern CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_*(...);
+    ///     (if interpolated string helpers are reachable)
+    ///   - extern declarations for all chaos_external_runtime_* helpers
     /// </summary>
     private string BuildTypeDeclarationsCode()
     {
@@ -942,23 +975,145 @@ extern ""C"" void ChaosJitRegisterAll() {}
             return string.Empty;
 
         var sb = new System.Text.StringBuilder();
-        sb.AppendLine("// Auto-generated extern TypeInfoV0 declarations (TU paging)");
+        sb.AppendLine("// Auto-generated type declarations (TU paging)");
         sb.AppendLine("#pragma once");
         sb.AppendLine();
         sb.AppendLine("#include <chaos/native_types.h>");
-        sb.AppendLine();
-        sb.AppendLine("struct TypeInfoV0;");
+        sb.AppendLine("#include <chaos/type_info.h>  // MethodTable, TypeInfoV0 (complete type)");
         sb.AppendLine();
 
+        // ── Struct forward declarations ──
+        // Page files use reinterpret_cast<chaos_type_<id>*>(ptr),
+        // reinterpret_cast<chaos_boxed_type_<id>*>(ptr), and
+        // CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_<id>, ...).
+        // The full struct definitions live only on page 0 (object model).
+        // Forward declarations here satisfy the compiler for pointer/cast usage.
+        bool hasAnyForwardDeclarations = false;
+        foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+        {
+            sb.Append("struct ");
+            sb.Append(GetNativeTypeSymbol(typeId));
+            sb.AppendLine(";");
+
+            sb.Append("struct ");
+            sb.Append(GetNativeBoxTypeSymbol(typeId));
+            sb.AppendLine(";");
+
+            hasAnyForwardDeclarations = true;
+        }
+        // chaos_valuetype_* forward declarations — only for actual value types
+        if (_emittedValueTypeSubjectIds is { Count: > 0 })
+        {
+            foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+            {
+                sb.Append("struct ");
+                sb.Append(GetNativeValueTypeSymbol(typeId));
+                sb.AppendLine(";");
+            }
+            hasAnyForwardDeclarations = true;
+        }
+        if (hasAnyForwardDeclarations)
+            sb.AppendLine();
+
+        // ── MethodTable extern declarations ──
+        // Previously declared `extern TypeInfoV0 chaos_mt_X;` but the actual
+        // definition type is MethodTable. With <chaos/type_info.h> included
+        // above, MethodTable is a complete type and page files can call
+        // methods like AsTypeInfoHot() on these symbols.
         foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
         {
             var symbol = GetNativeMethodTableSymbol(typeId);
-            sb.Append("extern TypeInfoV0 ");
+            sb.Append("extern MethodTable ");
             sb.Append(symbol);
             sb.AppendLine(";");
         }
-
         sb.AppendLine();
+
+        // ── Hotpatch dispatch table ──
+        // Page files access s_hotpatch_entries[] directly for dispatch.
+        // The array is defined in the hotpatch table section (module registration).
+        if (_nativeSymbolToDispatchSlot is { Count: > 0 })
+        {
+            sb.AppendLine("struct HotpatchEntryV0;");
+            sb.AppendLine("extern \"C\" HotpatchEntryV0 s_hotpatch_entries[];");
+            sb.AppendLine();
+        }
+
+        // ── External runtime dispatch table ──
+        // Bridge thunks in page files call through kChaosExternalRuntimeFnTable[idx].
+        // The array is defined in the module registration section.
+        if (_bridgeImportThunks is { Count: > 0 } &&
+            _bridgeImportThunks.Values.Any(t => t.ExternalRuntimeTableIndex >= 0))
+        {
+            sb.AppendLine("extern \"C\" void* kChaosExternalRuntimeFnTable[];");
+            sb.AppendLine();
+        }
+
+        // ── Static field extern declarations ──
+        // Declared as TU-scoped variables in the object model (page 0). Page files
+        // reference them by name and need extern declarations to compile.
+        if (_staticFieldDeclarations is { Count: > 0 })
+        {
+            foreach (var kvp in _staticFieldDeclarations.OrderBy(k => k.Key, StringComparer.Ordinal))
+            {
+                sb.Append("extern CHAOS_IL2CPP_INTPTR ");
+                sb.Append(GetNativeStaticFieldSymbol(kvp.Key));
+                sb.AppendLine(";");
+            }
+            sb.AppendLine();
+        }
+
+        // ── Runtime helper function declarations ──
+
+        // chaos_string_materialize: conditionally emitted when string IDs exist
+        if (_stringIdMapping is { Count: > 0 })
+        {
+            sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
+            sb.AppendLine();
+        }
+
+        // chaos_is_array_store_compatible: always emitted in object model
+        sb.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept;");
+        sb.AppendLine();
+
+        // chaos_default_interpolated_string_handler_*: emitted unconditionally in the
+        // shared header. These are defined in the object model section (page 0) when the
+        // family uses DefaultInterpolatedStringHandler helpers. Unused extern function
+        // declarations are harmless — the linker only resolves symbols that are actually
+        // referenced from each translation unit.
+        sb.AppendLine("void chaos_default_interpolated_string_handler_reset(CHAOS_IL2CPP_INTPTR chaos_handler_ref);");
+        sb.AppendLine("void chaos_default_interpolated_string_handler_append_string(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INTPTR chaos_string_value);");
+        sb.AppendLine("void chaos_default_interpolated_string_handler_append_int32(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_value);");
+        sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clear(CHAOS_IL2CPP_INTPTR chaos_handler_ref);");
+        sb.AppendLine();
+
+        // chaos_external_runtime_*: emit extern declarations matching definitions
+        if (_externalRuntimeHelpers is { Count: > 0 })
+        {
+            foreach (var helper in _externalRuntimeHelpers)
+            {
+                // Extract the first line of the source (the function signature)
+                // and convert it to a declaration by appending ";".
+                var source = helper.Source;
+                if (string.IsNullOrEmpty(source))
+                    continue;
+                int newlineIdx = source.IndexOf('\n');
+                string signatureLine = newlineIdx >= 0
+                    ? source.Substring(0, newlineIdx).Trim()
+                    : source.Trim();
+                if (string.IsNullOrEmpty(signatureLine))
+                    continue;
+                // Remove `static ` prefix if present (should be gone after template fix,
+                // but handle gracefully for any remaining static helpers)
+                if (signatureLine.StartsWith("static ", StringComparison.Ordinal))
+                    signatureLine = signatureLine.Substring(7);
+                sb.Append("extern ");
+                sb.Append(signatureLine);
+                sb.AppendLine(";");
+            }
+            sb.AppendLine();
+        }
+
         return sb.ToString();
     }
 

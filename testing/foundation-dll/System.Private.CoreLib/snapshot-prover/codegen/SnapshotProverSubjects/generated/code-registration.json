@@ -66,6 +66,947 @@
           "subjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_9:System.Void()"
         }
       ]
+    },
+    {
+      "moduleName": "SnapshotTestFixtures.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SnapshotTestFixtures_ArithmeticOps_RunAdd",
+          "subjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SnapshotTestFixtures_StringOps_UseString",
+          "subjectId": "SnapshotTestFixtures/StringOps::UseString:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SnapshotTestFixtures_VoidCaller_DoNothing",
+          "subjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SnapshotTestFixtures_MathHelper_RunSquare",
+          "subjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SnapshotTestFixtures_FlowControl_IsPositive",
+          "subjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SnapshotTestFixtures_InstanceHelper__ctor_System_Int32",
+          "subjectId": "SnapshotTestFixtures/InstanceHelper::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SnapshotTestFixtures_InstanceHelper_GetValue",
+          "subjectId": "SnapshotTestFixtures/InstanceHelper::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "SnapshotTestFixtures_CallVirtHelper_CreateAndUse",
+          "subjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "SnapshotTestFixtures_BoxingHelper_BoxAndUnbox",
+          "subjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "SnapshotTestFixtures_FieldHelper_GetAndIncrement",
+          "subjectId": "SnapshotTestFixtures/FieldHelper::GetAndIncrement:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "SnapshotTestFixtures_LoopHelper_SumToFive",
+          "subjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "SnapshotTestFixtures_ConversionHelper_ConvertToInt",
+          "subjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "SnapshotTestFixtures_Helper_Nop",
+          "subjectId": "SnapshotTestFixtures/Helper::Nop:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "SnapshotTestFixtures_Helper_Square_System_Int32",
+          "subjectId": "SnapshotTestFixtures/Helper::Square:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "SnapshotTestFixtures_Helper_ConsumeString_System_String",
+          "subjectId": "SnapshotTestFixtures/Helper::ConsumeString:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "SnapshotTestFixtures_Helper_GetValue",
+          "subjectId": "SnapshotTestFixtures/Helper::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "SnapshotTestFixtures_SwitchHelper_Classify",
+          "subjectId": "SnapshotTestFixtures/SwitchHelper::Classify:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "SnapshotTestFixtures_LdftnHelper_GetFnPtr",
+          "subjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "SnapshotTestFixtures_TargetHelper_GetValue",
+          "subjectId": "SnapshotTestFixtures/TargetHelper::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "SnapshotTestFixtures_ArrayHelper_MakeAndFill",
+          "subjectId": "SnapshotTestFixtures/ArrayHelper::MakeAndFill:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "SnapshotTestFixtures_EhHelper_SafeDivide",
+          "subjectId": "SnapshotTestFixtures/EhHelper::SafeDivide:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "SnapshotTestFixtures_GenericHelper_UseGeneric",
+          "subjectId": "SnapshotTestFixtures/GenericHelper::UseGeneric:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "SnapshotTestFixtures_Wrapper_1__ctor_0",
+          "subjectId": "SnapshotTestFixtures/Wrapper\u00601::.ctor:System.Void(!0)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "SnapshotTestFixtures_Wrapper_1_GetValue",
+          "subjectId": "SnapshotTestFixtures/Wrapper\u00601::GetValue:!0()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "SnapshotTestFixtures_DelegateHelper_RunDelegate",
+          "subjectId": "SnapshotTestFixtures/DelegateHelper::RunDelegate:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "SnapshotTestFixtures_BaseClass_Compute",
+          "subjectId": "SnapshotTestFixtures/BaseClass::Compute:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "SnapshotTestFixtures_BaseClass__ctor",
+          "subjectId": "SnapshotTestFixtures/BaseClass::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "SnapshotTestFixtures_DerivedClass_Compute",
+          "subjectId": "SnapshotTestFixtures/DerivedClass::Compute:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "SnapshotTestFixtures_DerivedClass__ctor",
+          "subjectId": "SnapshotTestFixtures/DerivedClass::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "SnapshotTestFixtures_VirtualHelper_UseVirtual",
+          "subjectId": "SnapshotTestFixtures/VirtualHelper::UseVirtual:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "SnapshotTestFixtures_MarkedClass__ctor",
+          "subjectId": "SnapshotTestFixtures/MarkedClass::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "SnapshotTestFixtures_TypeCheckHelper_CheckAndCast",
+          "subjectId": "SnapshotTestFixtures/TypeCheckHelper::CheckAndCast:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "SnapshotTestFixtures_SizeOfHelper_GetSize",
+          "subjectId": "SnapshotTestFixtures/SizeOfHelper::GetSize:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "SnapshotTestFixtures_IndirectHelper_ReadWriteRef",
+          "subjectId": "SnapshotTestFixtures/IndirectHelper::ReadWriteRef:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "SnapshotTestFixtures_ArithmeticCompareHelper_RunCompare",
+          "subjectId": "SnapshotTestFixtures/ArithmeticCompareHelper::RunCompare:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "SnapshotTestFixtures_BranchDupHelper_RunBranchDup",
+          "subjectId": "SnapshotTestFixtures/BranchDupHelper::RunBranchDup:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "SnapshotTestFixtures_HasInstanceFields__ctor_System_Int32",
+          "subjectId": "SnapshotTestFixtures/HasInstanceFields::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "SnapshotTestFixtures_InstanceFieldHelper_CreateAndUseFields",
+          "subjectId": "SnapshotTestFixtures/InstanceFieldHelper::CreateAndUseFields:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "SnapshotTestFixtures_StaticFieldWriteHelper_WriteAndRead",
+          "subjectId": "SnapshotTestFixtures/StaticFieldWriteHelper::WriteAndRead:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "SnapshotTestFixtures_VirtualDispatchHelper_UseVirtualDispatch",
+          "subjectId": "SnapshotTestFixtures/VirtualDispatchHelper::UseVirtualDispatch:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "SnapshotTestFixtures_BitwiseHelper_RunBitwise",
+          "subjectId": "SnapshotTestFixtures/BitwiseHelper::RunBitwise:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "SnapshotTestFixtures_ShiftHelper_RunShift",
+          "subjectId": "SnapshotTestFixtures/ShiftHelper::RunShift:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "SnapshotTestFixtures_ArrayLengthHelper_RunLength",
+          "subjectId": "SnapshotTestFixtures/ArrayLengthHelper::RunLength:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "SnapshotTestFixtures_ValueTypeHelper_RunValueType",
+          "subjectId": "SnapshotTestFixtures/ValueTypeHelper::RunValueType:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "SnapshotTestFixtures_LocalAllocHelper_RunAlloc",
+          "subjectId": "SnapshotTestFixtures/LocalAllocHelper::RunAlloc:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "SnapshotTestFixtures_MulDivHelper_RunMulDiv",
+          "subjectId": "SnapshotTestFixtures/MulDivHelper::RunMulDiv:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "SnapshotTestFixtures_BranchCompareHelper_RunBranchCompare",
+          "subjectId": "SnapshotTestFixtures/BranchCompareHelper::RunBranchCompare:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "SnapshotTestFixtures_FloatOpsHelper_RunFloatOps",
+          "subjectId": "SnapshotTestFixtures/FloatOpsHelper::RunFloatOps:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "SnapshotTestFixtures_ConvWideHelper_RunConvWide",
+          "subjectId": "SnapshotTestFixtures/ConvWideHelper::RunConvWide:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "SnapshotTestFixtures_NegShiftHelper_RunNegShift",
+          "subjectId": "SnapshotTestFixtures/NegShiftHelper::RunNegShift:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "SnapshotTestFixtures_LdcI8Helper_RunLdcI8",
+          "subjectId": "SnapshotTestFixtures/LdcI8Helper::RunLdcI8:System.Int64()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "SnapshotTestFixtures_ConvSmallIntHelper_RunConvSmall",
+          "subjectId": "SnapshotTestFixtures/ConvSmallIntHelper::RunConvSmall:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "SnapshotTestFixtures_LdindI1Helper_RunLdindI1",
+          "subjectId": "SnapshotTestFixtures/LdindI1Helper::RunLdindI1:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "SnapshotTestFixtures_BranchCompareBHelper_RunBranchCompareB",
+          "subjectId": "SnapshotTestFixtures/BranchCompareBHelper::RunBranchCompareB:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "SnapshotTestFixtures_HasFields__ctor",
+          "subjectId": "SnapshotTestFixtures/HasFields::.ctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "SnapshotTestFixtures_AddressHelper_RunAddress",
+          "subjectId": "SnapshotTestFixtures/AddressHelper::RunAddress:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "SnapshotTestFixtures_LdtokenHelper_RunLdtoken",
+          "subjectId": "SnapshotTestFixtures/LdtokenHelper::RunLdtoken:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "SnapshotTestFixtures_LdelemaHelper_RunLdelema",
+          "subjectId": "SnapshotTestFixtures/LdelemaHelper::RunLdelema:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "SnapshotTestFixtures_LdargaHelper_RunLdarga_System_Int32",
+          "subjectId": "SnapshotTestFixtures/LdargaHelper::RunLdarga:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "SnapshotTestFixtures_CpobjHelper_RunCpobj",
+          "subjectId": "SnapshotTestFixtures/CpobjHelper::RunCpobj:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "SnapshotTestFixtures_StindNarrowHelper_RunStindNarrow",
+          "subjectId": "SnapshotTestFixtures/StindNarrowHelper::RunStindNarrow:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "SnapshotTestFixtures_CallvirtHelper_RunCallvirt",
+          "subjectId": "SnapshotTestFixtures/CallvirtHelper::RunCallvirt:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "SnapshotTestFixtures_UnboxHelper_RunUnbox",
+          "subjectId": "SnapshotTestFixtures/UnboxHelper::RunUnbox:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "SnapshotTestFixtures_CpblkHelper_RunCpblk",
+          "subjectId": "SnapshotTestFixtures/CpblkHelper::RunCpblk:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "SnapshotTestFixtures_LdindUnsignedHelper_RunLdindUnsigned",
+          "subjectId": "SnapshotTestFixtures/LdindUnsignedHelper::RunLdindUnsigned:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "SnapshotTestFixtures_LdindI8Helper_RunLdindI8",
+          "subjectId": "SnapshotTestFixtures/LdindI8Helper::RunLdindI8:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 66,
+          "symbol": "SnapshotTestFixtures_LdindWideHelper_RunLdindWide",
+          "subjectId": "SnapshotTestFixtures/LdindWideHelper::RunLdindWide:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 67,
+          "symbol": "SnapshotTestFixtures_StindWideHelper_RunStindWide",
+          "subjectId": "SnapshotTestFixtures/StindWideHelper::RunStindWide:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 68,
+          "symbol": "SnapshotTestFixtures_ArrayRefHelper_RunArrayRef",
+          "subjectId": "SnapshotTestFixtures/ArrayRefHelper::RunArrayRef:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 69,
+          "symbol": "SnapshotTestFixtures_ThrowHelper_CheckPositive_System_Int32",
+          "subjectId": "SnapshotTestFixtures/ThrowHelper::CheckPositive:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 70,
+          "symbol": "SnapshotTestFixtures_OverflowHelper_RunOverflowAdd",
+          "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowAdd:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 71,
+          "symbol": "SnapshotTestFixtures_OverflowHelper_RunOverflowSub",
+          "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowSub:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 72,
+          "symbol": "SnapshotTestFixtures_OverflowHelper_RunOverflowMul",
+          "subjectId": "SnapshotTestFixtures/OverflowHelper::RunOverflowMul:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 73,
+          "symbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI4",
+          "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 74,
+          "symbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU1_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 75,
+          "symbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI2_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI2:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 76,
+          "symbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU2_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU2:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 77,
+          "symbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU4_System_Int64",
+          "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU4:System.Int32(System.Int64)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 78,
+          "symbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfI8_System_Single",
+          "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfI8:System.Int64(System.Single)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 79,
+          "symbol": "SnapshotTestFixtures_OverflowConvHelper_ConvOvfU8_System_Double",
+          "subjectId": "SnapshotTestFixtures/OverflowConvHelper::ConvOvfU8:System.Int64(System.Double)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 80,
+          "symbol": "SnapshotTestFixtures_CalliHelper_RunCalli_System_Int32",
+          "subjectId": "SnapshotTestFixtures/CalliHelper::RunCalli:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 81,
+          "symbol": "SnapshotTestFixtures_MyClass__ctor_System_Int32",
+          "subjectId": "SnapshotTestFixtures/MyClass::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 82,
+          "symbol": "SnapshotTestFixtures_MyClass_GetValue",
+          "subjectId": "SnapshotTestFixtures/MyClass::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 83,
+          "symbol": "SnapshotTestFixtures_LdVirtftnHelper_RunLdVirtftn",
+          "subjectId": "SnapshotTestFixtures/LdVirtftnHelper::RunLdVirtftn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 84,
+          "symbol": "SnapshotTestFixtures_LdelemAllHelper_TestAllElems",
+          "subjectId": "SnapshotTestFixtures/LdelemAllHelper::TestAllElems:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 85,
+          "symbol": "SnapshotTestFixtures_StelemAllHelper_TestAllElems",
+          "subjectId": "SnapshotTestFixtures/StelemAllHelper::TestAllElems:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 86,
+          "symbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestCltUn",
+          "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCltUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 87,
+          "symbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestDivUn",
+          "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestDivUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 88,
+          "symbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestRemUn",
+          "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestRemUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 89,
+          "symbol": "SnapshotTestFixtures_UnsignedOpsHelper_TestCkfinite_System_Double",
+          "subjectId": "SnapshotTestFixtures/UnsignedOpsHelper::TestCkfinite:System.Double(System.Double)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 90,
+          "symbol": "SnapshotTestFixtures_RareOpsHelper_TestInitBlk_System_Int32",
+          "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestInitBlk:System.Void(System.Int32\u0026)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 91,
+          "symbol": "SnapshotTestFixtures_RareOpsHelper_TestStarg_System_Int32",
+          "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestStarg:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 92,
+          "symbol": "SnapshotTestFixtures_RareOpsHelper_TestConvRUn_System_Single",
+          "subjectId": "SnapshotTestFixtures/RareOpsHelper::TestConvRUn:System.Int32(System.Single)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 93,
+          "symbol": "SnapshotTestFixtures_StringFormatHelper_TestFormatOne",
+          "subjectId": "SnapshotTestFixtures/StringFormatHelper::TestFormatOne:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 94,
+          "symbol": "SnapshotTestFixtures_BranchUnsignedHelper_RunBranchUnsigned",
+          "subjectId": "SnapshotTestFixtures/BranchUnsignedHelper::RunBranchUnsigned:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 95,
+          "symbol": "SnapshotTestFixtures_BranchUnsignedBHelper_RunBranchUnsignedB",
+          "subjectId": "SnapshotTestFixtures/BranchUnsignedBHelper::RunBranchUnsignedB:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 96,
+          "symbol": "SnapshotTestFixtures_RethrowHelper_RunRethrow",
+          "subjectId": "SnapshotTestFixtures/RethrowHelper::RunRethrow:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 97,
+          "symbol": "SnapshotTestFixtures_OverflowUnHelper_RunOverflowAddUn",
+          "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowAddUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 98,
+          "symbol": "SnapshotTestFixtures_OverflowUnHelper_RunOverflowSubUn",
+          "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowSubUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 99,
+          "symbol": "SnapshotTestFixtures_OverflowUnHelper_RunOverflowMulUn",
+          "subjectId": "SnapshotTestFixtures/OverflowUnHelper::RunOverflowMulUn:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 100,
+          "symbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunArglist",
+          "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunArglist:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 101,
+          "symbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunMkrefany",
+          "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunMkrefany:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 102,
+          "symbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunRefanyval",
+          "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanyval:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 103,
+          "symbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunRefanytype",
+          "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunRefanytype:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 104,
+          "symbol": "SnapshotTestFixtures_MoreRareOpsHelper_RunJmp",
+          "subjectId": "SnapshotTestFixtures/MoreRareOpsHelper::RunJmp:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 105,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 106,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI1Un_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI1Un:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 107,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU1Un_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU1Un:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 108,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI2Un_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI2Un:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 109,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU2Un_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU2Un:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 110,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI4Un_System_Int64",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI4Un:System.Int32(System.Int64)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 111,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU4Un_System_Int64",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU4Un:System.Int32(System.Int64)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 112,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfI8Un_System_Single",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfI8Un:System.Int64(System.Single)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 113,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfU8Un_System_Double",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfU8Un:System.Int64(System.Double)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 114,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfIUn_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfIUn:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 115,
+          "symbol": "SnapshotTestFixtures_OverflowConvExtHelper_ConvOvfUUn_System_Int32",
+          "subjectId": "SnapshotTestFixtures/OverflowConvExtHelper::ConvOvfUUn:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 116,
+          "symbol": "SnapshotTestFixtures_SimpleGapsHelper_RunLdnull",
+          "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunLdnull:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 117,
+          "symbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvU4",
+          "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvU4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 118,
+          "symbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvI",
+          "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvI:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 119,
+          "symbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfI_System_Int32",
+          "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfI:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 120,
+          "symbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfU_System_Int32",
+          "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfU:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 121,
+          "symbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfIUn_System_Int32",
+          "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfIUn:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 122,
+          "symbol": "SnapshotTestFixtures_SimpleGapsHelper_RunConvOvfUUn_System_Int32",
+          "subjectId": "SnapshotTestFixtures/SimpleGapsHelper::RunConvOvfUUn:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 123,
+          "symbol": "SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI4",
+          "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI4:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 124,
+          "symbol": "SnapshotTestFixtures_LdindStindGapsHelper_RunLdindI",
+          "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunLdindI:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 125,
+          "symbol": "SnapshotTestFixtures_LdindStindGapsHelper_RunStindI",
+          "subjectId": "SnapshotTestFixtures/LdindStindGapsHelper::RunStindI:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 126,
+          "symbol": "SnapshotTestFixtures_CollectionsHelper_TestList",
+          "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestList:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 127,
+          "symbol": "SnapshotTestFixtures_CollectionsHelper_TestDict",
+          "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestDict:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 128,
+          "symbol": "SnapshotTestFixtures_CollectionsHelper_TestSet",
+          "subjectId": "SnapshotTestFixtures/CollectionsHelper::TestSet:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 129,
+          "symbol": "SnapshotTestFixtures_ExternalCaller_CallExternal",
+          "subjectId": "SnapshotTestFixtures/ExternalCaller::CallExternal:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 130,
+          "symbol": "SnapshotTestFixtures_MultiDispatcher_DispatchBoth",
+          "subjectId": "SnapshotTestFixtures/MultiDispatcher::DispatchBoth:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 131,
+          "symbol": "SnapshotTestFixtures_InternalHelper_Double_System_Int32",
+          "subjectId": "SnapshotTestFixtures/InternalHelper::Double:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 132,
+          "symbol": "SnapshotTestFixtures_StringConcatHelper_TestConcat",
+          "subjectId": "SnapshotTestFixtures/StringConcatHelper::TestConcat:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 133,
+          "symbol": "SnapshotTestFixtures_GenericsVirtEhDemo_DemoCombine",
+          "subjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 134,
+          "symbol": "SnapshotTestFixtures_BoxInterfaceArrayDemo_DemoBoxStore",
+          "subjectId": "SnapshotTestFixtures/BoxInterfaceArrayDemo::DemoBoxStore:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 135,
+          "symbol": "SnapshotTestFixtures_HotUpdateWithTypesDemo_Run",
+          "subjectId": "SnapshotTestFixtures/HotUpdateWithTypesDemo::Run:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 136,
+          "symbol": "SnapshotTestFixtures_HotUpdateWithGenericsDemo_Run",
+          "subjectId": "SnapshotTestFixtures/HotUpdateWithGenericsDemo::Run:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 137,
+          "symbol": "SnapshotTestFixtures_SealedHelper__ctor_System_Int32",
+          "subjectId": "SnapshotTestFixtures/SealedHelper::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 138,
+          "symbol": "SnapshotTestFixtures_SealedHelper_GetValueVirtual",
+          "subjectId": "SnapshotTestFixtures/SealedHelper::GetValueVirtual:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 139,
+          "symbol": "SnapshotTestFixtures_SealedClassVirtualHelper_RunSealedVirtual",
+          "subjectId": "SnapshotTestFixtures/SealedClassVirtualHelper::RunSealedVirtual:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 140,
+          "symbol": "SnapshotTestFixtures_IMyInterface_GetValue",
+          "subjectId": "SnapshotTestFixtures/IMyInterface::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 141,
+          "symbol": "SnapshotTestFixtures_ImplHelper__ctor_System_Int32",
+          "subjectId": "SnapshotTestFixtures/ImplHelper::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 142,
+          "symbol": "SnapshotTestFixtures_ImplHelper_GetValue",
+          "subjectId": "SnapshotTestFixtures/ImplHelper::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 143,
+          "symbol": "SnapshotTestFixtures_InterfaceDevirtHelper_RunInterfaceTest",
+          "subjectId": "SnapshotTestFixtures/InterfaceDevirtHelper::RunInterfaceTest:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 144,
+          "symbol": "SnapshotTestFixtures_EhFinallyHelper_TryFinally_Only_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFinallyHelper::TryFinally_Only:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 145,
+          "symbol": "SnapshotTestFixtures_EhFaultHelper_TryFault_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFaultHelper::TryFault:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 146,
+          "symbol": "SnapshotTestFixtures_EhFilterHelper_TryFilter_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFilterHelper::TryFilter:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 147,
+          "symbol": "SnapshotTestFixtures_EhMultipleCatchHelper_MultipleCatch_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhMultipleCatchHelper::MultipleCatch:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 148,
+          "symbol": "SnapshotTestFixtures_EhCatchFinallyNestedHelper_CatchFinallyNested_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhCatchFinallyNestedHelper::CatchFinallyNested:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 149,
+          "symbol": "SnapshotTestFixtures_EhFilterFinallyHelper_FilterFinally_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFilterFinallyHelper::FilterFinally:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 150,
+          "symbol": "SnapshotTestFixtures_EhNestedTryCatchHelper_NestedTryCatch_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhNestedTryCatchHelper::NestedTryCatch:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 151,
+          "symbol": "SnapshotTestFixtures_EhFaultFinallyHelper_FaultFinally_System_Int32",
+          "subjectId": "SnapshotTestFixtures/EhFaultFinallyHelper::FaultFinally:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 152,
+          "symbol": "SnapshotTestFixtures_Wrapper_System_Int32__ctor_System_Int32",
+          "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 153,
+          "symbol": "SnapshotTestFixtures_Wrapper_System_Int32_GetValue",
+          "subjectId": "SnapshotTestFixtures/Wrapper\u003CSystem.Int32\u003E::GetValue:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 154,
+          "symbol": "SnapshotTestFixtures_Wrapper__0__ctor_0",
+          "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::.ctor:System.Void(!0)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 155,
+          "symbol": "SnapshotTestFixtures_Wrapper__0_GetValue",
+          "subjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue:!0()"
+        }
+      ]
     }
   ],
   "typeCapabilities": []

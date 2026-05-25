@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct ReflectionActivationSubjects_t {
+    struct ReflectionActivationSubjects_ReflectionActivationSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -60,7 +60,7 @@ struct Functions {
         void (*Subject_7)(
                 void
         );
-    } reflectionActivationSubjects;
+    } reflectionActivationSubjects_ReflectionActivationSubjects;
     int32_t method_count;
 };
 
@@ -79,45 +79,45 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct ReflectionActivationSubjects {
+struct ReflectionActivationSubjects_ReflectionActivationSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.reflectionActivationSubjects.Subject_0(
+        return kFunctions.reflectionActivationSubjects_ReflectionActivationSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.reflectionActivationSubjects.Subject_1(
+        return kFunctions.reflectionActivationSubjects_ReflectionActivationSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.reflectionActivationSubjects.Subject_2(
+        return kFunctions.reflectionActivationSubjects_ReflectionActivationSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.reflectionActivationSubjects.Subject_3(
+        return kFunctions.reflectionActivationSubjects_ReflectionActivationSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.reflectionActivationSubjects.Subject_4(
+        return kFunctions.reflectionActivationSubjects_ReflectionActivationSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.reflectionActivationSubjects.Subject_5(
+        return kFunctions.reflectionActivationSubjects_ReflectionActivationSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.reflectionActivationSubjects.Subject_6(
+        return kFunctions.reflectionActivationSubjects_ReflectionActivationSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.reflectionActivationSubjects.Subject_7(
+        return kFunctions.reflectionActivationSubjects_ReflectionActivationSubjects.Subject_7(
         );
     }
     /// Total number of AOT-compiled methods in this type.

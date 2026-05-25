@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/interface/dispatch,pinvoke/dllimport,primitive/numeric/conversions/core",
-  "capturedAt": "2026-05-24T14:33:09",
+  "capturedAt": "2026-05-25T01:48:38",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 4.6,
+      "acquireReleaseNsPerOp": 3.1,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-24T14:33:09][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:09][DEBUG][GcEvents] registered callback 0x7ff64bbb0bc0 at slot 0\n[2026-05-24T14:33:09][WARN][CRAG] young_collection_no_region\n[2026-05-24T14:33:09][INFO][NUMA] numa_init count=%d\n[2026-05-24T14:33:09][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-24T14:33:09][INFO][OldGen] emergency_reserve_allocated base=0x2904816746496 size=65536\n[2026-05-24T14:33:09][INFO][OldGen] init done base=0x2904787451904 pages=8\n[2026-05-24T14:33:09][INFO][GcLowMem] low-memory monitor started\n[2026-05-24T14:33:09][DEBUG][codegen] T4 VEH handler registered\n[2026-05-24T14:33:09][DEBUG][GcEvents] registered callback 0x7ff64bbb0bc0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 4.6 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\n[2026-05-24T14:33:09][DEBUG][BGC] thread_started\n[2026-05-24T14:33:09][DEBUG][Finalizer] thread_started id={0}\n"
+  "rawOutput": "[2026-05-25T01:48:38][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T01:48:38][DEBUG][GcEvents] registered callback 0x7ff6fdb360b0 at slot 0\n[2026-05-25T01:48:38][WARN][CRAG] young_collection_no_region\n[2026-05-25T01:48:38][INFO][NUMA] numa_init count=%d\n[2026-05-25T01:48:38][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T01:48:38][INFO][OldGen] emergency_reserve_allocated base=0x1970841190400 size=65536\n[2026-05-25T01:48:38][INFO][OldGen] init done base=0x1970811830272 pages=8\n[2026-05-25T01:48:38][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T01:48:38][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T01:48:38][DEBUG][GcEvents] registered callback 0x7ff6fdb360b0 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 3.1 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\n[2026-05-25T01:48:38][DEBUG][BGC] thread_started\n[2026-05-25T01:48:38][DEBUG][Finalizer] thread_started id={0}\n"
 }

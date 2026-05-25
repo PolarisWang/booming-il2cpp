@@ -32,6 +32,21 @@ extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subjec
 extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_1(void);
 extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_2(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_0(void);
+extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_1(void);
+extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_2(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_0(void);
+extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_1(void);
+extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_2(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_0(void);
+extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_1(void);
+extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subject_2(void);
+
 namespace chaos::il2cpp::codegen::ReflectionCustomattrSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -56,7 +71,7 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo =
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
 
 // ── Virtual method table arrays ──
@@ -76,7 +91,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -272,7 +287,7 @@ CHAOS_IL2CPP_INT32 chaos_reflection_get_type_metadata_token_from_handle(CHAOS_IL
 CHAOS_IL2CPP_INTPTR chaos_reflection_create_type_value(CHAOS_IL2CPP_INTPTR chaos_type_handle)
 {
 	auto* chaos_type = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Type);
-	chaos_type->header.type_info = &chaos_mt_System_Private_CoreLib_System_Type.hot;
+	chaos_type->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Type);
 	chaos_type->runtime_type_handle = chaos_type_handle;
 	chaos_type->runtime_name_value = chaos_reflection_get_type_name_value_from_handle(chaos_type_handle);
 	chaos_type->runtime_metadata_token_value = chaos_reflection_get_type_metadata_token_from_handle(chaos_type_handle);
@@ -392,7 +407,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(CHAOS_IL2CPP_INTPTR chaos_type_valu
 	}
 
 	auto* chaos_method = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo);
-	chaos_method->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.hot;
+	chaos_method->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo);
 	chaos_method->declaring_type_handle = chaos_type->runtime_type_handle;
 	chaos_method->runtime_method_handle = chaos_method_handle;
 	chaos_method->generic_definition_method_handle = chaos_method_handle;
@@ -445,7 +460,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(CHAOS_IL2CPP_INTPTR chaos_m
 
 	auto* chaos_type_argument = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Type*>(chaos_type_argument_value);
 	auto* chaos_closed_method = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo);
-	chaos_closed_method->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.hot;
+	chaos_closed_method->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo);
 	chaos_closed_method->declaring_type_handle = chaos_method->declaring_type_handle;
 	chaos_closed_method->generic_definition_method_handle = chaos_method->generic_definition_method_handle != 0
 		? chaos_method->generic_definition_method_handle
@@ -492,16 +507,16 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(CHAOS_IL2CPP_INTPTR chaos_
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_member_value);
 	CHAOS_IL2CPP_INTPTR chaos_member_handle = 0;
 	CHAOS_IL2CPP_UINT8 chaos_member_kind = 0;
-	if (chaos_object_get_type_info(chaos_header) == &chaos_mt_System_Private_CoreLib_System_Type.hot
-		|| chaos_object_get_type_info(chaos_header)->stable_id == (&chaos_mt_System_Private_CoreLib_System_Type.hot)->stable_id)
+	if (chaos_object_get_type_info(chaos_header) == reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Type)
+		|| chaos_object_get_type_info(chaos_header)->stable_id == (reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Type))->stable_id)
 	{
 		auto* chaos_type = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Type*>(chaos_member_value);
 		chaos_member_kind = 1;
 		chaos_member_handle = chaos_type->runtime_type_handle;
 	}
 
-	else if (chaos_object_get_type_info(chaos_header) == &chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.hot
-		|| chaos_object_get_type_info(chaos_header)->stable_id == (&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.hot)->stable_id)
+	else if (chaos_object_get_type_info(chaos_header) == reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo)
+		|| chaos_object_get_type_info(chaos_header)->stable_id == (reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo))->stable_id)
 	{
 		auto* chaos_method = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo*>(chaos_member_value);
 		chaos_member_kind = 2;
@@ -690,7 +705,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
-		&chaos_mt_ReflectionCustomattrSubjects_ReflectionCustomattrSubjects.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ReflectionCustomattrSubjects_ReflectionCustomattrSubjects),
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
@@ -1187,7 +1202,7 @@ extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1283,7 +1298,7 @@ extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1359,7 +1374,7 @@ extern "C" void ReflectionCustomattrSubjects_ReflectionCustomattrSubjects_Subjec
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;

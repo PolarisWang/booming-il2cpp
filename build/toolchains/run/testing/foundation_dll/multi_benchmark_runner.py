@@ -362,16 +362,52 @@ def _run_mono_benchmark(
     tfm: str,
     iterations: int = 100000,
 ) -> dict[str, Any]:
-    """Build the harness for net8.0, then run with Mono."""
-    csproj = harness_dir / "ManagedBenchmarkHarness.csproj"
-    build_dir = harness_dir / "bin" / "Release" / tfm
-    exe_path = build_dir / "ManagedBenchmarkHarness.exe"
+    """Build the harness for net472 (Mono-compatible), then run with Mono.
 
+    Mono 6.x cannot run .NET 8+ assemblies, so we use net472 with the
+    reference assemblies NuGet package for a Mono-compatible build.
+    """
     print(f"  [multi-runner] Running Mono benchmark...")
+
+    # Use net472 for Mono compatibility
+    mono_tfm = "net472"
+    mono_build_dir = harness_dir / "mono_build"
+    mono_build_dir.mkdir(parents=True, exist_ok=True)
+
     try:
-        # Build for the target TFM
+        # Copy the harness source into the isolated build directory
+        src_cs = harness_dir / "ManagedBenchmarkHarness.cs"
+        dst_cs = mono_build_dir / "ManagedBenchmarkHarness.cs"
+        if src_cs.exists():
+            import shutil
+            shutil.copy2(str(src_cs), str(dst_cs))
+
+        # Create net472 csproj with Mono-compatible packages
+        csproj = mono_build_dir / "ManagedBenchmarkHarness.csproj"
+        csproj.write_text(f"""<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>{mono_tfm}</TargetFramework>
+    <RuntimeIdentifier>win</RuntimeIdentifier>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StartupObject>ManagedBenchmarkHarness</StartupObject>
+    <GenerateProgramFile>false</GenerateProgramFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Text.Json" Version="8.0.4" />
+  </ItemGroup>
+</Project>""", encoding="utf-8")
+
+        exe_path = mono_build_dir / "bin" / "Release" / mono_tfm / "win" / "ManagedBenchmarkHarness.exe"
+
+        # Build for net472
         r = subprocess.run(
-            ["dotnet", "build", str(csproj), "-f", tfm, "--configuration", "Release"],
+            ["dotnet", "build", str(csproj), "--configuration", "Release"],
             capture_output=True, text=True, timeout=120,
         )
         if r.returncode != 0:
@@ -402,13 +438,18 @@ def _run_mono_benchmark(
             })
         return {
             "method_results": method_results,
-            "runtime_info": {"tfm": tfm, "runner": "mono"},
+            "runtime_info": {"tfm": mono_tfm, "runner": "mono"},
             "duration_s": round(elapsed, 2),
         }
     except subprocess.TimeoutExpired:
         return {"method_results": [], "runtime_info": {}, "error": "timeout (300s)"}
     except Exception as e:
         return {"method_results": [], "runtime_info": {}, "error": str(e)}
+    finally:
+        # Clean up mono_build directory to avoid accumulating stale builds
+        import shutil
+        if mono_build_dir.exists():
+            shutil.rmtree(mono_build_dir, ignore_errors=True)
 
 
 def _run_ms_aot_benchmark(
@@ -968,6 +1009,85 @@ def save_report(report: MultiRunReport, output_dir: Path) -> Path:
     return report_path
 
 
+def _append_jsonl(path: Path, record: dict) -> None:
+    """Append a single JSON record to a JSONL file."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, ensure_ascii=False, default=str) + "\n")
+
+
+def _get_git_commit() -> str:
+    """Get current git commit hash."""
+    try:
+        r = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            capture_output=True, text=True, timeout=5,
+            cwd=Path(__file__).resolve().parent,
+        )
+        return r.stdout.strip() if r.returncode == 0 else "unknown"
+    except Exception:
+        return "unknown"
+
+
+def _detect_device() -> str:
+    """Detect device info for perf records."""
+    import platform
+    return platform.node() or "unknown"
+
+
+def save_multi_benchmark_to_perf_store(
+    report: MultiRunReport,
+    family_dir: Path,
+    slug: str,
+    assembly: str,
+) -> None:
+    """Save multi-benchmark results to the perf store for dashboard consumption.
+
+    Writes to: testing/results/foundation-dll/{assembly}/{slug}/perf/benchmark-history.jsonl
+    """
+    # Build perf store path relative to project root
+    # File is at build/toolchains/run/testing/foundation_dll/multi_benchmark_runner.py
+    # parents[5] = project root (D:/agent/booming-il2cpp/)
+    project_root = Path(__file__).resolve().parents[5]
+    perf_dir = project_root / "testing" / "results" / "foundation-dll" / assembly / slug / "perf"
+    perf_dir.mkdir(parents=True, exist_ok=True)
+    store_path = perf_dir / "benchmark-history.jsonl"
+
+    common = {
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "slug": slug,
+        "assembly": assembly,
+        "gitCommit": _get_git_commit(),
+        "device": _detect_device(),
+        "compiler": "msvc",
+        "configuration": "standard",
+    }
+
+    count = 0
+    for method in report.methods:
+        for alias, sample in method.samples.items():
+            if sample.status != "ok":
+                continue
+            ns_per_op = sample.mean_ns
+            ops_per_sec = 1e9 / ns_per_op if ns_per_op > 0 else 0
+            record = {
+                **common,
+                "technology": alias,
+                "methodSubjectId": method.subject_id,
+                "methodIndex": method.method_index,
+                "metrics": {
+                    "elapsedMilliseconds": ns_per_op * sample.samples / 1_000_000 if sample.samples else 0,
+                    "opsPerSecond": ops_per_sec,
+                },
+                "iterations": sample.samples,
+                "status": "completed",
+            }
+            _append_jsonl(store_path, record)
+            count += 1
+
+    print(f"  [multi-runner] Saved {count} records to perf store: {store_path}")
+
+
 def print_report_summary(report: MultiRunReport) -> None:
     """Print a human-readable summary of the multi-run report."""
     print()
@@ -1052,6 +1172,7 @@ def main() -> None:
 
     output_dir = args.output or (args.family_dir / "multi-run")
     save_report(report, output_dir)
+    save_multi_benchmark_to_perf_store(report, args.family_dir, args.family, args.assembly)
     print_report_summary(report)
 
 

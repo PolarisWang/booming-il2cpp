@@ -269,92 +269,92 @@ CHAOS_IL2CPP_INT32 chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCo
 		return 0u;
 	}();
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Boolean_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Boolean_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_boolean(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Byte_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Byte_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_byte(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Char_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Char_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_char(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_DateTime_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_DateTime_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_datetime(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Decimal_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Decimal_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_decimal(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Double_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Double_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_double(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int16_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int16_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_int16(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_int32(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int64_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Int64_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_int64(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_SByte_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_SByte_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_sbyte(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Single_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_Single_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_single(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_string(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_System_IFormatProvider_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_String_System_IFormatProvider_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
 {
 	return chaos_convert_tochar_string_provider(chaos_arg_0, chaos_arg_1);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt16_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt16_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_uint16(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt32_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt32_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_uint32(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt64_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_UINT16 chaos_external_runtime_System_Private_CoreLib_System_Convert__ToChar_System_Char_System_UInt64_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return chaos_convert_tochar_uint64(chaos_arg_0);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__(void)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_DateTime__get_UtcNow_System_DateTime__(void)
 {
 	return ChaosDatetimeGetUtcNow();
 }
 
-static void chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+void chaos_external_runtime_System_Private_CoreLib_System_Decimal___ctor_System_Void_System_Int32_(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
 	chaos_decimal_ctor_int32(chaos_fn_arg_0, chaos_fn_arg_1);
 }
@@ -1235,10 +1235,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1279,10 +1278,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1323,10 +1321,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
 			{
@@ -1367,10 +1364,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosDatetimeGetUtcNow();
@@ -1417,10 +1413,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_4(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1477,10 +1472,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_5(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1523,10 +1517,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_6(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1567,10 +1560,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_7(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1611,10 +1603,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_8(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));
@@ -1657,10 +1648,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
@@ -1703,11 +1693,10 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			_s0 = 0;
 			_s1 = 0;
@@ -1754,10 +1743,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1798,10 +1786,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat32(42.0f);
 			{
@@ -1844,22 +1831,21 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = chaos_convert_tochar_string(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			{{
+			{
 				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = chaos_convert_tochar_string(chaos_arg_0);
@@ -1894,15 +1880,14 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			_s1 = 0;
 			{
 				const auto chaos_arg_1 = _s1;
@@ -1910,9 +1895,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void)
 				const auto chaos_result = chaos_convert_tochar_string_provider(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			{{
+			{
 				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			_s2 = 0;
 			{
 				const auto chaos_arg_1 = _s2;
@@ -1949,10 +1934,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1993,10 +1977,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -2037,10 +2020,9 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			_s0 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s0));

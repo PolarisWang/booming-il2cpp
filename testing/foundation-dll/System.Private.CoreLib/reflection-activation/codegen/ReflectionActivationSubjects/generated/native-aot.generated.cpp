@@ -77,6 +77,36 @@ extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subjec
 extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_6(void);
 extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_7(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_0(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_1(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_2(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_3(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_4(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_5(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_6(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_7(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_0(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_1(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_2(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_3(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_4(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_5(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_6(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_7(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_0(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_1(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_2(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_3(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_4(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_5(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_6(void);
+extern "C" void ReflectionActivationSubjects_ReflectionActivationSubjects_Subject_7(void);
+
 namespace chaos::il2cpp::codegen::ReflectionActivationSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

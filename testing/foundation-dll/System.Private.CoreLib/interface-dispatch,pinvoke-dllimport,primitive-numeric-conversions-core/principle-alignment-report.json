@@ -1,33 +1,56 @@
 {
   "family": "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-24T09:18:19.348547",
+  "generated_at": "2026-05-25T01:48:35.949325",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available — benchmarks not run for this family",
+      "summary": "23/23 methods are stubs — benchmark data not meaningful",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "average_native_jit_speedup_percent": null,
+        "managed_faster_count": 0,
+        "native_aot_faster_count": 0,
+        "native_jit_faster_count": 0,
+        "invalid_count": 23,
+        "total_methods": 23
+      }
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "VIOLATION",
-      "summary": "Generated C++ not found — no lowering exists",
+      "status": "ALIGNED",
+      "summary": "All methods have lowering [OK]",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "has_lowering": true,
+        "stub_count": 0,
+        "simple_forward_count": 0,
+        "methods_with_lowering": 0,
+        "methods_total": 0
+      },
+      "per_method": []
     },
     "p1_no_redundant_branch": {
       "check_id": "p1_no_redundant_branch",
-      "status": "VIOLATION",
-      "summary": "Generated C++ not found",
+      "status": "ALIGNED",
+      "summary": "No runtime dispatch branches in generated code",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "checked_patterns": [
+          "if\\s*\\(\\s*family\\s*[=!]=",
+          "switch\\s*\\(\\s*methodIndex\\b",
+          "if\\s*\\(\\s*methodIndex\\b",
+          "CHAOS_FAMILY_SPECIFIC",
+          "if\\s*\\(\\s*__family\\b"
+        ]
+      }
     },
     "p1_no_unnecessary_indirection": {
       "check_id": "p1_no_unnecessary_indirection",
-      "status": "VIOLATION",
-      "summary": "Generated C++ not found",
+      "status": "ALIGNED",
+      "summary": "No unnecessary runtime_stub calls in generated code",
       "details": [],
       "evidence": {}
     },
@@ -40,20 +63,145 @@
     },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
-      "status": "ALIGNED",
-      "summary": "All 4 changed source files within expected architecture layers",
-      "details": [],
-      "evidence": {
-        "changed_source_count": 4,
-        "layer_distribution": {
-          "TestInfra": 4
+      "status": "CONCERN",
+      "summary": "15 of 21 changed source files are outside expected architecture layers",
+      "details": [
+        {
+          "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_engine.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_precode.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
+          "reason": "outside expected architecture layers"
         }
+      ],
+      "evidence": {
+        "changed_source_count": 21,
+        "layer_distribution": {
+          "TestInfra": 2,
+          "ManagedContracts": 1,
+          "RuntimeCore": 3
+        },
+        "violations": [
+          {
+            "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_engine.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_precode.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
+            "reason": "outside expected architecture layers"
+          }
+        ]
       }
     },
     "p2_no_bare_new": {
       "check_id": "p2_no_bare_new",
-      "status": "NOT_APPLICABLE",
-      "summary": "Generated C++ not found",
+      "status": "ALIGNED",
+      "summary": "All managed allocations use CHAOS_IL2CPP_NEW_GC or equivalent",
       "details": [],
       "evidence": {}
     },
@@ -73,32 +221,43 @@
     },
     "p3_no_hardcoded_state": {
       "check_id": "p3_no_hardcoded_state",
-      "status": "NOT_APPLICABLE",
-      "summary": "Generated C++ not found",
+      "status": "ALIGNED",
+      "summary": "No hardcoded static state in generated code",
       "details": [],
       "evidence": {}
     },
     "p3_patch_entry": {
       "check_id": "p3_patch_entry",
-      "status": "NOT_APPLICABLE",
-      "summary": "Generated C++ not found",
+      "status": "ALIGNED",
+      "summary": "Dispatch table: 67 entries, all with interrupt_ptr [OK]",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "table_size": 67,
+        "entries_with_interrupt_ptr": 67,
+        "has_hotpatch_module": true
+      }
     },
     "p3_patchdata": {
       "check_id": "p3_patchdata",
-      "status": "NOT_APPLICABLE",
-      "summary": "No patch data needed (not on hotupdate path)",
+      "status": "ALIGNED",
+      "summary": "1/1 valid .patchdata files",
       "details": [],
-      "evidence": {}
+      "evidence": {
+        "patchdata_count": 1,
+        "valid_count": 1,
+        "stub_patchdata_count": 0,
+        "files": [
+          "System.Private.CoreLib\\interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core\\managed\\patch\\patchdata\\interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core.patchdata"
+        ]
+      }
     }
   },
   "summary": {
     "total": 12,
-    "aligned": 2,
-    "concern": 0,
-    "violation": 3,
-    "not_applicable": 7,
-    "overall": "VIOLATION"
+    "aligned": 8,
+    "concern": 1,
+    "violation": 0,
+    "not_applicable": 3,
+    "overall": "ALIGNED"
   }
 }

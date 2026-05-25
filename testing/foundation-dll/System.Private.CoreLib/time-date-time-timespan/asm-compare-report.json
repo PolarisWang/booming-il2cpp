@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/time/date/time/timespan",
-  "capturedAt": "2026-05-22T01:19:33",
+  "capturedAt": "2026-05-25T01:37:16",
   "batchMode": true,
   "summary": {
     "totalMethods": 16,
@@ -25,7 +25,7 @@
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 52
+      "external_runtime_call": 60
     },
     "overallIrExpansionRatio": 0.52,
     "averageExpansionRatio": 0.52,
@@ -598,11 +598,21 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 4
       }
     },
     {
@@ -635,11 +645,21 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 4
       }
     },
     {
@@ -672,11 +692,21 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 4
       }
     },
     {
@@ -709,11 +739,21 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.TimeSpan::get_Ticks:System.Int64()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 4
       }
     }
   ]

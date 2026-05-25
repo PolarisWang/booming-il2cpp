@@ -1,62 +1,63 @@
 // verification_dispatch.generated.cpp — auto-generated
-// Assembly: RuntimeCompilerServicesSubjects, Methods: 10
+// Assembly: RuntimeCompilerServicesSubjects, Methods: 10, Mode: JIT
+
 #include <cstdint>
 #include <chrono>
 #include <chaos/native_types.h>
+#include <runtime_core.h>
+#include <chaos/eh.h>
+#include <chaos/hotpatch_dispatch.h>
+
+using chaos::il2cpp::runtime_core::ChaosDispatchMethod;
+using chaos::il2cpp::runtime_core::ChaosDispatchMethodAllModules;
 
 extern "C" const int kAotMethodCount;
-extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32);
-
 extern "C" const int kSubjectEntryCount;
-extern "C" const int kSubjectEntryIndices[];
-// (defined in native-aot.generated.cpp)
+extern "C" const int kSubjectSlotMap[];
+// kSubjectEntryCount/kSubjectSlotMap defined in native-aot.generated.cpp (DispatchEntryCode template)
+
+// kDefaultArgThunks defined in native-aot.generated.cpp
+extern "C" void (*kDefaultArgThunks[])() noexcept;
+
+extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
+extern "C" int32_t GetHotpatchEntryCount() noexcept;
+
+// Subject entry count: 10 (from manifest)
 
 
-// ── RunFactAll: run every method via RunNativeAot, return failure count ──
+// ── RunFactAll: dispatch ALL methods across ALL registered modules ────
+// Uses ChaosDispatchMethodAllModules from hotpatch_dispatch.h which iterates
+// every module in HotpatchNameRegistry.  Returns total failure count.
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {
-    int failed_count = 0;
-    for (int i = 0; i < kAotMethodCount; i++) {
-        try {
-            RunNativeAot(i);
-        } catch (...) {
-            ++failed_count;
-        }
-    }
-    return failed_count;
+    return ChaosDispatchMethodAllModules(nullptr);
 }
 
-// ── RunBenchmark: timing loop via RunNativeAot ───────────────────
+// ── RunBenchmark: timing loop via ChaosDispatchMethod ───────────────────
 extern "C" double RunBenchmark(int entry_index, int iterations) {
     if (entry_index < 0 || entry_index >= kAotMethodCount)
         return -1.0;
+    auto* entries = GetHotpatchEntries();
     auto start = std::chrono::steady_clock::now();
     for (int i = 0; i < iterations; i++) {
-        RunNativeAot(entry_index);
+        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, nullptr);
     }
     auto end = std::chrono::steady_clock::now();
     return std::chrono::duration<double, std::milli>(end - start).count();
 }
 
-// ── RunHotpatchAll: all-methods loop via RunNativeAot (post-patch) ──
+// ── RunHotpatchAll: dispatch ALL methods across ALL modules (post-patch) ──
 extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {
-    int failed_count = 0;
-    for (int i = 0; i < kAotMethodCount; i++) {
-        try {
-            RunNativeAot(i);
-        } catch (...) {
-            ++failed_count;
-        }
-    }
-    return failed_count;
+    return ChaosDispatchMethodAllModules(nullptr);
 }
 
-// ── RunHotpatchBenchmark: timing loop via RunNativeAot (post-patch) ──
+// ── RunHotpatchBenchmark: timing loop via ChaosDispatchMethod (post-patch) ──
 extern "C" double RunHotpatchBenchmark(int entry_index, int iterations) {
     if (entry_index < 0 || entry_index >= kAotMethodCount)
         return -1.0;
+    auto* entries = GetHotpatchEntries();
     auto start = std::chrono::steady_clock::now();
     for (int i = 0; i < iterations; i++) {
-        RunNativeAot(entry_index);
+        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, nullptr);
     }
     auto end = std::chrono::steady_clock::now();
     return std::chrono::duration<double, std::milli>(end - start).count();

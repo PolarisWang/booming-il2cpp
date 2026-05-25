@@ -34,12 +34,16 @@ def _is_jit_mode_from_manifest(manifest: dict[str, Any]) -> bool:
 def generate_verification_dispatch(
     manifest_path: str | Path,
     output_path: str | Path,
+    jit_mode: bool | None = None,
 ) -> None:
     """Generate verification_dispatch.generated.cpp from manifest JSON.
 
     Args:
         manifest_path: Path to methods-manifest.json emitted by codegen.
         output_path: Output path for verification_dispatch.generated.cpp.
+        jit_mode: If set, overrides the JIT mode detection from manifest.
+                  True=JIT dispatch (nullptr thunks), False=AOT dispatch.
+                  None=auto-detect from manifest's codegenMode field.
     """
     manifest_path = Path(manifest_path)
     output_path = Path(output_path)
@@ -58,7 +62,10 @@ def generate_verification_dispatch(
 
     assembly_name: str = manifest.get("assemblyName", "Unknown")
     method_count: int = manifest.get("methodCount", len(methods))
-    is_jit = _is_jit_mode_from_manifest(manifest)
+    if jit_mode is not None:
+        is_jit = jit_mode
+    else:
+        is_jit = _is_jit_mode_from_manifest(manifest)
 
     lines: list[str] = []
 
@@ -86,10 +93,9 @@ def generate_verification_dispatch(
     write('extern "C" const int kSubjectSlotMap[];')
     write('// kSubjectEntryCount/kSubjectSlotMap defined in native-aot.generated.cpp (DispatchEntryCode template)')
     write('')
-    if not is_jit:
-        write('// kDefaultArgThunks defined in native-aot.generated.cpp (AOT-only)')
-        write('extern "C" void (*kDefaultArgThunks[])() noexcept;')
-        write('')
+    write('// kDefaultArgThunks defined in native-aot.generated.cpp')
+    write('extern "C" void (*kDefaultArgThunks[])() noexcept;')
+    write('')
     # GetHotpatchEntries/GetHotpatchEntryCount: extern "C" defined in hotpatch-table.generated.cpp
     write('extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;')
     write('extern "C" int32_t GetHotpatchEntryCount() noexcept;')
@@ -123,10 +129,14 @@ def generate_verification_dispatch(
     # Each module's entries are dispatched individually with EH try/catch
     # inside the runtime function.  This provides full multi-assembly
     # coverage for the verification pipeline.
-    if not is_jit:
-        fact_thunks = 'kDefaultArgThunks'
-    else:
+    # Both AOT and JIT modes: AOT uses kDefaultArgThunks for native dispatch;
+    # JIT mode uses nullptr (direct_ptr via hotpatch entry) which works because
+    # FillExternalRuntimeStubs() fills all kChaosExternalRuntimeFnTable entries
+    # with safe stubs during bootstrap.
+    if is_jit:
         fact_thunks = 'nullptr'
+    else:
+        fact_thunks = 'kDefaultArgThunks'
 
     write("// ── RunFactAll: dispatch ALL methods across ALL registered modules ────")
     write("// Uses ChaosDispatchMethodAllModules from hotpatch_dispatch.h which iterates")
@@ -137,9 +147,10 @@ def generate_verification_dispatch(
     write('')
 
     # ── RunBenchmark ────────────────────────────────────────────────
-    # Uses ChaosDispatchMethod in the timing loop.  This measures the native path
-    # when no hotpatch is active, or the interpreter path after a hotpatch.
-    # ChaosDispatchMethod handles all hotpatch routing internally.
+    # Uses ChaosDispatchMethod in the timing loop with kDefaultArgThunks
+    # so the actual function body is executed regardless of JIT/AOT mode.
+    # (JIT nullptr mode is only valid via direct_ptr, which doesn't work
+    # when the file is compiled in AOT mode.)
     write("// ── RunBenchmark: timing loop via ChaosDispatchMethod ───────────────────")
     write('extern "C" double RunBenchmark(int entry_index, int iterations) {')
     write('    if (entry_index < 0 || entry_index >= kAotMethodCount)')
@@ -147,7 +158,7 @@ def generate_verification_dispatch(
     write('    auto* entries = GetHotpatchEntries();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
-    write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {fact_thunks});')
+    write('        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, kDefaultArgThunks);')
     write('    }')
     write('    auto end = std::chrono::steady_clock::now();')
     write('    return std::chrono::duration<double, std::milli>(end - start).count();')
@@ -173,7 +184,7 @@ def generate_verification_dispatch(
     write('    auto* entries = GetHotpatchEntries();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
-    write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {fact_thunks});')
+    write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, kDefaultArgThunks);')
     write('    }')
     write('    auto end = std::chrono::steady_clock::now();')
     write('    return std::chrono::duration<double, std::milli>(end - start).count();')
@@ -190,8 +201,17 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate verification dispatch C++")
     parser.add_argument("manifest_path", help="Path to methods-manifest.json")
     parser.add_argument("output_path", help="Output path for verification_dispatch.generated.cpp")
+    parser.add_argument("--jit-mode", action="store_true", default=None,
+                        help="Force JIT dispatch mode (nullptr thunks)")
+    parser.add_argument("--aot-mode", action="store_true", default=None,
+                        help="Force AOT dispatch mode (kDefaultArgThunks thunks)")
     args = parser.parse_args()
-    generate_verification_dispatch(args.manifest_path, args.output_path)
+    jit_mode = None
+    if args.jit_mode:
+        jit_mode = True
+    elif args.aot_mode:
+        jit_mode = False
+    generate_verification_dispatch(args.manifest_path, args.output_path, jit_mode=jit_mode)
 
 
 if __name__ == "__main__":

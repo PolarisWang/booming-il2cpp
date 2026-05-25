@@ -11,7 +11,18 @@ from typing import Any
 
 @dataclass
 class StageResult:
-    """Result of a single verification stage."""
+    """Result of a single verification stage.
+
+    Fields:
+        stage: Stage key matching orchestrator.STAGES (e.g. "preflight", "codegen").
+        status: One of "passed" (all checks ok), "failed" (checks failed),
+                "skipped" (not executed, e.g. by skip_stages config), or
+                "error" (unexpected exception during execution).
+        summary: Short human-readable summary of the stage outcome.
+        details: Stage-specific structured data (method counts, ratios, etc.).
+        errors: List of error messages (populated when status is "failed"/"error").
+        duration_ms: Wall-clock execution time in milliseconds.
+    """
     stage: str
     status: str  # "passed" | "failed" | "skipped" | "error"
     summary: str = ""
@@ -29,6 +40,18 @@ class FamilyContext:
 
     All path resolution uses family_dir as root, removing hardcoded
     _VERIFICATION_BASE dependencies that plagued the old pipeline.
+
+    Fields:
+        slug: Family identifier, typically kebab-case (e.g. "convert-char").
+        assembly: Assembly name (e.g. "System.Private.CoreLib").
+        family_dir: Root directory for this family's files (contract, managed/,
+                    codegen/, native/).
+        mode: Verification mode — "standard" (default, requires preflight/codegen/
+              fact/audit to pass) or "strict" (also requires hotupdate stages).
+        skip_stages: Set of stage keys to skip during pipeline execution.
+        verbose: Enable verbose logging output.
+        codegen_mode: Code generation mode override — "aot" or "jit" or None
+                      (None uses the default from stage config).
     """
     slug: str                       # "convert-char"
     assembly: str                   # "System.Private.CoreLib"
@@ -70,7 +93,27 @@ class FamilyContext:
 
 @dataclass
 class UnifiedReport:
-    """Top-level output of a family verification run."""
+    """Top-level output of a family verification run.
+
+    Fields:
+        family: Family slug (matches FamilyContext.slug).
+        assembly: Assembly name.
+        mode: Verification mode used ("standard" or "strict").
+        timestamp: ISO-8601 timestamp of when the report was generated.
+        duration_ms: Total pipeline wall-clock time in milliseconds.
+        overall_status: One of "pending" (not yet completed), "passed" (all
+                        required stages passed), "failed" (required stage
+                        failed or errored), or "skipped" (no stages ran).
+        stages: Dict of stage_key -> StageResult.to_dict() for every stage
+                that was executed or skipped.
+        coverage: Aggregated coverage metrics — stagePassRate (float),
+                  stagesPassed/failed/skipped/total (int).
+        dashboard: Benchmark key ratios (nativeFasterRatio, managedFasterRatio,
+                   irExpansionRatio, asmPassRate, averageSpeedupPercent).
+        regression: Regression detection results from _detect_regression(),
+                    containing hasRegression (bool), regressions (list),
+                    and benchmark (dict with status/metrics).
+    """
     family: str
     assembly: str
     mode: str = "standard"

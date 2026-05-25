@@ -8,7 +8,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 50732.6,
+      "postPatchNsPerOp": 15589.4,
       "slowdownPercent": 0.0
     },
     {
@@ -16,7 +16,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 30515.6,
+      "postPatchNsPerOp": 15894.2,
       "slowdownPercent": 0.0
     },
     {
@@ -24,7 +24,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19445.0,
+      "postPatchNsPerOp": 18268.3,
       "slowdownPercent": 0.0
     },
     {
@@ -32,7 +32,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 33230.0,
+      "postPatchNsPerOp": 17127.8,
       "slowdownPercent": 0.0
     },
     {
@@ -40,7 +40,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 15833.9,
+      "postPatchNsPerOp": 14244.5,
       "slowdownPercent": 0.0
     },
     {
@@ -48,7 +48,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19986.0,
+      "postPatchNsPerOp": 13205.2,
       "slowdownPercent": 0.0
     },
     {
@@ -56,7 +56,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 29699.5,
+      "postPatchNsPerOp": 13819.1,
       "slowdownPercent": 0.0
     },
     {
@@ -64,7 +64,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 22365.9,
+      "postPatchNsPerOp": 14073.0,
       "slowdownPercent": 0.0
     },
     {
@@ -72,7 +72,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18804.3,
+      "postPatchNsPerOp": 16013.4,
       "slowdownPercent": 0.0
     },
     {
@@ -80,7 +80,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 28119.2,
+      "postPatchNsPerOp": 13830.1,
       "slowdownPercent": 0.0
     },
     {
@@ -88,7 +88,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 41764.9,
+      "postPatchNsPerOp": 15922.6,
       "slowdownPercent": 0.0
     },
     {
@@ -96,7 +96,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 15732.0,
+      "postPatchNsPerOp": 14853.0,
       "slowdownPercent": 0.0
     },
     {
@@ -104,7 +104,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18821.2,
+      "postPatchNsPerOp": 18333.6,
       "slowdownPercent": 0.0
     },
     {
@@ -112,7 +112,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 38941.9,
+      "postPatchNsPerOp": 18764.7,
       "slowdownPercent": 0.0
     },
     {
@@ -120,7 +120,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17947.2,
+      "postPatchNsPerOp": 16558.7,
       "slowdownPercent": 0.0
     },
     {
@@ -128,7 +128,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 31434.6,
+      "postPatchNsPerOp": 16355.6,
       "slowdownPercent": 0.0
     }
   ],

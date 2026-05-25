@@ -7,64 +7,64 @@
       "methodIndex": 0,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17995.8,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 20030.62,
+      "postPatchNsPerOp": 22590.3,
+      "slowdownPercent": 12.78
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17345.8,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 73158.53,
+      "postPatchNsPerOp": 56632.8,
+      "slowdownPercent": -22.59
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 15907.6,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 63592.48,
+      "postPatchNsPerOp": 50954.6,
+      "slowdownPercent": -19.87
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18762.9,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 65964.04,
+      "postPatchNsPerOp": 45082.1,
+      "slowdownPercent": -31.66
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 16397.5,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 60743.52,
+      "postPatchNsPerOp": 49205.5,
+      "slowdownPercent": -18.99
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17556.9,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 57067.26,
+      "postPatchNsPerOp": 46755.2,
+      "slowdownPercent": -18.07
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 16179.8,
-      "slowdownPercent": 0.0
+      "prePatchNsPerOp": 59464.94,
+      "postPatchNsPerOp": 47867.3,
+      "slowdownPercent": -19.5
     }
   ],
   "summary": {
     "totalMethods": 7,
-    "nonStubMethods": 0,
-    "averageSlowdownPercent": 0.0,
-    "slowdownFactor": 1.0,
+    "nonStubMethods": 7,
+    "averageSlowdownPercent": -16.84,
+    "slowdownFactor": 0.8316,
     "slowdownThresholdX": 50.0
   }
 }

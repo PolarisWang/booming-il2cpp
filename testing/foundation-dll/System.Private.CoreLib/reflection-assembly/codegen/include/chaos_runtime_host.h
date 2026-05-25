@@ -57,12 +57,6 @@ extern "C" void ChaosJitRegisterAll();
 // generated module source (chaos_generated_module.cpp).
 extern "C" void ChaosRegisterGcLayouts();
 
-// ── ChaosRegisterAotEEClasses forward declaration ──────────────────────────
-// Generated code defines this to register constexpr EEClass instances for all
-// AOT types, setting cold_delta on each MethodTable to eliminate reverse lookup.
-// Called from ChaosGeneratedModuleActivate() after ChaosRegisterGcLayouts().
-extern "C" void ChaosRegisterAotEEClasses();
-
 // ── ChaosResolveExternalRuntimeFnTable forward declaration ─────────────────
 // Defined in the bootstrap library.  Resolves external runtime table entries
 // by subject ID through the HotpatchNameRegistry.

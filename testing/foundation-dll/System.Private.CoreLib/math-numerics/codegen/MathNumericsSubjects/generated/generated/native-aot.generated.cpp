@@ -208,79 +208,91 @@ extern "C" void ChaosRegisterGcLayouts() {
 
 CHAOS_IL2CPP_INT32 chaos_static_MathNumericsSubjects_MathNumericsSubjects___exitCode = 0;
 
-static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_BitConverter__GetBytes_System_Byte___System_Double_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_BitConverter__GetBytes_System_Byte___System_Double_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	(void)chaos_arg_0;
 	static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
 	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
 }
 
-static CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_BitConverter__GetBytes_System_Byte___System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
+CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_BitConverter__GetBytes_System_Byte___System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	return ChaosBitConverterGetBytes(0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_0));
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Abs_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
+double chaos_external_runtime_System_Private_CoreLib_System_BitConverter__ToDouble_System_Double_System_Byte___System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
+{
+	(void)chaos_arg_0; (void)chaos_arg_1;
+	return 0.0;
+}
+
+CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_BitConverter__ToInt32_System_Int32_System_Byte___System_Int32_(CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1)
+{
+	(void)chaos_arg_0; (void)chaos_arg_1;
+	return 0;
+}
+
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Abs_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
 {
 	return ChaosMathAbsDouble(chaos_fn_arg_0);
 }
 
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Math__Abs_System_Int32_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
+CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Math__Abs_System_Int32_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0)
 {
 	return ChaosMathAbsInt32(chaos_fn_arg_0);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__BigMul_System_Int64_System_Int32_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__BigMul_System_Int64_System_Int32_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
 	return ChaosMathBigMul(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Ceiling_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Ceiling_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
 {
 	return ChaosMathCeiling(chaos_fn_arg_0);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Cos_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Cos_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
 {
 	return ChaosMathCos(chaos_fn_arg_0);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Floor_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Floor_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
 {
 	return ChaosMathFloor(chaos_fn_arg_0);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Max_System_Double_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Max_System_Double_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1)
 {
 	return ChaosMathMaxDouble(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Math__Max_System_Int32_System_Int32_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Math__Max_System_Int32_System_Int32_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
 	return ChaosMathMaxInt32(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-static CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Math__Min_System_Int32_System_Int32_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
+CHAOS_IL2CPP_INT32 chaos_external_runtime_System_Private_CoreLib_System_Math__Min_System_Int32_System_Int32_System_Int32_(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)
 {
 	return ChaosMathMinInt32(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Pow_System_Double_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Pow_System_Double_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0, CHAOS_IL2CPP_INT64 chaos_fn_arg_1)
 {
 	return ChaosMathPow(chaos_fn_arg_0, chaos_fn_arg_1);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Round_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Round_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
 {
 	return ChaosMathRound(chaos_fn_arg_0);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Sin_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Sin_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
 {
 	return ChaosMathSin(chaos_fn_arg_0);
 }
 
-static CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Sqrt_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
+CHAOS_IL2CPP_INT64 chaos_external_runtime_System_Private_CoreLib_System_Math__Sqrt_System_Double_System_Double_(CHAOS_IL2CPP_INT64 chaos_fn_arg_0)
 {
 	return ChaosMathSqrt(chaos_fn_arg_0);
 }
@@ -310,20 +322,6 @@ extern "C" void chaos_bridge_thunk_0(void)
 extern "C" void chaos_bridge_thunk_1(void)
 {
 	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[16])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.BitConverter::ToDouble:System.Double(System.Byte[],System.Int32)
-extern "C" double chaos_bridge_thunk_3(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
 }
 
 extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_0(void);
@@ -626,8 +624,8 @@ extern "C" void* kChaosExternalRuntimeFnTable[19] = {
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_BitConverter__GetBytes_System_Byte___System_Int32_),
 	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_BitConverter__GetBytes_System_Byte___System_Double_),
 	nullptr,
-	nullptr,
-	nullptr,
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_BitConverter__ToInt32_System_Int32_System_Byte___System_Int32_),
+	reinterpret_cast<void*>(&chaos_external_runtime_System_Private_CoreLib_System_BitConverter__ToDouble_System_Double_System_Byte___System_Int32_),
 };
 
 extern "C" int32_t kChaosExternalRuntimeCount = 19;
@@ -1181,10 +1179,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1227,10 +1224,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1275,10 +1271,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1323,10 +1318,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_3(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1371,10 +1365,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_4(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1419,10 +1412,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_5(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1467,11 +1459,10 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_6(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -1518,11 +1509,10 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_7(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			_s1 = ChaosStoreFloat64(42);
@@ -1571,11 +1561,10 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_8(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -1622,10 +1611,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_9(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1670,11 +1658,10 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_10(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			_s1 = ChaosStoreFloat64(42);
@@ -1723,10 +1710,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_11(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1771,10 +1757,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_12(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1819,11 +1804,10 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_13(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -1872,10 +1856,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_14(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1922,10 +1905,9 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_15(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = ChaosStoreFloat64(42);
 			{
@@ -1972,13 +1954,10 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_16(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
 			{
@@ -1999,7 +1978,7 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_16(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_BitConverter__ToInt32_System_Int32_System_Byte___System_Int32_(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
@@ -2021,7 +2000,7 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_16(void)
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_BitConverter__ToInt32_System_Int32_System_Byte___System_Int32_(chaos_arg_0, chaos_arg_1);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
@@ -2053,13 +2032,10 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_17(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(8);
 			{
@@ -2080,7 +2056,7 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_17(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				const auto chaos_arg_0 = _s0;
-				const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_BitConverter__ToDouble_System_Double_System_Byte___System_Int32_(chaos_arg_0, chaos_arg_1);
 				_s0 = ChaosStoreFloat64(chaos_result);
 			}
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s0)));
@@ -2103,7 +2079,7 @@ extern "C" void MathNumericsSubjects_MathNumericsSubjects_Subject_17(void)
 			{
 				const auto chaos_arg_1 = _s2;
 				const auto chaos_arg_0 = _s1;
-				const auto chaos_result = reinterpret_cast<double(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_arg_0, chaos_arg_1);
+				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_BitConverter__ToDouble_System_Double_System_Byte___System_Int32_(chaos_arg_0, chaos_arg_1);
 				_s1 = ChaosStoreFloat64(chaos_result);
 			}
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(ChaosLoadFloat64(_s1)));

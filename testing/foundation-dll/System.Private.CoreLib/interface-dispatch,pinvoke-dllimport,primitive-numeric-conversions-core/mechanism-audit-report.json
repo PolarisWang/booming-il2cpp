@@ -1,17 +1,4201 @@
 {
   "family": "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 0,
-  "audited": 0,
+  "total_methods": 465,
+  "audited": 465,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 0,
+  "methods_without_assert": 465,
   "passed": true,
-  "method_details": [],
+  "method_details": [
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetModuleHandle_System_String",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetProcessId_System_IntPtr",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestAsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestByteToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondBase",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondDerived",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondMulti",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToFloat",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestFloatToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetModuleHandle",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetProcessId",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToByte",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToShort",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestLongToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestMultiImplCalc",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplDefault",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplSimple",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestUintToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAot",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotBench",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BenchmarkMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetModuleHandle_System_String",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetProcessId_System_IntPtr",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestAsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestByteToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondBase",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondDerived",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondMulti",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToFloat",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestFloatToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetModuleHandle",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetProcessId",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToByte",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToShort",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestLongToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestMultiImplCalc",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplDefault",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplSimple",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestUintToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetModuleHandle_System_String",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetProcessId_System_IntPtr",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestAsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestByteToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondBase",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondDerived",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondMulti",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToFloat",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestFloatToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetModuleHandle",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetProcessId",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToByte",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToShort",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestLongToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestMultiImplCalc",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplDefault",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplSimple",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestUintToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAot",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotBench",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BenchmarkMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetModuleHandle_System_String",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetProcessId_System_IntPtr",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestAsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestByteToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondBase",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondDerived",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondMulti",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToFloat",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestFloatToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetModuleHandle",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetProcessId",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToByte",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToShort",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestLongToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestMultiImplCalc",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplDefault",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplSimple",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestUintToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetModuleHandle_System_String",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetProcessId_System_IntPtr",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestAsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestByteToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondBase",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondDerived",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondMulti",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToFloat",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestFloatToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetModuleHandle",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetProcessId",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToByte",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToShort",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestLongToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestMultiImplCalc",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplDefault",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplSimple",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestUintToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAot",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RunNativeAotBench",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "BenchmarkMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_Subject_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetModuleHandle_System_String",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_GetProcessId_System_IntPtr",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_Run_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestAsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestByteToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondBase",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondDerived",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDiamondMulti",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToFloat",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestDoubleToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestFloatToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentProcess",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetCurrentThread",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetModuleHandle",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestGetProcessId",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToByte",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToDouble",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIntToShort",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestIsCheck",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestLongToInt",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestMultiImplCalc",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplDefault",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestSingleImplSimple",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_TestUintToLong",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Add_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_Multiply_System_Int32_System_Int32",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_BaseMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_DerivedMethod",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault_GetValue",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    }
+  ],
   "skip_details": [],
-  "errors": [
-    "Generated C++ not found"
-  ]
+  "errors": []
 }

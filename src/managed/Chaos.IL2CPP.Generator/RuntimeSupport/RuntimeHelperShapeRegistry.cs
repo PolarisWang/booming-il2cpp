@@ -6073,6 +6073,52 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
+            // === System.BitConverter::ToInt32 (GenericShapeDescriptor — stub returning 0) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.BitConverter",
+                MethodName: "ToInt32",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
+                        "    return 0;",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(),
+                        }),
+                        CreateInt32AbiSlot(),
+                        new HashSet<int> { 0, 1 });
+                }));
+
+            // === System.BitConverter::ToDouble (GenericShapeDescriptor — stub returning 0.0) ===
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.BitConverter",
+                MethodName: "ToDouble",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var src = RenderSimpleExternalRuntimeHelper("double", symbol,
+                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                    [
+                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
+                        "    return 0.0;",
+                    ]);
+                    return new GenericShapeResolution(src, symbol,
+                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                        {
+                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            CreateNativeIntAbiSlot(),
+                        }),
+                        new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64 },
+                        new HashSet<int> { 0, 1 });
+                }));
+
 
             // === Marshal.GetFunctionPointerForDelegate<T>(T) — returns native function pointer via thunk registry ===
             registry.RegisterGeneric(new GenericShapeDescriptor(

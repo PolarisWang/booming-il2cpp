@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct PrimitiveNumericConversionsCoreNativeEntry_t {
+    struct PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry_t {
         CHAOS_IL2CPP_INT32 (*TestByteToInt)(
                 void
         );
@@ -66,8 +66,8 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*TestUintToLong)(
                 void
         );
-    } primitiveNumericConversionsCoreNativeEntry;
-    struct PrimitiveNumericConversionsCoreSubjects_t {
+    } primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry;
+    struct PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -98,7 +98,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } primitiveNumericConversionsCoreSubjects;
+    } primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects;
     int32_t method_count;
 };
 
@@ -117,110 +117,110 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct PrimitiveNumericConversionsCoreNativeEntry {
+struct PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry {
     static inline CHAOS_IL2CPP_INT32 TestByteToInt(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestByteToInt(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestByteToInt(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDoubleToFloat(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestDoubleToFloat(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestDoubleToFloat(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDoubleToInt(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestDoubleToInt(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestDoubleToInt(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestFloatToDouble(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestFloatToDouble(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestFloatToDouble(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIntToByte(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestIntToByte(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestIntToByte(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIntToDouble(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestIntToDouble(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestIntToDouble(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIntToLong(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestIntToLong(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestIntToLong(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIntToShort(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestIntToShort(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestIntToShort(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestLongToInt(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestLongToInt(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestLongToInt(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestUintToLong(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreNativeEntry.TestUintToLong(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreNativeEntry.TestUintToLong(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 10;
 };
 
-struct PrimitiveNumericConversionsCoreSubjects {
+struct PrimitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_0(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_1(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_2(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_3(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_4(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_5(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_6(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_7(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_8(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.primitiveNumericConversionsCoreSubjects.Subject_9(
+        return kFunctions.primitiveNumericConversionsCoreSubjects_PrimitiveNumericConversionsCoreSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

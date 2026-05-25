@@ -59,6 +59,33 @@ extern const char* const kPatchDataHostClassName;
 extern "C" void RunMicrobench();
 
 
+// Defined in native-aot.generated.cpp (JIT mode) — registers all methods
+// for precode dispatch.  In AOT mode this is a no-op stub.
+extern "C" void ChaosJitRegisterAll();
+
+// Defined in native-aot.generated.cpp — hotpatch module registration
+extern "C" const HotpatchModuleV0* chaos_il2cpp_aot_hotpatch_module;
+
+#if defined(_WIN32)
+// VectoredExceptionHandler: captures crash diagnostics from JIT-compiled code.
+// SEH (__try/__except) cannot catch crashes in JIT code because the JIT region
+// has no .pdata for unwind. VEH is OS-level and fires regardless.
+#include <windows.h>
+static LONG CALLBACK JitVehHandler(PEXCEPTION_POINTERS ExceptionInfo) noexcept {
+    auto* ctx = ExceptionInfo->ContextRecord;
+    std::fprintf(stderr,
+        "JIT CRASH: Code=0x%08lX RIP=0x%p RSP=0x%p"
+        " RAX=0x%p RBX=0x%p RCX=0x%p RDX=0x%p RSI=0x%p RDI=0x%p\n",
+        ExceptionInfo->ExceptionRecord->ExceptionCode,
+        (void*)ctx->Rip, (void*)ctx->Rsp,
+        (void*)ctx->Rax, (void*)ctx->Rbx,
+        (void*)ctx->Rcx, (void*)ctx->Rdx,
+        (void*)ctx->Rsi, (void*)ctx->Rdi);
+    std::fflush(stderr);
+    return EXCEPTION_CONTINUE_SEARCH;
+}
+#endif
+
 
 // ── Shared helper: apply hotpatch and print diagnostic ─────────────
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
@@ -201,6 +228,20 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 
 // ── Main ───────────────────────────────────────────────────────────
 int main(int argc, char* argv[]) {
+
+#if defined(_WIN32)
+    // Install VEH to capture JIT crash diagnostics
+    AddVectoredExceptionHandler(1, JitVehHandler);
+#endif
+
+    // Register the hotpatch module so ChaosDispatchMethod can resolve
+    // JIT entries by module_id + token.
+    chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
+
+    // Register all methods for JIT precode dispatch.
+    // After this, each method's first call triggers JitStubDispatchImpl
+    // → jit::Compile().  Subsequent calls go directly to compiled code.
+    ChaosJitRegisterAll();
 
 
     if (argc < 2) {

@@ -86,7 +86,9 @@ static bool H_8(int i)
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
 static bool H_9(int i)
 {
-    try { Convert.ToChar((object)((i + 9) & 0xFF)); return false; } catch { return true; }
+    Convert.ToChar((object)((i + 9) & 0xFF));
+    _g++;  // volatile side-effect prevents DCE
+    return false;
 }
 
 [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]

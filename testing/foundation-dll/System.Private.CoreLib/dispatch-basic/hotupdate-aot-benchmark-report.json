@@ -7,48 +7,48 @@
       "methodIndex": 0,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 3.74,
-      "postPatchNsPerOp": 3.5,
-      "slowdownPercent": -6.42
+      "prePatchNsPerOp": 3.67,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": -42.78
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 3.5,
-      "postPatchNsPerOp": 3.6,
-      "slowdownPercent": 2.86
+      "prePatchNsPerOp": 3.68,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": -42.93
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 5.09,
-      "postPatchNsPerOp": 3.7,
-      "slowdownPercent": -27.31
+      "prePatchNsPerOp": 3.5,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": -40.0
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 3.42,
-      "postPatchNsPerOp": 3.4,
-      "slowdownPercent": -0.58
+      "prePatchNsPerOp": 3.7,
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": -43.24
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 3.34,
-      "postPatchNsPerOp": 3.4,
-      "slowdownPercent": 1.8
+      "prePatchNsPerOp": 3.47,
+      "postPatchNsPerOp": 3.6,
+      "slowdownPercent": 3.75
     }
   ],
   "summary": {
     "totalMethods": 5,
     "nonStubMethods": 5,
-    "averageSlowdownPercent": -5.93,
-    "slowdownFactor": 0.9407,
+    "averageSlowdownPercent": -33.04,
+    "slowdownFactor": 0.6696000000000001,
     "slowdownThresholdX": 50.0
   }
 }

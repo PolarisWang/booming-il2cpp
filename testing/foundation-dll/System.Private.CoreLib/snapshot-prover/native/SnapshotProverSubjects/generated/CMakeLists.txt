@@ -47,7 +47,7 @@ set(ENTRY_EHA_FLAG $<$<CXX_COMPILER_ID:MSVC>:/EHa>)
 
 # Assembly: SnapshotProverSubjects
 add_library(chaos_gen_SnapshotProverSubjects STATIC
-    ${CHAOS_GEN_DIR}/generated/native-aot.generated.cpp
+    ${CHAOS_GEN_DIR}/generated/native-aot.page-0001.cpp
     ${CHAOS_GEN_DIR}/generated/chaos_generated_module.cpp
 )
 
@@ -58,7 +58,6 @@ target_compile_options(chaos_gen_SnapshotProverSubjects PUBLIC ${COMMON_COMPILE_
 
 # Entry executable — links generated code + native runtime
 add_executable(entry
-    ${CHAOS_GEN_DIR}/runtime-entry.cpp
 )
 
 target_link_libraries(entry PRIVATE

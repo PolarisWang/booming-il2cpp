@@ -2,8 +2,8 @@
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-24T18:02:25",
-  "duration_ms": 34400,
+  "timestamp": "2026-05-25T01:32:34",
+  "duration_ms": 35386,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\managed\\subjects\\build-output\\GuidRandomHashcodeSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 25048
+      "duration_ms": 24577
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -40,17 +40,17 @@
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=failed (0/0)",
+      "status": "passed",
+      "summary": "Fact verify=passed (14/14)",
       "details": {
         "fact": {
-          "status": "failed",
-          "passed": 0,
-          "total": 0
+          "status": "passed",
+          "passed": 14,
+          "total": 14
         }
       },
       "errors": [],
-      "duration_ms": 388
+      "duration_ms": 359
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -61,60 +61,87 @@
           "status": "passed",
           "passed": 14,
           "total": 14,
-          "exit_code": 0
+          "exit_code": 3221225477
         }
       },
       "errors": [],
-      "duration_ms": 416
+      "duration_ms": 33
     },
     "audit": {
       "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN (mech_passed=True, strict_on_CONCERN=False)",
+      "status": "failed",
+      "summary": "false_passing=0, principle=VIOLATION (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "CONCERN",
+        "principleStatus": "VIOLATION",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1308
+      "duration_ms": 1649
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
+      "status": "passed",
+      "summary": "asm-compare: 14/14 methods OK, avg JIT=44.0 instr, avg AOT IR=18.0 instr, expansion=0.41x",
+      "details": {
+        "totalMethods": 14,
+        "okCount": 14,
+        "failedCount": 0,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 44,
+          "avg": 44.0,
+          "total": 616
+        },
+        "aotInstructionCount": {
+          "min": 8,
+          "max": 28,
+          "avg": 18.0,
+          "total": 252
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {
+          "external_runtime_call": 24
+        },
+        "overallIrExpansionRatio": 0.41,
+        "averageExpansionRatio": 0.41,
+        "maxExpansionRatio": 0.64,
+        "minExpansionRatio": 0.18
+      },
       "errors": [],
-      "duration_ms": 29
+      "duration_ms": 2641
     },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=5.0ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
+      "summary": "FramePool=2.6ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
       "details": {
         "framePool": {
-          "acquireReleaseNsPerOp": 5.0,
+          "acquireReleaseNsPerOp": 2.6,
           "batchCount": 1000,
           "framesPerBatch": 32
         },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 31
+      "duration_ms": 24
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "avg_aot_speedup=-153.07%, avg_jit_speedup=0.0%, native_aot_faster=1/10, managed_faster=9",
+      "summary": "avg_aot_speedup=-175.26%, avg_jit_speedup=0.0%, native_aot_faster=0/10, managed_faster=10",
       "details": {
-        "averageSpeedupPercent": -153.07,
-        "averageNativeAotSpeedupPercent": -153.07,
+        "averageSpeedupPercent": -175.26,
+        "averageNativeAotSpeedupPercent": -175.26,
         "averageNativeJitSpeedupPercent": 0.0,
-        "nativeAotFasterCount": 1,
+        "nativeAotFasterCount": 0,
         "nativeJitFasterCount": 0,
-        "managedFasterCount": 9,
+        "managedFasterCount": 10,
         "matchedCount": 10,
         "totalMethods": 14,
         "invalidCount": 4,
@@ -133,39 +160,39 @@
           "chaos_slower_than_jit": 8,
           "not_benchmarked": 4
         },
-        "multiRuntimeSpeedup": 0.33146789811136007,
+        "multiRuntimeSpeedup": 0.3516195487515964,
         "multiRuntimeFasterCount": 0,
         "multiRuntimeSlowerCount": 10
       },
       "errors": [],
-      "duration_ms": 6371
+      "duration_ms": 5346
     },
     "hotupdate": {
       "stage": "hotupdate",
-      "status": "failed",
-      "summary": "HotUpdate returned 0 total — no verification performed",
+      "status": "passed",
+      "summary": "14/14 passed, 0 failed (stub=0)",
       "details": {
-        "passedMethods": 0,
+        "passedMethods": 14,
         "failedMethods": 0,
-        "totalMethods": 0,
-        "realMethods": 0,
+        "totalMethods": 14,
+        "realMethods": 14,
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 25
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=2.78% (1.0x) over 14 methods (AOT patched path)",
+      "summary": "avg_slowdown=-0.87% (1.0x) over 14 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": 2.78,
-        "slowdownFactor": 1.0278,
+        "averageSlowdownPercent": -0.87,
+        "slowdownFactor": 0.9913,
         "threshold": 50.0,
         "nonStubMethods": 14
       },
       "errors": [],
-      "duration_ms": 373
+      "duration_ms": 365
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -177,7 +204,7 @@
         "total": 14
       },
       "errors": [],
-      "duration_ms": 26
+      "duration_ms": 24
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -190,17 +217,17 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 373
+      "duration_ms": 336
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
+    "methodCoverage": 100.0,
     "testedRate": 100.0,
     "overall": 100.0
   },
   "dashboard": {
     "interpreter": {
-      "fastFramePoolNsPerOp": 5.0,
+      "fastFramePoolNsPerOp": 2.6,
       "fastExecuteNsPerInstr": 0,
       "callVirtHandlerDispatchNs": 0,
       "callVirtMicHitNs": 0,
@@ -224,9 +251,9 @@
       }
     },
     "performance": {
-      "averageSpeedupPercent": -153.07,
-      "nativeFasterCount": 1,
-      "managedFasterCount": 9,
+      "averageSpeedupPercent": -175.26,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 10,
       "matchedCount": 10,
       "totalMethods": 14,
       "invalidCount": 4,
@@ -235,13 +262,13 @@
     },
     "hotupdate": {
       "aotFunctional": {
-        "passedMethods": 0,
+        "passedMethods": 14,
         "failedMethods": 0,
-        "totalMethods": 0
+        "totalMethods": 14
       },
       "aotOverhead": {
-        "averageSlowdownPercent": 2.78,
-        "slowdownFactor": 1.0278,
+        "averageSlowdownPercent": -0.87,
+        "slowdownFactor": 0.9913,
         "nonStubMethods": 14
       },
       "jitFunctional": {
@@ -256,9 +283,9 @@
       }
     },
     "keyRatios": {
-      "nativeFasterRatio": 0.1,
+      "nativeFasterRatio": 0.0,
       "irExpansionRatio": 0.41,
-      "interpreterSlowdownFactor": 1.0278,
+      "interpreterSlowdownFactor": 0.9913,
       "asmPassRate": 100.0
     }
   },
@@ -276,13 +303,13 @@
         "totalMethods": 14,
         "matchedCount": 10,
         "nativeFasterCount": 0,
-        "managedFasterCount": 9,
-        "averageSpeedupPercent": -153.07
+        "managedFasterCount": 10,
+        "averageSpeedupPercent": -175.26
       }
     },
     "hasRegression": true,
     "regressions": [
-      "Managed-faster ratio 90% exceeds native-faster ratio 0% (9/10 methods)"
+      "Managed-faster ratio 100% exceeds native-faster ratio 0% (10/10 methods)"
     ]
   }
 }

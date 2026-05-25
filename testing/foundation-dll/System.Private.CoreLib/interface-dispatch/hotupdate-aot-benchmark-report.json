@@ -7,17 +7,17 @@
       "methodIndex": 0,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 2.63,
-      "postPatchNsPerOp": 3.5,
-      "slowdownPercent": 33.08
+      "prePatchNsPerOp": 2.13,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": 7.98
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 2.13,
-      "postPatchNsPerOp": 4.0,
-      "slowdownPercent": 87.79
+      "prePatchNsPerOp": 2.18,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": 5.5
     },
     {
       "methodIndex": 2,
@@ -31,33 +31,33 @@
       "methodIndex": 3,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 2.2,
-      "postPatchNsPerOp": 3.6,
-      "slowdownPercent": 63.64
+      "prePatchNsPerOp": 3.63,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": -36.64
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 2.13,
-      "postPatchNsPerOp": 3.9,
-      "slowdownPercent": 83.1
+      "prePatchNsPerOp": 3.85,
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": -40.26
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 2.24,
+      "prePatchNsPerOp": 2.14,
       "postPatchNsPerOp": 2.3,
-      "slowdownPercent": 2.68
+      "slowdownPercent": 7.48
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 3.82,
+      "prePatchNsPerOp": 2.12,
       "postPatchNsPerOp": 2.3,
-      "slowdownPercent": -39.79
+      "slowdownPercent": 8.49
     },
     {
       "methodIndex": 7,
@@ -71,16 +71,16 @@
       "methodIndex": 8,
       "methodSubjectId": "InterfaceDispatchNativeEntry/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 2.31,
+      "prePatchNsPerOp": 2.1,
       "postPatchNsPerOp": 2.3,
-      "slowdownPercent": -0.43
+      "slowdownPercent": 9.52
     }
   ],
   "summary": {
     "totalMethods": 9,
     "nonStubMethods": 9,
-    "averageSlowdownPercent": 27.12,
-    "slowdownFactor": 1.2712,
+    "averageSlowdownPercent": -2.66,
+    "slowdownFactor": 0.9734,
     "slowdownThresholdX": 50.0
   }
 }

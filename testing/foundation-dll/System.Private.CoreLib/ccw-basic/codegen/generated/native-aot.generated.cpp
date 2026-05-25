@@ -69,6 +69,90 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Add_System_Int32_Syste
 extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
 extern "C" void CcwBasicSubjects_SimpleMath__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestConstantValue(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestDualInterface(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathAdd(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathMul(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_0(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_1(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_2(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_3(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_4(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_ConstantFortyTwo_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CcwBasicSubjects_ConstantFortyTwo__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_DualInterfaceImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_SimpleMath__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestConstantValue(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestDualInterface(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathAdd(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathMul(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_0(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_1(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_2(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_3(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_4(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_ConstantFortyTwo_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CcwBasicSubjects_ConstantFortyTwo__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_DualInterfaceImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_SimpleMath__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestConstantValue(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestDualInterface(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathAdd(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathMul(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_0(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_1(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_2(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_3(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_4(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_ConstantFortyTwo_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CcwBasicSubjects_ConstantFortyTwo__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_DualInterfaceImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_SimpleMath__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestConstantValue(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestDualInterface(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathAdd(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathMul(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_0(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_1(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_2(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_3(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_4(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_ConstantFortyTwo_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CcwBasicSubjects_ConstantFortyTwo__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_DualInterfaceImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_SimpleMath__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+
 namespace chaos::il2cpp::codegen::CcwBasicSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

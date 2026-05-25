@@ -2,8 +2,8 @@
   "family": "threading-monitor-interlocked",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T08:53:38",
-  "duration_ms": 632761,
+  "timestamp": "2026-05-25T01:37:30",
+  "duration_ms": 63711,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         ]
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -39,7 +39,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\build-output\\ThreadingMonitorInterlockedSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 28894
+      "duration_ms": 35289
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -52,16 +52,16 @@
     "fact": {
       "stage": "fact",
       "status": "passed",
-      "summary": "Fact verify=passed (18/18)",
+      "summary": "Fact verify=passed (14/14)",
       "details": {
         "fact": {
           "status": "passed",
-          "passed": 18,
-          "total": 18
+          "passed": 14,
+          "total": 14
         }
       },
       "errors": [],
-      "duration_ms": 430
+      "duration_ms": 714
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -76,82 +76,106 @@
         }
       },
       "errors": [],
-      "duration_ms": 30
+      "duration_ms": 2113
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "summary": "false_passing=0, principle=CONCERN (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 4,
+        "skipsFound": 0,
         "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1232
+      "duration_ms": 3433
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
+      "status": "passed",
+      "summary": "asm-compare: 14/14 methods OK, avg JIT=143.6 instr, avg AOT IR=7.5 instr, expansion=0.05x",
+      "details": {
+        "totalMethods": 14,
+        "okCount": 14,
+        "failedCount": 0,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 1438,
+          "avg": 143.6,
+          "total": 2010
+        },
+        "aotInstructionCount": {
+          "min": 1,
+          "max": 34,
+          "avg": 7.5,
+          "total": 105
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {
+          "external_runtime_call": 7
+        },
+        "overallIrExpansionRatio": 0.05,
+        "averageExpansionRatio": 0.13,
+        "maxExpansionRatio": 0.77,
+        "minExpansionRatio": 0.02
+      },
       "errors": [],
-      "duration_ms": 20
+      "duration_ms": 5532
     },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=3.1ns/op | FastExecute=1.9ns/op | CallVirt dispatch=1.9ns",
+      "summary": "FramePool=2.5ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
       "details": {
         "framePool": {
-          "acquireReleaseNsPerOp": 3.1,
+          "acquireReleaseNsPerOp": 2.5,
           "batchCount": 1000,
           "framesPerBatch": 32
-        },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 1.9
-        },
-        "callVirt": {
-          "handlerDispatchNs": 1.9,
-          "emptyStackNs": 2.1
         },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 27
+      "duration_ms": 32
     },
     "benchmark": {
       "stage": "benchmark",
-      "status": "failed",
-      "summary": "Benchmark stage crashed: Command '['D:\\\\agent\\\\booming-il2cpp\\\\testing\\\\foundation-dll\\\\System.Private.CoreLib\\\\threading-monitor-interlocked\\\\native\\\\entry-aot.exe', '--benchmark', '3', '100000']' timed out after 300 seconds",
+      "status": "skipped",
+      "summary": "All 14 non-stub methods are invalid (no managed harness)",
       "details": {},
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 15671
     },
     "hotupdate": {
       "stage": "hotupdate",
       "status": "passed",
-      "summary": "18/18 passed, 0 failed (stub=10)",
+      "summary": "14/14 passed, 0 failed (stub=10)",
       "details": {
-        "passedMethods": 18,
+        "passedMethods": 14,
         "failedMethods": 0,
-        "totalMethods": 18,
-        "realMethods": 18,
+        "totalMethods": 14,
+        "realMethods": 14,
         "stubMethods": 10
       },
       "errors": [],
-      "duration_ms": 109
+      "duration_ms": 39
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
-      "status": "failed",
-      "summary": "HotUpdate AOT benchmark stage crashed: Command '['D:\\\\agent\\\\booming-il2cpp\\\\testing\\\\foundation-dll\\\\System.Private.CoreLib\\\\threading-monitor-interlocked\\\\native\\\\entry-aot.exe', '--hotupdate-and-benchmark', '3', '10000']' timed out after 300 seconds",
-      "details": {},
+      "status": "passed",
+      "summary": "avg_slowdown=-4.68% (1.0x) over 4 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": -4.68,
+        "slowdownFactor": 0.9531999999999999,
+        "threshold": 50.0,
+        "nonStubMethods": 4
+      },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 103
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -163,32 +187,32 @@
         "total": 17
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 24
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
+      "summary": "avg_slowdown=-12.46% (0.9x) over 4 methods (JIT patched path)",
       "details": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
+        "averageSlowdownPercent": -12.46,
+        "slowdownFactor": 0.8754,
         "threshold": 50.0,
-        "nonStubMethods": 0
+        "nonStubMethods": 4
       },
       "errors": [],
-      "duration_ms": 610
+      "duration_ms": 750
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 71.43,
-    "overall": 85.72
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {
-      "fastFramePoolNsPerOp": 3.1,
+      "fastFramePoolNsPerOp": 2.5,
       "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 1.9,
+      "callVirtHandlerDispatchNs": 0,
       "callVirtMicHitNs": 0,
       "callVirtRawFallbackNs": 0,
       "poolSize": 32
@@ -197,11 +221,11 @@
       "totalMethods": 14,
       "okCount": 14,
       "failedCount": 0,
-      "overallIrExpansionRatio": 0.18,
-      "averageExpansionRatio": 0.18,
+      "overallIrExpansionRatio": 0.05,
+      "averageExpansionRatio": 0.13,
       "maxExpansionRatio": 0.77,
-      "jitInstructionAvg": 44.0,
-      "aotInstructionAvg": 7.8,
+      "jitInstructionAvg": 143.6,
+      "aotInstructionAvg": 7.5,
       "totalExternalRuntimeCalls": 0,
       "totalVirtualDispatches": 0,
       "totalBoxingOps": 0,
@@ -212,9 +236,14 @@
     "performance": {},
     "hotupdate": {
       "aotFunctional": {
-        "passedMethods": 18,
+        "passedMethods": 14,
         "failedMethods": 0,
-        "totalMethods": 18
+        "totalMethods": 14
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": -4.68,
+        "slowdownFactor": 0.9531999999999999,
+        "nonStubMethods": 4
       },
       "jitFunctional": {
         "passedMethods": 17,
@@ -222,22 +251,35 @@
         "totalMethods": 17
       },
       "jitOverhead": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "nonStubMethods": 0
+        "averageSlowdownPercent": -12.46,
+        "slowdownFactor": 0.8754,
+        "nonStubMethods": 4
       }
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0.18,
-      "interpreterSlowdownFactor": 0,
+      "irExpansionRatio": 0.05,
+      "interpreterSlowdownFactor": 0.9531999999999999,
       "asmPassRate": 100.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "skipped",
-      "message": "No benchmark report found"
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 14,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 14,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      }
     },
     "hasRegression": false,
     "regressions": []

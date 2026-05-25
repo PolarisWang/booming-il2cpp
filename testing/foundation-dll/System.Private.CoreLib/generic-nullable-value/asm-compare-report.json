@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/generic/nullable/value",
-  "capturedAt": "2026-05-22T01:19:22",
+  "capturedAt": "2026-05-25T01:27:19",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 34,
-      "avg": 24.3,
-      "total": 243
+      "max": 32,
+      "avg": 23.9,
+      "total": 239
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 20
     },
-    "overallIrExpansionRatio": 0.55,
-    "averageExpansionRatio": 0.55,
-    "maxExpansionRatio": 0.77,
+    "overallIrExpansionRatio": 0.54,
+    "averageExpansionRatio": 0.54,
+    "maxExpansionRatio": 0.73,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -195,8 +195,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 34,
-        "ratio": 0.77,
+        "aotInstructionCount": 32,
+        "ratio": 0.73,
         "jitCodeSize": 256
       },
       "jit": {
@@ -207,7 +207,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_4",
-        "instructions": 34
+        "instructions": 32
       },
       "analysis": [],
       "instructionCategories": {}
@@ -280,8 +280,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 32,
-        "ratio": 0.73,
+        "aotInstructionCount": 30,
+        "ratio": 0.68,
         "jitCodeSize": 256
       },
       "jit": {
@@ -292,7 +292,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_7",
-        "instructions": 32
+        "instructions": 30
       },
       "analysis": [
         {

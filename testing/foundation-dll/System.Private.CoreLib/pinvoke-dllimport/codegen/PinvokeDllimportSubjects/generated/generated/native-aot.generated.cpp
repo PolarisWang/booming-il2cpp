@@ -815,10 +815,9 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0(void
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d8 = s_hotpatch_entries[8];
@@ -879,10 +878,9 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1(void
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d9 = s_hotpatch_entries[9];
@@ -943,10 +941,9 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2(void
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d11 = s_hotpatch_entries[11];
@@ -1007,10 +1004,9 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3(void
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d10 = s_hotpatch_entries[10];
@@ -1113,11 +1109,9 @@ extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEnt
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	{
 		auto& _d4 = s_hotpatch_entries[4];
 		CHAOS_IL2CPP_INTPTR _d_hpresult{};
@@ -1157,11 +1151,9 @@ extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEnt
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	{
 		auto& _d5 = s_hotpatch_entries[5];
 		CHAOS_IL2CPP_INTPTR _d_hpresult{};
@@ -1201,9 +1193,9 @@ extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEnt
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-
-
+	CHAOS_IL2CPP_INTPTR _s1{};
 	_s0 = 0;
 	{
 		const auto chaos_arg_0 = _s0;
@@ -1244,9 +1236,9 @@ extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEnt
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-
-
+	CHAOS_IL2CPP_INTPTR _s1{};
 	{
 		auto& _d4 = s_hotpatch_entries[4];
 		CHAOS_IL2CPP_INTPTR _d_hpresult{};

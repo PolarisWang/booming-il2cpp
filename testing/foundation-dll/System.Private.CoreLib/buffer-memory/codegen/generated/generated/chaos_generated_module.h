@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct BufferMemoryNativeEntry_t {
+    struct BufferMemorySubjects_BufferMemoryNativeEntry_t {
         void (*CustomEntryMethod0)(
                 void
         );
@@ -45,8 +45,8 @@ struct Functions {
         void (*CustomEntryMethod9)(
                 void
         );
-    } bufferMemoryNativeEntry;
-    struct BufferMemorySubjects_t {
+    } bufferMemorySubjects_BufferMemoryNativeEntry;
+    struct BufferMemorySubjects_BufferMemorySubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -77,7 +77,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } bufferMemorySubjects;
+    } bufferMemorySubjects_BufferMemorySubjects;
     int32_t method_count;
 };
 
@@ -96,75 +96,75 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct BufferMemoryNativeEntry {
+struct BufferMemorySubjects_BufferMemoryNativeEntry {
     static inline void CustomEntryMethod0(
     ) {
-        return kFunctions.bufferMemoryNativeEntry.CustomEntryMethod0(
+        return kFunctions.bufferMemorySubjects_BufferMemoryNativeEntry.CustomEntryMethod0(
         );
     }
     static inline void CustomEntryMethod3(
     ) {
-        return kFunctions.bufferMemoryNativeEntry.CustomEntryMethod3(
+        return kFunctions.bufferMemorySubjects_BufferMemoryNativeEntry.CustomEntryMethod3(
         );
     }
     static inline void CustomEntryMethod9(
     ) {
-        return kFunctions.bufferMemoryNativeEntry.CustomEntryMethod9(
+        return kFunctions.bufferMemorySubjects_BufferMemoryNativeEntry.CustomEntryMethod9(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 3;
 };
 
-struct BufferMemorySubjects {
+struct BufferMemorySubjects_BufferMemorySubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_0(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_1(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_2(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_3(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_4(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_5(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_6(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_7(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_8(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.bufferMemorySubjects.Subject_9(
+        return kFunctions.bufferMemorySubjects_BufferMemorySubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

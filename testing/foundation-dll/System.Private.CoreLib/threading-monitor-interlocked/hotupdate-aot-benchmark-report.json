@@ -17,17 +17,17 @@
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)",
       "status": "passed",
-      "prePatchNsPerOp": 172.22,
-      "postPatchNsPerOp": 177.2,
-      "slowdownPercent": 2.89
+      "prePatchNsPerOp": 188.49,
+      "postPatchNsPerOp": 183.4,
+      "slowdownPercent": -2.7
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 172.96,
-      "postPatchNsPerOp": 174.5,
-      "slowdownPercent": 0.89
+      "prePatchNsPerOp": 192.79,
+      "postPatchNsPerOp": 216.1,
+      "slowdownPercent": 12.09
     },
     {
       "methodIndex": 4,
@@ -73,24 +73,24 @@
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()",
       "status": "passed",
-      "prePatchNsPerOp": 4.63,
-      "postPatchNsPerOp": 4.5,
-      "slowdownPercent": -2.81
+      "prePatchNsPerOp": 4.81,
+      "postPatchNsPerOp": 4.7,
+      "slowdownPercent": -2.29
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Volatile::Read:System.Int32(System.Int32&)",
       "status": "passed",
-      "prePatchNsPerOp": 242.82,
-      "postPatchNsPerOp": 238.8,
-      "slowdownPercent": -1.66
+      "prePatchNsPerOp": 313.64,
+      "postPatchNsPerOp": 232.6,
+      "slowdownPercent": -25.84
     }
   ],
   "summary": {
     "totalMethods": 14,
     "nonStubMethods": 4,
-    "averageSlowdownPercent": -0.17,
-    "slowdownFactor": 0.9983,
+    "averageSlowdownPercent": -4.68,
+    "slowdownFactor": 0.9531999999999999,
     "slowdownThresholdX": 50.0
   }
 }

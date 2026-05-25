@@ -2,191 +2,161 @@
   "family": "array-indexing-copy",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T08:06:49",
-  "duration_ms": 39798,
+  "timestamp": "2026-05-25T08:53:51",
+  "duration_ms": 57451,
   "overall_status": "passed",
   "stages": {
-    "preflight": {
-      "stage": "preflight",
-      "status": "passed",
-      "summary": "13 methods, 0 custom entries",
-      "details": {
-        "methodCount": 13,
-        "customMethodCount": 0,
-        "hasCustomEntryFile": false,
-        "customMethods": []
-      },
-      "errors": [],
-      "duration_ms": 0
-    },
-    "codegen": {
-      "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
-      "details": {
-        "methodCount": 13,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\array-indexing-copy\\managed\\subjects\\build-output\\ArrayIndexingCopySubjects.dll"
-      },
-      "errors": [],
-      "duration_ms": 32998
-    },
     "jit_codegen": {
       "stage": "jit_codegen",
       "status": "passed",
-      "summary": "entry-jit.exe already exists, skipping rebuild",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
       "details": {},
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 54273
     },
-    "fact": {
-      "stage": "fact",
+    "managed_fact": {
+      "stage": "managed_fact",
       "status": "passed",
-      "summary": "Fact verify=passed (16/16)",
+      "summary": "Fact net8.0: passed=12 failed=0 skipped=1",
       "details": {
-        "fact": {
-          "status": "passed",
-          "passed": 16,
-          "total": 16
-        }
-      },
-      "errors": [],
-      "duration_ms": 398
-    },
-    "fact_jit": {
-      "stage": "fact_jit",
-      "status": "passed",
-      "summary": "Fact JIT verify=passed (16/16)",
-      "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 16,
-          "total": 16,
-          "exit_code": 0
-        }
-      },
-      "errors": [],
-      "duration_ms": 30
-    },
-    "audit": {
-      "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
-      "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "CONCERN",
-        "methodsWithoutLowering": 0
-      },
-      "errors": [],
-      "duration_ms": 1318
-    },
-    "asm_compare": {
-      "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
-      "errors": [],
-      "duration_ms": 22
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=2.6ns/op | FastExecute=390.5ns/op | CallVirt dispatch=404.3ns",
-      "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 2.6,
-          "batchCount": 1000,
-          "framesPerBatch": 32
-        },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 390.5
-        },
-        "callVirt": {
-          "handlerDispatchNs": 404.3,
-          "emptyStackNs": 444.7
-        },
-        "poolSize": 32
-      },
-      "errors": [],
-      "duration_ms": 107
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All 13 non-stub methods are invalid (no managed harness)",
-      "details": {},
-      "errors": [],
-      "duration_ms": 2593
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "16/16 passed, 0 failed (stub=0)",
-      "details": {
-        "passedMethods": 16,
+        "totalMethods": 13,
+        "passedMethods": 12,
         "failedMethods": 0,
-        "totalMethods": 16,
-        "realMethods": 16,
-        "stubMethods": 0
+        "skippedMethods": 1,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int32)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int32,System.Array,System.Int32,System.Int32)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::Clear:System.Void(System.Array,System.Int32,System.Int32)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::Resize:System.Void(T[]&,System.Int32)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 4,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 5,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(System.Array,System.Collections.IComparer)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 6,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 7,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Int32,System.Int32,System.Object)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 8,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(System.Array,System.Object)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 9,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::LastIndexOf:System.Int32(System.Array,System.Object)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 10,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::Reverse:System.Void(System.Array)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 11,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::GetLength:System.Int32(System.Int32)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 12,
+            "methodSubjectId": "System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)",
+            "status": "passed",
+            "exceptionMessage": ""
+          }
+        ]
       },
       "errors": [],
-      "duration_ms": 27
+      "duration_ms": 3055
     },
-    "hotupdate_aot_benchmark": {
-      "stage": "hotupdate_aot_benchmark",
+    "dashboard": {
+      "stage": "dashboard",
       "status": "passed",
-      "summary": "avg_slowdown=-0.16% (1.0x) over 13 methods (AOT patched path)",
+      "summary": "Dashboard built: 6 sections",
       "details": {
-        "averageSlowdownPercent": -0.16,
-        "slowdownFactor": 0.9984000000000001,
-        "threshold": 50.0,
-        "nonStubMethods": 13
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 13,
+          "okCount": 13,
+          "failedCount": 0,
+          "overallIrExpansionRatio": 0.38,
+          "averageExpansionRatio": 0.38,
+          "maxExpansionRatio": 0.59,
+          "jitInstructionAvg": 44.0,
+          "aotInstructionAvg": 16.8,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {
+            "external_runtime_call": 24
+          }
+        },
+        "performance": {},
+        "hotupdate": {},
+        "managedFact": {
+          "totalMethods": 13,
+          "passedMethods": 12,
+          "failedMethods": 0,
+          "skippedMethods": 1,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0.38,
+          "interpreterSlowdownFactor": 0,
+          "asmPassRate": 100.0
+        }
       },
       "errors": [],
-      "duration_ms": 327
-    },
-    "hotupdate_jit_fact": {
-      "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "16/16 passed, 0 failed",
-      "details": {
-        "passed": 16,
-        "failed": 0,
-        "total": 16
-      },
-      "errors": [],
-      "duration_ms": 25
-    },
-    "hotupdate_jit_benchmark": {
-      "stage": "hotupdate_jit_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
-      "details": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "threshold": 50.0,
-        "nonStubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 1944
+      "duration_ms": 2
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
-    "testedRate": 100.0,
-    "overall": 100.0
+    "methodCoverage": 92.31,
+    "testedRate": 0.0,
+    "overall": 92.31
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 2.6,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 404.3,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
-    },
+    "interpreter": {},
     "irTranslation": {
       "totalMethods": 13,
       "okCount": 13,
@@ -204,39 +174,31 @@
       }
     },
     "performance": {},
-    "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 16,
-        "failedMethods": 0,
-        "totalMethods": 16
-      },
-      "aotOverhead": {
-        "averageSlowdownPercent": -0.16,
-        "slowdownFactor": 0.9984000000000001,
-        "nonStubMethods": 13
-      },
-      "jitFunctional": {
-        "passedMethods": 16,
-        "failedMethods": 0,
-        "totalMethods": 16
-      },
-      "jitOverhead": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "nonStubMethods": 0
-      }
+    "hotupdate": {},
+    "managedFact": {
+      "totalMethods": 13,
+      "passedMethods": 12,
+      "failedMethods": 0,
+      "skippedMethods": 1,
+      "tfm": "net8.0"
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.38,
-      "interpreterSlowdownFactor": 0.9984000000000001,
+      "interpreterSlowdownFactor": 0,
       "asmPassRate": 100.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "no_baseline",
-      "message": "Baseline auto-created from this run",
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 13,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
       "currentMetrics": {
         "totalMethods": 13,
         "matchedCount": 0,
