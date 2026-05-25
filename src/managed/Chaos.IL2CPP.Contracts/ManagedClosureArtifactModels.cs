@@ -299,14 +299,14 @@ public static class NativeReferenceArtifactNames
 public static class NativeAotArtifactNames
 {
     public const string GeneratedDirectory = "generated";
-    public const string GeneratedTranslationUnit = "generated/native-aot.generated.cpp";
-    public const string GeneratedHeader = "generated/native-aot.generated.header.h";
-    public const string AuditSummaryTranslationUnit = "generated/audit/native-aot.audit.generated.cpp";
-    public const string ShapeDispatchHeader = "generated/runtime_helper_shapes.h";
-    public const string EnumMetadataHeader = "generated/enum_metadata.generated.h";
-    public const string ModuleRegistration = "generated/module-registration.inc";
-    public const string GeneratedModuleHeader = "generated/chaos_generated_module.h";
-    public const string GeneratedModuleSource = "generated/chaos_generated_module.cpp";
+    public const string GeneratedTranslationUnit = "native-aot.generated.cpp";
+    public const string GeneratedHeader = "native-aot.generated.header.h";
+    public const string AuditSummaryTranslationUnit = "audit/native-aot.audit.generated.cpp";
+    public const string ShapeDispatchHeader = "runtime_helper_shapes.h";
+    public const string EnumMetadataHeader = "enum_metadata.generated.h";
+    public const string ModuleRegistration = "module-registration.inc";
+    public const string GeneratedModuleHeader = "chaos_generated_module.h";
+    public const string GeneratedModuleSource = "chaos_generated_module.cpp";
     public const string CodegenMetrics = "native-aot.codegen-metrics.json";
     public const string LoweringPlan = "native-aot.plan.json";
     public const string Manifest = "native-aot.manifest.json";

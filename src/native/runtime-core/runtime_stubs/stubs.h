@@ -10,6 +10,12 @@
 // (e.g. ChaosConvertToInt32FromDouble) can use RaiseManagedException.
 #include "exception_helpers.h"
 
+// Include thread_state.h before extern "C" so its namespaced inline
+// functions (GetCurrentThreadId, GetCurrentThread) get C++ linkage.
+// When first seen inside extern "C", MSVC gives them C linkage which
+// conflicts with Win32 API functions of the same name.
+#include "thread_state.h"
+
 extern "C" {
 
 #include "array_stubs.h"

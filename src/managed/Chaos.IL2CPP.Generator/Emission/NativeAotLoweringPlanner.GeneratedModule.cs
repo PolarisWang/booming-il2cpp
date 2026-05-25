@@ -149,11 +149,34 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // ── Value type typedefs ──
+        // The generated module header needs chaos_valuetype_* to be complete
+        // types (typedef CHAOS_IL2CPP_INT32) for function pointer signatures
+        // that return or accept value types by value.  The shared header has
+        // these typedefs but also carries Python-added extern "C" declarations
+        // that conflict with chaos_generated_module.cpp, so we emit the
+        // typedefs directly here.
+        var valueTypeTypedefs = "";
+        if (_emittedValueTypeSubjectIds is { Count: > 0 })
+        {
+            var vtBuilder = new System.Text.StringBuilder();
+            vtBuilder.AppendLine("// chaos_valuetype_* typedefs (opaque 32-bit managed value types)");
+            foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+            {
+                vtBuilder.Append("typedef CHAOS_IL2CPP_INT32 ");
+                vtBuilder.Append(GetNativeValueTypeSymbol(typeId));
+                vtBuilder.AppendLine(";");
+            }
+            vtBuilder.AppendLine();
+            valueTypeTypedefs = vtBuilder.ToString();
+        }
+
         return new ScriptObject
         {
             ["type_groups"] = typeGroupModels,
             ["k_aot_method_count_type"] = "const int",
             ["k_aot_method_count_value"] = methodsForLowering.Count,
+            ["value_type_typedefs"] = valueTypeTypedefs,
         };
     }
 

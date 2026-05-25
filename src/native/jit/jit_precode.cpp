@@ -358,6 +358,12 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
 
         // Step 2: Allocate registers → RegisterMethod (independent copy)
         auto rm = AllocateRegisters(ir);
+        if (rm.instructions.empty()) {
+            CHAOS_IL2CPP_LOG_WARN_M("jit",
+                "RegisterJitEntryMethods: skipping token 0x%x (empty IR — keep AOT path)",
+                entry.token);
+            continue;
+        }
         // ir goes out of scope — vectors auto-clean
 
         // Step 3: Heap-allocate JitPrecode (lives for program lifetime)

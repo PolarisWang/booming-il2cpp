@@ -10,7 +10,7 @@ from typing import Any, ClassVar
 
 _HERE = Path(__file__).resolve().parent
 _FOUNDATION_DLL = _HERE.parent  # <...>/foundation_dll/
-_REPO_ROOT = _FOUNDATION_DLL.parents[4]
+_REPO_ROOT = _FOUNDATION_DLL.parents[3]
 _VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 
 

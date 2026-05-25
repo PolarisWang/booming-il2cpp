@@ -693,7 +693,7 @@ public sealed partial class NativeAotLoweringPlanner
 				foreach (var entry in entries)
 				{
 					if (entry is null || !externDeclared.Add(entry.NativeSymbol)) continue;
-					builder.AppendLine(FormatMethodDeclaration(entry));
+					builder.AppendLine(FormatMethodDeclaration(entry, _sharedContextSymbols));
 					var stub = TryGetInstantiationStubSymbol(entry);
 					if (stub != null && externDeclared.Add(stub))
 					{

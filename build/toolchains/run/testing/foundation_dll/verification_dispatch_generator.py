@@ -82,6 +82,10 @@ def generate_verification_dispatch(
     write('#include <runtime_core.h>')
     write('#include <chaos/eh.h>')
     write('#include <chaos/hotpatch_dispatch.h>')
+    if is_jit:
+        write('// SEH support for JIT-mode dispatch (catches access violations from JIT code)')
+        write('#include <excpt.h>')
+        write('')
     write('')
     write('using chaos::il2cpp::runtime_core::ChaosDispatchMethod;')
     write('using chaos::il2cpp::runtime_core::ChaosDispatchMethodAllModules;')
@@ -93,10 +97,18 @@ def generate_verification_dispatch(
     write('extern "C" const int kSubjectSlotMap[];')
     write('// kSubjectEntryCount/kSubjectSlotMap defined in native-aot.generated.cpp (DispatchEntryCode template)')
     write('')
-    write('// kDefaultArgThunks defined in native-aot.generated.cpp')
-    write('extern "C" void (*kDefaultArgThunks[])() noexcept;')
+
+    # kDefaultArgThunks defined in native-aot.generated.cpp (AOT mode only)
+    if not is_jit:
+        write('// kDefaultArgThunks defined in native-aot.generated.cpp')
+        write('extern "C" void (*kDefaultArgThunks[])() noexcept;')
+        write('')
+
+    write('// In JIT mode, benchmark functions use nullptr instead of kDefaultArgThunks')
+    write('// because the JIT DispatchEntryCode template skips kDefaultArgThunks emission.')
+    write('// ChaosDispatchMethod accepts nullptr thunks and calls direct_ptr from')
+    write('// hotpatch entries (SetDirectDispatch has already been called by RegisterJitEntryMethods).')
     write('')
-    # GetHotpatchEntries/GetHotpatchEntryCount: extern "C" defined in hotpatch-table.generated.cpp
     write('extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;')
     write('extern "C" int32_t GetHotpatchEntryCount() noexcept;')
     write('')
@@ -124,26 +136,42 @@ def generate_verification_dispatch(
         write('')
 
     # ── RunFactAll ──────────────────────────────────────────────────
-    # Uses ChaosDispatchMethodAllModules to dispatch ALL methods across
-    # ALL registered modules (not just the entry module's subjects).
-    # Each module's entries are dispatched individually with EH try/catch
-    # inside the runtime function.  This provides full multi-assembly
-    # coverage for the verification pipeline.
-    # Both AOT and JIT modes: AOT uses kDefaultArgThunks for native dispatch;
-    # JIT mode uses nullptr (direct_ptr via hotpatch entry) which works because
-    # FillExternalRuntimeStubs() fills all kChaosExternalRuntimeFnTable entries
-    # with safe stubs during bootstrap.
+    # Uses ChaosDispatchMethodAll (AOT module only) to dispatch the entry
+    # module's subjects.  In AOT mode, kDefaultArgThunks provides native
+    # dispatch.  In JIT mode, nullptr invokes direct_ptr (JIT precode).
+    # JIT mode avoids ChaosDispatchMethodAllModules because JIT-registered
+    # modules may have incomplete direct_ptr entries that crash.
+    thunks = 'nullptr' if is_jit else 'kDefaultArgThunks'
     if is_jit:
-        fact_thunks = 'nullptr'
+        # JIT mode: dispatch only subject entries via kSubjectSlotMap.
+        # kAotMethodCount may include runtime intrinsic stubs that crash
+        # when JIT-compiled. kSubjectEntryCount/kSubjectSlotMap only
+        # include valid verified methods (matching hotupdate pattern).
+        # Uses catch(...) with /EHa to intercept hardware exceptions
+        # from JIT-compiled methods.
+        write("// ── RunFactAll: dispatch subject entries only (JIT mode) ──")
+        write("// Uses kSubjectSlotMap + kSubjectEntryCount to skip runtime")
+        write("// intrinsic stubs that may crash via JIT direct_ptr.")
+        write(f'extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {{')
+        write(f'    auto* entries = GetHotpatchEntries();')
+        write(f'    int32_t failures = 0;')
+        write(f'    for (int32_t si = 0; si < kSubjectEntryCount; si++) {{')
+        write(f'        int32_t i = kSubjectSlotMap[si];')
+        write(f'        try {{')
+        write(f'            ChaosDispatchMethod(entries, kAotMethodCount, i, {thunks});')
+        write(f'        }} catch(...) {{')
+        write(f'            ++failures;')
+        write(f'        }}')
+        write(f'    }}')
+        write(f'    return failures;')
+        write('}')
     else:
-        fact_thunks = 'kDefaultArgThunks'
-
-    write("// ── RunFactAll: dispatch ALL methods across ALL registered modules ────")
-    write("// Uses ChaosDispatchMethodAllModules from hotpatch_dispatch.h which iterates")
-    write("// every module in HotpatchNameRegistry.  Returns total failure count.")
-    write(f'extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {{')
-    write(f'    return ChaosDispatchMethodAllModules({fact_thunks});')
-    write('}')
+        write("// ── RunFactAll: dispatch ALL methods across ALL registered modules ────")
+        write("// Uses ChaosDispatchMethodAllModules from hotpatch_dispatch.h which iterates")
+        write("// every module in HotpatchNameRegistry.  Returns total failure count.")
+        write(f'extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {{')
+        write(f'    return ChaosDispatchMethodAllModules({thunks});')
+        write('}')
     write('')
 
     # ── RunBenchmark ────────────────────────────────────────────────
@@ -158,24 +186,42 @@ def generate_verification_dispatch(
     write('    auto* entries = GetHotpatchEntries();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
-    write('        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, kDefaultArgThunks);')
+    write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {thunks});')
     write('    }')
     write('    auto end = std::chrono::steady_clock::now();')
     write('    return std::chrono::duration<double, std::milli>(end - start).count();')
     write('}')
     write('')
 
-    # ── RunHotpatchAll ──────────────────────────────────────────────
-    # Same as RunFactAll but semantically "after hotpatch".
-    # Uses ChaosDispatchMethodAllModules to cover ALL registered modules.
-    # ChaosDispatchMethod handles all hotpatch routing internally.
-    write("// ── RunHotpatchAll: dispatch ALL methods across ALL modules (post-patch) ──")
-    write(f'extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {{')
-    write(f'    return ChaosDispatchMethodAllModules({fact_thunks});')
-    write('}')
+    # ── RunHotpatchAll and RunHotpatchBenchmark ───────────────────
+    # Both use the same thunk mode (fact_thunks for all-dispatch,
+    # benchmark_thunks for timing loop).
+    if is_jit:
+        write("// ── RunHotpatchAll: dispatch subject entries only (JIT mode) ──")
+        write("// Uses kSubjectSlotMap + kSubjectEntryCount matching hotupdate")
+        write("// pattern. Avoids intrinsic stubs that crash via JIT direct_ptr.")
+        write(f'extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {{')
+        write(f'    auto* entries = GetHotpatchEntries();')
+        write(f'    int32_t failures = 0;')
+        write(f'    for (int32_t si = 0; si < kSubjectEntryCount; si++) {{')
+        write(f'        int32_t i = kSubjectSlotMap[si];')
+        write(f'        try {{')
+        write(f'            ChaosDispatchMethod(entries, kAotMethodCount, i, {thunks});')
+        write(f'        }} catch(...) {{')
+        write(f'            ++failures;')
+        write(f'        }}')
+        write(f'    }}')
+        write(f'    return failures;')
+        write('}')
+    else:
+        write("// ── RunHotpatchAll: dispatch ALL methods across ALL modules (post-patch) ──")
+        write("// Uses ChaosDispatchMethodAllModules, same thunk semantics as RunFactAll.")
+        write(f'extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {{')
+        write(f'    return ChaosDispatchMethodAllModules({thunks});')
+        write('}')
     write('')
 
-    # ── RunHotpatchBenchmark ────────────────────────────────────────
+    # ── RunHotpatchBenchmark ──────────────────────────────────────
     # Timing loop via ChaosDispatchMethod, semantically for post-hotpatch measurement.
     write("// ── RunHotpatchBenchmark: timing loop via ChaosDispatchMethod (post-patch) ──")
     write('extern "C" double RunHotpatchBenchmark(int entry_index, int iterations) {')
@@ -184,7 +230,7 @@ def generate_verification_dispatch(
     write('    auto* entries = GetHotpatchEntries();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
-    write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, kDefaultArgThunks);')
+    write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {thunks});')
     write('    }')
     write('    auto end = std::chrono::steady_clock::now();')
     write('    return std::chrono::duration<double, std::milli>(end - start).count();')

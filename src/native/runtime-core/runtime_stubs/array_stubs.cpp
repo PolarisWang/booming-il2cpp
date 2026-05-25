@@ -197,5 +197,46 @@ CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytes(CHAOS_IL2CPP_INTPTR unused, CHAOS_
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 
+CHAOS_IL2CPP_INT32 ChaosBitConverterToInt32(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept
+{
+    if (byteArray == 0) return 0;
+    const auto* arr = get_managed_array(byteArray);
+    if (arr->elements == nullptr) return 0;
+    auto index = static_cast<CHAOS_IL2CPP_UINTPTR>(startIndex);
+    auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length);
+    if (index + 4 > len) return 0;
+
+    const auto* bytes = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(arr->elements);
+    return static_cast<CHAOS_IL2CPP_INT32>(
+        static_cast<CHAOS_IL2CPP_UINT32>(bytes[index]) |
+        (static_cast<CHAOS_IL2CPP_UINT32>(bytes[index + 1]) << 8) |
+        (static_cast<CHAOS_IL2CPP_UINT32>(bytes[index + 2]) << 16) |
+        (static_cast<CHAOS_IL2CPP_UINT32>(bytes[index + 3]) << 24));
+}
+
+double ChaosBitConverterToDouble(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept
+{
+    if (byteArray == 0) return 0.0;
+    const auto* arr = get_managed_array(byteArray);
+    if (arr->elements == nullptr) return 0.0;
+    auto index = static_cast<CHAOS_IL2CPP_UINTPTR>(startIndex);
+    auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length);
+    if (index + 8 > len) return 0.0;
+
+    const auto* bytes = reinterpret_cast<const CHAOS_IL2CPP_UINT8*>(arr->elements);
+    std::uint64_t bits = 0;
+    bits |= static_cast<std::uint64_t>(bytes[index]);
+    bits |= static_cast<std::uint64_t>(bytes[index + 1]) << 8;
+    bits |= static_cast<std::uint64_t>(bytes[index + 2]) << 16;
+    bits |= static_cast<std::uint64_t>(bytes[index + 3]) << 24;
+    bits |= static_cast<std::uint64_t>(bytes[index + 4]) << 32;
+    bits |= static_cast<std::uint64_t>(bytes[index + 5]) << 40;
+    bits |= static_cast<std::uint64_t>(bytes[index + 6]) << 48;
+    bits |= static_cast<std::uint64_t>(bytes[index + 7]) << 56;
+    double result;
+    std::memcpy(&result, &bits, sizeof(result));
+    return result;
+}
+
 }  // extern "C"
 }  // namespace chaos::il2cpp::runtime_core

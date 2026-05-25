@@ -14,7 +14,7 @@ from ..base import CheckMeta, CheckResult, FamilyContext, PrincipleCheck
 _HERE = Path(__file__).resolve().parent
 _PRINCIPLE_DIR = _HERE.parent
 _FOUNDATION_DLL = _PRINCIPLE_DIR.parent
-_REPO_ROOT = _FOUNDATION_DLL.parents[4]
+_REPO_ROOT = _FOUNDATION_DLL.parents[3]
 _TEMPLATES_DIR = _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates"
 
 SEMANTIC_PATTERNS = [

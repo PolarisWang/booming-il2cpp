@@ -67,8 +67,19 @@ internal sealed class SdkEmitter
             // ── Phase 1b': Copy runtime headers needed by chaos.h ────────────
             CopyRuntimeHeaders(repoRoot, includeDir);
 
+            // ── Phase 1b": Copy runtime_stubs .cpp sources into SDK ─────────
+            // The prebuilt chaos_runtime_core.lib is stale (may miss newly added
+            // stub functions).  By copying the .cpp sources into the SDK, the
+            // test framework's CMakeLists.txt can glob them directly, avoiding
+            // stale-lib symbol resolution failures without Python-level patching.
+            CopyRuntimeStubSources(repoRoot, sdkRoot);
+
             // ── Phase 1c: Generate chaos-config.cmake ────────────────────────
-            var configContent = SdkTemplateCatalog.RenderChaosConfig();
+            var configModel = new ScriptObject
+            {
+                ["msvc_version"] = DetectMsvcVersion(),
+            };
+            var configContent = SdkTemplateCatalog.RenderChaosConfig(configModel);
             File.WriteAllText(Path.Combine(sdkRoot, "chaos-config.cmake"), configContent);
             Console.WriteLine($"    SDK cmake: chaos-config.cmake");
 
@@ -95,14 +106,15 @@ internal sealed class SdkEmitter
 
     /// <summary>
     /// Copy a generated file from generatedRoot to the SDK include directory.
-    /// Searches generatedRoot/&lt;assembly&gt;/generated/ first, then generatedRoot/generated/.
+    /// Searches generatedRoot/&lt;assembly&gt;/generated/ first, then generatedRoot/.
+    /// After R1 fix, files land at single-level under generatedRoot (no double-nested generated/generated/).
     /// </summary>
     private static void CopyGeneratedHeader(string generatedRoot, string assemblyName, string includeDir, string fileName)
     {
         var candidates = new[]
         {
             Path.Combine(generatedRoot, assemblyName, "generated", fileName),
-            Path.Combine(generatedRoot, "generated", fileName),
+            Path.Combine(generatedRoot, fileName),
         };
 
         foreach (var candidate in candidates)
@@ -279,6 +291,32 @@ internal sealed class SdkEmitter
     }
 
     /// <summary>
+    /// Copy runtime_stubs .cpp source files into the SDK so the test framework
+    /// can compile them directly instead of relying on a prebuilt (and possibly
+    /// stale) chaos_runtime_core.lib.  The .h counterparts are already copied
+    /// by CopyRuntimeHeaders into include/runtime_stubs/.
+    ///
+    /// Maps: src/native/runtime-core/runtime_stubs/*.cpp → sdkRoot/runtime_stubs/
+    /// </summary>
+    private static void CopyRuntimeStubSources(string repoRoot, string sdkRoot)
+    {
+        var srcRuntimeStubs = Path.Combine(repoRoot, "src", "native", "runtime-core", "runtime_stubs");
+        var dstRuntimeStubs = Path.Combine(sdkRoot, "runtime_stubs");
+        Directory.CreateDirectory(dstRuntimeStubs);
+
+        int count = 0;
+        if (Directory.Exists(srcRuntimeStubs))
+        {
+            foreach (var f in Directory.GetFiles(srcRuntimeStubs, "*.cpp"))
+            {
+                File.Copy(f, Path.Combine(dstRuntimeStubs, Path.GetFileName(f)), overwrite: true);
+                count++;
+            }
+        }
+        Console.WriteLine($"    SDK runtime stubs sources: {count} .cpp files copied");
+    }
+
+    /// <summary>
     /// Copy prebuilt native runtime .lib files from the native build output
     /// directory into the SDK's lib/ directory.
     /// </summary>
@@ -398,13 +436,30 @@ internal sealed class SdkEmitter
         var objPath = Path.Combine(libDir, "chaos_codegen.obj");
         var libPath = Path.Combine(libDir, "chaos_codegen.lib");
 
-        // Step 1: Compile .cpp → .obj
+        // Skip precompilation if the .lib is already up-to-date
+        if (File.Exists(libPath) && File.Exists(generatedCpp))
+        {
+            var libTime = File.GetLastWriteTimeUtc(libPath);
+            var srcTime = File.GetLastWriteTimeUtc(generatedCpp);
+            if (libTime >= srcTime)
+            {
+                Console.WriteLine($"    [precompile] up-to-date: {libPath}");
+                return;
+            }
+        }
+
+        // Use temp paths so partial compilation failures don't overwrite the
+        // existing .lib or leave a half-written file (Risk R4).
+        var tmpObjPath = Path.Combine(libDir, "chaos_codegen.tmp.obj");
+        var tmpLibPath = Path.Combine(libDir, "chaos_codegen.tmp.lib");
+
+        // Step 1: Compile .cpp → .obj (to temp path)
         // Use /EHsc (not /EHa) for precompiled lib since generated code uses
         // C++ exception handling (throw chaos_managed_exception). The runtime
         // entry point that catches these needs /EHa, but the generated method
         // bodies themselves only throw, not catch.
         var compileArgs = $"/nologo /std:c++20 /utf-8 /EHsc /GS- /DWIN32 /D_WINDOWS " +
-                           $"{includeArgs} /c \"{generatedCpp}\" /Fo\"{objPath}\"";
+                           $"{includeArgs} /c \"{generatedCpp}\" /Fo\"{tmpObjPath}\"";
 
         Console.WriteLine($"    [precompile] compiling...");
 
@@ -415,7 +470,7 @@ internal sealed class SdkEmitter
             return;
         }
 
-        if (!File.Exists(objPath))
+        if (!File.Exists(tmpObjPath))
         {
             Console.WriteLine("    WARN: precompilation failed (no .obj produced)");
             var errOutput = (compileOut.Value.Error ?? "").Trim();
@@ -430,14 +485,16 @@ internal sealed class SdkEmitter
                 foreach (var line in stdOutput.Split('\n', StringSplitOptions.RemoveEmptyEntries))
                     Console.WriteLine($"      {line.Trim()}");
             }
+            // Clean up temp .obj on failure
+            try { File.Delete(tmpObjPath); } catch { }
             return;
         }
 
-        var objSize = new FileInfo(objPath).Length;
-        Console.WriteLine($"    [precompile] compiled: {objSize} bytes -> {objPath}");
+        var objSize = new FileInfo(tmpObjPath).Length;
+        Console.WriteLine($"    [precompile] compiled: {objSize} bytes -> {tmpObjPath}");
 
-        // Step 2: Bundle .obj → .lib
-        var libArgs = $"/nologo /out:\"{libPath}\" \"{objPath}\"";
+        // Step 2: Bundle .obj → .lib (to temp path for atomic rename)
+        var libArgs = $"/nologo /out:\"{tmpLibPath}\" \"{tmpObjPath}\"";
 
         Console.WriteLine($"    [precompile] creating library...");
 
@@ -448,18 +505,34 @@ internal sealed class SdkEmitter
             return;
         }
 
-        if (File.Exists(libPath))
+        if (File.Exists(tmpLibPath))
         {
-            var libSize = new FileInfo(libPath).Length;
+            var libSize = new FileInfo(tmpLibPath).Length;
+            // Atomic rename: only replace the final .lib if the temp .lib was
+            // fully written (Risk R4: partial compilation leaves no stale file).
+            try
+            {
+                if (File.Exists(libPath))
+                    File.Delete(libPath);
+                File.Move(tmpLibPath, libPath);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"    WARN: atomic rename failed: {ex.Message}");
+                return;
+            }
             Console.WriteLine($"    [precompile] chaos_codegen.lib: {libSize} bytes");
             // Clean up intermediate .obj
-            try { File.Delete(objPath); } catch { }
+            try { File.Delete(tmpObjPath); } catch { }
         }
         else
         {
             Console.WriteLine("    WARN: chaos_codegen.lib not created");
             foreach (var line in libResult.Value.Error.Trim().Split('\n', StringSplitOptions.RemoveEmptyEntries))
                 Console.WriteLine($"      {line.Trim()}");
+            // Clean up temp files on failure
+            try { File.Delete(tmpObjPath); } catch { }
+            try { File.Delete(tmpLibPath); } catch { }
         }
     }
 
@@ -699,5 +772,57 @@ internal sealed class SdkEmitter
         }
 
         return (vcIncludeDir, sdkIncludeDirs);
+    }
+
+    /// <summary>
+    /// Detect the MSVC toolchain version for recording in chaos-config.cmake.
+    /// Checks VCToolsVersion env var first (set by vcvarsall.bat), then
+    /// falls back to parsing the version from cl.exe's output.
+    /// Returns "unknown" if detection fails.
+    /// </summary>
+    private static string DetectMsvcVersion()
+    {
+        // 1. VCToolsVersion environment variable (set by vcvarsall.bat)
+        var vcVersion = Environment.GetEnvironmentVariable("VCToolsVersion");
+        if (!string.IsNullOrEmpty(vcVersion))
+            return vcVersion;
+
+        // 2. From VCToolsInstallDir path
+        var vcToolsDir = Environment.GetEnvironmentVariable("VCToolsInstallDir");
+        if (!string.IsNullOrEmpty(vcToolsDir))
+        {
+            // Path is typically .../MSVC/14.3x.xxxxx/bin/Hostx64/x64/
+            var di = new DirectoryInfo(vcToolsDir);
+            var msvcDir = di.Parent?.Parent?.Parent;  // up 3 levels to .../MSVC/<version>/
+            if (msvcDir != null && msvcDir.Exists && msvcDir.Parent?.Name == "MSVC")
+                return msvcDir.Name;
+        }
+
+        // 3. From cl.exe --version output
+        try
+        {
+            var clPath = FindMsvcCompiler("cl.exe");
+            if (clPath != null)
+            {
+                var result = RunProcessWithOutputCapture(clPath, "");
+                if (result != null)
+                {
+                    // cl.exe prints version banner to stderr when run without input.
+                    // Both streams are captured by RunProcessWithOutputCapture.
+                    var output = result.Value.Output + result.Value.Error;
+                    // MSVC prints: "Microsoft (R) C/C++ Optimizing Compiler Version 19.3x.xxxxx for x64"
+                    var match = System.Text.RegularExpressions.Regex.Match(
+                        output, @"Version\s+(\S+)");
+                    if (match.Success)
+                        return match.Groups[1].Value;
+                }
+            }
+        }
+        catch
+        {
+            // Ignore detection failures
+        }
+
+        return "unknown";
     }
 }

@@ -28,7 +28,7 @@ from pathlib import Path
 from typing import Any
 
 _HERE = Path(__file__).resolve().parent
-_REPO_ROOT = _HERE.parents[4]
+_REPO_ROOT = _HERE.parents[3]
 _VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 _TEST_CODE_GENERATOR = _HERE / "test_code_generator.py"
 
