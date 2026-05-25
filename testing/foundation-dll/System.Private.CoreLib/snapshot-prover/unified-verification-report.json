@@ -2,63 +2,167 @@
   "family": "snapshot-prover",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-23T18:33:49",
-  "duration_ms": 65634,
-  "overall_status": "passed",
+  "timestamp": "2026-05-25T22:02:51",
+  "duration_ms": 2243,
+  "overall_status": "failed",
   "stages": {
-    "codegen": {
-      "stage": "codegen",
+    "managed_fact": {
+      "stage": "managed_fact",
       "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
+      "summary": "Fact net8.0: passed=0 failed=0 skipped=10",
       "details": {
-        "methodCount": 10,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\snapshot-prover\\managed\\subjects\\build-output\\SnapshotProverSubjects.dll"
+        "totalMethods": 10,
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "skippedMethods": 10,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 4,
+            "methodSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 5,
+            "methodSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 6,
+            "methodSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 7,
+            "methodSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 8,
+            "methodSubjectId": "SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 9,
+            "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          }
+        ]
       },
       "errors": [],
-      "duration_ms": 25701
-    },
-    "jit_codegen": {
-      "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
-      "details": {},
-      "errors": [],
-      "duration_ms": 38977
-    },
-    "fact": {
-      "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (10/10)",
-      "details": {
-        "fact": {
-          "status": "passed",
-          "passed": 10,
-          "total": 10
-        }
-      },
-      "errors": [],
-      "duration_ms": 402
+      "duration_ms": 1907
     },
     "fact_jit": {
       "stage": "fact_jit",
+      "status": "failed",
+      "summary": "Fact JIT crashed: No module named 'fact_verifier'",
+      "details": {},
+      "errors": [],
+      "duration_ms": 2
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "failed",
+      "summary": "HotUpdate JIT fact crashed: No module named 'fact_verifier'",
+      "details": {},
+      "errors": [],
+      "duration_ms": 2
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "Fact JIT verify=passed (10/10)",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
       "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 10,
-          "total": 10,
-          "exit_code": 0
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 228
+    },
+    "dashboard": {
+      "stage": "dashboard",
+      "status": "passed",
+      "summary": "Dashboard built: 6 sections",
+      "details": {
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 10,
+          "okCount": 1,
+          "failedCount": 9,
+          "overallIrExpansionRatio": 3.3,
+          "averageExpansionRatio": 0.02,
+          "maxExpansionRatio": 0.02,
+          "jitInstructionAvg": 44.0,
+          "aotInstructionAvg": 14.5,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {
+            "external_runtime_call": 18
+          }
+        },
+        "performance": {},
+        "hotupdate": {
+          "jitOverhead": {
+            "averageSlowdownPercent": 0.0,
+            "slowdownFactor": 1.0,
+            "nonStubMethods": 0
+          }
+        },
+        "managedFact": {
+          "totalMethods": 10,
+          "passedMethods": 0,
+          "failedMethods": 0,
+          "skippedMethods": 10,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 3.3,
+          "interpreterSlowdownFactor": 0,
+          "asmPassRate": 10.0
         }
       },
       "errors": [],
-      "duration_ms": 551
+      "duration_ms": 0
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
+    "methodCoverage": 0.0,
     "testedRate": 0.0,
-    "overall": 100.0
+    "overall": 0.0
   },
   "dashboard": {
     "interpreter": {},
@@ -79,7 +183,20 @@
       }
     },
     "performance": {},
-    "hotupdate": {},
+    "hotupdate": {
+      "jitOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      }
+    },
+    "managedFact": {
+      "totalMethods": 10,
+      "passedMethods": 0,
+      "failedMethods": 0,
+      "skippedMethods": 10,
+      "tfm": "net8.0"
+    },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 3.3,

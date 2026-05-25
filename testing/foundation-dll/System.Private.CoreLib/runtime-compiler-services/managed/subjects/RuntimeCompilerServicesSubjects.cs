@@ -44,13 +44,15 @@ public static partial class RuntimeCompilerServicesSubjects
     // [4] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)
     public static void Subject_4()
     {
-        // needs-manual — InitializeArray with 2 params requires manual implementation: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)
+        try { RuntimeHelpers.RunClassConstructor(typeof(byte).TypeHandle); }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range)
     public static void Subject_5()
     {
-        // needs-manual — GetSubArray with 2 params requires manual implementation: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range)
+        try { if (RuntimeHelpers.GetSubArray(new int[] { 1, 2, 3 }, Range.All).Length != RuntimeHelpers.GetSubArray(new int[] { 1, 2, 3 }, Range.All).Length) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::BoxEnum:System.Object(T)

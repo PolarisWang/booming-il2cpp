@@ -11,24 +11,20 @@
 // This file is a READ-ONLY source for the pipeline. Pipeline copies it into
 // il2cpp_dist/entrypoint/ before invoking generate_and_build().
 
+using System;
+
 public static partial class BufferMemoryNativeEntry
 {
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Buffer::BlockCopy
-    // Manual byte-by-byte copy via array indexers
-    // NOTE: simple zero-init arrays + individual assignments (no for-loop,
-    // no array initializer syntax) to avoid codegen branching and
-    // RuntimeHelpers.InitializeArray gaps in linear emission path.
+    // Direct Buffer.BlockCopy call — generates compact external-runtime-bridge
+    // AOT code instead of ~200 lines of per-element bounds-checked array access.
     public static void CustomEntryMethod0()
     {
         byte[] src = new byte[5];
         byte[] dst = new byte[5];
-        dst[0] = src[0];
-        dst[1] = src[1];
-        dst[2] = src[2];
-        dst[3] = src[3];
-        dst[4] = src[4];
+        Buffer.BlockCopy(src, 0, dst, 0, 5);
     }
 
     // [3] System.Private.CoreLib/System.Buffer::GetByte

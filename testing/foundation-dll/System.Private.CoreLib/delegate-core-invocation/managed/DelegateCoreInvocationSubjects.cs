@@ -49,15 +49,13 @@ public static partial class DelegateCoreInvocationSubjects
     }
 
     // [5] System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)
-    public static void Subject_5()
+    public static void CustomEntrySubject_5()
     {
-        // needs-manual — CreateDelegate with 3 params requires manual implementation: System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)
     }
 
     // [6] System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)
-    public static void Subject_6()
+    public static void CustomEntrySubject_6()
     {
-        // needs-manual — CreateDelegate with 2 params requires manual implementation: System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)
     }
 
     // [7] System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()
@@ -68,15 +66,13 @@ public static partial class DelegateCoreInvocationSubjects
     }
 
     // [8] System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)
-    public static void Subject_8()
+    public static void CustomEntrySubject_8()
     {
-        // needs-manual — op_Equality requires manual implementation: System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)
     }
 
     // [9] System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)
-    public static void Subject_9()
+    public static void CustomEntrySubject_9()
     {
-        // needs-manual — op_Inequality requires manual implementation: System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)
     }
 
 }

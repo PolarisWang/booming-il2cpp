@@ -424,9 +424,32 @@ def _perf_store_path(slug: str) -> Path:
     return _RESULTS_BASE / slug / "perf" / "benchmark-history.jsonl"
 
 
+def _load_perf_jsonl(slug: str, stages_data: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+    """Load benchmark-history.jsonl records for a slug.
+
+    Falls back to extracting benchmark data from stage details when the
+    perf store JSONL file doesn't exist (e.g. batch-report.json has the
+    data but auto_save_perf_data hasn't been run yet).
+
+    Note: Not cached when stages_data is provided (dict is unhashable).
+    """
+    # Try perf store JSONL first (cached)
+    cached = _load_perf_jsonl_cached(slug)
+    if cached:
+        return cached
+
+    # Fallback: extract from stage details (batch-report.json embedded data)
+    if stages_data:
+        records = _extract_benchmark_from_stages(stages_data, slug=slug)
+        if records:
+            return records
+
+    return []
+
+
 @lru_cache(maxsize=128)
-def _load_perf_jsonl(slug: str) -> list[dict[str, Any]]:
-    """Load benchmark-history.jsonl records for a slug (cached)."""
+def _load_perf_jsonl_cached(slug: str) -> list[dict[str, Any]]:
+    """Load benchmark-history.jsonl records from disk (cached by slug)."""
     path = _perf_store_path(slug)
     if not path.exists():
         return []
@@ -442,6 +465,84 @@ def _load_perf_jsonl(slug: str) -> list[dict[str, Any]]:
     return records
 
 
+def _extract_benchmark_from_stages(stages_data: dict[str, Any], slug: str = "") -> list[dict[str, Any]]:
+    """Extract benchmark records from stage details (JSONL-like format).
+
+    Reads the 'benchmark' stage details and produces records in the same
+    format as _load_perf_jsonl, so _compute_benchmark_comparisons and
+    _build_benchmark_table can consume them identically.
+    """
+    bm = stages_data.get("benchmark", {})
+    bm_details = bm.get("details", {}) if isinstance(bm, dict) else {}
+    if not isinstance(bm_details, dict):
+        return []
+
+    records: list[dict[str, Any]] = []
+    slug = slug or stages_data.get("slug", stages_data.get("family", "?"))
+
+    # Map stage detail keys to technology labels
+    _TECH_MAP = {
+        "native-aot": "chaos-aot",
+        "native-jit": "chaos-jit",
+    }
+
+    for detail_key, bench_data in bm_details.items():
+        technology = _TECH_MAP.get(detail_key)
+        if not technology or not isinstance(bench_data, dict):
+            continue
+
+        results = bench_data.get("results") or []
+        for i, res in enumerate(results):
+            if not isinstance(res, dict):
+                continue
+            records.append({
+                "timestamp": "",
+                "slug": slug,
+                "technology": technology,
+                "methodSubjectId": "",
+                "methodIndex": res.get("methodIndex", i),
+                "metrics": {
+                    "elapsedMilliseconds": res.get("elapsedMilliseconds", 0),
+                    "opsPerSecond": res.get("opsPerSecond", 0),
+                    "calibratedMs": res.get("calibratedMs", 0),
+                },
+                "iterations": res.get("iterations", 100000),
+                "status": "completed" if "error" not in res else "error",
+            })
+
+    # HotUpdate benchmark stages
+    _HU_TECH_MAP = {
+        "hotupdate_aot_benchmark": "chaos-hu-aot",
+        "hotupdate_jit_benchmark": "chaos-hu-jit",
+    }
+    for stage_key, technology in _HU_TECH_MAP.items():
+        sd = stages_data.get(stage_key, {})
+        sd_details = sd.get("details", {}) if isinstance(sd, dict) else {}
+        if not isinstance(sd_details, dict):
+            continue
+        results = sd_details.get("results") or []
+        for i, res in enumerate(results):
+            if not isinstance(res, dict):
+                continue
+            metrics: dict[str, Any] = {
+                "elapsedMilliseconds": res.get("elapsedMilliseconds", 0),
+            }
+            if "postPatchNsPerOp" in res:
+                metrics["postPatchNsPerOp"] = res["postPatchNsPerOp"]
+            records.append({
+                "timestamp": "",
+                "slug": slug,
+                "technology": technology,
+                "methodSubjectId": "",
+                "methodIndex": res.get("methodIndex", i),
+                "metrics": metrics,
+                "iterations": res.get("iterations", 100000),
+                "status": "completed" if "error" not in res else "error",
+            })
+
+    return records
+
+
 def _geometric_mean(values: list[float]) -> float:
     """Compute geometric mean of a list of positive values."""
     if not values:
@@ -450,7 +551,7 @@ def _geometric_mean(values: list[float]) -> float:
     return math.exp(log_sum / len(values)) if log_sum else 0.0
 
 
-def _compute_benchmark_comparisons(slug: str) -> dict[str, Any]:
+def _compute_benchmark_comparisons(slug: str, stages_data: dict[str, Any] | None = None) -> dict[str, Any]:
     """Compute benchmark performance comparisons for a family.
 
     Reads the perf store JSONL and computes geometric mean opsPerSecond
@@ -460,8 +561,11 @@ def _compute_benchmark_comparisons(slug: str) -> dict[str, Any]:
     which indicates a measurement artifact where the benchmark harness
     failed to correctly time the operations (typically all methods report
     unrealistically identical high throughput).
+
+    When stages_data is provided, falls back to extracting benchmark
+    records from the stage details if the perf store JSONL doesn't exist.
     """
-    records = _load_perf_jsonl(slug)
+    records = _load_perf_jsonl(slug, stages_data=stages_data)
     if not records:
         return {"has_any_data": False, "technologies": {}, "comparisons": {}}
 
@@ -762,7 +866,7 @@ def _run_benchmarks_for_missing_families(report: dict[str, Any]) -> None:
             traceback.print_exc()
 
     # Clear perf data cache so re-parsed families get the new data
-    _load_perf_jsonl.cache_clear()
+    _load_perf_jsonl_cached.cache_clear()
     # Re-parse the families to pick up new perf data
     report["parsed"] = [parse_family(r) for r in report.get("results", [])]
 

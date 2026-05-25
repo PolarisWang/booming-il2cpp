@@ -62,6 +62,11 @@ class FamilyContext:
 
     @property
     def contract_path(self) -> Path:
+        # capability-family-contract.json is the new standard; fall back to
+        # contract.json for families not yet migrated.
+        cap = self.family_dir / "capability-family-contract.json"
+        if cap.exists():
+            return cap
         return self.family_dir / "contract.json"
 
     @property
@@ -86,7 +91,7 @@ class FamilyContext:
 
     @property
     def results_dir(self) -> Path:
-        return self.family_dir.parents[2] / "results" / "foundation-dll" / self.assembly / self.slug
+        return self.family_dir.parents[1] / "results" / "foundation-dll" / self.assembly / self.slug
 
 
 @dataclass

@@ -92,7 +92,7 @@ public static partial class GuidRandomHashcodeSubjects
     // [11] System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)
     public static void Subject_11()
     {
-        try { default(HashCode).Add(42); }
+        try { default(HashCode).Add(new object()); }
         catch { _exitCode = 1; }
     }
 

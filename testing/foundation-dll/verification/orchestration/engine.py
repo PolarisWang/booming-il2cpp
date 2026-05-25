@@ -17,7 +17,9 @@ from verification.orchestration.context import FamilyContext, StageResult, Unifi
 # Stage runners
 from verification.stages.preflight import run_preflight
 from verification.stages.codegen import run_codegen, run_jit_codegen
-from verification.stages.fact import run_fact, run_fact_jit
+from verification.stages.fact import (
+    run_fact, run_fact_jit, run_managed_fact, run_cross_verify,
+)
 from verification.stages.audit import run_audit
 from verification.stages.asm_compare import run_asm_compare
 from verification.stages.microbench import run_microbench
@@ -42,7 +44,7 @@ REQUIRED_STAGES_STRICT = REQUIRED_STAGES_STANDARD | {
 # ── Verification Pipeline ──────────────────────────────────────────
 
 class VerificationPipeline:
-    """13-stage verification pipeline orchestrator.
+    """15-stage verification pipeline orchestrator.
 
     Usage:
         ctx = FamilyContext(slug="convert-char", assembly="System.Private.CoreLib", ...)
@@ -55,6 +57,8 @@ class VerificationPipeline:
         ("preflight", run_preflight, "Preflight"),
         ("codegen", run_codegen, "Codegen (AOT)"),
         ("jit_codegen", run_jit_codegen, "JitCodegen"),
+        ("managed_fact", run_managed_fact, "Managed Fact (.NET)"),
+        ("cross_verify", run_cross_verify, "Cross-Verify (Managed vs Native)"),
         ("fact", run_fact, "Fact AOT"),
         ("fact_jit", run_fact_jit, "Fact JIT"),
         ("audit", run_audit, "Mechanism + Principle Audit"),

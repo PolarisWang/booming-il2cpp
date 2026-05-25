@@ -2,209 +2,125 @@
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-25T01:32:34",
-  "duration_ms": 35386,
+  "timestamp": "2026-05-25T22:00:57",
+  "duration_ms": 2128,
   "overall_status": "failed",
   "stages": {
-    "preflight": {
-      "stage": "preflight",
+    "managed_fact": {
+      "stage": "managed_fact",
       "status": "passed",
-      "summary": "14 methods, 0 custom entries",
+      "summary": "Fact net8.0: passed=10 failed=0 skipped=4",
       "details": {
-        "methodCount": 14,
-        "customMethodCount": 0,
-        "hasCustomEntryFile": false,
-        "customMethods": []
+        "totalMethods": 14,
+        "passedMethods": 10,
+        "failedMethods": 0,
+        "skippedMethods": 4,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 4,
+            "methodSubjectId": "System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 5,
+            "methodSubjectId": "System.Private.CoreLib/System.Guid::ToString:System.String()",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 6,
+            "methodSubjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 7,
+            "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 8,
+            "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 9,
+            "methodSubjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 10,
+            "methodSubjectId": "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 11,
+            "methodSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 12,
+            "methodSubjectId": "System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 13,
+            "methodSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)",
+            "status": "passed",
+            "exceptionMessage": ""
+          }
+        ]
       },
       "errors": [],
-      "duration_ms": 0
-    },
-    "codegen": {
-      "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
-      "details": {
-        "methodCount": 14,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\guid-random-hashcode\\managed\\subjects\\build-output\\GuidRandomHashcodeSubjects.dll"
-      },
-      "errors": [],
-      "duration_ms": 24577
-    },
-    "jit_codegen": {
-      "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "entry-jit.exe already exists, skipping rebuild",
-      "details": {},
-      "errors": [],
-      "duration_ms": 0
-    },
-    "fact": {
-      "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (14/14)",
-      "details": {
-        "fact": {
-          "status": "passed",
-          "passed": 14,
-          "total": 14
-        }
-      },
-      "errors": [],
-      "duration_ms": 359
+      "duration_ms": 1677
     },
     "fact_jit": {
       "stage": "fact_jit",
-      "status": "passed",
-      "summary": "Fact JIT verify=passed (14/14)",
-      "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 14,
-          "total": 14,
-          "exit_code": 3221225477
-        }
-      },
-      "errors": [],
-      "duration_ms": 33
-    },
-    "audit": {
-      "stage": "audit",
       "status": "failed",
-      "summary": "false_passing=0, principle=VIOLATION (mech_passed=True, strict_on_CONCERN=False)",
-      "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "VIOLATION",
-        "methodsWithoutLowering": 0
-      },
+      "summary": "Fact JIT crashed: No module named 'fact_verifier'",
+      "details": {},
       "errors": [],
-      "duration_ms": 1649
-    },
-    "asm_compare": {
-      "stage": "asm_compare",
-      "status": "passed",
-      "summary": "asm-compare: 14/14 methods OK, avg JIT=44.0 instr, avg AOT IR=18.0 instr, expansion=0.41x",
-      "details": {
-        "totalMethods": 14,
-        "okCount": 14,
-        "failedCount": 0,
-        "skippedCount": 0,
-        "jitInstructionCount": {
-          "min": 44,
-          "max": 44,
-          "avg": 44.0,
-          "total": 616
-        },
-        "aotInstructionCount": {
-          "min": 8,
-          "max": 28,
-          "avg": 18.0,
-          "total": 252
-        },
-        "totalExternalRuntimeCalls": 0,
-        "totalVirtualDispatches": 0,
-        "totalBoxingOps": 0,
-        "topInstructionCategories": {
-          "external_runtime_call": 24
-        },
-        "overallIrExpansionRatio": 0.41,
-        "averageExpansionRatio": 0.41,
-        "maxExpansionRatio": 0.64,
-        "minExpansionRatio": 0.18
-      },
-      "errors": [],
-      "duration_ms": 2641
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=2.6ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
-      "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 2.6,
-          "batchCount": 1000,
-          "framesPerBatch": 32
-        },
-        "poolSize": 32
-      },
-      "errors": [],
-      "duration_ms": 24
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "passed",
-      "summary": "avg_aot_speedup=-175.26%, avg_jit_speedup=0.0%, native_aot_faster=0/10, managed_faster=10",
-      "details": {
-        "averageSpeedupPercent": -175.26,
-        "averageNativeAotSpeedupPercent": -175.26,
-        "averageNativeJitSpeedupPercent": 0.0,
-        "nativeAotFasterCount": 0,
-        "nativeJitFasterCount": 0,
-        "managedFasterCount": 10,
-        "matchedCount": 10,
-        "totalMethods": 14,
-        "invalidCount": 4,
-        "benchmarkQuality": "ok",
-        "runtimesAvailable": [
-          "net8-jit",
-          "chaos-aot",
-          "net10-jit"
-        ],
-        "runtimesUnavailable": [],
-        "multiRunReportPath": "multi-run/multi-run-report.json",
-        "chaosClassification": {
-          "chaos_faster_than_all": 0,
-          "chaos_faster_than_jit": 0,
-          "chaos_midfield": 2,
-          "chaos_slower_than_jit": 8,
-          "not_benchmarked": 4
-        },
-        "multiRuntimeSpeedup": 0.3516195487515964,
-        "multiRuntimeFasterCount": 0,
-        "multiRuntimeSlowerCount": 10
-      },
-      "errors": [],
-      "duration_ms": 5346
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "14/14 passed, 0 failed (stub=0)",
-      "details": {
-        "passedMethods": 14,
-        "failedMethods": 0,
-        "totalMethods": 14,
-        "realMethods": 14,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 25
-    },
-    "hotupdate_aot_benchmark": {
-      "stage": "hotupdate_aot_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=-0.87% (1.0x) over 14 methods (AOT patched path)",
-      "details": {
-        "averageSlowdownPercent": -0.87,
-        "slowdownFactor": 0.9913,
-        "threshold": 50.0,
-        "nonStubMethods": 14
-      },
-      "errors": [],
-      "duration_ms": 365
+      "duration_ms": 2
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "14/14 passed, 0 failed",
-      "details": {
-        "passed": 14,
-        "failed": 0,
-        "total": 14
-      },
+      "status": "failed",
+      "summary": "HotUpdate JIT fact crashed: No module named 'fact_verifier'",
+      "details": {},
       "errors": [],
-      "duration_ms": 24
+      "duration_ms": 1
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -217,23 +133,63 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 336
+      "duration_ms": 342
+    },
+    "dashboard": {
+      "stage": "dashboard",
+      "status": "passed",
+      "summary": "Dashboard built: 6 sections",
+      "details": {
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 14,
+          "okCount": 14,
+          "failedCount": 0,
+          "overallIrExpansionRatio": 0.41,
+          "averageExpansionRatio": 0.41,
+          "maxExpansionRatio": 0.64,
+          "jitInstructionAvg": 44.0,
+          "aotInstructionAvg": 18.0,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {
+            "external_runtime_call": 24
+          }
+        },
+        "performance": {},
+        "hotupdate": {
+          "jitOverhead": {
+            "averageSlowdownPercent": 0.0,
+            "slowdownFactor": 1.0,
+            "nonStubMethods": 0
+          }
+        },
+        "managedFact": {
+          "totalMethods": 14,
+          "passedMethods": 10,
+          "failedMethods": 0,
+          "skippedMethods": 4,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0.41,
+          "interpreterSlowdownFactor": 0,
+          "asmPassRate": 100.0
+        }
+      },
+      "errors": [],
+      "duration_ms": 0
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
-    "testedRate": 100.0,
-    "overall": 100.0
+    "methodCoverage": 71.43,
+    "testedRate": 0.0,
+    "overall": 71.43
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 2.6,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 0,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
-    },
+    "interpreter": {},
     "irTranslation": {
       "totalMethods": 14,
       "okCount": 14,
@@ -250,42 +206,25 @@
         "external_runtime_call": 24
       }
     },
-    "performance": {
-      "averageSpeedupPercent": -175.26,
-      "nativeFasterCount": 0,
-      "managedFasterCount": 10,
-      "matchedCount": 10,
-      "totalMethods": 14,
-      "invalidCount": 4,
-      "averageNativeJitSpeedupPercent": 0.0,
-      "nativeJitFasterCount": 0
-    },
+    "performance": {},
     "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 14,
-        "failedMethods": 0,
-        "totalMethods": 14
-      },
-      "aotOverhead": {
-        "averageSlowdownPercent": -0.87,
-        "slowdownFactor": 0.9913,
-        "nonStubMethods": 14
-      },
-      "jitFunctional": {
-        "passedMethods": 14,
-        "failedMethods": 0,
-        "totalMethods": 14
-      },
       "jitOverhead": {
         "averageSlowdownPercent": 0.0,
         "slowdownFactor": 1.0,
         "nonStubMethods": 0
       }
     },
+    "managedFact": {
+      "totalMethods": 14,
+      "passedMethods": 10,
+      "failedMethods": 0,
+      "skippedMethods": 4,
+      "tfm": "net8.0"
+    },
     "keyRatios": {
-      "nativeFasterRatio": 0.0,
+      "nativeFasterRatio": 0,
       "irExpansionRatio": 0.41,
-      "interpreterSlowdownFactor": 0.9913,
+      "interpreterSlowdownFactor": 0,
       "asmPassRate": 100.0
     }
   },

@@ -1,7 +1,7 @@
 {
   "family": "attributes-custom-metadata",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-25T01:27:07.885421",
+  "generated_at": "2026-05-25T19:12:46.051366",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -20,15 +20,16 @@
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "ALIGNED",
-      "summary": "All methods have lowering [OK]",
+      "status": "CONCERN",
+      "summary": "16/18 methods have lowering (file has lowering in helper functions)",
       "details": [],
       "evidence": {
         "has_lowering": true,
+        "file_has_lowering": true,
+        "methods_with_lowering": 16,
+        "methods_total": 18,
         "stub_count": 0,
-        "simple_forward_count": 0,
-        "methods_with_lowering": 36,
-        "methods_total": 36
+        "simple_forward_count": 0
       },
       "per_method": [
         {
@@ -65,7 +66,7 @@
         },
         {
           "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0",
@@ -101,79 +102,7 @@
         },
         {
           "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_8",
-          "has_lowering": true
+          "has_lowering": false
         }
       ]
     },
@@ -209,14 +138,10 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "15 of 21 changed source files are outside expected architecture layers",
+      "summary": "12 of 28 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "file": "CLAUDE.md",
           "reason": "outside expected architecture layers"
         },
         {
@@ -224,11 +149,15 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
           "reason": "outside expected architecture layers"
         },
         {
@@ -236,31 +165,19 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/jit_engine.cpp",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
           "reason": "outside expected architecture layers"
         },
         {
@@ -273,19 +190,16 @@
         }
       ],
       "evidence": {
-        "changed_source_count": 21,
+        "changed_source_count": 28,
         "layer_distribution": {
-          "TestInfra": 2,
-          "ManagedContracts": 1,
-          "RuntimeCore": 3
+          "TestInfra": 6,
+          "ManagedContracts": 2,
+          "Driver": 2,
+          "RuntimeCore": 6
         },
         "violations": [
           {
-            "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "file": "CLAUDE.md",
             "reason": "outside expected architecture layers"
           },
           {
@@ -293,11 +207,15 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
             "reason": "outside expected architecture layers"
           },
           {
@@ -305,31 +223,19 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/jit_engine.cpp",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
             "reason": "outside expected architecture layers"
           },
           {
@@ -399,10 +305,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
-    "concern": 1,
+    "aligned": 7,
+    "concern": 2,
     "violation": 0,
     "not_applicable": 3,
-    "overall": "ALIGNED"
+    "overall": "CONCERN"
   }
 }

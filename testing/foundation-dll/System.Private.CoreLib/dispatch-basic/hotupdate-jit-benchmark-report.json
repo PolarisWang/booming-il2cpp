@@ -8,47 +8,47 @@
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 19068.59,
-      "postPatchNsPerOp": 30852.4,
-      "slowdownPercent": 61.8
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 78677.76,
-      "postPatchNsPerOp": 66214.1,
-      "slowdownPercent": -15.84
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 74042.65,
-      "postPatchNsPerOp": 64904.7,
-      "slowdownPercent": -12.34
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 70896.01,
-      "postPatchNsPerOp": 62969.8,
-      "slowdownPercent": -11.18
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 70699.6,
-      "postPatchNsPerOp": 59636.2,
-      "slowdownPercent": -15.65
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     }
   ],
   "summary": {
     "totalMethods": 5,
-    "nonStubMethods": 5,
-    "averageSlowdownPercent": 1.36,
-    "slowdownFactor": 1.0136,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
     "slowdownThresholdX": 50.0
   }
 }

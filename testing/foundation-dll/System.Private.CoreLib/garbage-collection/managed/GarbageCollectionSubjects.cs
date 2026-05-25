@@ -29,21 +29,21 @@ public static partial class GarbageCollectionSubjects
     // [2] System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)
     public static void Subject_2()
     {
-        try { GC.KeepAlive(42); }
+        try { GC.KeepAlive(null!); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)
     public static void Subject_3()
     {
-        try { if (GC.GetGeneration(42) != GC.GetGeneration(42)) _exitCode = 1; }
+        try { if (GC.GetGeneration(null!) != GC.GetGeneration(null!)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
     public static void Subject_4()
     {
-        try { if (((Array.CreateInstance(typeof(byte), 42)).GetHashCode()) != ((Array.CreateInstance(typeof(byte), 42)).GetHashCode())) _exitCode = 1; }
+        try { if ((int)(((Array)(Array.CreateInstance(typeof(byte), 42))).Length) != (int)(((Array)(Array.CreateInstance(typeof(byte), 42))).Length)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -57,7 +57,7 @@ public static partial class GarbageCollectionSubjects
     // [6] System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()
     public static void Subject_6()
     {
-        try { if (((GC.GetGCMemoryInfo()).GetHashCode()) != ((GC.GetGCMemoryInfo()).GetHashCode())) _exitCode = 1; }
+        try { if ((long)((GC.GetGCMemoryInfo()).TotalCommittedBytes) != (long)((GC.GetGCMemoryInfo()).TotalCommittedBytes)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

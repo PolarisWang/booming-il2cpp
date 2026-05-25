@@ -2,36 +2,159 @@
   "family": "primitive-numeric-conversions-core",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T19:44:09",
-  "duration_ms": 69,
-  "overall_status": "passed",
+  "timestamp": "2026-05-25T22:02:11",
+  "duration_ms": 2092,
+  "overall_status": "failed",
   "stages": {
-    "fact_jit": {
-      "stage": "fact_jit",
+    "managed_fact": {
+      "stage": "managed_fact",
       "status": "passed",
-      "summary": "Fact JIT verify=passed (20/20)",
+      "summary": "Fact net8.0: passed=0 failed=0 skipped=10",
       "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 20,
-          "total": 20,
-          "exit_code": 0
-        }
+        "totalMethods": 10,
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "skippedMethods": 10,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 4,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 5,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 6,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 7,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 8,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 9,
+            "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          }
+        ]
       },
       "errors": [],
-      "duration_ms": 35
+      "duration_ms": 1749
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "failed",
+      "summary": "Fact JIT crashed: No module named 'fact_verifier'",
+      "details": {},
+      "errors": [],
+      "duration_ms": 2
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
+      "status": "failed",
+      "summary": "HotUpdate JIT fact crashed: No module named 'fact_verifier'",
+      "details": {},
+      "errors": [],
+      "duration_ms": 2
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "20/20 passed, 0 failed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
       "details": {
-        "passed": 20,
-        "failed": 0,
-        "total": 20
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 31
+      "duration_ms": 235
+    },
+    "dashboard": {
+      "stage": "dashboard",
+      "status": "passed",
+      "summary": "Dashboard built: 6 sections",
+      "details": {
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 10,
+          "okCount": 10,
+          "failedCount": 0,
+          "overallIrExpansionRatio": 0.36,
+          "averageExpansionRatio": 0.36,
+          "maxExpansionRatio": 0.36,
+          "jitInstructionAvg": 44.0,
+          "aotInstructionAvg": 16.0,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {}
+        },
+        "performance": {},
+        "hotupdate": {
+          "jitOverhead": {
+            "averageSlowdownPercent": 0.0,
+            "slowdownFactor": 1.0,
+            "nonStubMethods": 0
+          }
+        },
+        "managedFact": {
+          "totalMethods": 10,
+          "passedMethods": 0,
+          "failedMethods": 0,
+          "skippedMethods": 10,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0.36,
+          "interpreterSlowdownFactor": 0,
+          "asmPassRate": 100.0
+        }
+      },
+      "errors": [],
+      "duration_ms": 0
     }
   },
   "coverage": {
@@ -57,11 +180,18 @@
     },
     "performance": {},
     "hotupdate": {
-      "jitFunctional": {
-        "passedMethods": 20,
-        "failedMethods": 0,
-        "totalMethods": 20
+      "jitOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
       }
+    },
+    "managedFact": {
+      "totalMethods": 10,
+      "passedMethods": 0,
+      "failedMethods": 0,
+      "skippedMethods": 10,
+      "tfm": "net8.0"
     },
     "keyRatios": {
       "nativeFasterRatio": 0,

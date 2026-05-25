@@ -27,16 +27,19 @@ SKIP_SLUGS = {
 
 
 def discover_families(assembly: str = "System.Private.CoreLib") -> list[str]:
-    families_dir = _TESTING_ROOT / "foundation-dll" / assembly
+    families_dir = _TESTING_ROOT / assembly
     slugs = sorted([
         d.name for d in families_dir.iterdir()
-        if d.is_dir() and (d / "contract.json").exists()
+        if d.is_dir() and (
+            (d / "capability-family-contract.json").exists() or
+            (d / "contract.json").exists()
+        )
     ])
     return [s for s in slugs if s not in SKIP_SLUGS]
 
 
 def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages: set[str] | None = None) -> dict:
-    family_dir = _TESTING_ROOT / "foundation-dll" / assembly / slug
+    family_dir = _TESTING_ROOT / assembly / slug
     ctx = FamilyContext(
         slug=slug,
         assembly=assembly,

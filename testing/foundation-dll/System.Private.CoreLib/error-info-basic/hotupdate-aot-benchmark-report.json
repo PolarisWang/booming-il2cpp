@@ -8,47 +8,47 @@
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 2.19,
-      "postPatchNsPerOp": 2.1,
-      "slowdownPercent": -4.11
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": 55.25
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 3.4,
-      "postPatchNsPerOp": 2.1,
-      "slowdownPercent": -38.24
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 11.76
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 3.8,
-      "postPatchNsPerOp": 2.1,
-      "slowdownPercent": -44.74
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": -10.53
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 3.75,
-      "postPatchNsPerOp": 2.1,
-      "slowdownPercent": -44.0
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 1.33
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 2.29,
-      "postPatchNsPerOp": 2.1,
-      "slowdownPercent": -8.3
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": 52.84
     }
   ],
   "summary": {
     "totalMethods": 5,
     "nonStubMethods": 5,
-    "averageSlowdownPercent": -27.88,
-    "slowdownFactor": 0.7212000000000001,
+    "averageSlowdownPercent": 22.13,
+    "slowdownFactor": 1.2213,
     "slowdownThresholdX": 50.0
   }
 }

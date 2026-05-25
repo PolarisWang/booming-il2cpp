@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/collections/generic/core",
-  "capturedAt": "2026-05-25T01:27:19",
+  "capturedAt": "2026-05-25T22:47:42",
   "batchMode": true,
   "summary": {
     "totalMethods": 16,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 704
+      "max": 58,
+      "avg": 44.9,
+      "total": 718
     },
     "aotInstructionCount": {
       "min": 1,
@@ -51,7 +51,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_0",
         "instructions": 1
       },
       "analysis": [],
@@ -107,7 +107,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_2",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_2",
         "instructions": 1
       },
       "analysis": [],
@@ -131,7 +131,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_3",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_3",
         "instructions": 1
       },
       "analysis": [],
@@ -155,7 +155,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_4",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_4",
         "instructions": 1
       },
       "analysis": [],
@@ -295,7 +295,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_8",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_8",
         "instructions": 1
       },
       "analysis": [],
@@ -356,7 +356,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_10",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_10",
         "instructions": 1
       },
       "analysis": [],
@@ -380,7 +380,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_11",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_11",
         "instructions": 1
       },
       "analysis": [],
@@ -404,7 +404,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_12",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_12",
         "instructions": 1
       },
       "analysis": [],
@@ -416,7 +416,7 @@
       "shortName": "Subject_13",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 58,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -424,11 +424,11 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 58
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_13",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_13",
         "instructions": 1
       },
       "analysis": [],
@@ -452,7 +452,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_14",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_14",
         "instructions": 1
       },
       "analysis": [],
@@ -476,7 +476,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_15",
+        "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_15",
         "instructions": 1
       },
       "analysis": [],

@@ -13,6 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="CollectionsGenericCoreSubjects.cs" />
+    <Compile Include="CollectionsGenericCoreNativeEntry.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />

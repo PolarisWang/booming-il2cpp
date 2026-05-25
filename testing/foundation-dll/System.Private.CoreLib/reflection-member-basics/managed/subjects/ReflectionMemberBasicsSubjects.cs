@@ -37,13 +37,15 @@ public static partial class ReflectionMemberBasicsSubjects
     // [3] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
     public static void Subject_3()
     {
-        // needs-manual — Invoke with 2 params requires manual implementation: System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
+        try { var method = typeof(int).GetMethod("Parse", new[] { typeof(string) })!; if (((int)method.Invoke(null, new object[] { "42" })!).GetHashCode() != ((int)method.Invoke(null, new object[] { "42" })!).GetHashCode()) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]()
     public static void Subject_4()
     {
-        // needs-manual — GetParameters with 0 params requires manual implementation: System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]()
+        try { if (typeof(int).GetMethod("Parse", new[] { typeof(string) })!.GetParameters().Length != typeof(int).GetMethod("Parse", new[] { typeof(string) })!.GetParameters().Length) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()
@@ -77,7 +79,7 @@ public static partial class ReflectionMemberBasicsSubjects
     // [9] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
     public static void Subject_9()
     {
-        try { if (((0).GetHashCode()) != ((0).GetHashCode())) _exitCode = 1; }
+        try { if ((typeof(byte).GetFields()[0].FieldType.GetHashCode()) != (typeof(byte).GetFields()[0].FieldType.GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -105,7 +107,7 @@ public static partial class ReflectionMemberBasicsSubjects
     // [13] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
     public static void Subject_13()
     {
-        try { if (((0).GetHashCode()) != ((0).GetHashCode())) _exitCode = 1; }
+        try { if ((typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType.GetHashCode()) != (typeof(byte).GetProperties(BindingFlags.Public | BindingFlags.Static)[0].PropertyType.GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

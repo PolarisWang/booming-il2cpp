@@ -1,7 +1,7 @@
 {
   "family": "custom-generics",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-25T08:06:24.877688",
+  "generated_at": "2026-05-25T19:39:40.715669",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -27,322 +27,10 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 90,
-        "methods_total": 90
+        "methods_with_lowering": 12,
+        "methods_total": 12
       },
       "per_method": [
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_5",
-          "has_lowering": true
-        },
         {
           "name": "CustomGenericsSubjects_CustomGenericsSubjects_Subject_0",
           "has_lowering": true
@@ -425,29 +113,112 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "2 of 4 changed source files are outside expected architecture layers",
+      "summary": "12 of 28 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+          "file": "CLAUDE.md",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_precode.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 4,
+        "changed_source_count": 28,
         "layer_distribution": {
-          "TestInfra": 2
+          "TestInfra": 6,
+          "ManagedContracts": 2,
+          "Driver": 2,
+          "RuntimeCore": 6
         },
         "violations": [
           {
-            "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+            "file": "CLAUDE.md",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_precode.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
             "reason": "outside expected architecture layers"
           }
         ]

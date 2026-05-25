@@ -2,221 +2,194 @@
   "family": "threading-monitor-interlocked",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-25T01:37:30",
-  "duration_ms": 63711,
-  "overall_status": "passed",
+  "timestamp": "2026-05-25T22:03:04",
+  "duration_ms": 2204,
+  "overall_status": "failed",
   "stages": {
-    "preflight": {
-      "stage": "preflight",
+    "managed_fact": {
+      "stage": "managed_fact",
       "status": "passed",
-      "summary": "14 methods, 10 custom entries",
+      "summary": "Fact net8.0: passed=0 failed=0 skipped=14",
       "details": {
-        "methodCount": 14,
-        "customMethodCount": 10,
-        "hasCustomEntryFile": false,
-        "customMethods": [
-          "System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)",
-          "System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)",
-          "System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)",
-          "System.Private.CoreLib/System.Threading.Monitor::PulseAll:System.Void(System.Object)",
-          "System.Private.CoreLib/System.Threading.Monitor::Wait:System.Boolean(System.Object)",
-          "System.Private.CoreLib/System.Threading.Interlocked::Increment:System.Int32(System.Int32&)",
-          "System.Private.CoreLib/System.Threading.Interlocked::Decrement:System.Int32(System.Int32&)",
-          "System.Private.CoreLib/System.Threading.Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)",
-          "System.Private.CoreLib/System.Threading.Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)",
-          "System.Private.CoreLib/System.Threading.Interlocked::Add:System.Int32(System.Int32&,System.Int32)"
+        "totalMethods": 14,
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "skippedMethods": 14,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Enter:System.Void(System.Object)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Exit:System.Void(System.Object)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 4,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 5,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::PulseAll:System.Void(System.Object)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 6,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::Wait:System.Boolean(System.Object)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 7,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Increment:System.Int32(System.Int32&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 8,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Decrement:System.Int32(System.Int32&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 9,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Exchange:System.Int32(System.Int32&,System.Int32)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 10,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::CompareExchange:System.Int32(System.Int32&,System.Int32,System.Int32)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 11,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::Add:System.Int32(System.Int32&,System.Int32)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 12,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 13,
+            "methodSubjectId": "System.Private.CoreLib/System.Threading.Volatile::Read:System.Int32(System.Int32&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          }
         ]
       },
       "errors": [],
-      "duration_ms": 1
-    },
-    "codegen": {
-      "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
-      "details": {
-        "methodCount": 14,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\threading-monitor-interlocked\\managed\\subjects\\build-output\\ThreadingMonitorInterlockedSubjects.dll"
-      },
-      "errors": [],
-      "duration_ms": 35289
-    },
-    "jit_codegen": {
-      "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "entry-jit.exe already exists, skipping rebuild",
-      "details": {},
-      "errors": [],
-      "duration_ms": 0
-    },
-    "fact": {
-      "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (14/14)",
-      "details": {
-        "fact": {
-          "status": "passed",
-          "passed": 14,
-          "total": 14
-        }
-      },
-      "errors": [],
-      "duration_ms": 714
+      "duration_ms": 1975
     },
     "fact_jit": {
       "stage": "fact_jit",
-      "status": "passed",
-      "summary": "Fact JIT verify=passed (17/17)",
-      "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 17,
-          "total": 17,
-          "exit_code": 0
-        }
-      },
-      "errors": [],
-      "duration_ms": 2113
-    },
-    "audit": {
-      "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN (mech_passed=True, strict_on_CONCERN=False)",
-      "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "CONCERN",
-        "methodsWithoutLowering": 0
-      },
-      "errors": [],
-      "duration_ms": 3433
-    },
-    "asm_compare": {
-      "stage": "asm_compare",
-      "status": "passed",
-      "summary": "asm-compare: 14/14 methods OK, avg JIT=143.6 instr, avg AOT IR=7.5 instr, expansion=0.05x",
-      "details": {
-        "totalMethods": 14,
-        "okCount": 14,
-        "failedCount": 0,
-        "skippedCount": 0,
-        "jitInstructionCount": {
-          "min": 44,
-          "max": 1438,
-          "avg": 143.6,
-          "total": 2010
-        },
-        "aotInstructionCount": {
-          "min": 1,
-          "max": 34,
-          "avg": 7.5,
-          "total": 105
-        },
-        "totalExternalRuntimeCalls": 0,
-        "totalVirtualDispatches": 0,
-        "totalBoxingOps": 0,
-        "topInstructionCategories": {
-          "external_runtime_call": 7
-        },
-        "overallIrExpansionRatio": 0.05,
-        "averageExpansionRatio": 0.13,
-        "maxExpansionRatio": 0.77,
-        "minExpansionRatio": 0.02
-      },
-      "errors": [],
-      "duration_ms": 5532
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=2.5ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
-      "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 2.5,
-          "batchCount": 1000,
-          "framesPerBatch": 32
-        },
-        "poolSize": 32
-      },
-      "errors": [],
-      "duration_ms": 32
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All 14 non-stub methods are invalid (no managed harness)",
+      "status": "failed",
+      "summary": "Fact JIT crashed: No module named 'fact_verifier'",
       "details": {},
       "errors": [],
-      "duration_ms": 15671
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "14/14 passed, 0 failed (stub=10)",
-      "details": {
-        "passedMethods": 14,
-        "failedMethods": 0,
-        "totalMethods": 14,
-        "realMethods": 14,
-        "stubMethods": 10
-      },
-      "errors": [],
-      "duration_ms": 39
-    },
-    "hotupdate_aot_benchmark": {
-      "stage": "hotupdate_aot_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=-4.68% (1.0x) over 4 methods (AOT patched path)",
-      "details": {
-        "averageSlowdownPercent": -4.68,
-        "slowdownFactor": 0.9531999999999999,
-        "threshold": 50.0,
-        "nonStubMethods": 4
-      },
-      "errors": [],
-      "duration_ms": 103
+      "duration_ms": 2
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "17/17 passed, 0 failed",
-      "details": {
-        "passed": 17,
-        "failed": 0,
-        "total": 17
-      },
+      "status": "failed",
+      "summary": "HotUpdate JIT fact crashed: No module named 'fact_verifier'",
+      "details": {},
       "errors": [],
-      "duration_ms": 24
+      "duration_ms": 1
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=-12.46% (0.9x) over 4 methods (JIT patched path)",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
       "details": {
-        "averageSlowdownPercent": -12.46,
-        "slowdownFactor": 0.8754,
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
         "threshold": 50.0,
-        "nonStubMethods": 4
+        "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 750
+      "duration_ms": 109
+    },
+    "dashboard": {
+      "stage": "dashboard",
+      "status": "passed",
+      "summary": "Dashboard built: 6 sections",
+      "details": {
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 14,
+          "okCount": 14,
+          "failedCount": 0,
+          "overallIrExpansionRatio": 0.05,
+          "averageExpansionRatio": 0.13,
+          "maxExpansionRatio": 0.77,
+          "jitInstructionAvg": 143.6,
+          "aotInstructionAvg": 7.5,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {
+            "external_runtime_call": 7
+          }
+        },
+        "performance": {},
+        "hotupdate": {
+          "jitOverhead": {
+            "averageSlowdownPercent": 0.0,
+            "slowdownFactor": 1.0,
+            "nonStubMethods": 0
+          }
+        },
+        "managedFact": {
+          "totalMethods": 14,
+          "passedMethods": 0,
+          "failedMethods": 0,
+          "skippedMethods": 14,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0.05,
+          "interpreterSlowdownFactor": 0,
+          "asmPassRate": 100.0
+        }
+      },
+      "errors": [],
+      "duration_ms": 1
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
-    "testedRate": 100.0,
-    "overall": 100.0
+    "methodCoverage": 0.0,
+    "testedRate": 0.0,
+    "overall": 0.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 2.5,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 0,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
-    },
+    "interpreter": {},
     "irTranslation": {
       "totalMethods": 14,
       "okCount": 14,
@@ -235,31 +208,23 @@
     },
     "performance": {},
     "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 14,
-        "failedMethods": 0,
-        "totalMethods": 14
-      },
-      "aotOverhead": {
-        "averageSlowdownPercent": -4.68,
-        "slowdownFactor": 0.9531999999999999,
-        "nonStubMethods": 4
-      },
-      "jitFunctional": {
-        "passedMethods": 17,
-        "failedMethods": 0,
-        "totalMethods": 17
-      },
       "jitOverhead": {
-        "averageSlowdownPercent": -12.46,
-        "slowdownFactor": 0.8754,
-        "nonStubMethods": 4
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
       }
+    },
+    "managedFact": {
+      "totalMethods": 14,
+      "passedMethods": 0,
+      "failedMethods": 0,
+      "skippedMethods": 14,
+      "tfm": "net8.0"
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.05,
-      "interpreterSlowdownFactor": 0.9531999999999999,
+      "interpreterSlowdownFactor": 0,
       "asmPassRate": 100.0
     }
   },

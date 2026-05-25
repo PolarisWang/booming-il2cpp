@@ -94,9 +94,9 @@ def _fmt_metric_value(key: str, value: float) -> str:
 # ──────────────────────────────────────────────────────────────────────
 
 
-def _build_benchmark_table(slug: str) -> str:
+def _build_benchmark_table(slug: str, stages_data: dict[str, Any] | None = None) -> str:
     """Build per-method benchmark comparison table (ns/op across all runtimes)."""
-    records = _load_perf_jsonl(slug)
+    records = _load_perf_jsonl(slug, stages_data=stages_data)
     if not records:
         return ""
 
@@ -180,7 +180,7 @@ def _build_benchmark_table(slug: str) -> str:
   </div>"""
 
 
-def _build_benchmark_section(comparisons: dict[str, Any]) -> str:
+def _build_benchmark_section(comparisons: dict[str, Any], stages_data: dict[str, Any] | None = None) -> str:
     """Build HTML for the benchmark performance comparison section."""
     if not comparisons.get("has_any_data"):
         return ""
@@ -449,8 +449,8 @@ def _build_family_card(f: dict[str, Any], index: int) -> str:
     stage_rows = _build_stage_rows(slug, stages, has_data, coverage)
     metrics_grid = _build_metrics_grid(coverage, dashboard_data)
     cov_bar = _build_coverage_bar(coverage)
-    benchmark_section = _build_benchmark_section(_compute_benchmark_comparisons(slug_raw))
-    benchmark_table = _build_benchmark_table(slug_raw)
+    benchmark_section = _build_benchmark_section(_compute_benchmark_comparisons(slug_raw, stages_data=stages), stages_data=stages)
+    benchmark_table = _build_benchmark_table(slug_raw, stages_data=stages)
 
     return f"""\
 <div class="family-card" id="card-{index}" data-status="{status}">

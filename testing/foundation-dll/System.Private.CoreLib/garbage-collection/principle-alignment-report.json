@@ -1,12 +1,12 @@
 {
   "family": "garbage-collection",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-25T01:25:33.601889",
+  "generated_at": "2026-05-25T20:19:20.372912",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "12/12 methods are stubs — benchmark data not meaningful",
+      "summary": "10/10 methods are stubs — benchmark data not meaningful",
       "details": [],
       "evidence": {
         "average_speedup_percent": 0.0,
@@ -14,8 +14,8 @@
         "managed_faster_count": 0,
         "native_aot_faster_count": 0,
         "native_jit_faster_count": 0,
-        "invalid_count": 12,
-        "total_methods": 12
+        "invalid_count": 10,
+        "total_methods": 10
       }
     },
     "p1_lowering": {
@@ -27,250 +27,10 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 80,
-        "methods_total": 80
+        "methods_with_lowering": 20,
+        "methods_total": 20
       },
       "per_method": [
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": true
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": true
-        },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
           "has_lowering": true
@@ -385,14 +145,10 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "15 of 21 changed source files are outside expected architecture layers",
+      "summary": "12 of 28 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "file": "CLAUDE.md",
           "reason": "outside expected architecture layers"
         },
         {
@@ -400,11 +156,15 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
           "reason": "outside expected architecture layers"
         },
         {
@@ -412,31 +172,19 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/jit_engine.cpp",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
           "reason": "outside expected architecture layers"
         },
         {
@@ -449,19 +197,16 @@
         }
       ],
       "evidence": {
-        "changed_source_count": 21,
+        "changed_source_count": 28,
         "layer_distribution": {
-          "TestInfra": 2,
-          "ManagedContracts": 1,
-          "RuntimeCore": 3
+          "TestInfra": 6,
+          "ManagedContracts": 2,
+          "Driver": 2,
+          "RuntimeCore": 6
         },
         "violations": [
           {
-            "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "file": "CLAUDE.md",
             "reason": "outside expected architecture layers"
           },
           {
@@ -469,11 +214,15 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
             "reason": "outside expected architecture layers"
           },
           {
@@ -481,31 +230,19 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/jit_engine.cpp",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
             "reason": "outside expected architecture layers"
           },
           {

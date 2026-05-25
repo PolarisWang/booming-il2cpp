@@ -13,6 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DelegateCoreInvocationSubjects.cs" />
+    <Compile Include="DelegateCoreInvocationNativeEntry.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />

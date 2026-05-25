@@ -231,7 +231,11 @@ def _load_method_count(ctx: FamilyContext) -> int:
 
 
 def _run_hotupdate_fact(exe_path: Path) -> dict[str, Any]:
-    """Run entry.exe --hotupdate and parse JSON result."""
+    """Run entry.exe --hotupdate and parse JSON result.
+
+    R6: Also parses semanticChangedCount and allSemantic to verify
+    that the patch actually changed behavior.
+    """
     try:
         r = subprocess.run(
             [str(exe_path), "--hotupdate"],
@@ -243,20 +247,52 @@ def _run_hotupdate_fact(exe_path: Path) -> dict[str, Any]:
         return {"status": "error", "summary": str(e)}
 
     output = (r.stdout or "").strip()
-    for line in output.splitlines():
-        line = line.strip()
-        if line.startswith("{"):
+    # Scan for JSON object anywhere in output (handles trailing GC stats)
+    json_start = output.find("{")
+    if json_start >= 0:
+        # Find the matching closing brace for the root object
+        depth = 0
+        json_end = -1
+        for i in range(json_start, len(output)):
+            if output[i] == '{':
+                depth += 1
+            elif output[i] == '}':
+                depth -= 1
+                if depth == 0:
+                    json_end = i + 1
+                    break
+        if json_end > json_start:
+            json_str = output[json_start:json_end]
             try:
-                data = json.loads(line)
+                data = json.loads(json_str)
                 passed = data.get("passedMethods", 0)
                 failed = data.get("failedMethods", 0)
                 total = data.get("totalMethods", 0)
+                all_semantic = data.get("allSemantic", True)
+                semantic_changed = data.get("semanticChangedCount", 0)
+                all_revert = data.get("allRevert", True)
+
                 status = "passed" if failed == 0 else "failed"
+
+                # R6: If allSemantic is false, the patch didn't change behavior
+                # This is a warning — patch may not have been effective
+                if not all_semantic and passed > 0:
+                    print(f"    [hotupdate] WARNING: patch applied but no semantic change detected "
+                          f"(changed={semantic_changed}/{total})")
+
+                # R6: If revert failed, mark as warning
+                if not all_revert:
+                    print(f"    [hotupdate] WARNING: revert verification failed — "
+                          f"cleanup may have issues")
+
                 return {
                     "status": status,
                     "passedMethods": passed,
                     "failedMethods": failed,
                     "totalMethods": total,
+                    "allSemantic": all_semantic,
+                    "semanticChangedCount": semantic_changed,
+                    "allRevert": all_revert,
                     "exitCode": r.returncode,
                 }
             except json.JSONDecodeError:

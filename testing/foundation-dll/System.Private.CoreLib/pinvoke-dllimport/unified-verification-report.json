@@ -2,208 +2,132 @@
   "family": "pinvoke-dllimport",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-25T01:34:15",
-  "duration_ms": 92878,
-  "overall_status": "passed",
+  "timestamp": "2026-05-25T22:02:05",
+  "duration_ms": 1937,
+  "overall_status": "failed",
   "stages": {
-    "preflight": {
-      "stage": "preflight",
+    "managed_fact": {
+      "stage": "managed_fact",
       "status": "passed",
-      "summary": "4 methods, 0 custom entries",
+      "summary": "Fact net8.0: passed=0 failed=0 skipped=4",
       "details": {
-        "methodCount": 4,
-        "customMethodCount": 0,
-        "hasCustomEntryFile": false,
-        "customMethods": []
+        "totalMethods": 4,
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "skippedMethods": 4,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetCurrentProcess:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetCurrentThread:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetProcessId:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetModuleHandle:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          }
+        ]
       },
       "errors": [],
-      "duration_ms": 1
-    },
-    "codegen": {
-      "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
-      "details": {
-        "methodCount": 4,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\pinvoke-dllimport\\managed\\subjects\\build-output\\PinvokeDllimportSubjects.dll"
-      },
-      "errors": [],
-      "duration_ms": 37561
-    },
-    "jit_codegen": {
-      "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "entry-jit.exe already exists, skipping rebuild",
-      "details": {},
-      "errors": [],
-      "duration_ms": 0
-    },
-    "fact": {
-      "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (4/4)",
-      "details": {
-        "fact": {
-          "status": "passed",
-          "passed": 4,
-          "total": 4
-        }
-      },
-      "errors": [],
-      "duration_ms": 520
+      "duration_ms": 1720
     },
     "fact_jit": {
       "stage": "fact_jit",
-      "status": "passed",
-      "summary": "Fact JIT verify=passed (12/12)",
-      "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 12,
-          "total": 12,
-          "exit_code": 0
-        }
-      },
-      "errors": [],
-      "duration_ms": 34
-    },
-    "audit": {
-      "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED (mech_passed=True, strict_on_CONCERN=False)",
-      "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "ALIGNED",
-        "methodsWithoutLowering": 0
-      },
-      "errors": [],
-      "duration_ms": 2445
-    },
-    "asm_compare": {
-      "stage": "asm_compare",
-      "status": "passed",
-      "summary": "asm-compare: 4/4 methods OK, avg JIT=44.0 instr, avg AOT IR=16.0 instr, expansion=0.36x",
-      "details": {
-        "totalMethods": 4,
-        "okCount": 4,
-        "failedCount": 0,
-        "skippedCount": 0,
-        "jitInstructionCount": {
-          "min": 44,
-          "max": 44,
-          "avg": 44.0,
-          "total": 176
-        },
-        "aotInstructionCount": {
-          "min": 16,
-          "max": 16,
-          "avg": 16.0,
-          "total": 64
-        },
-        "totalExternalRuntimeCalls": 0,
-        "totalVirtualDispatches": 0,
-        "totalBoxingOps": 0,
-        "topInstructionCategories": {},
-        "overallIrExpansionRatio": 0.36,
-        "averageExpansionRatio": 0.36,
-        "maxExpansionRatio": 0.36,
-        "minExpansionRatio": 0.36
-      },
-      "errors": [],
-      "duration_ms": 5891
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=4.5ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
-      "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 4.5,
-          "batchCount": 1000,
-          "framesPerBatch": 32
-        },
-        "poolSize": 32
-      },
-      "errors": [],
-      "duration_ms": 32
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All 4 non-stub methods are invalid (no managed harness)",
+      "status": "failed",
+      "summary": "Fact JIT crashed: No module named 'fact_verifier'",
       "details": {},
       "errors": [],
-      "duration_ms": 43247
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "4/4 passed, 0 failed (stub=0)",
-      "details": {
-        "passedMethods": 4,
-        "failedMethods": 0,
-        "totalMethods": 4,
-        "realMethods": 4,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 33
-    },
-    "hotupdate_aot_benchmark": {
-      "stage": "hotupdate_aot_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=-21.75% (0.8x) over 4 methods (AOT patched path)",
-      "details": {
-        "averageSlowdownPercent": -21.75,
-        "slowdownFactor": 0.7825,
-        "threshold": 50.0,
-        "nonStubMethods": 4
-      },
-      "errors": [],
-      "duration_ms": 100
+      "duration_ms": 2
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "12/12 passed, 0 failed",
-      "details": {
-        "passed": 12,
-        "failed": 0,
-        "total": 12
-      },
+      "status": "failed",
+      "summary": "HotUpdate JIT fact crashed: No module named 'fact_verifier'",
+      "details": {},
       "errors": [],
-      "duration_ms": 25
+      "duration_ms": 1
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=-6.15% (0.9x) over 4 methods (JIT patched path)",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
       "details": {
-        "averageSlowdownPercent": -6.15,
-        "slowdownFactor": 0.9384999999999999,
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
         "threshold": 50.0,
-        "nonStubMethods": 4
+        "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 2981
+      "duration_ms": 114
+    },
+    "dashboard": {
+      "stage": "dashboard",
+      "status": "passed",
+      "summary": "Dashboard built: 6 sections",
+      "details": {
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 4,
+          "okCount": 4,
+          "failedCount": 0,
+          "overallIrExpansionRatio": 0.36,
+          "averageExpansionRatio": 0.36,
+          "maxExpansionRatio": 0.36,
+          "jitInstructionAvg": 44.0,
+          "aotInstructionAvg": 16.0,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {}
+        },
+        "performance": {},
+        "hotupdate": {
+          "jitOverhead": {
+            "averageSlowdownPercent": 0.0,
+            "slowdownFactor": 1.0,
+            "nonStubMethods": 0
+          }
+        },
+        "managedFact": {
+          "totalMethods": 4,
+          "passedMethods": 0,
+          "failedMethods": 0,
+          "skippedMethods": 4,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0.36,
+          "interpreterSlowdownFactor": 0,
+          "asmPassRate": 100.0
+        }
+      },
+      "errors": [],
+      "duration_ms": 1
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
-    "testedRate": 100.0,
-    "overall": 100.0
+    "methodCoverage": 0.0,
+    "testedRate": 0.0,
+    "overall": 0.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 4.5,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 0,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
-    },
+    "interpreter": {},
     "irTranslation": {
       "totalMethods": 4,
       "okCount": 4,
@@ -220,31 +144,23 @@
     },
     "performance": {},
     "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 4,
-        "failedMethods": 0,
-        "totalMethods": 4
-      },
-      "aotOverhead": {
-        "averageSlowdownPercent": -21.75,
-        "slowdownFactor": 0.7825,
-        "nonStubMethods": 4
-      },
-      "jitFunctional": {
-        "passedMethods": 12,
-        "failedMethods": 0,
-        "totalMethods": 12
-      },
       "jitOverhead": {
-        "averageSlowdownPercent": -6.15,
-        "slowdownFactor": 0.9384999999999999,
-        "nonStubMethods": 4
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
       }
+    },
+    "managedFact": {
+      "totalMethods": 4,
+      "passedMethods": 0,
+      "failedMethods": 0,
+      "skippedMethods": 4,
+      "tfm": "net8.0"
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.36,
-      "interpreterSlowdownFactor": 0.7825,
+      "interpreterSlowdownFactor": 0,
       "asmPassRate": 100.0
     }
   },

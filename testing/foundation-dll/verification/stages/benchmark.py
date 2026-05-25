@@ -881,10 +881,60 @@ def _run_single_benchmark(
 def _run_all_benchmarks(
     ctx: FamilyContext, exe_path: Path, label: str,
 ) -> dict[str, Any]:
-    """Run --benchmark for all methods under a given EXE."""
+    """Run --benchmark for all methods under a given EXE.
+
+    R5: Before timing, runs --fact-json to verify all methods pass (value gate).
+    Methods that fail the value gate are excluded from benchmark timing.
+    """
     method_count = _load_method_count(ctx)
     if method_count == 0:
         return {"status": "skipped", "summary": "no methods in contract"}
+
+    # R5: Value gate — pre-verify all methods before benchmarking
+    value_gate_failures: set[int] = set()
+    try:
+        r = subprocess.run(
+            [str(exe_path), "--fact-json"],
+            capture_output=True, text=True, timeout=120,
+        )
+        # Check exit code zero AND valid JSON output
+        fact_data = None
+        if r.returncode == 0:
+            # Robust JSON extraction — find first complete JSON object in output
+            output = (r.stdout or "").strip()
+            json_start = output.find("{")
+            if json_start >= 0:
+                depth = 0
+                json_end = -1
+                for i in range(json_start, len(output)):
+                    if output[i] == '{':
+                        depth += 1
+                    elif output[i] == '}':
+                        depth -= 1
+                        if depth == 0:
+                            json_end = i + 1
+                            break
+                if json_end > json_start:
+                    try:
+                        fact_data = json.loads(output[json_start:json_end])
+                    except json.JSONDecodeError:
+                        pass
+
+        if fact_data:
+            for nr in fact_data.get("factResults", []):
+                si = nr.get("si", -1)
+                if si >= 0 and not nr.get("passed", True):
+                    value_gate_failures.add(si)
+                    print(f"    [benchmark/{label}] value gate FAIL: si={si}")
+        elif r.returncode != 0:
+            print(f"    [benchmark/{label}] WARNING: --fact-json returned exit={r.returncode}, skipping value gate")
+        else:
+            print(f"    [benchmark/{label}] WARNING: could not parse --fact-json output, skipping value gate")
+    except Exception as e:
+        print(f"    [benchmark/{label}] WARNING: value gate error: {e}, skipping")
+
+    if value_gate_failures:
+        print(f"    [benchmark/{label}] value gate: {len(value_gate_failures)} methods excluded from benchmark")
 
     results: list[dict[str, Any]] = []
     total_ops = 0.0
@@ -892,6 +942,15 @@ def _run_all_benchmarks(
     fail_count = 0
 
     for i in range(method_count):
+        if i in value_gate_failures:
+            results.append({
+                "methodIndex": i,
+                "error": "value_gate_failed",
+                "opsPerSecond": 0,
+            })
+            fail_count += 1
+            continue
+
         result = _run_single_benchmark(exe_path, i)
         results.append(result)
         if result and "error" not in result:
@@ -901,7 +960,8 @@ def _run_all_benchmarks(
             fail_count += 1
 
     avg_ops = total_ops / ok_count if ok_count > 0 else 0.0
-    print(f"  [benchmark/{label}] {ok_count}/{method_count} OK, avg {avg_ops:.0f} ops/s")
+    print(f"  [benchmark/{label}] {ok_count}/{method_count} OK, avg {avg_ops:.0f} ops/s"
+          f" ({len(value_gate_failures)} value-gate skipped)")
 
     return {
         "status": "passed" if ok_count > 0 else "failed",
@@ -911,6 +971,7 @@ def _run_all_benchmarks(
         "failCount": fail_count,
         "totalMethods": method_count,
         "averageOpsPerSecond": avg_ops,
+        "valueGateFailures": list(value_gate_failures),
     }
 
 
