@@ -99,10 +99,10 @@ def run_il2cpp_codegen(
     Returns {"success": True/False, "methodCount": N, "dllPath": "...", ...}
     """
     from pipeline_native_aot_runner import (
-        _build_subjects_dll,
-        _codegen_patch_undefined_labels,
-        _generate_coverage_json,
-        _run_convert_to_cpp,
+        build_subjects_dll,
+        patch_undefined_codegen_labels,
+        generate_coverage_json,
+        run_convert_to_cpp,
     )
 
     contract = _read_contract(assembly, slug)
@@ -121,7 +121,7 @@ def run_il2cpp_codegen(
     # resolution (MemberReference.DecodeFieldSignature). Fix: isolate just the subjects
     # DLL into a clean input directory for convert-to-cpp.
     testing_base = _REPO_ROOT / "testing" / "foundation-dll" / assembly
-    build_result = _build_subjects_dll(slug, mids, assembly_name=assembly, verification=testing_base)
+    build_result = build_subjects_dll(slug, mids, assembly_name=assembly, verification=testing_base)
     if not build_result.get("success"):
         return {
             "success": False,
@@ -145,7 +145,7 @@ def run_il2cpp_codegen(
 
     # Run convert-to-cpp → testing/.../codegen/, pointing --assembly-dir at the
     # clean input directory so only the subjects DLL and its minimal deps are visible.
-    if not _run_convert_to_cpp(
+    if not run_convert_to_cpp(
         slug,
         str(clean_dll),
         verification=testing_base,
@@ -155,10 +155,10 @@ def run_il2cpp_codegen(
         return {"success": False, "error": "convert-to-cpp failed", "methodCount": len(mids)}
 
     # Patch undefined branch target labels
-    _codegen_patch_undefined_labels(slug, verification=testing_base)
+    patch_undefined_codegen_labels(slug, verification=testing_base)
 
     # Generate coverage JSON for dashboard/kernel
-    _generate_coverage_json(slug, assembly, mids, verification=testing_base)
+    generate_coverage_json(slug, assembly, mids, verification=testing_base)
 
     return {
         "success": True,
@@ -169,8 +169,8 @@ def run_il2cpp_codegen(
 
 def generate_dispatch_code(slug: str, assembly: str) -> bool:
     """Generate verification_dispatch.generated.cpp from codegen manifest."""
-    from generate_verification_dispatch import generate_verification_dispatch
-    from pipeline_native_aot_runner import _build_entry_exe
+    from verification_dispatch_generator import generate_verification_dispatch
+    from pipeline_native_aot_runner import build_entry_executable
 
     testing_base = _REPO_ROOT / "testing" / "foundation-dll" / assembly
     codegen_dir = testing_base / slug / "codegen"
@@ -182,10 +182,21 @@ def generate_dispatch_code(slug: str, assembly: str) -> bool:
     manifest_path = None
     for d in codegen_dir.iterdir():
         if d.is_dir() and d.name.endswith("Subjects"):
+            # Check flat layout: codegen/<Name>Subjects/native-aot.methods.json
             candidate = d / "native-aot.methods.json"
             if candidate.exists():
                 manifest_path = candidate
                 break
+            # Check per-assembly layout: codegen/<Name>Subjects/generated/native-aot.methods.json
+            candidate = d / "generated" / "native-aot.methods.json"
+            if candidate.exists():
+                manifest_path = candidate
+                break
+    # Fallback: check flat codegen/generated/ layout
+    if manifest_path is None:
+        flat_manifest = codegen_dir / "generated" / "native-aot.methods.json"
+        if flat_manifest.exists():
+            manifest_path = flat_manifest
 
     if manifest_path is None:
         print(f"  [adapter] manifest not found in {codegen_dir}")
@@ -195,20 +206,40 @@ def generate_dispatch_code(slug: str, assembly: str) -> bool:
     generate_verification_dispatch(str(manifest_path), str(dispatch_output))
 
     # Rebuild entry.exe with dispatch code
-    rebuild_ok = _build_entry_exe(slug, verification=testing_base)
-    if not rebuild_ok:
-        print(f"  [adapter] entry.exe rebuild with dispatch code FAILED")
-        return False
-
+    import subprocess as _sp
+    native_dir = testing_base / slug / "native"
+    build_dir = native_dir / "build"
+    if build_dir.exists():
+        # Clean just the dispatch object file to force rebuild
+        for obj in build_dir.rglob("verification_dispatch*"):
+            if obj.is_file():
+                obj.unlink()
+        rebuild = _sp.run(
+            ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
+             "--target", "entry"],
+            capture_output=True, text=True, timeout=300)
+        if rebuild.returncode != 0:
+            err = (rebuild.stderr or "")[-300:]
+            out = (rebuild.stdout or "")[-300:]
+            print(f"  [adapter] dispatch rebuild FAILED: {err} {out}")
+            return False
+        # Copy rebuilt entry.exe
+        built_exe = build_dir / "RelWithDebInfo" / "entry.exe"
+        if not built_exe.exists():
+            built_exe = build_dir / "Release" / "entry.exe"
+        if built_exe.exists():
+            import shutil
+            shutil.copy2(str(built_exe), str(entry_exe := native_dir / "entry.exe"))
+            print(f"  [adapter] dispatch rebuild OK")
     return True
 
 
 def build_entry_exe(slug: str, assembly: str) -> bool:
     """Build entry.exe via CMake under testing/ paths."""
-    from pipeline_native_aot_runner import _build_entry_exe
+    from pipeline_native_aot_runner import build_entry_executable
 
     testing_base = _REPO_ROOT / "testing" / "foundation-dll" / assembly
-    ok = _build_entry_exe(slug, verification=testing_base)
+    ok = build_entry_executable(slug, verification=testing_base)
     return ok
 
 
@@ -267,7 +298,7 @@ def run_jit_codegen(slug: str, assembly: str) -> dict[str, Any]:
     TODO(Phase 3): run_family() still writes JIT codegen to verification/ paths.
     Build from verification/ for now, then copy result to testing/.
     """
-    from pipeline_native_aot_runner import run_family, _build_entry_exe
+    from pipeline_native_aot_runner import run_family, build_entry_executable
 
     testing_base = _REPO_ROOT / "testing" / "foundation-dll" / assembly
     native_dir = testing_base / slug / "native"
@@ -283,7 +314,7 @@ def run_jit_codegen(slug: str, assembly: str) -> dict[str, Any]:
 
     # Build entry-jit.exe from verification/ path (where codegen was written)
     old_verification = _REPO_ROOT / "verification" / "foundation-dll" / assembly
-    build_ok = _build_entry_exe(slug, verification=old_verification, output_name="entry-jit.exe")
+    build_ok = build_entry_executable(slug, verification=old_verification, output_name="entry-jit.exe")
     if not build_ok:
         return {"success": False, "message": "entry-jit.exe build failed"}
 

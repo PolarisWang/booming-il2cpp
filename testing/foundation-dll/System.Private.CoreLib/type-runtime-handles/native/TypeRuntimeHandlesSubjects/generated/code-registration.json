@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "TypeRuntimeHandlesSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_0",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_1",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_2",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_3",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_4",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_5",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_6",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_7",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_8",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_9",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_10",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_11",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "TypeRuntimeHandlesSubjects_TypeRuntimeHandlesSubjects_Subject_12",
+          "subjectId": "TypeRuntimeHandlesSubjects/TypeRuntimeHandlesSubjects::Subject_12:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

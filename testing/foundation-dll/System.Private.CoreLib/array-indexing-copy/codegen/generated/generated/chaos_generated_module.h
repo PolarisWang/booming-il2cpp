@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct ArrayIndexingCopySubjects_t {
+    struct ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -75,8 +75,8 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } arrayIndexingCopySubjects;
-    struct ArrayIndexingCopySubjects___c_t {
+    } arrayIndexingCopySubjects_ArrayIndexingCopySubjects;
+    struct ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_t {
         void (*cctor)(
                 void
         );
@@ -86,7 +86,7 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*_Subject_3_b__4_0)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } arrayIndexingCopySubjects___c;
+    } arrayIndexingCopySubjects_ArrayIndexingCopySubjects___c;
     int32_t method_count;
 };
 
@@ -105,93 +105,93 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct ArrayIndexingCopySubjects {
+struct ArrayIndexingCopySubjects_ArrayIndexingCopySubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_0(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_10(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_11(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_12(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_12(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_1(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_2(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_3(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_4(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_5(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_6(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_7(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_8(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.arrayIndexingCopySubjects.Subject_9(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 13;
 };
 
-struct ArrayIndexingCopySubjects___c {
+struct ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c {
     static inline void cctor(
     ) {
-        return kFunctions.arrayIndexingCopySubjects___c.cctor(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects___c.cctor(
         );
     }
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.arrayIndexingCopySubjects___c.ctor(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects___c.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 _Subject_3_b__4_0(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.arrayIndexingCopySubjects___c._Subject_3_b__4_0(
+        return kFunctions.arrayIndexingCopySubjects_ArrayIndexingCopySubjects___c._Subject_3_b__4_0(
                     arg_0
         );
     }

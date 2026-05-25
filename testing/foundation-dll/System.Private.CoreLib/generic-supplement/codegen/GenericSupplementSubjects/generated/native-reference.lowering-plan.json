@@ -1868,6 +1868,9 @@
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_GeneratedCppTotalBytes:System.Int64()",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_GeneratedSourcePaths:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_GeneratedSymbolCount:System.Int32()",
+    "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_HotpatchDispatchCoverage:System.Double()",
+    "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_HotpatchEligibleMethodCount:System.Int32()",
+    "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_HotpatchEntryCount:System.Int32()",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_LargestGeneratedCppBytes:System.Int64()",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_PeakWorkingSetBytes:System.Int64()",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_PlanKind:System.String()",
@@ -1887,6 +1890,9 @@
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_GeneratedCppTotalBytes:System.Void(System.Int64)",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_GeneratedSourcePaths:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_GeneratedSymbolCount:System.Void(System.Int32)",
+    "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_HotpatchDispatchCoverage:System.Void(System.Double)",
+    "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_HotpatchEligibleMethodCount:System.Void(System.Int32)",
+    "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_HotpatchEntryCount:System.Void(System.Int32)",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_LargestGeneratedCppBytes:System.Void(System.Int64)",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_PeakWorkingSetBytes:System.Void(System.Int64)",
     "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_PlanKind:System.Void(System.String)",
@@ -3793,7 +3799,7 @@
     "GenericSupplementSubjects/GenericSupplementSubjects::Subject_2:System.Void()",
     "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()"
   ],
-  "translationUnitMethodCount": 3782,
+  "translationUnitMethodCount": 3788,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 4,
   "translationUnitPages": [
@@ -3809,20 +3815,20 @@
       "methodCount": 1024,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0002.cpp",
       "firstMethodSubjectId": "Chaos.IL2CPP.Contracts/ManagedCallSiteSignature::op_Equality:System.Boolean(ManagedCallSiteSignature,ManagedCallSiteSignature)",
-      "lastMethodSubjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoMethodToken:System.Void(System.String)"
+      "lastMethodSubjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConstructorSymbol:System.Void(System.String)"
     },
     {
       "pageNumber": 3,
       "methodCount": 1024,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0003.cpp",
-      "firstMethodSubjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EngineBindings:System.Void(EngineBindingsArtifact)",
-      "lastMethodSubjectId": "Chaos.IL2CPP.HotUpdate/DelegateWrapperSpec::GetHashCode:System.Int32()"
+      "firstMethodSubjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_CopyLength:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "lastMethodSubjectId": "Chaos.IL2CPP.HotUpdate/DelegateWrapperEntry::set_WrapperId:System.Void(System.String)"
     },
     {
       "pageNumber": 4,
-      "methodCount": 710,
+      "methodCount": 716,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0004.cpp",
-      "firstMethodSubjectId": "Chaos.IL2CPP.HotUpdate/DelegateWrapperSpec::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "firstMethodSubjectId": "Chaos.IL2CPP.HotUpdate/DelegateWrapperSpec::.ctor:System.Void()",
       "lastMethodSubjectId": "GenericSupplementSubjects/GenericSupplementSubjects::Subject_3:System.Void()"
     }
   ],

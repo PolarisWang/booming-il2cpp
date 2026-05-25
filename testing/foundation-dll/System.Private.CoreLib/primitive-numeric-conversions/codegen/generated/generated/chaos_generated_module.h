@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct PrimitiveNumericConversionsSubjects_t {
+    struct PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -81,7 +81,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } primitiveNumericConversionsSubjects;
+    } primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects;
     int32_t method_count;
 };
 
@@ -100,80 +100,80 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct PrimitiveNumericConversionsSubjects {
+struct PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_0(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_10(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_11(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_12(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_12(
         );
     }
     static inline void Subject_13(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_13(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_13(
         );
     }
     static inline void Subject_14(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_14(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_14(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_1(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_2(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_3(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_4(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_5(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_6(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_7(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_8(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.primitiveNumericConversionsSubjects.Subject_9(
+        return kFunctions.primitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

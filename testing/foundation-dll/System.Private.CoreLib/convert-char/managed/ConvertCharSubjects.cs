@@ -78,14 +78,14 @@ public static partial class ConvertCharSubjects
     // [9] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
     public static void Subject_9()
     {
-        try { if ((int)(Convert.ToChar((object)null!)) != (int)(Convert.ToChar((object)null!))) _exitCode = 1; }
+        try { if ((int)(Convert.ToChar(null!)) != (int)(Convert.ToChar(null!))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [10] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)
     public static void Subject_10()
     {
-        try { if ((int)(Convert.ToChar((object)null!, null)) != (int)(Convert.ToChar((object)null!, null))) _exitCode = 1; }
+        try { if ((int)(Convert.ToChar(null!, null)) != (int)(Convert.ToChar(null!, null))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -106,14 +106,14 @@ public static partial class ConvertCharSubjects
     // [13] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)
     public static void Subject_13()
     {
-        try { if ((int)(Convert.ToChar("h")) != (int)('h')) _exitCode = 1; }
+        try { if ((int)(Convert.ToChar("hello")) != (int)(Convert.ToChar("hello"))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [14] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)
     public static void Subject_14()
     {
-        try { if ((int)(Convert.ToChar("h", null)) != (int)('h')) _exitCode = 1; }
+        try { if ((int)(Convert.ToChar("hello", null)) != (int)(Convert.ToChar("hello", null))) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

@@ -58,7 +58,6 @@ target_compile_options(chaos_gen_ArrayIndexingCopySubjects PUBLIC ${COMMON_COMPI
 
 # Entry executable — links generated code + native runtime
 add_executable(entry
-    ${CHAOS_GEN_DIR}/runtime-entry.cpp
 )
 
 target_link_libraries(entry PRIVATE

@@ -43,20 +43,6 @@ extern "C" struct JitEntry {
 // New codegen runs (--mode jit) should use RegisterJitEntryMethods() instead.
 extern "C" void RegisterJitMethods(const JitMethodEntry* entries, uint32_t count) noexcept;
 
-// ── HybridEntry ─────────────────────────────────────────────────────
-// Describes a single method for Hybrid mode JIT compilation.
-// Codegen emits AOT C++ function body + AotCoreIr JSON for each method.
-// At startup, RegisterHybridMethods() creates a HybridPrecode with the
-// AOT entry saved, call_counter = kJitUpgradeThreshold, and a PrecodeArena
-// trampoline.  Cold calls go through AOT; when counter reaches 0, JIT
-// compilation triggers and subsequent calls use JIT-compiled code.
-extern "C" struct HybridEntry {
-    const char* json;         // AotCoreIr JSON string (null-terminated)
-    uint32_t    json_len;     // JSON string length (excluding null terminator)
-    uint32_t    token;        // metadata token for slot lookup
-    uint32_t    module_id;    // module index (0 for single-module)
-};
-
 // ── JitEntry registration ─────────────────────────────────────────────
 // Declared here (implementation in chaos_jit / jit_precode.cpp).
 // Processes an array of JitEntry descriptors to create JitPrecode +
@@ -73,18 +59,5 @@ typedef JitEntry JitT4Entry;
 inline void RegisterT4JitMethods(const JitT4Entry* entries, uint32_t count) noexcept {
     RegisterJitEntryMethods(entries, count);
 }
-
-// ── RegisterHybridMethods ────────────────────────────────────────────────
-// Called once at startup to register all methods for Hybrid mode.
-// In Hybrid mode, AOT C++ code is already compiled into the binary.
-// This function:
-//   1. Deserializes AotCoreIr JSON → RegisterMethod
-//   2. Heap-allocates HybridPrecode with counter = kJitUpgradeThreshold
-//   3. Saves the AOT entry from HotpatchEntryV0::direct_ptr
-//   4. Replaces direct_ptr with a PrecodeArena trampoline
-//
-// Cold: trampoline → HybridStubDispatchImpl → aot_entry (counter decrements)
-// Hot:  direct_ptr patched to JIT-compiled code (counter reached 0)
-extern "C" void RegisterHybridMethods(const HybridEntry* entries, uint32_t count) noexcept;
 
 #endif // CHAOS_IL2CPP_JIT_REGISTRATION_H_

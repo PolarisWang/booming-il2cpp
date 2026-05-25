@@ -8,45 +8,45 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::Run:System.Int32(System.Int32)",
-      "elapsedMilliseconds": 0.39,
-      "calibratedMs": 0.39,
-      "opsPerSecond": 256213169.4,
+      "elapsedMilliseconds": 0.219,
+      "calibratedMs": 0.219,
+      "opsPerSecond": 457456541.6,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetExceptionForHR:System.Int32()",
-      "elapsedMilliseconds": 0.371,
-      "calibratedMs": 0.371,
-      "opsPerSecond": 269179004.0,
+      "elapsedMilliseconds": 0.34,
+      "calibratedMs": 0.34,
+      "opsPerSecond": 293858360.3,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetHRForException:System.Int32()",
-      "elapsedMilliseconds": 0.377,
-      "calibratedMs": 0.377,
-      "opsPerSecond": 265463233.3,
+      "elapsedMilliseconds": 0.38,
+      "calibratedMs": 0.38,
+      "opsPerSecond": 263019463.4,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestThrowExceptionForHR_S_OK:System.Int32()",
-      "elapsedMilliseconds": 0.395,
-      "calibratedMs": 0.395,
-      "opsPerSecond": 253485424.6,
+      "elapsedMilliseconds": 0.375,
+      "calibratedMs": 0.375,
+      "opsPerSecond": 266524520.3,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "ErrorInfoBasicNativeEntry/ErrorInfoBasicNativeEntry::TestGetExceptionForHR_Zero:System.Int32()",
-      "elapsedMilliseconds": 0.419,
-      "calibratedMs": 0.419,
-      "opsPerSecond": 238435860.8,
+      "elapsedMilliseconds": 0.229,
+      "calibratedMs": 0.229,
+      "opsPerSecond": 436871996.5,
       "iterations": 100000,
       "status": "completed"
     }

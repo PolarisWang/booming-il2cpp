@@ -17274,6 +17274,8 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_HotUpdate_IosComplianceValidator_Fin
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
 	// pc-dispatch state machine for irreducible CFG
@@ -17396,6 +17398,9 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_HotUpdate_IosComplianceValidator_Get
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+	CHAOS_IL2CPP_INTPTR _s5{};
+
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
 	// pc-dispatch state machine for irreducible CFG

@@ -6497,7 +6497,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::ToString:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_HotpatchEntryCount:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -6509,7 +6509,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_HotpatchEntryCount:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
     {
@@ -6521,7 +6521,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::op_Inequality:System.Boolean(NativeCodegenMetricsArtifact,NativeCodegenMetricsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_HotpatchEligibleMethodCount:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -6533,7 +6533,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::op_Equality:System.Boolean(NativeCodegenMetricsArtifact,NativeCodegenMetricsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_HotpatchEligibleMethodCount:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
     {
@@ -6545,7 +6545,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::GetHashCode:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::get_HotpatchDispatchCoverage:System.Double()",
       "reason": "generated-direct-call"
     },
     {
@@ -6557,7 +6557,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::Equals:System.Boolean(System.Object)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::set_HotpatchDispatchCoverage:System.Void(System.Double)",
       "reason": "generated-direct-call"
     },
     {
@@ -6569,7 +6569,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::Equals:System.Boolean(NativeCodegenMetricsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::ToString:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -6581,7 +6581,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::\u003CClone\u003E$:NativeCodegenMetricsArtifact()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
       "reason": "generated-direct-call"
     },
     {
@@ -6593,7 +6593,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::.ctor:System.Void(NativeCodegenMetricsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::op_Inequality:System.Boolean(NativeCodegenMetricsArtifact,NativeCodegenMetricsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -6605,7 +6605,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::.ctor:System.Void()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::op_Equality:System.Boolean(NativeCodegenMetricsArtifact,NativeCodegenMetricsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -6617,7 +6617,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::get_EqualityContract:System.Type()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::GetHashCode:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -6629,7 +6629,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::get_Kind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::Equals:System.Boolean(System.Object)",
       "reason": "generated-direct-call"
     },
     {
@@ -6641,7 +6641,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::set_Kind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::Equals:System.Boolean(NativeCodegenMetricsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -6653,7 +6653,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::get_Path:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::\u003CClone\u003E$:NativeCodegenMetricsArtifact()",
       "reason": "generated-direct-call"
     },
     {
@@ -6665,7 +6665,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::set_Path:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::.ctor:System.Void(NativeCodegenMetricsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -6677,7 +6677,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::ToString:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -6689,7 +6689,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::get_EqualityContract:System.Type()",
       "reason": "generated-direct-call"
     },
     {
@@ -6701,7 +6701,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::op_Inequality:System.Boolean(NativeReferenceGeneratedArtifactRef,NativeReferenceGeneratedArtifactRef)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::get_Kind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -6713,7 +6713,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::op_Equality:System.Boolean(NativeReferenceGeneratedArtifactRef,NativeReferenceGeneratedArtifactRef)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::set_Kind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -6725,7 +6725,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::GetHashCode:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::get_Path:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -6737,7 +6737,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::Equals:System.Boolean(System.Object)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::set_Path:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -6749,7 +6749,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::Equals:System.Boolean(NativeReferenceGeneratedArtifactRef)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::ToString:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -6761,7 +6761,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::\u003CClone\u003E$:NativeReferenceGeneratedArtifactRef()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::PrintMembers:System.Boolean(System.Text.StringBuilder)",
       "reason": "generated-direct-call"
     },
     {
@@ -6773,7 +6773,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::.ctor:System.Void(NativeReferenceGeneratedArtifactRef)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::op_Inequality:System.Boolean(NativeReferenceGeneratedArtifactRef,NativeReferenceGeneratedArtifactRef)",
       "reason": "generated-direct-call"
     },
     {
@@ -6785,7 +6785,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::.ctor:System.Void()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::op_Equality:System.Boolean(NativeReferenceGeneratedArtifactRef,NativeReferenceGeneratedArtifactRef)",
       "reason": "generated-direct-call"
     },
     {
@@ -6797,7 +6797,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_EqualityContract:System.Type()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::GetHashCode:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -6809,7 +6809,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_PageNumber:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::Equals:System.Boolean(System.Object)",
       "reason": "generated-direct-call"
     },
     {
@@ -6821,7 +6821,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_PageNumber:System.Void(System.Int32)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::Equals:System.Boolean(NativeReferenceGeneratedArtifactRef)",
       "reason": "generated-direct-call"
     },
     {
@@ -6833,7 +6833,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_MethodCount:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::\u003CClone\u003E$:NativeReferenceGeneratedArtifactRef()",
       "reason": "generated-direct-call"
     },
     {
@@ -6845,7 +6845,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_MethodCount:System.Void(System.Int32)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::.ctor:System.Void(NativeReferenceGeneratedArtifactRef)",
       "reason": "generated-direct-call"
     },
     {
@@ -6857,7 +6857,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_Path:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceGeneratedArtifactRef::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -6869,7 +6869,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_Path:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_EqualityContract:System.Type()",
       "reason": "generated-direct-call"
     },
     {
@@ -6881,7 +6881,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_FirstMethodSubjectId:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_PageNumber:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -6893,7 +6893,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_FirstMethodSubjectId:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_PageNumber:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
     {
@@ -6905,7 +6905,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_LastMethodSubjectId:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_MethodCount:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -6917,7 +6917,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_LastMethodSubjectId:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_MethodCount:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
     {
@@ -6929,7 +6929,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::ToString:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_Path:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -6941,7 +6941,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_Path:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -6953,7 +6953,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::op_Inequality:System.Boolean(AuditTranslationUnitPageArtifact,AuditTranslationUnitPageArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_FirstMethodSubjectId:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -6965,7 +6965,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::op_Equality:System.Boolean(AuditTranslationUnitPageArtifact,AuditTranslationUnitPageArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_FirstMethodSubjectId:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -6977,7 +6977,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::GetHashCode:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::get_LastMethodSubjectId:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -6989,7 +6989,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::Equals:System.Boolean(System.Object)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::set_LastMethodSubjectId:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7001,7 +7001,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::Equals:System.Boolean(AuditTranslationUnitPageArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::ToString:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7013,7 +7013,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::\u003CClone\u003E$:AuditTranslationUnitPageArtifact()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
       "reason": "generated-direct-call"
     },
     {
@@ -7025,7 +7025,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::.ctor:System.Void(AuditTranslationUnitPageArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::op_Inequality:System.Boolean(AuditTranslationUnitPageArtifact,AuditTranslationUnitPageArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7037,7 +7037,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::.ctor:System.Void()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::op_Equality:System.Boolean(AuditTranslationUnitPageArtifact,AuditTranslationUnitPageArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7049,7 +7049,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_EqualityContract:System.Type()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::GetHashCode:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -7061,7 +7061,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_FormatVersion:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::Equals:System.Boolean(System.Object)",
       "reason": "generated-direct-call"
     },
     {
@@ -7073,7 +7073,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_FormatVersion:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::Equals:System.Boolean(AuditTranslationUnitPageArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7085,7 +7085,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_ArtifactKind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::\u003CClone\u003E$:AuditTranslationUnitPageArtifact()",
       "reason": "generated-direct-call"
     },
     {
@@ -7097,7 +7097,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_ArtifactKind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::.ctor:System.Void(AuditTranslationUnitPageArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7109,7 +7109,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_AssemblyName:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AuditTranslationUnitPageArtifact::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -7121,7 +7121,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_AssemblyName:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_EqualityContract:System.Type()",
       "reason": "generated-direct-call"
     },
     {
@@ -7133,7 +7133,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_PlanKind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_FormatVersion:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7145,7 +7145,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_PlanKind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_FormatVersion:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7157,7 +7157,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_PageNumber:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_ArtifactKind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7169,7 +7169,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_PageNumber:System.Void(System.Int32)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_ArtifactKind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7181,7 +7181,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_MethodCount:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_AssemblyName:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7193,7 +7193,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_MethodCount:System.Void(System.Int32)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_AssemblyName:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7205,7 +7205,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_MethodSubjectIds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_PlanKind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7217,7 +7217,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_MethodSubjectIds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_PlanKind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7229,7 +7229,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::ToString:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_PageNumber:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -7241,7 +7241,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_PageNumber:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
     {
@@ -7253,7 +7253,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::op_Inequality:System.Boolean(AssemblyFullClosureAuditPageManifestArtifact,AssemblyFullClosureAuditPageManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_MethodCount:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -7265,7 +7265,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::op_Equality:System.Boolean(AssemblyFullClosureAuditPageManifestArtifact,AssemblyFullClosureAuditPageManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_MethodCount:System.Void(System.Int32)",
       "reason": "generated-direct-call"
     },
     {
@@ -7277,7 +7277,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::GetHashCode:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::get_MethodSubjectIds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -7289,7 +7289,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::Equals:System.Boolean(System.Object)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::set_MethodSubjectIds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -7301,7 +7301,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::Equals:System.Boolean(AssemblyFullClosureAuditPageManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::ToString:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7313,7 +7313,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::\u003CClone\u003E$:AssemblyFullClosureAuditPageManifestArtifact()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
       "reason": "generated-direct-call"
     },
     {
@@ -7325,7 +7325,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::.ctor:System.Void(AssemblyFullClosureAuditPageManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::op_Inequality:System.Boolean(AssemblyFullClosureAuditPageManifestArtifact,AssemblyFullClosureAuditPageManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7337,7 +7337,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::.ctor:System.Void()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::op_Equality:System.Boolean(AssemblyFullClosureAuditPageManifestArtifact,AssemblyFullClosureAuditPageManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7349,7 +7349,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_EqualityContract:System.Type()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::GetHashCode:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -7361,7 +7361,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_FormatVersion:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::Equals:System.Boolean(System.Object)",
       "reason": "generated-direct-call"
     },
     {
@@ -7373,7 +7373,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_FormatVersion:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::Equals:System.Boolean(AssemblyFullClosureAuditPageManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7385,7 +7385,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_ArtifactKind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::\u003CClone\u003E$:AssemblyFullClosureAuditPageManifestArtifact()",
       "reason": "generated-direct-call"
     },
     {
@@ -7397,7 +7397,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_ArtifactKind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::.ctor:System.Void(AssemblyFullClosureAuditPageManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7409,7 +7409,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_AssemblyName:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/AssemblyFullClosureAuditPageManifestArtifact::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -7421,7 +7421,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_AssemblyName:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_EqualityContract:System.Type()",
       "reason": "generated-direct-call"
     },
     {
@@ -7433,7 +7433,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_EntrySubjectId:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_FormatVersion:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7445,7 +7445,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_EntrySubjectId:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_FormatVersion:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7457,7 +7457,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_ManagedClosureRootPath:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_ArtifactKind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7469,7 +7469,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_ManagedClosureRootPath:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_ArtifactKind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7481,7 +7481,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_PlanArtifactPath:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_AssemblyName:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7493,7 +7493,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_PlanArtifactPath:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_AssemblyName:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7505,7 +7505,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_RuntimeExecutionKind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_EntrySubjectId:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7517,7 +7517,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_RuntimeExecutionKind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_EntrySubjectId:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7529,7 +7529,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_PreferredAssemblyDispatchSubjectId:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_ManagedClosureRootPath:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7541,7 +7541,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_PreferredAssemblyDispatchSubjectId:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_ManagedClosureRootPath:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7553,7 +7553,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_TranslationUnitPageSize:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_PlanArtifactPath:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7565,7 +7565,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_TranslationUnitPageSize:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_PlanArtifactPath:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7577,7 +7577,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_TranslationUnitPageCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_RuntimeExecutionKind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7589,7 +7589,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_TranslationUnitPageCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_RuntimeExecutionKind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7601,7 +7601,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_TranslationUnitPages:System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_PreferredAssemblyDispatchSubjectId:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7613,7 +7613,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_TranslationUnitPages:System.Void(System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_PreferredAssemblyDispatchSubjectId:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7625,7 +7625,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_GeneratedSourcePath:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_TranslationUnitPageSize:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -7637,7 +7637,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_GeneratedSourcePath:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_TranslationUnitPageSize:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -7649,7 +7649,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_GeneratedSourcePaths:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_TranslationUnitPageCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -7661,7 +7661,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_GeneratedSourcePaths:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_TranslationUnitPageCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -7673,7 +7673,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_GeneratedArtifacts:System.Collections.Generic.IReadOnlyList\u003CNativeReferenceGeneratedArtifactRef\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_TranslationUnitPages:System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -7685,7 +7685,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_GeneratedArtifacts:System.Void(System.Collections.Generic.IReadOnlyList\u003CNativeReferenceGeneratedArtifactRef\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_TranslationUnitPages:System.Void(System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -7697,7 +7697,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::ToString:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_GeneratedSourcePath:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7709,7 +7709,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_GeneratedSourcePath:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7721,7 +7721,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::op_Inequality:System.Boolean(NativeReferenceProofManifestArtifact,NativeReferenceProofManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_GeneratedSourcePaths:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -7733,7 +7733,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::op_Equality:System.Boolean(NativeReferenceProofManifestArtifact,NativeReferenceProofManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_GeneratedSourcePaths:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -7745,7 +7745,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::GetHashCode:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::get_GeneratedArtifacts:System.Collections.Generic.IReadOnlyList\u003CNativeReferenceGeneratedArtifactRef\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -7757,7 +7757,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::Equals:System.Boolean(System.Object)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::set_GeneratedArtifacts:System.Void(System.Collections.Generic.IReadOnlyList\u003CNativeReferenceGeneratedArtifactRef\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -7769,7 +7769,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::Equals:System.Boolean(NativeReferenceProofManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::ToString:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7781,7 +7781,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::\u003CClone\u003E$:NativeReferenceProofManifestArtifact()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
       "reason": "generated-direct-call"
     },
     {
@@ -7793,7 +7793,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::.ctor:System.Void(NativeReferenceProofManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::op_Inequality:System.Boolean(NativeReferenceProofManifestArtifact,NativeReferenceProofManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7805,7 +7805,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::.ctor:System.Void()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::op_Equality:System.Boolean(NativeReferenceProofManifestArtifact,NativeReferenceProofManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7817,7 +7817,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_EqualityContract:System.Type()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::GetHashCode:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -7829,7 +7829,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Kind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::Equals:System.Boolean(System.Object)",
       "reason": "generated-direct-call"
     },
     {
@@ -7841,7 +7841,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::set_Kind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::Equals:System.Boolean(NativeReferenceProofManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7853,7 +7853,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Path:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::\u003CClone\u003E$:NativeReferenceProofManifestArtifact()",
       "reason": "generated-direct-call"
     },
     {
@@ -7865,7 +7865,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::set_Path:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::.ctor:System.Void(NativeReferenceProofManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -7877,7 +7877,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::ToString:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofManifestArtifact::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -7889,7 +7889,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_EqualityContract:System.Type()",
       "reason": "generated-direct-call"
     },
     {
@@ -7901,7 +7901,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::op_Inequality:System.Boolean(NativeAotGeneratedArtifactRef,NativeAotGeneratedArtifactRef)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Kind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7913,7 +7913,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::op_Equality:System.Boolean(NativeAotGeneratedArtifactRef,NativeAotGeneratedArtifactRef)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::set_Kind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7925,7 +7925,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::GetHashCode:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::get_Path:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7937,7 +7937,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::Equals:System.Boolean(System.Object)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::set_Path:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -7949,7 +7949,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::Equals:System.Boolean(NativeAotGeneratedArtifactRef)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::ToString:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -7961,7 +7961,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::\u003CClone\u003E$:NativeAotGeneratedArtifactRef()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::PrintMembers:System.Boolean(System.Text.StringBuilder)",
       "reason": "generated-direct-call"
     },
     {
@@ -7973,7 +7973,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::.ctor:System.Void(NativeAotGeneratedArtifactRef)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::op_Inequality:System.Boolean(NativeAotGeneratedArtifactRef,NativeAotGeneratedArtifactRef)",
       "reason": "generated-direct-call"
     },
     {
@@ -7985,7 +7985,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::.ctor:System.Void()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::op_Equality:System.Boolean(NativeAotGeneratedArtifactRef,NativeAotGeneratedArtifactRef)",
       "reason": "generated-direct-call"
     },
     {
@@ -7997,7 +7997,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_EqualityContract:System.Type()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::GetHashCode:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -8009,7 +8009,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_FormatVersion:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::Equals:System.Boolean(System.Object)",
       "reason": "generated-direct-call"
     },
     {
@@ -8021,7 +8021,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_FormatVersion:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::Equals:System.Boolean(NativeAotGeneratedArtifactRef)",
       "reason": "generated-direct-call"
     },
     {
@@ -8033,7 +8033,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_ArtifactKind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::\u003CClone\u003E$:NativeAotGeneratedArtifactRef()",
       "reason": "generated-direct-call"
     },
     {
@@ -8045,7 +8045,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_ArtifactKind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::.ctor:System.Void(NativeAotGeneratedArtifactRef)",
       "reason": "generated-direct-call"
     },
     {
@@ -8057,7 +8057,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_AssemblyName:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotGeneratedArtifactRef::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -8069,7 +8069,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_AssemblyName:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_EqualityContract:System.Type()",
       "reason": "generated-direct-call"
     },
     {
@@ -8081,7 +8081,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_EntrySubjectId:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_FormatVersion:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8093,7 +8093,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_EntrySubjectId:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_FormatVersion:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8105,7 +8105,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_ManagedClosureRootPath:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_ArtifactKind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8117,7 +8117,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_ManagedClosureRootPath:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_ArtifactKind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8129,7 +8129,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_PlanArtifactPath:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_AssemblyName:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8141,7 +8141,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_PlanArtifactPath:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_AssemblyName:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8153,7 +8153,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_TranslationUnitPageSize:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_EntrySubjectId:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8165,7 +8165,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_TranslationUnitPageSize:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_EntrySubjectId:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8177,7 +8177,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_TranslationUnitPageCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_ManagedClosureRootPath:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8189,7 +8189,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_TranslationUnitPageCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_ManagedClosureRootPath:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8201,7 +8201,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_TranslationUnitPages:System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_PlanArtifactPath:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8213,7 +8213,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_TranslationUnitPages:System.Void(System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_PlanArtifactPath:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8225,7 +8225,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_GeneratedArtifacts:System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_TranslationUnitPageSize:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -8237,7 +8237,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_GeneratedArtifacts:System.Void(System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_TranslationUnitPageSize:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -8249,7 +8249,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::ToString:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_TranslationUnitPageCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -8261,7 +8261,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_TranslationUnitPageCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -8273,7 +8273,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::op_Inequality:System.Boolean(NativeAotManifestArtifact,NativeAotManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_TranslationUnitPages:System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -8285,7 +8285,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::op_Equality:System.Boolean(NativeAotManifestArtifact,NativeAotManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_TranslationUnitPages:System.Void(System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -8297,7 +8297,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::GetHashCode:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::get_GeneratedArtifacts:System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -8309,7 +8309,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::Equals:System.Boolean(System.Object)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::set_GeneratedArtifacts:System.Void(System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -8321,7 +8321,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::Equals:System.Boolean(NativeAotManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::ToString:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8333,7 +8333,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::\u003CClone\u003E$:NativeAotManifestArtifact()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
       "reason": "generated-direct-call"
     },
     {
@@ -8345,7 +8345,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::.ctor:System.Void(NativeAotManifestArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::op_Inequality:System.Boolean(NativeAotManifestArtifact,NativeAotManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8357,7 +8357,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::.ctor:System.Void()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::op_Equality:System.Boolean(NativeAotManifestArtifact,NativeAotManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8369,7 +8369,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_EqualityContract:System.Type()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::GetHashCode:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -8381,7 +8381,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_ProofKind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::Equals:System.Boolean(System.Object)",
       "reason": "generated-direct-call"
     },
     {
@@ -8393,7 +8393,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_ProofKind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::Equals:System.Boolean(NativeAotManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8405,7 +8405,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_FocusArea:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::\u003CClone\u003E$:NativeAotManifestArtifact()",
       "reason": "generated-direct-call"
     },
     {
@@ -8417,7 +8417,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_FocusArea:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::.ctor:System.Void(NativeAotManifestArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8429,7 +8429,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_CapabilityIds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotManifestArtifact::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -8441,7 +8441,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_CapabilityIds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_EqualityContract:System.Type()",
       "reason": "generated-direct-call"
     },
     {
@@ -8453,7 +8453,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_BindingKinds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_ProofKind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8465,7 +8465,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_BindingKinds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_ProofKind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8477,7 +8477,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_HelperNames:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_FocusArea:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8489,7 +8489,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_HelperNames:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_FocusArea:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8501,7 +8501,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::ToString:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_CapabilityIds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -8513,7 +8513,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_CapabilityIds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -8525,7 +8525,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::op_Inequality:System.Boolean(EngineBindingsArtifact,EngineBindingsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_BindingKinds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -8537,7 +8537,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::op_Equality:System.Boolean(EngineBindingsArtifact,EngineBindingsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_BindingKinds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -8549,7 +8549,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::GetHashCode:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::get_HelperNames:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -8561,7 +8561,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::Equals:System.Boolean(System.Object)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::set_HelperNames:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -8573,7 +8573,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::Equals:System.Boolean(EngineBindingsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::ToString:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8585,7 +8585,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::\u003CClone\u003E$:EngineBindingsArtifact()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
       "reason": "generated-direct-call"
     },
     {
@@ -8597,7 +8597,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::.ctor:System.Void(EngineBindingsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::op_Inequality:System.Boolean(EngineBindingsArtifact,EngineBindingsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8609,7 +8609,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::.ctor:System.Void()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::op_Equality:System.Boolean(EngineBindingsArtifact,EngineBindingsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8621,7 +8621,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::get_EqualityContract:System.Type()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::GetHashCode:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -8633,7 +8633,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::get_HostPlatform:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::Equals:System.Boolean(System.Object)",
       "reason": "generated-direct-call"
     },
     {
@@ -8645,7 +8645,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::set_HostPlatform:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::Equals:System.Boolean(EngineBindingsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8657,7 +8657,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::get_RuntimeProfile:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::\u003CClone\u003E$:EngineBindingsArtifact()",
       "reason": "generated-direct-call"
     },
     {
@@ -8669,7 +8669,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::set_RuntimeProfile:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::.ctor:System.Void(EngineBindingsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8681,7 +8681,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::get_BindingKinds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/EngineBindingsArtifact::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -8693,7 +8693,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::set_BindingKinds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::get_EqualityContract:System.Type()",
       "reason": "generated-direct-call"
     },
     {
@@ -8705,7 +8705,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::ToString:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::get_HostPlatform:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8717,7 +8717,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::set_HostPlatform:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8729,7 +8729,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::op_Inequality:System.Boolean(HostBindingsArtifact,HostBindingsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::get_RuntimeProfile:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8741,7 +8741,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::op_Equality:System.Boolean(HostBindingsArtifact,HostBindingsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::set_RuntimeProfile:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8753,7 +8753,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::GetHashCode:System.Int32()",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::get_BindingKinds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -8765,7 +8765,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::Equals:System.Boolean(System.Object)",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::set_BindingKinds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -8777,7 +8777,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::Equals:System.Boolean(HostBindingsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::ToString:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8789,7 +8789,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::\u003CClone\u003E$:HostBindingsArtifact()",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::PrintMembers:System.Boolean(System.Text.StringBuilder)",
       "reason": "generated-direct-call"
     },
     {
@@ -8801,7 +8801,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::.ctor:System.Void(HostBindingsArtifact)",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::op_Inequality:System.Boolean(HostBindingsArtifact,HostBindingsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8813,7 +8813,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::.ctor:System.Void()",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::op_Equality:System.Boolean(HostBindingsArtifact,HostBindingsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8825,7 +8825,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EqualityContract:System.Type()",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::GetHashCode:System.Int32()",
       "reason": "generated-direct-call"
     },
     {
@@ -8837,7 +8837,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_FormatVersion:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::Equals:System.Boolean(System.Object)",
       "reason": "generated-direct-call"
     },
     {
@@ -8849,7 +8849,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FormatVersion:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::Equals:System.Boolean(HostBindingsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8861,7 +8861,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ArtifactKind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::\u003CClone\u003E$:HostBindingsArtifact()",
       "reason": "generated-direct-call"
     },
     {
@@ -8873,7 +8873,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ArtifactKind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::.ctor:System.Void(HostBindingsArtifact)",
       "reason": "generated-direct-call"
     },
     {
@@ -8885,7 +8885,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_PlanKind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/HostBindingsArtifact::.ctor:System.Void()",
       "reason": "generated-direct-call"
     },
     {
@@ -8897,7 +8897,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_PlanKind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EqualityContract:System.Type()",
       "reason": "generated-direct-call"
     },
     {
@@ -8909,7 +8909,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_AssemblyName:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_FormatVersion:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8921,7 +8921,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_AssemblyName:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FormatVersion:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8933,7 +8933,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EntrySubjectId:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ArtifactKind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8945,7 +8945,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EntrySubjectId:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ArtifactKind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8957,7 +8957,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_IncludeHeader:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_PlanKind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8969,7 +8969,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_IncludeHeader:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_PlanKind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -8981,7 +8981,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_NativeEntryFunctionName:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_AssemblyName:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -8993,7 +8993,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_NativeEntryFunctionName:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_AssemblyName:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9005,7 +9005,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EntrySymbol:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EntrySubjectId:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9017,7 +9017,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EntrySymbol:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EntrySubjectId:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9029,7 +9029,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_RuntimeExecutionKind:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_IncludeHeader:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9041,7 +9041,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_RuntimeExecutionKind:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_IncludeHeader:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9053,7 +9053,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitMode:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_NativeEntryFunctionName:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9065,7 +9065,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitMode:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_NativeEntryFunctionName:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9077,7 +9077,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitMethodSubjectIds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EntrySymbol:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9089,7 +9089,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitMethodSubjectIds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EntrySymbol:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9101,7 +9101,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitMethodCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_RuntimeExecutionKind:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9113,7 +9113,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitMethodCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_RuntimeExecutionKind:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9125,7 +9125,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitPageSize:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitMode:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9137,7 +9137,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitPageSize:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitMode:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9149,7 +9149,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitPageCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitMethodSubjectIds:System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -9161,7 +9161,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitPageCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitMethodSubjectIds:System.Void(System.Collections.Generic.IReadOnlyList\u003CSystem.String\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -9173,7 +9173,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitPages:System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitMethodCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -9185,7 +9185,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitPages:System.Void(System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitMethodCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -9197,7 +9197,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_AuditStatus:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitPageSize:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -9209,7 +9209,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_AuditStatus:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitPageSize:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -9221,7 +9221,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_AuditMessage:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitPageCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -9233,7 +9233,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_AuditMessage:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitPageCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -9245,7 +9245,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConstructorSymbol:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TranslationUnitPages:System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -9257,7 +9257,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConstructorSymbol:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TranslationUnitPages:System.Void(System.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -9269,7 +9269,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_InstanceMethodSymbol:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_AuditStatus:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9281,7 +9281,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_InstanceMethodSymbol:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_AuditStatus:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9293,7 +9293,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EchoMethodSymbol:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_AuditMessage:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9305,7 +9305,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoMethodSymbol:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_AuditMessage:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9317,7 +9317,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_GetterSymbol:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConstructorSymbol:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9329,7 +9329,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_GetterSymbol:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConstructorSymbol:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9341,7 +9341,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StaticMethodSymbol:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_InstanceMethodSymbol:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9353,7 +9353,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StaticMethodSymbol:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_InstanceMethodSymbol:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9365,7 +9365,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ThrowMethodSymbol:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EchoMethodSymbol:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9377,7 +9377,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ThrowMethodSymbol:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoMethodSymbol:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9389,7 +9389,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ReferenceTypeToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_GetterSymbol:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9401,7 +9401,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ReferenceTypeToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_GetterSymbol:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9413,7 +9413,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_CapturedFieldToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StaticMethodSymbol:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9425,7 +9425,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_CapturedFieldToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StaticMethodSymbol:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9437,7 +9437,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EntryMethodToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ThrowMethodSymbol:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9449,7 +9449,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EntryMethodToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ThrowMethodSymbol:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9461,7 +9461,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConstructorMethodToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ReferenceTypeToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9473,7 +9473,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConstructorMethodToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ReferenceTypeToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9485,7 +9485,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_InstanceMethodToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_CapturedFieldToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9497,7 +9497,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_InstanceMethodToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_CapturedFieldToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9509,7 +9509,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_DispatchStrategy:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EntryMethodToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9521,7 +9521,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_DispatchStrategy:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EntryMethodToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9533,7 +9533,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EchoMethodToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConstructorMethodToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9545,7 +9545,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoMethodToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConstructorMethodToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9557,7 +9557,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_GetterMethodToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_InstanceMethodToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9569,7 +9569,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_GetterMethodToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_InstanceMethodToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9581,7 +9581,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StaticMethodToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_DispatchStrategy:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9593,7 +9593,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StaticMethodToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_DispatchStrategy:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9605,7 +9605,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ThrowMethodToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EchoMethodToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9617,7 +9617,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ThrowMethodToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoMethodToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9629,7 +9629,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportMethodSubjectId:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_GetterMethodToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9641,7 +9641,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportMethodSubjectId:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_GetterMethodToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9653,7 +9653,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportMethodSymbol:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StaticMethodToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9665,7 +9665,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportMethodSymbol:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StaticMethodToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9677,7 +9677,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportModuleName:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ThrowMethodToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9689,7 +9689,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportModuleName:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ThrowMethodToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9701,7 +9701,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportEntryPointName:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportMethodSubjectId:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9713,7 +9713,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportEntryPointName:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportMethodSubjectId:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9725,7 +9725,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportArgument0:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportMethodSymbol:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9737,7 +9737,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportArgument0:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportMethodSymbol:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9749,7 +9749,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportArgument1:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportModuleName:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9761,7 +9761,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportArgument1:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportModuleName:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9773,7 +9773,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportArgument2:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportEntryPointName:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9785,7 +9785,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportArgument2:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportEntryPointName:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9797,7 +9797,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConsoleWriteLineStringIcall:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportArgument0:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -9809,7 +9809,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConsoleWriteLineStringIcall:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportArgument0:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -9821,7 +9821,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StringConcatPairIcall:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportArgument1:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -9833,7 +9833,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StringConcatPairIcall:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportArgument1:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -9845,7 +9845,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConstructorLiteral:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ImportArgument2:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -9857,7 +9857,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConstructorLiteral:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ImportArgument2:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -9869,7 +9869,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConstructorLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConsoleWriteLineStringIcall:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9881,7 +9881,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConstructorLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConsoleWriteLineStringIcall:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9893,7 +9893,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StoredLiteral:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StringConcatPairIcall:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9905,7 +9905,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StoredLiteral:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StringConcatPairIcall:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9917,7 +9917,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StoredLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConstructorLiteral:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9929,7 +9929,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StoredLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConstructorLiteral:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9941,7 +9941,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_MessagePrefixLiteral:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_ConstructorLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -9953,7 +9953,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessagePrefixLiteral:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_ConstructorLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -9965,7 +9965,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_MessagePrefixLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StoredLiteral:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -9977,7 +9977,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessagePrefixLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StoredLiteral:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -9989,7 +9989,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_MessageSuffixLiteral:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_StoredLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -10001,7 +10001,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessageSuffixLiteral:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_StoredLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -10013,7 +10013,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_MessageSuffixLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_MessagePrefixLiteral:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -10025,7 +10025,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessageSuffixLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessagePrefixLiteral:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -10037,7 +10037,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TrailingLiteral:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_MessagePrefixLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -10049,7 +10049,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TrailingLiteral:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessagePrefixLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -10061,7 +10061,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TrailingLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_MessageSuffixLiteral:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -10073,7 +10073,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TrailingLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessageSuffixLiteral:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -10085,7 +10085,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EchoLiteral:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_MessageSuffixLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -10097,7 +10097,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoLiteral:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_MessageSuffixLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -10109,7 +10109,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EchoLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TrailingLiteral:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -10121,7 +10121,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TrailingLiteral:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -10133,7 +10133,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_FinallyLiteral:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TrailingLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -10145,7 +10145,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FinallyLiteral:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TrailingLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -10157,7 +10157,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_FinallyLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EchoLiteral:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -10169,7 +10169,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FinallyLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoLiteral:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -10181,7 +10181,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_BoxedValueTypeToken:System.String()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_EchoLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -10193,7 +10193,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_BoxedValueTypeToken:System.Void(System.String)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_EchoLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -10205,7 +10205,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_BoxedInt32Value:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_FinallyLiteral:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -10217,7 +10217,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_BoxedInt32Value:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FinallyLiteral:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -10229,7 +10229,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_SourceArrayLength:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_FinallyLiteralByteCount:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -10241,7 +10241,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_SourceArrayLength:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_FinallyLiteralByteCount:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -10253,7 +10253,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TargetArrayLength:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_BoxedValueTypeToken:System.String()",
       "reason": "generated-direct-call"
     },
     {
@@ -10265,7 +10265,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TargetArrayLength:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_BoxedValueTypeToken:System.Void(System.String)",
       "reason": "generated-direct-call"
     },
     {
@@ -10277,7 +10277,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_SourceStoreIndex:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_BoxedInt32Value:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -10289,7 +10289,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_SourceStoreIndex:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_BoxedInt32Value:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -10301,7 +10301,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_SourceArrayIndex:System.Nullable\u003CSystem.Int32\u003E()",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_SourceArrayLength:System.Nullable\u003CSystem.Int32\u003E()",
       "reason": "generated-direct-call"
     },
     {
@@ -10313,13 +10313,49 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "method",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_SourceArrayIndex:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_SourceArrayLength:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
       "assemblyName": "Chaos.IL2CPP.HotUpdate",
       "subjectKind": "method",
       "subjectId": "Chaos.IL2CPP.HotUpdate/SupplementalMetadataWriter\u002B\u003C\u003Ec__DisplayClass1_0::\u003CWriteToBytes\u003Eb__5:SupplementalMetadataMethodTemplateEntry(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "subjectKind": "method",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_TargetArrayLength:System.Nullable\u003CSystem.Int32\u003E()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "subjectKind": "method",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_TargetArrayLength:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "subjectKind": "method",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_SourceStoreIndex:System.Nullable\u003CSystem.Int32\u003E()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "subjectKind": "method",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_SourceStoreIndex:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "subjectKind": "method",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::get_SourceArrayIndex:System.Nullable\u003CSystem.Int32\u003E()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "subjectKind": "method",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceLoweringPlanArtifact::set_SourceArrayIndex:System.Void(System.Nullable\u003CSystem.Int32\u003E)",
       "reason": "generated-direct-call"
     },
     {
@@ -24203,7 +24239,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodegenMode::Hybrid",
+      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestArtifact::\u003CFormatVersion\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24215,7 +24251,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestArtifact::\u003CFormatVersion\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestArtifact::\u003CArtifactKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24227,7 +24263,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestArtifact::\u003CArtifactKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestArtifact::\u003CEntries\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24239,7 +24275,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestArtifact::\u003CEntries\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestEntry::\u003CAssemblyName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24251,7 +24287,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestEntry::\u003CAssemblyName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestEntry::\u003CSubjectKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24263,7 +24299,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestEntry::\u003CSubjectKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestEntry::\u003CSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24275,7 +24311,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestEntry::\u003CSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestEntry::\u003CReason\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24287,7 +24323,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/AotManifestEntry::\u003CReason\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::\u003CFormatVersion\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24299,7 +24335,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::\u003CFormatVersion\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::\u003CArtifactKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24311,7 +24347,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::\u003CArtifactKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::\u003CRegistrations\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24323,7 +24359,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationArtifact::\u003CRegistrations\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CRegistrationKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24335,7 +24371,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CRegistrationKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CSlot\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24347,7 +24383,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CSlot\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24359,7 +24395,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24371,7 +24407,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CNamespaceName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24383,7 +24419,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CNamespaceName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CDisplayName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24395,7 +24431,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CDisplayName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CDefinitionSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24407,7 +24443,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CDefinitionSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CDeclaringTypeSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24419,7 +24455,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CDeclaringTypeSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CDeclaringMethodSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24431,7 +24467,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CDeclaringMethodSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CMemberType\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24443,7 +24479,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CMemberType\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CParameterIndex\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24455,7 +24491,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CParameterIndex\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CParameterAttributes\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24467,7 +24503,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CParameterAttributes\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CParameterCount\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24479,7 +24515,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CParameterCount\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CIsImported\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24491,7 +24527,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CIsImported\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CImportModuleName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24503,7 +24539,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CImportModuleName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CImportEntryPointName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24515,7 +24551,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CImportEntryPointName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CImportCallingConvention\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24527,7 +24563,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CImportCallingConvention\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CImportCharSet\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24539,7 +24575,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CImportCharSet\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CMetadataToken\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24551,7 +24587,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataRegistrationEntry::\u003CMetadataToken\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CFormatVersion\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24563,7 +24599,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CFormatVersion\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CArtifactKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24575,7 +24611,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CArtifactKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CRegisteredTypes\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24587,7 +24623,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CRegisteredTypes\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CRegisteredMethods\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24599,7 +24635,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CRegisteredMethods\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CReservedSlots\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24611,7 +24647,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTemplateArtifact::\u003CReservedSlots\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CAssemblyName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24623,7 +24659,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CAssemblyName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24635,7 +24671,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CDefinitionSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24647,7 +24683,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CDefinitionSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CRuntimeGenericContext\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24659,7 +24695,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CRuntimeGenericContext\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CGenericDiagnostic\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24671,7 +24707,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CGenericDiagnostic\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CMetadataToken\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24683,7 +24719,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataTypeTemplateEntry::\u003CMetadataToken\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CAssemblyName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24695,7 +24731,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CAssemblyName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24707,7 +24743,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CDefinitionSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24719,7 +24755,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CDefinitionSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CRuntimeGenericContext\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24731,7 +24767,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CRuntimeGenericContext\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CGenericDiagnostic\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24743,7 +24779,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CGenericDiagnostic\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CDeclaringTypeSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24755,7 +24791,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CDeclaringTypeSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CMetadataToken\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24767,7 +24803,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CMetadataToken\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CParameterCount\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24779,7 +24815,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataMethodTemplateEntry::\u003CParameterCount\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataReservedSlots::\u003CTypeCount\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24791,7 +24827,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataReservedSlots::\u003CTypeCount\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataReservedSlots::\u003CMethodCount\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24803,7 +24839,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataReservedSlots::\u003CMethodCount\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataReservedSlots::\u003CGenericInstantiationCount\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24815,7 +24851,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/SupplementalMetadataReservedSlots::\u003CGenericInstantiationCount\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationArtifact::\u003CFormatVersion\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24827,7 +24863,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationArtifact::\u003CFormatVersion\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationArtifact::\u003CArtifactKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24839,7 +24875,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationArtifact::\u003CArtifactKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationArtifact::\u003CModules\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24851,7 +24887,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationArtifact::\u003CModules\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationArtifact::\u003CTypeCapabilities\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24863,7 +24899,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationArtifact::\u003CTypeCapabilities\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationModule::\u003CModuleName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24875,7 +24911,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationModule::\u003CModuleName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationModule::\u003CRegistrations\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24887,7 +24923,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationModule::\u003CRegistrations\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationEntry::\u003CRegistrationKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24899,7 +24935,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationEntry::\u003CRegistrationKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationEntry::\u003CSlot\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24911,7 +24947,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationEntry::\u003CSlot\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationEntry::\u003CSymbol\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24923,7 +24959,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationEntry::\u003CSymbol\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationEntry::\u003CSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24935,7 +24971,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationEntry::\u003CSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CSubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24947,7 +24983,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CSubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CTypeToken\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24959,7 +24995,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CTypeToken\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CCapabilityBits\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24971,7 +25007,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CCapabilityBits\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CValueSizeBytes\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24983,7 +25019,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CValueSizeBytes\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CVectorWidthBytes\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -24995,7 +25031,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CVectorWidthBytes\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CVectorLaneCount\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25007,7 +25043,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CVectorLaneCount\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CVectorLaneKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25019,7 +25055,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CVectorLaneKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CScalarKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25031,7 +25067,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/CodeRegistrationTypeCapabilityEntry::\u003CScalarKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataWriterOutput::\u003CAotManifest\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25043,7 +25079,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataWriterOutput::\u003CAotManifest\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataWriterOutput::\u003CMetadataRegistration\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25055,7 +25091,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataWriterOutput::\u003CMetadataRegistration\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/MetadataWriterOutput::\u003CSupplementalMetadataTemplate\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25067,7 +25103,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/MetadataWriterOutput::\u003CSupplementalMetadataTemplate\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureArtifactRef::\u003CKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25079,7 +25115,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureArtifactRef::\u003CKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureArtifactRef::\u003CPath\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25091,7 +25127,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureArtifactRef::\u003CPath\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResolvedAssemblyRef::\u003CAssemblyName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25103,7 +25139,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResolvedAssemblyRef::\u003CAssemblyName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResolvedAssemblyRef::\u003CPath\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25115,7 +25151,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResolvedAssemblyRef::\u003CPath\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CFormatVersion\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25127,7 +25163,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CFormatVersion\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CArtifactKind\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25139,7 +25175,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CArtifactKind\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CAssemblyName\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25151,7 +25187,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CAssemblyName\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CEntrySubjectId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25163,7 +25199,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CEntrySubjectId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CInputAssemblyPath\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25175,7 +25211,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CInputAssemblyPath\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CAdditionalAssemblyPaths\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25187,7 +25223,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CAdditionalAssemblyPaths\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CResolvedAssemblies\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25199,7 +25235,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CResolvedAssemblies\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CFullAssemblyClosure\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25211,7 +25247,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CFullAssemblyClosure\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CInputModuleVersionId\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25223,7 +25259,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CInputModuleVersionId\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CArtifacts\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25235,7 +25271,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CArtifacts\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CHotUpdateAssemblyNames\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25247,7 +25283,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureManifestArtifact::\u003CHotUpdateAssemblyNames\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003COutputRootPath\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25259,7 +25295,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003COutputRootPath\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CTypedIlIr\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25271,7 +25307,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CTypedIlIr\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CAotCoreIr\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25283,7 +25319,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CAotCoreIr\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CAotManifest\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25295,7 +25331,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CAotManifest\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CMetadataRegistration\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25307,7 +25343,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CMetadataRegistration\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CSupplementalMetadataTemplate\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25319,7 +25355,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CSupplementalMetadataTemplate\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CCodeRegistration\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25331,7 +25367,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CCodeRegistration\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CGenericInstantiationDemandGraph\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25343,7 +25379,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CGenericInstantiationDemandGraph\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CGenericCapabilityMatrix\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25355,7 +25391,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CGenericCapabilityMatrix\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003COptimizationFacts\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25367,7 +25403,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003COptimizationFacts\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CPreserveDescriptor\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25379,7 +25415,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CPreserveDescriptor\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CNativeReferenceLoweringPlan\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25391,7 +25427,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CNativeReferenceLoweringPlan\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CNativeAotLoweringPlan\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25403,7 +25439,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CNativeAotLoweringPlan\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CClosureManifest\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25415,7 +25451,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/ManagedClosureResult::\u003CClosureManifest\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofRequest::\u003CManagedClosureRootPath\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25427,7 +25463,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofRequest::\u003CManagedClosureRootPath\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofRequest::\u003COutputRootPath\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25439,7 +25475,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceProofRequest::\u003COutputRootPath\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotRequest::\u003CManagedClosureRootPath\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25451,7 +25487,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotRequest::\u003CManagedClosureRootPath\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotRequest::\u003COutputRootPath\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25463,7 +25499,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotRequest::\u003COutputRootPath\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotRequest::\u003CMode\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -25475,7 +25511,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeAotRequest::\u003CMode\u003Ek__BackingField",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::GeneratedDirectory",
       "reason": "instance-field-state"
     },
     {
@@ -25487,7 +25523,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::GeneratedDirectory",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::GeneratedTranslationUnit",
       "reason": "instance-field-state"
     },
     {
@@ -25499,7 +25535,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::GeneratedTranslationUnit",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::RuntimeSkeletonGeneratedTranslationUnit",
       "reason": "instance-field-state"
     },
     {
@@ -25511,7 +25547,7 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::RuntimeSkeletonGeneratedTranslationUnit",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::RuntimeSkeletonCoverageReport",
       "reason": "instance-field-state"
     },
     {
@@ -25523,19 +25559,13 @@
     {
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::RuntimeSkeletonCoverageReport",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::AuditSummaryTranslationUnit",
       "reason": "instance-field-state"
     },
     {
       "assemblyName": "Chaos.IL2CPP.HotUpdate",
       "subjectKind": "field",
       "subjectId": "Chaos.IL2CPP.HotUpdate/SupplementalMetadataWriter\u002B\u003C\u003Ec__DisplayClass1_0::templateMethods",
-      "reason": "instance-field-state"
-    },
-    {
-      "assemblyName": "Chaos.IL2CPP.Contracts",
-      "subjectKind": "field",
-      "subjectId": "Chaos.IL2CPP.Contracts/NativeReferenceArtifactNames::AuditSummaryTranslationUnit",
       "reason": "instance-field-state"
     },
     {
@@ -25734,6 +25764,24 @@
       "assemblyName": "Chaos.IL2CPP.Contracts",
       "subjectKind": "field",
       "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::\u003CAotUnreachableMethodCount\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "subjectKind": "field",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::\u003CHotpatchEntryCount\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "subjectKind": "field",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::\u003CHotpatchEligibleMethodCount\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.IL2CPP.Contracts",
+      "subjectKind": "field",
+      "subjectId": "Chaos.IL2CPP.Contracts/NativeCodegenMetricsArtifact::\u003CHotpatchDispatchCoverage\u003Ek__BackingField",
       "reason": "instance-field-state"
     },
     {
@@ -32469,6 +32517,12 @@
       "reason": "external-call"
     },
     {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "field",
+      "subjectId": "System.Private.CoreLib/System.String::Empty",
+      "reason": "external-call"
+    },
+    {
       "assemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CAuditTranslationUnitPageArtifact\u003E\u003E()",
@@ -32502,12 +32556,6 @@
       "assemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CNativeReferenceGeneratedArtifactRef\u003E\u003E::Equals:System.Boolean(System.Collections.Generic.IReadOnlyList\u003CNativeReferenceGeneratedArtifactRef\u003E,System.Collections.Generic.IReadOnlyList\u003CNativeReferenceGeneratedArtifactRef\u003E)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "field",
-      "subjectId": "System.Private.CoreLib/System.String::Empty",
       "reason": "external-call"
     },
     {
@@ -32789,18 +32837,6 @@
     {
       "assemblyName": "System.Collections",
       "subjectKind": "method",
-      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E\u003E()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Collections",
-      "subjectKind": "method",
-      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E\u003E::GetHashCode:System.Int32(System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Collections",
-      "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.String,SupplementalMetadataResolvedMethod\u003E::.ctor:System.Void(System.Collections.Generic.IEqualityComparer\u003CSystem.String\u003E)",
       "reason": "external-call"
     },
@@ -32808,12 +32844,6 @@
       "assemblyName": "System.Collections",
       "subjectKind": "method",
       "subjectId": "System.Collections/System.Collections.Generic.Dictionary\u003CSystem.Int32,SupplementalMetadataResolvedMethod\u003E::.ctor:System.Void()",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Collections",
-      "subjectKind": "method",
-      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E\u003E::Equals:System.Boolean(System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E,System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E)",
       "reason": "external-call"
     },
     {
@@ -32964,6 +32994,24 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Collections.Generic.IReadOnlyDictionary\u003CSystem.String,SupplementalMetadataMethodTemplateEntry\u003E::TryGetValue:System.Boolean(System.String,SupplementalMetadataMethodTemplateEntry\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E\u003E::GetHashCode:System.Int32(System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CSystem.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E\u003E::Equals:System.Boolean(System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E,System.Collections.Generic.IReadOnlyList\u003CNativeAotGeneratedArtifactRef\u003E)",
       "reason": "external-call"
     },
     {

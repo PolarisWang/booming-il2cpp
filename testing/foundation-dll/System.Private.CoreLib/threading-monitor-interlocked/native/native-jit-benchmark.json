@@ -20,18 +20,18 @@
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)",
-      "elapsedMilliseconds": 1043.312,
-      "calibratedMs": 1043.312,
-      "opsPerSecond": 95848.6,
+      "elapsedMilliseconds": 1464.439,
+      "calibratedMs": 1464.439,
+      "opsPerSecond": 68285.6,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)",
-      "elapsedMilliseconds": 1041.231,
-      "calibratedMs": 1041.231,
-      "opsPerSecond": 96040.2,
+      "elapsedMilliseconds": 1649.621,
+      "calibratedMs": 1649.621,
+      "opsPerSecond": 60620.0,
       "iterations": 100000,
       "status": "completed"
     },
@@ -86,18 +86,18 @@
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()",
-      "elapsedMilliseconds": 1487.16,
-      "calibratedMs": 1487.16,
-      "opsPerSecond": 67242.3,
+      "elapsedMilliseconds": 2306.521,
+      "calibratedMs": 2306.521,
+      "opsPerSecond": 43355.3,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Volatile::Read:System.Int32(System.Int32&)",
-      "elapsedMilliseconds": 1065.89,
-      "calibratedMs": 1065.89,
-      "opsPerSecond": 93818.3,
+      "elapsedMilliseconds": 1286.299,
+      "calibratedMs": 1286.299,
+      "opsPerSecond": 77742.4,
       "iterations": 100000,
       "status": "completed"
     }

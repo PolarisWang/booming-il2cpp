@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct ConvertCharSubjects_t {
+    struct ConvertCharSubjects_ConvertCharSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -90,7 +90,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } convertCharSubjects;
+    } convertCharSubjects_ConvertCharSubjects;
     int32_t method_count;
 };
 
@@ -109,95 +109,95 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct ConvertCharSubjects {
+struct ConvertCharSubjects_ConvertCharSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.convertCharSubjects.Subject_0(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.convertCharSubjects.Subject_10(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.convertCharSubjects.Subject_11(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.convertCharSubjects.Subject_12(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_12(
         );
     }
     static inline void Subject_13(
     ) {
-        return kFunctions.convertCharSubjects.Subject_13(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_13(
         );
     }
     static inline void Subject_14(
     ) {
-        return kFunctions.convertCharSubjects.Subject_14(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_14(
         );
     }
     static inline void Subject_15(
     ) {
-        return kFunctions.convertCharSubjects.Subject_15(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_15(
         );
     }
     static inline void Subject_16(
     ) {
-        return kFunctions.convertCharSubjects.Subject_16(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_16(
         );
     }
     static inline void Subject_17(
     ) {
-        return kFunctions.convertCharSubjects.Subject_17(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_17(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.convertCharSubjects.Subject_1(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.convertCharSubjects.Subject_2(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.convertCharSubjects.Subject_3(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.convertCharSubjects.Subject_4(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.convertCharSubjects.Subject_5(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.convertCharSubjects.Subject_6(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.convertCharSubjects.Subject_7(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.convertCharSubjects.Subject_8(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.convertCharSubjects.Subject_9(
+        return kFunctions.convertCharSubjects_ConvertCharSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

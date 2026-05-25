@@ -14,9 +14,9 @@
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()",
-      "elapsedMilliseconds": 7.56,
-      "calibratedMs": 7.56,
-      "opsPerSecond": 13227513.2,
+      "elapsedMilliseconds": 7.455,
+      "calibratedMs": 7.455,
+      "opsPerSecond": 13412916.6,
       "iterations": 100000,
       "status": "completed"
     },
@@ -41,27 +41,27 @@
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)",
-      "elapsedMilliseconds": 10.547,
-      "calibratedMs": 10.547,
-      "opsPerSecond": 9481369.1,
+      "elapsedMilliseconds": 10.431,
+      "calibratedMs": 10.431,
+      "opsPerSecond": 9586992.4,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()",
-      "elapsedMilliseconds": 8.046,
-      "calibratedMs": 8.046,
-      "opsPerSecond": 12429308.3,
+      "elapsedMilliseconds": 7.824,
+      "calibratedMs": 7.824,
+      "opsPerSecond": 12780859.4,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()",
-      "elapsedMilliseconds": 21.496,
-      "calibratedMs": 21.496,
-      "opsPerSecond": 4652028.3,
+      "elapsedMilliseconds": 18.037,
+      "calibratedMs": 18.037,
+      "opsPerSecond": 5544067.0,
       "iterations": 100000,
       "status": "completed"
     },
@@ -74,9 +74,9 @@
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()",
-      "elapsedMilliseconds": 11.418,
-      "calibratedMs": 11.418,
-      "opsPerSecond": 8757717.7,
+      "elapsedMilliseconds": 10.798,
+      "calibratedMs": 10.798,
+      "opsPerSecond": 9261317.3,
       "iterations": 100000,
       "status": "completed"
     },

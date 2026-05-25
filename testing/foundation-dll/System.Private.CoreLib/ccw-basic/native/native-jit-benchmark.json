@@ -8,47 +8,47 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::Run:System.Int32(System.Int32)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 1913.908,
+      "calibratedMs": 1913.908,
+      "opsPerSecond": 52249.1,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 7697.514,
+      "calibratedMs": 7697.514,
+      "opsPerSecond": 12991.2,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 7379.087,
+      "calibratedMs": 7379.087,
+      "opsPerSecond": 13551.8,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestConstantValue:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 7289.995,
+      "calibratedMs": 7289.995,
+      "opsPerSecond": 13717.4,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestDualInterface:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 7200.513,
+      "calibratedMs": 7200.513,
+      "opsPerSecond": 13887.9,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     }
   ]
 }

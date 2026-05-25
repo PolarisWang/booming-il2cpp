@@ -48,6 +48,27 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Add_System_Int32_Syste
 extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
 extern "C" void CcwBasicSubjects_SimpleMath__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestConstantValue(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestDualInterface(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathAdd(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMathMul(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_0(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_1(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_2(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_3(void);
+extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_4(void);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_ConstantFortyTwo_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CcwBasicSubjects_ConstantFortyTwo__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_DualInterfaceImpl_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_DualInterfaceImpl__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_SimpleMath_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void CcwBasicSubjects_SimpleMath__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+
 namespace chaos::il2cpp::codegen::CcwBasicSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -68,18 +89,18 @@ inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System
 static constexpr InterfaceMapEntry chaos_iface_map_CcwBasicSubjects_ConstantFortyTwo[] = {
 	{ chaos_type_id_CcwBasicSubjects_IConstantValue, 1, 1 }
 };
-inline TypeInfoV0 chaos_mt_CcwBasicSubjects_ConstantFortyTwo = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_CcwBasicSubjects_ConstantFortyTwo, 9147543264357235806ULL, 2u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_ConstantFortyTwo, nullptr, 1, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_CcwBasicSubjects_ConstantFortyTwo = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CcwBasicSubjects_ConstantFortyTwo, 9147543264357235806ULL, 2u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_ConstantFortyTwo, nullptr, 1, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicSubjects_ConstantFortyTwo = static_cast<CHAOS_IL2CPP_INTPTR>(9147543264357235806ULL);
 static constexpr InterfaceMapEntry chaos_iface_map_CcwBasicSubjects_DualInterfaceImpl[] = {
 	{ chaos_type_id_CcwBasicSubjects_ISimpleMath, 2, 2 },
 	{ chaos_type_id_CcwBasicSubjects_IConstantValue, 1, 1 }
 };
-inline TypeInfoV0 chaos_mt_CcwBasicSubjects_DualInterfaceImpl = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_CcwBasicSubjects_DualInterfaceImpl, 14234888545717869799ULL, 4u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_DualInterfaceImpl, nullptr, 2, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_CcwBasicSubjects_DualInterfaceImpl = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CcwBasicSubjects_DualInterfaceImpl, 14234888545717869799ULL, 4u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_DualInterfaceImpl, nullptr, 2, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicSubjects_DualInterfaceImpl = static_cast<CHAOS_IL2CPP_INTPTR>(14234888545717869799ULL);
 static constexpr InterfaceMapEntry chaos_iface_map_CcwBasicSubjects_SimpleMath[] = {
 	{ chaos_type_id_CcwBasicSubjects_ISimpleMath, 2, 2 }
 };
-inline TypeInfoV0 chaos_mt_CcwBasicSubjects_SimpleMath = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_CcwBasicSubjects_SimpleMath, 4431683709018832856ULL, 4u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_SimpleMath, nullptr, 1, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_CcwBasicSubjects_SimpleMath = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CcwBasicSubjects_SimpleMath, 4431683709018832856ULL, 4u, 32, 1, 1}, {chaos_iface_map_CcwBasicSubjects_SimpleMath, nullptr, 1, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CcwBasicSubjects_SimpleMath = static_cast<CHAOS_IL2CPP_INTPTR>(4431683709018832856ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
@@ -163,7 +184,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -467,12 +488,12 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[8] = {
 		nullptr,
-		&chaos_mt_CcwBasicSubjects_CcwBasicSubjects.hot,
-		&chaos_mt_CcwBasicSubjects_ISimpleMath.hot,
-		&chaos_mt_CcwBasicSubjects_IConstantValue.hot,
-		&chaos_mt_CcwBasicSubjects_SimpleMath.hot,
-		&chaos_mt_CcwBasicSubjects_ConstantFortyTwo.hot,
-		&chaos_mt_CcwBasicSubjects_DualInterfaceImpl.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_CcwBasicSubjects),
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_ISimpleMath),
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_IConstantValue),
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_SimpleMath),
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_ConstantFortyTwo),
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_DualInterfaceImpl),
 		nullptr,
 	};
 
@@ -1396,7 +1417,7 @@ extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_0(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1472,7 +1493,7 @@ extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_1(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1548,7 +1569,7 @@ extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_2(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1624,7 +1645,7 @@ extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_3(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1700,7 +1721,7 @@ extern "C" void CcwBasicSubjects_CcwBasicSubjects_Subject_4(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1830,7 +1851,7 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestConstantV
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_CcwBasicSubjects_ConstantFortyTwo, {});
-		chaos_object->header.type_info = &chaos_mt_CcwBasicSubjects_ConstantFortyTwo.hot;
+		chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_ConstantFortyTwo);
 		CcwBasicSubjects_ConstantFortyTwo__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -1873,7 +1894,7 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestDualInter
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_CcwBasicSubjects_DualInterfaceImpl, {});
-		chaos_object->header.type_info = &chaos_mt_CcwBasicSubjects_DualInterfaceImpl.hot;
+		chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_DualInterfaceImpl);
 		CcwBasicSubjects_DualInterfaceImpl__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -1935,7 +1956,7 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMat
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_CcwBasicSubjects_SimpleMath, {});
-		chaos_object->header.type_info = &chaos_mt_CcwBasicSubjects_SimpleMath.hot;
+		chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_SimpleMath);
 		CcwBasicSubjects_SimpleMath__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}
@@ -1978,7 +1999,7 @@ extern "C" CHAOS_IL2CPP_INT32 CcwBasicSubjects_CcwBasicNativeEntry_TestSimpleMat
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_CcwBasicSubjects_SimpleMath, {});
-		chaos_object->header.type_info = &chaos_mt_CcwBasicSubjects_SimpleMath.hot;
+		chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CcwBasicSubjects_SimpleMath);
 		CcwBasicSubjects_SimpleMath__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}

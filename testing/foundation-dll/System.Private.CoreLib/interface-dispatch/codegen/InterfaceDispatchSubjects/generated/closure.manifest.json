@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "InterfaceDispatchSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "System.Private.CoreLib/interface-dispatch/codegen/_subjects_input/InterfaceDispatchSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/interface-dispatch/managed/subjects/build-output/InterfaceDispatchSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "InterfaceDispatchSubjects",
-      "path": "System.Private.CoreLib/interface-dispatch/codegen/_subjects_input/InterfaceDispatchSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/interface-dispatch/managed/subjects/build-output/InterfaceDispatchSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "05a7465a-ddf5-4c8f-8fe7-d87af3f8e38f",
+  "inputModuleVersionId": "43e0e220-dc0c-495d-aeb2-1acbbddc0e3c",
   "artifacts": [
     {
       "kind": "typedIlIr",

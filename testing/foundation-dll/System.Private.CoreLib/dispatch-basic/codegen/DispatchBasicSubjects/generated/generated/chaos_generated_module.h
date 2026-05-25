@@ -35,15 +35,15 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct BasicImpl_t {
+    struct DispatchBasicSubjects_BasicImpl_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } basicImpl;
-    struct Calculator_t {
+    } dispatchBasicSubjects_BasicImpl;
+    struct DispatchBasicSubjects_Calculator_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -57,8 +57,8 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
-    } calculator;
-    struct DispatchBasicNativeEntry_t {
+    } dispatchBasicSubjects_Calculator;
+    struct DispatchBasicSubjects_DispatchBasicNativeEntry_t {
         CHAOS_IL2CPP_INT32 (*Run)(
                     CHAOS_IL2CPP_INT32
         );
@@ -74,8 +74,8 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*TestIUnknownGetValue)(
                 void
         );
-    } dispatchBasicNativeEntry;
-    struct DispatchBasicSubjects_t {
+    } dispatchBasicSubjects_DispatchBasicNativeEntry;
+    struct DispatchBasicSubjects_DispatchBasicSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -91,21 +91,21 @@ struct Functions {
         void (*Subject_4)(
                 void
         );
-    } dispatchBasicSubjects;
-    struct StatusProvider_t {
+    } dispatchBasicSubjects_DispatchBasicSubjects;
+    struct DispatchBasicSubjects_StatusProvider_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetStatusCode)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } statusProvider;
-    struct System_Runtime_InteropServices_ComInterfaceTypeAttribute_t {
+    } dispatchBasicSubjects_StatusProvider;
+    struct DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
-    } system_Runtime_InteropServices_ComInterfaceTypeAttribute;
+    } dispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute;
     int32_t method_count;
 };
 
@@ -124,18 +124,18 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct BasicImpl {
+struct DispatchBasicSubjects_BasicImpl {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.basicImpl.ctor(
+        return kFunctions.dispatchBasicSubjects_BasicImpl.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetValue(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.basicImpl.GetValue(
+        return kFunctions.dispatchBasicSubjects_BasicImpl.GetValue(
                     arg_0
         );
     }
@@ -143,11 +143,11 @@ struct BasicImpl {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct Calculator {
+struct DispatchBasicSubjects_Calculator {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.calculator.ctor(
+        return kFunctions.dispatchBasicSubjects_Calculator.ctor(
                     arg_0
         );
     }
@@ -156,7 +156,7 @@ struct Calculator {
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.calculator.Add(
+        return kFunctions.dispatchBasicSubjects_Calculator.Add(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -167,7 +167,7 @@ struct Calculator {
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.calculator.Subtract(
+        return kFunctions.dispatchBasicSubjects_Calculator.Subtract(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -177,80 +177,80 @@ struct Calculator {
     static constexpr int32_t MethodCount = 3;
 };
 
-struct DispatchBasicNativeEntry {
+struct DispatchBasicSubjects_DispatchBasicNativeEntry {
     static inline CHAOS_IL2CPP_INT32 Run(
                 CHAOS_IL2CPP_INT32 arg_0
     ) {
-        return kFunctions.dispatchBasicNativeEntry.Run(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicNativeEntry.Run(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDualGetStatus(
     ) {
-        return kFunctions.dispatchBasicNativeEntry.TestDualGetStatus(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicNativeEntry.TestDualGetStatus(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIDispatchAdd(
     ) {
-        return kFunctions.dispatchBasicNativeEntry.TestIDispatchAdd(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicNativeEntry.TestIDispatchAdd(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIDispatchSub(
     ) {
-        return kFunctions.dispatchBasicNativeEntry.TestIDispatchSub(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicNativeEntry.TestIDispatchSub(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIUnknownGetValue(
     ) {
-        return kFunctions.dispatchBasicNativeEntry.TestIUnknownGetValue(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicNativeEntry.TestIUnknownGetValue(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 5;
 };
 
-struct DispatchBasicSubjects {
+struct DispatchBasicSubjects_DispatchBasicSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.dispatchBasicSubjects.Subject_0(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.dispatchBasicSubjects.Subject_1(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.dispatchBasicSubjects.Subject_2(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.dispatchBasicSubjects.Subject_3(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.dispatchBasicSubjects.Subject_4(
+        return kFunctions.dispatchBasicSubjects_DispatchBasicSubjects.Subject_4(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 5;
 };
 
-struct StatusProvider {
+struct DispatchBasicSubjects_StatusProvider {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.statusProvider.ctor(
+        return kFunctions.dispatchBasicSubjects_StatusProvider.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetStatusCode(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.statusProvider.GetStatusCode(
+        return kFunctions.dispatchBasicSubjects_StatusProvider.GetStatusCode(
                     arg_0
         );
     }
@@ -258,12 +258,12 @@ struct StatusProvider {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct System_Runtime_InteropServices_ComInterfaceTypeAttribute {
+struct DispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.system_Runtime_InteropServices_ComInterfaceTypeAttribute.ctor(
+        return kFunctions.dispatchBasicSubjects_System_Runtime_InteropServices_ComInterfaceTypeAttribute.ctor(
                     arg_0, 
                     arg_1
         );

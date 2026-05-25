@@ -75,6 +75,18 @@ extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_2(void);
 extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_3(void);
 extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_4(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestGetExceptionForHR_Zero(void);
+extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestGetExceptionForHR_Zero(void);
+extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestGetHRForException(void);
+extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_TestThrowExceptionForHR_S_OK(void);
+extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_0(void);
+extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_1(void);
+extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_2(void);
+extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_3(void);
+extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_4(void);
+
 namespace chaos::il2cpp::codegen::ErrorInfoBasicSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

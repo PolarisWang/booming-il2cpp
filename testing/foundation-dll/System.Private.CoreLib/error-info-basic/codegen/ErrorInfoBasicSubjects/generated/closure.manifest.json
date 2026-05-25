@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "ErrorInfoBasicSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "System.Private.CoreLib/error-info-basic/codegen/_subjects_input/ErrorInfoBasicSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/error-info-basic/managed/subjects/build-output/ErrorInfoBasicSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "ErrorInfoBasicSubjects",
-      "path": "System.Private.CoreLib/error-info-basic/codegen/_subjects_input/ErrorInfoBasicSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/error-info-basic/managed/subjects/build-output/ErrorInfoBasicSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "0f1f424f-7f06-48d1-8d77-ff20083f1dbd",
+  "inputModuleVersionId": "2c2c616c-8ff2-460a-88ac-f6f8399313db",
   "artifacts": [
     {
       "kind": "typedIlIr",

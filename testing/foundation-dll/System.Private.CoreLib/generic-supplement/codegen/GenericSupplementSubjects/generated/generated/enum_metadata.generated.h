@@ -164,11 +164,10 @@ static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_I
 static constexpr EnumFieldEntry kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE[] = {
     { "Aot", 0 },
     { "Jit", 1 },
-    { "Hybrid", 2 },
 };
 
 static constexpr EnumMetadataTable kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE = {
-    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE, 3
+    kEnumFields_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE, 2
 };
 
 static constexpr EnumTypeDescriptor kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE = {
@@ -9969,2245 +9968,23 @@ static constexpr EnumTypeDescriptor kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_J
     "System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions"
 };
 
-/// Lookup enum metadata by subject_id FNV-1a 32-bit hash.
-/// Returns nullptr if the type is unknown (fallback to reflection API).
-inline static const EnumMetadataTable* chaos_find_enum_metadata(
-    const char* subject_id) noexcept
+/// Compute FNV-1a 32-bit hash for a null-terminated string.
+/// Shared by chaos_find_enum_metadata and compute_enum_hash24.
+inline static CHAOS_IL2CPP_UINT32 compute_enum_hash32(
+    const char* s) noexcept
 {
-    if (subject_id == nullptr || subject_id[0] == '\0')
-        return nullptr;
-
-    // FNV-1a 32-bit hash
     CHAOS_IL2CPP_UINT32 h = 2166136261u;
-    for (const char* s = subject_id; *s; ++s) {
+    for (; *s; ++s) {
         h ^= static_cast<CHAOS_IL2CPP_UINT8>(*s);
         h *= 16777619u;
     }
+    return h;
+}
 
-    switch (h) {
-        case 0x00205F0Fu: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.OpCodeValues
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.OpCodeValues") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODEVALUES;
-        }
-        case 0x008C168Fu: {
-            // Verify: System.Private.CoreLib/System.Exception+ExceptionMessageKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Exception+ExceptionMessageKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTION_EXCEPTIONMESSAGEKIND;
-        }
-        case 0x0430DE5Cu: {
-            // Verify: System.Private.CoreLib/System.ExceptionResource
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.ExceptionResource") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONRESOURCE;
-        }
-        case 0x04C34F8Cu: {
-            // Verify: System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferAllocatedReason
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferAllocatedReason") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERALLOCATEDREASON;
-        }
-        case 0x0664927Au: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.ConcurrentExclusiveSchedulerPair+ProcessingMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.ConcurrentExclusiveSchedulerPair+ProcessingMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_PROCESSINGMODE;
-        }
-        case 0x06F09E30u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldTags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldTags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS;
-        }
-        case 0x0760E12Eu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.CALLCONV
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.CALLCONV") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV;
-        }
-        case 0x09114136u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+PFXExportFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+PFXExportFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS;
-        }
-        case 0x092690F2u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND;
-        }
-        case 0x0988EBF3u: {
-            // Verify: System.Text.Json/System.Text.Json.JsonTokenType
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonTokenType") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE;
-        }
-        case 0x09C21197u: {
-            // Verify: System.Private.CoreLib/System.Resources.ResourceTypeCode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Resources.ResourceTypeCode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_RESOURCETYPECODE;
-        }
-        case 0x09E2236Eu: {
-            // Verify: System.Private.CoreLib/System.Collections.Generic.InsertionBehavior
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Collections.Generic.InsertionBehavior") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COLLECTIONS_GENERIC_INSERTIONBEHAVIOR;
-        }
-        case 0x0ACC828Bu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventLevel
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventLevel") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTLEVEL;
-        }
-        case 0x0B715B4Fu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.SYSKIND
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.SYSKIND") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_SYSKIND;
-        }
-        case 0x0C07203Cu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertControlStoreFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertControlStoreFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS;
-        }
-        case 0x0C4317C5u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.MarshalMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.MarshalMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_MARSHALMODE;
-        }
-        case 0x0C832793u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.TraceLoggingDataType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.TraceLoggingDataType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_TRACELOGGINGDATATYPE;
-        }
-        case 0x0C8C51ECu: {
-            // Verify: System.Private.CoreLib/System.Reflection.CorElementType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.CorElementType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CORELEMENTTYPE;
-        }
-        case 0x0CE716D2u: {
-            // Verify: System.Private.CoreLib/System.Threading.ThreadState
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ThreadState") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE;
-        }
-        case 0x0DF2A801u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptKeySpec
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptKeySpec") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC;
-        }
-        case 0x0DFDE806u: {
-            // Verify: System.Private.CoreLib/System.Runtime.Serialization.StreamingContextStates
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Serialization.StreamingContextStates") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_SERIALIZATION_STREAMINGCONTEXTSTATES;
-        }
-        case 0x0E9F0B27u: {
-            // Verify: System.Private.CoreLib/System.Base64FormattingOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Base64FormattingOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BASE64FORMATTINGOPTIONS;
-        }
-        case 0x0EEAE405u: {
-            // Verify: System.Private.CoreLib/System.Reflection.GenericParameterAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.GenericParameterAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_GENERICPARAMETERATTRIBUTES;
-        }
-        case 0x0EF53829u: {
-            // Verify: System.Private.CoreLib/System.Globalization.DateTimeFormatInfoScanner+FoundDatePattern
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.DateTimeFormatInfoScanner+FoundDatePattern") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATINFOSCANNER_FOUNDDATEPATTERN;
-        }
-        case 0x10A41633u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+PfxCertStoreFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+PfxCertStoreFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS;
-        }
-        case 0x1180F43Cu: {
-            // Verify: System.Security.Cryptography/Interop+NCrypt+BufferType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+NCrypt+BufferType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE;
-        }
-        case 0x11AC7745u: {
-            // Verify: System.Private.CoreLib/System.IO.FileOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEOPTIONS;
-        }
-        case 0x1210298Cu: {
-            // Verify: System.Private.CoreLib/System.Reflection.BindingFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.BindingFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_BINDINGFLAGS;
-        }
-        case 0x12D54799u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertNameStringType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertNameStringType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE;
-        }
-        case 0x1319865Bu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertNameFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertNameFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS;
-        }
-        case 0x131FD541u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertStoreSaveAs
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertStoreSaveAs") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS;
-        }
-        case 0x14CEEA24u: {
-            // Verify: System.Private.CoreLib/System.Guid+GuidParseThrowStyle
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Guid+GuidParseThrowStyle") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_GUIDPARSETHROWSTYLE;
-        }
-        case 0x1508254Eu: {
-            // Verify: System.Security.Cryptography/Interop+NCrypt+AsymmetricPaddingMode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+NCrypt+AsymmetricPaddingMode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE;
-        }
-        case 0x15591819u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ContentType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ContentType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE;
-        }
-        case 0x15D6DCDCu: {
-            // Verify: System.Private.CoreLib/System.Guid+ParseFailure
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Guid+ParseFailure") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE;
-        }
-        case 0x163DDB74u: {
-            // Verify: System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType
-            if (std::strcmp(subject_id, "System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType") != 0) break;
-            return &kEnumTable_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE;
-        }
-        case 0x16AD7532u: {
-            // Verify: System.Private.CoreLib/System.IO.FileMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEMODE;
-        }
-        case 0x16D02A70u: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSupportKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSupportKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND;
-        }
-        case 0x17316DFCu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.LayoutKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.LayoutKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_LAYOUTKIND;
-        }
-        case 0x178B6257u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.TplEventSource+TaskWaitBehavior
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TplEventSource+TaskWaitBehavior") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TPLEVENTSOURCE_TASKWAITBEHAVIOR;
-        }
-        case 0x179942DFu: {
-            // Verify: System.Memory/System.ExceptionArgument
-            if (std::strcmp(subject_id, "System.Memory/System.ExceptionArgument") != 0) break;
-            return &kEnumTable_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT;
-        }
-        case 0x17C3BBE1u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.RSAEncryptionPaddingMode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.RSAEncryptionPaddingMode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE;
-        }
-        case 0x18CE8119u: {
-            // Verify: System.Private.CoreLib/System.Threading.OpenExistingResult
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.OpenExistingResult") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_OPENEXISTINGRESULT;
-        }
-        case 0x1926A8B1u: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.DynamicResolver+SecurityControlFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.DynamicResolver+SecurityControlFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS;
-        }
-        case 0x1A702B6Cu: {
-            // Verify: System.Text.Json/System.Text.Json.DataType
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.DataType") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE;
-        }
-        case 0x1AF95E40u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.GCHandleType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.GCHandleType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_GCHANDLETYPE;
-        }
-        case 0x1B9CA01Bu: {
-            // Verify: System.Private.CoreLib/System.IO.MatchCasing
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.MatchCasing") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHCASING;
-        }
-        case 0x1C2592F2u: {
-            // Verify: System.Private.CoreLib/System.TimeZoneInfoOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.TimeZoneInfoOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFOOPTIONS;
-        }
-        case 0x1CB0D003u: {
-            // Verify: System.Private.CoreLib/System.Runtime.Versioning.SxSRequirements
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Versioning.SxSRequirements") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS;
-        }
-        case 0x1CE31F89u: {
-            // Verify: System.Security.Cryptography/Interop+NCrypt+SecretAgreementFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+NCrypt+SecretAgreementFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS;
-        }
-        case 0x1CF7902Du: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.OidGroup
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.OidGroup") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP;
-        }
-        case 0x1EEE04BBu: {
-            // Verify: System.Private.CoreLib/Interop+NtDll+CreateOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+CreateOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS;
-        }
-        case 0x1EFA0AC6u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION;
-        }
-        case 0x1F0411A8u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertStoreSaveTo
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertStoreSaveTo") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO;
-        }
-        case 0x1F6B7F60u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CryptDecodeObjectStructType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CryptDecodeObjectStructType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE;
-        }
-        case 0x1FA7B368u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES;
-        }
-        case 0x1FE7040Bu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptAcquireContextFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptAcquireContextFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS;
-        }
-        case 0x21762609u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CspAlgorithmType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CspAlgorithmType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE;
-        }
-        case 0x2182F1DDu: {
-            // Verify: System.Text.Json/System.Text.Json.ConverterStrategy
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.ConverterStrategy") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY;
-        }
-        case 0x233B39AAu: {
-            // Verify: System.Private.CoreLib/System.DateTimeParse+DTT
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeParse+DTT") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DTT;
-        }
-        case 0x233ECD44u: {
-            // Verify: System.Private.CoreLib/System.StringSplitOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.StringSplitOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS;
-        }
-        case 0x2429FDC6u: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND;
-        }
-        case 0x24D6D3CFu: {
-            // Verify: System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS;
-        }
-        case 0x261EA7CFu: {
-            // Verify: System.Text.Json/System.Text.Json.MetadataPropertyName
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.MetadataPropertyName") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME;
-        }
-        case 0x2622F4A3u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEFLAGS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEFLAGS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEFLAGS;
-        }
-        case 0x2668A964u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.ManifestEnvelope+ManifestFormats
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.ManifestEnvelope+ManifestFormats") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_MANIFESTENVELOPE_MANIFESTFORMATS;
-        }
-        case 0x26D0D2D8u: {
-            // Verify: System.Private.CoreLib/System.Globalization.CalendarDataType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarDataType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARDATATYPE;
-        }
-        case 0x276A755Bu: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.ScopeAction
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.ScopeAction") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_SCOPEACTION;
-        }
-        case 0x27928BBAu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS;
-        }
-        case 0x279DABBBu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertUsageMatchType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertUsageMatchType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE;
-        }
-        case 0x282CBE79u: {
-            // Verify: System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterSpinLockReason
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterSpinLockReason") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERSPINLOCKREASON;
-        }
-        case 0x28B038F0u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARFLAGS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARFLAGS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARFLAGS;
-        }
-        case 0x2950534Cu: {
-            // Verify: System.Private.CoreLib/System.Reflection.PropertyAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.PropertyAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES;
-        }
-        case 0x2A835B9Eu: {
-            // Verify: System.Security.Cryptography/Microsoft.Win32.SafeHandles.SafeNCryptHandle+OwnershipState
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Microsoft.Win32.SafeHandles.SafeNCryptHandle+OwnershipState") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE;
-        }
-        case 0x2C1FCBE1u: {
-            // Verify: System.Private.CoreLib/System.AttributeTargets
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.AttributeTargets") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ATTRIBUTETARGETS;
-        }
-        case 0x2C85D069u: {
-            // Verify: System.Private.CoreLib/System.GC+StartNoGCRegionStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+StartNoGCRegionStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_STARTNOGCREGIONSTATUS;
-        }
-        case 0x2CA0F7ADu: {
-            // Verify: System.Private.CoreLib/System.PlatformID
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.PlatformID") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PLATFORMID;
-        }
-        case 0x2CDFB3ABu: {
-            // Verify: System.Private.CoreLib/System.Globalization.StrongBidiCategory
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.StrongBidiCategory") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_STRONGBIDICATEGORY;
-        }
-        case 0x2CFE353Bu: {
-            // Verify: System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS;
-        }
-        case 0x2D457B10u: {
-            // Verify: System.Private.CoreLib/System.RuntimeType+MemberListType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+MemberListType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_MEMBERLISTTYPE;
-        }
-        case 0x2E5DB2F6u: {
-            // Verify: System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS;
-        }
-        case 0x2EE27BB8u: {
-            // Verify: System.Private.CoreLib/Interop+BOOLEAN
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+BOOLEAN") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN;
-        }
-        case 0x2FA75B7Bu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.OpenFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.OpenFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS;
-        }
-        case 0x3023AB67u: {
-            // Verify: System.Text.Json/System.Text.Json.NumericType
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.NumericType") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE;
-        }
-        case 0x307FF573u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP;
-        }
-        case 0x309A76E9u: {
-            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptCreateHashFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptCreateHashFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS;
-        }
-        case 0x30D7EB67u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509NameType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509NameType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE;
-        }
-        case 0x315D6AD1u: {
-            // Verify: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeCarrierKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeCarrierKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND;
-        }
-        case 0x3270C0FBu: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCEONCOMPLETEDFLAGS;
-        }
-        case 0x32C58962u: {
-            // Verify: System.Private.CoreLib/System.DayOfWeek
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.DayOfWeek") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DAYOFWEEK;
-        }
-        case 0x33C283FEu: {
-            // Verify: System.Private.CoreLib/System.Reflection.PortableExecutableKinds
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.PortableExecutableKinds") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PORTABLEEXECUTABLEKINDS;
-        }
-        case 0x356AF1D4u: {
-            // Verify: System.Private.CoreLib/Interop+BOOL
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+BOOL") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL;
-        }
-        case 0x3774521Au: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CryptGetKeyParamQueryType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CryptGetKeyParamQueryType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE;
-        }
-        case 0x37757E73u: {
-            // Verify: System.Private.CoreLib/System.Reflection.MethodSemanticsAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodSemanticsAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODSEMANTICSATTRIBUTES;
-        }
-        case 0x3786DF1Du: {
-            // Verify: System.Private.CoreLib/System.Threading.PortableThreadPool+HillClimbing+StateOrTransition
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.PortableThreadPool+HillClimbing+StateOrTransition") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION;
-        }
-        case 0x37A25884u: {
-            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptSignAndVerifyHashFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptSignAndVerifyHashFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS;
-        }
-        case 0x385C362Du: {
-            // Verify: System.Private.CoreLib/System.ParseFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.ParseFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS;
-        }
-        case 0x3AB7DD37u: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptOpenAlgorithmProviderFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptOpenAlgorithmProviderFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS;
-        }
-        case 0x3AC190AAu: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.TaskStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TaskStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKSTATUS;
-        }
-        case 0x3ACD4FBEu: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.ManagedCallSiteKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.ManagedCallSiteKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND;
-        }
-        case 0x3BD1C617u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.Architecture
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.Architecture") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE;
-        }
-        case 0x3C05930Eu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertContextPropId
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertContextPropId") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID;
-        }
-        case 0x3C129112u: {
-            // Verify: System.Private.CoreLib/System.Globalization.CalendricalCalculationsHelper+CorrectionAlgorithm
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendricalCalculationsHelper+CorrectionAlgorithm") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDRICALCALCULATIONSHELPER_CORRECTIONALGORITHM;
-        }
-        case 0x3C14A7B3u: {
-            // Verify: System.Private.CoreLib/System.Security.SecurityRuleSet
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.SecurityRuleSet") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYRULESET;
-        }
-        case 0x3C7421A2u: {
-            // Verify: System.Private.CoreLib/System.GCCollectionMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.GCCollectionMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCCOLLECTIONMODE;
-        }
-        case 0x3CE2C6CFu: {
-            // Verify: System.Private.CoreLib/System.Globalization.DateTimeFormatFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.DateTimeFormatFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATFLAGS;
-        }
-        case 0x3D344490u: {
-            // Verify: System.Private.CoreLib/System.Resources.UltimateResourceFallbackLocation
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Resources.UltimateResourceFallbackLocation") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_ULTIMATERESOURCEFALLBACKLOCATION;
-        }
-        case 0x3FE4DD51u: {
-            // Verify: System.Private.CoreLib/System.Globalization.GregorianCalendarTypes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.GregorianCalendarTypes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_GREGORIANCALENDARTYPES;
-        }
-        case 0x408817F8u: {
-            // Verify: System.Private.CoreLib/System.Reflection.CustomAttributeEncoding
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.CustomAttributeEncoding") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CUSTOMATTRIBUTEENCODING;
-        }
-        case 0x40977136u: {
-            // Verify: System.Private.CoreLib/System.Reflection.TypeNameParser+TokenType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.TypeNameParser+TokenType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPENAMEPARSER_TOKENTYPE;
-        }
-        case 0x413999E5u: {
-            // Verify: System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterLockType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterLockType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERLOCKTYPE;
-        }
-        case 0x41B60CDCu: {
-            // Verify: System.Collections/System.Collections.Generic.NodeColor
-            if (std::strcmp(subject_id, "System.Collections/System.Collections.Generic.NodeColor") != 0) break;
-            return &kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR;
-        }
-        case 0x43574C54u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CspProviderFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CspProviderFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS;
-        }
-        case 0x437EAD33u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_PARAMFLAG;
-        }
-        case 0x43BFF842u: {
-            // Verify: System.Private.CoreLib/System.Reflection.MethodBase+InvokerArgFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodBase+InvokerArgFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERARGFLAGS;
-        }
-        case 0x444E2A6Eu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.DebuggerBrowsableState
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.DebuggerBrowsableState") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGERBROWSABLESTATE;
-        }
-        case 0x444ED2B2u: {
-            // Verify: System.Private.CoreLib/System.Text.TrimType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Text.TrimType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_TRIMTYPE;
-        }
-        case 0x4557DFB0u: {
-            // Verify: System.Private.CoreLib/System.GC+EndNoGCRegionStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+EndNoGCRegionStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENDNOGCREGIONSTATUS;
-        }
-        case 0x4558486Bu: {
-            // Verify: System.Private.CoreLib/System.Threading.StackCrawlMark
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.StackCrawlMark") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_STACKCRAWLMARK;
-        }
-        case 0x457A11CEu: {
-            // Verify: System.Private.CoreLib/System.TimeZoneInfo+StringSerializer+State
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.TimeZoneInfo+StringSerializer+State") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE;
-        }
-        case 0x4581A306u: {
-            // Verify: System.Security.Cryptography/Interop+Advapi32+KeySpec
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+KeySpec") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC;
-        }
-        case 0x45956DA8u: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptEncryptFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptEncryptFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS;
-        }
-        case 0x45C71C51u: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.TypeKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.TypeKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND;
-        }
-        case 0x470766A3u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.PbeEncryptionAlgorithm
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.PbeEncryptionAlgorithm") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM;
-        }
-        case 0x4718BAABu: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING;
-        }
-        case 0x47BE5D30u: {
-            // Verify: System.Private.CoreLib/System.Threading.PortableThreadPool+PendingBlockingAdjustment
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.PortableThreadPool+PendingBlockingAdjustment") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT;
-        }
-        case 0x47E90EACu: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_TYPE_ENUM
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_TYPE_ENUM") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM;
-        }
-        case 0x489A818Du: {
-            // Verify: System.Private.CoreLib/System.Reflection.MdSigCallingConvention
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MdSigCallingConvention") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MDSIGCALLINGCONVENTION;
-        }
-        case 0x48FF31C4u: {
-            // Verify: System.Private.CoreLib/System.Globalization.TextInfo+Tristate
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TextInfo+Tristate") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TEXTINFO_TRISTATE;
-        }
-        case 0x493D711Eu: {
-            // Verify: System.Private.CoreLib/System.LazyState
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.LazyState") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LAZYSTATE;
-        }
-        case 0x49552C72u: {
-            // Verify: System.Private.CoreLib/System.ParseFailureKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.ParseFailureKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFAILUREKIND;
-        }
-        case 0x4A67C078u: {
-            // Verify: System.Private.CoreLib/System.Environment+SpecialFolder
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Environment+SpecialFolder") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDER;
-        }
-        case 0x4B96825Cu: {
-            // Verify: System.Private.CoreLib/System.IO.UnixFileMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.UnixFileMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE;
-        }
-        case 0x4BF97897u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngKeyOpenOptions
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngKeyOpenOptions") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS;
-        }
-        case 0x4C11478Cu: {
-            // Verify: System.Text.Json/System.Text.Json.JsonSeparatorNamingPolicy+SeparatorState
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonSeparatorNamingPolicy+SeparatorState") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE;
-        }
-        case 0x4C86F999u: {
-            // Verify: System.Private.CoreLib/Interop+NtDll+DesiredAccess
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+DesiredAccess") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS;
-        }
-        case 0x4D3A59C2u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL;
-        }
-        case 0x4DAC37E6u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+X509KeyUsageFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+X509KeyUsageFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS;
-        }
-        case 0x4DBA3939u: {
-            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptGetKeyParamFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptGetKeyParamFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS;
-        }
-        case 0x4EDF9DE7u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngKeyUsages
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngKeyUsages") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES;
-        }
-        case 0x511738DBu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertNameStrTypeAndFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertNameStrTypeAndFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS;
-        }
-        case 0x512353DAu: {
-            // Verify: System.Private.CoreLib/System.Security.PartialTrustVisibilityLevel
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.PartialTrustVisibilityLevel") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PARTIALTRUSTVISIBILITYLEVEL;
-        }
-        case 0x521E1A98u: {
-            // Verify: System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+WaiterStates
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+WaiterStates") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_WAITERSTATES;
-        }
-        case 0x523FD939u: {
-            // Verify: System.Private.CoreLib/System.Reflection.SignatureCallingConvention
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.SignatureCallingConvention") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION;
-        }
-        case 0x53D7C4BCu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngExportPolicies
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngExportPolicies") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES;
-        }
-        case 0x53EDDA05u: {
-            // Verify: System.Private.CoreLib/System.Buffers.Utilities+MemoryPressure
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.Utilities+MemoryPressure") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_UTILITIES_MEMORYPRESSURE;
-        }
-        case 0x5402673Eu: {
-            // Verify: System.Private.CoreLib/System.IO.HandleInheritability
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.HandleInheritability") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_HANDLEINHERITABILITY;
-        }
-        case 0x54E0C990u: {
-            // Verify: System.Private.CoreLib/System.GC+RefreshMemoryStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+RefreshMemoryStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS;
-        }
-        case 0x54F6BD9Fu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.ThrowHelper+ExceptionArgument
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.ThrowHelper+ExceptionArgument") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT;
-        }
-        case 0x55342577u: {
-            // Verify: System.Private.CoreLib/System.MidpointRounding
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.MidpointRounding") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_MIDPOINTROUNDING;
-        }
-        case 0x5585C5C3u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.TaskContinuationOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TaskContinuationOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCONTINUATIONOPTIONS;
-        }
-        case 0x569F82E6u: {
-            // Verify: System.Private.CoreLib/System.DTSubStringType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.DTSubStringType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DTSUBSTRINGTYPE;
-        }
-        case 0x56C31CE8u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventCommand
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventCommand") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCOMMAND;
-        }
-        case 0x57713599u: {
-            // Verify: System.Private.CoreLib/System.Runtime.GCLargeObjectHeapCompactionMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.GCLargeObjectHeapCompactionMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLARGEOBJECTHEAPCOMPACTIONMODE;
-        }
-        case 0x57E0CA54u: {
-            // Verify: System.Private.CoreLib/System.DateTimeKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND;
-        }
-        case 0x595CE97Au: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptAlgPseudoHandle
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptAlgPseudoHandle") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE;
-        }
-        case 0x59827356u: {
-            // Verify: System.Private.CoreLib/System.TypeCode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.TypeCode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE;
-        }
-        case 0x5A4EE7B9u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCFLAGS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCFLAGS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCFLAGS;
-        }
-        case 0x5BC1BCE9u: {
-            // Verify: System.Private.CoreLib/System.Reflection.ExceptionHandlingClauseOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ExceptionHandlingClauseOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS;
-        }
-        case 0x5C66BA62u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertStoreProvider
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertStoreProvider") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER;
-        }
-        case 0x5C8C98BCu: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericContextKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericContextKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND;
-        }
-        case 0x5CC85E16u: {
-            // Verify: System.Private.CoreLib/Interop+NtDll+CreateDisposition
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+NtDll+CreateDisposition") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION;
-        }
-        case 0x5E1B9D29u: {
-            // Verify: System.Security.Cryptography/Interop+Advapi32+GetDefaultProviderFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+GetDefaultProviderFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS;
-        }
-        case 0x5E87E290u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCKIND
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCKIND") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND;
-        }
-        case 0x5EC0F5CBu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CallingConvention
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CallingConvention") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CALLINGCONVENTION;
-        }
-        case 0x5F736963u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ChainPolicy
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ChainPolicy") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY;
-        }
-        case 0x5F7FA645u: {
-            // Verify: System.Security.Cryptography/System.HexConverter+Casing
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.HexConverter+Casing") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING;
-        }
-        case 0x5F9481C2u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+FormatType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+FormatType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE;
-        }
-        case 0x5FD98933u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertFindFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertFindFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS;
-        }
-        case 0x60C509DBu: {
-            // Verify: System.Private.CoreLib/System.DateTimeParse+DS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeParse+DS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DS;
-        }
-        case 0x60CA2B6Fu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.DSASignatureFormat
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.DSASignatureFormat") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT;
-        }
-        case 0x60D8C295u: {
-            // Verify: System.Private.CoreLib/System.Globalization.DateTimeStyles
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.DateTimeStyles") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMESTYLES;
-        }
-        case 0x618CE4DCu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComInterfaceType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComInterfaceType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMINTERFACETYPE;
-        }
-        case 0x61956273u: {
-            // Verify: System.Private.CoreLib/System.Reflection.ProcessorArchitecture
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ProcessorArchitecture") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROCESSORARCHITECTURE;
-        }
-        case 0x621D8B23u: {
-            // Verify: System.Private.CoreLib/System.Security.Permissions.SecurityAction
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Permissions.SecurityAction") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION;
-        }
-        case 0x627FE925u: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrReferenceKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrReferenceKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND;
-        }
-        case 0x62D60BBBu: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION;
-        }
-        case 0x635A8AF5u: {
-            // Verify: System.Text.Json/System.Text.Json.JsonValueKind
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonValueKind") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND;
-        }
-        case 0x63F96FCFu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertSetPropertyFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertSetPropertyFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS;
-        }
-        case 0x640981AFu: {
-            // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.CompilationRelaxations
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.CompilationRelaxations") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_COMPILATIONRELAXATIONS;
-        }
-        case 0x64EE0BCFu: {
-            // Verify: System.Private.CoreLib/System.Configuration.Assemblies.AssemblyVersionCompatibility
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Configuration.Assemblies.AssemblyVersionCompatibility") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY;
-        }
-        case 0x66E51F31u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptMsgParamType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptMsgParamType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE;
-        }
-        case 0x67716A83u: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING;
-        }
-        case 0x6878DAA3u: {
-            // Verify: System.Private.CoreLib/System.Globalization.TimeSpanFormat+StandardFormat
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TimeSpanFormat+StandardFormat") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANFORMAT_STANDARDFORMAT;
-        }
-        case 0x69401F33u: {
-            // Verify: System.Private.CoreLib/System.RuntimeType+DispatchWrapperType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+DispatchWrapperType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE;
-        }
-        case 0x69769152u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+ContentType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+ContentType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE;
-        }
-        case 0x69D8BE39u: {
-            // Verify: System.Private.CoreLib/System.LoaderOptimization
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.LoaderOptimization") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION;
-        }
-        case 0x6A16366Bu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationMode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationMode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE;
-        }
-        case 0x6A695F22u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldFormat
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldFormat") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT;
-        }
-        case 0x6AF3569Du: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM;
-        }
-        case 0x6B149D6Au: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.INVOKEKIND
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.INVOKEKIND") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_INVOKEKIND;
-        }
-        case 0x6B15C52Cu: {
-            // Verify: System.Private.CoreLib/System.TokenType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.TokenType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TOKENTYPE;
-        }
-        case 0x6C30BDACu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.UnmanagedType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.UnmanagedType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_UNMANAGEDTYPE;
-        }
-        case 0x6DBE97D4u: {
-            // Verify: System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ParseNumberOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ParseNumberOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS;
-        }
-        case 0x6DC8437Fu: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptCreateHashFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptCreateHashFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS;
-        }
-        case 0x6E98EEDAu: {
-            // Verify: System.Private.CoreLib/System.ComponentModel.EditorBrowsableState
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.ComponentModel.EditorBrowsableState") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE;
-        }
-        case 0x6F9EBA6Fu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertStoreFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertStoreFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS;
-        }
-        case 0x700D0154u: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.OperandType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.OperandType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPERANDTYPE;
-        }
-        case 0x70A097A4u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.RSASignaturePaddingMode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.RSASignaturePaddingMode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE;
-        }
-        case 0x70B241ECu: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING;
-        }
-        case 0x71AB6FAAu: {
-            // Verify: System.Private.CoreLib/System.Reflection.MethodImplAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodImplAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODIMPLATTRIBUTES;
-        }
-        case 0x71C96144u: {
-            // Verify: System.Private.CoreLib/System.IO.MatchType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.MatchType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHTYPE;
-        }
-        case 0x727B6C3Fu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.PosixSignal
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.PosixSignal") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_POSIXSIGNAL;
-        }
-        case 0x7336D0E9u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptImportPublicKeyInfoFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptImportPublicKeyInfoFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS;
-        }
-        case 0x73C78E6Au: {
-            // Verify: System.Private.CoreLib/System.Globalization.CultureData+LocaleGroupingData
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureData+LocaleGroupingData") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALEGROUPINGDATA;
-        }
-        case 0x73CD94D5u: {
-            // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.UnsafeAccessorKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.UnsafeAccessorKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_UNSAFEACCESSORKIND;
-        }
-        case 0x7501FBC5u: {
-            // Verify: System.Private.CoreLib/System.Threading.EventResetMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.EventResetMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_EVENTRESETMODE;
-        }
-        case 0x756A19ADu: {
-            // Verify: System.Private.CoreLib/System.RuntimeType+RuntimeTypeCache+CacheType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+RuntimeTypeCache+CacheType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_RUNTIMETYPECACHE_CACHETYPE;
-        }
-        case 0x75CDC688u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertFindType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertFindType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE;
-        }
-        case 0x7671CE3Au: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreLocation
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreLocation") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION;
-        }
-        case 0x76D557E1u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptDecodeObjectFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptDecodeObjectFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS;
-        }
-        case 0x7766AFD2u: {
-            // Verify: System.Private.CoreLib/System.Threading.ApartmentState
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ApartmentState") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE;
-        }
-        case 0x77D9F0DDu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+ChainEngineConfigFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+ChainEngineConfigFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS;
-        }
-        case 0x7882A5BCu: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonSourceGenerationMode
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonSourceGenerationMode") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE;
-        }
-        case 0x7A7E11FCu: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+KeyBlobMagicNumber
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+KeyBlobMagicNumber") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER;
-        }
-        case 0x7AD75124u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.PaddingMode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.PaddingMode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE;
-        }
-        case 0x7AF0D34Eu: {
-            // Verify: System.Private.CoreLib/Interop+Globalization+ResultCode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Globalization+ResultCode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_RESULTCODE;
-        }
-        case 0x7C14A2C7u: {
-            // Verify: System.Private.CoreLib/System.ExceptionArgument
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.ExceptionArgument") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONARGUMENT;
-        }
-        case 0x7D55736Du: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonKnownNamingPolicy
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonKnownNamingPolicy") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY;
-        }
-        case 0x7D686189u: {
-            // Verify: System.Security.Cryptography/Interop+NCrypt+ErrorCode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+NCrypt+ErrorCode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE;
-        }
-        case 0x7D7E0E81u: {
-            // Verify: System.Private.CoreLib/System.Text.Unicode.GraphemeClusterBreakType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Text.Unicode.GraphemeClusterBreakType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE;
-        }
-        case 0x7E538B85u: {
-            // Verify: System.Private.CoreLib/System.GC+EnableNoGCRegionCallbackStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+EnableNoGCRegionCallbackStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS;
-        }
-        case 0x7E5A8108u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustErrorStatus
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustErrorStatus") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS;
-        }
-        case 0x7F05DE79u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.TaskCreationOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.TaskCreationOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCREATIONOPTIONS;
-        }
-        case 0x805634A2u: {
-            // Verify: System.Security.Cryptography/Internal.NativeCrypto.Cng+OpenAlgorithmProviderFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Internal.NativeCrypto.Cng+OpenAlgorithmProviderFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS;
-        }
-        case 0x80617111u: {
-            // Verify: System.Private.CoreLib/System.RuntimeType+CheckValueStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.RuntimeType+CheckValueStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS;
-        }
-        case 0x80C63118u: {
-            // Verify: System.Linq/System.Linq.ExceptionArgument
-            if (std::strcmp(subject_id, "System.Linq/System.Linq.ExceptionArgument") != 0) break;
-            return &kEnumTable_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT;
-        }
-        case 0x811582D0u: {
-            // Verify: System.Private.CoreLib/System.Security.Permissions.SecurityPermissionFlag
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Permissions.SecurityPermissionFlag") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYPERMISSIONFLAG;
-        }
-        case 0x815E7F97u: {
-            // Verify: System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS;
-        }
-        case 0x81805E6Eu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertQueryObjectType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertQueryObjectType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE;
-        }
-        case 0x81D9A6FEu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.RuntimeEventSource+EventId
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.RuntimeEventSource+EventId") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_RUNTIMEEVENTSOURCE_EVENTID;
-        }
-        case 0x8291778Eu: {
-            // Verify: System.Private.CoreLib/System.Reflection.ParameterAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ParameterAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PARAMETERATTRIBUTES;
-        }
-        case 0x8388F92Fu: {
-            // Verify: System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferDroppedReason
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferDroppedReason") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERDROPPEDREASON;
-        }
-        case 0x83A7057Cu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventActivityOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventActivityOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTACTIVITYOPTIONS;
-        }
-        case 0x841E4DCFu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CODEANALYSIS_DYNAMICALLYACCESSEDMEMBERTYPES;
-        }
-        case 0x853E964Du: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngKeyHandleOpenOptions
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngKeyHandleOpenOptions") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS;
-        }
-        case 0x862972CDu: {
-            // Verify: System.Private.CoreLib/System.Globalization.UnicodeCategory
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.UnicodeCategory") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY;
-        }
-        case 0x86B43E05u: {
-            // Verify: System.Private.CoreLib/System.Reflection.EventAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.EventAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES;
-        }
-        case 0x86EA5932u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventChannelType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventChannelType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE;
-        }
-        case 0x871AF722u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertEncodingType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertEncodingType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE;
-        }
-        case 0x87306E28u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CryptoStreamMode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CryptoStreamMode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE;
-        }
-        case 0x87C0EA01u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+ExpectedFormatTypeFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+ExpectedFormatTypeFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS;
-        }
-        case 0x87E6C643u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyStorageFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyStorageFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS;
-        }
-        case 0x87F25CC0u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.AsyncCausalityStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.AsyncCausalityStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_ASYNCCAUSALITYSTATUS;
-        }
-        case 0x88BC3873u: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+BCryptSignVerifyFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+BCryptSignVerifyFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS;
-        }
-        case 0x89116E2Bu: {
-            // Verify: System.Private.CoreLib/System.Globalization.IcuLocaleDataParts
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.IcuLocaleDataParts") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_ICULOCALEDATAPARTS;
-        }
-        case 0x89321D70u: {
-            // Verify: System.Private.CoreLib/System.Reflection.NullabilityInfoContext+NotAnnotatedStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.NullabilityInfoContext+NotAnnotatedStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYINFOCONTEXT_NOTANNOTATEDSTATUS;
-        }
-        case 0x89E3F3CEu: {
-            // Verify: System.Private.CoreLib/System.Reflection.NullabilityState
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.NullabilityState") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE;
-        }
-        case 0x8A5D0BA6u: {
-            // Verify: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeTargetEntry+TargetKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeTargetEntry+TargetKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND;
-        }
-        case 0x8AE75260u: {
-            // Verify: System.Private.CoreLib/System.Runtime.GCLatencyMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.GCLatencyMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLATENCYMODE;
-        }
-        case 0x8BA10731u: {
-            // Verify: System.Private.CoreLib/System.Environment+SpecialFolderOption
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Environment+SpecialFolderOption") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDEROPTION;
-        }
-        case 0x8BEF7DC8u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Contracts.ContractFailureKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Contracts.ContractFailureKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CONTRACTS_CONTRACTFAILUREKIND;
-        }
-        case 0x8C0C1B85u: {
-            // Verify: System.Private.CoreLib/System.Threading.ThreadPriority
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.ThreadPriority") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADPRIORITY;
-        }
-        case 0x8D16BC9Au: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationFlag
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationFlag") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG;
-        }
-        case 0x8DFF0696u: {
-            // Verify: System.Private.CoreLib/System.Threading.LazyThreadSafetyMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.LazyThreadSafetyMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE;
-        }
-        case 0x8E714DC1u: {
-            // Verify: System.Private.CoreLib/System.EnvironmentVariableTarget
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.EnvironmentVariableTarget") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENTVARIABLETARGET;
-        }
-        case 0x8E9305F4u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.KeyNumber
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.KeyNumber") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER;
-        }
-        case 0x8E962F90u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngKeyCreationOptions
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngKeyCreationOptions") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS;
-        }
-        case 0x8F2C6B47u: {
-            // Verify: System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ComponentParseResult
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ComponentParseResult") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_COMPONENTPARSERESULT;
-        }
-        case 0x8FF66DECu: {
-            // Verify: System.Private.CoreLib/System.Reflection.ImageFileMachine
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ImageFileMachine") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_IMAGEFILEMACHINE;
-        }
-        case 0x904D32E3u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.ConfigureAwaitOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.ConfigureAwaitOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONFIGUREAWAITOPTIONS;
-        }
-        case 0x9053E981u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.InternalTaskOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.InternalTaskOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_INTERNALTASKOPTIONS;
-        }
-        case 0x92770593u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACEMODE;
-        }
-        case 0x934DFFEDu: {
-            // Verify: System.Private.CoreLib/System.Globalization.TimeSpanStyles
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TimeSpanStyles") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES;
-        }
-        case 0x948DCF6Du: {
-            // Verify: System.Text.Json/System.Text.Json.ExceptionResource
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.ExceptionResource") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE;
-        }
-        case 0x94BDCA52u: {
-            // Verify: System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS;
-        }
-        case 0x951BBDB1u: {
-            // Verify: System.Private.CoreLib/System.Runtime.ConstrainedExecution.Consistency
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.ConstrainedExecution.Consistency") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY;
-        }
-        case 0x953E17DDu: {
-            // Verify: System.Private.CoreLib/System.Security.Permissions.PermissionState
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Permissions.PermissionState") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_PERMISSIONSTATE;
-        }
-        case 0x958994A7u: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.TypeNameBuilder+Format
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.TypeNameBuilder+Format") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPENAMEBUILDER_FORMAT;
-        }
-        case 0x962F322Eu: {
-            // Verify: System.Private.CoreLib/System.IO.SearchOption
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.SearchOption") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHOPTION;
-        }
-        case 0x97DCC476u: {
-            // Verify: System.Private.CoreLib/Interop+ObjectAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+ObjectAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES;
-        }
-        case 0x98517214u: {
-            // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.CastResult
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.CastResult") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_CASTRESULT;
-        }
-        case 0x98D0C7C6u: {
-            // Verify: System.Private.CoreLib/System.TypeNameKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.TypeNameKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEKIND;
-        }
-        case 0x995A7820u: {
-            // Verify: System.Private.CoreLib/System.Globalization.HebrewNumber+HS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.HebrewNumber+HS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HS;
-        }
-        case 0x998F181Eu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventPipeSerializationFormat
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventPipeSerializationFormat") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPIPESERIALIZATIONFORMAT;
-        }
-        case 0x99BC0F28u: {
-            // Verify: System.Private.CoreLib/System.Threading.LockRecursionPolicy
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.LockRecursionPolicy") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY;
-        }
-        case 0x99CACDB4u: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSpecializationKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSpecializationKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND;
-        }
-        case 0x9A189910u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.VarEnum
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.VarEnum") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_VARENUM;
-        }
-        case 0x9A89B6EEu: {
-            // Verify: System.Text.Json/System.Text.Json.ConsumeTokenResult
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.ConsumeTokenResult") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT;
-        }
-        case 0x9AE37DA4u: {
-            // Verify: System.Private.CoreLib/System.Runtime.GCSettings+SetLatencyModeStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.GCSettings+SetLatencyModeStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS;
-        }
-        case 0x9C6C4647u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARKIND
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARKIND") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARKIND;
-        }
-        case 0x9CC616BAu: {
-            // Verify: System.Private.CoreLib/System.Globalization.CalendarWeekRule
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarWeekRule") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE;
-        }
-        case 0x9D96E4DAu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreName
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreName") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME;
-        }
-        case 0x9E92B1C3u: {
-            // Verify: System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TIMEZONEINFORESULT;
-        }
-        case 0x9E97E73Cu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptOidInfoKeyType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptOidInfoKeyType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE;
-        }
-        case 0x9EB04086u: {
-            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptProvParam
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptProvParam") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM;
-        }
-        case 0xA041F77Cu: {
-            // Verify: System.Private.CoreLib/System.Globalization.FORMATFLAGS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.FORMATFLAGS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_FORMATFLAGS;
-        }
-        case 0xA0EE8B97u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS;
-        }
-        case 0xA14311A8u: {
-            // Verify: System.Private.CoreLib/System.Reflection.MethodBase+InvokerStrategy
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodBase+InvokerStrategy") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY;
-        }
-        case 0xA1F06941u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.ECKeyXmlFormat
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.ECKeyXmlFormat") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT;
-        }
-        case 0xA1FF20A1u: {
-            // Verify: System.Text.Json/System.Text.Json.StackFramePropertyState
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.StackFramePropertyState") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE;
-        }
-        case 0xA2611655u: {
-            // Verify: System.Private.CoreLib/System.Globalization.CalendarId
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarId") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID;
-        }
-        case 0xA3435A46u: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_ALG_ID_ENUM
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_ALG_ID_ENUM") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM;
-        }
-        case 0xA4194B48u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.FromBase64TransformMode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.FromBase64TransformMode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE;
-        }
-        case 0xA5722627u: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrRuntimeServiceKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrRuntimeServiceKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND;
-        }
-        case 0xA5929B03u: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.ReferenceHandlingStrategy
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.ReferenceHandlingStrategy") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY;
-        }
-        case 0xA5ABCC22u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_OBJECTIVEC_OBJECTIVECMARSHAL_MESSAGESENDFUNCTION;
-        }
-        case 0xA61F138Fu: {
-            // Verify: System.Private.CoreLib/System.Globalization.HebrewNumber+HebrewToken
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.HebrewNumber+HebrewToken") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HEBREWTOKEN;
-        }
-        case 0xA62C4308u: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.BodyAvailabilityCode
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.BodyAvailabilityCode") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE;
-        }
-        case 0xA698B412u: {
-            // Verify: System.Private.CoreLib/System.GC+GC_ALLOC_FLAGS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+GC_ALLOC_FLAGS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS;
-        }
-        case 0xA7C5BD9Bu: {
-            // Verify: System.Private.CoreLib/System.Runtime.Versioning.ResourceScope
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Versioning.ResourceScope") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_RESOURCESCOPE;
-        }
-        case 0xA880B7BEu: {
-            // Verify: System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS;
-        }
-        case 0xAA30318Fu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509FindType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509FindType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE;
-        }
-        case 0xAB076184u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.Task+TaskStateFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.Task+TaskStateFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASK_TASKSTATEFLAGS;
-        }
-        case 0xAC000695u: {
-            // Verify: System.Private.CoreLib/System.Reflection.AssemblyContentType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.AssemblyContentType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYCONTENTTYPE;
-        }
-        case 0xAC39E3DAu: {
-            // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.MethodCodeType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.MethodCodeType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODCODETYPE;
-        }
-        case 0xAC71F9ADu: {
-            // Verify: System.Private.CoreLib/System.Globalization.CalendarAlgorithmType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CalendarAlgorithmType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARALGORITHMTYPE;
-        }
-        case 0xAD24EBF0u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CharSet
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CharSet") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CHARSET;
-        }
-        case 0xADFECC6Du: {
-            // Verify: System.Private.CoreLib/System.Reflection.InvocationFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.InvocationFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS;
-        }
-        case 0xAE00ED7Du: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertControlStoreType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertControlStoreType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE;
-        }
-        case 0xAE3F2B49u: {
-            // Verify: System.Private.CoreLib/System.Reflection.FieldAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.FieldAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES;
-        }
-        case 0xAE924D7Bu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventSourceSettings
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventSourceSettings") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTSOURCESETTINGS;
-        }
-        case 0xAEEC9415u: {
-            // Verify: System.Private.CoreLib/System.DateTimeParse+TM
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.DateTimeParse+TM") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM;
-        }
-        case 0xAF65A67Du: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS;
-        }
-        case 0xB0EE334Bu: {
-            // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.LoadHint
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.LoadHint") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_LOADHINT;
-        }
-        case 0xB1512204u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.CausalityRelation
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.CausalityRelation") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYRELATION;
-        }
-        case 0xB1F47058u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCESTATUS;
-        }
-        case 0xB2CE6651u: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.OpCodeType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.OpCodeType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODETYPE;
-        }
-        case 0xB57D6640u: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.AssemblyBuilderAccess
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.AssemblyBuilderAccess") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS;
-        }
-        case 0xB5886A40u: {
-            // Verify: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeDispatchStyle
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeDispatchStyle") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE;
-        }
-        case 0xB6463128u: {
-            // Verify: System.Private.CoreLib/System.Security.Principal.TokenImpersonationLevel
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Principal.TokenImpersonationLevel") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_TOKENIMPERSONATIONLEVEL;
-        }
-        case 0xB680A94Du: {
-            // Verify: System.Private.CoreLib/System.Globalization.DigitShapes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.DigitShapes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DIGITSHAPES;
-        }
-        case 0xB69E8D3Eu: {
-            // Verify: System.Private.CoreLib/System.Runtime.Loader.AssemblyLoadContext+InternalState
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Loader.AssemblyLoadContext+InternalState") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_LOADER_ASSEMBLYLOADCONTEXT_INTERNALSTATE;
-        }
-        case 0xB726C185u: {
-            // Verify: System.Private.CoreLib/System.Reflection.PInvokeAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.PInvokeAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PINVOKEATTRIBUTES;
-        }
-        case 0xB73C071Au: {
-            // Verify: System.Private.CoreLib/System.Number+NumberBufferKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Number+NumberBufferKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_NUMBERBUFFERKIND;
-        }
-        case 0xB740C315u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.ECCurve+ECCurveType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.ECCurve+ECCurveType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE;
-        }
-        case 0xB769D93Au: {
-            // Verify: System.Private.CoreLib/System.StubHelpers.AsAnyMarshaler+BackPropAction
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.StubHelpers.AsAnyMarshaler+BackPropAction") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STUBHELPERS_ASANYMARSHALER_BACKPROPACTION;
-        }
-        case 0xB77E83BEu: {
-            // Verify: System.Private.CoreLib/System.Security.SecurityCriticalScope
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.SecurityCriticalScope") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYCRITICALSCOPE;
-        }
-        case 0xB805614Eu: {
-            // Verify: System.Private.CoreLib/System.Reflection.MetadataTokenType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MetadataTokenType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METADATATOKENTYPE;
-        }
-        case 0xB975A58Eu: {
-            // Verify: System.Text.Json/System.Text.Json.JsonCommentHandling
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonCommentHandling") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING;
-        }
-        case 0xB9B9E5EEu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.LIBFLAGS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.LIBFLAGS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS;
-        }
-        case 0xBAA247D5u: {
-            // Verify: System.Private.CoreLib/System.Globalization.HebrewNumberParsingState
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.HebrewNumberParsingState") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBERPARSINGSTATE;
-        }
-        case 0xBBCDED50u: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.FlowControl
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.FlowControl") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_FLOWCONTROL;
-        }
-        case 0xBBDEC631u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS;
-        }
-        case 0xBC5817ACu: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.HybridDispatchKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.HybridDispatchKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND;
-        }
-        case 0xBCB6DC0Bu: {
-            // Verify: System.Private.CoreLib/System.IO.FileAccess
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileAccess") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS;
-        }
-        case 0xBD10F4F5u: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.PEFileKinds
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.PEFileKinds") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PEFILEKINDS;
-        }
-        case 0xBD85E5D7u: {
-            // Verify: System.Private.CoreLib/Interop+Advapi32+ActivityControl
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+ActivityControl") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_ACTIVITYCONTROL;
-        }
-        case 0xBE0BA9B2u: {
-            // Verify: System.Private.CoreLib/System.HexConverter+Casing
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.HexConverter+Casing") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_HEXCONVERTER_CASING;
-        }
-        case 0xBE7F5639u: {
-            // Verify: System.Private.CoreLib/System.IO.SeekOrigin
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.SeekOrigin") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEEKORIGIN;
-        }
-        case 0xBF18F5D5u: {
-            // Verify: System.Private.CoreLib/System.Globalization.NumberStyles
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.NumberStyles") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_NUMBERSTYLES;
-        }
-        case 0xBF934014u: {
-            // Verify: System.Private.CoreLib/System.GCNotificationStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.GCNotificationStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCNOTIFICATIONSTATUS;
-        }
-        case 0xBF93BC81u: {
-            // Verify: System.Private.CoreLib/System.Globalization.TimeSpanParse+TimeSpanStandardStyles
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TimeSpanParse+TimeSpanStandardStyles") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TIMESPANSTANDARDSTYLES;
-        }
-        case 0xBFCF687Bu: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.PackingSize
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.PackingSize") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PACKINGSIZE;
-        }
-        case 0xBFD8BD93u: {
-            // Verify: System.Private.CoreLib/Interop+BCrypt+NTSTATUS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+BCrypt+NTSTATUS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS;
-        }
-        case 0xC03D7F7Fu: {
-            // Verify: System.Private.CoreLib/System.GCKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.GCKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCKIND;
-        }
-        case 0xC0716F8Fu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComMemberType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComMemberType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMMEMBERTYPE;
-        }
-        case 0xC14F8D65u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IDLFLAG
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IDLFLAG") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IDLFLAG;
-        }
-        case 0xC1BDEC8Fu: {
-            // Verify: System.Private.CoreLib/System.Number+ParsingStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Number+ParsingStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS;
-        }
-        case 0xC1DD8FF6u: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+NTSTATUS
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+NTSTATUS") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS;
-        }
-        case 0xC3197A07u: {
-            // Verify: System.Private.CoreLib/System.Buffers.OperationStatus
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Buffers.OperationStatus") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS;
-        }
-        case 0xC33CE704u: {
-            // Verify: System.Private.CoreLib/System.Reflection.MethodAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MethodAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODATTRIBUTES;
-        }
-        case 0xC35AB28Eu: {
-            // Verify: System.Private.CoreLib/System.Globalization.CultureData+LocaleNumberData
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureData+LocaleNumberData") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA;
-        }
-        case 0xC47700F9u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+ExpectedContentTypeFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+ExpectedContentTypeFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS;
-        }
-        case 0xC4DFC1B5u: {
-            // Verify: System.Private.CoreLib/System.Runtime.CompilerServices.MethodImplOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.CompilerServices.MethodImplOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODIMPLOPTIONS;
-        }
-        case 0xC62BB2BBu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertChainFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertChainFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS;
-        }
-        case 0xC69CB48Eu: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrAbiCarrierKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrAbiCarrierKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND;
-        }
-        case 0xC6A9EB01u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.StackTrace+TraceFormat
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.StackTrace+TraceFormat") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT;
-        }
-        case 0xC761A896u: {
-            // Verify: System.Private.CoreLib/Interop+ImpersonationLevel
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+ImpersonationLevel") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL;
-        }
-        case 0xC8855036u: {
-            // Verify: System.Private.CoreLib/System.IO.SearchTarget
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.SearchTarget") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET;
-        }
-        case 0xCA274D91u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509IncludeOption
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509IncludeOption") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION;
-        }
-        case 0xCA2C73B5u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.StringMarshalling
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.StringMarshalling") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING;
-        }
-        case 0xCC5F91B8u: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.InstructionOpCode
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.InstructionOpCode") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE;
-        }
-        case 0xCC731390u: {
-            // Verify: System.Private.CoreLib/System.Reflection.CallingConventions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.CallingConventions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CALLINGCONVENTIONS;
-        }
-        case 0xCC908537u: {
-            // Verify: System.Security.Cryptography/Interop+Advapi32+CryptHashProperty
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Advapi32+CryptHashProperty") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY;
-        }
-        case 0xCCAD5B51u: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND;
-        }
-        case 0xCD25C4FEu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngUIProtectionLevels
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngUIProtectionLevels") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS;
-        }
-        case 0xCE4AC3A5u: {
-            // Verify: System.Private.CoreLib/System.Reflection.TypeAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.TypeAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES;
-        }
-        case 0xCF01B762u: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericDemandFamilyKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericDemandFamilyKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND;
-        }
-        case 0xCF586EF1u: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+ConfigurationState
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+ConfigurationState") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE;
-        }
-        case 0xCF8B85EEu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CreateObjectFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CreateObjectFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATEOBJECTFLAGS;
-        }
-        case 0xD01172F2u: {
-            // Verify: System.Private.CoreLib/System.Reflection.AssemblyNameFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.AssemblyNameFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEFLAGS;
-        }
-        case 0xD0F5E2B4u: {
-            // Verify: System.Private.CoreLib/System.IO.FileAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEATTRIBUTES;
-        }
-        case 0xD108AF95u: {
-            // Verify: System.Private.CoreLib/System.Globalization.MonthNameStyles
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.MonthNameStyles") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_MONTHNAMESTYLES;
-        }
-        case 0xD1175241u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventOpcode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventOpcode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTOPCODE;
-        }
-        case 0xD1312F7Du: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrTypeShapeKind
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrTypeShapeKind") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND;
-        }
-        case 0xD33CF18Eu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertStoreAddDisposition
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertStoreAddDisposition") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION;
-        }
-        case 0xD3CFB0F0u: {
-            // Verify: System.Private.CoreLib/System.Threading.Tasks.CausalitySynchronousWork
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Threading.Tasks.CausalitySynchronousWork") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYSYNCHRONOUSWORK;
-        }
-        case 0xD3F0C259u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceResult
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceResult") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACERESULT;
-        }
-        case 0xD56E1D76u: {
-            // Verify: System.Text.Json/System.Text.Json.ConsumeNumberResult
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.ConsumeNumberResult") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT;
-        }
-        case 0xD5F6AC77u: {
-            // Verify: System.Private.CoreLib/System.Runtime.Versioning.ComponentGuaranteesOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Versioning.ComponentGuaranteesOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_COMPONENTGUARANTEESOPTIONS;
-        }
-        case 0xD61A7F8Au: {
-            // Verify: System.Private.CoreLib/System.GC+GCConfigurationType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.GC+GCConfigurationType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GCCONFIGURATIONTYPE;
-        }
-        case 0xD8BB0FE9u: {
-            // Verify: System.Private.CoreLib/System.Reflection.ResourceAttributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ResourceAttributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES;
-        }
-        case 0xD9FD14EBu: {
-            // Verify: System.Private.CoreLib/System.Runtime.ConstrainedExecution.Cer
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.ConstrainedExecution.Cer") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER;
-        }
-        case 0xDA62ADC6u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustInfoStatus
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustInfoStatus") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS;
-        }
-        case 0xDA822A59u: {
-            // Verify: System.Private.CoreLib/Interop+ContextTrackingMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+ContextTrackingMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE;
-        }
-        case 0xDB611107u: {
-            // Verify: System.Private.CoreLib/System.Reflection.MemberTypes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.MemberTypes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES;
-        }
-        case 0xDC8F029Eu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CipherMode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CipherMode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE;
-        }
-        case 0xDDAB29C6u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509VerificationFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509VerificationFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS;
-        }
-        case 0xDDE7A5CDu: {
-            // Verify: System.Private.CoreLib/System.Reflection.Associates+Attributes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Associates+Attributes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSOCIATES_ATTRIBUTES;
-        }
-        case 0xDE0F47D8u: {
-            // Verify: System.Private.CoreLib/System.IO.FileShare
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.IO.FileShare") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILESHARE;
-        }
-        case 0xDE42696Du: {
-            // Verify: System.Private.CoreLib/System.Text.NormalizationForm
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Text.NormalizationForm") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_NORMALIZATIONFORM;
-        }
-        case 0xE0861922u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.ControllerCommand
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.ControllerCommand") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_CONTROLLERCOMMAND;
-        }
-        case 0xE0DD5C31u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventProvider+WriteEventErrorCode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventProvider+WriteEventErrorCode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDER_WRITEEVENTERRORCODE;
-        }
-        case 0xE31D97C2u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.DllImportSearchPath
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.DllImportSearchPath") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH;
-        }
-        case 0xE333C2C8u: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS;
-        }
-        case 0xE3699697u: {
-            // Verify: System.Private.CoreLib/System.DefaultBinder+Primitives
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.DefaultBinder+Primitives") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES;
-        }
-        case 0xE4254900u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CertNameType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CertNameType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE;
-        }
-        case 0xE4C62746u: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonUnknownDerivedTypeHandling
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonUnknownDerivedTypeHandling") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING;
-        }
-        case 0xE53A620Eu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ContentionFlagsMap
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ContentionFlagsMap") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_CONTENTIONFLAGSMAP;
-        }
-        case 0xE5B2D957u: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+SourceConstructFlags
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+SourceConstructFlags") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS;
-        }
-        case 0xE5D3FA77u: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoKind
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoKind") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND;
-        }
-        case 0xE608DBCBu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.CreateComInterfaceFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.CreateComInterfaceFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATECOMINTERFACEFLAGS;
-        }
-        case 0xE676676Fu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventKeywords
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventKeywords") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTKEYWORDS;
-        }
-        case 0xE68A9FC7u: {
-            // Verify: System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING;
-        }
-        case 0xE6F09D9Eu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventTags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventTags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS;
-        }
-        case 0xE7118A49u: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+CryptAcquireCertificatePrivateKeyFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+CryptAcquireCertificatePrivateKeyFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS;
-        }
-        case 0xE782C1B5u: {
-            // Verify: System.Private.CoreLib/System.Globalization.CultureTypes
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureTypes") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES;
-        }
-        case 0xE8B841EBu: {
-            // Verify: System.Security.Cryptography/Interop+Crypt32+MsgEncodingType
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+Crypt32+MsgEncodingType") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE;
-        }
-        case 0xE9093830u: {
-            // Verify: System.Private.CoreLib/System.DelegateBindingFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.DelegateBindingFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DELEGATEBINDINGFLAGS;
-        }
-        case 0xEB3094ABu: {
-            // Verify: System.Private.CoreLib/System.StringComparison
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.StringComparison") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON;
-        }
-        case 0xEBFC9DBDu: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+HASHALGORITHM_ENUM
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+HASHALGORITHM_ENUM") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM;
-        }
-        case 0xEC06DE8Du: {
-            // Verify: System.Private.CoreLib/System.Reflection.AssemblyNameParser+AttributeKind
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.AssemblyNameParser+AttributeKind") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_ATTRIBUTEKIND;
-        }
-        case 0xEE6E5227u: {
-            // Verify: System.Private.CoreLib/System.Reflection.ResourceLocation
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.ResourceLocation") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCELOCATION;
-        }
-        case 0xEECC1B24u: {
-            // Verify: System.Private.CoreLib/System.Configuration.Assemblies.AssemblyHashAlgorithm
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Configuration.Assemblies.AssemblyHashAlgorithm") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM;
-        }
-        case 0xEFB6B852u: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+DSAFIPSVERSION_ENUM
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+DSAFIPSVERSION_ENUM") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM;
-        }
-        case 0xEFDA7B73u: {
-            // Verify: System.Private.CoreLib/System.Security.Principal.PrincipalPolicy
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Security.Principal.PrincipalPolicy") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY;
-        }
-        case 0xEFE95F73u: {
-            // Verify: Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.RuntimeMode
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.RuntimeMode") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE;
-        }
-        case 0xF1D5A67Eu: {
-            // Verify: System.Private.CoreLib/System.TypeNameFormatFlags
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.TypeNameFormatFlags") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS;
-        }
-        case 0xF2221B2Au: {
-            // Verify: System.Private.CoreLib/System.Globalization.CultureData+LocaleStringData
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CultureData+LocaleStringData") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALESTRINGDATA;
-        }
-        case 0xF2A50EA1u: {
-            // Verify: System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS
-            if (std::strcmp(subject_id, "System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS;
-        }
-        case 0xF2FFBFF1u: {
-            // Verify: System.Private.CoreLib/System.Globalization.TimeSpanParse+TTT
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.TimeSpanParse+TTT") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TTT;
-        }
-        case 0xF30EDDBBu: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComWrappersScenario
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComWrappersScenario") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMWRAPPERSSCENARIO;
-        }
-        case 0xF4AF6F34u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationReason
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationReason") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON;
-        }
-        case 0xF5ADD0B0u: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS;
-        }
-        case 0xF64AFB31u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CngPropertyOptions
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CngPropertyOptions") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS;
-        }
-        case 0xF67C68ABu: {
-            // Verify: System.Collections/System.Collections.Generic.TreeRotation
-            if (std::strcmp(subject_id, "System.Collections/System.Collections.Generic.TreeRotation") != 0) break;
-            return &kEnumTable_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION;
-        }
-        case 0xF722539Au: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventTask
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventTask") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTASK;
-        }
-        case 0xF74FA550u: {
-            // Verify: System.Security.Cryptography/Interop+BCrypt+CngBufferDescriptors
-            if (std::strcmp(subject_id, "System.Security.Cryptography/Interop+BCrypt+CngBufferDescriptors") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS;
-        }
-        case 0xF7CFFA84u: {
-            // Verify: System.Private.CoreLib/System.Reflection.Emit.StackBehaviour
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.Emit.StackBehaviour") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_STACKBEHAVIOUR;
-        }
-        case 0xF7D17E9Au: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainTrustMode
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainTrustMode") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE;
-        }
-        case 0xF8501125u: {
-            // Verify: System.Text.Json/System.Text.Json.PolymorphicSerializationState
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.PolymorphicSerializationState") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE;
-        }
-        case 0xF88D7997u: {
-            // Verify: System.Private.CoreLib/System.Runtime.Intrinsics.X86.FloatComparisonMode
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.Intrinsics.X86.FloatComparisonMode") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTRINSICS_X86_FLOATCOMPARISONMODE;
-        }
-        case 0xF8C0EF6Eu: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainStatusFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainStatusFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS;
-        }
-        case 0xF95F14D7u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.DESCKIND
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.DESCKIND") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DESCKIND;
-        }
-        case 0xF988EA4Au: {
-            // Verify: System.Private.CoreLib/System.Reflection.AssemblyNameParser+Token
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Reflection.AssemblyNameParser+Token") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN;
-        }
-        case 0xF9F6BDECu: {
-            // Verify: System.Text.Json/System.Text.Json.JsonSerializerDefaults
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.JsonSerializerDefaults") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS;
-        }
-        case 0xFA31A8BAu: {
-            // Verify: System.Private.CoreLib/System.Diagnostics.Tracing.EventProviderType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Diagnostics.Tracing.EventProviderType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDERTYPE;
-        }
-        case 0xFB7F7963u: {
-            // Verify: System.Text.Json/System.Text.Json.StackFrameObjectState
-            if (std::strcmp(subject_id, "System.Text.Json/System.Text.Json.StackFrameObjectState") != 0) break;
-            return &kEnumTable_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE;
-        }
-        case 0xFBAA6CECu: {
-            // Verify: Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.CodegenMode
-            if (std::strcmp(subject_id, "Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.CodegenMode") != 0) break;
-            return &kEnumTable_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE;
-        }
-        case 0xFC685799u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS;
-        }
-        case 0xFD53AEA9u: {
-            // Verify: System.Security.Cryptography/System.Security.Cryptography.CapiHelper+ClrPropertyId
-            if (std::strcmp(subject_id, "System.Security.Cryptography/System.Security.Cryptography.CapiHelper+ClrPropertyId") != 0) break;
-            return &kEnumTable_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID;
-        }
-        case 0xFDF59BEDu: {
-            // Verify: System.Private.CoreLib/System.Globalization.CompareOptions
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Globalization.CompareOptions") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_COMPAREOPTIONS;
-        }
-        case 0xFF0E6E27u: {
-            // Verify: System.Private.CoreLib/System.Runtime.InteropServices.ClassInterfaceType
-            if (std::strcmp(subject_id, "System.Private.CoreLib/System.Runtime.InteropServices.ClassInterfaceType") != 0) break;
-            return &kEnumTable_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CLASSINTERFACETYPE;
-        }
-        default:
-            return nullptr;
-    }
+/// Compute FNV-1a 24-bit hash (matching ChaosReflectionGetTypeFromHandle).
+inline static CHAOS_IL2CPP_UINT32 compute_enum_hash24(
+    const char* s) noexcept {
+    return s && s[0] ? compute_enum_hash32(s) & 0xFFFFFFu : 0u;
 }
 
 // ── Dispatch table: sorted by FNV-24 for binary search ──
@@ -12678,1817 +10455,1812 @@ inline static const EnumMetadataTable* chaos_dispatch_lookup(
     return nullptr;
 }
 
+/// Lookup enum metadata by subject_id FNV-1a 32-bit hash via dispatch table binary search.
+/// Returns nullptr if the type is unknown (fallback to reflection API).
+inline static const EnumMetadataTable* chaos_find_enum_metadata(
+    const char* subject_id) noexcept
+{
+    if (subject_id == nullptr || subject_id[0] == '\0')
+        return nullptr;
+    return chaos_dispatch_lookup(compute_enum_hash32(subject_id) & 0xFFFFFFu);
+}
+
+
 }}}  // namespace chaos::il2cpp::codegen
 
-// Function pointers defined in enum_stubs.cpp (default nullptr).
-extern "C" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata)(
+
+using chaos::il2cpp::codegen::compute_enum_hash24;extern "C" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata)(
     const char* subject_id) noexcept;
 extern "C" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata_by_fnv24)(
     CHAOS_IL2CPP_UINT32 fnv24) noexcept;
 
-// Helper: compute FNV-1a 24-bit hash (matching ChaosReflectionGetTypeFromHandle).
-static inline CHAOS_IL2CPP_UINT32 compute_enum_hash24(const char* s) noexcept {
-    if (s == nullptr || s[0] == '\0') return 0u;
-    CHAOS_IL2CPP_UINT32 h = 2166136261u;
-    for (; *s; ++s) {
-        h ^= static_cast<CHAOS_IL2CPP_UINT8>(*s);
-        h *= 16777619u;
+// Static (internal linkage) so multiple TUs including this header don't ODR-violate.
+// Only the first page's IIFE calls this; other TUs' copies are dead code.
+static void ChaosRegisterEnumGeneratedMetadata() noexcept {
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.OpCodeValues"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODEVALUES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Exception+ExceptionMessageKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTION_EXCEPTIONMESSAGEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.ExceptionResource"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONRESOURCE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferAllocatedReason"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERALLOCATEDREASON));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.ConcurrentExclusiveSchedulerPair+ProcessingMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_PROCESSINGMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldTags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.CALLCONV"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+PFXExportFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.JsonTokenType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Resources.ResourceTypeCode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_RESOURCETYPECODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Collections.Generic.InsertionBehavior"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_COLLECTIONS_GENERIC_INSERTIONBEHAVIOR));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventLevel"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTLEVEL));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.SYSKIND"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_SYSKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertControlStoreFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.MarshalMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_MARSHALMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.TraceLoggingDataType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_TRACELOGGINGDATATYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.CorElementType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CORELEMENTTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.ThreadState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptKeySpec"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.Serialization.StreamingContextStates"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_SERIALIZATION_STREAMINGCONTEXTSTATES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Base64FormattingOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BASE64FORMATTINGOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.GenericParameterAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_GENERICPARAMETERATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.DateTimeFormatInfoScanner+FoundDatePattern"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATINFOSCANNER_FOUNDDATEPATTERN));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+PfxCertStoreFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+BufferType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.FileOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.BindingFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_BINDINGFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameStringType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreSaveAs"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Guid+GuidParseThrowStyle"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_GUIDPARSETHROWSTYLE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+AsymmetricPaddingMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ContentType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Guid+ParseFailure"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.FileMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSupportKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.LayoutKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_LAYOUTKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TplEventSource+TaskWaitBehavior"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TPLEVENTSOURCE_TASKWAITBEHAVIOR));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Memory/System.ExceptionArgument"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.RSAEncryptionPaddingMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.OpenExistingResult"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_OPENEXISTINGRESULT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.DynamicResolver+SecurityControlFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.DataType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.GCHandleType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_GCHANDLETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.MatchCasing"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHCASING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.TimeZoneInfoOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFOOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.Versioning.SxSRequirements"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+SecretAgreementFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.OidGroup"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+CreateOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreSaveTo"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CryptDecodeObjectStructType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptAcquireContextFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CspAlgorithmType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.ConverterStrategy"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+DTT"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DTT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.StringSplitOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.MetadataPropertyName"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEFLAGS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.ManifestEnvelope+ManifestFormats"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_MANIFESTENVELOPE_MANIFESTFORMATS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarDataType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARDATATYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.ScopeAction"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_SCOPEACTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertUsageMatchType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterSpinLockReason"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERSPINLOCKREASON));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARFLAGS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.PropertyAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Microsoft.Win32.SafeHandles.SafeNCryptHandle+OwnershipState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.AttributeTargets"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_ATTRIBUTETARGETS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.GC+StartNoGCRegionStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_STARTNOGCREGIONSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.PlatformID"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_PLATFORMID));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.StrongBidiCategory"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_STRONGBIDICATEGORY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+MemberListType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_MEMBERLISTTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+BOOLEAN"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.OpenFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.NumericType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptCreateHashFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509NameType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeCarrierKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCEONCOMPLETEDFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.DayOfWeek"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DAYOFWEEK));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.PortableExecutableKinds"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PORTABLEEXECUTABLEKINDS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+BOOL"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CryptGetKeyParamQueryType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodSemanticsAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODSEMANTICSATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.PortableThreadPool+HillClimbing+StateOrTransition"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptSignAndVerifyHashFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.ParseFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptOpenAlgorithmProviderFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TaskStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.ManagedCallSiteKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.Architecture"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertContextPropId"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendricalCalculationsHelper+CorrectionAlgorithm"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDRICALCALCULATIONSHELPER_CORRECTIONALGORITHM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Security.SecurityRuleSet"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYRULESET));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.GCCollectionMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCCOLLECTIONMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.DateTimeFormatFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Resources.UltimateResourceFallbackLocation"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_ULTIMATERESOURCEFALLBACKLOCATION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.GregorianCalendarTypes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_GREGORIANCALENDARTYPES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.CustomAttributeEncoding"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CUSTOMATTRIBUTEENCODING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.TypeNameParser+TokenType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPENAMEPARSER_TOKENTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterLockType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERLOCKTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Collections/System.Collections.Generic.NodeColor"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CspProviderFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_PARAMFLAG));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodBase+InvokerArgFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERARGFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.DebuggerBrowsableState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGERBROWSABLESTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Text.TrimType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_TRIMTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.GC+EndNoGCRegionStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENDNOGCREGIONSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.StackCrawlMark"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_STACKCRAWLMARK));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.TimeZoneInfo+StringSerializer+State"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+KeySpec"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptEncryptFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.TypeKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.PbeEncryptionAlgorithm"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.PortableThreadPool+PendingBlockingAdjustment"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_TYPE_ENUM"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.MdSigCallingConvention"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MDSIGCALLINGCONVENTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.TextInfo+Tristate"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TEXTINFO_TRISTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.LazyState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_LAZYSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.ParseFailureKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFAILUREKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Environment+SpecialFolder"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDER));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.UnixFileMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyOpenOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.JsonSeparatorNamingPolicy+SeparatorState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+DesiredAccess"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+X509KeyUsageFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptGetKeyParamFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyUsages"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameStrTypeAndFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Security.PartialTrustVisibilityLevel"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PARTIALTRUSTVISIBILITYLEVEL));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+WaiterStates"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_WAITERSTATES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.SignatureCallingConvention"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngExportPolicies"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Buffers.Utilities+MemoryPressure"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_UTILITIES_MEMORYPRESSURE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.HandleInheritability"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_HANDLEINHERITABILITY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.GC+RefreshMemoryStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ThrowHelper+ExceptionArgument"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.MidpointRounding"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_MIDPOINTROUNDING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TaskContinuationOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCONTINUATIONOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.DTSubStringType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DTSUBSTRINGTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventCommand"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCOMMAND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.GCLargeObjectHeapCompactionMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLARGEOBJECTHEAPCOMPACTIONMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.DateTimeKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptAlgPseudoHandle"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.TypeCode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCFLAGS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.ExceptionHandlingClauseOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertStoreProvider"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericContextKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+CreateDisposition"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+GetDefaultProviderFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCKIND"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CallingConvention"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CALLINGCONVENTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ChainPolicy"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.HexConverter+Casing"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+FormatType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertFindFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+DS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.DSASignatureFormat"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.DateTimeStyles"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMESTYLES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComInterfaceType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMINTERFACETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.ProcessorArchitecture"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROCESSORARCHITECTURE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Security.Permissions.SecurityAction"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrReferenceKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.JsonValueKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertSetPropertyFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.CompilationRelaxations"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_COMPILATIONRELAXATIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Configuration.Assemblies.AssemblyVersionCompatibility"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptMsgParamType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanFormat+StandardFormat"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANFORMAT_STANDARDFORMAT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+DispatchWrapperType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ContentType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.LoaderOptimization"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldFormat"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.INVOKEKIND"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_INVOKEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.TokenType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TOKENTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.UnmanagedType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_UNMANAGEDTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ParseNumberOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptCreateHashFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.ComponentModel.EditorBrowsableState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.OperandType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPERANDTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.RSASignaturePaddingMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodImplAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODIMPLATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.MatchType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.PosixSignal"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_POSIXSIGNAL));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptImportPublicKeyInfoFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureData+LocaleGroupingData"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALEGROUPINGDATA));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.UnsafeAccessorKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_UNSAFEACCESSORKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.EventResetMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_EVENTRESETMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+RuntimeTypeCache+CacheType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_RUNTIMETYPECACHE_CACHETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertFindType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreLocation"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptDecodeObjectFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.ApartmentState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ChainEngineConfigFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonSourceGenerationMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+KeyBlobMagicNumber"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.PaddingMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Globalization+ResultCode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_RESULTCODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.ExceptionArgument"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONARGUMENT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonKnownNamingPolicy"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+ErrorCode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Text.Unicode.GraphemeClusterBreakType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.GC+EnableNoGCRegionCallbackStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustErrorStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TaskCreationOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCREATIONOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Internal.NativeCrypto.Cng+OpenAlgorithmProviderFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+CheckValueStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Linq/System.Linq.ExceptionArgument"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Security.Permissions.SecurityPermissionFlag"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYPERMISSIONFLAG));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertQueryObjectType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.RuntimeEventSource+EventId"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_RUNTIMEEVENTSOURCE_EVENTID));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.ParameterAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PARAMETERATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferDroppedReason"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERDROPPEDREASON));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventActivityOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTACTIVITYOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CODEANALYSIS_DYNAMICALLYACCESSEDMEMBERTYPES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyHandleOpenOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.UnicodeCategory"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.EventAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventChannelType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertEncodingType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CryptoStreamMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ExpectedFormatTypeFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.AsyncCausalityStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_ASYNCCAUSALITYSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptSignVerifyFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.IcuLocaleDataParts"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_ICULOCALEDATAPARTS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.NullabilityInfoContext+NotAnnotatedStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYINFOCONTEXT_NOTANNOTATEDSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.NullabilityState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeTargetEntry+TargetKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.GCLatencyMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLATENCYMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Environment+SpecialFolderOption"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDEROPTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Contracts.ContractFailureKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CONTRACTS_CONTRACTFAILUREKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.ThreadPriority"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADPRIORITY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationFlag"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.LazyThreadSafetyMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.EnvironmentVariableTarget"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENTVARIABLETARGET));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.KeyNumber"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyCreationOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ComponentParseResult"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_COMPONENTPARSERESULT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.ImageFileMachine"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_IMAGEFILEMACHINE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.ConfigureAwaitOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONFIGUREAWAITOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.InternalTaskOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_INTERNALTASKOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACEMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanStyles"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.ExceptionResource"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.ConstrainedExecution.Consistency"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Security.Permissions.PermissionState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_PERMISSIONSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.TypeNameBuilder+Format"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPENAMEBUILDER_FORMAT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.SearchOption"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHOPTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+ObjectAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.CastResult"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_CASTRESULT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.TypeNameKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.HebrewNumber+HS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventPipeSerializationFormat"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPIPESERIALIZATIONFORMAT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.LockRecursionPolicy"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSpecializationKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.VarEnum"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_VARENUM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.ConsumeTokenResult"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.GCSettings+SetLatencyModeStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARKIND"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarWeekRule"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreName"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TIMEZONEINFORESULT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptOidInfoKeyType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptProvParam"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.FORMATFLAGS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_FORMATFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodBase+InvokerStrategy"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ECKeyXmlFormat"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.StackFramePropertyState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarId"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_ALG_ID_ENUM"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.FromBase64TransformMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrRuntimeServiceKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.ReferenceHandlingStrategy"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_OBJECTIVEC_OBJECTIVECMARSHAL_MESSAGESENDFUNCTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.HebrewNumber+HebrewToken"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HEBREWTOKEN));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.BodyAvailabilityCode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.GC+GC_ALLOC_FLAGS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.Versioning.ResourceScope"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_RESOURCESCOPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509FindType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.Task+TaskStateFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASK_TASKSTATEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.AssemblyContentType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYCONTENTTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.MethodCodeType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODCODETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarAlgorithmType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARALGORITHMTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CharSet"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CHARSET));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.InvocationFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertControlStoreType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.FieldAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventSourceSettings"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTSOURCESETTINGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+TM"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.LoadHint"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_LOADHINT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.CausalityRelation"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYRELATION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCESTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.OpCodeType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.AssemblyBuilderAccess"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeDispatchStyle"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Security.Principal.TokenImpersonationLevel"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_TOKENIMPERSONATIONLEVEL));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.DigitShapes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DIGITSHAPES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.Loader.AssemblyLoadContext+InternalState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_LOADER_ASSEMBLYLOADCONTEXT_INTERNALSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.PInvokeAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PINVOKEATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Number+NumberBufferKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_NUMBERBUFFERKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ECCurve+ECCurveType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.StubHelpers.AsAnyMarshaler+BackPropAction"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STUBHELPERS_ASANYMARSHALER_BACKPROPACTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Security.SecurityCriticalScope"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYCRITICALSCOPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.MetadataTokenType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METADATATOKENTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.JsonCommentHandling"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.LIBFLAGS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.HebrewNumberParsingState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBERPARSINGSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.FlowControl"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_FLOWCONTROL));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.HybridDispatchKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.FileAccess"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.PEFileKinds"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PEFILEKINDS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+ActivityControl"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_ACTIVITYCONTROL));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.HexConverter+Casing"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_HEXCONVERTER_CASING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.SeekOrigin"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEEKORIGIN));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.NumberStyles"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_NUMBERSTYLES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.GCNotificationStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCNOTIFICATIONSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanParse+TimeSpanStandardStyles"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TIMESPANSTANDARDSTYLES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.PackingSize"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PACKINGSIZE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+BCrypt+NTSTATUS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.GCKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComMemberType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMMEMBERTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IDLFLAG"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IDLFLAG));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Number+ParsingStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+NTSTATUS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Buffers.OperationStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureData+LocaleNumberData"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ExpectedContentTypeFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.MethodImplOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODIMPLOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertChainFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrAbiCarrierKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.StackTrace+TraceFormat"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+ImpersonationLevel"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.SearchTarget"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509IncludeOption"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.StringMarshalling"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.InstructionOpCode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.CallingConventions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CALLINGCONVENTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptHashProperty"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngUIProtectionLevels"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.TypeAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericDemandFamilyKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+ConfigurationState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CreateObjectFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATEOBJECTFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.AssemblyNameFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.FileAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.MonthNameStyles"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_MONTHNAMESTYLES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventOpcode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTOPCODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrTypeShapeKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreAddDisposition"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.CausalitySynchronousWork"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYSYNCHRONOUSWORK));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceResult"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACERESULT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.ConsumeNumberResult"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.Versioning.ComponentGuaranteesOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_COMPONENTGUARANTEESOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.GC+GCConfigurationType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GCCONFIGURATIONTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.ResourceAttributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.ConstrainedExecution.Cer"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustInfoStatus"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+ContextTrackingMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.MemberTypes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CipherMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509VerificationFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Associates+Attributes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSOCIATES_ATTRIBUTES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.IO.FileShare"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILESHARE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Text.NormalizationForm"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_NORMALIZATIONFORM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.ControllerCommand"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_CONTROLLERCOMMAND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventProvider+WriteEventErrorCode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDER_WRITEEVENTERRORCODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.DllImportSearchPath"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.DefaultBinder+Primitives"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonUnknownDerivedTypeHandling"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ContentionFlagsMap"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_CONTENTIONFLAGSMAP));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+SourceConstructFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CreateComInterfaceFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATECOMINTERFACEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventKeywords"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTKEYWORDS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventTags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptAcquireCertificatePrivateKeyFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureTypes"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+MsgEncodingType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.DelegateBindingFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DELEGATEBINDINGFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.StringComparison"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+HASHALGORITHM_ENUM"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.AssemblyNameParser+AttributeKind"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_ATTRIBUTEKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.ResourceLocation"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCELOCATION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Configuration.Assemblies.AssemblyHashAlgorithm"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+DSAFIPSVERSION_ENUM"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Security.Principal.PrincipalPolicy"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.RuntimeMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.TypeNameFormatFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureData+LocaleStringData"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALESTRINGDATA));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanParse+TTT"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TTT));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComWrappersScenario"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMWRAPPERSSCENARIO));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationReason"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngPropertyOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Collections/System.Collections.Generic.TreeRotation"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventTask"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTASK));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+CngBufferDescriptors"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.StackBehaviour"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_STACKBEHAVIOUR));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainTrustMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.PolymorphicSerializationState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.Intrinsics.X86.FloatComparisonMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTRINSICS_X86_FLOATCOMPARISONMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainStatusFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.DESCKIND"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DESCKIND));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Reflection.AssemblyNameParser+Token"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.JsonSerializerDefaults"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventProviderType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDERTYPE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Text.Json/System.Text.Json.StackFrameObjectState"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.CodegenMode"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CapiHelper+ClrPropertyId"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Globalization.CompareOptions"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_COMPAREOPTIONS));
+    ChaosRegisterExternalType(
+        compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ClassInterfaceType"),
+        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
+            &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CLASSINTERFACETYPE));
+
+    if (g_chaos_resolve_enum_metadata == nullptr) {
+        g_chaos_resolve_enum_metadata =
+            &chaos::il2cpp::codegen::chaos_find_enum_metadata;
     }
-    return h & 0xFFFFFFu;
+    // Register the sorted dispatch table for binary-search metadata lookup.
+    ChaosEnumRegisterDispatchTable(
+        chaos::il2cpp::codegen::kEnumDispatchTable,
+        chaos::il2cpp::codegen::kEnumDispatchCount);
 }
-
-namespace {
-struct _EnumMetadataRegistrar {
-    _EnumMetadataRegistrar() noexcept {
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.OpCodeValues"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODEVALUES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Exception+ExceptionMessageKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTION_EXCEPTIONMESSAGEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.ExceptionResource"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONRESOURCE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferAllocatedReason"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERALLOCATEDREASON));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.ConcurrentExclusiveSchedulerPair+ProcessingMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONCURRENTEXCLUSIVESCHEDULERPAIR_PROCESSINGMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldTags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDTAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.CALLCONV"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_CALLCONV));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+PFXExportFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXEXPORTFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEKIND"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonTokenType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONTOKENTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Resources.ResourceTypeCode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_RESOURCETYPECODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Collections.Generic.InsertionBehavior"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_COLLECTIONS_GENERIC_INSERTIONBEHAVIOR));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventLevel"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTLEVEL));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.SYSKIND"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_SYSKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertControlStoreFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTOREFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.Marshalling.MarshalMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHALLING_MARSHALMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.TraceLoggingDataType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_TRACELOGGINGDATATYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.CorElementType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CORELEMENTTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.ThreadState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptKeySpec"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTKEYSPEC));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.Serialization.StreamingContextStates"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_SERIALIZATION_STREAMINGCONTEXTSTATES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Base64FormattingOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BASE64FORMATTINGOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.GenericParameterAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_GENERICPARAMETERATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.DateTimeFormatInfoScanner+FoundDatePattern"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATINFOSCANNER_FOUNDDATEPATTERN));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+PfxCertStoreFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_PFXCERTSTOREFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+BufferType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_BUFFERTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.FileOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.BindingFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_BINDINGFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameStringType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRINGTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreSaveAs"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVEAS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Guid+GuidParseThrowStyle"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_GUIDPARSETHROWSTYLE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+AsymmetricPaddingMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ASYMMETRICPADDINGMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ContentType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CONTENTTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Guid+ParseFailure"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GUID_PARSEFAILURE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Memory/System.Buffers.ReadOnlySequence`1+SequenceType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_MEMORY_SYSTEM_BUFFERS_READONLYSEQUENCE_1_SEQUENCETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.FileMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSupportKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSUPPORTKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.LayoutKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_LAYOUTKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TplEventSource+TaskWaitBehavior"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TPLEVENTSOURCE_TASKWAITBEHAVIOR));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Memory/System.ExceptionArgument"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_MEMORY_SYSTEM_EXCEPTIONARGUMENT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.RSAEncryptionPaddingMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSAENCRYPTIONPADDINGMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.OpenExistingResult"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_OPENEXISTINGRESULT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.DynamicResolver+SecurityControlFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_DYNAMICRESOLVER_SECURITYCONTROLFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.DataType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_DATATYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.GCHandleType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_GCHANDLETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.MatchCasing"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHCASING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.TimeZoneInfoOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFOOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.Versioning.SxSRequirements"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_SXSREQUIREMENTS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+SecretAgreementFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_SECRETAGREEMENTFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.OidGroup"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_OIDGROUP));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+CreateOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ECDiffieHellmanKeyDerivationFunction"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECDIFFIEHELLMANKEYDERIVATIONFUNCTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreSaveTo"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTORESAVETO));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CryptDecodeObjectStructType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CRYPTDECODEOBJECTSTRUCTTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.DebuggableAttribute+DebuggingModes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGABLEATTRIBUTE_DEBUGGINGMODES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptAcquireContextFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECONTEXTFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CspAlgorithmType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CSPALGORITHMTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.ConverterStrategy"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONVERTERSTRATEGY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+DTT"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DTT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.StringSplitOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGSPLITOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+FSharpKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_FSHARPKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+FINDEX_SEARCH_OPS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_SEARCH_OPS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.MetadataPropertyName"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_METADATAPROPERTYNAME));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.TYPEFLAGS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_TYPEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.ManifestEnvelope+ManifestFormats"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_MANIFESTENVELOPE_MANIFESTFORMATS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarDataType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARDATATYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.ScopeAction"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_SCOPEACTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertificateRequestLoadOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTIFICATEREQUESTLOADOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertUsageMatchType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTUSAGEMATCHTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterSpinLockReason"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERSPINLOCKREASON));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARFLAGS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.PropertyAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROPERTYATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Microsoft.Win32.SafeHandles.SafeNCryptHandle+OwnershipState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_MICROSOFT_WIN32_SAFEHANDLES_SAFENCRYPTHANDLE_OWNERSHIPSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.AttributeTargets"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_ATTRIBUTETARGETS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.GC+StartNoGCRegionStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_STARTNOGCREGIONSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.PlatformID"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_PLATFORMID));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.StrongBidiCategory"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_STRONGBIDICATEGORY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+FILE_INFORMATION_CLASS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_FILE_INFORMATION_CLASS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+MemberListType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_MEMBERLISTTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+FINDEX_INFO_LEVELS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_FINDEX_INFO_LEVELS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+BOOLEAN"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOLEAN));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.OpenFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_OPENFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.NumericType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_NUMERICTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ThreadAdjustmentReasonMap"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_THREADADJUSTMENTREASONMAP));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptCreateHashFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTCREATEHASHFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509NameType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509NAMETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeCarrierKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGECARRIERKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceOnCompletedFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCEONCOMPLETEDFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.DayOfWeek"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DAYOFWEEK));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.PortableExecutableKinds"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PORTABLEEXECUTABLEKINDS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+BOOL"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BOOL));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CapiHelper+CryptGetKeyParamQueryType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CRYPTGETKEYPARAMQUERYTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodSemanticsAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODSEMANTICSATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.PortableThreadPool+HillClimbing+StateOrTransition"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_HILLCLIMBING_STATEORTRANSITION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptSignAndVerifyHashFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTSIGNANDVERIFYHASHFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.ParseFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptOpenAlgorithmProviderFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTOPENALGORITHMPROVIDERFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TaskStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.ManagedCallSiteKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_MANAGEDCALLSITEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.Architecture"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_ARCHITECTURE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertContextPropId"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTEXTPROPID));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendricalCalculationsHelper+CorrectionAlgorithm"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDRICALCALCULATIONSHELPER_CORRECTIONALGORITHM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Security.SecurityRuleSet"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYRULESET));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.GCCollectionMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCCOLLECTIONMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.DateTimeFormatFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMEFORMATFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Resources.UltimateResourceFallbackLocation"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RESOURCES_ULTIMATERESOURCEFALLBACKLOCATION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.GregorianCalendarTypes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_GREGORIANCALENDARTYPES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.CustomAttributeEncoding"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CUSTOMATTRIBUTEENCODING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.TypeNameParser+TokenType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPENAMEPARSER_TOKENTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+EnterLockType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_ENTERLOCKTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Collections/System.Collections.Generic.NodeColor"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_NODECOLOR));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CspProviderFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CSPPROVIDERFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.PARAMFLAG"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_PARAMFLAG));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodBase+InvokerArgFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERARGFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.DebuggerBrowsableState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_DEBUGGERBROWSABLESTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Text.TrimType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_TRIMTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.GC+EndNoGCRegionStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENDNOGCREGIONSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.StackCrawlMark"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_STACKCRAWLMARK));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.TimeZoneInfo+StringSerializer+State"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_STRINGSERIALIZER_STATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+KeySpec"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_KEYSPEC));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptEncryptFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTENCRYPTFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.TypeKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.PbeEncryptionAlgorithm"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PBEENCRYPTIONALGORITHM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonUnmappedMemberHandling"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNMAPPEDMEMBERHANDLING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.PortableThreadPool+PendingBlockingAdjustment"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_PORTABLETHREADPOOL_PENDINGBLOCKINGADJUSTMENT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_TYPE_ENUM"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_TYPE_ENUM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.MdSigCallingConvention"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MDSIGCALLINGCONVENTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.TextInfo+Tristate"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TEXTINFO_TRISTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.LazyState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_LAZYSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.ParseFailureKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_PARSEFAILUREKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Environment+SpecialFolder"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDER));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.UnixFileMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_UNIXFILEMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyOpenOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYOPENOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonSeparatorNamingPolicy+SeparatorState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSEPARATORNAMINGPOLICY_SEPARATORSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+DesiredAccess"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_DESIREDACCESS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventChannel"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNEL));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+X509KeyUsageFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_X509KEYUSAGEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptGetKeyParamFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTGETKEYPARAMFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyUsages"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYUSAGES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameStrTypeAndFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMESTRTYPEANDFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Security.PartialTrustVisibilityLevel"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PARTIALTRUSTVISIBILITYLEVEL));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.ReaderWriterLockSlim+WaiterStates"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_READERWRITERLOCKSLIM_WAITERSTATES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.SignatureCallingConvention"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_SIGNATURECALLINGCONVENTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngExportPolicies"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGEXPORTPOLICIES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Buffers.Utilities+MemoryPressure"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_UTILITIES_MEMORYPRESSURE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.HandleInheritability"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_HANDLEINHERITABILITY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.GC+RefreshMemoryStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_REFRESHMEMORYSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ThrowHelper+ExceptionArgument"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_THROWHELPER_EXCEPTIONARGUMENT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.MidpointRounding"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_MIDPOINTROUNDING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TaskContinuationOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCONTINUATIONOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.DTSubStringType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DTSUBSTRINGTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventCommand"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCOMMAND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.GCLargeObjectHeapCompactionMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLARGEOBJECTHEAPCOMPACTIONMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.DateTimeKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptAlgPseudoHandle"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTALGPSEUDOHANDLE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.TypeCode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPECODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCFLAGS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.ExceptionHandlingClauseOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EXCEPTIONHANDLINGCLAUSEOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertStoreProvider"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTSTOREPROVIDER));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericContextKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICCONTEXTKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+NtDll+CreateDisposition"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_NTDLL_CREATEDISPOSITION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+GetDefaultProviderFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_GETDEFAULTPROVIDERFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.FUNCKIND"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_FUNCKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CallingConvention"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CALLINGCONVENTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.ChainPolicy"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CHAINPOLICY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.HexConverter+Casing"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_HEXCONVERTER_CASING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+FormatType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_FORMATTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertFindFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+DS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_DS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.DSASignatureFormat"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_DSASIGNATUREFORMAT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.DateTimeStyles"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DATETIMESTYLES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComInterfaceType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMINTERFACETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.ProcessorArchitecture"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PROCESSORARCHITECTURE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Security.Permissions.SecurityAction"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYACTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrReferenceKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRREFERENCEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonIgnoreCondition"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONIGNORECONDITION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonValueKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONVALUEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertSetPropertyFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSETPROPERTYFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.CompilationRelaxations"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_COMPILATIONRELAXATIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Configuration.Assemblies.AssemblyVersionCompatibility"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYVERSIONCOMPATIBILITY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptMsgParamType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTMSGPARAMTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonUnknownTypeHandling"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNTYPEHANDLING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanFormat+StandardFormat"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANFORMAT_STANDARDFORMAT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+DispatchWrapperType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_DISPATCHWRAPPERTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ContentType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CONTENTTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.LoaderOptimization"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_LOADEROPTIMIZATION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventFieldFormat"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTFIELDFORMAT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509SubjectKeyIdentifierHashAlgorithm"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509SUBJECTKEYIDENTIFIERHASHALGORITHM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.INVOKEKIND"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_INVOKEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.TokenType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TOKENTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.UnmanagedType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_UNMANAGEDTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ParseNumberOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_PARSENUMBEROPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptCreateHashFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTCREATEHASHFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.ComponentModel.EditorBrowsableState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_COMPONENTMODEL_EDITORBROWSABLESTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.OperandType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPERANDTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.RSASignaturePaddingMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_RSASIGNATUREPADDINGMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonNumberHandling"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONNUMBERHANDLING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodImplAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODIMPLATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.MatchType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_MATCHTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.PosixSignal"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_POSIXSIGNAL));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptImportPublicKeyInfoFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTIMPORTPUBLICKEYINFOFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureData+LocaleGroupingData"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALEGROUPINGDATA));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.UnsafeAccessorKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_UNSAFEACCESSORKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.EventResetMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_EVENTRESETMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+RuntimeTypeCache+CacheType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_RUNTIMETYPECACHE_CACHETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertFindType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTFINDTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreLocation"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORELOCATION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptDecodeObjectFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTDECODEOBJECTFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.ApartmentState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_APARTMENTSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ChainEngineConfigFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CHAINENGINECONFIGFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonSourceGenerationMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONSOURCEGENERATIONMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+KeyBlobMagicNumber"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_KEYBLOBMAGICNUMBER));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.PaddingMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_PADDINGMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+Globalization+ResultCode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_GLOBALIZATION_RESULTCODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.ExceptionArgument"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_EXCEPTIONARGUMENT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonKnownNamingPolicy"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONKNOWNNAMINGPOLICY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+NCrypt+ErrorCode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_NCRYPT_ERRORCODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Text.Unicode.GraphemeClusterBreakType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_UNICODE_GRAPHEMECLUSTERBREAKTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.GC+EnableNoGCRegionCallbackStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_ENABLENOGCREGIONCALLBACKSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustErrorStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTERRORSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.TaskCreationOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASKCREATIONOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Internal.NativeCrypto.Cng+OpenAlgorithmProviderFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTERNAL_NATIVECRYPTO_CNG_OPENALGORITHMPROVIDERFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.RuntimeType+CheckValueStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIMETYPE_CHECKVALUESTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Linq/System.Linq.ExceptionArgument"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_LINQ_SYSTEM_LINQ_EXCEPTIONARGUMENT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Security.Permissions.SecurityPermissionFlag"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_SECURITYPERMISSIONFLAG));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+TRACE_QUERY_INFO_CLASS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TRACE_QUERY_INFO_CLASS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertQueryObjectType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTQUERYOBJECTTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.RuntimeEventSource+EventId"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_RUNTIMEEVENTSOURCE_EVENTID));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.ParameterAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PARAMETERATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Buffers.ArrayPoolEventSource+BufferDroppedReason"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_ARRAYPOOLEVENTSOURCE_BUFFERDROPPEDREASON));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventActivityOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTACTIVITYOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.CodeAnalysis.DynamicallyAccessedMemberTypes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CODEANALYSIS_DYNAMICALLYACCESSEDMEMBERTYPES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyHandleOpenOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYHANDLEOPENOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.UnicodeCategory"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_UNICODECATEGORY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.EventAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EVENTATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventChannelType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTCHANNELTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertEncodingType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTENCODINGTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CryptoStreamMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CRYPTOSTREAMMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ExpectedFormatTypeFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDFORMATTYPEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyStorageFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYSTORAGEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.AsyncCausalityStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_ASYNCCAUSALITYSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+BCryptSignVerifyFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_BCRYPTSIGNVERIFYFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.IcuLocaleDataParts"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_ICULOCALEDATAPARTS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.NullabilityInfoContext+NotAnnotatedStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYINFOCONTEXT_NOTANNOTATEDSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.NullabilityState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_NULLABILITYSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeTargetEntry+TargetKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGETARGETENTRY_TARGETKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.GCLatencyMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCLATENCYMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Environment+SpecialFolderOption"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENT_SPECIALFOLDEROPTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Contracts.ContractFailureKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_CONTRACTS_CONTRACTFAILUREKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.ThreadPriority"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_THREADPRIORITY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationFlag"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONFLAG));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.LazyThreadSafetyMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LAZYTHREADSAFETYMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.EnvironmentVariableTarget"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_ENVIRONMENTVARIABLETARGET));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.KeyNumber"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_KEYNUMBER));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngKeyCreationOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGKEYCREATIONOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Buffers.Text.Utf8Parser+ComponentParseResult"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_TEXT_UTF8PARSER_COMPONENTPARSERESULT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.ImageFileMachine"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_IMAGEFILEMACHINE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.ConfigureAwaitOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CONFIGUREAWAITOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.InternalTaskOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_INTERNALTASKOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACEMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanStyles"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANSTYLES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.ExceptionResource"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_EXCEPTIONRESOURCE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+Kernel32+GET_FILEEX_INFO_LEVELS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_KERNEL32_GET_FILEEX_INFO_LEVELS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.ConstrainedExecution.Consistency"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CONSISTENCY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Security.Permissions.PermissionState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PERMISSIONS_PERMISSIONSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.TypeNameBuilder+Format"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_TYPENAMEBUILDER_FORMAT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.SearchOption"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHOPTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+ObjectAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_OBJECTATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.CastResult"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_CASTRESULT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.TypeNameKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.HebrewNumber+HS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventPipeSerializationFormat"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPIPESERIALIZATIONFORMAT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.LockRecursionPolicy"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_LOCKRECURSIONPOLICY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericSpecializationKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICSPECIALIZATIONKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.VarEnum"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_VARENUM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.ConsumeTokenResult"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMETOKENRESULT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.GCSettings+SetLatencyModeStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_GCSETTINGS_SETLATENCYMODESTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.VARKIND"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_VARKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarWeekRule"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARWEEKRULE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.StoreName"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_STORENAME));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.TimeZoneInfo+TimeZoneInfoResult"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TIMEZONEINFO_TIMEZONEINFORESULT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptOidInfoKeyType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTOIDINFOKEYTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptProvParam"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTPROVPARAM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.FORMATFLAGS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_FORMATFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.InvokeFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_INVOKEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodBase+InvokerStrategy"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODBASE_INVOKERSTRATEGY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ECKeyXmlFormat"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECKEYXMLFORMAT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.StackFramePropertyState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEPROPERTYSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarId"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARID));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+ECC_CURVE_ALG_ID_ENUM"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_ECC_CURVE_ALG_ID_ENUM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.FromBase64TransformMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_FROMBASE64TRANSFORMMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrRuntimeServiceKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRRUNTIMESERVICEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.ReferenceHandlingStrategy"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_REFERENCEHANDLINGSTRATEGY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal+MessageSendFunction"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_OBJECTIVEC_OBJECTIVECMARSHAL_MESSAGESENDFUNCTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.HebrewNumber+HebrewToken"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBER_HEBREWTOKEN));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.BodyAvailabilityCode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_BODYAVAILABILITYCODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.GC+GC_ALLOC_FLAGS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GC_ALLOC_FLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.Versioning.ResourceScope"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_RESOURCESCOPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+TOKEN_INFORMATION_CLASS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_TOKEN_INFORMATION_CLASS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509FindType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509FINDTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.Task+TaskStateFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_TASK_TASKSTATEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.AssemblyContentType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYCONTENTTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.MethodCodeType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODCODETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CalendarAlgorithmType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CALENDARALGORITHMTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CharSet"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CHARSET));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.InvocationFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_INVOCATIONFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertControlStoreType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCONTROLSTORETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.FieldAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_FIELDATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventSourceSettings"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTSOURCESETTINGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.DateTimeParse+TM"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DATETIMEPARSE_TM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509KeyUsageFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509KEYUSAGEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.LoadHint"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_LOADHINT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.CausalityRelation"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYRELATION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.Sources.ValueTaskSourceStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_SOURCES_VALUETASKSOURCESTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.OpCodeType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_OPCODETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.AssemblyBuilderAccess"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_ASSEMBLYBUILDERACCESS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.BridgeDispatchStyle"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_BRIDGEDISPATCHSTYLE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Security.Principal.TokenImpersonationLevel"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_TOKENIMPERSONATIONLEVEL));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.DigitShapes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_DIGITSHAPES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.Loader.AssemblyLoadContext+InternalState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_LOADER_ASSEMBLYLOADCONTEXT_INTERNALSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.PInvokeAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_PINVOKEATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Number+NumberBufferKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_NUMBERBUFFERKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.ECCurve+ECCurveType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_ECCURVE_ECCURVETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.StubHelpers.AsAnyMarshaler+BackPropAction"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STUBHELPERS_ASANYMARSHALER_BACKPROPACTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Security.SecurityCriticalScope"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_SECURITYCRITICALSCOPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.MetadataTokenType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METADATATOKENTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonCommentHandling"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONCOMMENTHANDLING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.LIBFLAGS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_LIBFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.HebrewNumberParsingState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_HEBREWNUMBERPARSINGSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.FlowControl"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_FLOWCONTROL));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IMPLTYPEFLAGS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IMPLTYPEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.HybridDispatchKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_HYBRIDDISPATCHKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.FileAccess"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEACCESS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.PEFileKinds"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PEFILEKINDS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+ActivityControl"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_ACTIVITYCONTROL));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.HexConverter+Casing"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_HEXCONVERTER_CASING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.SeekOrigin"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEEKORIGIN));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.NumberStyles"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_NUMBERSTYLES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.GCNotificationStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCNOTIFICATIONSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanParse+TimeSpanStandardStyles"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TIMESPANSTANDARDSTYLES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.PackingSize"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_PACKINGSIZE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+BCrypt+NTSTATUS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_BCRYPT_NTSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.GCKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GCKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComMemberType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMMEMBERTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.IDLFLAG"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_IDLFLAG));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Number+ParsingStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_NUMBER_PARSINGSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+NTSTATUS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_NTSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Buffers.OperationStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_BUFFERS_OPERATIONSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.MethodAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_METHODATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureData+LocaleNumberData"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALENUMBERDATA));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+ExpectedContentTypeFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_EXPECTEDCONTENTTYPEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.CompilerServices.MethodImplOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_COMPILERSERVICES_METHODIMPLOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertChainFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTCHAINFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrAbiCarrierKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRABICARRIERKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.StackTrace+TraceFormat"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_STACKTRACE_TRACEFORMAT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+ImpersonationLevel"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_IMPERSONATIONLEVEL));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.SearchTarget"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_SEARCHTARGET));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509IncludeOption"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509INCLUDEOPTION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.StringMarshalling"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_STRINGMARSHALLING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.InstructionOpCode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_INSTRUCTIONOPCODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.CallingConventions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_CALLINGCONVENTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Advapi32+CryptHashProperty"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_ADVAPI32_CRYPTHASHPROPERTY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrExceptionRegionKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIREXCEPTIONREGIONKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngUIProtectionLevels"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGUIPROTECTIONLEVELS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.TypeAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_TYPEATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.GenericDemandFamilyKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_GENERICDEMANDFAMILYKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo+ConfigurationState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFO_CONFIGURATIONSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CreateObjectFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATEOBJECTFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.AssemblyNameFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.FileAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILEATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.MonthNameStyles"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_MONTHNAMESTYLES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventOpcode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTOPCODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.AotCoreIrTypeShapeKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_AOTCOREIRTYPESHAPEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertStoreAddDisposition"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTSTOREADDDISPOSITION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Threading.Tasks.CausalitySynchronousWork"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_THREADING_TASKS_CAUSALITYSYNCHRONOUSWORK));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CustomQueryInterfaceResult"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CUSTOMQUERYINTERFACERESULT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.ConsumeNumberResult"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_CONSUMENUMBERRESULT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.Versioning.ComponentGuaranteesOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_VERSIONING_COMPONENTGUARANTEESOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.GC+GCConfigurationType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GC_GCCONFIGURATIONTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.ResourceAttributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCEATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.ConstrainedExecution.Cer"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_CONSTRAINEDEXECUTION_CER));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.CertTrustInfoStatus"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_CERTTRUSTINFOSTATUS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+ContextTrackingMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_CONTEXTTRACKINGMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.MemberTypes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_MEMBERTYPES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CipherMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CIPHERMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509VerificationFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509VERIFICATIONFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Associates+Attributes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSOCIATES_ATTRIBUTES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.IO.FileShare"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_IO_FILESHARE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Text.NormalizationForm"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TEXT_NORMALIZATIONFORM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.ControllerCommand"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_CONTROLLERCOMMAND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventProvider+WriteEventErrorCode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDER_WRITEEVENTERRORCODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.DllImportSearchPath"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_DLLIMPORTSEARCHPATH));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Converters.EnumConverterOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_CONVERTERS_ENUMCONVERTEROPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.DefaultBinder+Primitives"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DEFAULTBINDER_PRIMITIVES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CertNameType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CERTNAMETYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonUnknownDerivedTypeHandling"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONUNKNOWNDERIVEDTYPEHANDLING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.NativeRuntimeEventSource+ContentionFlagsMap"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_NATIVERUNTIMEEVENTSOURCE_CONTENTIONFLAGSMAP));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.FSharpCoreReflectionProxy+SourceConstructFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_FSHARPCOREREFLECTIONPROXY_SOURCECONSTRUCTFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfoKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_METADATA_JSONTYPEINFOKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.CreateComInterfaceFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CREATECOMINTERFACEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventKeywords"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTKEYWORDS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.Serialization.JsonObjectCreationHandling"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_SERIALIZATION_JSONOBJECTCREATIONHANDLING));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventTags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+CryptAcquireCertificatePrivateKeyFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_CRYPTACQUIRECERTIFICATEPRIVATEKEYFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureTypes"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTURETYPES));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+Crypt32+MsgEncodingType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_CRYPT32_MSGENCODINGTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.DelegateBindingFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DELEGATEBINDINGFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.StringComparison"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_STRINGCOMPARISON));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+HASHALGORITHM_ENUM"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_HASHALGORITHM_ENUM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.AssemblyNameParser+AttributeKind"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_ATTRIBUTEKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.ResourceLocation"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_RESOURCELOCATION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Configuration.Assemblies.AssemblyHashAlgorithm"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_CONFIGURATION_ASSEMBLIES_ASSEMBLYHASHALGORITHM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+DSAFIPSVERSION_ENUM"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_DSAFIPSVERSION_ENUM));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Security.Principal.PrincipalPolicy"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_SECURITY_PRINCIPAL_PRINCIPALPOLICY));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.RuntimeMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_HOTUPDATE_CHAOS_IL2CPP_HOTUPDATE_RUNTIMEMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.TypeNameFormatFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_TYPENAMEFORMATFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CultureData+LocaleStringData"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_CULTUREDATA_LOCALESTRINGDATA));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/Interop+Advapi32+EVENT_INFO_CLASS"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_INTEROP_ADVAPI32_EVENT_INFO_CLASS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.TimeSpanParse+TTT"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_TIMESPANPARSE_TTT));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComWrappersScenario"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMWRAPPERSSCENARIO));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509RevocationReason"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509REVOCATIONREASON));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventManifestOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTMANIFESTOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CngPropertyOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CNGPROPERTYOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Collections/System.Collections.Generic.TreeRotation"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_COLLECTIONS_SYSTEM_COLLECTIONS_GENERIC_TREEROTATION));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventTask"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTTASK));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/Interop+BCrypt+CngBufferDescriptors"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_INTEROP_BCRYPT_CNGBUFFERDESCRIPTORS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.Emit.StackBehaviour"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_EMIT_STACKBEHAVIOUR));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainTrustMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINTRUSTMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.PolymorphicSerializationState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_POLYMORPHICSERIALIZATIONSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.Intrinsics.X86.FloatComparisonMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTRINSICS_X86_FLOATCOMPARISONMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X509ChainStatusFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X509CHAINSTATUSFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ComTypes.DESCKIND"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_COMTYPES_DESCKIND));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Reflection.AssemblyNameParser+Token"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_REFLECTION_ASSEMBLYNAMEPARSER_TOKEN));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.JsonSerializerDefaults"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_JSONSERIALIZERDEFAULTS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Diagnostics.Tracing.EventProviderType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_DIAGNOSTICS_TRACING_EVENTPROVIDERTYPE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Text.Json/System.Text.Json.StackFrameObjectState"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_TEXT_JSON_SYSTEM_TEXT_JSON_STACKFRAMEOBJECTSTATE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("Chaos.IL2CPP.Contracts/Chaos.IL2CPP.Contracts.CodegenMode"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_CHAOS_IL2CPP_CONTRACTS_CHAOS_IL2CPP_CONTRACTS_CODEGENMODE));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.X509Certificates.X500DistinguishedNameFlags"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_X509CERTIFICATES_X500DISTINGUISHEDNAMEFLAGS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Security.Cryptography/System.Security.Cryptography.CapiHelper+ClrPropertyId"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_SECURITY_CRYPTOGRAPHY_SYSTEM_SECURITY_CRYPTOGRAPHY_CAPIHELPER_CLRPROPERTYID));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Globalization.CompareOptions"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_GLOBALIZATION_COMPAREOPTIONS));
-        ChaosRegisterExternalType(
-            compute_enum_hash24("System.Private.CoreLib/System.Runtime.InteropServices.ClassInterfaceType"),
-            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(
-                &chaos::il2cpp::codegen::kEnumTypeDesc_SYSTEM_PRIVATE_CORELIB_SYSTEM_RUNTIME_INTEROPSERVICES_CLASSINTERFACETYPE));
-
-        if (g_chaos_resolve_enum_metadata == nullptr) {
-            g_chaos_resolve_enum_metadata =
-                &chaos::il2cpp::codegen::chaos_find_enum_metadata;
-        }
-        // Register the sorted dispatch table for binary-search metadata lookup.
-        // This replaces the switch-case in chaos_find_enum_metadata_by_fnv24
-        // with an O(log n) binary search — reduces binary size and improves
-        // maintainability for large numbers of enum types.
-        ChaosEnumRegisterDispatchTable(
-            chaos::il2cpp::codegen::kEnumDispatchTable,
-            chaos::il2cpp::codegen::kEnumDispatchCount);
-    }
-} _s_enum_reg;
-}  // anonymous namespace
 

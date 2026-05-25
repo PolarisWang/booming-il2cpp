@@ -1,0 +1,90 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GlobalizationCultureSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_0",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_1",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_2",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_2:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_3",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_3:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_4",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_4:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_5",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_5:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_6",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_6:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_7",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_7:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_8",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_8:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_9",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_9:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_10",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_10:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_11",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_11:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subject_12",
+          "subjectId": "GlobalizationCultureSubjects/GlobalizationCultureSubjects::Subject_12:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct EhStressSubjects_t {
+    struct EhStressSubjects_EhStressSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -48,7 +48,7 @@ struct Functions {
         void (*Subject_3)(
                 void
         );
-    } ehStressSubjects;
+    } ehStressSubjects_EhStressSubjects;
     int32_t method_count;
 };
 
@@ -67,25 +67,25 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct EhStressSubjects {
+struct EhStressSubjects_EhStressSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.ehStressSubjects.Subject_0(
+        return kFunctions.ehStressSubjects_EhStressSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.ehStressSubjects.Subject_1(
+        return kFunctions.ehStressSubjects_EhStressSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.ehStressSubjects.Subject_2(
+        return kFunctions.ehStressSubjects_EhStressSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.ehStressSubjects.Subject_3(
+        return kFunctions.ehStressSubjects_EhStressSubjects.Subject_3(
         );
     }
     /// Total number of AOT-compiled methods in this type.

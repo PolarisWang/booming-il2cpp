@@ -1,0 +1,67 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ReflectionModuleSubjects",
+      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
+      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ReflectionModuleSubjects",
+      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionModuleSubjects",
+      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionModuleSubjects",
+      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionModuleSubjects",
+      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionModuleSubjects",
+      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ReflectionModuleSubjects",
+      "subjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::CustomEntrySubject_5:System.Void()",
+      "definitionSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects::CustomEntrySubject_5:System.Void()",
+      "declaringTypeSubjectId": "ReflectionModuleSubjects/ReflectionModuleSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

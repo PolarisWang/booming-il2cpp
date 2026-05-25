@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct GuidRandomHashcodeSubjects_t {
+    struct GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -78,7 +78,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } guidRandomHashcodeSubjects;
+    } guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects;
     int32_t method_count;
 };
 
@@ -97,75 +97,75 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct GuidRandomHashcodeSubjects {
+struct GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_0(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_10(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_11(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_12(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_12(
         );
     }
     static inline void Subject_13(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_13(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_13(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_1(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_2(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_3(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_4(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_5(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_6(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_7(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_8(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.guidRandomHashcodeSubjects.Subject_9(
+        return kFunctions.guidRandomHashcodeSubjects_GuidRandomHashcodeSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

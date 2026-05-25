@@ -51,6 +51,10 @@ add_library(chaos_gen_GenericSupplementSubjects STATIC
     ${CHAOS_GEN_DIR}/generated/native-aot.page-0002.cpp
     ${CHAOS_GEN_DIR}/generated/native-aot.page-0003.cpp
     ${CHAOS_GEN_DIR}/generated/native-aot.page-0004.cpp
+    ${CHAOS_GEN_DIR}/generated/native-aot.generated.page5.cpp
+    ${CHAOS_GEN_DIR}/generated/native-aot.generated.page6.cpp
+    ${CHAOS_GEN_DIR}/generated/native-aot.generated.page7.cpp
+    ${CHAOS_GEN_DIR}/generated/native-aot.generated.page8.cpp
     ${CHAOS_GEN_DIR}/generated/chaos_generated_module.cpp
 )
 
@@ -61,7 +65,6 @@ target_compile_options(chaos_gen_GenericSupplementSubjects PUBLIC ${COMMON_COMPI
 
 # Entry executable — links generated code + native runtime
 add_executable(entry
-    ${CHAOS_GEN_DIR}/runtime-entry.cpp
 )
 
 target_link_libraries(entry PRIVATE

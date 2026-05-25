@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "StringConstructionSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/string-construction/managed/subjects/build-output/StringConstructionSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/string-construction/managed/subjects/build-output/StringConstructionSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "StringConstructionSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/string-construction/managed/subjects/build-output/StringConstructionSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/string-construction/managed/subjects/build-output/StringConstructionSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "1e300db2-a239-4fe6-be37-eeb5ec2c4862",
+  "inputModuleVersionId": "cb1a88b3-c821-41b2-ac35-50164bdea696",
   "artifacts": [
     {
       "kind": "typedIlIr",

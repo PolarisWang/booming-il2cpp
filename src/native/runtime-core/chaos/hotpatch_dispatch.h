@@ -96,6 +96,33 @@ inline int32_t ChaosDispatchMethodAll(
     return failures;
 }
 
+// ── ChaosDispatchMethodAllModules (AOT mode) ────────────────────────────
+// Iterate dispatch over ALL registered modules' hotpatch entries.
+// Uses HotpatchNameRegistry singleton to enumerate all modules.
+// Each module's entries are dispatched individually; failures are summed.
+// Returns total failures across all modules.
+inline int32_t ChaosDispatchMethodAllModules(
+    void (* const* thunks)() noexcept = nullptr) noexcept
+{
+    int32_t failures = 0;
+    auto& registry = GetHotpatchNameRegistry();
+    size_t moduleCount = registry.ModuleCount();
+    for (size_t mi = 0; mi < moduleCount; ++mi) {
+        const auto* mod = registry.GetModuleByIndex(mi);
+        if (mod == nullptr || mod->entry_table == nullptr || mod->entry_table_size == 0)
+            continue;
+        int32_t count = static_cast<int32_t>(mod->entry_table_size);
+        for (int32_t i = 0; i < count; ++i) {
+            CHAOS_EH_TRY
+                ChaosDispatchMethod(mod->entry_table, count, i, thunks);
+            CHAOS_EH_CATCH_BEGIN
+                ++failures;
+            CHAOS_EH_END
+        }
+    }
+    return failures;
+}
+
 // ── ChaosDispatchMethodBench (AOT mode, fast path) ──────────────────────
 // Fast single-method dispatch: no setjmp, inline slot access.
 // Uses InterpreterEntryDirectFast for patched methods (no zero-init overhead).

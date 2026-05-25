@@ -97,6 +97,20 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1(void
 extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2(void);
 extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentProcess(void);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetCurrentThread(void);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetModuleHandle_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_GetProcessId_System_IntPtr(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentProcess(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetCurrentThread(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetModuleHandle(void);
+extern "C" CHAOS_IL2CPP_INT32 PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_TestGetProcessId(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2(void);
+extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3(void);
+
 namespace chaos::il2cpp::codegen::PinvokeDllimportSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -139,7 +153,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -372,7 +386,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[3] = {
 		nullptr,
-		&chaos_mt_PinvokeDllimportSubjects_PinvokeDllimportSubjects.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_PinvokeDllimportSubjects_PinvokeDllimportSubjects),
 		nullptr,
 	};
 
@@ -983,7 +997,7 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0(void
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1059,7 +1073,7 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1(void
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1135,7 +1149,7 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2(void
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1211,7 +1225,7 @@ extern "C" void PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3(void
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;

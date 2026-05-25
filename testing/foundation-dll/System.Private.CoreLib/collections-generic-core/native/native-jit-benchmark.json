@@ -14,9 +14,9 @@
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()",
-      "elapsedMilliseconds": 1258.878,
-      "calibratedMs": 1258.878,
-      "opsPerSecond": 79435.8,
+      "elapsedMilliseconds": 1623.305,
+      "calibratedMs": 1623.305,
+      "opsPerSecond": 61602.7,
       "iterations": 100000,
       "status": "completed"
     },
@@ -41,27 +41,27 @@
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)",
-      "elapsedMilliseconds": 1053.523,
-      "calibratedMs": 1053.523,
-      "opsPerSecond": 94919.6,
+      "elapsedMilliseconds": 1568.857,
+      "calibratedMs": 1568.857,
+      "opsPerSecond": 63740.7,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()",
-      "elapsedMilliseconds": 1060.933,
-      "calibratedMs": 1060.933,
-      "opsPerSecond": 94256.7,
+      "elapsedMilliseconds": 1406.438,
+      "calibratedMs": 1406.438,
+      "opsPerSecond": 71101.6,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()",
-      "elapsedMilliseconds": 1141.331,
-      "calibratedMs": 1141.331,
-      "opsPerSecond": 87617.0,
+      "elapsedMilliseconds": 1490.636,
+      "calibratedMs": 1490.636,
+      "opsPerSecond": 67085.5,
       "iterations": 100000,
       "status": "completed"
     },
@@ -74,9 +74,9 @@
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()",
-      "elapsedMilliseconds": 1181.514,
-      "calibratedMs": 1181.514,
-      "opsPerSecond": 84637.1,
+      "elapsedMilliseconds": 1396.733,
+      "calibratedMs": 1396.733,
+      "opsPerSecond": 71595.6,
       "iterations": 100000,
       "status": "completed"
     },

@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct ErrorInfoBasicNativeEntry_t {
+    struct ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_t {
         CHAOS_IL2CPP_INT32 (*Run)(
                     CHAOS_IL2CPP_INT32
         );
@@ -51,8 +51,8 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*TestThrowExceptionForHR_S_OK)(
                 void
         );
-    } errorInfoBasicNativeEntry;
-    struct ErrorInfoBasicSubjects_t {
+    } errorInfoBasicSubjects_ErrorInfoBasicNativeEntry;
+    struct ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -68,7 +68,7 @@ struct Functions {
         void (*Subject_4)(
                 void
         );
-    } errorInfoBasicSubjects;
+    } errorInfoBasicSubjects_ErrorInfoBasicSubjects;
     int32_t method_count;
 };
 
@@ -87,62 +87,62 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct ErrorInfoBasicNativeEntry {
+struct ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry {
     static inline CHAOS_IL2CPP_INT32 Run(
                 CHAOS_IL2CPP_INT32 arg_0
     ) {
-        return kFunctions.errorInfoBasicNativeEntry.Run(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicNativeEntry.Run(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetExceptionForHR(
     ) {
-        return kFunctions.errorInfoBasicNativeEntry.TestGetExceptionForHR(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicNativeEntry.TestGetExceptionForHR(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetExceptionForHR_Zero(
     ) {
-        return kFunctions.errorInfoBasicNativeEntry.TestGetExceptionForHR_Zero(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicNativeEntry.TestGetExceptionForHR_Zero(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetHRForException(
     ) {
-        return kFunctions.errorInfoBasicNativeEntry.TestGetHRForException(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicNativeEntry.TestGetHRForException(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestThrowExceptionForHR_S_OK(
     ) {
-        return kFunctions.errorInfoBasicNativeEntry.TestThrowExceptionForHR_S_OK(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicNativeEntry.TestThrowExceptionForHR_S_OK(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 5;
 };
 
-struct ErrorInfoBasicSubjects {
+struct ErrorInfoBasicSubjects_ErrorInfoBasicSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.errorInfoBasicSubjects.Subject_0(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.errorInfoBasicSubjects.Subject_1(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.errorInfoBasicSubjects.Subject_2(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.errorInfoBasicSubjects.Subject_3(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.errorInfoBasicSubjects.Subject_4(
+        return kFunctions.errorInfoBasicSubjects_ErrorInfoBasicSubjects.Subject_4(
         );
     }
     /// Total number of AOT-compiled methods in this type.

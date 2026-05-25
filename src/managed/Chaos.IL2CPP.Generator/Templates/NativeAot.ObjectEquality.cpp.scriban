@@ -30,8 +30,8 @@
 {{ indentation }}{{ tab }}{{ tab }}return false;
 {{ indentation }}{{ tab }}}
 {{~ if has_string_type ~}}
-{{ indentation }}{{ tab }}if (chaos_left_ti == &{{ string_type_info_symbol }}
-{{ indentation }}{{ tab }}{{ tab }}|| chaos_left_ti->stable_id == (&{{ string_type_info_symbol }})->stable_id)
+{{ indentation }}{{ tab }}if (chaos_left_ti == {{ string_type_info_symbol }}
+{{ indentation }}{{ tab }}{{ tab }}|| chaos_left_ti->stable_id == {{ string_type_info_symbol }}->stable_id)
 {{ indentation }}{{ tab }}{
 {{ indentation }}{{ tab }}{{ tab }}auto* chaos_left_string = reinterpret_cast<{{ string_type_symbol }}*>(chaos_left_value);
 {{ indentation }}{{ tab }}{{ tab }}auto* chaos_right_string = reinterpret_cast<{{ string_type_symbol }}*>(chaos_right_value);

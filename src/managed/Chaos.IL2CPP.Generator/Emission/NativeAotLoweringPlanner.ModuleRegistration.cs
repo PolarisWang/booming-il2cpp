@@ -105,6 +105,7 @@ public sealed partial class NativeAotLoweringPlanner
         MetadataRegistrationArtifact metadataRegistration)
     {
         var allMethods = GetHotpatchableMethods();
+        HotpatchEntryCount = allMethods.Count;
         if (allMethods.Count == 0)
         {
             // No methods — emit nullptr so the linker always resolves the symbol.

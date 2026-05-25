@@ -4355,6 +4355,9 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_HotUpdate_PrivateImplementationDetai
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
+	CHAOS_IL2CPP_INTPTR _s3{};
+	CHAOS_IL2CPP_INTPTR _s4{};
+
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
 
 	// pc-dispatch state machine for irreducible CFG

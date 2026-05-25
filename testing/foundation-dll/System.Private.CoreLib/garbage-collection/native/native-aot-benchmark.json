@@ -8,63 +8,63 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.GC::Collect:System.Void()",
-      "elapsedMilliseconds": 4004.855,
-      "calibratedMs": 4004.855,
-      "opsPerSecond": 24969.7,
+      "elapsedMilliseconds": 4207.864,
+      "calibratedMs": 4207.864,
+      "opsPerSecond": 23765.0,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()",
-      "elapsedMilliseconds": 330.075,
-      "calibratedMs": 330.075,
-      "opsPerSecond": 302961.4,
+      "elapsedMilliseconds": 281.922,
+      "calibratedMs": 281.922,
+      "opsPerSecond": 354707.5,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)",
-      "elapsedMilliseconds": 0.266,
-      "calibratedMs": 0.266,
-      "opsPerSecond": 376364320.7,
+      "elapsedMilliseconds": 0.295,
+      "calibratedMs": 0.295,
+      "opsPerSecond": 339213025.8,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)",
-      "elapsedMilliseconds": 0.659,
-      "calibratedMs": 0.659,
-      "opsPerSecond": 151630022.7,
+      "elapsedMilliseconds": 0.289,
+      "calibratedMs": 0.289,
+      "opsPerSecond": 345661942.6,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
-      "elapsedMilliseconds": 9.918,
-      "calibratedMs": 9.918,
-      "opsPerSecond": 10082779.6,
+      "elapsedMilliseconds": 8.941,
+      "calibratedMs": 8.941,
+      "opsPerSecond": 11184431.3,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
-      "elapsedMilliseconds": 3723.795,
-      "calibratedMs": 3723.795,
-      "opsPerSecond": 26854.3,
+      "elapsedMilliseconds": 3418.564,
+      "calibratedMs": 3418.564,
+      "opsPerSecond": 29252.0,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()",
-      "elapsedMilliseconds": 0.427,
-      "calibratedMs": 0.427,
-      "opsPerSecond": 234301780.7,
+      "elapsedMilliseconds": 0.267,
+      "calibratedMs": 0.267,
+      "opsPerSecond": 374953130.9,
       "iterations": 100000,
       "status": "completed"
     },
@@ -79,24 +79,6 @@
     },
     {
       "methodIndex": 8,
-      "methodSubjectId": "System.Private.CoreLib/System.GC::get_LatencyMode:System.GCLatencyMode()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
-      "iterations": 100000,
-      "status": "failed"
-    },
-    {
-      "methodIndex": 9,
-      "methodSubjectId": "System.Private.CoreLib/System.GC::set_LatencyMode(System.GCLatencyMode):System.Void()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
-      "iterations": 100000,
-      "status": "failed"
-    },
-    {
-      "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()",
       "elapsedMilliseconds": 0.0,
       "calibratedMs": 0.0,
@@ -105,7 +87,7 @@
       "status": "failed"
     },
     {
-      "methodIndex": 11,
+      "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()",
       "elapsedMilliseconds": 0.0,
       "calibratedMs": 0.0,

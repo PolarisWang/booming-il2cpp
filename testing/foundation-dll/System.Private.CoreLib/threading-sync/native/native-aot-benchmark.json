@@ -8,18 +8,18 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32)",
-      "elapsedMilliseconds": 9.042,
-      "calibratedMs": 9.042,
-      "opsPerSecond": 11059010.9,
+      "elapsedMilliseconds": 6.996,
+      "calibratedMs": 6.996,
+      "opsPerSecond": 14293269.3,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)",
-      "elapsedMilliseconds": 8.946,
-      "calibratedMs": 8.946,
-      "opsPerSecond": 11177805.3,
+      "elapsedMilliseconds": 7.085,
+      "calibratedMs": 7.085,
+      "opsPerSecond": 14114525.3,
       "iterations": 100000,
       "status": "completed"
     },
@@ -44,9 +44,9 @@
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::.ctor:System.Void(System.Boolean)",
-      "elapsedMilliseconds": 1.524,
-      "calibratedMs": 1.524,
-      "opsPerSecond": 65612492.6,
+      "elapsedMilliseconds": 0.216,
+      "calibratedMs": 0.216,
+      "opsPerSecond": 462107208.9,
       "iterations": 100000,
       "status": "completed"
     },

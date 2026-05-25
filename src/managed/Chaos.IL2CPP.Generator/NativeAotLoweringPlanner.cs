@@ -320,6 +320,15 @@ public sealed partial class NativeAotLoweringPlanner
     /// <summary>Number of methods not reachable from the entry point.</summary>
     internal int AotUnreachableMethodCount;
 
+    /// <summary>Number of hotpatch dispatch entries emitted.</summary>
+    internal int HotpatchEntryCount;
+
+    /// <summary>
+    /// Total methods eligible for hotpatch dispatch: those with IL bodies or P/Invoke,
+    /// deduplicated by NativeSymbol.
+    /// </summary>
+    internal int HotpatchEligibleMethodCount;
+
     /// <summary>
     /// Number of methods that required pc-dispatch state machine emission
     /// due to irreducible CFG (after interval analysis + node splitting).
@@ -490,6 +499,13 @@ public sealed partial class NativeAotLoweringPlanner
             .ToDictionary(t => t.NativeSymbol, t => t.idx);
         _nativeSymbolToDispatchSlot = BuildDispatchSlotMap(methodsForLowering, metadataRegistration);
         var stringLiterals = CollectStringLiterals(methodsForLowering);
+
+        // Compute hotpatch coverage statistics — eligible methods with IL bodies or P/Invoke,
+        // deduplicated by NativeSymbol (matching GetHotpatchableMethods() logic).
+        var hotpatchEligibleSymbols = new HashSet<string>(StringComparer.Ordinal);
+        HotpatchEligibleMethodCount = _methodsBySubjectId.Values
+            .Where(m => m.Instructions.Count > 0 || m.IsPInvoke)
+            .Count(m => hotpatchEligibleSymbols.Add(m.NativeSymbol));
 
         // Compute AOT call-graph reachability from the entry point method.
         // Only methods reachable via call/callvirt/newobj/ldftn instructions
@@ -763,6 +779,8 @@ public sealed partial class NativeAotLoweringPlanner
             globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
             globalDeclarations += @"
 extern ""C"" void ChaosJitRegisterAll() {
+    // Register hotpatch module so GetDispatchEntry can resolve tokens → slots
+    chaos::il2cpp::runtime_core::RegisterHotpatchModule(&s_hotpatch_module);
     RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount);
 }
 ";
@@ -802,8 +820,25 @@ extern ""C"" void ChaosJitRegisterAll() {}
         // Phase 1 diagnostics: log StructuredIR coverage summary
         LogPhase1Summary();
 
+        // Hotpatch dispatch coverage diagnostics
+        LogHotpatchCoverage();
+
         // Compute enum metadata header (may be empty if no enum types found)
         var enumMetaHeader = GenerateEnumMetadataHeader();
+
+        // If enum types exist, append an IIFE that registers the generated enum
+        // metadata tables and dispatch table at static init time.
+        if (!string.IsNullOrEmpty(enumMetaHeader))
+        {
+            moduleRegistrationCode += @"
+    // Register generated enum metadata (tables + dispatch + type descriptors).
+    // ChaosRegisterEnumGeneratedMetadata is defined in enum_metadata.generated.h.
+    static const CHAOS_IL2CPP_UINT32 s_enum_registered = []() noexcept {
+        ChaosRegisterEnumGeneratedMetadata();
+        return 1u;
+    }();
+";
+        }
 
         // Build A1 typed dispatch table header + A2 dispatch wiring source.
         // These are emitted as separate files (chaos_generated_module.h/.cpp) for
@@ -1275,7 +1310,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
     {
         var seenSymbols = new HashSet<string>(StringComparer.Ordinal);
         return _methodsBySubjectId.Values
-            .Where(m => m.Instructions.Count > 0) // has IL body — excludes abstract/interface stubs
+            .Where(m => m.Instructions.Count > 0 || m.IsPInvoke) // has IL body or P/Invoke with wrapper — excludes abstract/interface stubs
             .OrderBy(m => ExtractNumericSortKey(m.SubjectId))
             .ThenBy(m => m.SubjectId, StringComparer.Ordinal)
             .Where(m => seenSymbols.Add(m.NativeSymbol)) // deduplicate by NativeSymbol
@@ -3477,10 +3512,37 @@ private string GenerateEnumMetadataHeader()
     if (fieldEntries.Count == 0)
         return string.Empty;
 
-    return EnumMetadataExtractor.GenerateHeader(
+    var header = EnumMetadataExtractor.GenerateHeader(
         mergedFlags,
         mergedSubjectIds,
         fieldEntries);
+
+    // Post-process: if the header generator places compute_enum_hash24
+    // inside the chaos::il2cpp::codegen namespace (as newer versions of
+    // EnumMetadataExtractor do), but the registration code that calls it
+    // is generated OUTSIDE the namespace, inject a using-declaration so
+    // the unqualified call compiles.
+    const string namespaceClose = "}}}  // namespace chaos::il2cpp::codegen";
+    int nsCloseIdx = header.IndexOf(namespaceClose, StringComparison.Ordinal);
+    if (nsCloseIdx >= 0)
+    {
+        int callIdx = header.IndexOf("compute_enum_hash24(", nsCloseIdx, StringComparison.Ordinal);
+        if (callIdx >= 0)
+        {
+            // The hash function is called outside its defining namespace.
+            // Insert a using-declaration right after the namespace close.
+            int insertPos = nsCloseIdx + namespaceClose.Length;
+            // Skip past any trailing whitespace/newline
+            while (insertPos < header.Length &&
+                   (header[insertPos] == '\r' || header[insertPos] == '\n'))
+                insertPos++;
+            header = header[..insertPos] + "\n" +
+                "using chaos::il2cpp::codegen::compute_enum_hash24;" +
+                header[insertPos..];
+        }
+    }
+
+    return header;
 }
 
 /// <summary>
@@ -3679,6 +3741,36 @@ private static long? ReadFieldConstantValue(
                 continue;
 
             enumSubjectIds.Add(subjectId);
+        }
+    }
+
+    private void LogHotpatchCoverage()
+    {
+        if (HotpatchEligibleMethodCount <= 0)
+            return;
+
+        var pct = (double)HotpatchEntryCount / HotpatchEligibleMethodCount * 100;
+        Console.Error.WriteLine(
+            $"[hotpatch] dispatch coverage: {HotpatchEntryCount}/{HotpatchEligibleMethodCount} ({pct:F1}%)");
+
+        if (HotpatchEntryCount < HotpatchEligibleMethodCount)
+        {
+            var coveredSymbols = new HashSet<string>(
+                GetHotpatchableMethods().Select(m => m.NativeSymbol),
+                StringComparer.Ordinal);
+            var eligibleSymbols = new HashSet<string>(StringComparer.Ordinal);
+            var missing = _methodsBySubjectId.Values
+                .Where(m => (m.Instructions.Count > 0 || m.IsPInvoke) && eligibleSymbols.Add(m.NativeSymbol))
+                .Where(m => !coveredSymbols.Contains(m.NativeSymbol))
+                .Select(m => m.SubjectId)
+                .Take(10)
+                .ToList();
+            if (missing.Count > 0)
+            {
+                Console.Error.WriteLine($"[hotpatch] missing {HotpatchEligibleMethodCount - HotpatchEntryCount} methods from dispatch table (first {missing.Count}):");
+                foreach (var m in missing)
+                    Console.Error.WriteLine($"  {m}");
+            }
         }
     }
 }

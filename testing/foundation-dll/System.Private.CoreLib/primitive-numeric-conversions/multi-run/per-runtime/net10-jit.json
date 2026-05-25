@@ -1,7 +1,7 @@
 {
   "System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 3.815,
+    "mean_ns": 3.935,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -9,7 +9,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 18.365,
+    "mean_ns": 18.631,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -17,7 +17,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 19.426,
+    "mean_ns": 19.795,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -25,7 +25,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 19.218,
+    "mean_ns": 20.270000000000003,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -33,7 +33,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 20.404,
+    "mean_ns": 21.271,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -41,7 +41,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 38.961,
+    "mean_ns": 40.179,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -49,7 +49,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 43.007,
+    "mean_ns": 63.457,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -57,7 +57,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 44.734,
+    "mean_ns": 46.578,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -65,7 +65,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)": {
     "runtime": "net10-jit",
-    "mean_ns": 13.783,
+    "mean_ns": 16.107,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -73,7 +73,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)": {
     "runtime": "net10-jit",
-    "mean_ns": 68.858,
+    "mean_ns": 71.512,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -81,7 +81,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)": {
     "runtime": "net10-jit",
-    "mean_ns": 9.229,
+    "mean_ns": 9.558,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -89,7 +89,7 @@
   },
   "System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)": {
     "runtime": "net10-jit",
-    "mean_ns": 3.741,
+    "mean_ns": 3.882,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -97,7 +97,7 @@
   },
   "System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 24.076,
+    "mean_ns": 25.045,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -105,7 +105,7 @@
   },
   "System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 23.918,
+    "mean_ns": 25.581,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",
@@ -113,7 +113,7 @@
   },
   "System.Private.CoreLib/System.Double::Parse:System.Double(System.String)": {
     "runtime": "net10-jit",
-    "mean_ns": 43.042,
+    "mean_ns": 44.4,
     "stddev_ns": 0.0,
     "samples": 100000,
     "status": "ok",

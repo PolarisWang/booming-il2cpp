@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct PinvokeDllimportNativeEntry_t {
+    struct PinvokeDllimportSubjects_PinvokeDllimportNativeEntry_t {
         CHAOS_IL2CPP_INTPTR (*GetCurrentProcess)(
                 void
         );
@@ -60,8 +60,8 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*TestGetProcessId)(
                 void
         );
-    } pinvokeDllimportNativeEntry;
-    struct PinvokeDllimportSubjects_t {
+    } pinvokeDllimportSubjects_PinvokeDllimportNativeEntry;
+    struct PinvokeDllimportSubjects_PinvokeDllimportSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -74,7 +74,7 @@ struct Functions {
         void (*Subject_3)(
                 void
         );
-    } pinvokeDllimportSubjects;
+    } pinvokeDllimportSubjects_PinvokeDllimportSubjects;
     int32_t method_count;
 };
 
@@ -93,74 +93,74 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct PinvokeDllimportNativeEntry {
+struct PinvokeDllimportSubjects_PinvokeDllimportNativeEntry {
     static inline CHAOS_IL2CPP_INTPTR GetCurrentProcess(
     ) {
-        return kFunctions.pinvokeDllimportNativeEntry.GetCurrentProcess(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportNativeEntry.GetCurrentProcess(
         );
     }
     static inline CHAOS_IL2CPP_INTPTR GetCurrentThread(
     ) {
-        return kFunctions.pinvokeDllimportNativeEntry.GetCurrentThread(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportNativeEntry.GetCurrentThread(
         );
     }
     static inline CHAOS_IL2CPP_INTPTR GetModuleHandle(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.pinvokeDllimportNativeEntry.GetModuleHandle(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportNativeEntry.GetModuleHandle(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR GetProcessId(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.pinvokeDllimportNativeEntry.GetProcessId(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportNativeEntry.GetProcessId(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetCurrentProcess(
     ) {
-        return kFunctions.pinvokeDllimportNativeEntry.TestGetCurrentProcess(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportNativeEntry.TestGetCurrentProcess(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetCurrentThread(
     ) {
-        return kFunctions.pinvokeDllimportNativeEntry.TestGetCurrentThread(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportNativeEntry.TestGetCurrentThread(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetModuleHandle(
     ) {
-        return kFunctions.pinvokeDllimportNativeEntry.TestGetModuleHandle(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportNativeEntry.TestGetModuleHandle(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetProcessId(
     ) {
-        return kFunctions.pinvokeDllimportNativeEntry.TestGetProcessId(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportNativeEntry.TestGetProcessId(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 8;
 };
 
-struct PinvokeDllimportSubjects {
+struct PinvokeDllimportSubjects_PinvokeDllimportSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.pinvokeDllimportSubjects.Subject_0(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.pinvokeDllimportSubjects.Subject_1(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.pinvokeDllimportSubjects.Subject_2(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.pinvokeDllimportSubjects.Subject_3(
+        return kFunctions.pinvokeDllimportSubjects_PinvokeDllimportSubjects.Subject_3(
         );
     }
     /// Total number of AOT-compiled methods in this type.

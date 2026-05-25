@@ -190,6 +190,12 @@ internal static class EnumMetadataExtractor
             }
         }
 
+        // ── Build sorted FNV-24 dispatch table ──────────────────────────────
+        // Sorted array enables binary search lookup at runtime instead of a
+        // large switch-case.  This reduces generated code size with zero
+        // performance cost (binary search on 360 entries = ~9 comparisons).
+        var sortedFnv24 = fnv24ToIdentifier.OrderBy(kv => kv.Key).ToList();
+
         // ── Emit shared FNV-1a 32-bit hash helper ─────────────────────────
         sb.AppendLine("/// Compute FNV-1a 32-bit hash for a null-terminated string.");
         sb.AppendLine("/// Shared by chaos_find_enum_metadata and compute_enum_hash24.");
@@ -210,24 +216,9 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("    return s && s[0] ? compute_enum_hash32(s) & 0xFFFFFFu : 0u;");
         sb.AppendLine("}");
         sb.AppendLine();
-        // ── Emit lookup function (by subject_id string) ────────────────────
-        sb.AppendLine("/// Lookup enum metadata by subject_id FNV-1a 32-bit hash via dispatch table binary search.");
-        sb.AppendLine("/// Returns nullptr if the type is unknown (fallback to reflection API).");
-        sb.AppendLine("inline static const EnumMetadataTable* chaos_find_enum_metadata(");
-        sb.AppendLine("    const char* subject_id) noexcept");
-        sb.AppendLine("{");
-        sb.AppendLine("    if (subject_id == nullptr || subject_id[0] == ' ')");
-        sb.AppendLine("        return nullptr;");
-        sb.AppendLine("    return chaos_dispatch_lookup(compute_enum_hash32(subject_id) & 0xFFFFFFu);");
-        sb.AppendLine("}");
-        sb.AppendLine();
 
-        // ── Build sorted FNV-24 dispatch table ──────────────────────────────
-        // Sorted array enables binary search lookup at runtime instead of a
-        // large switch-case.  This reduces generated code size with zero
-        // performance cost (binary search on 360 entries = ~9 comparisons).
-        var sortedFnv24 = fnv24ToIdentifier.OrderBy(kv => kv.Key).ToList();
-
+        // Dispatch table and lookup must be emitted BEFORE chaos_find_enum_metadata
+        // since both are inline static and the compiler needs the declaration first.
         sb.AppendLine("// ── Dispatch table: sorted by FNV-24 for binary search ──");
         sb.AppendLine($"static constexpr EnumDispatchEntry kEnumDispatchTable[] = {{");
         foreach (var kv in sortedFnv24)
@@ -256,6 +247,18 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("    }");
         sb.AppendLine("    return nullptr;");
         sb.AppendLine("}");
+        sb.AppendLine();
+        // ── Emit lookup function (by subject_id string) ────────────────────
+        sb.AppendLine("/// Lookup enum metadata by subject_id FNV-1a 32-bit hash via dispatch table binary search.");
+        sb.AppendLine("/// Returns nullptr if the type is unknown (fallback to reflection API).");
+        sb.AppendLine("inline static const EnumMetadataTable* chaos_find_enum_metadata(");
+        sb.AppendLine("    const char* subject_id) noexcept");
+        sb.AppendLine("{");
+        sb.AppendLine("    if (subject_id == nullptr || subject_id[0] == '\\0')");
+        sb.AppendLine("        return nullptr;");
+        sb.AppendLine("    return chaos_dispatch_lookup(compute_enum_hash32(subject_id) & 0xFFFFFFu);");
+        sb.AppendLine("}");
+        sb.AppendLine();
 
         // Emit #error if fnv24 collisions detected (prevents silent wrong-metadata at runtime).
         if (fnv24CollisionCount > 0)
@@ -269,47 +272,44 @@ internal static class EnumMetadataExtractor
         sb.AppendLine();
         sb.AppendLine("}}}  // namespace chaos::il2cpp::codegen");
         sb.AppendLine();
-        // ── Function pointer registration ──────────────────────────────────
-        // The C-linkage variable is defined in enum_stubs.cpp (default nullptr).
-        // This static initializer registers our lookup function so that stubs
-        // can use pre-computed metadata instead of the reflection API.
-        // It also registers each enum type with the reflection system so that
-        // ChaosReflectionGetTypeFromHandle can resolve enum type FNV hashes.
-        sb.AppendLine("// Function pointers defined in enum_stubs.cpp (default nullptr).");
+        // ── Generated metadata registration function ─────────────────────────
+        // Replaces the old static initializer pattern. This function is called
+        // from an IIFE in the generated module registration code (not from a
+        // static initializer), which means:
+        //   (a) the registration runs at static init time anyway (IIFE),
+        //   (b) it's defined only in the single TU that includes this header,
+        //   (c) no anonymous-namespace struct = no ODR concerns.
+        //
+        // The C-linkage variables are defined in enum_stubs.cpp (default nullptr).
         sb.AppendLine("extern \"C\" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata)(");
         sb.AppendLine("    const char* subject_id) noexcept;");
         sb.AppendLine("extern \"C\" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata_by_fnv24)(");
         sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24) noexcept;");
         sb.AppendLine();
-        sb.AppendLine("namespace {");
-        sb.AppendLine("struct _EnumMetadataRegistrar {");
-        sb.AppendLine("    _EnumMetadataRegistrar() noexcept {");
+        sb.AppendLine("// Static (internal linkage) so multiple TUs including this header don't ODR-violate.");
+        sb.AppendLine("// Only the first page's IIFE calls this; other TUs' copies are dead code.");
+        sb.AppendLine("static void ChaosRegisterEnumGeneratedMetadata() noexcept {");
 
         // Emit type registration for each enum type
         foreach (var kv in hashToIdentifier.OrderBy(kv => kv.Key))
         {
             var et = enumTypes.First(e => typeIds[e.SubjectId] == kv.Value);
-            sb.AppendLine($"        ChaosRegisterExternalType(");
-            sb.AppendLine($"            compute_enum_hash24(\"{EscapeCppString(et.SubjectId)}\"),");
-            sb.AppendLine($"            reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(");
-            sb.AppendLine($"                &chaos::il2cpp::codegen::kEnumTypeDesc_{kv.Value}));");
+            sb.AppendLine($"    ChaosRegisterExternalType(");
+            sb.AppendLine($"        compute_enum_hash24(\"{EscapeCppString(et.SubjectId)}\"),");
+            sb.AppendLine($"        reinterpret_cast<const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor*>(");
+            sb.AppendLine($"            &chaos::il2cpp::codegen::kEnumTypeDesc_{kv.Value}));");
         }
 
         sb.AppendLine();
-        sb.AppendLine("        if (g_chaos_resolve_enum_metadata == nullptr) {");
-        sb.AppendLine("            g_chaos_resolve_enum_metadata =");
-        sb.AppendLine("                &chaos::il2cpp::codegen::chaos_find_enum_metadata;");
-        sb.AppendLine("        }");
-        sb.AppendLine("        // Register the sorted dispatch table for binary-search metadata lookup.");
-        sb.AppendLine("        // This replaces the switch-case in chaos_find_enum_metadata_by_fnv24");
-        sb.AppendLine("        // with an O(log n) binary search — reduces binary size and improves");
-        sb.AppendLine("        // maintainability for large numbers of enum types.");
-        sb.AppendLine("        ChaosEnumRegisterDispatchTable(");
-        sb.AppendLine("            chaos::il2cpp::codegen::kEnumDispatchTable,");
-        sb.AppendLine("            chaos::il2cpp::codegen::kEnumDispatchCount);");
+        sb.AppendLine("    if (g_chaos_resolve_enum_metadata == nullptr) {");
+        sb.AppendLine("        g_chaos_resolve_enum_metadata =");
+        sb.AppendLine("            &chaos::il2cpp::codegen::chaos_find_enum_metadata;");
         sb.AppendLine("    }");
-        sb.AppendLine("} _s_enum_reg;");
-        sb.AppendLine("}  // anonymous namespace");
+        sb.AppendLine("    // Register the sorted dispatch table for binary-search metadata lookup.");
+        sb.AppendLine("    ChaosEnumRegisterDispatchTable(");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumDispatchTable,");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumDispatchCount);");
+        sb.AppendLine("}");
         sb.AppendLine();
 
         return sb.ToString();

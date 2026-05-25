@@ -1,0 +1,51 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "PinvokeStressSubjects",
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "PinvokeStressSubjects",
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PinvokeStressSubjects",
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PinvokeStressSubjects",
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "PinvokeStressSubjects",
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

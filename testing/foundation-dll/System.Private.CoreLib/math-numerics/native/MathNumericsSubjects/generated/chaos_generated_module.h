@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct MathNumericsSubjects_t {
+    struct MathNumericsSubjects_MathNumericsSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -90,7 +90,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } mathNumericsSubjects;
+    } mathNumericsSubjects_MathNumericsSubjects;
     int32_t method_count;
 };
 
@@ -109,95 +109,95 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct MathNumericsSubjects {
+struct MathNumericsSubjects_MathNumericsSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_0(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_10(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_11(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_12(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_12(
         );
     }
     static inline void Subject_13(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_13(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_13(
         );
     }
     static inline void Subject_14(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_14(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_14(
         );
     }
     static inline void Subject_15(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_15(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_15(
         );
     }
     static inline void Subject_16(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_16(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_16(
         );
     }
     static inline void Subject_17(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_17(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_17(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_1(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_2(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_3(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_4(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_5(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_6(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_7(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_8(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.mathNumericsSubjects.Subject_9(
+        return kFunctions.mathNumericsSubjects_MathNumericsSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

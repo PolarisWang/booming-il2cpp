@@ -35,15 +35,15 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct ConstantFortyTwo_t {
+    struct RcwBasicSubjects_ConstantFortyTwo_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } constantFortyTwo;
-    struct RcwBasicNativeEntry_t {
+    } rcwBasicSubjects_ConstantFortyTwo;
+    struct RcwBasicSubjects_RcwBasicNativeEntry_t {
         CHAOS_IL2CPP_INTPTR (*CreateCcwForSimpleMath)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -97,8 +97,8 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*TestRcwVtableMethodCall)(
                 void
         );
-    } rcwBasicNativeEntry;
-    struct RcwBasicSubjects_t {
+    } rcwBasicSubjects_RcwBasicNativeEntry;
+    struct RcwBasicSubjects_RcwBasicSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -120,16 +120,16 @@ struct Functions {
         void (*Subject_6)(
                 void
         );
-    } rcwBasicSubjects;
-    struct RuntimeState_t {
+    } rcwBasicSubjects_RcwBasicSubjects;
+    struct RcwBasicSubjects_RuntimeState_t {
         CHAOS_IL2CPP_INTPTR (*Get)(
                 void
         );
         void (*Set)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } runtimeState;
-    struct SimpleMath_t {
+    } rcwBasicSubjects_RuntimeState;
+    struct RcwBasicSubjects_SimpleMath_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -143,7 +143,7 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
-    } simpleMath;
+    } rcwBasicSubjects_SimpleMath;
     int32_t method_count;
 };
 
@@ -162,18 +162,18 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct ConstantFortyTwo {
+struct RcwBasicSubjects_ConstantFortyTwo {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.constantFortyTwo.ctor(
+        return kFunctions.rcwBasicSubjects_ConstantFortyTwo.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetValue(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.constantFortyTwo.GetValue(
+        return kFunctions.rcwBasicSubjects_ConstantFortyTwo.GetValue(
                     arg_0
         );
     }
@@ -181,11 +181,11 @@ struct ConstantFortyTwo {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct RcwBasicNativeEntry {
+struct RcwBasicSubjects_RcwBasicNativeEntry {
     static inline CHAOS_IL2CPP_INTPTR CreateCcwForSimpleMath(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.rcwBasicNativeEntry.CreateCcwForSimpleMath(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.CreateCcwForSimpleMath(
                     arg_0
         );
     }
@@ -195,7 +195,7 @@ struct RcwBasicNativeEntry {
                 CHAOS_IL2CPP_INT32 arg_2, 
                 CHAOS_IL2CPP_INT32 arg_3
     ) {
-        return kFunctions.rcwBasicNativeEntry.MarshalCallComMethod(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.MarshalCallComMethod(
                     arg_0, 
                     arg_1, 
                     arg_2, 
@@ -208,7 +208,7 @@ struct RcwBasicNativeEntry {
                 CHAOS_IL2CPP_INT32 arg_2, 
                 CHAOS_IL2CPP_INT32 arg_3
     ) {
-        return kFunctions.rcwBasicNativeEntry.MarshalCallDirectComMethod(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.MarshalCallDirectComMethod(
                     arg_0, 
                     arg_1, 
                     arg_2, 
@@ -219,7 +219,7 @@ struct RcwBasicNativeEntry {
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.rcwBasicNativeEntry.MarshalCreateCcw(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.MarshalCreateCcw(
                     arg_0, 
                     arg_1
         );
@@ -227,14 +227,14 @@ struct RcwBasicNativeEntry {
     static inline CHAOS_IL2CPP_INTPTR MarshalCreateRcw(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.rcwBasicNativeEntry.MarshalCreateRcw(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.MarshalCreateRcw(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR MarshalGetRcwUnknown(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.rcwBasicNativeEntry.MarshalGetRcwUnknown(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.MarshalGetRcwUnknown(
                     arg_0
         );
     }
@@ -242,7 +242,7 @@ struct RcwBasicNativeEntry {
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.rcwBasicNativeEntry.MarshalRcwQueryInterface(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.MarshalRcwQueryInterface(
                     arg_0, 
                     arg_1
         );
@@ -250,101 +250,101 @@ struct RcwBasicNativeEntry {
     static inline void MarshalReleaseRcw(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.rcwBasicNativeEntry.MarshalReleaseRcw(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.MarshalReleaseRcw(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 Run(
                 CHAOS_IL2CPP_INT32 arg_0
     ) {
-        return kFunctions.rcwBasicNativeEntry.Run(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.Run(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestRcwDirectVtable(
     ) {
-        return kFunctions.rcwBasicNativeEntry.TestRcwDirectVtable(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.TestRcwDirectVtable(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestRcwMultipleWrappers(
     ) {
-        return kFunctions.rcwBasicNativeEntry.TestRcwMultipleWrappers(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.TestRcwMultipleWrappers(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestRcwQiUnknownInterface(
     ) {
-        return kFunctions.rcwBasicNativeEntry.TestRcwQiUnknownInterface(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.TestRcwQiUnknownInterface(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestRcwRoundTripIdentity(
     ) {
-        return kFunctions.rcwBasicNativeEntry.TestRcwRoundTripIdentity(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.TestRcwRoundTripIdentity(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestRcwRoundTripQi(
     ) {
-        return kFunctions.rcwBasicNativeEntry.TestRcwRoundTripQi(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.TestRcwRoundTripQi(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestRcwVtableMethodCall(
     ) {
-        return kFunctions.rcwBasicNativeEntry.TestRcwVtableMethodCall(
+        return kFunctions.rcwBasicSubjects_RcwBasicNativeEntry.TestRcwVtableMethodCall(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 15;
 };
 
-struct RcwBasicSubjects {
+struct RcwBasicSubjects_RcwBasicSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.rcwBasicSubjects.Subject_0(
+        return kFunctions.rcwBasicSubjects_RcwBasicSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.rcwBasicSubjects.Subject_1(
+        return kFunctions.rcwBasicSubjects_RcwBasicSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.rcwBasicSubjects.Subject_2(
+        return kFunctions.rcwBasicSubjects_RcwBasicSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.rcwBasicSubjects.Subject_3(
+        return kFunctions.rcwBasicSubjects_RcwBasicSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.rcwBasicSubjects.Subject_4(
+        return kFunctions.rcwBasicSubjects_RcwBasicSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.rcwBasicSubjects.Subject_5(
+        return kFunctions.rcwBasicSubjects_RcwBasicSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.rcwBasicSubjects.Subject_6(
+        return kFunctions.rcwBasicSubjects_RcwBasicSubjects.Subject_6(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 7;
 };
 
-struct RuntimeState {
+struct RcwBasicSubjects_RuntimeState {
     static inline CHAOS_IL2CPP_INTPTR Get(
     ) {
-        return kFunctions.runtimeState.Get(
+        return kFunctions.rcwBasicSubjects_RuntimeState.Get(
         );
     }
     static inline void Set(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.runtimeState.Set(
+        return kFunctions.rcwBasicSubjects_RuntimeState.Set(
                     arg_0
         );
     }
@@ -352,11 +352,11 @@ struct RuntimeState {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct SimpleMath {
+struct RcwBasicSubjects_SimpleMath {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.simpleMath.ctor(
+        return kFunctions.rcwBasicSubjects_SimpleMath.ctor(
                     arg_0
         );
     }
@@ -365,7 +365,7 @@ struct SimpleMath {
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.simpleMath.Add(
+        return kFunctions.rcwBasicSubjects_SimpleMath.Add(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -376,7 +376,7 @@ struct SimpleMath {
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.simpleMath.Multiply(
+        return kFunctions.rcwBasicSubjects_SimpleMath.Multiply(
                     arg_0, 
                     arg_1, 
                     arg_2

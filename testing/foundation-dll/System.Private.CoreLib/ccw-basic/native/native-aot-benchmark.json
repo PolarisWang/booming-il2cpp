@@ -8,45 +8,45 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::Run:System.Int32(System.Int32)",
-      "elapsedMilliseconds": 0.216,
-      "calibratedMs": 0.216,
-      "opsPerSecond": 462748727.4,
+      "elapsedMilliseconds": 0.213,
+      "calibratedMs": 0.213,
+      "opsPerSecond": 468823253.6,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()",
-      "elapsedMilliseconds": 0.22,
-      "calibratedMs": 0.22,
-      "opsPerSecond": 453926463.9,
+      "elapsedMilliseconds": 0.212,
+      "calibratedMs": 0.212,
+      "opsPerSecond": 471031559.1,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()",
-      "elapsedMilliseconds": 0.381,
-      "calibratedMs": 0.381,
-      "opsPerSecond": 262191924.5,
+      "elapsedMilliseconds": 0.226,
+      "calibratedMs": 0.226,
+      "opsPerSecond": 443262411.3,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestConstantValue:System.Int32()",
-      "elapsedMilliseconds": 0.276,
-      "calibratedMs": 0.276,
-      "opsPerSecond": 362318840.6,
+      "elapsedMilliseconds": 0.225,
+      "calibratedMs": 0.225,
+      "opsPerSecond": 443655723.2,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestDualInterface:System.Int32()",
-      "elapsedMilliseconds": 0.211,
-      "calibratedMs": 0.211,
-      "opsPerSecond": 473709142.6,
+      "elapsedMilliseconds": 0.212,
+      "calibratedMs": 0.212,
+      "opsPerSecond": 470809792.8,
       "iterations": 100000,
       "status": "completed"
     }

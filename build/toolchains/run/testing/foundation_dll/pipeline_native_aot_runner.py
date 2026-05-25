@@ -1281,9 +1281,27 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
                 fwd_decls.add(fn_name)
 
         if fwd_decls:
-            # Add forward declarations after the last #include in the header
+            # Build forward declarations by scanning page files for the exact
+            # extern "C" declaration text.  Using the exact text (return type +
+            # parameter list) avoids C2116/C2733 errors from mismatched
+            # signatures (e.g. void vs CHAOS_IL2CPP_INTPTR, or (...) vs
+            # specific parameter types in extern "C" functions).
             decl_lines = ["", "// Forward declarations (pipeline fix: page-file extern \"C\" functions)"]
-            for fn_name in sorted(fwd_decls):
+            ext_decl_pattern = _re.compile(
+                r'(extern\s+"C"\s+(?:CHAOS_IL2CPP_\w+|void|int|double|chaos_valuetype_\w+)\s+'
+                + '(' + '|'.join(_re.escape(f) for f in sorted(fwd_decls)) + r')'
+                + r'\s*\([^)]*\)\s*;)',
+                _re.MULTILINE)
+            found: set[str] = set()
+            for page_file in sorted(native_dir.rglob("native-aot.page-*.cpp")):
+                page_text = page_file.read_text(encoding="utf-8")
+                for m in ext_decl_pattern.finditer(page_text):
+                    fn_name = m.group(2)
+                    if fn_name in fwd_decls and fn_name not in found:
+                        decl_lines.append(m.group(1))
+                        found.add(fn_name)
+            # Fallback for any function whose declaration we couldn't locate
+            for fn_name in sorted(fwd_decls - found):
                 decl_lines.append(f'extern "C" void {fn_name}(...);')
             text += "\n".join(decl_lines) + "\n"
             header_file.write_text(text, encoding="utf-8")
@@ -1374,6 +1392,48 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
                         module_h.write_text(text, encoding="utf-8")
                         print(f"    [fix_page] added {len(missing)} chaos_valuetype"
                               f" typedefs in {module_h.name}")
+
+                    # Also add same typedefs to native-aot.generated.header.h so they
+                    # are visible in page-file TUs (page files include this header but
+                    # NOT chaos_generated_module.h).
+                    for header_h_file in native_dir.rglob("native-aot.generated.header.h"):
+                        hdr_text = header_h_file.read_text(encoding="utf-8")
+                        if "// chaos_valuetype typedefs (pipeline fix)" in hdr_text:
+                            continue  # already fixed
+                        # Find which ones already have typedefs
+                        defined_vt_hdr: set[str] = set()
+                        for m in _re.finditer(
+                                r'typedef\s+\w+\s+(chaos_valuetype_\w+)', hdr_text):
+                            defined_vt_hdr.add(m.group(1))
+                        missing_hdr = sorted(all_vt - defined_vt_hdr)
+                        if missing_hdr:
+                            typefix_lines_hdr = [
+                                "",
+                                "// chaos_valuetype typedefs (pipeline fix: missing value type aliases)"]
+                            for vt_name in missing_hdr:
+                                typefix_lines_hdr.append(
+                                    f"typedef CHAOS_IL2CPP_INT32 {vt_name};")
+                            # Insert at the top of the file (after last include or
+                            # after #pragma once) so typedefs are visible before
+                            # any forward declarations or extern "C" usage.
+                            insert_pos = len(hdr_text)
+                            last_include_hdr = -1
+                            for m in _re.finditer(r'^#include.*$', hdr_text, _re.MULTILINE):
+                                last_include_hdr = max(last_include_hdr, m.end())
+                            if last_include_hdr >= 0:
+                                insert_pos = last_include_hdr + 1
+                            else:
+                                pragma_pos = hdr_text.find("#pragma once")
+                                if pragma_pos >= 0:
+                                    rest = hdr_text[pragma_pos:]
+                                    nl2 = rest.find("\n\n")
+                                    if nl2 >= 0:
+                                        insert_pos = pragma_pos + nl2 + 2
+                            hdr_text = (hdr_text[:insert_pos] + "\n".join(typefix_lines_hdr) +
+                                        "\n" + hdr_text[insert_pos:])
+                            header_h_file.write_text(hdr_text, encoding="utf-8")
+                            print(f"    [fix_page] added {len(missing_hdr)} chaos_valuetype"
+                                  f" typedefs in {header_h_file.name}")
 
         # Step 3d: Rename duplicate function-pointer member names in
         # chaos_generated_module.h. C++ structs disallow overloaded members
@@ -1551,6 +1611,16 @@ def remediate_supplemental_codegen(native_dir: Path) -> None:
         if new_text != text:
             changed = True
             text = new_text
+        # Pattern 2: &chaos_mt_X.AsTypeInfoHot() — AsTypeInfoHot() already returns
+        # TypeInfoHot* (a pointer rvalue), so & creates an invalid TypeInfoHot**.
+        # Remove the & since the return value IS the pointer we need.
+        new_text = _re.sub(
+            r'&(chaos_mt_\w+)\.AsTypeInfoHot\(\)',
+            r'\1.AsTypeInfoHot()',
+            text)
+        if new_text != text:
+            changed = True
+            text = new_text
         if changed:
             gen_file.write_text(text, encoding="utf-8")
             print(f"    [fix_codegen] fixed .hot member access in {gen_file.name}")
@@ -1628,6 +1698,76 @@ def remediate_supplemental_codegen(native_dir: Path) -> None:
         if new_text != text:
             page_file.write_text(new_text, encoding="utf-8")
             print(f"    [fix_codegen] relaxed constexpr→const for iface_map in {page_file.name}")
+
+    # Step D: Fix missing _sN eval-stack slot declarations in generated code.
+    # ComputeMaxEvalStackDepth sometimes undercounts for generic methods where
+    # StringId emission or inlined code expands the effective stack depth beyond
+    # the IL-level analysis.  This post-processing step finds each function's
+    # declared and used _sN slots and injects any missing declarations.
+    import re as _re2
+    for gen_file in native_dir.rglob("native-aot.*"):
+        if gen_file.suffix not in (".cpp",):
+            continue
+        text = gen_file.read_text(encoding="utf-8")
+        # Split into per-function blocks at `// Managed method:` markers
+        func_blocks = _re2.split(r'(?=^// Managed method:)', text, flags=_re2.MULTILINE)
+        modified_blocks = []
+        total_added = 0
+        for block in func_blocks:
+            if not block.strip():
+                modified_blocks.append(block)
+                continue
+            # Find all slot declarations within this function block
+            decl_pattern = _re2.compile(r'^\tCHAOS_IL2CPP_INTPTR (_s\d+){};', _re2.MULTILINE)
+            use_pattern = _re2.compile(r'(?<!CHAOS_IL2CPP_INTPTR )_s(\d+)')
+            declared = [int(m.group(1)[2:]) for m in decl_pattern.finditer(block)]
+            if not declared:
+                modified_blocks.append(block)
+                continue
+            max_declared = max(declared)
+            # Find max _sN usage in non-declaration context
+            max_used = max_declared
+            for m in use_pattern.finditer(block):
+                idx = int(m.group(1))
+                if idx > max_used:
+                    max_used = idx
+            if max_used > max_declared:
+                # Find the last declaration and insert after it
+                last_decl_end = 0
+                for m in decl_pattern.finditer(block):
+                    end = m.end()
+                    if end > last_decl_end:
+                        last_decl_end = end
+                new_decls = ''
+                for i in range(max_declared + 1, max_used + 1):
+                    new_decls += f'\tCHAOS_IL2CPP_INTPTR _s{i}{{}};\n'
+                block = block[:last_decl_end] + '\n' + new_decls + block[last_decl_end:]
+                total_added += max_used - max_declared
+            modified_blocks.append(block)
+        if total_added > 0:
+            gen_file.write_text(''.join(modified_blocks), encoding="utf-8")
+            print(f"    [fix_codegen] added {total_added} slot declarations in {gen_file.name}")
+
+    # Step E: Fix ChaosRegisterEnumGeneratedMetadata calls when no enum types exist.
+    # The codegen unconditionally emits this call, but the enum_metadata file only
+    # defines the function when enum types are present.  If the header says
+    # "No enum types found", replace the call with a no-op lambda.
+    for em_file in native_dir.rglob("enum_metadata.generated.h"):
+        em_text = em_file.read_text(encoding="utf-8")
+        if "No enum types found in this closure" not in em_text:
+            continue
+        # Find the corresponding generated.cpp and remove the call
+        gen_dir = em_file.parent
+        for gen_file in gen_dir.glob("native-aot.generated.cpp"):
+            gtext = gen_file.read_text(encoding="utf-8")
+            # Replace the static-registration lambda that calls the missing function
+            new_gtext = _re.sub(
+                r'static const CHAOS_IL2CPP_UINT32 s_enum_registered = \[\]\(\) noexcept \{[\s\S]*?ChaosRegisterEnumGeneratedMetadata\(\);[\s\S]*?return 1u;\s*\}\(\);',
+                '// No enum types in this closure — skip registration.\nstatic constexpr CHAOS_IL2CPP_UINT32 s_enum_registered = 0u;',
+                gtext)
+            if new_gtext != gtext:
+                gen_file.write_text(new_gtext, encoding="utf-8")
+                print(f"    [fix_codegen] removed enum registration call in {gen_file.name}")
 
 
 def write_sentinel_dispatch(dispatch_cpp: Path) -> None:

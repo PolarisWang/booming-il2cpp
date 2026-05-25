@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "RcwBasicSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "System.Private.CoreLib/rcw-basic/codegen/_subjects_input/RcwBasicSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/rcw-basic/managed/subjects/build-output/RcwBasicSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "RcwBasicSubjects",
-      "path": "System.Private.CoreLib/rcw-basic/codegen/_subjects_input/RcwBasicSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/rcw-basic/managed/subjects/build-output/RcwBasicSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -20,7 +20,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "c426c9ec-4623-4746-a38f-831d67ae816c",
+  "inputModuleVersionId": "9bbc7df7-faf3-4d5c-83e7-0149dafe9eb8",
   "artifacts": [
     {
       "kind": "typedIlIr",

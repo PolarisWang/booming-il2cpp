@@ -48,7 +48,7 @@ def generate_verification_dispatch(
         print(f"  [generate_dispatch] manifest not found: {manifest_path}")
         return
 
-    with open(manifest_path, encoding="utf-8") as f:
+    with open(manifest_path, encoding="utf-8-sig") as f:
         manifest = json.load(f)
 
     methods: list[dict[str, Any]] = manifest.get("methods", [])
@@ -77,6 +77,7 @@ def generate_verification_dispatch(
     write('#include <chaos/hotpatch_dispatch.h>')
     write('')
     write('using chaos::il2cpp::runtime_core::ChaosDispatchMethod;')
+    write('using chaos::il2cpp::runtime_core::ChaosDispatchMethodAllModules;')
     write('')
 
     # Extern declarations (defined in native-aot.generated.cpp and hotpatch-table.generated.cpp)
@@ -87,7 +88,7 @@ def generate_verification_dispatch(
     write('')
     if not is_jit:
         write('// kDefaultArgThunks defined in native-aot.generated.cpp (AOT-only)')
-        write('extern "C" void (*kDefaultArgThunks[])();')
+        write('extern "C" void (*kDefaultArgThunks[])() noexcept;')
         write('')
     # GetHotpatchEntries/GetHotpatchEntryCount: extern "C" defined in hotpatch-table.generated.cpp
     write('extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;')
@@ -117,27 +118,21 @@ def generate_verification_dispatch(
         write('')
 
     # ── RunFactAll ──────────────────────────────────────────────────
-    # Uses ChaosDispatchMethod for each subject entry, catching exceptions.
-    # Iterates kSubjectSlotMap (subject methods only) rather than all
-    # kAotMethodCount methods, to avoid false failures from
-    # interpreter-unsupported EH patterns (fault/filter/nested-catch).
+    # Uses ChaosDispatchMethodAllModules to dispatch ALL methods across
+    # ALL registered modules (not just the entry module's subjects).
+    # Each module's entries are dispatched individually with EH try/catch
+    # inside the runtime function.  This provides full multi-assembly
+    # coverage for the verification pipeline.
     if not is_jit:
         fact_thunks = 'kDefaultArgThunks'
     else:
         fact_thunks = 'nullptr'
 
-    write("// ── RunFactAll: run every subject entry via ChaosDispatchMethod, return failure count ──")
-    write('extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {')
-    write('    int failed_count = 0;')
-    write('    for (int si = 0; si < kSubjectEntryCount; si++) {')
-    write('        int i = kSubjectSlotMap[si];')
-    write('        CHAOS_EH_TRY')
-    write(f'            ChaosDispatchMethod(GetHotpatchEntries(), kAotMethodCount, i, {fact_thunks});')
-    write('        CHAOS_EH_CATCH_BEGIN')
-    write('            ++failed_count;')
-    write('        CHAOS_EH_END')
-    write('    }')
-    write('    return failed_count;')
+    write("// ── RunFactAll: dispatch ALL methods across ALL registered modules ────")
+    write("// Uses ChaosDispatchMethodAllModules from hotpatch_dispatch.h which iterates")
+    write("// every module in HotpatchNameRegistry.  Returns total failure count.")
+    write(f'extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {{')
+    write(f'    return ChaosDispatchMethodAllModules({fact_thunks});')
     write('}')
     write('')
 
@@ -160,21 +155,12 @@ def generate_verification_dispatch(
     write('')
 
     # ── RunHotpatchAll ──────────────────────────────────────────────
-    # Same as RunFactAll but semantically "after hotpatch".  ChaosDispatchMethod
-    # checks the hotpatch dispatch table internally.  Iterates subject
-    # entries only (same reason as RunFactAll).
-    write("// ── RunHotpatchAll: all-subject-entries loop via ChaosDispatchMethod (post-patch) ──")
-    write('extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {')
-    write('    int failed_count = 0;')
-    write('    for (int si = 0; si < kSubjectEntryCount; si++) {')
-    write('        int i = kSubjectSlotMap[si];')
-    write('        CHAOS_EH_TRY')
-    write(f'            ChaosDispatchMethod(GetHotpatchEntries(), kAotMethodCount, i, {fact_thunks});')
-    write('        CHAOS_EH_CATCH_BEGIN')
-    write('            ++failed_count;')
-    write('        CHAOS_EH_END')
-    write('    }')
-    write('    return failed_count;')
+    # Same as RunFactAll but semantically "after hotpatch".
+    # Uses ChaosDispatchMethodAllModules to cover ALL registered modules.
+    # ChaosDispatchMethod handles all hotpatch routing internally.
+    write("// ── RunHotpatchAll: dispatch ALL methods across ALL modules (post-patch) ──")
+    write(f'extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {{')
+    write(f'    return ChaosDispatchMethodAllModules({fact_thunks});')
     write('}')
     write('')
 

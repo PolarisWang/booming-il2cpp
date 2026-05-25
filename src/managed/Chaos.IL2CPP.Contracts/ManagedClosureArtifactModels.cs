@@ -355,6 +355,18 @@ public sealed record NativeCodegenMetricsArtifact
 
     /// <summary>Number of methods not reachable from entry point.</summary>
     public int AotUnreachableMethodCount { get; init; }
+
+    /// <summary>Number of hotpatch dispatch entries emitted in s_hotpatch_entries[].</summary>
+    public int HotpatchEntryCount { get; init; }
+
+    /// <summary>
+    /// Total methods eligible for hotpatch dispatch: those with IL bodies or P/Invoke,
+    /// deduplicated by NativeSymbol (matching GetHotpatchableMethods logic).
+    /// </summary>
+    public int HotpatchEligibleMethodCount { get; init; }
+
+    /// <summary>Hotpatch dispatch coverage ratio (0.0–1.0).</summary>
+    public double HotpatchDispatchCoverage { get; init; }
 }
 
 public sealed record NativeReferenceGeneratedArtifactRef

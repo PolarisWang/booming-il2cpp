@@ -113,6 +113,16 @@ void SetModuleRegisteredCallback(ModuleRegisteredCallback cb) noexcept;
 
 void RegisterReversePInvokeWrappers(void* const* wrappers, uint32_t count) noexcept;
 
+// ── Module enumeration helpers ──────────────────────────────────────────
+// Used by verification dispatch (ChaosDispatchMethodAllModules) to iterate
+// all registered modules without exposing the internal vector directly.
+inline size_t HotpatchModuleCount() noexcept {
+    return GetHotpatchNameRegistry().ModuleCount();
+}
+inline const HotpatchModuleV0* GetHotpatchModuleByIndex(size_t index) noexcept {
+    return GetHotpatchNameRegistry().GetModuleByIndex(index);
+}
+
 // ── Dispatch helpers ──────────────────────────────────────────────────
 
 // Callback type for slot update notifications during hotpatch.

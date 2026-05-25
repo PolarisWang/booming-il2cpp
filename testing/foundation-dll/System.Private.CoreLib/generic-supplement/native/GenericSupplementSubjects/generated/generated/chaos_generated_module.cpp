@@ -6601,6 +6601,15 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifa
 extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_GeneratedSymbolCount(
             CHAOS_IL2CPP_INTPTR
 );
+extern "C" double Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_HotpatchDispatchCoverage(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_HotpatchEligibleMethodCount(
+            CHAOS_IL2CPP_INTPTR
+);
+extern "C" CHAOS_IL2CPP_INT32 Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_HotpatchEntryCount(
+            CHAOS_IL2CPP_INTPTR
+);
 extern "C" CHAOS_IL2CPP_INT64 Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_LargestGeneratedCppBytes(
             CHAOS_IL2CPP_INTPTR
 );
@@ -6667,6 +6676,18 @@ extern "C" void Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_Generate
             CHAOS_IL2CPP_INTPTR
 );
 extern "C" void Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_GeneratedSymbolCount_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" void Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_HotpatchDispatchCoverage_System_Double(
+            CHAOS_IL2CPP_INTPTR, 
+            double
+);
+extern "C" void Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_HotpatchEligibleMethodCount_System_Int32(
+            CHAOS_IL2CPP_INTPTR, 
+            CHAOS_IL2CPP_INT32
+);
+extern "C" void Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_HotpatchEntryCount_System_Int32(
             CHAOS_IL2CPP_INTPTR, 
             CHAOS_IL2CPP_INT32
 );
@@ -15573,6 +15594,9 @@ static const Functions s_functions = {
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_GeneratedCppTotalBytes,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_GeneratedSourcePaths,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_GeneratedSymbolCount,
+        &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_HotpatchDispatchCoverage,
+        &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_HotpatchEligibleMethodCount,
+        &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_HotpatchEntryCount,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_LargestGeneratedCppBytes,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_PeakWorkingSetBytes,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_PlanKind,
@@ -15592,6 +15616,9 @@ static const Functions s_functions = {
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_GeneratedCppTotalBytes_System_Int64,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_GeneratedSourcePaths_System_Collections_Generic_IReadOnlyList_System_String,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_GeneratedSymbolCount_System_Int32,
+        &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_HotpatchDispatchCoverage_System_Double,
+        &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_HotpatchEligibleMethodCount_System_Int32,
+        &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_HotpatchEntryCount_System_Int32,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_LargestGeneratedCppBytes_System_Int64,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_PeakWorkingSetBytes_System_Int64,
         &Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_PlanKind_System_String,
@@ -17702,7 +17729,7 @@ static const Functions s_functions = {
         &GenericSupplementSubjects_GenericSupplementSubjects_Subject_2,
         &GenericSupplementSubjects_GenericSupplementSubjects_Subject_3,
     },
-    3770,
+    3776,
 };
 
 const Functions kFunctions = s_functions;
@@ -17710,8 +17737,8 @@ const Functions kFunctions = s_functions;
 // Flat function pointer array for indexed dispatch (benchmarking).
 // Avoids fragile reinterpret_cast<void* const*>(&kFunctions) which depends on
 // struct layout uniformity across sub-struct members.
-extern "C" void* kFunctionsFlat[3770];
-void* kFunctionsFlat[3770] = {
+extern "C" void* kFunctionsFlat[3776];
+void* kFunctionsFlat[3776] = {
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_AotCoreIrAbiSlotArtifact__ctor),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_AotCoreIrAbiSlotArtifact__ctor_AotCoreIrAbiSlotArtifact),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_AotCoreIrAbiSlotArtifact_Clone),
@@ -19570,6 +19597,9 @@ void* kFunctionsFlat[3770] = {
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_GeneratedCppTotalBytes),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_GeneratedSourcePaths),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_GeneratedSymbolCount),
+    reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_HotpatchDispatchCoverage),
+    reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_HotpatchEligibleMethodCount),
+    reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_HotpatchEntryCount),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_LargestGeneratedCppBytes),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_PeakWorkingSetBytes),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_get_PlanKind),
@@ -19589,6 +19619,9 @@ void* kFunctionsFlat[3770] = {
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_GeneratedCppTotalBytes_System_Int64),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_GeneratedSourcePaths_System_Collections_Generic_IReadOnlyList_System_String),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_GeneratedSymbolCount_System_Int32),
+    reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_HotpatchDispatchCoverage_System_Double),
+    reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_HotpatchEligibleMethodCount_System_Int32),
+    reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_HotpatchEntryCount_System_Int32),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_LargestGeneratedCppBytes_System_Int64),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_PeakWorkingSetBytes_System_Int64),
     reinterpret_cast<void*>(&Chaos_IL2CPP_Contracts_NativeCodegenMetricsArtifact_set_PlanKind_System_String),

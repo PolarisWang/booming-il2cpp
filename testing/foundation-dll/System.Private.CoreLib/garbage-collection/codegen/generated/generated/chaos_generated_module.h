@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct GarbageCollectionSubjects_t {
+    struct GarbageCollectionSubjects_GarbageCollectionSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -66,7 +66,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } garbageCollectionSubjects;
+    } garbageCollectionSubjects_GarbageCollectionSubjects;
     int32_t method_count;
 };
 
@@ -85,55 +85,55 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct GarbageCollectionSubjects {
+struct GarbageCollectionSubjects_GarbageCollectionSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_0(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_1(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_2(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_3(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_4(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_5(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_6(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_7(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_8(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.garbageCollectionSubjects.Subject_9(
+        return kFunctions.garbageCollectionSubjects_GarbageCollectionSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

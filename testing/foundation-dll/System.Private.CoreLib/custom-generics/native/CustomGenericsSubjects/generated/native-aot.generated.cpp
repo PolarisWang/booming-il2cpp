@@ -286,6 +286,191 @@ extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_System_String__cto
 extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper__0_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_0(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_1(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_2(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_3(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_4(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_System_Int32_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Set_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32__ctor_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_Deconstruct_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String__ctor_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Echo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Util_Echo_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_System_Int32_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Util__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_1_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_System_String__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper__0_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_0(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_1(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_2(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_3(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_4(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_System_Int32_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Set_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32__ctor_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_Deconstruct_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String__ctor_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Echo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Util_Echo_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_System_Int32_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Util__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_1_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_System_String__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper__0_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_0(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_1(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_2(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_3(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_4(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_System_Int32_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Set_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32__ctor_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_Deconstruct_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String__ctor_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Echo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Util_Echo_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_System_Int32_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Util__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_1_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_System_String__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper__0_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_0(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_1(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_2(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_3(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_4(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_System_Int32_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Set_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32__ctor_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_Deconstruct_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String__ctor_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Echo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Util_Echo_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_System_Int32_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Util__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_1_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_System_String__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper__0_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_0(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_1(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_2(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_3(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_4(void);
+extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_System_Int32_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32_Set_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box_System_Int32__ctor_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_Get(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_IsDefault(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0_Set_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Box__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_2__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_Deconstruct_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String__ctor_System_Int32_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1_Deconstruct_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Pair__0__1__ctor_0_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Echo_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 CustomGenericsSubjects_CustomGenerics_Util_Echo_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_0_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Util_Equal_System_Int32_System_Int32_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Util__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_1_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_1__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper_System_String__ctor_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper__0_GetRefType(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void CustomGenericsSubjects_CustomGenerics_Wrapper__0__ctor_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1);
+
 namespace chaos::il2cpp::codegen::CustomGenericsSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -302,11 +487,11 @@ inline TypeInfoV0 chaos_mt_CustomGenericsSubjects_CustomGenerics_Box__0_ = {{nul
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CustomGenericsSubjects_CustomGenerics_Box__0_ = static_cast<CHAOS_IL2CPP_INTPTR>(16631257188485470305ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline TypeInfoV0 chaos_mt_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_, 5207933901502182743ULL, 7u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_ = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_, 5207933901502182743ULL, 7u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(5207933901502182743ULL);
 inline TypeInfoV0 chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper__0_ = {{nullptr, chaos_vtable_CustomGenericsSubjects_CustomGenerics_Wrapper__0_, 16395831064008788899ULL, 8u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CustomGenericsSubjects_CustomGenerics_Wrapper__0_ = static_cast<CHAOS_IL2CPP_INTPTR>(16395831064008788899ULL);
-inline TypeInfoV0 chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_ = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_, 1566872199215318928ULL, 9u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_ = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_, 1566872199215318928ULL, 9u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_ = static_cast<CHAOS_IL2CPP_INTPTR>(1566872199215318928ULL);
 inline TypeInfoV0 chaos_mt_CustomGenericsSubjects_CustomGenericsSubjects = {{nullptr, nullptr, 9789882378046446790ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CustomGenericsSubjects_CustomGenericsSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(9789882378046446790ULL);
@@ -322,7 +507,7 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo =
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
 inline TypeInfoV0 chaos_mt_CustomGenericsSubjects__0 = {{nullptr, nullptr, 3855468534570849247ULL, 0u, 32, 2, 0}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_CustomGenericsSubjects__0 = static_cast<CHAOS_IL2CPP_INTPTR>(3855468534570849247ULL);
@@ -456,7 +641,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -647,8 +832,8 @@ struct chaos_boxed_type_CustomGenericsSubjects_System_String
 		{
 			return false;
 		}
-		if (chaos_left_ti == &chaos_mt_System_Private_CoreLib_System_String.hot
-			|| chaos_left_ti->stable_id == (&chaos_mt_System_Private_CoreLib_System_String.hot)->stable_id)
+		if (chaos_left_ti == reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String)
+			|| chaos_left_ti->stable_id == (reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String))->stable_id)
 		{
 			auto* chaos_left_string = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_left_value);
 			auto* chaos_right_string = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_right_value);
@@ -774,7 +959,7 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 	const auto chaos_view = chaos::il2cpp::string_table::Resolve(chaos_id);
 
 	auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String, {});
-	chaos_string->header.type_info = &chaos_mt_System_Private_CoreLib_System_String.hot;
+	chaos_string->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String);
 	chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_view.byte_count);
 	auto* owned_utf8 = static_cast<char*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(chaos_view.byte_count + 1));
 	CHAOS_IL2CPP_MEMCPY(owned_utf8, chaos_view.utf8_data, chaos_view.byte_count);
@@ -816,7 +1001,7 @@ CHAOS_IL2CPP_INT32 chaos_reflection_get_type_metadata_token_from_handle(CHAOS_IL
 CHAOS_IL2CPP_INTPTR chaos_reflection_create_type_value(CHAOS_IL2CPP_INTPTR chaos_type_handle)
 {
 	auto* chaos_type = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Type);
-	chaos_type->header.type_info = &chaos_mt_System_Private_CoreLib_System_Type.hot;
+	chaos_type->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Type);
 	chaos_type->runtime_type_handle = chaos_type_handle;
 	chaos_type->runtime_name_value = chaos_reflection_get_type_name_value_from_handle(chaos_type_handle);
 	chaos_type->runtime_metadata_token_value = chaos_reflection_get_type_metadata_token_from_handle(chaos_type_handle);
@@ -1116,7 +1301,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(CHAOS_IL2CPP_INTPTR chaos_type_valu
 	}
 
 	auto* chaos_method = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo);
-	chaos_method->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.hot;
+	chaos_method->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo);
 	chaos_method->declaring_type_handle = chaos_type->runtime_type_handle;
 	chaos_method->runtime_method_handle = chaos_method_handle;
 	chaos_method->generic_definition_method_handle = chaos_method_handle;
@@ -1169,7 +1354,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(CHAOS_IL2CPP_INTPTR chaos_m
 
 	auto* chaos_type_argument = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Type*>(chaos_type_argument_value);
 	auto* chaos_closed_method = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo);
-	chaos_closed_method->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.hot;
+	chaos_closed_method->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo);
 	chaos_closed_method->declaring_type_handle = chaos_method->declaring_type_handle;
 	chaos_closed_method->generic_definition_method_handle = chaos_method->generic_definition_method_handle != 0
 		? chaos_method->generic_definition_method_handle
@@ -1654,7 +1839,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[6] = {
 		nullptr,
-		&chaos_mt_CustomGenericsSubjects_CustomGenericsSubjects.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects_CustomGenericsSubjects),
 		nullptr,
 		nullptr,
 		nullptr,
@@ -3002,7 +3187,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_0(void)
 			{
 				const auto chaos_arg_1 = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_);
 				chaos_stub_definition_CustomGenericsSubjects_CustomGenerics_Box_1___ctor_System_Void__0__type__System_Int32__method(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -3035,7 +3220,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_0(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3074,7 +3259,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_1(void)
 			{
 				const auto chaos_arg_1 = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Box_System_Int32_);
 				chaos_stub_definition_CustomGenericsSubjects_CustomGenerics_Box_1___ctor_System_Void__0__type__System_Int32__method(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -3119,7 +3304,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_1(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3208,7 +3393,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_2(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3265,7 +3450,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_3(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3345,7 +3530,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_4(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3384,7 +3569,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void)
 			{
 				const auto chaos_arg_1 = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_, {});
-				chaos_object->header.type_info = &chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_);
 				chaos_stub_definition_CustomGenericsSubjects_CustomGenerics_Wrapper_1___ctor_System_Void__0__type__System_String__method(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -3427,7 +3612,7 @@ extern "C" void CustomGenericsSubjects_CustomGenericsSubjects_Subject_5(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3534,7 +3719,7 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_IsDef
 	{
 		const auto chaos_value = _s1;
 		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_CustomGenericsSubjects__0, {});
-		chaos_boxed->header.type_info = &chaos_mt_CustomGenericsSubjects__0.hot;
+		chaos_boxed->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects__0);
 		chaos_boxed->value = chaos_value;
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
@@ -3565,7 +3750,7 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_1_IsDef
 		{
 			const auto chaos_value = _s3;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_CustomGenericsSubjects__0, {});
-			chaos_boxed->header.type_info = &chaos_mt_CustomGenericsSubjects__0.hot;
+			chaos_boxed->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects__0);
 			chaos_boxed->value = chaos_value;
 			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
@@ -3698,7 +3883,7 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_IsDe
 	{
 		const auto chaos_value = _s1;
 		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_CustomGenericsSubjects__0, {});
-		chaos_boxed->header.type_info = &chaos_mt_CustomGenericsSubjects__0.hot;
+		chaos_boxed->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects__0);
 		chaos_boxed->value = chaos_value;
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
@@ -3729,7 +3914,7 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box__0_IsDe
 		{
 			const auto chaos_value = _s3;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_CustomGenericsSubjects__0, {});
-			chaos_boxed->header.type_info = &chaos_mt_CustomGenericsSubjects__0.hot;
+			chaos_boxed->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects__0);
 			chaos_boxed->value = chaos_value;
 			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
@@ -3879,7 +4064,7 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_System_
 	{
 		const auto chaos_value = _s1;
 		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_CustomGenericsSubjects_System_Int32, {});
-		chaos_boxed->header.type_info = &chaos_mt_CustomGenericsSubjects_System_Int32.hot;
+		chaos_boxed->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects_System_Int32);
 		chaos_boxed->value = chaos_value;
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
@@ -3910,7 +4095,7 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Box_System_
 		{
 			const auto chaos_value = _s3;
 			auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_CustomGenericsSubjects_System_Int32, {});
-			chaos_boxed->header.type_info = &chaos_mt_CustomGenericsSubjects_System_Int32.hot;
+			chaos_boxed->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects_System_Int32);
 			chaos_boxed->value = chaos_value;
 			_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 		}
@@ -4389,7 +4574,7 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_1_G
 	{
 		const auto chaos_value = _s0;
 		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_CustomGenericsSubjects__0, {});
-		chaos_boxed->header.type_info = &chaos_mt_CustomGenericsSubjects__0.hot;
+		chaos_boxed->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects__0);
 		chaos_boxed->value = chaos_value;
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
@@ -4453,7 +4638,7 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper__0_
 	{
 		const auto chaos_value = _s0;
 		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_CustomGenericsSubjects__0, {});
-		chaos_boxed->header.type_info = &chaos_mt_CustomGenericsSubjects__0.hot;
+		chaos_boxed->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects__0);
 		chaos_boxed->value = chaos_value;
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}
@@ -4526,7 +4711,7 @@ extern "C" CHAOS_IL2CPP_INTPTR CustomGenericsSubjects_CustomGenerics_Wrapper_Sys
 	{
 		const auto chaos_value = _s0;
 		auto* chaos_boxed = CHAOS_IL2CPP_NEW_GC(chaos_boxed_type_CustomGenericsSubjects_System_String, {});
-		chaos_boxed->header.type_info = &chaos_mt_CustomGenericsSubjects_System_String.hot;
+		chaos_boxed->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CustomGenericsSubjects_System_String);
 		chaos_boxed->value = chaos_value;
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed);
 	}

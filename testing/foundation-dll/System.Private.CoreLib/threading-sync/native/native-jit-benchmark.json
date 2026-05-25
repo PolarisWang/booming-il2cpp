@@ -8,18 +8,18 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32)",
-      "elapsedMilliseconds": 2317.982,
-      "calibratedMs": 2317.982,
-      "opsPerSecond": 43141.0,
+      "elapsedMilliseconds": 1373.915,
+      "calibratedMs": 1373.915,
+      "opsPerSecond": 72784.7,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)",
-      "elapsedMilliseconds": 3147.225,
-      "calibratedMs": 3147.225,
-      "opsPerSecond": 31774.0,
+      "elapsedMilliseconds": 1207.046,
+      "calibratedMs": 1207.046,
+      "opsPerSecond": 82846.9,
       "iterations": 100000,
       "status": "completed"
     },
@@ -44,9 +44,9 @@
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::.ctor:System.Void(System.Boolean)",
-      "elapsedMilliseconds": 3218.808,
-      "calibratedMs": 3218.808,
-      "opsPerSecond": 31067.4,
+      "elapsedMilliseconds": 1039.809,
+      "calibratedMs": 1039.809,
+      "opsPerSecond": 96171.5,
       "iterations": 100000,
       "status": "completed"
     },
@@ -71,9 +71,9 @@
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::.ctor:System.Void(System.Boolean)",
-      "elapsedMilliseconds": 2296.553,
-      "calibratedMs": 2296.553,
-      "opsPerSecond": 43543.5,
+      "elapsedMilliseconds": 1065.91,
+      "calibratedMs": 1065.91,
+      "opsPerSecond": 93816.6,
       "iterations": 100000,
       "status": "completed"
     },
@@ -98,9 +98,9 @@
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinLock::.ctor:System.Void(System.Boolean)",
-      "elapsedMilliseconds": 2017.079,
-      "calibratedMs": 2017.079,
-      "opsPerSecond": 49576.6,
+      "elapsedMilliseconds": 1210.604,
+      "calibratedMs": 1210.604,
+      "opsPerSecond": 82603.4,
       "iterations": 100000,
       "status": "completed"
     },

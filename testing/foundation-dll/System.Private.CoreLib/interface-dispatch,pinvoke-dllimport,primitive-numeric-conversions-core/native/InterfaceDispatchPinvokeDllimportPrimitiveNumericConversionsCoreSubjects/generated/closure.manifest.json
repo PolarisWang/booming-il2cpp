@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core/managed/subjects/build-output/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core/managed/subjects/build-output/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core/managed/subjects/build-output/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core/managed/subjects/build-output/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "d6931cb1-a128-4471-938b-ba82a3086104",
+  "inputModuleVersionId": "9905792b-a26f-4da6-bdb2-e50b7268464e",
   "artifacts": [
     {
       "kind": "typedIlIr",
