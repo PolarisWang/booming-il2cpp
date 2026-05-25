@@ -144,8 +144,8 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
     // push r9                 ; 0x41 0x51
     p[4] = 0x41; p[5] = 0x51;
 
-    // sub rsp, 0x20           ; 0x48 0x83 0xEC 0x20
-    p[6] = 0x48; p[7] = 0x83; p[8] = 0xEC; p[9] = 0x20;
+    // sub rsp, 0x28           ; 0x48 0x83 0xEC 0x28 — 40 bytes (32 shadow + 8 alignment)
+    p[6] = 0x48; p[7] = 0x83; p[8] = 0xEC; p[9] = 0x28;
 
     // mov rcx, r10            ; 0x4C 0x89 0xD1
     p[10] = 0x4C; p[11] = 0x89; p[12] = 0xD1;
@@ -158,8 +158,8 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
     // call rax                ; 0xFF 0xD0
     p[23] = 0xFF; p[24] = 0xD0;
 
-    // add rsp, 0x20           ; 0x48 0x83 0xC4 0x20
-    p[25] = 0x48; p[26] = 0x83; p[27] = 0xC4; p[28] = 0x20;
+    // add rsp, 0x28           ; 0x48 0x83 0xC4 0x28
+    p[25] = 0x48; p[26] = 0x83; p[27] = 0xC4; p[28] = 0x28;
 
     // pop r9                  ; 0x41 0x59
     p[29] = 0x41; p[30] = 0x59;
@@ -208,14 +208,10 @@ void* PrecodeArena::AllocateJitTrampoline(JitPrecode* precode) noexcept {
 // Returns nullptr on managed exception during compilation.
 static JitMethod* CompileWithCatch(const interpreter::RegisterMethod& ir,
                                     const CompileConfig& config) noexcept {
-    std::fprintf(stderr, "DIAG: CompileWithCatch enter\n"); std::fflush(stderr);
     JitMethod* jit = nullptr;
     CHAOS_EH_TRY
-        std::fprintf(stderr, "DIAG: CompileWithCatch about to call Compile\n"); std::fflush(stderr);
         jit = Compile(ir, config);
-        std::fprintf(stderr, "DIAG: CompileWithCatch Compile returned %p\n", (void*)jit); std::fflush(stderr);
     CHAOS_EH_CATCH_BEGIN
-        std::fprintf(stderr, "DIAG: CompileWithCatch caught exception\n"); std::fflush(stderr);
         jit = nullptr;
     CHAOS_EH_END
     return jit;
