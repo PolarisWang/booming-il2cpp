@@ -23,6 +23,10 @@
 #include <cstdint>
 #include "codegen_bridge.h"
 
+// Shared forward declarations for type symbols (chaos_type_*, chaos_valuetype_*, etc.)
+// Required when function pointer signatures in the dispatch table reference value types.
+#include "native-aot.generated.header.h"
+
 // Forward declaration of ChaosRuntimeHost (defined in chaos_runtime_host.h).
 class ChaosRuntimeHost;
 

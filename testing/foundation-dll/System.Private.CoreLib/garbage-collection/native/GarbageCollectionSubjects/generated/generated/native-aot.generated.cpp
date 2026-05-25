@@ -1302,10 +1302,8 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[0])();
@@ -1328,10 +1326,8 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				reinterpret_cast<void(*)(void)>(kChaosExternalRuntimeFnTable[2])();
@@ -1354,10 +1350,8 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
@@ -1382,10 +1376,9 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = 0;
 			{
@@ -1428,12 +1421,11 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(41240749u);
 			{
@@ -1498,10 +1490,9 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1546,12 +1537,11 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[10])();
@@ -1602,10 +1592,9 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
@@ -1632,10 +1621,9 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1678,12 +1666,11 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9(vo
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = chaos_gc_get_total_pause_duration();

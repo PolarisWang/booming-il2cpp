@@ -1380,10 +1380,9 @@ extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_0(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
 			{
@@ -1454,10 +1453,9 @@ extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_1(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d7 = s_hotpatch_entries[7];
@@ -1518,10 +1516,9 @@ extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_2(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d8 = s_hotpatch_entries[8];
@@ -1582,10 +1579,9 @@ extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_3(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d9 = s_hotpatch_entries[9];
@@ -1646,10 +1642,9 @@ extern "C" void ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_4(void)
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto& _d6 = s_hotpatch_entries[6];
@@ -1710,9 +1705,8 @@ extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_R
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
-	CHAOS_IL2CPP_INTPTR _s0{};
 	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-
+	CHAOS_IL2CPP_INTPTR _s0{};
 	_s0 = chaos_args[0];
 	{
 		const auto chaos_switch_value = static_cast<CHAOS_IL2CPP_INT32>(_s0);
@@ -1806,13 +1800,11 @@ extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_T
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
-
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 	{
 		const auto chaos_arg_0 = _s0;
@@ -1842,15 +1834,13 @@ extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_T
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 7) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-2147467259);
 	{
 		const auto chaos_arg_0 = _s0;
@@ -1965,15 +1955,13 @@ extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_T
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(-2147467263);
 	chaos_locals[0] = _s0;
 	{
@@ -2118,10 +2106,8 @@ extern "C" CHAOS_IL2CPP_INT32 ErrorInfoBasicSubjects_ErrorInfoBasicNativeEntry_T
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
-	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			{

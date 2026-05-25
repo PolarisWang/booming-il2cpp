@@ -23,6 +23,12 @@
 #include <cstdint>
 #include "codegen_bridge.h"
 
+
+// chaos_valuetype typedefs (pipeline fix: missing value type aliases)
+// These are generated extern "C" value type names for which the
+// converter did not emit underlying typedefs. All are opaque 32-bit
+// value types in the managed ABI surface.
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_MyValueType;
 // Forward declaration of ChaosRuntimeHost (defined in chaos_runtime_host.h).
 class ChaosRuntimeHost;
 

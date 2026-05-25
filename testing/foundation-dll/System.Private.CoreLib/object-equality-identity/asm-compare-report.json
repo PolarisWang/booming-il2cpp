@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/object/equality/identity",
-  "capturedAt": "2026-05-22T01:19:22",
+  "capturedAt": "2026-05-25T01:30:38",
   "batchMode": true,
   "summary": {
     "totalMethods": 7,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 32,
-      "avg": 21.6,
-      "total": 151
+      "max": 28,
+      "avg": 19.0,
+      "total": 133
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 14
     },
-    "overallIrExpansionRatio": 0.49,
-    "averageExpansionRatio": 0.49,
-    "maxExpansionRatio": 0.73,
+    "overallIrExpansionRatio": 0.43,
+    "averageExpansionRatio": 0.43,
+    "maxExpansionRatio": 0.64,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 30,
-        "ratio": 0.68,
+        "aotInstructionCount": 28,
+        "ratio": 0.64,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,7 +52,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_0",
-        "instructions": 30
+        "instructions": 28
       },
       "analysis": [
         {
@@ -77,8 +77,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 32,
-        "ratio": 0.73,
+        "aotInstructionCount": 28,
+        "ratio": 0.64,
         "jitCodeSize": 256
       },
       "jit": {
@@ -89,7 +89,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_1",
-        "instructions": 32
+        "instructions": 28
       },
       "analysis": [
         {
@@ -114,8 +114,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 30,
-        "ratio": 0.68,
+        "aotInstructionCount": 18,
+        "ratio": 0.41,
         "jitCodeSize": 256
       },
       "jit": {
@@ -126,7 +126,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_Subject_2",
-        "instructions": 30
+        "instructions": 18
       },
       "analysis": [],
       "instructionCategories": {}

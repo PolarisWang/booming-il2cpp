@@ -2,8 +2,8 @@
   "family": "reflection-module",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T07:06:54",
-  "duration_ms": 41795,
+  "timestamp": "2026-05-25T01:33:39",
+  "duration_ms": 55865,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -30,7 +30,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\reflection-module\\managed\\subjects\\build-output\\ReflectionModuleSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 36120
+      "duration_ms": 39566
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -52,7 +52,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 437
+      "duration_ms": 915
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -67,52 +67,71 @@
         }
       },
       "errors": [],
-      "duration_ms": 36
+      "duration_ms": 1812
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "summary": "false_passing=0, principle=ALIGNED (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 1,
-        "principleStatus": "CONCERN",
+        "skipsFound": 0,
+        "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1379
+      "duration_ms": 2840
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
+      "status": "passed",
+      "summary": "asm-compare: 6/6 methods OK, avg JIT=44.0 instr, avg AOT IR=17.5 instr, expansion=0.4x",
+      "details": {
+        "totalMethods": 6,
+        "okCount": 6,
+        "failedCount": 0,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 44,
+          "avg": 44.0,
+          "total": 264
+        },
+        "aotInstructionCount": {
+          "min": 1,
+          "max": 22,
+          "avg": 17.5,
+          "total": 105
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {
+          "external_runtime_call": 18
+        },
+        "overallIrExpansionRatio": 0.4,
+        "averageExpansionRatio": 0.4,
+        "maxExpansionRatio": 0.5,
+        "minExpansionRatio": 0.02
+      },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 5876
     },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=3.0ns/op | FastExecute=1103.1ns/op | CallVirt dispatch=1058.7ns",
+      "summary": "FramePool=5.5ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
       "details": {
         "framePool": {
-          "acquireReleaseNsPerOp": 3.0,
+          "acquireReleaseNsPerOp": 5.5,
           "batchCount": 1000,
           "framesPerBatch": 32
-        },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 1103.1
-        },
-        "callVirt": {
-          "handlerDispatchNs": 1058.7,
-          "emptyStackNs": 1164.5
         },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 246
+      "duration_ms": 34
     },
     "benchmark": {
       "stage": "benchmark",
@@ -120,7 +139,7 @@
       "summary": "All 6 non-stub methods are invalid (no managed harness)",
       "details": {},
       "errors": [],
-      "duration_ms": 2467
+      "duration_ms": 3481
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -134,20 +153,20 @@
         "stubMethods": 1
       },
       "errors": [],
-      "duration_ms": 34
+      "duration_ms": 27
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=10.79% (1.1x) over 5 methods (AOT patched path)",
+      "summary": "avg_slowdown=38.67% (1.4x) over 5 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": 10.79,
-        "slowdownFactor": 1.1078999999999999,
+        "averageSlowdownPercent": 38.67,
+        "slowdownFactor": 1.3867000000000003,
         "threshold": 50.0,
         "nonStubMethods": 5
       },
       "errors": [],
-      "duration_ms": 138
+      "duration_ms": 152
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -159,7 +178,7 @@
         "total": 6
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 27
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -172,19 +191,19 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 903
+      "duration_ms": 1126
     }
   },
   "coverage": {
     "methodCoverage": 100.0,
-    "testedRate": 83.33,
-    "overall": 91.66
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
     "interpreter": {
-      "fastFramePoolNsPerOp": 3.0,
+      "fastFramePoolNsPerOp": 5.5,
       "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 1058.7,
+      "callVirtHandlerDispatchNs": 0,
       "callVirtMicHitNs": 0,
       "callVirtRawFallbackNs": 0,
       "poolSize": 32
@@ -213,8 +232,8 @@
         "totalMethods": 6
       },
       "aotOverhead": {
-        "averageSlowdownPercent": 10.79,
-        "slowdownFactor": 1.1078999999999999,
+        "averageSlowdownPercent": 38.67,
+        "slowdownFactor": 1.3867000000000003,
         "nonStubMethods": 5
       },
       "jitFunctional": {
@@ -231,14 +250,20 @@
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.4,
-      "interpreterSlowdownFactor": 1.1078999999999999,
+      "interpreterSlowdownFactor": 1.3867000000000003,
       "asmPassRate": 100.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "no_baseline",
-      "message": "Baseline auto-created from this run",
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 6,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
       "currentMetrics": {
         "totalMethods": 6,
         "matchedCount": 0,

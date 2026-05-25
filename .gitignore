@@ -97,6 +97,12 @@ build/native-runtime/fmt_build/
 build/native-runtime/src/
 build/native-runtime/tests/
 build/native-runtime/verification/
+build/native-runtime/testing/
+build/native-runtime/_deps/
+
+# Foundation-DLL native cmake build directories
+testing/foundation-dll/*/native/build/
+testing/foundation-dll/*/native/build*/
 
 # Root-level object/build artifact files (tracked accidentally, now excluded)
 *.obj

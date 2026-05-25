@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/field/property",
-  "capturedAt": "2026-05-22T01:19:24",
+  "capturedAt": "2026-05-25T01:33:35",
   "batchMode": true,
   "summary": {
     "totalMethods": 34,
@@ -16,10 +16,10 @@
       "total": 1496
     },
     "aotInstructionCount": {
-      "min": 15,
-      "max": 32,
-      "avg": 23.3,
-      "total": 791
+      "min": 13,
+      "max": 30,
+      "avg": 23.1,
+      "total": 785
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,10 +27,10 @@
     "topInstructionCategories": {
       "external_runtime_call": 89
     },
-    "overallIrExpansionRatio": 0.53,
-    "averageExpansionRatio": 0.53,
-    "maxExpansionRatio": 0.73,
-    "minExpansionRatio": 0.34
+    "overallIrExpansionRatio": 0.52,
+    "averageExpansionRatio": 0.52,
+    "maxExpansionRatio": 0.68,
+    "minExpansionRatio": 0.3
   },
   "methodResults": [
     {
@@ -558,8 +558,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 15,
-        "ratio": 0.34,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -570,7 +570,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_14",
-        "instructions": 15
+        "instructions": 13
       },
       "analysis": [
         {
@@ -1141,8 +1141,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 32,
-        "ratio": 0.73,
+        "aotInstructionCount": 30,
+        "ratio": 0.68,
         "jitCodeSize": 256
       },
       "jit": {
@@ -1153,7 +1153,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28",
-        "instructions": 32
+        "instructions": 30
       },
       "analysis": [
         {
@@ -1292,8 +1292,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
         "jitCodeSize": 256
       },
       "jit": {
@@ -1304,7 +1304,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31",
-        "instructions": 16
+        "instructions": 14
       },
       "analysis": [
         {

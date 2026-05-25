@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct BoxingUnboxingCastsSubjects_t {
+    struct BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -69,7 +69,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } boxingUnboxingCastsSubjects;
+    } boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects;
     int32_t method_count;
 };
 
@@ -88,60 +88,60 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct BoxingUnboxingCastsSubjects {
+struct BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_0(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_10(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_10(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_1(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_2(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_3(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_4(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_5(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_6(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_7(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_8(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.boxingUnboxingCastsSubjects.Subject_9(
+        return kFunctions.boxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

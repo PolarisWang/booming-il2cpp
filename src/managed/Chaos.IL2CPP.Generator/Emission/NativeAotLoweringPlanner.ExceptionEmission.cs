@@ -2139,7 +2139,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			// Emit label if this instruction is a branch target
 			if (labelMap.TryGetValue(calleeInstruction.IlOffset, out int lbl))
 			{
-				builder.AppendLine($"{indentation}chaos_inline_label_{lbl}:");
+				builder.AppendLine($"{indentation}chaos_inline_label_{inlineId}_{lbl}:");
 				builder.AppendLine($"{indentation}{{");
 			}
 
@@ -2182,7 +2182,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			{
 				int targetOff = GetRequiredIntOperand(calleeInstruction);
 				if (labelMap.TryGetValue(targetOff, out int brLbl))
-					builder.AppendLine($"{indentation}    goto chaos_inline_label_{brLbl};");
+					builder.AppendLine($"{indentation}    goto chaos_inline_label_{inlineId}_{brLbl};");
 				break;
 			}
 
@@ -2191,7 +2191,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				int targetOff = GetRequiredIntOperand(calleeInstruction);
 				if (!labelMap.TryGetValue(targetOff, out int bfLbl)) break;
 				string condVal = ConsumeEvalStackValueExpression();
-				builder.AppendLine($"{indentation}    if ({condVal} == 0) goto chaos_inline_label_{bfLbl};");
+				builder.AppendLine($"{indentation}    if ({condVal} == 0) goto chaos_inline_label_{inlineId}_{bfLbl};");
 				break;
 			}
 
@@ -2200,7 +2200,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				int targetOff = GetRequiredIntOperand(calleeInstruction);
 				if (!labelMap.TryGetValue(targetOff, out int btLbl)) break;
 				string condVal = ConsumeEvalStackValueExpression();
-				builder.AppendLine($"{indentation}    if ({condVal} != 0) goto chaos_inline_label_{btLbl};");
+				builder.AppendLine($"{indentation}    if ({condVal} != 0) goto chaos_inline_label_{inlineId}_{btLbl};");
 				break;
 			}
 
@@ -2211,7 +2211,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				if (!labelMap.TryGetValue(targetOff, out int eqLbl)) break;
 				string r = ConsumeEvalStackValueExpression();
 				string l = ConsumeEvalStackValueExpression();
-				builder.AppendLine($"{indentation}    if ({l} == {r}) goto chaos_inline_label_{eqLbl};");
+				builder.AppendLine($"{indentation}    if ({l} == {r}) goto chaos_inline_label_{inlineId}_{eqLbl};");
 				break;
 			}
 
@@ -2221,7 +2221,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				if (!labelMap.TryGetValue(targetOff, out int neLbl)) break;
 				string r = ConsumeEvalStackValueExpression();
 				string l = ConsumeEvalStackValueExpression();
-				builder.AppendLine($"{indentation}    if ({l} != {r}) goto chaos_inline_label_{neLbl};");
+				builder.AppendLine($"{indentation}    if ({l} != {r}) goto chaos_inline_label_{inlineId}_{neLbl};");
 				break;
 			}
 
@@ -2232,7 +2232,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				if (!labelMap.TryGetValue(targetOff, out int geLbl)) break;
 				string r = ConsumeEvalStackValueExpression();
 				string l = ConsumeEvalStackValueExpression();
-				builder.AppendLine($"{indentation}    if ({l} >= {r}) goto chaos_inline_label_{geLbl};");
+				builder.AppendLine($"{indentation}    if ({l} >= {r}) goto chaos_inline_label_{inlineId}_{geLbl};");
 				break;
 			}
 
@@ -2243,7 +2243,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				if (!labelMap.TryGetValue(targetOff, out int gtLbl)) break;
 				string r = ConsumeEvalStackValueExpression();
 				string l = ConsumeEvalStackValueExpression();
-				builder.AppendLine($"{indentation}    if ({l} > {r}) goto chaos_inline_label_{gtLbl};");
+				builder.AppendLine($"{indentation}    if ({l} > {r}) goto chaos_inline_label_{inlineId}_{gtLbl};");
 				break;
 			}
 
@@ -2254,7 +2254,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				if (!labelMap.TryGetValue(targetOff, out int leLbl)) break;
 				string r = ConsumeEvalStackValueExpression();
 				string l = ConsumeEvalStackValueExpression();
-				builder.AppendLine($"{indentation}    if ({l} <= {r}) goto chaos_inline_label_{leLbl};");
+				builder.AppendLine($"{indentation}    if ({l} <= {r}) goto chaos_inline_label_{inlineId}_{leLbl};");
 				break;
 			}
 
@@ -2265,7 +2265,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 				if (!labelMap.TryGetValue(targetOff, out int ltLbl)) break;
 				string r = ConsumeEvalStackValueExpression();
 				string l = ConsumeEvalStackValueExpression();
-				builder.AppendLine($"{indentation}    if ({l} < {r}) goto chaos_inline_label_{ltLbl};");
+				builder.AppendLine($"{indentation}    if ({l} < {r}) goto chaos_inline_label_{inlineId}_{ltLbl};");
 				break;
 			}
 
@@ -2283,6 +2283,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 
 		builder.AppendLine($"{indentation}chaos_inline_end{inlineId}:");
+		builder.AppendLine($"{indentation}    ;");
 		if (calleeHasReturn)
 		{
 			EmitEvalStackPush(builder, indentation + "    ", $"chaos_inline_retval{inlineId}");

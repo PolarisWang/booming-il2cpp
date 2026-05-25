@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/guid/random/hashcode",
-  "capturedAt": "2026-05-22T01:19:22",
+  "capturedAt": "2026-05-25T01:32:28",
   "batchMode": true,
   "summary": {
     "totalMethods": 14,
@@ -444,7 +444,7 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.HashCode::Add<System.Int32>:System.Void(System.Int32)' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.HashCode::Add<System.Object>:System.Void(System.Object)' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {

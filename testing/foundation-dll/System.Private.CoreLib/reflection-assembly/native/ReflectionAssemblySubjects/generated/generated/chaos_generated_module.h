@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct ReflectionAssemblySubjects_t {
+    struct ReflectionAssemblySubjects_ReflectionAssemblySubjects_t {
         void (*CustomEntrySubject_21)(
                 void
         );
@@ -102,7 +102,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } reflectionAssemblySubjects;
+    } reflectionAssemblySubjects_ReflectionAssemblySubjects;
     int32_t method_count;
 };
 
@@ -121,115 +121,115 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct ReflectionAssemblySubjects {
+struct ReflectionAssemblySubjects_ReflectionAssemblySubjects {
     static inline void CustomEntrySubject_21(
     ) {
-        return kFunctions.reflectionAssemblySubjects.CustomEntrySubject_21(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.CustomEntrySubject_21(
         );
     }
     static inline void Subject_0(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_0(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_10(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_11(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_12(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_12(
         );
     }
     static inline void Subject_13(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_13(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_13(
         );
     }
     static inline void Subject_14(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_14(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_14(
         );
     }
     static inline void Subject_15(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_15(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_15(
         );
     }
     static inline void Subject_16(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_16(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_16(
         );
     }
     static inline void Subject_17(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_17(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_17(
         );
     }
     static inline void Subject_18(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_18(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_18(
         );
     }
     static inline void Subject_19(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_19(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_19(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_1(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_1(
         );
     }
     static inline void Subject_20(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_20(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_20(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_2(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_3(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_4(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_5(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_6(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_7(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_8(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.reflectionAssemblySubjects.Subject_9(
+        return kFunctions.reflectionAssemblySubjects_ReflectionAssemblySubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

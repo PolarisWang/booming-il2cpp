@@ -1397,11 +1397,10 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_0(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -1456,11 +1455,10 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_1(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -1511,11 +1509,10 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_2(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -1584,12 +1581,11 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_3(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -1662,11 +1658,10 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_4(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -1721,14 +1716,13 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_5(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -1795,11 +1789,10 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_6(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -1872,11 +1865,10 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_7(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -1967,11 +1959,10 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_8(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -2046,15 +2037,13 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_9(
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -2117,15 +2106,13 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_10
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -2188,12 +2175,11 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_11
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -2274,12 +2260,11 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_12
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -2338,10 +2323,9 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_13
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -2406,10 +2390,9 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_14
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -2474,10 +2457,9 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_15
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -2542,11 +2524,10 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_16
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-
-
 	CHAOS_EH_TRY
 			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
@@ -2621,15 +2602,13 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_17
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
 			{
@@ -2680,15 +2659,13 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_18
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
 			{
@@ -2739,15 +2716,13 @@ extern "C" void StringCharTextCoreSubjects_StringCharTextCoreSubjects_Subject_19
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-
-
-
 	CHAOS_EH_TRY
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
 			{

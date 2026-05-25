@@ -59,9 +59,18 @@ inline int32_t ChaosDispatchMethod(
     auto& entry = entries[index];
 
 #if defined(CHAOS_IL2CPP_JIT_MODE)
-    // JIT mode: direct_ptr → precode trampoline → JIT compilation
-    // No hotpatch flag checks — direct_ptr is always valid.
-    reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    // JIT mode: prefer AOT thunks when available (verification pipeline uses
+    // AOT-compiled function bodies).  Only use direct_ptr when thunks are
+    // null (true JIT path with precode trampoline + JIT compilation).
+    if (thunks) {
+        thunks[index]();
+    } else {
+        auto fn = reinterpret_cast<void(*)()>(entry.direct_ptr);
+        if (fn == nullptr) {
+            return -1;
+        }
+        fn();
+    }
 #else
     // AOT mode: check hotpatch status
     if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
@@ -109,8 +118,9 @@ inline int32_t ChaosDispatchMethodAllModules(
     size_t moduleCount = registry.ModuleCount();
     for (size_t mi = 0; mi < moduleCount; ++mi) {
         const auto* mod = registry.GetModuleByIndex(mi);
-        if (mod == nullptr || mod->entry_table == nullptr || mod->entry_table_size == 0)
+        if (mod == nullptr || mod->entry_table == nullptr || mod->entry_table_size == 0) {
             continue;
+        }
         int32_t count = static_cast<int32_t>(mod->entry_table_size);
         for (int32_t i = 0; i < count; ++i) {
             CHAOS_EH_TRY
@@ -136,7 +146,11 @@ inline int32_t ChaosDispatchMethodBench(
     auto& entry = entries[index];
 
 #if defined(CHAOS_IL2CPP_JIT_MODE)
-    reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    if (thunks) {
+        thunks[index]();
+    } else {
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    }
 #else
     if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
         InterpreterEntryDirectFast(entry.method_key);

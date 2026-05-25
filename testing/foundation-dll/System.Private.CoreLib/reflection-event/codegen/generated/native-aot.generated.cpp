@@ -32,6 +32,21 @@ extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_0(void);
 extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_1(void);
 extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_2(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_0(void);
+extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_1(void);
+extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_2(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_0(void);
+extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_1(void);
+extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_2(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_0(void);
+extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_1(void);
+extern "C" void ReflectionEventSubjects_ReflectionEventSubjects_Subject_2(void);
+
 namespace chaos::il2cpp::codegen::ReflectionEventSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

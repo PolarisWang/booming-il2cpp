@@ -1,21 +1,26 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "timestamp": "2026-05-24T15:07:11Z",
-  "duration_ms": 12486,
+  "timestamp": "2026-05-25T01:49:39Z",
+  "duration_ms": 13788,
   "config": {
     "requested_runtimes": [
       "net8-jit",
+      "net10-jit",
       "chaos-aot",
-      "net10-jit"
+      "chaos-jit",
+      "mono"
     ],
     "available_runtimes": [
       "net8-jit",
+      "net10-jit",
       "chaos-aot",
-      "net10-jit"
+      "chaos-jit"
     ],
-    "unavailable_runtimes": [],
-    "iterations": 100000
+    "unavailable_runtimes": [
+      "mono"
+    ],
+    "iterations": 50000
   },
   "methods": [
     {
@@ -25,7 +30,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 3159.904,
+          "mean_ns": 3270.549,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "net10-jit": {
+          "runtime": "net10-jit",
+          "mean_ns": 1322.753,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -33,17 +46,17 @@
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 0.0,
+          "mean_ns": 759.32,
           "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
         },
-        "net10-jit": {
-          "runtime": "net10-jit",
-          "mean_ns": 1296.513,
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 772.24,
           "stddev_ns": 0.0,
-          "samples": 100000,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -56,15 +69,7 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 1.893,
-          "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 3.72,
+          "mean_ns": 1.896,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -72,9 +77,25 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.031,
+          "mean_ns": 3.045,
           "stddev_ns": 0.0,
           "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 1.74,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 1.74,
+          "stddev_ns": 0.0,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -87,7 +108,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.076,
+          "mean_ns": 1.898,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "net10-jit": {
+          "runtime": "net10-jit",
+          "mean_ns": 3.04,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -95,17 +124,17 @@
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 0.0,
+          "mean_ns": 2.1,
           "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
         },
-        "net10-jit": {
-          "runtime": "net10-jit",
-          "mean_ns": 3.031,
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 1.94,
           "stddev_ns": 0.0,
-          "samples": 100000,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -118,7 +147,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 3151.204,
+          "mean_ns": 3325.108,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "net10-jit": {
+          "runtime": "net10-jit",
+          "mean_ns": 1271.314,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -126,17 +163,17 @@
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 0.0,
+          "mean_ns": 775.4,
           "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
         },
-        "net10-jit": {
-          "runtime": "net10-jit",
-          "mean_ns": 1233.084,
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 790.28,
           "stddev_ns": 0.0,
-          "samples": 100000,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -149,7 +186,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 3567.661,
+          "mean_ns": 4042.698,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "net10-jit": {
+          "runtime": "net10-jit",
+          "mean_ns": 1282.591,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -157,17 +202,17 @@
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 0.0,
+          "mean_ns": 220.88,
           "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
         },
-        "net10-jit": {
-          "runtime": "net10-jit",
-          "mean_ns": 1269.748,
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 221.36,
           "stddev_ns": 0.0,
-          "samples": 100000,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -180,15 +225,7 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 3877.671,
-          "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 4.87,
+          "mean_ns": 4087.034,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -196,9 +233,25 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 1276.153,
+          "mean_ns": 1338.622,
           "stddev_ns": 0.0,
           "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 3.48,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 3.52,
+          "stddev_ns": 0.0,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -211,7 +264,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.21,
+          "mean_ns": 1.927,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "net10-jit": {
+          "runtime": "net10-jit",
+          "mean_ns": 3.044,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -219,17 +280,17 @@
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 0.0,
+          "mean_ns": 1.92,
           "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
         },
-        "net10-jit": {
-          "runtime": "net10-jit",
-          "mean_ns": 3.045,
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 1.92,
           "stddev_ns": 0.0,
-          "samples": 100000,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -242,15 +303,7 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.077,
-          "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 3.02,
+          "mean_ns": 1.977,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -258,9 +311,25 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.039,
+          "mean_ns": 3.045,
           "stddev_ns": 0.0,
           "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 1.94,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 1.96,
+          "stddev_ns": 0.0,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -273,15 +342,7 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 1.892,
-          "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 4.15,
+          "mean_ns": 1.928,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -289,9 +350,25 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.039,
+          "mean_ns": 3.048,
           "stddev_ns": 0.0,
           "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 3.3,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 3.28,
+          "stddev_ns": 0.0,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -304,7 +381,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 6.086,
+          "mean_ns": 5.921,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "net10-jit": {
+          "runtime": "net10-jit",
+          "mean_ns": 7.03,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -312,17 +397,17 @@
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 0.0,
+          "mean_ns": 825.42,
           "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
         },
-        "net10-jit": {
-          "runtime": "net10-jit",
-          "mean_ns": 7.263,
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 805.18,
           "stddev_ns": 0.0,
-          "samples": 100000,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -341,20 +426,28 @@
           "status": "stub",
           "error": ""
         },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 0.0,
-          "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
-        },
         "net10-jit": {
           "runtime": "net10-jit",
           "mean_ns": 0.0,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "stub",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 808.26,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 820.2,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
           "error": ""
         }
       }
@@ -366,15 +459,7 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 1.897,
-          "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 2.84,
+          "mean_ns": 1.927,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -382,9 +467,25 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.035,
+          "mean_ns": 3.056,
           "stddev_ns": 0.0,
           "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 1.72,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 1.72,
+          "stddev_ns": 0.0,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -397,7 +498,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 4035.514,
+          "mean_ns": 3665.324,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "net10-jit": {
+          "runtime": "net10-jit",
+          "mean_ns": 1387.824,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -405,17 +514,17 @@
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 0.0,
+          "mean_ns": 5.08,
           "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
         },
-        "net10-jit": {
-          "runtime": "net10-jit",
-          "mean_ns": 1251.301,
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 5.04,
           "stddev_ns": 0.0,
-          "samples": 100000,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -428,7 +537,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.125,
+          "mean_ns": 2.634,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "net10-jit": {
+          "runtime": "net10-jit",
+          "mean_ns": 5.576,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -436,17 +553,17 @@
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 0.0,
+          "mean_ns": 8.06,
           "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
         },
-        "net10-jit": {
-          "runtime": "net10-jit",
-          "mean_ns": 3.214,
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 11.92,
           "stddev_ns": 0.0,
-          "samples": 100000,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -465,20 +582,28 @@
           "status": "stub",
           "error": ""
         },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 0.0,
-          "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
-        },
         "net10-jit": {
           "runtime": "net10-jit",
           "mean_ns": 0.0,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "stub",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 8.1,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 8.12,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
           "error": ""
         }
       }
@@ -490,15 +615,7 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 1.888,
-          "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 2.84,
+          "mean_ns": 1.931,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -506,9 +623,25 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.004,
+          "mean_ns": 4.481,
           "stddev_ns": 0.0,
           "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 1.72,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 1.72,
+          "stddev_ns": 0.0,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -521,15 +654,7 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.08,
-          "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "ok",
-          "error": ""
-        },
-        "chaos-aot": {
-          "runtime": "chaos-aot",
-          "mean_ns": 3.15,
+          "mean_ns": 1.925,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -537,9 +662,25 @@
         },
         "net10-jit": {
           "runtime": "net10-jit",
-          "mean_ns": 3.006,
+          "mean_ns": 5.254,
           "stddev_ns": 0.0,
           "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-aot": {
+          "runtime": "chaos-aot",
+          "mean_ns": 1.72,
+          "stddev_ns": 0.0,
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
+        },
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 1.72,
+          "stddev_ns": 0.0,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -552,7 +693,15 @@
       "samples": {
         "net8-jit": {
           "runtime": "net8-jit",
-          "mean_ns": 2.081,
+          "mean_ns": 1.925,
+          "stddev_ns": 0.0,
+          "samples": 100000,
+          "status": "ok",
+          "error": ""
+        },
+        "net10-jit": {
+          "runtime": "net10-jit",
+          "mean_ns": 3.245,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -560,17 +709,17 @@
         },
         "chaos-aot": {
           "runtime": "chaos-aot",
-          "mean_ns": 0.0,
+          "mean_ns": 3.46,
           "stddev_ns": 0.0,
-          "samples": 100000,
-          "status": "error",
-          "error": "exit_code=3221225477"
+          "samples": 50000,
+          "status": "ok",
+          "error": ""
         },
-        "net10-jit": {
-          "runtime": "net10-jit",
-          "mean_ns": 3.202,
+        "chaos-jit": {
+          "runtime": "chaos-jit",
+          "mean_ns": 3.56,
           "stddev_ns": 0.0,
-          "samples": 100000,
+          "samples": 50000,
           "status": "ok",
           "error": ""
         }
@@ -580,10 +729,22 @@
   "summaries": [
     {
       "runtime": "net8-jit",
-      "geometric_mean_ns": 22.3235986367935,
-      "min_ns": 1.888,
-      "max_ns": 4035.514,
-      "median_ns": 2.125,
+      "geometric_mean_ns": 22.301305457549283,
+      "min_ns": 1.896,
+      "max_ns": 4087.034,
+      "median_ns": 1.977,
+      "method_count": 18,
+      "ok_count": 16,
+      "stub_count": 2,
+      "throws_count": 0,
+      "unsupported_count": 0
+    },
+    {
+      "runtime": "net10-jit",
+      "geometric_mean_ns": 23.651813272995742,
+      "min_ns": 3.04,
+      "max_ns": 1387.824,
+      "median_ns": 5.254,
       "method_count": 18,
       "ok_count": 16,
       "stub_count": 2,
@@ -592,25 +753,25 @@
     },
     {
       "runtime": "chaos-aot",
-      "geometric_mean_ns": 3.445849541794079,
-      "min_ns": 2.84,
-      "max_ns": 4.87,
-      "median_ns": 3.15,
+      "geometric_mean_ns": 12.74911876264118,
+      "min_ns": 1.72,
+      "max_ns": 825.42,
+      "median_ns": 3.48,
       "method_count": 18,
-      "ok_count": 7,
+      "ok_count": 18,
       "stub_count": 0,
       "throws_count": 0,
-      "unsupported_count": 11
+      "unsupported_count": 0
     },
     {
-      "runtime": "net10-jit",
-      "geometric_mean_ns": 21.239788566182817,
-      "min_ns": 3.004,
-      "max_ns": 1296.513,
-      "median_ns": 3.202,
+      "runtime": "chaos-jit",
+      "geometric_mean_ns": 13.02011725988221,
+      "min_ns": 1.72,
+      "max_ns": 820.2,
+      "median_ns": 3.56,
       "method_count": 18,
-      "ok_count": 16,
-      "stub_count": 2,
+      "ok_count": 18,
+      "stub_count": 0,
       "throws_count": 0,
       "unsupported_count": 0
     }
@@ -620,21 +781,45 @@
       "label": "Chaos AOT / .NET 8 JIT",
       "numerator": "chaos-aot",
       "denominator": "net8-jit",
-      "geometric_mean_ratio": 1.6766724963273616,
-      "min_ratio": 0.4559036144578313,
-      "max_ratio": 796.2363449691991,
+      "geometric_mean_ratio": 2.2037755234367,
+      "min_ratio": 0.007173317826076423,
+      "max_ratio": 1174.4350574712644,
+      "faster_count": 9,
+      "slower_count": 5,
+      "equal_count": 2,
+      "chaos_classification": ""
+    },
+    {
+      "label": "Chaos AOT / Chaos JIT",
+      "numerator": "chaos-aot",
+      "denominator": "chaos-jit",
+      "geometric_mean_ratio": 1.021256253258471,
+      "min_ratio": 0.9238095238095237,
+      "max_ratio": 1.478908188585608,
       "faster_count": 1,
-      "slower_count": 6,
-      "equal_count": 0,
+      "slower_count": 1,
+      "equal_count": 16,
+      "chaos_classification": ""
+    },
+    {
+      "label": "Chaos JIT / .NET 8 JIT",
+      "numerator": "chaos-jit",
+      "denominator": "net8-jit",
+      "geometric_mean_ratio": 2.154545975554039,
+      "min_ratio": 0.007353635212002286,
+      "max_ratio": 1161.0892045454545,
+      "faster_count": 9,
+      "slower_count": 4,
+      "equal_count": 3,
       "chaos_classification": ""
     },
     {
       "label": ".NET 10 JIT / .NET 8 JIT",
       "numerator": "net10-jit",
       "denominator": "net8-jit",
-      "geometric_mean_ratio": 1.0510273474349117,
-      "min_ratio": 0.6225732148733135,
-      "max_ratio": 3.2250545632106107,
+      "geometric_mean_ratio": 0.9429004533454359,
+      "min_ratio": 0.36638751427483823,
+      "max_ratio": 3.1519775205034186,
       "faster_count": 5,
       "slower_count": 11,
       "equal_count": 0,
@@ -644,15 +829,18 @@
   "regression_alerts": [],
   "runtimes_available": [
     "net8-jit",
+    "net10-jit",
     "chaos-aot",
-    "net10-jit"
+    "chaos-jit"
   ],
-  "runtimes_unavailable": [],
+  "runtimes_unavailable": [
+    "mono"
+  ],
   "chaos_classification_breakdown": {
-    "chaos_faster_than_all": 1,
-    "chaos_faster_than_jit": 0,
-    "chaos_midfield": 5,
-    "chaos_slower_than_jit": 1,
-    "not_benchmarked": 11
+    "chaos_faster_than_all": 5,
+    "chaos_faster_than_jit": 6,
+    "chaos_midfield": 3,
+    "chaos_slower_than_jit": 2,
+    "not_benchmarked": 2
   }
 }

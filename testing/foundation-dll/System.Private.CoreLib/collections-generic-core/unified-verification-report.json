@@ -2,8 +2,8 @@
   "family": "collections-generic-core",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-22T07:02:00",
-  "duration_ms": 38374,
+  "timestamp": "2026-05-25T01:27:37",
+  "duration_ms": 68819,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -17,7 +17,7 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\collections-generic-core\\managed\\subjects\\build-output\\CollectionsGenericCoreSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 21896
+      "duration_ms": 36898
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -50,7 +50,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 374
+      "duration_ms": 1558
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -65,60 +65,79 @@
         }
       },
       "errors": [],
-      "duration_ms": 30
+      "duration_ms": 33
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "summary": "false_passing=0, principle=ALIGNED (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "CONCERN",
+        "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1405
+      "duration_ms": 4163
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
+      "status": "passed",
+      "summary": "asm-compare: 16/16 methods OK, avg JIT=44.0 instr, avg AOT IR=5.3 instr, expansion=0.12x",
+      "details": {
+        "totalMethods": 16,
+        "okCount": 16,
+        "failedCount": 0,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 44,
+          "avg": 44.0,
+          "total": 704
+        },
+        "aotInstructionCount": {
+          "min": 1,
+          "max": 22,
+          "avg": 5.3,
+          "total": 85
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {
+          "external_runtime_call": 10
+        },
+        "overallIrExpansionRatio": 0.12,
+        "averageExpansionRatio": 0.12,
+        "maxExpansionRatio": 0.5,
+        "minExpansionRatio": 0.02
+      },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 7972
     },
     "microbench": {
       "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=3.8ns/op | FastExecute=2.0ns/op | CallVirt dispatch=2.0ns",
+      "summary": "FramePool=2.9ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
       "details": {
         "framePool": {
-          "acquireReleaseNsPerOp": 3.8,
+          "acquireReleaseNsPerOp": 2.9,
           "batchCount": 1000,
           "framesPerBatch": 32
-        },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 2.0
-        },
-        "callVirt": {
-          "handlerDispatchNs": 2.0,
-          "emptyStackNs": 2.2
         },
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 72
+      "duration_ms": 27
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "skipped",
-      "summary": "All 16 non-stub methods are invalid (no managed harness)",
+      "summary": "All 11 non-stub methods are invalid (no managed harness)",
       "details": {},
       "errors": [],
-      "duration_ms": 13414
+      "duration_ms": 16928
     },
     "hotupdate": {
       "stage": "hotupdate",
@@ -132,20 +151,20 @@
         "stubMethods": 11
       },
       "errors": [],
-      "duration_ms": 44
+      "duration_ms": 27
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=8.92% (1.1x) over 5 methods (AOT patched path)",
+      "summary": "avg_slowdown=0.78% (1.0x) over 5 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": 8.92,
-        "slowdownFactor": 1.0892,
+        "averageSlowdownPercent": 0.78,
+        "slowdownFactor": 1.0078,
         "threshold": 50.0,
         "nonStubMethods": 5
       },
       "errors": [],
-      "duration_ms": 303
+      "duration_ms": 125
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -157,20 +176,20 @@
         "total": 16
       },
       "errors": [],
-      "duration_ms": 34
+      "duration_ms": 24
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=2.34% (1.0x) over 5 methods (JIT patched path)",
+      "summary": "avg_slowdown=10.97% (1.1x) over 5 methods (JIT patched path)",
       "details": {
-        "averageSlowdownPercent": 2.34,
-        "slowdownFactor": 1.0234,
+        "averageSlowdownPercent": 10.97,
+        "slowdownFactor": 1.1097,
         "threshold": 50.0,
         "nonStubMethods": 5
       },
       "errors": [],
-      "duration_ms": 794
+      "duration_ms": 1052
     }
   },
   "coverage": {
@@ -180,9 +199,9 @@
   },
   "dashboard": {
     "interpreter": {
-      "fastFramePoolNsPerOp": 3.8,
+      "fastFramePoolNsPerOp": 2.9,
       "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 2.0,
+      "callVirtHandlerDispatchNs": 0,
       "callVirtMicHitNs": 0,
       "callVirtRawFallbackNs": 0,
       "poolSize": 32
@@ -211,8 +230,8 @@
         "totalMethods": 16
       },
       "aotOverhead": {
-        "averageSlowdownPercent": 8.92,
-        "slowdownFactor": 1.0892,
+        "averageSlowdownPercent": 0.78,
+        "slowdownFactor": 1.0078,
         "nonStubMethods": 5
       },
       "jitFunctional": {
@@ -221,31 +240,39 @@
         "totalMethods": 16
       },
       "jitOverhead": {
-        "averageSlowdownPercent": 2.34,
-        "slowdownFactor": 1.0234,
+        "averageSlowdownPercent": 10.97,
+        "slowdownFactor": 1.1097,
         "nonStubMethods": 5
       }
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.12,
-      "interpreterSlowdownFactor": 1.0892,
+      "interpreterSlowdownFactor": 1.0078,
       "asmPassRate": 100.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "no_baseline",
-      "message": "Baseline auto-created from this run",
-      "currentMetrics": {
+      "status": "regressed",
+      "baselineMetrics": {
         "totalMethods": 16,
         "matchedCount": 0,
         "nativeFasterCount": 0,
         "managedFasterCount": 0,
         "averageSpeedupPercent": 0.0
+      },
+      "currentMetrics": {
+        "totalMethods": 16,
+        "matchedCount": 5,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 5,
+        "averageSpeedupPercent": -421.74
       }
     },
-    "hasRegression": false,
-    "regressions": []
+    "hasRegression": true,
+    "regressions": [
+      "Managed-faster ratio 100% exceeds native-faster ratio 0% (5/5 methods)"
+    ]
   }
 }

@@ -32,7 +32,7 @@ if str(_OLD_PIPELINE) not in sys.path:
 from _core.python.models import FamilyContext
 from _core.python.orchestrator import VerificationPipeline
 from _core.python.perf_store import auto_save_perf_data
-from _core.python.deep_dashboard import generate_html as generate_dashboard_html
+from _core.python.deep_dashboard import generate_html as generate_dashboard_html, parse_family
 
 _TESTING_ROOT = _CORE_PACKAGE.parent
 
@@ -97,7 +97,7 @@ def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages:
             "duration_seconds": round(duration, 1),
             "error": str(e),
             "stages": {},
-            "coverage": {"stagesPassed": 0, "stagesTotal": 13, "stagePassRate": 0},
+            "coverage": {"stagesPassed": 0, "stagesTotal": 15, "stagePassRate": 0},
         }
 
 
@@ -151,6 +151,7 @@ def main() -> None:
     passed = 0
     failed = 0
     crashed = 0
+    skipped_count = 0
 
     for i, slug in enumerate(slugs):
         print(f"\n[{i+1}/{len(slugs)}] ", end="")
@@ -159,6 +160,8 @@ def main() -> None:
 
         if result["status"] == "passed":
             passed += 1
+        elif result["status"] == "skipped":
+            skipped_count += 1
         elif result["status"] == "crashed":
             crashed += 1
         else:
@@ -172,6 +175,7 @@ def main() -> None:
             "passed": passed,
             "failed": failed,
             "crashed": crashed,
+            "skipped": skipped_count,
             "elapsed_seconds": round(time.perf_counter() - total_start, 1),
             "results": results,
         }
@@ -183,16 +187,22 @@ def main() -> None:
     print(f"  Total: {len(slugs)} families in {total_time:.0f}s")
     print(f"  Passed: {passed}")
     print(f"  Failed: {failed}")
+    print(f"  Skipped: {skipped_count}")
     print(f"  Crashed: {crashed}")
     print(f"  Report: {output_path}")
     print(f"{'='*60}")
 
     # Final write
     report["elapsed_seconds"] = round(total_time, 1)
+    report["passed"] = passed
+    report["failed"] = failed
+    report["skipped"] = skipped_count
+    report["crashed"] = crashed
     output_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
 
     # Generate deep dashboard HTML
     try:
+        report["parsed"] = [parse_family(r) for r in report.get("results", [])]
         dashboard_html = generate_dashboard_html(report)
         dashboard_path = output_path.with_name("deep-dashboard.html")
         dashboard_path.write_text(dashboard_html, encoding="utf-8")

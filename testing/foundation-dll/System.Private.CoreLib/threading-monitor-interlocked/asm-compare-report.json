@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/monitor/interlocked",
-  "capturedAt": "2026-05-22T01:19:32",
+  "capturedAt": "2026-05-25T01:37:13",
   "batchMode": true,
   "summary": {
     "totalMethods": 14,
@@ -11,15 +11,15 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 616
+      "max": 1438,
+      "avg": 143.6,
+      "total": 2010
     },
     "aotInstructionCount": {
       "min": 1,
       "max": 34,
-      "avg": 7.8,
-      "total": 109
+      "avg": 7.5,
+      "total": 105
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,8 +27,8 @@
     "topInstructionCategories": {
       "external_runtime_call": 7
     },
-    "overallIrExpansionRatio": 0.18,
-    "averageExpansionRatio": 0.18,
+    "overallIrExpansionRatio": 0.05,
+    "averageExpansionRatio": 0.13,
     "maxExpansionRatio": 0.77,
     "minExpansionRatio": 0.02
   },
@@ -87,20 +87,20 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 28,
-        "ratio": 0.64,
-        "jitCodeSize": 256
+        "jitInstructionCount": 1438,
+        "aotInstructionCount": 26,
+        "ratio": 0.02,
+        "jitCodeSize": 3891
       },
       "jit": {
         "status": "ok",
-        "size": 256,
-        "instructions": 44
+        "size": 3891,
+        "instructions": 1438
       },
       "aot": {
         "status": "ok",
         "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2",
-        "instructions": 28
+        "instructions": 26
       },
       "analysis": [
         {
@@ -125,8 +125,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 30,
-        "ratio": 0.68,
+        "aotInstructionCount": 28,
+        "ratio": 0.64,
         "jitCodeSize": 256
       },
       "jit": {
@@ -137,7 +137,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3",
-        "instructions": 30
+        "instructions": 28
       },
       "analysis": [
         {

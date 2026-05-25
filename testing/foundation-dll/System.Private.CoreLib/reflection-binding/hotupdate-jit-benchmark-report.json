@@ -8,7 +8,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 24664.0,
+      "postPatchNsPerOp": 10642.9,
       "slowdownPercent": 0.0
     },
     {
@@ -16,7 +16,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Reflection.BindingFlags)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17904.9,
+      "postPatchNsPerOp": 10903.8,
       "slowdownPercent": 0.0
     },
     {
@@ -24,7 +24,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 211797.5,
+      "postPatchNsPerOp": 9679.6,
       "slowdownPercent": 0.0
     },
     {
@@ -32,7 +32,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17475.6,
+      "postPatchNsPerOp": 10612.8,
       "slowdownPercent": 0.0
     },
     {
@@ -40,7 +40,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String,System.Reflection.BindingFlags)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 36796.4,
+      "postPatchNsPerOp": 11129.6,
       "slowdownPercent": 0.0
     },
     {
@@ -48,7 +48,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 30040.3,
+      "postPatchNsPerOp": 10657.7,
       "slowdownPercent": 0.0
     },
     {
@@ -56,7 +56,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Reflection.BindingFlags)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 20092.7,
+      "postPatchNsPerOp": 10164.1,
       "slowdownPercent": 0.0
     },
     {
@@ -64,7 +64,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Type[])",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 86440.1,
+      "postPatchNsPerOp": 9770.4,
       "slowdownPercent": 0.0
     },
     {
@@ -72,7 +72,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 21481.7,
+      "postPatchNsPerOp": 11777.7,
       "slowdownPercent": 0.0
     },
     {
@@ -80,7 +80,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String,System.Reflection.BindingFlags)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 64976.2,
+      "postPatchNsPerOp": 10334.6,
       "slowdownPercent": 0.0
     },
     {
@@ -93,7 +93,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 20249.4,
+      "postPatchNsPerOp": 10565.8,
       "slowdownPercent": 0.0
     }
   ],

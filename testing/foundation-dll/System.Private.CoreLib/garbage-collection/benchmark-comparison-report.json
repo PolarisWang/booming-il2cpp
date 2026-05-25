@@ -3,10 +3,10 @@
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/garbage/collection",
   "summary": {
-    "totalMethods": 12,
+    "totalMethods": 10,
     "matchedCount": 0,
     "unmatchedCount": 0,
-    "invalidCount": 12,
+    "invalidCount": 10,
     "nativeAotFasterCount": 0,
     "nativeJitFasterCount": 0,
     "managedFasterCount": 0,
@@ -47,14 +47,6 @@
     },
     {
       "methodSubjectId": "System.Private.CoreLib/System.GC::Collect(System.Int32,System.GCCollectionMode):System.Void()",
-      "status": "managed_harness_unavailable"
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.GC::get_LatencyMode:System.GCLatencyMode()",
-      "status": "managed_harness_unavailable"
-    },
-    {
-      "methodSubjectId": "System.Private.CoreLib/System.GC::set_LatencyMode(System.GCLatencyMode):System.Void()",
       "status": "managed_harness_unavailable"
     },
     {

@@ -2,5 +2,7 @@
   "status": "passed",
   "passed": 14,
   "total": 14,
+  "all_semantic": false,
+  "all_revert": false,
   "exit_code": 0
 }

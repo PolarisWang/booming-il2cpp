@@ -33,6 +33,24 @@ extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_Syst
 extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void);
 extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0(void);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void);
+extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0(void);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void);
+extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0(void);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void);
+extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_3_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+
 namespace chaos::il2cpp::codegen::CodegenEdgeCasesSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -75,7 +93,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -280,7 +298,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
-		&chaos_mt_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects),
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
@@ -713,7 +731,7 @@ extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_0(void
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -741,7 +759,7 @@ extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_1_Syst
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -769,7 +787,7 @@ extern "C" void CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_Subject_2(void
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -802,7 +820,7 @@ extern "C" CHAOS_IL2CPP_INT32 CodegenEdgeCasesSubjects_CodegenEdgeCasesSubjects_
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;

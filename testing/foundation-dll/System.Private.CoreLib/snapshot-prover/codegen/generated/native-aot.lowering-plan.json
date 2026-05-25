@@ -7,5 +7,16 @@
   "nativeEntryFunctionName": "",
   "entrySymbol": "SnapshotProverSubjects_SnapshotProverSubjects_CustomEntrySubject_8",
   "entryMethodToken": "0u",
-  "workloadAbi": "full-assembly"
+  "workloadAbi": "full-assembly",
+  "translationUnitPageSize": 150,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 166,
+      "path": "generated/native-aot.page-0001.cpp",
+      "firstMethodSubjectId": "SnapshotProverSubjects/SnapshotProverSubjects::Subject_0:System.Void()",
+      "lastMethodSubjectId": "SnapshotTestFixtures/Wrapper\u003C!0\u003E::GetValue:!0()"
+    }
+  ]
 }

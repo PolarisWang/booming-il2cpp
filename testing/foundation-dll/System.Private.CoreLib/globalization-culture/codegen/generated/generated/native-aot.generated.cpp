@@ -1101,10 +1101,9 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetCurrent();
@@ -1153,10 +1152,9 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1205,10 +1203,9 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String);
@@ -1273,10 +1270,9 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1343,10 +1339,9 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1413,10 +1408,9 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1475,10 +1469,9 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1537,12 +1530,11 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1617,14 +1609,13 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1701,12 +1692,11 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1781,12 +1771,11 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1869,12 +1858,11 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();
@@ -1957,10 +1945,9 @@ extern "C" void GlobalizationCultureSubjects_GlobalizationCultureSubjects_Subjec
 {
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
+
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-
-
 	CHAOS_EH_TRY
 			{
 				const auto chaos_result = ChaosCultureGetInvariant();

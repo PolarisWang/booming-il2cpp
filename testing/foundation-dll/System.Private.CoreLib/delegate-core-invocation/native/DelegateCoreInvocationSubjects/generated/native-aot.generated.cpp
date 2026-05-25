@@ -203,6 +203,72 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___
 extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9(void);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor(void);
+
 namespace chaos::il2cpp::codegen::DelegateCoreInvocationSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -216,13 +282,13 @@ inline TypeInfoV0 chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocation
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(12315111816129013648ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline TypeInfoV0 chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c, 871985485055265288ULL, 9u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c, 871985485055265288ULL, 9u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c = static_cast<CHAOS_IL2CPP_INTPTR>(871985485055265288ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&chaos_mt_System_Private_CoreLib_System_Delegate.hot, nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Delegate), nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Action = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 14722794505377461205ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Action = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), nullptr, 14722794505377461205ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Action = static_cast<CHAOS_IL2CPP_INTPTR>(14722794505377461205ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
@@ -288,7 +354,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -454,7 +520,7 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos
 		case chaos_type_id_System_Private_CoreLib_System_Action:
 		{
 			auto* chaos_delegate = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-			chaos_delegate->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+			chaos_delegate->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 			return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);
 		}
 		default:
@@ -548,7 +614,7 @@ void chaos_ensure_type_initialized_DelegateCoreInvocationSubjects_DelegateCoreIn
 	if (chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9 == 0)
 	{
 	    auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c);
-	    chaos_object->header.type_info = &chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c.hot;
+	    chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c);
 		const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 		DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor(chaos_arg_0);
 	    chaos_static_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c____9 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -796,8 +862,8 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[3] = {
 		nullptr,
-		&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects.hot,
-		&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects),
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c),
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
@@ -1657,7 +1723,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1735,7 +1801,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1809,7 +1875,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				const auto chaos_method_ptr = _s2;
 				const auto chaos_target = _s1;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -1862,7 +1928,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				const auto chaos_method_ptr = _s5;
 				const auto chaos_target = _s4;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -1903,7 +1969,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1995,7 +2061,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				const auto chaos_method_ptr = _s2;
 				const auto chaos_target = _s1;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2043,7 +2109,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				const auto chaos_method_ptr = _s5;
 				const auto chaos_target = _s4;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2079,7 +2145,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2171,7 +2237,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				const auto chaos_method_ptr = _s2;
 				const auto chaos_target = _s1;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2219,7 +2285,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				const auto chaos_method_ptr = _s5;
 				const auto chaos_target = _s4;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2255,7 +2321,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2373,7 +2439,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				const auto chaos_method_ptr = _s2;
 				const auto chaos_target = _s1;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2418,7 +2484,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 				const auto chaos_method_ptr = _s5;
 				const auto chaos_target = _s4;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Action, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Action.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Action);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s4 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -2451,7 +2517,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2515,7 +2581,7 @@ extern "C" void DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c, {});
-		chaos_object->header.type_info = &chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c.hot;
+		chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c);
 		DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}

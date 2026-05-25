@@ -73,47 +73,51 @@ convert-char/
 Managed 侧 (dotnet)                 Native 侧 (entry.exe)
 ─────────────────────               ─────────────────────
 
-dotnet test ConvertChar.csproj      entry.exe           → Fact AOT Assert
-  ↓ xUnit Fact                        ↓ 所有 Subject_N
-  Convert.ToChar(65) == 'A'           exit code 0 = Pass
-
+dotnet run -f net8.0                entry-aot.exe       → Fact AOT Assert
+  ManagedFactHarness                  ↓ 所有 Subject_N
+  ↓ 自动生成 C# harness               exit code 0 = Pass
+  逐方法 try-catch 验证
                                     entry-jit.exe       → Fact JIT Assert
                                       ↓ 同 Subject_N，走 interpreter 路径
 
-dotnet run ConvertChar.csproj       entry-aot.exe --bench N → AOT 性能
-  ↓ JIT 基线 timing                   entry-jit.exe --bench N → JIT 性能
+dotnet run -f net8.0/net10.0       entry-aot.exe --bench N → AOT 性能
+  ↓ 多端 benchmark harness           entry-jit.exe --bench N → JIT 性能
+  .NET8 JIT / .NET10 JIT / Mono
 
                                     entry-aot.exe --hotupdate → 补丁 AOT
                                     entry-jit.exe --hotupdate → 补丁 JIT
 ```
 
-## 14 阶段管线
+## 13 阶段管线
 
-`run foundation-dll verify-family` 自动执行以下 14 阶段：
+`python _core/python/cli.py` 自动执行以下 13 阶段：
 
 | #  | 阶段 | 名称 | 说明 |
 |----|------|------|------|
-| 0  | Preflight | Contract 完整性检测 | 加载 `.contract.json`，检查 family 元数据 |
-| 1  | Codegen (AOT) | AOT 构建 + 保存 entry-aot.exe | chaos-il2cpp → `codegen/` → cmake → `entry.exe`，另存 `entry-aot.exe` |
-| 2  | JitCodegen | JIT 构建 entry-jit.exe | codegen_mode=jit → cmake → `entry-jit.exe`，恢复 `entry.exe` |
-| 3  | Fact AOT | AOT 事实验证 | `entry.exe` 无参数，验证 Assert 全部通过 |
-| 4  | Fact JIT | JIT 事实验证 | `entry-jit.exe` 无参数，验证 interpreter 路径通过 |
-| 5  | Audit | 机制 + 原则审计 | 检查 false-passing、stub、skip、原则对齐 |
-| 6  | AsmCompare | JIT vs AOT 指令分析 | 对比 IL → IR → asm 的扩展比 |
-| 7  | Microbench | 解释器内部指标 | FramePool、FastExecute、CallVirt 等微基准 |
-| 8  | Benchmark | 3-way 性能对比 | managed(.NET JIT) vs entry-aot.exe vs entry-jit.exe |
-| 9  | HotUpdate AOT Fact | 补丁 AOT 验证 | `entry-aot.exe --hotupdate`，验证补丁正确性 |
-| 10 | HotUpdate AOT Bench | 补丁 AOT 性能 | `entry-aot.exe --hotupdate-and-benchmark` |
-| 11 | HotUpdate JIT Fact | 补丁 JIT 验证 | `entry-jit.exe --hotupdate`，验证 interpreter 路径补丁 |
-| 12 | HotUpdate JIT Bench | 补丁 JIT 性能 | `entry-jit.exe --hotupdate-and-benchmark` |
-| 13 | Aggregate | 评分 + 报告 | 生成 `unified-verification-report.json` |
+| 0  | preflight | Contract 完整性检测 | 加载 `contract.json`，检查 family 元数据 |
+| 1  | codegen | Codegen (AOT) | chaos-il2cpp → `codegen/` → cmake → `entry.exe`，另存 `entry-aot.exe` |
+| 2  | jit_codegen | JitCodegen | codegen_mode=jit → cmake → `entry-jit.exe`，恢复 `entry.exe` |
+| 3  | fact | Fact AOT | `entry-aot.exe` 无参数，验证 Assert 全部通过 |
+| 4  | fact_jit | Fact JIT | `entry-jit.exe` 无参数，验证 interpreter 路径通过 |
+| 5  | audit | 机制 + 原则审计 | 检查 false-passing、stub、skip、原则对齐 |
+| 6  | asm_compare | AsmCompare (JIT vs AOT) | 对比 IL → IR → asm 的扩展比 |
+| 7  | microbench | Microbench (Interpreter) | FramePool、FastExecute、CallVirt 等微基准 |
+| 8  | benchmark | Benchmark (3-way) | Chaos AOT / Chaos JIT / Interpreter 三端性能对比 |
+| 9  | hotupdate | HotUpdate AOT Fact | `entry-aot.exe --hotupdate`，验证补丁正确性 |
+| 10 | hotupdate_aot_benchmark | HotUpdate AOT Bench | `entry-aot.exe --hotupdate-and-benchmark` |
+| 11 | hotupdate_jit_fact | HotUpdate JIT Fact | `entry-jit.exe --hotupdate`，验证 interpreter 路径补丁 |
+| 12 | hotupdate_jit_benchmark | HotUpdate JIT Bench | `entry-jit.exe --hotupdate-and-benchmark` |
+
+> **注意**：旧版管线包含独立的 .NET8 Managed Fact、Dashboard 和 Aggregate 阶段。在当前 13 阶段管线中，Managed Fact 已合并到 Fact AOT/JIT 阶段（无需额外 .NET SDK 依赖）；Dashboard 和 Aggregate 由 orchestrator 在内部调用 `aggregate.py` 生成，不再是独立阶段。
 
 ### 关键设计说明
 
+- **双路事实验证**: Stage 3 (Chaos AOT) + Stage 4 (Chaos JIT) 两层验证确保翻译语义与原生运行时一致。
+- **3 路 Benchmark**: Stage 8 通过 Chaos AOT / Chaos JIT / Interpreter 三端性能对比。
 - **两个 exe 的分工**: Codegen 阶段构建 `entry.exe` 并另存 `entry-aot.exe`；JitCodegen 阶段构建 `entry-jit.exe` 后恢复 `entry.exe` 为 AOT 版本。后续阶段按需使用 `entry-aot.exe` 或 `entry-jit.exe`。
 - **JIT codegen 失败不阻塞**: JIT 构建失败不影响后续 AOT 阶段，但会在汇总中标记为 failed。
 - **HotUpdate 双路验证**: 补丁同时通过 AOT dispatch 和 JIT/interpreter 两条路径验证，确保补丁机制的跨路径正确性。
-- **benchmark 基线**: AOT benchmark 基线写入 `native/native-aot-benchmark.json`，JIT benchmark 基线写入 `native/native-jit-benchmark.json`。
+- **aggregate 内部汇总**: 所有阶段执行完毕后，orchestrator 调用 `aggregate.py` 生成 `UnifiedReport`，包含覆盖率统计、dashboard 数据和回归检测。这一过程在 orchestrator 内部完成，不是独立阶段。
 
 ## 中间产物
 
@@ -130,20 +134,21 @@ dotnet run ConvertChar.csproj       entry-aot.exe --bench N → AOT 性能
 ## 入口命令
 
 ```bash
-# 完整 14 阶段管线
-run foundation-dll verify-family --family convert-char
-run foundation-dll verify-family --family convert-char --mode strict
+# 完整 13 阶段管线（标准模式）
+python _core/python/cli.py --slug convert-char --assembly System.Private.CoreLib
+
+# 严格模式（强制 hotupdate 阶段必须通过）
+python _core/python/cli.py --slug convert-char --assembly System.Private.CoreLib --mode strict
 
 # 指定跳过某些阶段
-python build/toolchains/run/testing/foundation_dll/family_verification_orchestrator.py \
-  convert-char --skip jit_codegen hotupdate_jit_fact hotupdate_jit_benchmark
+python _core/python/cli.py --slug convert-char --assembly System.Private.CoreLib \
+  --skip jit_codegen hotupdate_jit_fact hotupdate_jit_benchmark
 
-# 直接运行 pipeline（仅 codegen + fact verify）
-python build/toolchains/run/testing/foundation_dll/pipeline_native_aot_runner.py \
-  --assembly System.Private.CoreLib --families convert-char
+# 全量运行所有 families
+python _core/python/batch_run_all.py
 
-# 仅运行 entry EXE（需要先完成 codegen）
-python build/toolchains/run/testing/foundation_dll/fact_verifier.py convert-char
+# CI smoke（仅关键 families + 快速模式）
+python _core/python/ci_smoke.py
 ```
 
 ## Handwrite 源覆盖保护

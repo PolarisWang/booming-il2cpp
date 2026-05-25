@@ -33,11 +33,12 @@ extern "C" {
 
 // ── Magic and version ────────────────────────────────────────────────
 #define PATCH_DATA_MAGIC     0x50415854u   // "PADT" little-endian
-#define PATCH_DATA_VERSION   2u            // v2: added reg_ir_offset/reg_ir_size/reg_ir_count
+#define PATCH_DATA_VERSION   3u            // v3: added dependency section
 
-// ── Main header (fixed-size, 124 bytes) ──────────────────────────────
+// ── Main header (fixed-size, 132 bytes in v3) ────────────────────────────
 // v1: 112 bytes (aot_core_ir_count was the last field at offset 108)
 // v2: 124 bytes (added reg_ir_offset/reg_ir_size/reg_ir_count after aot_core_ir_count)
+// v3: 132 bytes (added dependency_offset/dependency_count after reg_ir_count)
 typedef struct PatchDataHeader {
     uint32_t magic;
     uint32_t version;
@@ -92,6 +93,12 @@ typedef struct PatchDataHeader {
     uint32_t reg_ir_offset;
     uint32_t reg_ir_size;
     uint32_t reg_ir_count;
+
+    // Dependency section (v3+): list of required assembly dependencies.
+    // Each entry identifies a dependency by name; PatchLoader verifies
+    // the dependency is registered before applying this patch.
+    uint32_t dependency_offset;
+    uint32_t dependency_count;
 } PatchDataHeader;
 
 // ── Table entry structs ──────────────────────────────────────────────
@@ -156,6 +163,17 @@ typedef struct PatchStandaloneSigEntry {
     uint32_t token;                     // 0x11000000 | row
 } PatchStandaloneSigEntry;
 
+// ── Dependency section (v3+) ──────────────────────────────────────────
+// Declares a dependency on another assembly. The PatchLoader verifies
+// that a module matching assembly_name is already registered before
+// applying this patch. Cross-module token resolution uses the
+// HotpatchNameRegistry to find method dispatch entries in the
+// dependency module.
+typedef struct PatchDataDependency {
+    uint32_t assembly_name_offset;      // assembly name in string heap
+    uint32_t min_version;               // minimum version (0 = any)
+} PatchDataDependency;
+
 // ── Inline helpers ──────────────────────────────────────────────────
 // These are safe to call on a mapped file after header validation.
 
@@ -163,8 +181,10 @@ static inline uint32_t PatchData_TotalSize(const PatchDataHeader* hdr) {
     uint32_t section_end = hdr->body_data_offset + hdr->body_data_size;
     uint32_t ir_end = hdr->aot_core_ir_offset + hdr->aot_core_ir_size;
     uint32_t reg_ir_end = hdr->reg_ir_offset + hdr->reg_ir_size;
+    uint32_t dep_end = hdr->dependency_offset + hdr->dependency_count * sizeof(PatchDataDependency);
     uint32_t max_end = (ir_end > section_end) ? ir_end : section_end;
-    return (reg_ir_end > max_end) ? reg_ir_end : max_end;
+    max_end = (reg_ir_end > max_end) ? reg_ir_end : max_end;
+    return (dep_end > max_end) ? dep_end : max_end;
 }
 
 static inline const char* PatchData_String(const PatchDataHeader* hdr, uint32_t offset) {

@@ -1,20 +1,20 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-24T23:07:03.634543",
+  "generated_at": "2026-05-25T08:53:24.195561",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "18/18 methods are stubs — benchmark data not meaningful",
+      "summary": "10/18 methods are stubs — benchmark data not meaningful",
       "details": [],
       "evidence": {
-        "average_speedup_percent": 0.0,
-        "average_native_jit_speedup_percent": null,
-        "managed_faster_count": 0,
-        "native_aot_faster_count": 0,
+        "average_speedup_percent": -16.96,
+        "average_native_jit_speedup_percent": 0.0,
+        "managed_faster_count": 3,
+        "native_aot_faster_count": 4,
         "native_jit_faster_count": 0,
-        "invalid_count": 18,
+        "invalid_count": 10,
         "total_methods": 18
       }
     },
@@ -71,21 +71,62 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "1 of 2 changed source files are outside expected architecture layers",
+      "summary": "6 of 11 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+          "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/27-T4原生代码生成器架构.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/INDEX.md",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 2,
+        "changed_source_count": 11,
         "layer_distribution": {
-          "TestInfra": 1
+          "TestInfra": 4,
+          "RuntimeCore": 1
         },
         "violations": [
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+            "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/27-T4原生代码生成器架构.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/INDEX.md",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
             "reason": "outside expected architecture layers"
           }
         ]

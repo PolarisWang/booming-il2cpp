@@ -72,6 +72,141 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_7(void);
 extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_8(void);
 extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_0(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_1(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_10(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_11(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_12(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_13(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_14(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_15(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_16(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_17(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_18(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_19(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_2(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_20(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_21(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_22(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_23(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_24(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_25(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_26(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_27(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_28(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_29(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_3(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_30(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_31(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_32(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_33(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_34(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_35(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_36(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_37(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_38(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_39(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_4(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_40(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_41(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_42(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_5(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_6(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_7(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_8(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_9(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_0(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_1(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_10(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_11(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_12(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_13(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_14(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_15(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_16(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_17(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_18(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_19(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_2(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_20(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_21(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_22(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_23(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_24(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_25(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_26(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_27(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_28(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_29(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_3(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_30(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_31(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_32(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_33(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_34(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_35(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_36(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_37(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_38(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_39(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_4(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_40(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_41(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_42(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_5(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_6(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_7(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_8(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_9(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_0(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_1(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_10(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_11(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_12(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_13(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_14(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_15(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_16(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_17(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_18(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_19(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_2(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_20(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_21(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_22(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_23(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_24(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_25(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_26(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_27(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_28(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_29(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_3(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_30(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_31(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_32(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_33(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_34(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_35(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_36(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_37(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_38(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_39(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_4(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_40(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_41(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_42(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_5(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_6(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_7(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_8(void);
+extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::ReflectionTypeSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -92,11 +227,11 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorI
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {{nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 10748947813473285525ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Type = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
 
 // ── Virtual method table arrays ──
@@ -116,7 +251,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -296,7 +431,7 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 	const auto chaos_view = chaos::il2cpp::string_table::Resolve(chaos_id);
 
 	auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String, {});
-	chaos_string->header.type_info = &chaos_mt_System_Private_CoreLib_System_String.hot;
+	chaos_string->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String);
 	chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_view.byte_count);
 	auto* owned_utf8 = static_cast<char*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(chaos_view.byte_count + 1));
 	CHAOS_IL2CPP_MEMCPY(owned_utf8, chaos_view.utf8_data, chaos_view.byte_count);
@@ -338,7 +473,7 @@ CHAOS_IL2CPP_INT32 chaos_reflection_get_type_metadata_token_from_handle(CHAOS_IL
 CHAOS_IL2CPP_INTPTR chaos_reflection_create_type_value(CHAOS_IL2CPP_INTPTR chaos_type_handle)
 {
 	auto* chaos_type = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Type);
-	chaos_type->header.type_info = &chaos_mt_System_Private_CoreLib_System_Type.hot;
+	chaos_type->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Type);
 	chaos_type->runtime_type_handle = chaos_type_handle;
 	chaos_type->runtime_name_value = chaos_reflection_get_type_name_value_from_handle(chaos_type_handle);
 	chaos_type->runtime_metadata_token_value = chaos_reflection_get_type_metadata_token_from_handle(chaos_type_handle);
@@ -385,7 +520,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssembly(CHAOS_IL2CPP_INTPTR chaos_type_va
 		default:
 		{
 			auto* chaos_assembly = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_Assembly);
-			chaos_assembly->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_Assembly.hot;
+			chaos_assembly->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly);
 			chaos_assembly->runtime_assembly_name_value = chaos_reflection_create_string_literal("System.Private.CoreLib");
 			return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_assembly);
 		}
@@ -442,7 +577,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssembly_name(CHAOS_IL2CPP_INTPTR chaos_as
 	}
 
 	auto* chaos_assembly_name = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName);
-	chaos_assembly_name->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName.hot;
+	chaos_assembly_name->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName);
 	chaos_assembly_name->runtime_name_value = chaos_assembly->runtime_assembly_name_value;
 	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_assembly_name);
 }
@@ -741,7 +876,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod(CHAOS_IL2CPP_INTPTR chaos_type_valu
 	}
 
 	auto* chaos_method = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo);
-	chaos_method->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.hot;
+	chaos_method->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo);
 	chaos_method->declaring_type_handle = chaos_type->runtime_type_handle;
 	chaos_method->runtime_method_handle = chaos_method_handle;
 	chaos_method->generic_definition_method_handle = chaos_method_handle;
@@ -794,7 +929,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(CHAOS_IL2CPP_INTPTR chaos_m
 
 	auto* chaos_type_argument = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Type*>(chaos_type_argument_value);
 	auto* chaos_closed_method = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo);
-	chaos_closed_method->header.type_info = &chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo.hot;
+	chaos_closed_method->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo);
 	chaos_closed_method->declaring_type_handle = chaos_method->declaring_type_handle;
 	chaos_closed_method->generic_definition_method_handle = chaos_method->generic_definition_method_handle != 0
 		? chaos_method->generic_definition_method_handle
@@ -1340,7 +1475,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
-		&chaos_mt_ReflectionTypeSubjects_ReflectionTypeSubjects.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ReflectionTypeSubjects_ReflectionTypeSubjects),
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
@@ -2853,7 +2988,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_3(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2945,7 +3080,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_4(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3037,7 +3172,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_5(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3129,7 +3264,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_6(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3221,7 +3356,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_7(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3311,7 +3446,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_8(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3395,7 +3530,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_9(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3479,7 +3614,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_10(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3563,7 +3698,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_11(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3647,7 +3782,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_12(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3731,7 +3866,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_13(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3815,7 +3950,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_14(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3899,7 +4034,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_15(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -3983,7 +4118,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_16(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4067,7 +4202,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_17(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4151,7 +4286,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_18(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4235,7 +4370,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_19(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4319,7 +4454,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_20(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4403,7 +4538,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_21(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4487,7 +4622,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_22(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4571,7 +4706,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_23(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4655,7 +4790,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_24(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4739,7 +4874,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_25(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4823,7 +4958,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_26(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4907,7 +5042,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_27(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -4991,7 +5126,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_28(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5083,7 +5218,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_29(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5167,7 +5302,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_30(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5259,7 +5394,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_31(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5343,7 +5478,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_32(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5441,7 +5576,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_33(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5525,7 +5660,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_34(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5609,7 +5744,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_35(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5701,7 +5836,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_36(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5785,7 +5920,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_37(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5869,7 +6004,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_38(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -5953,7 +6088,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_39(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -6037,7 +6172,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_40(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -6131,7 +6266,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_41(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -6215,7 +6350,7 @@ extern "C" void ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_42(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;

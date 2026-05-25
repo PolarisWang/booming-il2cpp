@@ -8,7 +8,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19033.8,
+      "postPatchNsPerOp": 12680.4,
       "slowdownPercent": 0.0
     },
     {
@@ -16,7 +16,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Write:System.Void(System.Byte[],System.Int32,System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 29619.2,
+      "postPatchNsPerOp": 10628.4,
       "slowdownPercent": 0.0
     },
     {
@@ -24,7 +24,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Flush:System.Void()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 62341.4,
+      "postPatchNsPerOp": 11504.8,
       "slowdownPercent": 0.0
     },
     {
@@ -32,7 +32,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19450.2,
+      "postPatchNsPerOp": 12476.7,
       "slowdownPercent": 0.0
     },
     {
@@ -40,7 +40,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 21570.8,
+      "postPatchNsPerOp": 12203.5,
       "slowdownPercent": 0.0
     },
     {
@@ -48,7 +48,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 27914.0,
+      "postPatchNsPerOp": 13130.3,
       "slowdownPercent": 0.0
     },
     {
@@ -56,7 +56,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 64055.9,
+      "postPatchNsPerOp": 13566.7,
       "slowdownPercent": 0.0
     },
     {
@@ -64,7 +64,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.Stream::CopyTo:System.Void(System.IO.Stream)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 31429.9,
+      "postPatchNsPerOp": 13802.8,
       "slowdownPercent": 0.0
     },
     {
@@ -72,7 +72,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17376.8,
+      "postPatchNsPerOp": 13529.3,
       "slowdownPercent": 0.0
     },
     {
@@ -80,7 +80,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 39160.6,
+      "postPatchNsPerOp": 15192.3,
       "slowdownPercent": 0.0
     },
     {
@@ -88,7 +88,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 34801.3,
+      "postPatchNsPerOp": 13572.1,
       "slowdownPercent": 0.0
     },
     {
@@ -96,7 +96,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 21362.4,
+      "postPatchNsPerOp": 13463.1,
       "slowdownPercent": 0.0
     },
     {
@@ -104,7 +104,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 33307.7,
+      "postPatchNsPerOp": 14098.6,
       "slowdownPercent": 0.0
     },
     {
@@ -112,7 +112,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 102552.8,
+      "postPatchNsPerOp": 13969.8,
       "slowdownPercent": 0.0
     },
     {
@@ -120,7 +120,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 33190.9,
+      "postPatchNsPerOp": 13342.9,
       "slowdownPercent": 0.0
     },
     {
@@ -128,7 +128,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 60651.7,
+      "postPatchNsPerOp": 14253.3,
       "slowdownPercent": 0.0
     },
     {
@@ -136,7 +136,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 48467.9,
+      "postPatchNsPerOp": 14334.1,
       "slowdownPercent": 0.0
     },
     {
@@ -144,7 +144,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.IO.BinaryWriter::Write:System.Void(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19799.4,
+      "postPatchNsPerOp": 14036.0,
       "slowdownPercent": 0.0
     }
   ],

@@ -2,22 +2,14 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/array/indexing/copy",
-  "capturedAt": "2026-05-22T08:06:44",
+  "capturedAt": "2026-05-25T01:29:46",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 2.6,
+      "acquireReleaseNsPerOp": 4.0,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
-    "fastExecute": {
-      "runCount": 100000,
-      "nsPerCall": 390.5
-    },
-    "callVirt": {
-      "handlerDispatchNs": 404.3,
-      "emptyStackNs": 444.7
-    },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-22T08:06:44][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T08:06:44][DEBUG][GcEvents] registered callback 0x7ff73d236360 at slot 0\n[2026-05-22T08:06:44][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:06:44][INFO][NUMA] numa_init count=%d\n[2026-05-22T08:06:44][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-22T08:06:44][INFO][OldGen] init done base=0x2398440062976 pages=8\n[2026-05-22T08:06:44][DEBUG][codegen] T4 VEH handler registered\n[2026-05-22T08:06:44][DEBUG][GcEvents] registered callback 0x7ff73d236360 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.6 ns/op (1000 batches x 32 frames)\n[2026-05-22T08:06:44][DEBUG][BGC] thread_started\n[2026-05-22T08:06:44][DEBUG][Finalizer] thread_started id={0}\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 390.5 ns/op\n[2026-05-22T08:06:44][WARN][CRAG] young_collection_no_region\n[2026-05-22T08:06:44][DEBUG][BGC] start_cycle\n[2026-05-22T08:06:44][DEBUG][BGC] root_scan heap=695 oldgen=10 valid=0 marked=0\n[2026-05-22T08:06:44][DEBUG][BGC] root_set_populated\n[2026-05-22T08:06:44][DEBUG][BGC] concurrent_mark_started\n[2026-05-22T08:06:44][DEBUG][BGC] concurrent_mark_begin\n[2026-05-22T08:06:44][DEBUG][BGC] parallel_workers spawned=8\n[2026-05-22T08:06:44][DEBUG][BGC] concurrent_mark_complete\nHandler dispatch overhead (LdcI4): 404.3 ns/call\nCallVirt empty-stack: 444.7 ns/call\n"
+  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 4.0 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\nGC|region|active=0|total_allocated=0\n"
 }

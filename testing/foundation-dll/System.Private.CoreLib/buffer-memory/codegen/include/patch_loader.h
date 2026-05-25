@@ -285,6 +285,12 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
                                     const char* host_type_name = nullptr,
                                     const char* const* host_method_names = nullptr) noexcept;
 
+// Initialize multi-module patch support.
+// Registers the deferred-patch-retry callback so that pending patches
+// are automatically retried when a new module is registered.
+// Safe to call multiple times; only the first call registers the hook.
+void InitializeMultiModulePatchSupport() noexcept;
+
 // Revert all patched methods in the given context.
 // Clears kHotpatchActive flags on all affected dispatch table entries,
 // frees PatchMethod cached IR, and deletes the PatchContext.

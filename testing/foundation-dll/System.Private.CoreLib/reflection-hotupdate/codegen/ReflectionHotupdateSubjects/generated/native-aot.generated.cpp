@@ -33,6 +33,24 @@ extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_
 extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_2(void);
 extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_3(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_0(void);
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_1(void);
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_2(void);
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_3(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_0(void);
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_1(void);
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_2(void);
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_3(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_0(void);
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_1(void);
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_2(void);
+extern "C" void ReflectionHotupdateSubjects_ReflectionHotupdateSubjects_Subject_3(void);
+
 namespace chaos::il2cpp::codegen::ReflectionHotupdateSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

@@ -2,8 +2,8 @@
   "family": "enumerator-iteration",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-24T14:17:27",
-  "duration_ms": 2,
+  "timestamp": "2026-05-25T01:26:28",
+  "duration_ms": 3,
   "overall_status": "passed",
   "stages": {
     "preflight": {

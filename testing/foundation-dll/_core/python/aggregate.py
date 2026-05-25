@@ -29,7 +29,15 @@ def aggregate(ctx: FamilyContext, stages: dict[str, StageResult], total_duration
     failures = [name for name, sr in stages.items() if name in required and sr.status == "failed"]
     errors = [name for name, sr in stages.items() if name in required and sr.status == "error"]
 
-    overall_status = "failed" if (errors or failures) else "passed"
+    if errors or failures:
+        overall_status = "failed"
+    else:
+        # At least one non-skipped required stage must have run to count as passed
+        required_ran = any(
+            name in stages and stages[name].status == "passed"
+            for name in required
+        )
+        overall_status = "passed" if required_ran else "skipped"
 
     return UnifiedReport(
         family=ctx.slug,
@@ -51,9 +59,14 @@ def _compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
     failed = sum(1 for sr in stages.values() if sr.status == "failed")
     skipped = sum(1 for sr in stages.values() if sr.status == "skipped")
     total = len(stages)
+    non_skipped = total - skipped
+
+    # Pass rate: fraction of non-skipped stages that passed
+    # (100% if no stages were actually run, to avoid division by zero)
+    rate = round(passed / non_skipped * 100, 1) if non_skipped else 100.0
 
     return {
-        "stagePassRate": round(passed / total * 100, 1) if total else 0.0,
+        "stagePassRate": rate,
         "stagesPassed": passed,
         "stagesFailed": failed,
         "stagesSkipped": skipped,

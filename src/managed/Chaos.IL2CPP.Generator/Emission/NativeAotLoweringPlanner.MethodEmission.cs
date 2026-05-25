@@ -134,6 +134,7 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 		ValidateMethod(method);
 		_linearScratchCounter = 0;
+		_nextInlineId = 0;
 
 		// P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
 		if (method.IsPInvoke)
@@ -176,35 +177,40 @@ public sealed partial class NativeAotLoweringPlanner
 		handler.AppendFormatted(Math.Max(method.LocalCount, 1));
 		handler.AppendLiteral(") chaos_locals{};");
 		stringBuilder5.AppendLine(ref handler);
-		if (usesStructuredSlots && structuredSlotCount > 0)
-		{
-			EmitStructuredSlotDeclarations(builder, structuredSlotCount, "    ");
-		}
-		else if (evalStackSize > 0)
-		{
-			stringBuilder = builder;
-			StringBuilder stringBuilder6 = stringBuilder;
-			handler = new StringBuilder.AppendInterpolatedStringHandler(51, 1, stringBuilder);
-			handler.AppendLiteral("    CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
-			handler.AppendFormatted(evalStackSize);
-			handler.AppendLiteral(") chaos_eval_stack{};");
-			stringBuilder6.AppendLine(ref handler);
-			builder.AppendLine("    CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
-		}
 		EmitAbiArgumentInitialization(builder, methodAbiParameterSlots);
 		EmitStaticInitializationPrologue(builder, method);
-		builder.AppendLine();
+		// Emit structured IR body first to capture actual slot depth,
+		// since ComputeMaxEvalStackDepth may undercount for generic methods
+		// where inlined code or StringId emission expands the effective depth.
+		var bodyBuilder = new System.Text.StringBuilder();
 		_currentMethodNativeSymbol = method.NativeSymbol;
 		_currentMethodArtifact = method;
+		int actualSlotCount;
 		try
 		{
-			EmitViaStructuredIR(builder, method, instructions, offsets, body);
+			actualSlotCount = EmitViaStructuredIR(bodyBuilder, method, instructions, offsets, body);
 		}
 		finally
 		{
 			_currentMethodNativeSymbol = null;
 			_currentMethodArtifact = null;
 		}
+		if (usesStructuredSlots && actualSlotCount > 0)
+		{
+			EmitStructuredSlotDeclarations(builder, actualSlotCount, "	");
+		}
+		else if (!usesStructuredSlots && evalStackSize > 0)
+		{
+			stringBuilder = builder;
+			StringBuilder stringBuilder6 = stringBuilder;
+			handler = new StringBuilder.AppendInterpolatedStringHandler(51, 1, stringBuilder);
+			handler.AppendLiteral("	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, ");
+			handler.AppendFormatted(evalStackSize);
+			handler.AppendLiteral(") chaos_eval_stack{};");
+			stringBuilder6.AppendLine(ref handler);
+			builder.AppendLine("	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
+		}
+		builder.Append(bodyBuilder);
 		builder.AppendLine("}");
 	}
 

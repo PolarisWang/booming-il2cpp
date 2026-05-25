@@ -7,17 +7,17 @@
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 90.42,
-      "postPatchNsPerOp": 99.3,
-      "slowdownPercent": 9.82
+      "prePatchNsPerOp": 69.96,
+      "postPatchNsPerOp": 74.9,
+      "slowdownPercent": 7.06
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.SemaphoreSlim::.ctor:System.Void(System.Int32,System.Int32)",
       "status": "passed",
-      "prePatchNsPerOp": 89.46,
-      "postPatchNsPerOp": 98.1,
-      "slowdownPercent": 9.66
+      "prePatchNsPerOp": 70.85,
+      "postPatchNsPerOp": 70.1,
+      "slowdownPercent": -1.06
     },
     {
       "methodIndex": 2,
@@ -38,9 +38,9 @@
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.ManualResetEvent::.ctor:System.Void(System.Boolean)",
       "status": "passed",
-      "prePatchNsPerOp": 15.24,
-      "postPatchNsPerOp": 4.4,
-      "slowdownPercent": -71.13
+      "prePatchNsPerOp": 2.16,
+      "postPatchNsPerOp": 2.7,
+      "slowdownPercent": 25.0
     },
     {
       "methodIndex": 6,
@@ -62,7 +62,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Threading.AutoResetEvent::.ctor:System.Void(System.Boolean)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 2.0,
+      "postPatchNsPerOp": 1.2,
       "slowdownPercent": 0.0
     },
     {
@@ -85,7 +85,7 @@
       "methodSubjectId": "System.Private.CoreLib/System.Threading.SpinLock::.ctor:System.Void(System.Boolean)",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 1.8,
+      "postPatchNsPerOp": 1.2,
       "slowdownPercent": 0.0
     },
     {
@@ -107,8 +107,8 @@
   "summary": {
     "totalMethods": 17,
     "nonStubMethods": 3,
-    "averageSlowdownPercent": -17.22,
-    "slowdownFactor": 0.8278,
+    "averageSlowdownPercent": 10.33,
+    "slowdownFactor": 1.1033,
     "slowdownThresholdX": 50.0
   }
 }

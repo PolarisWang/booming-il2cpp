@@ -28,7 +28,7 @@ namespace chaos::il2cpp::jit {
 
 // ── Managed array type ───────────────────────────────────────────────
 constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_managed_array = 1;
-inline MethodTable chaos_type_info_managed_array = { nullptr, nullptr, 1ULL, 0, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0 };
+inline TypeInfoV0 chaos_type_info_managed_array = {{ nullptr, nullptr, 1ULL, 0, 32, 2, 0 }, { nullptr, nullptr, 0, 0, 0, 0 }};
 
 struct chaos_managed_array
 {

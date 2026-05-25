@@ -60,6 +60,15 @@ STAGE_CN: dict[str, dict[str, str | dict[str, str]]] = {
             "TypeLoadException": "类型加载异常，JIT 无法解析合约中引用的类型",
         },
     },
+    "managed_fact": {
+        "name": "托管事实验证 (.NET8)",
+        "description": "运行 .NET8 托管事实验证，通过自动生成的 C# harness 逐方法调用被测方法，确保 IL 语义与 .NET 运行时一致",
+        "failure_meaning": "托管事实验证不通过：被测方法在 .NET8 上抛出预期外异常或返回非预期结果",
+        "common_errors": {
+            "FactAssertionFailed": "托管事实断言失败，方法执行结果与预期不一致",
+            "UnexpectedException": "被测方法抛出预期外异常，可能由 harness 参数输入不当引起",
+        },
+    },
     "fact": {
         "name": "AOT 正确性验证",
         "description": "运行 AOT 编译输出的事实验证（Fact），确认 IL 语义在 AOT 路径下执行结果与预期一致",
@@ -141,14 +150,23 @@ STAGE_CN: dict[str, dict[str, str | dict[str, str]]] = {
         "failure_meaning": "热更新 JIT 基准测试失败：可能由于热更新流程中的 JIT 性能退化",
         "common_errors": {},
     },
+    "dashboard": {
+        "name": "仪表盘生成",
+        "description": "聚合所有阶段数据生成统一 JSON 仪表盘和 HTML 报告，包含覆盖率、性能对比、IR 翻译指标等的综合摘要",
+        "failure_meaning": "仪表盘生成失败：部分阶段数据可能缺失或格式异常",
+        "common_errors": {
+            "JsonSerializationError": "JSON 序列化失败，报告数据可能包含不可序列化的类型",
+            "MissingStageData": "缺少必要阶段数据，仪表盘部分章节可能为空",
+        },
+    },
 }
 
-# All 13 stage keys in pipeline order
+# All 15 stage keys in pipeline order
 STAGE_KEYS = [
-    "preflight", "codegen", "jit_codegen", "fact", "fact_jit",
+    "preflight", "codegen", "jit_codegen", "managed_fact", "fact", "fact_jit",
     "audit", "asm_compare", "microbench", "benchmark",
     "hotupdate", "hotupdate_aot_benchmark", "hotupdate_jit_fact",
-    "hotupdate_jit_benchmark",
+    "hotupdate_jit_benchmark", "dashboard",
 ]
 
 METRIC_CN: dict[str, dict[str, str]] = {
@@ -531,7 +549,7 @@ def _build_benchmark_section(comparisons: dict[str, Any]) -> str:
     tech_summary = ""
     if techs:
         tech_parts = []
-        for tech in ["chaos-aot", "chaos-jit", "chaos-hu-aot", "chaos-hu-jit", "net8-jit", "net10-jit"]:
+        for tech in ["chaos-aot", "chaos-jit", "chaos-hu-aot", "chaos-hu-jit", "net8-jit", "net10-jit", "mono"]:
             t = techs.get(tech)
             if t:
                 ops_str = _fmt_metric_value("averageOpsPerSecond", t["gm_ops"])
@@ -783,7 +801,7 @@ def _build_stage_rows_from_coverage(slug: str, coverage: dict[str, Any] | None) 
     passed = coverage.get("stagesPassed", 0)
     failed = coverage.get("stagesFailed", 0)
     skipped = coverage.get("stagesSkipped", 0)
-    total = coverage.get("stagesTotal", 13)
+    total = coverage.get("stagesTotal", 15)
 
     return f"""\
 <tr class="stage-row status-{'passed' if failed == 0 else 'failed'}">
@@ -910,19 +928,44 @@ def _build_coverage_bar(coverage: dict[str, Any] | None) -> str:
     if not coverage:
         return ""
     passed = coverage.get("stagesPassed", 0)
-    total = coverage.get("stagesTotal", 13)
+    failed = coverage.get("stagesFailed", 0)
+    skipped = coverage.get("stagesSkipped", 0)
+    total = coverage.get("stagesTotal", 15)
+    non_skipped = total - skipped
     rate = coverage.get("stagePassRate", 0)
     if total == 0:
         return ""
+
+    # Bar segments: passed/failed proportion of TOTAL (including skipped as neutral)
+    p_pct = passed / total * 100 if total else 0
+    f_pct = failed / total * 100 if total else 0
+
+    detail_parts = [f"通过 {passed}"]
+    if failed:
+        detail_parts.append(f"失败 {failed}")
+    if skipped:
+        detail_parts.append(f"跳过 {skipped}")
+
     color = "#4caf50" if rate >= 80 else ("#ff9800" if rate >= 50 else "#f44336")
+    skipped_color = "#e0e0e0"
+
+    bar_html = f"""\
+    <div class="coverage-bar" style="display:flex;height:8px;border-radius:4px;overflow:hidden;background:{skipped_color};">"""
+    if p_pct > 0:
+        bar_html += f'<div style="width:{p_pct:.0f}%;background:{color};"></div>'
+    if f_pct > 0:
+        bar_html += f'<div style="width:{f_pct:.0f}%;background:#f44336;"></div>'
+    if skipped > 0:
+        s_pct = skipped / total * 100
+        bar_html += f'<div style="width:{s_pct:.0f}%;background:#e0e0e0;"></div>'
+    bar_html += "</div>"
+
     return f"""\
 <div style="display:flex;justify-content:space-between;font-size:0.8rem;color:#888;margin-top:6px;">
-  <span>阶段覆盖率</span>
-  <span>{passed}/{total} ({rate:.0f}%)</span>
+  <span>阶段覆盖率 ({', '.join(detail_parts)})</span>
+  <span>{passed}/{non_skipped} 非跳过 ({rate:.0f}%)</span>
 </div>
-<div class="coverage-bar">
-  <div class="coverage-fill" style="width:{rate:.0f}%;background:{color};"></div>
-</div>"""
+{bar_html}"""
 
 
 def _build_family_card(f: dict[str, Any], index: int) -> str:
@@ -977,11 +1020,13 @@ def _build_family_card(f: dict[str, Any], index: int) -> str:
 
 def generate_html(report: dict[str, Any]) -> str:
     """Generate the complete self-contained HTML dashboard."""
-    parsed = report.get("parsed", [])
+    parsed = report.get("parsed") or [parse_family(r) for r in report.get("results", [])]
     total = len(parsed)
     n_passed = sum(1 for f in parsed if f.get("status") == "passed")
     n_failed = sum(1 for f in parsed if f.get("status") == "failed")
-    n_other = total - n_passed - n_failed
+    n_skipped = sum(1 for f in parsed if f.get("status") == "skipped")
+    n_crashed = sum(1 for f in parsed if f.get("status") == "crashed")
+    n_other = total - n_passed - n_failed - n_skipped - n_crashed
     pass_rate = round(n_passed / total * 100) if total > 0 else 0
     elapsed = report.get("elapsed_seconds", 0)
     elapsed_str = f"{int(elapsed // 60)}分{int(elapsed % 60)}秒" if elapsed else ""
@@ -1030,6 +1075,8 @@ def generate_html(report: dict[str, Any]) -> str:
     <div class="num">{n_failed}</div>
     <div class="label">失败 &#10007;</div>
   </div>
+  {f'<div class="stat-card" style="background:#fff8e1;"><div class="num" style="color:#f57f17;">{n_skipped}</div><div class="label">跳过</div></div>' if n_skipped > 0 else ''}
+  {f'<div class="stat-card" style="background:#fbe9e7;"><div class="num" style="color:#c62828;">{n_crashed}</div><div class="label">崩溃</div></div>' if n_crashed > 0 else ''}
   <div class="stat-card rate">
     <div class="num">{pass_rate}%</div>
     <div class="label">通过率</div>
@@ -1119,7 +1166,7 @@ def _run_benchmarks_for_missing_families(report: dict[str, Any]) -> None:
     Uses subprocess to call the CLI (which handles its own sys.path setup).
     Only runs for families with native binaries (entry.exe / entry-jit.exe).
     """
-    parsed = report.get("parsed", [])
+    parsed = report.get("parsed") or [parse_family(r) for r in report.get("results", [])]
     families_without_data = [f for f in parsed if not _has_any_benchmark_data(f["slug"])]
 
     if not families_without_data:

@@ -7,49 +7,49 @@
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
       "status": "passed",
-      "prePatchNsPerOp": 230.91,
-      "postPatchNsPerOp": 225.9,
-      "slowdownPercent": -2.17
+      "prePatchNsPerOp": 139.35,
+      "postPatchNsPerOp": 145.7,
+      "slowdownPercent": 4.56
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
       "status": "passed",
-      "prePatchNsPerOp": 185.98,
-      "postPatchNsPerOp": 190.9,
-      "slowdownPercent": 2.65
+      "prePatchNsPerOp": 137.22,
+      "postPatchNsPerOp": 140.8,
+      "slowdownPercent": 2.61
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)",
       "status": "passed",
-      "prePatchNsPerOp": 185.58,
-      "postPatchNsPerOp": 391.7,
-      "slowdownPercent": 111.07
+      "prePatchNsPerOp": 135.43,
+      "postPatchNsPerOp": 140.6,
+      "slowdownPercent": 3.82
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Object::GetHashCode:System.Int32()",
       "status": "passed",
-      "prePatchNsPerOp": 97.95,
-      "postPatchNsPerOp": 99.1,
-      "slowdownPercent": 1.17
+      "prePatchNsPerOp": 73.34,
+      "postPatchNsPerOp": 73.0,
+      "slowdownPercent": -0.46
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
       "status": "passed",
-      "prePatchNsPerOp": 134.25,
-      "postPatchNsPerOp": 96.2,
-      "slowdownPercent": -28.34
+      "prePatchNsPerOp": 74.05,
+      "postPatchNsPerOp": 75.0,
+      "slowdownPercent": 1.28
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Object::GetType:System.Type()",
       "status": "passed",
-      "prePatchNsPerOp": 100.99,
-      "postPatchNsPerOp": 109.1,
-      "slowdownPercent": 8.03
+      "prePatchNsPerOp": 70.32,
+      "postPatchNsPerOp": 74.2,
+      "slowdownPercent": 5.52
     },
     {
       "methodIndex": 6,
@@ -60,8 +60,8 @@
   "summary": {
     "totalMethods": 7,
     "nonStubMethods": 6,
-    "averageSlowdownPercent": 15.4,
-    "slowdownFactor": 1.1540000000000001,
+    "averageSlowdownPercent": 2.89,
+    "slowdownFactor": 1.0289,
     "slowdownThresholdX": 50.0
   }
 }
