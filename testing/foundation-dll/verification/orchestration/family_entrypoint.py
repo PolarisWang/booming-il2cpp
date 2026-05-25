@@ -22,15 +22,15 @@ import tempfile
 from pathlib import Path
 from typing import Any
 
-_REPO_ROOT = Path(__file__).resolve().parents[3]
+_REPO_ROOT = Path(__file__).resolve().parents[4]
 
-from test_code_generator import (METHOD_OVERRIDES, build_call_expr, build_call_expr_with_refs,
-                                 build_call_expr_with_ref_locals, cast_return_to_int,
-                                 default_expr, get_skip_reason, has_blocked_param, has_ref_param,
-                                 is_auto_callable,
-                                 parse_method_subject_id, ref_return_expr,
-                                 INSTANCE_ALTERNATIVE_EXPR_MAP, TYPE_ALTERNATIVE_MAP)
-from native_code_generator import slug_from_family_id, family_namespace_slug, method_slot_name
+from verification.stages.test_code_generator import (METHOD_OVERRIDES, build_call_expr, build_call_expr_with_refs,
+                                                     build_call_expr_with_ref_locals, cast_return_to_int,
+                                                     default_expr, get_skip_reason, has_blocked_param, has_ref_param,
+                                                     is_auto_callable,
+                                                     parse_method_subject_id, ref_return_expr,
+                                                     INSTANCE_ALTERNATIVE_EXPR_MAP, TYPE_ALTERNATIVE_MAP)
+from verification.stages.native_code_generator import slug_from_family_id, family_namespace_slug, method_slot_name
 
 
 # ═══════════════════════════════════════════════════════════════════

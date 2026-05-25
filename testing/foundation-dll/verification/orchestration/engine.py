@@ -12,17 +12,17 @@ import time
 from pathlib import Path
 from typing import Any
 
-from orchestration.context import FamilyContext, StageResult, UnifiedReport
+from verification.orchestration.context import FamilyContext, StageResult, UnifiedReport
 
 # Stage runners
-from stages.preflight import run_preflight
-from stages.codegen import run_codegen, run_jit_codegen
-from stages.fact import run_fact, run_fact_jit
-from stages.audit import run_audit
-from stages.asm_compare import run_asm_compare
-from stages.microbench import run_microbench
-from stages.benchmark import run_benchmark
-from stages.hotupdate import (
+from verification.stages.preflight import run_preflight
+from verification.stages.codegen import run_codegen, run_jit_codegen
+from verification.stages.fact import run_fact, run_fact_jit
+from verification.stages.audit import run_audit
+from verification.stages.asm_compare import run_asm_compare
+from verification.stages.microbench import run_microbench
+from verification.stages.benchmark import run_benchmark
+from verification.stages.hotupdate import (
     run_hotupdate,
     run_hotupdate_aot_bench,
     run_hotupdate_jit_fact,

@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from soak.report import (
+from verification.soak.report import (
     SoakSnapshot,
     compute_degradation,
 )
@@ -63,7 +63,7 @@ class TestDegradationDetection:
 
 class TestSoakReportWriter:
     def test_report_roundtrip(self, tmp_path):
-        from soak.report import SoakReport
+        from verification.soak.report import SoakReport
 
         report_path = tmp_path / "soak.jsonl"
         with SoakReport(report_path) as report:

@@ -17,7 +17,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from orchestration.context import FamilyContext
+from verification.orchestration.context import FamilyContext
 
 # ── Environment / device detection ──────────────────────────────────────
 

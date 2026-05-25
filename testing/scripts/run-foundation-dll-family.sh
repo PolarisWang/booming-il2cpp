@@ -19,7 +19,7 @@ fi
 FAMILY_SLUG="$1"
 shift
 
-PYTHONPATH="$REPO_ROOT/testing/foundation-dll/verification:$REPO_ROOT/build/toolchains/run/testing/foundation_dll:$REPO_ROOT/build/toolchains/run"
+PYTHONPATH="$REPO_ROOT/testing/foundation-dll:$REPO_ROOT/testing/foundation-dll/verification:$REPO_ROOT/build/toolchains/run/testing/foundation_dll:$REPO_ROOT/build/toolchains/run"
 export PYTHONPATH
 
 echo "=== Foundation DLL Verification: $FAMILY_SLUG ==="

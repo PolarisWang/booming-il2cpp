@@ -11,7 +11,7 @@ _VERIFICATION = Path(__file__).resolve().parent.parent
 if str(_VERIFICATION) not in sys.path:
     sys.path.insert(0, str(_VERIFICATION))
 
-from orchestration.context import FamilyContext, StageResult
+from verification.orchestration.context import FamilyContext, StageResult
 
 
 @pytest.fixture

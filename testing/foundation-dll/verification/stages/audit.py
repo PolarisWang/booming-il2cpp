@@ -2,27 +2,18 @@
 
 from __future__ import annotations
 
-import sys
 import time
-from pathlib import Path
 from typing import Any
 
-from orchestration.context import FamilyContext, StageResult
+from verification.orchestration.context import FamilyContext, StageResult
 
 
 def run_audit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
     """Stage 5: Mechanism audit (stub detection, skip audit) + Principle alignment."""
     start = time.perf_counter()
 
-    # Ensure old pipeline path is available for mechanism_audit
-    _old_pipeline = (
-        Path(__file__).resolve().parents[4] / "build" / "toolchains" / "run" / "testing" / "foundation_dll"
-    )
-    if str(_old_pipeline) not in sys.path:
-        sys.path.insert(0, str(_old_pipeline))
-
     try:
-        from mechanism_audit import run_full_audit
+        from .mechanism_audit import run_full_audit
 
         audit_result = run_full_audit(ctx.assembly, ctx.slug)
 

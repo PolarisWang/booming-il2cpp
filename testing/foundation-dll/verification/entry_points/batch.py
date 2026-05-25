@@ -13,10 +13,10 @@ from pathlib import Path
 
 from .._path import _HERE as _VERIFICATION_ROOT
 
-from orchestration.context import FamilyContext
-from orchestration.engine import VerificationPipeline
-from analysis.perf_store import auto_save_perf_data
-from reporting.dashboard import generate_html as generate_dashboard_html, parse_family
+from verification.orchestration.context import FamilyContext
+from verification.orchestration.engine import VerificationPipeline
+from verification.analysis.perf_store import auto_save_perf_data
+from verification.reporting.dashboard import generate_html as generate_dashboard_html, parse_family
 
 _TESTING_ROOT = _VERIFICATION_ROOT.parent
 

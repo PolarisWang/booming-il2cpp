@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from orchestration.context import FamilyContext, StageResult
+from verification.orchestration.context import FamilyContext, StageResult
 
 # preflight
 from .preflight import run_preflight
@@ -60,16 +60,36 @@ def get_default_stages() -> list[str]:
     return [name for name, _, enabled in STAGE_REGISTRY if enabled]
 
 
+# Function-to-module mapping (overrides rsplit derivation for non-trivial cases)
+_FUNC_MODULE_OVERRIDES = {
+    "run_preflight": "preflight",
+    "run_hotupdate_jit_fact": "hotupdate",
+    "run_hotupdate_jit_bench": "hotupdate",
+    "run_hotupdate_aot_bench": "hotupdate",
+    "run_fact_jit": "fact",
+    "run_fact_cross_verify": "fact",
+    "run_jit_codegen": "codegen",
+    "run_hotupdate": "hotupdate",
+}
+
+
+def _func_to_module(func_name: str) -> str:
+    """Derive module name from function name, with overrides for edge cases."""
+    if func_name in _FUNC_MODULE_OVERRIDES:
+        return _FUNC_MODULE_OVERRIDES[func_name]
+    if func_name.startswith("run_"):
+        return func_name[len("run_"):]
+    return func_name
+
+
 def lookup_stage(name: str):
     """Look up a stage function by name. Returns None if not found."""
     for sname, func_name, _ in STAGE_REGISTRY:
         if sname == name:
-            module = __import__(f"stages.{func_name.rsplit('_', 1)[0] if func_name.startswith('run_') and func_name != 'run_preflight' else func_name}", fromlist=[func_name])
-            # fallback: try all known stage modules
             for mod_name in ("preflight", "codegen", "fact", "microbench",
                              "audit", "asm_compare", "benchmark", "hotupdate"):
                 try:
-                    mod = __import__(f"stages.{mod_name}", fromlist=[func_name])
+                    mod = __import__(f"verification.stages.{mod_name}", fromlist=[func_name])
                     fn = getattr(mod, func_name, None)
                     if fn is not None:
                         return fn

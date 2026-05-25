@@ -15,7 +15,7 @@ import sys
 import time
 from pathlib import Path
 
-from soak.report import (
+from verification.soak.report import (
     DegradationCheck,
     SoakReport,
     SoakSnapshot,
