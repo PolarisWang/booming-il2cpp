@@ -1,31 +1,14 @@
-"""Codegen stage runners — entrypoint generation + IL2CPP compile + entry.exe build.
-
-Phase 2.5: family_entrypoint_generator and verification_dispatch_generator have been
-absorbed into verification/orchestration/. pipeline_native_aot_runner still imported
-from old pipeline via sys.path bridge (to be fully absorbed in a later phase).
-"""
+"""Codegen stage runners — entrypoint generation + IL2CPP compile + entry.exe build."""
 
 from __future__ import annotations
 
 import subprocess
-import sys
 import time
 from pathlib import Path
 
-# Old pipeline path MUST be inserted before any imports that transitively
-# depend on modules still living in the old pipeline directory
-# (test_code_generator, native_code_generator, pipeline_native_aot_runner, etc.)
-_OLD_PIPELINE = (
-    Path(__file__).resolve().parents[4] / "build" / "toolchains" / "run" / "testing" / "foundation_dll"
-)
-if str(_OLD_PIPELINE) not in sys.path:
-    sys.path.insert(0, str(_OLD_PIPELINE))
-
-from orchestration.context import FamilyContext, StageResult
-from orchestration.family_entrypoint import generate_and_build
-from orchestration.dispatch_generator import generate_verification_dispatch
-
-_REPO_ROOT = Path(__file__).resolve().parents[3]
+from verification.orchestration.context import FamilyContext, StageResult
+from verification.orchestration.family_entrypoint import generate_and_build
+from verification.orchestration.dispatch_generator import generate_verification_dispatch
 
 
 def _read_contract(assembly: str, slug: str) -> dict | None:

@@ -8,8 +8,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from orchestration.context import FamilyContext
-from analysis.perf_store import (
+from verification.orchestration.context import FamilyContext
+from verification.analysis.perf_store import (
     BenchmarkQuery,
     query_benchmarks,
     query_latest_benchmarks,

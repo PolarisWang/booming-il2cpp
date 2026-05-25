@@ -32,15 +32,13 @@ _REPO_ROOT = _HERE.parents[4]
 _VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 _TEST_CODE_GENERATOR = _HERE / "test_code_generator.py"
 
-sys.path.insert(0, str(_HERE.parent.parent))  # for testing package
-
 try:
-    from testing.foundation_dll.stub_detector import scan_family, FamilyStubResult
+    from .stub_detector import scan_family, FamilyStubResult
 except ImportError:
     scan_family = None
 
 try:
-    from testing.foundation_dll.principle import run_family_checks, discover_checks
+    from .principle import run_family_checks, discover_checks
     discover_checks()
     run_principle_checks = run_family_checks
 except ImportError:

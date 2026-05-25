@@ -16,8 +16,8 @@ import time
 from pathlib import Path
 from typing import Any
 
-from orchestration.context import FamilyContext, StageResult
-from analysis.perf_store import save_managed_benchmark_records
+from verification.orchestration.context import FamilyContext, StageResult
+from verification.analysis.perf_store import save_managed_benchmark_records
 
 _MANAGED_TECHNOLOGIES = ["net8-jit", "net10-jit", "mono"]
 

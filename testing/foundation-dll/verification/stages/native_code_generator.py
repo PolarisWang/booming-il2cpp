@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from test_code_generator import (
+from verification.stages.test_code_generator import (
     build_call_expr,
     cast_return_to_int,
     has_unsafe_param,

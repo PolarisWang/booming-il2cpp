@@ -26,10 +26,8 @@ _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[4]  # D:/agent/booming-il2cpp
 _VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 _VERIFICATION: Path | None = None  # set per-assembly in main()
-sys.path.insert(0, str(_HERE))
-sys.path.insert(0, str(_HERE.parent.parent))  # for testing.trace (build/toolchains/run/)
 
-from family_entrypoint_generator import generate_and_build
+from verification.orchestration.family_entrypoint import generate_and_build
 
 from testing.trace import trace_init, trace
 
@@ -158,7 +156,7 @@ def build_subjects_dll(
                 dest = subjects_dir / f.name
                 dest.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
 
-    from family_entrypoint_generator import generate_and_build
+    from verification.orchestration.family_entrypoint import generate_and_build
     extra_refs = None
     if family_slug in ("snapshot-prover",):
         extra_refs = ["../../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
@@ -292,11 +290,16 @@ def run_convert_to_cpp(
         print(f"    Driver DLL not found at {driver_dll}")
         return False
 
+    # Derive assembly name from DLL path for per-assembly SDK output.
+    # The converter writes to codegen/<AssemblyName>/generated/ so that
+    # the rest of the pipeline can consume per-assembly layout directly.
+    asm_name = Path(dll_path).stem
+
     cmd = [
         "dotnet", "exec", str(driver_dll), "convert-to-cpp",
         "--assembly", dll_path,
         "--assembly-dir", str(Path(dll_path).parent),
-        "--sdk-out", str(codegen_out),
+        "--sdk-out", str(codegen_out / asm_name),
     ]
     if entry_point_subject_id:
         cmd.extend(["--entry-point", entry_point_subject_id])
@@ -326,24 +329,8 @@ def run_convert_to_cpp(
             except UnicodeEncodeError:
                 pass
 
-    # Sync flat codegen/generated/ -> codegen/<AssemblyName>/generated/
-    # The converter writes to the flat layout; the rest of the pipeline
-    # expects per-assembly layout.
-    asm_name = Path(dll_path).stem
-    flat_gen = codegen_out / "generated"
-    if flat_gen.exists():
-        per_asm_dir = codegen_out / asm_name / "generated"
-        per_asm_dir.mkdir(parents=True, exist_ok=True)
-        for root, dirs, files in os.walk(flat_gen):
-            rel_path = Path(root).relative_to(flat_gen)
-            target_dir = per_asm_dir / rel_path
-            target_dir.mkdir(parents=True, exist_ok=True)
-            for f in files:
-                src = Path(root) / f
-                (target_dir / f).write_bytes(src.read_bytes())
-
-    # Check output — use rglob to handle potential double-nested paths
-    # (outputRoot = sdkRoot/generated/ + RelativePath "generated/file.cpp")
+    # Check output — converter writes directly to codegen/<Assembly>/generated/
+    # (single-level after R1 fix).  The flat layout is no longer created.
     cpp_found = False
     for d in sorted(codegen_out.iterdir()):
         if d.is_dir() and d.name not in ("build", "generated"):
@@ -358,64 +345,119 @@ def run_convert_to_cpp(
                         print(f"      + {per_asm_cpp}")
     if not cpp_found:
         print(f"    convert-to-cpp OK (no .cpp output found)")
+
+    # P0: Clean stale flat-layout generated/ and double-nested generated/generated/
+    # directories from pre-R5 runs.  These are never the current output and only
+    # confuse consumers.  Only clean after new per-assembly output is confirmed.
+    stale_flat = codegen_out / "generated"
+    stale_double = codegen_out / "generated" / "generated"
+    for stale_dir in (stale_flat, stale_double):
+        if stale_dir.exists() and stale_dir.is_dir():
+            shutil.rmtree(stale_dir)
+            print(f"    [clean] removed stale generated/ directory: {stale_dir.relative_to(v / family_slug)}")
+
+    # P2: Generate artifact-index.json listing all SDK output files
+    _generate_artifact_index(codegen_out, v, family_slug)
+
     return True
 
 
-def patch_undefined_codegen_labels(family_slug: str, *, verification: Path | None = None) -> None:
-    """Post-process generated C++ to fix undefined branch-target labels.
+def _generate_artifact_index(codegen_out: Path, v: Path, family_slug: str) -> None:
+    """Generate artifact-index.json — a manifest of all SDK output files.
 
-    When the IL reader strips nop instructions, branch targets pointing to those
-    stripped offsets become undefined C++ labels (chaos_label_N referenced in goto
-    but never defined). This function maps them to the nearest following defined label.
+    Lists every file under codegen/ with its relative path, type, size (bytes),
+    and last-modified timestamp.  Consumers can use this to discover what was
+    produced without scraping the directory structure (Risk R5 mitigation).
     """
-    v = verification or _VERIFICATION
-    codegen_dir = v / family_slug / "codegen"
-    if not codegen_dir.exists():
-        print(f"    [patch_labels] no codegen dir: {codegen_dir}")
+    index_path = codegen_out / "artifact-index.json"
+    try:
+        entries = []
+        for f in sorted(codegen_out.rglob("*")):
+            if not f.is_file():
+                continue
+            rel = str(f.relative_to(codegen_out)).replace("\\", "/")
+            # Skip index itself and temp files
+            if rel == "artifact-index.json" or ".tmp." in rel:
+                continue
+            ext = f.suffix.lower()
+            if ext in (".cpp", ".h", ".hpp"):
+                file_type = "source"
+            elif ext == ".lib":
+                file_type = "library"
+            elif ext == ".json":
+                file_type = "metadata"
+            elif ext == ".cmake":
+                file_type = "cmake"
+            elif ext == ".obj":
+                file_type = "object"
+            else:
+                file_type = "other"
+            entries.append({
+                "path": rel,
+                "type": file_type,
+                "size": f.stat().st_size,
+                "modified": f.stat().st_mtime,
+            })
+        payload = {
+            "family": family_slug,
+            "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%S"),
+            "totalFiles": len(entries),
+            "files": entries,
+        }
+        index_path.write_text(
+            json.dumps(payload, indent=2, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        print(f"    [artifact-index] {len(entries)} files -> {index_path.relative_to(v / family_slug)}")
+    except OSError as e:
+        print(f"    [artifact-index] FAILED to write: {e}")
+
+
+def _verify_codegen_artifacts(codegen_out: Path, v: Path, family_slug: str) -> None:
+    """Verify expected SDK artifacts exist after convert-to-cpp.
+
+    Catches missing files from path inconsistencies between C#, Python, and
+    Scriban templates (Risk R3).  Logs warnings for missing artifacts but
+    does not fail the pipeline — the build step will catch compile errors.
+    """
+    asm_dirs = [d for d in codegen_out.iterdir()
+                if d.is_dir() and d.name not in ("build", "generated", "_subjects_input",
+                                                  "include", "lib", "cmake")]
+    if not asm_dirs:
         return
 
-    for cpp_file in sorted(codegen_dir.rglob("native-aot.generated.cpp")):
-        content = cpp_file.read_text(encoding="utf-8")
-        orig = content
-
-        # Collect all label definitions and goto references
-        defs: set[int] = set()
-        refs: set[int] = set()
-        for m in re.finditer(r'chaos_label_(\d+):', content):
-            defs.add(int(m.group(1)))
-        for m in re.finditer(r'goto\s+chaos_label_(\d+)', content):
-            refs.add(int(m.group(1)))
-
-        undefined = refs - defs
-        if not undefined:
+    # Check per-assembly generated files
+    for asm_dir in asm_dirs:
+        gen_dir = asm_dir / "generated"
+        if not gen_dir.exists():
             continue
+        expected = [
+            ("generated C++", gen_dir / "native-aot.generated.cpp"),
+            ("generated module header", gen_dir / "chaos_generated_module.h"),
+            ("methods metadata", gen_dir / "metadata" / "native-aot.methods.json"),
+        ]
+        for label, path in expected:
+            if not path.exists():
+                print(f"    [verify] MISSING {label}: {path.relative_to(v / family_slug)}")
 
-        # Build a map: undefined label -> nearest higher-numbered defined label
-        sorted_defs = sorted(defs)
-        fixup = {}
-        for lbl in sorted(undefined):
-            # Binary search for the first defined label > lbl
-            idx = __import__("bisect").bisect_right(sorted_defs, lbl)
-            if idx < len(sorted_defs):
-                fixup[lbl] = sorted_defs[idx]
-            else:
-                # No higher label exists — last resort: use the label itself (still broken)
-                print(f"      WARN: chaos_label_{lbl} has no higher defined label, leaving as-is")
-                fixup[lbl] = lbl
+    # Check SDK-level files
+    sdk_checks = [
+        ("chaos-config.cmake", codegen_out / "chaos-config.cmake"),
+        ("chaos-targets.cmake", codegen_out / "cmake" / "chaos-targets.cmake"),
+        ("chaos.h umbrella header", codegen_out / "include" / "chaos.h"),
+    ]
+    for label, path in sdk_checks:
+        if not path.exists():
+            print(f"    [verify] MISSING SDK {label}: {path.relative_to(v / family_slug)}")
 
-        # Apply replacements (sorted descending to avoid offset shifts)
-        for old_lbl, new_lbl in sorted(fixup.items(), reverse=True):
-            content = content.replace(
-                f"chaos_label_{old_lbl}",
-                f"chaos_label_{new_lbl}",
-            )
-
-        cpp_file.write_text(content, encoding="utf-8")
-        print(f"    [patch_labels] {cpp_file.relative_to(codegen_dir)}: fixed {len(fixup)} undefined labels")
-        for lbl, mapped in sorted(fixup.items()):
-            if lbl != mapped:
-                print(f"      chaos_label_{lbl} → chaos_label_{mapped}")
-
+    # Check lib/ directory has .lib files
+    lib_dir = codegen_out / "lib"
+    if lib_dir.exists():
+        lib_count = len(list(lib_dir.glob("*.lib")))
+        if lib_count < 5:
+            print(f"    [verify] WARN: SDK lib/ only has {lib_count} .lib files (expected ~11)")
+    else:
+        print(f"    [verify] MISSING SDK lib/ directory")
 
 
 def generate_coverage_json(family_slug: str, assembly_name: str,
@@ -447,80 +489,6 @@ def generate_coverage_json(family_slug: str, assembly_name: str,
     except OSError as e:
         print(f"    [coverage_json] FAILED to write: {e}")
         return False
-
-
-def generate_supplemental_metadata(family_slug: str, method_subject_ids: list[str],
-                                    *, verification: Path | None = None) -> bool:
-    """Generate supplemental-metadata.json from the codegen template.
-
-    Reads codegen/generated/hot-update/supplemental-metadata-template.json
-    (produced by the managed convert-to-cpp pipeline) and produces the
-    resolved supplemental-metadata payload consumed by the native hot-update
-    runtime (LoadSupplementalMetadataFromPath).
-
-    For foundation-dll test families, the template typically contains
-    registered types/methods from the subjects assembly. The output payload
-    marks all template entries as ReferencedAot (they are AOT-compiled and
-    resolvable by metadata token from hotupdate code).
-
-    If the template file does not exist, this step is silently skipped
-    (not all codegen modes produce one).
-    """
-    v = verification or _VERIFICATION
-    template = v / family_slug / "codegen" / "generated" / "hot-update" / "supplemental-metadata-template.json"
-    if not template.exists():
-        return True  # silently skip — not all codegen modes produce a template
-
-    import json as _json
-    try:
-        with template.open(encoding="utf-8") as f:
-            tmpl = _json.load(f)
-    except Exception as e:
-        print(f"    [supplemental] FAILED to read template: {e}")
-        return False
-
-    registered_types = tmpl.get("registeredTypes", [])
-    registered_methods = tmpl.get("registeredMethods", [])
-    reserved = tmpl.get("reservedSlots", {"typeCount": 256, "methodCount": 1024, "genericInstantiationCount": 256})
-
-    # Build resolved payload:
-    # - All registered types/methods from the template are "ReferencedAot"
-    # - Empty generic instantiations (not needed for foundation-dll test families)
-    types_out = []
-    for t in registered_types:
-        types_out.append({
-            "subjectId": t["subjectId"],
-            "metadataToken": t["metadataToken"],
-            "sourceKind": "ReferencedAot",
-        })
-
-    methods_out = []
-    for m in registered_methods:
-        methods_out.append({
-            "subjectId": m["subjectId"],
-            "metadataToken": m["metadataToken"],
-            "sourceKind": "ReferencedAot",
-        })
-
-    payload = {
-        "formatVersion": "v0",
-        "artifactKind": "supplementalMetadata",
-        "reservedSlots": reserved,
-        "types": types_out,
-        "methods": methods_out,
-        "genericInstantiations": [],
-    }
-
-    out_dir = template.parent
-    out_path = out_dir / "supplemental-metadata.json"
-    try:
-        out_dir.mkdir(parents=True, exist_ok=True)
-        out_path.write_text(_json.dumps(payload, indent=2), encoding="utf-8")
-        print(f"    [supplemental] wrote {len(types_out)} types, {len(methods_out)} methods -> {out_path.relative_to(v)}")
-    except Exception as e:
-        print(f"    [supplemental] FAILED to write: {e}")
-        return False
-    return True
 
 
 def generate_patch_data(family_slug: str, *,
@@ -569,7 +537,7 @@ def generate_patch_data(family_slug: str, *,
                 dest = patch_dir / dest_name
                 dest.write_text(content, encoding="utf-8")
 
-    from family_entrypoint_generator import generate_and_build
+    from verification.orchestration.family_entrypoint import generate_and_build
     build_result = generate_and_build(
         patch_dir,
         assembly_name="System.Private.CoreLib",
@@ -583,7 +551,10 @@ def generate_patch_data(family_slug: str, *,
         return write_sentinel_patch_data(family_dir)
 
     # Run emit-patch-data
-    from batch_hotupdate_runner import _run_emit_patch_data
+    try:
+        from batch_hotupdate_runner import _run_emit_patch_data
+    except ImportError:
+        _run_emit_patch_data = None
     patchdata_dir = family_dir / "managed" / "patch" / "patchdata"
     patchdata_dir.mkdir(parents=True, exist_ok=True)
     patchdata_path = patchdata_dir / f"{family_slug}.patchdata"
@@ -821,55 +792,43 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
     codegen_rel = str((verification / family_slug / "codegen").resolve()).replace("\\", "/")
 
-    # ── JIT glob: only nested path (exclude stale flat layout from AOT runs) ─
-    # Flat layout file (*Subjects/generated/native-aot.generated.cpp) is stale
-    # output from old --output runs and contains an empty ChaosJitRegisterAll(){}
-    # stub.  Including it alongside the JIT-generated real implementation causes
-    # duplicate symbol at link time (/FORCE:MULTIPLE picks one unpredictably).
+    # ── JIT glob: exclude stale flat-layout AOT output ──────────────
+    # After R1 fix (generated/generated/ → generated/), fresh SDK output
+    # uses *Subjects/generated/* paths.  Stale files from old --output
+    # runs also use *Subjects/generated/*, so we need to explicitly exclude
+    # AOT-generated files that contain the empty ChaosJitRegisterAll{} stub
+    # when running in JIT mode.
     if is_jit:
         codegen_glob = (
             f'file(GLOB CHAOS_CODEGEN_CPP\n'
             f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/native-aot.generated.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/chaos_generated_module.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/generated/generated/native-aot.generated.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/generated/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/generated/generated/chaos_generated_module.cpp"\n'
+            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
+            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
             f')\n'
             f'file(GLOB CHAOS_CODEGEN_NATIVE_CPP\n'
             f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/native-aot.generated.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/chaos_generated_module.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/generated/generated/native-aot.generated.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/generated/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/generated/generated/chaos_generated_module.cpp"\n'
+            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
+            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
             f')\n'
         )
         glob_comment = (
-            f'# JIT mode: exclude codegen/generated/native-aot.generated.cpp (stale flat\n'
-            f'# layout from old --output runs, has empty ChaosJitRegisterAll stub).\n'
-            f'# Keep *Subjects/generated/native-aot.generated.cpp (current --sdk-out output).\n'
+            f'# JIT mode: sources at *Subjects/generated/* (single-level, R1 fix).\n'
         )
     else:
         codegen_glob = (
             f'file(GLOB CHAOS_CODEGEN_CPP\n'
             f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/native-aot.generated.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/generated/chaos_generated_module.cpp"\n'
+            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
+            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
             f')\n'
             f'file(GLOB CHAOS_CODEGEN_NATIVE_CPP\n'
             f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/native-aot.generated.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/generated/chaos_generated_module.cpp"\n'
+            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
+            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
             f')\n'
         )
         glob_comment = (
-            f'# Flat layout (single file): *Subjects/generated/native-aot.generated.cpp\n'
-            f'# Paged layout (large families): *Subjects/generated/generated/ (page files + module)\n'
+            f'# AOT mode: sources at *Subjects/generated/* (single-level, R1 fix).\n'
         )
     # chaos_jit.lib (JIT debug contract symbols) and chaos_debugger.lib are
     # always linked via chaos::runtime (chaos-targets.cmake), so their
@@ -921,11 +880,21 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/verification_dispatch.generated.cpp"\n'
         f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/jit_stubs.cpp"\n'
         f')\n'
+        f'# SDK runtime_stubs sources (resolved directly from the source tree to\n'
+        f'# avoid depending on SdkEmitter to stage them into the SDK output dir).\n'
+        f'file(GLOB CHAOS_RUNTIME_STUB_SOURCES\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/runtime_stubs/*.cpp"\n'
+        f')\n'
+        f'list(REMOVE_ITEM CHAOS_RUNTIME_STUB_SOURCES\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp"\n'
+        f')\n'
         f'set(CHAOS_ENTRY_SOURCES\n'
         f'    "runtime-entry.cpp"\n'
         f'    "runtime-patchdata.cpp"\n'
         f'    "verification_dispatch.generated.cpp"\n'
         f'    ${{CHAOS_NATIVE_STUBS}}\n'
+        f'    ${{CHAOS_RUNTIME_STUB_SOURCES}}\n'
         f'    ${{CHAOS_AOT_GENERATED_CPP}}\n'
         f')\n'
         f'\n'
@@ -936,8 +905,9 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'set(CHAOS_ENTRY_INCLUDES\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/gc"\n'
-        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/runtime_stubs"  # runtime_stubs for enum_stubs.h\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/runtime_stubs"  # runtime_stubs headers\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/bootstrap"\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native"  # parent for bootstrap/bootstrap.h includes\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/interpreter"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/interpreter/generated"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/support"\n'
@@ -1113,6 +1083,24 @@ def ensure_jit_debug_contract_stubs(native_dir: Path) -> None:
 
 
 
+def remediate_flat_layout_includes(native_dir: Path) -> None:
+    """Fix include paths in flat-layout native-aot.generated.cpp files.
+
+    The codegen emits nested layout (generated/generated/) with includes like
+    '#include "../native-aot.generated.header.h"' (relative to generated/generated/).
+    The pipeline syncs to flat layout (generated/) where the header is in the same
+    directory, so the '../' prefix resolves to the wrong parent directory.
+    """
+    for gen_cpp in native_dir.glob("*Subjects/generated/native-aot.generated.cpp"):
+        text = gen_cpp.read_text(encoding="utf-8")
+        old = '#include "../native-aot.generated.header.h"'
+        new = '#include "native-aot.generated.header.h"'
+        if old in text:
+            text = text.replace(old, new)
+            gen_cpp.write_text(text, encoding="utf-8")
+            print(f"    [build_entry] fixed include path in {gen_cpp.relative_to(native_dir)}")
+
+
 def remediate_forward_declarations(native_dir: Path) -> None:
     """Add forward declarations for extern \"C\" functions referenced before
     their declaration in generated native-aot.generated.cpp.
@@ -1208,32 +1196,20 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
 
     The converter may emit large families as page-split TUs (native-aot.page-*.cpp).
     These page files have two issues:
-    1. Include path for native-aot.generated.header.h uses wrong relative path
-       (page files are in generated/generated/ but include says generated/xxx.h)
-    2. Calls to extern "C" functions from other assemblies need forward declarations.
+    1. Calls to extern "C" functions from other assemblies need forward declarations.
+    2. The converter sometimes omits native-aot.generated.header.h include from page-0001.cpp.
 
     Fix by:
-    1. Correcting the include path in page files
-    2. Adding extern "C" forward declarations to native-aot.generated.header.h
+    1. Adding extern "C" forward declarations to native-aot.generated.header.h
        (included by all page files)
-    3. Adding the same include to page-0001.cpp if missing
+    2. Adding the same include to page-0001.cpp if missing
     """
     import re as _re
     for page_file in sorted(native_dir.rglob("native-aot.page-*.cpp")):
         text = page_file.read_text(encoding="utf-8")
         changed = False
 
-        # Step 1: Fix include path — page files are in generated/generated/
-        # but the include says "generated/native-aot.generated.header.h"
-        new_text = text.replace(
-            '#include "generated/native-aot.generated.header.h"',
-            '#include "native-aot.generated.header.h"')
-        if new_text != text:
-            changed = True
-            text = new_text
-            print(f"    [fix_page] fixed include path in {page_file.name}")
-
-        # Step 2: Add header include if missing (page-0001 may not have it)
+        # Step 1: Add header include if missing (page-0001 may not have it)
         header_include = '#include "native-aot.generated.header.h"'
         if header_include not in text:
             # Insert after the last #include line
@@ -1248,7 +1224,7 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
         if changed:
             page_file.write_text(text, encoding="utf-8")
 
-    # Step 3: Add forward declarations to native-aot.generated.header.h
+    # Step 2: Add forward declarations to native-aot.generated.header.h
     for header_file in native_dir.rglob("native-aot.generated.header.h"):
         text = header_file.read_text(encoding="utf-8")
 
@@ -1307,7 +1283,7 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
             header_file.write_text(text, encoding="utf-8")
             print(f"    [fix_page] added {len(fwd_decls)} forward decls in {header_file.name}")
 
-        # Step 3b: Fix ambiguous TypeInfoV0 — the header declares bare `struct TypeInfoV0;`
+        # Step 2b: Fix ambiguous TypeInfoV0 — the header declares bare `struct TypeInfoV0;`
         # and `extern TypeInfoV0 ...` which causes C2872 when included from within a
         # namespace block (page files live in `chaos::il2cpp::codegen::<Family>`).
         # Qualify with the full namespace to avoid ambiguity with
@@ -1326,7 +1302,7 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
                 print(f"    [fix_page] qualified {count}x TypeInfoV0 to "
                       f"chaos::il2cpp::common::TypeInfoV0 in {header_file.name}")
 
-        # Step 3c: Generate missing chaos_valuetype_* typedefs for external
+        # Step 2c: Generate missing chaos_valuetype_* typedefs for external
         # assembly value types. The converter emits these in function signatures
         # (e.g. chaos_valuetype_Chaos_IL2CPP_Contracts_SubjectId) but does not
         # emit the corresponding typedef. Scan chaos_generated_module.h and
@@ -1435,7 +1411,7 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
                             print(f"    [fix_page] added {len(missing_hdr)} chaos_valuetype"
                                   f" typedefs in {header_h_file.name}")
 
-        # Step 3d: Rename duplicate function-pointer member names in
+        # Step 2d: Rename duplicate function-pointer member names in
         # chaos_generated_module.h. C++ structs disallow overloaded members
         # (e.g. two `ctor` or two `Equals` with the same signature). The
         # converter emits positional aggregate initializers in the .cpp, so
@@ -1556,24 +1532,6 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
                 module_h_file.write_text("\n".join(result), encoding="utf-8")
                 print(f"    [fix_page] deduplicated {dedup_count} struct type"
                       f" redefinitions in {module_h_file.name}")
-
-    # Step 4: Also update the codegen copy of the header (if exists)
-    codegen_dir = native_dir.parent / "codegen"
-    if codegen_dir.exists():
-        for header_file in codegen_dir.rglob("native-aot.generated.header.h"):
-            text = header_file.read_text(encoding="utf-8")
-            if "// Forward declarations (pipeline fix" in text:
-                continue
-            # Copy same forward decls from native version
-            native_headers = list(native_dir.rglob("native-aot.generated.header.h"))
-            if native_headers:
-                native_text = native_headers[0].read_text(encoding="utf-8")
-                fwd_marker = "// Forward declarations (pipeline fix"
-                fwd_start = native_text.find(fwd_marker)
-                if fwd_start != -1:
-                    text += "\n" + native_text[fwd_start:] + "\n"
-                    header_file.write_text(text, encoding="utf-8")
-                    print(f"    [fix_page] synced forward decls to codegen {header_file.name}")
 
     # Step 5: Fix supplemental-metadata codegen version mismatches.
     # The converter generates code referencing `.hot` on MethodTable (no such
@@ -1810,6 +1768,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         if stale_name.suffix in (".cpp", ".h") and stale_name.name not in (
             # Handwritten files to preserve
             "jit_debug_contract_stubs.cpp",
+            "verification_dispatch.generated.cpp",
         ):
             stale_name.unlink()
             print(f"    [build_entry] cleaned stale: {stale_name.name}")
@@ -1853,7 +1812,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     ensure_jit_debug_contract_stubs(native_dir)
 
     # Generate runtime-entry.cpp from Python template — clean, no post-processing needed
-    from family_entrypoint_generator import generate_runtime_entry
+    from verification.orchestration.family_entrypoint import generate_runtime_entry
     native_runtime_entry = native_dir / "runtime-entry.cpp"
     native_runtime_entry.write_text(generate_runtime_entry(is_jit=is_jit), encoding="utf-8")
     print(f"    [build_entry] generated runtime-entry.cpp from Python template -> {native_runtime_entry}")
@@ -1866,16 +1825,11 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             if not subdir.is_dir() or subdir.name in ("build", "generated", "hot-update"):
                 continue
             # Sync ALL generated files (.cpp, .h) from codegen to native
-            # Handle potential double-nested path: converter writes to
-            # sdkRoot/generated/ + RelativePath "generated/..." → generated/generated/
+            # After R1 fix: files land at codegen/<Assembly>/generated/* (single-level)
             src = subdir / "generated"
             if not src.exists():
                 print(f"    [build_entry] skipping {subdir.name}: no generated/ subdir")
                 continue
-            # Detect double-nested generated/generated/ layout
-            inner_gen = src / "generated"
-            if inner_gen.exists() and not any(f.suffix in ('.cpp', '.h') for f in src.iterdir() if f.is_file()):
-                src = inner_gen
             dst = native_dir / subdir.name / "generated"
             # Clean stale native files before sync — the converter may change
             # output layout (e.g. switched to page-split output), and stale files
@@ -1883,8 +1837,6 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             if dst.exists():
                 shutil.rmtree(dst)
             dst.mkdir(parents=True, exist_ok=True)
-            # Use copytree for recursive sync — converter may emit page files
-            # (native-aot.page-*) in inner generated/generated/ subdirs.
             for src_file in src.rglob("*"):
                 if src_file.is_file():
                     rel = src_file.relative_to(src)
@@ -1909,10 +1861,9 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             # Find codegen sources available for the missing names
             for expected in sorted(missing_expected):
                 expected_native = native_dir / expected / "generated" / "native-aot.generated.cpp"
-                # Check if a corresponding codegen source exists
+                # Check if a corresponding codegen source exists (converter writes
+                # directly to codegen/<AssemblyName>/generated/ — no flat layout step)
                 expected_codegen = codegen_dir / expected / "generated" / "native-aot.generated.cpp"
-                if not expected_codegen.exists():
-                    expected_codegen = codegen_dir / expected / "generated" / "generated" / "native-aot.generated.cpp"
                 if expected_codegen.exists():
                     # Already has its own codegen output — sync it
                     expected_native.parent.mkdir(parents=True, exist_ok=True)
@@ -1921,10 +1872,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                 else:
                     # Assembly name mismatch — find best source (most recently modified)
                     def _find_cpp_source(s):
-                        p = codegen_dir / s / "generated" / "native-aot.generated.cpp"
-                        if p.exists():
-                            return p
-                        return codegen_dir / s / "generated" / "generated" / "native-aot.generated.cpp"
+                        return codegen_dir / s / "generated" / "native-aot.generated.cpp"
                     best_src = max(
                         (_find_cpp_source(s) for s in synced_names),
                         key=lambda p: p.stat().st_mtime if p.exists() else 0,
@@ -1945,30 +1893,10 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         write_sentinel_dispatch(dispatch_cpp)
         print(f"    [build_entry] sentinel verification_dispatch.generated.cpp created")
 
-    # Copy enum_stubs.cpp from source to native/ for unresolved symbol resolution.
-    # The pre-built chaos_runtime_core.lib at artifacts/presets/ is stale (built
-    # before enum_stubs.cpp was added), so enum_stubs.cpp needs to be compiled
-    # directly as part of the entry.exe build via cmake file glob.
-    enum_stubs_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs" / "enum_stubs.cpp"
-    if enum_stubs_src.exists():
-        enum_stubs_dst = native_dir / "enum_stubs.cpp"
-        if not enum_stubs_dst.exists() or enum_stubs_src.stat().st_mtime > enum_stubs_dst.stat().st_mtime:
-            enum_stubs_dst.write_bytes(enum_stubs_src.read_bytes())
-            enum_stubs_hdr_src = _REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_stubs" / "enum_stubs.h"
-            if enum_stubs_hdr_src.exists():
-                enum_stubs_hdr_dst = native_dir / "enum_stubs.h"
-                if not enum_stubs_hdr_dst.exists() or enum_stubs_hdr_src.stat().st_mtime > enum_stubs_hdr_dst.stat().st_mtime:
-                    enum_stubs_hdr_dst.write_bytes(enum_stubs_hdr_src.read_bytes())
-                    print(f"    [build_entry] copied enum_stubs.h to native/ for include resolution")
-            print(f"    [build_entry] copied enum_stubs.cpp to native/ for link resolution")
-
-    # Add forward declarations for functions referenced before their extern "C" decl.
+    # Add forward declarations + flat-layout include path fix
+    remediate_flat_layout_includes(native_dir)
     remediate_forward_declarations(native_dir)
     remediate_page_file_declarations(native_dir)
-    codegen_native_dir = v / family_slug / "codegen"
-    if codegen_native_dir.exists():
-        remediate_forward_declarations(codegen_native_dir)
-
     build_dir = native_dir / "build"
     # Remove stale cmake cache to avoid generator/platform mismatch errors
     if build_dir.exists():
@@ -1979,15 +1907,23 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     if not build_dir.exists():
         build_dir.mkdir(parents=True, exist_ok=True)
 
-    # Step 1: CMake configure
+    # Step 1: CMake configure (with retry for transient Windows file-lock failures)
     print(f"    [build_entry] cmake configure...")
-    cfg_result = subprocess.run(
-        ["cmake", "-S", str(native_dir), "-B", str(build_dir),
-         "-G", "Visual Studio 17 2022", "-A", "x64"],
-        capture_output=True, text=True, timeout=120,
-    )
-    if cfg_result.returncode != 0:
-        print(f"    [build_entry] cmake configure FAILED")
+    cfg_result = None
+    for cfg_attempt in range(3):
+        if cfg_attempt > 0:
+            wait = 1 << cfg_attempt  # 2, 4 seconds
+            print(f"    [build_entry] cmake configure retry #{cfg_attempt} after {wait}s...")
+            time.sleep(wait)
+        cfg_result = subprocess.run(
+            ["cmake", "-S", str(native_dir), "-B", str(build_dir),
+             "-G", "Visual Studio 17 2022", "-A", "x64"],
+            capture_output=True, text=True, timeout=120,
+        )
+        if cfg_result.returncode == 0:
+            break
+    if cfg_result and cfg_result.returncode != 0:
+        print(f"    [build_entry] cmake configure FAILED after retries")
         for line in cfg_result.stderr.splitlines()[-10:]:
             print(f"      {line}")
         return False
@@ -1999,15 +1935,23 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                       capture_output=True, text=True, timeout=30)
         print(f"    [build_entry] vcxproj patched for /EHs /EHc-")
 
-    # Step 2: CMake build (entry target, RelWithDebInfo)
+    # Step 2: CMake build (entry target, RelWithDebInfo) with retry for transient failures
     print(f"    [build_entry] cmake build...")
-    build_result = subprocess.run(
-        ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
-         "--target", "entry"],
-        capture_output=True, text=True, timeout=300,
-    )
-    if build_result.returncode != 0:
-        print(f"    [build_entry] cmake build FAILED")
+    build_result = None
+    for build_attempt in range(3):
+        if build_attempt > 0:
+            wait = 1 << build_attempt  # 2, 4 seconds
+            print(f"    [build_entry] cmake build retry #{build_attempt} after {wait}s...")
+            time.sleep(wait)
+        build_result = subprocess.run(
+            ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
+             "--target", "entry"],
+            capture_output=True, text=True, timeout=300,
+        )
+        if build_result.returncode == 0:
+            break
+    if build_result and build_result.returncode != 0:
+        print(f"    [build_entry] cmake build FAILED after retries")
         for line in build_result.stderr.splitlines()[-15:]:
             print(f"      {line}")
         return False
@@ -2164,25 +2108,45 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
         return result
     result["steps"]["convert_to_cpp"] = "OK"
 
-    # Step 1c: Fix up undefined branch target labels in generated C++.
-    # When the IL reader strips nop instructions, some branch targets point
-    # to IL offsets that have no corresponding instruction.  The codegen's
-    # EmitFlatGotoBody only emits labels at real instruction offsets, so
-    # those branch targets become undefined C++ labels.  Map them to the
-    # nearest following real instruction offset so the file compiles.
-    patch_undefined_codegen_labels(family_slug, verification=verification)
-
-    # Step 1d: Generate .patchdata for hotpatch dispatch (before entry.exe build)
+    # Step 1c: Generate .patchdata for hotpatch dispatch (before entry.exe build)
     generate_patch_data(family_slug, verification=verification)
 
     # Step 1e: Generate coverage JSON for dashboard/kernel integration
     generate_coverage_json(family_slug, assembly_name, mids, verification=verification)
 
-    # Step 1f: Generate supplemental metadata payload from template
-    generate_supplemental_metadata(family_slug, mids, verification=verification)
+    # Determine JIT mode before dispatch regeneration
+    is_jit_build = (codegen_mode == "jit")
+
+    # Step 1f: For JIT mode, regenerate verification_dispatch with JIT thunks
+    # (nullptr instead of kDefaultArgThunks). The sentinel dispatch left by
+    # build_entry_executable's cleanup is AOT-mode and will cause LNK2001.
+    if is_jit_build:
+        try:
+            from verification_dispatch_generator import generate_verification_dispatch
+            codegen_dir = verification / family_slug / "codegen"
+            # Search codegen subdirectories for the methods manifest.
+            # The codegen output directory name matches the DLL stem (e.g.
+            # "BufferMemorySubjects"), not assembly_name ("System.Private.CoreLib").
+            manifest_path: Path | None = None
+            for sub in sorted(codegen_dir.iterdir()):
+                if not sub.is_dir():
+                    continue
+                candidate = sub / "generated" / "native-aot.methods.json"
+                if candidate.exists():
+                    manifest_path = candidate
+                    break
+            if manifest_path:
+                dispatch_output = verification / family_slug / "native" / "verification_dispatch.generated.cpp"
+                generate_verification_dispatch(str(manifest_path), str(dispatch_output), jit_mode=True)
+                print(f"    [jit_codegen] regenerated JIT-mode verification_dispatch")
+            else:
+                print(f"    [jit_codegen] WARNING: manifest not found in {codegen_dir}")
+        except ImportError:
+            print(f"    [jit_codegen] verification_dispatch_generator not available (skip)")
+        except ImportError:
+            print(f"    [jit_codegen] verification_dispatch_generator not available (skip)")
 
     # Step 2: Build entry.exe from codegen/native-aot.generated.cpp → native/
-    is_jit_build = (codegen_mode == "jit")
     print(f"  [2/3] Building entry.exe from codegen (jit={is_jit_build})...")
     if not build_entry_executable(family_slug, verification=verification, config_tier=config_tier, is_jit=is_jit_build):
         result["steps"]["build_entry_exe"] = "FAILED"

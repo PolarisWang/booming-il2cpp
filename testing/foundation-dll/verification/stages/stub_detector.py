@@ -23,7 +23,7 @@ from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Any
 
-_VERIFICATION_BASE = Path(__file__).resolve().parents[5] / "testing" / "foundation-dll"
+_VERIFICATION_BASE = Path(__file__).resolve().parents[2]
 
 # ── Stub detection patterns ────────────────────────────────────────────
 

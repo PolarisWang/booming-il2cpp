@@ -7,7 +7,7 @@ import time
 from pathlib import Path
 from typing import Any
 
-from analysis.perf_store import _common_fields, _get_git_commit, _detect_device
+from verification.analysis.perf_store import _common_fields, _get_git_commit, _detect_device
 
 DEFAULT_THRESHOLDS = {
     "cpp_size_bytes": {"warning": 1.15, "critical": 1.30},

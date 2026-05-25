@@ -3,8 +3,8 @@
 import json
 from pathlib import Path
 
-from orchestration.context import FamilyContext, StageResult
-from stages.preflight import run_preflight
+from verification.orchestration.context import FamilyContext, StageResult
+from verification.stages.preflight import run_preflight
 
 
 class TestPreflight:

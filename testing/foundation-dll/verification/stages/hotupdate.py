@@ -13,9 +13,9 @@ import time
 from pathlib import Path
 from typing import Any
 
-from orchestration.context import FamilyContext, StageResult
+from verification.orchestration.context import FamilyContext, StageResult
 
-_REPO_ROOT = Path(__file__).resolve().parents[3]
+_REPO_ROOT = Path(__file__).resolve().parents[4]
 _DRIVER_DLL = (
     _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"
     / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
