@@ -17,7 +17,9 @@ internal static partial class NativeCodegenMetricsBuilder
         int structuredExceptionBodyCount = 0,
         int totalMethodCount = 0,
         int aotReachableMethodCount = 0,
-        int aotUnreachableMethodCount = 0)
+        int aotUnreachableMethodCount = 0,
+        int hotpatchEntryCount = 0,
+        int hotpatchEligibleMethodCount = 0)
     {
         ArgumentException.ThrowIfNullOrWhiteSpace(codegenKind);
         ArgumentException.ThrowIfNullOrWhiteSpace(planKind);
@@ -62,6 +64,11 @@ internal static partial class NativeCodegenMetricsBuilder
                 : 1.0,
             AotReachableMethodCount = aotReachableMethodCount,
             AotUnreachableMethodCount = aotUnreachableMethodCount,
+            HotpatchEntryCount = hotpatchEntryCount,
+            HotpatchEligibleMethodCount = hotpatchEligibleMethodCount,
+            HotpatchDispatchCoverage = hotpatchEligibleMethodCount > 0
+                ? (double)hotpatchEntryCount / hotpatchEligibleMethodCount
+                : 1.0,
         };
     }
 

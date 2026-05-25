@@ -46,6 +46,25 @@ extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_13(void);
 extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_5(void);
 extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_10(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_11(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_12(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_14(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_15(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_16(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_2(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_3(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_4(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_6(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_CustomEntrySubject_8(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_0(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_1(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_13(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_5(void);
+extern "C" void ThreadingSyncSubjects_ThreadingSyncSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::ThreadingSyncSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

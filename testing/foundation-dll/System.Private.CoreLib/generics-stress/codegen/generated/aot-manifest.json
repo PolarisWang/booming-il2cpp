@@ -1,0 +1,60 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "GenericsStressSubjects",
+      "subjectKind": "method",
+      "subjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_0:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericsStressSubjects",
+      "subjectKind": "method",
+      "subjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_1:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericsStressSubjects",
+      "subjectKind": "method",
+      "subjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_2:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "GenericsStressSubjects",
+      "subjectKind": "field",
+      "subjectId": "GenericsStressSubjects/GenericsStressSubjects::_exitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Sort\u003CSystem.Byte\u003E:System.Void(System.Byte[],System.Int32,System.Int32,System.Collections.Generic.IComparer\u003CSystem.Byte\u003E)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Byte",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::BinarySearch\u003CSystem.Byte\u003E:System.Int32(System.Byte[],System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::IndexOf\u003CSystem.Byte\u003E:System.Int32(System.Byte[],System.Byte)",
+      "reason": "external-call"
+    }
+  ]
+}

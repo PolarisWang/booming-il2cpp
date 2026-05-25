@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct StringCharTextCoreSubjects_t {
+    struct StringCharTextCoreSubjects_StringCharTextCoreSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -96,7 +96,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } stringCharTextCoreSubjects;
+    } stringCharTextCoreSubjects_StringCharTextCoreSubjects;
     int32_t method_count;
 };
 
@@ -115,105 +115,105 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct StringCharTextCoreSubjects {
+struct StringCharTextCoreSubjects_StringCharTextCoreSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_0(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_10(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_11(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_12(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_12(
         );
     }
     static inline void Subject_13(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_13(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_13(
         );
     }
     static inline void Subject_14(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_14(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_14(
         );
     }
     static inline void Subject_15(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_15(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_15(
         );
     }
     static inline void Subject_16(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_16(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_16(
         );
     }
     static inline void Subject_17(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_17(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_17(
         );
     }
     static inline void Subject_18(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_18(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_18(
         );
     }
     static inline void Subject_19(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_19(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_19(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_1(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_2(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_3(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_4(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_5(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_6(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_7(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_8(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.stringCharTextCoreSubjects.Subject_9(
+        return kFunctions.stringCharTextCoreSubjects_StringCharTextCoreSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

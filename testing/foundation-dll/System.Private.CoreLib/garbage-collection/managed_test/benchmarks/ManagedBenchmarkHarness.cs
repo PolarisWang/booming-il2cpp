@@ -104,29 +104,9 @@ class ManagedBenchmarkHarness
                     IsException = false,
                 });
             }
-            { // [8] System.Private.CoreLib/System.GC::get_LatencyMode:System.GCLatencyMode() — unsupported type
+            { // [8] System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64() — unsupported type
                 results.Add(new MethodResult {
                     MethodIndex = 8,
-                    MethodSubjectId = "System.Private.CoreLib/System.GC::get_LatencyMode:System.GCLatencyMode()",
-                    ElapsedMilliseconds = 0.0,
-                    Iterations = 100000,
-                    IsBodyReal = false,
-                    IsException = false,
-                });
-            }
-            { // [9] System.Private.CoreLib/System.GC::set_LatencyMode(System.GCLatencyMode):System.Void() — unsupported type
-                results.Add(new MethodResult {
-                    MethodIndex = 9,
-                    MethodSubjectId = "System.Private.CoreLib/System.GC::set_LatencyMode(System.GCLatencyMode):System.Void()",
-                    ElapsedMilliseconds = 0.0,
-                    Iterations = 100000,
-                    IsBodyReal = false,
-                    IsException = false,
-                });
-            }
-            { // [10] System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64() — unsupported type
-                results.Add(new MethodResult {
-                    MethodIndex = 10,
                     MethodSubjectId = "System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()",
                     ElapsedMilliseconds = 0.0,
                     Iterations = 100000,
@@ -134,9 +114,9 @@ class ManagedBenchmarkHarness
                     IsException = false,
                 });
             }
-            { // [11] System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan() — unsupported type
+            { // [9] System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan() — unsupported type
                 results.Add(new MethodResult {
-                    MethodIndex = 11,
+                    MethodIndex = 9,
                     MethodSubjectId = "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()",
                     ElapsedMilliseconds = 0.0,
                     Iterations = 100000,

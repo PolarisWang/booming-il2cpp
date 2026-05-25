@@ -1,0 +1,279 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadata",
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  },
+  "types": [
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ISimple",
+      "metadataToken": 33554435,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/IWithDefault",
+      "metadataToken": 33554436,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ICalculator",
+      "metadataToken": 33554437,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/IBase",
+      "metadataToken": 33554438,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/IDerived",
+      "metadataToken": 33554439,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplSimple",
+      "metadataToken": 33554440,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault",
+      "metadataToken": 33554441,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd",
+      "metadataToken": 33554442,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/CalcMul",
+      "metadataToken": 33554443,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond",
+      "metadataToken": 33554444,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2",
+      "metadataToken": 33554445,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry",
+      "metadataToken": 33554446,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "methods": [
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_0:System.Void()",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_1:System.Void()",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_2:System.Void()",
+      "metadataToken": 100663299,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_3:System.Void()",
+      "metadataToken": 100663300,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_4:System.Void()",
+      "metadataToken": 100663301,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_5:System.Void()",
+      "metadataToken": 100663302,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_6:System.Void()",
+      "metadataToken": 100663303,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_7:System.Void()",
+      "metadataToken": 100663304,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchSubjects::Subject_8:System.Void()",
+      "metadataToken": 100663305,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ISimple::GetValue:System.Int32()",
+      "metadataToken": 100663306,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/IWithDefault::GetValue:System.Int32()",
+      "metadataToken": 100663307,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663308,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ICalculator::Multiply:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663309,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/IBase::BaseMethod:System.Int32()",
+      "metadataToken": 100663310,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/IDerived::DerivedMethod:System.Int32()",
+      "metadataToken": 100663311,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplSimple::GetValue:System.Int32()",
+      "metadataToken": 100663312,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplSimple::.ctor:System.Void()",
+      "metadataToken": 100663313,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::GetValue:System.Int32()",
+      "metadataToken": 100663314,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplWithDefault::.ctor:System.Void()",
+      "metadataToken": 100663315,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd::Add:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663316,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663317,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/CalcAdd::.ctor:System.Void()",
+      "metadataToken": 100663318,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/CalcMul::Add:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663319,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/CalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
+      "metadataToken": 100663320,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/CalcMul::.ctor:System.Void()",
+      "metadataToken": 100663321,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond::BaseMethod:System.Int32()",
+      "metadataToken": 100663322,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond::DerivedMethod:System.Int32()",
+      "metadataToken": 100663323,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond::.ctor:System.Void()",
+      "metadataToken": 100663324,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::BaseMethod:System.Int32()",
+      "metadataToken": 100663325,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::DerivedMethod:System.Int32()",
+      "metadataToken": 100663326,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/ImplDiamond2::.ctor:System.Void()",
+      "metadataToken": 100663327,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::Run:System.Int32(System.Int32)",
+      "metadataToken": 100663328,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplSimple:System.Int32()",
+      "metadataToken": 100663329,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestSingleImplDefault:System.Int32()",
+      "metadataToken": 100663330,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestMultiImplCalc:System.Int32()",
+      "metadataToken": 100663331,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestIsCheck:System.Int32()",
+      "metadataToken": 100663332,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestAsCheck:System.Int32()",
+      "metadataToken": 100663333,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondBase:System.Int32()",
+      "metadataToken": 100663334,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondDerived:System.Int32()",
+      "metadataToken": 100663335,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "InterfaceDispatchSubjects/InterfaceDispatchNativeEntry::TestDiamondMulti:System.Int32()",
+      "metadataToken": 100663336,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "genericInstantiations": []
+}

@@ -2,7 +2,6 @@
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
-#include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
@@ -15,8 +14,8 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
-#include "enum_metadata.generated.h"
 #include "enum_stubs.h"
+#include "enum_metadata.generated.h"
 #include "convert.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
@@ -849,7 +848,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry8;
 	/* ── Entry 9: ConvertCharSubjects_ConvertCharSubjects_Subject_9 ── */
 	struct {
@@ -921,7 +920,7 @@ static const struct {
 		const void*         code_address;
 		CHAOS_IL2CPP_UINT32 frame_size;
 		CHAOS_IL2CPP_UINT32 num_gc_slots;
-		CHAOS_IL2CPP_UINT32 slots[5];
+		CHAOS_IL2CPP_UINT32 slots[3];
 	} entry17;
 } kChaosGcSlotMapsSection = {
 	/* entry0 = ConvertCharSubjects_ConvertCharSubjects_Subject_0 */
@@ -990,11 +989,11 @@ static const struct {
 	},
 	/* entry8 = ConvertCharSubjects_ConvertCharSubjects_Subject_8 */
 	.entry8 = {
-		/* entry_total_size = 40 */ 40u,
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_8),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	},
 	/* entry9 = ConvertCharSubjects_ConvertCharSubjects_Subject_9 */
 	.entry9 = {
@@ -1062,18 +1061,18 @@ static const struct {
 	},
 	/* entry17 = ConvertCharSubjects_ConvertCharSubjects_Subject_17 */
 	.entry17 = {
-		/* entry_total_size = 40 */ 40u,
+		/* entry_total_size = 32 */ 32u,
 		/* code_address */ reinterpret_cast<const void*>(&ConvertCharSubjects_ConvertCharSubjects_Subject_17),
-		/* frame_size = 40 */ 40u,
-		/* num_gc_slots = 5 */ 5u,
-		/* slots */ { 0u, 8u, 16u, 24u, 32u }
+		/* frame_size = 24 */ 24u,
+		/* num_gc_slots = 3 */ 3u,
+		/* slots */ { 0u, 8u, 16u }
 	}
 };
 #if defined(_MSC_VER)
 #pragma pack(pop)
 #endif
 
-static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 600u;
+static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 584u;
 
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
@@ -1190,6 +1189,13 @@ static const ReflectionQueryImageDescriptor kReflImage = { "ConvertCharSubjects"
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
 // LookupModule(mid)->image at lines 311-321 of bootstrap.cpp.
+	// Register generated enum metadata (tables + dispatch + type descriptors).
+	// ChaosRegisterEnumGeneratedMetadata is defined in enum_metadata.generated.h.
+	static const CHAOS_IL2CPP_UINT32 s_enum_registered = []() noexcept {
+		ChaosRegisterEnumGeneratedMetadata();
+		return 1u;
+	}();
+
 // ── Generic registration proof-host helper ─────────────────
 // Populate generic registration arrays from this TU.
 static void ChaosDoPopulateGenericRegistration(
@@ -1231,15 +1237,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1265,13 +1262,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_0(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1289,15 +1281,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1323,13 +1306,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_1(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1347,15 +1325,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_2(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1381,13 +1350,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_2(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1405,15 +1369,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1445,13 +1400,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_3(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1469,17 +1419,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_4(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -1521,13 +1460,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_4(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1545,15 +1479,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_5(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1581,13 +1506,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_5(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1605,15 +1525,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_6(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1639,13 +1550,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_6(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1663,15 +1569,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_7(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1697,13 +1594,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_7(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1721,19 +1613,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_8(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -1761,13 +1640,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_8(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1785,15 +1659,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1821,13 +1686,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_9(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1846,16 +1706,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -1887,13 +1737,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_10(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1911,15 +1756,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1945,13 +1781,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_11(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1969,15 +1800,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -1993,7 +1815,7 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void)
 				const auto chaos_result = chaos_convert_tochar_single(chaos_arg_0);
 				_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_load_float32(_s0) == chaos_load_float32(_s1) ? 1 : 0);
+			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosLoadFloat32(_s0) == ChaosLoadFloat32(_s1) ? 1 : 0);
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s0) == static_cast<CHAOS_IL2CPP_INTPTR>(_s1) ? 1 : 0);
 			chaos_locals[0] = _s0;
@@ -2005,13 +1827,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_12(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -2029,15 +1846,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -2069,13 +1877,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_13(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -2094,16 +1897,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void)
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
@@ -2139,13 +1932,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_14(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -2163,15 +1951,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -2197,13 +1976,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_15(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -2221,15 +1995,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
@@ -2255,13 +2020,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_16(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -2279,19 +2039,6 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
 
 
 	CHAOS_EH_TRY
@@ -2319,13 +2066,8 @@ extern "C" void ConvertCharSubjects_ConvertCharSubjects_Subject_17(void)
 				chaos_static_ConvertCharSubjects_ConvertCharSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{

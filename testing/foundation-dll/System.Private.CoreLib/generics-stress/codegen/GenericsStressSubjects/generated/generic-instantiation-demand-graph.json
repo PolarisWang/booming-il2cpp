@@ -1,0 +1,84 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "GenericsStressSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::BinarySearch\u003CSystem.Byte\u003E:System.Int32(System.Byte[],System.Byte)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Array::BinarySearch:System.Int32(!!0[],!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "GenericsStressSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.Byte\u003E:System.Byte[]()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "GenericsStressSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::IndexOf\u003CSystem.Byte\u003E:System.Int32(System.Byte[],System.Byte)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Array::IndexOf:System.Int32(!!0[],!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "GenericsStressSubjects",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Sort\u003CSystem.Byte\u003E:System.Void(System.Byte[],System.Int32,System.Int32,System.Collections.Generic.IComparer\u003CSystem.Byte\u003E)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Int32,System.Int32,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Array::Sort:System.Void(!!0[],System.Int32,System.Int32,System.Collections.Generic.IComparer\u003C!!0\u003E)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Byte"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    }
+  ]
+}

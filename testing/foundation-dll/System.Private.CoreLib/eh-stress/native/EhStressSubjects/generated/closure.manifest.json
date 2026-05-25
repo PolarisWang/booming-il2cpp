@@ -3,12 +3,12 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "EhStressSubjects",
   "entrySubjectId": "",
-  "inputAssemblyPath": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/eh-stress/managed/subjects/build-output/EhStressSubjects.dll",
+  "inputAssemblyPath": "testing/foundation-dll/System.Private.CoreLib/eh-stress/managed/subjects/build-output/EhStressSubjects.dll",
   "additionalAssemblyPaths": [],
   "resolvedAssemblies": [
     {
       "assemblyName": "EhStressSubjects",
-      "path": "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/eh-stress/managed/subjects/build-output/EhStressSubjects.dll"
+      "path": "testing/foundation-dll/System.Private.CoreLib/eh-stress/managed/subjects/build-output/EhStressSubjects.dll"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -16,7 +16,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "76c9f363-ac9f-4531-a3f4-24a438d1cf31",
+  "inputModuleVersionId": "694cc03c-4dda-4835-87d1-70b008c61d4d",
   "artifacts": [
     {
       "kind": "typedIlIr",

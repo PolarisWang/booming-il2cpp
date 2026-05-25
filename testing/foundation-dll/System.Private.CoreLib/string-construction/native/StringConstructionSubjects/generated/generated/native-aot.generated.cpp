@@ -2,7 +2,6 @@
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
-#include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
@@ -15,8 +14,8 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
-#include "enum_metadata.generated.h"
 #include "enum_stubs.h"
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -512,7 +511,12 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[8] = {
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[8] = {
+// s_hotpatch_entries — external linkage for verification_dispatch
+// NOTE: `static` is deliberately omitted so that the verification dispatch
+// TU (verification_dispatch.generated.cpp) can access this array via
+// GetHotpatchEntries(). Without external linkage, the linker cannot resolve
+// the symbol across translation units.
+extern "C" HotpatchEntryV0 s_hotpatch_entries[8] = {
 	{ reinterpret_cast<void*>(&StringConstructionSubjects_StringConstructionSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // StringConstructionSubjects::Subject_0
 	{ reinterpret_cast<void*>(&StringConstructionSubjects_StringConstructionSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // StringConstructionSubjects::Subject_1
 	{ reinterpret_cast<void*>(&StringConstructionSubjects_StringConstructionSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // StringConstructionSubjects::Subject_2
@@ -522,6 +526,10 @@ static HotpatchEntryV0 s_hotpatch_entries[8] = {
 	{ reinterpret_cast<void*>(&StringConstructionSubjects_StringConstructionSubjects_Subject_6), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // StringConstructionSubjects::Subject_6
 	{ reinterpret_cast<void*>(&StringConstructionSubjects_StringConstructionSubjects_Subject_7), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // StringConstructionSubjects::Subject_7
 };
+
+// Accessor functions for verification_dispatch.generated.cpp
+extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpatch_entries; }
+extern "C" int32_t GetHotpatchEntryCount() noexcept { return 8; }
 
 // Module hotpatch bundle
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
@@ -572,12 +580,12 @@ extern "C" void* kChaosExternalRuntimeFnTable[11] = {
 
 extern "C" int32_t kChaosExternalRuntimeCount = 11;
 // (no method AOT entries for this module)
-// ── Dispatch table (kAotMethods[]) ──────────────────────────────
+// ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-// NOTE: JIT mode skips kAotMethods/kBenchmarkWrappers — dispatch goes
-// through direct_ptr (precode trampoline → JIT compilation).
+// NOTE: Pure data only — dispatch routing is in <chaos/hotpatch_dispatch.h>.
+// JIT mode uses direct_ptr (precode trampoline → JIT compilation).
 
-static void (*kAotMethods[8])() = {
+static void (*kMethodTable[8])() = {
 	reinterpret_cast<void(*)()>(&StringConstructionSubjects_StringConstructionSubjects_Subject_0),
 	reinterpret_cast<void(*)()>(&StringConstructionSubjects_StringConstructionSubjects_Subject_1),
 	reinterpret_cast<void(*)()>(&StringConstructionSubjects_StringConstructionSubjects_Subject_2),
@@ -588,29 +596,29 @@ static void (*kAotMethods[8])() = {
 	reinterpret_cast<void(*)()>(&StringConstructionSubjects_StringConstructionSubjects_Subject_7),
 };
 
-// ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
-// Each wrapper supplies default argument values based on parameter types.
+// ── Default-arg thunks (kDefaultArgThunks[]) ────────────────────────────
+// Each thunk supplies default argument values based on parameter types.
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
-static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-extern "C" void (*kBenchmarkWrappers[8])() = {
-	[]() {kAotMethods[0]();},
-	[]() {kAotMethods[1]();},
-	[]() {kAotMethods[2]();},
-	[]() {kAotMethods[3]();},
-	[]() {kAotMethods[4]();},
-	[]() {kAotMethods[5]();},
-	[]() {kAotMethods[6]();},
-	[]() {kAotMethods[7]();},
+static CHAOS_IL2CPP_UINT8 __g_null_instance = 0;
+extern "C" void (*kDefaultArgThunks[8])() = {
+	[]() {kMethodTable[0]();},
+	[]() {kMethodTable[1]();},
+	[]() {kMethodTable[2]();},
+	[]() {kMethodTable[3]();},
+	[]() {kMethodTable[4]();},
+	[]() {kMethodTable[5]();},
+	[]() {kMethodTable[6]();},
+	[]() {kMethodTable[7]();},
 };
 
-// ── Subject entry index mapping ─────────────────────────────────
-// Maps subject index (0-based sequential) to kAotMethod index.
-// Used by runtime-entry.cpp to route --benchmark N to the correct
-// AOT method slot, since kAotMethods[] includes lambdas/closures
+// ── Subject slot map (kSubjectSlotMap[]) ────────────────────────────
+// Maps subject index (0-based sequential) to kMethodTable index.
+// External consumers use this to route --benchmark N to the correct
+// AOT method slot, since kMethodTable[] includes lambdas/closures
 // that shift subject methods to non-contiguous indices.
 extern "C" const int kSubjectEntryCount = 8;
-extern "C" const int kSubjectEntryIndices[8] = {
+extern "C" const int kSubjectSlotMap[8] = {
 	0,
 	1,
 	2,
@@ -620,79 +628,6 @@ extern "C" const int kSubjectEntryIndices[8] = {
 	6,
 	7,
 };
-
-// Single-method dispatch via hotpatch dispatch table.
-// AOT mode: uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
-// methods receive a valid this-pointer sentinel and default argument values.
-extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
-	CHAOS_IL2CPP_INT32 chaos_entry_index)
-{
-	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
-		return -1;
-	auto& entry = s_hotpatch_entries[chaos_entry_index];
-	if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
-		&& !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
-	{
-		uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
-		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-			entry.method_key, __chaos_args, __chaos_ret);
-	} else {
-		kBenchmarkWrappers[chaos_entry_index]();
-	}
-	return 0;
-}
-
-// All-methods loop: run every method and return a bitmask of failures.
-extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
-{
-	CHAOS_IL2CPP_INT32 result = 0;
-	for (int i = 0; i < kAotMethodCount; i++) {
-		auto& entry = s_hotpatch_entries[i];
-		if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
-			&& !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
-		{
-			uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
-			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				entry.method_key, __chaos_args, __chaos_ret);
-		} else {
-			// Use kBenchmarkWrappers which supply correct default argument values
-			kBenchmarkWrappers[i]();
-		}
-	}
-	return result;
-}
-
-// Fast benchmark dispatch: no setjmp, inline slot access.
-extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
-	CHAOS_IL2CPP_INT32 chaos_entry_index)
-{
-	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
-		return -1;
-	auto& entry = s_hotpatch_entries[chaos_entry_index];
-	if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
-		&& !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
-	{
-		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
-			entry.method_key);
-	} else {
-		kBenchmarkWrappers[chaos_entry_index]();
-	}
-	return 0;
-}
-
-// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
-extern "C" double BenchmarkMethod(
-	int chaos_entry_index, int iterations) {
-	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
-		return -1.0;
-	auto start = std::chrono::steady_clock::now();
-	for (int i = 0; i < iterations; i++) {
-		kBenchmarkWrappers[chaos_entry_index]();
-	}
-	auto end = std::chrono::steady_clock::now();
-	return std::chrono::duration<double, std::milli>(
-		end - start).count();
-}
 // ── GC Slot Map Section ───────────────────────────────────────────
 // Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
 // One nested struct entry per method with GC-referencing stack slots.
@@ -938,6 +873,13 @@ static const ReflectionQueryImageDescriptor kReflImage = { "StringConstructionSu
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
 // LookupModule(mid)->image at lines 311-321 of bootstrap.cpp.
+	// Register generated enum metadata (tables + dispatch + type descriptors).
+	// ChaosRegisterEnumGeneratedMetadata is defined in enum_metadata.generated.h.
+	static const CHAOS_IL2CPP_UINT32 s_enum_registered = []() noexcept {
+		ChaosRegisterEnumGeneratedMetadata();
+		return 1u;
+	}();
+
 // ── Generic registration proof-host helper ─────────────────
 // Populate generic registration arrays from this TU.
 static void ChaosDoPopulateGenericRegistration(
@@ -979,8 +921,6 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_0(
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
 
 
 	CHAOS_EH_TRY
@@ -994,13 +934,8 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_0(
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1018,9 +953,6 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_1(
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
 
 
 	CHAOS_EH_TRY
@@ -1032,13 +964,8 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_1(
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1057,9 +984,6 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_2(
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
 
 
 	CHAOS_EH_TRY
@@ -1075,13 +999,8 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_2(
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1103,21 +1022,13 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_3(
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
+
 
 
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0);
@@ -1127,9 +1038,9 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_3(
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			// br (handled via structured EH branches)
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{{
+			{
 				_s3 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s3;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[5])(chaos_arg_0);
@@ -1151,13 +1062,8 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_3(
 				chaos_static_StringConstructionSubjects_StringConstructionSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1179,21 +1085,13 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_4(
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
 	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
+
 
 
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_arg_0);
@@ -1203,9 +1101,9 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_4(
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
 			// br (handled via structured EH branches)
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			{{
+			{
 				_s3 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s3;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[6])(chaos_arg_0);
@@ -1227,13 +1125,8 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_4(
 				chaos_static_StringConstructionSubjects_StringConstructionSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1251,23 +1144,12 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_5(
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
@@ -1282,9 +1164,9 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_5(
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			{{
+			{
 				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[7])(chaos_arg_0);
@@ -1311,13 +1193,8 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_5(
 				chaos_static_StringConstructionSubjects_StringConstructionSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1335,23 +1212,12 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_6(
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_arg_0);
@@ -1366,9 +1232,9 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_6(
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			{{
+			{
 				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[9])(chaos_arg_0);
@@ -1395,13 +1261,8 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_6(
 				chaos_static_StringConstructionSubjects_StringConstructionSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1419,23 +1280,12 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_7(
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[10])(chaos_arg_0);
@@ -1450,9 +1300,9 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_7(
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__get_Length_System_Int32__(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			{{
+			{
 				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[10])(chaos_arg_0);
@@ -1479,13 +1329,8 @@ extern "C" void StringConstructionSubjects_StringConstructionSubjects_Subject_7(
 				chaos_static_StringConstructionSubjects_StringConstructionSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{

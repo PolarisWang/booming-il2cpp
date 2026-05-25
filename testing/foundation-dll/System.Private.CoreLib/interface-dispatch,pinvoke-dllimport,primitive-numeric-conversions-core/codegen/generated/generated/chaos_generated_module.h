@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_t {
+    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_t {
         CHAOS_IL2CPP_INTPTR (*GetCurrentProcess)(
                 void
         );
@@ -117,8 +117,8 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*TestUintToLong)(
                 void
         );
-    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry;
-    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_t {
+    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry;
+    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -132,8 +132,8 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
-    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd;
-    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_t {
+    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd;
+    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -147,13 +147,13 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
-    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul;
-    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault_t {
+    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul;
+    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault_t {
         CHAOS_IL2CPP_INT32 (*GetValue)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault;
-    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_t {
+    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault;
+    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -163,8 +163,8 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*DerivedMethod)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond;
-    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_t {
+    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond;
+    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -174,24 +174,24 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*DerivedMethod)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2;
-    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple_t {
+    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2;
+    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple;
-    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault_t {
+    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple;
+    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault;
-    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_t {
+    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault;
+    struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -261,7 +261,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects;
+    } interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects;
     int32_t method_count;
 };
 
@@ -280,157 +280,157 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry {
+struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry {
     static inline CHAOS_IL2CPP_INTPTR GetCurrentProcess(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.GetCurrentProcess(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.GetCurrentProcess(
         );
     }
     static inline CHAOS_IL2CPP_INTPTR GetCurrentThread(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.GetCurrentThread(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.GetCurrentThread(
         );
     }
     static inline CHAOS_IL2CPP_INTPTR GetModuleHandle(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.GetModuleHandle(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.GetModuleHandle(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR GetProcessId(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.GetProcessId(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.GetProcessId(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 Run(
                 CHAOS_IL2CPP_INT32 arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.Run(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.Run(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestAsCheck(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestAsCheck(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestAsCheck(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestByteToInt(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestByteToInt(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestByteToInt(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDiamondBase(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDiamondBase(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDiamondBase(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDiamondDerived(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDiamondDerived(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDiamondDerived(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDiamondMulti(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDiamondMulti(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDiamondMulti(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDoubleToFloat(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDoubleToFloat(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDoubleToFloat(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDoubleToInt(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDoubleToInt(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestDoubleToInt(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestFloatToDouble(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestFloatToDouble(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestFloatToDouble(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetCurrentProcess(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestGetCurrentProcess(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestGetCurrentProcess(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetCurrentThread(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestGetCurrentThread(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestGetCurrentThread(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetModuleHandle(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestGetModuleHandle(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestGetModuleHandle(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestGetProcessId(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestGetProcessId(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestGetProcessId(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIntToByte(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIntToByte(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIntToByte(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIntToDouble(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIntToDouble(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIntToDouble(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIntToLong(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIntToLong(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIntToLong(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIntToShort(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIntToShort(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIntToShort(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIsCheck(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIsCheck(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestIsCheck(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestLongToInt(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestLongToInt(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestLongToInt(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestMultiImplCalc(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestMultiImplCalc(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestMultiImplCalc(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestSingleImplDefault(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestSingleImplDefault(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestSingleImplDefault(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestSingleImplSimple(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestSingleImplSimple(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestSingleImplSimple(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestUintToLong(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestUintToLong(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry.TestUintToLong(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 27;
 };
 
-struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd {
+struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd.ctor(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd.ctor(
                     arg_0
         );
     }
@@ -439,7 +439,7 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd.Add(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd.Add(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -450,7 +450,7 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd.Multiply(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcAdd.Multiply(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -460,11 +460,11 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
     static constexpr int32_t MethodCount = 3;
 };
 
-struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul {
+struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul.ctor(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul.ctor(
                     arg_0
         );
     }
@@ -473,7 +473,7 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul.Add(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul.Add(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -484,7 +484,7 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul.Multiply(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_CalcMul.Multiply(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -494,11 +494,11 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
     static constexpr int32_t MethodCount = 3;
 };
 
-struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault {
+struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault {
     static inline CHAOS_IL2CPP_INT32 GetValue(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault.GetValue(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_IWithDefault.GetValue(
                     arg_0
         );
     }
@@ -506,25 +506,25 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
     static constexpr int32_t MethodCount = 1;
 };
 
-struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond {
+struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.ctor(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 BaseMethod(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.BaseMethod(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.BaseMethod(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 DerivedMethod(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.DerivedMethod(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond.DerivedMethod(
                     arg_0
         );
     }
@@ -532,25 +532,25 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
     static constexpr int32_t MethodCount = 3;
 };
 
-struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2 {
+struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2 {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2.ctor(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 BaseMethod(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2.BaseMethod(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2.BaseMethod(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 DerivedMethod(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2.DerivedMethod(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplDiamond2.DerivedMethod(
                     arg_0
         );
     }
@@ -558,18 +558,18 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
     static constexpr int32_t MethodCount = 3;
 };
 
-struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple {
+struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.ctor(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetValue(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.GetValue(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplSimple.GetValue(
                     arg_0
         );
     }
@@ -577,18 +577,18 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
     static constexpr int32_t MethodCount = 2;
 };
 
-struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault {
+struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault.ctor(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetValue(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault.GetValue(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry_ImplWithDefault.GetValue(
                     arg_0
         );
     }
@@ -596,120 +596,120 @@ struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEnt
     static constexpr int32_t MethodCount = 2;
 };
 
-struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects {
+struct InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_0(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_10(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_11(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_12(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_12(
         );
     }
     static inline void Subject_13(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_13(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_13(
         );
     }
     static inline void Subject_14(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_14(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_14(
         );
     }
     static inline void Subject_15(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_15(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_15(
         );
     }
     static inline void Subject_16(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_16(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_16(
         );
     }
     static inline void Subject_17(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_17(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_17(
         );
     }
     static inline void Subject_18(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_18(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_18(
         );
     }
     static inline void Subject_19(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_19(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_19(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_1(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_1(
         );
     }
     static inline void Subject_20(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_20(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_20(
         );
     }
     static inline void Subject_21(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_21(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_21(
         );
     }
     static inline void Subject_22(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_22(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_22(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_2(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_3(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_4(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_5(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_6(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_7(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_8(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_9(
+        return kFunctions.interfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects_InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

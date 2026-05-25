@@ -1,0 +1,667 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 33554435
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BISimple",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BISimple",
+      "metadataToken": 33554436
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIWithDefault",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIWithDefault",
+      "metadataToken": 33554437
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator",
+      "metadataToken": 33554438
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIBase",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIBase",
+      "metadataToken": 33554439
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIDerived",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIDerived",
+      "metadataToken": 33554440
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple",
+      "metadataToken": 33554441
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault",
+      "metadataToken": 33554442
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd",
+      "metadataToken": 33554443
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul",
+      "metadataToken": 33554444
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond",
+      "metadataToken": 33554445
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2",
+      "metadataToken": 33554446
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_10:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_10:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663307,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_11:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_11:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663308,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_12:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_12:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663309,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_13:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_13:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663310,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_14:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_14:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663311,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_15:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_15:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663312,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_16:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_16:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663313,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_17:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_17:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663314,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_18:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_18:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663315,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_19:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_19:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663316,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_20:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_20:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663317,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_21:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_21:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663318,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_22:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects::Subject_22:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "metadataToken": 100663319,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::Run:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663320,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplSimple:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplSimple:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663321,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplDefault:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestSingleImplDefault:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663322,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestMultiImplCalc:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestMultiImplCalc:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663323,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIsCheck:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIsCheck:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663324,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestAsCheck:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestAsCheck:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663325,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondBase:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondBase:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663326,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondDerived:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondDerived:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663327,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondMulti:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDiamondMulti:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663328,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetCurrentProcess:System.IntPtr()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetCurrentProcess:System.IntPtr()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663329,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentProcess:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentProcess:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663330,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetCurrentThread:System.IntPtr()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetCurrentThread:System.IntPtr()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663331,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentThread:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetCurrentThread:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663332,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetProcessId:System.UInt32(System.IntPtr)",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetProcessId:System.UInt32(System.IntPtr)",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663333,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetProcessId:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetProcessId:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663334,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetModuleHandle:System.IntPtr(System.String)",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::GetModuleHandle:System.IntPtr(System.String)",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663335,
+      "parameterCount": 1
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetModuleHandle:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestGetModuleHandle:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663336,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663337,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663338,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663339,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663340,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663341,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663342,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663343,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663344,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663345,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry",
+      "metadataToken": 100663346,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BISimple::GetValue:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BISimple::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BISimple",
+      "metadataToken": 100663347,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIWithDefault::GetValue:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIWithDefault::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIWithDefault",
+      "metadataToken": 100663348,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator",
+      "metadataToken": 100663349,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator::Multiply:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator::Multiply:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BICalculator",
+      "metadataToken": 100663350,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIBase::BaseMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIBase::BaseMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIBase",
+      "metadataToken": 100663351,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIDerived::DerivedMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIDerived::DerivedMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BIDerived",
+      "metadataToken": 100663352,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple::GetValue:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple",
+      "metadataToken": 100663353,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplSimple",
+      "metadataToken": 100663354,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault::GetValue:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault::GetValue:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault",
+      "metadataToken": 100663355,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplWithDefault",
+      "metadataToken": 100663356,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd",
+      "metadataToken": 100663357,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd::Multiply:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd",
+      "metadataToken": 100663358,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcAdd",
+      "metadataToken": 100663359,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul::Add:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul::Add:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul",
+      "metadataToken": 100663360,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul::Multiply:System.Int32(System.Int32,System.Int32)",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul",
+      "metadataToken": 100663361,
+      "parameterCount": 2
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BCalcMul",
+      "metadataToken": 100663362,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond::BaseMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond::BaseMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond",
+      "metadataToken": 100663363,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond::DerivedMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond::DerivedMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond",
+      "metadataToken": 100663364,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond",
+      "metadataToken": 100663365,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2::BaseMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2::BaseMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2",
+      "metadataToken": 100663366,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2::DerivedMethod:System.Int32()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2::DerivedMethod:System.Int32()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2",
+      "metadataToken": 100663367,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects",
+      "subjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2::.ctor:System.Void()",
+      "definitionSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2::.ctor:System.Void()",
+      "declaringTypeSubjectId": "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry\u002BImplDiamond2",
+      "metadataToken": 100663368,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

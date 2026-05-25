@@ -63,6 +63,42 @@ extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_
 extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8(void);
 extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_0(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_1(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_10(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_11(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_12(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_13(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_14(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_15(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_16(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_17(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_18(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_19(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_2(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_20(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_21(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_22(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_23(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_24(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_25(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_26(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_27(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_28(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_29(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_3(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_30(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_31(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_32(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_33(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_4(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_5(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_6(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_7(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_8(void);
+extern "C" void ReflectionFieldPropertySubjects_ReflectionFieldPropertySubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::ReflectionFieldPropertySubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

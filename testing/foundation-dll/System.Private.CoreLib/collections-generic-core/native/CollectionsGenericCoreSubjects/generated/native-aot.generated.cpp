@@ -117,6 +117,24 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_8(void);
 extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_1(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_10(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_11(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_12(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_13(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_14(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_15(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_2(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_3(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_4(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_5(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_6(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_7(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_8(void);
+extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::CollectionsGenericCoreSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -163,7 +181,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -495,7 +513,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
-		&chaos_mt_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects),
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
@@ -1064,7 +1082,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -1075,7 +1093,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1138,7 +1156,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			_s1 = _s0;
@@ -1189,7 +1207,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1215,7 +1233,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -1227,7 +1245,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1269,7 +1287,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -1281,7 +1299,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_List_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Collections_System_Collections_Generic_List_System_Int32_);
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -1307,7 +1325,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1351,7 +1369,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_Dictionary_System_String_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_String_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_String_System_Int32_);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -1361,7 +1379,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Collections_System_Collections_Generic_Dictionary_System_String_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_String_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Collections_System_Collections_Generic_Dictionary_System_String_System_Int32_);
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -1385,7 +1403,7 @@ extern "C" void CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Su
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;

@@ -1,0 +1,43 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "GenericsStressSubjects",
+      "subjectId": "GenericsStressSubjects/GenericsStressSubjects",
+      "definitionSubjectId": "GenericsStressSubjects/GenericsStressSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "GenericsStressSubjects",
+      "subjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "GenericsStressSubjects/GenericsStressSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericsStressSubjects",
+      "subjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "GenericsStressSubjects/GenericsStressSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericsStressSubjects",
+      "subjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "GenericsStressSubjects/GenericsStressSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

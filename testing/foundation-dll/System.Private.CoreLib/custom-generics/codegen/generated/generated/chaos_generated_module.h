@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct CustomGenerics_Box__0__t {
+    struct CustomGenericsSubjects_CustomGenerics_Box__0__t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
@@ -50,8 +50,8 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
-    } customGenerics_Box__0_;
-    struct CustomGenerics_Box_System_Int32__t {
+    } customGenericsSubjects_CustomGenerics_Box__0_;
+    struct CustomGenericsSubjects_CustomGenerics_Box_System_Int32__t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
@@ -66,8 +66,8 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32
         );
-    } customGenerics_Box_System_Int32_;
-    struct CustomGenerics_Box_1_t {
+    } customGenericsSubjects_CustomGenerics_Box_System_Int32_;
+    struct CustomGenericsSubjects_CustomGenerics_Box_1_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
@@ -82,8 +82,8 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
-    } customGenerics_Box_1;
-    struct CustomGenerics_Pair__0__1__t {
+    } customGenericsSubjects_CustomGenerics_Box_1;
+    struct CustomGenericsSubjects_CustomGenerics_Pair__0__1__t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR, 
@@ -94,8 +94,8 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
-    } customGenerics_Pair__0__1_;
-    struct CustomGenerics_Pair_System_Int32_System_String__t {
+    } customGenericsSubjects_CustomGenerics_Pair__0__1_;
+    struct CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String__t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INT32, 
@@ -106,8 +106,8 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
-    } customGenerics_Pair_System_Int32_System_String_;
-    struct CustomGenerics_Pair_2_t {
+    } customGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_;
+    struct CustomGenericsSubjects_CustomGenerics_Pair_2_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR, 
@@ -118,8 +118,8 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
-    } customGenerics_Pair_2;
-    struct CustomGenerics_Util_t {
+    } customGenericsSubjects_CustomGenerics_Pair_2;
+    struct CustomGenericsSubjects_CustomGenerics_Util_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -137,8 +137,8 @@ struct Functions {
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
         );
-    } customGenerics_Util;
-    struct CustomGenerics_Wrapper__0__t {
+    } customGenericsSubjects_CustomGenerics_Util;
+    struct CustomGenericsSubjects_CustomGenerics_Wrapper__0__t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
@@ -146,8 +146,8 @@ struct Functions {
         CHAOS_IL2CPP_INTPTR (*GetRefType)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } customGenerics_Wrapper__0_;
-    struct CustomGenerics_Wrapper_System_String__t {
+    } customGenericsSubjects_CustomGenerics_Wrapper__0_;
+    struct CustomGenericsSubjects_CustomGenerics_Wrapper_System_String__t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
@@ -155,8 +155,8 @@ struct Functions {
         CHAOS_IL2CPP_INTPTR (*GetRefType)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } customGenerics_Wrapper_System_String_;
-    struct CustomGenerics_Wrapper_1_t {
+    } customGenericsSubjects_CustomGenerics_Wrapper_System_String_;
+    struct CustomGenericsSubjects_CustomGenerics_Wrapper_1_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR, 
                     CHAOS_IL2CPP_INTPTR
@@ -164,8 +164,8 @@ struct Functions {
         CHAOS_IL2CPP_INTPTR (*GetRefType)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } customGenerics_Wrapper_1;
-    struct CustomGenericsSubjects_t {
+    } customGenericsSubjects_CustomGenerics_Wrapper_1;
+    struct CustomGenericsSubjects_CustomGenericsSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -184,7 +184,7 @@ struct Functions {
         void (*Subject_5)(
                 void
         );
-    } customGenericsSubjects;
+    } customGenericsSubjects_CustomGenericsSubjects;
     int32_t method_count;
 };
 
@@ -203,12 +203,12 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct CustomGenerics_Box__0_ {
+struct CustomGenericsSubjects_CustomGenerics_Box__0_ {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.customGenerics_Box__0_.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box__0_.ctor(
                     arg_0, 
                     arg_1
         );
@@ -216,14 +216,14 @@ struct CustomGenerics_Box__0_ {
     static inline CHAOS_IL2CPP_INTPTR Get(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Box__0_.Get(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box__0_.Get(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR IsDefault(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Box__0_.IsDefault(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box__0_.IsDefault(
                     arg_0
         );
     }
@@ -231,7 +231,7 @@ struct CustomGenerics_Box__0_ {
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.customGenerics_Box__0_.Set(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box__0_.Set(
                     arg_0, 
                     arg_1
         );
@@ -240,12 +240,12 @@ struct CustomGenerics_Box__0_ {
     static constexpr int32_t MethodCount = 4;
 };
 
-struct CustomGenerics_Box_System_Int32_ {
+struct CustomGenericsSubjects_CustomGenerics_Box_System_Int32_ {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
-        return kFunctions.customGenerics_Box_System_Int32_.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box_System_Int32_.ctor(
                     arg_0, 
                     arg_1
         );
@@ -253,14 +253,14 @@ struct CustomGenerics_Box_System_Int32_ {
     static inline CHAOS_IL2CPP_INT32 Get(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Box_System_Int32_.Get(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box_System_Int32_.Get(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR IsDefault(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Box_System_Int32_.IsDefault(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box_System_Int32_.IsDefault(
                     arg_0
         );
     }
@@ -268,7 +268,7 @@ struct CustomGenerics_Box_System_Int32_ {
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
-        return kFunctions.customGenerics_Box_System_Int32_.Set(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box_System_Int32_.Set(
                     arg_0, 
                     arg_1
         );
@@ -277,12 +277,12 @@ struct CustomGenerics_Box_System_Int32_ {
     static constexpr int32_t MethodCount = 4;
 };
 
-struct CustomGenerics_Box_1 {
+struct CustomGenericsSubjects_CustomGenerics_Box_1 {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.customGenerics_Box_1.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box_1.ctor(
                     arg_0, 
                     arg_1
         );
@@ -290,14 +290,14 @@ struct CustomGenerics_Box_1 {
     static inline CHAOS_IL2CPP_INTPTR Get(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Box_1.Get(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box_1.Get(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR IsDefault(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Box_1.IsDefault(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box_1.IsDefault(
                     arg_0
         );
     }
@@ -305,7 +305,7 @@ struct CustomGenerics_Box_1 {
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.customGenerics_Box_1.Set(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Box_1.Set(
                     arg_0, 
                     arg_1
         );
@@ -314,13 +314,13 @@ struct CustomGenerics_Box_1 {
     static constexpr int32_t MethodCount = 4;
 };
 
-struct CustomGenerics_Pair__0__1_ {
+struct CustomGenericsSubjects_CustomGenerics_Pair__0__1_ {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
-        return kFunctions.customGenerics_Pair__0__1_.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Pair__0__1_.ctor(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -331,7 +331,7 @@ struct CustomGenerics_Pair__0__1_ {
                 CHAOS_IL2CPP_INTPTR arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
-        return kFunctions.customGenerics_Pair__0__1_.Deconstruct(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Pair__0__1_.Deconstruct(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -341,13 +341,13 @@ struct CustomGenerics_Pair__0__1_ {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct CustomGenerics_Pair_System_Int32_System_String_ {
+struct CustomGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_ {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
-        return kFunctions.customGenerics_Pair_System_Int32_System_String_.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_.ctor(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -358,7 +358,7 @@ struct CustomGenerics_Pair_System_Int32_System_String_ {
                 CHAOS_IL2CPP_INTPTR arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
-        return kFunctions.customGenerics_Pair_System_Int32_System_String_.Deconstruct(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Pair_System_Int32_System_String_.Deconstruct(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -368,13 +368,13 @@ struct CustomGenerics_Pair_System_Int32_System_String_ {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct CustomGenerics_Pair_2 {
+struct CustomGenericsSubjects_CustomGenerics_Pair_2 {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
-        return kFunctions.customGenerics_Pair_2.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Pair_2.ctor(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -385,7 +385,7 @@ struct CustomGenerics_Pair_2 {
                 CHAOS_IL2CPP_INTPTR arg_1, 
                 CHAOS_IL2CPP_INTPTR arg_2
     ) {
-        return kFunctions.customGenerics_Pair_2.Deconstruct(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Pair_2.Deconstruct(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -395,25 +395,25 @@ struct CustomGenerics_Pair_2 {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct CustomGenerics_Util {
+struct CustomGenericsSubjects_CustomGenerics_Util {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Util.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Util.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 Echo_System_Int32_(
                 CHAOS_IL2CPP_INT32 arg_0
     ) {
-        return kFunctions.customGenerics_Util.Echo_System_Int32_(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Util.Echo_System_Int32_(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INTPTR Echo_1(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Util.Echo_1(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Util.Echo_1(
                     arg_0
         );
     }
@@ -421,7 +421,7 @@ struct CustomGenerics_Util {
                 CHAOS_IL2CPP_INT32 arg_0, 
                 CHAOS_IL2CPP_INT32 arg_1
     ) {
-        return kFunctions.customGenerics_Util.Equal_System_Int32_(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Util.Equal_System_Int32_(
                     arg_0, 
                     arg_1
         );
@@ -430,7 +430,7 @@ struct CustomGenerics_Util {
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.customGenerics_Util.Equal_1(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Util.Equal_1(
                     arg_0, 
                     arg_1
         );
@@ -439,12 +439,12 @@ struct CustomGenerics_Util {
     static constexpr int32_t MethodCount = 5;
 };
 
-struct CustomGenerics_Wrapper__0_ {
+struct CustomGenericsSubjects_CustomGenerics_Wrapper__0_ {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.customGenerics_Wrapper__0_.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Wrapper__0_.ctor(
                     arg_0, 
                     arg_1
         );
@@ -452,7 +452,7 @@ struct CustomGenerics_Wrapper__0_ {
     static inline CHAOS_IL2CPP_INTPTR GetRefType(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Wrapper__0_.GetRefType(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Wrapper__0_.GetRefType(
                     arg_0
         );
     }
@@ -460,12 +460,12 @@ struct CustomGenerics_Wrapper__0_ {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct CustomGenerics_Wrapper_System_String_ {
+struct CustomGenericsSubjects_CustomGenerics_Wrapper_System_String_ {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.customGenerics_Wrapper_System_String_.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Wrapper_System_String_.ctor(
                     arg_0, 
                     arg_1
         );
@@ -473,7 +473,7 @@ struct CustomGenerics_Wrapper_System_String_ {
     static inline CHAOS_IL2CPP_INTPTR GetRefType(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Wrapper_System_String_.GetRefType(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Wrapper_System_String_.GetRefType(
                     arg_0
         );
     }
@@ -481,12 +481,12 @@ struct CustomGenerics_Wrapper_System_String_ {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct CustomGenerics_Wrapper_1 {
+struct CustomGenericsSubjects_CustomGenerics_Wrapper_1 {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0, 
                 CHAOS_IL2CPP_INTPTR arg_1
     ) {
-        return kFunctions.customGenerics_Wrapper_1.ctor(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Wrapper_1.ctor(
                     arg_0, 
                     arg_1
         );
@@ -494,7 +494,7 @@ struct CustomGenerics_Wrapper_1 {
     static inline CHAOS_IL2CPP_INTPTR GetRefType(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.customGenerics_Wrapper_1.GetRefType(
+        return kFunctions.customGenericsSubjects_CustomGenerics_Wrapper_1.GetRefType(
                     arg_0
         );
     }
@@ -502,35 +502,35 @@ struct CustomGenerics_Wrapper_1 {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct CustomGenericsSubjects {
+struct CustomGenericsSubjects_CustomGenericsSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.customGenericsSubjects.Subject_0(
+        return kFunctions.customGenericsSubjects_CustomGenericsSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.customGenericsSubjects.Subject_1(
+        return kFunctions.customGenericsSubjects_CustomGenericsSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.customGenericsSubjects.Subject_2(
+        return kFunctions.customGenericsSubjects_CustomGenericsSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.customGenericsSubjects.Subject_3(
+        return kFunctions.customGenericsSubjects_CustomGenericsSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.customGenericsSubjects.Subject_4(
+        return kFunctions.customGenericsSubjects_CustomGenericsSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.customGenericsSubjects.Subject_5(
+        return kFunctions.customGenericsSubjects_CustomGenericsSubjects.Subject_5(
         );
     }
     /// Total number of AOT-compiled methods in this type.

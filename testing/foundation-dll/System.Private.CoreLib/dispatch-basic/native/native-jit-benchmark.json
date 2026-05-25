@@ -8,47 +8,47 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 1906.859,
+      "calibratedMs": 1906.859,
+      "opsPerSecond": 52442.3,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 7867.776,
+      "calibratedMs": 7867.776,
+      "opsPerSecond": 12710.1,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 7404.265,
+      "calibratedMs": 7404.265,
+      "opsPerSecond": 13505.7,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 7089.601,
+      "calibratedMs": 7089.601,
+      "opsPerSecond": 14105.2,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 7069.96,
+      "calibratedMs": 7069.96,
+      "opsPerSecond": 14144.4,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     }
   ]
 }

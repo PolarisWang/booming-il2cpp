@@ -51,6 +51,30 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_Cust
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_8(void);
 extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod0(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod1(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod10(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod2(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod3(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod4(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod5(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod6(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod7(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod8(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_CustomEntryMethod9(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_0(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_1(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_10(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_2(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_3(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_4(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_5(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_6(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_8(void);
+extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsSubjects_CustomEntrySubject_9(void);
+
 namespace chaos::il2cpp::codegen::ThreadingThreadBasicsSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -93,7 +117,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -1375,7 +1399,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_C
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_PlatformNotSupportedException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_PlatformNotSupportedException)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1413,7 +1437,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_C
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Threading_Thread_System_Threading_ThreadInterruptedException)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1438,7 +1462,7 @@ extern "C" void ThreadingThreadBasicsSubjects_ThreadingThreadBasicsNativeEntry_C
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_PlatformNotSupportedException.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_PlatformNotSupportedException)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;

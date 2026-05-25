@@ -50,6 +50,11 @@ public:
     // Returns composite key: (module_index << 32) | token, or 0 if not found.
     uint64_t LookupMethod(const char* ns, const char* type_name, const char* method_name) const noexcept;
 
+    // Direct access to registered modules (for multi-module dependency checks).
+    const HotpatchModuleV0* GetModuleByIndex(size_t index) const noexcept {
+        return (index < modules_.size()) ? modules_[index] : nullptr;
+    }
+
     // Token→Slot within a specific module (no cross-module collision).
     uint32_t TokenToSlot(uint32_t module_id, uint32_t token) const noexcept;
 
@@ -62,6 +67,12 @@ public:
     // Module-scoped lookup (preferred — no token collision).
     HotpatchEntryV0* GetDispatchEntry(uint32_t module_id, uint32_t token) const noexcept;
     HotpatchEntryV0* GetDispatchEntryBySlot(size_t module_index, uint32_t slot) const noexcept;
+
+    // ── Method name resolution (for debugger/SOS) ─────────────────
+    // Given (module_id, method_token), scan method_entries and return
+    // the UTF-8 method name from codegen-emitted .rodata.
+    // Returns nullptr if not found (e.g. AOT-only method without hotpatch entry).
+    const char* GetMethodName(uint32_t module_id, uint32_t method_token) const noexcept;
 
     // ── Patch management ────────────────────────────────────────────
     // Module-scoped patch: set/unset patch on (module_id, slot) — O(1).
@@ -93,7 +104,24 @@ HotpatchNameRegistry& GetHotpatchNameRegistry() noexcept;
 // ── Registration entry point (extern "C") ────────────────────────────
 void RegisterHotpatchModule(const HotpatchModuleV0* module) noexcept;
 
+// ── Module registration callback ─────────────────────────────────────
+// Called after each module registration. Used by PatchLoader to retry
+// deferred patches whose dependencies may now be satisfied.
+// Set to nullptr when no callback is needed (default).
+typedef void (*ModuleRegisteredCallback)() noexcept;
+void SetModuleRegisteredCallback(ModuleRegisteredCallback cb) noexcept;
+
 void RegisterReversePInvokeWrappers(void* const* wrappers, uint32_t count) noexcept;
+
+// ── Module enumeration helpers ──────────────────────────────────────────
+// Used by verification dispatch (ChaosDispatchMethodAllModules) to iterate
+// all registered modules without exposing the internal vector directly.
+inline size_t HotpatchModuleCount() noexcept {
+    return GetHotpatchNameRegistry().ModuleCount();
+}
+inline const HotpatchModuleV0* GetHotpatchModuleByIndex(size_t index) noexcept {
+    return GetHotpatchNameRegistry().GetModuleByIndex(index);
+}
 
 // ── Dispatch helpers ──────────────────────────────────────────────────
 

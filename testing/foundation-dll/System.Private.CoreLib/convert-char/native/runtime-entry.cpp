@@ -19,7 +19,19 @@
 #include <cstdint>
 
 #include <chaos/config.h>
-#include <chaos/eh.h>
+#include <chaos/native_types.h>
+#include <runtime_core.h>
+
+// ── EH macros (manual definitions to avoid SDK eh.h which has a
+// type-mismatched chaos_eh_match_type that fails to compile without
+// ChaosGeneratedRuntimePrelude.h) ──────────────────────────────
+// Prevent SDK's eh.h from being processed (hotpatch_dispatch.h includes it)
+#define CHAOS_IL2CPP_COMMON_EH_H_
+#define CHAOS_EH_TRY               try {
+#define CHAOS_EH_CATCH_BEGIN       } catch (const chaos_managed_exception& chaos_exception) {
+#define CHAOS_EH_END               }
+#define CHAOS_EH_EXCEPTION_OBJ     (chaos_exception.object_value)
+
 #include <chaos/hotpatch_dispatch.h>
 #include <patch_loader.h>
 
@@ -45,6 +57,8 @@ extern const char* const kPatchDataHostClassName;
 
 // Defined in microbench.cpp (optional)
 extern "C" void RunMicrobench();
+
+
 
 // ── Shared helper: apply hotpatch and print diagnostic ─────────────
 static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
@@ -187,6 +201,8 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 
 // ── Main ───────────────────────────────────────────────────────────
 int main(int argc, char* argv[]) {
+
+
     if (argc < 2) {
         // Default: fact mode
         return RunFactMode();

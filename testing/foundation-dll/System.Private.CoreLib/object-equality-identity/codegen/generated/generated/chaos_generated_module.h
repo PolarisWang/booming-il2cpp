@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct ObjectEqualityIdentitySubjects_t {
+    struct ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -57,7 +57,7 @@ struct Functions {
         void (*Subject_6)(
                 void
         );
-    } objectEqualityIdentitySubjects;
+    } objectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects;
     int32_t method_count;
 };
 
@@ -76,40 +76,40 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct ObjectEqualityIdentitySubjects {
+struct ObjectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.objectEqualityIdentitySubjects.Subject_0(
+        return kFunctions.objectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.objectEqualityIdentitySubjects.Subject_1(
+        return kFunctions.objectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.objectEqualityIdentitySubjects.Subject_2(
+        return kFunctions.objectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.objectEqualityIdentitySubjects.Subject_3(
+        return kFunctions.objectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.objectEqualityIdentitySubjects.Subject_4(
+        return kFunctions.objectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.objectEqualityIdentitySubjects.Subject_5(
+        return kFunctions.objectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.objectEqualityIdentitySubjects.Subject_6(
+        return kFunctions.objectEqualityIdentitySubjects_ObjectEqualityIdentitySubjects.Subject_6(
         );
     }
     /// Total number of AOT-compiled methods in this type.

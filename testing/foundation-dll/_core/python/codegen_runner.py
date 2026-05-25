@@ -40,13 +40,7 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # 3. Generate verification dispatch code
-    print(f"  [codegen] Generating dispatch code...")
-    dispatch_ok = generate_dispatch_code(ctx.slug, ctx.assembly)
-    if not dispatch_ok:
-        print(f"    [codegen] WARNING: dispatch generation failed (continuing)")
-
-    # 4. Build entry.exe
+    # 3. Build entry.exe (full clean build with sentinel dispatch)
     print(f"  [codegen] Building entry.exe...")
     build_ok = build_entry_exe(ctx.slug, ctx.assembly)
     if not build_ok:
@@ -55,6 +49,12 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
             summary="entry.exe build failed",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
+
+    # 4. Generate verification dispatch code (overwrites sentinel, incremental rebuild)
+    print(f"  [codegen] Generating dispatch code...")
+    dispatch_ok = generate_dispatch_code(ctx.slug, ctx.assembly)
+    if not dispatch_ok:
+        print(f"    [codegen] WARNING: dispatch generation failed (continuing)")
 
     # 5. Save AOT binary for subsequent stages
     save_aot_binary(ctx.slug, ctx.assembly)

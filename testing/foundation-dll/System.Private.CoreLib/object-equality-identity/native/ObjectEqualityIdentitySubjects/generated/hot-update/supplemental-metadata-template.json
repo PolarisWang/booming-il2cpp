@@ -1,0 +1,75 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "ObjectEqualityIdentitySubjects",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "ObjectEqualityIdentitySubjects",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentitySubjects",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentitySubjects",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentitySubjects",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentitySubjects",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentitySubjects",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "ObjectEqualityIdentitySubjects",
+      "subjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "ObjectEqualityIdentitySubjects/ObjectEqualityIdentitySubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

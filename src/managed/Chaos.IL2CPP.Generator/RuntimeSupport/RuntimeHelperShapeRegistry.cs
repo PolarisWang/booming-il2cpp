@@ -1463,7 +1463,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "        CHAOS_IL2CPP_FAIL();",
                         "    }",
                         string.Empty,
-                        "    const CHAOS_IL2CPP_STRING chaos_formatted = ChaosIl2cpp::Common::format_float(chaos_load_float32(chaos_arg_0));",
+                        "    const CHAOS_IL2CPP_STRING chaos_formatted = ChaosIl2cpp::Common::format_float(ChaosLoadFloat32(chaos_arg_0));",
                         "    const auto chaos_id = chaos::il2cpp::string_table::Intern(",
                         "        chaos_formatted.c_str(), static_cast<CHAOS_IL2CPP_UINT32>(chaos_formatted.size()));",
                         "    return chaos_make_string_id_value(chaos_id);",

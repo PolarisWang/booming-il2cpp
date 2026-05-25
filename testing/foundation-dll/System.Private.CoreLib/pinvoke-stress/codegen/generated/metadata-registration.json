@@ -1,0 +1,77 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "metadataRegistration",
+  "registrations": [
+    {
+      "registrationKind": "assembly",
+      "slot": 0,
+      "subjectId": "PinvokeStressSubjects"
+    },
+    {
+      "registrationKind": "type",
+      "slot": 1,
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "name": "PinvokeStressSubjects",
+      "displayName": "PinvokeStressSubjects",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "metadataToken": 33554434
+    },
+    {
+      "registrationKind": "field",
+      "slot": 2,
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects::_exitCode",
+      "name": "_exitCode",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects::_exitCode",
+      "declaringTypeSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "memberType": "System.Int32"
+    },
+    {
+      "registrationKind": "method",
+      "slot": 3,
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_0:System.Void()",
+      "name": "Subject_0",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663297
+    },
+    {
+      "registrationKind": "method",
+      "slot": 4,
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_1:System.Void()",
+      "name": "Subject_1",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663298
+    },
+    {
+      "registrationKind": "method",
+      "slot": 5,
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_2:System.Void()",
+      "name": "Subject_2",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663299
+    },
+    {
+      "registrationKind": "method",
+      "slot": 6,
+      "subjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_3:System.Void()",
+      "name": "Subject_3",
+      "definitionSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "PinvokeStressSubjects/PinvokeStressSubjects",
+      "memberType": "System.Void",
+      "parameterCount": 0,
+      "isImported": false,
+      "metadataToken": 100663300
+    }
+  ]
+}

@@ -50,7 +50,7 @@ public sealed partial class NativeAotLoweringPlanner
 	// Mirrors the eval stack: each entry tracks whether the slot
 	// contains Float32/Float64 (stored via ChaosStoreFloat32/64) or
 	// NativeInt (plain integer-as-pointer).  Consumers (conv.i4,
-	// ceq, etc.) use this to emit chaos_load_float32/ChaosLoadFloat64
+	// ceq, etc.) use this to emit ChaosLoadFloat32/ChaosLoadFloat64
 	// before operating on the value.
 	private enum SlotType : byte { NativeInt, Float32, Float64 }
 
@@ -447,13 +447,13 @@ public sealed partial class NativeAotLoweringPlanner
 			ConsumeSlotType();
 			string _rLoad = _rType switch
 			{
-				SlotType.Float32 => $"chaos_load_float32({_rExpr})",
+				SlotType.Float32 => $"ChaosLoadFloat32({_rExpr})",
 				SlotType.Float64 => $"ChaosLoadFloat64({_rExpr})",
 				_ => $"static_cast<CHAOS_IL2CPP_INTPTR>({_rExpr})",
 			};
 			string _lLoad = _lType switch
 			{
-				SlotType.Float32 => $"chaos_load_float32({_lExpr})",
+				SlotType.Float32 => $"ChaosLoadFloat32({_lExpr})",
 				SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
 				_ => $"static_cast<CHAOS_IL2CPP_INTPTR>({_lExpr})",
 			};
@@ -483,13 +483,13 @@ public sealed partial class NativeAotLoweringPlanner
 			ConsumeSlotType();
 			string _rLoad = _rType switch
 			{
-				SlotType.Float32 => $"chaos_load_float32({_rExpr})",
+				SlotType.Float32 => $"ChaosLoadFloat32({_rExpr})",
 				SlotType.Float64 => $"ChaosLoadFloat64({_rExpr})",
 				_ => $"static_cast<CHAOS_IL2CPP_INT32>({_rExpr})",
 			};
 			string _lLoad = _lType switch
 			{
-				SlotType.Float32 => $"chaos_load_float32({_lExpr})",
+				SlotType.Float32 => $"ChaosLoadFloat32({_lExpr})",
 				SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
 				_ => $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})",
 			};
@@ -520,13 +520,13 @@ public sealed partial class NativeAotLoweringPlanner
 			ConsumeSlotType();
 			string _rLoad = _rType switch
 			{
-				SlotType.Float32 => $"chaos_load_float32({_rExpr})",
+				SlotType.Float32 => $"ChaosLoadFloat32({_rExpr})",
 				SlotType.Float64 => $"ChaosLoadFloat64({_rExpr})",
 				_ => $"static_cast<CHAOS_IL2CPP_INT32>({_rExpr})",
 			};
 			string _lLoad = _lType switch
 			{
-				SlotType.Float32 => $"chaos_load_float32({_lExpr})",
+				SlotType.Float32 => $"ChaosLoadFloat32({_lExpr})",
 				SlotType.Float64 => $"ChaosLoadFloat64({_lExpr})",
 				_ => $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})",
 			};
@@ -1109,7 +1109,7 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation);
 			break;
 		case "ldelem.r4":
-			EmitLinearArrayLoad(builder, "ChaosStoreFloat32(chaos_load_float32(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation);
 			break;
 		case "ldelem.r8":
 			EmitLinearArrayLoad(builder, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation);
@@ -1154,7 +1154,7 @@ public sealed partial class NativeAotLoweringPlanner
 				case "System.Int64": case "System.UInt64":
 					EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation); break;
 				case "System.Single":
-					EmitLinearArrayLoad(builder, "ChaosStoreFloat32(chaos_load_float32(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation); break;
 				case "System.Double":
 					EmitLinearArrayLoad(builder, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation); break;
 				default:
@@ -1430,7 +1430,7 @@ public sealed partial class NativeAotLoweringPlanner
 		SlotType _slotType = PeekSlotType();
 		return _slotType switch
 		{
-			SlotType.Float32 => $"chaos_load_float32({AccessEvalStackTopExpression()})",
+			SlotType.Float32 => $"ChaosLoadFloat32({AccessEvalStackTopExpression()})",
 			SlotType.Float64 => $"ChaosLoadFloat64({AccessEvalStackTopExpression()})",
 			_ => useUintptrDefault
 				? $"static_cast<CHAOS_IL2CPP_UINTPTR>({AccessEvalStackTopExpression()})"
@@ -1984,9 +1984,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		{
 			// Consume the `this` argument (boxed enum reference) from the eval stack
 			ConsumeEvalStackValueExpression();
-			builder.AppendLine($"{indentation}{{{{");
+			builder.AppendLine($"{indentation}{{");
 			EmitEvalStackPush(builder, indentation + "    ", $"CHAOS_IL2CPP_STRING_ID({ToCppStringLiteral(foldedFieldName)})");
-			builder.AppendLine($"{indentation}}}}}");
+			builder.AppendLine($"{indentation}}}");
 			return;
 		}
 
@@ -3137,9 +3137,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		// already materialize StringId via chaos_string_materialize() or handle it internally.
 		if (_stringIdMapping is { Count: > 0 } && TryGetStringId(requiredStringOperand, out _))
 		{
-			builder.AppendLine($"{indentation}{{{{");
+			builder.AppendLine($"{indentation}{{");
 			EmitEvalStackPush(builder, indentation + "    ", $"CHAOS_IL2CPP_STRING_ID({ToCppStringLiteral(requiredStringOperand)})");
-			builder.AppendLine($"{indentation}}}}}");
+			builder.AppendLine($"{indentation}}}");
 			return;
 		}
 

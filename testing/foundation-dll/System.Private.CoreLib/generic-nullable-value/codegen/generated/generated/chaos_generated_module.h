@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct GenericNullableValueSubjects_t {
+    struct GenericNullableValueSubjects_GenericNullableValueSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -66,7 +66,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } genericNullableValueSubjects;
+    } genericNullableValueSubjects_GenericNullableValueSubjects;
     int32_t method_count;
 };
 
@@ -85,55 +85,55 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct GenericNullableValueSubjects {
+struct GenericNullableValueSubjects_GenericNullableValueSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_0(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_1(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_2(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_3(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_4(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_5(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_6(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_7(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_8(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.genericNullableValueSubjects.Subject_9(
+        return kFunctions.genericNullableValueSubjects_GenericNullableValueSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

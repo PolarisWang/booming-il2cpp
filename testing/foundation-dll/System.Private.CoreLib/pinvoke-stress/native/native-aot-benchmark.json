@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/pinvoke/stress",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Environment::get_TickCount:System.Int32()",
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetLastPInvokeError:System.Int32()",
+      "elapsedMilliseconds": -1.0,
+      "calibratedMs": -1.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
+    }
+  ]
+}

@@ -9,7 +9,7 @@ child_execution_mode: auto
 auto_continue: true
 auto_stop_policy: blocking-only
 dispatch_model: sequential
-recommended_next_child: foundation-dll-industrialization (Phase 2)
+recommended_next_child: ws4-aot-phase-4-5
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
@@ -76,22 +76,23 @@ pending_phases: [phase-1-remaining, phase-2]
 |---------|-------|--------|-------|---------|------------|-----------------|
 | ws1-jit-industrialization | phase-1 | completed | main | JIT 工业化收官 ✅ 199/199 测试通过 | — | 大 |
 | ws3-foundation-dll | phase-1 | ready | main | Foundation-DLL 全量验证攻坚（16 failures 硬修复） | — | 大 |
-| ws4-aot-phase-4-5 | phase-1 | ready | main | AOT PHASE 4 HotUpdate 完整化 + PHASE 5 性能优化 | — | 极大 |
+| ws4-aot-phase-4-5 | phase-1 | in-progress | main | AOT PHASE 4 HotUpdate 完整化 + PHASE 5 性能优化 | — | 极大 |
 | ws5-cicd | phase-1 | ready | main | CI/CD 完整体系（WF 框架/fd CI/JIT 基线/AOT 门禁/Dashboard） | — | 中 |
 | ws7-engineering-excellence | phase-1 | ready | main | 工程卓越度（文档/pipeline 自测/压力测试/基准回归） | — | 大 |
 | ws2-hybrid-industrialization | phase-2 | completed | main | Hybrid 工业化冲刺 ✅ 41/41 测试通过 | ws1-jit-industrialization ✅ | 中 |
 
 ## 最新摘要
 
-2026-05-24: WS2 (Hybrid 工业化冲刺) 已完成。6 个子任务全部完成：h1-core(19 tests) + h2-e2e(8 tests) + h3-race(7 tests) + h4-fd(Foundation-DLL stage 14) + h5-bench(7/7 benchmarks) + h6-doc(wiki 文档)。ws2 目录已移至 docs/dev/completed/。
+2026-05-25: WS4 (AOT PHASE 4+5) 已启动。p4-hotpatch/p4-multimodule/p4-interpreter 已完成，p5-paging 作为下一子任务。
+- p4-interpreter: entry_direct.cpp Step C SEH gate 已移除，FastExecute 现已覆盖 SEH 方法。commit 525a87ef6.
 
 已完成工作流：
 - ✅ WS1 (JIT工业化收官) — 199/199 测试通过
 - ✅ WS2 (Hybrid工业化冲刺) — 41/41 测试通过，wiki 文档完成
 
 剩余工作流：
-- 🔄 WS3 (Foundation-DLL 全量验证) — 已作为独立 foundation-dll-industrialization 任务在推进，Phase 2 已解除 SYS-001 阻塞，准备逐 family 攻坚
-- ⏳ WS4 (AOT PHASE 4+5) — 未启动（HotUpdate 完整化 + 性能优化）
+- 🔄 WS4 (AOT PHASE 4+5) — p4-interpreter ✅，p5-paging 进行中
+- ⏳ WS3 (Foundation-DLL 全量验证) — 独立 foundation-dll-industrialization 任务推进中
 - ⏳ WS5 (CI/CD 完整体系) — 未启动
 - ⏳ WS7 (工程卓越度) — 未启动
 

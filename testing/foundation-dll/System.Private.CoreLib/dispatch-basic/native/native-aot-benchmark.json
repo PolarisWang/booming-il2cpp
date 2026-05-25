@@ -8,45 +8,45 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::Run:System.Int32(System.Int32)",
-      "elapsedMilliseconds": 0.374,
-      "calibratedMs": 0.374,
-      "opsPerSecond": 267094017.1,
+      "elapsedMilliseconds": 0.367,
+      "calibratedMs": 0.367,
+      "opsPerSecond": 272702481.6,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
-      "elapsedMilliseconds": 0.35,
-      "calibratedMs": 0.35,
-      "opsPerSecond": 285632676.4,
+      "elapsedMilliseconds": 0.368,
+      "calibratedMs": 0.368,
+      "opsPerSecond": 271960837.6,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
-      "elapsedMilliseconds": 0.509,
-      "calibratedMs": 0.509,
-      "opsPerSecond": 196425063.8,
+      "elapsedMilliseconds": 0.35,
+      "calibratedMs": 0.35,
+      "opsPerSecond": 285306704.7,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
-      "elapsedMilliseconds": 0.342,
-      "calibratedMs": 0.342,
-      "opsPerSecond": 292568753.7,
+      "elapsedMilliseconds": 0.37,
+      "calibratedMs": 0.37,
+      "opsPerSecond": 270124257.2,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
-      "elapsedMilliseconds": 0.334,
-      "calibratedMs": 0.334,
-      "opsPerSecond": 299580587.2,
+      "elapsedMilliseconds": 0.347,
+      "calibratedMs": 0.347,
+      "opsPerSecond": 288184438.0,
       "iterations": 100000,
       "status": "completed"
     }

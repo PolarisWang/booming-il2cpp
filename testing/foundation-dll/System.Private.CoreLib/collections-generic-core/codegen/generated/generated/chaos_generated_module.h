@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct CollectionsGenericCoreSubjects_t {
+    struct CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -84,7 +84,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } collectionsGenericCoreSubjects;
+    } collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects;
     int32_t method_count;
 };
 
@@ -103,85 +103,85 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct CollectionsGenericCoreSubjects {
+struct CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_0(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_0(
         );
     }
     static inline void Subject_10(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_10(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_10(
         );
     }
     static inline void Subject_11(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_11(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_11(
         );
     }
     static inline void Subject_12(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_12(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_12(
         );
     }
     static inline void Subject_13(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_13(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_13(
         );
     }
     static inline void Subject_14(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_14(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_14(
         );
     }
     static inline void Subject_15(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_15(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_15(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_1(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_2(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_3(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_4(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_5(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_6(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_7(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_8(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.collectionsGenericCoreSubjects.Subject_9(
+        return kFunctions.collectionsGenericCoreSubjects_CollectionsGenericCoreSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

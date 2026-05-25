@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct StringConstructionSubjects_t {
+    struct StringConstructionSubjects_StringConstructionSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -60,7 +60,7 @@ struct Functions {
         void (*Subject_7)(
                 void
         );
-    } stringConstructionSubjects;
+    } stringConstructionSubjects_StringConstructionSubjects;
     int32_t method_count;
 };
 
@@ -79,45 +79,45 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct StringConstructionSubjects {
+struct StringConstructionSubjects_StringConstructionSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.stringConstructionSubjects.Subject_0(
+        return kFunctions.stringConstructionSubjects_StringConstructionSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.stringConstructionSubjects.Subject_1(
+        return kFunctions.stringConstructionSubjects_StringConstructionSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.stringConstructionSubjects.Subject_2(
+        return kFunctions.stringConstructionSubjects_StringConstructionSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.stringConstructionSubjects.Subject_3(
+        return kFunctions.stringConstructionSubjects_StringConstructionSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.stringConstructionSubjects.Subject_4(
+        return kFunctions.stringConstructionSubjects_StringConstructionSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.stringConstructionSubjects.Subject_5(
+        return kFunctions.stringConstructionSubjects_StringConstructionSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.stringConstructionSubjects.Subject_6(
+        return kFunctions.stringConstructionSubjects_StringConstructionSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.stringConstructionSubjects.Subject_7(
+        return kFunctions.stringConstructionSubjects_StringConstructionSubjects.Subject_7(
         );
     }
     /// Total number of AOT-compiled methods in this type.

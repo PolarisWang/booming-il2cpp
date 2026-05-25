@@ -7,7 +7,6 @@ set(CMAKE_CXX_STANDARD 20)
 add_compile_options(/utf-8 /GS- /FS)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
-add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
@@ -28,7 +27,6 @@ file(GLOB CHAOS_CODEGEN_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
 )
-# Also search native/ (pipeline syncs codegen output there after convert-to-cpp)
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
@@ -72,7 +70,6 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
-    "${CHAOS_PROJECT_ROOT}/src/native/jit"
 )
 
 add_executable(entry ${CHAOS_ENTRY_SOURCES})

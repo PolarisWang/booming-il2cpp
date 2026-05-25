@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct CalcAdd_t {
+    struct InterfaceDispatchSubjects_CalcAdd_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -49,8 +49,8 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
-    } calcAdd;
-    struct CalcMul_t {
+    } interfaceDispatchSubjects_CalcAdd;
+    struct InterfaceDispatchSubjects_CalcMul_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -64,13 +64,13 @@ struct Functions {
                     CHAOS_IL2CPP_INT32, 
                     CHAOS_IL2CPP_INT32
         );
-    } calcMul;
-    struct IWithDefault_t {
+    } interfaceDispatchSubjects_CalcMul;
+    struct InterfaceDispatchSubjects_IWithDefault_t {
         CHAOS_IL2CPP_INT32 (*GetValue)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } iWithDefault;
-    struct ImplDiamond_t {
+    } interfaceDispatchSubjects_IWithDefault;
+    struct InterfaceDispatchSubjects_ImplDiamond_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -80,8 +80,8 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*DerivedMethod)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } implDiamond;
-    struct ImplDiamond2_t {
+    } interfaceDispatchSubjects_ImplDiamond;
+    struct InterfaceDispatchSubjects_ImplDiamond2_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
@@ -91,24 +91,24 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*DerivedMethod)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } implDiamond2;
-    struct ImplSimple_t {
+    } interfaceDispatchSubjects_ImplDiamond2;
+    struct InterfaceDispatchSubjects_ImplSimple_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } implSimple;
-    struct ImplWithDefault_t {
+    } interfaceDispatchSubjects_ImplSimple;
+    struct InterfaceDispatchSubjects_ImplWithDefault_t {
         void (*ctor)(
                     CHAOS_IL2CPP_INTPTR
         );
         CHAOS_IL2CPP_INT32 (*GetValue)(
                     CHAOS_IL2CPP_INTPTR
         );
-    } implWithDefault;
-    struct InterfaceDispatchNativeEntry_t {
+    } interfaceDispatchSubjects_ImplWithDefault;
+    struct InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_t {
         CHAOS_IL2CPP_INT32 (*Run)(
                     CHAOS_IL2CPP_INT32
         );
@@ -136,8 +136,8 @@ struct Functions {
         CHAOS_IL2CPP_INT32 (*TestSingleImplSimple)(
                 void
         );
-    } interfaceDispatchNativeEntry;
-    struct InterfaceDispatchSubjects_t {
+    } interfaceDispatchSubjects_InterfaceDispatchNativeEntry;
+    struct InterfaceDispatchSubjects_InterfaceDispatchSubjects_t {
         void (*Subject_0)(
                 void
         );
@@ -165,7 +165,7 @@ struct Functions {
         void (*Subject_8)(
                 void
         );
-    } interfaceDispatchSubjects;
+    } interfaceDispatchSubjects_InterfaceDispatchSubjects;
     int32_t method_count;
 };
 
@@ -184,11 +184,11 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct CalcAdd {
+struct InterfaceDispatchSubjects_CalcAdd {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.calcAdd.ctor(
+        return kFunctions.interfaceDispatchSubjects_CalcAdd.ctor(
                     arg_0
         );
     }
@@ -197,7 +197,7 @@ struct CalcAdd {
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.calcAdd.Add(
+        return kFunctions.interfaceDispatchSubjects_CalcAdd.Add(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -208,7 +208,7 @@ struct CalcAdd {
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.calcAdd.Multiply(
+        return kFunctions.interfaceDispatchSubjects_CalcAdd.Multiply(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -218,11 +218,11 @@ struct CalcAdd {
     static constexpr int32_t MethodCount = 3;
 };
 
-struct CalcMul {
+struct InterfaceDispatchSubjects_CalcMul {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.calcMul.ctor(
+        return kFunctions.interfaceDispatchSubjects_CalcMul.ctor(
                     arg_0
         );
     }
@@ -231,7 +231,7 @@ struct CalcMul {
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.calcMul.Add(
+        return kFunctions.interfaceDispatchSubjects_CalcMul.Add(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -242,7 +242,7 @@ struct CalcMul {
                 CHAOS_IL2CPP_INT32 arg_1, 
                 CHAOS_IL2CPP_INT32 arg_2
     ) {
-        return kFunctions.calcMul.Multiply(
+        return kFunctions.interfaceDispatchSubjects_CalcMul.Multiply(
                     arg_0, 
                     arg_1, 
                     arg_2
@@ -252,11 +252,11 @@ struct CalcMul {
     static constexpr int32_t MethodCount = 3;
 };
 
-struct IWithDefault {
+struct InterfaceDispatchSubjects_IWithDefault {
     static inline CHAOS_IL2CPP_INT32 GetValue(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.iWithDefault.GetValue(
+        return kFunctions.interfaceDispatchSubjects_IWithDefault.GetValue(
                     arg_0
         );
     }
@@ -264,25 +264,25 @@ struct IWithDefault {
     static constexpr int32_t MethodCount = 1;
 };
 
-struct ImplDiamond {
+struct InterfaceDispatchSubjects_ImplDiamond {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond.ctor(
+        return kFunctions.interfaceDispatchSubjects_ImplDiamond.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 BaseMethod(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond.BaseMethod(
+        return kFunctions.interfaceDispatchSubjects_ImplDiamond.BaseMethod(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 DerivedMethod(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond.DerivedMethod(
+        return kFunctions.interfaceDispatchSubjects_ImplDiamond.DerivedMethod(
                     arg_0
         );
     }
@@ -290,25 +290,25 @@ struct ImplDiamond {
     static constexpr int32_t MethodCount = 3;
 };
 
-struct ImplDiamond2 {
+struct InterfaceDispatchSubjects_ImplDiamond2 {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond2.ctor(
+        return kFunctions.interfaceDispatchSubjects_ImplDiamond2.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 BaseMethod(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond2.BaseMethod(
+        return kFunctions.interfaceDispatchSubjects_ImplDiamond2.BaseMethod(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 DerivedMethod(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implDiamond2.DerivedMethod(
+        return kFunctions.interfaceDispatchSubjects_ImplDiamond2.DerivedMethod(
                     arg_0
         );
     }
@@ -316,18 +316,18 @@ struct ImplDiamond2 {
     static constexpr int32_t MethodCount = 3;
 };
 
-struct ImplSimple {
+struct InterfaceDispatchSubjects_ImplSimple {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implSimple.ctor(
+        return kFunctions.interfaceDispatchSubjects_ImplSimple.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetValue(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implSimple.GetValue(
+        return kFunctions.interfaceDispatchSubjects_ImplSimple.GetValue(
                     arg_0
         );
     }
@@ -335,18 +335,18 @@ struct ImplSimple {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct ImplWithDefault {
+struct InterfaceDispatchSubjects_ImplWithDefault {
     static inline void ctor(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implWithDefault.ctor(
+        return kFunctions.interfaceDispatchSubjects_ImplWithDefault.ctor(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 GetValue(
                 CHAOS_IL2CPP_INTPTR arg_0
     ) {
-        return kFunctions.implWithDefault.GetValue(
+        return kFunctions.interfaceDispatchSubjects_ImplWithDefault.GetValue(
                     arg_0
         );
     }
@@ -354,102 +354,102 @@ struct ImplWithDefault {
     static constexpr int32_t MethodCount = 2;
 };
 
-struct InterfaceDispatchNativeEntry {
+struct InterfaceDispatchSubjects_InterfaceDispatchNativeEntry {
     static inline CHAOS_IL2CPP_INT32 Run(
                 CHAOS_IL2CPP_INT32 arg_0
     ) {
-        return kFunctions.interfaceDispatchNativeEntry.Run(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchNativeEntry.Run(
                     arg_0
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestAsCheck(
     ) {
-        return kFunctions.interfaceDispatchNativeEntry.TestAsCheck(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchNativeEntry.TestAsCheck(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDiamondBase(
     ) {
-        return kFunctions.interfaceDispatchNativeEntry.TestDiamondBase(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchNativeEntry.TestDiamondBase(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDiamondDerived(
     ) {
-        return kFunctions.interfaceDispatchNativeEntry.TestDiamondDerived(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchNativeEntry.TestDiamondDerived(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestDiamondMulti(
     ) {
-        return kFunctions.interfaceDispatchNativeEntry.TestDiamondMulti(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchNativeEntry.TestDiamondMulti(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestIsCheck(
     ) {
-        return kFunctions.interfaceDispatchNativeEntry.TestIsCheck(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchNativeEntry.TestIsCheck(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestMultiImplCalc(
     ) {
-        return kFunctions.interfaceDispatchNativeEntry.TestMultiImplCalc(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchNativeEntry.TestMultiImplCalc(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestSingleImplDefault(
     ) {
-        return kFunctions.interfaceDispatchNativeEntry.TestSingleImplDefault(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchNativeEntry.TestSingleImplDefault(
         );
     }
     static inline CHAOS_IL2CPP_INT32 TestSingleImplSimple(
     ) {
-        return kFunctions.interfaceDispatchNativeEntry.TestSingleImplSimple(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchNativeEntry.TestSingleImplSimple(
         );
     }
     /// Total number of AOT-compiled methods in this type.
     static constexpr int32_t MethodCount = 9;
 };
 
-struct InterfaceDispatchSubjects {
+struct InterfaceDispatchSubjects_InterfaceDispatchSubjects {
     static inline void Subject_0(
     ) {
-        return kFunctions.interfaceDispatchSubjects.Subject_0(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.interfaceDispatchSubjects.Subject_1(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.interfaceDispatchSubjects.Subject_2(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.interfaceDispatchSubjects.Subject_3(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.interfaceDispatchSubjects.Subject_4(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.interfaceDispatchSubjects.Subject_5(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchSubjects.Subject_5(
         );
     }
     static inline void Subject_6(
     ) {
-        return kFunctions.interfaceDispatchSubjects.Subject_6(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchSubjects.Subject_6(
         );
     }
     static inline void Subject_7(
     ) {
-        return kFunctions.interfaceDispatchSubjects.Subject_7(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchSubjects.Subject_7(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.interfaceDispatchSubjects.Subject_8(
+        return kFunctions.interfaceDispatchSubjects_InterfaceDispatchSubjects.Subject_8(
         );
     }
     /// Total number of AOT-compiled methods in this type.

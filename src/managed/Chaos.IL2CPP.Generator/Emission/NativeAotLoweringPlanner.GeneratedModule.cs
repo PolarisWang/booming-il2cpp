@@ -54,15 +54,15 @@ public sealed partial class NativeAotLoweringPlanner
         for (int gi = 0; gi < typeGroups.Count; gi++)
         {
             var group = typeGroups[gi];
-            var typeDisplayName = GetTypeDisplayName(group.Key);
-            var safeName = SanitizeCppIdentifier(typeDisplayName);
-            var safeNameLower = SanitizeCppIdentifierLowerFirst(typeDisplayName);
+            var safeName = SanitizeCppIdentifier(group.Key);
+            var safeNameLower = SanitizeCppIdentifierLowerFirst(group.Key);
 
             var methods = group
                 .OrderBy(m => m.SubjectId, StringComparer.Ordinal)
                 .ToArray();
 
             var methodModels = new ScriptObject[methods.Length];
+            var methodNameCounts = new Dictionary<string, int>(StringComparer.Ordinal);
             for (int mi = 0; mi < methods.Length; mi++)
             {
                 var method = methods[mi];
@@ -85,6 +85,19 @@ public sealed partial class NativeAotLoweringPlanner
                     rawMethodName = rawMethodName.Substring(1);
                 var safeMethodName = SanitizeCppIdentifier(rawMethodName);
 
+                // Uniquify method names: when two managed overloads collapse to the
+                // same C++ identifier at the ABI level, append _1, _2, ... suffix.
+                if (methodNameCounts.TryGetValue(safeMethodName, out var methodCount))
+                {
+                    var baseName = safeMethodName;
+                    safeMethodName = baseName + "_" + methodCount;
+                    methodNameCounts[baseName] = methodCount + 1;
+                }
+                else
+                {
+                    methodNameCounts[safeMethodName] = 1;
+                }
+
                 methodModels[mi] = new ScriptObject
                 {
                     ["return_type"] = MapAbiSlotReturnType(method.ReturnAbi),
@@ -102,6 +115,38 @@ public sealed partial class NativeAotLoweringPlanner
                 ["method_count"] = methods.Length,
                 ["methods"] = methodModels,
             };
+        }
+
+        // Detect duplicate safe_names across type groups and uniquify by
+        // appending the assembly prefix.  The converter may emit methods for
+        // the same C# type from different assemblies, and GetTypeDisplayName()
+        // strips the assembly prefix, causing C2011 struct redefinition errors.
+        var safeNameGroups = new Dictionary<string, List<int>>(StringComparer.Ordinal);
+        for (int gi = 0; gi < typeGroupModels.Length; gi++)
+        {
+            var name = (string)typeGroupModels[gi]["safe_name"];
+            if (!safeNameGroups.TryGetValue(name, out var list))
+            {
+                list = new List<int>();
+                safeNameGroups[name] = list;
+            }
+            list.Add(gi);
+        }
+        foreach (var kvp in safeNameGroups)
+        {
+            if (kvp.Value.Count <= 1) continue;
+            foreach (var gi in kvp.Value)
+            {
+                var groupKey = typeGroups[gi].Key;
+                var slashIdx = groupKey.IndexOf('/');
+                var assemblyPart = slashIdx > 0 ? groupKey[..slashIdx] : groupKey;
+                var assemblySafe = SanitizeCppIdentifier(assemblyPart);
+                var oldName = (string)typeGroupModels[gi]["safe_name"];
+                var newName = oldName + "_" + assemblySafe;
+                typeGroupModels[gi]["safe_name"] = newName;
+                typeGroupModels[gi]["safe_name_lower"] =
+                    SanitizeCppIdentifierLowerFirst(newName);
+            }
         }
 
         return new ScriptObject

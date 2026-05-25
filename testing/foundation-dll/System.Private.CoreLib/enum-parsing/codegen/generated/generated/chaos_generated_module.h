@@ -35,7 +35,7 @@ class ChaosRuntimeHost;
 // codegen.  Each group's section is a constexpr aggregate so the compiler can
 // inline through the table when the address is known at compile time (LTO).
 struct Functions {
-    struct EnumParsingSubjects_t {
+    struct EnumParsingSubjects_EnumParsingSubjects_t {
         void (*CustomEntrySubject_10)(
                 void
         );
@@ -75,7 +75,7 @@ struct Functions {
         void (*Subject_9)(
                 void
         );
-    } enumParsingSubjects;
+    } enumParsingSubjects_EnumParsingSubjects;
     int32_t method_count;
 };
 
@@ -94,70 +94,70 @@ extern "C" void* kFunctionsFlat[];
 // Compiler inlines through the table when LTO is enabled.
 // ═══════════════════════════════════════════════════════════════════════════
 
-struct EnumParsingSubjects {
+struct EnumParsingSubjects_EnumParsingSubjects {
     static inline void CustomEntrySubject_10(
     ) {
-        return kFunctions.enumParsingSubjects.CustomEntrySubject_10(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.CustomEntrySubject_10(
         );
     }
     static inline void CustomEntrySubject_11(
     ) {
-        return kFunctions.enumParsingSubjects.CustomEntrySubject_11(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.CustomEntrySubject_11(
         );
     }
     static inline void CustomEntrySubject_12(
     ) {
-        return kFunctions.enumParsingSubjects.CustomEntrySubject_12(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.CustomEntrySubject_12(
         );
     }
     static inline void CustomEntrySubject_6(
     ) {
-        return kFunctions.enumParsingSubjects.CustomEntrySubject_6(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.CustomEntrySubject_6(
         );
     }
     static inline void CustomEntrySubject_7(
     ) {
-        return kFunctions.enumParsingSubjects.CustomEntrySubject_7(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.CustomEntrySubject_7(
         );
     }
     static inline void Subject_0(
     ) {
-        return kFunctions.enumParsingSubjects.Subject_0(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.Subject_0(
         );
     }
     static inline void Subject_1(
     ) {
-        return kFunctions.enumParsingSubjects.Subject_1(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.Subject_1(
         );
     }
     static inline void Subject_2(
     ) {
-        return kFunctions.enumParsingSubjects.Subject_2(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.Subject_2(
         );
     }
     static inline void Subject_3(
     ) {
-        return kFunctions.enumParsingSubjects.Subject_3(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.Subject_3(
         );
     }
     static inline void Subject_4(
     ) {
-        return kFunctions.enumParsingSubjects.Subject_4(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.Subject_4(
         );
     }
     static inline void Subject_5(
     ) {
-        return kFunctions.enumParsingSubjects.Subject_5(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.Subject_5(
         );
     }
     static inline void Subject_8(
     ) {
-        return kFunctions.enumParsingSubjects.Subject_8(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.Subject_8(
         );
     }
     static inline void Subject_9(
     ) {
-        return kFunctions.enumParsingSubjects.Subject_9(
+        return kFunctions.enumParsingSubjects_EnumParsingSubjects.Subject_9(
         );
     }
     /// Total number of AOT-compiled methods in this type.

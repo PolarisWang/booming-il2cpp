@@ -14,20 +14,20 @@
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)",
-      "elapsedMilliseconds": 0.284,
-      "calibratedMs": 0.284,
-      "opsPerSecond": 352236703.1,
+      "elapsedMilliseconds": 0.289,
+      "calibratedMs": 0.289,
+      "opsPerSecond": 346140533.1,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 0.284,
+      "calibratedMs": 0.284,
+      "opsPerSecond": 352236703.1,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 3,
@@ -50,27 +50,27 @@
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)",
-      "elapsedMilliseconds": 0.284,
-      "calibratedMs": 0.284,
-      "opsPerSecond": 352609308.9,
+      "elapsedMilliseconds": 0.283,
+      "calibratedMs": 0.283,
+      "opsPerSecond": 353857041.8,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)",
-      "elapsedMilliseconds": 0.3,
-      "calibratedMs": 0.3,
-      "opsPerSecond": 333444481.5,
+      "elapsedMilliseconds": 0.301,
+      "calibratedMs": 0.301,
+      "opsPerSecond": 331895121.1,
       "iterations": 100000,
       "status": "completed"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)",
-      "elapsedMilliseconds": 0.418,
-      "calibratedMs": 0.418,
-      "opsPerSecond": 239348970.8,
+      "elapsedMilliseconds": 0.561,
+      "calibratedMs": 0.561,
+      "opsPerSecond": 178316690.4,
       "iterations": 100000,
       "status": "completed"
     },
@@ -95,9 +95,9 @@
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)",
-      "elapsedMilliseconds": 0.289,
-      "calibratedMs": 0.289,
-      "opsPerSecond": 346020761.2,
+      "elapsedMilliseconds": 0.28,
+      "calibratedMs": 0.28,
+      "opsPerSecond": 356633380.9,
       "iterations": 100000,
       "status": "completed"
     },
@@ -128,29 +128,29 @@
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)",
-      "elapsedMilliseconds": 0.283,
-      "calibratedMs": 0.283,
-      "opsPerSecond": 352733686.1,
-      "iterations": 100000,
-      "status": "completed"
-    },
-    {
-      "methodIndex": 16,
-      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
-      "elapsedMilliseconds": 0.302,
-      "calibratedMs": 0.302,
-      "opsPerSecond": 330797221.3,
+      "elapsedMilliseconds": 0.284,
+      "calibratedMs": 0.284,
+      "opsPerSecond": 352112676.1,
       "iterations": 100000,
       "status": "failed"
     },
     {
-      "methodIndex": 17,
-      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
-      "elapsedMilliseconds": 0.421,
-      "calibratedMs": 0.421,
-      "opsPerSecond": 237642585.6,
+      "methodIndex": 16,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)",
+      "elapsedMilliseconds": 0.301,
+      "calibratedMs": 0.301,
+      "opsPerSecond": 331674958.5,
       "iterations": 100000,
       "status": "completed"
+    },
+    {
+      "methodIndex": 17,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)",
+      "elapsedMilliseconds": 0.0,
+      "calibratedMs": 0.0,
+      "opsPerSecond": 0.0,
+      "iterations": 100000,
+      "status": "failed"
     }
   ]
 }

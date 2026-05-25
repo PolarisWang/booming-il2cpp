@@ -2,7 +2,6 @@
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
-#include "com_ccw.h"
 #include "codegen_bridge.h"
 #include "module_registry.h"
 #include "abi_manifest.h"
@@ -15,8 +14,8 @@
 #include <gc/gc_bgc_inline.h>
 #include <gc/gc_card_table.h>
 #include <ChaosGeneratedRuntimePrelude.h>
-#include "enum_metadata.generated.h"
 #include "enum_stubs.h"
+#include "enum_metadata.generated.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -452,12 +451,21 @@ static constexpr HotpatchSlotEntryV0 s_hotpatch_slots[4] = {
 };
 
 // Dispatch table (function pointers)
-static HotpatchEntryV0 s_hotpatch_entries[4] = {
-	{ reinterpret_cast<void*>(&EhStressSubjects_EhStressSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EhStressSubjects::Subject_0
-	{ reinterpret_cast<void*>(&EhStressSubjects_EhStressSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EhStressSubjects::Subject_1
-	{ reinterpret_cast<void*>(&EhStressSubjects_EhStressSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EhStressSubjects::Subject_2
-	{ reinterpret_cast<void*>(&EhStressSubjects_EhStressSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, kHotpatchKeepNative },  // EhStressSubjects::Subject_3
+// s_hotpatch_entries — external linkage for verification_dispatch
+// NOTE: `static` is deliberately omitted so that the verification dispatch
+// TU (verification_dispatch.generated.cpp) can access this array via
+// GetHotpatchEntries(). Without external linkage, the linker cannot resolve
+// the symbol across translation units.
+extern "C" HotpatchEntryV0 s_hotpatch_entries[4] = {
+	{ reinterpret_cast<void*>(&EhStressSubjects_EhStressSubjects_Subject_0), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // EhStressSubjects::Subject_0
+	{ reinterpret_cast<void*>(&EhStressSubjects_EhStressSubjects_Subject_1), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // EhStressSubjects::Subject_1
+	{ reinterpret_cast<void*>(&EhStressSubjects_EhStressSubjects_Subject_2), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // EhStressSubjects::Subject_2
+	{ reinterpret_cast<void*>(&EhStressSubjects_EhStressSubjects_Subject_3), reinterpret_cast<void*>(&InterpreterEntryDirect), 0ull, 0 },  // EhStressSubjects::Subject_3
 };
+
+// Accessor functions for verification_dispatch.generated.cpp
+extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpatch_entries; }
+extern "C" int32_t GetHotpatchEntryCount() noexcept { return 4; }
 
 // Module hotpatch bundle
 static constexpr HotpatchModuleV0 s_hotpatch_module = {
@@ -500,115 +508,23 @@ extern "C" void* kChaosExternalRuntimeFnTable[7] = {
 
 extern "C" int32_t kChaosExternalRuntimeCount = 7;
 // (no method AOT entries for this module)
-// ── Dispatch table (kAotMethods[]) ──────────────────────────────
+// ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
-// NOTE: JIT mode skips kAotMethods/kBenchmarkWrappers — dispatch goes
-// through direct_ptr (precode trampoline → JIT compilation).
+// NOTE: Pure data only — dispatch routing is in <chaos/hotpatch_dispatch.h>.
+// JIT mode uses direct_ptr (precode trampoline → JIT compilation).
 
-static void (*kAotMethods[4])() = {
-	reinterpret_cast<void(*)()>(&EhStressSubjects_EhStressSubjects_Subject_0),
-	reinterpret_cast<void(*)()>(&EhStressSubjects_EhStressSubjects_Subject_1),
-	reinterpret_cast<void(*)()>(&EhStressSubjects_EhStressSubjects_Subject_2),
-	reinterpret_cast<void(*)()>(&EhStressSubjects_EhStressSubjects_Subject_3),
-};
-
-// ── Benchmark wrappers (kBenchmarkWrappers[]) ──────────────────────────
-// Each wrapper supplies default argument values based on parameter types.
-// String params receive a valid StringId; all others receive 0.
-// Instance methods receive a sentinel this-pointer so they don't crash on null.
-static CHAOS_IL2CPP_UINT8 __g_benchmark_this_sentinel = 0;
-extern "C" void (*kBenchmarkWrappers[4])() = {
-	[]() {kAotMethods[0]();},
-	[]() {kAotMethods[1]();},
-	[]() {kAotMethods[2]();},
-	[]() {kAotMethods[3]();},
-};
-
-// ── Subject entry index mapping ─────────────────────────────────
-// Maps subject index (0-based sequential) to kAotMethod index.
-// Used by runtime-entry.cpp to route --benchmark N to the correct
-// AOT method slot, since kAotMethods[] includes lambdas/closures
+// ── Subject slot map (kSubjectSlotMap[]) ────────────────────────────
+// Maps subject index (0-based sequential) to kMethodTable index.
+// External consumers use this to route --benchmark N to the correct
+// AOT method slot, since kMethodTable[] includes lambdas/closures
 // that shift subject methods to non-contiguous indices.
 extern "C" const int kSubjectEntryCount = 4;
-extern "C" const int kSubjectEntryIndices[4] = {
+extern "C" const int kSubjectSlotMap[4] = {
 	0,
 	1,
 	2,
 	3,
 };
-
-// Single-method dispatch via hotpatch dispatch table.
-// AOT mode: uses kBenchmarkWrappers (not raw kAotMethods) to ensure instance
-// methods receive a valid this-pointer sentinel and default argument values.
-extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(
-	CHAOS_IL2CPP_INT32 chaos_entry_index)
-{
-	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
-		return -1;
-	auto& entry = s_hotpatch_entries[chaos_entry_index];
-	if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
-		&& !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
-	{
-		uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
-		chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-			entry.method_key, __chaos_args, __chaos_ret);
-	} else {
-		kBenchmarkWrappers[chaos_entry_index]();
-	}
-	return 0;
-}
-
-// All-methods loop: run every method and return a bitmask of failures.
-extern "C" CHAOS_IL2CPP_INT32 RunNativeAotAll()
-{
-	CHAOS_IL2CPP_INT32 result = 0;
-	for (int i = 0; i < kAotMethodCount; i++) {
-		auto& entry = s_hotpatch_entries[i];
-		if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
-			&& !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
-		{
-			uint64_t __chaos_args[4] = {}; uint64_t __chaos_ret[2] = {};
-			chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				entry.method_key, __chaos_args, __chaos_ret);
-		} else {
-			// Use kBenchmarkWrappers which supply correct default argument values
-			kBenchmarkWrappers[i]();
-		}
-	}
-	return result;
-}
-
-// Fast benchmark dispatch: no setjmp, inline slot access.
-extern "C" CHAOS_IL2CPP_INT32 RunNativeAotBench(
-	CHAOS_IL2CPP_INT32 chaos_entry_index)
-{
-	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
-		return -1;
-	auto& entry = s_hotpatch_entries[chaos_entry_index];
-	if (chaos::il2cpp::runtime_core::HotpatchIsActive(entry)
-		&& !chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(entry))
-	{
-		chaos::il2cpp::runtime_core::InterpreterEntryDirectFast(
-			entry.method_key);
-	} else {
-		kBenchmarkWrappers[chaos_entry_index]();
-	}
-	return 0;
-}
-
-// Pure AOT benchmark: calls kBenchmarkWrappers[i] directly, no hotpatch overhead.
-extern "C" double BenchmarkMethod(
-	int chaos_entry_index, int iterations) {
-	if (chaos_entry_index < 0 || chaos_entry_index >= kAotMethodCount)
-		return -1.0;
-	auto start = std::chrono::steady_clock::now();
-	for (int i = 0; i < iterations; i++) {
-		kBenchmarkWrappers[chaos_entry_index]();
-	}
-	auto end = std::chrono::steady_clock::now();
-	return std::chrono::duration<double, std::milli>(
-		end - start).count();
-}
 // ── GC Slot Map Section ───────────────────────────────────────────
 // Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
 // One nested struct entry per method with GC-referencing stack slots.
@@ -782,6 +698,13 @@ static const ReflectionQueryImageDescriptor kReflImage = { "EhStressSubjects", k
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
 // LookupModule(mid)->image at lines 311-321 of bootstrap.cpp.
+	// Register generated enum metadata (tables + dispatch + type descriptors).
+	// ChaosRegisterEnumGeneratedMetadata is defined in enum_metadata.generated.h.
+	static const CHAOS_IL2CPP_UINT32 s_enum_registered = []() noexcept {
+		ChaosRegisterEnumGeneratedMetadata();
+		return 1u;
+	}();
+
 // ── Generic registration proof-host helper ─────────────────
 // Populate generic registration arrays from this TU.
 static void ChaosDoPopulateGenericRegistration(
@@ -826,18 +749,6 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_0(void)
 	CHAOS_IL2CPP_INTPTR _s2{};
 	CHAOS_IL2CPP_INTPTR _s3{};
 	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
-	CHAOS_IL2CPP_INTPTR _s13{};
-	CHAOS_IL2CPP_INTPTR _s14{};
-	CHAOS_IL2CPP_INTPTR _s15{};
-	CHAOS_IL2CPP_INTPTR _s16{};
 
 
 	CHAOS_EH_TRY
@@ -907,13 +818,8 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_0(void)
 				chaos_static_EhStressSubjects_EhStressSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -931,29 +837,20 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_1(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("42");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = ChaosConvertToInt32(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			{{
+			{
 				_s1 = CHAOS_IL2CPP_STRING_ID("42");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = ChaosConvertToInt32(chaos_arg_0);
@@ -971,13 +868,8 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_1(void)
 				chaos_static_EhStressSubjects_EhStressSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -995,29 +887,20 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_2(void)
 	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
-	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
 
 
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("42");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s0;
 				const auto chaos_result = ChaosParseInt32(chaos_arg_0);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			{{
+			{
 				_s1 = CHAOS_IL2CPP_STRING_ID("42");
-			}}
+			}
 			{
 				const auto chaos_arg_0 = _s1;
 				const auto chaos_result = ChaosParseInt32(chaos_arg_0);
@@ -1035,13 +918,8 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_2(void)
 				chaos_static_EhStressSubjects_EhStressSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1060,22 +938,12 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_3(void)
 	CHAOS_IL2CPP_INTPTR _s0{};
 	CHAOS_IL2CPP_INTPTR _s1{};
 	CHAOS_IL2CPP_INTPTR _s2{};
-	CHAOS_IL2CPP_INTPTR _s3{};
-	CHAOS_IL2CPP_INTPTR _s4{};
-	CHAOS_IL2CPP_INTPTR _s5{};
-	CHAOS_IL2CPP_INTPTR _s6{};
-	CHAOS_IL2CPP_INTPTR _s7{};
-	CHAOS_IL2CPP_INTPTR _s8{};
-	CHAOS_IL2CPP_INTPTR _s9{};
-	CHAOS_IL2CPP_INTPTR _s10{};
-	CHAOS_IL2CPP_INTPTR _s11{};
-	CHAOS_IL2CPP_INTPTR _s12{};
 
 
 	CHAOS_EH_TRY
-			{{
+			{
 				_s0 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
 			{
 				const auto chaos_arg_1 = _s1;
@@ -1083,9 +951,9 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_3(void)
 				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__IndexOf_System_Int32_System_Char_(chaos_arg_0, chaos_arg_1);
 				_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 			}
-			{{
+			{
 				_s1 = CHAOS_IL2CPP_STRING_ID("hello");
-			}}
+			}
 			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(65);
 			{
 				const auto chaos_arg_1 = _s2;
@@ -1105,13 +973,8 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_3(void)
 				chaos_static_EhStressSubjects_EhStressSubjects___exitCode = chaos_value;
 			}
 	CHAOS_EH_CATCH_BEGIN
-		if (CHAOS_EH_EXCEPTION_OBJ < 0) { CHAOS_EH_RETHROW; }
-		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
-		if (chaos_header != nullptr)
-		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
-			{ CHAOS_EH_RETHROW; }
-		}
+		if (!chaos_eh_match_type(CHAOS_EH_EXCEPTION_OBJ, chaos_mt_System_Private_CoreLib_System_Object.AsTypeInfoHot()))
+		{ CHAOS_EH_RETHROW; }
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			{
@@ -1130,4 +993,28 @@ extern "C" void EhStressSubjects_EhStressSubjects_Subject_3(void)
 // extern "C" definition for link-time visibility from runtime-entry.cpp
 extern "C" const int kAotMethodCount = 4;
 
-extern "C" void ChaosJitRegisterAll() {}
+// --- JIT Method Entry Table ---
+// Auto-generated by chaos-il2cpp codegen for --mode jit.
+#include <cstdint>
+#include "jit_registration.h"
+
+static const char kJitJson_0[] = "{\"methodId\":\"eh-stress-subjects.eh-stress-subjects.subject-0\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::Subject_0:System.Void()\",\"signature\":\"System.Void EhStressSubjects::Subject_0()\",\"identity\":{\"assemblyName\":\"EhStressSubjects\",\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"definitionSubjectId\":\"EhStressSubjects/EhStressSubjects::Subject_0:System.Void()\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::Subject_0:System.Void()\",\"methodId\":\"eh-stress-subjects.eh-stress-subjects.subject-0\",\"signature\":\"System.Void EhStressSubjects::Subject_0()\"},\"nativeSymbol\":\"EhStressSubjects_EhStressSubjects_Subject_0\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":53,\"handlerOffset\":54,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":2,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":3,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":8,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":9,\"resultType\":\"System.Object\",\"callee\":\"System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":14,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"newarr\",\"opCode\":43,\"operand\":\"System.Private.CoreLib/System.Int32\",\"ilOffset\":20,\"resultType\":\"System.Int32[]\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"type\",\"subjectId\":\"System.Private.CoreLib/System.Int32\"},\"targetReference\":{\"kind\":1,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32\",\"typeShape\":1,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"runtimeServiceKind\":6,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":26,\"resultType\":\"System.Object\",\"callee\":\"System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"callvirt\",\"opCode\":15,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Object::GetHashCode:System.Int32()\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":36,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":38,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":39,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":41,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":42,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":51,\"ilOffset\":43,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":45,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"ilOffset\":46,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EhStressSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EhStressSubjects\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":65,\"ilOffset\":52,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":54,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":56,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"ilOffset\":57,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EhStressSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EhStressSubjects\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":65,\"ilOffset\":63,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":65,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EhStressSubjects\"}";
+static const char kJitJson_1[] = "{\"methodId\":\"eh-stress-subjects.eh-stress-subjects.subject-1\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::Subject_1:System.Void()\",\"signature\":\"System.Void EhStressSubjects::Subject_1()\",\"identity\":{\"assemblyName\":\"EhStressSubjects\",\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"definitionSubjectId\":\"EhStressSubjects/EhStressSubjects::Subject_1:System.Void()\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::Subject_1:System.Void()\",\"methodId\":\"eh-stress-subjects.eh-stress-subjects.subject-1\",\"signature\":\"System.Void EhStressSubjects::Subject_1()\"},\"nativeSymbol\":\"EhStressSubjects_EhStressSubjects_Subject_1\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":39,\"handlerOffset\":40,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"42\",\"ilOffset\":2,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"42\",\"ilOffset\":12,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EhStressSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EhStressSubjects\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"ilOffset\":43,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EhStressSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EhStressSubjects\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":51,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EhStressSubjects\"}";
+static const char kJitJson_2[] = "{\"methodId\":\"eh-stress-subjects.eh-stress-subjects.subject-2\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::Subject_2:System.Void()\",\"signature\":\"System.Void EhStressSubjects::Subject_2()\",\"identity\":{\"assemblyName\":\"EhStressSubjects\",\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"definitionSubjectId\":\"EhStressSubjects/EhStressSubjects::Subject_2:System.Void()\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::Subject_2:System.Void()\",\"methodId\":\"eh-stress-subjects.eh-stress-subjects.subject-2\",\"signature\":\"System.Void EhStressSubjects::Subject_2()\"},\"nativeSymbol\":\"EhStressSubjects_EhStressSubjects_Subject_2\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":39,\"handlerOffset\":40,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"42\",\"ilOffset\":2,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"42\",\"ilOffset\":12,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":17,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":22,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":24,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":25,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":27,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":28,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":37,\"ilOffset\":29,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":31,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"ilOffset\":32,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EhStressSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EhStressSubjects\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":38,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":40,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":42,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"ilOffset\":43,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EhStressSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EhStressSubjects\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":51,\"ilOffset\":49,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":51,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EhStressSubjects\"}";
+static const char kJitJson_3[] = "{\"methodId\":\"eh-stress-subjects.eh-stress-subjects.subject-3\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::Subject_3:System.Void()\",\"signature\":\"System.Void EhStressSubjects::Subject_3()\",\"identity\":{\"assemblyName\":\"EhStressSubjects\",\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"definitionSubjectId\":\"EhStressSubjects/EhStressSubjects::Subject_3:System.Void()\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::Subject_3:System.Void()\",\"methodId\":\"eh-stress-subjects.eh-stress-subjects.subject-3\",\"signature\":\"System.Void EhStressSubjects::Subject_3()\"},\"nativeSymbol\":\"EhStressSubjects_EhStressSubjects_Subject_3\",\"isStatic\":true,\"returnType\":\"System.Void\",\"returnAbi\":{\"carrierKindCode\":0,\"typeShape\":1},\"parameterCount\":0,\"parameterAbis\":[],\"localCount\":1,\"exceptionRegionCount\":1,\"exceptionRegions\":[{\"handlingKindCode\":1,\"tryOffset\":1,\"tryLength\":43,\"handlerOffset\":44,\"handlerLength\":11,\"catchTypeSubjectId\":\"System.Private.CoreLib/System.Object\"}],\"instructions\":[{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":2,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":65,\"ilOffset\":7,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":9,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ldstr\",\"opCode\":4,\"operand\":\"hello\",\"ilOffset\":14,\"resultType\":\"System.String\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":65,\"ilOffset\":19,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"call\",\"opCode\":14,\"ilOffset\":21,\"resultType\":\"System.Int32\",\"callee\":\"System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)\",\"reference\":{\"assemblyName\":\"System.Private.CoreLib\",\"subjectKind\":\"method\",\"subjectId\":\"System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)\"},\"targetReference\":{\"kind\":3,\"assemblyName\":\"System.Private.CoreLib\",\"subjectId\":\"System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeShape\":0},\"dispatchKindCode\":4,\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":26,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":0,\"ilOffset\":28,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"ceq\",\"opCode\":31,\"ilOffset\":29,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stloc\",\"opCode\":8,\"operand\":0,\"ilOffset\":31,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldloc\",\"opCode\":7,\"operand\":0,\"ilOffset\":32,\"isPreserveSig\":false},{\"op\":\"brfalse\",\"opCode\":19,\"operand\":41,\"ilOffset\":33,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":35,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"ilOffset\":36,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EhStressSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EhStressSubjects\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":42,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"pop\",\"opCode\":47,\"ilOffset\":44,\"isPreserveSig\":false},{\"op\":\"ldc.i4\",\"opCode\":0,\"operand\":1,\"ilOffset\":46,\"resultType\":\"System.Int32\",\"isPreserveSig\":false},{\"op\":\"stsfld\",\"opCode\":13,\"operand\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"ilOffset\":47,\"resultType\":\"System.Void\",\"reference\":{\"assemblyName\":\"EhStressSubjects\",\"subjectKind\":\"field\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\"},\"targetReference\":{\"kind\":2,\"assemblyName\":\"EhStressSubjects\",\"subjectId\":\"EhStressSubjects/EhStressSubjects::_exitCode\",\"typeShape\":0,\"arrayElementTypeShape\":0,\"isSealed\":false,\"isComImport\":false,\"comInterfaceTypeKind\":0,\"declaringTypeSubjectId\":\"EhStressSubjects/EhStressSubjects\",\"declaringTypeShape\":1,\"fieldTypeSubjectId\":\"System.Int32\"},\"runtimeServiceKind\":5,\"isPreserveSig\":false},{\"op\":\"leave\",\"opCode\":50,\"operand\":55,\"ilOffset\":53,\"resultType\":\"System.Void\",\"isPreserveSig\":false},{\"op\":\"ret\",\"opCode\":53,\"ilOffset\":55,\"isPreserveSig\":false}],\"isPInvoke\":false,\"isUnmanagedCallersOnly\":false,\"importCallingConvention\":0,\"importCharSet\":0,\"importSetLastError\":false,\"isInternalLink\":false,\"isSuppressGCTransition\":false,\"hasBlittableStructReturn\":false,\"declaringAssemblyName\":\"EhStressSubjects\"}";
+
+extern "C" const JitEntry kChaosJitEntries[4] =
+{
+    { kJitJson_0, 7629u, 0x00000003u, 0u },
+    { kJitJson_1, 5127u, 0x00000004u, 0u },
+    { kJitJson_2, 5103u, 0x00000005u, 0u },
+    { kJitJson_3, 5322u, 0x00000006u, 0u }
+};
+
+extern "C" const uint32_t kChaosJitEntryCount = 4u;
+
+extern "C" void ChaosJitRegisterAll() {
+    // Register hotpatch module so GetDispatchEntry can resolve tokens → slots
+    chaos::il2cpp::runtime_core::RegisterHotpatchModule(&s_hotpatch_module);
+    RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount);
+}

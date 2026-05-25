@@ -2,23 +2,22 @@
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
   "total": 1,
-  "passed": 0,
-  "failed": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
-      "family": "convert-char",
+      "family": "dispatch-basic",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
         "convert_to_cpp": "OK",
-        "build_entry_exe": "FAILED"
+        "build_entry_exe": "OK"
       },
-      "success": false,
-      "methodCount": 18,
+      "success": true,
+      "methodCount": 5,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll",
-      "error": "entry.exe build failed"
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\dispatch-basic\\managed\\subjects\\build-output\\DispatchBasicSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-24T22:21:33"
+  "timestamp": "2026-05-25T01:51:15"
 }

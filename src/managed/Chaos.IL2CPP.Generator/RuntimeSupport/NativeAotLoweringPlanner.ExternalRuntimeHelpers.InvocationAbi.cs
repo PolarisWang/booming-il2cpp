@@ -267,7 +267,7 @@ public sealed partial class NativeAotLoweringPlanner
 		case AotCoreIrAbiCarrierKind.Float32:
 			returnLines =
 			[
-				"    return chaos_load_float32(chaos_eval_stack[--chaos_stack_top]);"
+				"    return ChaosLoadFloat32(chaos_eval_stack[--chaos_stack_top]);"
 			];
 			break;
 		case AotCoreIrAbiCarrierKind.Float64:
@@ -726,7 +726,7 @@ public sealed partial class NativeAotLoweringPlanner
 			AotCoreIrAbiCarrierKind.UInt8 => "static_cast<CHAOS_IL2CPP_UINT8>(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.Int16 => "static_cast<CHAOS_IL2CPP_INT16>(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.UInt16 => "static_cast<CHAOS_IL2CPP_UINT16>(" + sourceName + ")", 
-			AotCoreIrAbiCarrierKind.Float32 => "chaos_load_float32(" + sourceName + ")", 
+			AotCoreIrAbiCarrierKind.Float32 => "ChaosLoadFloat32(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.Float64 => "ChaosLoadFloat64(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.Int64 => "ChaosLoadInt64(" + sourceName + ")", 
 			AotCoreIrAbiCarrierKind.UInt64 => "chaos_load_uint64(" + sourceName + ")", 
@@ -912,7 +912,7 @@ public sealed partial class NativeAotLoweringPlanner
 		case AotCoreIrAbiCarrierKind.UInt16:
 			return $"WriteI32({argName})";
 		case AotCoreIrAbiCarrierKind.Float32:
-			return $"WriteF32(chaos_load_float32({argName}))";
+			return $"WriteF32(ChaosLoadFloat32({argName}))";
 		case AotCoreIrAbiCarrierKind.Float64:
 			return $"WriteF64(ChaosLoadFloat64({argName}))";
 		case AotCoreIrAbiCarrierKind.Int64:

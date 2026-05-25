@@ -1,0 +1,64 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "AttributesCustomMetadataSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Attribute\u003E::.ctor:System.Void(System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::.ctor:System.Void(System.Collections.Generic.IEnumerable\u003C!0\u003E)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::.ctor:System.Void(System.Collections.Generic.IEnumerable\u003C!0\u003E)",
+        "typeArguments": [
+          "System.Attribute"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "AttributesCustomMetadataSubjects",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.List\u003CSystem.Attribute\u003E::get_Count:System.Int32()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::get_Count:System.Int32()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.List\u00601::get_Count:System.Int32()",
+        "typeArguments": [
+          "System.Attribute"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "AttributesCustomMetadataSubjects",
+      "owningAssemblyName": "System.Linq",
+      "subjectKind": "method",
+      "subjectId": "System.Linq/Enumerable::Cast\u003CSystem.Attribute\u003E:System.Collections.Generic.IEnumerable\u003CSystem.Attribute\u003E(System.Collections.IEnumerable)",
+      "definitionSubjectId": "System.Linq/Enumerable::Cast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.IEnumerable)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Linq/Enumerable::Cast:System.Collections.Generic.IEnumerable\u003C!!0\u003E(System.Collections.IEnumerable)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Attribute"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    }
+  ]
+}

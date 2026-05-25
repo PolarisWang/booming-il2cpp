@@ -63,6 +63,60 @@ extern "C" CHAOS_IL2CPP_INT32 ArrayIndexingCopySubjects_ArrayIndexingCopySubject
 extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_cctor(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_1(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_10(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_11(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_12(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_2(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_3(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_4(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_5(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_6(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_7(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_8(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_9(void);
+extern "C" CHAOS_IL2CPP_INT32 ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_Subject_3_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_cctor(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_1(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_10(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_11(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_12(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_2(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_3(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_4(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_5(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_6(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_7(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_8(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_9(void);
+extern "C" CHAOS_IL2CPP_INT32 ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_Subject_3_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_cctor(void);
+
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_1(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_10(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_11(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_12(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_2(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_3(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_4(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_5(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_6(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_7(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_8(void);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_9(void);
+extern "C" CHAOS_IL2CPP_INT32 ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_Subject_3_b__4_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_cctor(void);
+
 namespace chaos::il2cpp::codegen::ArrayIndexingCopySubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -76,15 +130,15 @@ inline TypeInfoV0 chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects =
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects = static_cast<CHAOS_IL2CPP_INTPTR>(18134131238671616544ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline TypeInfoV0 chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c, 11884632647042276952ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c, 11884632647042276952ULL, 2u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c = static_cast<CHAOS_IL2CPP_INTPTR>(11884632647042276952ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Byte = {{nullptr, nullptr, 3217969471912086765ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Byte = static_cast<CHAOS_IL2CPP_INTPTR>(3217969471912086765ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&chaos_mt_System_Private_CoreLib_System_Delegate.hot, nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Delegate), nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8866194404114377402ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Int32 = {{nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
@@ -131,7 +185,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -368,7 +422,7 @@ void chaos_ensure_type_initialized_ArrayIndexingCopySubjects_ArrayIndexingCopySu
 	if (chaos_static_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c____9 == 0)
 	{
 	    auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c);
-	    chaos_object->header.type_info = &chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c.hot;
+	    chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c);
 		const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 		ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c__ctor(chaos_arg_0);
 	    chaos_static_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c____9 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -566,8 +620,8 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[3] = {
 		nullptr,
-		&chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects.hot,
-		&chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects),
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c),
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
@@ -1370,7 +1424,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1385,7 +1439,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1402,7 +1456,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_0(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1442,7 +1496,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_1(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1458,7 +1512,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_1(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1478,7 +1532,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_1(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1515,7 +1569,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_2(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1533,7 +1587,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_2(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1594,7 +1648,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_3(vo
 						const auto chaos_method_ptr = _s1;
 						const auto chaos_target = _s0;
 						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
-						chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.hot;
+						chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Func_System_Int32_);
 						chaos_object->chaos_delegate_target = chaos_target;
 						chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 						_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -1696,7 +1750,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_3(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1736,7 +1790,7 @@ extern "C" CHAOS_IL2CPP_INT32 ArrayIndexingCopySubjects_ArrayIndexingCopySubject
 		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 		chaos_array->element_type_shape = 1;
-		chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+		chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1781,7 +1835,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_4(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1817,7 +1871,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_5(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1836,7 +1890,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_5(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1882,7 +1936,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_6(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1904,7 +1958,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_6(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1932,7 +1986,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_6(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1982,7 +2036,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_7(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2008,7 +2062,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_7(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2040,7 +2094,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_7(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2086,7 +2140,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_8(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2108,7 +2162,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_8(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2136,7 +2190,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_8(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2182,7 +2236,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_9(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2204,7 +2258,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_9(vo
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2232,7 +2286,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_9(vo
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2269,7 +2323,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_10(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2315,7 +2369,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_11(v
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Int32);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2337,7 +2391,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_11(v
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Int32);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2365,7 +2419,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_11(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2413,7 +2467,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_12(v
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Int32);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2440,7 +2494,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_12(v
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Int32.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Int32);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -2473,7 +2527,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects_Subject_12(v
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2497,7 +2551,7 @@ extern "C" void ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c_cctor(vo
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c, {});
-		chaos_object->header.type_info = &chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c.hot;
+		chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c);
 		ArrayIndexingCopySubjects_ArrayIndexingCopySubjects___c__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}

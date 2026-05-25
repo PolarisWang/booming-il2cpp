@@ -47,6 +47,26 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7(void);
 extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8(void);
 extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8(void);
+extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::IoStreamsBasicsSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -101,7 +121,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -243,7 +263,7 @@ CHAOS_IL2CPP_INTPTR chaos_string_materialize(CHAOS_IL2CPP_INTPTR chaos_value) no
 	const auto chaos_view = chaos::il2cpp::string_table::Resolve(chaos_id);
 
 	auto* chaos_string = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_String, {});
-	chaos_string->header.type_info = &chaos_mt_System_Private_CoreLib_System_String.hot;
+	chaos_string->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String);
 	chaos_string->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_view.byte_count);
 	auto* owned_utf8 = static_cast<char*>(chaos::il2cpp::runtime_core::GcAllocateAtomic(chaos_view.byte_count + 1));
 	CHAOS_IL2CPP_MEMCPY(owned_utf8, chaos_view.utf8_data, chaos_view.byte_count);
@@ -605,7 +625,7 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[2] = {
 		nullptr,
-		&chaos_mt_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_IoStreamsBasicsSubjects_IoStreamsBasicsSubjects),
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[3] = {
@@ -1450,14 +1470,14 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
@@ -1470,7 +1490,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1494,14 +1514,14 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(5);
@@ -1514,7 +1534,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s3 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1544,7 +1564,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_0(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1574,7 +1594,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1588,7 +1608,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
@@ -1606,7 +1626,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_1(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1632,7 +1652,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1645,7 +1665,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_2(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1691,7 +1711,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1707,7 +1727,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3(void)
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s1));
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1737,7 +1757,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1766,7 +1786,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1782,7 +1802,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_4(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1820,7 +1840,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1832,7 +1852,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5(void)
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1858,7 +1878,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1896,7 +1916,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1908,7 +1928,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6(void)
 			_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s0));
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1934,7 +1954,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1961,13 +1981,13 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -1980,7 +2000,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_7(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2022,7 +2042,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8(void)
 			{
 				const auto chaos_arg_1 = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_StringReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_StringReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_StringReader);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_StringReader___ctor_System_Void_System_String_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -2046,7 +2066,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_StringReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_StringReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_StringReader);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_StringReader___ctor_System_Void_System_String_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -2080,7 +2100,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_8(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2122,7 +2142,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9(void)
 			{
 				const auto chaos_arg_1 = _s0;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_StringReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_StringReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_StringReader);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_StringReader___ctor_System_Void_System_String_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -2146,7 +2166,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9(void)
 			{
 				const auto chaos_arg_1 = _s1;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_StringReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_StringReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_StringReader);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_StringReader___ctor_System_Void_System_String_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -2180,7 +2200,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_9(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2207,7 +2227,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_StringWriter, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_StringWriter.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_StringWriter);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_StringWriter___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -2224,7 +2244,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_10(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2251,7 +2271,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_StringWriter, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_StringWriter.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_StringWriter);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_StringWriter___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -2268,7 +2288,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_11(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2294,7 +2314,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_StringWriter, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_StringWriter.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_StringWriter);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_StringWriter___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
@@ -2307,7 +2327,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_12(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2355,19 +2375,19 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryReader);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -2384,19 +2404,19 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryReader);
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -2419,7 +2439,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_13(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2469,19 +2489,19 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryReader);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -2507,19 +2527,19 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryReader);
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -2551,7 +2571,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_14(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2603,19 +2623,19 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryReader);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -2633,19 +2653,19 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15(void)
 				auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 				chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 				chaos_array->element_type_shape = 1;
-				chaos_array->element_type_info = &chaos_mt_System_Private_CoreLib_System_Byte.hot;
+				chaos_array->element_type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Byte);
 				chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
 				chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryReader, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryReader.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryReader);
 				_s2 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
@@ -2669,7 +2689,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2697,13 +2717,13 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryWriter, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -2716,7 +2736,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_16(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -2744,13 +2764,13 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17(void)
 	CHAOS_EH_TRY
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_MemoryStream, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_MemoryStream.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_MemoryStream);
 				chaos_external_runtime_System_Private_CoreLib_System_IO_MemoryStream___ctor_System_Void__(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			{
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_IO_BinaryWriter, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_IO_BinaryWriter);
 				_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 			}
 			_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(42);
@@ -2763,7 +2783,7 @@ extern "C" void IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_17(void)
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;

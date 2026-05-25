@@ -47,6 +47,26 @@ extern "C" CHAOS_IL2CPP_INT32 ThreadingMonitorInterlockedSubjects_ThreadingMonit
 extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
 extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_cctor(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_0(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_1(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_10(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_11(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_4(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_5(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_6(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_7(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_8(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_CustomEntrySubject_9(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_12(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_13(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2(void);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3(void);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__14_0(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_Subject_13_b__14_1(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c_cctor(void);
+
 namespace chaos::il2cpp::codegen::ThreadingMonitorInterlockedSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
@@ -58,11 +78,11 @@ using namespace chaos::il2cpp::runtime_core;
 const void* chaos_vtable_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c[];
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Object = {{nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Delegate = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 7451128447593600616ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Delegate = static_cast<CHAOS_IL2CPP_INTPTR>(7451128447593600616ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{&chaos_mt_System_Private_CoreLib_System_Delegate.hot, nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_MulticastDelegate = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Delegate), nullptr, 6681393039041505440ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_MulticastDelegate = static_cast<CHAOS_IL2CPP_INTPTR>(6681393039041505440ULL);
-inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{&chaos_mt_System_Private_CoreLib_System_MulticastDelegate.hot, nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Func_System_Int32_ = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_MulticastDelegate), nullptr, 8866194404114377402ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Func_System_Int32_ = static_cast<CHAOS_IL2CPP_INTPTR>(8866194404114377402ULL);
 inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {{nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
@@ -78,7 +98,7 @@ inline TypeInfoV0 chaos_mt_System_Private_CoreLib_System_String = {{nullptr, nul
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
 inline TypeInfoV0 chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects = {{nullptr, nullptr, 4882207410565625576ULL, 0u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects = static_cast<CHAOS_IL2CPP_INTPTR>(4882207410565625576ULL);
-inline TypeInfoV0 chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c = {{&chaos_mt_System_Private_CoreLib_System_Object.hot, chaos_vtable_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c, 9387555369835203792ULL, 3u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
+inline TypeInfoV0 chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c = {{reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c, 9387555369835203792ULL, 3u, 32, 1, 1}, {nullptr, nullptr, 0, 0, 0, 0}};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c = static_cast<CHAOS_IL2CPP_INTPTR>(9387555369835203792ULL);
 
 // ── Virtual method table arrays ──
@@ -114,7 +134,7 @@ bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHA
 	// this line is reached only if caller skipped materialization.
 	if (chaos_is_string_id(chaos_value))
 	{
-		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(&chaos_mt_System_Private_CoreLib_System_String.hot, chaos_array->element_type_info);
+		return chaos_array->element_type_shape == chaos_type_shape_reference            && chaos_is_type_compatible(reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_String), chaos_array->element_type_info);
 	}
 
 	auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
@@ -288,7 +308,7 @@ void chaos_ensure_type_initialized_ThreadingMonitorInterlockedSubjects_Threading
 	if (chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9 == 0)
 	{
 	    auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c);
-	    chaos_object->header.type_info = &chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c.hot;
+	    chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c);
 		const auto chaos_arg_0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 		ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor(chaos_arg_0);
 	    chaos_static_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c____9 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -473,8 +493,8 @@ static const ::ChaosAbiManifestV0* const s_abi_manifest =
 
 	static const TypeInfoHot* const s_type_info_ptrs[3] = {
 		nullptr,
-		&chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects.hot,
-		&chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c.hot,
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects),
+		reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c),
 	};
 
 	static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[1] = {
@@ -1192,7 +1212,7 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1270,7 +1290,7 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1381,7 +1401,7 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1452,7 +1472,7 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 				const auto chaos_method_ptr = _s2;
 				const auto chaos_target = _s1;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Func_System_Int32_);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -1576,7 +1596,7 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 				const auto chaos_method_ptr = _s6;
 				const auto chaos_target = _s5;
 				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Int32_, {});
-				chaos_object->header.type_info = &chaos_mt_System_Private_CoreLib_System_Func_System_Int32_.hot;
+				chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Func_System_Int32_);
 				chaos_object->chaos_delegate_target = chaos_target;
 				chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
 				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -1687,7 +1707,7 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 		auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(CHAOS_EH_EXCEPTION_OBJ);
 		if (chaos_header != nullptr)
 		{
-			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), &chaos_mt_System_Private_CoreLib_System_Object.hot))
+			if (!chaos_is_type_compatible(chaos_object_get_type_info(chaos_header), reinterpret_cast<const TypeInfoHot*>(&chaos_mt_System_Private_CoreLib_System_Object)))
 			{ CHAOS_EH_RETHROW; }
 		}
 		_s0 = CHAOS_EH_EXCEPTION_OBJ;
@@ -1759,7 +1779,7 @@ extern "C" void ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedS
 
 	{
 		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c, {});
-		chaos_object->header.type_info = &chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c.hot;
+		chaos_object->header.type_info = reinterpret_cast<const TypeInfoHot*>(&chaos_mt_ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c);
 		ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects___c__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 	}

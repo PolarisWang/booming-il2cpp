@@ -1,0 +1,104 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadata",
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  },
+  "types": [
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "methods": [
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_0:System.Void()",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_1:System.Void()",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_2:System.Void()",
+      "metadataToken": 100663299,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_3:System.Void()",
+      "metadataToken": 100663300,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_4:System.Void()",
+      "metadataToken": 100663301,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_5:System.Void()",
+      "metadataToken": 100663302,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_6:System.Void()",
+      "metadataToken": 100663303,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_7:System.Void()",
+      "metadataToken": 100663304,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_8:System.Void()",
+      "metadataToken": 100663305,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_9:System.Void()",
+      "metadataToken": 100663306,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_10:System.Void()",
+      "metadataToken": 100663307,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_11:System.Void()",
+      "metadataToken": 100663308,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_12:System.Void()",
+      "metadataToken": 100663309,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::Subject_13:System.Void()",
+      "metadataToken": 100663310,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_14:System.Void()",
+      "metadataToken": 100663311,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_15:System.Void()",
+      "metadataToken": 100663312,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "ThreadingSyncSubjects/ThreadingSyncSubjects::CustomEntrySubject_16:System.Void()",
+      "metadataToken": 100663313,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "genericInstantiations": []
+}

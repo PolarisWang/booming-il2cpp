@@ -1,0 +1,99 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadataTemplate",
+  "registeredTypes": [
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 33554434
+    }
+  ],
+  "registeredMethods": [
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_0:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663297,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_1:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_1:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663298,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_2:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_2:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663299,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_3:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_3:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663300,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_4:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663301,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_5:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_5:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663302,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_6:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_6:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663303,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_7:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663304,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_8:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_8:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663305,
+      "parameterCount": 0
+    },
+    {
+      "assemblyName": "GenericNullableValueSubjects",
+      "subjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()",
+      "definitionSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects::Subject_9:System.Void()",
+      "declaringTypeSubjectId": "GenericNullableValueSubjects/GenericNullableValueSubjects",
+      "metadataToken": 100663306,
+      "parameterCount": 0
+    }
+  ],
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  }
+}

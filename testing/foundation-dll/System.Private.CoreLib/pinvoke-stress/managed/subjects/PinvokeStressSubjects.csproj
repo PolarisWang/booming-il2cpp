@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <IsTestProject>false</IsTestProject>
+    <AssemblyName>PinvokeStressSubjects</AssemblyName>
+    <RootNamespace>PinvokeStressSubjects</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0020;SYSLIB0050;CS8602;CS8604</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="PinvokeStressSubjects.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Remove="Microsoft.NET.Test.Sdk" />
+    <PackageReference Remove="xunit" />
+    <PackageReference Remove="xunit.runner.visualstudio" />
+    <PackageReference Remove="FsCheck.Xunit" />
+  </ItemGroup>
+</Project>

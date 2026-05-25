@@ -1,0 +1,30 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "GenericsStressSubjects.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "GenericsStressSubjects_GenericsStressSubjects_Subject_0",
+          "subjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_0:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "GenericsStressSubjects_GenericsStressSubjects_Subject_1",
+          "subjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_1:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "GenericsStressSubjects_GenericsStressSubjects_Subject_2",
+          "subjectId": "GenericsStressSubjects/GenericsStressSubjects::Subject_2:System.Void()"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

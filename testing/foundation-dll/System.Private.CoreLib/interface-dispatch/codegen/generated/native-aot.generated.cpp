@@ -175,6 +175,43 @@ extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6(vo
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7(void);
 extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcAdd_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void InterfaceDispatchSubjects_CalcAdd__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Add_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_CalcMul_Multiply_System_Int32_System_Int32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1, CHAOS_IL2CPP_INT32 chaos_fn_arg_2);
+extern "C" void InterfaceDispatchSubjects_CalcMul__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_IWithDefault_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond2_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplDiamond2__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_BaseMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplDiamond_DerivedMethod(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplDiamond__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplSimple_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplSimple__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_ImplWithDefault_GetValue(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" void InterfaceDispatchSubjects_ImplWithDefault__ctor(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_Run_System_Int32(CHAOS_IL2CPP_INT32 chaos_fn_arg_0);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestAsCheck(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondBase(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondDerived(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestDiamondMulti(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestIsCheck(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestMultiImplCalc(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplDefault(void);
+extern "C" CHAOS_IL2CPP_INT32 InterfaceDispatchSubjects_InterfaceDispatchNativeEntry_TestSingleImplSimple(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_0(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_1(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_2(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_3(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_4(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_5(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_6(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_7(void);
+extern "C" void InterfaceDispatchSubjects_InterfaceDispatchSubjects_Subject_8(void);
+
 namespace chaos::il2cpp::codegen::InterfaceDispatchSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup

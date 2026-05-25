@@ -8,65 +8,65 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::Run:System.Int32(System.Int32)",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 2003.062,
+      "calibratedMs": 2003.062,
+      "opsPerSecond": 49923.6,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 7315.853,
+      "calibratedMs": 7315.853,
+      "opsPerSecond": 13668.9,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6359.248,
+      "calibratedMs": 6359.248,
+      "opsPerSecond": 15725.1,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6596.404,
+      "calibratedMs": 6596.404,
+      "opsPerSecond": 15159.8,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 6074.352,
+      "calibratedMs": 6074.352,
+      "opsPerSecond": 16462.7,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 5706.726,
+      "calibratedMs": 5706.726,
+      "opsPerSecond": 17523.2,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()",
-      "elapsedMilliseconds": 0.0,
-      "calibratedMs": 0.0,
-      "opsPerSecond": 0.0,
+      "elapsedMilliseconds": 5946.494,
+      "calibratedMs": 5946.494,
+      "opsPerSecond": 16816.6,
       "iterations": 100000,
-      "status": "failed"
+      "status": "completed"
     }
   ]
 }

@@ -87,6 +87,18 @@ extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7(vo
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8(void);
 extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9(void);
 
+// Forward declarations (pipeline fix: used before extern "C" decl)
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8(void);
+extern "C" void GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9(void);
+
 namespace chaos::il2cpp::codegen::GarbageCollectionSubjects {
 
 // Bring runtime_core declarations into scope for unqualified lookup
