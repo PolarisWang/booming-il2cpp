@@ -3551,10 +3551,14 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
     for (uint32_t slot = 0; slot < num_cache_regs_; ++slot)
         prologue_push_offsets_[4 + slot] = buf_.pos(),
         enc_.EmitPush(callee_saved_regs_[slot]);
-    enc_.EmitMovRR(kRBX, kRCX); enc_.EmitMovRR(kRSI, kRDX);
     prologue_sub_rsp_offset_ = buf_.pos();
     prologue_sub_rsp_size_ = static_cast<uint32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_ + localloc_extra_);
     enc_.EmitSubRI(kRSP, static_cast<int32_t>(prologue_sub_rsp_size_));
+    // Set up register convention: RBX = args_buf, RSI = ret_buf.
+    // Both point to the GPR file in the local frame (not from caller RCX/RDX),
+    // since JIT mode calls these functions as void() with no arguments.
+    enc_.EmitLeaRM(kRBX, kRSP, static_cast<int32_t>(kGprFileOff));
+    enc_.EmitLeaRM(kRSI, kRSP, static_cast<int32_t>(kGprFileOff));
     prologue_total_bytes_ = buf_.pos() - prologue_push_offsets_[0];
 
     // Build push register list for unwind info: rbp, rbx, rsi, rdi, cached regs
