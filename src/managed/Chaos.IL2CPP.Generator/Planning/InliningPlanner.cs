@@ -41,6 +41,16 @@ internal sealed class InliningPlanner
     /// </summary>
     internal const float kMaxInlineCallerFraction = 0.50f;
 
+    /// <summary>
+    /// Max nesting depth for inlining. Depth 1 = top-level call site;
+    /// depth 2 = inline inside an inline; etc. Prevents runaway
+    /// recursive inlining and C++ code bloat.
+    /// </summary>
+    internal const int kMaxInlineDepth = 3;
+
+    /// <summary>Max callee IR instructions for inlining when call site is inside a loop.</summary>
+    internal const int kMaxInlineLoopInstructionCount = 48;
+
     // ── Hot/cold thresholds ────────────────────────────────────────────
     // Methods with estimated call count exceeding these thresholds are
     // classified into temperature bands for code-section assignment.
@@ -106,7 +116,8 @@ internal sealed class InliningPlanner
         int calleeInstructionCount,
         int callerInstructionCount,
         bool isRecursive,
-        int calleeEstimatedComplexity = -1)
+        int calleeEstimatedComplexity = -1,
+        bool isInLoop = false)
     {
         if (isRecursive)
         {
@@ -117,12 +128,13 @@ internal sealed class InliningPlanner
             };
         }
 
-        if (calleeInstructionCount > kMaxInlineInstructionCount)
+        int effectiveMax = isInLoop ? kMaxInlineLoopInstructionCount : kMaxInlineInstructionCount;
+        if (calleeInstructionCount > effectiveMax)
         {
             return new InlineCandidate
             {
                 CanInline = false,
-                Reason = $"callee size ({calleeInstructionCount}) exceeds max inline count ({kMaxInlineInstructionCount})"
+                Reason = $"callee size ({calleeInstructionCount}) exceeds max inline count ({effectiveMax})"
             };
         }
 

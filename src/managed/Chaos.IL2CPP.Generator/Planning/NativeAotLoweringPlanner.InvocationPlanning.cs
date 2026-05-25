@@ -689,12 +689,16 @@ public sealed partial class NativeAotLoweringPlanner
                         .ToArray();
                     if (ifaceUniqueImpls.Length == 1)
                     {
-                        // Single implementation — guard on first receiver type
+                        // Single implementation — guard on first receiver type, or unconditional if sealed
+                        string guardReceiver = _sealedTypeSubjectIds != null
+                            && _sealedTypeSubjectIds.Contains(routes[0].ReceiverTypeSubjectId)
+                            ? null!
+                            : routes[0].ReceiverTypeSubjectId;
                         _devirtualizationHints[key] = new DevirtualizationHint(
                             true,
                             routes[0].ImplementationMethod.SubjectId,
                             routes[0].ImplementationMethod.Identity.DeclaringTypeSubjectId,
-                            guardTypeSubjectId: routes[0].ReceiverTypeSubjectId);
+                            guardTypeSubjectId: guardReceiver);
                     }
                     // Multiple implementations: skip devirtualization, fall through to vtable
                 }
@@ -712,11 +716,15 @@ public sealed partial class NativeAotLoweringPlanner
                             string.Equals(r.ReceiverTypeSubjectId, slotDeclaringTypeSubjectId, StringComparison.Ordinal));
                         if (declaringImpl != null)
                         {
+                            string guardType3c = _sealedTypeSubjectIds != null
+                                && _sealedTypeSubjectIds.Contains(slotDeclaringTypeSubjectId)
+                                ? null!
+                                : slotDeclaringTypeSubjectId;
                             _devirtualizationHints[key] = new DevirtualizationHint(
                                 true,
                                 declaringImpl.ImplementationMethod.SubjectId,
                                 declaringImpl.ImplementationMethod.Identity.DeclaringTypeSubjectId,
-                                guardTypeSubjectId: slotDeclaringTypeSubjectId);
+                                guardTypeSubjectId: guardType3c);
                         }
                     }
                     else if (uniqueImpls.Length == 1)
@@ -758,11 +766,15 @@ public sealed partial class NativeAotLoweringPlanner
                         StringComparison.Ordinal));
                 if (declaringImpl != null)
                 {
+                    string guardType4 = _sealedTypeSubjectIds != null
+                        && _sealedTypeSubjectIds.Contains(slotDeclaringTypeSubjectId)
+                        ? null!
+                        : slotDeclaringTypeSubjectId;
                     _devirtualizationHints[p4Key] = new DevirtualizationHint(
                         true,
                         declaringImpl.ImplementationMethod.SubjectId,
                         declaringImpl.ImplementationMethod.Identity.DeclaringTypeSubjectId,
-                        guardTypeSubjectId: slotDeclaringTypeSubjectId);
+                        guardTypeSubjectId: guardType4);
                 }
             }
         }

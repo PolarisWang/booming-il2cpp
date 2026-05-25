@@ -18,6 +18,7 @@ namespace Chaos.IL2CPP.Generator;
 public sealed partial class NativeAotLoweringPlanner
 {
 	private int _linearScratchCounter;
+	private int _nextInlineId;
 	private string? _pendingEnumBoxSubjectId;
 
 	// Array bounds check cache for structured slot mode.
@@ -2053,30 +2054,66 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 	/// <summary>
 	/// Try to inline a resolved callee method at the call site.
 	/// Used by both direct calls and devirtualized callvirt.
+	/// Supports simple multi-BB callees (up to 3 basic blocks) with branch
+	/// target remapping and unified exit via goto chaos_inline_end{N}.
 	/// </summary>
-	private bool TryInlineResolvedMethod(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string calleeSubjectId, int paramCount, string indentation)
+	private bool TryInlineResolvedMethod(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string calleeSubjectId, int paramCount, string indentation, int depth = 1)
 	{
 		if (!_methodsBySubjectId.TryGetValue(calleeSubjectId, out var calleeMethod)) return false;
 		if (calleeMethod.ExceptionRegionCount > 0) return false;
 		if (calleeMethod.IsPInvoke) return false;
 		if (_currentMethodArtifact == null) return false;
 		if (_currentMethodNativeSymbol == null) return false;
+		if (depth > InliningPlanner.kMaxInlineDepth) return false;
+		int inlineId = _nextInlineId++;
 
 		// Budget check via InliningPlanner
 		bool isRecursive = string.Equals(calleeMethod.NativeSymbol, _currentMethodNativeSymbol, StringComparison.Ordinal);
 		var candidate = InliningPlanner.EvaluateInline(calleeMethod.Instructions.Count, _currentMethodArtifact.Instructions.Count, isRecursive);
+		if (!candidate.CanInline) return false;
 
-		// Single-BB restriction: no branches, switch, leave, starg, ldarga, ldloca
+		// Multi-BB support: scan callee instructions to find branch targets and count basic blocks.
+		var branchTargets = new HashSet<int>();
+		int basicBlockCount = 1;
 		foreach (var ci in calleeMethod.Instructions)
 		{
-			if (ci.Op is "br" or "brfalse" or "brtrue" or "beq" or "bne.un"
-			    or "bge" or "bge.un" or "bgt" or "bgt.un" or "ble" or "ble.un"
-			    or "blt" or "blt.un" or "switch" or "leave" or "endfilter"
-			    or "starg" or "ldarga" or "ldloca")
+			switch (ci.Op)
 			{
+			case "br":
+			case "brfalse":
+			case "brtrue":
+			case "beq": case "bne.un":
+			case "bge": case "bge.un":
+			case "bgt": case "bgt.un":
+			case "ble": case "ble.un":
+			case "blt": case "blt.un":
+				branchTargets.Add(GetRequiredIntOperand(ci));
+				basicBlockCount++;
+				break;
+			case "switch":
+			case "leave":
+			case "endfilter":
+			case "endfinally":
+			case "starg":
+			case "ldarga":
+			case "ldloca":
 				return false;
 			}
 		}
+
+		if (basicBlockCount > 3) return false;
+
+		// Build IlOffset to label number mapping for branch targets
+		var labelMap = new Dictionary<int, int>();
+		int labelIdx = 0;
+		foreach (int target in branchTargets.OrderBy(t => t))
+		{
+			labelMap[target] = labelIdx++;
+		}
+
+		// Determine if callee is non-void (has a return value on eval stack)
+		bool calleeHasReturn = !string.Equals(calleeMethod.ReturnType, "System.Void", StringComparison.Ordinal)
+		                       && !string.Equals(calleeMethod.ReturnType, "void", StringComparison.Ordinal);
 
 		// ---- EMIT INLINE BODY ----
 		builder.AppendLine($"{indentation}{{");
@@ -2089,37 +2126,167 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine($"{indentation}    auto chaos_inline_arg_{i} = {argExpr};");
 		}
 
+		// For non-void callees, capture return value at each ret and push at unified exit
+		if (calleeHasReturn)
+		{
+			builder.AppendLine($"{indentation}    CHAOS_IL2CPP_INTPTR chaos_inline_retval{inlineId}{{}};");
+		}
+
 		int localOffset = _currentMethodArtifact.LocalCount;
 
 		foreach (var calleeInstruction in calleeMethod.Instructions)
 		{
-			if (calleeInstruction.Op == "ret") continue;
+			// Emit label if this instruction is a branch target
+			if (labelMap.TryGetValue(calleeInstruction.IlOffset, out int lbl))
+			{
+				builder.AppendLine($"{indentation}chaos_inline_label_{lbl}:");
+				builder.AppendLine($"{indentation}{{");
+			}
 
-			if (calleeInstruction.Op == "ldarg")
+			switch (calleeInstruction.Op)
+			{
+			case "ret":
+			{
+				if (calleeHasReturn)
+				{
+					string retVal = ConsumeEvalStackValueExpression();
+					builder.AppendLine($"{indentation}    chaos_inline_retval{inlineId} = {retVal};");
+				}
+				builder.AppendLine($"{indentation}    goto chaos_inline_end{inlineId};");
+				break;
+			}
+
+			case "ldarg":
 			{
 				int argIndex = GetRequiredIntOperand(calleeInstruction);
 				EmitEvalStackPush(builder, indentation + "    ", $"chaos_inline_arg_{argIndex}");
-				continue;
+				break;
 			}
 
-			if (calleeInstruction.Op == "ldloc")
+			case "ldloc":
 			{
 				int localIndex = GetRequiredIntOperand(calleeInstruction);
 				EmitEvalStackPush(builder, indentation + "    ", $"chaos_locals[{localOffset + localIndex}]");
-				continue;
+				break;
 			}
 
-			if (calleeInstruction.Op == "stloc")
+			case "stloc":
 			{
 				string valueExpr = ConsumeEvalStackValueExpression();
 				int localIndex = GetRequiredIntOperand(calleeInstruction);
 				builder.AppendLine($"{indentation}    chaos_locals[{localOffset + localIndex}] = {valueExpr};");
-				continue;
+				break;
 			}
 
-			EmitInstruction(builder, calleeInstruction, indentation + "    ");
+			case "br":
+			{
+				int targetOff = GetRequiredIntOperand(calleeInstruction);
+				if (labelMap.TryGetValue(targetOff, out int brLbl))
+					builder.AppendLine($"{indentation}    goto chaos_inline_label_{brLbl};");
+				break;
+			}
+
+			case "brfalse":
+			{
+				int targetOff = GetRequiredIntOperand(calleeInstruction);
+				if (!labelMap.TryGetValue(targetOff, out int bfLbl)) break;
+				string condVal = ConsumeEvalStackValueExpression();
+				builder.AppendLine($"{indentation}    if ({condVal} == 0) goto chaos_inline_label_{bfLbl};");
+				break;
+			}
+
+			case "brtrue":
+			{
+				int targetOff = GetRequiredIntOperand(calleeInstruction);
+				if (!labelMap.TryGetValue(targetOff, out int btLbl)) break;
+				string condVal = ConsumeEvalStackValueExpression();
+				builder.AppendLine($"{indentation}    if ({condVal} != 0) goto chaos_inline_label_{btLbl};");
+				break;
+			}
+
+			case "beq":
+			case "beq.un":
+			{
+				int targetOff = GetRequiredIntOperand(calleeInstruction);
+				if (!labelMap.TryGetValue(targetOff, out int eqLbl)) break;
+				string r = ConsumeEvalStackValueExpression();
+				string l = ConsumeEvalStackValueExpression();
+				builder.AppendLine($"{indentation}    if ({l} == {r}) goto chaos_inline_label_{eqLbl};");
+				break;
+			}
+
+			case "bne.un":
+			{
+				int targetOff = GetRequiredIntOperand(calleeInstruction);
+				if (!labelMap.TryGetValue(targetOff, out int neLbl)) break;
+				string r = ConsumeEvalStackValueExpression();
+				string l = ConsumeEvalStackValueExpression();
+				builder.AppendLine($"{indentation}    if ({l} != {r}) goto chaos_inline_label_{neLbl};");
+				break;
+			}
+
+			case "bge":
+			case "bge.un":
+			{
+				int targetOff = GetRequiredIntOperand(calleeInstruction);
+				if (!labelMap.TryGetValue(targetOff, out int geLbl)) break;
+				string r = ConsumeEvalStackValueExpression();
+				string l = ConsumeEvalStackValueExpression();
+				builder.AppendLine($"{indentation}    if ({l} >= {r}) goto chaos_inline_label_{geLbl};");
+				break;
+			}
+
+			case "bgt":
+			case "bgt.un":
+			{
+				int targetOff = GetRequiredIntOperand(calleeInstruction);
+				if (!labelMap.TryGetValue(targetOff, out int gtLbl)) break;
+				string r = ConsumeEvalStackValueExpression();
+				string l = ConsumeEvalStackValueExpression();
+				builder.AppendLine($"{indentation}    if ({l} > {r}) goto chaos_inline_label_{gtLbl};");
+				break;
+			}
+
+			case "ble":
+			case "ble.un":
+			{
+				int targetOff = GetRequiredIntOperand(calleeInstruction);
+				if (!labelMap.TryGetValue(targetOff, out int leLbl)) break;
+				string r = ConsumeEvalStackValueExpression();
+				string l = ConsumeEvalStackValueExpression();
+				builder.AppendLine($"{indentation}    if ({l} <= {r}) goto chaos_inline_label_{leLbl};");
+				break;
+			}
+
+			case "blt":
+			case "blt.un":
+			{
+				int targetOff = GetRequiredIntOperand(calleeInstruction);
+				if (!labelMap.TryGetValue(targetOff, out int ltLbl)) break;
+				string r = ConsumeEvalStackValueExpression();
+				string l = ConsumeEvalStackValueExpression();
+				builder.AppendLine($"{indentation}    if ({l} < {r}) goto chaos_inline_label_{ltLbl};");
+				break;
+			}
+
+			default:
+			{
+				EmitInstruction(builder, calleeInstruction, indentation + "    ");
+				break;
+			}
+			}
+
+			if (labelMap.ContainsKey(calleeInstruction.IlOffset))
+			{
+				builder.AppendLine($"{indentation}}}");
+			}
 		}
 
+		builder.AppendLine($"{indentation}chaos_inline_end{inlineId}:");
+		if (calleeHasReturn)
+		{
+			EmitEvalStackPush(builder, indentation + "    ", $"chaos_inline_retval{inlineId}");
+		}
 		builder.AppendLine($"{indentation}}}");
 		return true;
 	}
@@ -2197,6 +2364,13 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			}
 			if (devirtHint.GuardTypeSubjectId != null)
 			{
+#if CHAOS_IL2CPP_DEVIRT_TRACE
+				// Emit-time sanity: if the guard type is sealed, this guard is unnecessary
+				if (_sealedTypeSubjectIds != null && _sealedTypeSubjectIds.Contains(devirtHint.GuardTypeSubjectId))
+				{
+					System.Console.Error.WriteLine($"[devirt] WARNING: unnecessary guard for sealed type {devirtHint.GuardTypeSubjectId} at {instruction.IlOffset}");
+				}
+#endif
 				// Guard-based devirtualization: check runtime type, direct call if match, vtable fallback otherwise.
 				string guardStableIdExpr = GetNativeTypeIdSymbol(devirtHint.GuardTypeSubjectId);
 				if (!string.Equals(devirtRet, "void", StringComparison.Ordinal))
