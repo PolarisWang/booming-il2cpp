@@ -263,3 +263,39 @@ build/vs2022/tests/contracts/native/runtime-core/*.vcxproj.filters
 # Generated codegen output (testing)
 testing/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen/generated/
 /testing/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen/native-aot.methods.json
+
+# ── Foundation-DLL: intermediate build & codegen artifacts ──────────────
+
+# Codegen output (entirely generated, not source)
+testing/foundation-dll/**/codegen/
+
+# Managed build-output directories (obj/bin already ignored globally)
+testing/foundation-dll/**/managed/**/build-output/
+
+# Native build artifacts (build/ ignored above)
+testing/foundation-dll/**/native/**/*.exe
+testing/foundation-dll/**/native/**/*.lib
+testing/foundation-dll/**/native/**/*.exp
+testing/foundation-dll/**/native/**/*.ilk
+
+# Generated C++ in native/ (hand-written stubs like enum_stubs.cpp stay tracked)
+testing/foundation-dll/**/native/**/generated/
+testing/foundation-dll/**/native/runtime-entry.cpp
+testing/foundation-dll/**/native/runtime-patchdata.cpp
+testing/foundation-dll/**/native/verification_dispatch.generated.cpp
+testing/foundation-dll/**/native/microbench.cpp
+testing/foundation-dll/**/native/jit_debug_contract_stubs.cpp
+
+# Generated test harness / benchmark output directories
+testing/foundation-dll/**/multi-run/
+testing/foundation-dll/**/reports_generated/
+testing/foundation-dll/**/managed_test/
+testing/foundation-dll/**/benchmark/
+
+# Pipeline run data
+testing/foundation-dll/**/native/*-benchmark.json
+testing/foundation-dll/**/*.patchdata
+testing/foundation-dll/**/*.jsonl
+
+# Pipeline results (perf store, batch reports)
+testing/results/
