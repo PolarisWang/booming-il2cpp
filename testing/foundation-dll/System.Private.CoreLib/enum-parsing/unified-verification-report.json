@@ -2,77 +2,185 @@
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-24T17:54:43",
-  "duration_ms": 27655,
-  "overall_status": "passed",
+  "timestamp": "2026-05-25T21:18:53",
+  "duration_ms": 2528,
+  "overall_status": "failed",
   "stages": {
-    "codegen": {
-      "stage": "codegen",
+    "managed_fact": {
+      "stage": "managed_fact",
       "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
+      "summary": "Fact net8.0: passed=12 failed=0 skipped=1",
       "details": {
-        "methodCount": 13,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
+        "totalMethods": 13,
+        "passedMethods": 12,
+        "failedMethods": 0,
+        "skippedMethods": 1,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::GetName:System.String(System.Type,System.Object)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::GetNames:System.String[](System.Type)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 4,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::GetValues:System.Array(System.Type)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 5,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 6,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 7,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 8,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::ToString:System.String()",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 9,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::ToString:System.String(System.String)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 10,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 11,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)",
+            "status": "passed",
+            "exceptionMessage": ""
+          },
+          {
+            "methodIndex": 12,
+            "methodSubjectId": "System.Private.CoreLib/System.Enum::BoxToString:System.String()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          }
+        ]
       },
       "errors": [],
-      "duration_ms": 27536
-    },
-    "jit_codegen": {
-      "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "entry-jit.exe already exists, skipping rebuild",
-      "details": {},
-      "errors": [],
-      "duration_ms": 0
-    },
-    "fact": {
-      "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (13/13)",
-      "details": {
-        "fact": {
-          "status": "passed",
-          "passed": 13,
-          "total": 13
-        }
-      },
-      "errors": [],
-      "duration_ms": 47
+      "duration_ms": 1691
     },
     "fact_jit": {
       "stage": "fact_jit",
+      "status": "failed",
+      "summary": "Fact JIT crashed: No module named 'fact_verifier'",
+      "details": {},
+      "errors": [],
+      "duration_ms": 2
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "failed",
+      "summary": "HotUpdate JIT fact crashed: No module named 'fact_verifier'",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
       "status": "passed",
-      "summary": "Fact JIT verify=passed (13/13)",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
       "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 13,
-          "total": 13,
-          "exit_code": 0
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 734
+    },
+    "dashboard": {
+      "stage": "dashboard",
+      "status": "passed",
+      "summary": "Dashboard built: 6 sections",
+      "details": {
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 13,
+          "okCount": 13,
+          "failedCount": 0,
+          "overallIrExpansionRatio": 0.48,
+          "averageExpansionRatio": 0.48,
+          "maxExpansionRatio": 0.68,
+          "jitInstructionAvg": 44.0,
+          "aotInstructionAvg": 21.2,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {
+            "external_runtime_call": 54
+          }
+        },
+        "performance": {},
+        "hotupdate": {
+          "jitOverhead": {
+            "averageSlowdownPercent": 0.0,
+            "slowdownFactor": 1.0,
+            "nonStubMethods": 0
+          }
+        },
+        "managedFact": {
+          "totalMethods": 13,
+          "passedMethods": 12,
+          "failedMethods": 0,
+          "skippedMethods": 1,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0.48,
+          "interpreterSlowdownFactor": 0,
+          "asmPassRate": 100.0
         }
       },
       "errors": [],
-      "duration_ms": 37
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "13/13 passed, 0 failed (stub=0)",
-      "details": {
-        "passedMethods": 13,
-        "failedMethods": 0,
-        "totalMethods": 13,
-        "realMethods": 13,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 31
+      "duration_ms": 0
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
+    "methodCoverage": 92.31,
     "testedRate": 0.0,
-    "overall": 100.0
+    "overall": 92.31
   },
   "dashboard": {
     "interpreter": {},
@@ -80,29 +188,36 @@
       "totalMethods": 13,
       "okCount": 13,
       "failedCount": 0,
-      "overallIrExpansionRatio": 0.21,
-      "averageExpansionRatio": 0.52,
-      "maxExpansionRatio": 0.77,
-      "jitInstructionAvg": 116.5,
-      "aotInstructionAvg": 25.0,
+      "overallIrExpansionRatio": 0.48,
+      "averageExpansionRatio": 0.48,
+      "maxExpansionRatio": 0.68,
+      "jitInstructionAvg": 44.0,
+      "aotInstructionAvg": 21.2,
       "totalExternalRuntimeCalls": 0,
       "totalVirtualDispatches": 0,
       "totalBoxingOps": 0,
       "topInstructionCategories": {
-        "external_runtime_call": 58
+        "external_runtime_call": 54
       }
     },
     "performance": {},
     "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 13,
-        "failedMethods": 0,
-        "totalMethods": 13
+      "jitOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
       }
+    },
+    "managedFact": {
+      "totalMethods": 13,
+      "passedMethods": 12,
+      "failedMethods": 0,
+      "skippedMethods": 1,
+      "tfm": "net8.0"
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0.21,
+      "irExpansionRatio": 0.48,
       "interpreterSlowdownFactor": 0,
       "asmPassRate": 100.0
     }

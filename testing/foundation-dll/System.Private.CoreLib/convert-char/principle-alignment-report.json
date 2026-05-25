@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-25T08:53:24.195561",
+  "generated_at": "2026-05-25T19:35:32.049284",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -27,10 +27,155 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 0,
-        "methods_total": 0
+        "methods_with_lowering": 36,
+        "methods_total": 36
       },
-      "per_method": []
+      "per_method": [
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
+          "has_lowering": true
+        },
+        {
+          "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
+          "has_lowering": true
+        }
+      ]
     },
     "p1_no_redundant_branch": {
       "check_id": "p1_no_redundant_branch",
@@ -71,62 +216,112 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "6 of 11 changed source files are outside expected architecture layers",
+      "summary": "12 of 28 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+          "file": "CLAUDE.md",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/27-T4原生代码生成器架构.md",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/INDEX.md",
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/jit/jit_precode.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 11,
+        "changed_source_count": 28,
         "layer_distribution": {
-          "TestInfra": 4,
-          "RuntimeCore": 1
+          "TestInfra": 6,
+          "ManagedContracts": 2,
+          "Driver": 2,
+          "RuntimeCore": 6
         },
         "violations": [
           {
-            "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+            "file": "CLAUDE.md",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/27-T4原生代码生成器架构.md",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/INDEX.md",
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "wiki/06-测试验证/FactStatic-Native验证Gate流程.md",
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/jit/jit_precode.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -174,13 +369,14 @@
     "p3_patchdata": {
       "check_id": "p3_patchdata",
       "status": "ALIGNED",
-      "summary": "1/1 valid .patchdata files",
+      "summary": "2/2 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 1,
-        "valid_count": 1,
+        "patchdata_count": 2,
+        "valid_count": 2,
         "stub_patchdata_count": 0,
         "files": [
+          "System.Private.CoreLib\\convert-char\\native\\subjects.patchdata",
           "System.Private.CoreLib\\convert-char\\managed\\patch\\patchdata\\convert-char.patchdata"
         ]
       }

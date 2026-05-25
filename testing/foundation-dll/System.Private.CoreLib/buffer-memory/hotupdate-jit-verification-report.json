@@ -1,6 +1,8 @@
 {
   "status": "passed",
-  "passed": 13,
-  "total": 13,
+  "passed": 10,
+  "total": 10,
+  "all_semantic": true,
+  "all_revert": true,
   "exit_code": 0
 }

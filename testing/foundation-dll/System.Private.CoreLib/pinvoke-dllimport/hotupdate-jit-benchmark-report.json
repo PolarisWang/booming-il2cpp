@@ -8,39 +8,39 @@
       "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetCurrentProcess:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 78882.6,
-      "postPatchNsPerOp": 65153.7,
-      "slowdownPercent": -17.4
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetCurrentThread:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 68478.08,
-      "postPatchNsPerOp": 65516.7,
-      "slowdownPercent": -4.32
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetProcessId:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 69266.78,
-      "postPatchNsPerOp": 65833.5,
-      "slowdownPercent": -4.96
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetModuleHandle:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 65079.54,
-      "postPatchNsPerOp": 66427.1,
-      "slowdownPercent": 2.07
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     }
   ],
   "summary": {
     "totalMethods": 4,
-    "nonStubMethods": 4,
-    "averageSlowdownPercent": -6.15,
-    "slowdownFactor": 0.9384999999999999,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
     "slowdownThresholdX": 50.0
   }
 }

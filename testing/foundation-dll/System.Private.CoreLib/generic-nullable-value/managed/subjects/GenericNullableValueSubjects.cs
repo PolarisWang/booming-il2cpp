@@ -34,9 +34,8 @@ public static partial class GenericNullableValueSubjects
     }
 
     // [3] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)
-    public static void Subject_3()
+    public static void CustomEntrySubject_3()
     {
-        // non-callable: System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)
     }
 
     // [4] System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)

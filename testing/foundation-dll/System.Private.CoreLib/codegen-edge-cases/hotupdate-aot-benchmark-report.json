@@ -16,31 +16,31 @@
       "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 3.26,
-      "postPatchNsPerOp": 2.5,
-      "slowdownPercent": -23.31
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": -20.25
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()",
       "status": "passed",
       "prePatchNsPerOp": 2.11,
-      "postPatchNsPerOp": 2.9,
-      "slowdownPercent": 37.44
+      "postPatchNsPerOp": 2.5,
+      "slowdownPercent": 18.48
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 2.12,
-      "postPatchNsPerOp": 3.7,
-      "slowdownPercent": 74.53
+      "postPatchNsPerOp": 2.5,
+      "slowdownPercent": 17.92
     }
   ],
   "summary": {
     "totalMethods": 4,
     "nonStubMethods": 4,
-    "averageSlowdownPercent": 26.93,
-    "slowdownFactor": 1.2693,
+    "averageSlowdownPercent": 8.8,
+    "slowdownFactor": 1.088,
     "slowdownThresholdX": 50.0
   }
 }

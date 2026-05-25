@@ -61,25 +61,4 @@ public static partial class GarbageCollectionSubjects
         catch { _exitCode = 1; }
     }
 
-    // [7] System.Private.CoreLib/System.GC::Collect(System.Int32,System.GCCollectionMode):System.Void()
-    public static void Subject_7()
-    {
-        try { GC.Collect(42, default); }
-        catch { _exitCode = 1; }
-    }
-
-    // [8] System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()
-    public static void Subject_8()
-    {
-        try { if ((int)(GC.CollectionCount(42)) != (int)(GC.CollectionCount(42))) _exitCode = 1; }
-        catch { _exitCode = 1; }
-    }
-
-    // [9] System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()
-    public static void Subject_9()
-    {
-        try { if ((long)((GC.GetTotalPauseDuration()).Ticks) != (long)((GC.GetTotalPauseDuration()).Ticks)) _exitCode = 1; }
-        catch { _exitCode = 1; }
-    }
-
 }

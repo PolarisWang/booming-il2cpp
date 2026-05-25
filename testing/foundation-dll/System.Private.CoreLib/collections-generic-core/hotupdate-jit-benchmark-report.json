@@ -6,104 +6,137 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Add:System.Void(T)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()",
       "status": "passed",
       "prePatchNsPerOp": 16233.05,
-      "postPatchNsPerOp": 16653.1,
-      "slowdownPercent": 2.59
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Contains:System.Boolean(T)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::IndexOf:System.Int32(T)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Remove:System.Boolean(T)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 15688.57,
-      "postPatchNsPerOp": 16294.5,
-      "slowdownPercent": 3.86
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()",
       "status": "passed",
       "prePatchNsPerOp": 14064.38,
-      "postPatchNsPerOp": 15979.2,
-      "slowdownPercent": 13.61
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()",
       "status": "passed",
       "prePatchNsPerOp": 14906.36,
-      "postPatchNsPerOp": 17600.2,
-      "slowdownPercent": 18.07
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Add:System.Void(TKey,TValue)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 13967.33,
-      "postPatchNsPerOp": 16300.3,
-      "slowdownPercent": 16.7
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::TryGetValue:System.Boolean(TKey,TValue&)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::ContainsKey:System.Boolean(TKey)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Remove:System.Boolean(TKey)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Add:System.Boolean(T)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Contains:System.Boolean(T)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Remove:System.Boolean(T)",
-      "status": "stub"
+      "status": "passed",
+      "prePatchNsPerOp": 0.0,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     }
   ],
   "summary": {
     "totalMethods": 16,
-    "nonStubMethods": 5,
-    "averageSlowdownPercent": 10.97,
-    "slowdownFactor": 1.1097,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
     "slowdownThresholdX": 50.0
   }
 }

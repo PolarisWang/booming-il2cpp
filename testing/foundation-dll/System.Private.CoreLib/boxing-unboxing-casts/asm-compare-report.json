@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/boxing/unboxing/casts",
-  "capturedAt": "2026-05-23T18:49:39",
+  "capturedAt": "2026-05-25T22:41:36",
   "batchMode": true,
   "summary": {
     "totalMethods": 11,

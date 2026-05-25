@@ -967,6 +967,31 @@ static int RunFactMode() {
     return failed_count;
 }
 
+// ── --fact-json: per-method JSON output (R1+R2: value-level verification) ──
+static int RunFactJsonMode() {
+    const int kCount = kSubjectEntryCount;
+    printf("{\\"factResults\\":[");
+    bool first = true;
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+        CHAOS_IL2CPP_INT32 result = 0;
+        bool caught = false;
+        CHAOS_EH_TRY
+            result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                GetHotpatchEntries(), kAotMethodCount, i, nullptr);
+        CHAOS_EH_CATCH_BEGIN
+            caught = true;
+        CHAOS_EH_END
+        if (!first) printf(",");
+        printf("{\\"si\\":%d,\\"methodIndex\\":%d,\\"passed\\":%s,\\"exitCode\\":%d}",
+               si, i, caught ? "false" : "true", caught ? -1 : (int)result);
+        first = false;
+    }
+    printf("]}\\n");
+    std::fflush(stdout);
+    return 0;
+}
+
 static int RunBenchmarkMode(int entry_index, int iterations) {
     double elapsed_ms = RunBenchmark(entry_index, iterations);
     if (elapsed_ms < 0.0) {
@@ -985,30 +1010,40 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
 
 static int RunHotupdateMode() {
     const int kCount = kSubjectEntryCount;
+    // R6: Phase 1 — baseline, capture return values
     CHAOS_IL2CPP_INT32 baseline_values[256] = {0};
     bool baseline_ok[256] = {false};
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
         CHAOS_EH_TRY
-            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+            CHAOS_IL2CPP_INT32 result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, nullptr);
+            baseline_values[si] = result;
             baseline_ok[si] = true;
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
     }
+    // R6: Phase 2 — apply patch and compare return values
     auto* patch_ctx = ApplyHotpatchIfAvailable();
-    bool all_semantic = true;
     int semantic_passed = 0;
+    int semantic_changed_count = 0;
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
+        CHAOS_IL2CPP_INT32 patched_result = -1;
+        bool patched_ok = false;
         CHAOS_EH_TRY
-            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+            patched_result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, nullptr);
+            patched_ok = true;
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
         if (!baseline_ok[si]) { continue; }
         semantic_passed++;
+        if (patched_ok && baseline_values[si] != patched_result) {
+            semantic_changed_count++;
+        }
     }
+    // R6: Phase 3 — revert and verify cleanup
     if (patch_ctx != nullptr) {
         chaos::il2cpp::runtime_core::Unpatch(patch_ctx);
     }
@@ -1024,11 +1059,13 @@ static int RunHotupdateMode() {
             all_revert = false;
         CHAOS_EH_END
     }
+    bool all_semantic = (semantic_passed > 0 && semantic_changed_count > 0);
     printf(
         "{\\"passedMethods\\":%d,\\"failedMethods\\":0,"
-        "\\"totalMethods\\":%d,\\"allSemantic\\":%s,\\"allRevert\\":%s}\\n",
+        "\\"totalMethods\\":%d,\\"allSemantic\\":%s,\\"allRevert\\":%s,"
+        "\\"semanticChangedCount\\":%d}\\n",
         semantic_passed, kCount, all_semantic ? "true" : "false",
-        all_revert ? "true" : "false");
+        all_revert ? "true" : "false", semantic_changed_count);
     std::fflush(stdout);
     return 0;
 }
@@ -1057,6 +1094,8 @@ int main(int argc, char* argv[]) {
 __JIT_CALL__
 
     if (argc < 2) { return RunFactMode(); }
+
+    if (std::strcmp(argv[1], "--fact-json") == 0) { return RunFactJsonMode(); }
 
     if (std::strcmp(argv[1], "--benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --benchmark <index> <iterations>\\n"); return 1; }

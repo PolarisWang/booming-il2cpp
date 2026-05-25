@@ -13,6 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GenericNullableValueSubjects.cs" />
+    <Compile Include="GenericNullableValueNativeEntry.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />

@@ -32,23 +32,23 @@
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 3.7,
-      "postPatchNsPerOp": 2.1,
-      "slowdownPercent": -43.24
+      "postPatchNsPerOp": 2.2,
+      "slowdownPercent": -40.54
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 3.47,
-      "postPatchNsPerOp": 3.6,
-      "slowdownPercent": 3.75
+      "postPatchNsPerOp": 2.1,
+      "slowdownPercent": -39.48
     }
   ],
   "summary": {
     "totalMethods": 5,
     "nonStubMethods": 5,
-    "averageSlowdownPercent": -33.04,
-    "slowdownFactor": 0.6696000000000001,
+    "averageSlowdownPercent": -41.15,
+    "slowdownFactor": 0.5885,
     "slowdownThresholdX": 50.0
   }
 }

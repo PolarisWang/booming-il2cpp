@@ -87,7 +87,8 @@ public static partial class ReflectionBindingSubjects
     // [10] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
     public static void Subject_10()
     {
-        // needs-manual — Invoke with 2 params requires manual implementation: System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
+        try { var method = typeof(int).GetMethod("Parse", new[] { typeof(string) })!; if (((int)method.Invoke(null, new object[] { "42" })!).GetHashCode() != ((int)method.Invoke(null, new object[] { "42" })!).GetHashCode()) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [11] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)

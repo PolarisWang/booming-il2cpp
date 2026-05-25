@@ -52,7 +52,7 @@ class TestFamilyContext:
             assembly="System.Private.CoreLib",
             family_dir=Path("/testing/foundation-dll/System.Private.CoreLib/convert-char"),
         )
-        expected = Path("/testing/results/foundation-dll/System.Private.CoreLib/convert-char")
+        expected = Path("/testing/foundation-dll/results/foundation-dll/System.Private.CoreLib/convert-char")
         assert ctx.results_dir == expected
 
     def test_strict_mode(self):

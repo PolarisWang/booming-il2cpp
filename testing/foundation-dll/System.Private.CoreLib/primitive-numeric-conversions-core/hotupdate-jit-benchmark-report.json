@@ -8,7 +8,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 22988.3,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     },
     {
@@ -16,7 +16,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 22859.3,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     },
     {
@@ -24,7 +24,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 24037.8,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     },
     {
@@ -32,7 +32,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19543.5,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     },
     {
@@ -40,7 +40,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19010.1,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     },
     {
@@ -48,7 +48,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18246.8,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     },
     {
@@ -56,7 +56,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 21288.8,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     },
     {
@@ -64,7 +64,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18112.7,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     },
     {
@@ -72,7 +72,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18919.0,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     },
     {
@@ -80,7 +80,7 @@
       "methodSubjectId": "PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 19054.4,
+      "postPatchNsPerOp": 0.0,
       "slowdownPercent": 0.0
     }
   ],

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/enum/parsing",
-  "capturedAt": "2026-05-22T01:19:22",
+  "capturedAt": "2026-05-25T22:50:05",
   "batchMode": true,
   "summary": {
     "totalMethods": 13,
@@ -11,26 +11,26 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 986,
-      "avg": 116.5,
-      "total": 1514
+      "max": 44,
+      "avg": 44.0,
+      "total": 572
     },
     "aotInstructionCount": {
-      "min": 1,
-      "max": 34,
-      "avg": 25.0,
-      "total": 325
+      "min": 12,
+      "max": 30,
+      "avg": 21.2,
+      "total": 276
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 58
+      "external_runtime_call": 54
     },
-    "overallIrExpansionRatio": 0.21,
-    "averageExpansionRatio": 0.52,
-    "maxExpansionRatio": 0.77,
-    "minExpansionRatio": 0.02
+    "overallIrExpansionRatio": 0.48,
+    "averageExpansionRatio": 0.48,
+    "maxExpansionRatio": 0.68,
+    "minExpansionRatio": 0.27
   },
   "methodResults": [
     {
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 28,
-        "ratio": 0.64,
+        "aotInstructionCount": 26,
+        "ratio": 0.59,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,7 +52,7 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_0",
-        "instructions": 28
+        "instructions": 26
       },
       "analysis": [
         {
@@ -286,7 +286,7 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Array::get_Length:System.Int32()' uses ExternalRuntime dispatch"
         },
         {
           "severity": "info",
@@ -301,7 +301,7 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Array::get_Length:System.Int32()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
@@ -314,20 +314,20 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 986,
-        "aotInstructionCount": 32,
-        "ratio": 0.03,
-        "jitCodeSize": 3650
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 30,
+        "ratio": 0.68,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3650,
-        "instructions": 986
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_5",
-        "instructions": 32
+        "instructions": 30
       },
       "analysis": [
         {
@@ -362,8 +362,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 24,
-        "ratio": 0.55,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -373,8 +373,8 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_6",
-        "instructions": 24
+        "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6",
+        "instructions": 12
       },
       "analysis": [
         {
@@ -386,30 +386,10 @@
           "severity": "info",
           "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 6
+        "external_runtime_call": 2
       }
     },
     {
@@ -419,8 +399,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 26,
-        "ratio": 0.59,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -430,8 +410,8 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_7",
-        "instructions": 26
+        "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7",
+        "instructions": 13
       },
       "analysis": [
         {
@@ -443,30 +423,10 @@
           "severity": "info",
           "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 6
+        "external_runtime_call": 2
       }
     },
     {
@@ -476,8 +436,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 24,
-        "ratio": 0.55,
+        "aotInstructionCount": 28,
+        "ratio": 0.64,
         "jitCodeSize": 256
       },
       "jit": {
@@ -488,9 +448,19 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_8",
-        "instructions": 24
+        "instructions": 28
       },
       "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)' uses ExternalRuntime dispatch"
+        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -499,11 +469,21 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 6
       }
     },
     {
@@ -513,8 +493,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 26,
-        "ratio": 0.59,
+        "aotInstructionCount": 28,
+        "ratio": 0.64,
         "jitCodeSize": 256
       },
       "jit": {
@@ -525,13 +505,18 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_9",
-        "instructions": 26
+        "instructions": 28
       },
       "analysis": [
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Int32::ToString:System.String(System.String)' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)' uses ExternalRuntime dispatch"
         },
         {
           "severity": "info",
@@ -541,7 +526,12 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Int32::ToString:System.String(System.String)' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)' uses ExternalRuntime dispatch"
         },
         {
           "severity": "info",
@@ -550,7 +540,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 6
       }
     },
     {
@@ -560,8 +550,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 34,
-        "ratio": 0.77,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
         "jitCodeSize": 256
       },
       "jit": {
@@ -571,20 +561,10 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_10",
-        "instructions": 34
+        "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10",
+        "instructions": 14
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -597,7 +577,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -607,8 +587,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 32,
-        "ratio": 0.73,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -618,20 +598,10 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_11",
-        "instructions": 32
+        "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11",
+        "instructions": 13
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -644,7 +614,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -654,8 +624,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
         "jitCodeSize": 256
       },
       "jit": {
@@ -666,10 +636,23 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12",
-        "instructions": 1
+        "instructions": 14
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     }
   ]
 }

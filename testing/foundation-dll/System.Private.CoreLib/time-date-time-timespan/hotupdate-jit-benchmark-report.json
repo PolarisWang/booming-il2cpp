@@ -6,130 +6,98 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 15589.4,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:11][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:11][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:11][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:11][INFO][OldGen] emergency_reserve_allocated base=0x1784286150656 size=65536\n[2026-05-25T22:03:11][INFO][OldGen] init done base=0x1784255938560 pages=8\n[2026-05-25T22:03:11][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:11][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:11][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n[2026-05-25T22:03:11][DEBUG][BGC] thread_started\n[2026-05-25T22:03:11][DEBUG][Finalizer] thread_started id={0}\nJIT CRASH: Code=0xC0000005 RIP=0x00007FFAAF641A39 RSP=0x00000013FBAFF860 RAX=0x0000000000000000 RBX=0x0000000000000002 RCX=0x00000013FBAFFAA0 RDX=0x00000013FBAFFAF0 RSI=0x00007FF6B875C1F8 RDI=0x0000000000000000\n"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::.ctor:System.Void(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 15894.2,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:11][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:11][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:11][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:11][INFO][OldGen] emergency_reserve_allocated base=0x2529091321856 size=65536\n[2026-05-25T22:03:11][INFO][OldGen] init done base=0x2529061961728 pages=8\n[2026-05-25T22:03:11][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:11][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:11][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n[2026-05-25T22:03:11][DEBUG][BGC] thread_started\n[2026-05-25T22:03:11][DEBUG][Finalizer] thread_started id={0}\nJIT CRASH: Code=0xC0000005 RIP=0x00007FFAAF641A39 RSP=0x00000071583FF3E0 RAX=0x0000000000000000 RBX=0x0000000000000002 RCX=0x00000071583FF620 RDX=0x00000071583FF670 RSI=0x00007FF6B875C1F8 RDI=0x0000000000000000\n"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::Parse:System.DateTime(System.String)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18268.3,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:11][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:11][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:11][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:11][INFO][OldGen] emergency_reserve_allocated base=0x1907678314496 size=65536\n[2026-05-25T22:03:11][INFO][OldGen] init done base=0x1907653017600 pages=8\n[2026-05-25T22:03:11][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:11][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:11][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n[2026-05-25T22:03:11][DEBUG][Finalizer] thread_started id={0}\n[2026-05-25T22:03:11][DEBUG][BGC] thread_started\nJIT CRASH: Code=0xC0000005 RIP=0x00007FFAAF641A39 RSP=0x0000006C5FDFF560 RAX=0x0000000000000000 RBX=0x0000000000000002 RCX=0x0000006C5FDFF7A0 RDX=0x0000006C5FDFF7F0 RSI=0x00007FF6B875C1F8 RDI=0x0000000000000000\n"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::TryParse:System.Boolean(System.String,System.DateTime&)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 17127.8,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x2566367019008 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x2566341722112 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\nJIT CRASH: Code=0xC0000005 RIP=0x0000000000000000 RSP=0x000000795D6FFAB8 RAX=0x0000000000000031 RBX=0x0000000000000000 RCX=0xB7637D7A01D621A9 RDX=0x000000795D6FFB08 RSI=0x00007FF6B83E1CC8 RDI=0xCBF29CE484222325\n"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 14244.5,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x1769324150784 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x1769294856192 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n[2026-05-25T22:03:12][DEBUG][BGC] thread_started\n[2026-05-25T22:03:12][DEBUG][Finalizer] thread_started id={0}\nJIT CRASH: Code=0xC0000005 RIP=0x00007FFAAF641A39 RSP=0x00000065820FF2D0 RAX=0x0000000000000000 RBX=0x0000000000000002 RCX=0x00000065820FF520 RDX=0x00000065820FF560 RSI=0x00007FF6B875C1F8 RDI=0x0000000000000000\n"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 13205.2,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x2432663814144 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x2432640155648 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n[2026-05-25T22:03:12][DEBUG][Finalizer] thread_started id={0}\n[2026-05-25T22:03:12][DEBUG][BGC] thread_started\nJIT CRASH: Code=0xC0000005 RIP=0x00007FFAAF641A39 RSP=0x0000004B44CFF750 RAX=0x0000000000000000 RBX=0x0000000000000002 RCX=0x0000004B44CFF9A0 RDX=0x0000004B44CFF9E0 RSI=0x00007FF6B875C1F8 RDI=0x0000000000000000\n"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 13819.1,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x2778589495296 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x2778564198400 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n{\"elapsedMilliseconds\":0.156,\"calibratedMs\":0.156,\"opsPerSecond\":64102564,\"iterations\":10000}\nJIT CRASH: Code=0xC0000005 RIP=0x00007FF6B830A397 RSP=0x000000920DAFF8A0 RAX=0x0000000000000001 RBX=0x00007FF6B875C1F8 RCX=0xFFFFFFFFEF10C700 RDX=0x0000000000000000 RSI=0x0000000000000000 RDI=0x00007FF6B875C1E8\n"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 14073.0,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x1970504794112 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x1970479497216 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n{\"elapsedMilliseconds\":0.159,\"calibratedMs\":0.159,\"opsPerSecond\":62932662,\"iterations\":10000}\nJIT CRASH: Code=0xC0000005 RIP=0x00007FF6B830A397 RSP=0x000000A9FFEFF5D0 RAX=0x0000000000000001 RBX=0x00007FF6B875C1F8 RCX=0xFFFFFFFFC984C6E0 RDX=0x0000000000000000 RSI=0x0000000000000000 RDI=0x00007FF6B875C1E8\n"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 16013.4,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x2160956997632 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x2160932683776 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n{\"elapsedMilliseconds\":0.157,\"calibratedMs\":0.157,\"opsPerSecond\":63572791,\"iterations\":10000}\nJIT CRASH: Code=0xC0000005 RIP=0x00007FF6B830A397 RSP=0x0000005C50F7FB40 RAX=0x0000000000000001 RBX=0x00007FF6B875C1F8 RCX=0x000000002161CF70 RDX=0x0000000000000000 RSI=0x0000000000000000 RDI=0x00007FF6B875C1E8\n"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 13830.1,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x1395020070912 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x1394994839552 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n{\"elapsedMilliseconds\":0.162,\"calibratedMs\":0.162,\"opsPerSecond\":61728395,\"iterations\":10000}\nJIT CRASH: Code=0xC0000005 RIP=0x00007FF6B830A397 RSP=0x000000211A4FFBC0 RAX=0x0000000000000001 RBX=0x00007FF6B875C1F8 RCX=0xFFFFFFFFCBE9C7E0 RDX=0x0000000000000000 RSI=0x0000000000000000 RDI=0x00007FF6B875C1E8\n"
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.DateTime::DaysInMonth:System.Int32(System.Int32,System.Int32)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 15922.6,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x2149925257216 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x2149923684352 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n{\"elapsedMilliseconds\":0.051,\"calibratedMs\":0.051,\"opsPerSecond\":197628458,\"iterations\":10000}\nJIT CRASH: Code=0xC0000005 RIP=0x00007FF6B830A397 RSP=0x0000009F6DEFFA10 RAX=0x0000000000000001 RBX=0x00007FF6B875C1F8 RCX=0xFFFFFFFF8FCFC690 RDX=0x0000000000000000 RSI=0x0000000000000000 RDI=0x00007FF6B875C1E8\n"
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::.ctor:System.Void(System.Int32,System.Int32,System.Int32)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 14853.0,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x1812654718976 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x1812629422080 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\n[2026-05-25T22:03:12][DEBUG][BGC] thread_started\n[2026-05-25T22:03:12][DEBUG][Finalizer] thread_started id={0}\nJIT CRASH: Code=0xC0000005 RIP=0x00007FFAAF641A39 RSP=0x0000007E431FF790 RAX=0x0000000000000000 RBX=0x0000000000000002 RCX=0x0000007E431FF9E0 RDX=0x0000007E431FFA20 RSI=0x00007FF6B875C1F8 RDI=0x0000000000000000\n"
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromDays:System.TimeSpan(System.Double)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18333.6,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x2770390220800 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x2770360008704 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\nJIT CRASH: Code=0xC0000005 RIP=0x0000000000000000 RSP=0x000000EDE98FF758 RAX=0x8000000000000000 RBX=0x000000000000000C RCX=0x8000000000000000 RDX=0x0000000000000010 RSI=0x00007FF6B84372A0 RDI=0x0000000000002710\n"
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromHours:System.TimeSpan(System.Double)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 18764.7,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x1951536775168 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x1951513116672 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\nJIT CRASH: Code=0xC0000005 RIP=0x0000000000000000 RSP=0x00000088FCD3FC88 RAX=0x8000000000000000 RBX=0x000000000000000D RCX=0x8000000000000000 RDX=0x0000000000000010 RSI=0x00007FF6B84372A0 RDI=0x0000000000002710\n"
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::FromMinutes:System.TimeSpan(System.Double)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 16558.7,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x2868898496512 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x2868868284416 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\nJIT CRASH: Code=0xC0000005 RIP=0x0000000000000000 RSP=0x000000B475DCFE18 RAX=0x8000000000000000 RBX=0x000000000000000E RCX=0x8000000000000000 RDX=0x0000000000000010 RSI=0x00007FF6B84372A0 RDI=0x0000000000002710\n"
     },
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Private.CoreLib/System.TimeSpan::Parse:System.TimeSpan(System.String)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 16355.6,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "[2026-05-25T22:03:12][WARN][CRAG] young_collection_no_region\n[2026-05-25T22:03:12][INFO][NUMA] numa_init count=%d\n[2026-05-25T22:03:12][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T22:03:12][INFO][OldGen] emergency_reserve_allocated base=0x2266860486656 size=65536\n[2026-05-25T22:03:12][INFO][OldGen] init done base=0x2266830274560 pages=8\n[2026-05-25T22:03:12][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T22:03:12][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T22:03:12][DEBUG][GcEvents] registered callback 0x7ff6b836b740 at slot 0\nJIT CRASH: Code=0xC0000005 RIP=0x0000000000000000 RSP=0x0000006D7292FC28 RAX=0x0000000861C46800 RBX=0xCBF29CE484222325 RCX=0x0000000861C46800 RDX=0x0000000861C46800 RSI=0x00007FF6B83E1CB8 RDI=0x0000000000000000\n"
     }
   ],
   "summary": {

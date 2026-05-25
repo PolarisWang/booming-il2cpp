@@ -65,7 +65,8 @@ public static partial class ThreadSyncSubjects
     // [7] System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)
     public static void Subject_7()
     {
-        // needs-manual — .ctor with 2 params requires manual implementation: System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)
+        try { var wc = new WaitCallback(_ => {}); ThreadPool.QueueUserWorkItem(wc); }
+        catch { _exitCode = 1; }
     }
 
 }

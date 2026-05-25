@@ -1,7 +1,7 @@
 {
   "family": "ccw-basic",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-25T01:27:11.019721",
+  "generated_at": "2026-05-25T19:23:50.152223",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -27,50 +27,10 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 20,
-        "methods_total": 20
+        "methods_with_lowering": 10,
+        "methods_total": 10
       },
       "per_method": [
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_4",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_0",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_1",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_2",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_3",
-          "has_lowering": true
-        },
-        {
-          "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_4",
-          "has_lowering": true
-        },
         {
           "name": "CcwBasicSubjects_CcwBasicSubjects_Subject_0",
           "has_lowering": true
@@ -145,14 +105,10 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "15 of 21 changed source files are outside expected architecture layers",
+      "summary": "12 of 28 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "file": "CLAUDE.md",
           "reason": "outside expected architecture layers"
         },
         {
@@ -160,11 +116,15 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
           "reason": "outside expected architecture layers"
         },
         {
@@ -172,31 +132,19 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/native/jit/jit_engine.cpp",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
           "reason": "outside expected architecture layers"
         },
         {
@@ -209,19 +157,16 @@
         }
       ],
       "evidence": {
-        "changed_source_count": 21,
+        "changed_source_count": 28,
         "layer_distribution": {
-          "TestInfra": 2,
-          "ManagedContracts": 1,
-          "RuntimeCore": 3
+          "TestInfra": 6,
+          "ManagedContracts": 2,
+          "Driver": 2,
+          "RuntimeCore": 6
         },
         "violations": [
           {
-            "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "file": "CLAUDE.md",
             "reason": "outside expected architecture layers"
           },
           {
@@ -229,11 +174,15 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
             "reason": "outside expected architecture layers"
           },
           {
@@ -241,31 +190,19 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/native/jit/jit_engine.cpp",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
             "reason": "outside expected architecture layers"
           },
           {

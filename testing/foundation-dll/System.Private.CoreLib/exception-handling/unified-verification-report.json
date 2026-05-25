@@ -2,15 +2,80 @@
   "family": "exception-handling",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-25T01:26:28",
-  "duration_ms": 3,
-  "overall_status": "passed",
+  "timestamp": "2026-05-25T21:18:55",
+  "duration_ms": 103,
+  "overall_status": "failed",
   "stages": {
-    "preflight": {
-      "stage": "preflight",
-      "status": "passed",
-      "summary": "No method subject IDs found in contract — empty family (skipping verification)",
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "failed",
+      "summary": "JIT codegen error: [WinError 3] The system cannot find the path specified: 'D:\\\\agent\\\\booming-il2cpp\\\\testing\\\\foundation-dll\\\\System.Private.CoreLib\\\\exception-handling\\\\codegen'",
       "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "skipped",
+      "summary": "No methods in contract",
+      "details": {
+        "totalMethods": 0,
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "skippedMethods": 0,
+        "tfm": "net8.0",
+        "methodResults": []
+      },
+      "errors": [],
+      "duration_ms": 100
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT fact",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT hotupdate",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "No method subject IDs found",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "dashboard": {
+      "stage": "dashboard",
+      "status": "passed",
+      "summary": "Dashboard built: 6 sections",
+      "details": {
+        "interpreter": {},
+        "irTranslation": {},
+        "performance": {},
+        "hotupdate": {},
+        "managedFact": {
+          "totalMethods": 0,
+          "passedMethods": 0,
+          "failedMethods": 0,
+          "skippedMethods": 0,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0,
+          "interpreterSlowdownFactor": 0,
+          "asmPassRate": 0.0
+        }
+      },
       "errors": [],
       "duration_ms": 0
     }
@@ -25,6 +90,13 @@
     "irTranslation": {},
     "performance": {},
     "hotupdate": {},
+    "managedFact": {
+      "totalMethods": 0,
+      "passedMethods": 0,
+      "failedMethods": 0,
+      "skippedMethods": 0,
+      "tfm": "net8.0"
+    },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0,

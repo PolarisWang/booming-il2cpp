@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/generic/nullable/value",
-  "capturedAt": "2026-05-25T01:27:19",
+  "capturedAt": "2026-05-25T22:35:45",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -182,7 +182,7 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_3",
+        "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_CustomEntrySubject_3",
         "instructions": 1
       },
       "analysis": [],
