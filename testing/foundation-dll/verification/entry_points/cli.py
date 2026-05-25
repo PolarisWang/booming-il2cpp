@@ -59,6 +59,11 @@ def main() -> None:
 
     auto_save_perf_data(ctx, report.stages)
 
+    # Save unified report to results directory (Scheme C: single source of truth for dashboard)
+    report_path = ctx.results_dir / "unified-verification-report.json"
+    report_path.parent.mkdir(parents=True, exist_ok=True)
+    report_path.write_text(report.to_json(), encoding="utf-8")
+
     print(report.to_json())
 
     if report.overall_status == "passed":
