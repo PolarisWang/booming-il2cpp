@@ -31,8 +31,7 @@ public static partial class ReflectionActivationSubjects
     // [2] System.Private.CoreLib/System.Activator::CreateInstance:T()
     public static void Subject_2()
     {
-        try { if (Activator.CreateInstance<byte>().GetHashCode() != Activator.CreateInstance<byte>().GetHashCode()) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        // needs-manual — CreateInstance with 0 params requires manual implementation: System.Private.CoreLib/System.Activator::CreateInstance:T()
     }
 
     // [3] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)

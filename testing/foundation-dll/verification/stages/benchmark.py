@@ -27,7 +27,7 @@ _MANAGED_TECHNOLOGIES = ["net8-jit", "net10-jit", "mono"]
 TECHNOLOGY_DEFS: dict[str, dict[str, Any]] = {
     "net8-jit":  {"runner": "dotnet-run", "tfm": "net8.0"},
     "net10-jit": {"runner": "dotnet-run", "tfm": "net10.0"},
-    "mono":      {"runner": "mono",       "tfm": "net8.0"},
+    "mono":      {"runner": "mono",       "tfm": "net48"},
 }
 
 
@@ -51,8 +51,25 @@ def _detect_frameworks() -> list[str]:
         return []
 
 
+def _mono_path() -> str | None:
+    """Find the mono executable path.
+
+    Checks PATH first, then falls back to standard Windows install locations.
+    """
+    path = shutil.which("mono")
+    if path:
+        return path
+    for candidate in (
+        r"C:\Program Files\Mono\bin\mono.exe",
+        r"C:\Program Files (x86)\Mono\bin\mono.exe",
+    ):
+        if Path(candidate).exists():
+            return candidate
+    return None
+
+
 def _mono_available() -> bool:
-    return shutil.which("mono") is not None
+    return _mono_path() is not None
 
 
 def detect_managed_runtimes(
@@ -458,7 +475,7 @@ def _generate_managed_harness(
         '  <PropertyGroup>\n'
         '    <OutputType>Exe</OutputType>\n'
         '    <StartupObject>ManagedBenchmarkHarness</StartupObject>\n'
-        '    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>\n'
+        '    <TargetFrameworks>net8.0;net10.0;net48</TargetFrameworks>\n'
         '    <Nullable>enable</Nullable>\n'
         '    <ImplicitUsings>enable</ImplicitUsings>\n',
     ]
@@ -466,6 +483,9 @@ def _generate_managed_harness(
         csproj_parts.append('    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n')
     csproj_parts.append(
         '  </PropertyGroup>\n'
+        '  <ItemGroup>\n'
+        '    <PackageReference Include="System.Text.Json" Version="8.0.5" />\n'
+        '  </ItemGroup>\n'
         '</Project>\n',
     )
     csproj_path.write_text(''.join(csproj_parts), encoding="utf-8")
@@ -666,15 +686,16 @@ def _run_mono_benchmark(
     tfm: str,
     iterations: int = 100000,
 ) -> dict[str, Any]:
-    """Build the harness for net8.0, then run with Mono."""
+    """Build the harness for net48, then run with Mono."""
     csproj = harness_dir / "ManagedBenchmarkHarness.csproj"
-    build_dir = harness_dir / "bin" / "Release" / tfm
+    # With -r win-x86, the output goes to bin/Release/net48/win-x86/
+    build_dir = harness_dir / "bin" / "Release" / tfm / "win-x86"
     exe_path = build_dir / "ManagedBenchmarkHarness.exe"
 
     print("  [managed-runner] Running Mono benchmark...")
     try:
         r = subprocess.run(
-            ["dotnet", "build", str(csproj), "-f", tfm, "--configuration", "Release"],
+            ["dotnet", "build", str(csproj), "-f", tfm, "--configuration", "Release", "-r", "win-x86"],
             capture_output=True, text=True, timeout=120,
         )
         if r.returncode != 0:
@@ -683,9 +704,13 @@ def _run_mono_benchmark(
         if not exe_path.exists():
             return {"method_results": [], "error": f"exe not found at {exe_path}"}
 
+        mono_exe = _mono_path()
+        if not mono_exe:
+            return {"method_results": [], "error": "mono not found"}
+
         start = time.perf_counter()
         r = subprocess.run(
-            ["mono", str(exe_path)],
+            [mono_exe, str(exe_path)],
             capture_output=True, text=True, timeout=300,
         )
         elapsed = time.perf_counter() - start

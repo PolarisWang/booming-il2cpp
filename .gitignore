@@ -297,5 +297,34 @@ testing/foundation-dll/**/native/*-benchmark.json
 testing/foundation-dll/**/*.patchdata
 testing/foundation-dll/**/*.jsonl
 
+# Old pipeline reports in family dirs (Scheme C: reports go to testing/results/)
+testing/foundation-dll/**/dashboard.html
+testing/foundation-dll/**/unified-verification-report.json
+testing/foundation-dll/**/native/golden-values.json
+testing/foundation-dll/**/native/stderr.txt
+testing/foundation-dll/**/native/stdout.txt
+testing/foundation-dll/**/native/jit_err.txt
+testing/foundation-dll/**/native/jit_out.txt
+
+# Pipeline cache and temp output
+testing/foundation-dll/.asm-compare-cache/
+testing/foundation-dll/batch_output*.txt
+testing/foundation-dll/run_pipeline.py
+
+# Nested build output (accidental copy within family dir)
+testing/foundation-dll/**/System.Private.CoreLib/
+
 # Pipeline results (perf store, batch reports)
 testing/results/
+
+# Root-level scratch
+/buffer-memory-raw.txt
+/buffer-memory-report.json
+/jit-check-results.json
+/jit_stderr.txt
+/jit_stdout.txt
+/testing/__init__.py.bak
+
+# CMake-generated project files (unordered_dense build)
+build/native-runtime/unordered_dense_build/*.vcxproj
+build/native-runtime/unordered_dense_build/*.vcxproj.filters

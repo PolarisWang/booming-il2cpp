@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/activation",
-  "capturedAt": "2026-05-22T01:19:24",
+  "capturedAt": "2026-05-25T23:28:20",
   "batchMode": true,
   "summary": {
     "totalMethods": 8,
@@ -283,7 +283,7 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Array::get_Length:System.Int32()' uses ExternalRuntime dispatch"
         },
         {
           "severity": "info",
@@ -298,7 +298,7 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Array::get_Length:System.Int32()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
@@ -340,7 +340,7 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Array::get_Length:System.Int32()' uses ExternalRuntime dispatch"
         },
         {
           "severity": "info",
@@ -355,7 +355,7 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Array::get_Length:System.Int32()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
@@ -402,7 +402,7 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Array::get_Length:System.Int32()' uses ExternalRuntime dispatch"
         },
         {
           "severity": "info",
@@ -422,7 +422,7 @@
         {
           "severity": "info",
           "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+          "message": "Call to 'System.Private.CoreLib/System.Array::get_Length:System.Int32()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
