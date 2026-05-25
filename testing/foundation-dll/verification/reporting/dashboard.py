@@ -357,6 +357,61 @@ def load_batch_report(path: Path) -> dict[str, Any]:
     return raw
 
 
+def scan_results_directory(results_root: Path | None = None) -> dict[str, Any]:
+    """Scan results directory for per-family unified-verification-report.json files.
+
+    Scheme C: Replaces the single batch-report.json source of truth.
+    Each family's cli.py run writes its report independently; the dashboard
+    scans the directory to assemble the full view.
+
+    Returns a report dict in the same format as load_batch_report().
+    """
+    if results_root is None:
+        results_root = Path(__file__).resolve().parents[3] / "results" / "foundation-dll"
+
+    if not results_root.exists():
+        return {"total_families": 0, "results": [], "parsed": [], "elapsed_seconds": 0}
+
+    results: list[dict[str, Any]] = []
+    total_start = time.time()
+
+    # Walk assembly/slug/unified-verification-report.json
+    for assembly_dir in sorted(results_root.iterdir()):
+        if not assembly_dir.is_dir():
+            continue
+        for family_dir in sorted(assembly_dir.iterdir()):
+            if not family_dir.is_dir():
+                continue
+            report_file = family_dir / "unified-verification-report.json"
+            if not report_file.exists():
+                continue
+            try:
+                raw = json.loads(report_file.read_text(encoding="utf-8"))
+                entry = {
+                    "slug": raw.get("family", family_dir.name),
+                    "status": raw.get("overall_status", "unknown"),
+                    "duration_seconds": round(raw.get("duration_ms", 0) / 1000, 1),
+                    "stages": raw.get("stages", {}),
+                    "coverage": raw.get("coverage"),
+                    "dashboard": raw.get("dashboard"),
+                    "regression": raw.get("regression"),
+                }
+                results.append(entry)
+            except (OSError, json.JSONDecodeError) as e:
+                print(f"  [WARN] Skipping {report_file}: {e}")
+
+    elapsed = round(time.time() - total_start, 1)
+    parsed = [parse_family(r) for r in results]
+
+    return {
+        "total_families": len(results),
+        "results": results,
+        "parsed": parsed,
+        "elapsed_seconds": elapsed,
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+    }
+
+
 # ──────────────────────────────────────────────────────────────────────
 # Benchmark performance comparison (reads perf store JSONL)
 # ──────────────────────────────────────────────────────────────────────
@@ -570,10 +625,14 @@ def _escape_html(s: str) -> str:
 
 
 # ──────────────────────────────────────────────────────────────────────
-# Re-export generate_html from the renderer module
+# Re-export generate_html from the renderer module (lazy to avoid circular import)
 # ──────────────────────────────────────────────────────────────────────
 
-from .dashboard_renderer import generate_html  # noqa: E402
+
+def generate_html(report: dict[str, Any]) -> str:
+    """Lazy delegate to dashboard_renderer.generate_html to avoid circular import."""
+    from .dashboard_renderer import generate_html as _generate_html
+    return _generate_html(report)
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -588,26 +647,44 @@ def main() -> None:
 
     parser = argparse.ArgumentParser(description="Generate deep test detail dashboard HTML")
     parser.add_argument("--report", default=None, help="Path to batch-report.json")
+    parser.add_argument("--from-results", action="store_true",
+                        help="Scan testing/results/foundation-dll/ for per-family reports")
     parser.add_argument("--output", "-o", default=None, help="Output HTML path")
     parser.add_argument("--run-missing", action="store_true",
                         help="Run benchmark stages for families without perf data (requires native binaries)")
 
     args = parser.parse_args()
 
-    if args.report:
-        report_path = Path(args.report)
-    else:
+    if args.from_results:
+        print("Scanning results directory for per-family reports...")
+        report = scan_results_directory()
+        total = report.get("total_families", 0)
+        n_with_data = sum(1 for f in report.get("parsed", []) if f.get("has_stage_data"))
+        print(f"Found {total} families ({n_with_data} with stage data)")
+        # Derive output path: testing/results/deep-dashboard.html
         report_path = _testing_root / "results" / "batch-report.json"
-
-    if not report_path.exists():
-        print(f"Error: report not found: {report_path}")
-        sys.exit(1)
-
-    print(f"Loading report: {report_path}")
-    report = load_batch_report(report_path)
-    total = len(report.get("parsed", []))
-    n_with_data = sum(1 for f in report["parsed"] if f.get("has_stage_data"))
-    print(f"Parsed {total} families ({n_with_data} with stage data)")
+    elif args.report:
+        report_path = Path(args.report)
+        if not report_path.exists():
+            print(f"Error: report not found: {report_path}")
+            sys.exit(1)
+        print(f"Loading report: {report_path}")
+        report = load_batch_report(report_path)
+        total = len(report.get("parsed", []))
+        n_with_data = sum(1 for f in report["parsed"] if f.get("has_stage_data"))
+        print(f"Parsed {total} families ({n_with_data} with stage data)")
+    else:
+        # Default: try batch-report.json, fall back to results scan
+        report_path = _testing_root / "results" / "batch-report.json"
+        if report_path.exists():
+            print(f"Loading report: {report_path}")
+            report = load_batch_report(report_path)
+        else:
+            print("No batch-report.json found, scanning results directory...")
+            report = scan_results_directory()
+        total = len(report.get("parsed", []))
+        n_with_data = sum(1 for f in report["parsed"] if f.get("has_stage_data"))
+        print(f"Found {total} families ({n_with_data} with stage data)")
 
     # ── Run benchmarks for families without perf data ──────────────
     if args.run_missing:
@@ -633,7 +710,7 @@ def _run_benchmarks_for_missing_families(report: dict[str, Any]) -> None:
     """
     _testing_root = Path(__file__).resolve().parents[3]
     _families_root = _testing_root / "foundation-dll" / "System.Private.CoreLib"
-    _cli_script = str(_testing_root / "foundation-dll" / "_core" / "python" / "cli.py")
+    _cli_script = str(_testing_root / "foundation-dll" / "verification" / "entry_points" / "cli.py")
 
     parsed = report.get("parsed") or [parse_family(r) for r in report.get("results", [])]
     families_without_data = [f for f in parsed if not _has_any_benchmark_data(f["slug"])]

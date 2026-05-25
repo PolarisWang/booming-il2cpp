@@ -37,8 +37,11 @@ class TestVerificationPipeline:
         pipeline = VerificationPipeline(ctx)
         names = [name for name, _, _ in pipeline.STAGES]
         assert names[0] == "preflight"
+        assert names[2] == "jit_codegen"
+        assert names[3] == "managed_fact"
+        assert names[4] == "cross_verify"
         assert names[-1] == "hotupdate_jit_benchmark"
-        assert len(names) == 13
+        assert len(names) == 15
 
     def test_fatal_stages_contains_preflight(self):
         assert "preflight" in VerificationPipeline.FATAL_STAGES
