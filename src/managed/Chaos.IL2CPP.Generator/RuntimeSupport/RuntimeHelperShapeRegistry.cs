@@ -745,7 +745,7 @@ public sealed partial class NativeAotLoweringPlanner
                 new HashSet<int> { 0, 1 });
 
             registry.Register("System.ArgumentOutOfRangeException", ".ctor", ["System.String", "System.String"],
-                ShapeKind.SimpleForward, "ChaosReflectionSetExceptionMetadata",
+                ShapeKind.SimpleForward, "ChaosReflectionSetExceptionMetadata_2params",
                 new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
                 {
                     CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
@@ -6073,51 +6073,25 @@ public sealed partial class NativeAotLoweringPlanner
                         new HashSet<int>(Enumerable.Range(0, abiSlots.Count)));
                 }));
 
-            // === System.BitConverter::ToInt32 (GenericShapeDescriptor — stub returning 0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.BitConverter",
-                MethodName: "ToInt32",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === System.BitConverter::ToInt32 (SimpleForward → ChaosBitConverterToInt32) ===
+            registry.Register("System.BitConverter", "ToInt32", ["System.Byte[]", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBitConverterToInt32",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-                    [
-                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                        "    return 0;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                        {
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            CreateNativeIntAbiSlot(),
-                        }),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0, 1 });
-                }));
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateInt32AbiSlot(),
+                }), CreateInt32AbiSlot(),
+                new HashSet<int> { 0, 1 });
 
-            // === System.BitConverter::ToDouble (GenericShapeDescriptor — stub returning 0.0) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.BitConverter",
-                MethodName: "ToDouble",
-                Resolver: static (planner, callee, typeArgs) =>
+            // === System.BitConverter::ToDouble (SimpleForward → ChaosBitConverterToDouble) ===
+            registry.Register("System.BitConverter", "ToDouble", ["System.Byte[]", "System.Int32"],
+                ShapeKind.SimpleForward, "ChaosBitConverterToDouble",
+                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
                 {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("double", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
-                    [
-                        "    (void)chaos_arg_0; (void)chaos_arg_1;",
-                        "    return 0.0;",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                        {
-                            CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            CreateNativeIntAbiSlot(),
-                        }),
-                        new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64 },
-                        new HashSet<int> { 0, 1 });
-                }));
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                    CreateInt32AbiSlot(),
+                }), new AotCoreIrAbiSlotArtifact { CarrierKindCode = AotCoreIrAbiCarrierKind.Float64 },
+                new HashSet<int> { 0, 1 });
 
 
             // === Marshal.GetFunctionPointerForDelegate<T>(T) — returns native function pointer via thunk registry ===

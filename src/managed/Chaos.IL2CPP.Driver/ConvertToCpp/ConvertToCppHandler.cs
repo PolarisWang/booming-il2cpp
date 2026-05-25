@@ -138,6 +138,7 @@ internal static class ConvertToCppHandler
                 var assemblyName = result.ClosureManifest?.AssemblyName ?? "unknown";
                 var sdkEmitter = new SdkEmitter();
                 sdkEmitter.EmitSdk(sdkRoot, outputRoot, repoRoot, nativeLibDir, "RelWithDebInfo", assemblyName);
+                ValidateSdkOutput(sdkRoot, outputRoot);
                 Console.WriteLine(" done");
             }
 
@@ -216,6 +217,7 @@ internal static class ConvertToCppHandler
                 var assemblyName = results.FirstOrDefault()?.ClosureManifest?.AssemblyName ?? "combined";
                 var sdkEmitter = new SdkEmitter();
                 sdkEmitter.EmitSdk(sdkRoot, outputRoot, repoRoot, nativeLibDir, "RelWithDebInfo", assemblyName);
+                ValidateSdkOutput(sdkRoot, outputRoot);
                 Console.WriteLine(" done");
             }
 
@@ -226,6 +228,38 @@ internal static class ConvertToCppHandler
         return 0;
     }
 
+    /// <summary>
+    /// Validate that the SDK output has the expected minimum structure.
+    /// </summary>
+    private static void ValidateSdkOutput(string sdkRoot, string generatedRoot)
+    {
+        var missing = new List<string>();
+
+        // Required SDK scaffolding files
+        if (!File.Exists(Path.Combine(sdkRoot, "chaos-config.cmake")))
+            missing.Add("chaos-config.cmake");
+        if (!File.Exists(Path.Combine(sdkRoot, "cmake", "chaos-targets.cmake")))
+            missing.Add("cmake/chaos-targets.cmake");
+        if (!File.Exists(Path.Combine(sdkRoot, "include", "chaos.h")))
+            missing.Add("include/chaos.h");
+
+        // Generated code files
+        var genCpp = Directory.GetFiles(generatedRoot, "native-aot.generated.cpp", SearchOption.AllDirectories);
+        if (genCpp.Length == 0)
+            missing.Add("generated/*/native-aot.generated.cpp (not found under generatedRoot)");
+
+        if (missing.Count > 0)
+        {
+            Console.WriteLine($"    WARN: SDK validation — {missing.Count} expected files missing:");
+            foreach (var m in missing)
+                Console.WriteLine($"      MISSING: {m}");
+        }
+        else
+        {
+            Console.WriteLine($"    SDK validation: OK ({genCpp.Length} generated TU(s))");
+        }
+    }
+
     private static void WriteArtifacts(string root, ManagedClosureResult result)
     {
         Directory.CreateDirectory(root);
@@ -233,6 +267,9 @@ internal static class ConvertToCppHandler
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.AotManifest), result.AotManifest);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.MetadataRegistration), result.MetadataRegistration);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.SupplementalMetadataTemplate), result.SupplementalMetadataTemplate);
+        // Also emit resolved supplemental-metadata.json with sourceKind=ReferencedAot
+        // for the hot-update metadata pipeline, eliminating the need for Python post-processing.
+        WriteSupplementalMetadataResolved(root, result.SupplementalMetadataTemplate);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.CodeRegistration), result.CodeRegistration);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.GenericInstantiationDemandGraph), result.GenericInstantiationDemandGraph);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.OptimizationFacts), result.OptimizationFacts);
@@ -240,6 +277,38 @@ internal static class ConvertToCppHandler
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.NativeReferenceLoweringPlan), result.NativeReferenceLoweringPlan);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.NativeAotLoweringPlan), result.NativeAotLoweringPlan);
         WriteJson(Path.Combine(root, ManagedClosureArtifactNames.ClosureManifest), result.ClosureManifest);
+    }
+
+    private static void WriteSupplementalMetadataResolved(string root, SupplementalMetadataTemplateArtifact template)
+    {
+        if (template?.RegisteredTypes == null && template?.RegisteredMethods == null)
+            return;
+
+        var resolved = new
+        {
+            formatVersion = "v0",
+            artifactKind = "supplementalMetadata",
+            reservedSlots = new
+            {
+                typeCount = template.ReservedSlots?.TypeCount ?? 256,
+                methodCount = template.ReservedSlots?.MethodCount ?? 1024,
+                genericInstantiationCount = template.ReservedSlots?.GenericInstantiationCount ?? 256,
+            },
+            types = template.RegisteredTypes?.Select(t => new
+            {
+                subjectId = t.SubjectId,
+                metadataToken = t.MetadataToken,
+                sourceKind = "ReferencedAot",
+            }) ?? [],
+            methods = template.RegisteredMethods?.Select(m => new
+            {
+                subjectId = m.SubjectId,
+                metadataToken = m.MetadataToken,
+                sourceKind = "ReferencedAot",
+            }) ?? [],
+            genericInstantiations = Array.Empty<object>(),
+        };
+        WriteJson(Path.Combine(root, ManagedClosureArtifactNames.SupplementalMetadata), resolved);
     }
 
     private static void WriteCombinedReport(string outputRoot, ConvertToCppConfig config, IReadOnlyList<ManagedClosureResult> results)

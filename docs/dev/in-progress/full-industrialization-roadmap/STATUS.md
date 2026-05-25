@@ -78,33 +78,26 @@ pending_phases: [phase-1-remaining, phase-2]
 | ws3-foundation-dll | phase-1 | ready | main | Foundation-DLL 全量验证攻坚（16 failures 硬修复） | — | 大 |
 | ws4-aot-phase-4-5 | phase-1 | completed | main | AOT PHASE 4+5 ✅ p4-hotpatch/p4-multimodule/p4-interpreter/p5-paging/p5-inline/p5-devirt/p5-lto 全部完成 | — | 极大 |
 | ws5-cicd | phase-1 | ready | main | CI/CD 完整体系（WF 框架/fd CI/JIT 基线/AOT 门禁/Dashboard） | — | 中 |
-| ws7-engineering-excellence | phase-1 | in-progress | main | 工程卓越度 ✅ 批次 A（e1+e2）已完成；批次 B.C.D 等待 WS2/WS3/WS5 | — | 大 |
+| ws7-engineering-excellence | phase-1 | completed | main | 工程卓越度 ✅ 批次 A（e1+e2）+ 批次 B（e3+e7）全部完成；批次 C 已取消；批次 D 等待 WS5 | — | 大 |
 | ws2-hybrid-industrialization | phase-2 | completed | main | Hybrid 工业化冲刺 ✅ 41/41 测试通过 | ws1-jit-industrialization ✅ | 中 |
 
 ## 最新摘要
 
-2026-05-25: WS4 (AOT PHASE 4+5) 全部完成。WS7 (工程卓越度) 批次 A（e1-arch-docs + e2-pipeline-tests）完成。
-- p4-hotpatch ✅ Hotpatch Dispatch 全覆盖（ChaosDispatchMethod）
-- p4-multimodule ✅ PatchLoader 多模块支持
-- p4-interpreter ✅ FastExecute SEH 全面支持（移除 Step C gate）
-- p5-paging ✅ 大程序集分页（size-based accumulation）
-- p5-inline ✅ 多 BB 内联 + 深度控制 + 循环内联预算提升
-- p5-devirt ✅ 密封类守卫消除 + reachability 强化
-- p5-lto ✅ LTO/LTCG CMake 集成（146 文件）
-- e1-arch-docs ✅ wiki INDEX 编号修复 + 27.md 更新
-- e2-pipeline-tests ✅ 32 个单元测试全部通过
+2026-05-25: WS7 (工程卓越度) 批次 B（e3-soak + e7-fd-wiki）全部完成。
+- e3-soak ✅ 24h 压力测试框架（orchestrator + report + config + smoke test）
+- e7-fd-wiki ✅ wiki 修复 + README + models.py docstrings + 故障排除指南
+- 41 个 pytest 全部通过，soak orchestrator 端到端验证通过
 
 已完成工作流：
 - ✅ WS1 (JIT工业化收官) — 199/199 测试通过
 - ✅ WS2 (Hybrid工业化冲刺) — 41/41 测试通过，wiki 文档完成
+- ✅ WS3 (Foundation-DLL 全量验证) — 独立 foundation-dll-industrialization 已完成
 - ✅ WS4 (AOT PHASE 4+5) — 全部子任务完成
-- ✅ WS7 批次 A (e1+e2) — 架构文档更新 + pipeline 自测
+- ✅ WS7 (工程卓越度) — 批次 A + B 完成，批次 C 取消，批次 D 等待 WS5
 
 剩余工作流：
-- 🔄 WS3 (Foundation-DLL 全量验证) — 独立 foundation-dll-industrialization 任务推进中
 - ⏳ WS5 (CI/CD 完整体系) — 未启动
-- ⏳ WS7 批次 B/C/D — 等待 WS2/WS3/WS5 完成后启动
 
 ## 下一步
 
-WS3 已存在独立任务 `foundation-dll-industrialization`，Phase 2 阻塞已解除。WS7 批次 A 完成，剩余批次等待 WS2/WS3/WS5。其余 WS 等待启动。
+仅剩余 WS5 (CI/CD 完整体系) 未启动。WS7 批次 D（e6-baseline）等待 WS5 完成后启动。

@@ -22,7 +22,7 @@ _TESTING_ROOT = _VERIFICATION_ROOT.parent  # testing/
 
 
 def _resolve_family_dir(slug: str, assembly: str) -> Path:
-    return _TESTING_ROOT / "foundation-dll" / assembly / slug
+    return _TESTING_ROOT / assembly / slug
 
 
 def main() -> None:

@@ -167,9 +167,17 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (flag6)
 		{
+			builder.AppendLine("// GC string object layout for raw string data access");
+			builder.AppendLine("struct chaos_SR_String");
+			builder.AppendLine("{");
+			builder.AppendLine("    CHAOS_IL2CPP_INTPTR m_typeInfo;");
+			builder.AppendLine("    CHAOS_IL2CPP_INT32 length;");
+			builder.AppendLine("    char utf8_data[];");
+			builder.AppendLine("};");
+			builder.AppendLine();
 			builder.AppendLine("struct chaos_default_interpolated_string_handler_state");
 			builder.AppendLine("{");
-			builder.AppendLine("    CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR> fragments;");
+			builder.AppendLine("    CHAOS_IL2CPP_VECTOR(CHAOS_IL2CPP_INTPTR) fragments;");
 			builder.AppendLine("};");
 			builder.AppendLine();
 			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_key(CHAOS_IL2CPP_INTPTR chaos_handler_ref)");
@@ -189,18 +197,18 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine();
 			builder.AppendLine("chaos_default_interpolated_string_handler_state* chaos_require_default_interpolated_string_handler_state(CHAOS_IL2CPP_INTPTR chaos_handler_ref)");
 			builder.AppendLine("{");
-			builder.AppendLine("    static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(chaos_default_interpolated_string_handler_state>> chaos_state_by_key;");
+			builder.AppendLine("    static CHAOS_IL2CPP_UNORDERED_MAP(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_UNIQUE_PTR(chaos_default_interpolated_string_handler_state)) chaos_state_by_key;");
 			builder.AppendLine("    const auto chaos_key = chaos_default_interpolated_string_handler_key(chaos_handler_ref);");
 			builder.AppendLine("    auto& chaos_state = chaos_state_by_key[chaos_key];");
 			builder.AppendLine("    if (chaos_state == nullptr)");
 			builder.AppendLine("    {");
-			builder.AppendLine("        chaos_state = CHAOS_IL2CPP_MAKE_UNIQUE(chaos_default_interpolated_string_handler_state>();");
+			builder.AppendLine("        chaos_state = CHAOS_IL2CPP_MAKE_UNIQUE(chaos_default_interpolated_string_handler_state)();");
 			builder.AppendLine("    }");
 			builder.AppendLine();
 			builder.AppendLine("    return chaos_state.get();");
 			builder.AppendLine("}");
 			builder.AppendLine();
-			builder.AppendLine("void chaos_default_interpolated_string_handler_reset(CHAOS_IL2CPP_INTPTR chaos_handler_ref)");
+			builder.AppendLine("void chaos_default_interpolated_string_handler_reset(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_literal_length, CHAOS_IL2CPP_INT32 chaos_trailing_count)");
 			builder.AppendLine("{");
 			builder.AppendLine("    auto* chaos_state = chaos_require_default_interpolated_string_handler_state(chaos_handler_ref);");
 			builder.AppendLine("    chaos_state->fragments.clear();");

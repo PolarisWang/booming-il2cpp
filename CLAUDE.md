@@ -32,6 +32,24 @@
 2. **无要求则走 TDD** — 如果 wiki 中没有自测要求，则按 TDD 规范补充测试：先写失败测试，再改实现，直到测试通过
 3. **验证管线** — 如果项目有对应验证管线（如 foundation-dll verification pipeline），必须跑通后再声称完成
 
+## AI Agent Bug 修复规范
+
+### 规则 1：系统性调试强制加载
+
+任何以"修复"、"bug"、"测试失败"、"崩溃"、"编译错误"等为目的的任务，必须先调用 `dev-systematic-debugging` 技能完成四阶段调试流程（根因调查 → 模式分析 → 假设验证 → 实现修复）。禁止跳过第一阶段（根因调查）直接进入代码修改。
+
+### 规则 2：根因记录
+
+修复完成后，STATUS.md 或 commit message 必须包含以下三段式根因摘要：
+
+- `root_cause` — 一句话根因（如 "memory_order_relaxed 导致跨线程可见性违反"）
+- `fix_strategy` — 修复策略（如 "将 relaxed 改为 acquire-release"）
+- `regression_check` — 验证范围（如 "运行 gc-stress + foundation-dll 全量 family"）
+
+### 规则 3：三次修复规则
+
+同一 bug 的第三次修复仍未解决时，禁止再尝试第四次修复。必须先调用 `dev-brainstorm` 或 `dev-architecture-first-development` 完成架构审视，确认不是架构层面的问题后再继续。
+
 ## 知识记录
 
 - 新翻译路径必须记录到 `wiki/03-功能模块/il2cpp-核心架构/il2cpp-核心翻译路径参考.md`

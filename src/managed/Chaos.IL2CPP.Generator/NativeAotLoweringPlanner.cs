@@ -260,6 +260,13 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private IReadOnlyList<ExternalRuntimeHelperDefinition>? _externalRuntimeHelpers;
 
+    /// <summary>
+    /// Method declarations captured during BuildingPlanToTemplateModel, emitted into the
+    /// shared header so page-split TUs can call methods across pages with correct signatures.
+    /// Only set when TU paging is active (multiple page files exist).
+    /// </summary>
+    private IReadOnlyList<string>? _methodDeclarations;
+
     private readonly RuntimeHelperShapeRegistry _shapeRegistry = RuntimeHelperShapeRegistry.BuildDefault();
 
     /// <summary>
@@ -664,6 +671,7 @@ public sealed partial class NativeAotLoweringPlanner
         BuildEnumToStringFoldTable(methodsForLowering);
 
         var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols);
+        _methodDeclarations = methodDeclarations;
         var methods = methodsForLowering
             .Select(method =>
             {
@@ -796,12 +804,13 @@ public sealed partial class NativeAotLoweringPlanner
         if (_codegenMode == CodegenMode.Jit && methodCount > 0)
         {
             globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
-            globalDeclarations += @"
-extern ""C"" void ChaosJitRegisterAll() {
+            var cgNs = SanitizeCppIdentifier(_assemblyName);
+            globalDeclarations += $@"
+extern ""C"" void ChaosJitRegisterAll() {{
     // Register hotpatch module so GetDispatchEntry can resolve tokens → slots
-    chaos::il2cpp::runtime_core::RegisterHotpatchModule(&s_hotpatch_module);
+    chaos::il2cpp::runtime_core::RegisterHotpatchModule(&chaos::il2cpp::codegen::{cgNs}::s_hotpatch_module);
     RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount);
-}
+}}
 ";
         }
         else
@@ -1001,12 +1010,19 @@ extern ""C"" void ChaosJitRegisterAll() {}
 
             hasAnyForwardDeclarations = true;
         }
-        // chaos_valuetype_* forward declarations — only for actual value types
+        // chaos_valuetype_* typedefs — these are opaque 32-bit value types in the
+        // managed ABI surface.  em emit typedef CHAOS_IL2CPP_INT32 (not forward
+        // declarations) because extern "C" functions returning these types by value
+        // need a complete POD type.  MSVC C2526 forbids extern "C" from returning
+        // incomplete or non-POD types.
+        // NOTE: In the object model section these types ARE fully defined, but the
+        // shared header is parsed before the object model section, so we provide
+        // the minimum viable type here.
         if (_emittedValueTypeSubjectIds is { Count: > 0 })
         {
             foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
             {
-                sb.Append("struct ");
+                sb.Append("typedef CHAOS_IL2CPP_INT32 ");
                 sb.Append(GetNativeValueTypeSymbol(typeId));
                 sb.AppendLine(";");
             }
@@ -1081,7 +1097,7 @@ extern ""C"" void ChaosJitRegisterAll() {}
         // family uses DefaultInterpolatedStringHandler helpers. Unused extern function
         // declarations are harmless — the linker only resolves symbols that are actually
         // referenced from each translation unit.
-        sb.AppendLine("void chaos_default_interpolated_string_handler_reset(CHAOS_IL2CPP_INTPTR chaos_handler_ref);");
+        sb.AppendLine("void chaos_default_interpolated_string_handler_reset(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_literal_length, CHAOS_IL2CPP_INT32 chaos_trailing_count);");
         sb.AppendLine("void chaos_default_interpolated_string_handler_append_string(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INTPTR chaos_string_value);");
         sb.AppendLine("void chaos_default_interpolated_string_handler_append_int32(CHAOS_IL2CPP_INTPTR chaos_handler_ref, CHAOS_IL2CPP_INT32 chaos_value);");
         sb.AppendLine("CHAOS_IL2CPP_INTPTR chaos_default_interpolated_string_handler_to_string_and_clear(CHAOS_IL2CPP_INTPTR chaos_handler_ref);");
@@ -1113,6 +1129,11 @@ extern ""C"" void ChaosJitRegisterAll() {}
             }
             sb.AppendLine();
         }
+
+        // ── ChaosReflectionSetExceptionMetadata_2params ──
+        // Called from ArgumentOutOfRangeException..ctor(string,string) in page
+        // files.  Declared in exception_api.cpp — page files need visibility.
+        sb.AppendLine("void ChaosReflectionSetExceptionMetadata_2params(CHAOS_IL2CPP_INTPTR chaos_exception, CHAOS_IL2CPP_INTPTR chaos_message, CHAOS_IL2CPP_INTPTR chaos_param_name);");
 
         return sb.ToString();
     }

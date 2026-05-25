@@ -1,6 +1,7 @@
 {{~ for include in includes ~}}
 #include {{ include }}
 {{ end ~}}
+#include "native-aot.generated.header.h"
 
 // Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
 extern "C" void InterpreterEntryDirect(
@@ -17,11 +18,11 @@ namespace chaos::il2cpp::codegen::{{ codegen_namespace }} {
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::jit;
 
-{{ object_model_section }}
-
 {{~ for declaration in method_declarations ~}}
 {{ declaration }}
 {{ end ~}}
+
+{{ object_model_section }}
 
 {{ module_registration_code }}
 {{ generic_registration_code }}

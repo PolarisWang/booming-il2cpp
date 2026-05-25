@@ -247,6 +247,11 @@ void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, b
 
     if (patched) {
         entry->method_key = reinterpret_cast<uintptr_t>(method_key);
+        // Clear kHotpatchKeepNative: patched method should route to interpreter,
+        // not keep running the AOT native thunk. Reader uses relaxed ordering
+        // for HotpatchShouldKeepNative, so relaxed clear is sufficient.
+        _InterlockedAnd(reinterpret_cast<volatile long*>(&entry->flags),
+                        static_cast<long>(~(static_cast<unsigned long>(kHotpatchKeepNative))));
         // release: method_key visible before flags (reader uses acquire fence)
         _InterlockedOr(reinterpret_cast<volatile long*>(&entry->flags), kHotpatchActive);
     } else {

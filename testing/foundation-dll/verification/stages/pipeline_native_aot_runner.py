@@ -23,13 +23,15 @@ import time
 from pathlib import Path
 
 _HERE = Path(__file__).resolve().parent
-_REPO_ROOT = _HERE.parents[4]  # D:/agent/booming-il2cpp
+_REPO_ROOT = _HERE.parents[3]  # D:/agent/booming-il2cpp
 _VERIFICATION_BASE = _REPO_ROOT / "testing" / "foundation-dll"
 _VERIFICATION: Path | None = None  # set per-assembly in main()
 
 from verification.orchestration.family_entrypoint import generate_and_build
 
-from testing.trace import trace_init, trace
+# trace — no-op stubs for removed testing.trace module
+def trace_init(**kwargs): pass
+def trace(name, **kwargs): pass
 
 # Families to process (all 23 non-report CoreLib families)
 FAMILIES = [

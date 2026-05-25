@@ -25,6 +25,7 @@ public static class ManagedClosureArtifactNames
     public const string AotManifest = "aot-manifest.json";
     public const string MetadataRegistration = "metadata-registration.json";
     public const string SupplementalMetadataTemplate = "hot-update/supplemental-metadata-template.json";
+    public const string SupplementalMetadata = "hot-update/supplemental-metadata.json";
     public const string CodeRegistration = "code-registration.json";
     public const string GenericInstantiationDemandGraph = "generic-instantiation-demand-graph.json";
     public const string GenericCapabilityMatrix = "generic-capability-matrix.json";

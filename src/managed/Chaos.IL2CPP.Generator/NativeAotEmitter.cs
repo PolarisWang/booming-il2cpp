@@ -233,15 +233,14 @@ public sealed class NativeAotEmitter
             .Select(BuildMethodSection)
             .ToArray();
 
-        // Always include the shared header when type declarations exist, so every
-        // page file has access to cross-TU extern declarations (chaos_mt_*, etc.).
-        IReadOnlyList<string> includes = templateModel.Includes;
-        if (!string.IsNullOrEmpty(templateModel.TypeDeclarationsCode))
-        {
-            var extended = new List<string>(includes);
-            extended.Add("\"native-aot.generated.header.h\"");
-            includes = extended;
-        }
+        // Include the shared header when NOT inlining the object model.
+        // Pages with inline TypeInfoV0 definitions are self-sufficient;
+        // pages without them need the shared header for extern type declarations,
+        // chaos_valuetype_* typedefs, and cross-TU function declarations.
+        // Including BOTH would cause ODR violations and bloat MSVC heap usage.
+        var includes = new List<string>(templateModel.Includes);
+        if (!includeObjectModel)
+            includes.Insert(0, "\"native-aot.generated.header.h\"");
 
         var model = new ScriptObject
         {
@@ -350,7 +349,7 @@ public sealed class NativeAotEmitter
                 {
                     PageNumber = i + 1,
                     MethodCount = Math.Min(autoPageSize, totalMethods - i * autoPageSize),
-                    Path = $"generated/native-aot.generated{pageSuffix}.cpp",
+                    Path = $"native-aot.generated{pageSuffix}.cpp",
                 });
             }
             pages = autoPages;
@@ -375,10 +374,10 @@ public sealed class NativeAotEmitter
                               + (templateModel.GenericRegistrationCode?.Length ?? 0)
                               + 500; // Scriban template structural overhead
 
-            // Threshold: ~2 MB of C++ output. MethodSource.Length is a close
-            // upper-bound estimate of each method's contribution to the final
-            // rendered output (Scriban wrapping adds ~200 chars per method).
-            const int sizeThresholdChars = 1_500_000;
+            // Threshold: ~350 KB of C++ source per page (~50 pages for 3788 methods).
+            // Keeps generated files under ~50K lines / ~2 MB to avoid MSVC C1060
+            // (compiler out of heap space) which triggers at ~15 MB / 448K lines.
+            const int sizeThresholdChars = 350_000;
             const int perMethodOverhead = 200;
             const int perPageOverhead = 500;
 
@@ -436,30 +435,32 @@ public sealed class NativeAotEmitter
                 else
                 {
                     // Overflow page beyond the originally planned page count.
-                    string suffix = actualPageIdx == 0
-                        ? ""
-                        : $".page{actualPageIdx + 1}";
+                    // Use native-aot.page-NNNN.cpp naming to match cmake glob
+                    // (native-aot.page-*.cpp) and keep the lowering plan convention.
                     page = new AuditTranslationUnitPageArtifact
                     {
                         PageNumber = actualPageIdx + 1,
                         MethodCount = methodIdx - pageStart,
-                        Path = $"generated/native-aot.generated{suffix}.cpp",
+                        Path = $"native-aot.page-{actualPageIdx + 1:D4}.cpp",
                     };
                 }
 
-                // TypeInfoV0 inline definitions — must be included in every page file
-                // because extern "C" functions returning chaos_valuetype_* by value
-                // need the full struct definition (not just forward declaration) for
-                // MSVC to verify POD-ness.  The shared header provides additional
-                // cross-TU extern declarations alongside the inline definitions.
+                // All pages get inline TypeInfoV0 definitions (includeObjectModel=true)
+                // because the shared header only has forward declarations of chaos_type_*
+                // which are insufficient for code that accesses type members directly.
+                // The shared header is NOT included (would duplicate definitions and
+                // bloat MSVC heap usage).
                 string content = BuildGeneratedPage(
                     templateModel, pageMethods,
                     includeRegistration: isFirstPage,
                     includeObjectModel: true);
 
+                // Normalize page path to flat (no directory prefix) so cmake
+                // glob patterns match regardless of what the lowering plan uses.
+                var pageFileName = Path.GetFileName(page.Path.AsSpan());
                 sources.Add(new NativeAotGeneratedSource
                 {
-                    RelativePath = page.Path,
+                    RelativePath = pageFileName.Length > 0 ? pageFileName.ToString() : page.Path,
                     Contents = content,
                 });
                 artifacts.Add(new NativeAotGeneratedArtifactRef
@@ -474,6 +475,20 @@ public sealed class NativeAotEmitter
         else
         {
             // Single translation unit (traditional behavior)
+            // Emit shared header with extern TypeInfoV0 declarations so that
+            // chaos_generated_module.h can include it unconditionally.
+            string headerContent = BuildSharedHeader(templateModel);
+            sources.Add(new NativeAotGeneratedSource
+            {
+                RelativePath = NativeAotArtifactNames.GeneratedHeader,
+                Contents = headerContent,
+            });
+            artifacts.Add(new NativeAotGeneratedArtifactRef
+            {
+                Kind = "generatedHeader",
+                Path = NativeAotArtifactNames.GeneratedHeader,
+            });
+
             string content = BuildGeneratedTranslationUnit(templateModel);
             sources.Add(new NativeAotGeneratedSource
             {

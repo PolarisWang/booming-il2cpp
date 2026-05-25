@@ -42,8 +42,8 @@ CHAOS_IL2CPP_INT32     ChaosDecimalToInt32(CHAOS_IL2CPP_INTPTR dec) noexcept;
 // RaiseManagedException is [[noreturn]], so the overflow path is cold.
 CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT32 ChaosConvertToInt32FromDouble(CHAOS_IL2CPP_FLOAT64 value) noexcept {
     if (std::isnan(value) ||
-        value < static_cast<CHAOS_IL2CPP_FLOAT64>(std::numeric_limits<CHAOS_IL2CPP_INT32>::min()) ||
-        value > static_cast<CHAOS_IL2CPP_FLOAT64>(std::numeric_limits<CHAOS_IL2CPP_INT32>::max()))
+        value < static_cast<CHAOS_IL2CPP_FLOAT64>((std::numeric_limits<CHAOS_IL2CPP_INT32>::min)()) ||
+        value > static_cast<CHAOS_IL2CPP_FLOAT64>((std::numeric_limits<CHAOS_IL2CPP_INT32>::max)()))
     {
         chaos::il2cpp::runtime_core::RaiseManagedException(
             "System.OverflowException",

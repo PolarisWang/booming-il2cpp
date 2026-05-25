@@ -10,6 +10,8 @@ from verification.orchestration.context import FamilyContext, StageResult
 from verification.orchestration.family_entrypoint import generate_and_build
 from verification.orchestration.dispatch_generator import generate_verification_dispatch
 
+_REPO_ROOT = Path(__file__).resolve().parents[4]
+
 
 def _read_contract(assembly: str, slug: str) -> dict | None:
     """Read contract from testing/ path."""
@@ -28,7 +30,7 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
     """Stage 1: Entrypoint generation + IL2CPP compile (AOT)."""
     start = time.perf_counter()
 
-    from pipeline_native_aot_runner import (
+    from verification.stages.pipeline_native_aot_runner import (
         build_entry_executable,
         build_subjects_dll,
         generate_coverage_json,
@@ -196,7 +198,7 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
         )
 
     print(f"  [jit_codegen] Building JIT mode entry-jit.exe...")
-    from pipeline_native_aot_runner import run_family as _run_old_family
+    from verification.stages.pipeline_native_aot_runner import run_family as _run_old_family
 
     testing_base = _get_testing_base(ctx.assembly)
     native_dir = testing_base / ctx.slug / "native"
