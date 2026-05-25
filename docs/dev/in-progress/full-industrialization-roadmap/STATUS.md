@@ -76,23 +76,29 @@ pending_phases: [phase-1-remaining, phase-2]
 |---------|-------|--------|-------|---------|------------|-----------------|
 | ws1-jit-industrialization | phase-1 | completed | main | JIT 工业化收官 ✅ 199/199 测试通过 | — | 大 |
 | ws3-foundation-dll | phase-1 | ready | main | Foundation-DLL 全量验证攻坚（16 failures 硬修复） | — | 大 |
-| ws4-aot-phase-4-5 | phase-1 | in-progress | main | AOT PHASE 4 HotUpdate 完整化 + PHASE 5 性能优化 | — | 极大 |
+| ws4-aot-phase-4-5 | phase-1 | completed | main | AOT PHASE 4+5 ✅ p4-hotpatch/p4-multimodule/p4-interpreter/p5-paging/p5-inline/p5-devirt/p5-lto 全部完成 | — | 极大 |
 | ws5-cicd | phase-1 | ready | main | CI/CD 完整体系（WF 框架/fd CI/JIT 基线/AOT 门禁/Dashboard） | — | 中 |
 | ws7-engineering-excellence | phase-1 | ready | main | 工程卓越度（文档/pipeline 自测/压力测试/基准回归） | — | 大 |
 | ws2-hybrid-industrialization | phase-2 | completed | main | Hybrid 工业化冲刺 ✅ 41/41 测试通过 | ws1-jit-industrialization ✅ | 中 |
 
 ## 最新摘要
 
-2026-05-25: WS4 (AOT PHASE 4+5) 已启动。p4-hotpatch/p4-multimodule/p4-interpreter 已完成，p5-paging 作为下一子任务。
-- p4-interpreter: entry_direct.cpp Step C SEH gate 已移除，FastExecute 现已覆盖 SEH 方法。commit 525a87ef6.
+2026-05-25: WS4 (AOT PHASE 4+5) 全部完成。
+- p4-hotpatch ✅ Hotpatch Dispatch 全覆盖（ChaosDispatchMethod）
+- p4-multimodule ✅ PatchLoader 多模块支持
+- p4-interpreter ✅ FastExecute SEH 全面支持（移除 Step C gate）
+- p5-paging ✅ 大程序集分页（size-based accumulation）
+- p5-inline ✅ 多 BB 内联 + 深度控制 + 循环内联预算提升
+- p5-devirt ✅ 密封类守卫消除 + reachability 强化
+- p5-lto ✅ LTO/LTCG CMake 集成（146 文件）
 
 已完成工作流：
 - ✅ WS1 (JIT工业化收官) — 199/199 测试通过
 - ✅ WS2 (Hybrid工业化冲刺) — 41/41 测试通过，wiki 文档完成
+- ✅ WS4 (AOT PHASE 4+5) — 全部子任务完成
 
 剩余工作流：
-- 🔄 WS4 (AOT PHASE 4+5) — p4-interpreter ✅，p5-paging 进行中
-- ⏳ WS3 (Foundation-DLL 全量验证) — 独立 foundation-dll-industrialization 任务推进中
+- 🔄 WS3 (Foundation-DLL 全量验证) — 独立 foundation-dll-industrialization 任务推进中
 - ⏳ WS5 (CI/CD 完整体系) — 未启动
 - ⏳ WS7 (工程卓越度) — 未启动
 

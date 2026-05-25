@@ -79,3 +79,15 @@ target_link_libraries(entry PRIVATE
     chaos::runtime
 )
 target_link_options(entry PRIVATE /FORCE:MULTIPLE)
+
+# Enable link-time optimization (LTO/LTCG) for release/profile builds
+if(MSVC)
+  set_target_properties(entry PROPERTIES
+    INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE
+    INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO TRUE
+  )
+else()
+  set_target_properties(entry PROPERTIES
+    INTERPROCEDURAL_OPTIMIZATION TRUE
+  )
+endif()
