@@ -52,6 +52,7 @@ struct JitPrecode {
     JitMethod*                   compiled   = nullptr; // result of Compile()
     HotpatchEntryV0*             entry      = nullptr; // back-pointer to patch entry
     void*                        trampoline = nullptr; // executable trampoline code
+    void*                        original_direct_ptr = nullptr; // saved AOT code pointer
 
     // ── PGO fields (only used when config.enable_pgo is true) ───────────────
     std::atomic<uint32_t> pgo_call_count{0};   // Call count for PGO-driven Tier 1 upgrade

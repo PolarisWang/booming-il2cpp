@@ -217,6 +217,26 @@ static JitMethod* CompileWithCatch(const interpreter::RegisterMethod& ir,
     return jit;
 }
 
+// ── SafeCompileWithCatch ──────────────────────────────────────────────
+// Wraps Compile() in raw SEH __try/__except to catch access violations
+// during compilation.  The CHAOS_EH filter doesn't catch AVs, so we use
+// a catch-all handler.  Returns nullptr on any SEH during compilation.
+// Separate function to avoid MSVC C2712 (__try in function with unwind).
+static JitMethod* SafeCompileWithCatch(const interpreter::RegisterMethod& ir,
+                                        const CompileConfig& config) noexcept {
+#if defined(_WIN32)
+    JitMethod* jit = nullptr;
+    __try {
+        jit = Compile(ir, config);
+    } __except(EXCEPTION_EXECUTE_HANDLER) {
+        jit = nullptr;
+    }
+    return jit;
+#else
+    return Compile(ir, config);
+#endif
+}
+
 // ── JitStubDispatchImpl ───────────────────────────────────────────────
 //
 // State machine:
@@ -257,13 +277,18 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
     if (precode->state.compare_exchange_strong(expected, kPrecodeCompiling,
                                                 std::memory_order_acq_rel)) {
         // Winner — compile the method
-        JitMethod* jit = CompileWithCatch(precode->ir, precode->config);
+        void* fallback = precode->original_direct_ptr;
+        JitMethod* jit = SafeCompileWithCatch(precode->ir, precode->config);
         if (!jit) {
-            // Compilation failed — reset state so we can retry
+            // Compilation failed — restore original direct_ptr (AOT code)
+            // so future calls go directly to AOT without crashing.
+            if (precode->entry && fallback) {
+                precode->entry->direct_ptr = fallback;
+            }
             precode->state.store(kPrecodeUncompiled, std::memory_order_release);
-            CHAOS_IL2CPP_LOG_ERROR_M("jit",
-                "JitStubDispatchImpl: Compile() failed for method");
-            return nullptr;
+            CHAOS_IL2CPP_LOG_WARN_M("jit",
+                "JitStubDispatchImpl: Compile() failed, falling back to AOT");
+            return fallback;
         }
 
         precode->compiled = jit;
@@ -324,48 +349,37 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
 
-    std::fprintf(stderr, "DIAG: RegisterJitEntryMethods enter entries=%p count=%u\n", (void*)entries, count); std::fflush(stderr);
-
     for (uint32_t i = 0; i < count; ++i) {
         const auto& entry = entries[i];
-        std::fprintf(stderr, "DIAG: JIT entry %u/%u token=0x%x module=%u json_len=%u\n",
-                     i, count, entry.token, entry.module_id, entry.json_len);
-        std::fflush(stderr);
 
         // Step 1: Deserialize AotCoreIr JSON → IRMethod
         auto ir = DeserializeAotCoreIrMethod(
             entry.json, entry.json_len, nullptr, nullptr, nullptr, nullptr);
-        std::fprintf(stderr, "DIAG: entry %u deserialize OK\n", i);
-        std::fflush(stderr);
 
         // Step 2: Allocate registers → RegisterMethod (independent copy)
         auto rm = AllocateRegisters(ir);
-        std::fprintf(stderr, "DIAG: entry %u alloc_regs OK\n", i);
-        std::fflush(stderr);
         // ir goes out of scope — vectors auto-clean
 
         // Step 3: Heap-allocate JitPrecode (lives for program lifetime)
         auto* precode = new JitPrecode();
-        std::fprintf(stderr, "DIAG: entry %u new JitPrecode OK precode=%p\n", i, (void*)precode);
-        std::fflush(stderr);
         precode->ir = std::move(rm);
         precode->config = CompileConfig{};
+        precode->config.enable_optimizer = false;
 
         // Step 4: Look up the HotpatchEntryV0 for this method
         precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(
             entry.module_id, entry.token);
-        std::fprintf(stderr, "DIAG: entry %u GetDispatchEntry OK entry=%p\n", i, (void*)precode->entry);
-        std::fflush(stderr);
 
         // Step 5: Allocate trampoline from the RWX arena
         precode->trampoline = s_precode_arena.AllocateJitTrampoline(precode);
-        std::fprintf(stderr, "DIAG: entry %u AllocateJitTrampoline OK trampoline=%p\n", i, (void*)precode->trampoline);
-        std::fflush(stderr);
 
         // Step 6: Point direct_ptr at the trampoline.
         // First call goes trampoline → JitStubEntry → JitStubDispatchImpl
         // → Compile() → direct_ptr atomically replaced with compiled code.
+        // Save the original direct_ptr (AOT code) in case Compile() fails
+        // and we need to fall back to AOT execution.
         if (precode->entry && precode->trampoline) {
+            precode->original_direct_ptr = precode->entry->direct_ptr;
             precode->entry->direct_ptr = precode->trampoline;
         } else {
             CHAOS_IL2CPP_LOG_ERROR_M("jit",
