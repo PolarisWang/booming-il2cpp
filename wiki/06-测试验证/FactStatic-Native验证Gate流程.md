@@ -90,7 +90,7 @@ dotnet run -f net8.0/net10.0       entry-aot.exe --bench N → AOT 性能
 
 ## 13 阶段管线
 
-`python _core/python/cli.py` 自动执行以下 13 阶段：
+`python -m verification.entry_points.cli` 自动执行以下 13 阶段：
 
 | #  | 阶段 | 名称 | 说明 |
 |----|------|------|------|
@@ -135,20 +135,20 @@ dotnet run -f net8.0/net10.0       entry-aot.exe --bench N → AOT 性能
 
 ```bash
 # 完整 13 阶段管线（标准模式）
-python _core/python/cli.py --slug convert-char --assembly System.Private.CoreLib
+python -m verification.entry_points.cli --slug convert-char --assembly System.Private.CoreLib
 
 # 严格模式（强制 hotupdate 阶段必须通过）
-python _core/python/cli.py --slug convert-char --assembly System.Private.CoreLib --mode strict
+python -m verification.entry_points.cli --slug convert-char --assembly System.Private.CoreLib --mode strict
 
 # 指定跳过某些阶段
-python _core/python/cli.py --slug convert-char --assembly System.Private.CoreLib \
+python -m verification.entry_points.cli --slug convert-char --assembly System.Private.CoreLib \
   --skip jit_codegen hotupdate_jit_fact hotupdate_jit_benchmark
 
 # 全量运行所有 families
-python _core/python/batch_run_all.py
+python -m verification.entry_points.batch
 
 # CI smoke（仅关键 families + 快速模式）
-python _core/python/ci_smoke.py
+python -m verification.entry_points.ci_smoke
 ```
 
 ## Handwrite 源覆盖保护
