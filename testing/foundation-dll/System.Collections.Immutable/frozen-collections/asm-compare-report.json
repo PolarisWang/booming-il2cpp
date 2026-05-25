@@ -1,0 +1,333 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Collections.Immutable",
+  "familyId": "family/System.Collections.Immutable/frozen/collections",
+  "capturedAt": "2026-05-25T21:39:13",
+  "batchMode": true,
+  "summary": {
+    "totalMethods": 8,
+    "okCount": 8,
+    "failedCount": 0,
+    "skippedCount": 0,
+    "jitInstructionCount": {
+      "min": 44,
+      "max": 44,
+      "avg": 44.0,
+      "total": 352
+    },
+    "aotInstructionCount": {
+      "min": 19,
+      "max": 30,
+      "avg": 22.1,
+      "total": 177
+    },
+    "totalExternalRuntimeCalls": 0,
+    "totalVirtualDispatches": 0,
+    "totalBoxingOps": 0,
+    "topInstructionCategories": {
+      "external_runtime_call": 16
+    },
+    "overallIrExpansionRatio": 0.5,
+    "averageExpansionRatio": 0.5,
+    "maxExpansionRatio": 0.68,
+    "minExpansionRatio": 0.43
+  },
+  "methodResults": [
+    {
+      "methodIndex": 0,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create<string,int>:System.Collections.Frozen.FrozenDictionary<System.String,System.Int32>()",
+      "shortName": "Subject_0",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 19,
+        "ratio": 0.43,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_0",
+        "instructions": 19
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary<System.String,System.Int32>:System.Collections.Frozen.FrozenDictionary<System.String,System.Int32>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.Int32>>,System.Collections.Generic.IEqualityComparer<System.String>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.String,System.Int32>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 1,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create<Byte,Byte>:System.Collections.Frozen.FrozenDictionary<System.Byte,System.Byte>()",
+      "shortName": "Subject_1",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 19,
+        "ratio": 0.43,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_1",
+        "instructions": 19
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary<System.Byte,System.Byte>:System.Collections.Frozen.FrozenDictionary<System.Byte,System.Byte>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.Byte,System.Byte>>,System.Collections.Generic.IEqualityComparer<System.Byte>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.Byte,System.Byte>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 2,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create<string,string>:System.Collections.Frozen.FrozenDictionary<System.String,System.String>()",
+      "shortName": "Subject_2",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 19,
+        "ratio": 0.43,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_2",
+        "instructions": 19
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::ToFrozenDictionary<System.String,System.String>:System.Collections.Frozen.FrozenDictionary<System.String,System.String>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<System.String,System.String>>,System.Collections.Generic.IEqualityComparer<System.String>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary<System.String,System.String>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 3,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Byte>:System.Collections.Frozen.FrozenSet<System.Byte>()",
+      "shortName": "Subject_3",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 19,
+        "ratio": 0.43,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_3",
+        "instructions": 19
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet<System.Byte>:System.Collections.Frozen.FrozenSet<System.Byte>(System.Collections.Generic.IEnumerable<System.Byte>,System.Collections.Generic.IEqualityComparer<System.Byte>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Byte>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 4,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Byte>:System.Collections.Frozen.FrozenSet<System.Byte>(System.Byte)",
+      "shortName": "Subject_4",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 26,
+        "ratio": 0.59,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_4",
+        "instructions": 26
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet<System.Byte>:System.Collections.Frozen.FrozenSet<System.Byte>(System.Collections.Generic.IEnumerable<System.Byte>,System.Collections.Generic.IEqualityComparer<System.Byte>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Byte>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 5,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Byte>:System.Collections.Frozen.FrozenSet<System.Byte>(System.Byte,System.Byte)",
+      "shortName": "Subject_5",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 30,
+        "ratio": 0.68,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_5",
+        "instructions": 30
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet<System.Byte>:System.Collections.Frozen.FrozenSet<System.Byte>(System.Collections.Generic.IEnumerable<System.Byte>,System.Collections.Generic.IEqualityComparer<System.Byte>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Byte>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 6,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Int32>:System.Collections.Frozen.FrozenSet<System.Int32>()",
+      "shortName": "Subject_6",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 19,
+        "ratio": 0.43,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_6",
+        "instructions": 19
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet<System.Int32>:System.Collections.Frozen.FrozenSet<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    },
+    {
+      "methodIndex": 7,
+      "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Int32>:System.Collections.Frozen.FrozenSet<System.Int32>(System.Int32)",
+      "shortName": "Subject_7",
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 26,
+        "ratio": 0.59,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "FrozenCollectionsSubjects_FrozenCollectionsSubjects_CustomEntrySubject_7",
+        "instructions": 26
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet::ToFrozenSet<System.Int32>:System.Collections.Frozen.FrozenSet<System.Int32>(System.Collections.Generic.IEnumerable<System.Int32>,System.Collections.Generic.IEqualityComparer<System.Int32>)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Collections.Immutable/System.Collections.Frozen.FrozenSet<System.Int32>::get_Count:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
+    }
+  ]
+}

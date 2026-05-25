@@ -16,21 +16,21 @@ public static partial class RuntimeCompilerServicesSubjects
     // [0] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)
     public static void Subject_0()
     {
-        try { if (RuntimeHelpers.GetHashCode(42) != RuntimeHelpers.GetHashCode(42)) _exitCode = 1; }
+        try { if (RuntimeHelpers.GetHashCode(null!) != RuntimeHelpers.GetHashCode(null!)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)
     public static void Subject_1()
     {
-        try { if (((RuntimeHelpers.Equals(42, 42)) ? 1 : 0) != ((RuntimeHelpers.Equals(42, 42)) ? 1 : 0)) _exitCode = 1; }
+        try { if (((RuntimeHelpers.Equals(null!, null!)) ? 1 : 0) != ((RuntimeHelpers.Equals(null!, null!)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     public static void Subject_2()
     {
-        try { if (((RuntimeHelpers.GetObjectValue(42)).GetHashCode()) != ((RuntimeHelpers.GetObjectValue(42)).GetHashCode())) _exitCode = 1; }
+        try { if (((RuntimeHelpers.GetObjectValue(null!)).GetHashCode()) != ((RuntimeHelpers.GetObjectValue(null!)).GetHashCode())) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -44,19 +44,19 @@ public static partial class RuntimeCompilerServicesSubjects
     // [4] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)
     public static void Subject_4()
     {
-        // TODO: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle) could not be auto-generated
+        // needs-manual — InitializeArray with 2 params requires manual implementation: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)
     }
 
     // [5] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range)
     public static void Subject_5()
     {
-        // TODO: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range) could not be auto-generated
+        // needs-manual — GetSubArray with 2 params requires manual implementation: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range)
     }
 
     // [6] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::BoxEnum:System.Object(T)
     public static void Subject_6()
     {
-        // TODO: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::BoxEnum:System.Object(T) could not be auto-generated
+        // non-callable: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::BoxEnum:System.Object(T)
     }
 
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.Runtime.CompilerServices.FormattableString(System.String,System.Object[])
@@ -69,7 +69,7 @@ public static partial class RuntimeCompilerServicesSubjects
     // [8] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)
     public static void Subject_8()
     {
-        try { new RuntimeWrappedException(42); }
+        try { new RuntimeWrappedException(null!); }
         catch { _exitCode = 1; }
     }
 

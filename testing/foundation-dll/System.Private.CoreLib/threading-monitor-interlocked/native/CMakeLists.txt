@@ -7,7 +7,6 @@ set(CMAKE_CXX_STANDARD 20)
 add_compile_options(/utf-8 /GS- /FS)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
-add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
@@ -20,24 +19,16 @@ set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/threading-monitor-interlocked/codegen")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
-# JIT mode: EXCLUDES *Subjects/generated/native-aot.generated.cpp (flat layout
-# from old --output runs, has empty ChaosJitRegisterAll stub).
-# Only nested *Subjects/generated/generated/ + codegen/generated/ patterns.
+# AOT mode: sources at *Subjects/generated/* (single-level, R1 fix).
 file(GLOB CHAOS_CODEGEN_CPP
-    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
-    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
-    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/generated/native-aot.generated.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/generated/native-aot.page-*.cpp"
-    "${CHAOS_CODEGEN_DIR}/generated/generated/chaos_generated_module.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/chaos_generated_module.cpp"
 )
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
-    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/generated/generated/native-aot.generated.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/generated/generated/native-aot.page-*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/generated/generated/chaos_generated_module.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.page-*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/chaos_generated_module.cpp"
 )
 # Prefer native (pipeline post-processed) copies over codegen originals
 if(CHAOS_CODEGEN_NATIVE_CPP)
@@ -52,15 +43,14 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
-# SDK runtime_stubs sources (copied by SdkEmitter during convert-to-cpp).
-# These resolve symbols that may be missing from the prebuilt
-# chaos_runtime_core.lib (stale SDK that predates newly added stubs).
+# SDK runtime_stubs sources (resolved directly from the source tree to
+# avoid depending on SdkEmitter to stage them into the SDK output dir).
 file(GLOB CHAOS_RUNTIME_STUB_SOURCES
-    "${CHAOS_SDK_DIR}/runtime_stubs/*.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/*.cpp"
 )
 list(REMOVE_ITEM CHAOS_RUNTIME_STUB_SOURCES
-    "${CHAOS_SDK_DIR}/runtime_stubs/guid_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/threading_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp"
 )
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
@@ -79,7 +69,6 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"  # runtime_stubs headers
-    "${CHAOS_SDK_DIR}/runtime_stubs"  # SDK-delivered runtime stubs sources
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native"  # parent for bootstrap/bootstrap.h includes
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
@@ -89,7 +78,6 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
-    "${CHAOS_PROJECT_ROOT}/src/native/jit"
 )
 
 add_executable(entry ${CHAOS_ENTRY_SOURCES})

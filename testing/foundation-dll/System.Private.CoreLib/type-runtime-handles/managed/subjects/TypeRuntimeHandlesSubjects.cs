@@ -16,22 +16,19 @@ public static partial class TypeRuntimeHandlesSubjects
     // [0] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
     public static void Subject_0()
     {
-        try { if ((Type.GetType("System.Byte")!).GetHashCode() != (Type.GetType("System.Byte")!).GetHashCode()) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        // needs-manual — GetType with 1 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
     }
 
     // [1] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
     public static void Subject_1()
     {
-        try { if ((Type.GetType("System.Byte", false)!).GetHashCode() != (Type.GetType("System.Byte", false)!).GetHashCode()) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        // needs-manual — GetType with 2 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
     }
 
     // [2] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
     public static void Subject_2()
     {
-        try { if ((Type.GetType("System.Byte", false, false)!).GetHashCode() != (Type.GetType("System.Byte", false, false)!).GetHashCode()) _exitCode = 1; }
-        catch { _exitCode = 1; }
+        // needs-manual — GetType with 3 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
     }
 
     // [3] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)

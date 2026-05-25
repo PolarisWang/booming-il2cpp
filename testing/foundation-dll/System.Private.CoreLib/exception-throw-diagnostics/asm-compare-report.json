@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/exception/throw/diagnostics",
-  "capturedAt": "2026-05-25T22:48:56",
+  "capturedAt": "2026-05-25T23:01:43",
   "batchMode": true,
   "summary": {
     "totalMethods": 17,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 1672,
-      "avg": 139.8,
-      "total": 2376
+      "max": 44,
+      "avg": 44.0,
+      "total": 748
     },
     "aotInstructionCount": {
       "min": 9,
@@ -27,10 +27,10 @@
     "topInstructionCategories": {
       "external_runtime_call": 25
     },
-    "overallIrExpansionRatio": 0.14,
-    "averageExpansionRatio": 0.42,
+    "overallIrExpansionRatio": 0.45,
+    "averageExpansionRatio": 0.44,
     "maxExpansionRatio": 1.18,
-    "minExpansionRatio": 0.01
+    "minExpansionRatio": 0.2
   },
   "methodResults": [
     {
@@ -134,15 +134,15 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 1672,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 20,
-        "ratio": 0.01,
-        "jitCodeSize": 4082
+        "ratio": 0.45,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 4082,
-        "instructions": 1672
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

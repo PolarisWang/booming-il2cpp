@@ -16,19 +16,19 @@ public static partial class TypeRuntimeHandlesSubjects
     // [0] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
     public static void Subject_0()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String) could not be auto-generated
+        // needs-manual — GetType with 1 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
     }
 
     // [1] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
     public static void Subject_1()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean) could not be auto-generated
+        // needs-manual — GetType with 2 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
     }
 
     // [2] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
     public static void Subject_2()
     {
-        // TODO: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean) could not be auto-generated
+        // needs-manual — GetType with 3 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
     }
 
     // [3] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)

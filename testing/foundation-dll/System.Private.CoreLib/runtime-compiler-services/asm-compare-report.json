@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/runtime/compiler/services",
-  "capturedAt": "2026-05-22T01:19:28",
+  "capturedAt": "2026-05-25T23:21:18",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 32,
-      "avg": 14.3,
-      "total": 143
+      "max": 28,
+      "avg": 13.4,
+      "total": 134
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 21
     },
-    "overallIrExpansionRatio": 0.33,
-    "averageExpansionRatio": 0.33,
-    "maxExpansionRatio": 0.73,
+    "overallIrExpansionRatio": 0.3,
+    "averageExpansionRatio": 0.3,
+    "maxExpansionRatio": 0.64,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 18,
+        "ratio": 0.41,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,7 +52,7 @@
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_0",
-        "instructions": 20
+        "instructions": 18
       },
       "analysis": [
         {
@@ -77,8 +77,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 32,
-        "ratio": 0.73,
+        "aotInstructionCount": 28,
+        "ratio": 0.64,
         "jitCodeSize": 256
       },
       "jit": {
@@ -89,7 +89,7 @@
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_1",
-        "instructions": 32
+        "instructions": 28
       },
       "analysis": [
         {
@@ -114,8 +114,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 22,
-        "ratio": 0.5,
+        "aotInstructionCount": 20,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
@@ -126,7 +126,7 @@
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_2",
-        "instructions": 22
+        "instructions": 20
       },
       "analysis": [
         {
@@ -332,8 +332,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -344,7 +344,7 @@
       "aot": {
         "status": "ok",
         "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_8",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [],
       "instructionCategories": {}

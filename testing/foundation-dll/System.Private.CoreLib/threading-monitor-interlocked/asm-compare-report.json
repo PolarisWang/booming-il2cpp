@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/monitor/interlocked",
-  "capturedAt": "2026-05-25T01:37:13",
+  "capturedAt": "2026-05-25T23:29:22",
   "batchMode": true,
   "summary": {
     "totalMethods": 14,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 1438,
-      "avg": 143.6,
-      "total": 2010
+      "max": 44,
+      "avg": 44.0,
+      "total": 616
     },
     "aotInstructionCount": {
       "min": 1,
@@ -27,8 +27,8 @@
     "topInstructionCategories": {
       "external_runtime_call": 7
     },
-    "overallIrExpansionRatio": 0.05,
-    "averageExpansionRatio": 0.13,
+    "overallIrExpansionRatio": 0.17,
+    "averageExpansionRatio": 0.17,
     "maxExpansionRatio": 0.77,
     "minExpansionRatio": 0.02
   },
@@ -87,15 +87,15 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 1438,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 26,
-        "ratio": 0.02,
-        "jitCodeSize": 3891
+        "ratio": 0.59,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3891,
-        "instructions": 1438
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
