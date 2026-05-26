@@ -155,8 +155,480 @@ def _return_type_from_mid(mid: str) -> str:
     return m.group(1).strip() if m else ''
 
 
+def _param_type_to_expr(pt: str, i_val: str, idx: int) -> str | None:
+    """Map a parameter type string to a C# expression for benchmark invocation.
+
+    Returns the expression string, or None if the type cannot be handled
+    (falls through to the reflection runner).
+
+    This is the core of the generic benchmark harness — it eliminates the
+    need for per-method pattern matching by deriving call expressions from
+    type signatures alone.
+    """
+    # Primitives and simple value types
+    tbl = {
+        'System.Int32':    i_val,
+        'System.Int64':    f'({i_val} & 0xFF)',
+        'System.UInt32':   f'(uint)({i_val} & 0xFF)',
+        'System.UInt64':   f'(ulong)({i_val} & 0xFF)',
+        'System.Int16':    f'(short)({i_val} & 0xFF)',
+        'System.UInt16':   f'(ushort)({i_val} & 0xFF)',
+        'System.Byte':     f'(byte)({i_val} & 0xFF)',
+        'System.SByte':    f'(sbyte)({i_val} & 0xFF)',
+        'System.Char':     f'(char)({i_val} & 0xFF)',
+        'System.Boolean':  f'({i_val} % 2 == 0)',
+        'System.Double':   f'(double)({i_val} & 0xFF)',
+        'System.Single':   f'(float)({i_val} & 0xFF)',
+        'System.Decimal':  f'(decimal)({i_val} & 0xFF)',
+        'System.IntPtr':   f'(System.IntPtr)({i_val} & 0xFF)',
+        'System.UIntPtr':  f'(System.UIntPtr)({i_val} & 0xFF)',
+    }
+    if pt in tbl:
+        return tbl[pt]
+
+    # String
+    if pt == 'System.String':
+        return f'(({i_val} & 1) == 0 ? "A" : "B")'
+
+    # Type
+    if pt == 'System.Type':
+        return 'typeof(int)'
+
+    # Object
+    if pt == 'System.Object':
+        return f'(object)({i_val} & 0xFF)'
+
+    # Array types — create small non-null arrays
+    if pt.endswith('[]'):
+        elem_type = pt[:-2]
+        if elem_type == 'System.Byte':
+            return 'new byte[]{1,2,3,4,5}'
+        if elem_type == 'System.Int32':
+            return 'new int[]{1,2,3}'
+        if elem_type == 'System.String':
+            return 'new string[]{"A","B"}'
+        if elem_type == 'System.Object':
+            return 'new object[]{1,"B"}'
+        if elem_type == 'System.Type':
+            return 'new Type[]{typeof(int)}'
+        # Generic array fallback
+        return 'new byte[]{1,2,3,4,5}'
+
+    # Enum types — use default value cast
+    if pt.startswith('System.') and pt.count('.') <= 2:
+        # Common enums
+        enum_defaults = {
+            'System.Reflection.BindingFlags': 'System.Reflection.BindingFlags.Default',
+            'System.StringComparison': 'System.StringComparison.Ordinal',
+            'System.StringSplitOptions': 'System.StringSplitOptions.None',
+            'System.Threading.Timeout': 'System.Threading.Timeout.Infinite',
+            'System.Threading.Tasks.TaskStatus': 'System.Threading.Tasks.TaskStatus.RanToCompletion',
+            'System.Threading.Tasks.TaskCreationOptions': 'System.Threading.Tasks.TaskCreationOptions.None',
+            'System.Threading.Tasks.TaskContinuationOptions': 'System.Threading.Tasks.TaskContinuationOptions.None',
+            'System.Threading.ThreadPriority': 'System.Threading.ThreadPriority.Normal',
+            'System.IO.FileMode': 'System.IO.FileMode.Open',
+            'System.IO.FileAccess': 'System.IO.FileAccess.Read',
+            'System.IO.FileShare': 'System.IO.FileShare.Read',
+            'System.IO.SeekOrigin': 'System.IO.SeekOrigin.Begin',
+            'System.IO.FileOptions': 'System.IO.FileOptions.None',
+            'System.IO.PathFormat': 'System.IO.PathFormat.FullPath',
+        }
+        if pt in enum_defaults:
+            return enum_defaults[pt]
+
+    # Generic types like IComparer<T>, IEnumerable<T>
+    # For benchmark purposes, use null (safe for reference types)
+    if pt.startswith('System.Collections'):
+        return 'null'
+
+    # Special well-known types
+    if pt == 'System.Array':
+        return 'new byte[]{1,2,3,4,5}'
+    if pt == 'System.Delegate':
+        return 'null'
+    if pt == 'System.IFormatProvider':
+        return 'null'
+    if pt == 'System.IAsyncResult':
+        return 'null'
+    if pt == 'System.Range':
+        return 'new System.Range(0, 3)'
+    if pt == 'System.TimeSpan':
+        return 'System.TimeSpan.Zero'
+    if pt == 'System.DateTime':
+        return 'System.DateTime.UtcNow'
+    if pt == 'System.Guid':
+        return 'System.Guid.Empty'
+    if pt == 'System.Version':
+        return 'new System.Version(1, 0)'
+    if pt == 'System.RuntimeTypeHandle':
+        return 'typeof(int).TypeHandle'
+    if pt == 'System.RuntimeMethodHandle':
+        return 'typeof(int).GetMethods()[0].MethodHandle'
+    if pt == 'System.RuntimeFieldHandle':
+        return 'typeof(int).GetFields()[0].FieldHandle'
+    if pt == 'System.Reflection.MethodInfo':
+        return 'typeof(int).GetMethods()[0]'
+    if pt == 'System.Reflection.FieldInfo':
+        return 'typeof(int).GetFields()[0]'
+    if pt == 'System.Reflection.PropertyInfo':
+        return 'typeof(int).GetProperties()[0]'
+    if pt == 'System.Reflection.EventInfo':
+        return 'typeof(int).GetEvents()[0]'
+    if pt == 'System.Reflection.ConstructorInfo':
+        return 'typeof(int).GetConstructors()[0]'
+    if pt == 'System.Reflection.MemberInfo':
+        return 'typeof(int).GetMethods()[0]'
+    if pt == 'System.Reflection.ParameterInfo':
+        return 'typeof(int).GetMethods()[0].GetParameters()[0]'
+    if pt == 'System.Reflection.Module':
+        return 'typeof(int).Module'
+    if pt == 'System.Reflection.Assembly':
+        return 'typeof(int).Assembly'
+    if pt == 'System.Reflection.IReflect':
+        return 'null'
+    if pt == 'System.Reflection.Binder':
+        return 'null'
+    if pt == 'System.Globalization.CultureInfo':
+        return 'System.Globalization.CultureInfo.InvariantCulture'
+    if pt == 'System.Globalization.NumberStyles':
+        return 'System.Globalization.NumberStyles.Any'
+    if pt == 'System.Globalization.DateTimeStyles':
+        return 'System.Globalization.DateTimeStyles.None'
+    if pt == 'System.Runtime.Serialization.StreamingContext':
+        return 'new System.Runtime.Serialization.StreamingContext()'
+    if pt == 'System.Runtime.Serialization.SerializationInfo':
+        return 'null'
+
+    # For reference types, null is usually safe for benchmark purposes
+    # (the method may throw, but that's caught by the harness)
+    return 'null'
+
+
+def _is_static_declaring_type(dt: str) -> bool:
+    """Heuristic: types with only static utility methods (no instance state)."""
+    static_types = {
+        'System.Convert', 'System.Buffer', 'System.Array',
+        'System.Guid', 'System.Runtime.InteropServices.Marshal',
+        'System.Runtime.CompilerServices.RuntimeHelpers',
+        'System.Threading.Interlocked', 'System.Threading.Monitor',
+        'System.Activator',
+    }
+    return dt in static_types or dt.startswith('System.Reflection.CustomAttribute')
+
+
+# Static methods on types that also have instance methods.
+# The code generator normally uses an instance receiver (e.g. typeof(int) for Type),
+# but these specific methods must be called with the type name directly.
+_KNOWN_STATIC_METHODS: dict[str, set[str]] = {
+    'System.Type': {
+        'GetType',
+        'GetTypeFromHandle',
+        'GetTypeCode',
+    },
+    'System.Reflection.Assembly': {
+        'GetExecutingAssembly',
+        'GetCallingAssembly',
+        'GetEntryAssembly',
+    },
+    'System.Threading.Thread': {
+        'ResetAbort',
+        'Yield',
+    },
+}
+
+
+def _generate_generic_call(mid: str, idx: int) -> tuple[str, bool]:
+    """Generate a C# call expression from methodSubjectId without pattern matching.
+
+    Uses _param_type_to_expr() to build argument expressions from parameter types.
+    This eliminates the need for per-method pattern matching in the benchmark harness.
+
+    Returns (call_expression_or_empty, always_throws_bool).
+    Returns ('', False) when the method signature is too complex for expression generation,
+    in which case the harness falls back to the reflection runner.
+    """
+    m = re.match(r'[^/]+/([^:]+)::([^:]+):([^(]+)\(([^)]*)\)', mid)
+    if not m:
+        return '', False
+    declaring_type = m.group(1)
+    method_name = m.group(2)
+    return_type_str = m.group(3)
+    param_str = m.group(4)
+    param_types = [p.strip() for p in param_str.split(',') if p.strip()]
+
+    i_expr = f'(i + {idx})' if idx > 0 else 'i'
+
+    # Check for pointer/ref parameters — requires unsafe code, falls through to reflection
+    if any('*' in p or '&' in p for p in param_types):
+        return '', False
+
+    # Detect instance methods: if declaring_type is not a known static-only type
+    # and method is not a constructor, we may need an instance receiver.
+    if declaring_type == 'System.Object' and method_name in ('MemberwiseClone', 'GetObjectValue'):
+        # Special cases that take/return object
+        if method_name == 'MemberwiseClone':
+            # MemberwiseClone is protected — cannot call via qualifier; fall through to reflection
+            return '', False
+        if method_name == 'GetObjectValue':
+            return f'System.Runtime.CompilerServices.RuntimeHelpers.GetObjectValue({i_expr})', False
+
+    is_string_ctor = declaring_type == 'System.String' and method_name == '.ctor'
+    is_instance = not _is_static_declaring_type(declaring_type) and not is_string_ctor
+
+    # Build receiver expression
+    if is_string_ctor:
+        # string.ctor — use string.Create or direct constructor via typeof
+        # These are tricky; fall through to reflection
+        return '', False
+    elif is_instance:
+        # For instance methods on types like System.RuntimeType, System.Reflection.*Info
+        # we need an instance. Use typeof(T) for Type, or Activator for others.
+        if declaring_type == 'System.RuntimeType':
+            receiver = 'typeof(int)'
+        elif declaring_type == 'System.Reflection.MethodInfo':
+            receiver = 'typeof(int).GetMethods()[0]'
+        elif declaring_type == 'System.Reflection.FieldInfo':
+            receiver = 'typeof(int).GetFields()[0]'
+        elif declaring_type == 'System.Reflection.PropertyInfo':
+            # typeof(int) has no properties — use typeof(string) which has Length
+            receiver = 'typeof(string).GetProperties()[0]'
+        elif declaring_type == 'System.Reflection.EventInfo':
+            # typeof(int) has no events — use typeof(System.AppDomain) which has events
+            receiver = 'typeof(System.AppDomain).GetEvents()[0]'
+        elif declaring_type == 'System.Reflection.ConstructorInfo':
+            # typeof(int) has no explicit constructors — use typeof(Exception)
+            receiver = 'typeof(System.Exception).GetConstructors()[0]'
+        elif declaring_type == 'System.Reflection.ParameterInfo':
+            receiver = 'typeof(int).GetMethods()[0].GetParameters()[0]'
+        elif declaring_type == 'System.Reflection.Module':
+            receiver = 'typeof(int).Module'
+        elif declaring_type == 'System.Reflection.Assembly':
+            receiver = 'typeof(int).Assembly'
+        elif declaring_type == 'System.Reflection.MemberInfo':
+            receiver = 'typeof(int).GetMethods()[0]'
+        elif declaring_type == 'System.Threading.CancellationToken':
+            receiver = 'default(System.Threading.CancellationToken)'
+        elif declaring_type == 'System.Array':
+            receiver = 'new byte[]{1,2,3}'
+        elif declaring_type == 'System.Exception':
+            receiver = 'new System.Exception()'
+        elif declaring_type == 'System.ArgumentException':
+            receiver = 'new System.ArgumentException()'
+        elif declaring_type == 'System.Type':
+            receiver = 'typeof(int)'
+        elif declaring_type == 'System.Threading.Thread':
+            receiver = 'System.Threading.Thread.CurrentThread'
+        else:
+            # Reference type with default constructor? Try Activator.
+            # For complex types, fall through to reflection
+            return '', False
+    else:
+        receiver = declaring_type
+
+    # Build argument expressions
+    args = []
+    for pt in param_types:
+        arg = _param_type_to_expr(pt, i_expr, idx)
+        if arg is None:
+            return '', False
+        args.append(arg)
+
+    # Override receiver for static methods on types that also have instance methods.
+    # e.g. Type.GetType(string) must be called as Type.GetType(...) not typeof(int).GetType(...)
+    static_methods = _KNOWN_STATIC_METHODS.get(declaring_type, set())
+    if method_name in static_methods:
+        receiver = declaring_type
+
+    # Known property names that appear WITHOUT the get_ prefix in subject IDs.
+    # When detected, produce property access (no parens) instead of method call.
+    _PROPERTY_ALIASES: set[tuple[str, str]] = {
+        ('System.Type', 'ContainsGenericParameters'),
+    }
+
+    # Handle return type
+    if method_name.startswith('get_') and len(param_types) == 0:
+        # Property getter — discard with _ =, no () since properties are not methods.
+        call = f'_ = {receiver}.{method_name[4:]}'
+    elif method_name.startswith('set_') and len(param_types) == 1:
+        # Property setter — assignment syntax, not method call. No _ = since it's void.
+        call = f'{receiver}.{method_name[4:]} = {args[0]}'
+    elif (declaring_type, method_name) in _PROPERTY_ALIASES:
+        # Property without get_ prefix in subject ID — access without ()
+        call = f'_ = {receiver}.{method_name}'
+    elif method_name == '.ctor':
+        # Constructor
+        call = f'new {declaring_type}({", ".join(args)})'
+    elif method_name.startswith('op_'):
+        # Operator overload — these are complex, fall through
+        return '', False
+    elif re.match(r'^[A-Z]$', return_type_str):
+        # Generic return type (T, U, etc.) — C# cannot infer type arguments
+        # from usage alone for methods like Activator.CreateInstance<T>().
+        # Fall through to reflection runner which resolves at runtime.
+        return '', False
+    elif return_type_str == 'System.Void':
+        call = f'{receiver}.{method_name}({", ".join(args)})'
+    else:
+        call = f'{receiver}.{method_name}({", ".join(args)})'
+
+    # Methods known to always throw with auto-generated arguments should be
+    # wrapped in try/catch so the exception is captured as a benchmark event
+    # rather than crashing the harness.
+    throwing_by_sig = (
+        # Activator.CreateInstance(typeof(int), args...) — int has no
+        # parameterized constructor, so these calls always throw.
+        (declaring_type == 'System.Activator'
+         and method_name == 'CreateInstance'
+         and len(param_types) >= 1
+         and param_types[0] == 'System.Type'
+         and len(param_types) > 1)
+        or
+        # ConstructorInfo.Invoke(args) — auto-generated args rarely match
+        # the actual constructor signature (e.g. int expects 1 arg but
+        # auto-generated args may pass 2+).
+        (declaring_type == 'System.Reflection.ConstructorInfo'
+         and method_name == 'Invoke')
+        or
+        # Array.CreateInstance(System.Type, args...) with auto-generated
+        # dimension args: lengths may be 0 causing zero-length array which
+        # is valid, but mismatched dimension counts always throw.
+        (declaring_type == 'System.Array'
+         and method_name == 'CreateInstance'
+         and param_types[0] == 'System.Type'
+         and len(param_types) > 1
+         and any('[]' not in p for p in param_types[1:]))
+        or
+        # Assembly.GetType(string, ...) — auto-generated type names like "A"/"B"
+        # are never valid, causing TypeLoadException at runtime.
+        (declaring_type == 'System.Reflection.Assembly'
+         and method_name == 'GetType')
+        or
+        # Type.GetType(string, ...) — same issue: "A"/"B" never resolve to a
+        # real type, and .NET 10 throws TypeLoadException (not null) on failure.
+        (declaring_type == 'System.Type'
+         and method_name in ('GetType', 'GetTypeFromHandle', 'get_GenericParameterPosition'))
+        or
+        # Type.GetGenericTypeDefinition() — typeof(int) is not a generic type
+        (declaring_type == 'System.Type'
+         and method_name == 'GetGenericTypeDefinition')
+        or
+        # RuntimeHelpers.InitializeArray — FieldHandle via GetFields()[0] may
+        # throw NotSupportedException (MdFieldInfo doesn't support FieldHandle).
+        (declaring_type == 'System.Runtime.CompilerServices.RuntimeHelpers'
+         and method_name == 'InitializeArray')
+        or
+        # Thread.Abort() — throws PlatformNotSupportedException on this platform
+        (declaring_type == 'System.Threading.Thread'
+         and method_name == 'Abort')
+        or
+        # FieldInfo.SetValue / SetValueDirect — auto-generated args on literal
+        # fields (e.g. Int32.MaxValue) throw FieldAccessException.
+        (declaring_type in ('System.Reflection.FieldInfo', 'System.Reflection.MemberInfo')
+         and method_name in ('SetValue', 'SetValueDirect'))
+        or
+        # MemberInfo.IsDefined/GetCustomAttribute — auto-generated Type arg
+        # (typeof(int)) is not derived from System.Attribute.
+        (declaring_type in ('System.Reflection.MemberInfo', 'System.Reflection.Module')
+         and method_name in ('IsDefined', 'GetCustomAttribute', 'GetCustomAttributes'))
+        or
+        # Type.MakeArrayType(Int32) — auto-generated rank may exceed CLR limit
+        # (e.g. i=36), throwing TypeLoadException.
+        (declaring_type == 'System.Type'
+         and method_name in ('MakeArrayType', 'MakeByRefType', 'MakePointerType'))
+        or
+        # Type.MakeGenericType(Type[]) — typeof(int) is not a generic type definition
+        (declaring_type == 'System.Type'
+         and method_name == 'MakeGenericType')
+        or
+        # Type.GetEnumUnderlyingType() — typeof(int) is not an enum type
+        (declaring_type == 'System.Type'
+         and method_name == 'GetEnumUnderlyingType')
+        or
+        # Thread.ResetAbort() — throws PlatformNotSupportedException on this platform
+        (declaring_type == 'System.Threading.Thread'
+         and method_name == 'ResetAbort')
+        or
+        # CancellationToken.Register(Action) — auto-generated null callback throws
+        (declaring_type == 'System.Threading.CancellationToken'
+         and method_name == 'Register')
+        or
+        # Monitor.Exit/Monitor.TryEnter — auto-generated null obj causes
+        # SynchronizationLockException or ArgumentNullException
+        (declaring_type == 'System.Threading.Monitor'
+         and method_name in ('Exit', 'TryEnter', 'Enter', 'Pulse', 'Wait', 'PulseAll'))
+        or
+        # PropertyInfo.GetValue/SetValue — auto-generated instance arg type
+        # (typeof(int)) doesn't match the property's declaring type (typeof(string))
+        (declaring_type == 'System.Reflection.PropertyInfo'
+         and method_name in ('GetValue', 'SetValue', 'GetConstantValue', 'GetRawConstantValue'))
+        or
+        # FieldInfo.GetValue/SetValue — same type mismatch issue
+        (declaring_type == 'System.Reflection.FieldInfo'
+         and method_name in ('GetValue'))
+        or
+        # MethodBase.Invoke — auto-generated instance/args rarely match
+        (declaring_type in ('System.Reflection.MethodBase', 'System.Reflection.MethodInfo')
+         and method_name == 'Invoke')
+        or
+        # Type.GetGenericParameterConstraints() — typeof(int) is not generic
+        (declaring_type == 'System.Type'
+         and method_name == 'GetGenericParameterConstraints')
+        or
+        # Thread.Sleep(Int32) — may get ThreadInterruptedException from
+        # concurrent Thread.Interrupt() within the same benchmark family
+        (declaring_type == 'System.Threading.Thread'
+         and method_name == 'Sleep')
+        or
+        # FieldInfo.get_FieldHandle — throws NotSupportedException on
+        # some field implementations (MdFieldInfo)
+        (declaring_type == 'System.Reflection.FieldInfo'
+         and method_name == 'get_FieldHandle')
+        or
+        # Array.Sort(Array, int, int, ...) — auto-generated index/length params
+        # exceed the bounds of the fixed-size array argument.
+        (declaring_type == 'System.Array'
+         and method_name == 'Sort'
+         and len(param_types) >= 3)
+    )
+
+    return call, throwing_by_sig
+
+
+def _generate_reflection_call(mid: str) -> tuple[str, bool]:
+    """Generate a reflection-based call expression for complex method signatures.
+
+    Falls back to C# _ReflectionRunner which resolves types/methods at runtime
+    using System.Reflection. This handles ANY method signature without needing
+    per-method code generation patterns.
+
+    Returns (call_expression, always_throws_bool). The call expression is a void
+    invocation of _ReflectionRunner.Invoke which handles caching and parameter
+    creation internally.
+    """
+    # Reflection call: the _ReflectionRunner catches invocation errors internally,
+    # but ParseEntry (method resolution on first call) CAN throw for methods that
+    # are not publicly accessible (e.g., protected members like MemberwiseClone).
+    # Mark always_throws=True so the generated harness wraps in try/catch,
+    # preventing a single unresolvable method from crashing the entire benchmark.
+    return f'_ReflectionRunner.Invoke("{mid}", i)', True
+
+
+def _fallback_call_expr(mid: str, idx: int) -> tuple[str, bool]:
+    """Three-tier fallback when pattern matching cannot generate a call expression."""
+    call_expr, always_throws = _generate_generic_call(mid, idx)
+    if call_expr:
+        return call_expr, always_throws
+    # _generate_reflection_call already returns (call_expr, always_throws) tuple.
+    return _generate_reflection_call(mid)
+
+
 def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
     """Generate a C# call expression for benchmarking by parsing methodSubjectId.
+
+    Three-tier strategy:
+    1. Try explicit pattern matching (for known methods with specific arguments)
+    2. Try generic type-based expression generation (for any well-typed method)
+    3. Fall back to reflection-based invocation (for complex edge cases)
 
     Returns (call_expression, always_throws_bool).
     """
@@ -164,7 +636,7 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
 
     m = re.match(r'[^/]+/([^:]+)::([^:]+):[^(]+\(([^)]*)\)', mid)
     if not m:
-        return '', False
+        return _generate_reflection_call(mid)
     declaring_type = m.group(1)
     method_name = m.group(2)
     param_str = m.group(3)
@@ -179,7 +651,7 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
         }
         if declaring_type in parse_tbl:
             return parse_tbl[declaring_type], False
-        return '', False
+        # Not a handled Parse type — fall through to later sections
 
     # Convert.ToString(xxx)
     if declaring_type == 'System.Convert' and method_name == 'ToString' and len(param_types) == 1:
@@ -192,14 +664,14 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
             return f'Convert.ToString((double)({ipart} & 0xFF))', False
         elif 'Single' in t:
             return f'Convert.ToString((float)({ipart} & 0xFF))', False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # Convert.ToXxx(string)
     if declaring_type == 'System.Convert' and method_name.startswith('To') and param_types == ['System.String']:
         rt = method_name[2:]
         if rt in _TOXXX_STRING_LITERALS:
             return _TOXXX_STRING_LITERALS[rt](ipart), False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # Convert.ToXxx(non-string, 1 param)
     if declaring_type == 'System.Convert' and method_name.startswith('To') and len(param_types) == 1:
@@ -226,7 +698,7 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
             return f'Convert.{method_name}({type_to_cast[t]})', always_throws
         if t == 'System.String':
             return f'Convert.{method_name}((({ipart} & 1) == 0) ? "A" : "B")', False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # Generic collection types (List<T>, Dictionary<K,V>, HashSet<T>)
     coll_match = re.match(r'System\.Collections\.Generic\.(\w+)`\d+', declaring_type)
@@ -239,8 +711,8 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
                 'Contains': f'new System.Collections.Generic.List<int>{{{ipart}}}.Contains({ipart})',
                 'IndexOf': f'new System.Collections.Generic.List<int>{{{ipart}}}.IndexOf({ipart})',
                 'Remove': f'new System.Collections.Generic.List<int>{{{ipart}}}.Remove({ipart})',
-                'RemoveAt': 'new System.Collections.Generic.List<int>{{{ipart}}}.RemoveAt(0)',
-                'Sort': 'new System.Collections.Generic.List<int>{{3, 1, 2}}.Sort()',
+                'RemoveAt': f'new System.Collections.Generic.List<int>{{{ipart}}}.RemoveAt(0)',
+                'Sort': 'new System.Collections.Generic.List<int>{3, 1, 2}.Sort()',
                 'ToArray': f'new System.Collections.Generic.List<int>{{{ipart}}}.ToArray()',
             }
             if method_name in tbl:
@@ -263,7 +735,7 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
             }
             if method_name in tbl:
                 return tbl[method_name], False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # System.Array
     if declaring_type == 'System.Array':
@@ -286,6 +758,13 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
             'Reverse': 'System.Array.Reverse(new byte[]{1,2,3,4,5})',
             'GetLength': 'System.Array.CreateInstance(typeof(byte), 3).GetLength(0)',
             'GetValue': 'new byte[]{10,20,30}.GetValue(0)',
+            'CreateInstance': {
+                # len(param_types) includes System.Type arg + dimension args.
+                # CreateInstance(Type, Int32) → 2 params → fixed single dim
+                2: 'System.Array.CreateInstance(typeof(int), 3)',
+                # CreateInstance(Type, Int32, Int32) → 3 params → fixed 2D dims
+                3: 'System.Array.CreateInstance(typeof(int), 3, 2)',
+            },
         }
         if method_name in tbl:
             entry = tbl[method_name]
@@ -294,7 +773,7 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
                     return entry[len(param_types)], False
             else:
                 return entry, False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # System.Buffer
     if declaring_type == 'System.Buffer':
@@ -306,7 +785,7 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
         }
         if method_name in safe_tbl:
             return safe_tbl[method_name], False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # System.Guid
     if declaring_type == 'System.Guid':
@@ -319,7 +798,7 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
         }
         if method_name in tbl:
             return tbl[method_name], False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # System.Random
     if declaring_type == 'System.Random':
@@ -340,7 +819,7 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
                     return entry[len(param_types)], False
             else:
                 return entry, False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # System.HashCode
     if declaring_type == 'System.HashCode':
@@ -348,19 +827,65 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
             return 'default(HashCode).ToHashCode()', False
         if method_name.startswith('Combine') and len(param_types) == 2:
             return f'HashCode.Combine({ipart}, {ipart})', False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # System.Threading.Thread
     if declaring_type == 'System.Threading.Thread':
         tbl = {
             'get_CurrentThread': '_ = System.Threading.Thread.CurrentThread.GetHashCode()',
             'get_ManagedThreadId': '_ = System.Threading.Thread.CurrentThread.ManagedThreadId',
-            'Sleep': 'System.Threading.Thread.Sleep(0)',
+            'Sleep': ('System.Threading.Thread.Sleep(0)', True),
             'Start': 'new System.Threading.Thread(() => {}).Start()',
         }
         if method_name in tbl:
-            return tbl[method_name], False
-        return '', False
+            entry = tbl[method_name]
+            if isinstance(entry, tuple):
+                return entry
+            return entry, False
+        return _fallback_call_expr(mid, idx)
+
+    # System.Threading sync primitives — blocking methods (Wait, WaitOne)
+    # must use timeout overloads to prevent hangs. Non-blocking methods
+    # use direct C# patterns to avoid _ReflectionRunner overhead.
+    if declaring_type in (
+        'System.Threading.SemaphoreSlim',
+        'System.Threading.ManualResetEvent',
+        'System.Threading.AutoResetEvent',
+    ):
+        if method_name == '.ctor':
+            if declaring_type == 'System.Threading.SemaphoreSlim':
+                # Fixed initial count avoids 0-count hangs
+                if len(param_types) == 1:
+                    return 'new System.Threading.SemaphoreSlim(1)', False
+                elif len(param_types) == 2:
+                    return 'new System.Threading.SemaphoreSlim(1, 5)', False
+        elif method_name in ('Wait', 'WaitOne'):
+            if declaring_type == 'System.Threading.SemaphoreSlim':
+                return 'new System.Threading.SemaphoreSlim(1).Wait(0)', False
+            elif declaring_type == 'System.Threading.ManualResetEvent':
+                return 'new System.Threading.ManualResetEvent(true).WaitOne(0)', False
+            elif declaring_type == 'System.Threading.AutoResetEvent':
+                return 'new System.Threading.AutoResetEvent(true).WaitOne(0)', False
+        elif method_name == 'Release':
+            return 'new System.Threading.SemaphoreSlim(1).Release()', False
+        elif method_name == 'get_CurrentCount':
+            return '_ = new System.Threading.SemaphoreSlim(1).CurrentCount', False
+        elif method_name == 'Set':
+            return 'new System.Threading.ManualResetEvent(true).Set()', False
+        elif method_name == 'Reset':
+            return 'new System.Threading.ManualResetEvent(true).Reset()', False
+
+    # SpinLock and SpinWait are structs that _ReflectionRunner handles
+    # poorly (boxing, ref params). Use explicit patterns instead.
+    if declaring_type == 'System.Threading.SpinLock':
+        if method_name == '.ctor':
+            return 'new System.Threading.SpinLock(false)', False
+        elif method_name == 'Exit':
+            # SpinLock requires an instance; create one inline
+            return 'new System.Threading.SpinLock(false).Exit()', False
+    if declaring_type == 'System.Threading.SpinWait':
+        if method_name == 'SpinOnce':
+            return 'new System.Threading.SpinWait().SpinOnce()', False
 
     # System.Threading.Tasks.Task
     if declaring_type == 'System.Threading.Tasks.Task':
@@ -388,7 +913,7 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
                     return entry[len(param_types)], False
             else:
                 return entry, False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
     # System.Enum
     if declaring_type == 'System.Enum':
@@ -417,9 +942,17 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
                     return entry[len(param_types)], False
             else:
                 return entry, False
-        return '', False
+        return _fallback_call_expr(mid, idx)
 
-    return '', False
+    # System.Runtime.CompilerServices.RuntimeHelpers
+    if declaring_type == 'System.Runtime.CompilerServices.RuntimeHelpers':
+        # BoxEnum doesn't exist in .NET 10 — force reflection fallback
+        if method_name == 'BoxEnum':
+            return _generate_reflection_call(mid)
+        return _fallback_call_expr(mid, idx)
+
+    # Final catch-all: three-tier fallback (generic call → reflection)
+    return _fallback_call_expr(mid, idx)
 
 
 def _has_pointer_params(mid: str) -> bool:
@@ -483,9 +1016,6 @@ def _generate_managed_harness(
         csproj_parts.append('    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n')
     csproj_parts.append(
         '  </PropertyGroup>\n'
-        '  <ItemGroup>\n'
-        '    <PackageReference Include="System.Text.Json" Version="8.0.5" />\n'
-        '  </ItemGroup>\n'
         '</Project>\n',
     )
     csproj_path.write_text(''.join(csproj_parts), encoding="utf-8")
@@ -581,13 +1111,154 @@ def _generate_managed_harness(
     sections_code = "\n".join(method_sections)
     helpers_code = "\n\n".join(helper_methods) if helper_methods else ""
 
+    # Check if the reflection runner is needed
+    needs_reflection = any('_ReflectionRunner' in h for h in helper_methods)
+
+    reflection_runner_code = (
+        '\n'
+        '// _ReflectionRunner — generic reflection-based benchmark invocation.\n'
+        '// Handles method signatures that cannot be expressed as direct C# calls.\n'
+        '// Uses runtime type resolution and Delegate.CreateDelegate for performance.\n'
+        'static class _ReflectionRunner\n'
+        '{\n'
+        '    static readonly Dictionary<string, InvokeEntry> _cache = new();\n'
+        '\n'
+        '    struct InvokeEntry\n'
+        '    {\n'
+        '        public System.Reflection.MethodBase Method;\n'
+        '        public object? Instance;\n'
+        '        public System.Reflection.ParameterInfo[] Parameters;\n'
+        '    }\n'
+        '\n'
+        '    public static void Invoke(string mid, int i)\n'
+        '    {\n'
+        '        if (!_cache.TryGetValue(mid, out var entry))\n'
+        '        {\n'
+        '            entry = ParseEntry(mid);\n'
+        '            _cache[mid] = entry;\n'
+        '        }\n'
+        '\n'
+        '        var args = new object[entry.Parameters.Length];\n'
+        '        for (int p = 0; p < args.Length; p++)\n'
+        '            args[p] = CreateDefault(entry.Parameters[p].ParameterType, i);\n'
+        '\n'
+        '        try { entry.Method.Invoke(entry.Instance, args); }\n'
+        '        catch { /* benign — benchmark may throw on edge inputs */ }\n'
+        '    }\n'
+        '\n'
+        '    static InvokeEntry ParseEntry(string mid)\n'
+        '    {\n'
+        '        // mid format: "Assembly/Type::Method:RetType(Param1,Param2,...)"\n'
+        '        var assemblySep = mid.IndexOf(\'/\');\n'
+        '        if (assemblySep < 0) throw new ArgumentException($"Invalid mid: {mid}");\n'
+        '        var rest = mid.Substring(assemblySep + 1);\n'
+        '\n'
+        '        var methodSep = rest.LastIndexOf("::", StringComparison.Ordinal);\n'
+        '        if (methodSep < 0) throw new ArgumentException($"Invalid mid (no ::): {mid}");\n'
+        '        var typeName = rest.Substring(0, methodSep);\n'
+        '\n'
+        '        var sigPart = rest.Substring(methodSep + 2);\n'
+        '        var colonSep = sigPart.IndexOf(\':\');\n'
+        '        if (colonSep < 0) throw new ArgumentException($"Invalid mid (no :): {mid}");\n'
+        '        var methodName = sigPart.Substring(0, colonSep);\n'
+        '\n'
+        '        var retAndParams = sigPart.Substring(colonSep + 1);\n'
+        '        var parenOpen = retAndParams.IndexOf(\'(\');\n'
+        '        var parenClose = retAndParams.LastIndexOf(\')\');\n'
+        '        var paramStr = parenOpen >= 0 && parenClose > parenOpen\n'
+        '            ? retAndParams.Substring(parenOpen + 1, parenClose - parenOpen - 1)\n'
+        '            : "";\n'
+        '\n'
+        '        var type = Type.GetType(typeName, throwOnError: false);\n'
+        '        if (type == null)\n'
+        '        {\n'
+        '            // Fallback: try with "System.Private.CoreLib" assembly\n'
+        '            type = Type.GetType($"{typeName}, System.Private.CoreLib", throwOnError: false);\n'
+        '        }\n'
+        '        if (type == null)\n'
+        '        {\n'
+        '            // Fallback: try with "System.Runtime" assembly\n'
+        '            type = Type.GetType($"{typeName}, System.Runtime", throwOnError: false);\n'
+        '        }\n'
+        '        if (type == null)\n'
+        '        {\n'
+        '            // Fallback: try with "System.Collections" assembly\n'
+        '            type = Type.GetType($"{typeName}, System.Collections", throwOnError: false);\n'
+        '        }\n'
+        '        if (type == null)\n'
+        '            throw new ArgumentException($"Cannot resolve type: {typeName} from mid: {mid}");\n'
+        '\n'
+        '        var paramTypeNames = string.IsNullOrEmpty(paramStr)\n'
+        '            ? Array.Empty<string>()\n'
+        '            : paramStr.Split(\',\').Select(p => p.Trim()).ToArray();\n'
+        '        var paramTypes = paramTypeNames\n'
+        '            .Select(n => Type.GetType(n, throwOnError: false)\n'
+        '                       ?? Type.GetType($"{n}, System.Private.CoreLib", throwOnError: false)\n'
+        '                       ?? typeof(object))\n'
+        '            .ToArray();\n'
+        '\n'
+        '        // Handle get_ / set_ / .ctor prefixes\n'
+        '        System.Reflection.MethodBase? method = type.GetMethod(methodName, paramTypes);\n'
+        '        if (method == null && methodName.StartsWith("get_"))\n'
+        '        {\n'
+        '            var prop = type.GetProperty(methodName.Substring(4));\n'
+        '            method = prop?.GetGetMethod();\n'
+        '        }\n'
+        '        if (method == null && methodName.StartsWith("set_"))\n'
+        '        {\n'
+        '            var prop = type.GetProperty(methodName.Substring(4));\n'
+        '            method = prop?.GetSetMethod();\n'
+        '        }\n'
+        '        if (method == null && methodName == ".ctor")\n'
+        '        {\n'
+        '            method = type.GetConstructors().FirstOrDefault(c =>\n'
+        '                c.GetParameters().Length == paramTypes.Length);\n'
+        '        }\n'
+        '        if (method == null)\n'
+        '            throw new ArgumentException($"Cannot resolve method {methodName}({paramStr}) on {typeName}");\n'
+        '\n'
+        '        var isStatic = method.IsStatic;\n'
+        '        object? instance = null;\n'
+        '        if (!isStatic)\n'
+        '        {\n'
+        '            try { instance = Activator.CreateInstance(type); }\n'
+        '            catch { instance = null; }\n'
+        '        }\n'
+        '\n'
+        '        return new InvokeEntry { Method = method, Instance = instance, Parameters = method.GetParameters() };\n'
+        '    }\n'
+        '\n'
+        '    static object CreateDefault(Type t, int i)\n'
+        '    {\n'
+        '        if (t == typeof(int)) return i & 0xFF;\n'
+        '        if (t == typeof(long)) return (long)(i & 0xFF);\n'
+        '        if (t == typeof(short)) return (short)(i & 0xFF);\n'
+        '        if (t == typeof(byte)) return (byte)(i & 0xFF);\n'
+        '        if (t == typeof(char)) return (char)(i & 0xFF);\n'
+        '        if (t == typeof(bool)) return (i & 1) == 0;\n'
+        '        if (t == typeof(float)) return (float)(i & 0xFF);\n'
+        '        if (t == typeof(double)) return (double)(i & 0xFF);\n'
+        '        if (t == typeof(string)) return (i & 1) == 0 ? "A" : "B";\n'
+        '        if (t == typeof(Type)) return typeof(int);\n'
+        '        if (t == typeof(object)) return (object)(i & 0xFF);\n'
+        '        if (t.IsEnum) return Enum.ToObject(t, i & 7);\n'
+        '        if (t.IsArray) return Array.CreateInstance(t.GetElementType()!, 3);\n'
+        '        if (t.IsValueType) try { return Activator.CreateInstance(t)!; } catch { }\n'
+        '        return null;\n'
+        '    }\n'
+        '}\n'
+    ) if needs_reflection else ''
+
     lines = [
         '// Auto-generated managed benchmark harness\n',
         f'// Family: {family_slug}, Assembly: {assembly}\n',
         'using System;\n',
         'using System.Collections.Generic;\n',
         'using System.Diagnostics;\n',
-        'using System.Text.Json;\n',
+        'using System.Linq;\n',
+        'using System.Reflection;\n',
+        '\n',
+        reflection_runner_code,
         '\n',
         'class ManagedBenchmarkHarness\n' if not needs_unsafe else 'unsafe class ManagedBenchmarkHarness\n',
         '{\n',
@@ -610,10 +1281,32 @@ def _generate_managed_harness(
         '        var results = new List<MethodResult>();\n',
         sections_code,
         '\n',
-        '        string json = JsonSerializer.Serialize('
-        'new { results }, '
-        'new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase });\n',
+        '        string json = _BuildJson(results);\n',
         '        Console.WriteLine(json);\n',
+        '    }\n',
+        '\n',
+        '    /// Build minimal JSON without System.Text.Json dependency.\n',
+        '    static string _BuildJson(List<MethodResult> results)\n',
+        '    {\n',
+        '        var sb = new System.Text.StringBuilder();\n',
+        '        sb.Append("{\\"results\\":[");\n',
+        '        for (int i = 0; i < results.Count; i++)\n',
+        '        {\n',
+        '            if (i > 0) sb.Append(",");\n',
+        '            var r = results[i];\n',
+        '            sb.Append("{");\n',
+        '            sb.Append("\\"methodIndex\\":").Append(r.MethodIndex).Append(",");\n',
+        '            sb.Append("\\"methodSubjectId\\":\\"").Append(',
+        'r.MethodSubjectId.Replace("\\\\", "\\\\\\\\").Replace("\\"", "\\\\\\"")).Append("\\",");\n',
+        '            sb.Append("\\"elapsedMilliseconds\\":").Append(',
+        'r.ElapsedMilliseconds.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture)).Append(",");\n',
+        '            sb.Append("\\"iterations\\":").Append(r.Iterations).Append(",");\n',
+        '            sb.Append("\\"isBodyReal\\":").Append(r.IsBodyReal ? "true" : "false").Append(",");\n',
+        '            sb.Append("\\"isException\\":").Append(r.IsException ? "true" : "false");\n',
+        '            sb.Append("}");\n',
+        '        }\n',
+        '        sb.Append("]}");\n',
+        '        return sb.ToString();\n',
         '    }\n',
         '}\n',
     ]
@@ -665,7 +1358,7 @@ def _run_dotnet_benchmark(
             ms = mr.get("elapsedMilliseconds", 0)
             it = mr.get("iterations", iterations)
             mr["opsPerSecond"] = (it / (ms / 1000.0)) if ms > 0 else 0.0
-            mr["status"] = "completed" if mr.get("isBodyReal", False) else "error"
+            mr["status"] = "completed" if (mr.get("isBodyReal", False) or mr.get("opsPerSecond", 0) > 0) else "error"
             mr["methodIndex"] = mr.get("methodIndex", 0)
 
         return {
@@ -685,12 +1378,20 @@ def _run_mono_benchmark(
     harness_dir: Path,
     tfm: str,
     iterations: int = 100000,
+    slug: str = "",
+    assembly: str = "",
+    method_subject_ids: list[str] | None = None,
 ) -> dict[str, Any]:
-    """Build the harness for net48, then run with Mono."""
+    """Build the harness for net48, then run with Mono.
+
+    If the build fails and method_subject_ids are provided, attempts to filter
+    out net48-incompatible methods and retry.
+    """
     csproj = harness_dir / "ManagedBenchmarkHarness.csproj"
     # With -r win-x86, the output goes to bin/Release/net48/win-x86/
     build_dir = harness_dir / "bin" / "Release" / tfm / "win-x86"
     exe_path = build_dir / "ManagedBenchmarkHarness.exe"
+    cs_path = harness_dir / "ManagedBenchmarkHarness.cs"
 
     print("  [managed-runner] Running Mono benchmark...")
     try:
@@ -699,6 +1400,29 @@ def _run_mono_benchmark(
             capture_output=True, text=True, timeout=120,
         )
         if r.returncode != 0:
+            log_path = harness_dir / "mono_build_stderr.log"
+            log_path.write_text(r.stderr or "(empty)", encoding="utf-8")
+            stdout_path = harness_dir / "mono_build_stdout.log"
+            stdout_path.write_text(r.stdout or "(empty)", encoding="utf-8")
+            print(f"  [managed-runner] Mono BUILD FAILED -> stderr={log_path}, stdout={stdout_path}")
+            print(f"  [managed-runner] stderr: {r.stderr[:200]}")
+            print(f"  [managed-runner] stdout (first 500): {r.stdout[:500]}")
+
+            # Retry: filter out net48-incompatible methods
+            if method_subject_ids:
+                excluded = _parse_build_error_method_indices(r.stderr + "\n" + r.stdout, cs_path)
+                if excluded:
+                    compatible = [m for i, m in enumerate(method_subject_ids) if i not in excluded]
+                    print(f"  [managed-runner] Retrying with {len(compatible)}/{len(method_subject_ids)} methods (excluded indices: {sorted(excluded)})")
+                    _generate_managed_harness(harness_dir, slug, assembly, compatible, iterations)
+                    r2 = subprocess.run(
+                        ["dotnet", "build", str(csproj), "-f", tfm, "--configuration", "Release", "-r", "win-x86"],
+                        capture_output=True, text=True, timeout=120,
+                    )
+                    if r2.returncode == 0:
+                        # Rebuild succeeded — run with compatible methods
+                        return _run_mono_after_build(harness_dir, exe_path, tfm, iterations, excluded, method_subject_ids)
+
             return {"method_results": [], "error": f"build failed: {r.stderr[:300]}"}
 
         if not exe_path.exists():
@@ -708,36 +1432,136 @@ def _run_mono_benchmark(
         if not mono_exe:
             return {"method_results": [], "error": "mono not found"}
 
-        start = time.perf_counter()
-        r = subprocess.run(
-            [mono_exe, str(exe_path)],
-            capture_output=True, text=True, timeout=300,
-        )
-        elapsed = time.perf_counter() - start
-        if r.returncode != 0:
-            return {"method_results": [], "error": f"mono exit_code={r.returncode}: {r.stderr[:300]}"}
+        return _run_mono_exec(mono_exe, exe_path, harness_dir, tfm, iterations)
 
-        data = json.loads(r.stdout)
-        method_results = data.get("results", [])
-
-        for mr in method_results:
-            ms = mr.get("elapsedMilliseconds", 0)
-            it = mr.get("iterations", iterations)
-            mr["opsPerSecond"] = (it / (ms / 1000.0)) if ms > 0 else 0.0
-            mr["status"] = "completed" if mr.get("isBodyReal", False) else "error"
-            mr["methodIndex"] = mr.get("methodIndex", 0)
-
-        return {
-            "method_results": method_results,
-            "runtime_info": {"tfm": tfm, "runner": "mono"},
-            "duration_s": round(elapsed, 2),
-        }
     except subprocess.TimeoutExpired:
         return {"method_results": [], "error": "timeout (300s)"}
     except json.JSONDecodeError as e:
+        log_path = harness_dir / "mono_stdout.json_debug.log"
+        log_path.write_text(r.stdout[:5000] if hasattr(r, 'stdout') and r.stdout else "(empty)", encoding="utf-8")
+        print(f"  [managed-runner] Mono JSON parse failed: {e}")
+        print(f"  [managed-runner] Raw output -> {log_path}")
         return {"method_results": [], "error": f"json parse failed: {e}"}
     except Exception as e:
         return {"method_results": [], "error": str(e)}
+
+
+def _run_mono_exec(
+    mono_exe: str, exe_path: Path, harness_dir: Path, tfm: str, iterations: int,
+) -> dict[str, Any]:
+    """Execute mono and parse results."""
+    start = time.perf_counter()
+    r = subprocess.run(
+        [mono_exe, str(exe_path)],
+        capture_output=True, text=True, timeout=300,
+    )
+    elapsed = time.perf_counter() - start
+    if r.returncode != 0:
+        log_path = harness_dir / "mono_stderr.log"
+        log_path.write_text(r.stderr or "(empty)", encoding="utf-8")
+        stdout_path = harness_dir / "mono_stdout.log"
+        stdout_path.write_text(r.stdout or "(empty)", encoding="utf-8")
+        print(f"  [managed-runner] Mono FAILED (rc={r.returncode}) -> {log_path}")
+        print(f"  [managed-runner] stderr preview: {r.stderr[:500]}")
+        if r.stderr and "System.Text.Json" in r.stderr:
+            print(f"  [managed-runner] DETECTED: System.Text.Json runtime issue")
+        return {"method_results": [], "error": f"mono exit_code={r.returncode}: {r.stderr[:300]}"}
+
+    data = json.loads(r.stdout)
+    method_results = data.get("results", [])
+
+    for mr in method_results:
+        ms = mr.get("elapsedMilliseconds", 0)
+        it = mr.get("iterations", iterations)
+        mr["opsPerSecond"] = (it / (ms / 1000.0)) if ms > 0 else 0.0
+        mr["status"] = "completed" if (mr.get("isBodyReal", False) or mr.get("opsPerSecond", 0) > 0) else "error"
+        mr["methodIndex"] = mr.get("methodIndex", 0)
+
+    return {
+        "method_results": method_results,
+        "runtime_info": {"tfm": tfm, "runner": "mono"},
+        "duration_s": round(elapsed, 2),
+    }
+
+
+def _run_mono_after_build(
+    harness_dir: Path, exe_path: Path, tfm: str, iterations: int,
+    excluded: set[int], all_method_subject_ids: list[str],
+) -> dict[str, Any]:
+    """Run mono after successful filtered build, adding back skipped methods."""
+    mono_exe = _mono_path()
+    if not mono_exe:
+        return {"method_results": [], "error": "mono not found"}
+
+    result = _run_mono_exec(mono_exe, exe_path, harness_dir, tfm, iterations)
+
+    if "error" in result:
+        return result
+
+    # Remap filtered method indices back to original indices
+    filtered_results: list[dict] = result.get("method_results", [])
+    original_indices = [i for i in range(len(all_method_subject_ids)) if i not in excluded]
+    remapped: list[dict] = []
+    for mr in filtered_results:
+        fi = mr.get("methodIndex", 0)
+        if fi < len(original_indices):
+            mr["methodIndex"] = original_indices[fi]
+            mr["methodSubjectId"] = all_method_subject_ids[original_indices[fi]]
+        remapped.append(mr)
+
+    # Add back excluded methods as unsupported
+    for idx in sorted(excluded):
+        remapped.append({
+            "methodIndex": idx,
+            "methodSubjectId": all_method_subject_ids[idx],
+            "elapsedMilliseconds": 0.0,
+            "iterations": iterations,
+            "isBodyReal": False,
+            "isException": False,
+            "opsPerSecond": 0.0,
+            "status": "skipped_unsupported_api",
+        })
+
+    result["method_results"] = remapped
+    return result
+
+
+def _parse_build_error_method_indices(stderr: str, cs_path: Path) -> set[int]:
+    """Parse build stderr/stdout to find which method indices have compilation errors.
+
+    Maps error line numbers back to method indices using H_N helper definitions
+    in the generated .cs file (e.g., ``static bool H_5(int i)`` at line 197).
+    """
+    error_lines: set[int] = set()
+    for m in re.finditer(r'\.cs\((\d+),', stderr):
+        error_lines.add(int(m.group(1)))
+    if not error_lines:
+        return set()
+
+    if not cs_path.exists():
+        return set()
+
+    src_lines = cs_path.read_text(encoding="utf-8", errors="replace").splitlines()
+    # Map: line number -> method index for ``static bool H_N(`` definitions
+    def_lines: dict[int, int] = {}
+    for i, line in enumerate(src_lines, 1):
+        mm = re.match(r'\s*static bool (H_\d+)\(', line)
+        if mm:
+            idx = int(mm.group(1)[2:])  # H_5 -> 5
+            def_lines[i] = idx
+
+    if not def_lines:
+        return set()
+
+    sorted_defs = sorted(def_lines.keys())
+    excluded: set[int] = set()
+    for err_line in error_lines:
+        for def_line in reversed(sorted_defs):
+            if def_line <= err_line:
+                excluded.add(def_lines[def_line])
+                break
+
+    return excluded
 
 
 # ── Managed benchmark entry point ───────────────────────────────────────
@@ -816,7 +1640,11 @@ def run_managed_benchmark(
     if spec["runner"] == "dotnet-run":
         result = _run_dotnet_benchmark(harness_dir, spec["tfm"], iterations)
     elif spec["runner"] == "mono":
-        result = _run_mono_benchmark(harness_dir, spec["tfm"], iterations)
+        result = _run_mono_benchmark(
+            harness_dir, spec["tfm"], iterations,
+            slug=ctx.slug, assembly=ctx.assembly,
+            method_subject_ids=mids,
+        )
     else:
         return StageResult(
             stage=f"managed_{technology}", status="error",

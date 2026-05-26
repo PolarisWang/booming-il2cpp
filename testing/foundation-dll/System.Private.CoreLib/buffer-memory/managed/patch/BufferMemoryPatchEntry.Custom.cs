@@ -13,7 +13,6 @@
 
 public static partial class BufferMemoryPatchEntry
 {
-    public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Buffer::BlockCopy
     // Manual byte-by-byte copy via array indexers

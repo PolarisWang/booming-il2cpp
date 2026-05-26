@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 from typing import Any, Iterable
 import sys
@@ -68,9 +69,27 @@ def render_declared_test_host_project(
     project_references: Iterable[str],
     generated_source_path: str,
     assembly_name: str | None = None,
+    project_dir: Path | None = None,
 ) -> str:
     project_name = assembly_name or _host_class_name(subject_id=subject_id, host_kind=host_kind)
-    references = [_FRAMEWORK_PROJECT_REFERENCE, _RUNTIME_PROJECT_REFERENCE, *list(project_references)]
+    if project_dir is not None:
+        resolved_dir = project_dir.resolve()
+        repo_root = resolved_dir
+        for _ in range(10):
+            if (repo_root / "src" / "reference").is_dir():
+                break
+            repo_root = repo_root.parent
+        framework_ref = os.path.relpath(
+            str(repo_root / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"),
+            str(resolved_dir),
+        ).replace("\\", "/")
+        runtime_ref = os.path.relpath(
+            str(repo_root / "src" / "reference" / "Chaos.TestFramework.Runtime" / "Chaos.TestFramework.Runtime.csproj"),
+            str(resolved_dir),
+        ).replace("\\", "/")
+        references = [framework_ref, runtime_ref, *list(project_references)]
+    else:
+        references = [_FRAMEWORK_PROJECT_REFERENCE, _RUNTIME_PROJECT_REFERENCE, *list(project_references)]
     project_reference_items = "\n".join(
         f'    <ProjectReference Include="{_xml_escape(str(reference))}" />'
         for reference in references

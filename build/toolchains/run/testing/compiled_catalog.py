@@ -207,6 +207,13 @@ def ensure_declaration_discovery_tool(repo_root: Path) -> Path:
     if not project_path.is_file():
         raise FileNotFoundError(f"declaration discovery project missing: {project_path}")
 
+    # If the DLL already exists from a previous build, return it directly.
+    # Rebuilding with ChaosTempIntermediateRoot forces a full dependency graph
+    # rebuild which can OOM for large projects like CollectionGen.
+    if dll_path.is_file():
+        _DISCOVERY_TOOL_CACHE = dll_path
+        return dll_path
+
     arguments = [
         "dotnet",
         "build",

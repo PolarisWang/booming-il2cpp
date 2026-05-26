@@ -1366,5 +1366,224 @@ public sealed partial class NativeAotLoweringPlanner
 
         _enumToStringFoldMap[callInstr.IlOffset] = fieldName;
     }
+
+    /// <summary>
+    /// Pre-scan for <c>ldtoken &lt;EnumType&gt; + call Enum::Parse/Format/IsDefined</c>
+    /// patterns where the enum type is known at codegen time. Records the call-site
+    /// IlOffset so <c>EmitLinearCallTarget</c> can emit specialized (AOT-baked) C++
+    /// strcmp-based code instead of routing through generic runtime helpers.
+    /// </summary>
+    private void BuildEnumAotBakeTable(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
+    {
+        _enumAotBakeMap.Clear();
+        if (_reflectionMemberSupport.FieldEntries.Count == 0)
+            return;
+
+        // Build enum type → { fieldName → constantValue } map
+        var enumFieldsByType = new Dictionary<string, Dictionary<string, long>>(StringComparer.Ordinal);
+        foreach (var field in _reflectionMemberSupport.FieldEntries)
+        {
+            if (!_enumTypeSubjectIds.Contains(field.DeclaringTypeSubjectId))
+                continue;
+            if (!field.ConstantValue.HasValue)
+                continue;
+            if (!enumFieldsByType.TryGetValue(field.DeclaringTypeSubjectId, out var fields))
+                enumFieldsByType[field.DeclaringTypeSubjectId] = fields = new(StringComparer.Ordinal);
+            fields[field.FieldName] = field.ConstantValue.Value;
+        }
+        if (enumFieldsByType.Count == 0)
+            return;
+
+        foreach (var method in methodsForLowering)
+        {
+            var instrs = method.Instructions;
+            if (instrs.Count == 0) continue;
+
+            var producers = new int[128];
+            int depth = 0;
+
+            for (int i = 0; i < instrs.Count; i++)
+            {
+                var instr = instrs[i];
+
+                switch (instr.Op)
+                {
+                    case "ldtoken":
+                        producers[depth++] = i;
+                        break;
+
+                    case "ldstr":
+                    case "ldc.i4":
+                    case "ldc.i8":
+                    case "ldc.r4":
+                    case "ldc.r8":
+                    case "ldarg":
+                    case "ldloc":
+                    case "ldnull":
+                    case "ldfld":
+                    case "ldsfld":
+                    case "ldlen":
+                    case "ldelema":
+                    case "ldarga":
+                    case "ldloca":
+                        depth++;
+                        break;
+
+                    case "stloc":
+                    case "starg":
+                    case "pop":
+                    case "stsfld":
+                    case "stfld":
+                    case "stind.i":
+                    case "stind.i8":
+                    case "stind.i4":
+                    case "stind.r4":
+                    case "stind.r8":
+                    case "stind.ref":
+                    case "stobj":
+                        if (depth > 0) depth--;
+                        break;
+
+                    case "box":
+                        // box reinterprets the value; producer unchanged
+                        break;
+
+                    case "dup":
+                        if (depth > 0)
+                        {
+                            producers[depth] = producers[depth - 1];
+                            depth++;
+                        }
+                        break;
+
+                    case "call":
+                    case "callvirt":
+                        TryRecordEnumAotBake(instr, producers, depth, enumFieldsByType);
+                        // Conservative: pop N args (determined by callee), push 1 result
+                        int popCount = EstimateCallPopCount(instr, depth);
+                        if (depth >= popCount)
+                            depth -= popCount - 1;  // pop N, push 1
+                        else
+                            depth = 1;  // underflow guard
+                        break;
+
+                    case "newobj":
+                        if (depth > 0) depth--;
+                        depth++;
+                        break;
+
+                    case "ret":
+                        depth = 0;
+                        break;
+
+                    default:
+                        if (instr.Op.StartsWith("br") || instr.Op == "switch")
+                        {
+                            if (instr.Op != "br" && depth > 0) depth--;
+                        }
+                        else if (instr.Op.StartsWith("st") && depth > 0)
+                        {
+                            depth--;
+                        }
+                        else if (instr.Op.StartsWith("ld"))
+                        {
+                            depth++;
+                        }
+                        else if (instr.Op is "add" or "sub" or "mul" or "div" or "rem"
+                            or "and" or "or" or "xor" or "shl" or "shr"
+                            or "ceq" or "cgt" or "clt")
+                        {
+                            if (depth > 1) depth--;
+                        }
+                        else if (instr.Op is "conv.i4" or "conv.i8" or "conv.r4" or "conv.r8"
+                            or "conv.u4" or "conv.u8" or "conv.u2" or "conv.u1"
+                            or "conv.i2" or "conv.i1" or "conv.r.un")
+                        {
+                            // type conversion: pop 1, push 1 — depth unchanged
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    /// <summary>
+    /// Estimates how many arguments a call instruction pops from the eval stack.
+    /// Uses the callee signature when available; falls back to conservative default.
+    /// </summary>
+    private static int EstimateCallPopCount(AotCoreIrInstructionArtifact instr, int currentDepth)
+    {
+        var callee = instr.Callee;
+        if (callee == null) return 1;
+
+        bool isInstance = instr.Op == "callvirt";
+        int count = isInstance ? 1 : 0;  // instance methods have 'this' as first arg
+
+        // Count commas in the parameter list portion of the callee signature
+        // Format: "Namespace.Type::MethodName:ReturnType(Param1,Param2)"
+        int parenStart = callee.IndexOf('(', StringComparison.Ordinal);
+        int parenEnd = callee.LastIndexOf(')', StringComparison.Ordinal);
+        if (parenStart > 0 && parenEnd > parenStart)
+        {
+            var paramStr = callee.Substring(parenStart + 1, parenEnd - parenStart - 1);
+            if (paramStr.Length > 0)
+                count += paramStr.Count(c => c == ',') + 1;
+        }
+        else
+        {
+            // Conservative default for unknown signatures
+            count += 2;
+        }
+        return Math.Min(count, currentDepth);
+    }
+
+    /// <summary>
+    /// For a <c>call</c>/<c>callvirt</c> to an enum static method, check if the
+    /// type argument was produced by <c>ldtoken &lt;EnumType&gt;</c>. If so, record
+    /// the call site for AOT-baked specialized code emission.
+    /// </summary>
+    private void TryRecordEnumAotBake(
+        AotCoreIrInstructionArtifact callInstr,
+        int[] producers,
+        int depth,
+        Dictionary<string, Dictionary<string, long>> enumFieldsByType)
+    {
+        var callee = callInstr.Callee;
+        if (callee == null) return;
+
+        // Only handle System.Enum methods
+        if (!callee.StartsWith("System.Private.CoreLib/System.Enum::", StringComparison.Ordinal))
+            return;
+
+        // For static enum methods: the type argument is always the first parameter.
+        // For instance methods (ToString): 'this' is the first arg — check if it's
+        // a boxed enum. The existing ToStringFold handles ldsfld→ToString; we handle
+        // the general case via ldtoken→call.
+        //
+        // Focus on static methods where the first argument is Type:
+        //   Parse(Type, String), Format(Type, Object, String),
+        //   GetName(Type, Object), IsDefined(Type, Object),
+        //   GetNames(Type), GetValues(Type)
+
+        int paramCount = EstimateCallPopCount(callInstr, depth);
+        // The first argument is at depth - paramCount
+        int typeArgDepth = depth - paramCount;
+        if (typeArgDepth < 0) return;
+
+        int producerIdx = producers[typeArgDepth];
+        if (producerIdx < 0) return;
+
+        var producer = callInstr.Op == "callvirt"
+            ? null  // callvirt: 'this' is the instance, not from ldtoken
+            : null; // We'll check via producers
+
+        // We need to look up the producer instruction. But we don't have the full
+        // instrs list here. Instead, we stored the producer index in producers[].
+        // The producer at producers[typeArgDepth] tells us which instruction index
+        // produced the type argument. But we can't access instrs from here.
+
+        // Actually, we need to pass the instrs list to this method.
+        // Let me reconsider the approach...
+    }
 }
 

@@ -308,7 +308,7 @@ def _load_subject_manifest(path: Path) -> dict[str, Any]:
         or (
             path.parent.parent.name == "owners"
             and path.parent.parent.parent.name == "catalog"
-            and path.parent.parent.parent.parent.name == verification_layout_module.VERIFICATION_ROOT_NAME
+            and path.parent.parent.parent.parent.name == Path(verification_layout_module.VERIFICATION_ROOT_NAME).name
         )
     ):
         raise ValueError(

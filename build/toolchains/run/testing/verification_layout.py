@@ -201,7 +201,7 @@ def raw_stress_records_path(repo_root: Path, test_name: str) -> Path:
 def repo_root_from_owner_manifest(manifest_path: Path) -> Path:
     resolved = manifest_path.resolve()
     for parent in resolved.parents:
-        if parent.name == "owners" and parent.parent.name == "catalog" and parent.parent.parent.name == VERIFICATION_ROOT_NAME:
+        if parent.name == "owners" and parent.parent.name == "catalog" and parent.parent.parent.name == Path(VERIFICATION_ROOT_NAME).name:
             return parent.parent.parent.parent
         if parent.name == "subjects":
             fixtures_parent = parent.parent

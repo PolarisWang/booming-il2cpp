@@ -1062,6 +1062,12 @@ def _load_formal_source(repo_root: Path) -> dict[str, Any] | None:
     }
     if not any(value for value in payload.values()):
         return None
+    # Only consider formal source usable if at least one table has non-empty items
+    if not any(
+        isinstance(value, dict) and len(list(value.get("items") or [])) > 0
+        for value in payload.values()
+    ):
+        return None
     return payload
 
 
@@ -1588,11 +1594,7 @@ def build_dashboard_overview(
 
 
 def generate(repo_root: Path, output_path: Path, subject_ids: list[str] | None = None) -> None:
-    formal_source = _load_formal_source(repo_root)
-    if formal_source is not None:
-        data = _collect_data_from_formal_source(formal_source)
-    else:
-        data = _collect_data(repo_root, subject_ids)
+    data = _resolve_dashboard_data(repo_root, subject_ids=subject_ids)
     overview = _build_overview(data)
     template = _read_template(_testing_support_path(repo_root, "templates", "benchmark-dashboard.html"))
     payload = _dashboard_payload(data, overview)
@@ -1605,19 +1607,32 @@ def generate(repo_root: Path, output_path: Path, subject_ids: list[str] | None =
     output_path.write_text(html, encoding="utf-8")
 
 
+def _resolve_dashboard_data(
+    repo_root: Path,
+    subject_ids: list[str] | None = None,
+) -> dict[str, Any]:
+    """Resolve dashboard data preferring formal source when it has benchmark content."""
+    formal_source = _load_formal_source(repo_root)
+    if formal_source is not None:
+        projections_module = _import_verification_projection_module()
+        projected = projections_module.project_inventory_tables(formal_source)
+        benchmark_rows = list(projected.get("benchmark") or [])
+        if benchmark_rows:
+            return _collect_data_from_formal_source(formal_source)
+
+    # Fall back to raw records when formal source has no benchmark data
+    subjects_mod = _load("subjects", _testing_support_path(repo_root, "subjects.py"))
+    resolved_ids = subject_ids if subject_ids is not None else subjects_mod.discover_perf_subject_ids(repo_root)
+    return _collect_data(repo_root, resolved_ids)
+
+
 def update_docs(repo_root: Path, subject_id: str | None = None) -> None:
     docs_root = verification_layout_module.benchmark_projection_root(repo_root)
     subjects_doc_root = docs_root / "subjects"
     subjects_doc_root.mkdir(parents=True, exist_ok=True)
 
-    formal_source = _load_formal_source(repo_root)
-    if formal_source is not None:
-        del subject_id
-        data = _collect_data_from_formal_source(formal_source)
-    else:
-        subjects_mod = _load("subjects", _testing_support_path(repo_root, "subjects.py"))
-        del subject_id
-        data = _collect_data(repo_root, subjects_mod.discover_perf_subject_ids(repo_root))
+    del subject_id
+    data = _resolve_dashboard_data(repo_root)
     overview = _build_overview(data)
 
     for stale_path in list(subjects_doc_root.glob("*.json")):

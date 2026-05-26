@@ -703,10 +703,27 @@ def generate_and_build(
 
     custom_method_indices: set[int] | None = None
     family_slug = slug_from_family_id(family_id)
-    contract_path = _REPO_ROOT / "testing" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json"
-    if contract_path.exists():
-        with open(contract_path, encoding="utf-8") as f:
-            contract = json.load(f)
+    # Try multiple contract locations: computed slug, then actual output_dir parent(s)
+    candidate_paths = [
+        _REPO_ROOT / "testing" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json",
+        _REPO_ROOT / "testing" / "foundation-dll" / assembly_name / family_slug / "contract.json",
+    ]
+    for parent in [output_dir, output_dir.parent]:
+        for fname in ("capability-family-contract.json", "contract.json"):
+            candidate = parent / fname
+            if candidate not in candidate_paths:
+                candidate_paths.append(candidate)
+    contract = None
+    for cp in candidate_paths:
+        if cp.exists():
+            try:
+                with open(cp, encoding="utf-8") as f:
+                    contract = json.load(f)
+                if contract.get("customEntryIndices") is not None:
+                    break
+            except Exception:
+                continue
+    if contract is not None:
         indices = contract.get("customEntryIndices")
         if indices is not None:
             custom_method_indices = set(indices)
@@ -892,7 +909,9 @@ def generate_runtime_entry(*, is_jit: bool = False) -> str:
         #if defined(_WIN32)
             AddVectoredExceptionHandler(1, JitVehHandler);
         #endif
-            chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
+            if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
+                chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
+            }
             ChaosJitRegisterAll();
     ''') if is_jit else ''
 

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/collections/generic/core",
-  "capturedAt": "2026-05-25T22:47:42",
+  "capturedAt": "2026-05-25T23:57:09",
   "batchMode": true,
   "summary": {
     "totalMethods": 16,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 58,
-      "avg": 44.9,
-      "total": 718
+      "max": 44,
+      "avg": 44.0,
+      "total": 704
     },
     "aotInstructionCount": {
       "min": 1,
@@ -416,7 +416,7 @@
       "shortName": "Subject_13",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 58,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -424,7 +424,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 58
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

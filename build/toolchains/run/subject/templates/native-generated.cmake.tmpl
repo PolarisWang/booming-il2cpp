@@ -15,6 +15,7 @@ endforeach()
 add_library(chaos_subject_generated_native STATIC EXCLUDE_FROM_ALL
     ${CHAOS_SUBJECT_GENERATED_INPUT_SOURCES})
 chaos_configure_subject_target(chaos_subject_generated_native)
+target_link_libraries(chaos_subject_generated_native PUBLIC chaos_runtime_core)
 
 set_target_properties(
     chaos_subject_generated_native

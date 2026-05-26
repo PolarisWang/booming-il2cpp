@@ -14,7 +14,7 @@ if __package__ in (None, ""):
     from commands import inspect as inspect_commands
     from commands import prepare as prepare_commands
     from commands import project as project_commands
-    from commands import foundation_dll as foundation_dll_commands
+    # foundation_dll imported lazily in execute_command due to broken transitive deps
     from commands import test as test_commands
     from commands import benchmark as benchmark_commands
     from commands import stress as stress_commands
@@ -32,7 +32,7 @@ else:
     from .commands import inspect as inspect_commands
     from .commands import prepare as prepare_commands
     from .commands import project as project_commands
-    from .commands import foundation_dll as foundation_dll_commands
+    # foundation_dll imported lazily in execute_command due to broken transitive deps
     from .commands import test as test_commands
     from .commands import benchmark as benchmark_commands
     from .commands import stress as stress_commands
@@ -270,6 +270,7 @@ def execute_command(
     if command["handler"] == "project.dispatch":
         return project_commands.handle(command, repo_root, host_platform, command_text, options or {}, progress_callback=progress_callback)
     if command["handler"] == "foundation_dll.dispatch":
+        from commands import foundation_dll as foundation_dll_commands
         return foundation_dll_commands.handle(
             command,
             repo_root,

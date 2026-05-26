@@ -659,11 +659,13 @@ public sealed partial class NativeAotLoweringPlanner
 		case "conv.r4":
 		{
 			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = ChaosStoreFloat32(static_cast<float>({AccessEvalStackTopExpression()}));");
+			UpdateSlotType(SlotType.Float32);
 			break;
 		}
 		case "conv.r8":
 		{
 			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = ChaosStoreFloat64(static_cast<double>({AccessEvalStackTopExpression()}));");
+			UpdateSlotType(SlotType.Float64);
 			break;
 		}
 		case "conv.u":
@@ -3220,22 +3222,60 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		SlotType _lType = PeekSlotType();
 		string _lExpr = ConsumeEvalStackValueExpression();
 		ConsumeSlotType();
-		string _rLoad = (_rType is SlotType.Float32 or SlotType.Float64) ? $"ChaosLoadFloat64({_rExpr})" : $"static_cast<CHAOS_IL2CPP_INT32>({_rExpr})";
-		string _lLoad = (_lType is SlotType.Float32 or SlotType.Float64) ? $"ChaosLoadFloat64({_lExpr})" : $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})";
+
+		// When either operand is float/double, emit direct C++ arithmetic
+		// instead of ChaosWrap* helpers (which truncate through int32).
+		bool _rIsFloat = _rType is SlotType.Float32 or SlotType.Float64;
+		bool _lIsFloat = _lType is SlotType.Float32 or SlotType.Float64;
+		bool isFloatOp = _lIsFloat || _rIsFloat;
+
+		string _rLoad = isFloatOp
+		    ? (_rIsFloat
+		        ? $"ChaosLoadFloat64({_rExpr})"
+		        : $"static_cast<double>({_rExpr})")
+		    : $"static_cast<CHAOS_IL2CPP_INT32>({_rExpr})";
+		string _lLoad = isFloatOp
+		    ? (_lIsFloat
+		        ? $"ChaosLoadFloat64({_lExpr})"
+		        : $"static_cast<double>({_lExpr})")
+		    : $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})";
+
 		if (_activeStructuredSlotContext is not null)
 		{
-			EmitEvalStackPush(builder, indentation,
-			    $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}({_lLoad}, {_rLoad}))");
+			string expr = isFloatOp
+			    ? BuildFloatArithmeticExpression(helperName, _lLoad, _rLoad)
+			    : $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}({_lLoad}, {_rLoad}))";
+			EmitEvalStackPush(builder, indentation, expr);
 		}
 		else
 		{
 			builder.AppendLine($"{indentation}{{");
 			builder.AppendLine($"{indentation}    const auto chaos_right = {_rLoad};");
 			builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
-			EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(chaos_left, chaos_right))");
+			string expr = isFloatOp
+			    ? BuildFloatArithmeticExpression(helperName, "chaos_left", "chaos_right")
+			    : $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(chaos_left, chaos_right))";
+			EmitEvalStackPush(builder, indentation + "    ", expr);
 			builder.AppendLine($"{indentation}}}");
 		}
-		PushSlotType(SlotType.NativeInt);
+		PushSlotType(isFloatOp ? SlotType.Float64 : SlotType.NativeInt);
+	}
+
+	/// <summary>
+	/// Build a direct C++ arithmetic expression for float/double operations,
+	/// avoiding the ChaosWrap* helpers that truncate through int32.
+	/// </summary>
+	private static string BuildFloatArithmeticExpression(string helperName, string left, string right)
+	{
+		return helperName switch
+		{
+			"ChaosWrapAdd" => $"static_cast<CHAOS_IL2CPP_INTPTR>(({left} + {right}))",
+			"ChaosWrapSub" => $"static_cast<CHAOS_IL2CPP_INTPTR>(({left} - {right}))",
+			"ChaosWrapMul" => $"static_cast<CHAOS_IL2CPP_INTPTR>(({left} * {right}))",
+			"ChaosDiv"     => $"static_cast<CHAOS_IL2CPP_INTPTR>(({left} / {right}))",
+			"ChaosRem"     => $"static_cast<CHAOS_IL2CPP_INTPTR>(fmod({left}, {right}))",
+			_ => throw new NotSupportedException($"Float arithmetic helper '{helperName}' not supported")
+		};
 	}
 
 	private void EmitLinearBinaryBitwise(StringBuilder builder, string indentation, string operation)

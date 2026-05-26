@@ -83,6 +83,12 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<int, string> _enumToStringFoldMap =
         new Dictionary<int, string>();
 
+    // A2.5: Pre-computed bake map for System.Enum methods where the target enum
+    // type is known at codegen time (e.g. ldtoken <DayOfWeek> + call Enum::Parse).
+    // Maps call-site IlOffset to (enumTypeSubjectId, calleeSubjectId).
+    private Dictionary<int, (string EnumTypeId, string Callee)> _enumAotBakeMap =
+        new Dictionary<int, (string EnumTypeId, string Callee)>();
+
     private CodegenMode _codegenMode = CodegenMode.Aot;
 
     // Verification dispatch manifest (populated by BuildDispatchEntryCode)
@@ -785,15 +791,26 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Step 3: Emit ReflectionQueryImageDescriptor for module.image,
         // enabling ResolveSubjectId to find call_target via reflection query model.
+        // Build extern "C" kAotMethodCount at file scope for Python-generated runtime-entry.cpp link-time visibility.
+        var methodCount = methodsForLowering.Count;
+
         var reflectionQueryCode = EmitReflectionQueryImage(methodsForLowering, metadataRegistration);
         if (!string.IsNullOrEmpty(reflectionQueryCode))
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(reflectionQueryCode);
         }
+        else if (methodCount > 0)
+        {
+            // When there are no reflection queries, emit a zero-initialized
+            // kReflImage definition so the ModuleDescriptor's .image field
+            // (which always references kReflImage) has a linkable symbol.
+            // See also: reflImageForwardDecl below.
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append("const ::chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kReflImage = {};");
+        }
 
         // Build extern "C" kAotMethodCount at file scope for Python-generated runtime-entry.cpp link-time visibility.
-        var methodCount = methodsForLowering.Count;
         var globalDeclarations = methodCount > 0
             ? $"// extern \"C\" definition for link-time visibility from runtime-entry.cpp\nextern \"C\" const int kAotMethodCount = {methodCount};\n"
             : string.Empty;
@@ -817,6 +834,27 @@ extern ""C"" void ChaosJitRegisterAll() {{
         {
             globalDeclarations += @"
 extern ""C"" void ChaosJitRegisterAll() {}
+";
+        }
+
+        // Generate entry function (RunNativeAot) for generic-managed-entry plans.
+        // The benchmark host main() calls RunNativeAot(entryIndex) which delegates
+        // to the lowering plan's entry symbol (e.g. InvokeWorkload).
+        // We add a forward declaration at file scope because the entry symbol is
+        // declared inside the codegen namespace (Scriban template) while the entry
+        // function needs to be at file scope (outside the namespace) for
+        // native_aot_main.cpp link-time visibility.
+        if (loweringPlan.PlanKind == "generic-managed-entry"
+            && !string.IsNullOrEmpty(loweringPlan.NativeEntryFunctionName)
+            && !string.IsNullOrEmpty(loweringPlan.EntrySymbol)
+            && methodCount > 0)
+        {
+            globalDeclarations += $@"
+// Forward declaration for entry symbol (defined in codegen namespace above).
+extern ""C"" CHAOS_IL2CPP_INT32 {loweringPlan.EntrySymbol}(CHAOS_IL2CPP_INT32);
+extern ""C"" CHAOS_IL2CPP_INT32 {loweringPlan.NativeEntryFunctionName}(CHAOS_IL2CPP_INT32 entryIndex) {{
+    return {loweringPlan.EntrySymbol}(entryIndex);
+}}
 ";
         }
 

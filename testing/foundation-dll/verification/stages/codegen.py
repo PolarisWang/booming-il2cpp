@@ -14,11 +14,12 @@ _REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
 def _read_contract(assembly: str, slug: str) -> dict | None:
-    """Read contract from testing/ path."""
-    testing_path = _REPO_ROOT / "testing" / "foundation-dll" / assembly / slug / "contract.json"
-    if testing_path.exists():
-        import json
-        return json.loads(testing_path.read_text(encoding="utf-8"))
+    """Read contract from testing/ path (contract.json or capability-family-contract.json)."""
+    for fname in ("contract.json", "capability-family-contract.json"):
+        testing_path = _REPO_ROOT / "testing" / "foundation-dll" / assembly / slug / fname
+        if testing_path.exists():
+            import json
+            return json.loads(testing_path.read_text(encoding="utf-8"))
     return None
 
 
@@ -50,12 +51,21 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
     if not mids:
         mids = [m["methodSubjectId"] for m in contract.get("methodContracts", [])]
 
+    if not mids:
+        return StageResult(
+            stage="codegen", status="passed",
+            summary="0 methods — no codegen needed",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
     # 1. Generate C# entrypoint subjects
     print(f"  [codegen] Generating entrypoint...")
     family_id = contract.get("familyId", f"family/{ctx.assembly}/{ctx.slug.replace('-', '/')}")
     extra_refs = None
     if ctx.slug in ("snapshot-prover",):
         extra_refs = ["../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj"]
+    elif ctx.slug in ("generic-supplement",):
+        extra_refs = ["../../../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj"]
 
     ep_result = generate_and_build(
         ctx.managed_dir,
@@ -198,6 +208,21 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
         )
 
     print(f"  [jit_codegen] Building JIT mode entry-jit.exe...")
+
+    # Check if there are methods to codegen
+    from verification.orchestration.context import FamilyContext
+    contract = _read_contract(ctx.assembly, ctx.slug)
+    if contract is not None:
+        mids = contract.get("methodSubjectIds", [])
+        if not mids:
+            mids = [m["methodSubjectId"] for m in contract.get("methodContracts", [])]
+        if not mids:
+            return StageResult(
+                stage="jit_codegen", status="passed",
+                summary="0 methods — no JIT codegen needed",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+
     from verification.stages.pipeline_native_aot_runner import run_family as _run_old_family
 
     testing_base = _get_testing_base(ctx.assembly)

@@ -140,7 +140,7 @@ def save_managed_benchmark_records(
         record = {
             **common,
             "technology": technology,
-            "methodSubjectId": method_subject_ids[i] if i < len(method_subject_ids) else f"method_{i}",
+            "methodSubjectId": res.get("methodSubjectId") or (method_subject_ids[i] if i < len(method_subject_ids) else f"method_{i}"),
             "methodIndex": res.get("methodIndex", i),
             "metrics": {
                 "elapsedMilliseconds": res.get("elapsedMilliseconds", 0),
@@ -261,15 +261,15 @@ def auto_save_perf_data(
 
     sd = report_stages.get("benchmark", {})
     if sd.get("status") == "passed" and sd.get("details"):
-        _save_benchmark_from_dict(ctx, sd)
+        _save_benchmark_from_dict(ctx, sd, stage_name="benchmark")
 
     sd = report_stages.get("hotupdate_aot_benchmark", {})
     if sd.get("status") == "passed" and sd.get("details"):
-        _save_benchmark_from_dict(ctx, sd)
+        _save_benchmark_from_dict(ctx, sd, stage_name="hotupdate_aot_benchmark")
 
     sd = report_stages.get("hotupdate_jit_benchmark", {})
     if sd.get("status") == "passed" and sd.get("details"):
-        _save_benchmark_from_dict(ctx, sd)
+        _save_benchmark_from_dict(ctx, sd, stage_name="hotupdate_jit_benchmark")
 
     print(f"  [perf_store] saved to {_store_dir(ctx)}")
 
@@ -326,9 +326,11 @@ def _save_microbench_from_dict(ctx: FamilyContext, sd: dict[str, Any]) -> None:
     _append_jsonl(path, record)
 
 
-def _save_benchmark_from_dict(ctx: FamilyContext, sd: dict[str, Any]) -> None:
+def _save_benchmark_from_dict(ctx: FamilyContext, sd: dict[str, Any],
+                               stage_name: str = "") -> None:
     details = sd.get("details", {})
-    stage_name = sd.get("stage", "")
+    if not stage_name:
+        stage_name = sd.get("stage", "")
     sdir = _store_dir(ctx)
     path = sdir / "benchmark-history.jsonl"
     common = _common_fields(ctx)
@@ -372,6 +374,12 @@ def _save_benchmark_from_dict(ctx: FamilyContext, sd: dict[str, Any]) -> None:
             metrics = {
                 "elapsedMilliseconds": res.get("elapsedMilliseconds", 0),
             }
+            elapsed = res.get("elapsedMilliseconds", 0)
+            iters = res.get("iterations", 100000)
+            if elapsed > 0 and iters > 0:
+                metrics["opsPerSecond"] = iters / (elapsed / 1000.0)
+            if "opsPerSecond" in res:
+                metrics["opsPerSecond"] = res["opsPerSecond"]
             if "postPatchNsPerOp" in res:
                 metrics["postPatchNsPerOp"] = res["postPatchNsPerOp"]
             record = {

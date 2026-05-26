@@ -372,18 +372,44 @@ public sealed partial class NativeAotLoweringPlanner
             if (!targetOffset.HasValue) return;
             if (!offsetToBlockIndex.TryGetValue(targetOffset.Value, out var h)) return;
             if (h > sourceIdx) return;
-            if (!dominators[sourceIdx][h]) return;
 
-            if (!loopHeaders.ContainsKey(h))
+            // Standard natural loop: header (target h) dominates latch (source)
+            if (dominators[sourceIdx][h])
             {
-                var body = FindNaturalLoopBody(blocks, offsetToBlockIndex, h, sourceIdx);
-                loopHeaders[h] = new NaturalLoopInfo(h, body, new HashSet<int> { sourceIdx });
+                if (!loopHeaders.ContainsKey(h))
+                {
+                    var body = FindNaturalLoopBody(blocks, offsetToBlockIndex, h, sourceIdx);
+                    loopHeaders[h] = new NaturalLoopInfo(h, body, new HashSet<int> { sourceIdx });
+                }
+                else
+                {
+                    loopHeaders[h].LatchIndices.Add(sourceIdx);
+                    var additionalBody = FindNaturalLoopBody(blocks, offsetToBlockIndex, h, sourceIdx);
+                    loopHeaders[h].BodyIndices.UnionWith(additionalBody);
+                }
+                return;
             }
-            else
+
+            // Reversed loop pattern (C# for-loop IL: body before condition):
+            // source (condition block) dominates target (body block).
+            // The backward edge goes from condition→body (later→earlier in layout),
+            // but the actual loop structure has the condition as the header.
+            // Register with sourceIdx as the header and h as the latch.
+            if (dominators[h][sourceIdx])
             {
-                loopHeaders[h].LatchIndices.Add(sourceIdx);
-                var additionalBody = FindNaturalLoopBody(blocks, offsetToBlockIndex, h, sourceIdx);
-                loopHeaders[h].BodyIndices.UnionWith(additionalBody);
+                if (!loopHeaders.ContainsKey(sourceIdx))
+                {
+                    var body = FindNaturalLoopBody(blocks, offsetToBlockIndex, sourceIdx, h);
+                    if (!body.Contains(sourceIdx))
+                        body.Add(sourceIdx);
+                    loopHeaders[sourceIdx] = new NaturalLoopInfo(sourceIdx, body, new HashSet<int> { h });
+                }
+                else
+                {
+                    loopHeaders[sourceIdx].LatchIndices.Add(h);
+                    var additionalBody = FindNaturalLoopBody(blocks, offsetToBlockIndex, sourceIdx, h);
+                    loopHeaders[sourceIdx].BodyIndices.UnionWith(additionalBody);
+                }
             }
         }
 
@@ -460,20 +486,27 @@ public sealed partial class NativeAotLoweringPlanner
                     return false;
                 if (targetIdx < i)
                 {
-                    if (!loopHeaders.ContainsKey(targetIdx))
-                        return false;
-                    if (!loopHeaders[targetIdx].LatchIndices.Contains(i))
-                        return false;
+                    // Standard loop: target is header, source is latch
+                    if (loopHeaders.ContainsKey(targetIdx) && loopHeaders[targetIdx].LatchIndices.Contains(i))
+                        continue;
+                    // Reversed loop (body-before-condition pattern): source is header, target is latch
+                    if (loopHeaders.ContainsKey(i) && loopHeaders[i].LatchIndices.Contains(targetIdx))
+                        continue;
+                    // Not a recognized backedge → irreducible
+                    return false;
                 }
             }
             if (block.BranchTarget.HasValue)
             {
                 if (offsetToBlockIndex.TryGetValue(block.BranchTarget.Value, out var targetIdx) && targetIdx < i)
                 {
-                    if (!loopHeaders.ContainsKey(targetIdx))
-                        return false;
-                    if (!loopHeaders[targetIdx].LatchIndices.Contains(i))
-                        return false;
+                    // Standard loop: target is header, source is latch
+                    if (loopHeaders.ContainsKey(targetIdx) && loopHeaders[targetIdx].LatchIndices.Contains(i))
+                        continue;
+                    // Reversed loop: source is header, target is latch
+                    if (loopHeaders.ContainsKey(i) && loopHeaders[i].LatchIndices.Contains(targetIdx))
+                        continue;
+                    return false;
                 }
             }
             if (block.SwitchTargets.Count > 0)
@@ -992,6 +1025,25 @@ public sealed partial class NativeAotLoweringPlanner
             }
             else
             {
+                // Check if this block belongs to a pending reversed loop
+                // (body blocks before header in layout). Skip it here;
+                // BuildLoop at the loop header will include it.
+                bool isPendingReversedLoopBody = false;
+                for (int scanIdx = idx + 1; scanIdx <= endIndex; scanIdx++)
+                {
+                    if (cfg.LoopHeaders.TryGetValue(scanIdx, out var revLoop) &&
+                        revLoop.BodyIndices.Contains(idx))
+                    {
+                        isPendingReversedLoopBody = true;
+                        break;
+                    }
+                }
+                if (isPendingReversedLoopBody)
+                {
+                    idx++;
+                    continue;
+                }
+
                 // Check for break/continue in sequential block
                 var seqBlock = block;
                 if (seqBlock.Terminator != null && (seqBlock.Terminator.Op is "br" or "leave"))
@@ -1040,88 +1092,71 @@ public sealed partial class NativeAotLoweringPlanner
     {
         var header = cfg.Blocks[headerIndex];
         var bodyIndicesAfterHeader = loopInfo.BodyIndices.Where(i => i > headerIndex).ToList();
-        int bodyStart = bodyIndicesAfterHeader.Count > 0 ? bodyIndicesAfterHeader.Min() : headerIndex + 1;
 
-        int maxLatchIdx = loopInfo.LatchIndices.Max();
-        // bodyEnd must cover all body blocks, not just up to maxLatchIdx.
-        // A body block after the max latch occurs when a conditional latch
-        // falls through to non-latch code that is still within the loop body.
-        int bodyEnd = Math.Max(maxLatchIdx, loopInfo.BodyIndices.Max());
-        if (bodyEnd > endIndex) bodyEnd = endIndex;
+        // Detect reversed loop pattern (C# for-loop IL: body before condition).
+        // In this pattern, the header (condition block) comes AFTER some body blocks.
+        bool isReversed = bodyIndicesAfterHeader.Count == 0 && loopInfo.BodyIndices.Any(i => i < headerIndex);
 
-        int exitIdx = bodyEnd + 1;
-        while (exitIdx <= endIndex && loopInfo.BodyIndices.Contains(exitIdx))
-            exitIdx++;
-
-        // Collect all exit offsets for multi-exit loop support.
-        // The natural exit is the first block after the loop body.
-        // Additional exits come from body blocks that branch to offsets
-        // outside the body range (early exits / break equivalents).
-        var exitOffsets = new HashSet<int>();
-        if (exitIdx <= endIndex)
-            exitOffsets.Add(cfg.Blocks[exitIdx].StartOffset);
-
-        // Scan body blocks for branches to non-body, non-latch offsets
-        foreach (var bodyIdx in loopInfo.BodyIndices)
-        {
-            if (bodyIdx < bodyStart || bodyIdx > bodyEnd) continue;
-            var block = cfg.Blocks[bodyIdx];
-            if (block.BranchTarget.HasValue &&
-                block.Terminator?.Op is "br" or "leave" &&
-                cfg.OffsetToBlockIndex.TryGetValue(block.BranchTarget.Value, out var brTargetIdx) &&
-                !loopInfo.BodyIndices.Contains(brTargetIdx) &&
-                brTargetIdx != headerIndex &&
-                brTargetIdx > bodyEnd)
-            {
-                exitOffsets.Add(block.BranchTarget.Value);
-            }
-            if (block.ConditionalTarget.HasValue &&
-                cfg.OffsetToBlockIndex.TryGetValue(block.ConditionalTarget.Value, out var condTargetIdx) &&
-                !loopInfo.BodyIndices.Contains(condTargetIdx) &&
-                condTargetIdx != headerIndex &&
-                condTargetIdx > bodyEnd)
-            {
-                exitOffsets.Add(block.ConditionalTarget.Value);
-            }
-        }
-
-        int? exitOffset = exitIdx <= endIndex ? cfg.Blocks[exitIdx].StartOffset : null;
-        int headerOffset = header.StartOffset;
-
+        int bodyStart, bodyEnd, exitIdx;
         bool isWhile;
         BasicBlock? latchBlock = null;
 
-        if (loopInfo.LatchIndices.Contains(headerIndex))
+        if (isReversed)
         {
-            // Self-loop: header is also a latch (e.g., do-while pattern
-            // where the conditional branch targets its own block).
-            // Always treat as do-while.
+            // Reversed loop: body blocks precede the header in layout.
+            // The header's condition block is the last thing in the loop body,
+            // and the backward edge from header→body is the "continue" edge.
+            // This is inherently a do-while pattern.
+            int minBody = loopInfo.BodyIndices.Min();
+            int maxBody = loopInfo.BodyIndices.Max();
+            bodyStart = minBody;
+            bodyEnd = headerIndex - 1; // body up to (not including) the header
+
+            exitIdx = headerIndex + 1;
             isWhile = false;
-            latchBlock = header;
-        }
-        else if (header.ConditionalTarget.HasValue && IsConditionalBranchOpcode(header.Terminator?.Op ?? ""))
-        {
-            isWhile = true;
-            var latchesInBody = loopInfo.LatchIndices.Where(l => l <= bodyEnd && l >= bodyStart).ToList();
-            if (latchesInBody.Count > 0)
-            {
-                int latchIdx = latchesInBody.Max();
-                latchBlock = cfg.Blocks[latchIdx];
-            }
+            latchBlock = header; // the header (condition block) serves as latch
         }
         else
         {
-            isWhile = false;
-            var latchesInBody = loopInfo.LatchIndices.Where(l => l <= bodyEnd && l >= bodyStart).ToList();
-            if (latchesInBody.Count > 0)
+            bodyStart = bodyIndicesAfterHeader.Count > 0 ? bodyIndicesAfterHeader.Min() : headerIndex + 1;
+
+            int maxLatchIdx = loopInfo.LatchIndices.Max();
+            bodyEnd = Math.Max(maxLatchIdx, loopInfo.BodyIndices.Max());
+            if (bodyEnd > endIndex) bodyEnd = endIndex;
+
+            exitIdx = bodyEnd + 1;
+            while (exitIdx <= endIndex && loopInfo.BodyIndices.Contains(exitIdx))
+                exitIdx++;
+
+            if (loopInfo.LatchIndices.Contains(headerIndex))
             {
-                int latchIdx = latchesInBody.Max();
-                latchBlock = cfg.Blocks[latchIdx];
+                isWhile = false;
+                latchBlock = header;
+            }
+            else if (header.ConditionalTarget.HasValue && IsConditionalBranchOpcode(header.Terminator?.Op ?? ""))
+            {
+                isWhile = true;
+                var latchesInBody = loopInfo.LatchIndices.Where(l => l <= bodyEnd && l >= bodyStart).ToList();
+                if (latchesInBody.Count > 0)
+                {
+                    int latchIdx = latchesInBody.Max();
+                    latchBlock = cfg.Blocks[latchIdx];
+                }
+            }
+            else
+            {
+                isWhile = false;
+                var latchesInBody = loopInfo.LatchIndices.Where(l => l <= bodyEnd && l >= bodyStart).ToList();
+                if (latchesInBody.Count > 0)
+                {
+                    int latchIdx = latchesInBody.Max();
+                    latchBlock = cfg.Blocks[latchIdx];
+                }
             }
         }
 
         // Build exit offset set: merge natural exit + early exits + outer loop exits
-        var loopExitSet = new HashSet<int>(exitOffsets);
+        var loopExitSet = new HashSet<int>(outerLoopExitOffsets ?? new HashSet<int>());
         if (outerLoopExitOffsets != null)
         {
             foreach (var o in outerLoopExitOffsets)
@@ -1131,11 +1166,11 @@ public sealed partial class NativeAotLoweringPlanner
         // Build body with the loop's own context for break/continue detection
         StructuredIRNode body;
         if (bodyStart <= bodyEnd)
-            body = RecoverStructure(cfg, bodyStart, bodyEnd, headerOffset, loopExitSet);
+            body = RecoverStructure(cfg, bodyStart, bodyEnd, outerLoopHeaderOffset, loopExitSet);
         else
             body = new IRSequence(Array.Empty<StructuredIRNode>());
 
-        int exitVal = exitOffset ?? -1;
+        int exitVal = exitIdx;
 
         if (isWhile)
         {
@@ -1165,7 +1200,7 @@ public sealed partial class NativeAotLoweringPlanner
                 body,
                 latchInstructions,
                 latchTerminator,
-                headerOffset,
+                outerLoopHeaderOffset ?? -1,
                 exitVal);
         }
     }
