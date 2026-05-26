@@ -3,6 +3,7 @@
 #include <cstring>
 
 #include <chaos/common.h>
+#include <chaos/profile.h>
 
 #ifndef CHAOS_NATIVE_AOT_ENTRY
 #define CHAOS_NATIVE_AOT_ENTRY RunNativeAot
@@ -62,21 +63,33 @@ int main(int argc, char** argv) {
     const int iterations = ParseIterations(argc, argv);
     const CHAOS_IL2CPP_INT32 entry_index = ParseEntryIndex(argc, argv);
     const char* subject_id = ParseSubjectId(argc, argv);
+
+    // Warmup: pay one-time runtime initialization cost (GC, type system, vtables, etc.)
+    // before starting the timed measurement. This ensures per-call reported time
+    // reflects actual execution cost, not one-time init.
+    CHAOS_NATIVE_AOT_ENTRY(entry_index);
+
     const auto started = CHAOS_IL2CPP_CHRONO_STEADY_CLOCK::now();
     long long checksum = 0;
-    for (int index = 0; index < iterations; ++index) {
-        checksum += static_cast<long long>(CHAOS_NATIVE_AOT_ENTRY(entry_index));
+    {
+        CHAOS_IL2CPP_PROFILE_SCOPE("BenchmarkLoop");
+        for (int index = 0; index < iterations; ++index) {
+            checksum += static_cast<long long>(CHAOS_NATIVE_AOT_ENTRY(entry_index));
+        }
     }
+    CHAOS_IL2CPP_PROFILE_DUMP();
     const auto elapsed_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(
         CHAOS_IL2CPP_CHRONO_STEADY_CLOCK::now() - started);
-    const double elapsed = static_cast<double>(elapsed_ns.count()) / 1000000.0;
-    const double seconds = elapsed / 1000.0;
-    const double ops_per_second = seconds > 0.0 ? (static_cast<double>(iterations) / seconds) : 0.0;
+    const double total_ms = static_cast<double>(elapsed_ns.count()) / 1000000.0;
+    // Report total batch time (all iterations), matching managed benchmark convention.
+    // The dashboard normalizes across modes by comparing total time for the same
+    // iteration count (managed and native both use _perf_harness_iterations = 100).
+    const double ops_per_second = total_ms > 0.0 ? (static_cast<double>(iterations) / (total_ms / 1000.0)) : 0.0;
 
     if (subject_id != nullptr) {
         CHAOS_IL2CPP_LOG_WRITE_RAW_M(
             "{{\"elapsedMilliseconds\":{0:.6f},\"opsPerSecond\":{1:.6f},\"checksum\":{2},\"iterations\":{3},\"subjectId\":\"{4}\"}}\n",
-            elapsed,
+            total_ms,
             ops_per_second,
             NormalizeChecksum(checksum),
             iterations,
@@ -84,7 +97,7 @@ int main(int argc, char** argv) {
     } else {
         CHAOS_IL2CPP_LOG_WRITE_RAW_M(
             "{{\"elapsedMilliseconds\":{0:.6f},\"opsPerSecond\":{1:.6f},\"checksum\":{2},\"iterations\":{3}}}\n",
-            elapsed,
+            total_ms,
             ops_per_second,
             NormalizeChecksum(checksum),
             iterations);

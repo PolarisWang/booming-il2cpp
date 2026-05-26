@@ -292,6 +292,15 @@ private:
     /// Pushes newly-marked children to worker 0's deque.
     void ProcessGreyObject(void* obj);
 
+    // ── Synchronisation primitives ───────────────────────────────
+    // Startup barriers: BgcController::Start() waits for both threads
+    // to complete their RegisterThread + EnterPreemptiveMode before
+    // returning.  Without these, concurrent dispatch (e.g. benchmark
+    // tight loop) races with BGC/finalizer thread initialization and
+    // causes sporadic segfaults.
+    std::atomic<bool> bgc_thread_started_{false};
+    std::atomic<bool> finalizer_thread_started_{false};
+
     // ── Test-accessible members ─────────────────────────────────
     // DrainGlobalSatbQueue and kMaxSatbPool are accessed by SATB
     // stress tests.  Normal GC calls DrainGlobalSatbQueue from
@@ -500,6 +509,12 @@ extern std::atomic<bool> g_bgc_is_marking;
 extern void BgcFlushSatbBuffer(const SatbEntry* entries, uint32_t count);
 
 extern void GcAdvanceBgcCycle() noexcept;
+
+/// Global flag to disable BGC startup.  When false, BgcController::Start() is
+/// skipped — useful for short-lived verification/benchmark processes where BGC
+/// concurrency is not needed and the startup race is undesirable.
+/// Default: true (BGC enabled).  Set to false before RuntimeInit().
+extern bool g_bgc_enabled;
 
 }  // namespace chaos::il2cpp::runtime_core
 

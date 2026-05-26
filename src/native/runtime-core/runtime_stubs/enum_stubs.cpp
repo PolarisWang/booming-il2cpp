@@ -2,14 +2,18 @@
 
 // enum_stubs.cpp — Enum helper stub implementations
 #include <chaos/native_types.h>
+#include <chaos/type_info.h>
 #include <chaos/log.h>
 #include <cstring>
 #include <cstdio>
+#include <mutex>
 
 #include "generated_code_compat.h"
 #include "string_table.h"
 #include "runtime_stubs/stub_common.h"
 #include "gc_helpers.h"
+#include "gc_layout.h"
+#include "gc_events.h"
 #include "reflection_query_model.h"
 #include "reflection_api.h"
 #include "reflection_metadata_impl.h"
@@ -24,6 +28,33 @@ extern "C" {
 /// padding(4) + utf8_data(8) + string_id(8) = 40 bytes on x64.
 static constexpr CHAOS_IL2CPP_SIZE kManagedStringHeader = 40;
 
+// ── Stub-level TypeInfo for GC visibility ──────────────────────────────
+// Objects allocated by stubs (strings, boxed values, arrays) must have a
+// valid TypeInfoHot* at offset [0] so that the GC's IsValidManagedObject()
+// recognizes them during marking.  Without this, the GC treats them as
+// non-object memory and may sweep them while the mutator still holds
+// references, causing access violations on the next use.
+//
+// The TypeInfo is registered lazily on first allocation and uses a raw-alloc
+// (pointer-free) layout so the GC does not attempt to trace references.
+static TypeInfoHot g_stub_string_typeinfo{};
+static std::once_flag g_stub_string_typeinfo_flag;
+static void init_stub_string_typeinfo() noexcept {
+    auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+    uint64_t stable_id = registry.RegisterOrGetRawAllocType(
+        static_cast<uint32_t>(kManagedStringHeader));
+    g_stub_string_typeinfo.parent = nullptr;
+    g_stub_string_typeinfo.vtable_array = nullptr;
+    g_stub_string_typeinfo.stable_id = stable_id;
+    g_stub_string_typeinfo.vtable_length = 0;
+    g_stub_string_typeinfo.warm_delta = 0;
+    g_stub_string_typeinfo.type_shape = 0;
+    g_stub_string_typeinfo.flags = 0;
+    registry.RegisterTypeInfoRange(
+        reinterpret_cast<uintptr_t>(&g_stub_string_typeinfo),
+        reinterpret_cast<uintptr_t>(&g_stub_string_typeinfo) + sizeof(g_stub_string_typeinfo));
+}
+
 /// Allocate a managed string with the given byte_count of UTF-8 payload + NUL.
 /// Uses chaos_managed_string layout so generated code reads length/utf8_data
 /// at correct offsets via the CHAOS_IL2CPP_STRING_TYPE* path.
@@ -34,6 +65,12 @@ static CHAOS_IL2CPP_INTPTR enum_alloc_string(CHAOS_IL2CPP_UINTPTR byte_count) no
     if (storage == nullptr) return 0;
 
     std::memset(storage, 0, kManagedStringHeader);
+
+    // Set TypeInfo at offset 0 for GC visibility.  Without this, the GC
+    // cannot recognize the string as a valid managed object during marking,
+    // causing it to be swept while the mutator still holds a reference.
+    std::call_once(g_stub_string_typeinfo_flag, init_stub_string_typeinfo);
+    *reinterpret_cast<TypeInfoHot**>(storage) = &g_stub_string_typeinfo;
 
     // length at offset 16
     auto* len_field = reinterpret_cast<CHAOS_IL2CPP_INT32*>(storage + 16);
@@ -234,8 +271,28 @@ static thread_local CHAOS_IL2CPP_INTPTR s_enum_str_names[64];
 
 // GetNames result array cache: single-entry, keyed by TypeInfoHandle.
 // Avoids N string allocations + 1 array allocation per call in hot loops.
+//
+// thread_local is NOT a GC root, so the cached managed pointers become
+// dangling after a young collection promotes nursery objects to old gen.
+// To handle this safely, a GC_YOUNG_START callback clears both cache keys
+// before each collection, forcing a cache rebuild from metadata on the
+// next call.  This ensures the managed array and strings are always
+// freshly allocated after any GC event.
 static thread_local CHAOS_IL2CPP_UINTPTR s_enum_names_array_key = 0;
 static thread_local CHAOS_IL2CPP_INTPTR s_enum_names_array = 0;
+
+// ── GC cache invalidation ──────────────────────────────────────────
+// Registered lazily on first call to ChaosEnumGetNames.  Clears
+// thread_local cache keys before each young collection so that the
+// next call re-allocates managed objects from non-moving metadata.
+static void enum_stubs_on_gc_event(GcEvent event, void* /*user_data*/) noexcept {
+    if (event == GcEvent::GC_YOUNG_START) {
+        s_enum_names_array_key = 0;
+        s_enum_str_type_key = 0;
+    }
+}
+
+static std::once_flag s_enum_gc_callback_flag;
 
 // Forward declaration: used by enum_resolve_meta and ensure_enum_str_cache.
 // Extracts a stable TypeInfoHandle from a managed Type object or tagged handle.
@@ -796,6 +853,12 @@ static CHAOS_IL2CPP_UINTPTR enum_extract_type_handle(CHAOS_IL2CPP_INTPTR type_ar
 CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
 {
     if (type == 0) return 0;
+
+    // Register GC callback once per process to invalidate thread_local
+    // caches before young collections (prevents dangling managed pointers).
+    std::call_once(s_enum_gc_callback_flag, [] {
+        GcRegisterEventCallback(enum_stubs_on_gc_event, nullptr);
+    });
 
     // Result array cache: single-entry, keyed by TypeInfoHandle.
     // Extracting the handle early avoids the resolve_type_arg round-trip.

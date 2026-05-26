@@ -12,7 +12,7 @@
 {{ indentation }}{{ tab }}{{ tab }}case {{ ctor.type_handle_literal }}:
 {{ indentation }}{{ tab }}{{ tab }}{
 {{ indentation }}{{ tab }}{{ tab }}{{ tab }}auto* chaos_object = CHAOS_IL2CPP_NEW_GC({{ ctor.native_type_symbol }});
-{{ indentation }}{{ tab }}{{ tab }}{{ tab }}chaos_object->header.type_info = &{{ ctor.type_info_symbol }};
+{{ indentation }}{{ tab }}{{ tab }}{{ tab }}chaos_object->header.type_info = {{ ctor.type_info_symbol }};
 {{ indentation }}{{ tab }}{{ tab }}{{ tab }}{{ ctor.ctor_symbol }}(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 {{ indentation }}{{ tab }}{{ tab }}{{ tab }}return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
 {{ indentation }}{{ tab }}{{ tab }}}

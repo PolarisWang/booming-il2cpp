@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
@@ -66,6 +66,15 @@ public sealed partial class NativeAotLoweringPlanner
 	/// </summary>
 	private HashSet<int>? _structLocalSlots;
 
+	/// <summary>
+	/// Local slots that hold Float32/Float64 values. Populated per-method
+	/// in <c>EmitViaStructuredIR</c> by <c>IdentifyFloatLocalSlots</c>.
+	/// When set, ldloc for any slot in this map emits
+	/// ChaosLoadFloat32/ChaosLoadFloat64(chaos_locals[N]) and pushes the
+	/// corresponding SlotType, enabling direct _dN/_fN slot allocation.
+	/// </summary>
+	private Dictionary<int, SlotType>? _floatLocalSlots;
+
 	private static HashSet<int> IdentifyStructLocalSlots(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
 	{
 		var structLocals = new HashSet<int>();
@@ -81,6 +90,153 @@ public sealed partial class NativeAotLoweringPlanner
 			structLocals.Add(GetRequiredIntOperand(instructions[i - 1]));
 		}
 		return structLocals;
+	}
+
+	/// <summary>
+	/// Pre-scan the instruction list to identify which local slots hold
+	/// Float32 or Float64 values. Simulates the eval stack type stack
+	/// linearly across all instructions, recording the SlotType stored
+	/// into each local by stloc. Falls back to NativeInt for ambiguous
+	/// cases (locals stored with multiple types, or unresolvable types).
+	/// </summary>
+	private static Dictionary<int, SlotType> IdentifyFloatLocalSlots(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+	{
+		var result = new Dictionary<int, SlotType>();
+		var typeStack = new Stack<SlotType>();
+
+		// Iterate all instructions linearly, simulating the eval stack type flow.
+		// This captures the type at each stloc, which tells us what type
+		// ldloc should restore when loading the same local.
+		for (int i = 0; i < instructions.Count; i++)
+		{
+			var op = instructions[i].Op;
+			switch (op)
+			{
+				// Push float types
+				case "ldc.r8":
+					typeStack.Push(SlotType.Float64);
+					break;
+				case "ldc.r4":
+					typeStack.Push(SlotType.Float32);
+					break;
+
+				// stloc: pop type and record for this local slot
+				case "stloc":
+					if (typeStack.Count > 0)
+					{
+						int slot = GetRequiredIntOperand(instructions[i]);
+						SlotType storedType = typeStack.Pop();
+						// Only record if the type is float (NativeInt is the default, no need to track)
+						if (storedType is SlotType.Float32 or SlotType.Float64)
+							result[slot] = storedType;
+					}
+					break;
+
+				// ldloc: push conservative type (we don't know yet; stloc above will capture)
+		case "ldloc":
+					typeStack.Push(SlotType.NativeInt);
+					break;
+
+				// Binary arithmetic: pop 2, push float if either operand is float
+				case "add": case "sub": case "mul": case "div": case "rem":
+				case "add.ovf": case "add.ovf.un":
+				case "sub.ovf": case "sub.ovf.un":
+				case "mul.ovf": case "mul.ovf.un":
+				case "div.un": case "rem.un":
+					if (typeStack.Count >= 2)
+					{
+						SlotType rightType = typeStack.Pop();
+						SlotType leftType = typeStack.Pop();
+						typeStack.Push(
+							rightType is SlotType.Float32 or SlotType.Float64 ||
+							leftType is SlotType.Float32 or SlotType.Float64
+								? SlotType.Float64
+								: SlotType.NativeInt);
+					}
+					break;
+
+				// Conv: in-place type change
+				case "conv.r8":
+					if (typeStack.Count > 0)
+					{
+						typeStack.Pop();
+						typeStack.Push(SlotType.Float64);
+					}
+					break;
+				case "conv.r4":
+				case "conv.r.un":
+					if (typeStack.Count > 0)
+					{
+						typeStack.Pop();
+						typeStack.Push(SlotType.Float32);
+					}
+					break;
+				case "conv.i4": case "conv.i8": case "conv.u4": case "conv.u8":
+				case "conv.i": case "conv.u":
+					if (typeStack.Count > 0)
+					{
+						typeStack.Pop();
+						typeStack.Push(SlotType.NativeInt);
+					}
+					break;
+
+				// ldelem: element type determined by opcode
+				case "ldelem.r8":
+					typeStack.Push(SlotType.Float64);
+					break;
+				case "ldelem.r4":
+					typeStack.Push(SlotType.Float32);
+					break;
+
+				// ceq/cgt/clt: always produce integer (NativeInt)
+				case "ceq": case "cgt": case "clt":
+				case "cgt.un": case "clt.un":
+					if (typeStack.Count >= 2)
+					{
+						typeStack.Pop();
+						typeStack.Pop();
+					}
+					typeStack.Push(SlotType.NativeInt);
+					break;
+
+				// Instructions that push one value (ldc.i4, ldnull, ldarg, etc.)
+				case "ldc.i4": case "ldc.i8": case "ldnull":
+				case "ldarg": case "ldarga": case "ldloca":
+				case "ldsfld": case "ldfld": case "ldlen":
+				case "ldind.i4": case "ldind.i8": case "ldind.i":
+				case "ldind.u4": case "ldind.u8":
+				case "ldind.ref": case "ldobj":
+					typeStack.Push(SlotType.NativeInt);
+					break;
+
+				// Instructions with no stack effect, or unknown: keep stack as-is
+				case "nop": case "br": case "leave": case "endfinally":
+				case "brtrue": case "brfalse":
+				case "beq": case "bge": case "bgt": case "ble": case "blt":
+				case "bne.un": case "bge.un": case "bgt.un": case "ble.un": case "blt.un":
+				case "switch":
+					break;
+
+				// pop: remove one value
+				case "pop":
+					if (typeStack.Count > 0)
+						typeStack.Pop();
+					break;
+
+				// dup: duplicate top
+				case "dup":
+					if (typeStack.Count > 0)
+						typeStack.Push(typeStack.Peek());
+					break;
+
+				// Default: assume unknown ops push one value (conservative)
+				default:
+					typeStack.Push(SlotType.NativeInt);
+					break;
+			}
+		}
+
+		return result;
 	}
 
 	private SlotType PeekSlotType()
@@ -276,16 +432,19 @@ public sealed partial class NativeAotLoweringPlanner
 		case "ldc.r8":
 		{
 			EmitEvalStackPush(builder, indentation, FormatFloat64Literal(GetRequiredDoubleOperand(instruction)), SlotType.Float64);
+			PushSlotType(SlotType.Float64);
 			break;
 		}
 		case "ldc.r4":
 		{
 			EmitEvalStackPush(builder, indentation, FormatFloat32Literal(GetRequiredSingleOperand(instruction)), SlotType.Float32);
+			PushSlotType(SlotType.Float32);
 			break;
 		}
 		case "ldarg":
 		{
 			EmitEvalStackPush(builder, indentation, $"chaos_args[{GetRequiredIntOperand(instruction)}]");
+			PushSlotType(SlotType.NativeInt);
 			break;
 		}
 		case "ldstr":
@@ -294,13 +453,32 @@ public sealed partial class NativeAotLoweringPlanner
 		case "ldtoken":
 			EmitLinearLoadTypeToken(builder, instruction, indentation);
 			break;
-		case "ldloc":
+						case "ldloc":
 		{
 			int ldlocSlot = GetRequiredIntOperand(instruction);
 			if (_structLocalSlots is not null && _structLocalSlots.Contains(ldlocSlot))
 				EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[{ldlocSlot}])");
+			else if (_floatLocalSlots is not null && _floatLocalSlots.TryGetValue(ldlocSlot, out var ldlocType) && ldlocType != SlotType.NativeInt)
+			{
+				Console.Error.WriteLine($"DBG: ldloc slot={ldlocSlot} type={ldlocType} FLOAT PATH slotCount={_floatLocalSlots.Count} method={_currentMethodNativeSymbol}");
+				string wrapper = ldlocType switch
+				{
+					SlotType.Float32 => "ChaosLoadFloat32",
+					SlotType.Float64 => "ChaosLoadFloat64",
+					_ => throw new NotSupportedException(),
+				};
+				EmitEvalStackPush(builder, indentation, $"{wrapper}(chaos_locals[{ldlocSlot}])", ldlocType);
+				PushSlotType(ldlocType);
+			}
 			else
+			{
+				int floatCount = _floatLocalSlots?.Count ?? -1;
+				string floatInfo = _floatLocalSlots is null ? "NULL" : $"count={floatCount} [{string.Join(",", _floatLocalSlots.Select(kv => $"{kv.Key}:{kv.Value}"))}]";
+				string structInfo = _structLocalSlots is null ? "NULL" : $"count={_structLocalSlots.Count} [{string.Join(",", _structLocalSlots)}]";
+				Console.Error.WriteLine($"DBG: ldloc slot={ldlocSlot} FALLTHROUGH _float={floatInfo} _struct={structInfo} method={_currentMethodNativeSymbol}");
 				EmitEvalStackPush(builder, indentation, $"chaos_locals[{ldlocSlot}]");
+				PushSlotType(SlotType.NativeInt);
+			}
 			break;
 		}
 		case "ldsfld":
@@ -395,13 +573,22 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			break;
 		}
-		case "stloc":
-			ResetArrayCheckCache();
+					case "stloc":
+				ResetArrayCheckCache();
 		{
-			builder.AppendLine($"{indentation}chaos_locals[{GetRequiredIntOperand(instruction)}] = {ConsumeEvalStackValueExpression()};");
+			SlotType stlocType = PeekSlotType();
+			string stlocValue = ConsumeEvalStackValueExpression();
+			ConsumeSlotType();
+			string storedExpr = stlocType switch
+			{
+				SlotType.Float32 => $"ChaosStoreFloat32({stlocValue})",
+				SlotType.Float64 => $"ChaosStoreFloat64({stlocValue})",
+				_ => stlocValue,
+			};
+			builder.AppendLine($"{indentation}chaos_locals[{GetRequiredIntOperand(instruction)}] = {storedExpr};");
 			break;
 		}
-		case "starg":
+			case "starg":
 			ResetArrayCheckCache();
 		{
 			builder.AppendLine($"{indentation}chaos_args[{GetRequiredIntOperand(instruction)}] = {ConsumeEvalStackValueExpression()};");
@@ -651,7 +838,10 @@ public sealed partial class NativeAotLoweringPlanner
 		case "conv.u8":
 		{
 			string _loadExpr = PrepareConvOvfValue();
-			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>({_loadExpr}));");
+			ConsumeEvalStackValueExpression();
+			ConsumeSlotType();
+			EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>({_loadExpr}))", SlotType.NativeInt);
+			PushSlotType(SlotType.NativeInt);
 			break;
 		}
 		case "conv.r4":
@@ -1111,9 +1301,11 @@ public sealed partial class NativeAotLoweringPlanner
 			break;
 		case "ldelem.r4":
 			EmitLinearArrayLoad(builder, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation);
+			PushSlotType(SlotType.Float32);
 			break;
 		case "ldelem.r8":
 			EmitLinearArrayLoad(builder, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation);
+			PushSlotType(SlotType.Float64);
 			break;
 		case "ldelem.ref":
 			EmitLinearArrayLoad(builder, "chaos_element", indentation);
@@ -1155,9 +1347,13 @@ public sealed partial class NativeAotLoweringPlanner
 				case "System.Int64": case "System.UInt64":
 					EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation); break;
 				case "System.Single":
-					EmitLinearArrayLoad(builder, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation);
+					PushSlotType(SlotType.Float32);
+					break;
 				case "System.Double":
-					EmitLinearArrayLoad(builder, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation);
+					PushSlotType(SlotType.Float64);
+					break;
 				default:
 					EmitLinearArrayLoad(builder, "chaos_element", indentation); break;
 				}
@@ -1429,6 +1625,10 @@ public sealed partial class NativeAotLoweringPlanner
 	private string PrepareConvOvfValue(bool useUintptrDefault = false)
 	{
 		SlotType _slotType = PeekSlotType();
+		// In structured mode, _fN/_dN slots are already float/double C++ variables.
+		// The ChaosLoadFloat* wrappers would do double->intptr truncation -> memcpy = garbage.
+		if (_activeStructuredSlotContext is not null && _slotType is SlotType.Float32 or SlotType.Float64)
+			return AccessEvalStackTopExpression();
 		return _slotType switch
 		{
 			SlotType.Float32 => $"ChaosLoadFloat32({AccessEvalStackTopExpression()})",
@@ -1720,7 +1920,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else
 		{
-			EmitEvalStackPush(builder, indentation + "    ", "chaos_boxed->value");
+			EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed->value)");
 		}
 		builder.AppendLine($"{indentation}}}");
 	}
@@ -3227,23 +3427,41 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		bool _lIsFloat = _lType is SlotType.Float32 or SlotType.Float64;
 		bool isFloatOp = _lIsFloat || _rIsFloat;
 
+		// In structured mode, _dN/_fN typed slots are already float/double C++ vars -> use directly
 		string _rLoad = isFloatOp
 		    ? (_rIsFloat
-		        ? $"ChaosLoadFloat64({_rExpr})"
+		        ? (_activeStructuredSlotContext is not null && (_rExpr.StartsWith("_d", StringComparison.Ordinal) || _rExpr.StartsWith("_f", StringComparison.Ordinal))
+		            ? _rExpr
+		            : $"ChaosLoadFloat64({_rExpr})")
 		        : $"static_cast<double>({_rExpr})")
 		    : $"static_cast<CHAOS_IL2CPP_INT32>({_rExpr})";
 		string _lLoad = isFloatOp
 		    ? (_lIsFloat
-		        ? $"ChaosLoadFloat64({_lExpr})"
+		        ? (_activeStructuredSlotContext is not null && (_lExpr.StartsWith("_d", StringComparison.Ordinal) || _lExpr.StartsWith("_f", StringComparison.Ordinal))
+		            ? _lExpr
+		            : $"ChaosLoadFloat64({_lExpr})")
 		        : $"static_cast<double>({_lExpr})")
 		    : $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})";
 
 		if (_activeStructuredSlotContext is not null)
 		{
-			string expr = isFloatOp
-			    ? BuildFloatArithmeticExpression(helperName, _lLoad, _rLoad)
-			    : $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}({_lLoad}, {_rLoad}))";
-			EmitEvalStackPush(builder, indentation, expr);
+			if (isFloatOp)
+			{
+				string floatExpr = helperName switch
+				{
+					"ChaosWrapAdd" => $"({_lLoad} + {_rLoad})",
+					"ChaosWrapSub" => $"({_lLoad} - {_rLoad})",
+					"ChaosWrapMul" => $"({_lLoad} * {_rLoad})",
+					"ChaosDiv"     => $"({_lLoad} / {_rLoad})",
+					"ChaosRem"     => $"fmod({_lLoad}, {_rLoad})",
+				};
+				EmitEvalStackPush(builder, indentation, floatExpr, SlotType.Float64);
+			}
+			else
+			{
+				string expr = $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}({_lLoad}, {_rLoad}))";
+				EmitEvalStackPush(builder, indentation, expr);
+			}
 		}
 		else
 		{

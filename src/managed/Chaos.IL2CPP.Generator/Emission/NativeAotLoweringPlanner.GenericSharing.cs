@@ -30,6 +30,15 @@ public sealed partial class NativeAotLoweringPlanner
     private HashSet<string> _sharedContextSymbols = new(StringComparer.Ordinal);
 
     /// <summary>
+    /// Pre-computed map of instantiation stub symbols → whether they need the
+    /// chaos_generic_context parameter. Uses union semantics: if ANY method
+    /// sharing a stub needs context, the stub is emitted with context.
+    /// Populated during Create(), used by BuildMethodDeclarations (header)
+    /// and vtable declaration sections (page files) to avoid C2733.
+    /// </summary>
+    private Dictionary<string, bool> _stubNeedsContext = new(StringComparer.Ordinal);
+
+    /// <summary>
     /// Builds the sharing canonical map by grouping generic methods by their open
     /// definition and classifying type arguments as reference type (SHARED) or
     /// value type (SPECIALIZED).

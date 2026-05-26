@@ -1,7 +1,7 @@
-"""Benchmark stage runner — native AOT/JIT + managed (.NET/Mono) performance.
+"""Benchmark stage runner — native AOT/JIT + managed (.NET) performance.
 
 Runs entry.exe --benchmark and entry-jit.exe --benchmark for all native methods.
-Also runs managed benchmarks (net8-jit, net10-jit, mono) via managed harness generation.
+Also runs managed benchmarks (net8-jit, net10-jit) via managed harness generation.
 Managed results are soft-fail: they contribute data to perf store but don't
 gate the pipeline stage status.
 """
@@ -19,7 +19,7 @@ from typing import Any
 from verification.orchestration.context import FamilyContext, StageResult
 from verification.analysis.perf_store import save_managed_benchmark_records
 
-_MANAGED_TECHNOLOGIES = ["net8-jit", "net10-jit", "mono"]
+_MANAGED_TECHNOLOGIES = ["net8-jit", "net10-jit"]
 
 
 # ── Managed benchmark technology definitions ─────────────────────────────
@@ -27,7 +27,6 @@ _MANAGED_TECHNOLOGIES = ["net8-jit", "net10-jit", "mono"]
 TECHNOLOGY_DEFS: dict[str, dict[str, Any]] = {
     "net8-jit":  {"runner": "dotnet-run", "tfm": "net8.0"},
     "net10-jit": {"runner": "dotnet-run", "tfm": "net10.0"},
-    "mono":      {"runner": "mono",       "tfm": "net48"},
 }
 
 
@@ -51,27 +50,6 @@ def _detect_frameworks() -> list[str]:
         return []
 
 
-def _mono_path() -> str | None:
-    """Find the mono executable path.
-
-    Checks PATH first, then falls back to standard Windows install locations.
-    """
-    path = shutil.which("mono")
-    if path:
-        return path
-    for candidate in (
-        r"C:\Program Files\Mono\bin\mono.exe",
-        r"C:\Program Files (x86)\Mono\bin\mono.exe",
-    ):
-        if Path(candidate).exists():
-            return candidate
-    return None
-
-
-def _mono_available() -> bool:
-    return _mono_path() is not None
-
-
 def detect_managed_runtimes(
     requested: list[str] | None = None,
 ) -> tuple[list[str], list[str]]:
@@ -80,7 +58,6 @@ def detect_managed_runtimes(
         requested = list(TECHNOLOGY_DEFS.keys())
 
     frameworks = _detect_frameworks()
-    mono_ok = _mono_available()
 
     available: list[str] = []
     unavailable: list[str] = []
@@ -89,16 +66,8 @@ def detect_managed_runtimes(
             unavailable.append(alias)
             continue
         spec = TECHNOLOGY_DEFS[alias]
-        if spec["runner"] == "dotnet-run":
-            if spec["tfm"] in frameworks:
-                available.append(alias)
-            else:
-                unavailable.append(alias)
-        elif spec["runner"] == "mono":
-            if mono_ok:
-                available.append(alias)
-            else:
-                unavailable.append(alias)
+        if spec["tfm"] in frameworks:
+            available.append(alias)
         else:
             unavailable.append(alias)
 
@@ -1008,7 +977,7 @@ def _generate_managed_harness(
         '  <PropertyGroup>\n'
         '    <OutputType>Exe</OutputType>\n'
         '    <StartupObject>ManagedBenchmarkHarness</StartupObject>\n'
-        '    <TargetFrameworks>net8.0;net10.0;net48</TargetFrameworks>\n'
+        '    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>\n'
         '    <Nullable>enable</Nullable>\n'
         '    <ImplicitUsings>enable</ImplicitUsings>\n',
     ]
@@ -1072,6 +1041,7 @@ def _generate_managed_harness(
                 f'                    Iterations = {iterations},\n'
                 '                    IsBodyReal = false,\n'
                 '                    IsException = false,\n'
+                '                    AllocatedBytes = 0,\n'
                 '                });\n'
                 '            }'
             )
@@ -1088,6 +1058,7 @@ def _generate_managed_harness(
             f'{body}\n'
             '                }\n'
             '                double bestMs = double.MaxValue;\n'
+            '                long allocBefore = GC.GetAllocatedBytesForCurrentThread();\n'
             '                for (int r = 0; r < 3; r++) {\n'
             '                    var sw = System.Diagnostics.Stopwatch.StartNew();\n'
             f'                    for (int i = 0; i < {iterations}; i++) {{\n'
@@ -1097,6 +1068,7 @@ def _generate_managed_harness(
             '                    double ms = sw.Elapsed.TotalMilliseconds;\n'
             '                    if (ms < bestMs) bestMs = ms;\n'
             '                }\n'
+            '                long allocAfter = GC.GetAllocatedBytesForCurrentThread();\n'
             '                results.Add(new MethodResult {\n'
             f'                    MethodIndex = {idx},\n'
             f'                    MethodSubjectId = "{mid}",\n'
@@ -1104,6 +1076,7 @@ def _generate_managed_harness(
             f'                    Iterations = {iterations},\n'
             '                    IsBodyReal = true,\n'
             '                    IsException = threw,\n'
+            '                    AllocatedBytes = allocAfter - allocBefore,\n'
             '                });\n'
             '            }'
         )
@@ -1272,6 +1245,7 @@ def _generate_managed_harness(
         '        public int Iterations { get; set; }\n',
         '        public bool IsBodyReal { get; set; }\n',
         '        public bool IsException { get; set; }\n',
+        '        public long AllocatedBytes { get; set; }\n',
         '    }\n',
         '\n',
         helpers_code,
@@ -1302,7 +1276,8 @@ def _generate_managed_harness(
         'r.ElapsedMilliseconds.ToString("0.000", System.Globalization.CultureInfo.InvariantCulture)).Append(",");\n',
         '            sb.Append("\\"iterations\\":").Append(r.Iterations).Append(",");\n',
         '            sb.Append("\\"isBodyReal\\":").Append(r.IsBodyReal ? "true" : "false").Append(",");\n',
-        '            sb.Append("\\"isException\\":").Append(r.IsException ? "true" : "false");\n',
+        '            sb.Append("\\"isException\\":").Append(r.IsException ? "true" : "false").Append(",");\n',
+        '            sb.Append("\\"allocatedBytes\\":").Append(r.AllocatedBytes);\n',
         '            sb.Append("}");\n',
         '        }\n',
         '        sb.Append("]}");\n',
@@ -1372,196 +1347,6 @@ def _run_dotnet_benchmark(
         return {"method_results": [], "error": f"json parse failed: {e}"}
     except Exception as e:
         return {"method_results": [], "error": str(e)}
-
-
-def _run_mono_benchmark(
-    harness_dir: Path,
-    tfm: str,
-    iterations: int = 100000,
-    slug: str = "",
-    assembly: str = "",
-    method_subject_ids: list[str] | None = None,
-) -> dict[str, Any]:
-    """Build the harness for net48, then run with Mono.
-
-    If the build fails and method_subject_ids are provided, attempts to filter
-    out net48-incompatible methods and retry.
-    """
-    csproj = harness_dir / "ManagedBenchmarkHarness.csproj"
-    # With -r win-x86, the output goes to bin/Release/net48/win-x86/
-    build_dir = harness_dir / "bin" / "Release" / tfm / "win-x86"
-    exe_path = build_dir / "ManagedBenchmarkHarness.exe"
-    cs_path = harness_dir / "ManagedBenchmarkHarness.cs"
-
-    print("  [managed-runner] Running Mono benchmark...")
-    try:
-        r = subprocess.run(
-            ["dotnet", "build", str(csproj), "-f", tfm, "--configuration", "Release", "-r", "win-x86"],
-            capture_output=True, text=True, timeout=120,
-        )
-        if r.returncode != 0:
-            log_path = harness_dir / "mono_build_stderr.log"
-            log_path.write_text(r.stderr or "(empty)", encoding="utf-8")
-            stdout_path = harness_dir / "mono_build_stdout.log"
-            stdout_path.write_text(r.stdout or "(empty)", encoding="utf-8")
-            print(f"  [managed-runner] Mono BUILD FAILED -> stderr={log_path}, stdout={stdout_path}")
-            print(f"  [managed-runner] stderr: {r.stderr[:200]}")
-            print(f"  [managed-runner] stdout (first 500): {r.stdout[:500]}")
-
-            # Retry: filter out net48-incompatible methods
-            if method_subject_ids:
-                excluded = _parse_build_error_method_indices(r.stderr + "\n" + r.stdout, cs_path)
-                if excluded:
-                    compatible = [m for i, m in enumerate(method_subject_ids) if i not in excluded]
-                    print(f"  [managed-runner] Retrying with {len(compatible)}/{len(method_subject_ids)} methods (excluded indices: {sorted(excluded)})")
-                    _generate_managed_harness(harness_dir, slug, assembly, compatible, iterations)
-                    r2 = subprocess.run(
-                        ["dotnet", "build", str(csproj), "-f", tfm, "--configuration", "Release", "-r", "win-x86"],
-                        capture_output=True, text=True, timeout=120,
-                    )
-                    if r2.returncode == 0:
-                        # Rebuild succeeded — run with compatible methods
-                        return _run_mono_after_build(harness_dir, exe_path, tfm, iterations, excluded, method_subject_ids)
-
-            return {"method_results": [], "error": f"build failed: {r.stderr[:300]}"}
-
-        if not exe_path.exists():
-            return {"method_results": [], "error": f"exe not found at {exe_path}"}
-
-        mono_exe = _mono_path()
-        if not mono_exe:
-            return {"method_results": [], "error": "mono not found"}
-
-        return _run_mono_exec(mono_exe, exe_path, harness_dir, tfm, iterations)
-
-    except subprocess.TimeoutExpired:
-        return {"method_results": [], "error": "timeout (300s)"}
-    except json.JSONDecodeError as e:
-        log_path = harness_dir / "mono_stdout.json_debug.log"
-        log_path.write_text(r.stdout[:5000] if hasattr(r, 'stdout') and r.stdout else "(empty)", encoding="utf-8")
-        print(f"  [managed-runner] Mono JSON parse failed: {e}")
-        print(f"  [managed-runner] Raw output -> {log_path}")
-        return {"method_results": [], "error": f"json parse failed: {e}"}
-    except Exception as e:
-        return {"method_results": [], "error": str(e)}
-
-
-def _run_mono_exec(
-    mono_exe: str, exe_path: Path, harness_dir: Path, tfm: str, iterations: int,
-) -> dict[str, Any]:
-    """Execute mono and parse results."""
-    start = time.perf_counter()
-    r = subprocess.run(
-        [mono_exe, str(exe_path)],
-        capture_output=True, text=True, timeout=300,
-    )
-    elapsed = time.perf_counter() - start
-    if r.returncode != 0:
-        log_path = harness_dir / "mono_stderr.log"
-        log_path.write_text(r.stderr or "(empty)", encoding="utf-8")
-        stdout_path = harness_dir / "mono_stdout.log"
-        stdout_path.write_text(r.stdout or "(empty)", encoding="utf-8")
-        print(f"  [managed-runner] Mono FAILED (rc={r.returncode}) -> {log_path}")
-        print(f"  [managed-runner] stderr preview: {r.stderr[:500]}")
-        if r.stderr and "System.Text.Json" in r.stderr:
-            print(f"  [managed-runner] DETECTED: System.Text.Json runtime issue")
-        return {"method_results": [], "error": f"mono exit_code={r.returncode}: {r.stderr[:300]}"}
-
-    data = json.loads(r.stdout)
-    method_results = data.get("results", [])
-
-    for mr in method_results:
-        ms = mr.get("elapsedMilliseconds", 0)
-        it = mr.get("iterations", iterations)
-        mr["opsPerSecond"] = (it / (ms / 1000.0)) if ms > 0 else 0.0
-        mr["status"] = "completed" if (mr.get("isBodyReal", False) or mr.get("opsPerSecond", 0) > 0) else "error"
-        mr["methodIndex"] = mr.get("methodIndex", 0)
-
-    return {
-        "method_results": method_results,
-        "runtime_info": {"tfm": tfm, "runner": "mono"},
-        "duration_s": round(elapsed, 2),
-    }
-
-
-def _run_mono_after_build(
-    harness_dir: Path, exe_path: Path, tfm: str, iterations: int,
-    excluded: set[int], all_method_subject_ids: list[str],
-) -> dict[str, Any]:
-    """Run mono after successful filtered build, adding back skipped methods."""
-    mono_exe = _mono_path()
-    if not mono_exe:
-        return {"method_results": [], "error": "mono not found"}
-
-    result = _run_mono_exec(mono_exe, exe_path, harness_dir, tfm, iterations)
-
-    if "error" in result:
-        return result
-
-    # Remap filtered method indices back to original indices
-    filtered_results: list[dict] = result.get("method_results", [])
-    original_indices = [i for i in range(len(all_method_subject_ids)) if i not in excluded]
-    remapped: list[dict] = []
-    for mr in filtered_results:
-        fi = mr.get("methodIndex", 0)
-        if fi < len(original_indices):
-            mr["methodIndex"] = original_indices[fi]
-            mr["methodSubjectId"] = all_method_subject_ids[original_indices[fi]]
-        remapped.append(mr)
-
-    # Add back excluded methods as unsupported
-    for idx in sorted(excluded):
-        remapped.append({
-            "methodIndex": idx,
-            "methodSubjectId": all_method_subject_ids[idx],
-            "elapsedMilliseconds": 0.0,
-            "iterations": iterations,
-            "isBodyReal": False,
-            "isException": False,
-            "opsPerSecond": 0.0,
-            "status": "skipped_unsupported_api",
-        })
-
-    result["method_results"] = remapped
-    return result
-
-
-def _parse_build_error_method_indices(stderr: str, cs_path: Path) -> set[int]:
-    """Parse build stderr/stdout to find which method indices have compilation errors.
-
-    Maps error line numbers back to method indices using H_N helper definitions
-    in the generated .cs file (e.g., ``static bool H_5(int i)`` at line 197).
-    """
-    error_lines: set[int] = set()
-    for m in re.finditer(r'\.cs\((\d+),', stderr):
-        error_lines.add(int(m.group(1)))
-    if not error_lines:
-        return set()
-
-    if not cs_path.exists():
-        return set()
-
-    src_lines = cs_path.read_text(encoding="utf-8", errors="replace").splitlines()
-    # Map: line number -> method index for ``static bool H_N(`` definitions
-    def_lines: dict[int, int] = {}
-    for i, line in enumerate(src_lines, 1):
-        mm = re.match(r'\s*static bool (H_\d+)\(', line)
-        if mm:
-            idx = int(mm.group(1)[2:])  # H_5 -> 5
-            def_lines[i] = idx
-
-    if not def_lines:
-        return set()
-
-    sorted_defs = sorted(def_lines.keys())
-    excluded: set[int] = set()
-    for err_line in error_lines:
-        for def_line in reversed(sorted_defs):
-            if def_line <= err_line:
-                excluded.add(def_lines[def_line])
-                break
-
-    return excluded
 
 
 # ── Managed benchmark entry point ───────────────────────────────────────
@@ -1639,12 +1424,6 @@ def run_managed_benchmark(
 
     if spec["runner"] == "dotnet-run":
         result = _run_dotnet_benchmark(harness_dir, spec["tfm"], iterations)
-    elif spec["runner"] == "mono":
-        result = _run_mono_benchmark(
-            harness_dir, spec["tfm"], iterations,
-            slug=ctx.slug, assembly=ctx.assembly,
-            method_subject_ids=mids,
-        )
     else:
         return StageResult(
             stage=f"managed_{technology}", status="error",

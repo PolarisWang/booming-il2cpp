@@ -130,13 +130,16 @@ def save_managed_benchmark_records(
     technology: str,
     method_results: list[dict[str, Any]],
 ) -> None:
-    """Save managed runner (.NET JIT / MONO) results to JSONL."""
+    """Save managed runner (.NET JIT) results to JSONL."""
     sdir = _store_dir(ctx)
     path = sdir / "benchmark-history.jsonl"
     common = _common_fields(ctx)
     method_subject_ids = _load_method_subject_ids(ctx)
 
     for i, res in enumerate(method_results):
+        alloc_bytes = res.get("allocatedBytes", 0)
+        iterations = res.get("iterations", 100000)
+        alloc_per_op = res.get("allocPerOp", (alloc_bytes / max(iterations, 1)) if alloc_bytes else 0)
         record = {
             **common,
             "technology": technology,
@@ -145,6 +148,8 @@ def save_managed_benchmark_records(
             "metrics": {
                 "elapsedMilliseconds": res.get("elapsedMilliseconds", 0),
                 "opsPerSecond": res.get("opsPerSecond", 0),
+                "allocatedBytes": res.get("allocatedBytes", 0),
+                "allocPerOp": res.get("allocPerOp", 0),
             },
             "iterations": res.get("iterations", 100000),
             "status": res.get("status", "completed"),
@@ -356,6 +361,8 @@ def _save_benchmark_from_dict(ctx: FamilyContext, sd: dict[str, Any],
                         "elapsedMilliseconds": res.get("elapsedMilliseconds", 0),
                         "opsPerSecond": res.get("opsPerSecond", 0),
                         "calibratedMs": res.get("calibratedMs", 0),
+                        "allocatedBytes": res.get("allocatedBytes", 0),
+                        "allocPerOp": res.get("allocPerOp", 0),
                     },
                     "iterations": res.get("iterations", 100000),
                     "status": "completed" if "error" not in (res or {}) else "error",
@@ -382,6 +389,10 @@ def _save_benchmark_from_dict(ctx: FamilyContext, sd: dict[str, Any],
                 metrics["opsPerSecond"] = res["opsPerSecond"]
             if "postPatchNsPerOp" in res:
                 metrics["postPatchNsPerOp"] = res["postPatchNsPerOp"]
+            if "allocatedBytes" in res:
+                metrics["allocatedBytes"] = res["allocatedBytes"]
+            if "allocPerOp" in res:
+                metrics["allocPerOp"] = res["allocPerOp"]
             record = {
                 **common,
                 "technology": technology,

@@ -10,6 +10,13 @@
 #include <chaos/log.h>
 #include <chaos/profile.h>
 
+// Global log-output flag — defined (not extern) in chaos_runtime_core.lib so
+// that the linker produces exactly one instance.  All inline log_write() calls
+// in every prebuilt lib reference this single variable via the extern declaration
+// in <chaos/log.h>.  Set to true by verification entry points to redirect
+// diagnostic log output from stdout to stderr.
+bool chaos::il2cpp::common::log_internal::g_log_use_stderr = false;
+
 #include "memory_domain.h"
 #include "gc_region.h"
 #include "gc_old_gen.h"

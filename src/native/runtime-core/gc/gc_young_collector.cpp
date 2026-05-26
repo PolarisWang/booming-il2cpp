@@ -16,6 +16,7 @@
 #include "gc_scheduler.h"
 #include "gc_stats.h"
 #include "gc_heap.h"
+#include <thread_state.h>
 
 #include <chrono>
 #include <cstdint>
@@ -404,6 +405,37 @@ YoungCollectionResult GcYoungCollection(bool force_skip_gen1) {
             result.bfs_worklist = static_cast<void**>(tls_bfs_worklist);
             result.bfs_worklist_capacity = tls_bfs_capacity;
             result.bfs_worklist_count = 0;
+        }
+    }
+
+    // ── Phase 0: Conservative stack root scan ──
+    // Scan only the current thread's stack for nursery pointers to fix up
+    // stack-local GC handles after promotion.  This runs inline with the
+    // mutator thread that triggered the allocation (not at a STW safepoint),
+    // so only the current thread's stack is guaranteed consistent.
+    // We do NOT use GcScanAllThreadRoots here because that function applies
+    // a g_heap_base filter that may not cover nursery region addresses —
+    // nursery is allocated via RegionManager with separate ranges that can
+    // fall below the old-gen heap base.
+    {
+        CHAOS_IL2CPP_PROFILE_SCOPE("GC_Phase0_StackRoots");
+        auto* current_thread = threading::GetCurrentThread();
+        if (current_thread != nullptr) {
+            char* scan_start = static_cast<char*>(current_thread->stack_limit);
+            char* scan_end   = static_cast<char*>(current_thread->stack_base);
+            uintptr_t start_aligned = (reinterpret_cast<uintptr_t>(scan_start) + sizeof(void*) - 1)
+                & ~static_cast<uintptr_t>(sizeof(void*) - 1);
+            uintptr_t end_aligned = reinterpret_cast<uintptr_t>(scan_end)
+                & ~static_cast<uintptr_t>(sizeof(void*) - 1);
+            for (uintptr_t slot = start_aligned; slot < end_aligned; slot += sizeof(void*)) {
+                void* val = *reinterpret_cast<void**>(slot);
+                if (val != nullptr && IsInNursery(val)) {
+                    void* tenured = GcScavengeObjectKnownNursery(val, &result);
+                    if (tenured != nullptr && tenured != val) {
+                        *reinterpret_cast<void**>(slot) = tenured;
+                    }
+                }
+            }
         }
     }
 

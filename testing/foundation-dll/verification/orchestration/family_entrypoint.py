@@ -930,6 +930,21 @@ def generate_runtime_entry(*, is_jit: bool = False) -> str:
 #include <cstring>
 #include <chrono>
 #include <cstdint>
+#include <cinttypes>
+
+#if defined(_WIN32)
+#define NOMINMAX
+#include <Windows.h>
+#endif
+
+// Define the log-output redirection flag declared extern in <chaos/log.h>.
+// The inline log_write() in log.h references g_log_use_stderr to decide
+// whether diagnostic log output goes to stdout or stderr.  The prebuilt
+// chaos_runtime_core.lib (SDK) does not currently export this symbol, so
+// we define it here in the entry point TU to satisfy the linker.
+namespace chaos { namespace il2cpp { namespace common { namespace log_internal {
+bool g_log_use_stderr = false;
+}}}}
 
 #include <chaos/config.h>
 #include <chaos/native_types.h>
@@ -961,10 +976,16 @@ extern "C" void ChaosRegisterGcLayouts();
 // Default arg thunks (defined in native-aot.generated.cpp)
 extern "C" void (*kDefaultArgThunks[])() noexcept;
 
+// Benchmark result struct (must match verification_dispatch.generated.cpp)
+struct BenchmarkResult {
+    double elapsed_ms;
+    int64_t allocated_bytes;
+};
+
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll();
-extern "C" double RunBenchmark(int entry_index, int iterations);
+extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);
 extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll();
-extern "C" double RunHotpatchBenchmark(int entry_index, int iterations);
+extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations);
 
 extern const uint8_t kPatchData[];
 extern const size_t kPatchDataSize;
@@ -1023,17 +1044,20 @@ static int RunFactJsonMode() {
 }
 
 static int RunBenchmarkMode(int entry_index, int iterations) {
-    double elapsed_ms = RunBenchmark(entry_index, iterations);
-    if (elapsed_ms < 0.0) {
+    auto result = RunBenchmark(entry_index, iterations);
+    if (result.elapsed_ms < 0.0) {
         printf("{\\"elapsedMilliseconds\\":-1.0,\\"error\\":\\"invalid index\\"}\\n");
         return 1;
     }
-    double ns_per_op = (elapsed_ms * 1e6) / iterations;
-    double ops_per_sec = (iterations / elapsed_ms) * 1000.0;
+    double ns_per_op = (result.elapsed_ms * 1e6) / iterations;
+    double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
+    double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
     printf(
         "{\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
-        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d}\\n",
-        elapsed_ms, elapsed_ms, ops_per_sec, iterations);
+        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d,"
+        "\\"allocatedBytes\\":%" PRId64 ",\\"allocPerOp\\":%.1f}\\n",
+        result.elapsed_ms, result.elapsed_ms, ops_per_sec, iterations,
+        result.allocated_bytes, alloc_per_op);
     std::fflush(stdout);
     return 0;
 }
@@ -1047,7 +1071,7 @@ static int RunHotupdateMode() {
         int i = kSubjectSlotMap[si];
         CHAOS_EH_TRY
             CHAOS_IL2CPP_INT32 result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, nullptr);
+                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
             baseline_values[si] = result;
             baseline_ok[si] = true;
         CHAOS_EH_CATCH_BEGIN
@@ -1063,7 +1087,7 @@ static int RunHotupdateMode() {
         bool patched_ok = false;
         CHAOS_EH_TRY
             patched_result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, nullptr);
+                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
             patched_ok = true;
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
@@ -1083,7 +1107,7 @@ static int RunHotupdateMode() {
         int i = kSubjectSlotMap[si];
         CHAOS_EH_TRY
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, nullptr);
+                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
             revert_passed++;
         CHAOS_EH_CATCH_BEGIN
             all_revert = false;
@@ -1106,22 +1130,38 @@ static int RunMicrobenchMode() {
 }
 
 static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
-    double elapsed_ms = RunHotpatchBenchmark(entry_index, iterations);
-    if (elapsed_ms < 0.0) {
+    auto result = RunHotpatchBenchmark(entry_index, iterations);
+    if (result.elapsed_ms < 0.0) {
         printf("{\\"elapsedMilliseconds\\":-1.0,\\"error\\":\\"invalid index\\"}\\n");
         return 1;
     }
-    double ops_per_sec = (iterations / elapsed_ms) * 1000.0;
+    double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
+    double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
     printf(
         "{\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
-        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d}\\n",
-        elapsed_ms, elapsed_ms, ops_per_sec, iterations);
+        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d,"
+        "\\"allocatedBytes\\":%" PRId64 ",\\"allocPerOp\\":%.1f}\\n",
+        result.elapsed_ms, result.elapsed_ms, ops_per_sec, iterations,
+        result.allocated_bytes, alloc_per_op);
     std::fflush(stdout);
     return 0;
 }
 
 int main(int argc, char* argv[]) {
 __JIT_CALL__
+
+    // Redirect diagnostic log output to stderr so that machine-consumed
+    // protocol output (benchmark JSON, fact results) on stdout stays clean.
+    // The verification pipeline parses stdout for JSON — log messages on
+    // stdout would pollute the protocol stream and cause parse failures.
+    chaos::il2cpp::common::log_internal::g_log_use_stderr = true;
+
+    // Disable BGC for this short-lived verification process.  BGC concurrent
+    // mark/sweep races with tight allocation loops in benchmark/fact dispatch,
+    // causing sporadic access violations.  For a process that runs for < 30s
+    // and allocates heavily, STW collections are more predictable and avoid
+    // the known BGC concurrency races (see gc_old_gen.cpp BgcSweep Phase 4b).
+    chaos::il2cpp::runtime_core::g_bgc_enabled = false;
 
     // Initialize ChaOS runtime: resolves kChaosExternalRuntimeFnTable entries
     // (bridge/import stubs) and registers the AOT module so that HotpatchNameRegistry
@@ -1131,6 +1171,8 @@ __JIT_CALL__
     // NOTE: heap-allocated and intentionally leaked.  RuntimeShutdown() + static
     // destruction (BgcController threads) race on exit — for a short-lived
     // verification process it is safe to let the OS reclaim everything.
+    // TerminateProcess at the shutdown label kills all threads immediately
+    // without running static destructors, avoiding the race entirely.
     auto* chaos_host = new ChaosRuntimeHost();
     if (!chaos_host->Initialize("verification-entry")) {
         std::fprintf(stderr, "FATAL: ChaosRuntimeHost::Initialize failed\\n");
@@ -1145,28 +1187,34 @@ __JIT_CALL__
     }
     ChaosRegisterGcLayouts();
 
-    if (argc < 2) { int ret = RunFactMode(); _exit(ret); }
+    int ret = 0;
+    if (argc < 2) { ret = RunFactMode(); goto shutdown; }
 
-    if (std::strcmp(argv[1], "--fact-json") == 0) { int ret = RunFactJsonMode(); _exit(ret); }
+    if (std::strcmp(argv[1], "--fact-json") == 0) { ret = RunFactJsonMode(); goto shutdown; }
 
     if (std::strcmp(argv[1], "--benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --benchmark <index> <iterations>\\n"); return 1; }
-        int ret = RunBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
-        _exit(ret);
+        ret = RunBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        goto shutdown;
     }
 
-    if (std::strcmp(argv[1], "--hotupdate") == 0) { int ret = RunHotupdateMode(); _exit(ret); }
+    if (std::strcmp(argv[1], "--hotupdate") == 0) { ret = RunHotupdateMode(); goto shutdown; }
 
     if (std::strcmp(argv[1], "--hotupdate-and-benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --hotupdate-and-benchmark <index> <iterations>\\n"); return 1; }
-        int ret = RunHotupdateBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
-        _exit(ret);
+        ret = RunHotupdateBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        goto shutdown;
     }
 
-    if (std::strcmp(argv[1], "--microbench") == 0) { int ret = RunMicrobenchMode(); _exit(ret); }
+    if (std::strcmp(argv[1], "--microbench") == 0) { ret = RunMicrobenchMode(); goto shutdown; }
 
     printf("Unknown flag: %s\\n", argv[1]);
-    return 1;
+    ret = 1;
+
+shutdown:
+    std::fflush(stdout);
+    TerminateProcess(GetCurrentProcess(), static_cast<DWORD>(ret));
+    // unreachable
 }
 '''
     return template.replace('__JIT_DECL__', jit_decl).replace('__JIT_CALL__', jit_call)
