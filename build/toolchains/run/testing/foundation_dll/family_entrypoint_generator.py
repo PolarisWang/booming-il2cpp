@@ -1237,6 +1237,7 @@ def generate_runtime_entry(*, is_jit: bool = False) -> str:
 #include <cstring>
 #include <chrono>
 #include <cstdint>
+#include <cinttypes>
 
 #include <chaos/config.h>
 #include <chaos/native_types.h>
@@ -1275,11 +1276,17 @@ extern "C" void ChaosRegisterGcLayouts();
 // Default arg thunks (defined in native-aot.generated.cpp)
 extern "C" void (*kDefaultArgThunks[])() noexcept;
 
+// Benchmark result struct (must match verification_dispatch.generated.cpp)
+struct BenchmarkResult {
+    double elapsed_ms;
+    int64_t allocated_bytes;
+};
+
 // Defined in verification_dispatch.generated.cpp
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll();
-extern "C" double RunBenchmark(int entry_index, int iterations);
+extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);
 extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll();
-extern "C" double RunHotpatchBenchmark(int entry_index, int iterations);
+extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations);
 
 // Defined in runtime-patchdata.cpp
 extern const uint8_t kPatchData[];
@@ -1347,17 +1354,20 @@ static int RunFactJsonMode() {
 // ── Benchmark mode ─────────────────────────────────────────────────
 // Runs ChaosDispatchMethod in a tight timing loop, prints JSON.
 static int RunBenchmarkMode(int entry_index, int iterations) {
-    double elapsed_ms = RunBenchmark(entry_index, iterations);
-    if (elapsed_ms < 0.0) {
+    auto result = RunBenchmark(entry_index, iterations);
+    if (result.elapsed_ms < 0.0) {
         printf("{\\"elapsedMilliseconds\\":-1.0,\\"error\\":\\"invalid index\\"}\\n");
         return 1;
     }
-    double ns_per_op = (elapsed_ms * 1e6) / iterations;
-    double ops_per_sec = (iterations / elapsed_ms) * 1000.0;
+    double ns_per_op = (result.elapsed_ms * 1e6) / iterations;
+    double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
+    double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
     printf(
         "{\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
-        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d}\\n",
-        elapsed_ms, elapsed_ms, ops_per_sec, iterations);
+        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d,"
+        "\\"allocatedBytes\\":%" PRId64 ",\\"allocPerOp\\":%.1f}\\n",
+        result.elapsed_ms, result.elapsed_ms, ops_per_sec, iterations,
+        result.allocated_bytes, alloc_per_op);
     std::fflush(stdout);
     return 0;
 }
@@ -1452,16 +1462,19 @@ static int RunMicrobenchMode() {
 
 // ── Hotupdate-and-benchmark mode ───────────────────────────────────
 static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
-    double elapsed_ms = RunHotpatchBenchmark(entry_index, iterations);
-    if (elapsed_ms < 0.0) {
+    auto result = RunHotpatchBenchmark(entry_index, iterations);
+    if (result.elapsed_ms < 0.0) {
         printf("{\\"elapsedMilliseconds\\":-1.0,\\"error\\":\\"invalid index\\"}\\n");
         return 1;
     }
-    double ops_per_sec = (iterations / elapsed_ms) * 1000.0;
+    double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
+    double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
     printf(
         "{\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
-        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d}\\n",
-        elapsed_ms, elapsed_ms, ops_per_sec, iterations);
+        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d,"
+        "\\"allocatedBytes\\":%" PRId64 ",\\"allocPerOp\\":%.1f}\\n",
+        result.elapsed_ms, result.elapsed_ms, ops_per_sec, iterations,
+        result.allocated_bytes, alloc_per_op);
     std::fflush(stdout);
     return 0;
 }

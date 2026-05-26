@@ -261,6 +261,23 @@ public sealed partial class NativeAotLoweringPlanner
     private HashSet<string>? _emittedValueTypeSubjectIds;
 
     /// <summary>
+    /// Full C++ struct body code for value types that have fields or _backing
+    /// members, captured during EmitObjectModelDeclarations. Used by
+    /// BuildTypeDeclarationsCode to emit struct definitions in the shared header
+    /// instead of bare typedefs, avoiding C2556/C2371 when the page file's object
+    /// model section also defines these types.
+    /// Null when no value type has a non-trivial struct body.
+    /// </summary>
+    private string? _valueTypeStructCode;
+
+    /// <summary>
+    /// Subject IDs of value types that have struct definitions in _valueTypeStructCode.
+    /// Types NOT in this set should use typedef CHAOS_IL2CPP_INT32 in the shared header
+    /// (they are enum-like types with no fields).
+    /// </summary>
+    private HashSet<string>? _valueTypeStructSubjectIds;
+
+    /// <summary>
     /// External runtime helper definitions captured during Create, used by
     /// BuildTypeDeclarationsCode to emit extern declarations in the shared header.
     /// </summary>
@@ -496,6 +513,21 @@ public sealed partial class NativeAotLoweringPlanner
             .ThenBy(m => m.SubjectId, StringComparer.Ordinal)
             .ToList();
 
+        // Pre-compute stubNeedsContext: for each method, determine if its
+        // instantiation stub needs the chaos_generic_context parameter.  Uses
+        // union semantics: if ANY method sharing a stub needs context, the stub
+        // gets context.  This avoids C2733 (extern "C" cannot be overloaded).
+        _stubNeedsContext.Clear();
+        foreach (var m in methodsForLowering)
+        {
+            var stub = TryGetInstantiationStubSymbol(m);
+            if (string.IsNullOrEmpty(stub)) continue;
+            if (_sharedContextSymbols.Contains(m.NativeSymbol))
+                _stubNeedsContext[stub] = true;
+            else if (!_stubNeedsContext.ContainsKey(stub))
+                _stubNeedsContext[stub] = false;
+        }
+
         // Augment lowering set with methods of types that implement COM interfaces.
         // These concrete implementations are referenced by vtable arrays for CCW dispatch
         // but may not be discovered by static call-graph reachability (interface dispatch).
@@ -676,7 +708,7 @@ public sealed partial class NativeAotLoweringPlanner
         // A2.4: Pre-scan for ldsfld→Enum::ToString() constant-folding patterns
         BuildEnumToStringFoldTable(methodsForLowering);
 
-        var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols);
+        var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols, _stubNeedsContext);
         _methodDeclarations = methodDeclarations;
         var methods = methodsForLowering
             .Select(method =>
@@ -1048,18 +1080,27 @@ extern ""C"" CHAOS_IL2CPP_INT32 {loweringPlan.NativeEntryFunctionName}(CHAOS_IL2
 
             hasAnyForwardDeclarations = true;
         }
-        // chaos_valuetype_* typedefs — these are opaque 32-bit value types in the
-        // managed ABI surface.  em emit typedef CHAOS_IL2CPP_INT32 (not forward
-        // declarations) because extern "C" functions returning these types by value
-        // need a complete POD type.  MSVC C2526 forbids extern "C" from returning
-        // incomplete or non-POD types.
-        // NOTE: In the object model section these types ARE fully defined, but the
-        // shared header is parsed before the object model section, so we provide
-        // the minimum viable type here.
+        // chaos_valuetype_* definitions — these are opaque 32-bit value types in the
+        // managed ABI surface.
+        // 1. Types with fields or _backing: emit struct definitions (from
+        //    _valueTypeStructCode) so sizeof and ABI are correct.
+        // 2. Types without fields (pure enums): emit typedef CHAOS_IL2CPP_INT32
+        //    for correct ABI (int32_t register passing, not empty-struct sizeof=1).
+        // Structs are NOT re-emitted in page file object model, avoiding C2556/C2371.
+        var vtCode = _valueTypeStructCode;
+        if (vtCode is { Length: > 0 })
+        {
+            sb.Append(vtCode);
+            hasAnyForwardDeclarations = true;
+        }
+        // Emit typedef for remaining value types (enum-like, no struct definition).
         if (_emittedValueTypeSubjectIds is { Count: > 0 })
         {
+            HashSet<string>? structSubjectIds = _valueTypeStructSubjectIds;
             foreach (var typeId in _emittedValueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
             {
+                if (structSubjectIds?.Contains(typeId) == true)
+                    continue; // already has struct definition above
                 sb.Append("typedef CHAOS_IL2CPP_INT32 ");
                 sb.Append(GetNativeValueTypeSymbol(typeId));
                 sb.AppendLine(";");

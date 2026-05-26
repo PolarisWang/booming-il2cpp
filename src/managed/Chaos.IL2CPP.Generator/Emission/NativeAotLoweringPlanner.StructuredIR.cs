@@ -155,10 +155,12 @@ public sealed partial class NativeAotLoweringPlanner
         {
             if (_depth <= 0)
             {
+                System.Console.Error.WriteLine($"DIAG: PopValue underflow depth={_depth} slotInfo.Cnt={_slotInfo.Count} intSlots={_intSlotCount} f64={_float64SlotCount} f32={_float32SlotCount}");
                 throw new InvalidOperationException("structured slot stack underflow.");
             }
 
             _depth--;
+            EnsureSlotInfoCapacity(_depth + 1);
             return _slotInfo[_depth].name;
         }
 
@@ -169,7 +171,14 @@ public sealed partial class NativeAotLoweringPlanner
                 return FormatStructuredSlotName(_depth);
             }
 
+            EnsureSlotInfoCapacity(_depth);
             return _slotInfo[_depth - 1].name;
+        }
+
+        private void EnsureSlotInfoCapacity(int required)
+        {
+            while (_slotInfo.Count < required)
+                _slotInfo.Add((FormatStructuredSlotName(_slotInfo.Count), SlotType.NativeInt));
         }
 
         public void Discard(int count = 1)
@@ -668,14 +677,10 @@ public sealed partial class NativeAotLoweringPlanner
             preConditionDepth = _activeStructuredSlotContext?.Depth ?? 0;
         }
 
-        // postConditionDepth will be set after the condition-effect computation below.
-        int postConditionDepth = preConditionDepth;
 
-        // Compute net eval-stack effect of condition instructions + terminator.
-        // When the structured IR reconstruction places values pushed by a
-        // predecessor CFG block outside the condition instruction list, the
-        // depth may be undercounted. We compensate by computing the required
-        // depth from the instructions themselves.
+                // Compute minimum required depth for condition instructions using
+        // the estimated push/pop counts. This compensates for values pushed
+        // by predecessor CFG blocks that the condition instructions consume.
         {
             int condPushes = 0, condPops = 0;
             foreach (var instr in ite.ConditionInstructions)
@@ -684,21 +689,16 @@ public sealed partial class NativeAotLoweringPlanner
                 condPops += EstimatePopCount(instr.Op);
             }
             int termPops = EstimateTerminatorPopCount(terminator.Op);
-            // net = (preDepth + condPushes - condPops - termPops) must be >= 0
-            // ⇒ minimum preDepth = condPops + termPops - condPushes
             int requiredDepth = Math.Max(0, condPops + termPops - condPushes);
             if (preConditionDepth < requiredDepth)
                 preConditionDepth = requiredDepth;
-
-            // Depth AFTER condition instructions + terminator have run.
-            // Both then-body and else-body execute at this depth, since the
-            // terminator leaves residual values on the eval stack that the
-            // branch bodies must see (e.g., ldsfld; dup; brtrue → brtrue pops
-            // only the dup copy, leaving the original ldsfld value for the
-            // else body's pop).
-            postConditionDepth = preConditionDepth + condPushes - condPops - termPops;
-            if (postConditionDepth < 0) postConditionDepth = 0;
         }
+
+        // Save preConditionDepth so we can restore it for the else/post-merge body.
+        // postConditionDepth is captured from ACTUAL depth after condition+terminator
+        // emission, since the estimation-based approach causes slot stack underflows
+        // for opcodes (ceq, cgt, clt, etc.) whose internal pops are not reflected by
+        // EstimatePushCount/EstimatePopCount.
         _activeStructuredSlotContext?.RestoreDepth(preConditionDepth);
 
         // Scan then/else bodies for ldloc slots referenced externally. When a stloc+ldloc
@@ -727,7 +727,8 @@ public sealed partial class NativeAotLoweringPlanner
             SlotType _cType = PeekSlotType();
             string _cSlot = ConsumeEvalStackValueExpression();
             ConsumeSlotType();
-            // Condition operand consumed — depth is back to preConditionDepth
+            // Consumed the condition operand; capture actual depth for else/post-merge body.
+            int postCondDepth = _activeStructuredSlotContext?.Depth ?? 0;
             string _condition = _cType switch
             {
                 SlotType.Float32 => branchOnNonZero
@@ -751,14 +752,14 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 builder.AppendLine(inner + "else");
                 builder.AppendLine(inner + "{");
-                _activeStructuredSlotContext?.RestoreDepth(postConditionDepth);
+                _activeStructuredSlotContext?.RestoreDepth(postCondDepth);
                 EmitStructuredIRNode(builder, ite.ElseBody, method, bodyIndent);
                 builder.AppendLine(inner + "}");
             }
 
             if (ite.PostMergeBody != null)
             {
-                _activeStructuredSlotContext?.RestoreDepth(postConditionDepth);
+                _activeStructuredSlotContext?.RestoreDepth(postCondDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
@@ -793,6 +794,8 @@ public sealed partial class NativeAotLoweringPlanner
             SlotType _cmpLType = PeekSlotType();
             string _cmpLExpr = ConsumeEvalStackValueExpression();
             ConsumeSlotType();
+            // Captured actual depth after comparison + terminator consumption
+            int postCondDepth = _activeStructuredSlotContext?.Depth ?? 0;
             string _cmpRight = _cmpRType switch
             {
                 SlotType.Float32 => $"ChaosLoadFloat32({_cmpRExpr})",
@@ -821,14 +824,14 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 builder.AppendLine(inner + "else");
                 builder.AppendLine(inner + "{");
-                _activeStructuredSlotContext?.RestoreDepth(postConditionDepth);
+                _activeStructuredSlotContext?.RestoreDepth(postCondDepth);
                 EmitStructuredIRNode(builder, ite.ElseBody, method, bodyIndent);
                 builder.AppendLine(inner + "}");
             }
 
             if (ite.PostMergeBody != null)
             {
-                _activeStructuredSlotContext?.RestoreDepth(postConditionDepth);
+                _activeStructuredSlotContext?.RestoreDepth(postCondDepth);
                 EmitStructuredIRNode(builder, ite.PostMergeBody, method, inner);
             }
 
@@ -976,6 +979,8 @@ public sealed partial class NativeAotLoweringPlanner
             SlotType _cmpLType = PeekSlotType();
             string _cmpLExpr = ConsumeEvalStackValueExpression();
             ConsumeSlotType();
+            // Captured actual depth after comparison + terminator consumption
+            int postCondDepth = _activeStructuredSlotContext?.Depth ?? 0;
             string _cmpRight = _cmpRType switch
             {
                 SlotType.Float32 => $"ChaosLoadFloat32({_cmpRExpr})",
@@ -1615,6 +1620,7 @@ public sealed partial class NativeAotLoweringPlanner
         _activeStructuredSlotContext = slotContext;
         _structuredSlotTypes.Clear();
         _structLocalSlots = IdentifyStructLocalSlots(instructions);
+        _floatLocalSlots = IdentifyFloatLocalSlots(instructions);
         try
         {
             EmitStructuredIRNode(builder, body!, method, "    ");
@@ -1624,6 +1630,7 @@ public sealed partial class NativeAotLoweringPlanner
             _activeStructuredSlotContext = previousSlotContext;
             _structuredSlotTypes.Clear();
             _structLocalSlots = null;
+            _floatLocalSlots = null;
         }
         return slotContext;
     }

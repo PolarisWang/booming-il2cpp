@@ -68,6 +68,7 @@ set(CHAOS_ENTRY_SOURCES
 set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"  # runtime_stubs for enum_stubs.h
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"  # runtime_stubs headers
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native"  # parent for bootstrap/bootstrap.h includes
@@ -83,7 +84,8 @@ set(CHAOS_ENTRY_INCLUDES
 add_executable(entry ${CHAOS_ENTRY_SOURCES})
 target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_compile_options(entry PRIVATE /EHa)
+target_compile_definitions(entry PRIVATE CHAOS_IL2CPP_CONFIG_CHECK)  # chaos-il2cpp config tier
 target_link_libraries(entry PRIVATE
     chaos::runtime
 )
-target_link_options(entry PRIVATE /FORCE:MULTIPLE)
+target_link_options(entry PRIVATE /FORCE:MULTIPLE /MAP)

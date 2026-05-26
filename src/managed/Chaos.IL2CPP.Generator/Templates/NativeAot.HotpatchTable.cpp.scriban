@@ -43,8 +43,8 @@ extern "C" HotpatchEntryV0 s_hotpatch_entries[{{ total_method_count }}] = {
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept { return s_hotpatch_entries; }
 extern "C" int32_t GetHotpatchEntryCount() noexcept { return {{ total_method_count }}; }
 
-// Module hotpatch bundle
-static constexpr HotpatchModuleV0 s_hotpatch_module = {
+// Module hotpatch bundle (extern linkage — referenced across page files)
+extern constexpr HotpatchModuleV0 s_hotpatch_module = {
     "{{ assembly_name_literal }}",
     s_hotpatch_types,
     {{ type_group_count }}u,

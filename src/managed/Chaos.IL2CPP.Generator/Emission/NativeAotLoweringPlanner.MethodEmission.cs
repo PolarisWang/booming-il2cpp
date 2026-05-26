@@ -50,18 +50,23 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private static IReadOnlyList<string> BuildMethodDeclarations(
         IReadOnlyList<AotCoreIrMethodArtifact> reachableMethods,
-        IReadOnlySet<string>? sharedContextSymbols = null)
+        IReadOnlySet<string>? sharedContextSymbols = null,
+        IReadOnlyDictionary<string, bool>? stubNeedsContext = null)
 	{
 		var declarations = new List<string>();
+		var emittedStubSymbols = new HashSet<string>(StringComparer.Ordinal);
 		foreach (AotCoreIrMethodArtifact reachableMethod in reachableMethods)
 		{
 			declarations.Add(FormatMethodDeclaration(reachableMethod, sharedContextSymbols));
 			string? text = TryGetInstantiationStubSymbol(reachableMethod);
-			if (!string.IsNullOrEmpty(text))
+			if (!string.IsNullOrEmpty(text) && emittedStubSymbols.Add(text))
 			{
+				bool needsContext = stubNeedsContext is not null
+		    ? stubNeedsContext.TryGetValue(text, out bool nc) && nc
+		    : sharedContextSymbols?.Contains(reachableMethod.NativeSymbol) == true;
 				declarations.Add(FormatMethodDeclaration(text, reachableMethod.ReturnAbi,
                     GetMethodAbiParameterSlots(reachableMethod),
-                    sharedContextSymbols?.Contains(reachableMethod.NativeSymbol) == true));
+                    needsContext));
 			}
 		}
 		return declarations;
@@ -81,10 +86,10 @@ public sealed partial class NativeAotLoweringPlanner
 
 		IReadOnlyList<AotCoreIrAbiSlotArtifact> methodAbiParameterSlots = GetMethodAbiParameterSlots(method);
 
-		// Determine if this stub forwards to a shared canonical body that needs
-		// the chaos_generic_context parameter for runtime type resolution.
-		bool needsContext = _sharedContextSymbols.Count > 0 &&
-		                    _genericSharingCanonicalMap.ContainsKey(method.SubjectId);
+		// Determine if this stub needs the chaos_generic_context parameter.
+		// Uses the pre-computed _stubNeedsContext map (union semantics) to
+		// match the header declaration and avoid C2733.
+		bool needsContext = _stubNeedsContext.TryGetValue(text, out bool nc) && nc;
 
 		string paramSig = FormatAbiSlotParameterSignature(methodAbiParameterSlots);
 		if (needsContext)

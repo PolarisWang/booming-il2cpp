@@ -25,6 +25,11 @@
 
 namespace chaos::il2cpp::runtime_core {
 
+// Default: BGC enabled.  Verification/benchmark entrypoints may set to false
+// before RuntimeInit() to disable BGC for short-lived processes where the
+// concurrency race is not desired.
+bool g_bgc_enabled = true;
+
 // ── Global state ─────────────────────────────────────────────────────
 
 thread_local int tls_satb_buffer_index = -1;
@@ -53,11 +58,24 @@ BgcController::~BgcController() {
 void BgcController::Start() {
     if (bgc_running_.exchange(true, std::memory_order_acq_rel))
         return;
+    bgc_thread_started_.store(false, std::memory_order_release);
     bgc_thread_ = std::thread(&BgcController::BgcThreadMain, this);
 
     // Start dedicated finalizer thread.
     if (!finalizer_running_.exchange(true, std::memory_order_acq_rel)) {
+        finalizer_thread_started_.store(false, std::memory_order_release);
         finalizer_thread_ = std::thread(&BgcController::FinalizerThreadMain, this);
+    }
+
+    // Wait for both threads to complete their startup (RegisterThread +
+    // EnterPreemptiveMode) before returning.  Without this barrier,
+    // concurrent dispatch (benchmark loops, fact-json) races with thread
+    // initialization, causing sporadic segfaults (~20-40% failure rate).
+    while (!bgc_thread_started_.load(std::memory_order_acquire)) {
+        std::this_thread::yield();
+    }
+    while (!finalizer_thread_started_.load(std::memory_order_acquire)) {
+        std::this_thread::yield();
     }
 }
 
@@ -811,6 +829,9 @@ void BgcController::BgcThreadMain() {
     threading::RegisterThread(bgc_thread_id, nullptr);
     threading::EnterPreemptiveMode();
 
+    // Signal Start() that BGC thread startup is complete.
+    bgc_thread_started_.store(true, std::memory_order_release);
+
     while (bgc_running_.load(std::memory_order_acquire)) {
         // Wait for a start request.  Uses condition_variable for event-driven
         // wake-up (P1-4: replaces sleep_for polling).
@@ -1139,6 +1160,9 @@ void BgcController::FinalizerThreadMain() noexcept {
     threading::EnterPreemptiveMode();
     finalizer_thread_id_ = std::this_thread::get_id();
     CHAOS_IL2CPP_LOG_DEBUG("Finalizer", "thread_started id={0}", thread_id);
+
+    // Signal Start() that finalizer thread startup is complete.
+    finalizer_thread_started_.store(true, std::memory_order_release);
 
     while (finalizer_running_.load(std::memory_order_acquire)) {
         std::vector<TimedFinalizerEntry> queue;

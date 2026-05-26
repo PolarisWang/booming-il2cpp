@@ -53,7 +53,6 @@ def _load_method_subject_ids(ctx: FamilyContext) -> list[str]:
 TECHNOLOGY_NAMES: dict[str, str] = {
     "net8-jit": ".NET 8 JIT",
     "net10-jit": ".NET 10 JIT",
-    "mono": "Mono",
     "chaos-aot": "IL2CPP AOT",
     "chaos-jit": "IL2CPP JIT",
     "chaos-hu-aot": "HotUpdate AOT",

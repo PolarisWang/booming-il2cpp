@@ -697,7 +697,8 @@ public sealed partial class NativeAotLoweringPlanner
 					var stub = TryGetInstantiationStubSymbol(entry);
 					if (stub != null && externDeclared.Add(stub))
 					{
-						builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry)));
+						bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
+						builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
 					}
 				}
 				// Emit vtable array
@@ -1030,49 +1031,41 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 			builder.AppendLine("};");
 			builder.AppendLine();
 		}
-		foreach (string typeSubjectId2 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
+		// Value type struct definitions are now emitted into the shared header
+		// (BuildTypeDeclarationsCode) to avoid C2556/C2371. Types without managed
+		// fields (pure enums and _backing-only boxed types) use typedef only.
 		{
-			StringBuilder stringBuilder = builder;
-			StringBuilder stringBuilder16 = stringBuilder;
-			StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(7, 1, stringBuilder);
-			handler.AppendLiteral("struct ");
-			handler.AppendFormatted(GetNativeValueTypeSymbol(typeSubjectId2));
-			stringBuilder16.AppendLine(ref handler);
-			builder.AppendLine("{");
-			List<string> list2 = fieldsByDeclaringType.TryGetValue(typeSubjectId2, out var fields2) ? fields2 : s_emptyFieldList;
-			if (list2.Count == 0)
+			var vtBuilder = new System.Text.StringBuilder(4096);
+			var vtSubjectIds = new HashSet<string>(StringComparer.Ordinal);
+			foreach (string vtId in valueTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
 			{
-				if (hashSet3.Contains(typeSubjectId2))
+				var vtFields = fieldsByDeclaringType.TryGetValue(vtId, out var f2) ? f2 : s_emptyFieldList;
+				if (vtFields.Count == 0)
 				{
-					// This value type is boxed but has no explicit fields
-					// (e.g. an enum like DayOfWeek). Emit a default backing
-					// field with intptr_t converting ctor so that codegen
-					// boxing (which assigns intptr_t to .value) compiles.
-					string vtName = GetNativeValueTypeSymbol(typeSubjectId2);
-					builder.AppendLine("    CHAOS_IL2CPP_INTPTR _backing = 0;");
-					builder.AppendLine($"    {vtName}() = default;");
-					builder.AppendLine("    // cppcheck-suppress noExplicitConstructor");
-					builder.AppendLine($"    {vtName}(CHAOS_IL2CPP_INTPTR v) noexcept : _backing(v) {{}}");
+					// No managed fields: keep typedef CHAOS_IL2CPP_INT32 only.
+					// Covers pure enums and _backing-only boxed types, avoiding
+					// C2440 (reinterpret_cast on struct) and C2371 (typedef conflict).
+					continue;
 				}
-				builder.AppendLine("};");
-				builder.AppendLine();
-				continue;
+				vtSubjectIds.Add(vtId);
+				vtBuilder.Append("struct ");
+				vtBuilder.Append(GetNativeValueTypeSymbol(vtId));
+				vtBuilder.AppendLine();
+				vtBuilder.AppendLine("{");
+				foreach (string f in vtFields)
+				{
+					var cppType = MapFieldTypeToCppType(fieldTypeMap.GetValueOrDefault(f));
+					vtBuilder.Append("    ");
+					vtBuilder.Append(cppType);
+					vtBuilder.Append(" ");
+					vtBuilder.Append(GetNativeFieldMemberName(f));
+					vtBuilder.AppendLine(" = 0;");
+				}
+				vtBuilder.AppendLine("};");
+				vtBuilder.AppendLine();
 			}
-			foreach (string item9 in list2)
-			{
-				var cppType = MapFieldTypeToCppType(fieldTypeMap.GetValueOrDefault(item9));
-				stringBuilder = builder;
-				StringBuilder stringBuilder17 = stringBuilder;
-				handler = new StringBuilder.AppendInterpolatedStringHandler(23, 1, stringBuilder);
-				handler.AppendLiteral("    ");
-				handler.AppendFormatted(cppType);
-				handler.AppendLiteral(" ");
-				handler.AppendFormatted(GetNativeFieldMemberName(item9));
-				handler.AppendLiteral(" = 0;");
-				stringBuilder17.AppendLine(ref handler);
-			}
-			builder.AppendLine("};");
-			builder.AppendLine();
+			_valueTypeStructCode = vtBuilder.Length > 0 ? vtBuilder.ToString() : null;
+			_valueTypeStructSubjectIds = vtSubjectIds.Count > 0 ? vtSubjectIds : null;
 		}
 		foreach (string item10 in sortedHashSet3)
 		{

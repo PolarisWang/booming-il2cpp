@@ -219,7 +219,7 @@ def _build_benchmark_section(comparisons: dict[str, Any], stages_data: dict[str,
     tech_summary = ""
     if techs:
         tech_parts = []
-        for tech in ["chaos-aot", "chaos-jit", "chaos-hu-aot", "chaos-hu-jit", "net8-jit", "net10-jit", "mono"]:
+        for tech in ["chaos-aot", "chaos-jit", "chaos-hu-aot", "chaos-hu-jit", "net8-jit", "net10-jit"]:
             t = techs.get(tech)
             if t:
                 ops_str = _fmt_metric_value("averageOpsPerSecond", t["gm_ops"])
@@ -235,6 +235,86 @@ def _build_benchmark_section(comparisons: dict[str, Any], stages_data: dict[str,
 {rows}
     </div>
   </div>"""
+
+# ─────────────────────────────────────────────────────────────────────
+# Allocation table (per-method alloc/op across all runtimes)
+# ─────────────────────────────────────────────────────────────────────
+
+
+def _build_allocation_table(slug: str, stages_data: dict[str, Any] | None = None) -> str:
+    """Build per-method allocation comparison table (alloc/op across all runtimes).
+
+    Same layout as _build_benchmark_table but reads allocPerOp from metrics.
+    Shows '-' when no allocation data is available for a method/tech combination.
+    """
+    records = _load_perf_jsonl(slug, stages_data=stages_data)
+    if not records:
+        return ""
+
+    by_method: dict[int, dict[str, float]] = defaultdict(dict)
+    method_labels: dict[int, str] = {}
+
+    for r in records:
+        tech = r.get("technology", "")
+        idx = r.get("methodIndex", -1)
+        if idx < 0 or tech not in _BENCHMARK_TECH_ORDER:
+            continue
+
+        mid = r.get("methodSubjectId", "")
+        if idx not in method_labels:
+            method_labels[idx] = _short_method_label(mid)
+
+        metrics = r.get("metrics", {})
+        alloc = metrics.get("allocPerOp")
+        if alloc is not None:
+            by_method[idx][tech] = float(alloc)
+
+    if not by_method:
+        return ""
+
+    header_cells = '<th style="text-align:left;">方法</th>'
+    for tech in _BENCHMARK_TECH_ORDER:
+        label = _BENCHMARK_TECH_LABELS.get(tech, tech)
+        header_cells += f'<th style="text-align:right;"><div>{label}</div><div class="runtime-sub">alloc/op</div></th>'
+
+    body_rows = ""
+    for idx in sorted(by_method.keys()):
+        methods = by_method[idx]
+        label = method_labels.get(idx, f"#{idx}")
+
+        valid = [(t, v) for t, v in methods.items() if v >= 0]
+        highest_tech = max(valid, key=lambda x: x[1])[0] if len(valid) >= 2 else None
+        lowest_tech = min(valid, key=lambda x: x[1])[0] if len(valid) >= 2 else None
+
+        cells = f'<td>{_escape_html(label)}</td>'
+        for tech in _BENCHMARK_TECH_ORDER:
+            v = methods.get(tech)
+            if v is not None and v >= 0:
+                cls = ""
+                if lowest_tech and tech == lowest_tech:
+                    cls = ' cell-fastest'
+                elif highest_tech and tech == highest_tech:
+                    cls = ' cell-slowest'
+                if v >= 1000:
+                    val_str = f"{v:,.0f}"
+                elif v >= 1:
+                    val_str = f"{v:.1f}"
+                else:
+                    val_str = "0"
+                cells += f'<td class="{cls}">{val_str}</td>'
+            else:
+                cells += '<td class="cell-na">-</td>'
+        body_rows += f"<tr>{cells}</tr>"
+
+    return f"""  <div class="benchmark-table-wrap" style="margin-top:16px;">
+    <h4 class="section-title">内存分配 (alloc/op) 💠</h4>
+    <table class="benchmark-table">
+      <thead><tr>{header_cells}</tr></thead>
+      <tbody>{body_rows}</tbody>
+    </table>
+  </div>"""
+
+
 
 
 # ──────────────────────────────────────────────────────────────────────
@@ -451,6 +531,7 @@ def _build_family_card(f: dict[str, Any], index: int) -> str:
     cov_bar = _build_coverage_bar(coverage)
     benchmark_section = _build_benchmark_section(_compute_benchmark_comparisons(slug_raw, stages_data=stages), stages_data=stages)
     benchmark_table = _build_benchmark_table(slug_raw, stages_data=stages)
+    allocation_table = _build_allocation_table(slug_raw, stages_data=stages)
 
     return f"""\
 <div class="family-card" id="card-{index}" data-status="{status}">
@@ -474,6 +555,7 @@ def _build_family_card(f: dict[str, Any], index: int) -> str:
     {('<h4 style="font-size:0.85rem;color:#555;margin:12px 0 4px;">关键指标</h4><div class="metrics-grid">' + metrics_grid + '</div>') if metrics_grid and metrics_grid != '<div class="na-notice">暂无指标数据</div>' else ''}
     {benchmark_section}
     {benchmark_table}
+    {allocation_table}
   </div>
 </div>"""
 

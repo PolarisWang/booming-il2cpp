@@ -2731,12 +2731,12 @@ void MarkSweepOldGen::Collect(void (*root_callback)(void* obj, void* user_data),
                     }
                 }
                 if (should_pool) {
-                    // 100%-free normal page at STW safepoint: VirtualFree
-                    // instead of pooling.  All mutators are paused so no
-                    // concurrent free-list access is possible.
-                    VirtualFreePage(p, p->page_size);
-                } else {
-                    FreePage(p);
+                    // 100%-free normal page at STW safepoint: keep committed
+                    // in the page pool instead of VirtualFree.  Stale GC
+                    // handles in TLS or stack slots would AV on freed memory.
+                    page_pool_.push_back(PoolEntry{
+                        p, p->page_size, p->payload_size, p->bitmap_bytes,
+                        static_cast<int8_t>(p->numa_node) });
                 }
                 page_count_--;
             } else {
@@ -3207,18 +3207,14 @@ void MarkSweepOldGen::BgcSweep() {
                     }
                 }
                 if (should_pool) {
-                    // Decommit the page to release physical pages while
-                    // keeping the VA range reserved for fast recommit.
-                    auto pool_page_size = p->page_size;
-                    auto pool_payload_size = p->payload_size;
-                    auto pool_bitmap_bytes = p->bitmap_bytes;
-                    auto pool_numa_node = static_cast<int8_t>(p->numa_node);
-#if defined(_WIN32) || defined(_WIN64)
-                    VirtualFree(p, pool_page_size, MEM_DECOMMIT);
-#endif
-                    page_pool_.push_back(PoolEntry{
-                        p, pool_page_size, pool_payload_size, pool_bitmap_bytes,
-                        pool_numa_node });
+                    // Defer decommit to BgcCompact (STW safepoint) — BgcSweep
+                    // runs concurrently with mutators that may have allocated
+                    // from this page's free list after SweepPage rebuilt it.
+                    // Decommitting here would cause the mutator to write to
+                    // decommitted memory (access violation).
+                    deferred_pool_pages_.push_back(PoolEntry{
+                        p, p->page_size, p->payload_size, p->bitmap_bytes,
+                        static_cast<int8_t>(p->numa_node) });
                 } else {
                     // Defer VirtualFree to BgcCompact (STW safepoint).
                     deferred_free_pages_.push_back(p);
@@ -3374,6 +3370,16 @@ void MarkSweepOldGen::BgcCompact() {
             VirtualFreePage(p, p->page_size);
         }
         deferred_free_pages_.clear();
+
+        // Deferred pool pages: MEM_DECOMMIT (keep VA reserved) and add
+        // to page_pool_ for fast recommit on next AllocatePage.
+        for (auto& entry : deferred_pool_pages_) {
+#if defined(_WIN32) || defined(_WIN64)
+            VirtualFree(entry.page, entry.page_size, MEM_DECOMMIT);
+#endif
+            page_pool_.push_back(entry);
+        }
+        deferred_pool_pages_.clear();
     }
 
     // Clear compaction skip list (snapshot of pinned_roots_ taken above).

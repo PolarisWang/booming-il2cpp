@@ -3,6 +3,7 @@
 #include "gc_heap.h"
 #include "../gc/gc_etw.h"
 #include "../gc/gc_low_mem.h"
+#include "../gc/gc_worker_pool.h"
 
 // T4 VEH handler for SEH dispatch in native-generated code.
 #include "../jit/jit_seh.h"
@@ -56,7 +57,12 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     runtime_state->internal_state = ::new (internal_mem) RuntimeInternalState();
 
     // Start the BGC background thread for concurrent mark/sweep.
-    BgcController::Instance().Start();
+    // g_bgc_enabled can be set to false before RuntimeInit() to disable
+    // BGC — used by short-lived verification/benchmark processes where
+    // BGC concurrency races with tight allocation loops.
+    if (g_bgc_enabled) {
+        BgcController::Instance().Start();
+    }
 
     // Start the OS low-memory notification monitor.
     // Non-functional on non-Windows platforms (no-op).
@@ -77,6 +83,14 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
 void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state) {
     if (runtime_state == nullptr) return;
 
+    // Stop background threads before freeing runtime state.
+    // Order matters:
+    //   1. BGC controller first — joins BGC concurrent-mark thread + finalizer
+    //      thread so they no longer access GC data structures.
+    //   2. GC worker pool — joins any parked parallel GC workers.
+    //   3. Then remaining teardown (ETW, low-mem monitor, free state).
+    BgcController::Instance().Stop();
+    GcWorkerPool::Instance().Shutdown();
     GcEtwShutdown();
     g_low_memory_monitor.Stop();
     SetRuntimeMode(RuntimeMode::Aot);

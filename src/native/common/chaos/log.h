@@ -5,11 +5,16 @@
 //
 // ============================================================================
 // Architecture: Direct-write with global mutex. Each CHAOS_IL2CPP_LOG_XXXXX
-// call formats the message and writes it to stdout immediately — no ring
+// call formats the message and writes it to stderr immediately — no ring
 // buffer, no batching, no explicit fflush needed.
 //
-// stdout must be set to line-buffered mode (_IOLBF) at RuntimeInit so that
-// fputs + '\n' auto-flushes via libc.
+// stderr must be unbuffered for reliable immediate output. On Windows the
+// C runtime default is unbuffered for stderr; on POSIX stderr defaults to
+// line-buffered when connected to a TTY and unbuffered otherwise.
+//
+// Protocol/machine output (benchmark JSON, fact results) should go to stdout
+// via CHAOS_IL2CPP_LOG_WRITE_RAW or direct printf/fputs so that diagnostic
+// logs (stderr) do not pollute machine-consumed output.
 // ============================================================================
 //
 // ── Log levels ──────────────────────────────────────────────────────────────
@@ -39,6 +44,7 @@
 #include <atomic>
 #include <mutex>
 #include <string>
+
 
 #include <chaos/trace.h>
 #include <chaos/config.h>
@@ -109,14 +115,30 @@ inline std::string format_fmt(const char* level, const char* category,
                        fmt::format(fmt_str, std::forward<Args>(args)...));
 }
 
+// ── Global log-output flag (defined in runtime_core.cpp) ──────────────
+// Non-inline, non-COMDAT variable in chaos_runtime_core.lib so there is
+// exactly ONE instance across the entire binary.  The verification pipeline
+// sets this flag to redirect diagnostic log output to stderr, keeping
+// machine-consumed protocol output (benchmark JSON, fact results) clean on
+// stdout.
+//
+// All inline log_write() calls in every prebuilt lib (interpreter, jit,
+// bootstrap, etc.) reference this single extern variable — no ODR ambiguity.
+
+extern bool g_log_use_stderr;
+
 // ── Log write (lock-protected, immediate) ───────────────────────────────────
 // Each call acquires g_log_mutex, writes the formatted line + newline to
-// stdout. With _IOLBF the '\n' triggers libc auto-flush — no fflush needed.
+// stdout (default) or stderr (when g_log_use_stderr is set by the verification
+// pipeline entry point).  The output FILE* switch is checked at runtime so
+// all prebuilt libs (interpreter, jit, bootstrap, etc.) benefit without
+// recompilation — they all call the same inline function that references the
+// single extern g_log_use_stderr flag in chaos_runtime_core.lib.
 
 inline void log_write(const std::string& formatted) {
     std::lock_guard<std::mutex> guard(g_log_mutex);
-    std::fputs(formatted.c_str(), stdout);
-    std::fputc('\n', stdout);
+    std::fputs(formatted.c_str(), g_log_use_stderr ? stderr : stdout);
+    std::fputc('\n', g_log_use_stderr ? stderr : stdout);
 }
 
 // ── Raw write (bypasses log formatting, no prefix, no newline added) ────────

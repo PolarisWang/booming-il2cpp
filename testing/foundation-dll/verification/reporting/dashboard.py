@@ -515,6 +515,8 @@ def _extract_benchmark_from_stages(stages_data: dict[str, Any], slug: str = "") 
                     "elapsedMilliseconds": res.get("elapsedMilliseconds", 0),
                     "opsPerSecond": res.get("opsPerSecond", 0),
                     "calibratedMs": res.get("calibratedMs", 0),
+                    "allocatedBytes": res.get("allocatedBytes", 0),
+                    "allocPerOp": res.get("allocPerOp", 0),
                 },
                 "iterations": res.get("iterations", 100000),
                 "status": "completed" if "error" not in res else "error",
@@ -540,6 +542,10 @@ def _extract_benchmark_from_stages(stages_data: dict[str, Any], slug: str = "") 
             }
             if "postPatchNsPerOp" in res:
                 metrics["postPatchNsPerOp"] = res["postPatchNsPerOp"]
+            if "allocatedBytes" in res:
+                metrics["allocatedBytes"] = res["allocatedBytes"]
+            if "allocPerOp" in res:
+                metrics["allocPerOp"] = res["allocPerOp"]
             records.append({
                 "timestamp": "",
                 "slug": slug,
@@ -722,17 +728,17 @@ def _short_method_label(method_subject_id: str) -> str:
 
 
 _BENCHMARK_TECH_ORDER = [
-    "net8-jit", "net10-jit", "mono",
+    "net8-jit", "net10-jit",
     "chaos-aot", "chaos-jit",
     "chaos-hu-aot", "chaos-hu-jit",
 ]
 _BENCHMARK_TECH_LABELS = {
-    "net8-jit": ".NET 8 JIT", "net10-jit": ".NET 10 JIT", "mono": "Mono",
+    "net8-jit": ".NET 8 JIT", "net10-jit": ".NET 10 JIT",
     "chaos-aot": "Chaos AOT", "chaos-jit": "Chaos JIT",
     "chaos-hu-aot": "HU AOT", "chaos-hu-jit": "HU JIT",
 }
 _BENCHMARK_TECH_SHORT = {
-    "net8-jit": "NET8", "net10-jit": "NET10", "mono": "Mono",
+    "net8-jit": "NET8", "net10-jit": "NET10",
     "chaos-aot": "AOT", "chaos-jit": "JIT",
     "chaos-hu-aot": "HU-A", "chaos-hu-jit": "HU-J",
 }

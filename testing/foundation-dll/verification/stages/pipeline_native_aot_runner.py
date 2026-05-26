@@ -30,7 +30,7 @@ _VERIFICATION: Path | None = None  # set per-assembly in main()
 from verification.orchestration.family_entrypoint import generate_and_build
 
 # trace — no-op stubs for removed testing.trace module
-def trace_init(**kwargs): pass
+def trace_init(*args, **kwargs): pass
 def trace(name, **kwargs): pass
 
 # Families to process (all 23 non-report CoreLib families)
@@ -779,6 +779,24 @@ def inject_eha_directive(cmakelists: Path) -> None:
         cmakelists.write_text(text, encoding="utf-8")
 
 
+def _sync_runtime_libs_to_sdk(codegen_dir: Path) -> None:
+    """Copy runtime libs from codegen/lib/ into the per-assembly SDK lib/."""
+    if not codegen_dir.is_dir():
+        return
+    parent_lib_dir = codegen_dir / "lib"
+    if not parent_lib_dir.is_dir():
+        return
+    for d in sorted(codegen_dir.iterdir()):
+        if not d.is_dir():
+            continue
+        sdk_lib_dir = d / "lib"
+        if not sdk_lib_dir.is_dir():
+            continue
+        for lib_file in sorted(parent_lib_dir.iterdir()):
+            if lib_file.suffix == ".lib" and not (sdk_lib_dir / lib_file.name).exists():
+                shutil.copy2(str(lib_file), str(sdk_lib_dir / lib_file.name))
+
+
 def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Path, *, is_jit: bool = False) -> None:
     """Auto-generate or update native/CMakeLists.txt with SDK-based template.
 
@@ -808,13 +826,25 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
     codegen_dir = verification / family_slug / "codegen"
     codegen_rel = str(codegen_dir.resolve()).replace("\\", "/")
-    # SDK output goes to codegen/<AssemblyName>/ via --sdk-out.
-    # Scan for the subdirectory that contains chaos-config.cmake.
+    # SDK root: use the per-assembly subdirectory (EnumParsingSubjects etc.)
+    # that contains the fresh chaos-codegen.lib from --sdk-out.
+    # Sync runtime libs from codegen/lib/ into the per-assembly lib/ so the
+    # SDK has all dependencies (chaos_common.lib, chaos_runtime_core.lib, etc.).
     sdk_rel = codegen_rel
     if codegen_dir.is_dir():
         for d in sorted(codegen_dir.iterdir()):
             if d.is_dir() and (d / "chaos-config.cmake").exists():
                 sdk_rel = str(d.resolve()).replace("\\", "/")
+                # Sync runtime libs from codegen/lib/ into per-assembly lib/
+                sdk_lib_dir = d / "lib"
+                parent_lib_dir = codegen_dir / "lib"
+                if parent_lib_dir.is_dir() and sdk_lib_dir.is_dir():
+                    for lib_file in parent_lib_dir.iterdir():
+                        if lib_file.suffix == ".lib":
+                            dst = sdk_lib_dir / lib_file.name
+                            if not dst.exists():
+                                import shutil
+                                shutil.copy2(str(lib_file), str(dst))
                 break
 
     # ── JIT glob: exclude stale flat-layout AOT output ──────────────
@@ -1354,10 +1384,13 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
                 if "// chaos_valuetype typedefs (pipeline fix)" in text:
                     pass  # already fixed
                 else:
-                    # Find which ones already have typedefs
+                    # Find which ones already have typedefs or struct definitions
                     defined_vt: set[str] = set()
                     for m in _re.finditer(
                             r'typedef\s+\w+\s+(chaos_valuetype_\w+)', text):
+                        defined_vt.add(m.group(1))
+                    for m in _re.finditer(
+                            r'struct\s+(chaos_valuetype_\w+)\s*\{', text):
                         defined_vt.add(m.group(1))
                     # Filter out already-defined ones and known type_info types
                     missing = sorted(all_vt - defined_vt)
@@ -1401,10 +1434,13 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
                         hdr_text = header_h_file.read_text(encoding="utf-8")
                         if "// chaos_valuetype typedefs (pipeline fix)" in hdr_text:
                             continue  # already fixed
-                        # Find which ones already have typedefs
+                        # Find which ones already have typedefs or struct definitions
                         defined_vt_hdr: set[str] = set()
                         for m in _re.finditer(
                                 r'typedef\s+\w+\s+(chaos_valuetype_\w+)', hdr_text):
+                            defined_vt_hdr.add(m.group(1))
+                        for m in _re.finditer(
+                                r'struct\s+(chaos_valuetype_\w+)\s*\{', hdr_text):
                             defined_vt_hdr.add(m.group(1))
                         missing_hdr = sorted(all_vt - defined_vt_hdr)
                         if missing_hdr:
@@ -1938,6 +1974,13 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     remediate_flat_layout_includes(native_dir)
     remediate_forward_declarations(native_dir)
     remediate_page_file_declarations(native_dir)
+
+    # ── Sync runtime libs into per-assembly SDK lib/ ────────────────
+    # The codegen regenerates codegen/<AssemblyName>/lib/chaos_codegen.lib
+    # but NOT the runtime libs (chaos_common.lib, etc.).  Copy them from
+    # codegen/lib/ so find_package(chaos) resolves all dependencies.
+    _sync_runtime_libs_to_sdk(codegen_dir)
+
     build_dir = native_dir / "build"
     # Remove stale cmake cache to avoid generator/platform mismatch errors
     if build_dir.exists():

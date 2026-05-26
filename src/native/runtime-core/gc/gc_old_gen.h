@@ -571,6 +571,14 @@ public:
     static constexpr int kMaxPoolSize = 16;
     std::vector<PoolEntry> page_pool_;
 
+    // Pool pages (100%-free normal pages) deferred from BgcSweep Phase 4b
+    // to BgcCompact (STW safepoint).  BgcSweep runs concurrently with
+    // mutators that may have allocated from a page's free list after
+    // SweepPage rebuilt it.  Deferring the MEM_DECOMMIT to BgcCompact
+    // prevents the mutator from writing to decommitted memory.
+    // Same reasoning as deferred_free_pages_ — see BgcSweep Phase 4b.
+    std::vector<PoolEntry> deferred_pool_pages_;
+
     // Per-size-class last-used-page cache (avoids O(n) page_list walk).
     OldGenPage* last_alloc_page_[kOldGenNumSizeClasses]{};
 

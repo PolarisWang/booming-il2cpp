@@ -14,7 +14,7 @@ CHAOS_IL2CPP_INTPTR chaos_delegate_allocate_with_type_info(const TypeInfo* chaos
         case {{ entry.type_id_symbol }}:
         {
             auto* chaos_delegate = CHAOS_IL2CPP_NEW_GC({{ entry.native_type_symbol }}, {});
-            chaos_delegate->header.type_info = &{{ entry.type_info_symbol }};
+            chaos_delegate->header.type_info = {{ entry.type_info_symbol }};
             return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_delegate);
         }
 {{~ end ~}}

@@ -3525,12 +3525,17 @@ def _parse_perf_payload(output_lines: list[str]) -> dict[str, Any]:
     if not output_lines:
         return {}
 
-    try:
-        payload = json.loads(output_lines[-1])
-    except ValueError:
-        return {}
-
-    return dict(payload) if isinstance(payload, dict) else {}
+    # Scan from the end — the JSON payload should be emitted by the benchmark
+    # binary, but runtime shutdown logging (GC stats, etc.) may appear after
+    # it on stdout.  Linear scan backwards avoids brittle "last line" logic.
+    for line in reversed(output_lines):
+        try:
+            payload = json.loads(line)
+        except ValueError:
+            continue
+        if isinstance(payload, dict):
+            return dict(payload)
+    return {}
 
 
 def _payload_custom_perf_metrics(payload: dict[str, Any]) -> dict[str, float]:
@@ -3673,6 +3678,10 @@ def run_runtime_perf_collect(*, repo_root: Path, request: dict[str, Any]) -> dic
     variant = _selection_variant(selection)
     declared_benchmark = _resolve_declared_benchmark(selection, repo_root=repo_root, subject_id=subject_id)
     workload_entry = str(declared_benchmark.get("workloadEntry") or _selection_workload_entry(selection))
+    if not workload_entry:
+        source_entry = str(selection.get("source", {}).get("entry") or "")
+        if source_entry:
+            workload_entry = source_entry
     host_platform = _normalize_host_platform(str(execution_context.get("hostPlatform") or ""))
     runtime_profile = str(execution_context.get("runtimeProfile") or "")
     sample_count = _perf_sample_count(runtime_profile)
@@ -3888,7 +3897,7 @@ def run_native_runtime_perf(*, repo_root: Path, request: dict[str, Any]) -> dict
     iterations = _subject_perf_iterations(
         subject_id=subject_id,
         validation_spec=validation_spec,
-        default_iterations=1,
+        default_iterations=_perf_harness_iterations(runtime_profile),
     )
     declared_entry_selection = _selection_declared_entry_selection(selection)
     collection_entry_index = declared_entry_selection.get("entryIndex")
