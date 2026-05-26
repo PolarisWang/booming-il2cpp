@@ -185,19 +185,19 @@ public sealed partial class NativeAotLoweringPlanner
 		var bodyBuilder = new System.Text.StringBuilder();
 		_currentMethodNativeSymbol = method.NativeSymbol;
 		_currentMethodArtifact = method;
-		int actualSlotCount;
+		StructuredSlotEmissionContext? slotContext = null;
 		try
 		{
-			actualSlotCount = EmitViaStructuredIR(bodyBuilder, method, instructions, offsets, body);
+			slotContext = EmitViaStructuredIR(bodyBuilder, method, instructions, offsets, body);
 		}
 		finally
 		{
 			_currentMethodNativeSymbol = null;
 			_currentMethodArtifact = null;
 		}
-		if (usesStructuredSlots && actualSlotCount > 0)
+		if (usesStructuredSlots && slotContext != null)
 		{
-			EmitStructuredSlotDeclarations(builder, actualSlotCount, "	");
+			EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, "	");
 		}
 		else if (!usesStructuredSlots && evalStackSize > 0)
 		{

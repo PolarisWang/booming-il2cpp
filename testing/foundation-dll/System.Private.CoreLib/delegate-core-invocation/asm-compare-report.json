@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/delegate/core/invocation",
-  "capturedAt": "2026-05-26T00:02:49",
+  "capturedAt": "2026-05-26T10:57:51",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 440
+      "max": 75,
+      "avg": 47.1,
+      "total": 471
     },
     "aotInstructionCount": {
       "min": 1,
@@ -27,8 +27,8 @@
     "topInstructionCategories": {
       "external_runtime_call": 24
     },
-    "overallIrExpansionRatio": 0.45,
-    "averageExpansionRatio": 0.44,
+    "overallIrExpansionRatio": 0.42,
+    "averageExpansionRatio": 0.41,
     "maxExpansionRatio": 0.86,
     "minExpansionRatio": 0.02
   },
@@ -332,15 +332,15 @@
       "shortName": "Subject_7",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 75,
         "aotInstructionCount": 38,
-        "ratio": 0.86,
+        "ratio": 0.51,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 75
       },
       "aot": {
         "status": "ok",

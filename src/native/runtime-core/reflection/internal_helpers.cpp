@@ -135,7 +135,7 @@ static inline const char* DecodeStringValue(CHAOS_IL2CPP_INTPTR value) {
 // runtime_type_handle from a GC Type object pointer.
 //
 // Managed Type layout:
-//   [ThinLockableHeader(16B)][runtime_type_handle(8B)][runtime_name_value(8B)][...]
+//   [ThinLockableHeader(8B)][runtime_type_handle(8B)][runtime_name_value(8B)][...]
 static inline const ReflectionQueryTypeDescriptor* ResolveTypeFromReflectionOrGcHandle(
     CHAOS_IL2CPP_INTPTR handle) noexcept {
     auto* desc = GetTypeDescriptorFromHandle(handle);
