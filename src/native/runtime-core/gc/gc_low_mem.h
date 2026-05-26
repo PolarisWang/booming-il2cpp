@@ -35,7 +35,7 @@ private:
 
     std::thread monitor_thread_;
     std::atomic<bool> shutdown_{false};
-    int platform_supported_{0};  // Non-zero when running with valid OS handles.
+    void* platform_supported_{nullptr};  // Stores the HANDLE* array (2 handles: low-memory notification + shutdown event).
 };
 
 /// Process-wide low-memory monitor instance.
