@@ -1,5 +1,6 @@
 #include "gc_stats.h"
 #include "gc_region.h"
+#include "core/gc_alloc_stubs.h"
 
 #include <chaos/log.h>
 
@@ -24,6 +25,8 @@ GcEventEntry g_gc_event_ring[kGcEventRingSize] = {};
 // ── Snapshot ──────────────────────────────────────────────────
 
 GcSnapshot GcGetSnapshot() noexcept {
+    // Flush fast-path TLS counters before reading global stats.
+    FlushTlsFastStats();
     GcSnapshot snap;
 
     // Read all counters with acquire semantics for causal consistency.
@@ -86,6 +89,8 @@ namespace {
 }
 
 void GcDumpStats() noexcept {
+    // Flush fast-path TLS counters before reading global stats.
+    FlushTlsFastStats();
     // ── Young collection ──────────────────────────────────────────
     uint64_t young_count = g_gc_stats.young_collections.load(std::memory_order_relaxed);
     if (young_count > 0) {

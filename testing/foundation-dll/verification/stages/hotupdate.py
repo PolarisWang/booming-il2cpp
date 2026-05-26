@@ -42,13 +42,23 @@ def _build_patch_dll(ctx: FamilyContext) -> Path | None:
 
     r = subprocess.run(
         ["dotnet", "build", str(csproj), "-c", "Release",
-         "--nologo", "-v", "quiet"],
+         "--nologo", "-v", "minimal"],
         capture_output=True, text=True, timeout=300,
     )
     if r.returncode != 0:
         print(f"    [hotupdate] Patch DLL build FAILED (exit={r.returncode})")
-        for line in (r.stderr or "").splitlines()[-5:]:
-            print(f"      {line}")
+        # Print both stdout and stderr — MSBuild errors can appear in either
+        err_lines = (r.stderr or "").splitlines()
+        out_lines = (r.stdout or "").splitlines()
+        # Filter to error/warning lines for concise output
+        for line in (err_lines + out_lines):
+            stripped = line.strip()
+            if any(kw in stripped for kw in ("error ", "warning ", "CS", "BUILD", "FAILED")):
+                print(f"      {stripped}")
+        # If no filtered lines, print last few lines from each
+        if not any(kw in (r.stderr or "") + (r.stdout or "") for kw in ("error ", "FAILED")):
+            for line in (err_lines + out_lines)[-10:]:
+                print(f"      {line.strip()}")
         return None
 
     dll = build_out / f"{csproj.stem}.dll"
@@ -237,6 +247,10 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
         print(f"  [hotupdate] entry.exe rebuild FAILED (exit={r.returncode})")
         for line in (r.stderr or "").splitlines()[-10:]:
             print(f"    {line}")
+        # If stderr had no error info, try stdout
+        if not any(kw in (r.stderr or "") for kw in ("error", "FAILED", "fatal")):
+            for line in (r.stdout or "").splitlines()[-10:]:
+                print(f"    {line.strip()}")
         return False
 
     print(f"  [hotupdate] entry.exe rebuild OK")

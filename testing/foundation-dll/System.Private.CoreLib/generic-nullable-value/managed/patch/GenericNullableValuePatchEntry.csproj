@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="GenericNullableValuePatchEntry.cs" />
+    <Compile Include="GenericNullableValuePatchEntry.Custom.cs" />
   </ItemGroup>
 </Project>

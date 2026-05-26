@@ -87,6 +87,32 @@ static CHAOS_IL2CPP_INTPTR enum_alloc_string(CHAOS_IL2CPP_UINTPTR byte_count) no
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
 }
 
+/// Allocate a managed string in the Pinned Object Heap (POH).
+/// POH objects never participate in young GC copying, so thread_local
+/// cache pointers to POH strings remain valid across collections.
+/// Same chaos_managed_string layout as enum_alloc_string().
+static CHAOS_IL2CPP_INTPTR enum_alloc_string_poh(CHAOS_IL2CPP_UINTPTR byte_count) noexcept
+{
+    auto* storage = static_cast<unsigned char*>(
+        GcAllocatePinned(kManagedStringHeader + byte_count + 1));
+    if (storage == nullptr) return 0;
+
+    std::memset(storage, 0, kManagedStringHeader);
+
+    std::call_once(g_stub_string_typeinfo_flag, init_stub_string_typeinfo);
+    *reinterpret_cast<TypeInfoHot**>(storage) = &g_stub_string_typeinfo;
+
+    auto* len_field = reinterpret_cast<CHAOS_IL2CPP_INT32*>(storage + 16);
+    *len_field = static_cast<CHAOS_IL2CPP_INT32>(byte_count);
+
+    char* data_area = reinterpret_cast<char*>(storage + kManagedStringHeader);
+    if (byte_count > 0) data_area[0] = '\0';
+    auto* utf8_field = reinterpret_cast<const char**>(storage + 24);
+    *utf8_field = data_area;
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+}
+
 /// Write a C string into a pre-allocated managed string's inline data area.
 static void write_string_data(CHAOS_IL2CPP_INTPTR str_handle, const char* data, CHAOS_IL2CPP_UINTPTR len) noexcept
 {
@@ -285,10 +311,13 @@ static thread_local CHAOS_IL2CPP_INTPTR s_enum_names_array = 0;
 // Registered lazily on first call to ChaosEnumGetNames.  Clears
 // thread_local cache keys before each young collection so that the
 // next call re-allocates managed objects from non-moving metadata.
+//
+// Note: s_enum_str_type_key is NOT cleared here because the cached
+// enum field name strings are allocated in POH (via enum_alloc_string_poh)
+// and never move during GC, so thread_local pointers remain valid.
 static void enum_stubs_on_gc_event(GcEvent event, void* /*user_data*/) noexcept {
     if (event == GcEvent::GC_YOUNG_START) {
         s_enum_names_array_key = 0;
-        s_enum_str_type_key = 0;
     }
 }
 
@@ -384,8 +413,7 @@ static void ensure_enum_str_cache(CHAOS_IL2CPP_INTPTR type_key,
         for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
             const EnumFieldEntry& fe = meta->fields[i];
             size_t nlen = std::strlen(fe.name);
-            auto str_h = enum_alloc_string(static_cast<CHAOS_IL2CPP_UINTPTR>(nlen));
-            if (str_h == 0) continue;
+            auto str_h = enum_alloc_string_poh(static_cast<CHAOS_IL2CPP_UINTPTR>(nlen));            if (str_h == 0) continue;
             write_string_data(str_h, fe.name, static_cast<CHAOS_IL2CPP_UINTPTR>(nlen));
             s_enum_str_values[i] = fe.value;
             s_enum_str_names[i] = str_h;
@@ -404,8 +432,7 @@ static void ensure_enum_str_cache(CHAOS_IL2CPP_INTPTR type_key,
             for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
                 const EnumFieldEntry& fe = md->fields[i];
                 size_t nlen = std::strlen(fe.name);
-                auto str_h = enum_alloc_string(static_cast<CHAOS_IL2CPP_UINTPTR>(nlen));
-                if (str_h == 0) continue;
+                auto str_h = enum_alloc_string_poh(static_cast<CHAOS_IL2CPP_UINTPTR>(nlen));                if (str_h == 0) continue;
                 write_string_data(str_h, fe.name, static_cast<CHAOS_IL2CPP_UINTPTR>(nlen));
                 s_enum_str_values[i] = fe.value;
                 s_enum_str_names[i] = str_h;
@@ -425,13 +452,12 @@ static void ensure_enum_str_cache(CHAOS_IL2CPP_INTPTR type_key,
         if (f.name_utf8 == nullptr || std::strncmp(f.name_utf8, "value_", 6) == 0) continue;
 
         const auto name_len = std::strlen(f.name_utf8);
-        auto str_handle = enum_alloc_string(name_len);
+        auto str_handle = enum_alloc_string_poh(name_len);
         if (str_handle == 0) continue;
         write_string_data(str_handle, f.name_utf8, name_len);
 
         s_enum_str_values[idx] = f.constant_value;
-        s_enum_str_names[idx] = str_handle;
-        idx++;
+        s_enum_str_names[idx] = str_handle;        idx++;
     }
     s_enum_str_count = idx;
 }

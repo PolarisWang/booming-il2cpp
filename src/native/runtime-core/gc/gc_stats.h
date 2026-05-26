@@ -282,7 +282,9 @@ inline void GcRecordAlloc(CHAOS_IL2CPP_SIZE bytes, bool oversized) noexcept {
     if (oversized) {
         g_gc_stats.alloc_oversized.fetch_add(1, std::memory_order_relaxed);
     }
+#if defined(CHAOS_IL2CPP_GC_EVENTS) && CHAOS_IL2CPP_GC_EVENTS == 1
     GcEtwRecordAlloc(bytes);
+#endif
 }
 
 // ── Dump ─────────────────────────────────────────────────────────

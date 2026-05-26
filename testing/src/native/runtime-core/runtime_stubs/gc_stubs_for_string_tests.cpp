@@ -34,8 +34,11 @@ void* GcAllocateAtomic(std::size_t size) {
     return std::calloc(1, size);
 }
 
-// GcAllocate: same approach — zeroed calloc.
-void* GcAllocate(std::size_t size) {
+// GcAllocateFast/GcAllocateProfiled: zeroed calloc.
+void* GcAllocateFast(std::size_t size) {
+    return std::calloc(1, size);
+}
+void* GcAllocateProfiled(std::size_t size) {
     return std::calloc(1, size);
 }
 

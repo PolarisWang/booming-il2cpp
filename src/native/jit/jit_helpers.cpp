@@ -375,8 +375,8 @@ extern "C" void* CodegenNewObj(uint32_t type_token, uint32_t field_count) noexce
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
     // Allocate through the GC heap so the object is tracked for GC scanning
-    // and compaction.  GcAllocate returns zeroed memory.
-    auto* obj = static_cast<InterpreterObject*>(GcAllocate(sizeof(InterpreterObject)));
+    // and compaction.  GcAllocateProfiled returns zeroed memory.
+    auto* obj = static_cast<InterpreterObject*>(GcAllocateProfiled(sizeof(InterpreterObject)));
     if (obj == nullptr) return nullptr;
     // Manual init: GcAllocate zeroes everything, so we only need to point
     // fields_ptr_ to the inline buffer and set type_token.
@@ -450,13 +450,13 @@ extern "C" void* CodegenNewArr(int32_t length) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::NewArr");
     using namespace chaos::il2cpp::interpreter;
     using namespace chaos::il2cpp::runtime_core;
-    // Allocate through GC heap.  GcAllocate returns zeroed memory; on MSVC
+    // Allocate through GC heap.  GcAllocateProfiled returns zeroed memory; on MSVC
     // this is equivalent to a default-constructed empty std::vector (all
     // internal pointers null).  The subsequent resize allocates the vector's
     // internal buffer on C++ heap.
     // TODO(Phase 3.4): Replace std::vector with GC-allocated buffer to
     // eliminate the hidden C++ heap allocation and enable full GC tracking.
-    auto* arr = static_cast<ArrayStorage*>(GcAllocate(sizeof(ArrayStorage)));
+    auto* arr = static_cast<ArrayStorage*>(GcAllocateProfiled(sizeof(ArrayStorage)));
     if (arr == nullptr) return nullptr;
     // GcAllocate zeroes memory — vector is empty.  No placement new needed.
     arr->elements.resize(static_cast<size_t>(length > 0 ? length : 0));

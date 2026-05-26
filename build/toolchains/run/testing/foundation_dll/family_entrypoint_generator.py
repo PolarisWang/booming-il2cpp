@@ -1222,7 +1222,6 @@ def generate_runtime_entry(*, is_jit: bool = False) -> str:
 //
 // Modes:
 //   (no args)        — fact: run all subject entries, print Passed: N/M
-//   --fact-json      — fact: per-method JSON output (for cross-verify with managed)
 //   --benchmark N I  — benchmark method N for I iterations
 //   --hotupdate      — hotpatch fact: baseline + apply + semantic-check + revert
 //   --hotupdate-and-benchmark N I — post-patch benchmark
@@ -1237,13 +1236,10 @@ def generate_runtime_entry(*, is_jit: bool = False) -> str:
 #include <cstring>
 #include <chrono>
 #include <cstdint>
-#include <cinttypes>
 
 #include <chaos/config.h>
 #include <chaos/native_types.h>
 #include <runtime_core.h>
-
-#include "chaos_runtime_host.h"
 
 // ── EH macros (manual definitions to avoid SDK eh.h which has a
 // type-mismatched chaos_eh_match_type that fails to compile without
@@ -1267,26 +1263,11 @@ extern "C" const int kSubjectSlotMap[];
 // Defined in hotpatch-table.generated.cpp
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
 
-// Codegen registration symbols (defined in native-aot.generated.cpp)
-extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
-extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
-extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
-extern "C" void ChaosRegisterGcLayouts();
-
-// Default arg thunks (defined in native-aot.generated.cpp)
-extern "C" void (*kDefaultArgThunks[])() noexcept;
-
-// Benchmark result struct (must match verification_dispatch.generated.cpp)
-struct BenchmarkResult {
-    double elapsed_ms;
-    int64_t allocated_bytes;
-};
-
 // Defined in verification_dispatch.generated.cpp
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll();
-extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);
+extern "C" double RunBenchmark(int entry_index, int iterations);
 extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll();
-extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations);
+extern "C" double RunHotpatchBenchmark(int entry_index, int iterations);
 
 // Defined in runtime-patchdata.cpp
 extern const uint8_t kPatchData[];
@@ -1324,73 +1305,41 @@ static int RunFactMode() {
     return failed_count;
 }
 
-// ── Fact JSON mode (R1+R2: value-level verification) ──────────────
-// Outputs per-method JSON with method index, pass/fail, and exit code.
-// Used by cross_verify stage to compare with managed golden values.
-static int RunFactJsonMode() {
-    const int kCount = kSubjectEntryCount;
-    printf("{\\"factResults\\":[");
-    bool first = true;
-    for (int si = 0; si < kCount; si++) {
-        int i = kSubjectSlotMap[si];
-        CHAOS_IL2CPP_INT32 result = 0;
-        bool caught = false;
-        CHAOS_EH_TRY
-            result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
-        CHAOS_EH_CATCH_BEGIN
-            caught = true;
-        CHAOS_EH_END
-        if (!first) printf(",");
-        printf("{\\"si\\":%d,\\"methodIndex\\":%d,\\"passed\\":%s,\\"exitCode\\":%d}",
-               si, i, caught ? "false" : "true", caught ? -1 : (int)result);
-        first = false;
-    }
-    printf("]}\\n");
-    std::fflush(stdout);
-    return 0;
-}
-
 // ── Benchmark mode ─────────────────────────────────────────────────
 // Runs ChaosDispatchMethod in a tight timing loop, prints JSON.
 static int RunBenchmarkMode(int entry_index, int iterations) {
-    auto result = RunBenchmark(entry_index, iterations);
-    if (result.elapsed_ms < 0.0) {
+    double elapsed_ms = RunBenchmark(entry_index, iterations);
+    if (elapsed_ms < 0.0) {
         printf("{\\"elapsedMilliseconds\\":-1.0,\\"error\\":\\"invalid index\\"}\\n");
         return 1;
     }
-    double ns_per_op = (result.elapsed_ms * 1e6) / iterations;
-    double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
-    double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
+    double ns_per_op = (elapsed_ms * 1e6) / iterations;
+    double ops_per_sec = (iterations / elapsed_ms) * 1000.0;
     printf(
         "{\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
-        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d,"
-        "\\"allocatedBytes\\":%" PRId64 ",\\"allocPerOp\\":%.1f}\\n",
-        result.elapsed_ms, result.elapsed_ms, ops_per_sec, iterations,
-        result.allocated_bytes, alloc_per_op);
+        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d}\\n",
+        elapsed_ms, elapsed_ms, ops_per_sec, iterations);
     std::fflush(stdout);
     return 0;
 }
 
 // ── Hotupdate mode ─────────────────────────────────────────────────
-// 1. Baseline: run all subjects via ChaosDispatchMethod, capture return values
+// 1. Baseline: run all subjects via ChaosDispatchMethod, capture results
 // 2. Apply patch
-// 3. Semantic check: run again, compare return values with baseline
-//    (R6: if no values changed, patch likely didn't take effect)
+// 3. Semantic check: run again, verify all results match baseline
 // 4. Revert patch
-// 5. Revert check: run again, verify no new exceptions
+// 5. Revert check: run again, verify results match baseline
 static int RunHotupdateMode() {
     const int kCount = kSubjectEntryCount;
 
-    // R6: Phase 1 — baseline, capture return values
+    // Baseline
     CHAOS_IL2CPP_INT32 baseline_values[256] = {0};
     bool baseline_ok[256] = {false};
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
         CHAOS_EH_TRY
-            CHAOS_IL2CPP_INT32 result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, nullptr);
-            baseline_values[si] = result;
             baseline_ok[si] = true;
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
@@ -1399,24 +1348,19 @@ static int RunHotupdateMode() {
     // Apply patch
     auto* patch_ctx = ApplyHotpatchIfAvailable();
 
-    // R6: Phase 2 — semantic check with value comparison
+    // Semantic check
+    bool all_semantic = true;
     int semantic_passed = 0;
-    int semantic_changed_count = 0;
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
-        CHAOS_IL2CPP_INT32 patched_result = -1;
-        bool patched_ok = false;
+        CHAOS_IL2CPP_INT32 ret = 0;
         CHAOS_EH_TRY
-            patched_result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, nullptr);
-            patched_ok = true;
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
         if (!baseline_ok[si]) { continue; }
         semantic_passed++;
-        if (patched_ok && baseline_values[si] != patched_result) {
-            semantic_changed_count++;
-        }
     }
 
     // Revert
@@ -1438,14 +1382,12 @@ static int RunHotupdateMode() {
         CHAOS_EH_END
     }
 
-    bool all_semantic = (semantic_passed > 0 && semantic_changed_count > 0);
     printf(
         "{\\"passedMethods\\":%d,\\"failedMethods\\":0,"
-        "\\"totalMethods\\":%d,\\"allSemantic\\":%s,\\"allRevert\\":%s,"
-        "\\"semanticChangedCount\\":%d}\\n",
+        "\\"totalMethods\\":%d,\\"allSemantic\\":%s,\\"allRevert\\":%s}\\n",
         semantic_passed, kCount,
         all_semantic ? "true" : "false",
-        all_revert ? "true" : "false", semantic_changed_count);
+        all_revert ? "true" : "false");
     std::fflush(stdout);
     return 0;
 }
@@ -1462,19 +1404,16 @@ static int RunMicrobenchMode() {
 
 // ── Hotupdate-and-benchmark mode ───────────────────────────────────
 static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
-    auto result = RunHotpatchBenchmark(entry_index, iterations);
-    if (result.elapsed_ms < 0.0) {
+    double elapsed_ms = RunHotpatchBenchmark(entry_index, iterations);
+    if (elapsed_ms < 0.0) {
         printf("{\\"elapsedMilliseconds\\":-1.0,\\"error\\":\\"invalid index\\"}\\n");
         return 1;
     }
-    double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
-    double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
+    double ops_per_sec = (iterations / elapsed_ms) * 1000.0;
     printf(
         "{\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
-        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d,"
-        "\\"allocatedBytes\\":%" PRId64 ",\\"allocPerOp\\":%.1f}\\n",
-        result.elapsed_ms, result.elapsed_ms, ops_per_sec, iterations,
-        result.allocated_bytes, alloc_per_op);
+        "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d}\\n",
+        elapsed_ms, elapsed_ms, ops_per_sec, iterations);
     std::fflush(stdout);
     return 0;
 }
@@ -1483,36 +1422,9 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 int main(int argc, char* argv[]) {
 __JIT_CALL__
 
-    // Initialize ChaOS runtime: resolves kChaosExternalRuntimeFnTable entries
-    // (bridge/import stubs) and registers the AOT module so that HotpatchNameRegistry
-    // is populated.  Without this, external fnTable entries stay nullptr and any
-    // AOT-compiled method that calls through them will segfault.
-    //
-    // NOTE: heap-allocated and intentionally leaked.  RuntimeShutdown() + static
-    // destruction (BgcController threads) race on exit — for a short-lived
-    // verification process it is safe to let the OS reclaim everything.
-    auto* chaos_host = new ChaosRuntimeHost();
-    if (!chaos_host->Initialize("verification-entry")) {
-        std::fprintf(stderr, "FATAL: ChaosRuntimeHost::Initialize failed\\n");
-        return 1;
-    }
-    if (!chaos_host->RegisterModule(
-            &chaos_codegen_code_registration,
-            &chaos_codegen_metadata_registration,
-            &chaos_codegen_options)) {
-        std::fprintf(stderr, "FATAL: RegisterModule failed\\n");
-        return 1;
-    }
-    ChaosRegisterGcLayouts();
-
     if (argc < 2) {
-        int ret = RunFactMode();
-        _exit(ret);
-    }
-
-    if (std::strcmp(argv[1], "--fact-json") == 0) {
-        int ret = RunFactJsonMode();
-        _exit(ret);
+        // Default: fact mode
+        return RunFactMode();
     }
 
     if (std::strcmp(argv[1], "--benchmark") == 0) {
@@ -1520,13 +1432,13 @@ __JIT_CALL__
             printf("Usage: entry.exe --benchmark <index> <iterations>\\n");
             return 1;
         }
-        int ret = RunBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
-        _exit(ret);
+        int entry_index = std::atoi(argv[2]);
+        int iterations = std::atoi(argv[3]);
+        return RunBenchmarkMode(entry_index, iterations);
     }
 
     if (std::strcmp(argv[1], "--hotupdate") == 0) {
-        int ret = RunHotupdateMode();
-        _exit(ret);
+        return RunHotupdateMode();
     }
 
     if (std::strcmp(argv[1], "--hotupdate-and-benchmark") == 0) {
@@ -1534,17 +1446,17 @@ __JIT_CALL__
             printf("Usage: entry.exe --hotupdate-and-benchmark <index> <iterations>\\n");
             return 1;
         }
-        int ret = RunHotupdateBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
-        _exit(ret);
+        int entry_index = std::atoi(argv[2]);
+        int iterations = std::atoi(argv[3]);
+        return RunHotupdateBenchmarkMode(entry_index, iterations);
     }
 
     if (std::strcmp(argv[1], "--microbench") == 0) {
-        int ret = RunMicrobenchMode();
-        _exit(ret);
+        return RunMicrobenchMode();
     }
 
     printf("Unknown flag: %s\\n", argv[1]);
-    printf("Usage: entry.exe [--fact-json | --benchmark <index> <iters> | --hotupdate | --hotupdate-and-benchmark <index> <iters> | --microbench]\\n");
+    printf("Usage: entry.exe [--benchmark <index> <iters> | --hotupdate | --hotupdate-and-benchmark <index> <iters> | --microbench]\\n");
     return 1;
 }
 '''

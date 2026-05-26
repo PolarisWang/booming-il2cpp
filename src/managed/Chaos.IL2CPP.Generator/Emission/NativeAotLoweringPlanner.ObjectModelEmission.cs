@@ -155,6 +155,19 @@ public sealed partial class NativeAotLoweringPlanner
 				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
 				if (targetReference is null)
 				{
+					// Track delegate type for invoke callvirt so the type struct
+					// (and its base chain MulticastDelegate/Delegate/Object) is
+					// emitted for reinterpret_cast<T*> in EmitLinearDelegateInvoke.
+					if (!string.IsNullOrEmpty(instruction.Callee) &&
+						instruction.Op is "callvirt" &&
+						string.Equals(GetMethodName(instruction.Callee), "Invoke", StringComparison.Ordinal))
+					{
+						string declaringType = GetMethodDeclaringTypeSubjectId(instruction.Callee);
+						if (IsDelegateTypeSubjectId(declaringType, _referenceTypeBaseSubjectIds))
+						{
+							TrackReferenceType(declaringType, null);
+						}
+					}
 					continue;
 				}
 				flag = targetReference.Kind == AotCoreIrReferenceKind.Type;
@@ -351,6 +364,8 @@ public sealed partial class NativeAotLoweringPlanner
 		int num = 2;
 		// Ensure System.String is always tracked (used in IsArrayStoreCompatible fast path)
 		TrackReferenceType("System.Private.CoreLib/System.String", null);
+		// Ensure System.Type is always tracked (used in reflection and runtime type helpers)
+		TrackReferenceType("System.Private.CoreLib/System.Type", "System.Private.CoreLib/System.Object");
 		// Ensure reflection types used by ReflectionObjectEmission are tracked
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodInfo", null);
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.ConstructorInfo", null);
@@ -591,6 +606,40 @@ public sealed partial class NativeAotLoweringPlanner
 			num++;
 		}
 		var sortedHashSet3 = hashSet3.OrderBy<string, string>((string result) => result, StringComparer.Ordinal).ToArray();
+		// ── Emit missing interface type IDs for hashSet3 types ──────────────────────────────────────────
+		// hashSet3 types enter through Path B (Box/Unbox/UnboxAny scanning at
+		// lines 203-239) which does NOT propagate implemented interfaces to
+		// interfaceTypeSubjectIds.  However, the iface_map generation below
+		// uses _referenceTypeImplementedInterfaceSubjectIds (a comprehensive,
+		// independent scan) which DOES include these interfaces.  Emit the
+		// missing chaos_type_id_* constants here so the iface_map references
+		// resolve at compile time.
+		HashSet<string> extraIfaceIds = new HashSet<string>();
+		foreach (string boxedType in sortedHashSet3)
+		{
+			if (_referenceTypeImplementedInterfaceSubjectIds.TryGetValue(boxedType, out var ifaces))
+			{
+				foreach (string iface in ifaces)
+				{
+					if (!interfaceTypeSubjectIds.Contains(iface))
+						extraIfaceIds.Add(iface);
+				}
+			}
+		}
+		if (extraIfaceIds.Count > 0)
+		{
+			var sortedExtraIfaceIds = extraIfaceIds.OrderBy(id => ComputeStableTypeId(id)).ToArray();
+			foreach (string iface in sortedExtraIfaceIds)
+			{
+				ulong sid = ComputeStableTypeId(iface);
+				StringBuilder sb = builder;
+				sb.Append("inline constexpr CHAOS_IL2CPP_INTPTR ");
+				sb.Append(GetNativeTypeIdSymbol(iface));
+				sb.Append(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
+				sb.Append(sid.ToString());
+				sb.AppendLine("ULL);");
+			}
+		}
 		foreach (string item3 in sortedHashSet3)
 		{
 			ulong stableId = ComputeStableTypeId(item3);
@@ -1139,6 +1188,14 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 				{
 				case AotCoreIrTypeShapeKind.ValueType:
 					valueTypeSubjectIds.Add(subjectId);
+					if (implementedInterfaceSubjectIds != null)
+					{
+						foreach (string ifaceId in implementedInterfaceSubjectIds)
+						{
+							if (!string.IsNullOrEmpty(ifaceId))
+								TrackInterfaceType(ifaceId);
+						}
+					}
 					break;
 				case AotCoreIrTypeShapeKind.InterfaceType:
 					TrackInterfaceType(subjectId);

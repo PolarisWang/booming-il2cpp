@@ -83,11 +83,20 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<int, string> _enumToStringFoldMap =
         new Dictionary<int, string>();
 
-    // A2.5: Pre-computed bake map for System.Enum methods where the target enum
-    // type is known at codegen time (e.g. ldtoken <DayOfWeek> + call Enum::Parse).
-    // Maps call-site IlOffset to (enumTypeSubjectId, calleeSubjectId).
-    private Dictionary<int, (string EnumTypeId, string Callee)> _enumAotBakeMap =
-        new Dictionary<int, (string EnumTypeId, string Callee)>();
+    // ── Enum AOT bake (A2.5) ───────────────────────────────────────────
+    /// For calls where the enum type is known at codegen time (e.g. ldtoken
+    /// <DayOfWeek> + call Enum::Parse/GetName/Format), this pre-computes the
+    /// result so the emitter can substitute a compile-time constant.
+    private sealed record EnumAotBakeEntry(
+        string EnumTypeId,
+        string Callee,      // full callee subject id
+        string? ConstantStr, // pre-evaluated string result (for GetName/Format/ToString)
+        long? ConstantInt,   // pre-evaluated numeric result (for Parse/IsDefined — boxed)
+        int ArgCount         // how many eval-stack args to consume
+    );
+
+    private Dictionary<int, EnumAotBakeEntry> _enumAotBakeMap =
+        new Dictionary<int, EnumAotBakeEntry>();
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
 
@@ -720,6 +729,8 @@ public sealed partial class NativeAotLoweringPlanner
 
         // A2.4: Pre-scan for ldsfld→Enum::ToString() constant-folding patterns
         BuildEnumToStringFoldTable(methodsForLowering);
+        // A2.5: Pre-scan for Enum::Parse/GetName/Format/IsDefined with constant args
+        BuildEnumAotBakeTable(methodsForLowering);
 
         var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols, _stubNeedsContext);
         _methodDeclarations = methodDeclarations;
@@ -1136,6 +1147,39 @@ extern ""C"" CHAOS_IL2CPP_INT32 {loweringPlan.NativeEntryFunctionName}(CHAOS_IL2
             sb.AppendLine(";");
         }
         sb.AppendLine();
+
+        // ── Interface type ID constants ──
+        // Interface map arrays in page files reference chaos_type_id_* constants.
+        // Emit them in the shared header so all TUs can resolve cross-page references.
+        // Collect from both open-generic interface definitions (_interfaceTypeSubjectIds)
+        // and constructed generic interface types used in InterfaceMap entries
+        // (_referenceTypeImplementedInterfaceSubjectIds values).
+        var allInterfaceTypeIds = new HashSet<string>(StringComparer.Ordinal);
+        if (_interfaceTypeSubjectIds is { Count: > 0 })
+        {
+            allInterfaceTypeIds.UnionWith(_interfaceTypeSubjectIds);
+        }
+        if (_referenceTypeImplementedInterfaceSubjectIds is { Count: > 0 })
+        {
+            foreach (var ifaceSet in _referenceTypeImplementedInterfaceSubjectIds.Values)
+            {
+                if (ifaceSet is { Count: > 0 })
+                    allInterfaceTypeIds.UnionWith(ifaceSet);
+            }
+        }
+        if (allInterfaceTypeIds.Count > 0)
+        {
+            foreach (string ifaceId in allInterfaceTypeIds.OrderBy(id => id, StringComparer.Ordinal))
+            {
+                ulong ifaceStableId = ComputeStableTypeId(ifaceId);
+                sb.Append("inline constexpr CHAOS_IL2CPP_INTPTR ");
+                sb.Append(GetNativeTypeIdSymbol(ifaceId));
+                sb.Append(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
+                sb.Append(ifaceStableId.ToString());
+                sb.AppendLine("ULL);");
+            }
+            sb.AppendLine();
+        }
 
         // ── Hotpatch dispatch table ──
         // Page files access s_hotpatch_entries[] directly for dispatch.
@@ -3879,6 +3923,34 @@ private static void CollectEnumTypesAndFieldsFromAssembly(
                 subjectId, fieldName, MetadataTokens.GetToken(fieldHandle), constantValue));
         }
     }
+}
+
+/// <summary>
+/// Fallback: scan PE metadata of all closure assemblies to collect enum field
+/// entries (name + constant value) when _reflectionMemberSupport.FieldEntries
+/// is empty (e.g. during foundation-dll codegen for stub-based families).
+/// </summary>
+private IReadOnlyList<ReflectionMemberFieldEntry> CollectEnumFieldEntriesFromMetadata()
+{
+    var seenSubjectIds = new HashSet<string>(_moduleTypeSubjectIds, StringComparer.Ordinal);
+    var enumFieldEntries = new List<ReflectionMemberFieldEntry>();
+    var dummyFlags = new List<uint>();
+    var dummySubjectIds = new List<string>();
+
+    foreach (var assemblyPath in _cachedClosureAssemblyPaths)
+    {
+        try
+        {
+            CollectEnumTypesAndFieldsFromAssembly(assemblyPath, seenSubjectIds,
+                dummyFlags, dummySubjectIds, enumFieldEntries);
+        }
+        catch
+        {
+            continue;
+        }
+    }
+
+    return enumFieldEntries;
 }
 
 /// <summary>

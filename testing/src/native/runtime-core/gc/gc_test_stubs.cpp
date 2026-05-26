@@ -119,5 +119,7 @@ namespace chaos { namespace il2cpp { namespace runtime_core {
 thread_local TLAB tls_tlab;
 thread_local CHAOS_IL2CPP_SIZE tls_tlab_size = kDefaultTlabSize;
 thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc = 0;
+thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_count = 0;
+thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes = 0;
 thread_local CHAOS_IL2CPP_INT64 tls_total_allocated_bytes = 0;
 }}}
