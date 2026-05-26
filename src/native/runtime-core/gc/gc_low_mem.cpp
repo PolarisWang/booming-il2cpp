@@ -37,7 +37,7 @@ void GcLowMemoryMonitor::Start() noexcept {
     // platform_supported_ != 0 signals that the monitor is active.
     // We pack both handles into a single allocation.
     HANDLE* handles = new HANDLE[2]{h, hShutdown};
-    platform_supported_ = reinterpret_cast<int>(handles);
+    platform_supported_ = handles;
     shutdown_.store(false, std::memory_order_relaxed);
 
     monitor_thread_ = std::thread([this]() noexcept { MonitorLoop(); });

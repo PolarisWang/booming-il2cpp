@@ -846,14 +846,20 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		case "conv.r4":
 		{
-			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = ChaosStoreFloat32(static_cast<float>({AccessEvalStackTopExpression()}));");
-			UpdateSlotType(SlotType.Float32);
+			string _loadExpr = PrepareConvOvfValue();
+			ConsumeEvalStackValueExpression();
+			ConsumeSlotType();
+			EmitEvalStackPush(builder, indentation, $"static_cast<float>({_loadExpr})", SlotType.Float32);
+			PushSlotType(SlotType.Float32);
 			break;
 		}
 		case "conv.r8":
 		{
-			builder.AppendLine($"{indentation}{AccessEvalStackTopExpression()} = ChaosStoreFloat64(static_cast<double>({AccessEvalStackTopExpression()}));");
-			UpdateSlotType(SlotType.Float64);
+			string _loadExpr = PrepareConvOvfValue();
+			ConsumeEvalStackValueExpression();
+			ConsumeSlotType();
+			EmitEvalStackPush(builder, indentation, $"static_cast<double>({_loadExpr})", SlotType.Float64);
+			PushSlotType(SlotType.Float64);
 			break;
 		}
 		case "conv.u":
@@ -1920,7 +1926,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		else
 		{
-			EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_boxed->value)");
+			EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_boxed->value)");
 		}
 		builder.AppendLine($"{indentation}}}");
 	}
@@ -2959,9 +2965,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			var ctorArgs0 = FormatAbiInvocationArgumentList(invocationTarget.ParameterAbis);
 			if (ctorArgs0.StartsWith("chaos_arg_0", StringComparison.Ordinal))
 				ctorArgs0 = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_value) | chaos_managed_pointer_local_slot_tag" + ctorArgs0.Substring(11);
-			string ctorCtxArg0 = _sharedContextSymbols.Contains(invocationTarget.TargetSymbol)
-				? (string.IsNullOrEmpty(ctorArgs0) ? "chaos_generic_context" : ", chaos_generic_context")
-				: "";
+			string ctorCtxArg0 = "";
+			if (_sharedContextSymbols.Contains(invocationTarget.TargetSymbol))
+			{
+				bool callerIsShared = _currentMethodNativeSymbol != null &&
+				                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+				ctorCtxArg0 = string.IsNullOrEmpty(ctorArgs0)
+					? (callerIsShared ? "chaos_generic_context" : "0")
+					: (callerIsShared ? ", chaos_generic_context" : ", 0");
+			}
 			builder.AppendLine($"{indentation}    {invocationTarget.TargetSymbol}({ctorArgs0}{ctorCtxArg0});");
 			EmitEvalStackPush(builder, indentation + "    ", "chaos_value");
 			builder.AppendLine(indentation + "}");
@@ -3004,9 +3016,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			var ctorArgs2 = FormatAbiInvocationArgumentList(constructorTarget.ParameterAbis);
 			if (ctorArgs2.StartsWith("chaos_arg_0", StringComparison.Ordinal))
 				ctorArgs2 = "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)" + ctorArgs2.Substring(11);
-			string ctorCtxArg2 = _sharedContextSymbols.Contains(constructorTarget.TargetSymbol)
-				? (string.IsNullOrEmpty(ctorArgs2) ? "chaos_generic_context" : ", chaos_generic_context")
-				: "";
+			string ctorCtxArg2 = "";
+			if (_sharedContextSymbols.Contains(constructorTarget.TargetSymbol))
+			{
+				bool callerIsShared = _currentMethodNativeSymbol != null &&
+				                      _sharedContextSymbols.Contains(_currentMethodNativeSymbol);
+				ctorCtxArg2 = string.IsNullOrEmpty(ctorArgs2)
+					? (callerIsShared ? "chaos_generic_context" : "0")
+					: (callerIsShared ? ", chaos_generic_context" : ", 0");
+			}
 			builder.AppendLine($"{indentation}    {constructorTarget.TargetSymbol}({ctorArgs2}{ctorCtxArg2});");
 				if (TypeHasFinalizer(requiredTargetReference.SubjectId))
 				{

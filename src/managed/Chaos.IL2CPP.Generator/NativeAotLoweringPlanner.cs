@@ -522,10 +522,23 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var stub = TryGetInstantiationStubSymbol(m);
             if (string.IsNullOrEmpty(stub)) continue;
-            if (_sharedContextSymbols.Contains(m.NativeSymbol))
+            // Stub needs context if: (1) its native symbol is a shared canonical body,
+            // or (2) the method is a non-canonical shared instantiation that forwards
+            // to the canonical body via the generic sharing map.
+            if (_sharedContextSymbols.Contains(m.NativeSymbol) ||
+                _genericSharingCanonicalMap.ContainsKey(m.SubjectId))
                 _stubNeedsContext[stub] = true;
             else if (!_stubNeedsContext.ContainsKey(stub))
                 _stubNeedsContext[stub] = false;
+        }
+
+        // Also add stub symbols that need context into _sharedContextSymbols so
+        // call site emission (EmitLinearResolvedInvocation etc.) correctly passes
+        // chaos_generic_context when calling stub definitions.
+        foreach (var kvp in _stubNeedsContext)
+        {
+            if (kvp.Value)
+                _sharedContextSymbols.Add(kvp.Key);
         }
 
         // Augment lowering set with methods of types that implement COM interfaces.
