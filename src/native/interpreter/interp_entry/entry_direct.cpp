@@ -610,7 +610,6 @@ void InterpreterEntryDirect(
         auto tier = patch_method->tier_state.load(std::memory_order_acquire);
         CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: before instructions.data() reg_method=%p", (void*)reg_method);
         const interpreter::RegisterInstruction* exec_instrs = reg_method->instructions.data();
-        std::fprintf(stderr, "[diag:StepB] data=%p size=%llu\n", (void*)exec_instrs, (unsigned long long)reg_method->instructions.size());
         uint32_t exec_instr_count = static_cast<uint32_t>(reg_method->instructions.size());
 
         if (tier == PatchMethod::kStackInterpreted && call_count >= TierManager::Get().GetAdaptiveT1Threshold()) {

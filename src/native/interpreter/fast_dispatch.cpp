@@ -985,7 +985,19 @@ static void Handle_Call_DoAotDirect(FastFrame& frame,
     uint64_t a5 = (ac > 5) ? raw_args[5] : 0;
     uint64_t a6 = (ac > 6) ? raw_args[6] : 0;
     uint64_t a7 = (ac > 7) ? raw_args[7] : 0;
-    uint64_t result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+
+    uint64_t result = 0;
+#if defined(_WIN32)
+    __try {
+        result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+    } __except(EXCEPTION_EXECUTE_HANDLER) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+#else
+    result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+#endif
 
     // Read ret_tag from CachedCallInfo.
     // ret_tag is pre-computed by the interpreter (not codegen) to match the
@@ -1027,7 +1039,18 @@ static void Handle_Call_DoMIC(FastFrame& frame,
     uint64_t a5 = (ac > 5) ? raw_args[5] : 0;
     uint64_t a6 = (ac > 6) ? raw_args[6] : 0;
     uint64_t a7 = (ac > 7) ? raw_args[7] : 0;
-    uint64_t result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+    uint64_t result = 0;
+#if defined(_WIN32)
+    __try {
+        result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+    } __except(EXCEPTION_EXECUTE_HANDLER) {
+        frame.threw_exception = true;
+        frame.pc = 9999;
+        return;
+    }
+#else
+    result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+#endif
 
     // Push return value with cached tag.
     auto ret_tag = static_cast<uint8_t>(cache_info->ret_tag);
@@ -1134,11 +1157,55 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
         using DirectFn0 = uint64_t (*)();
         auto fn = reinterpret_cast<DirectFn0>(instr.direct_fn);
         uint64_t result = fn();
-        uint8_t ret_tag = static_cast<uint8_t>(interpreter::ValueTag::Int32);
-        if (frame.call_cache != nullptr && frame.pc < frame.call_count) {
-            const auto* cc = static_cast<const ri::CachedCallInfo*>(frame.call_cache);
-            if (cc[frame.pc].ret_tag != 0xFF) ret_tag = cc[frame.pc].ret_tag;
+        uint8_t ret_tag = (instr.direct_ret_tag != 0xFF)
+            ? instr.direct_ret_tag
+            : static_cast<uint8_t>(interpreter::ValueTag::Int32);
+        if (ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
+            frame.stack[frame.sp] = result;
+            frame.stack_tags[frame.sp] = ret_tag;
+            ++frame.sp;
         }
+        ++frame.pc;
+        return;
+    }
+
+    // ── Direct function inline path (ac 1..8) ─────────────────────
+    // Inline arg pop + SEH-protected call + result push to eliminate
+    // PopCallArgs RAII overhead (~30ns constructor/destructor) and the
+    // extra function call to Handle_Call_DoAotDirect.  Uses
+    // instr.direct_ret_tag directly to skip frame.call_cache lookup.
+    if (instr.direct_fn != nullptr && ac <= 8) {
+        uint64_t pop_buf[8];
+        for (uint32_t i = ac; i > 0; --i) {
+            --frame.sp;
+            pop_buf[i - 1] = frame.stack[frame.sp];
+        }
+        using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                                      uint64_t, uint64_t, uint64_t, uint64_t);
+        auto fn = reinterpret_cast<DirectFn>(instr.direct_fn);
+        uint64_t a0 = pop_buf[0];
+        uint64_t a1 = (ac > 1) ? pop_buf[1] : 0;
+        uint64_t a2 = (ac > 2) ? pop_buf[2] : 0;
+        uint64_t a3 = (ac > 3) ? pop_buf[3] : 0;
+        uint64_t a4 = (ac > 4) ? pop_buf[4] : 0;
+        uint64_t a5 = (ac > 5) ? pop_buf[5] : 0;
+        uint64_t a6 = (ac > 6) ? pop_buf[6] : 0;
+        uint64_t a7 = (ac > 7) ? pop_buf[7] : 0;
+        uint64_t result = 0;
+#if defined(_WIN32)
+        __try {
+            result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+        } __except(EXCEPTION_EXECUTE_HANDLER) {
+            frame.threw_exception = true;
+            frame.pc = 9999;
+            return;
+        }
+#else
+        result = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+#endif
+        uint8_t ret_tag = (instr.direct_ret_tag != 0xFF)
+            ? instr.direct_ret_tag
+            : static_cast<uint8_t>(interpreter::ValueTag::Int32);
         if (ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
             frame.stack[frame.sp] = result;
             frame.stack_tags[frame.sp] = ret_tag;

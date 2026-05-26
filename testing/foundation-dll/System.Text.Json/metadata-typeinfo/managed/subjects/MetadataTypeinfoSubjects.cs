@@ -26,6 +26,8 @@ public static partial class MetadataTypeinfoSubjects
     // [1] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonTypeInfo{T}:System.Text.Json.Serialization.Metadata.JsonTypeInfo{T}(System.Text.Json.JsonSerializerOptions)
     public static void CustomEntrySubject_1()
     {
+        try { var info = JsonTypeInfo.CreateJsonTypeInfo<int>(null!); Assert.IsNotNull(info); }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Text.Json.JsonSerializerOptions)
@@ -178,6 +180,8 @@ public static partial class MetadataTypeinfoSubjects
     // [23] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_CreateObject:System.Void(System.Func{System.Object})
     public static void CustomEntrySubject_23()
     {
+        try { default(JsonTypeInfo)!.CreateObject = default; Assert.IsTrue(true); }
+        catch { _exitCode = 1; }
     }
 
     // [24] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_NumberHandling:System.Void(System.Nullable{System.Text.Json.Serialization.JsonNumberHandling})
@@ -190,21 +194,29 @@ public static partial class MetadataTypeinfoSubjects
     // [25] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnDeserialized:System.Void(System.Action{System.Object})
     public static void CustomEntrySubject_25()
     {
+        try { default(JsonTypeInfo)!.OnDeserialized = default; Assert.IsTrue(true); }
+        catch { _exitCode = 1; }
     }
 
     // [26] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnDeserializing:System.Void(System.Action{System.Object})
     public static void CustomEntrySubject_26()
     {
+        try { default(JsonTypeInfo)!.OnDeserializing = default; Assert.IsTrue(true); }
+        catch { _exitCode = 1; }
     }
 
     // [27] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnSerialized:System.Void(System.Action{System.Object})
     public static void CustomEntrySubject_27()
     {
+        try { default(JsonTypeInfo)!.OnSerialized = default; Assert.IsTrue(true); }
+        catch { _exitCode = 1; }
     }
 
     // [28] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnSerializing:System.Void(System.Action{System.Object})
     public static void CustomEntrySubject_28()
     {
+        try { default(JsonTypeInfo)!.OnSerializing = default; Assert.IsTrue(true); }
+        catch { _exitCode = 1; }
     }
 
     // [29] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OriginatingResolver:System.Void(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver)
@@ -238,13 +250,15 @@ public static partial class MetadataTypeinfoSubjects
     // [33] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_IsReadOnly:System.Void(System.Boolean)
     public static void Subject_33()
     {
-        // TODO: System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_IsReadOnly:System.Void(System.Boolean) could not be auto-generated
+        try { default(JsonTypeInfo)!.IsReadOnly = true; }
+        catch { _exitCode = 1; }
     }
 
     // [34] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_ConstructorAttributeProvider:System.Void(System.Reflection.ICustomAttributeProvider)
     public static void Subject_34()
     {
-        // TODO: System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_ConstructorAttributeProvider:System.Void(System.Reflection.ICustomAttributeProvider) could not be auto-generated
+        try { default(JsonTypeInfo)!.ConstructorAttributeProvider = default; }
+        catch { _exitCode = 1; }
     }
 
     // [35] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::get_CreateObject:System.Func{T}()
@@ -257,6 +271,8 @@ public static partial class MetadataTypeinfoSubjects
     // [36] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::get_SerializeHandler:System.Action{System.Text.Json.Utf8JsonWriter,T}()
     public static void CustomEntrySubject_36()
     {
+        try { var h = default(JsonTypeInfo<int>)!.SerializeHandler; Assert.IsNull(h); }
+        catch { _exitCode = 1; }
     }
 
     // [37] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::set_CreateObject:System.Void(System.Func{T})
@@ -269,6 +285,8 @@ public static partial class MetadataTypeinfoSubjects
     // [38] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::set_SerializeHandler:System.Void(System.Action{System.Text.Json.Utf8JsonWriter,T})
     public static void CustomEntrySubject_38()
     {
+        try { default(JsonTypeInfo<int>)!.SerializeHandler = default; Assert.IsTrue(true); }
+        catch { _exitCode = 1; }
     }
 
 }

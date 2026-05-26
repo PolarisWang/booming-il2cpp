@@ -1625,7 +1625,6 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_Call");
     uint32_t ac = instr.call_arg_count();
     void* call_target = instr.imm.ptr;
-    std::fprintf(stderr, "[diag:RC] pc=%u target=%p\n", frame.pc, call_target);
     if (call_target == nullptr) { ++frame.pc; return; }
 
     // Build raw_args/raw_tags from consecutive registers starting at src1_reg
@@ -1657,8 +1656,6 @@ static void Reg_Call(RegisterFrame& frame, const RegisterInstruction& instr) noe
             cache_info = &cc[frame.pc];
         }
     }
-    std::fprintf(stderr, "[diag:REG_CALL] pc=%u ac=%u inst=%d ci=%p\n", frame.pc, ac, instr.is_instance_call(), (void*)cache_info);
-    std::fflush(stderr);
 
     auto dret = ri::InterpreterDispatchRaw(
         call_target, raw_args, raw_tags, ac,

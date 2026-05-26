@@ -100,6 +100,31 @@ CachedCallInfo PrecacheCallTarget(void* call_target) noexcept {
     return info;
 }
 
+// ── SEH-safe direct thunk call (separate function avoids C2712) ──────────
+// __try/__except cannot coexist with C++ object unwinding in MSVC, so the
+// raw AOT thunk call is isolated to this helper.
+// Uniform 8-arg AOT thunk signature matching fn(a0...a7) calling convention.
+using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
+                              uint64_t, uint64_t, uint64_t, uint64_t);
+
+#if defined(_WIN32)
+static uint64_t CallDirectFnSehSafe(
+    DirectFn fn,
+    uint64_t a0, uint64_t a1, uint64_t a2, uint64_t a3,
+    uint64_t a4, uint64_t a5, uint64_t a6, uint64_t a7,
+    bool* out_caught) noexcept
+{
+    uint64_t ret = 0;
+    __try {
+        ret = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+    } __except(EXCEPTION_EXECUTE_HANDLER) {
+        *out_caught = true;
+    }
+    return ret;
+}
+#endif
+
+
 // ── InterpreterDispatchRaw ──────────────────────────────────────────────────
 // Optimized dispatch that skips the InterpreterValue[] round-trip.
 // Takes raw uint64_t values + ValueTag tags directly from FastFrame stack,
@@ -239,8 +264,6 @@ RawDispatchResult InterpreterDispatchRaw(
     // The AOT thunk expects all managed args (including 'this' for instance
     // calls) as raw uint64_t values via the uniform 8-arg signature.  Struct
     // returns and >8 arg cases fall through to MethodInvoke.
-    using DirectFn = uint64_t (*)(uint64_t, uint64_t, uint64_t, uint64_t,
-                                  uint64_t, uint64_t, uint64_t, uint64_t);
     if (use_cache && cache_info->direct_ptr != nullptr && !cache_info->is_patched &&
         ret_tag != ValueTag::Struct && arg_count <= 8) {
         // Skip MIC for instance methods where 'this' is a value type.
@@ -261,7 +284,22 @@ RawDispatchResult InterpreterDispatchRaw(
             uint64_t a5 = (arg_count > 5) ? raw_args[5] : 0;
             uint64_t a6 = (arg_count > 6) ? raw_args[6] : 0;
             uint64_t a7 = (arg_count > 7) ? raw_args[7] : 0;
-            uint64_t ret_scalar = fn(a0, a1, a2, a3, a4, a5, a6, a7);
+            uint64_t ret_scalar = 0;
+            bool seh_caught = false;
+#if defined(_WIN32)
+            ret_scalar = CallDirectFnSehSafe(
+                reinterpret_cast<DirectFn>(cache_info->direct_ptr),
+                a0, a1, a2, a3, a4, a5, a6, a7, &seh_caught);
+#else
+            ret_scalar = reinterpret_cast<DirectFn>(cache_info->direct_ptr)(
+                a0, a1, a2, a3, a4, a5, a6, a7);
+#endif
+            if (seh_caught) {
+                --ctx->recursion_depth;
+                result.threw_exception = true;
+                result.exception_obj = nullptr;
+                return result;
+            }
 
             if (ret_tag != ValueTag::Void) {
                 result.has_value = true;

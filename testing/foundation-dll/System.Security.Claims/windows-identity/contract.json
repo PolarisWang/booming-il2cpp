@@ -4,5 +4,58 @@
   "ownerSubjectId": "SolutionCorePack",
   "familyId": "family/System.Security.Claims/windows-identity",
   "displayName": "Windows Identity",
-  "methodSubjectIds": []
+  "methodSubjectIds": [
+    "System.Security.Claims/System.Security.Claims.Claim::.ctor:System.Void(System.String,System.String)",
+    "System.Security.Claims/System.Security.Claims.Claim::.ctor:System.Void(System.String,System.String,System.String)",
+    "System.Security.Claims/System.Security.Claims.Claim::.ctor:System.Void(System.String,System.String,System.String,System.String)",
+    "System.Security.Claims/System.Security.Claims.Claim::.ctor:System.Void(System.String,System.String,System.String,System.String,System.String)",
+    "System.Security.Claims/System.Security.Claims.Claim::get_Type:System.String()",
+    "System.Security.Claims/System.Security.Claims.Claim::get_Value:System.String()",
+    "System.Security.Claims/System.Security.Claims.Claim::get_ValueType:System.String()",
+    "System.Security.Claims/System.Security.Claims.Claim::get_Issuer:System.String()",
+    "System.Security.Claims/System.Security.Claims.Claim::get_OriginalIssuer:System.String()",
+    "System.Security.Claims/System.Security.Claims.Claim::Clone:System.Security.Claims.Claim()",
+    "System.Security.Claims/System.Security.Claims.Claim::ToString:System.String()",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::.ctor:System.Void()",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::.ctor:System.Void(System.String)",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::.ctor:System.Void(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim})",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::.ctor:System.Void(System.Collections.Generic.IEnumerable{System.Security.Claims.Claim},System.String)",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::get_AuthenticationType:System.String()",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::get_IsAuthenticated:System.Boolean()",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::get_Name:System.String()",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::get_Claims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::AddClaim:System.Void(System.Security.Claims.Claim)",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::TryRemoveClaim:System.Boolean(System.Security.Claims.Claim)",
+    "System.Security.Claims/System.Security.Claims.ClaimsIdentity::HasClaim:System.Boolean(System.String,System.String)",
+    "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::.ctor:System.Void()",
+    "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::.ctor:System.Void(System.Collections.Generic.IEnumerable{System.Security.Claims.ClaimsIdentity})",
+    "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::get_Identity:System.Security.Principal.IIdentity()",
+    "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::get_Claims:System.Collections.Generic.IEnumerable{System.Security.Claims.Claim}()",
+    "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::AddIdentity:System.Void(System.Security.Claims.ClaimsIdentity)",
+    "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::IsInRole:System.Boolean(System.String)",
+    "System.Security.Claims/System.Security.Claims.ClaimsPrincipal::HasClaim:System.Boolean(System.String,System.String)",
+    "System.Security.Claims/System.Security.Principal.GenericIdentity::.ctor:System.Void(System.String)",
+    "System.Security.Claims/System.Security.Principal.GenericIdentity::.ctor:System.Void(System.String,System.String)",
+    "System.Security.Claims/System.Security.Principal.GenericIdentity::get_Name:System.String()",
+    "System.Security.Claims/System.Security.Principal.GenericIdentity::get_AuthenticationType:System.String()",
+    "System.Security.Claims/System.Security.Principal.GenericIdentity::get_IsAuthenticated:System.Boolean()",
+    "System.Security.Claims/System.Security.Principal.GenericPrincipal::.ctor:System.Void(System.Security.Principal.IIdentity,System.String{})",
+    "System.Security.Claims/System.Security.Principal.GenericPrincipal::get_Identity:System.Security.Principal.IIdentity()",
+    "System.Security.Claims/System.Security.Principal.GenericPrincipal::IsInRole:System.Boolean(System.String)"
+  ],
+  "methodSubjectCount": 37,
+  "customEntryIndices": [],
+  "functionalObligation": {
+    "required": true
+  },
+  "performanceObligation": {
+    "required": false
+  },
+  "hotupdateFunctionalObligation": {
+    "required": false
+  },
+  "hotupdatePerformanceObligation": {
+    "required": false
+  },
+  "reviewBundleRequired": true
 }

@@ -5,10 +5,9 @@ set(CMAKE_CXX_STANDARD 20)
 # Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions
 # thrown by generated code (throw chaos_managed_exception from unresolved calls).
 add_compile_options(/utf-8 /GS- /FS)
-add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
-add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
-add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
-add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
+add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
+add_compile_definitions(CHAOS_IL2CPP_CONFIG_PROFILE)
+add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=2)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).

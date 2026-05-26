@@ -307,6 +307,10 @@ static thread_local CHAOS_IL2CPP_INTPTR s_enum_str_names[64];
 static thread_local CHAOS_IL2CPP_UINTPTR s_enum_names_array_key = 0;
 static thread_local CHAOS_IL2CPP_INTPTR s_enum_names_array = 0;
 
+// GetValues result array cache: single-entry, keyed by TypeInfoHandle.
+static thread_local CHAOS_IL2CPP_UINTPTR s_enum_values_array_key = 0;
+static thread_local CHAOS_IL2CPP_INTPTR s_enum_values_array = 0;
+
 // ── GC cache invalidation ──────────────────────────────────────────
 // Registered lazily on first call to ChaosEnumGetNames.  Clears
 // thread_local cache keys before each young collection so that the
@@ -318,6 +322,7 @@ static thread_local CHAOS_IL2CPP_INTPTR s_enum_names_array = 0;
 static void enum_stubs_on_gc_event(GcEvent event, void* /*user_data*/) noexcept {
     if (event == GcEvent::GC_YOUNG_START) {
         s_enum_names_array_key = 0;
+        s_enum_values_array_key = 0;
     }
 }
 
@@ -918,10 +923,17 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetName(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
 static CHAOS_IL2CPP_UINTPTR enum_extract_type_handle(CHAOS_IL2CPP_INTPTR type_arg) noexcept {
     if (type_arg == 0) return 0;
 
-    // Tagged TypeInfoHandle: 0x02XXXXXX
+    // Codegen pseudo-handle: 0x02XXXXXX (FNV-24 with prefix tag)
     uint32_t val = static_cast<uint32_t>(type_arg & 0xFFFFFFFFu);
     if ((val & 0xFF000000u) == 0x02000000u && (val & 0xFFFFFFu) != 0u)
         return static_cast<CHAOS_IL2CPP_UINTPTR>(val);
+
+    // TypeInfoHandle with bit[63]=1 (reflection query tagged pointer).
+    // Return the handle itself as a stable cache key. Do NOT try to read
+    // +8 as a pointer — the handle is not a memory address and doing so
+    // may crash (Subject_2 exit_code=0xFFFFFFFF).
+    if (TryDecodeReflectionQueryTypeHandle(static_cast<TypeInfoHandle>(type_arg)) != nullptr)
+        return static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg);
 
     // Managed Type object: read runtime_type_handle at offset 8 (after ThinLockableHeader)
     CHAOS_IL2CPP_UINTPTR raw_handle = 0;
@@ -1005,9 +1017,16 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
 }
 
 /// Enum.GetValues(Type) — returns an object[] of all enum literal values (boxed).
+/// Results are cached per TypeInfoHandle (single-entry) to avoid repeated
+/// GC allocation of boxed values in hot loops.
 CHAOS_IL2CPP_INTPTR ChaosEnumGetValues(CHAOS_IL2CPP_INTPTR type) noexcept
 {
     if (type == 0) return 0;
+
+    // Result array cache: single-entry, keyed by TypeInfoHandle.
+    CHAOS_IL2CPP_UINTPTR type_handle = enum_extract_type_handle(type);
+    if (type_handle != 0 && type_handle == s_enum_values_array_key)
+        return s_enum_values_array;
 
     // Fast path: direct metadata (no resolve_type_arg)
     const auto* meta = enum_resolve_meta(type);
@@ -1019,6 +1038,8 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetValues(CHAOS_IL2CPP_INTPTR type) noexcept
         for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
             accessor->elements[i] = enum_alloc_boxed_int64(meta->fields[i].value);
         }
+        s_enum_values_array_key = type_handle;
+        s_enum_values_array = arr;
         return arr;
     }
 
@@ -1183,6 +1204,10 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
         // Fast path: direct metadata (no resolve_type_arg)
         const auto* meta = enum_resolve_meta(type);
         if (meta != nullptr) {
+            // POH cache: zero-alloc on repeated calls for the same type
+            ensure_enum_str_cache(type, meta);
+            auto cached = lookup_cached_enum_name(val);
+            if (cached != 0) return cached;
             for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
                 if (meta->fields[i].value == val) {
                     const auto name_len = std::strlen(meta->fields[i].name);
@@ -1262,6 +1287,10 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
     // Fast path: direct metadata (no resolve_type_arg)
     const auto* meta = enum_resolve_meta(type_handle);
     if (meta != nullptr) {
+        // POH cache: zero-alloc on repeated calls for the same type
+        ensure_enum_str_cache(type_handle, meta);
+        auto cached = lookup_cached_enum_name(val);
+        if (cached != 0) return cached;
         for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
             if (meta->fields[i].value == val) {
                 const auto name_len = std::strlen(meta->fields[i].name);
@@ -1319,6 +1348,10 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToStringRaw(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_
     // Fast path: direct metadata (no resolve_type_arg)
     const auto* meta = enum_resolve_meta(type_handle);
     if (meta != nullptr) {
+        // POH cache: zero-alloc on repeated calls for the same type
+        ensure_enum_str_cache(type_handle, meta);
+        auto cached = lookup_cached_enum_name(val);
+        if (cached != 0) return cached;
         for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
             if (meta->fields[i].value == val) {
                 const auto name_len = std::strlen(meta->fields[i].name);

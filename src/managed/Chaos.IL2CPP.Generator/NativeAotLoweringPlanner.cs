@@ -36,6 +36,11 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlySet<string> _enumTypeSubjectIds =
         new HashSet<string>(StringComparer.Ordinal);
 
+    // Enum field value→name map, built once from FieldEntries or PE metadata scan.
+    // Used by both AOT Bake planning and BoxToString switch emission.
+    private Dictionary<string, Dictionary<long, string>> _enumValueToNameMap =
+        new(StringComparer.Ordinal);
+
     private CustomAttributeSupportModel _customAttributeSupport = CustomAttributeSupportModel.Empty;
     private AssemblyReflectionSupportModel _assemblyReflectionSupport = AssemblyReflectionSupportModel.Empty;
     private ReflectionMemberSupportModel _reflectionMemberSupport = ReflectionMemberSupportModel.Empty;
@@ -332,6 +337,12 @@ public sealed partial class NativeAotLoweringPlanner
     /// Populated by <see cref="BuildDispatchSlotMap"/> before method body emission.
     /// </summary>
     private Dictionary<string, int>? _nativeSymbolToDispatchSlot;
+
+    /// <summary>
+    /// Entry function code (RunNativeAot) to emit only in the first translation unit page.
+    /// Populated for both generic-managed-entry and full-assembly-entry plans.
+    /// </summary>
+    private string? _entryFunctionCode;
 
     /// <summary>
     /// Native symbol of the method currently being emitted. Set/reset in
@@ -698,6 +709,7 @@ public sealed partial class NativeAotLoweringPlanner
         _reflectionMemberSupport = reflectionMemberSupport!;
         _staticFieldDataSupport = staticFieldDataSupport!;
         _enumTypeSubjectIds = CollectEnumTypeSubjectIds(_reflectionMemberSupport, _cachedClosureAssemblyPaths);
+        _enumValueToNameMap = BuildEnumValueToNameMap();
         _staticInitializationSupport = BuildStaticInitializationSupportModel(
             methodsForLowering,
             closureManifest);
@@ -757,28 +769,6 @@ public sealed partial class NativeAotLoweringPlanner
         // Incremented during BuildMethodSourceSafe → EmitViaStructuredIR → EmitPcDispatch.
         PcDispatchCount = (int)Interlocked.Read(ref s_pcDispatchCount);
 
-        // Emit bridge/import thunks after all method bodies.
-        // These C++ wrapper functions handle GC transition and calling
-        // convention adaptation for calls crossing the managed/native boundary.
-        if (_bridgeImportThunks is { Count: > 0 })
-        {
-            objectModelBuilder.AppendLine();
-            objectModelBuilder.AppendLine("// ── Bridge/import thunks ──");
-            // Forward-declare the external runtime dispatch table for bridge thunks
-            // that route through kChaosExternalRuntimeFnTable[idx] instead of calling
-            // chaos_external_runtime_* symbols directly (those symbols don't exist at
-            // link time for callees without shape-matching ExternalRuntimeHelper definitions).
-            // The actual definition is emitted later in the module registration section.
-            if (_bridgeImportThunks.Values.Any(t => t.ExternalRuntimeTableIndex >= 0))
-            {
-                objectModelBuilder.AppendLine("extern \"C\" void* kChaosExternalRuntimeFnTable[];");
-            }
-            foreach (var thunk in _bridgeImportThunks.Values
-                .OrderBy(t => t.ThunkSymbol, StringComparer.Ordinal))
-            {
-                EmitBridgeImportThunk(objectModelBuilder, thunk);
-            }
-        }
 
         var entryBridgeArguments = fullAssemblyMode ? "" : BuildEntryBridgeArguments(entryMethod);
 
@@ -833,6 +823,29 @@ public sealed partial class NativeAotLoweringPlanner
         {
             moduleRegSb.Append(Environment.NewLine);
             moduleRegSb.Append(gcSlotMapCode);
+        }
+
+        // Step 1.75: Emit bridge/import thunks in the registration-only section so they
+        // appear in only the first translation unit page, avoiding duplicate symbol errors.
+        // These C++ wrapper functions handle GC transition and calling convention adaptation
+        // for calls crossing the managed/native boundary.
+        if (_bridgeImportThunks is { Count: > 0 })
+        {
+            moduleRegSb.Append(Environment.NewLine);
+            moduleRegSb.Append("// ── Bridge/import thunks ──");
+            moduleRegSb.Append(Environment.NewLine);
+            if (_bridgeImportThunks.Values.Any(t => t.ExternalRuntimeTableIndex >= 0))
+            {
+                // Forward-declare the external runtime dispatch table. The actual definition
+                // is emitted in BuildExternalRuntimeDispatchTable (above in Step 1).
+                moduleRegSb.Append("extern \"C\" void* kChaosExternalRuntimeFnTable[];");
+                moduleRegSb.Append(Environment.NewLine);
+            }
+            foreach (var thunk in _bridgeImportThunks.Values
+                .OrderBy(t => t.ThunkSymbol, StringComparer.Ordinal))
+            {
+                EmitBridgeImportThunk(moduleRegSb, thunk);
+            }
         }
 
         // Step 2: Emit CodeRegistrationV0, MetadataRegistrationV0, CodegenRegistrationOptionsV0
@@ -893,25 +906,62 @@ extern ""C"" void ChaosJitRegisterAll() {}
 ";
         }
 
-        // Generate entry function (RunNativeAot) for generic-managed-entry plans.
-        // The benchmark host main() calls RunNativeAot(entryIndex) which delegates
-        // to the lowering plan's entry symbol (e.g. InvokeWorkload).
+        // Generate entry function (RunNativeAot) for all plan kinds that have
+        // a callable workload entry point. The benchmark host main() calls
+        // RunNativeAot(entryIndex) which delegates to InvokeWorkload.
         // We add a forward declaration at file scope because the entry symbol is
         // declared inside the codegen namespace (Scriban template) while the entry
         // function needs to be at file scope (outside the namespace) for
         // native_aot_main.cpp link-time visibility.
+        // For generic-managed-entry plans, the lowering plan explicitly specifies
+        // NativeEntryFunctionName and EntrySymbol. For full-assembly-entry plans,
+        // we search the method list for InvokeWorkload as a well-known entry point.
+        string? invokeWorkloadSymbol = null;
+        if (loweringPlan.PlanKind == "full-assembly-entry" && methodCount > 0)
+        {
+            foreach (var method in methodsForLowering)
+            {
+                if (method.SubjectId.Contains("::InvokeWorkload:", StringComparison.Ordinal))
+                {
+                    invokeWorkloadSymbol = method.NativeSymbol;
+                    break;
+                }
+            }
+        }
+
+        string? entryFunctionCode = null;
         if (loweringPlan.PlanKind == "generic-managed-entry"
             && !string.IsNullOrEmpty(loweringPlan.NativeEntryFunctionName)
             && !string.IsNullOrEmpty(loweringPlan.EntrySymbol)
             && methodCount > 0)
         {
-            globalDeclarations += $@"
+            entryFunctionCode = $@"
 // Forward declaration for entry symbol (defined in codegen namespace above).
 extern ""C"" CHAOS_IL2CPP_INT32 {loweringPlan.EntrySymbol}(CHAOS_IL2CPP_INT32);
 extern ""C"" CHAOS_IL2CPP_INT32 {loweringPlan.NativeEntryFunctionName}(CHAOS_IL2CPP_INT32 entryIndex) {{
     return {loweringPlan.EntrySymbol}(entryIndex);
 }}
 ";
+        }
+        else if (invokeWorkloadSymbol is not null && methodCount > 0)
+        {
+            // Fallback for full-assembly-entry plans: generate RunNativeAot that
+            // forwards to the InvokeWorkload method (found by SubjectId pattern).
+            entryFunctionCode = $@"
+// Forward declaration for InvokeWorkload (defined in codegen namespace below).
+extern ""C"" CHAOS_IL2CPP_INT32 {invokeWorkloadSymbol}(CHAOS_IL2CPP_INT32);
+extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
+    return {invokeWorkloadSymbol}(entryIndex);
+}}
+";
+        }
+
+        if (entryFunctionCode is not null)
+        {
+            // Store the entry function separately from globalDeclarations so that
+            // NativeAotEmitter can emit it only in the first page (page-0001),
+            // avoiding duplicate symbol errors across translation units.
+            _entryFunctionCode = entryFunctionCode;
         }
 
         // Add kReflImage forward declaration BEFORE the ModuleDescriptor that references it.
@@ -1034,6 +1084,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 {loweringPlan.NativeEntryFunctionName}(CHAOS_IL2
             ModuleRegistrationCode = moduleRegistrationCode,
             WorkloadAbi = loweringPlan.WorkloadAbi,
             GlobalDeclarations = globalDeclarations,
+            EntryFunctionCode = _entryFunctionCode ?? "",
             ManifestJson = _manifestJson ?? "",
             CodegenNamespace = SanitizeCppIdentifier(loweringPlan.AssemblyName),
             GeneratedModuleHeaderContent = moduleHeader,
@@ -4041,6 +4092,45 @@ private static long? ReadFieldConstantValue(
     }
 
     /// <summary>
+    /// Build a type → {value → name} map for all enum types in the closure.
+    /// Prefers FieldEntries from reflection member support data; falls back
+    /// to scanning PE metadata of closure assemblies.
+    /// Used by S2 (BoxToString switch) and other value→name lookups.
+    /// </summary>
+    private Dictionary<string, Dictionary<long, string>> BuildEnumValueToNameMap()
+    {
+        var map = new Dictionary<string, Dictionary<long, string>>(StringComparer.Ordinal);
+
+        IReadOnlyList<ReflectionMemberFieldEntry> fieldEntries;
+        if (_reflectionMemberSupport.FieldEntries.Count > 0)
+        {
+            fieldEntries = _reflectionMemberSupport.FieldEntries;
+        }
+        else
+        {
+            fieldEntries = CollectEnumFieldEntriesFromMetadata();
+        }
+
+        foreach (var field in fieldEntries)
+        {
+            if (field.ConstantValue == null)
+                continue;
+
+            if (!map.TryGetValue(field.DeclaringTypeSubjectId, out var valueToName))
+            {
+                valueToName = new Dictionary<long, string>();
+                map[field.DeclaringTypeSubjectId] = valueToName;
+            }
+
+            // First field with this value wins (consistent with Enum.GetName behavior).
+            if (!valueToName.ContainsKey(field.ConstantValue.Value))
+                valueToName[field.ConstantValue.Value] = field.FieldName;
+        }
+
+        return map;
+    }
+
+    /// <summary>
     /// Scan a single assembly's PE metadata for enum type definitions and
     /// add their subject IDs to the provided set.
     /// </summary>
@@ -4177,6 +4267,13 @@ public sealed record NativeAotTemplateModel
     /// Empty string when no globals are needed.
     /// </summary>
     public string GlobalDeclarations { get; init; } = "";
+
+    /// <summary>
+    /// C++ code for the native entry function (RunNativeAot) emitted at file
+    /// scope. Only included in the first translation unit page to avoid
+    /// duplicate symbol errors across paged TUs.
+    /// </summary>
+    public string EntryFunctionCode { get; init; } = "";
 
 /// <summary>
 /// JSON manifest of methods for verification dispatch generation.

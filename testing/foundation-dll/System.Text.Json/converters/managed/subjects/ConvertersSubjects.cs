@@ -6,8 +6,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Chaos.TestFramework;
 
 public static partial class ConvertersSubjects
 {
@@ -52,25 +54,29 @@ public static partial class ConvertersSubjects
     // [5] System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::Read:T(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)
     public static void Subject_5()
     {
-        // TODO: System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::Read:T(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions) could not be auto-generated
+        try { var opts = new JsonSerializerOptions(); var converter = (JsonConverter<int>)opts.GetConverter(typeof(int)); var bytes = Encoding.UTF8.GetBytes("42"); var reader = new Utf8JsonReader(bytes); reader.Read(); var result = converter.Read(ref reader, typeof(int), opts); Assert.AreEqual(42, result); }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::ReadAsPropertyName:T(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)
     public static void Subject_6()
     {
-        // TODO: System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::ReadAsPropertyName:T(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions) could not be auto-generated
+        try { var opts = new JsonSerializerOptions(); var converter = (JsonConverter<int>)opts.GetConverter(typeof(int)); var bytes = Encoding.UTF8.GetBytes("\"42\""); var reader = new Utf8JsonReader(bytes); reader.Read(); var result = converter.ReadAsPropertyName(ref reader, typeof(int), opts); Assert.AreEqual(42, result); }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::Write:System.Void(System.Text.Json.Utf8JsonWriter,T,System.Text.Json.JsonSerializerOptions)
     public static void Subject_7()
     {
-        // TODO: System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::Write:System.Void(System.Text.Json.Utf8JsonWriter,T,System.Text.Json.JsonSerializerOptions) could not be auto-generated
+        try { var opts = new JsonSerializerOptions(); var converter = (JsonConverter<int>)opts.GetConverter(typeof(int)); using var ms = new System.IO.MemoryStream(); using var writer = new Utf8JsonWriter(ms); converter.Write(writer, 42, opts); writer.Flush(); Assert.IsTrue(ms.Length > 0); }
+        catch { _exitCode = 1; }
     }
 
     // [8] System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::WriteAsPropertyName:System.Void(System.Text.Json.Utf8JsonWriter,T,System.Text.Json.JsonSerializerOptions)
     public static void Subject_8()
     {
-        // TODO: System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::WriteAsPropertyName:System.Void(System.Text.Json.Utf8JsonWriter,T,System.Text.Json.JsonSerializerOptions) could not be auto-generated
+        try { var opts = new JsonSerializerOptions(); var converter = (JsonConverter<int>)opts.GetConverter(typeof(int)); using var ms = new System.IO.MemoryStream(); using var writer = new Utf8JsonWriter(ms); converter.WriteAsPropertyName(writer, 42, opts); writer.Flush(); Assert.IsTrue(ms.Length > 0); }
+        catch { _exitCode = 1; }
     }
 
 }

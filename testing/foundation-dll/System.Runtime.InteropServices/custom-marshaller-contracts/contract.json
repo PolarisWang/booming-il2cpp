@@ -8,7 +8,7 @@
   "methodSubjectCount": 0,
   "customEntryIndices": [],
   "functionalObligation": {
-    "required": true
+    "required": false
   },
   "performanceObligation": {
     "required": false

@@ -28,11 +28,21 @@ extern "C" void ChaosRegisterExternalType(
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime_type_handle) {
     if (runtime_type_handle == 0) return 0;
 
+    // Single-entry thread_local cache: benchmark-hot paths call with the same
+    // handle 100k+ times (e.g. enum operations with typeof(T) in a loop).
+    // The cache avoids O(n) metadata scanning on every call.
+    thread_local CHAOS_IL2CPP_INTPTR s_last_handle = 0;
+    thread_local CHAOS_IL2CPP_INTPTR s_last_result = 0;
+    if (runtime_type_handle == s_last_handle)
+        return s_last_result;
+
     // Try raw metadata token lookup first.
     uint32_t token = DecodeMetadataToken(runtime_type_handle);
     auto* typeDesc = aot_metadata::FindTypeByMetadataToken(token);
     if (typeDesc != nullptr) {
-        return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(typeDesc));
+        s_last_handle = runtime_type_handle;
+        s_last_result = static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(typeDesc));
+        return s_last_result;
     }
 
     // Try pseudo-metadata handle (codegen FNV-1a convention: 0x02XXXXXX).
@@ -49,15 +59,18 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime
                 h *= 16777619u;
             }
             if ((h & 0xFFFFFFu) == target_hash) {
-                return static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(type));
+                s_last_handle = runtime_type_handle;
+                s_last_result = static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(type));
+                return s_last_result;
             }
-        }
 
         // Scan dynamically registered types (codegen enum types, etc.).
         for (CHAOS_IL2CPP_UINT32 i = 0u; i < s_dynamicTypeCount; i++) {
             if (s_dynamicTypes[i].fnv24_hash == target_hash) {
-                return static_cast<CHAOS_IL2CPP_INTPTR>(
+                s_last_handle = runtime_type_handle;
+                s_last_result = static_cast<CHAOS_IL2CPP_INTPTR>(
                     EncodeReflectionQueryTypeHandle(s_dynamicTypes[i].type_desc));
+                return s_last_result;
             }
         }
     }
@@ -79,10 +92,14 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime
                     if (ti != nullptr) {
                         // Encode as ReflectionQuery handle if image is available.
                         if (mod->image != nullptr && idx < mod->image->type_count) {
-                            return static_cast<CHAOS_IL2CPP_INTPTR>(
+                            s_last_handle = runtime_type_handle;
+                            s_last_result = static_cast<CHAOS_IL2CPP_INTPTR>(
                                 EncodeReflectionQueryTypeHandle(mod->image->types[idx]));
+                            return s_last_result;
                         }
                         // Otherwise return the raw module_id+token as the handle.
+                        s_last_handle = runtime_type_handle;
+                        s_last_result = runtime_type_handle;
                         return runtime_type_handle;
                     }
                 }
@@ -90,14 +107,18 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime
                 if (mod->image != nullptr) {
                     auto* typeDesc = FindReflectionQueryTypeByToken(mod->image, tok);
                     if (typeDesc != nullptr) {
-                        return static_cast<CHAOS_IL2CPP_INTPTR>(
+                        s_last_handle = runtime_type_handle;
+                        s_last_result = static_cast<CHAOS_IL2CPP_INTPTR>(
                             EncodeReflectionQueryTypeHandle(typeDesc));
+                        return s_last_result;
                     }
                 }
             }
         }
     }
 
+    s_last_handle = runtime_type_handle;
+    s_last_result = 0;
     return 0;
 }
 

@@ -110,10 +110,71 @@ def run_single_benchmark(
     }
 
 
-def discover_method_count(entry_exe: Path) -> int:
+def run_single_hotupdate_benchmark(
+    entry_exe: Path, method_index: int, iterations: int
+) -> dict[str, Any]:
+    """Run entry.exe --hotupdate-and-benchmark for one method (applies patch first).
+
+    The hotupdate-and-benchmark flow:
+      1. Apply hotpatch to redirect execution through the interpreter
+      2. Warmup call (excluded from PROFILE data via PROFILE_RESET)
+      3. Benchmark loop (captured by PROFILE_SCOPE instrumentation)
+      4. PROFILE_DUMP() outputs PROFILE| lines to stderr
+      5. Revert patch
+    """
+    cmd = [
+        str(entry_exe),
+        "--hotupdate-and-benchmark",
+        str(method_index),
+        str(iterations),
+    ]
+    try:
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+    except subprocess.TimeoutExpired:
+        return {"method_index": method_index, "error": "timeout"}
+    except OSError as e:
+        return {"method_index": method_index, "error": str(e)}
+
+    stdout = result.stdout or ""
+    stderr = result.stderr or ""
+
+    # Parse timing JSON from stdout (same format as regular benchmark)
+    timing: dict[str, Any] = {}
+    for line in stdout.splitlines():
+        line = line.strip()
+        if line.startswith("{"):
+            try:
+                timing = json.loads(line)
+            except json.JSONDecodeError:
+                pass
+
+    # Parse profile data from stderr (interpreter PROFILE_SCOPE data)
+    profile = parse_profile_lines(stderr)
+
+    # Also capture any diagnostic output on stderr for debugging
+    diag_lines = [
+        l for l in stderr.splitlines() if not l.startswith("PROFILE|")
+    ]
+
+    return {
+        "method_index": method_index,
+        "timing": timing,
+        "profile": profile,
+        "diagnostics": diag_lines,
+        "exit_code": result.returncode,
+    }
+
+
+def discover_method_count(entry_exe: Path, hotupdate: bool = False) -> int:
     """Try to discover method count by probing benchmark indices."""
+    flag = "--hotupdate-and-benchmark" if hotupdate else "--benchmark"
     for count in [10, 20, 50, 100, 200]:
-        cmd = [str(entry_exe), "--benchmark", str(count), "1"]
+        cmd = [str(entry_exe), flag, str(count), "1"]
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=10)
         if result.returncode != 0:
             return count
@@ -237,6 +298,12 @@ def main() -> None:
         default=Path("profile_data"),
         help="Output directory for profile JSON reports",
     )
+    parser.add_argument(
+        "--hotupdate",
+        action="store_true",
+        help="Use --hotupdate-and-benchmark to collect interpreter PROFILE data "
+             "(applies patch, runs through interpreter, captures PROFILE_SCOPE data)",
+    )
     args = parser.parse_args()
 
     entry_exe = args.entry_exe_path.resolve()
@@ -244,10 +311,12 @@ def main() -> None:
         print(f"Error: entry.exe not found at {entry_exe}", file=sys.stderr)
         sys.exit(1)
 
+    mode_label = "hotupdate" if args.hotupdate else "benchmark"
+
     # Discover or use explicit method indices
     if args.all_methods:
-        method_count = discover_method_count(entry_exe)
-        print(f"Discovered {method_count} methods", file=sys.stderr)
+        method_count = discover_method_count(entry_exe, hotupdate=args.hotupdate)
+        print(f"Discovered {method_count} methods ({mode_label} mode)", file=sys.stderr)
         indices = list(range(method_count))
     elif args.method_index is not None:
         indices = [args.method_index]
@@ -256,22 +325,35 @@ def main() -> None:
         sys.exit(1)
 
     # Run benchmarks
+    run_fn = run_single_hotupdate_benchmark if args.hotupdate else run_single_benchmark
     results: list[dict[str, Any]] = []
     for idx in indices:
-        print(f"  Benchmarking method {idx}/{len(indices)}...", file=sys.stderr)
-        r = run_single_benchmark(entry_exe, idx, args.iterations)
+        print(f"  {mode_label} method {idx}/{len(indices)}...", file=sys.stderr)
+        r = run_fn(entry_exe, idx, args.iterations)
         results.append(r)
+        if "error" in r:
+            print(f"    Error: {r['error']}", file=sys.stderr)
+        elif r.get("exit_code", 0) != 0:
+            print(f"    Exit code: {r['exit_code']}", file=sys.stderr)
+        else:
+            timing = r.get("timing", {})
+            profile = r.get("profile", {})
+            scope_count = len(profile.get("scopes", {})) if profile else 0
+            print(f"    OK  timing_ms={timing.get('elapsedMilliseconds', 'N/A')}  "
+                  f"scopes={scope_count}", file=sys.stderr)
 
     # Aggregate
     report = aggregate_profile_results(results)
     report["family"] = args.family
     report["iterations"] = args.iterations
     report["captured_at"] = time.strftime("%Y-%m-%dT%H:%M:%S")
+    report["mode"] = mode_label
 
     # Write output
     output_dir = args.output_dir / args.family
     output_dir.mkdir(parents=True, exist_ok=True)
-    report_path = output_dir / "profile-report.json"
+    filename = "profile-report-hotupdate.json" if args.hotupdate else "profile-report.json"
+    report_path = output_dir / filename
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
 
