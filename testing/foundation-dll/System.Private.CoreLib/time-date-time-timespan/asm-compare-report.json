@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/time/date/time/timespan",
-  "capturedAt": "2026-05-25T23:23:05",
+  "capturedAt": "2026-05-26T00:21:42",
   "batchMode": true,
   "summary": {
     "totalMethods": 16,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 704
+      "max": 57,
+      "avg": 44.8,
+      "total": 717
     },
     "aotInstructionCount": {
       "min": 11,
@@ -27,8 +27,8 @@
     "topInstructionCategories": {
       "external_runtime_call": 60
     },
-    "overallIrExpansionRatio": 0.52,
-    "averageExpansionRatio": 0.52,
+    "overallIrExpansionRatio": 0.51,
+    "averageExpansionRatio": 0.51,
     "maxExpansionRatio": 0.68,
     "minExpansionRatio": 0.25
   },
@@ -715,15 +715,15 @@
       "shortName": "Subject_15",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 57,
         "aotInstructionCount": 24,
-        "ratio": 0.55,
+        "ratio": 0.42,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 57
       },
       "aot": {
         "status": "ok",

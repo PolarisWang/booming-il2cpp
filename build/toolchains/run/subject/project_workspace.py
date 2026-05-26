@@ -1461,11 +1461,12 @@ def _materialize_subject_native_aot_source(
     generated_source_path: Path,
     host_kind: str = "",
 ) -> Path:
+    resolved_repo_root = repo_root.resolve()
     host_subdir = "proof" if host_kind == "proof-host" else "benchmark"
     host_main_path = (
-        repo_root / "src" / "native" / "proof-host" / "native_aot_main.cpp"
+        resolved_repo_root / "src" / "native" / "proof-host" / "native_aot_main.cpp"
         if host_kind == "proof-host"
-        else repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
+        else resolved_repo_root / "src" / "native" / "benchmark-host" / "native_aot_main.cpp"
     )
 
     materialized_root = _subject_materialized_source_root(workspace_root, matrix_id)
@@ -1586,6 +1587,8 @@ def _subject_configure_arguments(
             mirrored_generated_root,
             generated_stage_kind=generated_stage_kind,
         )
+        if not generated_source_path.is_absolute():
+            generated_source_path = (repo_root.resolve() / generated_source_path).resolve()
         if generated_stage_kind == "generated-native-aot":
             source_root = _materialize_subject_native_aot_source(
                 repo_root,
@@ -1603,7 +1606,7 @@ def _subject_configure_arguments(
                 str(configure_root),
                 "-G",
                 WINDOWS_VISUAL_STUDIO_GENERATOR,
-                f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root.as_posix()}",
+                f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root.resolve().as_posix()}",
                 f"-DCHAOS_SUBJECT_VARIANT={variant}",
                 f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root}",
             ]
@@ -1627,7 +1630,7 @@ def _subject_configure_arguments(
             str(configure_root),
             "-G",
             WINDOWS_VISUAL_STUDIO_GENERATOR,
-            f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root.as_posix()}",
+            f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root.resolve().as_posix()}",
             f"-DCHAOS_SUBJECT_VARIANT={variant}",
             f"-DCHAOS_SUBJECT_BUILD_OUT_ROOT={out_root}",
             f"-DCHAOS_SUBJECT_RUNTIME_ROOT={runtime_root}",
@@ -1951,6 +1954,7 @@ def _subject_managed_test_projects(
                 project_references=project_references,
                 generated_source_path=_relative_path_text(project_path.parent, generated_source_path),
                 assembly_name=assembly_name,
+                project_dir=project_path.parent,
             ),
             encoding="utf-8",
         )

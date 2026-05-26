@@ -22,6 +22,12 @@ _DRIVER_DLL = (
 )
 
 
+def _has_patch_project(ctx: FamilyContext) -> bool:
+    """Check whether the family has a managed/patch/ project for hotupdate testing."""
+    patch_dir = ctx.family_dir / "managed" / "patch"
+    return any(patch_dir.glob("*.csproj"))
+
+
 def _build_patch_dll(ctx: FamilyContext) -> Path | None:
     """Build the patch DLL from managed/patch/ and return the DLL path."""
     patch_dir = ctx.family_dir / "managed" / "patch"
@@ -200,6 +206,29 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
     build_dir = native_dir / "build"
     if not build_dir.exists():
         build_dir = native_dir / "build" / "vs2022"
+    if not build_dir.exists():
+        # Fallback: try to locate CMakeLists.txt and configure
+        cmake_lists = native_dir / "CMakeLists.txt"
+        if cmake_lists.exists():
+            print(f"  [hotupdate] Configuring CMake at {native_dir}...")
+            subprocess.run(
+                ["cmake", "-S", str(native_dir), "-B", str(build_dir),
+                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo"],
+                capture_output=True, text=True, timeout=120,
+            )
+        else:
+            print(f"  [hotupdate] No build directory ({build_dir}) and no CMakeLists.txt found")
+            return False
+    elif not (build_dir / "CMakeCache.txt").exists():
+        # Build dir exists but was never configured — configure first
+        cmake_lists = native_dir / "CMakeLists.txt"
+        if cmake_lists.exists():
+            print(f"  [hotupdate] Configuring CMake (existing dir, no cache) at {native_dir}...")
+            subprocess.run(
+                ["cmake", "-S", str(native_dir), "-B", str(build_dir),
+                 "-DCMAKE_BUILD_TYPE=RelWithDebInfo"],
+                capture_output=True, text=True, timeout=120,
+            )
     r = subprocess.run(
         ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry"],
         capture_output=True, text=True, timeout=300,
@@ -340,6 +369,13 @@ def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    if not _has_patch_project(ctx):
+        return StageResult(
+            stage="hotupdate", status="skipped",
+            summary="no patch project — hotupdate not applicable",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
     if not _ensure_patch_data(ctx):
         return StageResult(
             stage="hotupdate", status="failed",
@@ -383,6 +419,13 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
         return StageResult(
             stage="hotupdate_aot_benchmark", status="skipped",
             summary="no methods in contract",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    if not _has_patch_project(ctx):
+        return StageResult(
+            stage="hotupdate_aot_benchmark", status="skipped",
+            summary="no patch project — hotupdate not applicable",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 

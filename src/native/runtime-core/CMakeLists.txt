@@ -176,7 +176,7 @@ add_library(chaos_runtime_core STATIC
     tier_manager.cpp
     )
 target_compile_features(chaos_runtime_core PUBLIC cxx_std_17)
-target_compile_definitions(chaos_runtime_core PUBLIC NOMINMAX)
+target_compile_definitions(chaos_runtime_core PUBLIC NOMINMAX CHAOS_IL2CPP_HAS_TIER_MANAGER)
 
 # ── GC feature selection (G-29: compile-time feature toggles) ──────
 #
@@ -235,7 +235,8 @@ target_include_directories(
         "${REPO_ROOT}/src/native/interpreter"
         "${REPO_ROOT}/src/native/interpreter/generated"
         "${CMAKE_CURRENT_LIST_DIR}"
-        "${CMAKE_CURRENT_LIST_DIR}/gc")
+        "${CMAKE_CURRENT_LIST_DIR}/gc"
+        "${CMAKE_CURRENT_LIST_DIR}/runtime_stubs")
 
 target_link_libraries(chaos_runtime_core PUBLIC chaos_fmt chaos_common)
 if(WIN32)

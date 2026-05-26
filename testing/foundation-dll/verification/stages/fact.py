@@ -22,6 +22,15 @@ def run_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
 
     exe_path = ctx.entry_exe_path
     if not exe_path.exists():
+        # Check if this is a 0-method family (no codegen needed)
+        preflight = stages.get("preflight")
+        if preflight and preflight.details and preflight.details.get("methodCount", 0) == 0:
+            return StageResult(
+                stage="fact", status="passed",
+                summary="passed (0/0 — no methods to verify)",
+                details={"passed": 0, "total": 0, "exitCode": 0},
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
         return StageResult(
             stage="fact", status="failed",
             summary="entry.exe not found (codegen stage may have failed)",

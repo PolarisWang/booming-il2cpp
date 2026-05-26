@@ -10,5 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="DelegateCoreInvocationPatchEntry.cs" />
+    <Compile Include="DelegateCoreInvocationPatchEntry.Custom.cs" />
   </ItemGroup>
 </Project>

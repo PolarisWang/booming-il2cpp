@@ -12,8 +12,6 @@ using System.Threading.Tasks;
 
 public static partial class ThreadingTasksPrimitivesPatchEntry
 {
-    public static int _exitCode;
-
     private static int s_sharedState;
 
     // [0] System.Threading.Tasks.Task::Run(System.Action)

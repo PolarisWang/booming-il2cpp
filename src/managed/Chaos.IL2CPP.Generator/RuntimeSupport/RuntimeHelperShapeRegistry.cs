@@ -301,16 +301,23 @@ public sealed partial class NativeAotLoweringPlanner
                 var genericPart = typeDisplayName!.Substring(entry.TypeDisplayNamePrefix.Length);
                 if (genericPart.StartsWith('`'))
                 {
-                    // Open generic — extract type args from the method name's suffix
-                    // e.g. "System.Collections.Immutable.ImmutableArray`1::get_Item" -> needs method-level generic parsing
-                    // For now, extract from the declaring type's `` suffix
+                    // Open generic — try to extract closed type args from [[...]] syntax
+                    // (e.g. "List`1[[System.Int32]]" -> ["System.Int32"]).
+                    // If no [[...]] is present (open generic subject ID like "List`1"),
+                    // still match the descriptor — these resolvers work with generic
+                    // pointer types and don't depend on concrete type args.
                     if (TryParseGenericTypeArgsFromTypeName(genericPart, out var parsedTypeArgs))
                     {
                         typeArgs = parsedTypeArgs;
                         descriptor = entry;
                         return true;
                     }
-                    continue;
+                    // Open generic without resolved type args — match with empty list
+                    // (the resolver's Resolver lambda receives the callee subject ID
+                    // and can inspect type parameters from the method signature).
+                    typeArgs = Array.Empty<string>();
+                    descriptor = entry;
+                    return true;
                 }
 
                 // Non-generic descriptor match (no <...> brackets expected).

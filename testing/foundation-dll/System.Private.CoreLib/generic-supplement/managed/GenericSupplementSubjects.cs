@@ -1,61 +1,43 @@
+// Auto-generated native-AOT entry point
+// Family: family/System.Private.CoreLib/generic/supplement
+// Assembly: System.Private.CoreLib
+// Variant: subjects
+
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
-/// <summary>
-/// Auto-generated subjects class for GenericSupplement test family.
-/// Each subject method calls the corresponding NativeEntry test method twice
-/// and checks that both invocations return the same result.
-/// </summary>
-internal static partial class GenericSupplementSubjects
+public static partial class GenericSupplementSubjects
 {
-    // Inlined exit code — avoids SDK method resolution in codegen for direct field access.
-    // volatile prevents the compiler from eliding the double-invoke pattern.
-    private static volatile int _exitCode = 0;
+    // Inlined exit code — avoids SDK method call resolution in codegen
+    public static int _exitCode;
 
-    // Subject 0: roundtrip test
-    internal static void Subject_0()
+    // [0] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()
+    public static void Subject_0()
     {
-        try
-        {
-            var a = GenericSupplementNativeEntry.TestSupplementalMetadataRoundtrip();
-            var b = GenericSupplementNativeEntry.TestSupplementalMetadataRoundtrip();
-            if (a != b) _exitCode = 1;
-        }
+        try { if (GenericSupplementNativeEntry.TestSupplementalMetadataRoundtrip() != GenericSupplementNativeEntry.TestSupplementalMetadataRoundtrip()) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
-    // Subject 1: type lookup by subject ID
-    internal static void Subject_1()
+    // [1] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()
+    public static void Subject_1()
     {
-        try
-        {
-            var a = GenericSupplementNativeEntry.TestTypeLookupBySubjectId();
-            var b = GenericSupplementNativeEntry.TestTypeLookupBySubjectId();
-            if (a != b) _exitCode = 1;
-        }
+        try { if (GenericSupplementNativeEntry.TestTypeLookupBySubjectId() != GenericSupplementNativeEntry.TestTypeLookupBySubjectId()) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
-    // Subject 2: type lookup by token
-    internal static void Subject_2()
+    // [2] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()
+    public static void Subject_2()
     {
-        try
-        {
-            var a = GenericSupplementNativeEntry.TestTypeLookupByToken();
-            var b = GenericSupplementNativeEntry.TestTypeLookupByToken();
-            if (a != b) _exitCode = 1;
-        }
+        try { if (GenericSupplementNativeEntry.TestTypeLookupByToken() != GenericSupplementNativeEntry.TestTypeLookupByToken()) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
-    // Subject 3: generic instantiation tracking
-    internal static void Subject_3()
+    // [3] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()
+    public static void Subject_3()
     {
-        try
-        {
-            var a = GenericSupplementNativeEntry.TestGenericInstantiation();
-            var b = GenericSupplementNativeEntry.TestGenericInstantiation();
-            if (a != b) _exitCode = 1;
-        }
+        try { if (GenericSupplementNativeEntry.TestGenericInstantiation() != GenericSupplementNativeEntry.TestGenericInstantiation()) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
+
 }

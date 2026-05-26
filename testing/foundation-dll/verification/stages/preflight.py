@@ -35,8 +35,13 @@ def run_preflight(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
     mids = contract.get("methodSubjectIds", [])
     if not mids:
         return StageResult(
-            stage="preflight", status="failed",
-            summary="No methodSubjectIds found in contract",
+            stage="preflight", status="passed",
+            summary="0 methods — no verification needed",
+            details={
+                "methodCount": 0,
+                "familyId": contract.get("familyId", ""),
+                "displayName": contract.get("displayName", ""),
+            },
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 

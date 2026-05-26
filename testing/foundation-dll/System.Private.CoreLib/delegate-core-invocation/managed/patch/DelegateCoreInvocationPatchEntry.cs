@@ -39,17 +39,7 @@ public static partial class DelegateCoreInvocationPatchEntry
     }
 
     // [5] System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)
-    public static int Subject_5()
-    {
-        return unchecked((int)(0xB0000000u + 5));
-    }
-
     // [6] System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)
-    public static int Subject_6()
-    {
-        return unchecked((int)(0xB0000000u + 6));
-    }
-
     // [7] System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()
     public static int Subject_7()
     {
@@ -57,17 +47,7 @@ public static partial class DelegateCoreInvocationPatchEntry
     }
 
     // [8] System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)
-    public static int Subject_8()
-    {
-        return unchecked((int)(0xB0000000u + 8));
-    }
-
     // [9] System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)
-    public static int Subject_9()
-    {
-        return unchecked((int)(0xB0000000u + 9));
-    }
-
     public static void Run(int entryIndex)
     {
         try
@@ -79,11 +59,11 @@ public static partial class DelegateCoreInvocationPatchEntry
                 case 2: Subject_2(); break;
                 case 3: Subject_3(); break;
                 case 4: Subject_4(); break;
-                case 5: Subject_5(); break;
-                case 6: Subject_6(); break;
+                case 5: CustomEntryMethod5(); break;
+                case 6: CustomEntryMethod6(); break;
                 case 7: Subject_7(); break;
-                case 8: Subject_8(); break;
-                case 9: Subject_9(); break;
+                case 8: CustomEntryMethod8(); break;
+                case 9: CustomEntryMethod9(); break;
             }
         }
         catch

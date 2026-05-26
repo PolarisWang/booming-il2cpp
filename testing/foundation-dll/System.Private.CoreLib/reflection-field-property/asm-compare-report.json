@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/field/property",
-  "capturedAt": "2026-05-25T23:32:50",
+  "capturedAt": "2026-05-25T23:56:52",
   "batchMode": true,
   "summary": {
     "totalMethods": 34,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 524,
-      "avg": 75.5,
-      "total": 2568
+      "max": 44,
+      "avg": 44.0,
+      "total": 1496
     },
     "aotInstructionCount": {
       "min": 13,
@@ -27,10 +27,10 @@
     "topInstructionCategories": {
       "external_runtime_call": 89
     },
-    "overallIrExpansionRatio": 0.31,
-    "averageExpansionRatio": 0.49,
+    "overallIrExpansionRatio": 0.52,
+    "averageExpansionRatio": 0.52,
     "maxExpansionRatio": 0.68,
-    "minExpansionRatio": 0.04
+    "minExpansionRatio": 0.3
   },
   "methodResults": [
     {
@@ -636,15 +636,15 @@
       "shortName": "Subject_16",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 280,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 22,
-        "ratio": 0.08,
-        "jitCodeSize": 1730
+        "ratio": 0.5,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 1730,
-        "instructions": 280
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -784,15 +784,15 @@
       "shortName": "Subject_20",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 400,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 22,
-        "ratio": 0.06,
-        "jitCodeSize": 2450
+        "ratio": 0.5,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 2450,
-        "instructions": 400
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -905,15 +905,15 @@
       "shortName": "Subject_23",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 524,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 20,
-        "ratio": 0.04,
-        "jitCodeSize": 3194
+        "ratio": 0.45,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3194,
-        "instructions": 524
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

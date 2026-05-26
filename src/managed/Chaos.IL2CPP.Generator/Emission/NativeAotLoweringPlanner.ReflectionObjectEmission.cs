@@ -1014,9 +1014,9 @@ public sealed partial class NativeAotLoweringPlanner
 						handler = new StringBuilder.AppendInterpolatedStringHandler(46, 2, stringBuilder);
 						handler.AppendLiteral("            auto* chaos_constructor_");
 						handler.AppendFormatted(num2);
-						handler.AppendLiteral(" = new ");
+						handler.AppendLiteral(" = CHAOS_IL2CPP_NEW_GC(");
 						handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.ConstructorInfo"));
-						handler.AppendLiteral("{};");
+						handler.AppendLiteral(", {});");
 						stringBuilder65.AppendLine(ref handler);
 						stringBuilder = builder;
 						StringBuilder stringBuilder66 = stringBuilder;
@@ -1187,9 +1187,9 @@ public sealed partial class NativeAotLoweringPlanner
 						handler = new StringBuilder.AppendInterpolatedStringHandler(44, 2, stringBuilder);
 						handler.AppendLiteral("            auto* chaos_parameter_");
 						handler.AppendFormatted(num3);
-						handler.AppendLiteral(" = new ");
+						handler.AppendLiteral(" = CHAOS_IL2CPP_NEW_GC(");
 						handler.AppendFormatted(GetNativeTypeSymbol("System.Private.CoreLib/System.Reflection.ParameterInfo"));
-						handler.AppendLiteral("{};");
+						handler.AppendLiteral(", {});");
 						stringBuilder81.AppendLine(ref handler);
 						stringBuilder = builder;
 						StringBuilder stringBuilder82 = stringBuilder;

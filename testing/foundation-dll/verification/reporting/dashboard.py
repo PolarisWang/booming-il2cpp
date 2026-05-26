@@ -364,41 +364,51 @@ def scan_results_directory(results_root: Path | None = None) -> dict[str, Any]:
     Each family's cli.py run writes its report independently; the dashboard
     scans the directory to assemble the full view.
 
-    Returns a report dict in the same format as load_batch_report().
+    Falls back to family source directories (testing/foundation-dll/System.Private.CoreLib/{slug}/)
+    when the canonical results directory doesn't have per-family reports.
     """
     if results_root is None:
-        results_root = Path(__file__).resolve().parents[3] / "results" / "foundation-dll"
-
-    if not results_root.exists():
-        return {"total_families": 0, "results": [], "parsed": [], "elapsed_seconds": 0}
+        results_root = Path(__file__).resolve().parents[2] / "results" / "foundation-dll"
 
     results: list[dict[str, Any]] = []
     total_start = time.time()
 
-    # Walk assembly/slug/unified-verification-report.json
-    for assembly_dir in sorted(results_root.iterdir()):
-        if not assembly_dir.is_dir():
-            continue
-        for family_dir in sorted(assembly_dir.iterdir()):
-            if not family_dir.is_dir():
+    def _collect_from(root: Path, assembly_filter: set[str] | None = None) -> None:
+        if not root.exists():
+            return
+        for assembly_dir in sorted(root.iterdir()):
+            if not assembly_dir.is_dir():
                 continue
-            report_file = family_dir / "unified-verification-report.json"
-            if not report_file.exists():
+            if assembly_filter and assembly_dir.name not in assembly_filter:
                 continue
-            try:
-                raw = json.loads(report_file.read_text(encoding="utf-8"))
-                entry = {
-                    "slug": raw.get("family", family_dir.name),
-                    "status": raw.get("overall_status", "unknown"),
-                    "duration_seconds": round(raw.get("duration_ms", 0) / 1000, 1),
-                    "stages": raw.get("stages", {}),
-                    "coverage": raw.get("coverage"),
-                    "dashboard": raw.get("dashboard"),
-                    "regression": raw.get("regression"),
-                }
-                results.append(entry)
-            except (OSError, json.JSONDecodeError) as e:
-                print(f"  [WARN] Skipping {report_file}: {e}")
+            for family_dir in sorted(assembly_dir.iterdir()):
+                if not family_dir.is_dir():
+                    continue
+                report_file = family_dir / "unified-verification-report.json"
+                if not report_file.exists():
+                    continue
+                try:
+                    raw = json.loads(report_file.read_text(encoding="utf-8"))
+                    entry = {
+                        "slug": raw.get("family", family_dir.name),
+                        "status": raw.get("overall_status", "unknown"),
+                        "duration_seconds": round(raw.get("duration_ms", 0) / 1000, 1),
+                        "stages": raw.get("stages", {}),
+                        "coverage": raw.get("coverage"),
+                        "dashboard": raw.get("dashboard"),
+                        "regression": raw.get("regression"),
+                    }
+                    results.append(entry)
+                except (OSError, json.JSONDecodeError) as e:
+                    print(f"  [WARN] Skipping {report_file}: {e}")
+
+    # Try the canonical results directory path
+    _collect_from(results_root)
+
+    # Fallback: family source dirs (batch runner stores reports there)
+    if not results:
+        families_root = Path(__file__).resolve().parents[2]
+        _collect_from(families_root, assembly_filter={"System.Private.CoreLib"})
 
     elapsed = round(time.time() - total_start, 1)
     parsed = [parse_family(r) for r in results]
@@ -526,6 +536,7 @@ def _extract_benchmark_from_stages(stages_data: dict[str, Any], slug: str = "") 
                 continue
             metrics: dict[str, Any] = {
                 "elapsedMilliseconds": res.get("elapsedMilliseconds", 0),
+                "opsPerSecond": res.get("opsPerSecond", 0),
             }
             if "postPatchNsPerOp" in res:
                 metrics["postPatchNsPerOp"] = res["postPatchNsPerOp"]
@@ -578,8 +589,10 @@ def _compute_benchmark_comparisons(slug: str, stages_data: dict[str, Any] | None
     def _is_valid_run(recs: list[dict[str, Any]]) -> bool:
         """Check if a run's measurements are valid.
 
-        Skips runs where ALL methods complete in under 1ms (measurement artifact).
-        Valid runs have at least some methods taking measurable time (>1ms).
+        Skips runs where ALL methods report elapsedMilliseconds=0,
+        which indicates a measurement failure in the benchmark harness.
+        Native AOT code routinely completes 100k iterations in <1ms,
+        so we only filter out truly-zero measurements, not fast ones.
         """
         elapsed_values = [
             r.get("metrics", {}).get("elapsedMilliseconds", 0)
@@ -587,7 +600,7 @@ def _compute_benchmark_comparisons(slug: str, stages_data: dict[str, Any] | None
         ]
         if not elapsed_values:
             return False
-        return max(elapsed_values) >= 1.0
+        return max(elapsed_values) > 0.0
 
     def _latest_valid_run(recs: list[dict[str, Any]]) -> list[dict[str, Any]]:
         """Find the latest timestamp group that passes validation."""
@@ -625,6 +638,10 @@ def _compute_benchmark_comparisons(slug: str, stages_data: dict[str, Any] | None
                 ops_values.append(1e9 / metrics["postPatchNsPerOp"])
             elif "opsPerSecond" in metrics and metrics["opsPerSecond"] > 0:
                 ops_values.append(metrics["opsPerSecond"])
+            elif metrics.get("elapsedMilliseconds", 0) > 0:
+                # Fallback: compute opsPerSecond from elapsed time + iterations
+                iters = r.get("iterations", 100000)
+                ops_values.append(iters / (metrics["elapsedMilliseconds"] / 1000.0))
 
         if ops_values:
             gm_ops = _geometric_mean(ops_values)
@@ -663,6 +680,8 @@ def _compute_benchmark_comparisons(slug: str, stages_data: dict[str, Any] | None
                            "status": "completed" if (hu_aot and chaos_aot) else "无数据"},
         "hu_jit_vs_jit": {**_ratio_pct(hu_jit, chaos_jit),
                            "status": "completed" if (hu_jit and chaos_jit) else "无数据"},
+        "hu_aot_vs_net8": {**_ratio_pct(hu_aot, net8_jit),
+                            "status": "completed" if (hu_aot and net8_jit) else "无托管数据"},
     }
 
     return {
@@ -747,12 +766,12 @@ def generate_html(report: dict[str, Any]) -> str:
 def main() -> None:
     import argparse
 
-    _testing_root = Path(__file__).resolve().parents[3]
+    _testing_root = Path(__file__).resolve().parents[2]
 
     parser = argparse.ArgumentParser(description="Generate deep test detail dashboard HTML")
     parser.add_argument("--report", default=None, help="Path to batch-report.json")
     parser.add_argument("--from-results", action="store_true",
-                        help="Scan testing/results/foundation-dll/ for per-family reports")
+                        help="Scan results/foundation-dll/ for per-family reports")
     parser.add_argument("--output", "-o", default=None, help="Output HTML path")
     parser.add_argument("--run-missing", action="store_true",
                         help="Run benchmark stages for families without perf data (requires native binaries)")
@@ -765,7 +784,7 @@ def main() -> None:
         total = report.get("total_families", 0)
         n_with_data = sum(1 for f in report.get("parsed", []) if f.get("has_stage_data"))
         print(f"Found {total} families ({n_with_data} with stage data)")
-        # Derive output path: testing/results/deep-dashboard.html
+        # Derive output path from report_path
         report_path = _testing_root / "results" / "batch-report.json"
     elif args.report:
         report_path = Path(args.report)

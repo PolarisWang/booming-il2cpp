@@ -77,7 +77,8 @@ public sealed partial class NativeAotLoweringPlanner
         int PcValue,
         IReadOnlyList<AotCoreIrInstructionArtifact> Instructions,
         AotCoreIrInstructionArtifact? Terminator,
-        int NextPcValue); // -1 = return, >=0 = next chaos_pc
+        int NextPcValue,
+        int FallthroughPcValue = -1); // -1 = fall-through path not applicable (for ret/throw/br/exit)
 
     /// <summary>
     /// pc-dispatch state machine node. Generated for irreducible CFGs that
@@ -1472,8 +1473,40 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         var cfg = BuildControlFlowGraph(instructions, offsets);
-        Console.WriteLine($"TRYBUILD: {method.SubjectId}, blocks={cfg.Blocks.Count}, loops={cfg.LoopHeaders.Count}, reducible={cfg.IsReducible}");
-        if (!cfg.IsReducible)
+        bool reducible = cfg.IsReducible;
+        if (!reducible)
+        {
+            // Diagnose WHY reducible fails
+            var diag = new System.Text.StringBuilder();
+            diag.Append($"IRRED_DIAG: {SafeShortName(method)} blocks={cfg.Blocks.Count} loops={cfg.LoopHeaders.Count}");
+            for (int bi = 0; bi < cfg.Blocks.Count; bi++)
+            {
+                var b = cfg.Blocks[bi];
+                if (b.Terminator != null)
+                    diag.Append($" B{bi}({b.Terminator.Op})");
+                if (b.ConditionalTarget.HasValue)
+                {
+                    if (cfg.OffsetToBlockIndex.TryGetValue(b.ConditionalTarget.Value, out var ctIdx))
+                    {
+                        bool isBack = ctIdx < bi;
+                        bool isLoopHdr = cfg.LoopHeaders.ContainsKey(ctIdx);
+                        diag.Append($" cond->B{ctIdx}{(isBack?"[back]":"[fwd]")}{(isLoopHdr?"[loop]":"[!loop]")}");
+                    }
+                }
+                if (b.BranchTarget.HasValue)
+                {
+                    if (cfg.OffsetToBlockIndex.TryGetValue(b.BranchTarget.Value, out var btIdx))
+                    {
+                        bool isBack = btIdx < bi;
+                        bool isLoopHdr = cfg.LoopHeaders.ContainsKey(btIdx);
+                        diag.Append($" br->B{btIdx}{(isBack?"[back]":"[fwd]")}{(isLoopHdr?"[loop]":"[!loop]")}");
+                    }
+                }
+            }
+            Console.Error.WriteLine(diag.ToString());
+        }
+        Console.Error.WriteLine($"TRYBUILD: {SafeShortName(method)}, blocks={cfg.Blocks.Count}, loops={cfg.LoopHeaders.Count}, reducible={reducible}");
+        if (!reducible)
         {
             var splitCfg = MakeCfgReducibleViaIntervalAnalysis(cfg);
             if (splitCfg.IsReducible)
@@ -2036,13 +2069,29 @@ public sealed partial class NativeAotLoweringPlanner
                         builder.AppendLine(indentation + "        chaos_pc = " + pcCase.NextPcValue.ToString() + ";");
                         break;
                     default:
-                        builder.AppendLine(indentation + "        chaos_pc = " + pcCase.NextPcValue.ToString() + ";");
+                        if (pcCase.FallthroughPcValue >= 0 && IsConditionalBranchOpcode(pcCase.Terminator.Op))
+                        {
+                            string condition = EmitBranchConditionCpp(pcCase.Terminator);
+                            builder.AppendLine(indentation + "        if (" + condition + ") { chaos_pc = " + pcCase.NextPcValue.ToString() + "; } else { chaos_pc = " + pcCase.FallthroughPcValue.ToString() + "; }");
+                        }
+                        else if (pcCase.NextPcValue >= 0)
+                        {
+                            builder.AppendLine(indentation + "        chaos_pc = " + pcCase.NextPcValue.ToString() + ";");
+                        }
+                        else
+                        {
+                            builder.AppendLine(indentation + "        chaos_pc = -1;");
+                        }
                         break;
                 }
             }
-            else
+            else if (pcCase.NextPcValue >= 0)
             {
                 builder.AppendLine(indentation + "        chaos_pc = " + pcCase.NextPcValue.ToString() + ";");
+            }
+            else
+            {
+                builder.AppendLine(indentation + "        chaos_pc = -1;");
             }
 
             builder.AppendLine(indentation + "        break;");
@@ -2082,6 +2131,7 @@ public sealed partial class NativeAotLoweringPlanner
                 entryPc = pcValue;
 
             int nextPcValue = -1;
+            int fallthroughPcValue = -1;
 
             if (block.Terminator != null)
             {
@@ -2106,21 +2156,141 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         nextPcValue = -1;
                     }
+                    // Fall-through = next sequential block in the CFG
+                    if (i + 1 < cfg.Blocks.Count)
+                        fallthroughPcValue = blockIndexToPc[i + 1];
                 }
                 else
                 {
                     nextPcValue = -1;
                 }
             }
+            else
+            {
+                // No terminator: fall through to next block
+                if (i + 1 < cfg.Blocks.Count)
+                    nextPcValue = blockIndexToPc[i + 1];
+            }
 
             cases.Add(new PcDispatchCase(
                 PcValue: pcValue,
                 Instructions: block.BodyInstructions,
                 Terminator: block.Terminator,
-                NextPcValue: nextPcValue));
+                NextPcValue: nextPcValue,
+                FallthroughPcValue: fallthroughPcValue));
         }
 
         return new IRPcDispatch(cases, entryPc);
+    }
+
+    /// <summary>
+    /// Emits the C++ condition expression for a conditional branch terminator
+    /// in the pc-dispatch state machine. Operands are peeked from the structured
+    /// slot context and popped to keep stack tracking consistent.
+    /// </summary>
+    private string EmitBranchConditionCpp(AotCoreIrInstructionArtifact terminator)
+    {
+        string op = terminator.Op;
+        var ctx = _activeStructuredSlotContext;
+        if (ctx == null)
+            return "true";
+
+        switch (op)
+        {
+            case "brtrue":
+            {
+                string val = ctx.PeekValue();
+                ctx.PopValue();
+                return val;
+            }
+            case "brfalse":
+            {
+                string val = ctx.PeekValue();
+                ctx.PopValue();
+                return "!" + val;
+            }
+            case "brnull":
+            {
+                string val = ctx.PeekValue();
+                ctx.PopValue();
+                return val + " == 0";
+            }
+            case "brnonnull":
+            {
+                string val = ctx.PeekValue();
+                ctx.PopValue();
+                return val + " != 0";
+            }
+            case "beq":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return left + " == " + right;
+            }
+            case "bne.un":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return left + " != " + right;
+            }
+            case "blt":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return "(int32_t)" + left + " < (int32_t)" + right;
+            }
+            case "blt.un":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return "(uint32_t)" + left + " < (uint32_t)" + right;
+            }
+            case "bgt":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return "(int32_t)" + left + " > (int32_t)" + right;
+            }
+            case "bgt.un":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return "(uint32_t)" + left + " > (uint32_t)" + right;
+            }
+            case "ble":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return "(int32_t)" + left + " <= (int32_t)" + right;
+            }
+            case "ble.un":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return "(uint32_t)" + left + " <= (uint32_t)" + right;
+            }
+            case "bge":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return "(int32_t)" + left + " >= (int32_t)" + right;
+            }
+            case "bge.un":
+            {
+                string right = ctx.PeekValue(); ctx.PopValue();
+                string left = ctx.PeekValue(); ctx.PopValue();
+                return "(uint32_t)" + left + " >= (uint32_t)" + right;
+            }
+            default:
+                // Unknown opcode: fall through to taken target (conservative)
+                if (ctx.Depth > 0)
+                {
+                    string val = ctx.PeekValue();
+                    ctx.PopValue();
+                    return val;
+                }
+                return "true";
+        }
     }
 
     // ════════════════════════════════════════════════════════════════════════════

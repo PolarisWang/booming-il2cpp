@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/generics",
-  "capturedAt": "2026-05-25T23:11:36",
+  "capturedAt": "2026-05-25T23:48:36",
   "batchMode": true,
   "summary": {
     "totalMethods": 12,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 83,
-      "avg": 47.2,
-      "total": 567
+      "max": 44,
+      "avg": 44.0,
+      "total": 528
     },
     "aotInstructionCount": {
       "min": 20,
@@ -27,10 +27,10 @@
     "topInstructionCategories": {
       "external_runtime_call": 60
     },
-    "overallIrExpansionRatio": 0.51,
-    "averageExpansionRatio": 0.53,
+    "overallIrExpansionRatio": 0.55,
+    "averageExpansionRatio": 0.56,
     "maxExpansionRatio": 0.64,
-    "minExpansionRatio": 0.34
+    "minExpansionRatio": 0.45
   },
   "methodResults": [
     {
@@ -398,15 +398,15 @@
       "shortName": "Subject_7",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 83,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 28,
-        "ratio": 0.34,
+        "ratio": 0.64,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 83
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

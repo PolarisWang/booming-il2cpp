@@ -178,21 +178,33 @@ function(chaos_apply_subject_variant target_name)
 endfunction()
 
 function(chaos_configure_subject_target target_name)
-    target_compile_features("${{target_name}}" PRIVATE cxx_std_17)
+    target_compile_features("${{target_name}}" PRIVATE cxx_std_20)
+    target_compile_options("${{target_name}}" PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8>)
     target_include_directories(
         "${{target_name}}"
         PRIVATE
             "${{REPO_ROOT}}/contracts/native/v0"
+            "${{REPO_ROOT}}/src/native/common"
             "${{REPO_ROOT}}/src/native/runtime-core"
+            "${{REPO_ROOT}}/src/native/runtime-core/gc"
             "${{REPO_ROOT}}/src/native/bootstrap"
             "${{REPO_ROOT}}/src/native/support"
             "${{REPO_ROOT}}/src/native/benchmark-host"
-            "${{REPO_ROOT}}/src/native/proof-host")
+            "${{REPO_ROOT}}/src/native/proof-host"
+            "${{REPO_ROOT}}/third_party/fmt/include"
+            "${{REPO_ROOT}}/third_party/unordered_dense/include")
     chaos_apply_subject_variant("${{target_name}}")
 endfunction()
 
+add_subdirectory("{repo_root_text}/third_party/fmt" "fmt")
+add_subdirectory("{repo_root_text}/third_party/unordered_dense" "unordered_dense")
+add_subdirectory("{repo_root_text}/src/native/common" "common")
+add_subdirectory("{repo_root_text}/src/native/diagnostics" "diagnostics")
 add_subdirectory("{repo_root_text}/src/native/runtime-core" "runtime-core")
 add_subdirectory("{repo_root_text}/src/native/hot-update" "hot-update")
+add_subdirectory("{repo_root_text}/src/native/interpreter" "interpreter")
+add_subdirectory("{repo_root_text}/src/native/jit" "jit")
+add_subdirectory("{repo_root_text}/src/native/engine-bridge" "engine-bridge")
 add_subdirectory("{repo_root_text}/src/native/support" "support")
 add_subdirectory("{repo_root_text}/src/native/bootstrap" "bootstrap")
 add_subdirectory(generated)
@@ -208,6 +220,7 @@ endif()
 add_library(chaos_subject_generated_native STATIC EXCLUDE_FROM_ALL
     "${CHAOS_SUBJECT_GENERATED_INPUT_SOURCE}")
 chaos_configure_subject_target(chaos_subject_generated_native)
+target_link_libraries(chaos_subject_generated_native PUBLIC chaos_runtime_core)
 
 set_target_properties(
     chaos_subject_generated_native

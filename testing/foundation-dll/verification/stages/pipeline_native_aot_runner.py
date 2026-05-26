@@ -566,6 +566,10 @@ def generate_patch_data(family_slug: str, *,
     if not os.path.exists(aot_core_ir_path):
         aot_core_ir_path = None
 
+    if _run_emit_patch_data is None:
+        print(f"    [gen_patch] batch_hotupdate_runner not available, writing sentinel")
+        return write_sentinel_patch_data(family_dir)
+
     if not _run_emit_patch_data(build_result["dll_path"], str(patchdata_path),
                                 aot_core_ir_path=aot_core_ir_path):
         print(f"    [gen_patch] emit-patch-data failed")
@@ -792,7 +796,16 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     """
 
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
-    codegen_rel = str((verification / family_slug / "codegen").resolve()).replace("\\", "/")
+    codegen_dir = verification / family_slug / "codegen"
+    codegen_rel = str(codegen_dir.resolve()).replace("\\", "/")
+    # SDK output goes to codegen/<AssemblyName>/ via --sdk-out.
+    # Scan for the subdirectory that contains chaos-config.cmake.
+    sdk_rel = codegen_rel
+    if codegen_dir.is_dir():
+        for d in sorted(codegen_dir.iterdir()):
+            if d.is_dir() and (d / "chaos-config.cmake").exists():
+                sdk_rel = str(d.resolve()).replace("\\", "/")
+                break
 
     # ── JIT glob: exclude stale flat-layout AOT output ──────────────
     # After R1 fix (generated/generated/ → generated/), fresh SDK output
@@ -859,7 +872,7 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'# Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and\n'
         f'# chaos::codegen (precompiled generated code) via find_package(chaos).\n'
         f'# The SDK root is the codegen output directory from --sdk-out.\n'
-        f'set(CHAOS_SDK_DIR "{codegen_rel}")\n'
+        f'set(CHAOS_SDK_DIR "{sdk_rel}")\n'
         f'find_package(chaos REQUIRED PATHS "${{CHAOS_SDK_DIR}}")\n'
         f'\n'
         f'# Paths\n'

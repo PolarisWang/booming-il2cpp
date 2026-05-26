@@ -1,10 +1,4 @@
-if(CMAKE_SOURCE_DIR STREQUAL CMAKE_CURRENT_SOURCE_DIR)
-    # Standalone build: jit/CMakeLists.txt is the root.
-    get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../.." ABSOLUTE)
-else()
-    # Subdirectory build: CMAKE_SOURCE_DIR is the project root.
-    set(REPO_ROOT "${CMAKE_SOURCE_DIR}")
-endif()
+get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 
 add_library(chaos_jit STATIC
     code_buffer.cpp
