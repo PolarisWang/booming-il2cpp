@@ -323,6 +323,10 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
         exe_produced = (build_dir / "RelWithDebInfo" / "entry.exe").exists()
         if exe_produced:
             print(f"  [hotupdate] entry.exe rebuild OK (exit={r.returncode}, exe produced)")
+            # Copy rebuilt exe back to native_dir so pipeline stages use the new binary
+            import shutil as _shutil
+            _shutil.copy2(str(build_dir / "RelWithDebInfo" / "entry.exe"),
+                          str(native_dir / "entry.exe"))
             return True
         print(f"  [hotupdate] entry.exe rebuild FAILED (exit={r.returncode})")
         for line in (r.stderr or "").splitlines()[-15:]:
@@ -333,6 +337,10 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
                 print(f"    {line.strip()}")
         return False
 
+    # Copy rebuilt exe back to native_dir so pipeline stages use the new binary
+    import shutil as _shutil
+    _shutil.copy2(str(build_dir / "RelWithDebInfo" / "entry.exe"),
+                  str(native_dir / "entry.exe"))
     print(f"  [hotupdate] entry.exe rebuild OK")
     return True
 
