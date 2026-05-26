@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Chaos.IL2CPP.Contracts/1.0.0": {
+        "runtime": {
+          "Chaos.IL2CPP.Contracts.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Chaos.IL2CPP.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

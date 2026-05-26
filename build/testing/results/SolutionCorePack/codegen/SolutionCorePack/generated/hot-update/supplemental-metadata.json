@@ -1,0 +1,1534 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "supplementalMetadata",
+  "reservedSlots": {
+    "typeCount": 256,
+    "methodCount": 1024,
+    "genericInstantiationCount": 256
+  },
+  "types": [
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection",
+      "metadataToken": 33554451,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj",
+      "metadataToken": 33554435,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BICalc",
+      "metadataToken": 33554436,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder",
+      "metadataToken": 33554437,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments",
+      "metadataToken": 33554452,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry",
+      "metadataToken": 33554435,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute",
+      "metadataToken": 33554453,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute",
+      "metadataToken": 33554454,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkSubjectIdAttribute",
+      "metadataToken": 33554455,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader",
+      "metadataToken": 33554436,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateSubjectIdAttribute",
+      "metadataToken": 33554456,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyIdAttribute",
+      "metadataToken": 33554457,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosBenchmarkRunner",
+      "metadataToken": 33554437,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostArguments",
+      "metadataToken": 33554438,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute",
+      "metadataToken": 33554458,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest",
+      "metadataToken": 33554439,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRouteAttribute",
+      "metadataToken": 33554459,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfileAttribute",
+      "metadataToken": 33554460,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirectionAttribute",
+      "metadataToken": 33554461,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute",
+      "metadataToken": 33554462,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostArguments",
+      "metadataToken": 33554440,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest",
+      "metadataToken": 33554442,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute",
+      "metadataToken": 33554463,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection",
+      "metadataToken": 33554443,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosProofRunner",
+      "metadataToken": 33554444,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest",
+      "metadataToken": 33554445,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding",
+      "metadataToken": 33554446,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkAttribute",
+      "metadataToken": 33554464,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertionException",
+      "metadataToken": 33554465,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState",
+      "metadataToken": 33554466,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifestLoader",
+      "metadataToken": 33554447,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor",
+      "metadataToken": 33554448,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert",
+      "metadataToken": 33554467,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/Program",
+      "metadataToken": 33554449,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/RuntimeTrace",
+      "metadataToken": 33554450,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader\u002B\u003C\u003Ec__DisplayClass4_0",
+      "metadataToken": 33554451,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosBenchmarkRunner\u002B\u003C\u003Ec__DisplayClass0_0",
+      "metadataToken": 33554452,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection\u002B\u003C\u003Ec",
+      "metadataToken": 33554454,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosProofRunner\u002B\u003C\u003Ec__DisplayClass0_0",
+      "metadataToken": 33554455,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor\u002B\u003C\u003Ec__DisplayClass11_0",
+      "metadataToken": 33554457,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor\u002B\u003C\u003Ec__DisplayClass6_0",
+      "metadataToken": 33554458,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitCategory",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkCategory",
+      "metadataToken": 33554435,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosExecutionMode",
+      "metadataToken": 33554436,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryKind",
+      "metadataToken": 33554437,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice",
+      "metadataToken": 33554438,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosMetric",
+      "metadataToken": 33554439,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily",
+      "metadataToken": 33554440,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostKind",
+      "metadataToken": 33554441,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem",
+      "metadataToken": 33554441,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype",
+      "metadataToken": 33554442,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability",
+      "metadataToken": 33554443,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId",
+      "metadataToken": 33554444,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRoute",
+      "metadataToken": 33554445,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRoute",
+      "metadataToken": 33554446,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfile",
+      "metadataToken": 33554447,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirection",
+      "metadataToken": 33554448,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature",
+      "metadataToken": 33554449,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosEvidenceKind",
+      "metadataToken": 33554450,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection\u002B\u003C\u003EO",
+      "metadataToken": 33554453,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor\u002B\u003C\u003EO",
+      "metadataToken": 33554456,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "methods": [
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::InvokeWorkload:System.Int32(System.Int32)",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::get_SchemaVersion:System.Int32()",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::.ctor:System.Void(Chaos.TestFramework.ChaosSubjectEntryKind,Chaos.TestFramework.ChaosSubjectSlice)",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::set_SchemaVersion:System.Void(System.Int32)",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntryKind:Chaos.TestFramework.ChaosSubjectEntryKind()",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticDouble:System.Int32()",
+      "metadataToken": 100663299,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::get_SubjectId:System.String()",
+      "metadataToken": 100663299,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::set_EntryKind:System.Void(Chaos.TestFramework.ChaosSubjectEntryKind)",
+      "metadataToken": 100663299,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunStringConcat:System.Int32()",
+      "metadataToken": 100663300,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::set_SubjectId:System.Void(System.String)",
+      "metadataToken": 100663300,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntrySlice:Chaos.TestFramework.ChaosSubjectSlice()",
+      "metadataToken": 100663300,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArrayAccess:System.Int32()",
+      "metadataToken": 100663301,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::get_FrameworkReferenced:System.Boolean()",
+      "metadataToken": 100663301,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::set_EntrySlice:System.Void(Chaos.TestFramework.ChaosSubjectSlice)",
+      "metadataToken": 100663301,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunObjectAlloc:System.Int32()",
+      "metadataToken": 100663302,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::set_FrameworkReferenced:System.Void(System.Boolean)",
+      "metadataToken": 100663302,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_IsNone:System.Boolean()",
+      "metadataToken": 100663302,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunVirtualCall:System.Int32()",
+      "metadataToken": 100663303,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::get_SubjectKind:System.String()",
+      "metadataToken": 100663303,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::ToString:System.String()",
+      "metadataToken": 100663303,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunLoopBranch:System.Int32()",
+      "metadataToken": 100663304,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::set_SubjectKind:System.Void(System.String)",
+      "metadataToken": 100663304,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "metadataToken": 100663304,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::get_Value:System.Int32()",
+      "metadataToken": 100663305,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::get_WarningCodes:System.Collections.Generic.List\u003CSystem.String\u003E()",
+      "metadataToken": 100663305,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::op_Inequality:System.Boolean(Chaos.TestFramework.ChaosSubjectEntrySelection,Chaos.TestFramework.ChaosSubjectEntrySelection)",
+      "metadataToken": 100663305,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::.ctor:System.Void(System.Int32)",
+      "metadataToken": 100663306,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::set_WarningCodes:System.Void(System.Collections.Generic.List\u003CSystem.String\u003E)",
+      "metadataToken": 100663306,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::op_Equality:System.Boolean(Chaos.TestFramework.ChaosSubjectEntrySelection,Chaos.TestFramework.ChaosSubjectEntrySelection)",
+      "metadataToken": 100663306,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BICalc::Compute:System.Int64(System.Int32)",
+      "metadataToken": 100663307,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::get_DeclaredUnitTests:System.Collections.Generic.List\u003CChaosTestCollectionEntry\u003E()",
+      "metadataToken": 100663307,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::GetHashCode:System.Int32()",
+      "metadataToken": 100663307,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::Compute:System.Int64(System.Int32)",
+      "metadataToken": 100663308,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::set_DeclaredUnitTests:System.Void(System.Collections.Generic.List\u003CChaosTestCollectionEntry\u003E)",
+      "metadataToken": 100663308,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Equals:System.Boolean(System.Object)",
+      "metadataToken": 100663308,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::.ctor:System.Void()",
+      "metadataToken": 100663309,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::get_DeclaredBenchmarks:System.Collections.Generic.List\u003CChaosTestCollectionEntry\u003E()",
+      "metadataToken": 100663309,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Equals:System.Boolean(Chaos.TestFramework.ChaosSubjectEntrySelection)",
+      "metadataToken": 100663309,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::set_DeclaredBenchmarks:System.Void(System.Collections.Generic.List\u003CChaosTestCollectionEntry\u003E)",
+      "metadataToken": 100663310,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Deconstruct:System.Void(Chaos.TestFramework.ChaosSubjectEntryKind\u0026,Chaos.TestFramework.ChaosSubjectSlice\u0026)",
+      "metadataToken": 100663310,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollection::.ctor:System.Void()",
+      "metadataToken": 100663311,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::TryParse:System.Boolean(System.String[],Chaos.TestFramework.ChaosSubjectEntrySelection\u0026)",
+      "metadataToken": 100663311,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::get_EntryIndex:System.Int32()",
+      "metadataToken": 100663312,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::ParseByte:System.Byte(System.String,System.String,System.String)",
+      "metadataToken": 100663312,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::set_EntryIndex:System.Void(System.Int32)",
+      "metadataToken": 100663313,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::ParseUInt16:System.UInt16(System.String,System.String,System.String)",
+      "metadataToken": 100663313,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::get_StableId:System.String()",
+      "metadataToken": 100663314,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::.ctor:System.Void(System.String)",
+      "metadataToken": 100663314,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::set_StableId:System.Void(System.String)",
+      "metadataToken": 100663315,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_FamilyId:System.String()",
+      "metadataToken": 100663315,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::get_Alias:System.String()",
+      "metadataToken": 100663316,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_IncludeNativeProof:System.Boolean()",
+      "metadataToken": 100663316,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::set_Alias:System.Void(System.String)",
+      "metadataToken": 100663317,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_IncludeNativeProof:System.Void(System.Boolean)",
+      "metadataToken": 100663317,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::get_AssemblyName:System.String()",
+      "metadataToken": 100663318,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_IncludeBenchmark:System.Boolean()",
+      "metadataToken": 100663318,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::set_AssemblyName:System.Void(System.String)",
+      "metadataToken": 100663319,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_IncludeBenchmark:System.Void(System.Boolean)",
+      "metadataToken": 100663319,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::get_DeclaringType:System.String()",
+      "metadataToken": 100663320,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_IncludeHotUpdate:System.Boolean()",
+      "metadataToken": 100663320,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::set_DeclaringType:System.Void(System.String)",
+      "metadataToken": 100663321,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_IncludeHotUpdate:System.Void(System.Boolean)",
+      "metadataToken": 100663321,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::get_MethodName:System.String()",
+      "metadataToken": 100663322,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_ExecutionModes:Chaos.TestFramework.ChaosExecutionMode()",
+      "metadataToken": 100663322,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::set_MethodName:System.Void(System.String)",
+      "metadataToken": 100663323,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_ExecutionModes:System.Void(Chaos.TestFramework.ChaosExecutionMode)",
+      "metadataToken": 100663323,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::get_MethodSignature:System.String()",
+      "metadataToken": 100663324,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute::.ctor:System.Void(System.String)",
+      "metadataToken": 100663324,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::set_MethodSignature:System.Void(System.String)",
+      "metadataToken": 100663325,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute::get_MethodSubjectId:System.String()",
+      "metadataToken": 100663325,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::.ctor:System.Void()",
+      "metadataToken": 100663326,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkSubjectIdAttribute::.ctor:System.Void(System.String)",
+      "metadataToken": 100663326,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader::Load:ChaosTestCollection(System.String)",
+      "metadataToken": 100663327,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkSubjectIdAttribute::get_MethodSubjectId:System.String()",
+      "metadataToken": 100663327,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader::EnsureEntryExists:System.Void(System.String,ChaosManagedHostKind,System.Int32)",
+      "metadataToken": 100663328,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateSubjectIdAttribute::.ctor:System.Void(System.String)",
+      "metadataToken": 100663328,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader::ResolveEntry:ChaosTestCollectionEntry(System.String,ChaosManagedHostKind,System.Int32)",
+      "metadataToken": 100663329,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateSubjectIdAttribute::get_MethodSubjectId:System.String()",
+      "metadataToken": 100663329,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader::.cctor:System.Void()",
+      "metadataToken": 100663330,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyIdAttribute::.ctor:System.Void(Chaos.TestFramework.CapabilityFamilyId)",
+      "metadataToken": 100663330,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosBenchmarkRunner::Run:System.Int32(System.String[])",
+      "metadataToken": 100663331,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyIdAttribute::get_FamilyId:Chaos.TestFramework.CapabilityFamilyId()",
+      "metadataToken": 100663331,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostArguments::Parse:ChaosHotUpdateHostRequest(System.String[])",
+      "metadataToken": 100663332,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::.ctor:System.Void(Chaos.TestFramework.VerificationRoute)",
+      "metadataToken": 100663332,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::.ctor:System.Void(System.String,System.String,System.Int32)",
+      "metadataToken": 100663333,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::get_Route:Chaos.TestFramework.VerificationRoute()",
+      "metadataToken": 100663333,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::get_CollectionPath:System.String()",
+      "metadataToken": 100663334,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRouteAttribute::.ctor:System.Void(Chaos.TestFramework.BenchmarkRoute)",
+      "metadataToken": 100663334,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::set_CollectionPath:System.Void(System.String)",
+      "metadataToken": 100663335,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRouteAttribute::get_Route:Chaos.TestFramework.BenchmarkRoute()",
+      "metadataToken": 100663335,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::get_BindingManifestPath:System.String()",
+      "metadataToken": 100663336,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfileAttribute::.ctor:System.Void(Chaos.TestFramework.BenchmarkProfile)",
+      "metadataToken": 100663336,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::set_BindingManifestPath:System.Void(System.String)",
+      "metadataToken": 100663337,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfileAttribute::get_Profile:Chaos.TestFramework.BenchmarkProfile()",
+      "metadataToken": 100663337,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::get_EntryIndex:System.Int32()",
+      "metadataToken": 100663338,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirectionAttribute::.ctor:System.Void(Chaos.TestFramework.HotUpdateDirection)",
+      "metadataToken": 100663338,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::set_EntryIndex:System.Void(System.Int32)",
+      "metadataToken": 100663339,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirectionAttribute::get_Direction:Chaos.TestFramework.HotUpdateDirection()",
+      "metadataToken": 100663339,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::ToString:System.String()",
+      "metadataToken": 100663340,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::.ctor:System.Void(Chaos.TestFramework.ChaosUnitCategory)",
+      "metadataToken": 100663340,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "metadataToken": 100663341,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Category:Chaos.TestFramework.ChaosUnitCategory()",
+      "metadataToken": 100663341,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::op_Inequality:System.Boolean(ChaosHotUpdateHostRequest,ChaosHotUpdateHostRequest)",
+      "metadataToken": 100663342,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Alias:System.String()",
+      "metadataToken": 100663342,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::op_Equality:System.Boolean(ChaosHotUpdateHostRequest,ChaosHotUpdateHostRequest)",
+      "metadataToken": 100663343,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Alias:System.Void(System.String)",
+      "metadataToken": 100663343,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::GetHashCode:System.Int32()",
+      "metadataToken": 100663344,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_CapabilityFamily:Chaos.TestFramework.ChaosCapabilityFamily()",
+      "metadataToken": 100663344,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::Equals:System.Boolean(System.Object)",
+      "metadataToken": 100663345,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_CapabilityFamily:System.Void(Chaos.TestFramework.ChaosCapabilityFamily)",
+      "metadataToken": 100663345,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::Equals:System.Boolean(ChaosHotUpdateHostRequest)",
+      "metadataToken": 100663346,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Capability:Chaos.TestFramework.ChaosCapabilityItem()",
+      "metadataToken": 100663346,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::Deconstruct:System.Void(System.String\u0026,System.String\u0026,System.Int32\u0026)",
+      "metadataToken": 100663347,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Capability:System.Void(Chaos.TestFramework.ChaosCapabilityItem)",
+      "metadataToken": 100663347,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostArguments::ParseHostKind:ChaosManagedHostKind(System.String[])",
+      "metadataToken": 100663348,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Requires:Chaos.TestFramework.ChaosRuntimeFeature()",
+      "metadataToken": 100663348,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostArguments::Parse:ChaosManagedHostRequest(System.String[])",
+      "metadataToken": 100663349,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Requires:System.Void(Chaos.TestFramework.ChaosRuntimeFeature)",
+      "metadataToken": 100663349,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::.ctor:System.Void(System.String,System.Int32)",
+      "metadataToken": 100663350,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Archetype:Chaos.TestFramework.ChaosSolutionArchetype()",
+      "metadataToken": 100663350,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_CollectionPath:System.String()",
+      "metadataToken": 100663351,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Archetype:System.Void(Chaos.TestFramework.ChaosSolutionArchetype)",
+      "metadataToken": 100663351,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::set_CollectionPath:System.Void(System.String)",
+      "metadataToken": 100663352,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_HotUpdateCapability:Chaos.TestFramework.ChaosHotUpdateCapability()",
+      "metadataToken": 100663352,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_EntryIndex:System.Int32()",
+      "metadataToken": 100663353,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_HotUpdateCapability:System.Void(Chaos.TestFramework.ChaosHotUpdateCapability)",
+      "metadataToken": 100663353,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::set_EntryIndex:System.Void(System.Int32)",
+      "metadataToken": 100663354,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Evidence:Chaos.TestFramework.ChaosEvidenceKind()",
+      "metadataToken": 100663354,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::ToString:System.String()",
+      "metadataToken": 100663355,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Evidence:System.Void(Chaos.TestFramework.ChaosEvidenceKind)",
+      "metadataToken": 100663355,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "metadataToken": 100663356,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Priority:System.Byte()",
+      "metadataToken": 100663356,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::op_Inequality:System.Boolean(ChaosManagedHostRequest,ChaosManagedHostRequest)",
+      "metadataToken": 100663357,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Priority:System.Void(System.Byte)",
+      "metadataToken": 100663357,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::op_Equality:System.Boolean(ChaosManagedHostRequest,ChaosManagedHostRequest)",
+      "metadataToken": 100663358,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor:System.Void(Chaos.TestFramework.ChaosBenchmarkCategory,Chaos.TestFramework.ChaosMetric)",
+      "metadataToken": 100663358,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::GetHashCode:System.Int32()",
+      "metadataToken": 100663359,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Category:Chaos.TestFramework.ChaosBenchmarkCategory()",
+      "metadataToken": 100663359,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::Equals:System.Boolean(System.Object)",
+      "metadataToken": 100663360,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Metrics:Chaos.TestFramework.ChaosMetric()",
+      "metadataToken": 100663360,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::Equals:System.Boolean(ChaosManagedHostRequest)",
+      "metadataToken": 100663361,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Alias:System.String()",
+      "metadataToken": 100663361,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::Deconstruct:System.Void(System.String\u0026,System.Int32\u0026)",
+      "metadataToken": 100663362,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Alias:System.Void(System.String)",
+      "metadataToken": 100663362,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection::ResolveEntry:ChaosTestCollectionEntry(ChaosManagedHostKind,ChaosManagedHostRequest)",
+      "metadataToken": 100663363,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_CapabilityFamily:Chaos.TestFramework.ChaosCapabilityFamily()",
+      "metadataToken": 100663363,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection::InvokeStaticEntry:System.Void(ChaosTestCollectionEntry)",
+      "metadataToken": 100663364,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_CapabilityFamily:System.Void(Chaos.TestFramework.ChaosCapabilityFamily)",
+      "metadataToken": 100663364,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection::ResolveAssembly:System.Reflection.Assembly(System.String)",
+      "metadataToken": 100663365,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Capability:Chaos.TestFramework.ChaosCapabilityItem()",
+      "metadataToken": 100663365,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection::ResolveMethod:System.Reflection.MethodInfo(System.Type,System.String,System.String)",
+      "metadataToken": 100663366,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Capability:System.Void(Chaos.TestFramework.ChaosCapabilityItem)",
+      "metadataToken": 100663366,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection::BuildMethodSignature:System.String(System.Reflection.MethodInfo)",
+      "metadataToken": 100663367,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Requires:Chaos.TestFramework.ChaosRuntimeFeature()",
+      "metadataToken": 100663367,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection::FormatParameterType:System.String(System.Type)",
+      "metadataToken": 100663368,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Requires:System.Void(Chaos.TestFramework.ChaosRuntimeFeature)",
+      "metadataToken": 100663368,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosProofRunner::Run:System.Int32(System.String[])",
+      "metadataToken": 100663369,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Archetype:Chaos.TestFramework.ChaosSolutionArchetype()",
+      "metadataToken": 100663369,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::get_SubjectId:System.String()",
+      "metadataToken": 100663370,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Archetype:System.Void(Chaos.TestFramework.ChaosSolutionArchetype)",
+      "metadataToken": 100663370,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::set_SubjectId:System.Void(System.String)",
+      "metadataToken": 100663371,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_HotUpdateCapability:Chaos.TestFramework.ChaosHotUpdateCapability()",
+      "metadataToken": 100663371,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::get_CollectionPath:System.String()",
+      "metadataToken": 100663372,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_HotUpdateCapability:System.Void(Chaos.TestFramework.ChaosHotUpdateCapability)",
+      "metadataToken": 100663372,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::set_CollectionPath:System.Void(System.String)",
+      "metadataToken": 100663373,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Modes:Chaos.TestFramework.ChaosExecutionMode()",
+      "metadataToken": 100663373,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::get_PatchProjectIds:System.Collections.Generic.List\u003CSystem.String\u003E()",
+      "metadataToken": 100663374,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Modes:System.Void(Chaos.TestFramework.ChaosExecutionMode)",
+      "metadataToken": 100663374,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::set_PatchProjectIds:System.Void(System.Collections.Generic.List\u003CSystem.String\u003E)",
+      "metadataToken": 100663375,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_WarmupCount:System.Byte()",
+      "metadataToken": 100663375,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::get_PatchAssemblyNames:System.Collections.Generic.List\u003CSystem.String\u003E()",
+      "metadataToken": 100663376,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_WarmupCount:System.Void(System.Byte)",
+      "metadataToken": 100663376,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::set_PatchAssemblyNames:System.Void(System.Collections.Generic.List\u003CSystem.String\u003E)",
+      "metadataToken": 100663377,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_IterationCount:System.UInt16()",
+      "metadataToken": 100663377,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::get_EntryBindings:System.Collections.Generic.List\u003CChaosHotUpdateEntryBinding\u003E()",
+      "metadataToken": 100663378,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_IterationCount:System.Void(System.UInt16)",
+      "metadataToken": 100663378,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::set_EntryBindings:System.Void(System.Collections.Generic.List\u003CChaosHotUpdateEntryBinding\u003E)",
+      "metadataToken": 100663379,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_InvocationCount:System.UInt16()",
+      "metadataToken": 100663379,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::.ctor:System.Void()",
+      "metadataToken": 100663380,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_InvocationCount:System.Void(System.UInt16)",
+      "metadataToken": 100663380,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::get_HostKind:System.String()",
+      "metadataToken": 100663381,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_P99Ms:System.Int32()",
+      "metadataToken": 100663381,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::set_HostKind:System.Void(System.String)",
+      "metadataToken": 100663382,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_P99Ms:System.Void(System.Int32)",
+      "metadataToken": 100663382,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::get_EntryIndex:System.Int32()",
+      "metadataToken": 100663383,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_MinOpsPerSec:System.Int32()",
+      "metadataToken": 100663383,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::set_EntryIndex:System.Void(System.Int32)",
+      "metadataToken": 100663384,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_MinOpsPerSec:System.Void(System.Int32)",
+      "metadataToken": 100663384,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::get_AssemblyName:System.String()",
+      "metadataToken": 100663385,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_MaxAllocBytes:System.Int32()",
+      "metadataToken": 100663385,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::set_AssemblyName:System.Void(System.String)",
+      "metadataToken": 100663386,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_MaxAllocBytes:System.Void(System.Int32)",
+      "metadataToken": 100663386,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::get_StableId:System.String()",
+      "metadataToken": 100663387,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkAttribute::.ctor:System.Void(Chaos.TestFramework.ChaosBenchmarkCategory,Chaos.TestFramework.ChaosMetric)",
+      "metadataToken": 100663387,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::set_StableId:System.Void(System.String)",
+      "metadataToken": 100663388,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertionException::.ctor:System.Void(System.String)",
+      "metadataToken": 100663388,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::.ctor:System.Void()",
+      "metadataToken": 100663389,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::Reset:System.Void()",
+      "metadataToken": 100663389,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifestLoader::Load:ChaosHotUpdateBindingManifest(System.String)",
+      "metadataToken": 100663390,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::Complete:System.Int32()",
+      "metadataToken": 100663390,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifestLoader::.cctor:System.Void()",
+      "metadataToken": 100663391,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::RecordFailure:System.Void()",
+      "metadataToken": 100663391,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::ExecuteProof:System.Void(System.String,System.String,System.Int32)",
+      "metadataToken": 100663392,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::.cctor:System.Void()",
+      "metadataToken": 100663392,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::ExecuteBenchmark:System.Void(System.String,System.String,System.Int32)",
+      "metadataToken": 100663393,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::True:System.Void(System.Boolean,System.String)",
+      "metadataToken": 100663393,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::ExecuteProofWorkload:System.Object(System.String,System.String,System.Int32,System.String)",
+      "metadataToken": 100663394,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::False:System.Void(System.Boolean,System.String)",
+      "metadataToken": 100663394,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::ExecuteBenchmarkWorkload:System.Object(System.String,System.String,System.Int32,System.String)",
+      "metadataToken": 100663395,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal:System.Void(System.Int32,System.Int32,System.String)",
+      "metadataToken": 100663395,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::ResolveEntry:ChaosTestCollectionEntry(System.String,ChaosManagedHostKind,System.Int32)",
+      "metadataToken": 100663396,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal\u00601:System.Void(!!0,!!0,System.String)",
+      "metadataToken": 100663396,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::InvokeEntry:System.Object(System.String,ChaosTestCollectionEntry,System.String)",
+      "metadataToken": 100663397,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::NotNull:System.Void(System.Object,System.String)",
+      "metadataToken": 100663397,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::LoadAssemblyByName:System.Reflection.Assembly(System.String,System.String)",
+      "metadataToken": 100663398,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail:System.Void(System.String)",
+      "metadataToken": 100663398,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::RegisterBaseDirectoryResolver:System.Boolean()",
+      "metadataToken": 100663399,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws\u00601:System.Void(System.Action,System.String)",
+      "metadataToken": 100663399,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::ResolveFromBaseDirectory:System.Reflection.Assembly(AssemblyLoadContext,System.Reflection.AssemblyName)",
+      "metadataToken": 100663400,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::FindLoadedAssembly:System.Reflection.Assembly(System.String)",
+      "metadataToken": 100663401,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::ResolveBaseDirectoryAssemblyPath:System.String(System.String,System.String)",
+      "metadataToken": 100663402,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::.cctor:System.Void()",
+      "metadataToken": 100663403,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/Program::Main:System.Int32(System.String[])",
+      "metadataToken": 100663404,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/RuntimeTrace::.cctor:System.Void()",
+      "metadataToken": 100663405,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/RuntimeTrace::get_IsEnabled:System.Boolean()",
+      "metadataToken": 100663406,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/RuntimeTrace::Point:System.Void(System.String,System.String,System.Object)",
+      "metadataToken": 100663407,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/RuntimeTrace::TraceCall:System.Void(System.String,System.String,System.Action)",
+      "metadataToken": 100663408,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader\u002B\u003C\u003Ec__DisplayClass4_0::.ctor:System.Void()",
+      "metadataToken": 100663409,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader\u002B\u003C\u003Ec__DisplayClass4_0::\u003CResolveEntry\u003Eb__0:System.Boolean(ChaosTestCollectionEntry)",
+      "metadataToken": 100663410,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosBenchmarkRunner\u002B\u003C\u003Ec__DisplayClass0_0::.ctor:System.Void()",
+      "metadataToken": 100663411,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosBenchmarkRunner\u002B\u003C\u003Ec__DisplayClass0_0::\u003CRun\u003Eb__0:System.Void()",
+      "metadataToken": 100663412,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection\u002B\u003C\u003Ec::.cctor:System.Void()",
+      "metadataToken": 100663413,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection\u002B\u003C\u003Ec::.ctor:System.Void()",
+      "metadataToken": 100663414,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostReflection\u002B\u003C\u003Ec::\u003CBuildMethodSignature\u003Eb__4_0:System.String(System.Reflection.ParameterInfo)",
+      "metadataToken": 100663415,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosProofRunner\u002B\u003C\u003Ec__DisplayClass0_0::.ctor:System.Void()",
+      "metadataToken": 100663416,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosProofRunner\u002B\u003C\u003Ec__DisplayClass0_0::\u003CRun\u003Eb__0:System.Void()",
+      "metadataToken": 100663417,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor\u002B\u003C\u003Ec__DisplayClass11_0::.ctor:System.Void()",
+      "metadataToken": 100663418,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor\u002B\u003C\u003Ec__DisplayClass11_0::\u003CFindLoadedAssembly\u003Eb__0:System.Boolean(System.Reflection.Assembly)",
+      "metadataToken": 100663419,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor\u002B\u003C\u003Ec__DisplayClass6_0::.ctor:System.Void()",
+      "metadataToken": 100663420,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor\u002B\u003C\u003Ec__DisplayClass6_0::\u003CResolveEntry\u003Eb__0:System.Boolean(ChaosTestCollectionEntry)",
+      "metadataToken": 100663421,
+      "sourceKind": "ReferencedAot"
+    }
+  ],
+  "genericInstantiations": []
+}

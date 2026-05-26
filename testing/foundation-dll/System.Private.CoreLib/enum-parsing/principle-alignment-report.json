@@ -1,7 +1,7 @@
 {
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-26T18:50:56.257844",
+  "generated_at": "2026-05-26T22:18:03.560136",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -274,38 +274,403 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "3 of 5 changed source files are outside expected architecture layers",
+      "summary": "48 of 272 changed source files are outside expected architecture layers",
       "details": [
+        {
+          "file": "build/native-profile/ALL_BUILD.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/ZERO_CHECK.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch_chaos_benchmark_host.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch_chaos_bootstrap.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch_chaos_common.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch_chaos_engine_bridge.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch_chaos_hot_update.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch_chaos_interpreter.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch_chaos_proof_host.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch_chaos_runtime_core.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/check_arch_chaos_support.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/cmake_install.cmake",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/fmt_build/chaos_fmt.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/fmt_build/chaos_fmt.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/roadmap0_preset_router.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/src/native/benchmark-host/ALL_BUILD.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/src/native/benchmark-host/chaos_benchmark_host.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/src/native/benchmark-host/chaos_benchmark_host.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/src/native/engine-bridge/chaos_engine_bridge.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/src/native/proof-host/chaos_proof_host.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/src/native/proof-host/chaos_proof_host.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/src/native/support/chaos_support.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/native-profile/unordered_dense_build/chaos_unordered_dense.sln",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/benchmark-host/chaos_benchmark_host.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/engine-bridge/chaos_engine_bridge.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/src/native/proof-host/chaos_proof_host.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/abi/test_abi_method_table.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/engine-bridge/test_engine_bridge_smoke.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/engine-bridge/test_engine_bridge_stress.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/fuzz/test_fuzz_gc.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/fuzz/test_fuzz_il.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_abi.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_bench.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_binary_ir.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_debug_info.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_gc_slot_map.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_il_smoke.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_mode.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_native.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_osr.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_pgo.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_seh.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/vs2022/testing/src/native/jit/test_jit_unwind.vcxproj",
+          "reason": "outside expected architecture layers"
+        },
         {
           "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/native/benchmark-host/native_aot_main.cpp",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 5,
+        "changed_source_count": 272,
         "layer_distribution": {
-          "TestInfra": 1,
-          "RuntimeCore": 1
+          "Bootstrap": 9,
+          "Common": 2,
+          "HotUpdate": 8,
+          "Interpreter": 4,
+          "RuntimeCore": 122,
+          "Contracts": 77,
+          "Tests": 2
         },
         "violations": [
+          {
+            "file": "build/native-profile/ALL_BUILD.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/ZERO_CHECK.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch_chaos_benchmark_host.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch_chaos_bootstrap.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch_chaos_common.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch_chaos_engine_bridge.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch_chaos_hot_update.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch_chaos_interpreter.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch_chaos_proof_host.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch_chaos_runtime_core.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/check_arch_chaos_support.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/cmake_install.cmake",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/fmt_build/chaos_fmt.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/fmt_build/chaos_fmt.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/roadmap0_preset_router.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/src/native/benchmark-host/ALL_BUILD.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/src/native/benchmark-host/chaos_benchmark_host.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/src/native/benchmark-host/chaos_benchmark_host.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/src/native/engine-bridge/chaos_engine_bridge.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/src/native/proof-host/chaos_proof_host.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/src/native/proof-host/chaos_proof_host.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/src/native/support/chaos_support.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/native-profile/unordered_dense_build/chaos_unordered_dense.sln",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/benchmark-host/chaos_benchmark_host.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/engine-bridge/chaos_engine_bridge.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/src/native/proof-host/chaos_proof_host.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/abi/test_abi_method_table.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/engine-bridge/test_engine_bridge_smoke.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/engine-bridge/test_engine_bridge_stress.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/fuzz/test_fuzz_gc.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/fuzz/test_fuzz_il.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_abi.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_bench.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_binary_ir.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_debug_info.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_gc_slot_map.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_il_smoke.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_mode.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_native.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_osr.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_pgo.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_seh.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/vs2022/testing/src/native/jit/test_jit_unwind.vcxproj",
+            "reason": "outside expected architecture layers"
+          },
           {
             "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/native/benchmark-host/native_aot_main.cpp",
             "reason": "outside expected architecture layers"
           }
         ]

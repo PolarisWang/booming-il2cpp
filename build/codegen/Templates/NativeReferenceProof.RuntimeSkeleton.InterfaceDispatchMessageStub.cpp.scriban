@@ -1,0 +1,145 @@
+void* CHAOS_RUNTIME_ABI_CALL {{ stub_name }}_InterfaceDispatchResolvedRender(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* __this)
+{
+    if (runtime == nullptr || thread == nullptr || __this == nullptr) {
+        return nullptr;
+    }
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return nullptr;
+    }
+    const CodegenBridgeV0* bridge = chaos_codegen_get_bridge_v0();
+    if (bridge == nullptr) {
+        return nullptr;
+    }
+    void* raw_concat_string = bridge->resolve_icall({{ concat_icall_literal }});
+    if (raw_concat_string == nullptr) {
+        return nullptr;
+    }
+    using ConcatStringPairFn = void* (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* left_string, const void* right_string);
+    const auto concat_string_pair = reinterpret_cast<ConcatStringPairFn>(raw_concat_string);
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>({{ assembly_name_literal }}));
+    FieldInfoHandle captured_field = bridge->resolve_field_by_token(image, {{ captured_field_token }});
+    if (captured_field == nullptr) {
+        return nullptr;
+    }
+    void* captured_value = nullptr;
+    if (abi->field_get_value(
+            runtime,
+            thread,
+            captured_field,
+            __this,
+            &captured_value,
+            sizeof(captured_value)) != CHAOS_RUNTIME_STATUS_OK || captured_value == nullptr) {
+        return nullptr;
+    }
+    void* message_prefix = abi->string_new_utf8(runtime, thread, {{ message_prefix_literal }}, {{ message_prefix_literal_byte_count }}u);
+    if (message_prefix == nullptr) {
+        return nullptr;
+    }
+    void* combined_message = concat_string_pair(runtime, thread, message_prefix, captured_value);
+    if (combined_message == nullptr) {
+        return nullptr;
+    }
+    void* message_suffix = abi->string_new_utf8(runtime, thread, {{ message_suffix_literal }}, {{ message_suffix_literal_byte_count }}u);
+    if (message_suffix == nullptr) {
+        return nullptr;
+    }
+    return concat_string_pair(runtime, thread, combined_message, message_suffix);
+}
+
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)managed_args;
+    if (bridge == nullptr || code_registration == nullptr || metadata_registration == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_READY;
+    }
+    struct UnresolvedVirtualCallEntry {
+        CHAOS_IL2CPP_UINT32 instance_type_token;
+        CHAOS_IL2CPP_UINT32 declared_method_token;
+        void* resolved_method;
+    };
+    const UnresolvedVirtualCallEntry unresolved_virtual_calls[] = {
+        { {{ reference_type_token }}, {{ instance_method_token }}, reinterpret_cast<void*>(&{{ stub_name }}_InterfaceDispatchResolvedRender) },
+    };
+    CodeRegistrationV0 registered_code_registration = *code_registration;
+    registered_code_registration.unresolved_virtual_calls = unresolved_virtual_calls;
+    registered_code_registration.unresolved_virtual_call_count =
+        static_cast<CHAOS_IL2CPP_UINT32>(sizeof(unresolved_virtual_calls) / sizeof(unresolved_virtual_calls[0]));
+    if (bridge->register_codegen(&registered_code_registration, metadata_registration, options) != CHAOS_BRIDGE_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    if (bridge->bootstrap_runtime() != CHAOS_BRIDGE_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    const char* image_name = options->image_name_utf8 != nullptr
+        ? options->image_name_utf8 : {{ assembly_name_literal }};
+    ImageHandle image = reinterpret_cast<ImageHandle>(const_cast<char*>(image_name));
+    TypeInfoHandle reference_type = bridge->resolve_type_by_token(image, {{ reference_type_token }});
+    FieldInfoHandle captured_field = bridge->resolve_field_by_token(image, {{ captured_field_token }});
+    MethodInfoHandle declared_interface_method = bridge->resolve_method_by_token(image, {{ instance_method_token }});
+    if (reference_type == nullptr || captured_field == nullptr || declared_interface_method == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    if (abi->class_init(runtime, reference_type) != CHAOS_RUNTIME_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    MethodInfoHandle resolved_interface_method = bridge->resolve_virtual_method(reference_type, declared_interface_method);
+    if (resolved_interface_method == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(RuntimeState* runtime, ThreadState* thread, const void* string_object);
+    void* raw_write_line_string = bridge->resolve_icall({{ console_write_line_string_icall_literal }});
+    if (raw_write_line_string == nullptr) {
+        return CHAOS_BRIDGE_STATUS_NOT_SUPPORTED;
+    }
+    const auto write_line_string = reinterpret_cast<WriteLineStringFn>(raw_write_line_string);
+    void* constructor_argument = abi->string_new_utf8(runtime, thread, {{ constructor_literal }}, {{ constructor_literal_byte_count }}u);
+    if (constructor_argument == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    void* constructed_instance = abi->object_new(runtime, thread, reference_type);
+    if (constructed_instance == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    if (abi->field_set_value(
+            runtime,
+            thread,
+            captured_field,
+            constructed_instance,
+            &constructor_argument,
+            sizeof(constructor_argument)) != CHAOS_RUNTIME_STATUS_OK) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    void* message = nullptr;
+    BridgeStatus invoke_status = bridge->invoke_virtual(
+        runtime,
+        thread,
+        constructed_instance,
+        resolved_interface_method,
+        nullptr,
+        0u,
+        &message,
+        sizeof(message),
+        nullptr);
+    if (invoke_status != CHAOS_BRIDGE_STATUS_OK) {
+        return invoke_status;
+    }
+    if (message == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INTERNAL_ERROR;
+    }
+    return write_line_string(runtime, thread, message);
+}

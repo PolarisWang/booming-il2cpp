@@ -948,6 +948,7 @@ bool g_log_use_stderr = false;
 
 #include <chaos/config.h>
 #include <chaos/native_types.h>
+#include <chaos/profile.h>
 #include <runtime_core.h>
 
 #include "chaos_runtime_host.h"
@@ -973,15 +974,9 @@ extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" void ChaosRegisterGcLayouts();
 
-// Default arg thunks (defined in native-aot.generated.cpp for AOT,
-// not emitted in JIT — dispatch generator uses nullptr).
-// CHAOS_USE_DEFAULT_THUNKS -> kDefaultArgThunks (AOT) or nullptr (JIT).
-#ifndef CHAOS_IL2CPP_JIT_MODE
-extern "C" void (*kDefaultArgThunks[])() noexcept;
-#define CHAOS_USE_DEFAULT_THUNKS kDefaultArgThunks
-#else
+// kDefaultArgThunks no longer needed — hotpatch_dispatch.h falls through to
+// entry.direct_ptr when thunks==nullptr. Works for both AOT and JIT modes.
 #define CHAOS_USE_DEFAULT_THUNKS nullptr
-#endif
 
 // Benchmark result struct (must match verification_dispatch.generated.cpp)
 struct BenchmarkResult {
@@ -1051,6 +1046,7 @@ static int RunFactJsonMode() {
 }
 
 static int RunBenchmarkMode(int entry_index, int iterations) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("RunBenchmarkMode");
     auto result = RunBenchmark(entry_index, iterations);
     if (result.elapsed_ms < 0.0) {
         printf("{\\"elapsedMilliseconds\\":-1.0,\\"error\\":\\"invalid index\\"}\\n");

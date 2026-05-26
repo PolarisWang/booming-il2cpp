@@ -172,6 +172,24 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
     """Build patch DLL -> emit-patch-data -> generate runtime-patchdata.cpp -> rebuild entry.exe."""
     native_dir = ctx.native_dir
 
+    # Copy handwritten partial class files to patch dir so CustomEntryMethodN()
+    # implementations are visible to the patch DLL compiler.
+    # Handwritten files use class "XxxNativeEntry" but the patch variant
+    # uses "XxxPatchEntry".
+    handwritten_dir = ctx.family_dir / "handwritten"
+    patch_dir = ctx.family_dir / "managed" / "patch"
+    patch_dir.mkdir(parents=True, exist_ok=True)
+    if handwritten_dir.exists():
+        for f in sorted(handwritten_dir.glob("*.cs")):
+            content = f.read_text(encoding="utf-8")
+            if f.name.endswith(".Custom.cs"):
+                dest_name = f.name.replace("NativeEntry", "PatchEntry")
+                content = content.replace("NativeEntry", "PatchEntry")
+            else:
+                dest_name = f.name
+            dest = patch_dir / dest_name
+            dest.write_text(content, encoding="utf-8")
+
     dll = _build_patch_dll(ctx)
     if dll is None:
         print("  [hotupdate] _ensure_patch_data: patch DLL build failed")
@@ -206,14 +224,65 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
             capture_output=True, text=True, timeout=300,
         )
         runtime_core_lib = runtime_core_build / "RelWithDebInfo" / "chaos_runtime_core.lib"
-        sdk_lib_dir = native_dir.parent / "codegen" / "lib"
-        if runtime_core_lib.exists() and sdk_lib_dir.exists():
+        if runtime_core_lib.exists():
             import shutil as _shutil
-            _shutil.copy2(str(runtime_core_lib), str(sdk_lib_dir / "chaos_runtime_core.lib"))
-            print(f"  [hotupdate] Copied chaos_runtime_core.lib to SDK")
+            # Copy to ALL per-subject SDK lib dirs (codegen/<Subject>/lib/), not
+            # just codegen/lib/.  The entry.vcxproj links from per-subject dirs,
+            # and cmake dependency tracking recompiles native-aot.generated.cpp
+            # when headers like gc_alloc_stubs.h change — the new .obj references
+            # symbols from the rebuilt lib (e.g. tls_alloc_fast_count).  Without
+            # this copy, the linker finds a stale lib and reports LNK2001.
+            codegen_dir = native_dir.parent / "codegen"
+            copied = 0
+            if codegen_dir.is_dir():
+                for sub_dir in sorted(codegen_dir.iterdir()):
+                    sdk_lib_dir = sub_dir / "lib"
+                    if sdk_lib_dir.is_dir():
+                        _shutil.copy2(str(runtime_core_lib),
+                                      str(sdk_lib_dir / "chaos_runtime_core.lib"))
+                        copied += 1
+            # Also copy to codegen/lib/ (fallback location)
+            parent_lib_dir = codegen_dir / "lib" if codegen_dir.is_dir() else native_dir.parent / "codegen" / "lib"
+            if parent_lib_dir.exists():
+                _shutil.copy2(str(runtime_core_lib),
+                              str(parent_lib_dir / "chaos_runtime_core.lib"))
+                if copied == 0:
+                    copied = 1
+            print(f"  [hotupdate] Copied chaos_runtime_core.lib to {copied} SDK lib dir(s)")
 
     print(f"  [hotupdate] Rebuilding entry.exe with patchdata...")
     build_dir = native_dir / "build"
+
+    # Ensure microbench.cpp exists — the initial build creates it, but it may
+    # have been deleted between stages.  Without it, cmake --build fails with
+    # C1083 (Cannot open source file) because the cmake-generated vcxproj
+    # still references it from the initial configure.
+    microbench_cpp = native_dir / "microbench.cpp"
+    if not microbench_cpp.exists():
+        microbench_cpp.write_text(
+            '// microbench.cpp — Interpreter internal microbenchmarks.\n'
+            '// Auto-generated (hotupdate fallback).\n'
+            '#include "fast_frame_pool.h"\n'
+            '#include <chrono>\n'
+            '#include <cstdio>\n'
+            '#include <cstdint>\n'
+            '\n'
+            'using Clock = std::chrono::high_resolution_clock;\n'
+            'using chaos::il2cpp::runtime_core::tls_frame_pool;\n'
+            'using chaos::il2cpp::runtime_core::FastFramePool;\n'
+            'using chaos::il2cpp::runtime_core::FastFrame;\n'
+            '\n'
+            'extern "C" const int kAotMethodCount;\n'
+            'struct BenchmarkResult { double elapsed_ms; int64_t allocated_bytes; };\n'
+            'extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);\n'
+            '\n'
+            'extern "C" void RunMicrobench() {\n'
+            '    printf("microbench: no-op (hotupdate fallback)\\n");\n'
+            '}\n',
+            encoding="utf-8",
+        )
+        print(f"  [hotupdate] generated fallback microbench.cpp")
+
     if not build_dir.exists():
         build_dir = native_dir / "build" / "vs2022"
     if not build_dir.exists():

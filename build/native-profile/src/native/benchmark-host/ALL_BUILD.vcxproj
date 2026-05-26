@@ -177,6 +177,18 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{58C64499-D69B-348C-AEC4-8A38EDC849D3}</Project>
       <Name>chaos_benchmark_host</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\src\native\benchmark-host\chaos_eh_benchmark_cpp_throw.vcxproj">
+      <Project>{21323671-369F-3EA9-8280-D05E123A3A25}</Project>
+      <Name>chaos_eh_benchmark_cpp_throw</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\src\native\benchmark-host\chaos_eh_benchmark_setjmp.vcxproj">
+      <Project>{F931F5B9-3D7F-3042-95AA-1EBE54E8BA1B}</Project>
+      <Name>chaos_eh_benchmark_setjmp</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\src\native\benchmark-host\chaos_eh_benchmark_win32_seh.vcxproj">
+      <Project>{FDE6B671-81EE-37A0-990B-AD499FC19319}</Project>
+      <Name>chaos_eh_benchmark_win32_seh</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

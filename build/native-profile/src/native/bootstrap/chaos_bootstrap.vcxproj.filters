@@ -4,9 +4,18 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\bootstrap\bootstrap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\bootstrap\bootstrap_delegates.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\bootstrap\bootstrap_icall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\bootstrap\bootstrap.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\bootstrap\bootstrap_internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

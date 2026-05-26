@@ -76,10 +76,14 @@ def generate_verification_dispatch(
     write('')
     write('#include <cstdint>')
     write('#include <chrono>')
+    write('// Force-enable PROFILE_SCOPE regardless of config tier — needed because')
+    write('// the SDK include dir may shadow the project config.h')
+    write('#define CHAOS_IL2CPP_PROFILE_ENABLED 1')
     write('#include <chaos/native_types.h>')
     write('#include <runtime_core.h>')
     write('#include <chaos/eh.h>')
     write('#include <chaos/hotpatch_dispatch.h>')
+    write('#include <chaos/profile.h>')
     if is_jit:
         write('// SEH support for JIT-mode dispatch (catches access violations from JIT code)')
         write('#include <excpt.h>')
@@ -97,16 +101,14 @@ def generate_verification_dispatch(
     write('// kSubjectEntryCount/kSubjectSlotMap defined in native-aot.generated.cpp (DispatchEntryCode template)')
     write('')
 
-    # kDefaultArgThunks defined in native-aot.generated.cpp (AOT mode only)
-    if not is_jit:
-        write('// kDefaultArgThunks defined in native-aot.generated.cpp')
-        write('extern "C" void (*kDefaultArgThunks[])() noexcept;')
-        write('')
-
-    write('// In JIT mode, benchmark functions use nullptr instead of kDefaultArgThunks')
-    write('// because the JIT DispatchEntryCode template skips kDefaultArgThunks emission.')
-    write('// ChaosDispatchMethod accepts nullptr thunks and calls direct_ptr from')
-    write('// hotpatch entries (SetDirectDispatch has already been called by RegisterJitEntryMethods).')
+    # kDefaultArgThunks no longer needed — hotpatch_dispatch.h falls through to
+    # entry.direct_ptr when thunks==nullptr (works in both AOT and JIT modes).
+    # This eliminates per-family profile_thunk_stubs.cpp files.
+    write('')
+    write('// Benchmark functions use nullptr thunks. ChaosDispatchMethod falls through')
+    write('// to entry.direct_ptr from the hotpatch entries, so no kDefaultArgThunks')
+    write('// definition is needed regardless of AOT/JIT mode.')
+    write('')
     write('')
     write('extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;')
     write('extern "C" int32_t GetHotpatchEntryCount() noexcept;')
@@ -133,7 +135,7 @@ def generate_verification_dispatch(
         write('')
 
     # ── RunFactAll ──────────────────────────────────────────────────
-    thunks = 'nullptr' if is_jit else 'kDefaultArgThunks'
+    thunks = 'nullptr'  # Always nullptr — hotpatch_dispatch.h fallback to direct_ptr
     if is_jit:
         write("// ── RunFactAll: dispatch subject entries only (JIT mode) ──")
         write("// Uses kSubjectSlotMap + kSubjectEntryCount to skip runtime")
@@ -171,6 +173,11 @@ def generate_verification_dispatch(
     write('    if (entry_index < 0 || entry_index >= kAotMethodCount)')
     write('        return {-1.0, 0};')
     write('    auto* entries = GetHotpatchEntries();')
+    write('    // Warmup: one call to initialize type resolution, static constructors, etc.')
+    write('    // before starting the timed measurement, so per-call reported time')
+    write('    // reflects steady-state execution, not one-time init.')
+    write(f'    ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {thunks});')
+    write('    CHAOS_IL2CPP_PROFILE_RESET();')
     write('    auto alloc_before = chaos_gc_get_allocated_bytes_for_current_thread();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
@@ -181,6 +188,7 @@ def generate_verification_dispatch(
     write('    BenchmarkResult result;')
     write('    result.elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();')
     write('    result.allocated_bytes = alloc_after - alloc_before;')
+    write('    CHAOS_IL2CPP_PROFILE_DUMP();')
     write('    return result;')
     write('}')
     write('')
@@ -217,6 +225,9 @@ def generate_verification_dispatch(
     write('    if (entry_index < 0 || entry_index >= kAotMethodCount)')
     write('        return {-1.0, 0};')
     write('    auto* entries = GetHotpatchEntries();')
+    write('    // Warmup — one call to initialize type resolution, static constructors, etc.')
+    write(f'    ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {thunks});')
+    write('    CHAOS_IL2CPP_PROFILE_RESET();')
     write('    auto alloc_before = chaos_gc_get_allocated_bytes_for_current_thread();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
@@ -227,6 +238,13 @@ def generate_verification_dispatch(
     write('    BenchmarkResult result;')
     write('    result.elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();')
     write('    result.allocated_bytes = alloc_after - alloc_before;')
+    write('    std::fprintf(stderr, "PROFILE_DEBUG: thread_count=%d\\n", chaos::il2cpp::common::g_profile_thread_count.load(std::memory_order_relaxed));')
+    write('    std::fprintf(stderr, "PROFILE_DEBUG: registration_slot=%d\\n", g_tls_profile.registration_slot);')
+    write('    std::fprintf(stderr, "PROFILE_DEBUG: slot_count=%d\\n", g_tls_profile.slot_count);')
+    write('    std::fprintf(stderr, "PROFILE_DEBUG: calibrated=%d\\n", chaos::il2cpp::common::g_profile_calibrated);')
+    write('    std::fprintf(stderr, "PROFILE_DEBUG: before dump\\n");')
+    write('    CHAOS_IL2CPP_PROFILE_DUMP();')
+    write('    std::fprintf(stderr, "PROFILE_DEBUG: after dump\\n");')
     write('    return result;')
     write('}')
 

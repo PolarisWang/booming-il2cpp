@@ -38,13 +38,15 @@ def discover_families(assembly: str = "System.Private.CoreLib") -> list[str]:
     return [s for s in slugs if s not in SKIP_SLUGS]
 
 
-def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages: set[str] | None = None) -> dict:
+def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages: set[str] | None = None,
+               native_config: str = "check") -> dict:
     family_dir = _TESTING_ROOT / assembly / slug
     ctx = FamilyContext(
         slug=slug,
         assembly=assembly,
         family_dir=family_dir,
         skip_stages=skip_stages or set(),
+        native_config=native_config,
     )
 
     print(f"\n{'='*60}")
@@ -106,6 +108,8 @@ def main() -> None:
                         help="Comma-separated stages to skip: preflight,codegen,jit_codegen,fact,fact_jit,audit,asm_compare,microbench,benchmark,hotupdate")
     parser.add_argument("--resume", default=None,
                         help="Resume from a specific slug (skip families before this)")
+    parser.add_argument("--native-config", choices=["check", "profile", "ship"], default="check",
+                        help="Native build config (default: check)")
     args = parser.parse_args()
 
     if args.family:
@@ -143,7 +147,7 @@ def main() -> None:
 
     for i, slug in enumerate(slugs):
         print(f"\n[{i+1}/{len(slugs)}] ", end="")
-        result = run_family(slug, args.assembly, skip_stages)
+        result = run_family(slug, args.assembly, skip_stages, native_config=args.native_config)
         results.append(result)
 
         if result["status"] == "passed":

@@ -1,0 +1,67 @@
+[
+  {
+    "methodIndex": 0,
+    "opsPerSecond": 690126.8,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 1,
+    "opsPerSecond": 432899.3,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 2,
+    "opsPerSecond": 427200.9,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 3,
+    "opsPerSecond": 1598475.7,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 4,
+    "opsPerSecond": 1681172.4,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 5,
+    "opsPerSecond": 1769795.6,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 6,
+    "opsPerSecond": 10006203.8,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 7,
+    "opsPerSecond": 2445789.1,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 8,
+    "opsPerSecond": 678154.6,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 9,
+    "opsPerSecond": 692958.0,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 10,
+    "opsPerSecond": 2617163.9,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 11,
+    "opsPerSecond": 2632216.2,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  },
+  {
+    "methodIndex": 12,
+    "opsPerSecond": 9509409.6,
+    "baselineTimestamp": "2026-05-26T16:47:02"
+  }
+]

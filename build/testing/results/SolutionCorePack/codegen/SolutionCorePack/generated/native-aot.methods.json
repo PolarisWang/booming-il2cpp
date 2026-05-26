@@ -1,0 +1,3382 @@
+﻿{
+  "schemaVersion": 2,
+  "assemblyName": "SolutionCorePack",
+  "methodCount": 240,
+  "defaultStringId": 6573052206977776629,
+  "methods": [
+    {
+      "index": 0,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosBenchmarkRunner_Run_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 1,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosBenchmarkRunner___c__DisplayClass0_0__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 2,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosBenchmarkRunner___c__DisplayClass0_0_Run_b__0",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 3,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 4,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_get_CollectionPath",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 5,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_get_EntryBindings",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 6,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_get_PatchAssemblyNames",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 7,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_get_PatchProjectIds",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 8,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_get_SubjectId",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 9,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_set_CollectionPath_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 10,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_set_EntryBindings_System_Collections_Generic_List_ChaosHotUpdateEntryBinding",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 11,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_set_PatchAssemblyNames_System_Collections_Generic_List_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 12,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_set_PatchProjectIds_System_Collections_Generic_List_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 13,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifest_set_SubjectId_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 14,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifestLoader_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 15,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateBindingManifestLoader_Load_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 16,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateEntryBinding__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 17,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateEntryBinding_get_AssemblyName",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 18,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateEntryBinding_get_EntryIndex",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 19,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateEntryBinding_get_HostKind",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 20,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateEntryBinding_get_StableId",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 21,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateEntryBinding_set_AssemblyName_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 22,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateEntryBinding_set_EntryIndex_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 23,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateEntryBinding_set_HostKind_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 24,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateEntryBinding_set_StableId_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 25,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 26,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_ExecuteBenchmark_System_String_System_String_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 27,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_ExecuteBenchmarkWorkload_System_String_System_String_System_Int32_System_String",
+      "paramCount": 4,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 28,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_ExecuteProof_System_String_System_String_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 29,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_ExecuteProofWorkload_System_String_System_String_System_Int32_System_String",
+      "paramCount": 4,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 30,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_FindLoadedAssembly_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 31,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_InvokeEntry_System_String_ChaosTestCollectionEntry_System_String",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 32,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_LoadAssemblyByName_System_String_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 33,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_RegisterBaseDirectoryResolver",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 34,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_ResolveBaseDirectoryAssemblyPath_System_String_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 35,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_ResolveEntry_System_String_ChaosManagedHostKind_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 36,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor_ResolveFromBaseDirectory_AssemblyLoadContext_System_Reflection_AssemblyName",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 37,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor___c__DisplayClass11_0__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 38,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor___c__DisplayClass11_0_FindLoadedAssembly_b__0_System_Reflection_Assembly",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 39,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor___c__DisplayClass6_0__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 40,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateExecutor___c__DisplayClass6_0_ResolveEntry_b__0_ChaosTestCollectionEntry",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 41,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostArguments_Parse_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 42,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest__ctor_System_String_System_String_System_Int32",
+      "paramCount": 4,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 43,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_Deconstruct_System_String_System_String_System_Int32",
+      "paramCount": 4,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 44,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_Equals_ChaosHotUpdateHostRequest",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 45,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_Equals_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 46,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_get_BindingManifestPath",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 47,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_get_CollectionPath",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 48,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_get_EntryIndex",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 49,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_GetHashCode",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 50,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_op_Equality_ChaosHotUpdateHostRequest_ChaosHotUpdateHostRequest",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 51,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_op_Inequality_ChaosHotUpdateHostRequest_ChaosHotUpdateHostRequest",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 52,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_PrintMembers_System_Text_StringBuilder",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 53,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_set_BindingManifestPath_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 54,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_set_CollectionPath_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 55,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_set_EntryIndex_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 56,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest_ToString",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 57,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostArguments_Parse_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 58,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostArguments_ParseHostKind_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 59,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostReflection_BuildMethodSignature_System_Reflection_MethodInfo",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 60,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostReflection_FormatParameterType_System_Type",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 61,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostReflection_InvokeStaticEntry_ChaosTestCollectionEntry",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 62,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostReflection_ResolveAssembly_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 63,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostReflection_ResolveEntry_ChaosManagedHostKind_ChaosManagedHostRequest",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 64,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostReflection_ResolveMethod_System_Type_System_String_System_String",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 65,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 66,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 67,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c_BuildMethodSignature_b__4_0_System_Reflection_ParameterInfo",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 68,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest__ctor_System_String_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 69,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_Deconstruct_System_String_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 70,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_Equals_ChaosManagedHostRequest",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 71,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_Equals_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 72,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_get_CollectionPath",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 73,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_get_EntryIndex",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 74,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_GetHashCode",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 75,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_op_Equality_ChaosManagedHostRequest_ChaosManagedHostRequest",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 76,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_op_Inequality_ChaosManagedHostRequest_ChaosManagedHostRequest",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 77,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_PrintMembers_System_Text_StringBuilder",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 78,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_set_CollectionPath_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 79,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_set_EntryIndex_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 80,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_ToString",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 81,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosProofRunner_Run_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 82,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosProofRunner___c__DisplayClass0_0__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 83,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosProofRunner___c__DisplayClass0_0_Run_b__0",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 84,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 85,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_get_DeclaredBenchmarks",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 86,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_get_DeclaredUnitTests",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 87,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_get_FrameworkReferenced",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 88,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_get_SchemaVersion",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 89,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_get_SubjectId",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 90,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_get_SubjectKind",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 91,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_get_WarningCodes",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 92,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_set_DeclaredBenchmarks_System_Collections_Generic_List_ChaosTestCollectionEntry",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 93,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_set_DeclaredUnitTests_System_Collections_Generic_List_ChaosTestCollectionEntry",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 94,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_set_FrameworkReferenced_System_Boolean",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 95,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_set_SchemaVersion_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 96,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_set_SubjectId_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 97,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_set_SubjectKind_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 98,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollection_set_WarningCodes_System_Collections_Generic_List_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 99,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 100,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_get_Alias",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 101,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_get_AssemblyName",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 102,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_get_DeclaringType",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 103,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_get_EntryIndex",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 104,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_get_MethodName",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 105,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_get_MethodSignature",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 106,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_get_StableId",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 107,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_set_Alias_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 108,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_set_AssemblyName_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 109,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_set_DeclaringType_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 110,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_set_EntryIndex_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 111,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_set_MethodName_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 112,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_set_MethodSignature_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 113,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionEntry_set_StableId_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 114,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionLoader_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 115,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionLoader_EnsureEntryExists_System_String_ChaosManagedHostKind_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 116,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionLoader_Load_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 117,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionLoader_ResolveEntry_System_String_ChaosManagedHostKind_System_Int32",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 118,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionLoader___c__DisplayClass4_0__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 119,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionLoader___c__DisplayClass4_0_ResolveEntry_b__0_ChaosTestCollectionEntry",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 120,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_Program_Main_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 121,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_RuntimeTrace_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 122,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_RuntimeTrace_get_IsEnabled",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 123,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_RuntimeTrace_Point_System_String_System_String_System_Object",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 124,
+      "nativeSymbol": "Chaos_TestFramework_Runtime_RuntimeTrace_TraceCall_System_String_System_String_System_Action",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 125,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Equal_System_Int32_System_Int32_System_String",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 126,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Equal_0_0_System_String",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 127,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 128,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_False_System_Boolean_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 129,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_NotNull_System_Object_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 130,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 131,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_True_System_Boolean_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 132,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor_Chaos_TestFramework_ChaosBenchmarkCategory_Chaos_TestFramework_ChaosMetric",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 133,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Alias",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 134,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Archetype",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 135,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Capability",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 136,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_CapabilityFamily",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 137,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Category",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 138,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_HotUpdateCapability",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 139,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_InvocationCount",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 140,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_IterationCount",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 141,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_MaxAllocBytes",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 142,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Metrics",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 143,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_MinOpsPerSec",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 144,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Modes",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 145,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_P99Ms",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 146,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Requires",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 147,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_WarmupCount",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 148,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Alias_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 149,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Archetype_Chaos_TestFramework_ChaosSolutionArchetype",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 150,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Capability_Chaos_TestFramework_ChaosCapabilityItem",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 151,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_CapabilityFamily_Chaos_TestFramework_ChaosCapabilityFamily",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 152,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_HotUpdateCapability_Chaos_TestFramework_ChaosHotUpdateCapability",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 153,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_InvocationCount_System_UInt16",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 154,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_IterationCount_System_UInt16",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 155,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_MaxAllocBytes_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 156,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_MinOpsPerSec_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 157,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Modes_Chaos_TestFramework_ChaosExecutionMode",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 158,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_P99Ms_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 159,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Requires_Chaos_TestFramework_ChaosRuntimeFeature",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 160,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_WarmupCount_System_Byte",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 161,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkProfileAttribute__ctor_Chaos_TestFramework_BenchmarkProfile",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 162,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkProfileAttribute_get_Profile",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 163,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkRouteAttribute__ctor_Chaos_TestFramework_BenchmarkRoute",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 164,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkRouteAttribute_get_Route",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 165,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkSubjectIdAttribute__ctor_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 166,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkSubjectIdAttribute_get_MethodSubjectId",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 167,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityFamilyIdAttribute__ctor_Chaos_TestFramework_CapabilityFamilyId",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 168,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityFamilyIdAttribute_get_FamilyId",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 169,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute__ctor_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 170,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_ExecutionModes",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 171,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_FamilyId",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 172,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_IncludeBenchmark",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 173,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_IncludeHotUpdate",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 174,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_IncludeNativeProof",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 175,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_set_ExecutionModes_Chaos_TestFramework_ChaosExecutionMode",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 176,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_set_IncludeBenchmark_System_Boolean",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 177,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_set_IncludeHotUpdate_System_Boolean",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 178,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_set_IncludeNativeProof_System_Boolean",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 179,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertionException__ctor_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 180,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertState_cctor",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 181,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertState_Complete",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 182,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertState_RecordFailure",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 183,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertState_Reset",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 184,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosBenchmarkAttribute__ctor_Chaos_TestFramework_ChaosBenchmarkCategory_Chaos_TestFramework_ChaosMetric",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 185,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_ParseByte_System_String_System_String_System_String",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 186,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_ParseUInt16_System_String_System_String_System_String",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 187,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_TryParse_System_String_Chaos_TestFramework_ChaosSubjectEntrySelection",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 188,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection__ctor_Chaos_TestFramework_ChaosSubjectEntryKind_Chaos_TestFramework_ChaosSubjectSlice",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 189,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Deconstruct_Chaos_TestFramework_ChaosSubjectEntryKind_Chaos_TestFramework_ChaosSubjectSlice",
+      "paramCount": 3,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 190,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Equals_Chaos_TestFramework_ChaosSubjectEntrySelection",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 191,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Equals_System_Object",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 192,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_get_EntryKind",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 193,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_get_EntrySlice",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 194,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_get_IsNone",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 195,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_GetHashCode",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 196,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_op_Equality_Chaos_TestFramework_ChaosSubjectEntrySelection_Chaos_TestFramework_ChaosSubjectEntrySelection",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 197,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_op_Inequality_Chaos_TestFramework_ChaosSubjectEntrySelection_Chaos_TestFramework_ChaosSubjectEntrySelection",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 198,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_PrintMembers_System_Text_StringBuilder",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 199,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_set_EntryKind_Chaos_TestFramework_ChaosSubjectEntryKind",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 200,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_set_EntrySlice_Chaos_TestFramework_ChaosSubjectSlice",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 201,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_ToString",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 202,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute__ctor_Chaos_TestFramework_ChaosUnitCategory",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 203,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Alias",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 204,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Archetype",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 205,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Capability",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 206,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_CapabilityFamily",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 207,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Category",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 208,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Evidence",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 209,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_HotUpdateCapability",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 210,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Priority",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 211,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Requires",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 212,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Alias_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 213,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Archetype_Chaos_TestFramework_ChaosSolutionArchetype",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 214,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Capability_Chaos_TestFramework_ChaosCapabilityItem",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 215,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_CapabilityFamily_Chaos_TestFramework_ChaosCapabilityFamily",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 216,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Evidence_Chaos_TestFramework_ChaosEvidenceKind",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 217,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_HotUpdateCapability_Chaos_TestFramework_ChaosHotUpdateCapability",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 218,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Priority_System_Byte",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 219,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Requires_Chaos_TestFramework_ChaosRuntimeFeature",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 220,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateDirectionAttribute__ctor_Chaos_TestFramework_HotUpdateDirection",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 221,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateDirectionAttribute_get_Direction",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 222,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateSubjectIdAttribute__ctor_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 223,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateSubjectIdAttribute_get_MethodSubjectId",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 224,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_MethodSubjectIdAttribute__ctor_System_String",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": true,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 225,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_MethodSubjectIdAttribute_get_MethodSubjectId",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 226,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_VerificationRouteAttribute__ctor_Chaos_TestFramework_VerificationRoute",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 227,
+      "nativeSymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_VerificationRouteAttribute_get_Route",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 228,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 229,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArithmeticDouble",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 230,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArithmeticInt",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 231,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArrayAccess",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 232,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunLoopBranch",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 233,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunObjectAlloc",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 234,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunStringConcat",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 235,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunVirtualCall",
+      "paramCount": 0,
+      "params": [],
+      "isInstance": false
+    },
+    {
+      "index": 236,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder__ctor",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 237,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder_Compute_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 238,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj__ctor_System_Int32",
+      "paramCount": 2,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        },
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": true
+    },
+    {
+      "index": 239,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj_get_Value",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": true
+        }
+      ],
+      "isInstance": true
+    }
+  ]
+}

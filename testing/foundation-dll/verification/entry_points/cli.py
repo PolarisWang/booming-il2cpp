@@ -36,6 +36,8 @@ def main() -> None:
                         help="Stages to skip: preflight codegen jit_codegen fact fact_jit audit asm_compare microbench benchmark hotupdate")
     parser.add_argument("--verbose", "-v", action="store_true",
                         help="Verbose output")
+    parser.add_argument("--native-config", choices=["check", "profile", "ship"], default="check",
+                        help="Native build config (default: check)")
 
     args = parser.parse_args()
     family_dir = _resolve_family_dir(args.family_slug, args.assembly)
@@ -52,6 +54,7 @@ def main() -> None:
         mode=args.mode,
         skip_stages=set(args.skip),
         verbose=args.verbose,
+        native_config=args.native_config,
     )
 
     pipeline = VerificationPipeline(ctx)

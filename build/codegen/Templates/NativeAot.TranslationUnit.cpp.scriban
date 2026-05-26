@@ -1,0 +1,38 @@
+{{~ for include in includes ~}}
+#include {{ include }}
+{{ end ~}}
+#include "native-aot.generated.header.h"
+
+// Forward declaration for dispatch table entries (defined in runtime_stubs.cpp)
+extern "C" void InterpreterEntryDirect(
+    CHAOS_IL2CPP_UINTPTR method_key,
+    void*     args_buf,
+    void*     ret_buf) noexcept;
+
+#pragma warning(push)
+#pragma warning(disable: 4065 4244)
+
+namespace chaos::il2cpp::codegen::{{ codegen_namespace }} {
+
+// Bring runtime_core and jit declarations into scope for unqualified lookup
+using namespace chaos::il2cpp::runtime_core;
+using namespace chaos::il2cpp::jit;
+
+{{~ for declaration in method_declarations ~}}
+{{ declaration }}
+{{ end ~}}
+
+{{ object_model_section }}
+
+{{ module_registration_code }}
+{{ generic_registration_code }}
+{{~ for method_section in method_sections ~}}
+{{ method_section }}
+
+{{ end ~}}
+
+
+}  // namespace chaos::il2cpp::codegen::{{ codegen_namespace }}
+#pragma warning(pop)
+
+{{ global_declarations }}

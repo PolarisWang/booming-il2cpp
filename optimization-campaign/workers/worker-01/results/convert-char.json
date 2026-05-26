@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/convert/char",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "elapsedMilliseconds": 79.176,
+      "calibratedMs": 79.176,
+      "opsPerSecond": 1263012,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.189,
+      "calibratedMs": 0.189,
+      "opsPerSecond": 530503979,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.2,
+      "calibratedMs": 0.2,
+      "opsPerSecond": 499500500,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 78.62,
+      "calibratedMs": 78.62,
+      "opsPerSecond": 1271935,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 19.876,
+      "calibratedMs": 19.876,
+      "opsPerSecond": 5031168,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.345,
+      "calibratedMs": 0.345,
+      "opsPerSecond": 289603244,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.189,
+      "calibratedMs": 0.189,
+      "opsPerSecond": 530503979,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.192,
+      "calibratedMs": 0.192,
+      "opsPerSecond": 521104742,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.324,
+      "calibratedMs": 0.324,
+      "opsPerSecond": 309023486,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 83.66,
+      "calibratedMs": 83.66,
+      "opsPerSecond": 1195307,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 81.626,
+      "calibratedMs": 81.626,
+      "opsPerSecond": 1225106,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.191,
+      "calibratedMs": 0.191,
+      "opsPerSecond": 524934383,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.488,
+      "calibratedMs": 0.488,
+      "opsPerSecond": 204792136,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.852,
+      "calibratedMs": 0.852,
+      "opsPerSecond": 117384670,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 1.123,
+      "calibratedMs": 1.123,
+      "opsPerSecond": 89007566,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.169,
+      "calibratedMs": 0.169,
+      "opsPerSecond": 592066311,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.36,
+      "calibratedMs": 0.36,
+      "opsPerSecond": 278009452,
+      "iterations": 100000
+    },
+    {
+      "elapsedMilliseconds": 0.328,
+      "calibratedMs": 0.328,
+      "opsPerSecond": 304599452,
+      "iterations": 100000
+    }
+  ]
+}

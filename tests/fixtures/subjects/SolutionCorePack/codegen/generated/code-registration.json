@@ -1,0 +1,713 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "codeRegistration",
+  "modules": [
+    {
+      "moduleName": "SolutionCorePack.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::InvokeWorkload:System.Int32(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArithmeticInt",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArithmeticDouble",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticDouble:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunStringConcat",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunStringConcat:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArrayAccess",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArrayAccess:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunObjectAlloc",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunObjectAlloc:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunVirtualCall",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunVirtualCall:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunLoopBranch",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunLoopBranch:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj_get_Value",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::get_Value:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj__ctor_System_Int32",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::.ctor:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_ICalc_Compute_System_Int32",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BICalc::Compute:System.Int64(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder_Compute_System_Int32",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::Compute:System.Int64(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder__ctor",
+          "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::.ctor:System.Void()"
+        }
+      ]
+    },
+    {
+      "moduleName": "Chaos.TestFramework.Sdk.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection__ctor_Chaos_TestFramework_ChaosSubjectEntryKind_Chaos_TestFramework_ChaosSubjectSlice",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::.ctor:System.Void(Chaos.TestFramework.ChaosSubjectEntryKind,Chaos.TestFramework.ChaosSubjectSlice)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_get_EntryKind",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntryKind:Chaos.TestFramework.ChaosSubjectEntryKind()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 2,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_set_EntryKind_Chaos_TestFramework_ChaosSubjectEntryKind",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::set_EntryKind:System.Void(Chaos.TestFramework.ChaosSubjectEntryKind)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 3,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_get_EntrySlice",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntrySlice:Chaos.TestFramework.ChaosSubjectSlice()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 4,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_set_EntrySlice_Chaos_TestFramework_ChaosSubjectSlice",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::set_EntrySlice:System.Void(Chaos.TestFramework.ChaosSubjectSlice)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 5,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_get_IsNone",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_IsNone:System.Boolean()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 6,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_ToString",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::ToString:System.String()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 7,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_PrintMembers_System_Text_StringBuilder",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::PrintMembers:System.Boolean(System.Text.StringBuilder)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 8,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_op_Inequality_Chaos_TestFramework_ChaosSubjectEntrySelection_Chaos_TestFramework_ChaosSubjectEntrySelection",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::op_Inequality:System.Boolean(Chaos.TestFramework.ChaosSubjectEntrySelection,Chaos.TestFramework.ChaosSubjectEntrySelection)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 9,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_op_Equality_Chaos_TestFramework_ChaosSubjectEntrySelection_Chaos_TestFramework_ChaosSubjectEntrySelection",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::op_Equality:System.Boolean(Chaos.TestFramework.ChaosSubjectEntrySelection,Chaos.TestFramework.ChaosSubjectEntrySelection)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 10,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_GetHashCode",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::GetHashCode:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 11,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Equals_System_Object",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Equals:System.Boolean(System.Object)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 12,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Equals_Chaos_TestFramework_ChaosSubjectEntrySelection",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Equals:System.Boolean(Chaos.TestFramework.ChaosSubjectEntrySelection)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 13,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Deconstruct_Chaos_TestFramework_ChaosSubjectEntryKind_Chaos_TestFramework_ChaosSubjectSlice",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Deconstruct:System.Void(Chaos.TestFramework.ChaosSubjectEntryKind\u0026,Chaos.TestFramework.ChaosSubjectSlice\u0026)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 14,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_TryParse_System_String_Chaos_TestFramework_ChaosSubjectEntrySelection",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::TryParse:System.Boolean(System.String[],Chaos.TestFramework.ChaosSubjectEntrySelection\u0026)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 15,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_ParseByte_System_String_System_String_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::ParseByte:System.Byte(System.String,System.String,System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 16,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_ParseUInt16_System_String_System_String_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::ParseUInt16:System.UInt16(System.String,System.String,System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 17,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute__ctor_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::.ctor:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 18,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_FamilyId",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_FamilyId:System.String()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 19,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_IncludeNativeProof",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_IncludeNativeProof:System.Boolean()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 20,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_set_IncludeNativeProof_System_Boolean",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_IncludeNativeProof:System.Void(System.Boolean)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 21,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_IncludeBenchmark",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_IncludeBenchmark:System.Boolean()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 22,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_set_IncludeBenchmark_System_Boolean",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_IncludeBenchmark:System.Void(System.Boolean)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 23,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_IncludeHotUpdate",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_IncludeHotUpdate:System.Boolean()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 24,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_set_IncludeHotUpdate_System_Boolean",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_IncludeHotUpdate:System.Void(System.Boolean)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 25,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_get_ExecutionModes",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_ExecutionModes:Chaos.TestFramework.ChaosExecutionMode()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 26,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityTestAttribute_set_ExecutionModes_Chaos_TestFramework_ChaosExecutionMode",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_ExecutionModes:System.Void(Chaos.TestFramework.ChaosExecutionMode)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 27,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_MethodSubjectIdAttribute__ctor_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute::.ctor:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 28,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_MethodSubjectIdAttribute_get_MethodSubjectId",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute::get_MethodSubjectId:System.String()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 29,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkSubjectIdAttribute__ctor_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkSubjectIdAttribute::.ctor:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 30,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkSubjectIdAttribute_get_MethodSubjectId",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkSubjectIdAttribute::get_MethodSubjectId:System.String()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 31,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateSubjectIdAttribute__ctor_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateSubjectIdAttribute::.ctor:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 32,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateSubjectIdAttribute_get_MethodSubjectId",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateSubjectIdAttribute::get_MethodSubjectId:System.String()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 33,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityFamilyIdAttribute__ctor_Chaos_TestFramework_CapabilityFamilyId",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyIdAttribute::.ctor:System.Void(Chaos.TestFramework.CapabilityFamilyId)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 34,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_CapabilityFamilyIdAttribute_get_FamilyId",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyIdAttribute::get_FamilyId:Chaos.TestFramework.CapabilityFamilyId()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 35,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_VerificationRouteAttribute__ctor_Chaos_TestFramework_VerificationRoute",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::.ctor:System.Void(Chaos.TestFramework.VerificationRoute)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 36,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_VerificationRouteAttribute_get_Route",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::get_Route:Chaos.TestFramework.VerificationRoute()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 37,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkRouteAttribute__ctor_Chaos_TestFramework_BenchmarkRoute",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRouteAttribute::.ctor:System.Void(Chaos.TestFramework.BenchmarkRoute)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 38,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkRouteAttribute_get_Route",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRouteAttribute::get_Route:Chaos.TestFramework.BenchmarkRoute()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 39,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkProfileAttribute__ctor_Chaos_TestFramework_BenchmarkProfile",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfileAttribute::.ctor:System.Void(Chaos.TestFramework.BenchmarkProfile)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 40,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkProfileAttribute_get_Profile",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfileAttribute::get_Profile:Chaos.TestFramework.BenchmarkProfile()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 41,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateDirectionAttribute__ctor_Chaos_TestFramework_HotUpdateDirection",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirectionAttribute::.ctor:System.Void(Chaos.TestFramework.HotUpdateDirection)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 42,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_HotUpdateDirectionAttribute_get_Direction",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirectionAttribute::get_Direction:Chaos.TestFramework.HotUpdateDirection()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 43,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute__ctor_Chaos_TestFramework_ChaosUnitCategory",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::.ctor:System.Void(Chaos.TestFramework.ChaosUnitCategory)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 44,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Category",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Category:Chaos.TestFramework.ChaosUnitCategory()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 45,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Alias",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Alias:System.String()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 46,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Alias_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Alias:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 47,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_CapabilityFamily",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_CapabilityFamily:Chaos.TestFramework.ChaosCapabilityFamily()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 48,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_CapabilityFamily_Chaos_TestFramework_ChaosCapabilityFamily",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_CapabilityFamily:System.Void(Chaos.TestFramework.ChaosCapabilityFamily)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 49,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Capability",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Capability:Chaos.TestFramework.ChaosCapabilityItem()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 50,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Capability_Chaos_TestFramework_ChaosCapabilityItem",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Capability:System.Void(Chaos.TestFramework.ChaosCapabilityItem)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 51,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Requires",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Requires:Chaos.TestFramework.ChaosRuntimeFeature()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 52,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Requires_Chaos_TestFramework_ChaosRuntimeFeature",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Requires:System.Void(Chaos.TestFramework.ChaosRuntimeFeature)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 53,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Archetype",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Archetype:Chaos.TestFramework.ChaosSolutionArchetype()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 54,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Archetype_Chaos_TestFramework_ChaosSolutionArchetype",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Archetype:System.Void(Chaos.TestFramework.ChaosSolutionArchetype)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 55,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_HotUpdateCapability",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_HotUpdateCapability:Chaos.TestFramework.ChaosHotUpdateCapability()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 56,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_HotUpdateCapability_Chaos_TestFramework_ChaosHotUpdateCapability",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_HotUpdateCapability:System.Void(Chaos.TestFramework.ChaosHotUpdateCapability)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 57,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Evidence",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Evidence:Chaos.TestFramework.ChaosEvidenceKind()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 58,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Evidence_Chaos_TestFramework_ChaosEvidenceKind",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Evidence:System.Void(Chaos.TestFramework.ChaosEvidenceKind)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 59,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_get_Priority",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Priority:System.Byte()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 60,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosUnitTestAttribute_set_Priority_System_Byte",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Priority:System.Void(System.Byte)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 61,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute__ctor_Chaos_TestFramework_ChaosBenchmarkCategory_Chaos_TestFramework_ChaosMetric",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor:System.Void(Chaos.TestFramework.ChaosBenchmarkCategory,Chaos.TestFramework.ChaosMetric)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 62,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Category",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Category:Chaos.TestFramework.ChaosBenchmarkCategory()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 63,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Metrics",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Metrics:Chaos.TestFramework.ChaosMetric()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 64,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Alias",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Alias:System.String()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 65,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Alias_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Alias:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 66,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_CapabilityFamily",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_CapabilityFamily:Chaos.TestFramework.ChaosCapabilityFamily()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 67,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_CapabilityFamily_Chaos_TestFramework_ChaosCapabilityFamily",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_CapabilityFamily:System.Void(Chaos.TestFramework.ChaosCapabilityFamily)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 68,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Capability",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Capability:Chaos.TestFramework.ChaosCapabilityItem()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 69,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Capability_Chaos_TestFramework_ChaosCapabilityItem",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Capability:System.Void(Chaos.TestFramework.ChaosCapabilityItem)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 70,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Requires",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Requires:Chaos.TestFramework.ChaosRuntimeFeature()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 71,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Requires_Chaos_TestFramework_ChaosRuntimeFeature",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Requires:System.Void(Chaos.TestFramework.ChaosRuntimeFeature)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 72,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Archetype",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Archetype:Chaos.TestFramework.ChaosSolutionArchetype()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 73,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Archetype_Chaos_TestFramework_ChaosSolutionArchetype",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Archetype:System.Void(Chaos.TestFramework.ChaosSolutionArchetype)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 74,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_HotUpdateCapability",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_HotUpdateCapability:Chaos.TestFramework.ChaosHotUpdateCapability()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 75,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_HotUpdateCapability_Chaos_TestFramework_ChaosHotUpdateCapability",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_HotUpdateCapability:System.Void(Chaos.TestFramework.ChaosHotUpdateCapability)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 76,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_Modes",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Modes:Chaos.TestFramework.ChaosExecutionMode()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 77,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_Modes_Chaos_TestFramework_ChaosExecutionMode",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Modes:System.Void(Chaos.TestFramework.ChaosExecutionMode)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 78,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_WarmupCount",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_WarmupCount:System.Byte()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 79,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_WarmupCount_System_Byte",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_WarmupCount:System.Void(System.Byte)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 80,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_IterationCount",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_IterationCount:System.UInt16()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 81,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_IterationCount_System_UInt16",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_IterationCount:System.Void(System.UInt16)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 82,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_InvocationCount",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_InvocationCount:System.UInt16()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 83,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_InvocationCount_System_UInt16",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_InvocationCount:System.Void(System.UInt16)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 84,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_P99Ms",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_P99Ms:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 85,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_P99Ms_System_Int32",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_P99Ms:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 86,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_MinOpsPerSec",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_MinOpsPerSec:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 87,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_MinOpsPerSec_System_Int32",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_MinOpsPerSec:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 88,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_get_MaxAllocBytes",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_MaxAllocBytes:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 89,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_BenchmarkAttribute_set_MaxAllocBytes_System_Int32",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_MaxAllocBytes:System.Void(System.Int32)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 90,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosBenchmarkAttribute__ctor_Chaos_TestFramework_ChaosBenchmarkCategory_Chaos_TestFramework_ChaosMetric",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkAttribute::.ctor:System.Void(Chaos.TestFramework.ChaosBenchmarkCategory,Chaos.TestFramework.ChaosMetric)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 91,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertionException__ctor_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertionException::.ctor:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 92,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertState_Reset",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::Reset:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 93,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertState_Complete",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::Complete:System.Int32()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 94,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertState_RecordFailure",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::RecordFailure:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 95,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosAssertState_cctor",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::.cctor:System.Void()"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 96,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_True_System_Boolean_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::True:System.Void(System.Boolean,System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 97,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_False_System_Boolean_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::False:System.Void(System.Boolean,System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 98,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Equal_System_Int32_System_Int32_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal:System.Void(System.Int32,System.Int32,System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 99,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Equal_0_0_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal\u00601:System.Void(!!0,!!0,System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 100,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_NotNull_System_Object_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::NotNull:System.Void(System.Object,System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 101,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Fail_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail:System.Void(System.String)"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 102,
+          "symbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System_Action_System_String",
+          "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws\u00601:System.Void(System.Action,System.String)"
+        }
+      ]
+    }
+  ],
+  "typeCapabilities": []
+}

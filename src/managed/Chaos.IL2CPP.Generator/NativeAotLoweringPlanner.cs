@@ -95,8 +95,8 @@ public sealed partial class NativeAotLoweringPlanner
         int ArgCount         // how many eval-stack args to consume
     );
 
-    private Dictionary<int, EnumAotBakeEntry> _enumAotBakeMap =
-        new Dictionary<int, EnumAotBakeEntry>();
+    private Dictionary<(string MethodId, int IlOffset), EnumAotBakeEntry> _enumAotBakeMap =
+        new Dictionary<(string, int), EnumAotBakeEntry>();
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
 

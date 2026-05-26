@@ -91,11 +91,11 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -123,13 +123,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -157,13 +157,13 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -192,11 +192,11 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;FMT_USE_WINDOWS_H=0;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\third_party\fmt\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\build\native-profile\CMakeFiles\a4406747cc0d85789c0e9cabf9544489\INSTALL_force.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{BC56D5B1-68A1-3348-885D-F68F38CD779A}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -49,6 +49,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("D:/agent/booming-il2cpp/build/native-profile/src/native/diagnostics/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("D:/agent/booming-il2cpp/build/native-profile/src/native/runtime-core/cmake_install.cmake")
 endif()
 
@@ -64,7 +69,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/agent/booming-il2cpp/build/native-profile/src/native/codegen/cmake_install.cmake")
+  include("D:/agent/booming-il2cpp/build/native-profile/src/native/jit/cmake_install.cmake")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
@@ -134,7 +139,12 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
-  include("D:/agent/booming-il2cpp/build/native-profile/verification/foundation-dll/cmake_install.cmake")
+  include("D:/agent/booming-il2cpp/build/native-profile/testing/foundation-dll/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
+  include("D:/agent/booming-il2cpp/build/native-profile/testing/cmake_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)

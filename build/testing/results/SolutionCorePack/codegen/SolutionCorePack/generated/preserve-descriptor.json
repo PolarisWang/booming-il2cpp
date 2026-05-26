@@ -1,0 +1,120 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "preserveDescriptor",
+  "entries": [
+    {
+      "subjectKind": "type",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BICalc",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "type",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder",
+      "preserve": "all",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "field",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::\u003CValue\u003Ek__BackingField",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "property",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::property:Value",
+      "preserve": "members",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::InvokeWorkload:System.Int32(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticDouble:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunStringConcat:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArrayAccess:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunObjectAlloc:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunVirtualCall:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunLoopBranch:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::get_Value:System.Int32()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::.ctor:System.Void(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BICalc::Compute:System.Int64(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::Compute:System.Int64(System.Int32)",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::.ctor:System.Void()",
+      "preserve": "signature",
+      "reason": "full-assembly-closure"
+    }
+  ]
+}

@@ -51,6 +51,10 @@ class FamilyContext:
         verbose: Enable verbose logging output.
         codegen_mode: Code generation mode override — "aot" or "jit" or None
                       (None uses the default from stage config).
+        native_config: Native build config — "check" (default, debug-oriented),
+                      "profile" (with PROFILE_SCOPE instrumentation), or "ship"
+                      (optimized, no instrumentation).  When "profile", the
+                      benchmark stage automatically collects PROFILE_DUMP data.
     """
     slug: str
     assembly: str
@@ -59,6 +63,7 @@ class FamilyContext:
     skip_stages: set[str] = field(default_factory=set)
     verbose: bool = False
     codegen_mode: str | None = None
+    native_config: str = "check"
 
     @property
     def contract_path(self) -> Path:

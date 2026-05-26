@@ -4,6 +4,7 @@
 #include "../gc/gc_etw.h"
 #include "../gc/gc_low_mem.h"
 #include "../gc/gc_worker_pool.h"
+#include "../gc/gc_young_gen.h"
 
 // T4 VEH handler for SEH dispatch in native-generated code.
 #include "../jit/jit_seh.h"
@@ -75,6 +76,11 @@ RuntimeStatus CHAOS_RUNTIME_ABI_CALL RuntimeInit(
     // chaos_common delegates to the real implementation instead of stubbing.
     threading::RegisterAsyncTaskRun();
 
+    // Initialize the shared young generation (nursery + TLAB).
+    // Must be called before any GC allocation — every allocation goes through
+    // NurseryAllocate which relies on g_young_gen for TLAB carving.
+    InitYoungGeneration();
+
     SetRuntimeMode(RuntimeMode::Aot);
     *out_runtime_state = runtime_state;
     return CHAOS_RUNTIME_STATUS_OK;
@@ -91,6 +97,7 @@ void CHAOS_RUNTIME_ABI_CALL RuntimeShutdown(RuntimeState* runtime_state) {
     //   3. Then remaining teardown (ETW, low-mem monitor, free state).
     BgcController::Instance().Stop();
     GcWorkerPool::Instance().Shutdown();
+    DestroyYoungGeneration();
     GcEtwShutdown();
     g_low_memory_monitor.Stop();
     SetRuntimeMode(RuntimeMode::Aot);

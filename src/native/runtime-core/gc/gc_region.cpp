@@ -3,6 +3,8 @@
 #include <chaos/log.h>
 
 #include <cstdio>
+#include <atomic>
+#include <intrin.h>
 
 #include "core/gc_alloc_stubs.h"
 #include "gc_bgc.h"
@@ -616,6 +618,24 @@ void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size) {
 }
 
 TLAB TlabClaimFromYoungGen() noexcept {
+    // Lazy one-time initialization of the shared young generation.
+    // RuntimeInit may not be called in all execution paths (e.g., benchmark
+    // hosts call generated code directly).  Without this, g_young_gen.bump
+    // is nullptr and every allocation falls through to OldGen.
+    // Use compare_exchange for thread safety — only one thread initializes.
+    static std::atomic<int> s_young_gen_state{0};  // 0=uninit, 1=initing, 2=ready
+    int expected = 0;
+    if (s_young_gen_state.compare_exchange_strong(expected, 1,
+            std::memory_order_acq_rel, std::memory_order_acquire)) {
+        InitYoungGeneration();
+        s_young_gen_state.store(2, std::memory_order_release);
+    } else if (expected == 1) {
+        // Another thread is initializing — spin-wait.
+        while (s_young_gen_state.load(std::memory_order_acquire) != 2) {
+            _mm_pause();
+        }
+    }
+
     // Use the per-thread adaptive TLAB size (tuned by UpdateTlabSize).
     CHAOS_IL2CPP_SIZE tlab_sz = tls_tlab_size;
     // Clamp to valid range in case UpdateTlabSize produced an extreme value.

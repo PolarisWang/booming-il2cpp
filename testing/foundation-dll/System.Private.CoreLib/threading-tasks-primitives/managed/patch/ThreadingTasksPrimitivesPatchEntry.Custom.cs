@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 public static partial class ThreadingTasksPrimitivesPatchEntry
 {
+    // _exitCode is provided by the auto-generated partial class.
 
     private static int s_sharedState;
 

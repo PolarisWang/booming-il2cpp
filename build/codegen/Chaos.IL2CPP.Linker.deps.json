@@ -1,0 +1,73 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v8.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v8.0": {
+      "Chaos.IL2CPP.Linker/1.0.0": {
+        "dependencies": {
+          "Chaos.IL2CPP.Contracts": "1.0.0",
+          "Chaos.IL2CPP.SemanticWorld": "1.0.0"
+        },
+        "runtime": {
+          "Chaos.IL2CPP.Linker.dll": {}
+        }
+      },
+      "Chaos.IL2CPP.Contracts/1.0.0": {
+        "runtime": {
+          "Chaos.IL2CPP.Contracts.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Chaos.IL2CPP.Loader/1.0.0": {
+        "dependencies": {
+          "Chaos.IL2CPP.Contracts": "1.0.0"
+        },
+        "runtime": {
+          "Chaos.IL2CPP.Loader.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "Chaos.IL2CPP.SemanticWorld/1.0.0": {
+        "dependencies": {
+          "Chaos.IL2CPP.Contracts": "1.0.0",
+          "Chaos.IL2CPP.Loader": "1.0.0"
+        },
+        "runtime": {
+          "Chaos.IL2CPP.SemanticWorld.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Chaos.IL2CPP.Linker/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chaos.IL2CPP.Contracts/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chaos.IL2CPP.Loader/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Chaos.IL2CPP.SemanticWorld/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

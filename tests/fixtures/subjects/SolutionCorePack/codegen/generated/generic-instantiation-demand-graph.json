@@ -1,0 +1,284 @@
+{
+  "demands": [
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectEntryKind\u003E::Equals:System.Boolean(Chaos.TestFramework.ChaosSubjectEntryKind,Chaos.TestFramework.ChaosSubjectEntryKind)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+        "typeArguments": [
+          "Chaos.TestFramework.ChaosSubjectEntryKind"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectEntryKind\u003E::GetHashCode:System.Int32(Chaos.TestFramework.ChaosSubjectEntryKind)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::GetHashCode:System.Int32(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::GetHashCode:System.Int32(!0)",
+        "typeArguments": [
+          "Chaos.TestFramework.ChaosSubjectEntryKind"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectEntryKind\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectEntryKind\u003E()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+        "typeArguments": [
+          "Chaos.TestFramework.ChaosSubjectEntryKind"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectSlice\u003E::Equals:System.Boolean(Chaos.TestFramework.ChaosSubjectSlice,Chaos.TestFramework.ChaosSubjectSlice)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::Equals:System.Boolean(!0,!0)",
+        "typeArguments": [
+          "Chaos.TestFramework.ChaosSubjectSlice"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectSlice\u003E::GetHashCode:System.Int32(Chaos.TestFramework.ChaosSubjectSlice)",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::GetHashCode:System.Int32(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::GetHashCode:System.Int32(!0)",
+        "typeArguments": [
+          "Chaos.TestFramework.ChaosSubjectSlice"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectSlice\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectSlice\u003E()",
+      "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u00601::get_Default:System.Collections.Generic.EqualityComparer\u003C!0\u003E()",
+        "typeArguments": [
+          "Chaos.TestFramework.ChaosSubjectSlice"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E:System.String[]()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Array::Empty:!!0[]()",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.String"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Byte\u003E::get_HasValue:System.Boolean()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Byte\u003E::get_Value:System.Byte()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_Value:!0()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_Value:!0()",
+        "typeArguments": [
+          "System.Byte"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.UInt16\u003E::.ctor:System.Void(System.UInt16)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::.ctor:System.Void(!0)",
+        "typeArguments": [
+          "System.UInt16"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.UInt16\u003E::get_HasValue:System.Boolean()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_HasValue:System.Boolean()",
+        "typeArguments": [
+          "System.UInt16"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.UInt16\u003E::get_Value:System.UInt16()",
+      "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_Value:!0()",
+      "demandSourceKind": "memberReference",
+      "instantiationKey": {
+        "contextKind": 1,
+        "definitionSubjectId": "System.Private.CoreLib/System.Nullable\u00601::get_Value:!0()",
+        "typeArguments": [
+          "System.UInt16"
+        ],
+        "methodArguments": []
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 2,
+      "isCrossAssembly": true
+    },
+    {
+      "requestingAssemblyName": "Chaos.TestFramework.Sdk",
+      "owningAssemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+      "definitionSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted:System.Void(!!0)",
+      "demandSourceKind": "methodSpec",
+      "instantiationKey": {
+        "contextKind": 2,
+        "definitionSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted:System.Void(!!0)",
+        "typeArguments": [],
+        "methodArguments": [
+          "System.Int32"
+        ]
+      },
+      "supportKindCode": 3,
+      "specializationKindCode": 1,
+      "familyKindCode": 3,
+      "isCrossAssembly": true
+    }
+  ]
+}

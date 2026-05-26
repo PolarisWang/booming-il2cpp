@@ -1,0 +1,41 @@
+// AUTO-GENERATED MathKernel stub — direct C++ kernel, no method_invoke
+// kernel_fn: {{ kernel_function_name }}
+// managed_return_type: {{ return_managed_type }}
+
+struct {{ stub_name }}_KernelArgs
+{
+{{~ for arg in arg_shapes ~}}
+    {{ arg.cpp_type }} {{ arg.name }};
+{{~ end ~}}
+{{~ if has_return ~}}
+    {{ return_cpp_type }} return_value;
+{{~ end ~}}
+};
+
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)metadata_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    if (managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const auto* request = static_cast<const {{ stub_name }}_KernelArgs*>(managed_args);
+{{~ if has_return ~}}
+    request->return_value = {{ kernel_call_expression }};
+{{~ else ~}}
+    {{ kernel_call_expression }};
+{{~ end ~}}
+    return CHAOS_BRIDGE_STATUS_OK;
+}

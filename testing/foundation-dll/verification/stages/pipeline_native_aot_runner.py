@@ -820,7 +820,7 @@ def _sync_runtime_libs_to_sdk(codegen_dir: Path) -> None:
                 shutil.copy2(str(lib_file), str(sdk_lib_dir / lib_file.name))
 
 
-def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Path, *, is_jit: bool = False) -> None:
+def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Path, *, is_jit: bool = False, config_tier: str = "CHECK") -> None:
     """Auto-generate or update native/CMakeLists.txt with SDK-based template.
 
     Uses find_package(chaos) to discover the chaos SDK (prebuilt runtime libs,
@@ -837,8 +837,8 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
       - Excludes flat layout glob pattern (*Subjects/generated/native-aot.generated.cpp)
         to avoid duplicate ChaosJitRegisterAll symbol (stale AOT output contains
         an empty stub that conflicts with the JIT-generated real implementation).
-      JIT libs (chaos_jit, chaos_debugger) are already part of chaos::runtime
-      from the SDK, so no extra target_link_libraries is needed.
+
+    config_tier controls compile definitions (CHECK=DEBUG, PROFILE=INFO, SHIP=ERROR).
     """
 
     # Always regenerate from template based on current settings.
@@ -933,8 +933,9 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'# Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions\n'
         f'# thrown by generated code (throw chaos_managed_exception from unresolved calls).\n'
         f'add_compile_options(/utf-8 /GS- /FS)\n'
-        f'add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)\n'
-        f'add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)\n'
+        f'add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_{config_tier})\n'
+        f'add_compile_definitions(CHAOS_IL2CPP_CONFIG_{config_tier})\n'
+        f'add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL={3 if config_tier == "CHECK" else 2 if config_tier == "PROFILE" else 0})\n'
         f'{jit_define}'
         f'\n'
         f'# Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and\n'
@@ -972,12 +973,18 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp"\n'
         f')\n'
+        f'# PROFILE globals (compiled from source to avoid stale SDK lib dependency).\n'
+        f'# Only generates symbols when CHAOS_IL2CPP_PROFILE_ENABLED=1 (PROFILE tier).\n'
+        f'set(CHAOS_PROFILE_GLOBALS\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/common/chaos/profile_globals.cpp"\n'
+        f')\n'
         f'set(CHAOS_ENTRY_SOURCES\n'
         f'    "runtime-entry.cpp"\n'
         f'    "runtime-patchdata.cpp"\n'
         f'    "verification_dispatch.generated.cpp"\n'
         f'    ${{CHAOS_NATIVE_STUBS}}\n'
         f'    ${{CHAOS_RUNTIME_STUB_SOURCES}}\n'
+        f'    ${{CHAOS_PROFILE_GLOBALS}}\n'
         f'    ${{CHAOS_AOT_GENERATED_CPP}}\n'
         f')\n'
         f'\n'
@@ -989,6 +996,7 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/gc"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/runtime-core/runtime_stubs"  # runtime_stubs headers\n'
+        f'    "${{CHAOS_PROJECT_ROOT}}/src/native/common"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/bootstrap"\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native"  # parent for bootstrap/bootstrap.h includes\n'
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/interpreter"\n'
@@ -1834,6 +1842,11 @@ def write_sentinel_dispatch(dispatch_cpp: Path) -> None:
         '#include <cstdint>\n'
         '#include <chaos/native_types.h>\n'
         '\n'
+        'struct BenchmarkResult {\n'
+        '    double elapsed_ms;\n'
+        '    int64_t allocated_bytes;\n'
+        '};\n'
+        '\n'
         'extern "C" const int kSubjectEntryCount;\n'
         'extern "C" const int kSubjectSlotMap[];\n'
         '\n'
@@ -1893,7 +1906,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         print(f"    [build_entry] cleaned stale jit_stubs.cpp")
 
     # Auto-generate CMakeLists.txt if missing (e.g. after clean delete)
-    ensure_cmake_lists_file(cmakelists, family_slug, v, is_jit=is_jit)
+    ensure_cmake_lists_file(cmakelists, family_slug, v, is_jit=is_jit, config_tier=config_tier)
 
     # Inject config tier compile definition into CMakeLists.txt
     inject_config_tier(cmakelists, config_tier)
@@ -1998,7 +2011,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
 
     # Ensure CMakeLists.txt exists — auto-generate from template if missing
     # (families deleted and regenerated from scratch won't have native/CMakeLists.txt)
-    ensure_cmake_lists_file(cmakelists, family_slug, v, is_jit=is_jit)
+    ensure_cmake_lists_file(cmakelists, family_slug, v, is_jit=is_jit, config_tier=config_tier)
 
     # Ensure verification_dispatch.generated.cpp exists
     # The real file is generated by the orchestrator after codegen; the sentinel
