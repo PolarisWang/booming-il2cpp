@@ -6,12 +6,14 @@ set(CMAKE_CXX_STANDARD 20)
 # thrown by generated code (throw chaos_managed_exception from unresolved calls).
 add_compile_options(/utf-8 /GS- /FS)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
 # The SDK root is the codegen output directory from --sdk-out.
-set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/enum-parsing/codegen")
+set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/enum-parsing/codegen/EnumParsingSubjects")
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 
 # Paths
@@ -19,19 +21,16 @@ set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/enum-parsing/codegen")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
-# Flat layout (single file): *Subjects/generated/native-aot.generated.cpp
-# Paged layout (large families): *Subjects/generated/generated/ (page files + module)
+# JIT mode: sources at *Subjects/generated/* (single-level, R1 fix).
 file(GLOB CHAOS_CODEGEN_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
-    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
-    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
-    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/chaos_generated_module.cpp"
 )
 file(GLOB CHAOS_CODEGEN_NATIVE_CPP
     "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.page-*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/chaos_generated_module.cpp"
 )
 # Prefer native (pipeline post-processed) copies over codegen originals
 if(CHAOS_CODEGEN_NATIVE_CPP)
@@ -46,11 +45,27 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
+# SDK runtime_stubs sources (resolved directly from the source tree to
+# avoid depending on SdkEmitter to stage them into the SDK output dir).
+file(GLOB CHAOS_RUNTIME_STUB_SOURCES
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/*.cpp"
+)
+list(REMOVE_ITEM CHAOS_RUNTIME_STUB_SOURCES
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp"
+)
+# PROFILE globals (compiled from source to avoid stale SDK lib dependency).
+# Only generates symbols when CHAOS_IL2CPP_PROFILE_ENABLED=1 (PROFILE tier).
+set(CHAOS_PROFILE_GLOBALS
+    "${CHAOS_PROJECT_ROOT}/src/native/common/chaos/profile_globals.cpp"
+)
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
     "verification_dispatch.generated.cpp"
     ${CHAOS_NATIVE_STUBS}
+    ${CHAOS_RUNTIME_STUB_SOURCES}
+    ${CHAOS_PROFILE_GLOBALS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -61,8 +76,10 @@ set(CHAOS_ENTRY_SOURCES
 set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"  # runtime_stubs for enum_stubs.h
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"  # runtime_stubs headers
+    "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
+    "${CHAOS_PROJECT_ROOT}/src/native"  # parent for bootstrap/bootstrap.h includes
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
     "${CHAOS_PROJECT_ROOT}/src/native/support"
@@ -70,6 +87,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CHAOS_PROJECT_ROOT}/src/native/jit"
 )
 
 add_executable(entry ${CHAOS_ENTRY_SOURCES})

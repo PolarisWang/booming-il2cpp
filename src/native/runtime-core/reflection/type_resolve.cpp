@@ -63,6 +63,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFromHandle(CHAOS_IL2CPP_INTPTR runtime
                 s_last_result = static_cast<CHAOS_IL2CPP_INTPTR>(EncodeReflectionQueryTypeHandle(type));
                 return s_last_result;
             }
+        }
 
         // Scan dynamically registered types (codegen enum types, etc.).
         for (CHAOS_IL2CPP_UINT32 i = 0u; i < s_dynamicTypeCount; i++) {
