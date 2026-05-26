@@ -1369,6 +1369,39 @@ public sealed partial class NativeAotLoweringPlanner
         int mergeIdx = maxTargetIdx + 1;
         int endIdx = cfg.Blocks.Count - 1;
 
+        int? originalSwitchMergeOffset = null;
+        // The merge block follows the last switch target. When the switch has a
+        // default case (e.g., `ldc.i4.0; stloc; br merge`), the block right after
+        // maxTargetIdx is the default body, NOT the merge point. Follow the default
+        // block's branch chain to find the actual merge offset — case body br/leave
+        // instructions always target this final merge point.
+        {
+            int checkIdx = mergeIdx;
+            while (checkIdx <= endIdx)
+            {
+                var checkBlock = cfg.Blocks[checkIdx];
+                if (checkBlock.Terminator is { Op: "br" or "leave" })
+                {
+                    int targetOffset = GetRequiredIntOperand(checkBlock.Terminator);
+                    if (cfg.OffsetToBlockIndex.TryGetValue(targetOffset, out var targetBlockIdx) && targetBlockIdx > checkIdx)
+                    {
+                        checkIdx = targetBlockIdx;
+                        continue;
+                    }
+                }
+                // Block has no branch-to-follow terminator. If it also has no
+                // terminator at all (empty Op), it may be a fall-through block
+                // whose next block is the real merge point — keep advancing.
+                if (checkBlock.Terminator is null || string.IsNullOrEmpty(checkBlock.Terminator.Op))
+                {
+                    checkIdx++;
+                    continue;
+                }
+                originalSwitchMergeOffset = checkBlock.StartOffset;
+                break;
+            }
+        }
+
         // --- Build default body first ---
         StructuredIRNode? defaultBody = null;
         var coveredBlocks = new HashSet<int>(caseMap.Keys);
@@ -1426,13 +1459,17 @@ public sealed partial class NativeAotLoweringPlanner
             else
                 body = new IRSequence(Array.Empty<StructuredIRNode>());
 
-            int? switchMergeOffset = mergeIdx <= endIdx ? cfg.Blocks[mergeIdx].StartOffset : null;
-            if (switchMergeOffset.HasValue)
-                body = RemoveTrailingBranch(body, switchMergeOffset.Value);
+            bool hadTrailingBranch = false;
+            if (originalSwitchMergeOffset.HasValue)
+            {
+                var beforeBody = body;
+                body = RemoveTrailingBranch(body, originalSwitchMergeOffset.Value);
+                hadTrailingBranch = !ReferenceEquals(beforeBody, body);
+            }
 
             // Detect fallthrough: a case body that has no control flow terminator
-            // (empty body or falls through to the next case).
-            if (!IsControlFlowTerminator(body) && ci < sortedCaseKeys.Count - 1)
+            // AND no trailing branch was stripped (i.e., the body genuinely falls through).
+            if (!IsControlFlowTerminator(body) && !hadTrailingBranch && ci < sortedCaseKeys.Count - 1)
             {
                 foreach (var caseValue in caseMap[caseBlockIdx])
                     fallthroughCaseValues.Add(caseValue);

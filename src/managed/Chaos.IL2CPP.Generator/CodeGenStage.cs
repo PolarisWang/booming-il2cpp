@@ -828,7 +828,7 @@ private static IReadOnlyList<ManagedClosureResolvedAssemblyRef> BuildResolvedAss
             PlanKind = "full-assembly-entry",
             AssemblyName = linkedWorld.Assembly.Name,
             EntrySubjectId = firstMethod?.SubjectId ?? linkedWorld.EntryPointSubjectId,
-            NativeEntryFunctionName = "",
+            NativeEntryFunctionName = "RunNativeAot",
             EntrySymbol = firstMethodSymbol ?? "",
             EntryMethodToken = "0u",
             WorkloadAbi = "full-assembly",

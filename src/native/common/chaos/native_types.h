@@ -99,6 +99,20 @@ namespace chaos { namespace il2cpp { namespace common {
         else \
             CHAOS_IL2CPP_ABORT(); \
     } while(0)
+
+// CHAOS_IL2CPP_FAIL_FAST: direct trap for bounds checks, no indirect jump.
+// Uses __fastfail (noreturn intrinsic) in PROFILE/SHIP configs, enabling the
+// C++ compiler to hoist bounds checks out of loops — the optimizer knows the
+// trap never returns, so checked variables are provably invariant after check.
+// Falls back to CHAOS_IL2CPP_FAIL() in CHECK config for verification mode
+// compatibility (where g_chaos_fail_hook routes failures through SEH).
+#if defined(CHAOS_IL2CPP_CONFIG_CHECK)
+#define CHAOS_IL2CPP_FAIL_FAST() CHAOS_IL2CPP_FAIL()
+#elif defined(_MSC_VER)
+#define CHAOS_IL2CPP_FAIL_FAST() __fastfail(7)  // FAST_FAIL_RANGE_CHECK
+#else
+#define CHAOS_IL2CPP_FAIL_FAST() __builtin_trap()
+#endif
 // HRESULT-style failure check: true when the high bit is set (negative).
 // Defined here for cross-platform use in native-aot codegen output.
 #define CHAOS_IL2CPP_FAILED(hr)    ((hr) < 0)

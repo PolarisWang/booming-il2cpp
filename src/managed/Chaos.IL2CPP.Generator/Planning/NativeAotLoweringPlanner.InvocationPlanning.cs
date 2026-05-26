@@ -1601,6 +1601,7 @@ public sealed partial class NativeAotLoweringPlanner
             return;
         }
 
+
         // Focus on static methods where the first argument is Type:
         //   Parse(Type, String), Format(Type, Object, String),
         //   GetName(Type, Object), IsDefined(Type, Object),
@@ -1609,7 +1610,8 @@ public sealed partial class NativeAotLoweringPlanner
         bool isFormat = callee.Contains("::Format:", StringComparison.Ordinal);
         bool isParse = callee.Contains("::Parse:", StringComparison.Ordinal);
         bool isIsDefined = callee.Contains("::IsDefined:", StringComparison.Ordinal);
-        if (!isGetName && !isFormat && !isParse && !isIsDefined) return;
+        bool isTryParse = callee.Contains("::TryParse:", StringComparison.Ordinal);
+        if (!isGetName && !isFormat && !isParse && !isIsDefined && !isTryParse) return;
 
         int paramCount = EstimateCallPopCount(callInstr, depth);
         // After the call, the first arg is always at eval stack position (depth - 1).
@@ -1683,6 +1685,43 @@ public sealed partial class NativeAotLoweringPlanner
             }
             // Case-insensitive fallback for Parse(Type, string, bool ignoreCase)
             if (constValue == null && isParse3)
+            {
+                foreach (var kv in fields)
+                {
+                    if (string.Equals(kv.Key, nameStr, StringComparison.OrdinalIgnoreCase))
+                    {
+                        constValue = kv.Value;
+                        break;
+                    }
+                }
+            }
+            if (constValue != null)
+            {
+                _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
+                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount);
+            }
+            return;
+        }
+
+        // ── Enum.TryParse(ldtoken<EnumType>, ldstr name, [bool ignoreCase,] out Object) ──
+        // Returns bool (1/0), writes boxed value through out parameter.
+        bool isTryParse3 = isTryParse && paramCount == 3;  // TryParse(Type, string, out)
+        bool isTryParse4 = isTryParse && paramCount == 4;  // TryParse(Type, string, bool, out)
+        if ((isTryParse3 || isTryParse4) && valueProducer.Op == "ldstr")
+        {
+            string nameStr = valueProducer.Operand?.ToString() ?? "";
+            long? constValue = null;
+            // Case-sensitive match first
+            foreach (var kv in fields)
+            {
+                if (string.Equals(kv.Key, nameStr, StringComparison.Ordinal))
+                {
+                    constValue = kv.Value;
+                    break;
+                }
+            }
+            // Case-insensitive fallback for TryParse(Type, string, bool, out)
+            if (constValue == null && isTryParse4)
             {
                 foreach (var kv in fields)
                 {
