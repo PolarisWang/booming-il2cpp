@@ -65,6 +65,8 @@ add_executable(entry ${CHAOS_ENTRY_SOURCES})
 target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_compile_options(entry PRIVATE /EHa)
 target_link_libraries(entry PRIVATE
+    chaos::runtime
+)
 
 # Enable link-time optimization (LTO/LTCG) for release/profile builds
 if(MSVC)
@@ -77,5 +79,3 @@ else()
     INTERPROCEDURAL_OPTIMIZATION TRUE
   )
 endif()
-    chaos::runtime
-)
