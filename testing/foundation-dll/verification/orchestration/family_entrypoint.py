@@ -188,11 +188,13 @@ def generate_entrypoint_source(
         usings: set[str] = set()
     elif variant == "subjects":
         usings = collect_required_usings(method_subject_ids)
+        if not probe_mode:
+            usings.add("Chaos.TestFramework")
     else:
         usings = collect_required_usings(method_subject_ids)
         usings.add("Chaos.TestFramework")
 
-    if not probe_mode:
+    if not probe_mode and variant != "subjects":
         usings.discard("Chaos.TestFramework")
 
     ns_indent = "    " if namespace_name else ""
@@ -454,10 +456,13 @@ def generate_project_file(
                         continue
                     extra_cs += f'    <Compile Include="{f.name}" />\n'
         custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
-        extra_refs_xml = "  </ItemGroup>\n"
+        # Always add Chaos.TestFramework.Sdk reference for subjects variant
+        sdk_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
+        all_refs = [str(sdk_csproj)]
         if extra_refs:
-            items = "\n".join(f'    <ProjectReference Include="{r}" />' for r in extra_refs)
-            extra_refs_xml = f"  </ItemGroup>\n  <ItemGroup>\n{items}\n  </ItemGroup>\n"
+            all_refs.extend(extra_refs)
+        items = "\n".join(f'    <ProjectReference Include="{r}" />' for r in all_refs)
+        extra_refs_xml = f"  </ItemGroup>\n  <ItemGroup>\n{items}\n  </ItemGroup>\n"
         remove_test_refs = (
             '  <ItemGroup>\n'
             '    <PackageReference Remove="Microsoft.NET.Test.Sdk" />\n'
@@ -1133,6 +1138,7 @@ static int RunMicrobenchMode() {
 }
 
 static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
+    auto* patch_ctx = ApplyHotpatchIfAvailable();
     auto result = RunHotpatchBenchmark(entry_index, iterations);
     if (result.elapsed_ms < 0.0) {
         printf("{\\"elapsedMilliseconds\\":-1.0,\\"error\\":\\"invalid index\\"}\\n");

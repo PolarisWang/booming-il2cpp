@@ -348,14 +348,47 @@ extern "C" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata_by_fnv24)(CH
 // Also declared in generated_code_compat.h for visibility from generated code.
 extern "C" const EnumMetadataTable* (*g_chaos_enum_dispatch_lookup)(CHAOS_IL2CPP_UINT32 fnv24) noexcept = nullptr;
 
-/// Static dispatch table state for binary-search enum lookup.
+/// Static dispatch table state for binary-search enum metadata lookup.
 /// Set by ChaosEnumRegisterDispatchTable and used by EnumDispatchLookup.
 static const EnumDispatchEntry* s_dispatch_entries = nullptr;
 static CHAOS_IL2CPP_UINT32 s_dispatch_count = 0;
 
-/// Binary-search lookup against the registered dispatch table.
+// Open-addressing hash table for O(1) dispatch lookup.
+// Capacity is next power of 2 > 284 * 1.5x load factor.
+static constexpr CHAOS_IL2CPP_UINT32 kDispatchHashCapacity = 512;
+static EnumDispatchEntry s_dispatch_hash_table[kDispatchHashCapacity] = {};
+
+/// Rebuild the hash table from s_dispatch_entries.
+/// Must be called after updating s_dispatch_entries/s_dispatch_count.
+static void rebuild_dispatch_hash_table() noexcept {
+    std::memset(s_dispatch_hash_table, 0, sizeof(s_dispatch_hash_table));
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < s_dispatch_count; i++) {
+        auto fnv24 = s_dispatch_entries[i].fnv24;
+        auto slot = fnv24 & (kDispatchHashCapacity - 1u);
+        while (s_dispatch_hash_table[slot].fnv24 != 0) {
+            slot = (slot + 1u) & (kDispatchHashCapacity - 1u);
+        }
+        s_dispatch_hash_table[slot] = s_dispatch_entries[i];
+    }
+}
+
+/// Hash-table lookup against the registered dispatch table.
+/// Falls back to binary search on hash collision or empty entry.
 static const EnumMetadataTable* EnumDispatchLookup(CHAOS_IL2CPP_UINT32 fnv24) noexcept {
     if (s_dispatch_entries == nullptr) return nullptr;
+
+    // Fast path: open-addressing hash table (O(1) average, <2 probes)
+    auto slot = fnv24 & (kDispatchHashCapacity - 1u);
+    for (CHAOS_IL2CPP_UINT32 probe = 0; probe < kDispatchHashCapacity; probe++) {
+        auto hs = s_dispatch_hash_table[slot].fnv24;
+        if (hs == fnv24)
+            return s_dispatch_hash_table[slot].table;
+        if (hs == 0)
+            return nullptr;  // empty slot → not in table
+        slot = (slot + 1u) & (kDispatchHashCapacity - 1u);
+    }
+
+    // Fallback: binary search (should rarely reach here due to load factor)
     CHAOS_IL2CPP_UINT32 lo = 0u, hi = s_dispatch_count;
     while (lo < hi) {
         CHAOS_IL2CPP_UINT32 mid = lo + (hi - lo) / 2u;
@@ -371,12 +404,14 @@ static const EnumMetadataTable* EnumDispatchLookup(CHAOS_IL2CPP_UINT32 fnv24) no
 
 /// Register a sorted FNV-24 dispatch table for enum metadata lookup.
 /// Called from the generated static initializer in enum_metadata.generated.h.
-/// The entries array must be sorted by fnv24 for binary search.
+/// The entries array must be sorted by fnv24 for binary search (used as fallback).
+/// Builds an open-addressing hash table for O(1) fast-path lookups.
 extern "C" void ChaosEnumRegisterDispatchTable(
     const EnumDispatchEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept
 {
     s_dispatch_entries = entries;
     s_dispatch_count = count;
+    rebuild_dispatch_hash_table();
     g_chaos_enum_dispatch_lookup = EnumDispatchLookup;
 }
 
@@ -386,8 +421,11 @@ extern "C" void ChaosEnumRegisterDispatchTable(
 extern "C" void ChaosEnumUpdateDispatchTable(
     const EnumDispatchEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept
 {
-    // Same as register — atomically replace the lookup closure.
-    ChaosEnumRegisterDispatchTable(entries, count);
+    // Rebuild the hash table and atomically replace the lookup closure.
+    s_dispatch_entries = entries;
+    s_dispatch_count = count;
+    rebuild_dispatch_hash_table();
+    g_chaos_enum_dispatch_lookup = EnumDispatchLookup;
 }
 
 /// Populate the enum string cache for the given type.
@@ -617,6 +655,20 @@ static const EnumFieldEntry* enum_find_entry_by_value(
     return nullptr;
 }
 
+/// Pre-compute field name lengths from an EnumMetadataTable into a stack array.
+/// Returns the number of lengths computed (min of count or 64).
+/// Avoids per-iteration strlen() in hot field-scanning loops.
+static CHAOS_IL2CPP_UINT32 precompute_name_lengths(
+    const EnumMetadataTable* meta,
+    CHAOS_IL2CPP_UINTPTR* out_lengths) noexcept
+{
+    CHAOS_IL2CPP_UINT32 cnt = meta->count > 64 ? 64 : meta->count;
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+        out_lengths[i] = std::strlen(meta->fields[i].name);
+    }
+    return cnt;
+}
+
 /// Fast path: find enum field entry by name using pre-computed metadata.
 static const EnumFieldEntry* enum_find_entry_by_name(
     const ReflectionQueryTypeDescriptor* desc,
@@ -624,7 +676,7 @@ static const EnumFieldEntry* enum_find_entry_by_name(
 {
     if (desc == nullptr || desc->subject_id_utf8 == nullptr) return nullptr;
 
-    // Priority 1: dispatch table (FNV-24 binary search)
+    // Priority 1: dispatch table (FNV-24 hash → O(1) hash table)
     if (g_chaos_enum_dispatch_lookup) {
         uint32_t h = 2166136261u;
         for (const char* s = desc->subject_id_utf8; *s; ++s) {
@@ -633,9 +685,10 @@ static const EnumFieldEntry* enum_find_entry_by_name(
         }
         const auto* meta = g_chaos_enum_dispatch_lookup(h & 0xFFFFFFu);
         if (meta != nullptr) {
-            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                const auto fn_len = std::strlen(meta->fields[i].name);
-                if (fn_len == name_len && std::memcmp(meta->fields[i].name, name, name_len) == 0) {
+            CHAOS_IL2CPP_UINTPTR fname_len[64];
+            CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name, name_len) == 0) {
                     return &meta->fields[i];
                 }
             }
@@ -648,9 +701,10 @@ static const EnumFieldEntry* enum_find_entry_by_name(
         ? g_chaos_resolve_enum_metadata(desc->subject_id_utf8)
         : nullptr;
     if (meta == nullptr) return nullptr;
-    for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-        const auto fn_len = std::strlen(meta->fields[i].name);
-        if (fn_len == name_len && std::memcmp(meta->fields[i].name, name, name_len) == 0) {
+    CHAOS_IL2CPP_UINTPTR fname_len[64];
+    CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+        if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name, name_len) == 0) {
             return &meta->fields[i];
         }
     }
@@ -664,7 +718,7 @@ static const EnumFieldEntry* enum_find_entry_by_name_icase(
 {
     if (desc == nullptr || desc->subject_id_utf8 == nullptr) return nullptr;
 
-    // Priority 1: dispatch table (FNV-24 binary search)
+    // Priority 1: dispatch table (FNV-24 hash → O(1) hash table)
     if (g_chaos_enum_dispatch_lookup) {
         uint32_t h = 2166136261u;
         for (const char* s = desc->subject_id_utf8; *s; ++s) {
@@ -673,9 +727,10 @@ static const EnumFieldEntry* enum_find_entry_by_name_icase(
         }
         const auto* meta = g_chaos_enum_dispatch_lookup(h & 0xFFFFFFu);
         if (meta != nullptr) {
-            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                const auto fn_len = std::strlen(meta->fields[i].name);
-                if (fn_len != name_len) continue;
+            CHAOS_IL2CPP_UINTPTR fname_len[64];
+            CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                if (fname_len[i] != name_len) continue;
                 bool match = true;
                 for (CHAOS_IL2CPP_UINTPTR j = 0; j < name_len; j++) {
                     char a = meta->fields[i].name[j];
@@ -695,9 +750,10 @@ static const EnumFieldEntry* enum_find_entry_by_name_icase(
         ? g_chaos_resolve_enum_metadata(desc->subject_id_utf8)
         : nullptr;
     if (meta == nullptr) return nullptr;
-    for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-        const auto fn_len = std::strlen(meta->fields[i].name);
-        if (fn_len != name_len) continue;
+    CHAOS_IL2CPP_UINTPTR fname_len[64];
+    CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+        if (fname_len[i] != name_len) continue;
         bool match = true;
         for (CHAOS_IL2CPP_UINTPTR j = 0; j < name_len; j++) {
             char a = meta->fields[i].name[j];
@@ -998,16 +1054,16 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
     {
         const auto* meta = enum_resolve_meta(type);
         if (meta != nullptr) {
-            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                const auto fn_len = std::strlen(meta->fields[i].name);
-                if (fn_len == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
+            CHAOS_IL2CPP_UINTPTR fname_len[64];
+            CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
                     return enum_alloc_boxed_int64(meta->fields[i].value);
                 }
             }
             // Case-insensitive fallback
-            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                const auto fn_len = std::strlen(meta->fields[i].name);
-                if (fn_len != name_len) continue;
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                if (fname_len[i] != name_len) continue;
                 bool match = true;
                 for (CHAOS_IL2CPP_UINTPTR j = 0; j < name_len; j++) {
                     char a = meta->fields[i].name[j];
@@ -1053,16 +1109,16 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
     {
         const auto* meta = enum_resolve_meta(type);
         if (meta != nullptr) {
-            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                const auto fn_len = std::strlen(meta->fields[i].name);
-                if (fn_len == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
+            CHAOS_IL2CPP_UINTPTR fname_len[64];
+            CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
                     return enum_alloc_boxed_int64(meta->fields[i].value);
                 }
             }
             if (ignoreCase) {
-                for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                    const auto fn_len = std::strlen(meta->fields[i].name);
-                    if (fn_len != name_len) continue;
+                for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                    if (fname_len[i] != name_len) continue;
                     bool match = true;
                     for (CHAOS_IL2CPP_UINTPTR j = 0; j < name_len; j++) {
                         char a = meta->fields[i].name[j];
@@ -1333,18 +1389,18 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
     {
         const auto* meta = enum_resolve_meta(type);
         if (meta != nullptr) {
-            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                const auto fn_len = std::strlen(meta->fields[i].name);
-                if (fn_len == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
+            CHAOS_IL2CPP_UINTPTR fname_len[64];
+            CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
                     auto boxed = enum_alloc_boxed_int64(meta->fields[i].value);
                     std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
                     return 1;
                 }
             }
             // Case-insensitive fallback
-            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                const auto fn_len = std::strlen(meta->fields[i].name);
-                if (fn_len != name_len) continue;
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                if (fname_len[i] != name_len) continue;
                 bool match = true;
                 for (CHAOS_IL2CPP_UINTPTR j = 0; j < name_len; j++) {
                     char a = meta->fields[i].name[j];
@@ -1391,18 +1447,18 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHA
     {
         const auto* meta = enum_resolve_meta(type);
         if (meta != nullptr) {
-            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                const auto fn_len = std::strlen(meta->fields[i].name);
-                if (fn_len == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
+            CHAOS_IL2CPP_UINTPTR fname_len[64];
+            CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
                     auto boxed = enum_alloc_boxed_int64(meta->fields[i].value);
                     std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
                     return 1;
                 }
             }
             if (ignoreCase) {
-                for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                    const auto fn_len = std::strlen(meta->fields[i].name);
-                    if (fn_len != name_len) continue;
+                for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+                    if (fname_len[i] != name_len) continue;
                     bool match = true;
                     for (CHAOS_IL2CPP_UINTPTR j = 0; j < name_len; j++) {
                         char a = meta->fields[i].name[j];
