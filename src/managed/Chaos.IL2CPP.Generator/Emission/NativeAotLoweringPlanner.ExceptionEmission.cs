@@ -275,14 +275,12 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		case "ldc.r8":
 		{
-			EmitEvalStackPush(builder, indentation, $"ChaosStoreFloat64({FormatFloat64Literal(GetRequiredDoubleOperand(instruction))})");
-			PushSlotType(SlotType.Float64);
+			EmitEvalStackPush(builder, indentation, FormatFloat64Literal(GetRequiredDoubleOperand(instruction)), SlotType.Float64);
 			break;
 		}
 		case "ldc.r4":
 		{
-			EmitEvalStackPush(builder, indentation, $"ChaosStoreFloat32({FormatFloat32Literal(GetRequiredSingleOperand(instruction))})");
-			PushSlotType(SlotType.Float32);
+			EmitEvalStackPush(builder, indentation, FormatFloat32Literal(GetRequiredSingleOperand(instruction)), SlotType.Float32);
 			break;
 		}
 		case "ldarg":

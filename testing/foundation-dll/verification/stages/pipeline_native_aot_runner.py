@@ -785,6 +785,11 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     Uses find_package(chaos) to discover the chaos SDK (prebuilt runtime libs,
     compile flags). The SDK is at codegen/ output directory (--sdk-out).
 
+    Only generates the file if it does not already exist — existing CMakeLists.txt
+    files (from git or previous manual setup) are preserved.  This avoids breaking
+    families whose handwritten CMakeLists.txt contains family-specific overrides
+    (extra includes, library references, stub exclusions).
+
     When is_jit=True:
       - Adds JIT include path (src/native/jit)
       - Adds CHAOS_IL2CPP_JIT_MODE compile definition
@@ -794,6 +799,11 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
       JIT libs (chaos_jit, chaos_debugger) are already part of chaos::runtime
       from the SDK, so no extra target_link_libraries is needed.
     """
+
+    # Preserve existing CMakeLists.txt — avoid overwriting handwritten files
+    # that may have family-specific overrides.
+    if cmakelists.exists():
+        return
 
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
     codegen_dir = verification / family_slug / "codegen"

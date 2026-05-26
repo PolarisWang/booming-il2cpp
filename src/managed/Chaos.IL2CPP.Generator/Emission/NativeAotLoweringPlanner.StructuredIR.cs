@@ -124,17 +124,30 @@ public sealed partial class NativeAotLoweringPlanner
     private sealed class StructuredSlotEmissionContext
     {
         private int _depth;
-        private int _maxDepth;
+        private int _intSlotCount;
+        private int _float64SlotCount;
+        private int _float32SlotCount;
+
+        private readonly List<(string name, SlotType type)> _slotInfo = new();
 
         public int Depth => _depth;
-        public int MaxDepth => _maxDepth;
+        public int MaxIntSlots => _intSlotCount;
+        public int MaxFloat64Slots => _float64SlotCount;
+        public int MaxFloat32Slots => _float32SlotCount;
 
-        public string AllocatePushTarget()
+        public string AllocatePushTarget(SlotType type = SlotType.NativeInt)
         {
-            string slotName = FormatStructuredSlotName(_depth);
+            string slotName = type switch
+            {
+                SlotType.Float64 => FormatDoubleSlotName(_float64SlotCount++),
+                SlotType.Float32 => FormatFloatSlotName(_float32SlotCount++),
+                _ => FormatStructuredSlotName(_intSlotCount++),
+            };
+            if (_depth < _slotInfo.Count)
+                _slotInfo[_depth] = (slotName, type);
+            else
+                _slotInfo.Add((slotName, type));
             _depth++;
-            if (_depth > _maxDepth)
-                _maxDepth = _depth;
             return slotName;
         }
 
@@ -146,24 +159,17 @@ public sealed partial class NativeAotLoweringPlanner
             }
 
             _depth--;
-            return FormatStructuredSlotName(_depth);
+            return _slotInfo[_depth].name;
         }
 
         public string PeekValue()
         {
-            // When the slot stack is empty, return a freshly-allocated slot name
-            // instead of throwing. This handles the case where the structured IR
-            // reconstruction places a `dup` instruction at the start of a nested
-            // if-then-else's condition instructions -- the value was left on the
-            // eval stack by the outer branch, and `dup` needs to reference it.
-            // The actual duplication (destination = source) will be emitted by
-            // the caller; the slot allocation here is purely a naming concern.
             if (_depth <= 0)
             {
                 return FormatStructuredSlotName(_depth);
             }
 
-            return FormatStructuredSlotName(_depth - 1);
+            return _slotInfo[_depth - 1].name;
         }
 
         public void Discard(int count = 1)
@@ -183,6 +189,8 @@ public sealed partial class NativeAotLoweringPlanner
     }
 
     private static string FormatStructuredSlotName(int slotIndex) => $"_s{slotIndex}";
+    private static string FormatDoubleSlotName(int slotIndex) => $"_d{slotIndex}";
+    private static string FormatFloatSlotName(int slotIndex) => $"_f{slotIndex}";
 
     private void EmitStructuredMethodReturn(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi, string indentation)
     {
@@ -212,10 +220,18 @@ public sealed partial class NativeAotLoweringPlanner
                 builder.AppendLine(indentation + $"return static_cast<CHAOS_IL2CPP_UINT16>({valueExpression});");
                 return;
             case AotCoreIrAbiCarrierKind.Float32:
-                builder.AppendLine(indentation + $"return ChaosLoadFloat32({valueExpression});");
+                // Typed slot (_fN) is already a float — return directly
+                if (valueExpression.StartsWith("_f", StringComparison.Ordinal))
+                    builder.AppendLine(indentation + $"return {valueExpression};");
+                else
+                    builder.AppendLine(indentation + $"return ChaosLoadFloat32({valueExpression});");
                 return;
             case AotCoreIrAbiCarrierKind.Float64:
-                builder.AppendLine(indentation + $"return ChaosLoadFloat64({valueExpression});");
+                // Typed slot (_dN) is already a double — return directly
+                if (valueExpression.StartsWith("_d", StringComparison.Ordinal))
+                    builder.AppendLine(indentation + $"return {valueExpression};");
+                else
+                    builder.AppendLine(indentation + $"return ChaosLoadFloat64({valueExpression});");
                 return;
             case AotCoreIrAbiCarrierKind.Int64:
                 builder.AppendLine(indentation + $"return ChaosLoadInt64({valueExpression});");
@@ -246,10 +262,10 @@ public sealed partial class NativeAotLoweringPlanner
             : valueExpression;
     }
 
-    private string AllocateEvalStackTargetExpression()
+    private string AllocateEvalStackTargetExpression(SlotType type = SlotType.NativeInt)
         => _activeStructuredSlotContext is null
             ? "chaos_eval_stack[chaos_stack_top++]"
-            : _activeStructuredSlotContext.AllocatePushTarget();
+            : _activeStructuredSlotContext.AllocatePushTarget(type);
 
     private string ConsumeEvalStackValueExpression()
         => _activeStructuredSlotContext is null
@@ -261,8 +277,8 @@ public sealed partial class NativeAotLoweringPlanner
             ? "chaos_eval_stack[chaos_stack_top - 1]"
             : _activeStructuredSlotContext.PeekValue();
 
-    private void EmitEvalStackPush(StringBuilder builder, string indentation, string valueExpression)
-        => builder.AppendLine($"{indentation}{AllocateEvalStackTargetExpression()} = {NormalizeStoredStackValueExpression(valueExpression)};");
+    private void EmitEvalStackPush(StringBuilder builder, string indentation, string valueExpression, SlotType type = SlotType.NativeInt)
+        => builder.AppendLine($"{indentation}{AllocateEvalStackTargetExpression(type)} = {NormalizeStoredStackValueExpression(valueExpression)};");
 
     private void EmitEvalStackDiscard(StringBuilder builder, string indentation, int count = 1)
     {
@@ -283,12 +299,14 @@ public sealed partial class NativeAotLoweringPlanner
         _activeStructuredSlotContext.Discard(count);
     }
 
-    private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxDepth, string indentation)
+    private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, string indentation)
     {
-        for (int i = 0; i < maxDepth; i++)
-        {
-            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INTPTR {FormatStructuredSlotName(i)}{{}};");
-        }
+        for (int i = 0; i < maxIntSlots; i++)
+            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INTPTR {FormatStructuredSlotName(i)};");
+        for (int i = 0; i < maxFloat64Slots; i++)
+            builder.AppendLine($"{indentation}double {FormatDoubleSlotName(i)};");
+        for (int i = 0; i < maxFloat32Slots; i++)
+            builder.AppendLine($"{indentation}float {FormatFloatSlotName(i)};");
     }
 
     // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
@@ -1571,7 +1589,7 @@ public sealed partial class NativeAotLoweringPlanner
         return true;
     }
 
-    private int EmitViaStructuredIR(
+    private StructuredSlotEmissionContext? EmitViaStructuredIR(
         StringBuilder builder,
         AotCoreIrMethodArtifact method,
         IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
@@ -1579,11 +1597,11 @@ public sealed partial class NativeAotLoweringPlanner
         StructuredIRNode? body = null)
     {
         if (instructions.Count == 0)
-            return 0;
+            return null;
 
         body ??= (TryBuildStructuredMethodBody(method, instructions, offsets, out var b, out _) ? b : null);
         if (body is null)
-            return 0;
+            return null;
 
         TotalMethodCount++;
 
@@ -1607,7 +1625,7 @@ public sealed partial class NativeAotLoweringPlanner
             _structuredSlotTypes.Clear();
             _structLocalSlots = null;
         }
-        return slotContext.MaxDepth;
+        return slotContext;
     }
 
     private bool TryBuildStructuredExceptionMethodBody(

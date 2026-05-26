@@ -1521,8 +1521,8 @@ public sealed partial class NativeAotLoweringPlanner
 
         // Count commas in the parameter list portion of the callee signature
         // Format: "Namespace.Type::MethodName:ReturnType(Param1,Param2)"
-        int parenStart = callee.IndexOf('(', StringComparison.Ordinal);
-        int parenEnd = callee.LastIndexOf(')', StringComparison.Ordinal);
+        int parenStart = callee.IndexOf('(');
+        int parenEnd = callee.LastIndexOf(')');
         if (parenStart > 0 && parenEnd > parenStart)
         {
             var paramStr = callee.Substring(parenStart + 1, parenEnd - parenStart - 1);
@@ -1573,7 +1573,7 @@ public sealed partial class NativeAotLoweringPlanner
         int producerIdx = producers[typeArgDepth];
         if (producerIdx < 0) return;
 
-        var producer = callInstr.Op == "callvirt"
+        string? producer = callInstr.Op == "callvirt"
             ? null  // callvirt: 'this' is the instance, not from ldtoken
             : null; // We'll check via producers
 

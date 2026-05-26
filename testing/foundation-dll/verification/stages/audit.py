@@ -27,10 +27,19 @@ def run_audit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult
         principle_status = overall.get("principle_status", "NOT_APPLICABLE")
         overall["passed"] = mechanism_passed and principle_status != "VIOLATION"
 
-        status = "passed" if overall.get("passed", False) else "failed"
-
         total = mechanism.get("total_methods", 0)
         audited = mechanism.get("audited", 0)
+
+        # Auto-pass for 0-method families (nothing to audit)
+        if total == 0:
+            return StageResult(
+                stage="audit", status="passed",
+                summary="methods=0 — no methods to audit",
+                details={"total_methods": 0, "audited": 0, "false_passing": 0, "stubs_found": 0},
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+
+        status = "passed" if overall.get("passed", False) else "failed"
         false_passing = mechanism.get("false_passing", 0)
         stubs = mechanism.get("stubs_found", 0)
 
