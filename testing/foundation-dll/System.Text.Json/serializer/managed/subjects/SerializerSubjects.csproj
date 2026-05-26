@@ -5,14 +5,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <IsTestProject>false</IsTestProject>
-    <AssemblyName>SerializerSubjects</AssemblyName>
-    <RootNamespace>SerializerSubjects</RootNamespace>
+    <AssemblyName>serializerSubjects</AssemblyName>
+    <RootNamespace>serializerSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0050</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="SerializerSubjects.cs" />
+    <Compile Include="serializerSubjects.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />

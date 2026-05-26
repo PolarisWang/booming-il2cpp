@@ -5,14 +5,17 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <IsTestProject>false</IsTestProject>
-    <AssemblyName>SchemaSubjects</AssemblyName>
-    <RootNamespace>SchemaSubjects</RootNamespace>
+    <AssemblyName>schemaSubjects</AssemblyName>
+    <RootNamespace>schemaSubjects</RootNamespace>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>$(NoWarn);SYSLIB0011;SYSLIB0050</NoWarn>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="SchemaSubjects.cs" />
+    <Compile Include="schemaSubjects.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../../../../../../src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />

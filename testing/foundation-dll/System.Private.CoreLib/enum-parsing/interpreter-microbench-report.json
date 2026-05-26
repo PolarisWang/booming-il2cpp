@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/enum/parsing",
-  "capturedAt": "2026-05-26T22:18:06",
+  "capturedAt": "2026-05-26T23:17:56",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 2.9,
+      "acquireReleaseNsPerOp": 2.8,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
     "poolSize": 32
   },
-  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.9 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\nGC|region|active=0|total_allocated=0\n"
+  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.8 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\nGC|region|active=0|total_allocated=0\n"
 }

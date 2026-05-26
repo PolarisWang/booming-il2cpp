@@ -1222,15 +1222,11 @@ static void Handle_Call(FastFrame& frame, const interpreter::IRInstruction& inst
     }
 
     // ── Route to path-specific handler ──────────────────────────────
-    // AotDirectDispatch takes priority: direct_fn is a pre-resolved
-    // chaos_external_runtime_* function pointer that always works.
-    // >8 args: fall back to DoRaw (AOT direct uses uniform 8-arg signature).
+    // direct_fn with >8 args falls back to DoRaw (uniform 8-arg signature
+    // can't handle more than 8).  The ac ≤ 8 direct_fn path is handled by
+    // the inline fast path above; only the >8 case reaches here.
     if (instr.direct_fn != nullptr) {
-        if (ac > 8) {
-            Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, nullptr);
-            return;
-        }
-        Handle_Call_DoAotDirect(frame, instr, pa.args, pa.tags, ac);
+        Handle_Call_DoRaw(frame, instr, pa.args, pa.tags, ac, nullptr);
         return;
     }
 
