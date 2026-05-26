@@ -935,6 +935,8 @@ def generate_runtime_entry(*, is_jit: bool = False) -> str:
 #include <chaos/native_types.h>
 #include <runtime_core.h>
 
+#include "chaos_runtime_host.h"
+
 #define CHAOS_IL2CPP_COMMON_EH_H_
 #define CHAOS_EH_TRY               try {
 #define CHAOS_EH_CATCH_BEGIN       } catch (const chaos_managed_exception& chaos_exception) {
@@ -949,6 +951,15 @@ extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectSlotMap[];
 
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
+
+// Codegen registration symbols (defined in native-aot.generated.cpp)
+extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
+extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
+extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
+extern "C" void ChaosRegisterGcLayouts();
+
+// Default arg thunks (defined in native-aot.generated.cpp)
+extern "C" void (*kDefaultArgThunks[])() noexcept;
 
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll();
 extern "C" double RunBenchmark(int entry_index, int iterations);
@@ -997,7 +1008,7 @@ static int RunFactJsonMode() {
         bool caught = false;
         CHAOS_EH_TRY
             result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, nullptr);
+                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
         CHAOS_EH_CATCH_BEGIN
             caught = true;
         CHAOS_EH_END
@@ -1112,23 +1123,47 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 int main(int argc, char* argv[]) {
 __JIT_CALL__
 
-    if (argc < 2) { return RunFactMode(); }
+    // Initialize ChaOS runtime: resolves kChaosExternalRuntimeFnTable entries
+    // (bridge/import stubs) and registers the AOT module so that HotpatchNameRegistry
+    // is populated.  Without this, external fnTable entries stay nullptr and any
+    // AOT-compiled method that calls through them will segfault.
+    //
+    // NOTE: heap-allocated and intentionally leaked.  RuntimeShutdown() + static
+    // destruction (BgcController threads) race on exit — for a short-lived
+    // verification process it is safe to let the OS reclaim everything.
+    auto* chaos_host = new ChaosRuntimeHost();
+    if (!chaos_host->Initialize("verification-entry")) {
+        std::fprintf(stderr, "FATAL: ChaosRuntimeHost::Initialize failed\\n");
+        return 1;
+    }
+    if (!chaos_host->RegisterModule(
+            &chaos_codegen_code_registration,
+            &chaos_codegen_metadata_registration,
+            &chaos_codegen_options)) {
+        std::fprintf(stderr, "FATAL: RegisterModule failed\\n");
+        return 1;
+    }
+    ChaosRegisterGcLayouts();
 
-    if (std::strcmp(argv[1], "--fact-json") == 0) { return RunFactJsonMode(); }
+    if (argc < 2) { int ret = RunFactMode(); _exit(ret); }
+
+    if (std::strcmp(argv[1], "--fact-json") == 0) { int ret = RunFactJsonMode(); _exit(ret); }
 
     if (std::strcmp(argv[1], "--benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --benchmark <index> <iterations>\\n"); return 1; }
-        return RunBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        int ret = RunBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        _exit(ret);
     }
 
-    if (std::strcmp(argv[1], "--hotupdate") == 0) { return RunHotupdateMode(); }
+    if (std::strcmp(argv[1], "--hotupdate") == 0) { int ret = RunHotupdateMode(); _exit(ret); }
 
     if (std::strcmp(argv[1], "--hotupdate-and-benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --hotupdate-and-benchmark <index> <iterations>\\n"); return 1; }
-        return RunHotupdateBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        int ret = RunHotupdateBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        _exit(ret);
     }
 
-    if (std::strcmp(argv[1], "--microbench") == 0) { return RunMicrobenchMode(); }
+    if (std::strcmp(argv[1], "--microbench") == 0) { int ret = RunMicrobenchMode(); _exit(ret); }
 
     printf("Unknown flag: %s\\n", argv[1]);
     return 1;

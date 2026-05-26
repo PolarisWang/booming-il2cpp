@@ -1242,6 +1242,8 @@ def generate_runtime_entry(*, is_jit: bool = False) -> str:
 #include <chaos/native_types.h>
 #include <runtime_core.h>
 
+#include "chaos_runtime_host.h"
+
 // ── EH macros (manual definitions to avoid SDK eh.h which has a
 // type-mismatched chaos_eh_match_type that fails to compile without
 // ChaosGeneratedRuntimePrelude.h) ──────────────────────────────
@@ -1263,6 +1265,15 @@ extern "C" const int kSubjectSlotMap[];
 
 // Defined in hotpatch-table.generated.cpp
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
+
+// Codegen registration symbols (defined in native-aot.generated.cpp)
+extern "C" const CodeRegistrationV0 chaos_codegen_code_registration;
+extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
+extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
+extern "C" void ChaosRegisterGcLayouts();
+
+// Default arg thunks (defined in native-aot.generated.cpp)
+extern "C" void (*kDefaultArgThunks[])() noexcept;
 
 // Defined in verification_dispatch.generated.cpp
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll();
@@ -1319,7 +1330,7 @@ static int RunFactJsonMode() {
         bool caught = false;
         CHAOS_EH_TRY
             result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, nullptr);
+                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
         CHAOS_EH_CATCH_BEGIN
             caught = true;
         CHAOS_EH_END
@@ -1459,13 +1470,36 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 int main(int argc, char* argv[]) {
 __JIT_CALL__
 
+    // Initialize ChaOS runtime: resolves kChaosExternalRuntimeFnTable entries
+    // (bridge/import stubs) and registers the AOT module so that HotpatchNameRegistry
+    // is populated.  Without this, external fnTable entries stay nullptr and any
+    // AOT-compiled method that calls through them will segfault.
+    //
+    // NOTE: heap-allocated and intentionally leaked.  RuntimeShutdown() + static
+    // destruction (BgcController threads) race on exit — for a short-lived
+    // verification process it is safe to let the OS reclaim everything.
+    auto* chaos_host = new ChaosRuntimeHost();
+    if (!chaos_host->Initialize("verification-entry")) {
+        std::fprintf(stderr, "FATAL: ChaosRuntimeHost::Initialize failed\\n");
+        return 1;
+    }
+    if (!chaos_host->RegisterModule(
+            &chaos_codegen_code_registration,
+            &chaos_codegen_metadata_registration,
+            &chaos_codegen_options)) {
+        std::fprintf(stderr, "FATAL: RegisterModule failed\\n");
+        return 1;
+    }
+    ChaosRegisterGcLayouts();
+
     if (argc < 2) {
-        // Default: fact mode
-        return RunFactMode();
+        int ret = RunFactMode();
+        _exit(ret);
     }
 
     if (std::strcmp(argv[1], "--fact-json") == 0) {
-        return RunFactJsonMode();
+        int ret = RunFactJsonMode();
+        _exit(ret);
     }
 
     if (std::strcmp(argv[1], "--benchmark") == 0) {
@@ -1473,13 +1507,13 @@ __JIT_CALL__
             printf("Usage: entry.exe --benchmark <index> <iterations>\\n");
             return 1;
         }
-        int entry_index = std::atoi(argv[2]);
-        int iterations = std::atoi(argv[3]);
-        return RunBenchmarkMode(entry_index, iterations);
+        int ret = RunBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        _exit(ret);
     }
 
     if (std::strcmp(argv[1], "--hotupdate") == 0) {
-        return RunHotupdateMode();
+        int ret = RunHotupdateMode();
+        _exit(ret);
     }
 
     if (std::strcmp(argv[1], "--hotupdate-and-benchmark") == 0) {
@@ -1487,13 +1521,13 @@ __JIT_CALL__
             printf("Usage: entry.exe --hotupdate-and-benchmark <index> <iterations>\\n");
             return 1;
         }
-        int entry_index = std::atoi(argv[2]);
-        int iterations = std::atoi(argv[3]);
-        return RunHotupdateBenchmarkMode(entry_index, iterations);
+        int ret = RunHotupdateBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        _exit(ret);
     }
 
     if (std::strcmp(argv[1], "--microbench") == 0) {
-        return RunMicrobenchMode();
+        int ret = RunMicrobenchMode();
+        _exit(ret);
     }
 
     printf("Unknown flag: %s\\n", argv[1]);
