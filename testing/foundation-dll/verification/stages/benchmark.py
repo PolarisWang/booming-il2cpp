@@ -1467,6 +1467,50 @@ def run_managed_benchmark(
     )
 
 
+# ── PROFILE data parsing ──────────────────────────────────────────────────
+
+_PROFILE_LINE_RE = re.compile(
+    r"^PROFILE\|(?P<name>[^|]+)\|"
+    r"avg=(?P<avg_cycles>[0-9.]+)\|"
+    r"avg_ns=(?P<avg_ns>[0-9.]+)\|"
+    r"min=(?P<min>[0-9]+)\|"
+    r"max=(?P<max>[0-9]+)\|"
+    r"count=(?P<count>[0-9]+)\|"
+    r"total_ns=(?P<total_ns>[0-9.]+)"
+)
+_CALIBRATION_RE = re.compile(
+    r"^PROFILE\|CALIBRATION\|ns_per_cycle=(?P<ns_per_cycle>[0-9.]+)"
+)
+
+
+def _parse_profile_data(stderr_text: str) -> dict[str, Any]:
+    """Parse PROFILE_DUMP() output from stderr into structured data."""
+    scopes: dict[str, dict[str, Any]] = {}
+    ns_per_cycle: float | None = None
+    for line in stderr_text.splitlines():
+        line = line.strip()
+        m = _CALIBRATION_RE.match(line)
+        if m:
+            ns_per_cycle = float(m.group("ns_per_cycle"))
+            continue
+        m = _PROFILE_LINE_RE.match(line)
+        if m:
+            name = m.group("name")
+            scopes[name] = {
+                "avg_cycles": float(m.group("avg_cycles")),
+                "avg_ns": float(m.group("avg_ns")),
+                "min_cycles": int(m.group("min")),
+                "max_cycles": int(m.group("max")),
+                "count": int(m.group("count")),
+                "total_ns": float(m.group("total_ns")),
+            }
+    return {
+        "ns_per_cycle": ns_per_cycle,
+        "scopes": scopes,
+        "has_profile_data": len(scopes) > 0,
+    }
+
+
 # ── Native benchmark runners ────────────────────────────────────────────
 
 def _load_method_count(ctx: FamilyContext) -> int:
@@ -1487,8 +1531,13 @@ def _load_method_count(ctx: FamilyContext) -> int:
 
 def _run_single_benchmark(
     exe_path: Path, method_index: int, iterations: int = 100000,
+    collect_profile: bool = False,
 ) -> dict[str, Any] | None:
-    """Run entry.exe --benchmark N and parse JSON timing output."""
+    """Run entry.exe --benchmark N and parse JSON timing output.
+
+    When collect_profile=True, also captures stderr and parses PROFILE| lines
+    from PROFILE_DUMP() output (requires PROFILE-tier build of entry.exe).
+    """
     try:
         r = subprocess.run(
             [str(exe_path), "--benchmark", str(method_index), str(iterations)],
@@ -1500,18 +1549,31 @@ def _run_single_benchmark(
         return {"methodIndex": method_index, "error": str(e)}
 
     output = (r.stdout or "").strip()
+    result = None
     for line in output.splitlines():
         line = line.strip()
         if line.startswith("{"):
             try:
-                return json.loads(line)
+                result = json.loads(line)
+                result["methodIndex"] = method_index
             except json.JSONDecodeError:
                 pass
-    return {"methodIndex": method_index, "error": f"no JSON output: {output[:200]}", "exitCode": r.returncode}
+
+    if result is None:
+        result = {"methodIndex": method_index, "error": f"no JSON output: {output[:200]}", "exitCode": r.returncode}
+
+    if collect_profile:
+        stderr_text = r.stderr or ""
+        profile = _parse_profile_data(stderr_text)
+        if profile["has_profile_data"]:
+            result["profile"] = profile
+
+    return result
 
 
 def _run_all_benchmarks(
     ctx: FamilyContext, exe_path: Path, label: str,
+    collect_profile: bool = False,
 ) -> dict[str, Any]:
     """Run --benchmark for all methods under a given EXE.
 
@@ -1583,7 +1645,7 @@ def _run_all_benchmarks(
             fail_count += 1
             continue
 
-        result = _run_single_benchmark(exe_path, i)
+        result = _run_single_benchmark(exe_path, i, collect_profile=collect_profile)
         results.append(result)
         if result and "error" not in result:
             total_ops += result.get("opsPerSecond", 0)
@@ -1595,6 +1657,50 @@ def _run_all_benchmarks(
     print(f"  [benchmark/{label}] {ok_count}/{method_count} OK, avg {avg_ops:.0f} ops/s"
           f" ({len(value_gate_failures)} value-gate skipped)")
 
+    # Aggregate PROFILE data across methods (when collected)
+    profile_summary = None
+    if collect_profile:
+        aggregated: dict[str, dict[str, float]] = {}
+        for r in results:
+            profile = r.get("profile") if r else None
+            if not profile:
+                continue
+            for name, data in profile.get("scopes", {}).items():
+                if name not in aggregated:
+                    aggregated[name] = {"total_ns": 0.0, "total_count": 0, "min_cycles": float("inf"), "max_cycles": 0}
+                agg = aggregated[name]
+                agg["total_ns"] += data["total_ns"]
+                agg["total_count"] += data["count"]
+                if data["min_cycles"] < agg["min_cycles"]:
+                    agg["min_cycles"] = data["min_cycles"]
+                if data["max_cycles"] > agg["max_cycles"]:
+                    agg["max_cycles"] = data["max_cycles"]
+
+        if aggregated:
+            total_profile_ns = sum(a["total_ns"] for a in aggregated.values())
+            scope_list = []
+            for name, agg in aggregated.items():
+                avg_ns = agg["total_ns"] / agg["total_count"] if agg["total_count"] > 0 else 0.0
+                pct = (agg["total_ns"] / total_profile_ns * 100) if total_profile_ns > 0 else 0.0
+                scope_list.append({
+                    "scope_name": name,
+                    "total_ns": round(agg["total_ns"], 1),
+                    "total_count": agg["total_count"],
+                    "avg_ns": round(avg_ns, 1),
+                    "min_cycles": agg["min_cycles"],
+                    "max_cycles": agg["max_cycles"],
+                    "percent_of_profile": round(pct, 2),
+                })
+            scope_list.sort(key=lambda s: -s["total_ns"])
+            profile_summary = {
+                "total_profile_ns": round(total_profile_ns, 1),
+                "num_scopes": len(scope_list),
+                "scopes": scope_list,
+            }
+            print(f"  [benchmark/{label}] PROFILE: {len(scope_list)} scope(s) collected, "
+                  f"top: {scope_list[0]['scope_name']}={scope_list[0]['total_ns']:.0f}ns"
+                  if scope_list else "")
+
     return {
         "status": "passed" if ok_count > 0 else "failed",
         "label": label,
@@ -1604,6 +1710,7 @@ def _run_all_benchmarks(
         "totalMethods": method_count,
         "averageOpsPerSecond": avg_ops,
         "valueGateFailures": list(value_gate_failures),
+        "profile": profile_summary,
     }
 
 
@@ -1623,9 +1730,10 @@ def run_benchmark(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
     jit_exe = ctx.entry_jit_exe_path
 
     benchmarks: dict[str, Any] = {}
+    collect_profile = ctx.native_config == "profile"
 
     if aot_exe.exists():
-        aot_result = _run_all_benchmarks(ctx, aot_exe, "native-aot")
+        aot_result = _run_all_benchmarks(ctx, aot_exe, "native-aot", collect_profile=collect_profile)
         benchmarks["native-aot"] = aot_result
     else:
         benchmarks["native-aot"] = {"status": "skipped", "summary": "entry.exe not found"}

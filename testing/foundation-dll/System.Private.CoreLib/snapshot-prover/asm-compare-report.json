@@ -2,18 +2,18 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/snapshot/prover",
-  "capturedAt": "2026-05-26T18:27:47",
+  "capturedAt": "2026-05-26T21:57:29",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
-    "okCount": 1,
-    "failedCount": 9,
+    "okCount": 10,
+    "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
       "max": 44,
       "avg": 44.0,
-      "total": 44
+      "total": 440
     },
     "aotInstructionCount": {
       "min": 1,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 18
     },
-    "overallIrExpansionRatio": 3.3,
-    "averageExpansionRatio": 0.02,
-    "maxExpansionRatio": 0.02,
+    "overallIrExpansionRatio": 0.33,
+    "averageExpansionRatio": 0.33,
+    "maxExpansionRatio": 0.36,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -37,17 +37,17 @@
       "methodIndex": 0,
       "methodSubjectId": "SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()",
       "shortName": "Subject_0",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "ratio": 0.36,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -74,17 +74,17 @@
       "methodIndex": 1,
       "methodSubjectId": "SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()",
       "shortName": "Subject_1",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "ratio": 0.36,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -111,17 +111,17 @@
       "methodIndex": 2,
       "methodSubjectId": "SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()",
       "shortName": "Subject_2",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "ratio": 0.36,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -148,17 +148,17 @@
       "methodIndex": 3,
       "methodSubjectId": "SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()",
       "shortName": "Subject_3",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "ratio": 0.36,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -185,17 +185,17 @@
       "methodIndex": 4,
       "methodSubjectId": "SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()",
       "shortName": "Subject_4",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "ratio": 0.36,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -222,17 +222,17 @@
       "methodIndex": 5,
       "methodSubjectId": "SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()",
       "shortName": "Subject_5",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "ratio": 0.36,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -259,17 +259,17 @@
       "methodIndex": 6,
       "methodSubjectId": "SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()",
       "shortName": "Subject_6",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "ratio": 0.36,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -296,17 +296,17 @@
       "methodIndex": 7,
       "methodSubjectId": "SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()",
       "shortName": "Subject_7",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "ratio": 0.36,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -357,17 +357,17 @@
       "methodIndex": 9,
       "methodSubjectId": "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()",
       "shortName": "Subject_9",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 16,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "ratio": 0.36,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

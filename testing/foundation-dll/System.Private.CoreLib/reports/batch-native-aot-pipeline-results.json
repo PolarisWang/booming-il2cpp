@@ -6,19 +6,19 @@
   "failed": 1,
   "results": [
     {
-      "family": "enum-parsing",
-      "config_tier": "CHECK",
+      "family": "convert-char",
+      "config_tier": "PROFILE",
       "steps": {
         "build_subjects": "OK",
         "convert_to_cpp": "OK",
         "build_entry_exe": "FAILED"
       },
       "success": false,
-      "methodCount": 13,
+      "methodCount": 18,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll",
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll",
       "error": "entry.exe build failed"
     }
   ],
-  "timestamp": "2026-05-26T19:38:04"
+  "timestamp": "2026-05-26T20:29:28"
 }

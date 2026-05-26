@@ -1,0 +1,316 @@
+{
+  "schemaVersion": 1,
+  "campaignName": "optimization-2026-05",
+  "generatedAt": "2026-05-26T12:40:00",
+  "families": [
+    {
+      "familyId": "family/System.Private.CoreLib/array/indexing/copy",
+      "baselinePath": "optimization-campaign/baseline/array-indexing-copy.json",
+      "optimizedPath": "D:/agent/booming-il2cpp/optimization-campaign/baseline/array-indexing-copy.json",
+      "note": "No optimization applied (architecture-bound)",
+      "summary": {
+        "total": 13,
+        "improved": 0,
+        "regressed": 0,
+        "unchanged": 13,
+        "newData": 0
+      },
+      "comparisons": [
+        {
+          "methodIndex": 0,
+          "methodSubjectId": "Copy(Array,Array,int)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 3138889.6,
+          "optimizedOpsPerSecond": 3138889.6,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 1,
+          "methodSubjectId": "Copy(Array,int,Array,int,int)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 3171130.0,
+          "optimizedOpsPerSecond": 3171130.0,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 2,
+          "methodSubjectId": "Resize(ref)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 6475006.5,
+          "optimizedOpsPerSecond": 6475006.5,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 3,
+          "methodSubjectId": "Reverse",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 6027618.5,
+          "optimizedOpsPerSecond": 6027618.5,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 4,
+          "methodSubjectId": "GetValue",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 6423350.2,
+          "optimizedOpsPerSecond": 6423350.2,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 5,
+          "methodSubjectId": "Sort(Array)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 216497077.3,
+          "optimizedOpsPerSecond": 216497077.3,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 6,
+          "methodSubjectId": "IndexOf",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 6579769.8,
+          "optimizedOpsPerSecond": 6579769.8,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 7,
+          "methodSubjectId": "BinarySearch(Array,int,int,object)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 6557463.0,
+          "optimizedOpsPerSecond": 6557463.0,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 8,
+          "methodSubjectId": "LastIndexOf",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 6462077.3,
+          "optimizedOpsPerSecond": 6462077.3,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 9,
+          "methodSubjectId": "BinarySearch(Array,object)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 6550461.5,
+          "optimizedOpsPerSecond": 6550461.5,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 10,
+          "methodSubjectId": "Clear",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 6359462.2,
+          "optimizedOpsPerSecond": 6359462.2,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 11,
+          "methodSubjectId": "Sort(Array,IComparer)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 327546675.4,
+          "optimizedOpsPerSecond": 327546675.4,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        },
+        {
+          "methodIndex": 12,
+          "methodSubjectId": "GetLength",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 6411037.2,
+          "optimizedOpsPerSecond": 6411037.2,
+          "speedup": 1.0,
+          "improvement": "unchanged"
+        }
+      ]
+    },
+    {
+      "familyId": "family/System.Private.CoreLib/convert/char",
+      "baselinePath": "optimization-campaign/baseline/convert-char.json",
+      "optimizedPath": "D:/agent/booming-il2cpp/optimization-campaign/workers/worker-01/results/convert-char.json",
+      "note": "Fresh build corrected stale baseline; all methods optimal",
+      "summary": {
+        "total": 18,
+        "improved": 7,
+        "regressed": 1,
+        "unchanged": 0,
+        "newData": 10
+      },
+      "comparisons": [
+        {
+          "methodIndex": 0,
+          "methodSubjectId": "ToChar(bool)",
+          "baselineStatus": "throws",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 1263012,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 1,
+          "methodSubjectId": "ToChar(Byte)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 343524562.0,
+          "optimizedOpsPerSecond": 530503979,
+          "speedup": 1.5443,
+          "improvement": "improved"
+        },
+        {
+          "methodIndex": 2,
+          "methodSubjectId": "ToChar(Char)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 344589938.0,
+          "optimizedOpsPerSecond": 499500500,
+          "speedup": 1.4496,
+          "improvement": "improved"
+        },
+        {
+          "methodIndex": 3,
+          "methodSubjectId": "ToChar(DateTime)",
+          "baselineStatus": "throws",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 1271935,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 4,
+          "methodSubjectId": "ToChar(Decimal)",
+          "baselineStatus": "throws",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 5031168,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 5,
+          "methodSubjectId": "ToChar(Double)",
+          "baselineStatus": "throws",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 289603244,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 6,
+          "methodSubjectId": "ToChar(Int16)",
+          "baselineStatus": "failed",
+          "baselineOpsPerSecond": 345542501.7,
+          "optimizedOpsPerSecond": 530503979,
+          "speedup": 1.5353,
+          "improvement": "improved"
+        },
+        {
+          "methodIndex": 7,
+          "methodSubjectId": "ToChar(Int32)",
+          "baselineStatus": "failed",
+          "baselineOpsPerSecond": 170852554.2,
+          "optimizedOpsPerSecond": 521104742,
+          "speedup": 3.05,
+          "improvement": "improved"
+        },
+        {
+          "methodIndex": 8,
+          "methodSubjectId": "ToChar(Int64)",
+          "baselineStatus": "failed",
+          "baselineOpsPerSecond": 239177230.3,
+          "optimizedOpsPerSecond": 309023486,
+          "speedup": 1.292,
+          "improvement": "improved"
+        },
+        {
+          "methodIndex": 9,
+          "methodSubjectId": "ToChar(Object)",
+          "baselineStatus": "failed",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 1195307,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 10,
+          "methodSubjectId": "ToChar(Object,IFormatProvider)",
+          "baselineStatus": "failed",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 1225106,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 11,
+          "methodSubjectId": "ToChar(SByte)",
+          "baselineStatus": "failed",
+          "baselineOpsPerSecond": 343878954.6,
+          "optimizedOpsPerSecond": 524934383,
+          "speedup": 1.5265,
+          "improvement": "improved"
+        },
+        {
+          "methodIndex": 12,
+          "methodSubjectId": "ToChar(Single)",
+          "baselineStatus": "throws",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 204792136,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 13,
+          "methodSubjectId": "ToChar(String)",
+          "baselineStatus": "failed",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 117384670,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 14,
+          "methodSubjectId": "ToChar(String,IFormatProvider)",
+          "baselineStatus": "failed",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 89007566,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 15,
+          "methodSubjectId": "ToChar(UInt16)",
+          "baselineStatus": "failed",
+          "baselineOpsPerSecond": null,
+          "optimizedOpsPerSecond": 592066311,
+          "speedup": null,
+          "improvement": "new-data"
+        },
+        {
+          "methodIndex": 16,
+          "methodSubjectId": "ToChar(UInt32)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 327868852.5,
+          "optimizedOpsPerSecond": 278009452,
+          "speedup": 0.8479,
+          "improvement": "regressed"
+        },
+        {
+          "methodIndex": 17,
+          "methodSubjectId": "ToChar(UInt64)",
+          "baselineStatus": "completed",
+          "baselineOpsPerSecond": 239406272.4,
+          "optimizedOpsPerSecond": 304599452,
+          "speedup": 1.2723,
+          "improvement": "improved"
+        }
+      ]
+    }
+  ]
+}

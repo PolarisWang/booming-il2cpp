@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/assembly",
-  "capturedAt": "2026-05-26T19:44:14",
+  "capturedAt": "2026-05-26T21:38:45",
   "batchMode": true,
   "summary": {
     "totalMethods": 22,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 53,
-      "avg": 44.4,
-      "total": 977
+      "max": 104,
+      "avg": 46.7,
+      "total": 1028
     },
     "aotInstructionCount": {
       "min": 10,
@@ -27,10 +27,10 @@
     "topInstructionCategories": {
       "external_runtime_call": 134
     },
-    "overallIrExpansionRatio": 0.51,
-    "averageExpansionRatio": 0.52,
+    "overallIrExpansionRatio": 0.49,
+    "averageExpansionRatio": 0.51,
     "maxExpansionRatio": 0.64,
-    "minExpansionRatio": 0.23
+    "minExpansionRatio": 0.1
   },
   "methodResults": [
     {
@@ -1115,15 +1115,15 @@
       "shortName": "Subject_18",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 53,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 20,
-        "ratio": 0.38,
+        "ratio": 0.45,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 53
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -1266,15 +1266,15 @@
       "shortName": "Subject_21",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 104,
         "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "ratio": 0.1,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 104
       },
       "aot": {
         "status": "ok",

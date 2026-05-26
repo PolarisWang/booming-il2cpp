@@ -22,6 +22,11 @@ public static partial class ThreadingTasksPrimitivesPatchEntry
     // [11] System.Private.CoreLib/System.Threading.Thread::Start:System.Void()
     // [12] System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)
     // [13] System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()
+    public static int Subject_13()
+    {
+        return unchecked((int)(0xB0000000u + 13));
+    }
+
     // [14] System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()
     public static void Run(int entryIndex)
     {
@@ -42,7 +47,7 @@ public static partial class ThreadingTasksPrimitivesPatchEntry
                 case 10: CustomEntryMethod10(); break;
                 case 11: CustomEntryMethod11(); break;
                 case 12: CustomEntryMethod12(); break;
-                case 13: CustomEntryMethod13(); break;
+                case 13: Subject_13(); break;
                 case 14: CustomEntryMethod14(); break;
             }
         }

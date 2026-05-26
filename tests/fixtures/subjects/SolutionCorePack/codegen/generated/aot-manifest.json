@@ -1,0 +1,2580 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "aotManifest",
+  "entries": [
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::InvokeWorkload:System.Int32(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::.ctor:System.Void(Chaos.TestFramework.ChaosSubjectEntryKind,Chaos.TestFramework.ChaosSubjectSlice)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntryKind:Chaos.TestFramework.ChaosSubjectEntryKind()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticDouble:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::set_EntryKind:System.Void(Chaos.TestFramework.ChaosSubjectEntryKind)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunStringConcat:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntrySlice:Chaos.TestFramework.ChaosSubjectSlice()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArrayAccess:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::set_EntrySlice:System.Void(Chaos.TestFramework.ChaosSubjectSlice)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunObjectAlloc:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_IsNone:System.Boolean()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunVirtualCall:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::ToString:System.String()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunLoopBranch:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::PrintMembers:System.Boolean(System.Text.StringBuilder)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::get_Value:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::op_Inequality:System.Boolean(Chaos.TestFramework.ChaosSubjectEntrySelection,Chaos.TestFramework.ChaosSubjectEntrySelection)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::.ctor:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::op_Equality:System.Boolean(Chaos.TestFramework.ChaosSubjectEntrySelection,Chaos.TestFramework.ChaosSubjectEntrySelection)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BICalc::Compute:System.Int64(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::GetHashCode:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::Compute:System.Int64(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Equals:System.Boolean(System.Object)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::.ctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Equals:System.Boolean(Chaos.TestFramework.ChaosSubjectEntrySelection)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Deconstruct:System.Void(Chaos.TestFramework.ChaosSubjectEntryKind\u0026,Chaos.TestFramework.ChaosSubjectSlice\u0026)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::TryParse:System.Boolean(System.String[],Chaos.TestFramework.ChaosSubjectEntrySelection\u0026)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::ParseByte:System.Byte(System.String,System.String,System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::ParseUInt16:System.UInt16(System.String,System.String,System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::.ctor:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_FamilyId:System.String()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_IncludeNativeProof:System.Boolean()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_IncludeNativeProof:System.Void(System.Boolean)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_IncludeBenchmark:System.Boolean()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_IncludeBenchmark:System.Void(System.Boolean)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_IncludeHotUpdate:System.Boolean()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_IncludeHotUpdate:System.Void(System.Boolean)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::get_ExecutionModes:Chaos.TestFramework.ChaosExecutionMode()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::set_ExecutionModes:System.Void(Chaos.TestFramework.ChaosExecutionMode)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute::.ctor:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute::get_MethodSubjectId:System.String()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkSubjectIdAttribute::.ctor:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkSubjectIdAttribute::get_MethodSubjectId:System.String()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateSubjectIdAttribute::.ctor:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateSubjectIdAttribute::get_MethodSubjectId:System.String()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyIdAttribute::.ctor:System.Void(Chaos.TestFramework.CapabilityFamilyId)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyIdAttribute::get_FamilyId:Chaos.TestFramework.CapabilityFamilyId()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::.ctor:System.Void(Chaos.TestFramework.VerificationRoute)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::get_Route:Chaos.TestFramework.VerificationRoute()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRouteAttribute::.ctor:System.Void(Chaos.TestFramework.BenchmarkRoute)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRouteAttribute::get_Route:Chaos.TestFramework.BenchmarkRoute()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfileAttribute::.ctor:System.Void(Chaos.TestFramework.BenchmarkProfile)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfileAttribute::get_Profile:Chaos.TestFramework.BenchmarkProfile()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirectionAttribute::.ctor:System.Void(Chaos.TestFramework.HotUpdateDirection)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirectionAttribute::get_Direction:Chaos.TestFramework.HotUpdateDirection()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::.ctor:System.Void(Chaos.TestFramework.ChaosUnitCategory)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Category:Chaos.TestFramework.ChaosUnitCategory()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Alias:System.String()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Alias:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_CapabilityFamily:Chaos.TestFramework.ChaosCapabilityFamily()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_CapabilityFamily:System.Void(Chaos.TestFramework.ChaosCapabilityFamily)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Capability:Chaos.TestFramework.ChaosCapabilityItem()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Capability:System.Void(Chaos.TestFramework.ChaosCapabilityItem)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Requires:Chaos.TestFramework.ChaosRuntimeFeature()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Requires:System.Void(Chaos.TestFramework.ChaosRuntimeFeature)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Archetype:Chaos.TestFramework.ChaosSolutionArchetype()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Archetype:System.Void(Chaos.TestFramework.ChaosSolutionArchetype)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_HotUpdateCapability:Chaos.TestFramework.ChaosHotUpdateCapability()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_HotUpdateCapability:System.Void(Chaos.TestFramework.ChaosHotUpdateCapability)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Evidence:Chaos.TestFramework.ChaosEvidenceKind()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Evidence:System.Void(Chaos.TestFramework.ChaosEvidenceKind)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::get_Priority:System.Byte()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::set_Priority:System.Void(System.Byte)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::.ctor:System.Void(Chaos.TestFramework.ChaosBenchmarkCategory,Chaos.TestFramework.ChaosMetric)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Category:Chaos.TestFramework.ChaosBenchmarkCategory()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Metrics:Chaos.TestFramework.ChaosMetric()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Alias:System.String()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Alias:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_CapabilityFamily:Chaos.TestFramework.ChaosCapabilityFamily()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_CapabilityFamily:System.Void(Chaos.TestFramework.ChaosCapabilityFamily)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Capability:Chaos.TestFramework.ChaosCapabilityItem()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Capability:System.Void(Chaos.TestFramework.ChaosCapabilityItem)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Requires:Chaos.TestFramework.ChaosRuntimeFeature()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Requires:System.Void(Chaos.TestFramework.ChaosRuntimeFeature)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Archetype:Chaos.TestFramework.ChaosSolutionArchetype()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Archetype:System.Void(Chaos.TestFramework.ChaosSolutionArchetype)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_HotUpdateCapability:Chaos.TestFramework.ChaosHotUpdateCapability()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_HotUpdateCapability:System.Void(Chaos.TestFramework.ChaosHotUpdateCapability)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_Modes:Chaos.TestFramework.ChaosExecutionMode()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_Modes:System.Void(Chaos.TestFramework.ChaosExecutionMode)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_WarmupCount:System.Byte()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_WarmupCount:System.Void(System.Byte)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_IterationCount:System.UInt16()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_IterationCount:System.Void(System.UInt16)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_InvocationCount:System.UInt16()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_InvocationCount:System.Void(System.UInt16)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_P99Ms:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_P99Ms:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_MinOpsPerSec:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_MinOpsPerSec:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::get_MaxAllocBytes:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::set_MaxAllocBytes:System.Void(System.Int32)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkAttribute::.ctor:System.Void(Chaos.TestFramework.ChaosBenchmarkCategory,Chaos.TestFramework.ChaosMetric)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertionException::.ctor:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::Reset:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::Complete:System.Int32()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::RecordFailure:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::.cctor:System.Void()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::True:System.Void(System.Boolean,System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::False:System.Void(System.Boolean,System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal:System.Void(System.Int32,System.Int32,System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal\u00601:System.Void(!!0,!!0,System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::NotNull:System.Void(System.Object,System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Fail:System.Void(System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "method",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws\u00601:System.Void(System.Action,System.String)",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack",
+      "subjectKind": "field",
+      "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj::\u003CValue\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitCategory::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitCategory::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitCategory::RuntimeContract",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitCategory::MetadataContract",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitCategory::InteropContract",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitCategory::HostContract",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitCategory::HotUpdateContract",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkCategory::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkCategory::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkCategory::RuntimeDispatch",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkCategory::Startup",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkCategory::Allocation",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosBenchmarkCategory::HotUpdate",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosExecutionMode::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosExecutionMode::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosExecutionMode::Managed",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosExecutionMode::Native",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosExecutionMode::Interpreter",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosExecutionMode::All",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryKind::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryKind::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryKind::Proof",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryKind::Benchmark",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::HotUpdateSkeletonProof",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::MixedExecutionProof",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::InterpreterLoweringProof",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::SimpleLibrarySolutionManagedOutput",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::MultiProjectSolutionManagedOutput",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::PackageReferenceSolutionManagedOutput",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::CoreRuntimeFeaturesProof",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::ReferenceAssemblySolutionManagedOutput",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::CoreLibReferenceSolutionManagedOutput",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::MixedReferenceClosureSolutionManagedOutput",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::CoreRuntimeInterfaceDispatchProof",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosMetric::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosMetric::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosMetric::WallClockUs",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosMetric::ManagedAllocBytes",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosMetric::NativeAllocBytes",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosMetric::PeakWorkingSet",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::PrimitivesAndOps",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::TypeSystemAndGenerics",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::AsyncAndIterators",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::DelegatesAndClosures",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::ExceptionsAndControlFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::ReflectionAndMetadata",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::InteropAndMarshaling",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::ThreadingAndSynchronization",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::RuntimeServices",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::UnsafeAndLowLevel",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::DiagnosticsAndTracing",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::LinkerAndAotClosure",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::HotUpdateWorkflow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityFamily::MixedExecution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::ArithmeticOps",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::BitwiseOps",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::ComparisonAndBranch",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::NumericConversion",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::OverflowBehavior",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::ArrayBasics",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::ArrayBoxing",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::GenericInstantiation",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::GenericConstraint",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::GenericVirtualDispatch",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::GenericInterfaceDispatch",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::GenericCollections",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::GenericLayout",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::AsyncAwait",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::TaskAndValueTaskFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::IteratorStateMachine",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::DelegateInvocation",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::DelegateChaining",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::LambdaClosureCapture",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::EventCallbackFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::CustomAttributeLookup",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::MemberMetadataLookup",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::MetadataSupplement",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::MetadataClosure",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::LinkerPreserveContract",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::LinkerStripping",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::ExceptionBasic",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::NestedException",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::FinallyAndFilter",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::CrossBoundaryException",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::NativeCallInterop",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::StringAndUtf8Marshaling",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::StructMarshaling",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::DelegateCallbackInterop",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::Threading",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::TaskScheduling",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::MonitorAndLocking",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::ThreadLocalState",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::RuntimeHelpers",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::GcSensitiveFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::ResourceLifecycle",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::LoaderContract",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::SpanAndMemory",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::RefStructAndStackalloc",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::UnsafePointer",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::FunctionPointer",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::RuntimeTraceOutput",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::NativeSymbolEvidence",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::CrashEvidence",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::FailureDiagnostics",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::RequiredInstantiationClosure",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::GenericSharingBoundary",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::AotClosureValidation",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::PackageLoad",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::SharedContractBinding",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::MethodReplacement",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::HotUpdateMetadataSupplement",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::PatchIntegrity",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::VersionRollback",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::PatchCallbackFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::MixedBridgeDispatch",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::InterpreterLowering",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::InterpreterArithmetic",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::MixedGenericFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::MixedExceptionFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::MixedDelegateFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::ObjectCastAndTypeCheck",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosCapabilityItem::ArrayCovariance",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::SimpleLibrarySolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::MultiProjectSolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::PackageReferenceSolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::ReferenceAssemblySolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::CoreLibReferenceSolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::MixedReferenceClosureSolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::SkeletonPatchSolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::FullProjectHotUpdateSolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::VersionCompatibilitySolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::ReferenceAssemblyPatchSolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSolutionArchetype::MixedBridgeSolution",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability::PackageLoad",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability::SharedContractBinding",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability::MethodReplacement",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability::MetadataSupplement",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability::PatchIntegrity",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability::VersionRollback",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosHotUpdateCapability::PatchCallbackFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ConvertChar",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_BufferMemory",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_EnumParsing",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_PrimitiveNumericConversions",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_StringCharTextCore",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ArrayIndexingCopy",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_SpanMemoryBuffers",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ObjectEqualityIdentity",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_TypeRuntimeHandles",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ExceptionThrowDiagnostics",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_GenericNullableValue",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_BoxingUnboxingCasts",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_DelegateCoreInvocation",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionMemberBasics",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_AttributesCustomMetadata",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ThreadingMonitorInterlocked",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ThreadingTasksPrimitives",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_TimeDateTimeTimespan",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_GuidRandomHashcode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_MathNumerics",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_GlobalizationCulture",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_IOStreamsBasics",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_CollectionsGenericCore",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_RuntimeCompilerServices",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionType",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionAssembly",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionMemberComplete",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionGenerics",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionParameters",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionModule",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionBinding",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionActivation",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_ReflectionFieldProperty",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_GarbageCollection",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyId::SystemPrivateCoreLib_CodegenEdgeCases",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRoute::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRoute::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRoute::Managed",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRoute::Native",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRoute::HotUpdate",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRoute::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRoute::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRoute::Managed",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRoute::Native",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRoute::HotUpdate",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfile::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfile::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfile::Default",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirection::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirection::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirection::HostToPatch",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirection::PatchToHost",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::GenericSharing",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::Reflection",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::Delegate",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::ExceptionFlow",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::NativeInterop",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::HotUpdate",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::AsyncStateMachine",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::Threading",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::Synchronization",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::SpanMemory",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::UnsafePointer",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::FunctionPointer",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::MetadataSupplement",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::GenericVirtualDispatch",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosRuntimeFeature::RefStructStackalloc",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosEvidenceKind::value__",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosEvidenceKind::None",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosEvidenceKind::Stdout",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosEvidenceKind::FileArtifact",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosEvidenceKind::Metadata",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosEvidenceKind::NativeSymbol",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::\u003CEntryKind\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::\u003CEntrySlice\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::EntryKindPrefix",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::EntrySlicePrefix",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::\u003CFamilyId\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::\u003CIncludeNativeProof\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::\u003CIncludeBenchmark\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::\u003CIncludeHotUpdate\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::\u003CExecutionModes\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute::\u003CMethodSubjectId\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkSubjectIdAttribute::\u003CMethodSubjectId\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateSubjectIdAttribute::\u003CMethodSubjectId\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyIdAttribute::\u003CFamilyId\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::\u003CRoute\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRouteAttribute::\u003CRoute\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfileAttribute::\u003CProfile\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirectionAttribute::\u003CDirection\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::\u003CCategory\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::\u003CAlias\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::\u003CCapabilityFamily\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::\u003CCapability\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::\u003CRequires\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::\u003CArchetype\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::\u003CHotUpdateCapability\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::\u003CEvidence\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::\u003CPriority\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CCategory\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CMetrics\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CAlias\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CCapabilityFamily\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CCapability\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CRequires\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CArchetype\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CHotUpdateCapability\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CModes\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CWarmupCount\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CIterationCount\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CInvocationCount\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CP99Ms\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CMinOpsPerSec\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::\u003CMaxAllocBytes\u003Ek__BackingField",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::ExitCode",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::LastFailedMethodIndex",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "Chaos.TestFramework.Sdk",
+      "subjectKind": "field",
+      "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::CurrentMethodIndex",
+      "reason": "instance-field-state"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Text.StringBuilder::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Text.StringBuilder::Append:System.Text.StringBuilder(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::ToString:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectEntryKind\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectEntryKind\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectEntryKind\u003E::GetHashCode:System.Int32(Chaos.TestFramework.ChaosSubjectEntryKind)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectSlice\u003E::get_Default:System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectSlice\u003E()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectSlice\u003E::GetHashCode:System.Int32(Chaos.TestFramework.ChaosSubjectSlice)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectEntryKind\u003E::Equals:System.Boolean(Chaos.TestFramework.ChaosSubjectEntryKind,Chaos.TestFramework.ChaosSubjectEntryKind)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Collections",
+      "subjectKind": "method",
+      "subjectId": "System.Collections/System.Collections.Generic.EqualityComparer\u003CChaos.TestFramework.ChaosSubjectSlice\u003E::Equals:System.Boolean(Chaos.TestFramework.ChaosSubjectSlice,Chaos.TestFramework.ChaosSubjectSlice)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Byte\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.UInt16\u003E",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Array::Empty\u003CSystem.String\u003E:System.String[]()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::StartsWith:System.Boolean(System.String,System.StringComparison)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Byte\u003E::.ctor:System.Void(System.Byte)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.UInt16\u003E::.ctor:System.Void(System.UInt16)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Byte\u003E::get_HasValue:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.UInt16\u003E::get_HasValue:System.Boolean()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.Byte\u003E::get_Value:System.Byte()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Nullable\u003CSystem.UInt16\u003E::get_Value:System.UInt16()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.String::Substring:System.String(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Byte::TryParse:System.Boolean(System.String,System.Byte\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.UInt16::TryParse:System.Boolean(System.String,System.UInt16\u0026)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Attribute::.ctor:System.Void()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Console",
+      "subjectKind": "method",
+      "subjectId": "System.Console/System.Console::get_Error:System.IO.TextWriter()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::.ctor:System.Void(System.Int32,System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendLiteral:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted\u003CSystem.Int32\u003E:System.Void(System.Int32)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::ToStringAndClear:System.String()",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ArgumentNullException::ThrowIfNull:System.Void(System.Object,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.Action::Invoke:System.Void()",
+      "reason": "external-call"
+    }
+  ]
+}

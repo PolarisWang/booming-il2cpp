@@ -1,0 +1,11 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "SolutionCorePack",
+  "entrySubjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Equal:System.Void(System.Int32,System.Int32,System.String)",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Equal_System_Int32_System_Int32_System_String",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly"
+}

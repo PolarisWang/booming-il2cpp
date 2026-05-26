@@ -1243,6 +1243,9 @@ public sealed partial class NativeAotLoweringPlanner
 
                     case "ldc.i4":
                     case "ldc.i8":
+                        producers[depth++] = i;
+                        break;
+
                     case "ldarg":
                     case "ldloc":
                     case "ldnull":
@@ -1345,26 +1348,57 @@ public sealed partial class NativeAotLoweringPlanner
         if (producerIdx < 0 || producerIdx >= callIndex) return;
 
         var producer = instrs[producerIdx];
-        string? fieldSubjectId = producer.Op switch
+
+        // Case 1: ldsfld EnumType::FieldName → callvirt ToString (static field ref)
+        // e.g. DayOfWeek.Monday.ToString() where producer = ldsfld DayOfWeek::Monday
+        if (producer.Op == "ldsfld")
         {
-            "ldsfld" => producer.TargetReference?.SubjectId,
-            _ => null
-        };
-        if (fieldSubjectId == null) return;
+            var fieldSubjectId = producer.TargetReference?.SubjectId;
+            if (fieldSubjectId == null) return;
 
-        // Parse "DeclaringType::FieldName"
-        var colonIdx = fieldSubjectId.LastIndexOf("::", StringComparison.Ordinal);
-        if (colonIdx <= 0) return;
+            var colonIdx = fieldSubjectId.LastIndexOf("::", StringComparison.Ordinal);
+            if (colonIdx <= 0) return;
 
-        var declaringType = fieldSubjectId.Substring(0, colonIdx);
-        var fieldName = fieldSubjectId.Substring(colonIdx + 2);
+            var declaringType = fieldSubjectId.Substring(0, colonIdx);
+            var fieldName = fieldSubjectId.Substring(colonIdx + 2);
 
-        // Verify this is an enum literal field (not e.g. MyClass::someField)
-        if (!enumFieldNamesByType.TryGetValue(declaringType, out var validNames) ||
-            !validNames.Contains(fieldName))
+            if (enumFieldNamesByType.TryGetValue(declaringType, out var validNames) &&
+                validNames.Contains(fieldName))
+            {
+                _enumToStringFoldMap[callInstr.IlOffset] = fieldName;
+            }
             return;
+        }
 
-        _enumToStringFoldMap[callInstr.IlOffset] = fieldName;
+        // Case 2: ldc.i4 value + box EnumType → callvirt ToString (BoxToString)
+        // e.g. ((Enum)DayOfWeek.Monday).ToString() — producer is ldc.i4(1),
+        // and a preceding box instruction carries the enum type.
+        if (producer.Op is "ldc.i4" or "ldc.i8")
+        {
+            long constValue = Convert.ToInt64(producer.Operand);
+
+            // Scan backward from callIndex for a box <EnumType> instruction
+            for (int j = callIndex - 1; j > producerIdx; j--)
+            {
+                if (instrs[j].Op != "box") continue;
+                var boxType = instrs[j].TargetReference?.SubjectId;
+                if (boxType == null || !enumFieldNamesByType.ContainsKey(boxType))
+                    continue;
+
+                // Look up field name by constant value
+                foreach (var field in _reflectionMemberSupport.FieldEntries)
+                {
+                    if (field.DeclaringTypeSubjectId == boxType &&
+                        field.ConstantValue.HasValue &&
+                        field.ConstantValue.Value == constValue)
+                    {
+                        _enumToStringFoldMap[callInstr.IlOffset] = field.FieldName;
+                        return;
+                    }
+                }
+            }
+            return;
+        }
     }
 
     /// <summary>
@@ -1375,14 +1409,12 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private void BuildEnumAotBakeTable(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
     {
-        Console.Error.WriteLine($"[AOT Bake] ENTERED BuildEnumAotBakeTable, methods={methodsForLowering.Count}, fieldEntries={_reflectionMemberSupport?.FieldEntries?.Count ?? -1}");
         _enumAotBakeMap.Clear();
 
         // Collect field entries — prefer reflection metadata, fall back to PE metadata scan
         var fieldEntries = _reflectionMemberSupport.FieldEntries.Count > 0
             ? _reflectionMemberSupport.FieldEntries
             : CollectEnumFieldEntriesFromMetadata();
-        Console.Error.WriteLine($"[AOT Bake] fieldEntries after fallback: {fieldEntries.Count}");
         if (fieldEntries.Count == 0)
             return;
 
@@ -1398,7 +1430,7 @@ public sealed partial class NativeAotLoweringPlanner
                 enumFieldsByType[field.DeclaringTypeSubjectId] = fields = new(StringComparer.Ordinal);
             fields[field.FieldName] = field.ConstantValue.Value;
         }
-        Console.Error.WriteLine($"[AOT Bake] enumFieldsByType has {enumFieldsByType.Count} types, FieldEntries={_reflectionMemberSupport.FieldEntries.Count}");
+        Console.Error.WriteLine($"[AOT Bake] scanning {methodsForLowering.Count} methods, {enumFieldsByType.Count} enum types with {fieldEntries.Count} fields");
         if (enumFieldsByType.Count == 0)
             return;
 
@@ -1406,6 +1438,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var instrs = method.Instructions;
             if (instrs.Count == 0) continue;
+            string? methodId = method.NativeSymbol;
 
             var producers = new int[128];
             int depth = 0;
@@ -1466,7 +1499,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                     case "call":
                     case "callvirt":
-                        TryRecordEnumAotBake(instr, instrs, producers, depth, enumFieldsByType);
+                        TryRecordEnumAotBake(instr, instrs, producers, depth, enumFieldsByType, methodId);
                         // Conservative: pop N args (determined by callee), push 1 result
                         int popCount = EstimateCallPopCount(instr, depth);
                         if (depth >= popCount)
@@ -1555,7 +1588,8 @@ public sealed partial class NativeAotLoweringPlanner
         IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
         int[] producers,
         int depth,
-        Dictionary<string, Dictionary<string, long>> enumFieldsByType)
+        Dictionary<string, Dictionary<string, long>> enumFieldsByType,
+        string? methodId)
     {
         var callee = callInstr.Callee;
         if (callee == null) return;
@@ -1563,7 +1597,9 @@ public sealed partial class NativeAotLoweringPlanner
         // Only handle static System.Enum methods
         if (callInstr.Op == "callvirt") return;
         if (!callee.StartsWith("System.Private.CoreLib/System.Enum::", StringComparison.Ordinal))
+        {
             return;
+        }
 
         // Focus on static methods where the first argument is Type:
         //   Parse(Type, String), Format(Type, Object, String),
@@ -1592,11 +1628,17 @@ public sealed partial class NativeAotLoweringPlanner
         var typeProducer = instrs[typeProducerIdx];
 
         if (typeProducer.Op != "ldtoken" || typeProducer.TargetReference?.SubjectId == null)
+        {
             return;
+        }
 
         string enumTypeId = typeProducer.TargetReference.SubjectId;
         if (!enumFieldsByType.TryGetValue(enumTypeId, out var fields))
-            return; // Not an enum type
+        {
+            return;
+        }
+
+        var bakeKey = (methodId ?? "", callInstr.IlOffset);
 
         // Check the value/name/format arguments for compile-time constants
         int valueArgDepth = typeArgDepth + 1; // arg after Type
@@ -1618,7 +1660,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (fieldName != null)
             {
-                _enumAotBakeMap[callInstr.IlOffset] = new EnumAotBakeEntry(
+                _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
                     enumTypeId, callee, ConstantStr: fieldName, ConstantInt: null, ArgCount: 2);
             }
             return;
@@ -1653,7 +1695,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (constValue != null)
             {
-                _enumAotBakeMap[callInstr.IlOffset] = new EnumAotBakeEntry(
+                _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
                     enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount);
             }
             return;
@@ -1694,7 +1736,7 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (result != null)
             {
-                _enumAotBakeMap[callInstr.IlOffset] = new EnumAotBakeEntry(
+                _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
                     enumTypeId, callee, ConstantStr: result, ConstantInt: null, ArgCount: 3);
             }
             return;
@@ -1709,7 +1751,7 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 if (kv.Value == constValue) { defined = true; break; }
             }
-            _enumAotBakeMap[callInstr.IlOffset] = new EnumAotBakeEntry(
+            _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
                 enumTypeId, callee, ConstantStr: null, ConstantInt: defined ? 1L : 0L, ArgCount: 2);
         }
     }

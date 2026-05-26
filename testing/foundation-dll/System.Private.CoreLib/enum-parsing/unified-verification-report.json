@@ -2,8 +2,8 @@
   "family": "enum-parsing",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-26T18:51:17",
-  "duration_ms": 68858,
+  "timestamp": "2026-05-26T22:18:25",
+  "duration_ms": 71564,
   "overall_status": "failed",
   "stages": {
     "preflight": {
@@ -23,7 +23,7 @@
         ]
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
@@ -34,7 +34,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\enum-parsing\\managed\\subjects\\build-output\\EnumParsingSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 42943
+      "duration_ms": 44385
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -136,7 +136,7 @@
         ]
       },
       "errors": [],
-      "duration_ms": 2351
+      "duration_ms": 2429
     },
     "fact": {
       "stage": "fact",
@@ -150,7 +150,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 43
+      "duration_ms": 48
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -165,7 +165,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 41
+      "duration_ms": 47
     },
     "audit": {
       "stage": "audit",
@@ -179,7 +179,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1912
+      "duration_ms": 2275
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -214,7 +214,7 @@
         "minExpansionRatio": 0.27
       },
       "errors": [],
-      "duration_ms": 3267
+      "duration_ms": 3380
     },
     "microbench": {
       "stage": "microbench",
@@ -229,12 +229,12 @@
         "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 30
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "net8-jit=57ns, net10-jit=31ns, chaos-aot=661ns, chaos-jit=649ns",
+      "summary": "net8-jit=54ns, net10-jit=32ns, chaos-aot=661ns, chaos-jit=651ns",
       "details": {
         "runtimesAvailable": [
           "net8-jit",
@@ -254,60 +254,60 @@
         },
         "summaries": {
           "net8-jit": {
-            "geometricMeanNs": 57.44538946372422,
+            "geometricMeanNs": 53.88012845565149,
             "okCount": 13,
             "totalMethods": 13
           },
           "net10-jit": {
-            "geometricMeanNs": 31.127455536356983,
+            "geometricMeanNs": 32.30318830761957,
             "okCount": 12,
             "totalMethods": 13
           },
           "chaos-aot": {
-            "geometricMeanNs": 660.6332540127574,
+            "geometricMeanNs": 660.6290780820916,
             "okCount": 13,
             "totalMethods": 13
           },
           "chaos-jit": {
-            "geometricMeanNs": 649.1394876486293,
+            "geometricMeanNs": 651.4324594210669,
             "okCount": 13,
             "totalMethods": 13
           }
         },
-        "chaosAotVsNet8Speedup": 0.08695503763214274,
+        "chaosAotVsNet8Speedup": 0.08155882058972311,
         "chaosAotFasterCount": 2,
         "chaosAotSlowerCount": 11,
-        "chaosAotGeometricMeanNs": 660.6332540127574
+        "chaosAotGeometricMeanNs": 660.6290780820916
       },
       "errors": [],
-      "duration_ms": 17116
+      "duration_ms": 17563
     },
     "hotupdate": {
       "stage": "hotupdate",
-      "status": "passed",
-      "summary": "13/13 passed, 0 failed (stub=0)",
+      "status": "failed",
+      "summary": "HotUpdate returned 0 total — no verification performed",
       "details": {
-        "passedMethods": 13,
+        "passedMethods": 0,
         "failedMethods": 0,
-        "totalMethods": 13,
-        "realMethods": 13,
+        "totalMethods": 0,
+        "realMethods": 0,
         "stubMethods": 0
       },
       "errors": [],
-      "duration_ms": 30
+      "duration_ms": 251
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=-0.35% (1.0x) over 13 methods (AOT patched path)",
+      "summary": "avg_slowdown=5.77% (1.1x) over 13 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": -0.35,
-        "slowdownFactor": 0.9965,
+        "averageSlowdownPercent": 5.77,
+        "slowdownFactor": 1.0576999999999999,
         "threshold": 50.0,
         "nonStubMethods": 13
       },
       "errors": [],
-      "duration_ms": 538
+      "duration_ms": 533
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -319,7 +319,7 @@
         "total": 13
       },
       "errors": [],
-      "duration_ms": 39
+      "duration_ms": 41
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -332,7 +332,7 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 411
+      "duration_ms": 423
     },
     "dashboard": {
       "stage": "dashboard",
@@ -373,13 +373,13 @@
         },
         "hotupdate": {
           "aotFunctional": {
-            "passedMethods": 13,
+            "passedMethods": 0,
             "failedMethods": 0,
-            "totalMethods": 13
+            "totalMethods": 0
           },
           "aotOverhead": {
-            "averageSlowdownPercent": -0.35,
-            "slowdownFactor": 0.9965,
+            "averageSlowdownPercent": 5.77,
+            "slowdownFactor": 1.0576999999999999,
             "nonStubMethods": 13
           },
           "jitFunctional": {
@@ -403,12 +403,12 @@
         "keyRatios": {
           "nativeFasterRatio": 0,
           "irExpansionRatio": 0.48,
-          "interpreterSlowdownFactor": 0.9965,
+          "interpreterSlowdownFactor": 1.0576999999999999,
           "asmPassRate": 100.0
         }
       },
       "errors": [],
-      "duration_ms": 2
+      "duration_ms": 1
     }
   },
   "coverage": {
@@ -451,13 +451,13 @@
     },
     "hotupdate": {
       "aotFunctional": {
-        "passedMethods": 13,
+        "passedMethods": 0,
         "failedMethods": 0,
-        "totalMethods": 13
+        "totalMethods": 0
       },
       "aotOverhead": {
-        "averageSlowdownPercent": -0.35,
-        "slowdownFactor": 0.9965,
+        "averageSlowdownPercent": 5.77,
+        "slowdownFactor": 1.0576999999999999,
         "nonStubMethods": 13
       },
       "jitFunctional": {
@@ -481,7 +481,7 @@
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0.48,
-      "interpreterSlowdownFactor": 0.9965,
+      "interpreterSlowdownFactor": 1.0576999999999999,
       "asmPassRate": 100.0
     }
   },

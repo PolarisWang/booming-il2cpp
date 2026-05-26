@@ -1,0 +1,95 @@
+// ── Module registration ──
+
+{{~ if has_type_data ~}}
+{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 s_type_flags[{{ type_count }}] = {
+{{~ for flag in type_flags ~}}
+{{ indentation }}{{ tab }}{{ flag }}u,
+{{~ end ~}}
+{{ indentation }}};
+
+{{ indentation }}static constexpr const char* s_type_names[{{ type_count }}] = {
+{{~ for name in type_names ~}}
+{{ indentation }}{{ tab }}"{{ name }}",
+{{~ end ~}}
+{{ indentation }}};
+
+{{ indentation }}static constexpr const char* s_type_namespaces[{{ type_count }}] = {
+{{~ for ns in type_namespaces ~}}
+{{ indentation }}{{ tab }}"{{ ns }}",
+{{~ end ~}}
+{{ indentation }}};
+
+{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 s_type_parent_tokens[{{ type_count }}] = {
+{{~ for token in type_parent_tokens ~}}
+{{ indentation }}{{ tab }}{{ token }}u,
+{{~ end ~}}
+{{ indentation }}};
+
+{{ indentation }}static const TypeInfoHot* const s_type_info_ptrs[{{ type_count }}] = {
+{{~ for ptr in type_info_ptrs ~}}
+{{ indentation }}{{ tab }}{{ ptr }},
+{{~ end ~}}
+{{ indentation }}};
+
+{{~ if has_nested_types ~}}
+{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_children[{{ nested_children_count }}] = {
+{{~ for child in nested_type_children ~}}
+{{ indentation }}{{ tab }}{{ child }}u,
+{{~ end ~}}
+{{ indentation }}};
+
+{{~ end ~}}
+{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 s_nested_type_offset[{{ nested_offsets_count }}] = {
+{{~ for offset in nested_type_offsets ~}}
+{{ indentation }}{{ tab }}{{ offset }}u,
+{{~ end ~}}
+{{ indentation }}};
+
+{{~ if has_constraints ~}}
+{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_data[{{ constraint_data_count }}] = {
+{{~ for val in generic_param_constraint_data ~}}
+{{ indentation }}{{ tab }}{{ val }}u,
+{{~ end ~}}
+{{ indentation }}};
+
+{{~ end ~}}
+{{ indentation }}static constexpr CHAOS_IL2CPP_UINT32 s_generic_param_constraint_offset[{{ constraint_offsets_count }}] = {
+{{~ for offset in generic_param_constraint_offsets ~}}
+{{ indentation }}{{ tab }}{{ offset }}u,
+{{~ end ~}}
+{{ indentation }}};
+{{~ end ~}}
+
+{{ custom_attribute_blob_code }}
+
+{{ indentation }}static const ::chaos::il2cpp::runtime_core::ModuleDescriptor s_native_aot_module = {
+{{ indentation }}{{ tab }}/* .name_utf8         = */ "{{ assembly_name }}",
+{{ indentation }}{{ tab }}/* .image             = */ &kReflImage,
+{{~ if has_type_data ~}}
+{{ indentation }}{{ tab }}/* .type_flags        = */ s_type_flags,
+{{ indentation }}{{ tab }}/* .type_names        = */ s_type_names,
+{{ indentation }}{{ tab }}/* .type_namespaces   = */ s_type_namespaces,
+{{ indentation }}{{ tab }}/* .type_parent_tokens= */ s_type_parent_tokens,
+{{ indentation }}{{ tab }}/* .type_info_ptrs    = */ s_type_info_ptrs,
+{{ indentation }}{{ tab }}/* .nested_type_children= */ {{ if has_nested_types }}s_nested_type_children{{ else }}nullptr{{ end }},
+{{ indentation }}{{ tab }}/* .nested_type_offset = */ s_nested_type_offset,
+{{ indentation }}{{ tab }}/* .generic_param_constraint_data= */ {{ if has_constraints }}s_generic_param_constraint_data{{ else }}nullptr{{ end }},
+{{ indentation }}{{ tab }}/* .generic_param_constraint_offset= */ s_generic_param_constraint_offset,
+{{ indentation }}{{ tab }}/* .type_count        = */ {{ type_count }}u,
+{{~ else ~}}
+{{ indentation }}{{ tab }}/* .type_flags        = */ nullptr,  // Tier 1 — deferred
+{{ indentation }}{{ tab }}/* .type_names        = */ nullptr,
+{{ indentation }}{{ tab }}/* .type_namespaces   = */ nullptr,
+{{ indentation }}{{ tab }}/* .type_parent_tokens= */ nullptr,
+{{ indentation }}{{ tab }}/* .type_info_ptrs    = */ nullptr,
+{{ indentation }}{{ tab }}/* .nested_type_children= */ nullptr,
+{{ indentation }}{{ tab }}/* .nested_type_offset = */ nullptr,
+{{ indentation }}{{ tab }}/* .generic_param_constraint_data= */ nullptr,
+{{ indentation }}{{ tab }}/* .generic_param_constraint_offset= */ nullptr,
+{{ indentation }}{{ tab }}/* .type_count        = */ 0u,
+{{~ end ~}}
+{{ module_descriptor_custom_attr_fields }}
+{{ indentation }}{{ tab }}/* .abi_manifest      = */ s_abi_manifest,
+{{ indentation }}};
+{{ indentation }}static const CHAOS_IL2CPP_UINT32 s_native_aot_module_id =
+{{ indentation }}{{ tab }}::chaos::il2cpp::runtime_core::RegisterModule("{{ assembly_name }}", &s_native_aot_module);

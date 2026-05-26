@@ -13,7 +13,7 @@
 
 public static partial class BufferMemoryNativeEntry
 {
-    public static int _exitCode;
+    // _exitCode is provided by the auto-generated partial class.
 
     // [0] System.Private.CoreLib/System.Buffer::BlockCopy
     // Manual byte-by-byte copy via array indexers

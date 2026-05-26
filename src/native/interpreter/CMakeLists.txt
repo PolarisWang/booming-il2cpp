@@ -1,5 +1,7 @@
 get_filename_component(REPO_ROOT "${CMAKE_CURRENT_LIST_DIR}/../../.." ABSOLUTE)
 
+include("${REPO_ROOT}/cmake/config-tier.cmake")
+
 add_library(chaos_interpreter STATIC
     interpreter_vm.cpp
     interpreter_vm.h
@@ -22,12 +24,14 @@ add_library(chaos_interpreter STATIC
     )
 
 target_compile_features(chaos_interpreter PUBLIC cxx_std_17)
-target_compile_options(chaos_interpreter PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /D_SILENCE_ALL_CXX17_C99_MATH_MACROS /Zm200>)
+target_compile_options(chaos_interpreter PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /D_SILENCE_ALL_CXX17_C99_MATH_MACROS /D_CRT_SECURE_NO_WARNINGS /Zm200>)
 target_include_directories(
     chaos_interpreter
     PUBLIC
         "${REPO_ROOT}/contracts/native/v0"
+        "${REPO_ROOT}/src/native/common"
         "${REPO_ROOT}/src/native/runtime-core"
+        "${REPO_ROOT}/src/native/runtime-core/gc"
         "${CMAKE_CURRENT_LIST_DIR}"
         "${CMAKE_CURRENT_LIST_DIR}/generated")
 target_include_directories(
@@ -36,7 +40,9 @@ target_include_directories(
         "${REPO_ROOT}/src/native"
         "${REPO_ROOT}/src/native/jit"
         "${REPO_ROOT}/src/native/hot-update"
-        "${REPO_ROOT}/third_party/fmt/include")
+        "${REPO_ROOT}/src/native/diagnostics"
+        "${REPO_ROOT}/third_party/fmt/include"
+        "${REPO_ROOT}/third_party/unordered_dense/include")
 target_link_libraries(
     chaos_interpreter
     PUBLIC

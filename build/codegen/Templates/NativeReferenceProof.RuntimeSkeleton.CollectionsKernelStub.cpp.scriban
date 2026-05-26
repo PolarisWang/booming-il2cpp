@@ -1,0 +1,46 @@
+struct {{ stub_name }}_KernelArgs
+{
+{{~ if arg_field_declarations.size > 0 ~}}
+    {{ arg_field_declarations }}
+{{~ end ~}}
+{{~ if return_field_declarations.size > 0 ~}}
+    {{ return_field_declarations }}
+{{~ end ~}}
+    {{ return_field_declaration }}
+};
+
+// contract_id: {{ contract_id }}
+// contract_version: {{ contract_version_hex }}
+// kContractVersion: {{ kContractVersion }}
+{{ version_assertion }}
+// helper_namespace: chaos::il2cpp::runtime_core::
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)bridge;
+    (void)code_registration;
+    (void)options;
+    (void)runtime;
+    (void)thread;
+    if (managed_args == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    auto* request = static_cast<{{ stub_name }}_KernelArgs*>(managed_args);
+{{~ if arg_validation_statements.size > 0 ~}}
+    {{ arg_validation_statements }}
+{{~ end ~}}
+    if (request->return_value == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+
+    const auto result = {{ helper_call_expression }};
+    *request->return_value = result;
+    return CHAOS_BRIDGE_STATUS_OK;
+}

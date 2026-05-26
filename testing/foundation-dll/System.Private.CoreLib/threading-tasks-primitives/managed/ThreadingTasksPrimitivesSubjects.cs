@@ -80,8 +80,10 @@ public static partial class ThreadingTasksPrimitivesSubjects
     }
 
     // [13] System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()
-    public static void CustomEntrySubject_13()
+    public static void Subject_13()
     {
+        try { if (((Thread.CurrentThread).GetHashCode()) != ((Thread.CurrentThread).GetHashCode())) _exitCode = 1; }
+        catch { _exitCode = 1; }
     }
 
     // [14] System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()

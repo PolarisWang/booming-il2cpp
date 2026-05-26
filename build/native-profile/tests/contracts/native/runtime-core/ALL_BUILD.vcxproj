@@ -197,6 +197,18 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{AAD24478-68F6-3D44-9EDD-D3CCD7929EF4}</Project>
       <Name>chaos_exception_sentinel_test</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_execution_context_smoke.vcxproj">
+      <Project>{0452FFAB-5DAB-3127-9061-DD9F69E9DA13}</Project>
+      <Name>chaos_execution_context_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_atomic_alloc_test.vcxproj">
+      <Project>{942E8FE4-2296-3B31-9D67-31F1B3DC84F7}</Project>
+      <Name>chaos_gc_atomic_alloc_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_bgc_race_test.vcxproj">
+      <Project>{7A795EAC-828D-3E0F-A309-8871FF7F4EE8}</Project>
+      <Name>chaos_gc_bgc_race_test</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_bgc_root_scan_test.vcxproj">
       <Project>{A31CDD05-44A6-3217-8106-98B6671C7635}</Project>
       <Name>chaos_gc_bgc_root_scan_test</Name>
@@ -225,6 +237,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{168C83E5-FF09-3B6C-B605-2F31B364C382}</Project>
       <Name>chaos_gc_events_test</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_finalizer_integration_test.vcxproj">
+      <Project>{A434EA2E-39BE-313E-B77C-0ACE050D1E45}</Project>
+      <Name>chaos_gc_finalizer_integration_test</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_finalizer_stress_test.vcxproj">
       <Project>{093DDA1B-67CE-3095-A92A-630F7082BDD8}</Project>
       <Name>chaos_gc_finalizer_stress_test</Name>
@@ -232,6 +248,14 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_finalizer_test.vcxproj">
       <Project>{30E92B4A-ECDC-3231-84CD-92F123010315}</Project>
       <Name>chaos_gc_finalizer_test</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_gen1_benchmark.vcxproj">
+      <Project>{1F4E00D7-CF60-3192-938A-D70490263068}</Project>
+      <Name>chaos_gc_gen1_benchmark</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_gen1_test.vcxproj">
+      <Project>{1B80C6C3-1B9C-3482-A0D7-F14AEE6204D6}</Project>
+      <Name>chaos_gc_gen1_test</Name>
     </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_handle_test.vcxproj">
       <Project>{210277E4-ECDE-3F7D-9736-86E92E339DE6}</Project>
@@ -285,6 +309,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{192E5E5B-93F6-3470-911E-773FD60412C0}</Project>
       <Name>chaos_gc_sanity_test</Name>
     </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_satb_stress_test.vcxproj">
+      <Project>{D9C13080-D53A-3991-91F8-184BAA0DC039}</Project>
+      <Name>chaos_gc_satb_stress_test</Name>
+    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_gc_scheduler_test.vcxproj">
       <Project>{C3B9B27E-0567-3375-A1ED-8BE045685A76}</Project>
       <Name>chaos_gc_scheduler_test</Name>
@@ -332,6 +360,10 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_threading_smoke.vcxproj">
       <Project>{FD018E88-6A13-328C-8216-86E4D5B834AF}</Project>
       <Name>chaos_threading_smoke</Name>
+    </ProjectReference>
+    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_unwind_info_test.vcxproj">
+      <Project>{75BCDDE0-F035-34B1-97D9-144CFB1BB2BC}</Project>
+      <Name>chaos_unwind_info_test</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

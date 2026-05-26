@@ -69,6 +69,9 @@ int main(int argc, char** argv) {
     // reflects actual execution cost, not one-time init.
     CHAOS_NATIVE_AOT_ENTRY(entry_index);
 
+    // Reset profile accumulators so warmup allocations/initializations are excluded.
+    CHAOS_IL2CPP_PROFILE_RESET();
+
     const auto started = CHAOS_IL2CPP_CHRONO_STEADY_CLOCK::now();
     long long checksum = 0;
     {

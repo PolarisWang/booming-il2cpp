@@ -1,0 +1,277 @@
+#include "{{ include_header }}"
+
+#if !defined(_WIN32)
+#error "reflectionInteropClosure proof requires a Windows host"
+#endif
+
+#include <windows.h>
+
+namespace chaos::il2cpp::generated {
+
+namespace {
+
+using chaos::il2cpp::runtime_core::EncodeReflectionQueryImageHandle;
+using ImportedGetTickCount64Fn = ULONGLONG (WINAPI*)(void);
+using WriteLineStringFn = CHAOS_IL2CPP_INT32 (CHAOS_RUNTIME_ABI_CALL*)(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    const void* string_object);
+
+constexpr CHAOS_IL2CPP_UINT32 kClosedTypeToken = {{ closed_type_token }};
+constexpr CHAOS_IL2CPP_UINT32 kGenericTypeDefinitionToken = {{ generic_type_definition_token }};
+constexpr CHAOS_IL2CPP_UINT32 kFieldToken = {{ captured_field_token }};
+constexpr CHAOS_IL2CPP_UINT32 kMethodToken = {{ instance_method_token }};
+constexpr const char* kConsoleWriteLineStringIcall = "{{ console_write_line_string_icall }}";
+constexpr const char* kFieldQueryName = {{ field_query_name_literal }};
+constexpr const char* kMethodQueryName = {{ method_query_name_literal }};
+constexpr CHAOS_IL2CPP_INT32 kMethodParameterCount = {{ method_parameter_count }};
+constexpr CHAOS_IL2CPP_UINT32 kParameterIndex = {{ parameter_index }}u;
+constexpr const char* kExpectedOutput = {{ expected_output_literal }};
+constexpr const char* kImportModuleName = {{ import_module_name_literal }};
+constexpr const char* kImportEntryPointName = {{ import_entry_point_name_literal }};
+
+const chaos::il2cpp::runtime_core::ReflectionQueryParameterDescriptor kMethodParameters[] = {
+    {
+        {{ parameter_subject_id_literal }},
+        "input",
+        kParameterIndex,
+        "",
+        0,
+        0u,
+        {{ parameter_attributes }}u,
+    },
+};
+
+const chaos::il2cpp::runtime_core::ReflectionQueryFieldDescriptor kClosedTypeFields[] = {
+    {
+        kFieldToken,
+        {{ field_subject_id_literal }},
+        {{ field_query_name_literal }},
+        "",
+    },
+};
+
+const chaos::il2cpp::runtime_core::ReflectionQueryMethodDescriptor kClosedTypeMethods[] = {
+    {
+        kMethodToken,
+        {{ method_subject_id_literal }},
+        {{ method_query_name_literal }},
+        "",
+        kMethodParameterCount,
+        kMethodParameters,
+        static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kMethodParameters) / sizeof(kMethodParameters[0])),
+    },
+};
+
+const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kGenericTypeDefinition = {
+    kGenericTypeDefinitionToken,
+    {{ generic_type_definition_subject_id_literal }},
+    {{ generic_type_definition_subject_id_literal }},
+    {{ closed_type_namespace_name_literal }},
+    {{ generic_type_definition_name_literal }},
+    {{ generic_type_definition_name_literal }},
+    nullptr,
+    nullptr,
+    0u,
+    nullptr,
+    0u,
+    nullptr,
+    0u,
+};
+
+const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor kClosedType = {
+    kClosedTypeToken,
+    {{ closed_type_subject_id_literal }},
+    {{ generic_type_definition_subject_id_literal }},
+    {{ closed_type_namespace_name_literal }},
+    {{ closed_type_name_literal }},
+    {{ closed_type_display_name_literal }},
+    &kGenericTypeDefinition,
+    kClosedTypeFields,
+    static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kClosedTypeFields) / sizeof(kClosedTypeFields[0])),
+    nullptr,
+    0u,
+    kClosedTypeMethods,
+    static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kClosedTypeMethods) / sizeof(kClosedTypeMethods[0])),
+};
+
+const chaos::il2cpp::runtime_core::ReflectionQueryTypeDescriptor* const kProofTypes[] = {
+    &kGenericTypeDefinition,
+    &kClosedType,
+};
+
+const chaos::il2cpp::runtime_core::ReflectionQueryImageDescriptor kProofImage = {
+    "{{ assembly_name }}",
+    kProofTypes,
+    static_cast<CHAOS_IL2CPP_UINT32>(sizeof(kProofTypes) / sizeof(kProofTypes[0])),
+    1, 0, 0, 0,
+};
+
+struct NativeReferenceContext {
+    const RuntimeAbiV0* abi;
+    const CodegenBridgeV0* bridge;
+    ImageHandle image;
+    TypeInfoHandle closed_type;
+    TypeInfoHandle generic_type_definition;
+    FieldInfoHandle field;
+    MethodInfoHandle method;
+    ImportedGetTickCount64Fn import_method;
+    WriteLineStringFn write_line_string;
+};
+
+NativeReferenceContext g_native_reference_context = {};
+
+ImageHandle GetNativeReferenceImage(const CodegenRegistrationOptionsV0* options) {
+    (void)options;
+    return EncodeReflectionQueryImageHandle(&kProofImage);
+}
+
+void ResetNativeReferenceContext() {
+    g_native_reference_context = {};
+}
+
+bool InitializeNativeReferenceContext(
+    const CodegenBridgeV0* bridge,
+    const CodegenRegistrationOptionsV0* options) {
+    if (bridge == nullptr) {
+        return false;
+    }
+
+    const RuntimeAbiV0* abi = chaos_runtime_get_abi_v0();
+    if (abi == nullptr) {
+        return false;
+    }
+
+    const HMODULE module_handle = ::GetModuleHandleA(kImportModuleName);
+    if (module_handle == nullptr) {
+        return false;
+    }
+
+    const FARPROC raw_import = ::GetProcAddress(module_handle, kImportEntryPointName);
+    if (raw_import == nullptr) {
+        return false;
+    }
+
+    g_native_reference_context.abi = abi;
+    g_native_reference_context.bridge = bridge;
+    g_native_reference_context.image = GetNativeReferenceImage(options);
+    g_native_reference_context.closed_type = bridge->resolve_type_by_token(g_native_reference_context.image, kClosedTypeToken);
+    g_native_reference_context.generic_type_definition =
+        bridge->resolve_type_by_token(g_native_reference_context.image, kGenericTypeDefinitionToken);
+    g_native_reference_context.field = bridge->resolve_field_by_token(g_native_reference_context.image, kFieldToken);
+    g_native_reference_context.method = bridge->resolve_method_by_token(g_native_reference_context.image, kMethodToken);
+    g_native_reference_context.import_method = reinterpret_cast<ImportedGetTickCount64Fn>(raw_import);
+    g_native_reference_context.write_line_string =
+        reinterpret_cast<WriteLineStringFn>(bridge->resolve_icall(kConsoleWriteLineStringIcall));
+
+    return g_native_reference_context.closed_type != nullptr
+        && g_native_reference_context.generic_type_definition != nullptr
+        && g_native_reference_context.field != nullptr
+        && g_native_reference_context.method != nullptr
+        && g_native_reference_context.import_method != nullptr
+        && g_native_reference_context.write_line_string != nullptr;
+}
+
+bool EnsureNativeReferenceContextReady(
+    RuntimeState* runtime,
+    ThreadState* thread) {
+    return runtime != nullptr
+        && thread != nullptr
+        && g_native_reference_context.abi != nullptr
+        && g_native_reference_context.bridge != nullptr
+        && g_native_reference_context.image != nullptr
+        && g_native_reference_context.closed_type != nullptr
+        && g_native_reference_context.generic_type_definition != nullptr
+        && g_native_reference_context.field != nullptr
+        && g_native_reference_context.method != nullptr
+        && g_native_reference_context.import_method != nullptr
+        && g_native_reference_context.write_line_string != nullptr;
+}
+
+}  // namespace
+
+extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ entry_symbol }}(
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    (void)managed_args;
+
+    if (!EnsureNativeReferenceContextReady(runtime, thread)) {
+        return 1;
+    }
+
+    FieldInfoHandle field = g_native_reference_context.abi->type_find_field(
+        g_native_reference_context.closed_type,
+        kFieldQueryName);
+    if (field == nullptr || field != g_native_reference_context.field) {
+        return 1;
+    }
+
+    MethodInfoHandle method = g_native_reference_context.abi->type_find_method(
+        g_native_reference_context.closed_type,
+        kMethodQueryName,
+        kMethodParameterCount);
+    if (method == nullptr || method != g_native_reference_context.method) {
+        return 1;
+    }
+
+    ParameterInfoHandle parameter = g_native_reference_context.abi->method_get_parameter(method, kParameterIndex);
+    if (parameter == nullptr) {
+        return 1;
+    }
+
+    TypeInfoHandle generic_type_definition =
+        g_native_reference_context.abi->type_get_generic_type_definition(g_native_reference_context.closed_type);
+    if (generic_type_definition == nullptr || generic_type_definition != g_native_reference_context.generic_type_definition) {
+        return 1;
+    }
+
+    (void)g_native_reference_context.import_method();
+
+    void* native_reference_output = g_native_reference_context.abi->string_new_utf8(
+        runtime,
+        thread,
+        kExpectedOutput,
+        {{ expected_output_byte_count }}u);
+    if (native_reference_output == nullptr) {
+        return 1;
+    }
+
+    return g_native_reference_context.write_line_string(runtime, thread, native_reference_output);
+}
+
+CHAOS_IL2CPP_INT32 {{ native_reference_function_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args) {
+    ResetNativeReferenceContext();
+
+    if (bridge == nullptr
+        || code_registration == nullptr
+        || metadata_registration == nullptr
+        || options == nullptr
+        || runtime == nullptr
+        || thread == nullptr) {
+        return 1;
+    }
+
+    if (bridge->register_codegen(code_registration, metadata_registration, options) != CHAOS_BRIDGE_STATUS_OK) {
+        return 1;
+    }
+
+    if (bridge->bootstrap_runtime() != CHAOS_BRIDGE_STATUS_OK) {
+        return 1;
+    }
+
+    if (!InitializeNativeReferenceContext(bridge, options)) {
+        return 1;
+    }
+
+    return {{ entry_symbol }}(runtime, thread, managed_args);
+}
+
+}  // namespace chaos::il2cpp::generated

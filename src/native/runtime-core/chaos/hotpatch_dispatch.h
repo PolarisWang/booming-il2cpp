@@ -48,6 +48,12 @@ namespace runtime_core {
 //   index:   method slot to dispatch
 //   thunks:  kDefaultArgThunks[] (may be nullptr in non-benchmark contexts)
 //
+// Dispatch priority:
+//   1. Hotpatch active (not keep-native) → InterpreterEntryDirect
+//   2. thunks provided → thunks[index]()
+//   3. direct_ptr available → direct_ptr()  (AOT-compiled function body)
+//   4. otherwise → no-op (graceful fallback)
+//
 // Returns 0 on success, -1 on invalid index.
 inline int32_t ChaosDispatchMethod(
     const HotpatchEntryV0* entries,
@@ -80,8 +86,11 @@ inline int32_t ChaosDispatchMethod(
         InterpreterEntryDirect(
             entry.method_key, __chaos_args, __chaos_ret);
     } else if (thunks) {
-        // Native execution via default-arg thunks
+        // Native execution via default-arg thunks (verification pipeline path)
         thunks[index]();
+    } else if (entry.direct_ptr) {
+        // Direct AOT function body (no thunks / JIT codegen compatibility)
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
     }
 #endif
     return 0;
@@ -156,6 +165,8 @@ inline int32_t ChaosDispatchMethodBench(
         InterpreterEntryDirectFast(entry.method_key);
     } else if (thunks) {
         thunks[index]();
+    } else if (entry.direct_ptr) {
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
     }
 #endif
     return 0;

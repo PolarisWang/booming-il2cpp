@@ -2194,7 +2194,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		// A2.5: AOT-baked enum calls — pre-evaluated at codegen time.
 		if (_enumAotBakeMap.Count > 0 &&
 			(instruction.OpCode is InstructionOpCode.Call) &&
-			_enumAotBakeMap.TryGetValue(instruction.IlOffset, out var bakeEntry))
+			_enumAotBakeMap.TryGetValue((_currentMethodNativeSymbol ?? "", instruction.IlOffset), out var bakeEntry))
 		{
 			EmitEnumAotBakedCall(builder, instruction, bakeEntry, indentation);
 			return;
@@ -3121,6 +3121,17 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 	private void EmitFusedEnumBoxToString(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
+			// A2.4: Constant-folded BoxToString — field name known at codegen time.
+			if (_enumToStringFoldMap.TryGetValue(instruction.IlOffset, out var foldedFieldName))
+			{
+				ConsumeEvalStackValueExpression();
+				_pendingEnumBoxSubjectId = null;
+				builder.AppendLine($"{indentation}{{");
+				EmitEvalStackPush(builder, indentation + "    ", $"CHAOS_IL2CPP_STRING_ID({ToCppStringLiteral(foldedFieldName)})");
+				builder.AppendLine($"{indentation}}}");
+				return;
+			}
+
 		string rawValueExpr = ConsumeEvalStackValueExpression();
 		string typeHandle = $"static_cast<CHAOS_IL2CPP_INTPTR>({GetTypeHandleLiteral(_pendingEnumBoxSubjectId!)})";
 

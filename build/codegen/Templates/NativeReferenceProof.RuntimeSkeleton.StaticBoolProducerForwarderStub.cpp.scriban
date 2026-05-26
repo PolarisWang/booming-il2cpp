@@ -1,0 +1,59 @@
+struct {{ stub_name }}_ProducerArgs
+{
+    bool* return_value;
+};
+
+struct {{ stub_name }}_ForwarderArgs
+{
+    bool value;
+    bool* return_value;
+};
+
+CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL {{ stub_name }}(
+    const CodegenBridgeV0* bridge,
+    const CodeRegistrationV0* code_registration,
+    const MetadataRegistrationV0* metadata_registration,
+    const CodegenRegistrationOptionsV0* options,
+    RuntimeState* runtime,
+    ThreadState* thread,
+    void* managed_args)
+{
+    (void)managed_args;
+    if (bridge == nullptr || code_registration == nullptr || options == nullptr || runtime == nullptr || thread == nullptr) {
+        return CHAOS_BRIDGE_STATUS_INVALID_ARGUMENT;
+    }
+    bool produced_value = false;
+    {{ stub_name }}_ProducerArgs producer_args
+    {
+        &produced_value
+    };
+    const CHAOS_IL2CPP_INT32 producer_status = {{ producer_stub_name }}(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        &producer_args);
+    if (producer_status != CHAOS_BRIDGE_STATUS_OK) {
+        return producer_status;
+    }
+    bool forwarded_value = false;
+    {{ stub_name }}_ForwarderArgs forwarder_args
+    {
+        produced_value,
+        &forwarded_value
+    };
+    const CHAOS_IL2CPP_INT32 forwarder_status = {{ forwarder_stub_name }}(
+        bridge,
+        code_registration,
+        metadata_registration,
+        options,
+        runtime,
+        thread,
+        &forwarder_args);
+    if (forwarder_status != CHAOS_BRIDGE_STATUS_OK) {
+        return forwarder_status;
+    }
+    return CHAOS_BRIDGE_STATUS_OK;
+}

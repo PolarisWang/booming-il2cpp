@@ -6,89 +6,69 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.GC::Collect:System.Void()",
-      "status": "passed",
-      "prePatchNsPerOp": 42078.63999999999,
-      "postPatchNsPerOp": 42704.8,
-      "slowdownPercent": 1.49
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()",
-      "status": "passed",
-      "prePatchNsPerOp": 2819.22,
-      "postPatchNsPerOp": 4233.9,
-      "slowdownPercent": 50.18
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)",
-      "status": "passed",
-      "prePatchNsPerOp": 2.95,
-      "postPatchNsPerOp": 2.6,
-      "slowdownPercent": -11.86
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)",
-      "status": "passed",
-      "prePatchNsPerOp": 2.89,
-      "postPatchNsPerOp": 2.8,
-      "slowdownPercent": -3.11
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)",
-      "status": "passed",
-      "prePatchNsPerOp": 89.41,
-      "postPatchNsPerOp": 89.2,
-      "slowdownPercent": -0.23
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)",
-      "status": "passed",
-      "prePatchNsPerOp": 34185.64,
-      "postPatchNsPerOp": 36567.9,
-      "slowdownPercent": 6.97
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()",
-      "status": "passed",
-      "prePatchNsPerOp": 2.67,
-      "postPatchNsPerOp": 2.7,
-      "slowdownPercent": 1.12
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.GC::Collect(System.Int32,System.GCCollectionMode):System.Void()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 1.6,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 1.0,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 1.0,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=0|total_allocated=0\n"
     }
   ],
   "summary": {
     "totalMethods": 10,
-    "nonStubMethods": 7,
-    "averageSlowdownPercent": 6.37,
-    "slowdownFactor": 1.0637,
+    "nonStubMethods": 0,
+    "averageSlowdownPercent": 0.0,
+    "slowdownFactor": 1.0,
     "slowdownThresholdX": 50.0
   }
 }

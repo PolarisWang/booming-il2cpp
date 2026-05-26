@@ -1,7 +1,7 @@
 {
   "family": "garbage-collection",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-25T20:19:20.372912",
+  "generated_at": "2026-05-26T20:14:10.435881",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -20,96 +20,177 @@
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "ALIGNED",
-      "summary": "All methods have lowering [OK]",
+      "status": "VIOLATION",
+      "summary": "0/40 methods with lowering",
       "details": [],
       "evidence": {
-        "has_lowering": true,
+        "has_lowering": false,
+        "file_has_lowering": false,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 20,
-        "methods_total": 20
+        "methods_with_lowering": 0,
+        "methods_total": 40
       },
       "per_method": [
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": true
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
+          "has_lowering": false
+        },
+        {
+          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
+          "has_lowering": false
         }
       ]
     },
@@ -145,26 +226,10 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "12 of 28 changed source files are outside expected architecture layers",
+      "summary": "4 of 4 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "CLAUDE.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
@@ -172,57 +237,20 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/jit_precode.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
+          "file": "src/native/benchmark-host/native_aot_main.cpp",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 28,
-        "layer_distribution": {
-          "TestInfra": 6,
-          "ManagedContracts": 2,
-          "Driver": 2,
-          "RuntimeCore": 6
-        },
+        "changed_source_count": 4,
+        "layer_distribution": {},
         "violations": [
           {
-            "file": "CLAUDE.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
@@ -230,27 +258,11 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/jit_precode.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
+            "file": "src/native/benchmark-host/native_aot_main.cpp",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -298,13 +310,14 @@
     "p3_patchdata": {
       "check_id": "p3_patchdata",
       "status": "ALIGNED",
-      "summary": "1/1 valid .patchdata files",
+      "summary": "2/2 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 1,
-        "valid_count": 1,
+        "patchdata_count": 2,
+        "valid_count": 2,
         "stub_patchdata_count": 0,
         "files": [
+          "System.Private.CoreLib\\garbage-collection\\native\\subjects.patchdata",
           "System.Private.CoreLib\\garbage-collection\\managed\\patch\\patchdata\\garbage-collection.patchdata"
         ]
       }
@@ -312,10 +325,10 @@
   },
   "summary": {
     "total": 12,
-    "aligned": 8,
+    "aligned": 7,
     "concern": 1,
-    "violation": 0,
+    "violation": 1,
     "not_applicable": 3,
-    "overall": "ALIGNED"
+    "overall": "VIOLATION"
   }
 }

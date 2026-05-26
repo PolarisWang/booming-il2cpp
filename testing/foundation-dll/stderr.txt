@@ -1,0 +1,10 @@
+[2026-05-26T20:48:26][WARN][CRAG] young_collection_no_region
+[2026-05-26T20:48:26][INFO][NUMA] numa_init count=%d
+[2026-05-26T20:48:26][INFO][OldGen] init initial_pages=8 numa_nodes=1
+[2026-05-26T20:48:26][INFO][OldGen] emergency_reserve_allocated base=0x2000089317376 size=65536
+[2026-05-26T20:48:26][INFO][OldGen] init done base=0x2000064020480 pages=8
+[2026-05-26T20:48:26][INFO][GcLowMem] low-memory monitor started
+
+=== PROFILE DUMP ===
+PROFILE|CALIBRATION|ns_per_cycle=0.227290
+=== PROFILE END ===

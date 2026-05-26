@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 public static partial class ThreadingTasksPrimitivesNativeEntry
 {
-    public static int _exitCode;
+    // _exitCode is provided by the auto-generated partial class.
 
     private static int s_sharedState;
 
