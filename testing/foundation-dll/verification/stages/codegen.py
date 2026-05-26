@@ -201,11 +201,15 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
     jit_exe = ctx.entry_jit_exe_path
 
     if jit_exe.exists():
-        return StageResult(
-            stage="jit_codegen", status="passed",
-            summary="entry-jit.exe already exists, skipping rebuild",
-            duration_ms=int((time.perf_counter() - start) * 1000),
-        )
+        # Check if the dispatch generator source has been updated since binary was built
+        dispatch_py = Path(__file__).resolve().parent.parent / "orchestration" / "dispatch_generator.py"
+        if dispatch_py.exists() and jit_exe.stat().st_mtime >= dispatch_py.stat().st_mtime:
+            return StageResult(
+                stage="jit_codegen", status="passed",
+                summary="entry-jit.exe already exists, skipping rebuild",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+        print(f"  [jit_codegen] dispatch_generator.py updated, rebuilding stale entry-jit.exe...")
 
     print(f"  [jit_codegen] Building JIT mode entry-jit.exe...")
 
