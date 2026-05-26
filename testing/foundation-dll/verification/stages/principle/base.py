@@ -138,9 +138,11 @@ def _build_native_entry_re(class_name: str) -> str:
 def _method_has_lowering_in_body(cpp: str, method_full_name: str, class_name: str) -> bool:
     """Check whether a specific method's body contains real native AOT lowering.
 
-    Two lowering modes are accepted:
+    Three lowering modes are accepted:
       1. chaos_eval_stack — array-based eval stack (IRFlatRegion / evalStackSize path)
-      2. _s0{}; — structured slot declaration (StructuredIR path)
+      2. _s0{}; — structured slot declaration with value initialization (StructuredIR path)
+      3. _s0;  — structured slot declaration without value init (StructuredIR path,
+                 used when codegen omits brace initialization for performance)
 
     Uses brace matching to extract each function body. Iterates ALL matches
     (forward declarations + actual implementation) and returns True if ANY
@@ -160,7 +162,7 @@ def _method_has_lowering_in_body(cpp: str, method_full_name: str, class_name: st
                 brace_depth -= 1
             pos += 1
         body = cpp[body_start:pos]
-        if "chaos_eval_stack" in body or "_s0{};" in body:
+        if "chaos_eval_stack" in body or "_s0{};" in body or "_s0;" in body:
             return True
     return False
 
