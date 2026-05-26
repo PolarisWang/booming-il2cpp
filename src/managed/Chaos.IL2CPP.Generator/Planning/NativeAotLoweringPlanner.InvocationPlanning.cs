@@ -1375,13 +1375,20 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private void BuildEnumAotBakeTable(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
     {
+        Console.Error.WriteLine($"[AOT Bake] ENTERED BuildEnumAotBakeTable, methods={methodsForLowering.Count}, fieldEntries={_reflectionMemberSupport?.FieldEntries?.Count ?? -1}");
         _enumAotBakeMap.Clear();
-        if (_reflectionMemberSupport.FieldEntries.Count == 0)
+
+        // Collect field entries — prefer reflection metadata, fall back to PE metadata scan
+        var fieldEntries = _reflectionMemberSupport.FieldEntries.Count > 0
+            ? _reflectionMemberSupport.FieldEntries
+            : CollectEnumFieldEntriesFromMetadata();
+        Console.Error.WriteLine($"[AOT Bake] fieldEntries after fallback: {fieldEntries.Count}");
+        if (fieldEntries.Count == 0)
             return;
 
         // Build enum type → { fieldName → constantValue } map
         var enumFieldsByType = new Dictionary<string, Dictionary<string, long>>(StringComparer.Ordinal);
-        foreach (var field in _reflectionMemberSupport.FieldEntries)
+        foreach (var field in fieldEntries)
         {
             if (!_enumTypeSubjectIds.Contains(field.DeclaringTypeSubjectId))
                 continue;
@@ -1391,6 +1398,7 @@ public sealed partial class NativeAotLoweringPlanner
                 enumFieldsByType[field.DeclaringTypeSubjectId] = fields = new(StringComparer.Ordinal);
             fields[field.FieldName] = field.ConstantValue.Value;
         }
+        Console.Error.WriteLine($"[AOT Bake] enumFieldsByType has {enumFieldsByType.Count} types, FieldEntries={_reflectionMemberSupport.FieldEntries.Count}");
         if (enumFieldsByType.Count == 0)
             return;
 
@@ -1426,7 +1434,7 @@ public sealed partial class NativeAotLoweringPlanner
                     case "ldelema":
                     case "ldarga":
                     case "ldloca":
-                        depth++;
+                        producers[depth++] = i;
                         break;
 
                     case "stloc":
@@ -1458,7 +1466,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                     case "call":
                     case "callvirt":
-                        TryRecordEnumAotBake(instr, producers, depth, enumFieldsByType);
+                        TryRecordEnumAotBake(instr, instrs, producers, depth, enumFieldsByType);
                         // Conservative: pop N args (determined by callee), push 1 result
                         int popCount = EstimateCallPopCount(instr, depth);
                         if (depth >= popCount)
@@ -1544,6 +1552,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private void TryRecordEnumAotBake(
         AotCoreIrInstructionArtifact callInstr,
+        IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
         int[] producers,
         int depth,
         Dictionary<string, Dictionary<string, long>> enumFieldsByType)
@@ -1551,39 +1560,158 @@ public sealed partial class NativeAotLoweringPlanner
         var callee = callInstr.Callee;
         if (callee == null) return;
 
-        // Only handle System.Enum methods
+        // Only handle static System.Enum methods
+        if (callInstr.Op == "callvirt") return;
         if (!callee.StartsWith("System.Private.CoreLib/System.Enum::", StringComparison.Ordinal))
             return;
 
-        // For static enum methods: the type argument is always the first parameter.
-        // For instance methods (ToString): 'this' is the first arg — check if it's
-        // a boxed enum. The existing ToStringFold handles ldsfld→ToString; we handle
-        // the general case via ldtoken→call.
-        //
         // Focus on static methods where the first argument is Type:
         //   Parse(Type, String), Format(Type, Object, String),
         //   GetName(Type, Object), IsDefined(Type, Object),
         //   GetNames(Type), GetValues(Type)
+        bool isGetName = callee.Contains("::GetName:", StringComparison.Ordinal);
+        bool isFormat = callee.Contains("::Format:", StringComparison.Ordinal);
+        bool isParse = callee.Contains("::Parse:", StringComparison.Ordinal);
+        bool isIsDefined = callee.Contains("::IsDefined:", StringComparison.Ordinal);
+        if (!isGetName && !isFormat && !isParse && !isIsDefined) return;
 
         int paramCount = EstimateCallPopCount(callInstr, depth);
-        // The first argument is at depth - paramCount
+        // After the call, the first arg is always at eval stack position (depth - 1).
+        // This works because the call pops paramCount args and pushes 1 result,
+        // so depth_after = depth_before - paramCount + 1.
+        // The first arg is at (depth - paramCount) where depth is the eval stack
+        // depth BEFORE the call. producers is not updated for call results,
+        // so after "ldtoken → call GetTypeFromHandle", producers[typeArgDepth]
+        // still holds the original ldtoken (stale-but-useful).
         int typeArgDepth = depth - paramCount;
         if (typeArgDepth < 0) return;
 
-        int producerIdx = producers[typeArgDepth];
-        if (producerIdx < 0) return;
+        int typeProducerIdx = producers[typeArgDepth];
+        if (typeProducerIdx < 0) return;
 
-        string? producer = callInstr.Op == "callvirt"
-            ? null  // callvirt: 'this' is the instance, not from ldtoken
-            : null; // We'll check via producers
+        var typeProducer = instrs[typeProducerIdx];
 
-        // We need to look up the producer instruction. But we don't have the full
-        // instrs list here. Instead, we stored the producer index in producers[].
-        // The producer at producers[typeArgDepth] tells us which instruction index
-        // produced the type argument. But we can't access instrs from here.
+        if (typeProducer.Op != "ldtoken" || typeProducer.TargetReference?.SubjectId == null)
+            return;
 
-        // Actually, we need to pass the instrs list to this method.
-        // Let me reconsider the approach...
+        string enumTypeId = typeProducer.TargetReference.SubjectId;
+        if (!enumFieldsByType.TryGetValue(enumTypeId, out var fields))
+            return; // Not an enum type
+
+        // Check the value/name/format arguments for compile-time constants
+        int valueArgDepth = typeArgDepth + 1; // arg after Type
+        if (valueArgDepth >= depth) return;
+
+        int valueProducerIdx = producers[valueArgDepth];
+        if (valueProducerIdx < 0) return;
+
+        var valueProducer = instrs[valueProducerIdx];
+
+        // ── Enum.GetName(ldtoken<EnumType>, ldc.i4 value) → string ─────
+        if (isGetName && valueProducer.Op is "ldc.i4" or "ldc.i8")
+        {
+            long constValue = Convert.ToInt64(valueProducer.Operand);
+            string? fieldName = null;
+            foreach (var kv in fields)
+            {
+                if (kv.Value == constValue) { fieldName = kv.Key; break; }
+            }
+            if (fieldName != null)
+            {
+                _enumAotBakeMap[callInstr.IlOffset] = new EnumAotBakeEntry(
+                    enumTypeId, callee, ConstantStr: fieldName, ConstantInt: null, ArgCount: 2);
+            }
+            return;
+        }
+
+        // ── Enum.Parse(ldtoken<EnumType>, ldstr name) → boxed int64 ────
+        bool isParse2 = isParse && paramCount == 2;  // Parse(Type, string)
+        bool isParse3 = isParse && paramCount == 3;  // Parse(Type, string, bool)
+        if ((isParse2 || isParse3) && valueProducer.Op == "ldstr")
+        {
+            string nameStr = valueProducer.Operand?.ToString() ?? "";
+            long? constValue = null;
+            foreach (var kv in fields)
+            {
+                if (string.Equals(kv.Key, nameStr, StringComparison.Ordinal))
+                {
+                    constValue = kv.Value;
+                    break;
+                }
+            }
+            // Case-insensitive fallback for Parse(Type, string, bool ignoreCase)
+            if (constValue == null && isParse3)
+            {
+                foreach (var kv in fields)
+                {
+                    if (string.Equals(kv.Key, nameStr, StringComparison.OrdinalIgnoreCase))
+                    {
+                        constValue = kv.Value;
+                        break;
+                    }
+                }
+            }
+            if (constValue != null)
+            {
+                _enumAotBakeMap[callInstr.IlOffset] = new EnumAotBakeEntry(
+                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount);
+            }
+            return;
+        }
+
+        // ── Enum.Format(ldtoken<EnumType>, ldc.i4 value, ldstr format) → string ──
+        int fmtArgDepth = typeArgDepth + 2; // Enum.Format(Type, Object, String)
+        if (isFormat && fmtArgDepth < depth &&
+            valueProducer.Op is "ldc.i4" or "ldc.i8")
+        {
+            // Check the format string (3rd arg)
+            int formatProducerIdx = producers[fmtArgDepth];
+            if (formatProducerIdx < 0) return;
+            var formatProducer = instrs[formatProducerIdx];
+            if (formatProducer.Op != "ldstr") return;
+
+            long constValue = Convert.ToInt64(valueProducer.Operand);
+            string formatStr = formatProducer.Operand?.ToString() ?? "G";
+            string? result = null;
+
+            if (string.Equals(formatStr, "G", StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(formatStr, "g", StringComparison.Ordinal))
+            {
+                foreach (var kv in fields)
+                {
+                    if (kv.Value == constValue) { result = kv.Key; break; }
+                }
+            }
+            else if (string.Equals(formatStr, "D", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(formatStr, "d", StringComparison.Ordinal))
+            {
+                result = constValue.ToString();
+            }
+            else if (string.Equals(formatStr, "X", StringComparison.OrdinalIgnoreCase) ||
+                     string.Equals(formatStr, "x", StringComparison.Ordinal))
+            {
+                result = constValue.ToString("X");
+            }
+            if (result != null)
+            {
+                _enumAotBakeMap[callInstr.IlOffset] = new EnumAotBakeEntry(
+                    enumTypeId, callee, ConstantStr: result, ConstantInt: null, ArgCount: 3);
+            }
+            return;
+        }
+
+        // ── Enum.IsDefined(ldtoken<EnumType>, ldc.i4 value) → bool ─────
+        if (isIsDefined && valueProducer.Op is "ldc.i4" or "ldc.i8")
+        {
+            long constValue = Convert.ToInt64(valueProducer.Operand);
+            bool defined = false;
+            foreach (var kv in fields)
+            {
+                if (kv.Value == constValue) { defined = true; break; }
+            }
+            _enumAotBakeMap[callInstr.IlOffset] = new EnumAotBakeEntry(
+                enumTypeId, callee, ConstantStr: null, ConstantInt: defined ? 1L : 0L, ArgCount: 2);
+        }
     }
 }
 

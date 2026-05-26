@@ -4,6 +4,7 @@
 
 #include <cstdio>
 
+#include "core/gc_alloc_stubs.h"
 #include "gc_bgc.h"
 #include "gc_coordinator.h"
 #include "gc_etw.h"
@@ -73,6 +74,10 @@ TLAB ClaimEmergencyTlab() noexcept;
 // Per-thread allocation counter (TLS-local, flushed to scheduler in slow path).
 thread_local CHAOS_IL2CPP_SIZE tls_alloc_since_last_gc = 0;
 
+// Per-thread fast-path allocation counters (flushed to g_gc_stats at GC time).
+thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_count = 0;
+thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes = 0;
+
 // Per-thread adaptive TLAB size (initialized to default, adjusted by UpdateTlabSize).
 thread_local CHAOS_IL2CPP_SIZE tls_tlab_size = kDefaultTlabSize;
 
@@ -110,6 +115,8 @@ void* NurseryAllocateSlow(CHAOS_IL2CPP_SIZE size) {
 
     // Flush TLS allocation counter to scheduler before making any GC decision.
     FlushTlsAllocCounter();
+    // Flush fast-path TLS counters to global stats before any GC or stats read.
+    FlushTlsFastStats();
 
     // Phase 0: Check soft memory limit (non-blocking).
     // When estimated heap usage exceeds the soft limit, request a full GC
@@ -1360,5 +1367,15 @@ extern "C" void* chaos_gc_allocate_pinned(CHAOS_IL2CPP_SIZE size) noexcept {
 // chaos_gc_get_total_memory, chaos_gc_add_memory_pressure, and
 // chaos_gc_remove_memory_pressure are now defined in gc_api.cpp
 // (declared in gc_api.h).
+
+// ── TLS force-reference ────────────────────────────────────────────
+// MSVC optimizes out unreferenced namespace-scope thread_local variables
+// from the .obj, even with extern linkage. This function forces emission
+// of tls_alloc_fast_count and tls_alloc_fast_bytes so that other
+// translation units linking against chaos_runtime_core.lib can resolve
+// the extern thread_local declarations in gc_alloc_stubs.h.
+extern "C" CHAOS_IL2CPP_SIZE chaos_gc_tls_force_ref() noexcept {
+    return tls_alloc_fast_count + tls_alloc_fast_bytes;
+}
 
 }  // namespace chaos::il2cpp::runtime_core

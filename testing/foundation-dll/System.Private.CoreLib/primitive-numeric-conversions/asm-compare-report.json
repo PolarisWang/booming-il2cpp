@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/primitive/numeric/conversions",
-  "capturedAt": "2026-05-25T23:34:06",
+  "capturedAt": "2026-05-26T19:36:10",
   "batchMode": true,
   "summary": {
     "totalMethods": 15,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 48,
-      "avg": 44.3,
-      "total": 664
+      "max": 44,
+      "avg": 44.0,
+      "total": 660
     },
     "aotInstructionCount": {
       "min": 18,
@@ -28,9 +28,9 @@
       "external_runtime_call": 38
     },
     "overallIrExpansionRatio": 0.45,
-    "averageExpansionRatio": 0.44,
+    "averageExpansionRatio": 0.45,
     "maxExpansionRatio": 0.59,
-    "minExpansionRatio": 0.38
+    "minExpansionRatio": 0.41
   },
   "methodResults": [
     {
@@ -523,15 +523,15 @@
       "shortName": "Subject_12",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 48,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 18,
-        "ratio": 0.38,
+        "ratio": 0.41,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 48
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

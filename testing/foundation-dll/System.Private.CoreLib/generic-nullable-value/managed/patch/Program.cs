@@ -7,7 +7,7 @@ public class Program
         GenericNullableValuePatchEntry._exitCode = 0; GenericNullableValuePatchEntry.Method0(); failures += GenericNullableValuePatchEntry._exitCode << 0;
         GenericNullableValuePatchEntry._exitCode = 0; GenericNullableValuePatchEntry.Method1(); failures += GenericNullableValuePatchEntry._exitCode << 1;
         GenericNullableValuePatchEntry._exitCode = 0; GenericNullableValuePatchEntry.Method2(); failures += GenericNullableValuePatchEntry._exitCode << 2;
-        GenericNullableValuePatchEntry._exitCode = 0; GenericNullableValuePatchEntry.Method3(); failures += GenericNullableValuePatchEntry._exitCode << 3;
+        GenericNullableValuePatchEntry._exitCode = 0; GenericNullableValuePatchEntry.CustomEntryMethod3(); failures += GenericNullableValuePatchEntry._exitCode << 3;
         GenericNullableValuePatchEntry._exitCode = 0; GenericNullableValuePatchEntry.Method4(); failures += GenericNullableValuePatchEntry._exitCode << 4;
         GenericNullableValuePatchEntry._exitCode = 0; GenericNullableValuePatchEntry.Method5(); failures += GenericNullableValuePatchEntry._exitCode << 5;
         GenericNullableValuePatchEntry._exitCode = 0; GenericNullableValuePatchEntry.Method6(); failures += GenericNullableValuePatchEntry._exitCode << 6;

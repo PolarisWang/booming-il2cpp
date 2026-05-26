@@ -1,6 +1,10 @@
-// GC allocation stubs — GcAllocate and GcAllocateAtomic are exposed from
-// gc_helpers.h but need NurseryAllocate/NurseryAllocateAtomic (gc_region.h)
-// to be defined first, so this file is included later in the TU chain.
+// GC allocation stubs — GcAllocateProfiled/GcAllocateAtomicProfiled are
+// non-inline variants that retain PROFILE_SCOPE + GcRecordAlloc for
+// diagnostic use (CHECK builds) and non-hot-path callers.
+//
+// Hot-path allocation goes through GcAllocateFast/GcAllocateAtomicFast
+// (__forceinline in gc_alloc_stubs.h), which skips PROFILE_SCOPE and
+// uses TLS counters instead of global atomics.
 
 #include <chaos/profile.h>
 
@@ -23,8 +27,15 @@ void CHAOS_RUNTIME_ABI_CALL DefaultDeallocate(void* ptr, void* user_data) {
 
 }  // anonymous namespace
 
-void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
-    CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocate");
+/// Legacy symbol: GcAllocate — delegates to the profiled variant.
+/// Kept for compilation units that include gc_helpers.h but not gc_alloc_stubs.h
+/// (e.g., runtime_stubs files compiled separately from the unity build).
+/// Hot-path callers use GcAllocateFast (__forceinline in gc_alloc_stubs.h).
+void* GcAllocate(CHAOS_IL2CPP_SIZE size) { return GcAllocateProfiled(size); }
+void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) { return GcAllocateAtomicProfiled(size); }
+
+void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateProfiled");
 
     // GC Stress mode: force a full GC before allocation.
     if (GcStressShouldTrigger()) [[unlikely]] {
@@ -38,8 +49,8 @@ void* GcAllocate(CHAOS_IL2CPP_SIZE size) {
     return ptr;
 }
 
-void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size) {
-    CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomic");
+void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size) {
+    CHAOS_IL2CPP_PROFILE_SCOPE("GcAllocateAtomicProfiled");
 
     // GC Stress mode: force a full GC before allocation.
     if (GcStressShouldTrigger()) [[unlikely]] {

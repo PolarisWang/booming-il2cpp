@@ -27,11 +27,6 @@ public static partial class GenericNullableValuePatchEntry
     }
 
     // [3] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)
-    public static int Subject_3()
-    {
-        return unchecked((int)(0xB0000000u + 3));
-    }
-
     // [4] System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)
     public static int Subject_4()
     {
@@ -77,7 +72,7 @@ public static partial class GenericNullableValuePatchEntry
                 case 0: Subject_0(); break;
                 case 1: Subject_1(); break;
                 case 2: Subject_2(); break;
-                case 3: Subject_3(); break;
+                case 3: CustomEntryMethod3(); break;
                 case 4: Subject_4(); break;
                 case 5: Subject_5(); break;
                 case 6: Subject_6(); break;

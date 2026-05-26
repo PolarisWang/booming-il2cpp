@@ -22,13 +22,27 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(
     if (left_str == nullptr) left_str = "";
     if (right_str == nullptr) right_str = "";
 
-    static char s_buf[4096];
-    auto result = fmt::format_to_n(s_buf, sizeof(s_buf) - 1, "{}{}", left_str, right_str);
-    size_t len = result.size;
-    if (len >= sizeof(s_buf)) len = sizeof(s_buf) - 1;
+    size_t left_len = std::strlen(left_str);
+    size_t right_len = std::strlen(right_str);
+    size_t total_len = left_len + right_len;
+
+    // Stack-allocate buffer for the concatenation result.
+    // This is faster than fmt::format_to_n ("{}{}") and avoids the
+    // thread-safety issue of a static buffer.
+    char buf[4096];
+    if (total_len >= sizeof(buf))
+        total_len = sizeof(buf) - 1;
+
+    size_t copy_left = (std::min)(left_len, total_len);
+    std::memcpy(buf, left_str, copy_left);
+    if (copy_left < total_len) {
+        size_t copy_right = (std::min)(right_len, total_len - copy_left);
+        std::memcpy(buf + copy_left, right_str, copy_right);
+    }
+    buf[total_len] = '\0';
 
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-        abi->string_new_utf8(runtime, thread, s_buf, len));
+        abi->string_new_utf8(runtime, thread, buf, total_len));
 }
 
 }  // namespace chaos::il2cpp::runtime_core

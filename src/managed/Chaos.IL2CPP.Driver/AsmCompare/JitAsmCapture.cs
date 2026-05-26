@@ -122,13 +122,14 @@ internal static class JitAsmCapture
     private static Assembly LoadAssemblyWithVersionRedirect(string assemblyPath)
     {
         var fullPath = Path.GetFullPath(assemblyPath);
+        var searchDir = Path.GetDirectoryName(fullPath)!;
 
         // Use a deterministic name so the runtime can deduplicate
         var alc = new AssemblyLoadContext(
             "asm-cmp-" + Path.GetFileNameWithoutExtension(fullPath),
             isCollectible: false);
 
-        alc.Resolving += static (context, assemblyName) =>
+        alc.Resolving += (context, assemblyName) =>
         {
             var name = assemblyName.Name;
             if (name is null) return null;
@@ -147,6 +148,15 @@ internal static class JitAsmCapture
                 {
                     return typeof(object).Assembly;
                 }
+            }
+
+            // Probe the subjects DLL directory for dependency assemblies
+            // (e.g. SnapshotTestFixtures.dll for snapshot-prover family).
+            var depPath = Path.Combine(searchDir, name + ".dll");
+            if (File.Exists(depPath))
+            {
+                try { return context.LoadFromAssemblyPath(depPath); }
+                catch { /* fall through to default binder */ }
             }
 
             // Everything else: let the default binder try

@@ -1259,7 +1259,7 @@ public sealed partial class NativeAotLoweringPlanner
 				builder.AppendLine($"{indentation}    chaos_value_owner->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
 				// Skip write barrier for primitive field types — they never hold GC references
 				string? fieldTypeId = targetRef.FieldTypeSubjectId;
-				if (fieldTypeId == null || !PrimitiveValueTypeSubjectIds.Contains(fieldTypeId))
+				if (fieldTypeId == null || !(PrimitiveValueTypeSubjectIds.Contains(fieldTypeId) || PrimitiveValueTypeSubjectIds.Contains("System.Private.CoreLib/" + fieldTypeId)))
 				{
 					builder.AppendLine($"{indentation}    if (chaos_is_gc_pointer(chaos_value_owner))");
 					builder.AppendLine($"{indentation}    {{");
@@ -1270,9 +1270,17 @@ public sealed partial class NativeAotLoweringPlanner
 			else
 			{
 				builder.AppendLine($"{indentation}    auto* chaos_object = reinterpret_cast<{GetNativeTypeSymbol(declaringTypeSubjectId)}*>({ConsumeEvalStackValueExpression()});");
-				builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)}));");
+				// Skip write barrier for primitive field types — they never hold GC references
+				string? fieldTypeId = targetRef.FieldTypeSubjectId;
+				if (fieldTypeId == null || !(PrimitiveValueTypeSubjectIds.Contains(fieldTypeId) || PrimitiveValueTypeSubjectIds.Contains("System.Private.CoreLib/" + fieldTypeId)))
+				{
+					builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)}));");
+				}
 				builder.AppendLine($"{indentation}    chaos_object->{GetNativeFieldMemberName(targetRef.SubjectId)} = chaos_value;");
-				builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_object);");
+				if (fieldTypeId == null || !(PrimitiveValueTypeSubjectIds.Contains(fieldTypeId) || PrimitiveValueTypeSubjectIds.Contains("System.Private.CoreLib/" + fieldTypeId)))
+				{
+					builder.AppendLine($"{indentation}    chaos_gc_dirty_card(chaos_object);");
+				}
 			}
 
 			builder.AppendLine($"{indentation}}}");
@@ -2183,6 +2191,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 	private void EmitLinearCallTarget(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation, bool enforceInstanceNullCheck)
 	{
+		// A2.5: AOT-baked enum calls — pre-evaluated at codegen time.
+		if (_enumAotBakeMap.Count > 0 &&
+			(instruction.OpCode is InstructionOpCode.Call) &&
+			_enumAotBakeMap.TryGetValue(instruction.IlOffset, out var bakeEntry))
+		{
+			EmitEnumAotBakedCall(builder, instruction, bakeEntry, indentation);
+			return;
+		}
+
 		// A2.4: Constant-folded Enum::ToString — field name known at codegen time.
 		// Check BEFORE ResolveDirectInvocationTarget so we short-circuit the InlineShape.
 		if (_enumToStringFoldMap.Count > 0 &&
@@ -2255,6 +2272,41 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		{
 			EmitLinearResolvedInvocation(builder, invocationTarget.TargetSymbol, invocationTarget.ParameterAbis, invocationTarget.ReturnAbi, invocationTarget.RawArgumentIndices, indentation, enforceInstanceNullCheck);
 		}
+	}
+
+	/// <summary>
+	/// Emit a pre-evaluated AOT-baked enum call result as a compile-time constant.
+	/// Called from <see cref="EmitLinearCallTarget"/> when <see cref="_enumAotBakeMap"/> matches.
+	/// </summary>
+	private void EmitEnumAotBakedCall(StringBuilder builder, AotCoreIrInstructionArtifact instruction, EnumAotBakeEntry bakeEntry, string indentation)
+	{
+		for (int i = 0; i < bakeEntry.ArgCount; i++)
+			ConsumeEvalStackValueExpression();
+
+		builder.AppendLine($"{indentation}{{");
+
+		if (bakeEntry.ConstantStr != null)
+		{
+			EmitEvalStackPush(builder, indentation + "    ", $"CHAOS_IL2CPP_STRING_ID({ToCppStringLiteral(bakeEntry.ConstantStr)})");
+		}
+		else if (bakeEntry.ConstantInt != null)
+		{
+			bool isIsDefined = bakeEntry.Callee.Contains("::IsDefined:", StringComparison.Ordinal);
+			if (isIsDefined)
+			{
+				EmitEvalStackPush(builder, indentation + "    ", bakeEntry.ConstantInt.Value != 0 ? "1" : "0");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}    // AOT-baked: {bakeEntry.Callee}");
+				builder.AppendLine($"{indentation}    auto* chaos_bake_box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
+				builder.AppendLine($"{indentation}    chaos_bake_box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)};");
+				builder.AppendLine($"{indentation}    chaos_bake_box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value});");
+				EmitEvalStackPush(builder, indentation + "    ", $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_bake_box)");
+			}
+		}
+
+		builder.AppendLine($"{indentation}}}");
 	}
 
 	/// <summary>

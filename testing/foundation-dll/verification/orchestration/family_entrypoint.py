@@ -973,8 +973,15 @@ extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" void ChaosRegisterGcLayouts();
 
-// Default arg thunks (defined in native-aot.generated.cpp)
+// Default arg thunks (defined in native-aot.generated.cpp for AOT,
+// not emitted in JIT — dispatch generator uses nullptr).
+// CHAOS_USE_DEFAULT_THUNKS -> kDefaultArgThunks (AOT) or nullptr (JIT).
+#ifndef CHAOS_IL2CPP_JIT_MODE
 extern "C" void (*kDefaultArgThunks[])() noexcept;
+#define CHAOS_USE_DEFAULT_THUNKS kDefaultArgThunks
+#else
+#define CHAOS_USE_DEFAULT_THUNKS nullptr
+#endif
 
 // Benchmark result struct (must match verification_dispatch.generated.cpp)
 struct BenchmarkResult {
@@ -1029,7 +1036,7 @@ static int RunFactJsonMode() {
         bool caught = false;
         CHAOS_EH_TRY
             result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
         CHAOS_EH_CATCH_BEGIN
             caught = true;
         CHAOS_EH_END
@@ -1071,7 +1078,7 @@ static int RunHotupdateMode() {
         int i = kSubjectSlotMap[si];
         CHAOS_EH_TRY
             CHAOS_IL2CPP_INT32 result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             baseline_values[si] = result;
             baseline_ok[si] = true;
         CHAOS_EH_CATCH_BEGIN
@@ -1087,7 +1094,7 @@ static int RunHotupdateMode() {
         bool patched_ok = false;
         CHAOS_EH_TRY
             patched_result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             patched_ok = true;
         CHAOS_EH_CATCH_BEGIN
         CHAOS_EH_END
@@ -1107,7 +1114,7 @@ static int RunHotupdateMode() {
         int i = kSubjectSlotMap[si];
         CHAOS_EH_TRY
             chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, kDefaultArgThunks);
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             revert_passed++;
         CHAOS_EH_CATCH_BEGIN
             all_revert = false;

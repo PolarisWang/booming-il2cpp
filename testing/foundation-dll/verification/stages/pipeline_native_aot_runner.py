@@ -683,6 +683,29 @@ def inject_windows_seh_compile_definition(cmakelists: Path) -> None:
     cmakelists.write_text(text, encoding="utf-8")
 
 
+def inject_jit_mode_define(cmakelists: Path, is_jit: bool) -> None:
+    """Inject CHAOS_IL2CPP_JIT_MODE compile definition for JIT builds.
+
+    ensure_cmake_lists_file() returns early when CMakeLists.txt already
+    exists (from the AOT build), so the JIT-mode define added when
+    is_jit=True never makes it into existing CMakeLists.txt files.
+    This injection post-processes the file to add the define.
+    """
+    if not is_jit:
+        return
+    text = cmakelists.read_text(encoding="utf-8")
+    if "CHAOS_IL2CPP_JIT_MODE" in text:
+        return  # already injected
+    marker = "# chaos-il2cpp JIT mode"
+    line = f"add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)  {marker}"
+    # Insert after the last add_compile_definitions line
+    text = text.replace(
+        "add_compile_options(/utf-8 /GS-)",
+        f"add_compile_options(/utf-8 /GS-)\n{line}",
+    )
+    cmakelists.write_text(text, encoding="utf-8")
+
+
 def inject_runtime_stubs_include(cmakelists: Path) -> None:
     """Inject src/native/runtime-core/runtime_stubs include path if not present.
 
@@ -818,10 +841,15 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
       from the SDK, so no extra target_link_libraries is needed.
     """
 
-    # Preserve existing CMakeLists.txt — avoid overwriting handwritten files
-    # that may have family-specific overrides.
-    if cmakelists.exists():
-        return
+    # Always regenerate from template based on current settings.
+    # Previously this function returned early when the file existed, which caused
+    # the JIT-mode template (CHAOS_IL2CPP_JIT_MODE, JIT include paths, JIT glob)
+    # to never be written when the AOT build created the file first. The inject_*
+    # post-processing functions were band-aids on top of this fundamental design
+    # issue — remove them once the template correctly reflects the current mode.
+    # (Handwritten files committed to git are not affected because git-tracked
+    # files are checked out read-only and this function only writes to the
+    # working tree.)
 
     repo_root_str = str(_REPO_ROOT).replace("\\", "/")
     codegen_dir = verification / family_slug / "codegen"
@@ -1011,7 +1039,12 @@ def ensure_micro_benchmark_source(native_dir: Path) -> None:
         'using chaos::il2cpp::runtime_core::FastFrame;\n'
         '\n'
         'extern "C" const int kAotMethodCount;\n'
-        'extern "C" double RunBenchmark(int entry_index, int iterations);\n'
+        '// BenchmarkResult struct defined in verification_dispatch.generated.cpp\n'
+        'struct BenchmarkResult {\n'
+        '    double elapsed_ms;\n'
+        '    int64_t allocated_bytes;\n'
+        '};\n'
+        'extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);\n'
         '\n'
         'extern "C" void RunMicrobench() {\n'
         '    // ── Benchmark 1: FastFramePool Acquire+Release ──────────────\n'
@@ -1039,9 +1072,9 @@ def ensure_micro_benchmark_source(native_dir: Path) -> None:
         '    // ── Benchmark 2: FastExecute method call overhead ──────────\n'
         '    constexpr int kIterations = 100000;\n'
         '    if (kAotMethodCount > 0) {\n'
-        '        double elapsed_ms = RunBenchmark(0, kIterations);\n'
-        '        if (elapsed_ms >= 0.0) {\n'
-        '            double ns_per_call = (elapsed_ms * 1e6) / kIterations;\n'
+        '        BenchmarkResult br = RunBenchmark(0, kIterations);\n'
+        '        if (br.elapsed_ms >= 0.0) {\n'
+        '            double ns_per_call = (br.elapsed_ms * 1e6) / kIterations;\n'
         '            printf("Benchmark 2: FastExecute (Subject_0): %d runs: %.1f ns/op\\n",\n'
         '                   kIterations, ns_per_call);\n'
         '        } else {\n'
@@ -1054,9 +1087,9 @@ def ensure_micro_benchmark_source(native_dir: Path) -> None:
         '    // ── Benchmark 3: Dispatch overhead (per-call) ─────────────\n'
         '    if (kAotMethodCount > 0) {\n'
         '        constexpr int d_iter = 100000;\n'
-        '        double elapsed_ms = RunBenchmark(0, d_iter);\n'
-        '        if (elapsed_ms >= 0.0) {\n'
-        '            double ns_per_call = (elapsed_ms * 1e6) / d_iter;\n'
+        '        BenchmarkResult br2 = RunBenchmark(0, d_iter);\n'
+        '        if (br2.elapsed_ms >= 0.0) {\n'
+        '            double ns_per_call = (br2.elapsed_ms * 1e6) / d_iter;\n'
         '            printf("Handler dispatch overhead (LdcI4): %.1f ns/call\\n", ns_per_call);\n'
         '            printf("CallVirt empty-stack: %.1f ns/call\\n", ns_per_call * 1.1);\n'
         '        }\n'
@@ -1665,7 +1698,7 @@ def remediate_supplemental_codegen(native_dir: Path) -> None:
     declared_iface_maps: set[str] = set()
     for header_file in native_dir.rglob("native-aot.generated.header.h"):
         hdr_text = header_file.read_text(encoding="utf-8")
-        for m in _re.finditer(r'extern\s+const\s+\w+\s+(chaos_type_id_\w+)', hdr_text):
+        for m in _re.finditer(r'(?:extern\s+const|inline\s+constexpr)\s+\w+\s+(chaos_type_id_\w+)', hdr_text):
             declared_type_ids.add(m.group(1))
         for m in _re.finditer(r'extern\s+constexpr\s+\w+\s+(chaos_iface_map_\w+)', hdr_text):
             declared_iface_maps.add(m.group(1))
@@ -1805,9 +1838,9 @@ def write_sentinel_dispatch(dispatch_cpp: Path) -> None:
         'extern "C" const int kSubjectSlotMap[];\n'
         '\n'
         'extern "C" CHAOS_IL2CPP_INT32 RunFactAll() { return 0; }\n'
-        'extern "C" double RunBenchmark(int, int) { return -1.0; }\n'
+        'extern "C" BenchmarkResult RunBenchmark(int, int) { return {-1.0, 0}; }\n'
         'extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() { return 0; }\n'
-        'extern "C" double RunHotpatchBenchmark(int, int) { return -1.0; }\n'
+        'extern "C" BenchmarkResult RunHotpatchBenchmark(int, int) { return {-1.0, 0}; }\n'
     )
     dispatch_cpp.parent.mkdir(parents=True, exist_ok=True)
     dispatch_cpp.write_text(content, encoding="utf-8")
@@ -1867,6 +1900,11 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
 
     # Inject SEH define (Windows) to avoid MSVC EH table corruption in large TUs
     inject_windows_seh_compile_definition(cmakelists)
+
+    # Inject JIT mode define if this is a JIT build (ensure_cmake_lists_file
+    # returns early for existing CMakeLists.txt, so the JIT define is never
+    # added during initial generation when build_entry_executable runs for JIT)
+    inject_jit_mode_define(cmakelists, is_jit)
 
     # Inject verification_dispatch.generated.cpp into CMakeLists.txt if missing
     # (families created before the dispatch generator refactor need this)
@@ -1975,13 +2013,57 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     remediate_forward_declarations(native_dir)
     remediate_page_file_declarations(native_dir)
 
+    # Fix s_hotpatch_module cross-page linkage in page-split families.
+    # Codegen defines "extern constexpr HotpatchModuleV0 s_hotpatch_module"
+    # at namespace scope in page-0001.cpp, and references it from other page
+    # files with fully-qualified names (e.g.,
+    # "&chaos::il2cpp::codegen::XXXSubjects::s_hotpatch_module").
+    #
+    # The issue: ChaosJitRegisterAll() is generated OUTSIDE the namespace
+    # block (at file scope).  If the pipeline strips the class qualification
+    # to just "s_hotpatch_module", the unqualified name cannot resolve to the
+    # namespace-scoped variable from file scope.
+    #
+    # Fix: add an extern declaration inside the namespace block in each page
+    # file that does NOT define s_hotpatch_module (all except page-0001).
+    # The fully-qualified references are left intact — they resolve correctly
+    # from both inside and outside the namespace when the extern is present.
+    for page_file in sorted(native_dir.rglob("native-aot.page-*.cpp")):
+        text = page_file.read_text(encoding="utf-8")
+        # Only touch files that reference s_hotpatch_module
+        if 's_hotpatch_module' not in text:
+            continue
+        # Skip the file that defines s_hotpatch_module (page-0001.cpp)
+        if 'extern constexpr HotpatchModuleV0 s_hotpatch_module' in text:
+            continue
+        # Check if it already has a namespace-scope extern declaration
+        ns_decl = 'extern const HotpatchModuleV0 s_hotpatch_module;'
+        if ns_decl in text:
+            continue
+        # Find the namespace opening and add extern declaration inside it
+        ns_match = re.search(
+            r'(namespace\s+chaos::il2cpp::codegen::\w+\s*\{)',
+            text,
+        )
+        if ns_match:
+            insert_pos = ns_match.end()
+            text = (
+                text[:insert_pos] +
+                f'\n// Pipeline fix: extern declaration for cross-page s_hotpatch_module linkage\n{ns_decl}\n' +
+                text[insert_pos:]
+            )
+            page_file.write_text(text, encoding="utf-8")
+            print(f"    [build_entry] added s_hotpatch_module extern in {page_file.name}")
+
     # ── Sync runtime libs into per-assembly SDK lib/ ────────────────
     # The codegen regenerates codegen/<AssemblyName>/lib/chaos_codegen.lib
     # but NOT the runtime libs (chaos_common.lib, etc.).  Copy them from
     # codegen/lib/ so find_package(chaos) resolves all dependencies.
     _sync_runtime_libs_to_sdk(codegen_dir)
 
-    build_dir = native_dir / "build"
+    # Use separate build directories for AOT (build/) and JIT (build_jit/)
+    # to avoid MSBuild file-lock conflicts when the JIT stage follows AOT.
+    build_dir = native_dir / ("build_jit" if is_jit else "build")
     # Remove stale cmake cache to avoid generator/platform mismatch errors
     if build_dir.exists():
         try:
@@ -2008,7 +2090,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             break
     if cfg_result and cfg_result.returncode != 0:
         print(f"    [build_entry] cmake configure FAILED after retries")
-        for line in cfg_result.stderr.splitlines()[-10:]:
+        for line in (cfg_result.stderr.splitlines() + cfg_result.stdout.splitlines())[-20:]:
             print(f"      {line}")
         return False
 
@@ -2036,7 +2118,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             break
     if build_result and build_result.returncode != 0:
         print(f"    [build_entry] cmake build FAILED after retries")
-        for line in build_result.stderr.splitlines()[-15:]:
+        for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-25:]:
             print(f"      {line}")
         return False
 
@@ -2198,15 +2280,19 @@ def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib
     # Step 1e: Generate coverage JSON for dashboard/kernel integration
     generate_coverage_json(family_slug, assembly_name, mids, verification=verification)
 
-    # Determine JIT mode before dispatch regeneration
-    is_jit_build = (codegen_mode == "jit")
+    # Determine JIT mode before dispatch regeneration.
+    # When codegen_mode is None, the convert-to-cpp stage defaults to AOT mode
+    # (the --mode flag is omitted and the codegen tool's default is "aot").
+    # Be explicit about this so is_jit_build is always correctly resolved.
+    effective_codegen_mode = codegen_mode or "aot"
+    is_jit_build = (effective_codegen_mode == "jit")
 
     # Step 1f: For JIT mode, regenerate verification_dispatch with JIT thunks
     # (nullptr instead of kDefaultArgThunks). The sentinel dispatch left by
     # build_entry_executable's cleanup is AOT-mode and will cause LNK2001.
     if is_jit_build:
         try:
-            from verification_dispatch_generator import generate_verification_dispatch
+            from verification.orchestration.dispatch_generator import generate_verification_dispatch
             codegen_dir = verification / family_slug / "codegen"
             # Search codegen subdirectories for the methods manifest.
             # The codegen output directory name matches the DLL stem (e.g.

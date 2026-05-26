@@ -2,22 +2,14 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/enum/parsing",
-  "capturedAt": "2026-05-25T19:54:30",
+  "capturedAt": "2026-05-26T18:50:59",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 3.1,
+      "acquireReleaseNsPerOp": 2.9,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
-    "fastExecute": {
-      "runCount": 100000,
-      "nsPerCall": 1531.6
-    },
-    "callVirt": {
-      "handlerDispatchNs": 1564.8,
-      "emptyStackNs": 1721.2
-    },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-25T19:54:30][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T19:54:30][DEBUG][GcEvents] registered callback 0x7ff6cf918c40 at slot 0\n[2026-05-25T19:54:30][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:54:30][INFO][NUMA] numa_init count=%d\n[2026-05-25T19:54:30][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T19:54:30][INFO][OldGen] emergency_reserve_allocated base=0x1325323780096 size=65536\n[2026-05-25T19:54:30][INFO][OldGen] init done base=0x1325323517952 pages=8\n[2026-05-25T19:54:30][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T19:54:30][DEBUG][GcEvents] registered callback 0x7ff6cf918c40 at slot 1\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 3.1 ns/op (1000 batches x 32 frames)\n[2026-05-25T19:54:30][DEBUG][BGC] thread_started\n[2026-05-25T19:54:30][DEBUG][Finalizer] thread_started id={0}\n[2026-05-25T19:54:30][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:54:30][DEBUG][BGC] start_cycle\n[2026-05-25T19:54:30][DEBUG][BGC] root_scan heap=699 oldgen=4 valid=0 marked=0\n[2026-05-25T19:54:30][DEBUG][BGC] root_set_populated\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_mark_started\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_mark_begin\n[2026-05-25T19:54:30][DEBUG][BGC] parallel_workers spawned=8\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_mark_complete\n[2026-05-25T19:54:30][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:54:30][DEBUG][BGC] stw_remark_start\n[2026-05-25T19:54:30][DEBUG][BGC] stw_remark_done marked=0 cards=0\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_sweep_started\n[2026-05-25T19:54:30][INFO][BGC] remark_done pause_us=38\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_sweep_begin\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_sweep_complete\n[2026-05-25T19:54:30][DEBUG][BGC] compact_needed_waiting\n[2026-05-25T19:54:30][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:54:30][DEBUG][BGC] stw_compact_start\n[2026-05-25T19:54:30][DEBUG][BGC] stw_compact_done\n[2026-05-25T19:54:30][INFO][BGC] compact_done pause_us=31\n[2026-05-25T19:54:30][DEBUG][BGC] cycle_finished\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 1531.6 ns/op\n[2026-05-25T19:54:30][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:54:30][DEBUG][BGC] start_cycle\n[2026-05-25T19:54:30][DEBUG][BGC] root_scan heap=725 oldgen=4 valid=0 marked=0\n[2026-05-25T19:54:30][DEBUG][BGC] root_set_populated\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_mark_started\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_mark_begin\n[2026-05-25T19:54:30][DEBUG][BGC] parallel_workers spawned=8\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_mark_complete\n[2026-05-25T19:54:30][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:54:30][DEBUG][BGC] stw_remark_start\n[2026-05-25T19:54:30][DEBUG][BGC] stw_remark_done marked=0 cards=0\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_sweep_started\n[2026-05-25T19:54:30][INFO][BGC] remark_done pause_us=45\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_sweep_begin\n[2026-05-25T19:54:30][DEBUG][BGC] concurrent_sweep_complete\n[2026-05-25T19:54:30][DEBUG][BGC] compact_needed_waiting\n[2026-05-25T19:54:30][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:54:30][DEBUG][BGC] stw_compact_start\n[2026-05-25T19:54:30][DEBUG][BGC] stw_compact_done\n[2026-05-25T19:54:30][INFO][BGC] compact_done pause_us=24\n[2026-05-25T19:54:30][DEBUG][BGC] cycle_finished\nHandler dispatch overhead (LdcI4): 1564.8 ns/call\nCallVirt empty-stack: 1721.2 ns/call\n"
+  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.9 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\nGC|region|active=0|total_allocated=0\n"
 }

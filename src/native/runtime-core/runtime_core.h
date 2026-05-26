@@ -177,6 +177,8 @@ ResolveStructMarshallingDescriptor(const TypeInfo* type) noexcept;
 // Each opens its own namespace chaos::il2cpp::runtime_core { ... } block.
 #include "gc_helpers.h"
 #include "gc_api.h"
+#include "gc/gc_region.h"
+#include "core/gc_alloc_stubs.h"
 #include "thread_state.h"
 #include "engine_binding.h"
 #include "char_classification.h"

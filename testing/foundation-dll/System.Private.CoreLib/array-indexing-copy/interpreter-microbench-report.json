@@ -2,22 +2,14 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/array/indexing/copy",
-  "capturedAt": "2026-05-25T19:09:29",
+  "capturedAt": "2026-05-26T18:52:19",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 2.9,
+      "acquireReleaseNsPerOp": 4.2,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
-    "fastExecute": {
-      "runCount": 100000,
-      "nsPerCall": 312.9
-    },
-    "callVirt": {
-      "handlerDispatchNs": 331.8,
-      "emptyStackNs": 365.0
-    },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-25T19:09:29][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T19:09:29][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:09:29][INFO][NUMA] numa_init count=%d\n[2026-05-25T19:09:29][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-25T19:09:29][INFO][OldGen] init done base=0x2326539862016 pages=2\n[2026-05-25T19:09:29][DEBUG][codegen] T4 VEH handler registered\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.9 ns/op (1000 batches x 32 frames)\n[2026-05-25T19:09:29][DEBUG][Finalizer] thread_started id={0}\n[2026-05-25T19:09:29][DEBUG][BGC] thread_started\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 312.9 ns/op\n[2026-05-25T19:09:29][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:09:29][DEBUG][BGC] start_cycle\n[2026-05-25T19:09:29][DEBUG][BGC] root_scan heap=919 oldgen=16 valid=0 marked=0\n[2026-05-25T19:09:29][DEBUG][BGC] root_set_populated\n[2026-05-25T19:09:29][DEBUG][BGC] concurrent_mark_started\n[2026-05-25T19:09:29][DEBUG][BGC] concurrent_mark_begin\n[2026-05-25T19:09:29][DEBUG][BGC] parallel_workers spawned=8\n[2026-05-25T19:09:29][DEBUG][BGC] concurrent_mark_complete\nHandler dispatch overhead (LdcI4): 331.8 ns/call\nCallVirt empty-stack: 365.0 ns/call\n"
+  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 4.2 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\nGC|region|active=0|total_allocated=0\n"
 }
