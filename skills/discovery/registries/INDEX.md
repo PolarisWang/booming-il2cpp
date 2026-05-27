@@ -4,7 +4,7 @@
 
 | 领域 | 范围 | 页面 | skill 数量 |
 | ---- | ---- | ---- | --------- |
-| `workflow` | 需求澄清、计划拆分、执行推进与调试/TDD 相关技能。 | [workflow](./workflow.md) | 8 |
+| `workflow` | 需求澄清、计划拆分、执行推进、性能优化战役与调试/TDD 相关技能。 | [workflow](./workflow.md) | 9 |
 | `quality` | 代码审查、验证、trace 强制和完成前质量门技能。 | [quality](./quality.md) | 4 |
 | `git` | 本地分支、worktree 与开发分支收口技能。 | [git](./git.md) | 2 |
 | `knowledge` | 长期知识沉淀与 wiki 维护技能。 | [knowledge](./knowledge.md) | 1 |
