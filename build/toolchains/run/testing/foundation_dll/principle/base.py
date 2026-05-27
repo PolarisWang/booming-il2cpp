@@ -140,7 +140,7 @@ def _method_has_lowering_in_body(cpp: str, method_full_name: str, class_name: st
 
     Two lowering modes are accepted:
       1. chaos_eval_stack — array-based eval stack (IRFlatRegion / evalStackSize path)
-      2. _s0{}; — structured slot declaration (StructuredIR path)
+      2. _s0; — structured slot declaration (StructuredIR path)
 
     Uses brace matching to extract each function body. Iterates ALL matches
     (forward declarations + actual implementation) and returns True if ANY
@@ -160,7 +160,7 @@ def _method_has_lowering_in_body(cpp: str, method_full_name: str, class_name: st
                 brace_depth -= 1
             pos += 1
         body = cpp[body_start:pos]
-        if "chaos_eval_stack" in body or "_s0{};" in body:
+        if "chaos_eval_stack" in body or "_s0{};" in body or "_s0;" in body:
             return True
     return False
 
@@ -241,14 +241,14 @@ class FamilyContext:
 
         Accepts two lowering modes:
           - chaos_eval_stack          (IRFlatRegion / evalStackSize path)
-          - _s0{};  (StructuredIR path)
+          - _s0;  (StructuredIR path)
         """
         cpp = self.generated_cpp_content
         if not cpp:
             return False
         if method_full_name and self.class_name:
             return _method_has_lowering_in_body(cpp, method_full_name, self.class_name)
-        return "chaos_eval_stack" in cpp or "_s0{};" in cpp
+        return "chaos_eval_stack" in cpp or "_s0{};" in cpp or "_s0;" in cpp
 
     def list_changed_files(self) -> list[str]:
         """Read git diff for this family's codegen directory."""

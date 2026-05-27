@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Chaos.TestFramework;
 
 namespace Chaos.Generated.ManagedTests.SolutionCorePack;
 
@@ -20,7 +19,6 @@ public static class SolutionCorePackBenchmarkWorkloads
         };
     }
 
-    [Benchmark(ChaosBenchmarkCategory.RuntimeDispatch, ChaosMetric.WallClockUs)]
     public static int RunArithmeticInt()
     {
         long sum = 0;
@@ -29,7 +27,6 @@ public static class SolutionCorePackBenchmarkWorkloads
         return (int)(sum & 0x7FFFFFFF);
     }
 
-    [Benchmark(ChaosBenchmarkCategory.RuntimeDispatch, ChaosMetric.WallClockUs)]
     public static int RunArithmeticDouble()
     {
         double sum = 0.0;
@@ -38,7 +35,6 @@ public static class SolutionCorePackBenchmarkWorkloads
         return (int)((long)(sum * 1000) % 10000);
     }
 
-    [Benchmark(ChaosBenchmarkCategory.RuntimeDispatch, ChaosMetric.WallClockUs)]
     public static int RunStringConcat()
     {
         string s = "";
@@ -47,7 +43,6 @@ public static class SolutionCorePackBenchmarkWorkloads
         return s.Length;
     }
 
-    [Benchmark(ChaosBenchmarkCategory.RuntimeDispatch, ChaosMetric.WallClockUs)]
     public static int RunArrayAccess()
     {
         var arr = new int[1000];
@@ -59,7 +54,6 @@ public static class SolutionCorePackBenchmarkWorkloads
         return (int)(sum & 0x7FFFFFFF);
     }
 
-    [Benchmark(ChaosBenchmarkCategory.Allocation, ChaosMetric.WallClockUs)]
     public static int RunObjectAlloc()
     {
         long sum = 0;
@@ -68,7 +62,6 @@ public static class SolutionCorePackBenchmarkWorkloads
         return (int)(sum & 0x7FFFFFFF);
     }
 
-    [Benchmark(ChaosBenchmarkCategory.RuntimeDispatch, ChaosMetric.WallClockUs)]
     public static int RunVirtualCall()
     {
         ICalc calc = new Adder();
@@ -78,7 +71,6 @@ public static class SolutionCorePackBenchmarkWorkloads
         return (int)(sum & 0x7FFFFFFF);
     }
 
-    [Benchmark(ChaosBenchmarkCategory.RuntimeDispatch, ChaosMetric.WallClockUs)]
     public static int RunLoopBranch()
     {
         long sum = 0;

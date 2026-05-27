@@ -47,9 +47,14 @@ internal static class AsmCompareHandler
 
             var pipeline = new PipelinePlan();
 
-            // Resolve target assemblies from methodSubjectIds for full AOT codegen
+            // Resolve target assemblies from methodSubjectIds for full AOT codegen.
+            // Handle both explicit --method-subject-ids and bare --method (which may
+            // also use the assembly-prefixed format).
+            var methodIds = config.MethodSubjectIds.Count > 0
+                ? config.MethodSubjectIds
+                : config.MethodNames;
             var additionalPaths = new HashSet<string>();
-            foreach (var subjectId in config.MethodSubjectIds)
+            foreach (var subjectId in methodIds)
             {
                 var slashIdx = subjectId.IndexOf('/');
                 if (slashIdx <= 0) continue;

@@ -386,6 +386,11 @@ public sealed partial class NativeAotLoweringPlanner
 			if (!dt.Contains("[[")) continue;
 			TrackReferenceType(dt, null);
 		}
+		// Pre-compute types safe for stack allocation (no GC-ref fields, no finalizer).
+		_typesSafeForStackAllocation = ComputeTypesSafeForStackAllocation(
+			referenceTypeSubjectIds, valueTypeSubjectIds,
+			fieldsByDeclaringType, fieldTypeMap,
+			_referenceTypeBaseSubjectIds);
 		// ── VTable slot allocation (must precede iface_map emission)
 			var vtableLengths = new Dictionary<string, int>(StringComparer.Ordinal);
 			var slotMap = new Dictionary<string, int>(StringComparer.Ordinal);

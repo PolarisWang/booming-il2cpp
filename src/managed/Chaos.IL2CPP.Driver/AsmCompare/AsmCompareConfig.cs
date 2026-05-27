@@ -54,8 +54,7 @@ internal sealed class AsmCompareConfig
                     break;
                 case "--method-subject-ids" when i + 1 < args.Length:
                     var rawIds = args[++i];
-                    methodSubjectIds = new List<string>(
-                        rawIds.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+                    methodSubjectIds = SplitRespectingParens(rawIds);
                     break;
                 case "--output" or "-o" when i + 1 < args.Length:
                     outputPath = args[++i];
@@ -126,6 +125,30 @@ internal sealed class AsmCompareConfig
     }
 
     public bool HasSection(string name) => AllSections || Sections.Contains(name);
+
+    /// Split a comma-separated list respecting balanced parentheses.
+    /// MethodSubjectIds like "ToChar(System.Object,System.IFormatProvider)" contain
+    /// commas inside parens that must NOT be treated as delimiters.
+    private static List<string> SplitRespectingParens(string raw)
+    {
+        var result = new List<string>();
+        int depth = 0;
+        int start = 0;
+        for (int i = 0; i < raw.Length; i++)
+        {
+            if (raw[i] == '(') depth++;
+            else if (raw[i] == ')') depth--;
+            else if (raw[i] == ',' && depth == 0)
+            {
+                var part = raw[start..i].Trim();
+                if (part.Length > 0) result.Add(part);
+                start = i + 1;
+            }
+        }
+        var last = raw[start..].Trim();
+        if (last.Length > 0) result.Add(last);
+        return result;
+    }
 
     private static void PrintHelp()
     {

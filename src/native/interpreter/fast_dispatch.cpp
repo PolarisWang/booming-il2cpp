@@ -821,7 +821,7 @@ static void Handle_Conv_R8(FastFrame& frame, const interpreter::IRInstruction&) 
     ++frame.pc;
 }
 
-static void Handle_Box(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
+static void Handle_Box(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Box");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     // Box: wrap the top-of-stack value into a heap-allocated InterpreterObject.
@@ -831,6 +831,7 @@ static void Handle_Box(FastFrame& frame, const interpreter::IRInstruction&) noex
     frame.TrackPool(boxed, ReturnBoxToPool);
     boxed->fields.resize(1);
     boxed->fields[0] = frame.PopIV();
+    boxed->type_token = static_cast<uint32_t>(instr.immediate_i4);
     frame.PushObj(boxed);
     ++frame.pc;
 }
@@ -1610,6 +1611,33 @@ static void Handle_LdElem(FastFrame& frame, const interpreter::IRInstruction& in
     ++frame.pc;
 }
 
+// NoChk variant: caller guarantees arr != nullptr and index < size.
+static void Handle_LdElemNoChk(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdElemNoChk");
+    if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
+    auto* arr = static_cast<interpreter::ArrayStorage*>(
+        reinterpret_cast<void*>(frame.stack[--frame.sp]));
+    frame.PushIV(arr->elements[index]);
+    ++frame.pc;
+}
+
+// NoChk variant: caller guarantees arr != nullptr and index < size.
+// Replaces Handle_StElem in hotupdate IR when bounds are known safe.
+static void Handle_StElemNoChk(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_StElemNoChk");
+    if (frame.sp < 3) { frame.threw_exception = true; frame.pc = 9999; return; }
+    auto val = frame.PopIV();
+    uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
+    auto* arr = static_cast<interpreter::ArrayStorage*>(
+        reinterpret_cast<void*>(frame.stack[--frame.sp]));
+    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
+    arr->elements[index] = val;
+    chaos_gc_dirty_card(arr);
+    ++frame.pc;
+}
+
 static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_StElem");
     if (frame.sp < 3) { frame.threw_exception = true; frame.pc = 9999; return; }
@@ -1849,6 +1877,17 @@ static void Handle_LdElemA(FastFrame& frame, const interpreter::IRInstruction&) 
     if (arr == nullptr || index >= arr->elements.size()) {
         frame.PushNull(); ++frame.pc; return;
     }
+    frame.PushIV(arr->elements[index]);
+    ++frame.pc;
+}
+
+// NoChk variant: caller guarantees arr != nullptr and index < size.
+static void Handle_LdElemANoChk(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdElemANoChk");
+    if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
+    uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
+    auto* arr = static_cast<interpreter::ArrayStorage*>(
+        reinterpret_cast<void*>(frame.stack[--frame.sp]));
     frame.PushIV(arr->elements[index]);
     ++frame.pc;
 }
@@ -2498,6 +2537,10 @@ bool FastExecute(FastFrame& frame,
             DISPATCH_CASE(97, InitBlk);
             DISPATCH_CASE(98, CallVirtConstrained);
             DISPATCH_CASE(99, Calli);
+            // NoChk variants: bounds check already verified by preceding IR.
+            DISPATCH_CASE(104, LdElemNoChk);
+            DISPATCH_CASE(105, StElemNoChk);
+            DISPATCH_CASE(106, LdElemANoChk);
             default:
                 Handle_Unsupported(frame, instrs[frame.pc]);
                 break;

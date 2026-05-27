@@ -447,6 +447,26 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                     }
                 }
 
+                // For type-token opcodes (Box, CastClass, IsInst), populate
+                // immediate_i4 from the resolved type descriptor's metadata_token.
+                // The JSON "operand" carries a SubjectId string (not an integer), so
+                // JsonIntOr at the lines above returned 0.  Decoding the resolved
+                // TypeInfoHandle gives us the actual metadata_token for MIC lookups.
+                // Only safe for opcodes where call_target is known to be TypeInfoHandle
+                // (not MethodInfoHandle or FieldInfoHandle).
+                if ((instr.op_code == interpreter::IROpCode::Box ||
+                     instr.op_code == interpreter::IROpCode::CastClass ||
+                     instr.op_code == interpreter::IROpCode::IsInst ||
+                     instr.op_code == interpreter::IROpCode::NewArr) &&
+                    instr.call_target != nullptr) {
+                    auto* type_desc = TryDecodeReflectionQueryTypeHandle(
+                        reinterpret_cast<TypeInfoHandle>(instr.call_target));
+                    if (type_desc != nullptr) {
+                        instr.immediate_i4 = static_cast<CHAOS_IL2CPP_INT32>(
+                            type_desc->metadata_token);
+                    }
+                }
+
                 // For instance calls, check callee metadata.
                 auto callee = json::JsonParser::FindKey(elem, "callee");
                 if (callee.IsString()) {

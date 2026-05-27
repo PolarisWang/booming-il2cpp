@@ -245,8 +245,31 @@ internal static class JitAsmCapture
         if (type is null)
             return null;
 
-        // Find method by name
-        return FindMethodInType(type, methodShortName);
+        // Find method by name (exact match preferred)
+        var exactByName = FindMethodInType(type, methodShortName);
+
+        // If exact match by name found and param types available, verify it matches the
+        // expected parameter types from the SubjectId to avoid picking the wrong overload.
+        if (exactByName is not null)
+        {
+            var paramTypes = ParseParameterTypes(methodSignature);
+            if (paramTypes is not null)
+            {
+                // Check if the name-only match has the right signature
+                if (MethodMatchesParameters(exactByName, paramTypes))
+                    return exactByName;
+
+                // Name-only match was wrong overload — find by parameter types instead
+                var byParams = FindMethodInType(type, methodShortName, paramTypes);
+                if (byParams is not null)
+                    return byParams;
+
+                // Return the name-only match as best-effort fallback
+                return exactByName;
+            }
+        }
+
+        return exactByName;
     }
 
     public static JitCaptureResult Capture(string assemblyPath, string methodName)
@@ -780,6 +803,63 @@ internal static class JitAsmCapture
         var candidate = methods.FirstOrDefault(m =>
             m.Name.Contains(shortName, StringComparison.OrdinalIgnoreCase));
         return candidate;
+    }
+
+    /// Try to resolve a method by matching both name and parameter types.
+    /// This avoids picking the wrong overload when multiple methods share a name.
+    private static MethodInfo? FindMethodInType(Type type, string shortName, string[] paramTypes)
+    {
+        var methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic |
+                                       BindingFlags.Static | BindingFlags.Instance |
+                                       BindingFlags.DeclaredOnly);
+
+        // Match by name and parameter types
+        foreach (var m in methods)
+        {
+            if (!m.Name.Equals(shortName, StringComparison.OrdinalIgnoreCase))
+                continue;
+            if (MethodMatchesParameters(m, paramTypes))
+                return m;
+        }
+
+        return null;
+    }
+
+    /// Check if a MethodInfo's parameter types match the expected type names.
+    private static bool MethodMatchesParameters(MethodInfo method, string[] paramTypes)
+    {
+        var ps = method.GetParameters();
+        if (ps.Length != paramTypes.Length)
+            return false;
+
+        for (int i = 0; i < ps.Length; i++)
+        {
+            var expected = paramTypes[i];
+            var actual = ps[i].ParameterType.FullName ?? ps[i].ParameterType.Name;
+
+            // Support both full name (System.Boolean) and short name (Boolean) matching
+            if (!actual.EndsWith(expected, StringComparison.OrdinalIgnoreCase) &&
+                !expected.EndsWith(actual, StringComparison.OrdinalIgnoreCase))
+                return false;
+        }
+
+        return true;
+    }
+
+    /// Parse parameter type names from a methodSignature like "ToChar:System.Char(System.Boolean)".
+    /// Returns null if no parameters, or the array of parameter type name strings.
+    private static string[]? ParseParameterTypes(string methodSignature)
+    {
+        int openParen = methodSignature.IndexOf('(');
+        int closeParen = methodSignature.LastIndexOf(')');
+        if (openParen < 0 || closeParen <= openParen)
+            return null;
+
+        var paramsStr = methodSignature[(openParen + 1)..closeParen];
+        if (string.IsNullOrWhiteSpace(paramsStr))
+            return null;
+
+        return paramsStr.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
     }
 
     // ── Native code boundary detection ──────────────────────────────────────
