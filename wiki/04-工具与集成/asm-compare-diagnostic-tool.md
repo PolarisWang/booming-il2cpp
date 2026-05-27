@@ -16,8 +16,11 @@ chaos-il2cpp asm-compare <managed.dll|exe> --method <name> [options]
 |------|------|
 | `<managed.dll\|exe>` | 托管程序集路径（必需） |
 | `--method <name>` | 方法名，支持 `TypeName::MethodName` 或 `TypeName.MethodName` 格式 |
+| `--methods <names>` | 逗号分隔的方法列表，批量模式（如 `Subject_0,Subject_1,Subject_2`） |
+| `--method-subject-ids <ids>` | 逗号分隔的完整 methodSubjectId 列表，每个 id 格式为 `AssemblyName/TypeName::MethodName:ReturnType(Params)`。支持括号内逗号（如 `System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean,System.IFormatProvider)` 不会被错误分割）。用于 JIT 捕获时解析框架中的真实目标方法，而非 Subjects DLL 的包装器。 |
 | `--output, -o <file>` | 输出到文件（默认 stdout） |
 | `--sections <list>` | 逗号分隔的 section 列表（默认全部） |
+| `--format <fmt>` | 输出格式：`text`（默认）或 `json` |
 | `--keep-temp` | 保留临时管线输出（用于调试） |
 | `--help, -h` | 显示帮助 |
 
@@ -42,10 +45,15 @@ chaos-il2cpp asm-compare <managed.dll|exe> --method <name> [options]
 ### 管线流程
 
 ```
-输入: managed.dll + --method
+输入: managed.dll + --method / --methods
+    │
+    ├─[0] 解析 methodSubjectId →
+    │    提取 AssemblyName，通过 System.Reflection.Assembly.Load 定位
+    │    目标程序集路径（如 System.Private.CoreLib.dll），
+    │    附加到 AdditionalAssemblyPaths
     │
     ├─[1] IL2CPP PipelinePlan.Execute()
-    │    └─ ManagedClosureResult (含 AotCoreIr + 12 个 artifacts)
+    │    └─ 加载入口 DLL + AdditionalAssemblyPaths → ManagedClosureResult
     │
     ├─[2] NativeAotEmitter.Generate()
     │    └─ NativeAotResult (含 GeneratedSources — C++ 文件)
@@ -71,12 +79,36 @@ chaos-il2cpp asm-compare <managed.dll|exe> --method <name> [options]
 
 | 文件 | 职责 |
 |------|------|
-| `AsmCompareConfig.cs` | CLI 参数解析，section 白名单 |
-| `AsmCompareHandler.cs` | 主编排（PipelinePlan → NativeAotEmitter → JIT asm capture → MSVC native compile → report） |
-| `JitAsmCapture.cs` | JIT 原生代码捕获 + x86-64 反汇编 + IL body 读取 + `DisassembleRaw()` 公共方法（反汇编原始字节，如 .obj .text 段） |
-| `NativeCompile.cs` | Phase 3 MSVC 编译管线：`FindMsvc()` 发现 VS2022 工具链、`Compile()` 编译 .cpp → .obj、`ExtractTextSection()` COFF .obj .text 段提取、`ExtractFunctionBytes()` COFF 符号表函数级提取、`ExtractFunctionDisassembly()` dumpbin 输出解析、`ExtractMsvcVersion()` 版本提取 |
-| `AsmCompareReport.cs` | 全 section 报告生成器（含 RAW-AOT section + SIDE-BY-SIDE native-vs-native 升级 + metrics/analysis 引擎） |
-| `AsmSemanticAligner.cs` | IL offset 锚定的语义块对齐引擎 + `AlignNativeVsNative()` native 级分块对齐 + `DetectNativeBlocks()`/`RenderNativeBlocks()` |
+| `AsmCompareConfig.cs` | CLI 参数解析，section 白名单，`SplitRespectingParens()` 处理括号内逗号 |
+| `AsmCompareHandler.cs` | 主编排（methodSubjectId → AdditionalAssemblyPaths 解析 → PipelinePlan → NativeAotEmitter → JIT asm capture → MSVC native compile → report） |
+| `JitAsmCapture.cs` | JIT 原生代码捕获 + x86-64 反汇编 + IL body 读取 + `DisassembleRaw()` + `ResolveMethodFromSubjectId()` 按参数类型匹配过载解析 |
+| `NativeCompile.cs` | Phase 3 MSVC 编译管线：`FindMsvc()` 发现 VS2022 工具链、`Compile()` 编译 .cpp → .obj、COFF 解析 |
+| `AsmCompareReport.cs` | 全 section 报告生成器（含 metrics/analysis 引擎） |
+| `AsmSemanticAligner.cs` | IL offset 锚定的语义块对齐引擎 |
+
+### Framework 方法解析
+
+asm-compare 的 Subjects DLL 包含 `Subject_N` 包装器方法（每个包装器调用一个 framework 目标方法）。AOT 侧如果只处理 Subjects DLL，生成的代码只有包装器逻辑（约 9 条 IR 指令），而非 framework 中的真实方法逻辑。
+
+通过 `--method-subject-ids` 传入完整 methodSubjectId（格式 `AssemblyName/TypeName::MethodName:ReturnType(Params)`），handler 从中提取 `AssemblyName` 部分，通过 `System.Reflection.Assembly.Load(assemblyName).Location` 解析目标程序集路径，传入 `ManagedClosureRequest.AdditionalAssemblyPaths`，使 pipeline 同时加载 Subjects DLL 和 framework 程序集。
+
+这样 AOT 侧就能生成 framework 真实方法的 C++ 代码，与 JIT 侧的对比数据才有意义。
+
+### JIT 过载解析
+
+`JitAsmCapture.ResolveMethodFromSubjectId()` 从 methodSubjectId 解析真实目标方法。由于 `Convert.ToChar` 等框架方法有多达 18 个过载，仅按方法名匹配会始终返回第一个过载。
+
+解析算法：
+1. 从 SubjectId 提取 `MethodName:ReturnType(ParamType1,ParamType2,...)`
+2. 通过 `Type.GetMethod()` 按名称找到候选方法列表
+3. 逐个匹配参数类型（从 SubjectId 解析的参数字符串与 `MethodInfo.GetParameters()` 对比）
+4. 只返回参数类型完全匹配的方法
+
+### 参数解析
+
+`AsmCompareConfig.SplitRespectingParens()` 用于解析 `--method-subject-ids` 的逗号分隔列表。由于 methodSubjectId 中包含方法签名括号（如 `ToChar:System.Char(System.Object,System.IFormatProvider)`），括号内也可能有逗号。
+
+实现方式是跟踪括号深度：只在深度为 0 时按逗号分割，括号内的逗号被跳过。确保 `Subject_N` 索引与 methodSubjectId 列表一一对应，不会因错误分割导致偏移错位。
 
 ### JIT 捕获原理
 
@@ -358,14 +390,37 @@ chaos-il2cpp asm-compare <dll> --method <method> -o report.txt
 
 # 指定 sections
 chaos-il2cpp asm-compare <dll> --method <method> --sections header,metrics,analysis
+
+# JSON 格式输出
+chaos-il2cpp asm-compare <dll> --method <method> --format json
+
+# 批量模式（多个方法，一次 pipeline 运行）
+chaos-il2cpp asm-compare <dll> \
+  --methods Subject_0,Subject_1,Subject_2 \
+  --method-subject-ids "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean),System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)" \
+  --format json \
+  --sections metrics,analysis
 ```
 
 ### Foundation-DLL 验证
 
 ```bash
+# 单方法
 chaos-il2cpp asm-compare \
   testing/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
   --method ConvertCharSubjects::Subject_0
+
+# 批量模式（用于 foundation-dll 管线集成）
+chaos-il2cpp asm-compare \
+  testing/foundation-dll/System.Private.CoreLib/convert-char/managed/subjects/build-output/ConvertCharSubjects.dll \
+  --methods Subject_0,Subject_1,Subject_2 \
+  --method-subject-ids "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean),System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32),System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)" \
+  --format json \
+  --sections metrics,analysis
+  
+# 通过 Python 验证管线自动调用（batch + cache）
+python build/check_foundation_dll_pipeline.py --family convert-char \
+  --skip hotupdate post_hotupdate_benchmark microbench
 ```
 
 ### 复杂案例验证
@@ -397,3 +452,5 @@ chaos-il2cpp asm-compare \
 - **JIT 边界检测**通过 ret 指令 + padding 检测，在非常规控制流中可能不准确
 - **TIERED COMPILATION**: `RuntimeHelpers.PrepareMethod` 确保 Tier1，但不保证最佳优化
 - **Native-vs-native 对齐** 为基本块位置对齐（第 N 个 JIT 块 ↔ 第 N 个 AOT 块），非 IL offset 锚定，在基本块数量不一致时可能错位
+- **Subject_N 命名约束**：AOT 方法查找使用 Subject_N 名称（包装器名），JIT 捕获使用完整 methodSubjectId（framework 方法名）。两者名称不一致，必须通过 methodMap 双索引对齐
+- **p1_lowering 检查**：代码生成 slot 变量可能使用 `_s0{};`（旧 codegen）或 `_s0;`（SEH 改写后），p1_lowering 检查同时接受两种模式

@@ -72,6 +72,7 @@ internal static class AsmCompareHandler
                 EntryPointSubjectIdOverride: null,
                 AdditionalAssemblyPaths: additionalPaths.Count > 0 ? additionalPaths.ToArray() : null,
                 FullAssemblyClosure: true));
+            ChaosTrace.Point("asm-compare.pipeline:exit", "codegen");
             if (closureResultResult.IsFailure)
             {
                 Console.Error.WriteLine($"Pipeline failed: [{closureResultResult.Error!.Code}] {closureResultResult.Error.Message}");
@@ -281,6 +282,9 @@ internal static class AsmCompareHandler
 
     private static AotCoreIrMethodArtifact? FindMethodInClosure(ManagedClosureResult result, string methodName)
     {
+        var methods = result.AotCoreIr.Methods;
+        if (methods.Count == 0) return null;
+
         var searchName = methodName.Replace("::", "/").Trim();
 
         foreach (var method in result.AotCoreIr.Methods)
