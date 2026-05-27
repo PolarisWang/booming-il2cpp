@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/tasks/primitives",
-  "capturedAt": "2026-05-27T21:00:36",
+  "capturedAt": "2026-05-27T23:21:25",
   "batchMode": true,
   "summary": {
     "totalMethods": 15,
@@ -11,9 +11,9 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 660
+      "max": 54,
+      "avg": 44.7,
+      "total": 670
     },
     "aotInstructionCount": {
       "min": 1,
@@ -231,7 +231,7 @@
       "shortName": "Subject_8",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 54,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -239,7 +239,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 54
       },
       "aot": {
         "status": "ok",

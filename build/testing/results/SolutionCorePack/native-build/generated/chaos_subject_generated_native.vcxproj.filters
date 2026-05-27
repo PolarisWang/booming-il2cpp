@@ -4,6 +4,9 @@
     <ClCompile Include="D:\agent\booming-il2cpp\artifact\verification-catalog\workspaces\subjects\SolutionCorePack\generated\subject-exec\analysis\generated\native-aot.generated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\artifact\verification-catalog\workspaces\subjects\SolutionCorePack\generated\subject-exec\analysis\generated\chaos_generated_module.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="D:\agent\booming-il2cpp\artifact\verification-catalog\workspaces\subjects\SolutionCorePack\native-source\windows-native-benchmark\generated\CMakeLists.txt" />

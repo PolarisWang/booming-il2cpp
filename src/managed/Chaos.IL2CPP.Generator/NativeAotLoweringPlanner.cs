@@ -125,7 +125,7 @@ public sealed partial class NativeAotLoweringPlanner
         { "IsInstanceOfType", "ChaosReflectionIsInstanceOfTypePtr" },
     };
 
-    private Dictionary<int, TypeHierarchyPtrFoldEntry> _typeHierarchyPtrFoldMap = new();
+    private Dictionary<(string MethodNativeSymbol, int IlOffset), TypeHierarchyPtrFoldEntry> _typeHierarchyPtrFoldMap = new();
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
 

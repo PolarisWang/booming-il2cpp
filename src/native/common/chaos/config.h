@@ -139,4 +139,29 @@
 #  define CHAOS_IL2CPP_PROFILE_ENABLED 1
 #endif
 
+// ── Platform identifier (compile-time, zero-overhead) ────────────────────
+// Returns a canonical platform/arch string determined entirely by
+// CHAOS_IL2CPP_TARGET_PLATFORM_* macros — no runtime detection, no
+// branching.  The compiler inlines this to a pointer to a string literal.
+// ============================================================================
+inline const char* CHAOS_IL2CPP_GetPlatformIdentifier() {
+#if defined(CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS)
+    return "windows-x64";
+#elif defined(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX)
+    return "linux-x64";
+#elif defined(CHAOS_IL2CPP_TARGET_PLATFORM_MACOS)
+#  if defined(__arm64__) || defined(__aarch64__)
+    return "macos-arm64";
+#  else
+    return "macos-x64";
+#  endif
+#elif defined(CHAOS_IL2CPP_TARGET_PLATFORM_ANDROID)
+    return "android-arm64";
+#elif defined(CHAOS_IL2CPP_TARGET_PLATFORM_IOS)
+    return "ios-arm64";
+#else
+    return "unknown";
+#endif
+}
+
 #endif // CHAOS_IL2CPP_COMMON_CONFIG_H_

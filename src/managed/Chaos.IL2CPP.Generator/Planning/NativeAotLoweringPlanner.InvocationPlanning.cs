@@ -1829,7 +1829,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                 if (TryFoldTypeHierarchyPtrCall(instrs, i, callee, out var entry))
                 {
-                    _typeHierarchyPtrFoldMap[instr.IlOffset] = entry;
+                    _typeHierarchyPtrFoldMap[(method.NativeSymbol, instr.IlOffset)] = entry;
                     matchedCalls++;
                 }
             }

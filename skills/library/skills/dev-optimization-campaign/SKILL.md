@@ -1,6 +1,6 @@
 ---
 name: dev-optimization-campaign
-description: 多 family 性能优化战役的编排技能。跨设备 git 异步协调：coordinator 先跑 baseline，worker 在 worktree 中独立优化，每次优化必须产出中文 docs/optimize/ 完整分析文档，commit 必须含性能对比数据。禁止 hack 测试代码，必须直接修复 codegen 或 il2cpp 项目。
+description: 多 family 性能优化战役的编排技能。跨设备 git 异步协调：coordinator 先跑 baseline，worker 在 worktree 中独立优化，每次优化必须产出中文 docs/optimize/ 完整分析文档，commit 必须含性能对比数据。禁止 hack 测试代码，必须直接修复 codegen 或 il2cpp 项目。支持跨平台验证：每个 worker 的优化必须在所有目标平台上验证收敛。
 ---
 
 # 优化战役编排 — 跨设备文档驱动模式
@@ -183,6 +183,18 @@ entry.exe --fact-json
 - chaos-hu-aot（hotupdate AOT）
 - chaos-hu-jit（hotupdate JIT）
 
+**跨平台要求**：优化前后必须至少在本机平台完成 benchmark 数据采集。如优化涉及平台相关代码（如指令选择、ABI 约定、内存布局），应额外在受影响平台上验证：
+
+```bash
+# 本机平台：优化主验证
+entry.exe --benchmark <method_index> <iterations>    # 自动嵌入平台标识
+
+# 跨平台验证（如涉及平台相关代码）:
+# 在其他机器上运行相同命令，结果自动带 platform 标签
+```
+
+平台自动识别：所有 benchmark JSON 输出自动包含 `"platform"` 字段（由编译期宏确定），无需手动指定 `--platform` 参数。
+
 #### Phase D — 与托管基线对比（vs .NET 8/10 JIT）
 
 ```
@@ -253,15 +265,16 @@ hu_aot_overhead = (hu_aot_ns - aot_ns) / aot_ns * 100
 
 ## 优化后数据
 
-| 方法 | baseline (ns/op) | 优化后 (ns/op) | .NET 8 (ns/op) | vs .NET 8 | 提升幅度 | 备注 |
-|------|------------------|----------------|----------------|-----------|---------|------|
-| ...  | ...              | ...            | ...            | +X%       | +XX%    |      |
+| 方法 | 平台 | baseline (ns/op) | 优化后 (ns/op) | .NET 8 (ns/op) | vs .NET 8 | 提升幅度 | 备注 |
+|------|------|------------------|----------------|----------------|-----------|---------|------|
+| ...  | windows-x64 | ... | ... | ... | +X% | +XX% | |
 
 ## 收敛检查
 
 - [ ] 全部 fact passed
 - [ ] 无退化方法（退化 > 10% 需说明并回退）
 - [ ] 优化后 vs .NET 8 差距在 20% 以内（`slowdown_vs_net8 <= 20%`）
+- [ ] 跨平台验证：本机平台收敛；涉及平台相关代码时至少在另一个平台验证
 - [ ] 或在 README.md 中已注明理论极限并经 Coordinator 确认
 
 ## 遗留问题
@@ -279,6 +292,19 @@ slowdown_vs_net8 = (optimized_ns - net8_ns) / net8_ns * 100
 要求: slowdown_vs_net8 <= 20%
 即 优化后比 .NET 8 最多慢 20%
 ```
+
+**跨平台收敛**：优化必须在 worker 的本机平台上完成收敛验证。如果优化涉及平台相关代码（汇编指令、ABI 约定、内存布局等），worker 应在本机之外至少一个异平台（如 Linux/macOS）上验证收敛结果。跨平台验证结果记录在 README.md 的"跨平台验证"小节：
+
+```markdown
+## 跨平台验证
+
+| 平台 | slowdown_vs_net8 | 状态 |
+|------|-----------------|------|
+| windows-x64 | +15.2% | ✅ 收敛 |
+| linux-x64 | +18.7% | ✅ 收敛 |
+```
+
+所有平台验证 JSON 输出自动包含 `"platform"` 字段，无需手动指定平台参数。
 
 若未收敛（`slowdown_vs_net8 > 20%`），Worker **不得** 提交完成，必须：
 1. 回到诊断阶段，深入分析根因
@@ -298,10 +324,10 @@ slowdown_vs_net8 = (optimized_ns - net8_ns) / net8_ns * 100
 
 ## 性能对比
 
-| method | baseline | optimized | .NET 8 | vs .NET 8 | speedup |
-|--------|----------|-----------|--------|-----------|---------|
-| Foo    | 100ns    | 72ns      | 60ns   | +20%      | 1.39x   |
-| Bar    | 250ns    | 210ns     | 180ns  | +16.7%    | 1.19x   |
+| method | platform | baseline | optimized | .NET 8 | vs .NET 8 | speedup |
+|--------|----------|----------|-----------|--------|-----------|---------|
+| Foo    | windows-x64 | 100ns | 72ns | 60ns | +20% | 1.39x |
+| Bar    | windows-x64 | 250ns | 210ns | 180ns | +16.7% | 1.19x |
 
 ## 根因
 

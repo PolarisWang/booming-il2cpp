@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-27T23:06:42.811160",
+  "generated_at": "2026-05-27T23:20:36.322905",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -374,30 +374,19 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "2 of 5 changed source files are outside expected architecture layers",
+      "summary": "1 of 1 changed source files are outside expected architecture layers",
       "details": [
         {
           "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
           "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
-          "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 5,
-        "layer_distribution": {
-          "TestInfra": 1,
-          "RuntimeCore": 2
-        },
+        "changed_source_count": 1,
+        "layer_distribution": {},
         "violations": [
           {
             "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
             "reason": "outside expected architecture layers"
           }
         ]

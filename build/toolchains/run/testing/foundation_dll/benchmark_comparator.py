@@ -25,6 +25,9 @@ import sys
 from pathlib import Path
 from typing import Any
 
+# Import host platform detection — auto-detects without CLI flags
+from build.toolchains.run.runtime import detect_host_platform
+
 
 def _load_json(path: Path) -> dict[str, Any]:
     if not path.exists():
@@ -212,8 +215,16 @@ def compare(
                 jit_vs_aot_ratios.append(jit_ms / aot_ms)
     jit_slowdown = round(sum(jit_vs_aot_ratios) / len(jit_vs_aot_ratios), 2) if jit_vs_aot_ratios else None
 
+    host_platform = detect_host_platform()
+    parts = host_platform.split("-", 1)
+    host_os = parts[0] if len(parts) > 0 else "unknown"
+    host_arch = parts[1] if len(parts) > 1 else "unknown"
+
     report = {
         "schemaVersion": 2,
+        "platform": host_platform,
+        "os": host_os,
+        "arch": host_arch,
         "assemblyName": managed_data.get("assemblyName", aot_data.get("assemblyName", "")),
         "familyId": managed_data.get("familyId", aot_data.get("familyId", "")),
         "summary": {

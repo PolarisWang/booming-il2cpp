@@ -21,8 +21,11 @@ public sealed partial class NativeAotLoweringPlanner
 	private int _nextInlineId;
 	private string? _pendingEnumBoxSubjectId;
 	private string? _pendingBoxSubjectId;
+	private bool _pendingBoxHasProvider;
 	private IReadOnlyList<AotCoreIrInstructionArtifact>? _lookaheadInstructionList;
 	private int _lookaheadInstructionIndex;
+	private IReadOnlyList<AotCoreIrInstructionArtifact>? _linearInstructionList;
+	private int _linearInstructionIndex;
 
 	private static readonly HashSet<string> ToCharEligiblePrimitives = new()
 	{
@@ -46,6 +49,11 @@ public sealed partial class NativeAotLoweringPlanner
 	// pattern is detected (e.g., for (int i = 0; i < arr.Length; i++) { arr[i]; }).
 	private HashSet<int>? _loopArrayAccessSkipOffsets;
 	private Dictionary<int, int>? _knownArrayLengths;
+
+	// Hoisted loop induction variables: maps chaos_locals slot → C++ local variable name.
+	// When set, ldloc/stloc for these slots emit direct C++ local access instead of
+	// chaos_locals[] traffic, keeping the IV in a register across loop iterations.
+	private Dictionary<int, string>? _hoistedIVs;
 
 	private void ResetArrayCheckCache()
 	{
@@ -363,12 +371,15 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 			ResetArrayCheckCache();
 		var filtered = FilterRedundantStoreReloadPairs(instructions);
+		_linearInstructionList = filtered;
 		for (int i = 0; i < filtered.Count; i++)
 		{
+			_linearInstructionIndex = i;
 			var instruction = filtered[i];
 			var nextInstruction = (i + 1 < filtered.Count) ? filtered[i + 1] : null;
 			EmitInstruction(builder, instruction, indentation, nextInstruction);
 		}
+		_linearInstructionList = null;
 	}
 
 	/// <summary>
@@ -411,6 +422,36 @@ public sealed partial class NativeAotLoweringPlanner
 		result = null;
 		return false;
 	}
+
+		/// <summary>
+		/// Two-step lookahead for patterns spanning 3 instructions (box + ldnull + call).
+		/// Only used in structured IR path; linear path uses nextInstruction directly.
+		/// </summary>
+		private bool TryGetSecondLookaheadInstruction(AotCoreIrInstructionArtifact? nextInstruction, [System.Diagnostics.CodeAnalysis.MaybeNullWhen(false)] out AotCoreIrInstructionArtifact? result)
+		{
+			// Linear path: use _linearInstructionList with _linearInstructionIndex
+			if (nextInstruction != null && _linearInstructionList != null)
+			{
+				int nextIdx = _linearInstructionIndex + 2;
+				if (nextIdx < _linearInstructionList.Count)
+				{
+					result = _linearInstructionList[nextIdx];
+					return true;
+				}
+			}
+			// Structured IR path: use _lookaheadInstructionList
+			if (_lookaheadInstructionList != null)
+			{
+				int nextIdx = _lookaheadInstructionIndex + 2;
+				if (nextIdx < _lookaheadInstructionList.Count)
+				{
+					result = _lookaheadInstructionList[nextIdx];
+					return true;
+				}
+			}
+			result = null;
+			return false;
+		}
 
 	private void EmitStructuredFinallyHandlerSequence(StringBuilder builder, FinallyHandlerShape handlerShape, string indentation)
 	{
@@ -531,7 +572,10 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			else
 			{
-				EmitEvalStackPush(builder, indentation, $"chaos_locals[{ldlocSlot}]");
+				string _ldSrc = _hoistedIVs is not null && _hoistedIVs.TryGetValue(ldlocSlot, out var _ivName)
+				    ? _ivName
+				    : $"chaos_locals[{ldlocSlot}]";
+				EmitEvalStackPush(builder, indentation, _ldSrc);
 				PushSlotType(SlotType.NativeInt);
 			}
 			break;
@@ -541,7 +585,7 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitLinearFieldLoad(builder, instruction, indentation);
 			break;
 			case "call":
-				if (_pendingBoxSubjectId != null && IsConvertToCharObjectCall(instruction))
+				if (_pendingBoxSubjectId != null && (IsConvertToCharObjectCall(instruction) || IsConvertToCharObjectProviderCall(instruction)))
 				{
 					EmitFusedConvertCharBoxCall(builder, indentation);
 				}
@@ -554,7 +598,7 @@ public sealed partial class NativeAotLoweringPlanner
 					EmitLinearCall(builder, instruction, indentation);
 				break;
 		case "callvirt":
-			if (_pendingBoxSubjectId != null && IsConvertToCharObjectCall(instruction))
+			if (_pendingBoxSubjectId != null && (IsConvertToCharObjectCall(instruction) || IsConvertToCharObjectProviderCall(instruction)))
 			{
 				EmitFusedConvertCharBoxCall(builder, indentation);
 			}
@@ -649,6 +693,10 @@ public sealed partial class NativeAotLoweringPlanner
 				_ => stlocValue,
 			};
 			builder.AppendLine($"{indentation}chaos_locals[{GetRequiredIntOperand(instruction)}] = {storedExpr};");
+			// If this slot is a hoisted IV, also update the C++ local
+			int _stlocSlot = GetRequiredIntOperand(instruction);
+			if (_hoistedIVs is not null && _hoistedIVs.TryGetValue(_stlocSlot, out var _ivName))
+			    builder.AppendLine($"{indentation}{_ivName} = {storedExpr};");
 			break;
 		}
 			case "starg":
@@ -1178,14 +1226,32 @@ public sealed partial class NativeAotLoweringPlanner
 					// consumed by subsequent call/callvirt peephole.
 				}
 				else if (boxTargetRef.Kind == AotCoreIrReferenceKind.Type
-					&& ToCharEligiblePrimitives.Contains(ExtractTypeName(boxTargetRef.SubjectId))
-					&& TryGetLookaheadInstruction(nextInstruction, out var lookaheadInstr)
-					&& (lookaheadInstr.Op == "call" || lookaheadInstr.Op == "callvirt")
-					&& IsConvertToCharObjectCall(lookaheadInstr))
+					&& ToCharEligiblePrimitives.Contains(ExtractTypeName(boxTargetRef.SubjectId)))
 				{
-					_pendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
-					// Skip box emission - raw value stays on eval stack,
-					// consumed by subsequent call/callvirt peephole.
+					// Pattern 1: box <primitive> + call/callvirt ToChar(Object)
+					if (TryGetLookaheadInstruction(nextInstruction, out var lookaheadInstr)
+						&& (lookaheadInstr.Op == "call" || lookaheadInstr.Op == "callvirt")
+						&& IsConvertToCharObjectCall(lookaheadInstr))
+					{
+						_pendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
+						_pendingBoxHasProvider = false;
+					}
+					// Pattern 2: box <primitive> + ldnull + call/callvirt ToChar(Object, IFormatProvider)
+					else if (TryGetLookaheadInstruction(nextInstruction, out var ldnullInstr)
+						&& ldnullInstr.Op == "ldnull"
+						&& TryGetSecondLookaheadInstruction(nextInstruction, out var providerCall)
+						&& (providerCall.Op == "call" || providerCall.Op == "callvirt")
+						&& IsConvertToCharObjectProviderCall(providerCall))
+					{
+						_pendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
+						_pendingBoxHasProvider = true;
+						// Skip box emission; ldnull will be processed normally,
+						// and EmitFusedConvertCharBoxCall will pop the provider null.
+					}
+					else
+					{
+						EmitLinearBox(builder, instruction, indentation);
+					}
 				}
 				else
 				{
@@ -2300,7 +2366,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		// A2.6: TypeInfo* direct API for typeof(T).IsAssignableFrom(typeof(U)) etc.
 		// Bypasses GetTypeFromHandle and emits *Ptr call with direct TypeInfo* symbols.
 		if (_typeHierarchyPtrFoldMap.Count > 0 &&
-			_typeHierarchyPtrFoldMap.TryGetValue(instruction.IlOffset, out var hierarchyFold))
+			_typeHierarchyPtrFoldMap.TryGetValue((_currentMethodNativeSymbol ?? "", instruction.IlOffset), out var hierarchyFold))
 		{
 			builder.AppendLine(indentation + "{");
 			if (hierarchyFold.TypeExpr2 is not null)
@@ -3699,16 +3765,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			else
 			{
 				// For int32 add/sub/mul, emit direct C++ wrapping expressions
-				// (via uint32 cast for well-defined wrap-on-overflow) instead of
-				// ChaosWrapAdd/Sub/Mul function calls.  This matches how double
-				// arithmetic is emitted (direct C++ operators) and eliminates
-				// ~20-30% call overhead on each loop iteration.
+				// using raw eval-stack expressions with a single (uint32) truncation
+				// instead of the redundant (uint32)(int32) double-cast chain.
+				// The outer (int32) +(intptr) preserves signed wrap-on-overflow semantics.
 				// ChaosDiv/ChaosRem still need function dispatch (divide-by-zero check).
 				string expr = helperName switch
 				{
-					"ChaosWrapAdd" => $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>({_lLoad}) + static_cast<CHAOS_IL2CPP_UINT32>({_rLoad})))",
-					"ChaosWrapSub" => $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>({_lLoad}) - static_cast<CHAOS_IL2CPP_UINT32>({_rLoad})))",
-					"ChaosWrapMul" => $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>({_lLoad}) * static_cast<CHAOS_IL2CPP_UINT32>({_rLoad})))",
+					"ChaosWrapAdd" => $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>({_lExpr}) + static_cast<CHAOS_IL2CPP_UINT32>({_rExpr})))",
+					"ChaosWrapSub" => $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>({_lExpr}) - static_cast<CHAOS_IL2CPP_UINT32>({_rExpr})))",
+					"ChaosWrapMul" => $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>({_lExpr}) * static_cast<CHAOS_IL2CPP_UINT32>({_rExpr})))",
 					_ => $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}({_lLoad}, {_rLoad}))",
 				};
 				EmitEvalStackPush(builder, indentation, expr);
@@ -4189,6 +4254,11 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			return instruction.Callee?.Contains("::ToChar:System.Char(System.Object)", System.StringComparison.Ordinal) == true;
 		}
 
+		private static bool IsConvertToCharObjectProviderCall(AotCoreIrInstructionArtifact instruction)
+		{
+			return instruction.Callee?.Contains("::ToChar:System.Char(System.Object,System.IFormatProvider)", System.StringComparison.Ordinal) == true;
+		}
+
 		private static string ExtractTypeName(string subjectId)
 		{
 			var slashIdx = subjectId.LastIndexOf('/');
@@ -4214,6 +4284,12 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 		private void EmitFusedConvertCharBoxCall(System.Text.StringBuilder builder, string indentation)
 		{
+			// If this was an IFormatProvider overload, pop the provider null value
+			if (_pendingBoxHasProvider)
+			{
+				ConsumeEvalStackValueExpression();
+				_pendingBoxHasProvider = false;
+			}
 			string rawValueExpr = ConsumeEvalStackValueExpression();
 			string inlineExpr = _pendingBoxSubjectId switch
 			{

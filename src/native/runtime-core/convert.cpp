@@ -161,6 +161,24 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_single(CHAOS_IL2CPP_INTPTR v
 // Boxed value types use PureTypeHeader (8B: type_info) + payload (8B) → 16B.
 // Payload is at offset 8. The type is determined by TypeInfoHot::stable_id
 // (64-bit FNV-1a hash of the type name).
+//
+// Dispatch strategy: constexpr perfect hash table (shift=14, mask=0x3F,
+// 64 slots, zero collisions among all 14 eligible value types).  Replaces
+// the 64-bit switch/ binary-search-tree with a single O(1) table lookup.
+// Handler indices are assigned alphabetically by type name.
+//
+// Index mapping (handler_idx → type):
+//   0=Boolean, 1=Byte, 2=Char, 3=DateTime, 4=Decimal, 5=Double,
+//   6=Int16, 7=Int32, 8=Int64, 9=SByte, 10=Single, 11=UInt16,
+//   12=UInt32, 13=UInt64
+
+// Perfect hash: (stable_id >> 14) & 0x3F → handler index 0-13 (or 0xFF = not found)
+static constexpr uint8_t kToCharHandlerIndex[64] = {
+    255, 255, 255, 255,  10,   1,   3, 255, 255, 255,   6,  13,   5, 255, 255, 255,
+    255, 255, 255,   7, 255, 255, 255,   9, 255, 255, 255, 255, 255, 255, 255, 255,
+    255, 255, 255, 255, 255, 255, 255, 255, 255,  12, 255,   2, 255,  11,   4, 255,
+    255, 255, 255, 255,   0, 255, 255,   8, 255, 255, 255, 255, 255, 255, 255, 255,
+};
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object(CHAOS_IL2CPP_INTPTR value)
 {
@@ -173,31 +191,60 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object(CHAOS_IL2CPP_INTPTR v
 
     const auto* obj = reinterpret_cast<const void*>(value);
     const auto* ti = chaos_object_get_type_info(obj);
+
+    // Fast rejection: only value types (type_shape==2) can be unboxed.
+    // Non-value types (reference, interface) reach here only on invalid IL.
+    if (ti->type_shape != 2)
+    {
+        chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+    }
+
+    uint32_t hash_slot = (ti->stable_id >> 14) & 0x3F;
+    uint8_t handler_idx = kToCharHandlerIndex[hash_slot];
+    if (handler_idx >= 14)
+    {
+        chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+    }
+
     const auto* payload = reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
         static_cast<const char*>(obj) + sizeof(PureTypeHeader));
 
-    switch (ti->stable_id)
+    switch (handler_idx)
     {
-        case chaos_compute_type_stable_id("System.Byte"):
+        case 0:  // System.Boolean → InvalidCastException
+            return chaos_convert_tochar_boolean(*payload);
+        case 1:  // System.Byte → direct cast (range always valid)
             return chaos_convert_tochar_byte(*payload);
-        case chaos_compute_type_stable_id("System.Char"):
-        case chaos_compute_type_stable_id("System.UInt16"):
+        case 2:  // System.Char → direct mask
             return static_cast<CHAOS_IL2CPP_UINT16>(*payload);
-        case chaos_compute_type_stable_id("System.Int16"):
-            return chaos_convert_tochar_int16(*payload);
-        case chaos_compute_type_stable_id("System.Int32"):
-            return chaos_convert_tochar_int32(*payload);
-        case chaos_compute_type_stable_id("System.Int64"):
-            return chaos_convert_tochar_int64(*payload);
-        case chaos_compute_type_stable_id("System.SByte"):
-            return chaos_convert_tochar_sbyte(*payload);
-        case chaos_compute_type_stable_id("System.UInt32"):
-            return chaos_convert_tochar_uint32(*payload);
-        case chaos_compute_type_stable_id("System.UInt64"):
-            return chaos_convert_tochar_uint64(*payload);
-        case chaos_compute_type_stable_id("System.Single"):
+        case 3:  // System.DateTime → InvalidCastException
+            return chaos_convert_tochar_datetime(*payload);
+        case 4:  // System.Decimal → DecimalCarrier parse at payload offset
         {
-            // Float payload: low 32 bits of *payload are the float bits
+            auto dec_addr = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
+                static_cast<const char*>(obj) + sizeof(PureTypeHeader));
+            return chaos_convert_tochar_decimal(dec_addr);
+        }
+        case 5:  // System.Double → IEEE 754 → int truncation
+        {
+            auto d = chaos::il2cpp::common::load_float64(*payload);
+            auto intVal = static_cast<int>(d);
+            if (intVal < 0 || intVal > 0xFFFF)
+            {
+                chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+            }
+            return static_cast<CHAOS_IL2CPP_UINT16>(intVal);
+        }
+        case 6:  // System.Int16 → signed range check
+            return chaos_convert_tochar_int16(*payload);
+        case 7:  // System.Int32 → signed range check
+            return chaos_convert_tochar_int32(*payload);
+        case 8:  // System.Int64 → signed range check
+            return chaos_convert_tochar_int64(*payload);
+        case 9:  // System.SByte → signed range check
+            return chaos_convert_tochar_sbyte(*payload);
+        case 10: // System.Single → IEEE 754 → int truncation
+        {
             CHAOS_IL2CPP_INT32 bits = static_cast<CHAOS_IL2CPP_INT32>(
                 static_cast<int32_t>(*payload));
             float f;
@@ -209,29 +256,12 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_object(CHAOS_IL2CPP_INTPTR v
             }
             return static_cast<CHAOS_IL2CPP_UINT16>(intVal);
         }
-        case chaos_compute_type_stable_id("System.Double"):
-        {
-            // Double payload at offset 8, read as double (same 8-byte slot)
-            auto d = chaos::il2cpp::common::load_float64(*payload);
-            auto intVal = static_cast<int>(d);
-            if (intVal < 0 || intVal > 0xFFFF)
-            {
-                chaos::il2cpp::runtime_core::chaos_raise_exception(0);
-            }
-            return static_cast<CHAOS_IL2CPP_UINT16>(intVal);
-        }
-        case chaos_compute_type_stable_id("System.Decimal"):
-        {
-            // Decimal payload at offset 8 is a DecimalCarrier (16B).
-            // chaos_convert_tochar_decimal expects a pointer to the carrier.
-            auto dec_addr = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-                static_cast<const char*>(obj) + sizeof(PureTypeHeader));
-            return chaos_convert_tochar_decimal(dec_addr);
-        }
-        case chaos_compute_type_stable_id("System.Boolean"):
-            return chaos_convert_tochar_boolean(*payload);
-        case chaos_compute_type_stable_id("System.DateTime"):
-            return chaos_convert_tochar_datetime(*payload);
+        case 11: // System.UInt16 → direct cast (range always valid)
+            return static_cast<CHAOS_IL2CPP_UINT16>(*payload);
+        case 12: // System.UInt32 → unsigned range check
+            return chaos_convert_tochar_uint32(*payload);
+        case 13: // System.UInt64 → unsigned range check
+            return chaos_convert_tochar_uint64(*payload);
         default:
             chaos::il2cpp::runtime_core::chaos_raise_exception(0);
     }

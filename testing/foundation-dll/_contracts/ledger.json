@@ -670,7 +670,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": "2026-05-27T15:07:35.386165+00:00"
+          "lastVerified": "2026-05-27T15:21:28.219804+00:00"
         },
         {
           "familyId": "family/System.Private.CoreLib/delegate/core-invocation",
