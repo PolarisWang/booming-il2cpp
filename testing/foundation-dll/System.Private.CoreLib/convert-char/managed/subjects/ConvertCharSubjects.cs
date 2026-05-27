@@ -79,14 +79,14 @@ public static partial class ConvertCharSubjects
     // [9] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
     public static void Subject_9()
     {
-        try { var _ = (int)(Convert.ToChar(null!)); }
+        try { var _ = (int)(Convert.ToChar((object)42)); }
         catch { _exitCode = 1; }
     }
 
     // [10] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)
     public static void Subject_10()
     {
-        try { var _ = (int)(Convert.ToChar(null!, null)); }
+        try { var _ = (int)(Convert.ToChar((object)42, null)); }
         catch { _exitCode = 1; }
     }
 
