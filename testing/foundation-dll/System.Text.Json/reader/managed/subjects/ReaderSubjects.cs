@@ -84,14 +84,14 @@ public static partial class ReaderSubjects
     // [8] System.Text.Json/System.Text.Json.Utf8JsonReader::get_TokenStartIndex:System.Int64()
     public static void CustomEntrySubject_8()
     {
-        try { var r = MakeBoolReader(); Assert.AreEqual(0, r.TokenStartIndex); }
+        try { var r = MakeBoolReader(); Assert.AreEqual(0L, r.TokenStartIndex); }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Text.Json/System.Text.Json.Utf8JsonReader::get_TokenType:System.Text.Json.JsonTokenType()
     public static void CustomEntrySubject_9()
     {
-        try { var r = MakeBoolReader(); Assert.AreEqual(JsonTokenType.True, r.TokenType); }
+        try { var r = MakeBoolReader(); Assert.AreEqual((int)JsonTokenType.True, (int)r.TokenType); }
         catch { _exitCode = 1; }
     }
 

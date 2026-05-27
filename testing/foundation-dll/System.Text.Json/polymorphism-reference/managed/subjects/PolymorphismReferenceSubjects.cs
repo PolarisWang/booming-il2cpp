@@ -38,14 +38,14 @@ public static partial class PolymorphismReferenceSubjects
     // [3] System.Text.Json/System.Text.Json.Serialization.ReferenceHandler`1::CreateResolver:System.Text.Json.Serialization.ReferenceResolver()
     public static void CustomEntrySubject_3()
     {
-        try { var r = new ReferenceHandler<int>().CreateResolver(); Assert.IsNotNull(r); }
+        try { var r = ReferenceHandler.Preserve.CreateResolver(); Assert.IsTrue(r != null); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Text.Json/System.Text.Json.Serialization.ReferenceHandler`1::.ctor:System.Void()
     public static void CustomEntrySubject_4()
     {
-        try { var h = new ReferenceHandler<int>(); Assert.IsNotNull(h); }
+        try { var h = ReferenceHandler.Preserve; Assert.IsNotNull(h); }
         catch { _exitCode = 1; }
     }
 

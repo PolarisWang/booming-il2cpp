@@ -31,7 +31,7 @@ public static partial class DocumentElementSubjects
     // [1] System.Text.Json/System.Text.Json.JsonDocument::get_RootElement:System.Text.Json.JsonElement()
     public static void CustomEntrySubject_1()
     {
-        try { using var doc = JsonDocument.Parse(TestJson); var el = doc.RootElement; Assert.AreEqual(JsonValueKind.Object, el.ValueKind); }
+        try { using var doc = JsonDocument.Parse(TestJson); var el = doc.RootElement; Assert.AreEqual((int)JsonValueKind.Object, (int)el.ValueKind); }
         catch { _exitCode = 1; }
     }
 
@@ -136,7 +136,7 @@ public static partial class DocumentElementSubjects
     // [16] System.Text.Json/System.Text.Json.JsonElement::get_ValueKind:System.Text.Json.JsonValueKind()
     public static void CustomEntrySubject_16()
     {
-        try { using var doc = JsonDocument.Parse(TestJson); Assert.AreEqual(JsonValueKind.Object, doc.RootElement.ValueKind); }
+        try { using var doc = JsonDocument.Parse(TestJson); Assert.AreEqual((int)JsonValueKind.Object, (int)doc.RootElement.ValueKind); }
         catch { _exitCode = 1; }
     }
 
