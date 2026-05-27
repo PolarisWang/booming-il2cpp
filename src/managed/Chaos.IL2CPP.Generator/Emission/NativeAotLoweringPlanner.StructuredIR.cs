@@ -902,6 +902,21 @@ public sealed partial class NativeAotLoweringPlanner
         string inner = indentation + "    ";
         string bodyIndent = inner + "    ";
 
+        // Induction variable detection for array bounds check elimination
+        if (_loopArrayAccessSkipOffsets == null)
+        {
+            var bodyInstrs = new List<AotCoreIrInstructionArtifact>();
+            CollectInstructions(w.Body, bodyInstrs);
+            int? ivSlot = DetectInductionVariableSlot(bodyInstrs);
+            if (ivSlot.HasValue)
+            {
+                var writtenSlots = new HashSet<int>();
+                CollectWrittenSlots(w.Body, writtenSlots);
+                writtenSlots.Add(ivSlot.Value);
+                _loopArrayAccessSkipOffsets = PreScanLoopArraySkips(w.Body, ivSlot.Value, writtenSlots);
+            }
+        }
+
         if (w.ConditionTerminator == null)
         {
             // No condition 鈥?infinite loop (while (true) { ... })
@@ -1006,6 +1021,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
         }
+    _loopArrayAccessSkipOffsets = null;
     }
 
     // 鈹€鈹€ Do-while loop 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
@@ -1018,6 +1034,21 @@ public sealed partial class NativeAotLoweringPlanner
     {
         string inner = indentation + "    ";
         string bodyIndent = inner + "    ";
+
+        // Induction variable detection for array bounds check elimination
+        if (_loopArrayAccessSkipOffsets == null)
+        {
+            var bodyInstrs = new List<AotCoreIrInstructionArtifact>();
+            CollectInstructions(dw.Body, bodyInstrs);
+            int? ivSlot = DetectInductionVariableSlot(bodyInstrs);
+            if (ivSlot.HasValue)
+            {
+                var writtenSlots = new HashSet<int>();
+                CollectWrittenSlots(dw.Body, writtenSlots);
+                writtenSlots.Add(ivSlot.Value);
+                _loopArrayAccessSkipOffsets = PreScanLoopArraySkips(dw.Body, ivSlot.Value, writtenSlots);
+            }
+        }
 
         builder.AppendLine(indentation + "do");
         builder.AppendLine(indentation + "{");
@@ -1111,6 +1142,7 @@ public sealed partial class NativeAotLoweringPlanner
         }
 
         builder.AppendLine(indentation + "} while (true);");
+        _loopArrayAccessSkipOffsets = null;
     }
 
     // 鈹€鈹€ Switch 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
@@ -2479,6 +2511,364 @@ public sealed partial class NativeAotLoweringPlanner
 
     internal static void LogMultipleCatchShape() =>
         System.Console.Error.WriteLine("[MultipleCatch] Detected multi-catch EH shape");
+
+    // ════════════════════════════════════════════════════════════════════════════
+    // Loop array bounds check elimination — induction variable detection
+    // ════════════════════════════════════════════════════════════════════════════
+
+    /// <summary>
+    /// Scans instructions for the induction variable increment pattern
+    /// ldloc X; ldc.i4 1; add; stloc X. Returns the local slot number if found.
+    /// </summary>
+    private static int? DetectInductionVariableSlot(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+    {
+        for (int i = 0; i < instructions.Count - 3; i++)
+        {
+            if (instructions[i].Op == "ldloc" &&
+                instructions[i + 1].Op == "ldc.i4" &&
+                instructions[i + 2].Op == "add" &&
+                instructions[i + 3].Op == "stloc")
+            {
+                int ldlocSlot = GetRequiredIntOperand(instructions[i]);
+                int constVal = GetRequiredIntOperand(instructions[i + 1]);
+                int stlocSlot = GetRequiredIntOperand(instructions[i + 3]);
+                if (constVal == 1 && ldlocSlot == stlocSlot)
+                    return ldlocSlot;
+            }
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Collects all local slots written (stloc) within an IR tree.
+    /// </summary>
+    private static void CollectWrittenSlots(StructuredIRNode node, HashSet<int> written)
+    {
+        switch (node)
+        {
+            case IRBlock block:
+                foreach (var instr in block.BodyInstructions)
+                    if (instr.Op == "stloc")
+                        written.Add(GetRequiredIntOperand(instr));
+                if (block.Terminator?.Op == "stloc")
+                    written.Add(GetRequiredIntOperand(block.Terminator));
+                break;
+            case IRSequence seq:
+                foreach (var n in seq.Nodes)
+                    CollectWrittenSlots(n, written);
+                break;
+            case IRIfThenElse ite:
+                CollectWrittenSlots(ite.ThenBody, written);
+                if (ite.ElseBody != null)
+                    CollectWrittenSlots(ite.ElseBody, written);
+                break;
+            case IRWhileLoop w:
+                CollectWrittenSlots(w.Body, written);
+                break;
+            case IRDoWhileLoop dw:
+                CollectWrittenSlots(dw.Body, written);
+                break;
+            case IRBreak: case IRContinue: case IRReturn: case IRThrow:
+                break;
+            case IRExceptionRegion er:
+                CollectWrittenSlots(er.TryBody, written);
+                CollectWrittenSlots(er.HandlerBody, written);
+                break;
+            case IRSwitch sw:
+                foreach (var caseBody in sw.CaseBodies.Values)
+                    CollectWrittenSlots(caseBody, written);
+                if (sw.DefaultBody != null)
+                    CollectWrittenSlots(sw.DefaultBody, written);
+                break;
+            case IRPcDispatch pc:
+                foreach (var pcCase in pc.Cases)
+                    foreach (var instr in pcCase.Instructions)
+                        if (instr.Op == "stloc")
+                            written.Add(GetRequiredIntOperand(instr));
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Collects all instruction artifacts within an IR tree (flattened).
+    /// </summary>
+    private static void CollectInstructions(StructuredIRNode node, List<AotCoreIrInstructionArtifact> instructions)
+    {
+        switch (node)
+        {
+            case IRBlock block:
+                instructions.AddRange(block.BodyInstructions);
+                if (block.Terminator != null)
+                    instructions.Add(block.Terminator);
+                break;
+            case IRSequence seq:
+                foreach (var n in seq.Nodes)
+                    CollectInstructions(n, instructions);
+                break;
+            case IRIfThenElse ite:
+                CollectInstructions(ite.ThenBody, instructions);
+                if (ite.ElseBody != null)
+                    CollectInstructions(ite.ElseBody, instructions);
+                break;
+            case IRWhileLoop w:
+                CollectInstructions(w.Body, instructions);
+                break;
+            case IRDoWhileLoop dw:
+                CollectInstructions(dw.Body, instructions);
+                break;
+            case IRBreak: case IRContinue: case IRReturn: case IRThrow:
+                break;
+            case IRExceptionRegion er:
+                CollectInstructions(er.TryBody, instructions);
+                CollectInstructions(er.HandlerBody, instructions);
+                break;
+            case IRSwitch sw:
+                foreach (var caseBody in sw.CaseBodies.Values)
+                    CollectInstructions(caseBody, instructions);
+                if (sw.DefaultBody != null)
+                    CollectInstructions(sw.DefaultBody, instructions);
+                break;
+            case IRPcDispatch pc:
+                foreach (var pcCase in pc.Cases)
+                    instructions.AddRange(pcCase.Instructions);
+                break;
+        }
+    }
+
+    /// <summary>
+    /// Abstract eval stack interpreter that tracks which local slots are on
+    /// the stack.  When a stelem/ldelem/ldelema instruction is found where the
+    /// index operand is the induction variable slot and the array operand is
+    /// a loop-invariant slot, the instruction's IlOffset is added to skipOffsets.
+    /// </summary>
+    private static void PreScanBlockArrayAccesses(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instructions,
+        int ivSlot,
+        HashSet<int> writtenSlots,
+        HashSet<int> skipOffsets)
+    {
+        // Abstract stack: each entry is a local slot number if the value
+        // came directly from ldloc, or null if the value is derived/unknown.
+        var stack = new List<int?>(instructions.Count);
+
+        foreach (var instr in instructions)
+        {
+            switch (instr.Op)
+            {
+                case "ldloc":
+                    stack.Add(GetRequiredIntOperand(instr));
+                    break;
+
+                case "ldc.i4": case "ldc.i8": case "ldc.r4": case "ldc.r8":
+                case "ldarg": case "ldnull": case "ldstr": case "ldtoken":
+                case "ldarga": case "ldloca": case "ldsflda":
+                case "ldflda":
+                case "newarr": case "sizeof":
+                case "dup": case "arglist":
+                case "ldftn": case "ldvirtftn":
+                    stack.Add(null);
+                    break;
+
+                case "stloc":
+                    if (stack.Count > 0) stack.RemoveAt(stack.Count - 1);
+                    break;
+
+                case "starg":
+                    if (stack.Count > 0) stack.RemoveAt(stack.Count - 1);
+                    break;
+
+                case "stelem": case "stelem.i": case "stelem.ref":
+                    if (stack.Count >= 3)
+                    {
+                        // Pop: value (bottom), index (middle), array (top of pops)
+                        stack.RemoveAt(stack.Count - 1); // value
+                        int? idxSlot = stack[^1];
+                        int? arrSlot = stack[^2];
+                        stack.RemoveRange(stack.Count - 2, 2); // index + array
+
+                        if (idxSlot == ivSlot && arrSlot.HasValue && !writtenSlots.Contains(arrSlot.Value))
+                            skipOffsets.Add(instr.IlOffset);
+                    }
+                    break;
+
+                case "ldelem": case "ldelem.i": case "ldelem.ref": case "ldelema":
+                    if (stack.Count >= 2)
+                    {
+                        int? idxSlot = stack[^1];
+                        int? arrSlot = stack[^2];
+                        stack.RemoveRange(stack.Count - 2, 2);
+                        stack.Add(null); // result value
+
+                        if (idxSlot == ivSlot && arrSlot.HasValue && !writtenSlots.Contains(arrSlot.Value))
+                            skipOffsets.Add(instr.IlOffset);
+                    }
+                    break;
+
+                // Binary: pop 2, push null (derived)
+                case "add": case "sub": case "mul": case "div": case "div.un":
+                case "rem": case "rem.un":
+                case "and": case "or": case "xor":
+                case "shl": case "shr": case "shr.un":
+                case "ceq": case "cgt": case "clt": case "cgt.un":
+                case "add.ovf": case "sub.ovf": case "mul.ovf":
+                case "add.ovf.un": case "sub.ovf.un": case "mul.ovf.un":
+                    if (stack.Count >= 2)
+                    {
+                        stack.RemoveRange(stack.Count - 2, 2);
+                        stack.Add(null);
+                    }
+                    break;
+
+                // Unary: pop 1, push null (derived)
+                case "neg": case "not":
+                case "conv.i1": case "conv.i2": case "conv.i4": case "conv.i8":
+                case "conv.u1": case "conv.u2": case "conv.u4": case "conv.u8":
+                case "conv.u": case "conv.r4": case "conv.r8": case "conv.r.un":
+                case "conv.ovf.i1": case "conv.ovf.u1": case "conv.ovf.i2":
+                case "conv.ovf.u2": case "conv.ovf.i4": case "conv.ovf.u4":
+                case "conv.ovf.i8": case "conv.ovf.u8":
+                case "conv.ovf.i": case "conv.ovf.u":
+                case "ckfinite":
+                case "ldind.i1": case "ldind.u1": case "ldind.i2": case "ldind.u2":
+                case "ldind.i4": case "ldind.u4": case "ldind.i8":
+                case "ldind.ref": case "ldind.r4": case "ldind.r8": case "ldind.i":
+                case "ldobj": case "ldlen": case "localloc":
+                case "box": case "unbox": case "unbox.any":
+                case "castclass": case "isinst":
+                case "ldfld":
+                    if (stack.Count >= 1)
+                    {
+                        stack.RemoveAt(stack.Count - 1);
+                        stack.Add(null);
+                    }
+                    break;
+
+                // Pop 1 only
+                case "pop": case "stsfld": case "stfld":
+                case "initobj": case "throw":
+                case "brtrue": case "brfalse":
+                    if (stack.Count >= 1) stack.RemoveAt(stack.Count - 1);
+                    break;
+
+                // Pop 2 only
+                case "beq": case "bne.un": case "bge": case "bgt":
+                case "ble": case "blt":
+                case "bge.un": case "bgt.un": case "ble.un": case "blt.un":
+                case "stobj":
+                case "stind.i4": case "stind.i1": case "stind.i2":
+                case "stind.i8": case "stind.r4": case "stind.r8":
+                case "stind.ref": case "stind.i":
+                    if (stack.Count >= 2) stack.RemoveRange(stack.Count - 2, 2);
+                    break;
+
+                // Pop 3 (cpblk)
+                case "cpblk":
+                    if (stack.Count >= 3) stack.RemoveRange(stack.Count - 3, 3);
+                    break;
+
+                // Call: pop N args, push 0/1 result
+                case "call": case "callvirt": case "calli":
+                    int? paramCount = instr.TargetParameterCount;
+                    if (paramCount.HasValue && stack.Count >= paramCount.Value)
+                        stack.RemoveRange(stack.Count - paramCount.Value, paramCount.Value);
+                    string? retType = instr.TargetReturnType;
+                    if (!string.IsNullOrEmpty(retType) && retType != "System.Void")
+                        stack.Add(null);
+                    break;
+
+                case "newobj":
+                    int? ctorParamCount = instr.TargetParameterCount;
+                    if (ctorParamCount.HasValue && stack.Count >= ctorParamCount.Value)
+                        stack.RemoveRange(stack.Count - ctorParamCount.Value, ctorParamCount.Value);
+                    stack.Add(null);
+                    break;
+
+                // ret: reset stack
+                case "ret":
+                    stack.Clear();
+                    break;
+
+                // br/leave: non-fallthrough, reset
+                case "br": case "leave":
+                    stack.Clear();
+                    break;
+
+                case "jmp":
+                    break;
+
+                case "switch":
+                    if (stack.Count >= 1) stack.RemoveAt(stack.Count - 1);
+                    break;
+
+                case "mkrefany":
+                    if (stack.Count >= 1) { stack.RemoveAt(stack.Count - 1); stack.Add(null); stack.Add(null); }
+                    break;
+
+                case "refanyval": case "refanytype":
+                    if (stack.Count >= 2) { stack.RemoveRange(stack.Count - 2, 2); stack.Add(null); }
+                    break;
+            }
+        }
+    }
+
+    /// <summary>
+    /// Walk an IR tree and collect all array access offsets that can skip
+    /// bounds checks because they use ivSlot as the index with a loop-invariant
+    /// array (not in writtenSlots).
+    /// </summary>
+    private HashSet<int>? PreScanLoopArraySkips(StructuredIRNode body, int ivSlot, HashSet<int> writtenSlots)
+    {
+        var skipOffsets = new HashSet<int>();
+        PreScanNodeArrayAccesses(body, ivSlot, writtenSlots, skipOffsets);
+        return skipOffsets.Count > 0 ? skipOffsets : null;
+    }
+
+    private static void PreScanNodeArrayAccesses(
+        StructuredIRNode node,
+        int ivSlot,
+        HashSet<int> writtenSlots,
+        HashSet<int> skipOffsets)
+    {
+        switch (node)
+        {
+            case IRBlock block:
+                PreScanBlockArrayAccesses(block.BodyInstructions, ivSlot, writtenSlots, skipOffsets);
+                if (block.Terminator != null)
+                    PreScanBlockArrayAccesses(new[] { block.Terminator }, ivSlot, writtenSlots, skipOffsets);
+                break;
+            case IRSequence seq:
+                foreach (var n in seq.Nodes)
+                    PreScanNodeArrayAccesses(n, ivSlot, writtenSlots, skipOffsets);
+                break;
+            case IRIfThenElse ite:
+                PreScanNodeArrayAccesses(ite.ThenBody, ivSlot, writtenSlots, skipOffsets);
+                if (ite.ElseBody != null)
+                    PreScanNodeArrayAccesses(ite.ElseBody, ivSlot, writtenSlots, skipOffsets);
+                break;
+            case IRWhileLoop w:
+                PreScanNodeArrayAccesses(w.Body, ivSlot, writtenSlots, skipOffsets);
+                break;
+            case IRDoWhileLoop dw:
+                PreScanNodeArrayAccesses(dw.Body, ivSlot, writtenSlots, skipOffsets);
+                break;
+            case IRBreak: case IRContinue: case IRReturn: case IRThrow:
+                break;
+            case IRExceptionRegion er:
+                PreScanNodeArrayAccesses(er.TryBody, ivSlot, writtenSlots, skipOffsets);
+                PreScanNodeArrayAccesses(er.HandlerBody, ivSlot, writtenSlots, skipOffsets);
+                break;
+            case IRSwitch sw:
+                foreach (var caseBody in sw.CaseBodies.Values)
+                    PreScanNodeArrayAccesses(caseBody, ivSlot, writtenSlots, skipOffsets);
+                if (sw.DefaultBody != null)
+                    PreScanNodeArrayAccesses(sw.DefaultBody, ivSlot, writtenSlots, skipOffsets);
+                break;
+            case IRPcDispatch pc:
+                foreach (var pcCase in pc.Cases)
+                    PreScanBlockArrayAccesses(pcCase.Instructions, ivSlot, writtenSlots, skipOffsets);
+                break;
+        }
+    }
 }
 
 

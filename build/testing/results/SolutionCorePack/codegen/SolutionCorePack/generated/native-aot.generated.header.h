@@ -1,4 +1,4 @@
-﻿// Auto-generated type declarations (TU paging)
+// Auto-generated type declarations (TU paging)
 #pragma once
 
 #include <chaos/native_types.h>

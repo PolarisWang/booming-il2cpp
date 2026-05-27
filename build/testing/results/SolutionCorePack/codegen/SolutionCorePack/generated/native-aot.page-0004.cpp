@@ -1,4 +1,4 @@
-﻿#include <chaos/common.h>
+#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -8324,7 +8324,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
 		if (chaos_length < 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			CHAOS_IL2CPP_FAIL_FAST();
 		}
 		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
 		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
@@ -8351,11 +8351,11 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s3);
 				if (chaos_array == nullptr)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 			}
@@ -8382,11 +8382,11 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s17);
 				if (chaos_array == nullptr)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 				_s19 = chaos_element;

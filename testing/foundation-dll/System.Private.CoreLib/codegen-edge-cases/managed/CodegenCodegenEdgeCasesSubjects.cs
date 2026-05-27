@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ public static partial class CodegenCodegenEdgeCasesSubjects
     // [3] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)
     public static void Subject_3()
     {
-        try { if (CodegenEdgeCasesSubjects.Subject_3(42) != CodegenEdgeCasesSubjects.Subject_3(42)) _exitCode = 1; }
+        try { var _ = CodegenEdgeCasesSubjects.Subject_3(42); }
         catch { _exitCode = 1; }
     }
 

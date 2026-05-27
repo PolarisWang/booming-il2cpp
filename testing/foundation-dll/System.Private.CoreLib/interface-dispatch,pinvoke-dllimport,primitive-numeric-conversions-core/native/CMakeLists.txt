@@ -77,7 +77,8 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/support"
     "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
-    "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
+    "${CHAOS_CODEGEN_DIR}/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/generated"
+    "${CMAKE_CURRENT_SOURCE_DIR}/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
     "${CHAOS_PROJECT_ROOT}/src/native/jit"
 )

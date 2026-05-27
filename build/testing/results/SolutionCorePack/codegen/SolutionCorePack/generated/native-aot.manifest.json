@@ -1,0 +1,61 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotManifest",
+  "assemblyName": "SolutionCorePack",
+  "entrySubjectId": "Chaos.TestFramework.Runtime/ChaosBenchmarkRunner\u002B\u003C\u003Ec__DisplayClass0_0::.ctor:System.Void()",
+  "managedClosureRootPath": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated",
+  "planArtifactPath": "native-aot.plan.json",
+  "translationUnitPageSize": 150,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 241,
+      "path": "generated/native-aot.page-0001.cpp",
+      "firstMethodSubjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::InvokeWorkload:System.Int32(System.Int32)",
+      "lastMethodSubjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor\u002B\u003C\u003Ec__DisplayClass6_0::\u003CResolveEntry\u003Eb__0:System.Boolean(ChaosTestCollectionEntry)"
+    }
+  ],
+  "generatedArtifacts": [
+    {
+      "kind": "shapeDispatchHeader",
+      "path": "runtime_helper_shapes.h"
+    },
+    {
+      "kind": "enumMetadataHeader",
+      "path": "enum_metadata.generated.h"
+    },
+    {
+      "kind": "generatedHeader",
+      "path": "native-aot.generated.header.h"
+    },
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "generated/native-aot.page-0001.cpp"
+    },
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "native-aot.page-0002.cpp"
+    },
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "native-aot.page-0003.cpp"
+    },
+    {
+      "kind": "generatedTranslationUnit",
+      "path": "native-aot.page-0004.cpp"
+    },
+    {
+      "kind": "generatedModuleHeader",
+      "path": "chaos_generated_module.h"
+    },
+    {
+      "kind": "generatedModuleSource",
+      "path": "chaos_generated_module.cpp"
+    },
+    {
+      "kind": "codegenMetrics",
+      "path": "native-aot.codegen-metrics.json"
+    }
+  ]
+}

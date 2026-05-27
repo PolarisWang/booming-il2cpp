@@ -1138,6 +1138,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 					_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[0] = _s1;
+				break;
 			case 1:
 				{
 					auto& _d1 = s_hotpatch_entries[1];
@@ -1155,6 +1156,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 					_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[0] = _s2;
+				break;
 			case 2:
 				{
 					auto& _d6 = s_hotpatch_entries[6];
@@ -1172,6 +1174,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 					_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[0] = _s3;
+				break;
 			case 3:
 				{
 					auto& _d3 = s_hotpatch_entries[3];
@@ -1189,6 +1192,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 					_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[0] = _s4;
+				break;
 			case 4:
 				{
 					auto& _d5 = s_hotpatch_entries[5];
@@ -1206,6 +1210,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 					_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[0] = _s5;
+				break;
 			case 5:
 				{
 					auto& _d7 = s_hotpatch_entries[7];
@@ -1223,6 +1228,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 					_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
 				}
 				chaos_locals[0] = _s6;
+				break;
 			case 6:
 			{
 				{

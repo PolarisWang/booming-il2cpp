@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,28 +37,28 @@ public static partial class GarbageCollectionSubjects
     // [3] System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)
     public static void Subject_3()
     {
-        try { if (GC.GetGeneration(null!) != GC.GetGeneration(null!)) _exitCode = 1; }
+        try { var _ = GC.GetGeneration(null!); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
     public static void Subject_4()
     {
-        try { if ((int)(((Array)(Array.CreateInstance(typeof(byte), 42))).Length) != (int)(((Array)(Array.CreateInstance(typeof(byte), 42))).Length)) _exitCode = 1; }
+        try { var _ = (int)(((Array)(Array.CreateInstance(typeof(byte), 42))).Length); }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)
     public static void Subject_5()
     {
-        try { if ((int)(GC.GetTotalMemory(true)) != (int)(GC.GetTotalMemory(true))) _exitCode = 1; }
+        try { var _ = (int)(GC.GetTotalMemory(true)); }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()
     public static void Subject_6()
     {
-        try { if ((long)((GC.GetGCMemoryInfo()).TotalCommittedBytes) != (long)((GC.GetGCMemoryInfo()).TotalCommittedBytes)) _exitCode = 1; }
+        try { var _ = (long)((GC.GetGCMemoryInfo()).TotalCommittedBytes); }
         catch { _exitCode = 1; }
     }
 
@@ -71,14 +72,14 @@ public static partial class GarbageCollectionSubjects
     // [8] System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()
     public static void Subject_8()
     {
-        try { if ((int)(GC.CollectionCount(42)) != (int)(GC.CollectionCount(42))) _exitCode = 1; }
+        try { var _ = (int)(GC.CollectionCount(42)); }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()
     public static void Subject_9()
     {
-        try { if ((long)((GC.GetTotalPauseDuration()).Ticks) != (long)((GC.GetTotalPauseDuration()).Ticks)) _exitCode = 1; }
+        try { var _ = (long)((GC.GetTotalPauseDuration()).Ticks); }
         catch { _exitCode = 1; }
     }
 

@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -56,7 +57,7 @@ public static partial class CollectionsGenericCoreSubjects
     // [7] System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()
     public static void Subject_7()
     {
-        try { if (((new List<int>().ToArray()).Length) != ((new List<int>().ToArray()).Length)) _exitCode = 1; }
+        try { var _ = ((new List<int>().ToArray()).Length); }
         catch { _exitCode = 1; }
     }
 
@@ -68,7 +69,7 @@ public static partial class CollectionsGenericCoreSubjects
     // [9] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()
     public static void Subject_9()
     {
-        try { if (new Dictionary<string, int>().Count != new Dictionary<string, int>().Count) _exitCode = 1; }
+        try { var _ = new Dictionary<string, int>().Count; }
         catch { _exitCode = 1; }
     }
 

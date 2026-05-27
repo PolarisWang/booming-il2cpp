@@ -16,6 +16,9 @@
     <Compile Include="CcwBasicNativeEntry.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />
     <PackageReference Remove="xunit" />
     <PackageReference Remove="xunit.runner.visualstudio" />

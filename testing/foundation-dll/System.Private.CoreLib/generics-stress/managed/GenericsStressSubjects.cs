@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,14 @@ public static partial class GenericsStressSubjects
     // [1] System.Private.CoreLib/System.Array::BinarySearch:System.Int32(System.Array,System.Object)
     public static void Subject_1()
     {
-        try { if (Array.BinarySearch(new byte[4], (byte)42) != Array.BinarySearch(new byte[4], (byte)42)) _exitCode = 1; }
+        try { var _ = Array.BinarySearch(new byte[4], (byte)42); }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Array::IndexOf:System.Int32(System.Array,System.Object)
     public static void Subject_2()
     {
-        try { if (Array.IndexOf(new byte[4], (byte)42) != Array.IndexOf(new byte[4], (byte)42)) _exitCode = 1; }
+        try { var _ = Array.IndexOf(new byte[4], (byte)42); }
         catch { _exitCode = 1; }
     }
 

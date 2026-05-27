@@ -1,0 +1,22 @@
+{
+  "formatVersion": "v0",
+  "artifactKind": "nativeAotLoweringPlan",
+  "planKind": "full-assembly-entry",
+  "assemblyName": "SolutionCorePack",
+  "entrySubjectId": "Chaos.TestFramework.Runtime/ChaosBenchmarkRunner\u002B\u003C\u003Ec__DisplayClass0_0::.ctor:System.Void()",
+  "nativeEntryFunctionName": "",
+  "entrySymbol": "Chaos_TestFramework_Runtime_ChaosBenchmarkRunner___c__DisplayClass0_0__ctor",
+  "entryMethodToken": "0u",
+  "workloadAbi": "full-assembly",
+  "translationUnitPageSize": 150,
+  "translationUnitPageCount": 1,
+  "translationUnitPages": [
+    {
+      "pageNumber": 1,
+      "methodCount": 241,
+      "path": "generated/native-aot.page-0001.cpp",
+      "firstMethodSubjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::InvokeWorkload:System.Int32(System.Int32)",
+      "lastMethodSubjectId": "Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor\u002B\u003C\u003Ec__DisplayClass6_0::\u003CResolveEntry\u003Eb__0:System.Boolean(ChaosTestCollectionEntry)"
+    }
+  ]
+}

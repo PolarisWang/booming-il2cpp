@@ -87,7 +87,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\src\native\benchmark-host;D:\agent\booming-il2cpp\src\native\proof-host;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\hot-update;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /utf-8 /GL- /w</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8 /w</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
@@ -99,11 +99,11 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME="SHIP";CHAOS_NATIVE_AOT_ENTRY=SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=%3BSHIP\"";NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR="Debug"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=\"SHIP\";CHAOS_NATIVE_AOT_ENTRY=SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=%3BSHIP\\"\";NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\src\native\benchmark-host;D:\agent\booming-il2cpp\src\native\proof-host;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\hot-update;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -118,7 +118,6 @@
       <AdditionalDependencies>..\Debug\chaos_subject_generated_native.lib;..\runtime-core\Debug\chaos_runtime_core.lib;..\hot-update\Debug\chaos_hot_update.lib;..\bootstrap\Debug\chaos_bootstrap.lib;..\support\Debug\chaos_support.lib;..\jit\Debug\chaos_jit.lib;..\interpreter\Debug\chaos_interpreter.lib;..\bootstrap\Debug\chaos_bootstrap.lib;..\jit\Debug\chaos_jit.lib;..\interpreter\Debug\chaos_interpreter.lib;..\support\Debug\chaos_support.lib;..\hot-update\Debug\chaos_hot_update.lib;..\runtime-core\Debug\chaos_runtime_core.lib;..\common\Debug\chaos_common.lib;..\fmt\Debug\chaos_fmt.lib;..\diagnostics\eventpipe\Debug\chaos_eventpipe.lib;..\diagnostics\debugger\Debug\chaos_debugger.lib;bcrypt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/agent/booming-il2cpp/build/testing/results/SolutionCorePack/native-build/benchmark/Debug/chaos_subject_native_aot.lib</ImportLibrary>
@@ -133,7 +132,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\src\native\benchmark-host;D:\agent\booming-il2cpp\src\native\proof-host;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\hot-update;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /utf-8 /GL- /w</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8 /w</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
@@ -143,13 +142,13 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME="SHIP";CHAOS_NATIVE_AOT_ENTRY=SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=%3BSHIP\"";NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR="Release"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=\"SHIP\";CHAOS_NATIVE_AOT_ENTRY=SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=%3BSHIP\\"\";NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\src\native\benchmark-host;D:\agent\booming-il2cpp\src\native\proof-host;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\hot-update;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -164,7 +163,6 @@
       <AdditionalDependencies>..\chaos_subject_generated_native.lib;..\runtime-core\Release\chaos_runtime_core.lib;..\hot-update\Release\chaos_hot_update.lib;..\bootstrap\Release\chaos_bootstrap.lib;..\support\Release\chaos_support.lib;..\jit\Release\chaos_jit.lib;..\interpreter\Release\chaos_interpreter.lib;..\bootstrap\Release\chaos_bootstrap.lib;..\jit\Release\chaos_jit.lib;..\interpreter\Release\chaos_interpreter.lib;..\support\Release\chaos_support.lib;..\hot-update\Release\chaos_hot_update.lib;..\runtime-core\Release\chaos_runtime_core.lib;..\common\Release\chaos_common.lib;..\fmt\Release\chaos_fmt.lib;..\diagnostics\eventpipe\Release\chaos_eventpipe.lib;..\diagnostics\debugger\Release\chaos_debugger.lib;bcrypt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/agent/booming-il2cpp/build/testing/results/SolutionCorePack/native-build/benchmark/Release/chaos_subject_native_aot.lib</ImportLibrary>
@@ -179,7 +177,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\src\native\benchmark-host;D:\agent\booming-il2cpp\src\native\proof-host;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\hot-update;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /utf-8 /GL- /w</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8 /w</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <ExceptionHandling>Sync</ExceptionHandling>
       <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
@@ -189,13 +187,13 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME="SHIP";CHAOS_NATIVE_AOT_ENTRY=SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=%3BSHIP\"";NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR="MinSizeRel"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
       <DebugInformationFormat>
       </DebugInformationFormat>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=\"SHIP\";CHAOS_NATIVE_AOT_ENTRY=SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=%3BSHIP\\"\";NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\src\native\benchmark-host;D:\agent\booming-il2cpp\src\native\proof-host;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\hot-update;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -210,7 +208,6 @@
       <AdditionalDependencies>..\MinSizeRel\chaos_subject_generated_native.lib;..\runtime-core\MinSizeRel\chaos_runtime_core.lib;..\hot-update\MinSizeRel\chaos_hot_update.lib;..\bootstrap\MinSizeRel\chaos_bootstrap.lib;..\support\MinSizeRel\chaos_support.lib;..\jit\MinSizeRel\chaos_jit.lib;..\interpreter\MinSizeRel\chaos_interpreter.lib;..\bootstrap\MinSizeRel\chaos_bootstrap.lib;..\jit\MinSizeRel\chaos_jit.lib;..\interpreter\MinSizeRel\chaos_interpreter.lib;..\support\MinSizeRel\chaos_support.lib;..\hot-update\MinSizeRel\chaos_hot_update.lib;..\runtime-core\MinSizeRel\chaos_runtime_core.lib;..\common\MinSizeRel\chaos_common.lib;..\fmt\MinSizeRel\chaos_fmt.lib;..\diagnostics\eventpipe\MinSizeRel\chaos_eventpipe.lib;..\diagnostics\debugger\MinSizeRel\chaos_debugger.lib;bcrypt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
       <GenerateDebugInformation>false</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/agent/booming-il2cpp/build/testing/results/SolutionCorePack/native-build/benchmark/MinSizeRel/chaos_subject_native_aot.lib</ImportLibrary>
@@ -225,7 +222,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\src\native\benchmark-host;D:\agent\booming-il2cpp\src\native\proof-host;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\hot-update;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <AdditionalOptions>%(AdditionalOptions) /utf-8 /GL- /w</AdditionalOptions>
+      <AdditionalOptions>%(AdditionalOptions) /utf-8 /w</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <ExceptionHandling>Sync</ExceptionHandling>
@@ -236,11 +233,11 @@
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <UseFullPaths>false</UseFullPaths>
       <WholeProgramOptimization>true</WholeProgramOptimization>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME="SHIP";CHAOS_NATIVE_AOT_ENTRY=SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=%3BSHIP\"";NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR="RelWithDebInfo"</PreprocessorDefinitions>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
     <ResourceCompile>
-      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=\"SHIP\";CHAOS_NATIVE_AOT_ENTRY=SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32;NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;CHAOS_VARIANT_SHIP;CHAOS_VARIANT_NAME=%3BSHIP\\"\";NOMINMAX;CHAOS_IL2CPP_HAS_TIER_MANAGER;FMT_USE_WINDOWS_H=0;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\contracts\native\v0;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\runtime-core\gc;D:\agent\booming-il2cpp\src\native\bootstrap;D:\agent\booming-il2cpp\src\native\support;D:\agent\booming-il2cpp\src\native\benchmark-host;D:\agent\booming-il2cpp\src\native\proof-host;D:\agent\booming-il2cpp\third_party\fmt\include;D:\agent\booming-il2cpp\third_party\unordered_dense\include;D:\agent\booming-il2cpp\src\native\interpreter;D:\agent\booming-il2cpp\src\native\interpreter\generated;D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs;D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\..;D:\agent\booming-il2cpp\src\native\diagnostics\debugger\..;D:\agent\booming-il2cpp\src\native\hot-update;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
@@ -255,7 +252,6 @@
       <AdditionalDependencies>..\RelWithDebInfo\chaos_subject_generated_native.lib;..\runtime-core\RelWithDebInfo\chaos_runtime_core.lib;..\hot-update\RelWithDebInfo\chaos_hot_update.lib;..\bootstrap\RelWithDebInfo\chaos_bootstrap.lib;..\support\RelWithDebInfo\chaos_support.lib;..\jit\RelWithDebInfo\chaos_jit.lib;..\interpreter\RelWithDebInfo\chaos_interpreter.lib;..\bootstrap\RelWithDebInfo\chaos_bootstrap.lib;..\jit\RelWithDebInfo\chaos_jit.lib;..\interpreter\RelWithDebInfo\chaos_interpreter.lib;..\support\RelWithDebInfo\chaos_support.lib;..\hot-update\RelWithDebInfo\chaos_hot_update.lib;..\runtime-core\RelWithDebInfo\chaos_runtime_core.lib;..\common\RelWithDebInfo\chaos_common.lib;..\fmt\RelWithDebInfo\chaos_fmt.lib;..\diagnostics\eventpipe\RelWithDebInfo\chaos_eventpipe.lib;..\diagnostics\debugger\RelWithDebInfo\chaos_debugger.lib;bcrypt.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
-      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
       <ImportLibrary>D:/agent/booming-il2cpp/build/testing/results/SolutionCorePack/native-build/benchmark/RelWithDebInfo/chaos_subject_native_aot.lib</ImportLibrary>

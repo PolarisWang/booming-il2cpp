@@ -1,4 +1,4 @@
-﻿#include <chaos/common.h>
+#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -9839,11 +9839,11 @@ extern "C" chaos_valuetype_Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest
 			auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s7);
 			if (chaos_array == nullptr)
 			{
-				CHAOS_IL2CPP_FAIL();
+				CHAOS_IL2CPP_FAIL_FAST();
 			}
 			if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 			{
-				CHAOS_IL2CPP_FAIL();
+				CHAOS_IL2CPP_FAIL_FAST();
 			}
 			const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 			_s9 = chaos_element;
@@ -9919,11 +9919,11 @@ extern "C" chaos_valuetype_Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest
 						auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s27);
 						if (chaos_array == nullptr)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 						_s29 = chaos_element;
@@ -10381,7 +10381,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Runtime_ChaosHotUpdateHostReq
 				auto* chaos_boxed = reinterpret_cast<chaos_boxed_type_Chaos_TestFramework_Runtime_ChaosHotUpdateHostRequest*>(_s4);
 				if (chaos_boxed == nullptr)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				chaos_unbox_any_value_0 = chaos_boxed->value;
 				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_unbox_any_value_0);
@@ -11094,11 +11094,11 @@ extern "C" chaos_valuetype_Chaos_TestFramework_Runtime_ChaosManagedHostRequest C
 			auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s6);
 			if (chaos_array == nullptr)
 			{
-				CHAOS_IL2CPP_FAIL();
+				CHAOS_IL2CPP_FAIL_FAST();
 			}
 			if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 			{
-				CHAOS_IL2CPP_FAIL();
+				CHAOS_IL2CPP_FAIL_FAST();
 			}
 			const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 			_s8 = chaos_element;
@@ -11280,11 +11280,11 @@ extern "C" chaos_valuetype_Chaos_TestFramework_Runtime_ChaosManagedHostRequest C
 						auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s51);
 						if (chaos_array == nullptr)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 						_s53 = chaos_element;
@@ -11640,11 +11640,11 @@ extern "C" chaos_valuetype_Chaos_TestFramework_Runtime_ChaosManagedHostKind Chao
 			auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s4);
 			if (chaos_array == nullptr)
 			{
-				CHAOS_IL2CPP_FAIL();
+				CHAOS_IL2CPP_FAIL_FAST();
 			}
 			if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 			{
-				CHAOS_IL2CPP_FAIL();
+				CHAOS_IL2CPP_FAIL_FAST();
 			}
 			const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 			_s6 = chaos_element;
@@ -11680,11 +11680,11 @@ extern "C" chaos_valuetype_Chaos_TestFramework_Runtime_ChaosManagedHostKind Chao
 							auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s13);
 							if (chaos_array == nullptr)
 							{
-								CHAOS_IL2CPP_FAIL();
+								CHAOS_IL2CPP_FAIL_FAST();
 							}
 							if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 							{
-								CHAOS_IL2CPP_FAIL();
+								CHAOS_IL2CPP_FAIL_FAST();
 							}
 							const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 							_s15 = chaos_element;
@@ -12664,11 +12664,11 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Runtime_ChaosManagedHostRefle
 				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s5);
 				if (chaos_array == nullptr)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 				_s7 = chaos_element;
@@ -12710,11 +12710,11 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Runtime_ChaosManagedHostRefle
 								auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s17);
 								if (chaos_array == nullptr)
 								{
-									CHAOS_IL2CPP_FAIL();
+									CHAOS_IL2CPP_FAIL_FAST();
 								}
 								if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 								{
-									CHAOS_IL2CPP_FAIL();
+									CHAOS_IL2CPP_FAIL_FAST();
 								}
 								const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 								_s19 = chaos_element;
@@ -13068,11 +13068,11 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Runtime_ChaosManagedHostRefle
 				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s11);
 				if (chaos_array == nullptr)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 				_s13 = chaos_element;
@@ -13238,11 +13238,11 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Runtime_ChaosManagedHostRefle
 							auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s48);
 							if (chaos_array == nullptr)
 							{
-								CHAOS_IL2CPP_FAIL();
+								CHAOS_IL2CPP_FAIL_FAST();
 							}
 							if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 							{
-								CHAOS_IL2CPP_FAIL();
+								CHAOS_IL2CPP_FAIL_FAST();
 							}
 							const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 							_s50 = chaos_element;

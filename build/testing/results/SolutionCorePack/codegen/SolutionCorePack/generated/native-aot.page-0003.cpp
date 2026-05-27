@@ -1,4 +1,4 @@
-﻿#include <chaos/common.h>
+#include <chaos/common.h>
 #include <chaos/type_info.h>
 #include "runtime_core.h"
 #include <chaos/eh.h>
@@ -7293,7 +7293,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Runtime_ChaosManagedHostReque
 				auto* chaos_boxed = reinterpret_cast<chaos_boxed_type_Chaos_TestFramework_Runtime_ChaosManagedHostRequest*>(_s4);
 				if (chaos_boxed == nullptr)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				chaos_unbox_any_value_0 = chaos_boxed->value;
 				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_unbox_any_value_0);
@@ -10363,7 +10363,7 @@ extern "C" void Chaos_TestFramework_Runtime_RuntimeTrace_TraceCall_System_String
 					if (chaos_invocation_list == nullptr ||
 						static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)
 					{
-						CHAOS_IL2CPP_FAIL();
+						CHAOS_IL2CPP_FAIL_FAST();
 					}
 
 					for (CHAOS_IL2CPP_SIZE chaos_delegate_index = 0; chaos_delegate_index < chaos_invocation_list->size(); ++chaos_delegate_index)
@@ -10371,12 +10371,12 @@ extern "C" void Chaos_TestFramework_Runtime_RuntimeTrace_TraceCall_System_String
 						const auto chaos_invocation_delegate_value = (*chaos_invocation_list)[chaos_delegate_index];
 						if (chaos_invocation_delegate_value == 0)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						auto* chaos_invocation_delegate = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(chaos_invocation_delegate_value);
 						if (chaos_invocation_delegate->chaos_delegate_method_ptr == 0)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						if (chaos_invocation_delegate->chaos_delegate_target == 0)
 						{
@@ -10394,7 +10394,7 @@ extern "C" void Chaos_TestFramework_Runtime_RuntimeTrace_TraceCall_System_String
 				{
 					if (chaos_delegate->chaos_delegate_method_ptr == 0)
 					{
-						CHAOS_IL2CPP_FAIL();
+						CHAOS_IL2CPP_FAIL_FAST();
 					}
 					bool __chaos_hotpatch_taken = false;
 					uint64_t __chaos_args_buf[1] = {0};
@@ -10930,7 +10930,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System
 					if (chaos_invocation_list == nullptr ||
 						static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)
 					{
-						CHAOS_IL2CPP_FAIL();
+						CHAOS_IL2CPP_FAIL_FAST();
 					}
 
 					for (CHAOS_IL2CPP_SIZE chaos_delegate_index = 0; chaos_delegate_index < chaos_invocation_list->size(); ++chaos_delegate_index)
@@ -10938,12 +10938,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System
 						const auto chaos_invocation_delegate_value = (*chaos_invocation_list)[chaos_delegate_index];
 						if (chaos_invocation_delegate_value == 0)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						auto* chaos_invocation_delegate = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(chaos_invocation_delegate_value);
 						if (chaos_invocation_delegate->chaos_delegate_method_ptr == 0)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						if (chaos_invocation_delegate->chaos_delegate_target == 0)
 						{
@@ -10961,7 +10961,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System
 				{
 					if (chaos_delegate->chaos_delegate_method_ptr == 0)
 					{
-						CHAOS_IL2CPP_FAIL();
+						CHAOS_IL2CPP_FAIL_FAST();
 					}
 					bool __chaos_hotpatch_taken = false;
 					uint64_t __chaos_args_buf[1] = {0};
@@ -11011,7 +11011,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System
 					if (chaos_invocation_list == nullptr ||
 						static_cast<CHAOS_IL2CPP_INTPTR>(chaos_invocation_list->size()) != chaos_delegate->chaos_delegate_invocation_count)
 					{
-						CHAOS_IL2CPP_FAIL();
+						CHAOS_IL2CPP_FAIL_FAST();
 					}
 
 					for (CHAOS_IL2CPP_SIZE chaos_delegate_index = 0; chaos_delegate_index < chaos_invocation_list->size(); ++chaos_delegate_index)
@@ -11019,12 +11019,12 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System
 						const auto chaos_invocation_delegate_value = (*chaos_invocation_list)[chaos_delegate_index];
 						if (chaos_invocation_delegate_value == 0)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						auto* chaos_invocation_delegate = reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>(chaos_invocation_delegate_value);
 						if (chaos_invocation_delegate->chaos_delegate_method_ptr == 0)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						if (chaos_invocation_delegate->chaos_delegate_target == 0)
 						{
@@ -11042,7 +11042,7 @@ extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_Assert_Throws_System
 				{
 					if (chaos_delegate->chaos_delegate_method_ptr == 0)
 					{
-						CHAOS_IL2CPP_FAIL();
+						CHAOS_IL2CPP_FAIL_FAST();
 					}
 					bool __chaos_hotpatch_taken = false;
 					uint64_t __chaos_args_buf[1] = {0};
@@ -12644,11 +12644,11 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Sdk_Chaos_TestFramework_Chaos
 			auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s6);
 			if (chaos_array == nullptr)
 			{
-				CHAOS_IL2CPP_FAIL();
+				CHAOS_IL2CPP_FAIL_FAST();
 			}
 			if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 			{
-				CHAOS_IL2CPP_FAIL();
+				CHAOS_IL2CPP_FAIL_FAST();
 			}
 			const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 			_s8 = chaos_element;
@@ -12781,11 +12781,11 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Sdk_Chaos_TestFramework_Chaos
 						auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s30);
 						if (chaos_array == nullptr)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 						_s32 = chaos_element;
@@ -13002,7 +13002,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Sdk_Chaos_TestFramework_Chaos
 						auto* chaos_destination = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s72);
 						if (chaos_source == nullptr)
 						{
-							CHAOS_IL2CPP_FAIL();
+							CHAOS_IL2CPP_FAIL_FAST();
 						}
 						*chaos_destination = *chaos_source;
 						if (chaos_is_gc_pointer(chaos_destination))
@@ -13246,7 +13246,7 @@ extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Sdk_Chaos_TestFramework_Chaos
 				auto* chaos_boxed = reinterpret_cast<chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection*>(_s4);
 				if (chaos_boxed == nullptr)
 				{
-					CHAOS_IL2CPP_FAIL();
+					CHAOS_IL2CPP_FAIL_FAST();
 				}
 				chaos_unbox_any_value_0 = chaos_boxed->value;
 				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_unbox_any_value_0);

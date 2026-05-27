@@ -1,22 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="D:\agent\booming-il2cpp\build\testing\results\SolutionCorePack\codegen\SolutionCorePack\generated\native-aot.generated.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\build\testing\results\SolutionCorePack\codegen\SolutionCorePack\generated\chaos_generated_module.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\build\testing\results\SolutionCorePack\codegen\SolutionCorePack\generated\native-aot.page-0001.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\build\testing\results\SolutionCorePack\codegen\SolutionCorePack\generated\native-aot.page-0002.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\build\testing\results\SolutionCorePack\codegen\SolutionCorePack\generated\native-aot.page-0003.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\build\testing\results\SolutionCorePack\codegen\SolutionCorePack\generated\native-aot.page-0004.cpp">
+    <ClCompile Include="D:\agent\booming-il2cpp\artifact\verification-catalog\workspaces\subjects\SolutionCorePack\generated\subject-exec\analysis\generated\native-aot.generated.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
