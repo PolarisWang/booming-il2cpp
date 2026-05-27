@@ -24,51 +24,72 @@ internal static class NativeCompile
         public JitAsmCapture.JitCaptureResult? AotDisasm { get; init; }
     }
 
-    public static NativeCompileResult Compile(string tempDir, string nativeSymbol)
+    /// <summary>
+    /// Shared compilation state — built once, reused across all methods in a batch.
+    /// </summary>
+    public sealed record CompilationContext
+    {
+        public required bool FoundMsvc { get; init; }
+        public required bool CompileSuccess { get; init; }
+        public required string? ObjectPath { get; init; }
+        public required string? MsvcVersion { get; init; }
+        public required string? CompileOutput { get; init; }
+        public required string? Error { get; init; }
+        public required string? ObjectSize { get; init; }
+        public Dictionary<string, string>? Env { get; init; }
+        public string? ClDir { get; init; }
+    }
+
+    /// <summary>
+    /// Phase 1: discover MSVC and compile the generated .cpp once.
+    /// Returns null if MSVC is not found.
+    /// </summary>
+    public static CompilationContext? CompileOnce(string tempDir)
     {
         try
         {
             var repoRoot = FindRepoRoot();
             if (repoRoot is null)
-                return Fail("Cannot determine repository root");
+                return CtxFail("Cannot determine repository root");
 
             var (clExe, env) = FindMsvc();
             if (clExe is null || env is null)
-                return new NativeCompileResult { FoundMsvc = false, Error = "MSVC not found." };
+                return new CompilationContext
+                {
+                    FoundMsvc = false, CompileSuccess = false,
+                    ObjectPath = null, MsvcVersion = null,
+                    CompileOutput = null, Error = "MSVC not found.",
+                    ObjectSize = null, Env = env, ClDir = null,
+                };
 
             var clDir = Path.GetDirectoryName(clExe)!;
             var msvcVersion = ExtractMsvcVersion(clDir);
 
-            // Find the generated file in the subdirectory
             var genDir = Path.Combine(tempDir, "generated");
             var genCppFiles = Directory.Exists(genDir)
                 ? Directory.GetFiles(genDir, "*.cpp", SearchOption.TopDirectoryOnly)
                 : [];
             if (genCppFiles.Length == 0)
-                return Fail("No generated .cpp files in tempDir/generated/");
+                return CtxFail("No generated .cpp files in tempDir/generated/");
 
             var cppPath = genCppFiles.First();
             var objDir = Path.Combine(tempDir, "obj");
             Directory.CreateDirectory(objDir);
             var objPath = Path.Combine(objDir, Path.GetFileNameWithoutExtension(cppPath) + ".obj");
 
-            // Find include dirs
             var includeDirs = GetIncludeDirs(repoRoot);
             var existingIncludes = includeDirs.Where(Directory.Exists).ToList();
             var includeFlags = string.Join(" ", existingIncludes.Select(d => $"-I\"{d}\""));
 
-            // Add the generated headers dir and tempDir for any extra headers
             if (Directory.Exists(genDir))
                 includeFlags += $" -I\"{genDir}\"";
 
-            // Also add any subdirectories that contain headers
             var headerDirs = Directory.GetDirectories(tempDir, "*", SearchOption.AllDirectories)
                 .Where(d => Directory.GetFiles(d, "*.h").Length > 0)
                 .ToList();
             foreach (var d in headerDirs)
                 includeFlags += $" -I\"{d}\"";
 
-            // Compile
             var compileCmd = $"\"{clExe}\" /nologo /std:c++20 /c /EHsc /W3 /utf-8 " +
                              $"{includeFlags} " +
                              "-DCHAOS_IL2CPP_CONFIG_CHECK -DCHAOS_IL2CPP_TRACE_ENABLED " +
@@ -81,70 +102,100 @@ internal static class NativeCompile
 
             if (compileExit != 0)
             {
-                return new NativeCompileResult
+                return new CompilationContext
                 {
-                    FoundMsvc = true,
-                    CompileSuccess = false,
-                    MsvcVersion = msvcVersion,
+                    FoundMsvc = true, CompileSuccess = false,
+                    ObjectPath = objPath, MsvcVersion = msvcVersion,
                     CompileOutput = Truncate(compileOutput, 4000),
                     Error = "Compilation failed.",
+                    ObjectSize = null, Env = env, ClDir = clDir,
                 };
             }
 
             var objSize = new FileInfo(objPath).Length;
-
-            // Extract function bytes from .obj (COFF symbol table)
-            byte[]? textSectionBytes = null;
-            string? textSectionName = null;
-            JitAsmCapture.JitCaptureResult? aotDisasm = null;
-            try
+            return new CompilationContext
             {
-                // Prefer function-level extraction via COFF symbol table
-                (textSectionBytes, textSectionName) = ExtractFunctionBytes(objPath, nativeSymbol);
-                if (textSectionBytes is null)
-                {
-                    // Fallback to whole-section extraction
-                    (textSectionBytes, textSectionName) = ExtractTextSection(objPath);
-                }
-
-                if (textSectionBytes is not null)
-                {
-                    aotDisasm = JitAsmCapture.DisassembleRaw(
-                        textSectionBytes,
-                        0x10000000,
-                        nativeSymbol);
-                }
-            }
-            catch { /* non-critical */ }
-
-            // Run dumpbin for disassembly
-            string? disasm = null;
-            var dumpbinExe = Path.Combine(clDir, "dumpbin.exe");
-            if (File.Exists(dumpbinExe))
-            {
-                var dumpbinCmd = $"\"{dumpbinExe}\" /DISASM /SYMBOLS \"{objPath}\"";
-                var (_, dumpOut, dumpErr) = RunProcess(dumpbinCmd, env, tempDir);
-                disasm = ExtractFunctionDisassembly(dumpOut + dumpErr, nativeSymbol);
-            }
-
-            return new NativeCompileResult
-            {
-                FoundMsvc = true,
-                CompileSuccess = true,
-                MsvcVersion = msvcVersion,
-                ObjectPath = objPath,
-                ObjectSize = FormatSize(objSize),
+                FoundMsvc = true, CompileSuccess = true,
+                ObjectPath = objPath, MsvcVersion = msvcVersion,
                 CompileOutput = Truncate(compileOutput, 2000),
-                Disassembly = disasm,
-                TextSectionBytes = textSectionBytes,
-                TextSectionName = textSectionName,
-                AotDisasm = aotDisasm,
+                Error = null, ObjectSize = FormatSize(objSize),
+                Env = env, ClDir = clDir,
             };
         }
         catch (Exception ex)
         {
-            return Fail($"Native compile failed: {ex.Message}");
+            return CtxFail($"Native compile failed: {ex.Message}");
         }
+    }
+
+    /// <summary>
+    /// Phase 2: extract a specific function from a previously compiled .obj.
+    /// Called per-method after CompileOnce().
+    /// </summary>
+    public static NativeCompileResult ExtractFromObj(CompilationContext ctx, string nativeSymbol)
+    {
+        if (!ctx.FoundMsvc)
+            return new NativeCompileResult { FoundMsvc = false, Error = "MSVC not found." };
+        if (!ctx.CompileSuccess || ctx.ObjectPath is null)
+            return new NativeCompileResult
+            {
+                FoundMsvc = true, CompileSuccess = false,
+                MsvcVersion = ctx.MsvcVersion, CompileOutput = ctx.CompileOutput,
+                Error = ctx.Error ?? "Compilation failed.",
+            };
+
+        var objPath = ctx.ObjectPath;
+
+        byte[]? textSectionBytes = null;
+        string? textSectionName = null;
+        JitAsmCapture.JitCaptureResult? aotDisasm = null;
+        try
+        {
+            (textSectionBytes, textSectionName) = ExtractFunctionBytes(objPath, nativeSymbol);
+            if (textSectionBytes is null)
+                (textSectionBytes, textSectionName) = ExtractTextSection(objPath);
+
+            if (textSectionBytes is not null)
+                aotDisasm = JitAsmCapture.DisassembleRaw(textSectionBytes, 0x10000000, nativeSymbol);
+        }
+        catch { /* non-critical */ }
+
+        string? disasm = null;
+        if (ctx.ClDir is not null)
+        {
+            var dumpbinExe = Path.Combine(ctx.ClDir, "dumpbin.exe");
+            if (File.Exists(dumpbinExe) && ctx.Env is not null)
+            {
+                var dumpbinCmd = $"\"{dumpbinExe}\" /DISASM /SYMBOLS \"{objPath}\"";
+                var (_, dumpOut, dumpErr) = RunProcess(dumpbinCmd, ctx.Env, Path.GetTempPath());
+                disasm = ExtractFunctionDisassembly(dumpOut + dumpErr, nativeSymbol);
+            }
+        }
+
+        return new NativeCompileResult
+        {
+            FoundMsvc = true,
+            CompileSuccess = true,
+            MsvcVersion = ctx.MsvcVersion,
+            ObjectPath = objPath,
+            ObjectSize = ctx.ObjectSize,
+            CompileOutput = ctx.CompileOutput,
+            Disassembly = disasm,
+            TextSectionBytes = textSectionBytes,
+            TextSectionName = textSectionName,
+            AotDisasm = aotDisasm,
+        };
+    }
+
+    /// <summary>
+    /// Legacy entry point — compile and extract in one call.
+    /// </summary>
+    public static NativeCompileResult Compile(string tempDir, string nativeSymbol)
+    {
+        var ctx = CompileOnce(tempDir);
+        if (ctx is null)
+            return new NativeCompileResult { Error = "CompileOnce returned null" };
+        return ExtractFromObj(ctx, nativeSymbol);
     }
 
     private static string? FindRepoRoot()
@@ -537,6 +588,14 @@ internal static class NativeCompile
         if (value is null || value.Length <= maxLen) return value;
         return value[..maxLen] + $"\n... (truncated)";
     }
+
+    private static CompilationContext CtxFail(string message) => new()
+    {
+        FoundMsvc = false, CompileSuccess = false,
+        ObjectPath = null, MsvcVersion = null,
+        CompileOutput = null, Error = message,
+        ObjectSize = null, Env = null, ClDir = null,
+    };
 
     private static NativeCompileResult Fail(string message) => new() { Error = message };
 }

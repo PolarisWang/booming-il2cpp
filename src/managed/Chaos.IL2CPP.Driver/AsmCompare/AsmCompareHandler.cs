@@ -125,6 +125,20 @@ internal static class AsmCompareHandler
                 Console.Error.WriteLine("  [2/3] Skipping C++ generation (not needed for metrics/analysis)");
             }
 
+            // ── Step 2b (P0): Compile .cpp to .obj once (shared across methods) ──
+            NativeCompile.CompilationContext? compileCtx = null;
+            bool needsNativeAsm = config.HasSection("raw-aot") || config.HasSection("side-by-side");
+            if (needsNativeAsm && needsCpp)
+            {
+                Console.Error.Write("  [2b/3] Compiling AOT native (once)...");
+                compileCtx = NativeCompile.CompileOnce(tempDir);
+                Console.Error.WriteLine(compileCtx is null
+                    ? " skipped"
+                    : compileCtx.CompileSuccess
+                        ? $" OK ({compileCtx.ObjectSize})"
+                        : $" FAIL ({compileCtx.Error})");
+            }
+
             // ── Step 3 (P1): Parallel JIT capture for all methods ──────────
             int totalMethods = config.MethodNames.Count;
             var methodResults = new ConcurrentDictionary<int, Dictionary<string, object?>>();
@@ -184,23 +198,12 @@ internal static class AsmCompareHandler
                         Console.Error.WriteLine($" {jitResult.Size} bytes, {jitResult.Instructions?.Count ?? 0} instr");
                 }
 
-                // Native AOT compilation (only if requested sections)
+                // Native AOT extraction from pre-compiled .obj
                 NativeCompile.NativeCompileResult? nativeResult = null;
-                if (config.HasSection("raw-aot") || config.HasSection("side-by-side"))
+                if (needsNativeAsm && compileCtx is not null)
                 {
-                    lock (consoleLock)
-                        Console.Error.Write("    [3b] Compiling AOT native...");
-                    ChaosTrace.Point("asm-compare.native_compile", "codegen");
-                    nativeResult = NativeCompile.Compile(tempDir, aotMethod.NativeSymbol ?? "");
-                    lock (consoleLock)
-                    {
-                        if (nativeResult.FoundMsvc && nativeResult.CompileSuccess)
-                            Console.Error.WriteLine($" OK ({nativeResult.ObjectSize})");
-                        else if (!nativeResult.FoundMsvc)
-                            Console.Error.WriteLine(" MSVC not found");
-                        else
-                            Console.Error.WriteLine(" FAIL");
-                    }
+                    var symbol = aotMethod.NativeSymbol ?? "";
+                    nativeResult = NativeCompile.ExtractFromObj(compileCtx, symbol);
                 }
 
                 // Generate report entry — label with the real methodSubjectId
