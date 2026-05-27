@@ -489,6 +489,46 @@ public sealed partial class NativeAotLoweringPlanner
 					builder.AppendLine("[];");
 				}
 			}
+		// ── Value type MethodTable definitions (must precede reference types,
+		// because reference types may reference value type MethodTable symbols
+		// as their parent, e.g., AssertionException → System_Exception) ──
+		// Ensure valuetype struct definitions exist for all boxed structured value types.
+		// A type may appear in hashSet3 (needs a boxed struct) without being in
+		// valueTypeSubjectIds (which drives valuetype struct emission). When the
+		// boxed struct references chaos_valuetype_X value{}, the struct must exist.
+		// This sync MUST happen before the valueTypeSubjectIds emission loop below.
+		foreach (string vt in hashSet3)
+		{
+			if (IsStructuredValueTypeSubjectId(vt) && !valueTypeSubjectIds.Contains(vt))
+			{
+				valueTypeSubjectIds.Add(vt);
+			}
+		}
+		foreach (string item3 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
+		{
+			ulong stableId = ComputeStableTypeId(item3);
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline MethodTable ");
+				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
+				handler.AppendLiteral(" = {nullptr, nullptr, ");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(", 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};");
+				stringBuilder.AppendLine(ref handler);
+			}
+			{
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
+				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_INTPTR ");
+				handler.AppendFormatted(GetNativeTypeIdSymbol(item3));
+				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
+				handler.AppendFormatted(stableId.ToString() + "ULL");
+				handler.AppendLiteral(");");
+				stringBuilder.AppendLine(ref handler);
+			}
+			num++;
+		}
 			// ── TypeInfo instances (replace integer type_id system) ──
 		foreach (string item in sortedReferenceTypes)
 		{
@@ -597,43 +637,6 @@ public sealed partial class NativeAotLoweringPlanner
 				stringBuilder.AppendLine(ref handler);
 			}
 
-			num++;
-		}
-		// Ensure valuetype struct definitions exist for all boxed structured value types.
-		// A type may appear in hashSet3 (needs a boxed struct) without being in
-		// valueTypeSubjectIds (which drives valuetype struct emission). When the
-		// boxed struct references chaos_valuetype_X value{}, the struct must exist.
-		// This sync MUST happen before the valueTypeSubjectIds emission loop below.
-		foreach (string vt in hashSet3)
-		{
-			if (IsStructuredValueTypeSubjectId(vt) && !valueTypeSubjectIds.Contains(vt))
-			{
-				valueTypeSubjectIds.Add(vt);
-			}
-		}
-		foreach (string item3 in valueTypeSubjectIds.OrderBy<string, string>((string result) => result, StringComparer.Ordinal))
-		{
-			ulong stableId = ComputeStableTypeId(item3);
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline MethodTable ");
-				handler.AppendFormatted(GetNativeMethodTableSymbol(item3));
-				handler.AppendLiteral(" = {nullptr, nullptr, ");
-				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(", 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};");
-				stringBuilder.AppendLine(ref handler);
-			}
-			{
-				StringBuilder stringBuilder = builder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(28, 2, stringBuilder);
-				handler.AppendLiteral("inline constexpr CHAOS_IL2CPP_INTPTR ");
-				handler.AppendFormatted(GetNativeTypeIdSymbol(item3));
-				handler.AppendLiteral(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
-				handler.AppendFormatted(stableId.ToString() + "ULL");
-				handler.AppendLiteral(");");
-				stringBuilder.AppendLine(ref handler);
-			}
 			num++;
 		}
 		var sortedHashSet3 = hashSet3.OrderBy<string, string>((string result) => result, StringComparer.Ordinal).ToArray();

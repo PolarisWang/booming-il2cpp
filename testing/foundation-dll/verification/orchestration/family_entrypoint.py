@@ -327,7 +327,7 @@ def generate_entrypoint_source(
                     lines.append(f"{ns_indent}        catch {{ _exitCode = 1; }}")
                 else:
                     cast_expr = cast_return_to_int(ret, call_expr)
-                    lines.append(f"{ns_indent}        try {{ var _ = {cast_expr}; }}")
+                    lines.append(f"{ns_indent}        try {{ _ = {cast_expr}; }}")
                     lines.append(f"{ns_indent}        catch {{ _exitCode = 1; }}")
         else:
             parsed = parse_method_subject_id(subject_id)

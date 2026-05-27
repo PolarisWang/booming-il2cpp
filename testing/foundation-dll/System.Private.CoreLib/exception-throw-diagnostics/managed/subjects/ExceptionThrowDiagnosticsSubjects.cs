@@ -30,42 +30,42 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     // [2] System.Private.CoreLib/System.Exception::get_Message:System.String()
     public static void Subject_2()
     {
-        try { var _ = ((new Exception().Message).Length); }
+        try { _ = ((new Exception().Message).Length); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()
     public static void Subject_3()
     {
-        try { var _ = ((new Exception().InnerException).GetHashCode()); }
+        try { _ = ((new Exception().InnerException).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Exception::get_StackTrace:System.String()
     public static void Subject_4()
     {
-        try { var _ = ((((new Exception().StackTrace) ?? "")).Length); }
+        try { _ = ((((new Exception().StackTrace) ?? "")).Length); }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Exception::get_HResult:System.Int32()
     public static void Subject_5()
     {
-        try { var _ = new Exception().HResult; }
+        try { _ = new Exception().HResult; }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Exception::ToString:System.String()
     public static void Subject_6()
     {
-        try { var _ = ((new Exception().ToString()).Length); }
+        try { _ = ((new Exception().ToString()).Length); }
         catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()
     public static void Subject_7()
     {
-        try { var _ = ((new Exception().GetBaseException()).GetHashCode()); }
+        try { _ = ((new Exception().GetBaseException()).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 

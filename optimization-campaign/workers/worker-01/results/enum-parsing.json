@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 2,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/enum/parsing",
+  "familyDisplayName": "Enum Parsing And Formatting",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "methodIndex": 0,
+      "calibratedMs": 132.323,
+      "opsPerSecond": 755729,
+      "iterations": 100000,
+      "allocatedBytes": 3200000,
+      "allocPerOp": 32.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 1,
+      "calibratedMs": 2.523,
+      "opsPerSecond": 39633784,
+      "iterations": 100000,
+      "allocatedBytes": 4800000,
+      "allocPerOp": 48.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 2,
+      "calibratedMs": 3.426,
+      "opsPerSecond": 29186854,
+      "iterations": 100000,
+      "allocatedBytes": 4800000,
+      "allocPerOp": 48.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 3,
+      "calibratedMs": 4.128,
+      "opsPerSecond": 24224219,
+      "iterations": 100000,
+      "allocatedBytes": 6400000,
+      "allocPerOp": 64.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 4,
+      "calibratedMs": 4.769,
+      "opsPerSecond": 20970955,
+      "iterations": 100000,
+      "allocatedBytes": 6400000,
+      "allocPerOp": 64.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 5,
+      "calibratedMs": 2.649,
+      "opsPerSecond": 37747244,
+      "iterations": 100000,
+      "allocatedBytes": 3200000,
+      "allocPerOp": 32.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 6,
+      "calibratedMs": 2.111,
+      "opsPerSecond": 47366427,
+      "iterations": 100000,
+      "allocatedBytes": 4800000,
+      "allocPerOp": 48.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 7,
+      "calibratedMs": 1.499,
+      "opsPerSecond": 66715591,
+      "iterations": 100000,
+      "allocatedBytes": 4800000,
+      "allocPerOp": 48.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 8,
+      "calibratedMs": 141.781,
+      "opsPerSecond": 705312,
+      "iterations": 100000,
+      "allocatedBytes": 3200000,
+      "allocPerOp": 32.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 9,
+      "calibratedMs": 132.299,
+      "opsPerSecond": 755864,
+      "iterations": 100000,
+      "allocatedBytes": 3200000,
+      "allocPerOp": 32.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 10,
+      "calibratedMs": 1.544,
+      "opsPerSecond": 64745872,
+      "iterations": 100000,
+      "allocatedBytes": 4800000,
+      "allocPerOp": 48.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 11,
+      "calibratedMs": 1.554,
+      "opsPerSecond": 64337644,
+      "iterations": 100000,
+      "allocatedBytes": 4800000,
+      "allocPerOp": 48.0,
+      "status": "completed"
+    },
+    {
+      "methodIndex": 12,
+      "calibratedMs": 1.452,
+      "opsPerSecond": 68856297,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "status": "completed"
+    }
+  ]
+}

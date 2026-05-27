@@ -30,28 +30,28 @@ public static partial class GuidRandomHashcodeSubjects
     // [2] System.Private.CoreLib/System.Guid::NewGuid:System.Guid()
     public static void Subject_2()
     {
-        try { var _ = ((Guid.NewGuid()).GetHashCode()); }
+        try { _ = ((Guid.NewGuid()).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)
     public static void Subject_3()
     {
-        try { var _ = ((Guid.Parse("00000000-0000-0000-0000-000000000000")).GetHashCode()); }
+        try { _ = ((Guid.Parse("00000000-0000-0000-0000-000000000000")).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)
     public static void Subject_4()
     {
-        try { var _ = ((Guid.TryParse("00000000-0000-0000-0000-000000000000", out _)) ? 1 : 0); }
+        try { _ = ((Guid.TryParse("00000000-0000-0000-0000-000000000000", out _)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Guid::ToString:System.String()
     public static void Subject_5()
     {
-        try { var _ = ((Guid.NewGuid().ToString()).Length); }
+        try { _ = ((Guid.NewGuid().ToString()).Length); }
         catch { _exitCode = 1; }
     }
 
@@ -65,21 +65,21 @@ public static partial class GuidRandomHashcodeSubjects
     // [7] System.Private.CoreLib/System.Random::Next:System.Int32()
     public static void Subject_7()
     {
-        try { var _ = new Random().Next(); }
+        try { _ = new Random().Next(); }
         catch { _exitCode = 1; }
     }
 
     // [8] System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)
     public static void Subject_8()
     {
-        try { var _ = new Random().Next(42); }
+        try { _ = new Random().Next(42); }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.Random::NextDouble:System.Double()
     public static void Subject_9()
     {
-        try { var _ = (int)(new Random().NextDouble()); }
+        try { _ = (int)(new Random().NextDouble()); }
         catch { _exitCode = 1; }
     }
 
@@ -100,14 +100,14 @@ public static partial class GuidRandomHashcodeSubjects
     // [12] System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()
     public static void Subject_12()
     {
-        try { var _ = default(HashCode).ToHashCode(); }
+        try { _ = default(HashCode).ToHashCode(); }
         catch { _exitCode = 1; }
     }
 
     // [13] System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)
     public static void Subject_13()
     {
-        try { var _ = HashCode.Combine(42, 42); }
+        try { _ = HashCode.Combine(42, 42); }
         catch { _exitCode = 1; }
     }
 

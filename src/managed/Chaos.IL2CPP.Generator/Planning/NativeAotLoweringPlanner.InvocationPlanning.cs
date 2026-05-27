@@ -1807,6 +1807,7 @@ public sealed partial class NativeAotLoweringPlanner
     private void BuildTypeHierarchyPtrFoldTable(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
     {
         _typeHierarchyPtrFoldMap.Clear();
+        _typeHierarchyPtrSkipIlOffsets.Clear();
         if (_allEmittedTypeSubjectIds is not { Count: > 0 })
             return;
         int totalCalls = 0, matchedCalls = 0;
@@ -1830,6 +1831,17 @@ public sealed partial class NativeAotLoweringPlanner
                 if (TryFoldTypeHierarchyPtrCall(instrs, i, callee, out var entry))
                 {
                     _typeHierarchyPtrFoldMap[(method.NativeSymbol, instr.IlOffset)] = entry;
+                    // Populate skip offsets map for DCE in EmitInstruction
+                    if (entry.SkipIlOffsets.Length > 0)
+                    {
+                        if (!_typeHierarchyPtrSkipIlOffsets.TryGetValue(method.NativeSymbol, out var set))
+                        {
+                            set = new HashSet<int>();
+                            _typeHierarchyPtrSkipIlOffsets[method.NativeSymbol] = set;
+                        }
+                        foreach (var offset in entry.SkipIlOffsets)
+                            set.Add(offset);
+                    }
                     matchedCalls++;
                 }
             }
@@ -1873,10 +1885,20 @@ public sealed partial class NativeAotLoweringPlanner
                 if (!IsTypeAotKnown(subjectId1) || !IsTypeAotKnown(subjectId2))
                     return false;
 
+                // Collect IlOffsets of dead instructions for DCE
+                var skipOffsets2 = new[]
+                {
+                    instrs[callIndex - 4].IlOffset, // ltoken type1
+                    instrs[callIndex - 3].IlOffset, // call GetTypeFromHandle(type1)
+                    instrs[callIndex - 2].IlOffset, // ltoken type2
+                    instrs[callIndex - 1].IlOffset, // call GetTypeFromHandle(type2)
+                };
+
                 entry = new TypeHierarchyPtrFoldEntry(
                     ptrFuncName,
                     GetNativeTypeInfoSymbol(subjectId1),
-                    GetNativeTypeInfoSymbol(subjectId2));
+                    GetNativeTypeInfoSymbol(subjectId2),
+                    skipOffsets2);
                 return true;
 
             case "IsInstanceOfType":
@@ -1886,10 +1908,18 @@ public sealed partial class NativeAotLoweringPlanner
                 if (!TryGetLdTokenSubjectId(instrs, callIndex - 2, out var typeSubjectId)) return false;
                 if (!IsTypeAotKnown(typeSubjectId)) return false;
 
+                // Collect IlOffsets of dead instructions (ltoken + GetTypeFromHandle for the type arg)
+                var skipOffsets1 = new[]
+                {
+                    instrs[callIndex - 2].IlOffset, // ltoken type
+                    instrs[callIndex - 1].IlOffset, // call GetTypeFromHandle(type)
+                };
+
                 entry = new TypeHierarchyPtrFoldEntry(
                     ptrFuncName,
                     GetNativeTypeInfoSymbol(typeSubjectId),
-                    TypeExpr2: null);
+                    TypeExpr2: null,
+                    skipOffsets1);
                 return true;
         }
 
