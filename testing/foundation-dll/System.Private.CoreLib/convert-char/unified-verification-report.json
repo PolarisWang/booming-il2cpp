@@ -2,8 +2,8 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-27T13:26:25",
-  "duration_ms": 93581,
+  "timestamp": "2026-05-27T23:07:35",
+  "duration_ms": 100620,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -28,7 +28,7 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 39494
+      "duration_ms": 43686
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -160,7 +160,7 @@
         ]
       },
       "errors": [],
-      "duration_ms": 2041
+      "duration_ms": 2124
     },
     "fact": {
       "stage": "fact",
@@ -174,7 +174,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 156
+      "duration_ms": 228
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -189,7 +189,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 38
+      "duration_ms": 41
     },
     "audit": {
       "stage": "audit",
@@ -203,7 +203,7 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1520
+      "duration_ms": 1849
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -236,12 +236,27 @@
         "minExpansionRatio": 0.05
       },
       "errors": [],
-      "duration_ms": 22956
+      "duration_ms": 20041
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=5.3ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 5.3,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 156
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "net8-jit=22ns, net10-jit=25ns, mono=24ns, chaos-aot=14ns, chaos-jit=14ns",
+      "summary": "net8-jit=27ns, net10-jit=24ns, mono=23ns, chaos-aot=9ns, chaos-jit=9ns",
       "details": {
         "runtimesAvailable": [
           "net8-jit",
@@ -253,46 +268,60 @@
         "runtimesUnavailable": [],
         "multiRunReportPath": "multi-run/multi-run-report.json",
         "chaosClassification": {
-          "chaos_faster_than_all": 5,
-          "chaos_faster_than_jit": 4,
-          "chaos_midfield": 5,
-          "chaos_slower_than_jit": 4,
+          "chaos_faster_than_all": 7,
+          "chaos_faster_than_jit": 6,
+          "chaos_midfield": 3,
+          "chaos_slower_than_jit": 2,
           "not_benchmarked": 0
         },
         "summaries": {
           "net8-jit": {
-            "geometricMeanNs": 21.791027328891502,
+            "geometricMeanNs": 26.96543785925449,
             "okCount": 18,
             "totalMethods": 18
           },
           "net10-jit": {
-            "geometricMeanNs": 24.887041187773015,
+            "geometricMeanNs": 24.383043640675982,
             "okCount": 16,
             "totalMethods": 18
           },
           "mono": {
-            "geometricMeanNs": 23.619757996651355,
+            "geometricMeanNs": 22.9259192915915,
             "okCount": 16,
             "totalMethods": 18
           },
           "chaos-aot": {
-            "geometricMeanNs": 14.091423817646502,
+            "geometricMeanNs": 9.014859294129838,
             "okCount": 18,
             "totalMethods": 18
           },
           "chaos-jit": {
-            "geometricMeanNs": 13.810194139043086,
+            "geometricMeanNs": 8.908150622446318,
             "okCount": 18,
             "totalMethods": 18
           }
         },
-        "chaosAotVsNet8Speedup": 1.5464035154206979,
-        "chaosAotFasterCount": 9,
-        "chaosAotSlowerCount": 9,
-        "chaosAotGeometricMeanNs": 14.091423817646502
+        "chaosAotVsNet8Speedup": 2.9912211582507373,
+        "chaosAotFasterCount": 13,
+        "chaosAotSlowerCount": 5,
+        "chaosAotGeometricMeanNs": 9.014859294129838
       },
       "errors": [],
-      "duration_ms": 26139
+      "duration_ms": 30975
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "18/18 passed, 0 failed (stub=0)",
+      "details": {
+        "passedMethods": 18,
+        "failedMethods": 0,
+        "totalMethods": 18,
+        "realMethods": 18,
+        "stubMethods": 0
+      },
+      "errors": [],
+      "duration_ms": 167
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
@@ -305,7 +334,7 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 540
+      "duration_ms": 582
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -317,7 +346,7 @@
         "total": 18
       },
       "errors": [],
-      "duration_ms": 42
+      "duration_ms": 38
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -330,14 +359,21 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 519
+      "duration_ms": 604
     },
     "dashboard": {
       "stage": "dashboard",
       "status": "passed",
       "summary": "Dashboard built: 6 sections",
       "details": {
-        "interpreter": {},
+        "interpreter": {
+          "fastFramePoolNsPerOp": 5.3,
+          "fastExecuteNsPerInstr": 0,
+          "callVirtHandlerDispatchNs": 0,
+          "callVirtMicHitNs": 0,
+          "callVirtRawFallbackNs": 0,
+          "poolSize": 32
+        },
         "irTranslation": {
           "totalMethods": 18,
           "okCount": 18,
@@ -361,6 +397,11 @@
           "invalidCount": 0
         },
         "hotupdate": {
+          "aotFunctional": {
+            "passedMethods": 18,
+            "failedMethods": 0,
+            "totalMethods": 18
+          },
           "aotOverhead": {
             "averageSlowdownPercent": 0.0,
             "slowdownFactor": 1.0,
@@ -401,7 +442,14 @@
     "overall": 94.44
   },
   "dashboard": {
-    "interpreter": {},
+    "interpreter": {
+      "fastFramePoolNsPerOp": 5.3,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 0,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
     "irTranslation": {
       "totalMethods": 18,
       "okCount": 18,
@@ -425,6 +473,11 @@
       "invalidCount": 0
     },
     "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 18,
+        "failedMethods": 0,
+        "totalMethods": 18
+      },
       "aotOverhead": {
         "averageSlowdownPercent": 0.0,
         "slowdownFactor": 1.0,

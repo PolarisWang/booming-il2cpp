@@ -291,6 +291,24 @@ public sealed partial class NativeAotLoweringPlanner
 				goto IL_06ac;
 			}
 		}
+		// Post-scan: capture typeof()-referenced types (ldtoken) that may have been
+		// missed by the main scanning loop (ldtoken's RuntimeServiceKind often falls
+		// outside the expected range). Without this, types referenced only via typeof()
+		// have no TypeInfo/chaos_mt_* symbol emitted, breaking the TypeHierarchyPtr
+		// optimization (which emits &chaos_mt_X.AsTypeInfoHot() directly).
+		foreach (var method2 in reachableMethods)
+		{
+			var instrs2 = method2.Instructions;
+			if (instrs2 is null) continue;
+			foreach (var instr2 in instrs2)
+			{
+				if (instr2.Op != "ldtoken") continue;
+				var targetRef2 = instr2.TargetReference;
+				if (targetRef2 is null) continue;
+				if (string.IsNullOrEmpty(targetRef2.SubjectId)) continue;
+				hashSet3.Add(targetRef2.SubjectId);
+			}
+		}
 		foreach (string additionalReferenceTypeSubjectId in _customAttributeSupport.AdditionalReferenceTypeSubjectIds)
 		{
 			TrackReferenceType(additionalReferenceTypeSubjectId, "System.Private.CoreLib/System.Object");

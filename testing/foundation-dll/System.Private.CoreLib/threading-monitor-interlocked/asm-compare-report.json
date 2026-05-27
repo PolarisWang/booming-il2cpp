@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/monitor/interlocked",
-  "capturedAt": "2026-05-27T20:58:06",
+  "capturedAt": "2026-05-27T23:15:05",
   "batchMode": true,
   "summary": {
     "totalMethods": 14,

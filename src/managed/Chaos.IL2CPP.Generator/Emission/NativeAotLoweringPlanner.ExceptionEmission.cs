@@ -21,6 +21,8 @@ public sealed partial class NativeAotLoweringPlanner
 	private int _nextInlineId;
 	private string? _pendingEnumBoxSubjectId;
 	private string? _pendingBoxSubjectId;
+	private IReadOnlyList<AotCoreIrInstructionArtifact>? _lookaheadInstructionList;
+	private int _lookaheadInstructionIndex;
 
 	private static readonly HashSet<string> ToCharEligiblePrimitives = new()
 	{
@@ -367,6 +369,47 @@ public sealed partial class NativeAotLoweringPlanner
 			var nextInstruction = (i + 1 < filtered.Count) ? filtered[i + 1] : null;
 			EmitInstruction(builder, instruction, indentation, nextInstruction);
 		}
+	}
+
+	/// <summary>
+	/// Emit a pre-filtered instruction list with next-instruction lookahead.
+	/// Unlike EmitInstructionSequence, this does NOT call
+	/// FilterRedundantStoreReloadPairs — the caller is responsible for
+	/// any filtering.  Used by the structured IR path which already
+	/// filters before each loop.
+	/// </summary>
+	private void EmitInstructionLookahead(StringBuilder builder, IReadOnlyList<AotCoreIrInstructionArtifact> instructions, string indentation)
+	{
+		_lookaheadInstructionList = instructions;
+		for (int i = 0; i < instructions.Count; i++)
+		{
+			_lookaheadInstructionIndex = i;
+			var instr = instructions[i];
+			var nextInstr = (i + 1 < instructions.Count) ? instructions[i + 1] : null;
+			EmitInstruction(builder, instr, indentation, nextInstr);
+		}
+		_lookaheadInstructionList = null;
+	}
+
+	/// <summary>
+	/// Resolve the effective next instruction for box elimination lookahead.
+	/// When <paramref name="nextInstruction"/> is provided (linear path), use it directly.
+	/// When null (structured IR path), fall back to the lookahead context fields.
+	/// </summary>
+	private bool TryGetLookaheadInstruction(AotCoreIrInstructionArtifact? nextInstruction, out AotCoreIrInstructionArtifact? result)
+	{
+		if (nextInstruction != null) { result = nextInstruction; return true; }
+		if (_lookaheadInstructionList != null)
+		{
+			int nextIdx = _lookaheadInstructionIndex + 1;
+			if (nextIdx < _lookaheadInstructionList.Count)
+			{
+				result = _lookaheadInstructionList[nextIdx];
+				return true;
+			}
+		}
+		result = null;
+		return false;
 	}
 
 	private void EmitStructuredFinallyHandlerSequence(StringBuilder builder, FinallyHandlerShape handlerShape, string indentation)
@@ -1136,9 +1179,9 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 				else if (boxTargetRef.Kind == AotCoreIrReferenceKind.Type
 					&& ToCharEligiblePrimitives.Contains(ExtractTypeName(boxTargetRef.SubjectId))
-					&& nextInstruction != null
-					&& (nextInstruction.Op == "call" || nextInstruction.Op == "callvirt")
-					&& IsConvertToCharObjectCall(nextInstruction))
+					&& TryGetLookaheadInstruction(nextInstruction, out var lookaheadInstr)
+					&& (lookaheadInstr.Op == "call" || lookaheadInstr.Op == "callvirt")
+					&& IsConvertToCharObjectCall(lookaheadInstr))
 				{
 					_pendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
 					// Skip box emission - raw value stays on eval stack,

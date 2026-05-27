@@ -42,6 +42,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(CHAOS_IL2CPP_INTPTR method_handl
 CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(CHAOS_IL2CPP_INTPTR method_handle, CHAOS_IL2CPP_INTPTR type_args);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attribute_type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+CHAOS_IL2CPP_INTPTR ChaosStringConcatWithFormattedInt32(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INT32 value);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR member_handle) noexcept;
@@ -130,6 +131,7 @@ using chaos::il2cpp::runtime_core::ChaosReflectionInvokeMethod;
 using chaos::il2cpp::runtime_core::ChaosReflectionMakeGenericMethod;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetCustomAttribute;
 using chaos::il2cpp::runtime_core::ChaosReflectionConcatStringPairValues;
+using chaos::il2cpp::runtime_core::ChaosStringConcatWithFormattedInt32;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetTypeFullName;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetAssemblyQualifiedName;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetReflectedType;
