@@ -13,10 +13,10 @@ from ..base import CheckMeta, CheckResult, FamilyContext, PrincipleCheck
 
 # Lowering indicators — real native AOT lowering.
 #   "chaos_eval_stack" — array-based eval stack (IRFlatRegion / evalStackSize path)
-#   "_s0{};" — structured slot declaration (StructuredIR path)
+#   "_s0;" — structured slot declaration (StructuredIR path)
 # Both indicate the method went through the codegen lowering pipeline.
 # CHAOS_IL2CPP_ARRAY (std::array) alone is NOT lowering — it's just args/locals storage.
-_LOWERING_PATTERNS = ("chaos_eval_stack", "_s0{};")
+_LOWERING_PATTERNS = ("chaos_eval_stack", "_s0{};", "_s0;")
 
 # Families exempted from p1_lowering VIOLATION — these contain delegate/event/
 # notification methods whose generated code is inherently empty stubs (no IL to

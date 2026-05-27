@@ -277,4 +277,52 @@ public sealed partial class NativeAotLoweringPlanner
         // Unknown type: conservative — assume NOT a GC ref.
         return false;
     }
+
+    /// <summary>
+    /// Compute which reference types contain zero GC-reference fields and are
+    /// therefore safe for stack allocation (no GC tracing needed through their
+    /// instances). Walks the full inheritance chain for each type.
+    /// </summary>
+    private HashSet<string> ComputeTypesSafeForStackAllocation(
+        IReadOnlySet<string> referenceTypeSubjectIds,
+        IReadOnlySet<string> valueTypeSubjectIds,
+        IReadOnlyDictionary<string, List<string>> fieldsByDeclaringType,
+        IReadOnlyDictionary<string, string?> fieldTypeMap,
+        IReadOnlyDictionary<string, string?> baseTypeMap)
+    {
+        var safe = new HashSet<string>(StringComparer.Ordinal);
+        foreach (var typeId in referenceTypeSubjectIds)
+        {
+            if (IsDelegateTypeSubjectId(typeId, _referenceTypeBaseSubjectIds))
+                continue;
+            if (TypeHasFinalizer(typeId))
+                continue;
+
+            bool hasGcRef = false;
+            string? current = typeId;
+            var visited = new HashSet<string>(StringComparer.Ordinal);
+            while (current != null && referenceTypeSubjectIds.Contains(current) && visited.Add(current))
+            {
+                if (fieldsByDeclaringType.TryGetValue(current, out var fieldList))
+                {
+                    foreach (string fieldSubjectId in fieldList)
+                    {
+                        string? fieldType = fieldTypeMap.GetValueOrDefault(fieldSubjectId);
+                        if (IsFieldAGcReference(fieldType, referenceTypeSubjectIds, valueTypeSubjectIds))
+                        {
+                            hasGcRef = true;
+                            break;
+                        }
+                    }
+                }
+                if (hasGcRef) break;
+                baseTypeMap.TryGetValue(current, out string? next);
+                current = next;
+            }
+
+            if (!hasGcRef)
+                safe.Add(typeId);
+        }
+        return safe;
+    }
 }

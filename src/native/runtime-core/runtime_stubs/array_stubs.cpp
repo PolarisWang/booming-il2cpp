@@ -12,13 +12,20 @@ extern "C" {
 
 CHAOS_IL2CPP_INTPTR ChaosArrayEmpty(void) noexcept
 {
-    // Allocate a zero-length managed array
-    auto* storage = static_cast<CHAOS_IL2CPP_UINT8*>(GcAllocateAtomic(sizeof(ManagedArrayAccessor)));
+    // Cached singleton: zero-length arrays are immutable and pointer-free,
+    // so a single shared instance is safe for all callers.
+    static ManagedArrayAccessor* s_empty = nullptr;
+    if (s_empty != nullptr) [[likely]]
+        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(s_empty);
+
+    auto* storage = static_cast<CHAOS_IL2CPP_UINT8*>(
+        GcAllocateAtomic(sizeof(ManagedArrayAccessor)));
     if (storage == nullptr) return 0;
     auto* arr = reinterpret_cast<ManagedArrayAccessor*>(storage);
     std::memset(arr, 0, sizeof(ManagedArrayAccessor));
     arr->element_type_shape = 0;
     arr->length = 0;
+    s_empty = arr;
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }
 

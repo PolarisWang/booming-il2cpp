@@ -465,7 +465,6 @@ public sealed partial class NativeAotLoweringPlanner
 				EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[{ldlocSlot}])");
 			else if (_floatLocalSlots is not null && _floatLocalSlots.TryGetValue(ldlocSlot, out var ldlocType) && ldlocType != SlotType.NativeInt)
 			{
-				Console.Error.WriteLine($"DBG: ldloc slot={ldlocSlot} type={ldlocType} FLOAT PATH slotCount={_floatLocalSlots.Count} method={_currentMethodNativeSymbol}");
 				string wrapper = ldlocType switch
 				{
 					SlotType.Float32 => "ChaosLoadFloat32",
@@ -477,10 +476,6 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			else
 			{
-				int floatCount = _floatLocalSlots?.Count ?? -1;
-				string floatInfo = _floatLocalSlots is null ? "NULL" : $"count={floatCount} [{string.Join(",", _floatLocalSlots.Select(kv => $"{kv.Key}:{kv.Value}"))}]";
-				string structInfo = _structLocalSlots is null ? "NULL" : $"count={_structLocalSlots.Count} [{string.Join(",", _structLocalSlots)}]";
-				Console.Error.WriteLine($"DBG: ldloc slot={ldlocSlot} FALLTHROUGH _float={floatInfo} _struct={structInfo} method={_currentMethodNativeSymbol}");
 				EmitEvalStackPush(builder, indentation, $"chaos_locals[{ldlocSlot}]");
 				PushSlotType(SlotType.NativeInt);
 			}
@@ -3089,7 +3084,15 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					}
 				}
 			}
-			builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
+			if (CanStackAllocate(requiredTargetReference))
+			{
+				builder.AppendLine($"{indentation}    {GetNativeTypeSymbol(requiredTargetReference.SubjectId)} __chaos_stack_obj{{}};");
+				builder.AppendLine($"{indentation}    auto* chaos_object = &__chaos_stack_obj;");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}    auto* chaos_object = CHAOS_IL2CPP_NEW_GC({GetNativeTypeSymbol(requiredTargetReference.SubjectId)}, {{}});");
+			}
 			builder.AppendLine($"{indentation}    chaos_object->header.type_info = {GetNativeTypeInfoSymbol(requiredTargetReference.SubjectId)};");
 			var ctorArgs2 = FormatAbiInvocationArgumentList(constructorTarget.ParameterAbis);
 			if (ctorArgs2.StartsWith("chaos_arg_0", StringComparison.Ordinal))
@@ -3133,6 +3136,28 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		}
 		EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object)");
 		builder.AppendLine(indentation + "}");
+	}
+
+	private bool CanStackAllocate(AotCoreIrReferenceArtifact targetRef)
+	{
+		if (targetRef.TypeShape != AotCoreIrTypeShapeKind.ReferenceType)
+		{
+			return false;
+		}
+		if (string.IsNullOrEmpty(targetRef.SubjectId))
+		{
+			return false;
+		}
+		if (IsDelegateTypeSubjectId(targetRef.SubjectId, _referenceTypeBaseSubjectIds))
+		{
+			return false;
+		}
+		if (TypeHasFinalizer(targetRef.SubjectId))
+		{
+			return false;
+		}
+		var inSet = _typesSafeForStackAllocation?.Contains(targetRef.SubjectId) == true;
+		return inSet;
 	}
 
 	private bool IsEnumRef(AotCoreIrReferenceArtifact targetRef)

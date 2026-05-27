@@ -179,6 +179,40 @@ inline void* NurseryAllocate(CHAOS_IL2CPP_SIZE size) noexcept {
     return NurseryAllocateSlow(size);
 }
 
+/// TLAB bump-pointer allocation WITHOUT zero-init.
+/// Identical to NurseryAllocate but skips std::memset — for callers that
+/// immediately write every byte (e.g., array header + element data).
+inline void* NurseryAllocateNoZero(CHAOS_IL2CPP_SIZE size) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateNoZero");
+    size = (size + 7) & ~static_cast<CHAOS_IL2CPP_SIZE>(7);
+
+    if (size > kMaxTlabAlloc) [[unlikely]] {
+        return NurseryAllocateSlow(size);
+    }
+
+    auto* tlab = &tls_tlab;
+    char* ptr = tlab->current;
+    char* next = ptr + size;
+
+    if (ptr != nullptr && next <= tlab->end) [[likely]] {
+        tlab->current = next;
+        // NOTE: no memset — caller must initialize all bytes.
+        tls_alloc_since_last_gc += size;
+        tls_total_allocated_bytes += size;
+        if (threading::SafepointRequested()) [[unlikely]] {
+            auto* mt = threading::GetCurrentThread();
+            if (mt) [[likely]] {
+                uint32_t seq = mt->suspend_seq.load(std::memory_order_acquire);
+                if (seq != 0) {
+                    mt->suspend_ack.store(seq, std::memory_order_release);
+                }
+            }
+        }
+        return ptr;
+    }
+    return NurseryAllocateSlow(size);
+}
+
 /// Atomic (pointer-free) variant of NurseryAllocate.
 /// Routes to NurseryAllocateAtomicSlow for oversized/old-gen fallback,
 /// so large pointer-free allocations skip bitmap scanning.
@@ -203,6 +237,38 @@ inline void* NurseryAllocateAtomic(CHAOS_IL2CPP_SIZE size) noexcept {
             // safepoint so GC doesn't wait for this thread, then continue
             // using the current TLAB.  If the TLAB runs out while the
             // safepoint is still active, NurseryAllocateSlow handles it.
+            auto* mt = threading::GetCurrentThread();
+            if (mt) [[likely]] {
+                uint32_t seq = mt->suspend_seq.load(std::memory_order_acquire);
+                if (seq != 0) {
+                    mt->suspend_ack.store(seq, std::memory_order_release);
+                }
+            }
+        }
+        return ptr;
+    }
+    return NurseryAllocateAtomicSlow(size);
+}
+
+/// TLAB bump-pointer allocation WITHOUT zero-init (atomic variant).
+/// Identical to NurseryAllocateAtomic but skips std::memset.
+inline void* NurseryAllocateAtomicNoZero(CHAOS_IL2CPP_SIZE size) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("NurseryAllocateAtomicNoZero");
+    size = (size + 7) & ~static_cast<CHAOS_IL2CPP_SIZE>(7);
+    if (size > kMaxTlabAlloc) [[unlikely]] {
+        return NurseryAllocateAtomicSlow(size);
+    }
+
+    auto* tlab = &tls_tlab;
+    char* ptr = tlab->current;
+    char* next = ptr + size;
+
+    if (ptr != nullptr && next <= tlab->end) [[likely]] {
+        tlab->current = next;
+        // NOTE: no memset — caller must initialize all bytes.
+        tls_alloc_since_last_gc += size;
+        tls_total_allocated_bytes += size;
+        if (threading::SafepointRequested()) [[unlikely]] {
             auto* mt = threading::GetCurrentThread();
             if (mt) [[likely]] {
                 uint32_t seq = mt->suspend_seq.load(std::memory_order_acquire);

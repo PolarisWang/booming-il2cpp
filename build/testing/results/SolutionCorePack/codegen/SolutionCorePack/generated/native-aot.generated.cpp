@@ -52,30 +52,30 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_ICalc = static_cast<CHAOS_IL2CPP_INTPTR>(12442021228370428464ULL);
 const void* chaos_vtable_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder[];
 const void* chaos_vtable_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj[];
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
 static constexpr InterfaceMapEntry chaos_iface_map_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder[] = {
 	{ chaos_type_id_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_ICalc, 1, 1 }
 };
-inline MethodTable chaos_mt_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder, 14262183984434432730ULL, 2u, 32, 1, 1, chaos_iface_map_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder, nullptr, 1, 0, 0, 0};
+inline MethodTable chaos_mt_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder, 14262183984434432730ULL, 2u, 32, 1, 1, chaos_iface_map_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder, nullptr, 1, 0, 65536};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder = static_cast<CHAOS_IL2CPP_INTPTR>(14262183984434432730ULL);
-inline MethodTable chaos_mt_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj, 10857097966795336750ULL, 4u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), chaos_vtable_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj, 10857097966795336750ULL, 4u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj = static_cast<CHAOS_IL2CPP_INTPTR>(10857097966795336750ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Int32 = {nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Int32 = {nullptr, nullptr, 11009693519287992193ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int32 = static_cast<CHAOS_IL2CPP_INTPTR>(11009693519287992193ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_String = {nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_System_Private_CoreLib_System_String = {nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Type = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0, 0};
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Type = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
 inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
 inline MethodTable chaos_mt_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_ICalc = {nullptr, nullptr, 12442021228370428464ULL, 0u, 32, 3, 0, nullptr, nullptr, 0, 0, 0, 0};
 
@@ -274,19 +274,26 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR ch
 	}
 
 	const auto chaos_combined_length = chaos_left_length + chaos_right_length;
-	auto* chaos_combined_utf8 = new char[chaos_combined_length + 1];
+	auto* chaos_raw = static_cast<char*>(
+		chaos::il2cpp::runtime_core::GcAllocateAtomic(
+			sizeof(chaos_type_System_Private_CoreLib_System_String) + chaos_combined_length + 1));
+	auto* chaos_str = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_raw);
+	chaos_str->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
+	chaos_str->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_combined_length);
+	chaos_str->string_id = 0;
+	chaos_str->utf8_data = chaos_raw + sizeof(chaos_type_System_Private_CoreLib_System_String);
+
 	if (chaos_left_length != 0)
 	{
-		CHAOS_IL2CPP_MEMCPY(chaos_combined_utf8, chaos_left_utf8, chaos_left_length);
+		CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data, chaos_left_utf8, chaos_left_length);
 	}
 	if (chaos_right_length != 0)
 	{
-		CHAOS_IL2CPP_MEMCPY(chaos_combined_utf8 + chaos_left_length, chaos_right_utf8, chaos_right_length);
+		CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data + chaos_left_length, chaos_right_utf8, chaos_right_length);
 	}
-	chaos_combined_utf8[chaos_combined_length] = '\0';
-	const auto chaos_result = chaos_reflection_create_string_utf8_copy(chaos_combined_utf8, chaos_combined_length);
-	delete[] chaos_combined_utf8;
-	return chaos_result;
+	chaos_str->utf8_data[chaos_combined_length] = '\0';
+
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);
 }
 
 CHAOS_IL2CPP_INTPTR chaos_reflection_create_string_literal(const char* chaos_utf8_data)
@@ -310,6 +317,11 @@ static constexpr uint16_t kGcOffsets_chaos_type_System_Private_CoreLib_System_Ty
 
 extern "C" void ChaosRegisterGcLayouts() {
 	auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();
+
+	// Register managed_array (variable-size: header + contiguous element data).
+	registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,
+		static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),
+		static_cast<uint16_t>(offsetof(chaos_managed_array, length)));
 
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 	registry.Register(14262183984434432730ULL, sizeof(chaos_type_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder), nullptr, 0);
@@ -340,10 +352,21 @@ extern "C" void ChaosRegisterGcLayouts() {
 CHAOS_IL2CPP_INTPTR chaos_external_runtime_System_Private_CoreLib_System_Int32__ToString_System_String__(CHAOS_IL2CPP_INTPTR chaos_arg_0)
 {
 	auto* chaos_value_slot = chaos_resolve_native_int_slot(chaos_arg_0);
-	const CHAOS_IL2CPP_STRING chaos_formatted = ChaosIl2cpp::Common::format_int32(static_cast<CHAOS_IL2CPP_INT32>(*chaos_value_slot));
-	const auto chaos_id = chaos::il2cpp::string_table::Intern(
-		chaos_formatted.c_str(), static_cast<CHAOS_IL2CPP_UINT32>(chaos_formatted.size()));
-	return chaos_make_string_id_value(chaos_id);
+	const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>(*chaos_value_slot);
+	char chaos_buf[16];
+	const auto chaos_fmt = fmt::format_to_n(chaos_buf, sizeof(chaos_buf), "{}", chaos_value);
+	const auto chaos_len = static_cast<CHAOS_IL2CPP_SIZE>(chaos_fmt.size);
+	auto* chaos_raw = static_cast<char*>(
+		chaos::il2cpp::runtime_core::GcAllocateAtomic(
+			sizeof(chaos_type_System_Private_CoreLib_System_String) + chaos_len + 1));
+	auto* chaos_str = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_raw);
+	chaos_str->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();
+	chaos_str->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_len);
+	chaos_str->utf8_data = chaos_raw + sizeof(chaos_type_System_Private_CoreLib_System_String);
+	CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data, chaos_buf, chaos_len);
+	chaos_str->utf8_data[chaos_len] = '\0';
+	chaos_str->string_id = 0;
+	return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);
 }
 
 void chaos_external_runtime_System_Private_CoreLib_System_Object___ctor_System_Void__(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
@@ -384,22 +407,6 @@ static constexpr GenericMethodRegistrationEntryV0 kGenericMethodEntries[1] = { {
 
 static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 0 } };
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
-
-
-// ── Bridge/import thunks ──
-extern "C" void* kChaosExternalRuntimeFnTable[];
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Int32
-extern "C" void chaos_bridge_thunk_0(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
-}
-
-// Bridge/import thunk for: SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads+SmallObj::<Value>k__BackingField
-extern "C" void chaos_bridge_thunk_1(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
-}
 
 
 // Forward declaration for module.image (defined in Step 3 below)
@@ -917,6 +924,21 @@ static const struct {
 
 static const CHAOS_IL2CPP_UINT32 kChaosGcSlotMapsSize = 440u;
 
+// ── Bridge/import thunks ──
+extern "C" void* kChaosExternalRuntimeFnTable[];
+
+// Bridge/import thunk for: System.Private.CoreLib/System.Int32
+extern "C" void chaos_bridge_thunk_0(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
+}
+
+// Bridge/import thunk for: SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads+SmallObj::<Value>k__BackingField
+extern "C" void chaos_bridge_thunk_1(void)
+{
+	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[5])();
+}
+
 // ── CodeRegistrationV0 ─────────────────────────────────────────
 // method_pointers: flat array of all AOT function pointers.
 static void* const kMethodPointers[12] = {
@@ -1122,6 +1144,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 		switch (chaos_switch_value)
 		{
 			case 0:
+			{
 				{
 					auto& _d2 = s_hotpatch_entries[2];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
@@ -1139,7 +1162,9 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				}
 				chaos_locals[0] = _s1;
 				break;
+			}
 			case 1:
+			{
 				{
 					auto& _d1 = s_hotpatch_entries[1];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
@@ -1157,7 +1182,9 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				}
 				chaos_locals[0] = _s2;
 				break;
+			}
 			case 2:
+			{
 				{
 					auto& _d6 = s_hotpatch_entries[6];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
@@ -1175,7 +1202,9 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				}
 				chaos_locals[0] = _s3;
 				break;
+			}
 			case 3:
+			{
 				{
 					auto& _d3 = s_hotpatch_entries[3];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
@@ -1193,7 +1222,9 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				}
 				chaos_locals[0] = _s4;
 				break;
+			}
 			case 4:
+			{
 				{
 					auto& _d5 = s_hotpatch_entries[5];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
@@ -1211,7 +1242,9 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				}
 				chaos_locals[0] = _s5;
 				break;
+			}
 			case 5:
+			{
 				{
 					auto& _d7 = s_hotpatch_entries[7];
 					CHAOS_IL2CPP_INT32 _d_hpresult{};
@@ -1229,6 +1262,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				}
 				chaos_locals[0] = _s6;
 				break;
+			}
 			case 6:
 			{
 				{
@@ -1342,7 +1376,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 			chaos_locals[0] = ChaosStoreFloat64(_d9);
 			_s3 = chaos_locals[1];
 			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s3)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s4))));
 			chaos_locals[1] = _s5;
 			_s6 = chaos_locals[1];
 			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(10000);
@@ -1404,8 +1438,8 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 			_s4 = chaos_locals[1];
 			_s5 = chaos_locals[1];
 			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s5)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s6))));
+			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s4)) * static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s7))));
 			_s9 = chaos_locals[1];
 			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			_s11 = chaos_store_uint64(chaos_load_uint64(_s9) | chaos_load_uint64(_s10));
@@ -1413,13 +1447,13 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 			_s13 = chaos_locals[1];
 			_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
 			_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_shift_right_int32(static_cast<CHAOS_IL2CPP_INT32>(_s13), static_cast<CHAOS_IL2CPP_INT32>(_s14)));
-			_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s12), static_cast<CHAOS_IL2CPP_INT32>(_s15)));
+			_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s12)) - static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s15))));
 			_s17 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s16));
-			_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s17)));
+			_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s3)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s17))));
 			chaos_locals[0] = _s18;
 			_s19 = chaos_locals[1];
 			_s20 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s19), static_cast<CHAOS_IL2CPP_INT32>(_s20)));
+			_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s19)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s20))));
 			chaos_locals[1] = _s21;
 			_s22 = chaos_locals[1];
 			_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(10000);
@@ -1475,14 +1509,14 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
 		if (chaos_length < 0)
 		{
-			CHAOS_IL2CPP_FAIL();
+			CHAOS_IL2CPP_FAIL_FAST();
 		}
-		auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {});
+		const auto chaos_total_size = sizeof(chaos_managed_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_length) * sizeof(CHAOS_IL2CPP_INTPTR);
+		auto* chaos_array = static_cast<chaos_managed_array*>(CHAOS_IL2CPP_MALLOC_GC(chaos_total_size));
 		chaos_array->header.type_info = &chaos_type_info_managed_array.hot;
 		chaos_array->element_type_shape = 1;
 		chaos_array->element_type_info = chaos_mt_System_Private_CoreLib_System_Int32.AsTypeInfoHot();
 		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
-		chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));
 		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
 	chaos_locals[0] = _s1;
@@ -1494,25 +1528,17 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 			_s4 = chaos_locals[2];
 			_s5 = chaos_locals[2];
 			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
-			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s6)));
+			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s5)) * static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s6))));
 			{
 				auto chaos_value_raw = _s7;
 				const auto chaos_value = chaos_value_raw;
 				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s4);
 				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s3);
-				if (chaos_array == nullptr)
-				{
-					CHAOS_IL2CPP_FAIL();
-				}
-				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
-				{
-					CHAOS_IL2CPP_FAIL();
-				}
-				chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+				chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 			}
 			_s8 = chaos_locals[2];
 			_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s8), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
+			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s8)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s9))));
 			chaos_locals[2] = _s10;
 			_s11 = chaos_locals[2];
 			_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(1000);
@@ -1531,23 +1557,15 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 			{
 				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s18);
 				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s17);
-				if (chaos_array == nullptr)
-				{
-					CHAOS_IL2CPP_FAIL();
-				}
-				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
-				{
-					CHAOS_IL2CPP_FAIL();
-				}
-				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				const auto chaos_element = chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
 				_s19 = chaos_element;
 			}
 			_s20 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s19));
-			_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s16), static_cast<CHAOS_IL2CPP_INT32>(_s20)));
+			_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s16)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s20))));
 			chaos_locals[1] = _s21;
 			_s22 = chaos_locals[3];
 			_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s22), static_cast<CHAOS_IL2CPP_INT32>(_s23)));
+			_s24 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s22)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s23))));
 			chaos_locals[3] = _s24;
 			_s25 = chaos_locals[3];
 			_s26 = static_cast<CHAOS_IL2CPP_INTPTR>(1000);
@@ -1617,7 +1635,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 			_s5 = chaos_locals[0];
 			_s6 = chaos_locals[1];
 			_s7 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s6));
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s5), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
+			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s5)) - static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s7))));
 			chaos_locals[0] = _s8;
 		}
 		else
@@ -1625,12 +1643,12 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 			_s9 = chaos_locals[0];
 			_s10 = chaos_locals[1];
 			_s11 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s10));
-			_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s11)));
+			_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s9)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s11))));
 			chaos_locals[0] = _s12;
 		}
 		_s13 = chaos_locals[1];
 		_s14 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s13), static_cast<CHAOS_IL2CPP_INT32>(_s14)));
+		_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s13)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s14))));
 		chaos_locals[1] = _s15;
 		do
 		{
@@ -1644,7 +1662,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 						_s18 = chaos_locals[0];
 						_s19 = chaos_locals[1];
 						_s20 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s19));
-						_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s18), static_cast<CHAOS_IL2CPP_INT32>(_s20)));
+						_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s18)) - static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s20))));
 						chaos_locals[0] = _s21;
 					}
 					else
@@ -1652,12 +1670,12 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 						_s22 = chaos_locals[0];
 						_s23 = chaos_locals[1];
 						_s24 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s23));
-						_s25 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s22), static_cast<CHAOS_IL2CPP_INT32>(_s24)));
+						_s25 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s22)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s24))));
 						chaos_locals[0] = _s25;
 					}
 					_s26 = chaos_locals[1];
 					_s27 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-					_s28 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s26), static_cast<CHAOS_IL2CPP_INT32>(_s27)));
+					_s28 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s26)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s27))));
 					chaos_locals[1] = _s28;
 				}
 				_s29 = chaos_locals[1];
@@ -1710,7 +1728,8 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 			_s4 = chaos_locals[1];
 			{
 				const auto chaos_arg_1 = _s4;
-				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj, {});
+				chaos_type_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj __chaos_stack_obj{};
+				auto* chaos_object = &__chaos_stack_obj;
 				chaos_object->header.type_info = chaos_mt_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj.AsTypeInfoHot();
 				SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj__ctor_System_Int32(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -1731,11 +1750,11 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				_s8 = chaos_inline_retval0;
 			}
 			_s9 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s8));
-			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
+			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s3)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s9))));
 			chaos_locals[0] = _s10;
 			_s11 = chaos_locals[1];
 			_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s11), static_cast<CHAOS_IL2CPP_INT32>(_s12)));
+			_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s11)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s12))));
 			chaos_locals[1] = _s13;
 			_s14 = chaos_locals[1];
 			_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(5000);
@@ -1796,7 +1815,7 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 			chaos_locals[0] = _s5;
 			_s6 = chaos_locals[1];
 			_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
+			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s6)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s7))));
 			chaos_locals[1] = _s8;
 			_s9 = chaos_locals[1];
 			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(500);
@@ -1840,7 +1859,8 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 	CHAOS_IL2CPP_INTPTR _s16;
 	CHAOS_IL2CPP_INTPTR _s17;
 	{
-		auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder, {});
+		chaos_type_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder __chaos_stack_obj{};
+		auto* chaos_object = &__chaos_stack_obj;
 		chaos_object->header.type_info = chaos_mt_SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder.AsTypeInfoHot();
 		SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder__ctor(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object));
 		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
@@ -1869,11 +1889,11 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 				chaos_callvirt_result = (*reinterpret_cast<CHAOS_IL2CPP_INT64(*)(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INT32 chaos_fn_arg_1)>(chaos_vtable_resolve(chaos_object_get_type_info(reinterpret_cast<void*>(chaos_arg_0))->vtable_array, 1u)))(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
 				_s7 = ChaosStoreInt64(chaos_callvirt_result);
 			}
-			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s4), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
+			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s4)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s7))));
 			chaos_locals[1] = _s8;
 			_s9 = chaos_locals[2];
 			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s9), static_cast<CHAOS_IL2CPP_INT32>(_s10)));
+			_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s9)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s10))));
 			chaos_locals[2] = _s11;
 			_s12 = chaos_locals[2];
 			_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(10000);
@@ -1915,7 +1935,7 @@ extern "C" CHAOS_IL2CPP_INT64 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 	CHAOS_IL2CPP_INTPTR _s3;
 	_s0 = chaos_args[1];
 	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s0), static_cast<CHAOS_IL2CPP_INT32>(_s1)));
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s0)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s1))));
 	_s3 = ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>(_s2));
 	return ChaosLoadInt64(_s3);
 }
@@ -1970,3 +1990,9 @@ extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_Solu
 extern "C" const int kAotMethodCount = 12;
 
 extern "C" void ChaosJitRegisterAll() {}
+
+// Forward declaration for InvokeWorkload (defined in codegen namespace below).
+extern "C" CHAOS_IL2CPP_INT32 SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32(CHAOS_IL2CPP_INT32);
+extern "C" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {
+    return SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32(entryIndex);
+}

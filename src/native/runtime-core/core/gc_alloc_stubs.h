@@ -62,6 +62,39 @@ __forceinline inline void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
     return ptr;
 }
 
+/// Fast-path GcAllocate WITHOUT zero-init — for callers that immediately
+/// write every byte (e.g., CHAOS_IL2CPP_MALLOC_GC for array allocations).
+__forceinline void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
+    if (GcStressShouldTrigger()) [[unlikely]] {
+        tls_in_gc_stress = true;
+        chaos_gc_collect();
+        tls_in_gc_stress = false;
+    }
+
+    void* ptr = NurseryAllocateNoZero(size);
+    if (ptr) {
+        tls_alloc_fast_count++;
+        tls_alloc_fast_bytes += size;
+    }
+    return ptr;
+}
+
+/// Fast-path GcAllocateAtomic WITHOUT zero-init (atomic/pointer-free variant).
+__forceinline void* GcAllocateAtomicFastNoZero(CHAOS_IL2CPP_SIZE size) {
+    if (GcStressShouldTrigger()) [[unlikely]] {
+        tls_in_gc_stress = true;
+        chaos_gc_collect();
+        tls_in_gc_stress = false;
+    }
+
+    void* ptr = NurseryAllocateAtomicNoZero(size);
+    if (ptr) {
+        tls_alloc_fast_count++;
+        tls_alloc_fast_bytes += size;
+    }
+    return ptr;
+}
+
 /// Flush TLS fast allocation counters to the global GC stats.
 /// Called from GC collect path (NurseryAllocateSlow, GcYoungCollection, etc.)
 /// before any GC decision or stats read.

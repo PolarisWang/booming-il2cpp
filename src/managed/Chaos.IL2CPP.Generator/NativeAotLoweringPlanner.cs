@@ -36,6 +36,10 @@ public sealed partial class NativeAotLoweringPlanner
     private IReadOnlySet<string> _enumTypeSubjectIds =
         new HashSet<string>(StringComparer.Ordinal);
 
+    // Types verified to have zero GC-reference fields (safe for stack allocation).
+    // Populated during EmitObjectModelDeclarations, consumed by EmitLinearNewObject.
+    private HashSet<string>? _typesSafeForStackAllocation;
+
     // Enum field value→name map, built once from FieldEntries or PE metadata scan.
     // Used by both AOT Bake planning and BoxToString switch emission.
     private Dictionary<string, Dictionary<long, string>> _enumValueToNameMap =

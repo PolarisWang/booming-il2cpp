@@ -315,13 +315,14 @@ namespace chaos { namespace il2cpp { namespace common {
 
 // Raw GC allocation for contiguous arrays (single allocation: header + element data).
 // Returns untyped void* — caller must placement-initialize the header fields.
-// Memory is already zeroed by the GC allocator.
+// Uses NoZero variant — the caller immediately writes all header fields, so the
+// GC allocator's std::memset(0) would be wasted work.
 #define CHAOS_IL2CPP_MALLOC_GC(size) \
-    static_cast<void*>(chaos::il2cpp::runtime_core::GcAllocateFast(size))
+    static_cast<void*>(chaos::il2cpp::runtime_core::GcAllocateFastNoZero(size))
 
 // Atomic (non-scanned) variant of CHAOS_IL2CPP_MALLOC_GC for pointer-free element data.
 #define CHAOS_IL2CPP_MALLOC_ATOMIC_GC(size) \
-    static_cast<void*>(chaos::il2cpp::runtime_core::GcAllocateAtomicFast(size))
+    static_cast<void*>(chaos::il2cpp::runtime_core::GcAllocateAtomicFastNoZero(size))
 
 // ========== Domain domain — per-module metadata ==========
 // Allocate through the current TLS domain heap.  Each allocation is tagged
