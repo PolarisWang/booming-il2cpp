@@ -2,354 +2,122 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/runtime/compiler/services",
-  "capturedAt": "2026-05-27T20:45:00",
+  "capturedAt": "2026-05-27T22:48:42",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
-    "okCount": 10,
-    "failedCount": 0,
+    "okCount": 0,
+    "failedCount": 10,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 440
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
     },
     "aotInstructionCount": {
-      "min": 1,
-      "max": 14,
-      "avg": 7.8,
-      "total": 78
+      "min": 0,
+      "max": 0,
+      "avg": 0,
+      "total": 0
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
-    "topInstructionCategories": {
-      "external_runtime_call": 12
-    },
-    "overallIrExpansionRatio": 0.18,
-    "averageExpansionRatio": 0.18,
-    "maxExpansionRatio": 0.32,
-    "minExpansionRatio": 0.02
+    "topInstructionCategories": {},
+    "overallIrExpansionRatio": 0,
+    "averageExpansionRatio": 0
   },
   "methodResults": [
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)",
       "shortName": "Subject_0",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_0",
-        "instructions": 9
-      },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)",
       "shortName": "Subject_1",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_1",
-        "instructions": 14
-      },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
       "shortName": "Subject_2",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_2",
-        "instructions": 10
-      },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::RunClassConstructor:System.Void(System.RuntimeTypeHandle)",
       "shortName": "Subject_3",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_3",
-        "instructions": 10
-      },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::get_TypeHandle:System.RuntimeTypeHandle()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::RunClassConstructor:System.Void(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 3
-      }
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)",
       "shortName": "Subject_4",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_4",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetSubArray:T[](T[],System.Range)",
       "shortName": "Subject_5",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_5",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::BoxEnum:System.Object(T)",
       "shortName": "Subject_6",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_6",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.Runtime.CompilerServices.FormattableString(System.String,System.Object[])",
       "shortName": "Subject_7",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_7",
-        "instructions": 11
-      },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.FormattableString(System.String,System.Object[])' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 3
-      }
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)",
       "shortName": "Subject_8",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_8",
-        "instructions": 9
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()",
       "shortName": "Subject_9",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "RuntimeCompilerServicesSubjects_RuntimeCompilerServicesSubjects_Subject_9",
-        "instructions": 12
-      },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "status": "error",
+      "error": "JSON parse failed: Expecting value: line 1 column 1 (char 0)",
+      "stdout": "",
+      "stderr": "Unhandled exception: An error occurred trying to start process 'D:\\agent\\booming-il2cpp\\src\\managed\\Chaos.IL2CPP.Driver\\bin\\Release\\net8.0\\Chaos.IL2CPP.Driver.exe' with working directory 'D:\\agent\\booming-il2cpp'. The system cannot find the file specified.\n"
     }
   ]
 }

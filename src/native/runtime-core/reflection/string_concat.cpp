@@ -85,5 +85,60 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(
         abi->string_new_utf8(runtime, thread, buf, total_len));
 }
 
+// ABI export: fused String.Concat(string, Int32.ToString(int)) — one allocation
+// instead of two.  Returns a new string containing the concatenation of
+// `left` followed by the decimal representation of `value`.
+extern "C" CHAOS_IL2CPP_INTPTR ChaosStringConcatWithFormattedInt32(
+    CHAOS_IL2CPP_INTPTR left,
+    CHAOS_IL2CPP_INT32 value)
+{
+    // ── Digit count via branch chain ──
+    auto tmp = static_cast<CHAOS_IL2CPP_UINT32>(value);
+    CHAOS_IL2CPP_SIZE val_len = 1;
+    if (tmp >= 10000) { val_len = 5; goto digit_done; }
+    if (tmp >= 1000)  { val_len = 4; goto digit_done; }
+    if (tmp >= 100)   { val_len = 3; goto digit_done; }
+    if (tmp >= 10)    { val_len = 2; }
+digit_done:
+
+    // ── Read left string length ──
+    CHAOS_IL2CPP_SIZE left_len = 0;
+    if (left != 0) {
+        left_len = static_cast<CHAOS_IL2CPP_SIZE>(
+            reinterpret_cast<const chaos_managed_string*>(left)->length);
+    }
+
+    const auto total = left_len + val_len;
+
+    // ── Allocate once (no zero-init needed — we write every byte) ──
+    auto* chaos_raw = static_cast<char*>(
+        GcAllocateAtomicFastNoZero(
+            sizeof(CHAOS_IL2CPP_STRING_TYPE) + total + 1));
+    if (chaos_raw == nullptr) return 0;
+
+    auto* chaos_str = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(chaos_raw);
+    chaos_str->header.type_info = reinterpret_cast<const chaos_managed_string*>(left)->header.type_info;
+    chaos_str->length = static_cast<CHAOS_IL2CPP_INT32>(total);
+    chaos_str->utf8_data = chaos_raw + sizeof(CHAOS_IL2CPP_STRING_TYPE);
+    chaos_str->string_id = 0;
+
+    // ── Copy left part ──
+    if (left_len > 0) {
+        CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data,
+            reinterpret_cast<const chaos_managed_string*>(left)->utf8_data,
+            left_len);
+    }
+
+    // ── Format Int32 digits directly into the remaining space ──
+    auto* p = chaos_str->utf8_data + total;
+    *p = '\0';
+    do {
+        *--p = static_cast<char>('0' + (tmp % 10));
+        tmp /= 10;
+    } while (tmp != 0);
+
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);
+}
+
 }  // namespace chaos::il2cpp::runtime_core
 }  // extern "C"

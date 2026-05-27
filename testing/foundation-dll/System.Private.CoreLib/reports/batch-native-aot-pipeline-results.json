@@ -2,23 +2,22 @@
   "assembly": "System.Private.CoreLib",
   "mode": "family-entrypoint",
   "total": 1,
-  "passed": 0,
-  "failed": 1,
+  "passed": 1,
+  "failed": 0,
   "results": [
     {
-      "family": "convert-char",
-      "config_tier": "PROFILE",
+      "family": "boxing-unboxing-casts",
+      "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
         "convert_to_cpp": "OK",
-        "build_entry_exe": "FAILED"
+        "build_entry_exe": "OK"
       },
-      "success": false,
-      "methodCount": 18,
+      "success": true,
+      "methodCount": 11,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll",
-      "error": "entry.exe build failed"
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\boxing-unboxing-casts\\managed\\subjects\\build-output\\BoxingUnboxingCastsSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-26T20:29:28"
+  "timestamp": "2026-05-27T23:06:15"
 }

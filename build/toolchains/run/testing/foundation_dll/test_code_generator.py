@@ -1630,6 +1630,15 @@ def build_call_expr(
         else:
             return override
 
+    # Special case: Convert.ToChar(System.Object) — null! resolves to String overload,
+    # missing the box IL instruction needed for the box elimination peephole.
+    if type_name == "Convert" and method_name == "ToChar":
+        pts = parsed["param_types"]
+        if pts == ["System.Object"]:
+            return "Convert.ToChar((object)42)"
+        if pts == ["System.Object", "System.IFormatProvider"]:
+            return "Convert.ToChar((object)42, null)"
+
     # WindowsPrincipal.IsInRole with WindowsBuiltInRole — disambiguate from int overload
     if (
         param_count == 1
