@@ -14,6 +14,7 @@
 #include "gc_helpers.h"
 #include "gc_layout.h"
 #include "gc_events.h"
+#include "gc_static_roots.h"
 #include "reflection_query_model.h"
 #include "reflection_api.h"
 #include "reflection_metadata_impl.h"
@@ -295,6 +296,72 @@ static thread_local CHAOS_IL2CPP_UINT32 s_enum_str_count = 0;
 static thread_local CHAOS_IL2CPP_INT64 s_enum_str_values[64];
 static thread_local CHAOS_IL2CPP_INTPTR s_enum_str_names[64];
 
+// ── Process-level enum field name string cache ────────────────────
+// All threads share this cache so each type's field name strings are
+// allocated only once process-wide (in POH, so they never move).
+// The cache is registered as an explicit GC root range so the GC does
+// not collect the cached POH string objects during mark/sweep.
+//
+// Direct-mapped: slot = (effective_key >> 3) & (kProcessEnumCacheSize - 1).
+// On collision the old entry is evicted — the next access re-allocates.
+// 16 entries covers the common concurrent-type count in benchmarks.
+static constexpr CHAOS_IL2CPP_UINT32 kProcessEnumCacheSize = 16;
+struct ProcessEnumCacheEntry {
+    CHAOS_IL2CPP_UINTPTR type_key;   // 0 = empty slot
+    CHAOS_IL2CPP_UINT32 count;
+    CHAOS_IL2CPP_INT64 values[64];
+    CHAOS_IL2CPP_INTPTR names[64];
+};
+static ProcessEnumCacheEntry g_enum_process_cache[kProcessEnumCacheSize] = {};
+static std::once_flag g_enum_process_cache_root_flag;
+
+/// Register g_enum_process_cache as a GC root range so the collector
+/// traces the cached POH string pointers during marking.  Without this,
+/// the strings could be swept as unreachable even though the cache holds
+/// the only live references.
+static void register_process_cache_gc_root() noexcept {
+    GcRegisterStaticRootRange(
+        g_enum_process_cache,
+        sizeof(g_enum_process_cache),
+        0u);  // domain_id=0: process-lifetime, never unloaded
+}
+
+/// Look up the process-level cache for @a effective_key.
+/// On hit, populates the thread_local cache and returns true.
+static bool lookup_process_enum_cache(CHAOS_IL2CPP_UINTPTR effective_key) noexcept {
+    if (effective_key == 0) return false;
+    auto slot = (effective_key >> 3) & (kProcessEnumCacheSize - 1u);
+    auto& entry = g_enum_process_cache[slot];
+    if (entry.type_key == effective_key) {
+        auto cnt = entry.count;
+        s_enum_str_type_key = effective_key;
+        s_enum_str_count = cnt;
+        for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+            s_enum_str_values[i] = entry.values[i];
+            s_enum_str_names[i] = entry.names[i];
+        }
+        return true;
+    }
+    return false;
+}
+
+/// Store the current thread_local cache contents into the process-level
+/// cache for @a effective_key.  type_key is written last so concurrent
+/// readers see a consistent snapshot (x64 store-store ordering).
+static void store_process_enum_cache(CHAOS_IL2CPP_UINTPTR effective_key) noexcept {
+    if (effective_key == 0) return;
+    std::call_once(g_enum_process_cache_root_flag, register_process_cache_gc_root);
+    auto slot = (effective_key >> 3) & (kProcessEnumCacheSize - 1u);
+    auto& entry = g_enum_process_cache[slot];
+    entry.count = s_enum_str_count;
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < s_enum_str_count; i++) {
+        entry.values[i] = s_enum_str_values[i];
+        entry.names[i] = s_enum_str_names[i];
+    }
+    // type_key published last: readers see consistent data or miss
+    entry.type_key = effective_key;
+}
+
 // GetNames result array cache: single-entry, keyed by TypeInfoHandle.
 // Avoids N string allocations + 1 array allocation per call in hot loops.
 //
@@ -447,6 +514,11 @@ static void ensure_enum_str_cache(CHAOS_IL2CPP_INTPTR type_key,
     CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type_key);
     CHAOS_IL2CPP_UINTPTR effective_key = handle != 0 ? handle : static_cast<CHAOS_IL2CPP_UINTPTR>(type_key);
     if (s_enum_str_type_key == effective_key) return;
+
+    // Check process-level cache before allocating new strings.
+    // Other threads may have already cached this type.
+    if (lookup_process_enum_cache(effective_key)) return;
+
     s_enum_str_type_key = effective_key;
     s_enum_str_count = 0;
 
@@ -462,6 +534,7 @@ static void ensure_enum_str_cache(CHAOS_IL2CPP_INTPTR type_key,
             s_enum_str_names[i] = str_h;
         }
         s_enum_str_count = cnt;
+        store_process_enum_cache(effective_key);
         return;
     }
 
@@ -481,6 +554,7 @@ static void ensure_enum_str_cache(CHAOS_IL2CPP_INTPTR type_key,
                 s_enum_str_names[i] = str_h;
             }
             s_enum_str_count = cnt;
+            store_process_enum_cache(effective_key);
             return;
         }
     }
@@ -503,6 +577,7 @@ static void ensure_enum_str_cache(CHAOS_IL2CPP_INTPTR type_key,
         s_enum_str_names[idx] = str_handle;        idx++;
     }
     s_enum_str_count = idx;
+    store_process_enum_cache(effective_key);
 }
 
 /// Look up a cached enum name string by value.  Returns 0 if not cached.
@@ -546,6 +621,42 @@ static const ReflectionQueryTypeDescriptor* resolve_type_arg(CHAOS_IL2CPP_INTPTR
 static thread_local CHAOS_IL2CPP_INTPTR s_enum_meta_type_key = 0;
 static thread_local const EnumMetadataTable* s_enum_meta_cache = nullptr;
 
+// ── TypeInfoHot* → EnumMetadataTable* reverse cache ─────────────
+// When enum_resolve_meta receives a raw heap pointer (TypeInfoHot* or
+// managed Type object), the existing fast paths don't recognize it:
+// - 0x02XXXXXX tag check fails (not a codegen pseudo-handle)
+// - bit[63]=1 check fails (not a tagged reflection handle)
+// - enum_extract_type_handle reads offset+8 as raw_handle (wrong field)
+//
+// This direct-mapped cache maps the raw pointer directly to metadata,
+// avoiding FNV-1a hash computation and resolve_type_arg fallback.
+// 32 entries, slot = (ptr >> 4) & 0x1F.
+static constexpr CHAOS_IL2CPP_UINT32 kTypeInfoReverseCacheSize = 32;
+static struct {
+    CHAOS_IL2CPP_INTPTR key;         // raw type_arg pointer, 0 = empty
+    const EnumMetadataTable* meta;
+} g_type_info_reverse_cache[kTypeInfoReverseCacheSize] = {};
+
+/// Returns true if type_arg is a raw heap pointer (not a tagged handle or
+/// codegen pseudo-handle).  Only such pointers are cached in the reverse cache.
+static bool is_raw_heap_pointer(CHAOS_IL2CPP_INTPTR ptr) noexcept {
+    if (ptr == 0) return false;
+    // Codegen pseudo-handle: 0x02XXXXXX in low 32 bits
+    uint32_t low32 = static_cast<uint32_t>(static_cast<CHAOS_IL2CPP_UINTPTR>(ptr) & 0xFFFFFFFFu);
+    if ((low32 & 0xFF000000u) == 0x02000000u) return false;
+    // Tagged reflection handle: bit[63]=1
+    if ((static_cast<CHAOS_IL2CPP_UINTPTR>(ptr) >> 63) != 0u) return false;
+    return true;
+}
+
+static void store_type_info_reverse_cache(CHAOS_IL2CPP_INTPTR type_arg,
+                                           const EnumMetadataTable* meta) noexcept {
+    if (meta == nullptr || !is_raw_heap_pointer(type_arg)) return;
+    auto rev_slot = (static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg) >> 4) & (kTypeInfoReverseCacheSize - 1u);
+    g_type_info_reverse_cache[rev_slot].key = type_arg;
+    g_type_info_reverse_cache[rev_slot].meta = meta;
+}
+
 /// Resolve type_arg to enum metadata table (cached).
 /// Returns nullptr if metadata is unavailable for this type.
 /// When non-null, the caller can skip resolve_type_arg entirely.
@@ -557,6 +668,19 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
     // Use stable TypeInfoHandle as cache key to handle GC-moved Type objects
     CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type_arg);
     if (handle != 0 && handle == s_enum_meta_type_key) return s_enum_meta_cache;
+
+    // TypeInfoHot* reverse cache: raw heap pointer → metadata.
+    // Catches TypeInfoHot* from boxed object headers and managed Type objects
+    // that the fast paths above don't recognize.
+    if (type_arg != 0) {
+        auto rev_slot = (static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg) >> 4) & (kTypeInfoReverseCacheSize - 1u);
+        auto& rev = g_type_info_reverse_cache[rev_slot];
+        if (rev.key == type_arg && rev.meta != nullptr) {
+            s_enum_meta_type_key = handle != 0 ? handle : static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg);
+            s_enum_meta_cache = rev.meta;
+            return rev.meta;
+        }
+    }
 
     // Fast path: direct fnv24 lookup from TypeInfoHandle (no resolve_type_arg)
     uint32_t val = static_cast<uint32_t>(handle & 0xFFFFFFFFu);
@@ -575,6 +699,7 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
         if (meta != nullptr) {
             s_enum_meta_type_key = handle;
             s_enum_meta_cache = meta;
+            store_type_info_reverse_cache(type_arg, meta);
             return meta;
         }
     }
@@ -606,6 +731,7 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
             if (meta != nullptr) {
                 s_enum_meta_type_key = handle != 0 ? handle : static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg);
                 s_enum_meta_cache = meta;
+                store_type_info_reverse_cache(type_arg, meta);
                 return meta;
             }
         }
@@ -621,6 +747,7 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
 
     s_enum_meta_type_key = handle != 0 ? handle : static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg);
     s_enum_meta_cache = meta;
+    store_type_info_reverse_cache(type_arg, meta);
     return meta;
 }
 
