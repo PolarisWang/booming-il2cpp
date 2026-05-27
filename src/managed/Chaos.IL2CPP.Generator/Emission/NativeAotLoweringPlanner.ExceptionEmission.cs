@@ -589,18 +589,28 @@ public sealed partial class NativeAotLoweringPlanner
 				{
 					EmitFusedConvertCharBoxCall(builder, indentation);
 				}
-				else if (_pendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
-				{
-					EmitFusedEnumBoxToString(builder, instruction, indentation);
-					_pendingEnumBoxSubjectId = null;
-				}
-				else
-					EmitLinearCall(builder, instruction, indentation);
-				break;
+					else if (_pendingBoxSubjectId != null && IsEnumFormatCall(instruction))
+					{
+						EmitFusedEnumFormatBoxCall(builder, indentation);
+						_pendingBoxSubjectId = null;
+					}
+					else if (_pendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
+					{
+						EmitFusedEnumBoxToString(builder, instruction, indentation);
+						_pendingEnumBoxSubjectId = null;
+					}
+					else
+						EmitLinearCall(builder, instruction, indentation);
+					break;
 		case "callvirt":
 			if (_pendingBoxSubjectId != null && (IsConvertToCharObjectCall(instruction) || IsConvertToCharObjectProviderCall(instruction)))
 			{
 				EmitFusedConvertCharBoxCall(builder, indentation);
+			}
+			else if (_pendingBoxSubjectId != null && IsEnumFormatCall(instruction))
+			{
+				EmitFusedEnumFormatBoxCall(builder, indentation);
+				_pendingBoxSubjectId = null;
 			}
 			else if (_pendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
 			{
@@ -1248,6 +1258,17 @@ public sealed partial class NativeAotLoweringPlanner
 						// Skip box emission; ldnull will be processed normally,
 						// and EmitFusedConvertCharBoxCall will pop the provider null.
 					}
+					// Pattern 3: box <primitive> + ldstr + call/callvirt Enum::Format(Type, Object, String)
+					else if (TryGetLookaheadInstruction(nextInstruction, out var ldstrInstr)
+						&& ldstrInstr.Op == "ldstr"
+						&& TryGetSecondLookaheadInstruction(nextInstruction, out var formatCall)
+						&& (formatCall.Op == "call" || formatCall.Op == "callvirt")
+						&& IsEnumFormatCall(formatCall))
+					{
+						_pendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
+						// Skip box emission; ldstr will be processed normally,
+						// and EmitFusedEnumFormatBoxCall will handle the fused call.
+					}
 					else
 					{
 						EmitLinearBox(builder, instruction, indentation);
@@ -1432,22 +1453,22 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitLinearCopyBlock(builder, indentation);
 			break;
 		case "ldelem.i1":
-			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT8");
 			break;
 		case "ldelem.u1":
-			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT8>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT8");
 			break;
 		case "ldelem.i2":
-			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT16");
 			break;
 		case "ldelem.u2":
-			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT16");
 			break;
 		case "ldelem.i4":
-			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT32");
 			break;
 		case "ldelem.u4":
-			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT32>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT32");
 			break;
 		case "ldelem.i8":
 			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation);
@@ -1486,17 +1507,17 @@ public sealed partial class NativeAotLoweringPlanner
 				switch (subjectId)
 				{
 				case "System.Byte": case "System.SByte":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT8"); break;
 				case "System.Boolean":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT8>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT8"); break;
 				case "System.Int16":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT16"); break;
 				case "System.UInt16": case "System.Char":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT16"); break;
 				case "System.Int32":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT32"); break;
 				case "System.UInt32":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT32>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT32"); break;
 				case "System.Int64": case "System.UInt64":
 					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation); break;
 				case "System.Single":
@@ -1513,13 +1534,13 @@ public sealed partial class NativeAotLoweringPlanner
 			break;
 		}
 		case "stelem.i1":
-			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw))", indentation, isReferenceElement: false);
+			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw)", indentation, isReferenceElement: false, elementType: "CHAOS_IL2CPP_INT8");
 			break;
 		case "stelem.i2":
-			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw))", indentation, isReferenceElement: false);
+			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw)", indentation, isReferenceElement: false, elementType: "CHAOS_IL2CPP_INT16");
 			break;
 		case "stelem.i4":
-			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw))", indentation, isReferenceElement: false);
+			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw)", indentation, isReferenceElement: false, elementType: "CHAOS_IL2CPP_INT32");
 			break;
 		case "stelem.i8":
 			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_value_raw)", indentation, isReferenceElement: false);
@@ -1558,11 +1579,11 @@ public sealed partial class NativeAotLoweringPlanner
 				switch (subjectId)
 				{
 				case "System.Byte": case "System.SByte": case "System.Boolean":
-					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw))", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw)", indentation, isReferenceElement: false, elementType: "CHAOS_IL2CPP_INT8"); break;
 				case "System.Int16": case "System.UInt16": case "System.Char":
-					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw))", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw)", indentation, isReferenceElement: false, elementType: "CHAOS_IL2CPP_INT16"); break;
 				case "System.Int32": case "System.UInt32":
-					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw))", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw)", indentation, isReferenceElement: false, elementType: "CHAOS_IL2CPP_INT32"); break;
 				case "System.Int64": case "System.UInt64":
 					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_value_raw)", indentation, isReferenceElement: false); break;
 				case "System.Single":
@@ -1917,7 +1938,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}}}");
 	}
 
-	private void EmitLinearArrayLoad(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string pushedValueExpression, string indentation)
+	private void EmitLinearArrayLoad(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string pushedValueExpression, string indentation, string? elementType = null)
 	{
 		string rawIndexExpr = ConsumeEvalStackValueExpression();
 		string rawArrayExpr = ConsumeEvalStackValueExpression();
@@ -1938,11 +1959,18 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL_FAST();");
 			builder.AppendLine($"{indentation}    }}");
 		}
-		builder.AppendLine($"{indentation}    const auto chaos_element = chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];");
+		if (elementType != null)
+		{
+			builder.AppendLine($"{indentation}    const auto chaos_element = *reinterpret_cast<{elementType}*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index));");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}    const auto chaos_element = chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];");
+		}
 		EmitEvalStackPush(builder, indentation + "    ", pushedValueExpression);
 		builder.AppendLine($"{indentation}}}");
 	}
-	private void EmitLinearArrayStore(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string storedValueExpression, string indentation, bool isReferenceElement)
+	private void EmitLinearArrayStore(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string storedValueExpression, string indentation, bool isReferenceElement, string? elementType = null)
 	{
 		string rawValueExpr = ConsumeEvalStackValueExpression();
 		string rawIndexExpr = ConsumeEvalStackValueExpression();
@@ -1991,7 +2019,14 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)));");
 		}
-		builder.AppendLine($"{indentation}    chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
+		if (elementType != null)
+		{
+			builder.AppendLine($"{indentation}    *reinterpret_cast<{elementType}*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)) = static_cast<{elementType}>(chaos_value);");
+		}
+		else
+		{
+			builder.AppendLine($"{indentation}    chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
+		}
 		if (isReferenceElement)
 		{
 			builder.AppendLine($"{indentation}    GC_END_STUBBORN_CHANGE(chaos_array);");
@@ -3342,6 +3377,11 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		return instruction.Callee?.Contains("::ToString:", StringComparison.Ordinal) == true;
 	}
 
+	private static bool IsEnumFormatCall(AotCoreIrInstructionArtifact instruction)
+	{
+		return instruction.Callee?.Contains("::Format:", StringComparison.Ordinal) == true;
+	}
+
 	private void EmitFusedEnumBoxToString(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
 	{
 			// A2.4: Constant-folded BoxToString — field name known at codegen time.
@@ -3361,6 +3401,19 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		// Fallback: large enum (>64 fields) or no metadata — use runtime stub.
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    const auto chaos_result = ChaosEnumToStringRaw({typeHandle}, static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
+		EmitEvalStackPush(builder, indentation + "    ", "chaos_result");
+		builder.AppendLine($"{indentation}}}");
+	}
+
+	private void EmitFusedEnumFormatBoxCall(StringBuilder builder, string indentation)
+	{
+		// Stack before pop: [type, raw_value, format_str] (format_str on top)
+		string formatExpr = ConsumeEvalStackValueExpression();
+		string rawValueExpr = ConsumeEvalStackValueExpression();
+		string typeExpr = ConsumeEvalStackValueExpression();
+
+		builder.AppendLine($"{indentation}{{");
+		builder.AppendLine($"{indentation}    const auto chaos_result = ChaosEnumFormatRaw({typeExpr}, static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}), {formatExpr});");
 		EmitEvalStackPush(builder, indentation + "    ", "chaos_result");
 		builder.AppendLine($"{indentation}}}");
 	}
