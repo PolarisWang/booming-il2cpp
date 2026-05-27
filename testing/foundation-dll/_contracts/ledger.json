@@ -670,7 +670,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-27T05:26:25.620061+00:00"
         },
         {
           "familyId": "family/System.Private.CoreLib/delegate/core-invocation",
@@ -692,7 +692,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-27T04:28:23.618854+00:00"
         },
         {
           "familyId": "family/System.Private.CoreLib/enum/parsing",

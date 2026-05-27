@@ -1,21 +1,28 @@
 {
   "family": "guid-random-hashcode",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-25T01:32:25.609797",
+  "generated_at": "2026-05-27T12:33:07.973200",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "VIOLATION",
-      "summary": "Average AOT speedup -190.61% — native significantly slower than managed",
+      "summary": "Average AOT speedup -175.26% — native significantly slower than managed",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -190.61,
-        "average_native_jit_speedup_percent": 4.85,
-        "managed_faster_count": 8,
-        "native_aot_faster_count": 1,
-        "native_jit_faster_count": 2,
+        "average_speedup_percent": -175.26,
+        "average_native_jit_speedup_percent": 0.0,
+        "managed_faster_count": 10,
+        "native_aot_faster_count": 0,
+        "native_jit_faster_count": 0,
         "matched_count": 10
       }
+    },
+    "p1_combo_slug_expansion": {
+      "check_id": "p1_combo_slug_expansion",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
@@ -26,10 +33,179 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 0,
-        "methods_total": 0
+        "methods_with_lowering": 42,
+        "methods_total": 42
       },
-      "per_method": []
+      "per_method": [
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_11",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_12",
+          "has_lowering": true
+        },
+        {
+          "name": "GuidRandomHashcodeSubjects_GuidRandomHashcodeSubjects_Subject_13",
+          "has_lowering": true
+        }
+      ]
     },
     "p1_no_redundant_branch": {
       "check_id": "p1_no_redundant_branch",
@@ -75,13 +251,24 @@
       "details": [],
       "evidence": {}
     },
+    "p2_cross_assembly_coverage": {
+      "check_id": "p2_cross_assembly_coverage",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "15 of 21 changed source files are outside expected architecture layers",
+      "summary": "6 of 18 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+          "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.h",
           "reason": "outside expected architecture layers"
         },
         {
@@ -89,68 +276,35 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GcTypeLayout.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
           "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
           "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/jit_engine.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/jit_precode.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
-          "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 21,
+        "changed_source_count": 18,
         "layer_distribution": {
           "TestInfra": 2,
-          "ManagedContracts": 1,
-          "RuntimeCore": 3
+          "Driver": 3,
+          "Common": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 4,
+          "Tests": 1
         },
         "violations": [
           {
-            "file": "build/native-runtime/unordered_dense_build/chaos_unordered_dense.sln",
+            "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.h",
             "reason": "outside expected architecture layers"
           },
           {
@@ -158,55 +312,15 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GcTypeLayout.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ModuleRegistration.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
             "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeCodegenMetricsBuilder.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/EnumMetadataExtractor.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/NativeAotLoweringPlanner.ExternalRuntimeHelpers.InvocationAbi.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.ObjectEquality.cpp.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.StringJoinStringEnumerable.cpp.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/jit_engine.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/jit_precode.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -221,6 +335,13 @@
     },
     "p2_no_code_duplication": {
       "check_id": "p2_no_code_duplication",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_shared_type_consistency": {
+      "check_id": "p2_shared_type_consistency",
       "status": "NOT_APPLICABLE",
       "summary": "Cross-family check — run with CrossFamilyContext",
       "details": [],
@@ -254,24 +375,25 @@
     "p3_patchdata": {
       "check_id": "p3_patchdata",
       "status": "ALIGNED",
-      "summary": "1/1 valid .patchdata files",
+      "summary": "2/2 valid .patchdata files",
       "details": [],
       "evidence": {
-        "patchdata_count": 1,
-        "valid_count": 1,
+        "patchdata_count": 2,
+        "valid_count": 2,
         "stub_patchdata_count": 0,
         "files": [
+          "System.Private.CoreLib\\guid-random-hashcode\\native\\subjects.patchdata",
           "System.Private.CoreLib\\guid-random-hashcode\\managed\\patch\\patchdata\\guid-random-hashcode.patchdata"
         ]
       }
     }
   },
   "summary": {
-    "total": 12,
+    "total": 15,
     "aligned": 7,
     "concern": 2,
     "violation": 1,
-    "not_applicable": 2,
+    "not_applicable": 5,
     "overall": "VIOLATION"
   }
 }

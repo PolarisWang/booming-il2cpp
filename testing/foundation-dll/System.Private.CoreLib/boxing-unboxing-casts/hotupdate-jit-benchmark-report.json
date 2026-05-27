@@ -54,10 +54,7 @@
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 7,

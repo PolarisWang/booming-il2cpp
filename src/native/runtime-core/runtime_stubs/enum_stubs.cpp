@@ -296,6 +296,13 @@ static thread_local CHAOS_IL2CPP_UINT32 s_enum_str_count = 0;
 static thread_local CHAOS_IL2CPP_INT64 s_enum_str_values[64];
 static thread_local CHAOS_IL2CPP_INTPTR s_enum_str_names[64];
 
+// Single-entry direct-mapped value→string cache for ToString/Format hot path.
+// Keyed by (s_enum_str_type_key, value) — two integer compares and we return
+// the cached pointer without calling ensure_enum_str_cache or doing a linear scan.
+// Cleared on type switch (s_enum_str_type_key change) or after GC young collection.
+static thread_local CHAOS_IL2CPP_INT64 s_enum_tostring_cache_value = -1;
+static thread_local CHAOS_IL2CPP_INTPTR s_enum_tostring_cache_name = 0;
+
 // ── Process-level enum field name string cache ────────────────────
 // All threads share this cache so each type's field name strings are
 // allocated only once process-wide (in POH, so they never move).
@@ -390,6 +397,7 @@ static void enum_stubs_on_gc_event(GcEvent event, void* /*user_data*/) noexcept 
     if (event == GcEvent::GC_YOUNG_START) {
         s_enum_names_array_key = 0;
         s_enum_values_array_key = 0;
+        s_enum_tostring_cache_value = -1;
     }
 }
 
@@ -419,6 +427,13 @@ extern "C" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata_by_fnv24)(CH
 // ChaosEnumRegisterDispatchTable() called from the generated static initializer.
 // Also declared in generated_code_compat.h for visibility from generated code.
 extern "C" const EnumMetadataTable* (*g_chaos_enum_dispatch_lookup)(CHAOS_IL2CPP_UINT32 fnv24) noexcept = nullptr;
+
+// Per-enum ToString dispatch lookup function pointer.
+// Set by ChaosEnumRegisterToStringDispatchTable() called from the generated
+// static initializer.  Default nullptr → stubs use POH cache + linear scan.
+// Also declared in generated_code_compat.h for visibility from generated code.
+extern "C" CHAOS_IL2CPP_INTPTR (*g_chaos_enum_tostring_dispatch_lookup)(
+    CHAOS_IL2CPP_UINT32 fnv24, CHAOS_IL2CPP_INT64 value) noexcept = nullptr;
 
 /// Static dispatch table state for binary-search enum metadata lookup.
 /// Set by ChaosEnumRegisterDispatchTable and used by EnumDispatchLookup.
@@ -500,6 +515,42 @@ extern "C" void ChaosEnumUpdateDispatchTable(
     g_chaos_enum_dispatch_lookup = EnumDispatchLookup;
 }
 
+// ── Per-enum ToString dispatch table state ──────────────────────────
+// Sorted-by-fnv24 array of (fnv24, to_string_fn) pairs registered by
+// the generated code.  Unlike the metadata dispatch table, this one
+// uses pure binary search (no hash table) because the ToString dispatch
+// is only called sparingly per unique value (the direct-mapped cache
+// in Phase 1 absorbs repeated calls to the same value).
+static const EnumToStringDispatchEntry* s_tostring_dispatch_entries = nullptr;
+static CHAOS_IL2CPP_UINT32 s_tostring_dispatch_count = 0;
+
+/// Binary-search lookup against the registered ToString dispatch table.
+/// Returns the result of the per-enum function if found, 0 otherwise.
+static CHAOS_IL2CPP_INTPTR EnumToStringDispatchLookup(
+    CHAOS_IL2CPP_UINT32 fnv24, CHAOS_IL2CPP_INT64 value) noexcept
+{
+    if (s_tostring_dispatch_entries == nullptr) return 0;
+    CHAOS_IL2CPP_UINT32 lo = 0u, hi = s_tostring_dispatch_count;
+    while (lo < hi) {
+        CHAOS_IL2CPP_UINT32 mid = lo + (hi - lo) / 2u;
+        auto& entry = s_tostring_dispatch_entries[mid];
+        if (entry.fnv24 < fnv24) lo = mid + 1u;
+        else if (entry.fnv24 > fnv24) hi = mid;
+        else return entry.to_string_fn ? entry.to_string_fn(value) : 0;
+    }
+    return 0;
+}
+
+/// Register the per-enum ToString dispatch table from generated code.
+/// Called once from the static initializer in the generated translation unit.
+extern "C" void ChaosEnumRegisterToStringDispatchTable(
+    const EnumToStringDispatchEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept
+{
+    s_tostring_dispatch_entries = entries;
+    s_tostring_dispatch_count = count;
+    g_chaos_enum_tostring_dispatch_lookup = EnumToStringDispatchLookup;
+}
+
 /// Populate the enum string cache for the given type.
 /// Pre-allocates managed strings for all named field values.
 ///
@@ -521,6 +572,8 @@ static void ensure_enum_str_cache(CHAOS_IL2CPP_INTPTR type_key,
 
     s_enum_str_type_key = effective_key;
     s_enum_str_count = 0;
+    s_enum_tostring_cache_value = -1;
+    s_enum_tostring_cache_name = 0;
 
     // Primary: pre-resolved metadata pointer (fastest path)
     if (meta != nullptr && meta->count > 0) {
@@ -1328,18 +1381,37 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
 
     if (is_g || fmt_len == 0) {
         // "G" format: return the name if found, otherwise decimal
+        // Per-enum codegen switch dispatch (~5ns, zero allocation)
+        if (g_chaos_enum_tostring_dispatch_lookup) {
+            CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type);
+            uint32_t val_low32 = static_cast<uint32_t>(handle & 0xFFFFFFFFu);
+            if ((val_low32 & 0xFF000000u) == 0x02000000u && (val_low32 & 0xFFFFFFu) != 0u) {
+                auto result = g_chaos_enum_tostring_dispatch_lookup(val_low32 & 0xFFFFFFu, val);
+                if (result != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = result; return result; }
+            }
+        }
+
+        // Fastest path: single-entry direct-mapped cache (2 integer compares)
+        CHAOS_IL2CPP_UINTPTR effective_key = enum_extract_type_handle(type);
+        if (effective_key != 0 && s_enum_str_type_key == effective_key
+            && s_enum_tostring_cache_value == val && s_enum_tostring_cache_name != 0) {
+            return s_enum_tostring_cache_name;
+        }
+
         // Fast path: direct metadata (no resolve_type_arg)
         const auto* meta = enum_resolve_meta(type);
         if (meta != nullptr) {
             // POH cache: zero-alloc on repeated calls for the same type
             ensure_enum_str_cache(type, meta);
             auto cached = lookup_cached_enum_name(val);
-            if (cached != 0) return cached;
+            if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
             for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
                 if (meta->fields[i].value == val) {
                     const auto name_len = std::strlen(meta->fields[i].name);
                     auto result = enum_alloc_string(name_len);
                     write_string_data(result, meta->fields[i].name, name_len);
+                    s_enum_tostring_cache_value = val;
+                    s_enum_tostring_cache_name = result;
                     return result;
                 }
             }
@@ -1350,13 +1422,15 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
             if (desc != nullptr) {
                 ensure_enum_str_cache(type, nullptr, desc);
                 auto cached = lookup_cached_enum_name(val);
-                if (cached != 0) return cached;
+                if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
 
                 const auto* field = find_field_by_value(desc, val);
                 if (field != nullptr && field->name_utf8 != nullptr) {
                     const auto name_len = std::strlen(field->name_utf8);
                     auto result = enum_alloc_string(name_len);
                     write_string_data(result, field->name_utf8, name_len);
+                    s_enum_tostring_cache_value = val;
+                    s_enum_tostring_cache_name = result;
                     return result;
                 }
             }
@@ -1411,18 +1485,41 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
 
     const CHAOS_IL2CPP_INT64 val = read_boxed_value(this_obj);
 
+    // Per-enum codegen switch dispatch (~5ns, zero allocation).
+    // Only works with codegen pseudo-handles (0x02XXXXXX).
+    // For other handle types (reflection handles, raw pointers), falls
+    // through to the generic cache path — ensuring compatibility.
+    if (g_chaos_enum_tostring_dispatch_lookup) {
+        CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type_handle);
+        uint32_t val_low32 = static_cast<uint32_t>(handle & 0xFFFFFFFFu);
+        if ((val_low32 & 0xFF000000u) == 0x02000000u && (val_low32 & 0xFFFFFFu) != 0u) {
+            auto result = g_chaos_enum_tostring_dispatch_lookup(val_low32 & 0xFFFFFFu, val);
+            if (result != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = result; return result; }
+            // 0 = not a named field → fall through to decimal
+        }
+    }
+
+    // Fastest path: single-entry direct-mapped cache (2 integer compares)
+    CHAOS_IL2CPP_UINTPTR effective_key = enum_extract_type_handle(type_handle);
+    if (effective_key != 0 && s_enum_str_type_key == effective_key
+        && s_enum_tostring_cache_value == val && s_enum_tostring_cache_name != 0) {
+        return s_enum_tostring_cache_name;
+    }
+
     // Fast path: direct metadata (no resolve_type_arg)
     const auto* meta = enum_resolve_meta(type_handle);
     if (meta != nullptr) {
         // POH cache: zero-alloc on repeated calls for the same type
         ensure_enum_str_cache(type_handle, meta);
         auto cached = lookup_cached_enum_name(val);
-        if (cached != 0) return cached;
+        if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
         for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
             if (meta->fields[i].value == val) {
                 const auto name_len = std::strlen(meta->fields[i].name);
                 auto result = enum_alloc_string(name_len);
                 write_string_data(result, meta->fields[i].name, name_len);
+                s_enum_tostring_cache_value = val;
+                s_enum_tostring_cache_name = result;
                 return result;
             }
         }
@@ -1433,6 +1530,8 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
         const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
         write_string_data(result, start, len);
+        s_enum_tostring_cache_value = val;
+        s_enum_tostring_cache_name = result;
         return result;
     }
 
@@ -1443,7 +1542,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
 
     ensure_enum_str_cache(type_handle, nullptr, desc);
     auto cached = lookup_cached_enum_name(val);
-    if (cached != 0) return cached;
+    if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
 
     const auto* field = find_field_by_value(desc, val);
     if (field == nullptr || field->name_utf8 == nullptr) {
@@ -1454,12 +1553,16 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
         const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
         write_string_data(result, start, len);
+        s_enum_tostring_cache_value = val;
+        s_enum_tostring_cache_name = result;
         return result;
     }
 
     const auto name_len = std::strlen(field->name_utf8);
     auto result = enum_alloc_string(name_len);
     write_string_data(result, field->name_utf8, name_len);
+    s_enum_tostring_cache_value = val;
+    s_enum_tostring_cache_name = result;
     return result;
 }
 
@@ -1472,18 +1575,37 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToStringRaw(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_
 
     const CHAOS_IL2CPP_INT64 val = raw_value;
 
+    // Per-enum codegen switch dispatch (~5ns, zero allocation)
+    if (g_chaos_enum_tostring_dispatch_lookup) {
+        CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type_handle);
+        uint32_t val_low32 = static_cast<uint32_t>(handle & 0xFFFFFFFFu);
+        if ((val_low32 & 0xFF000000u) == 0x02000000u && (val_low32 & 0xFFFFFFu) != 0u) {
+            auto result = g_chaos_enum_tostring_dispatch_lookup(val_low32 & 0xFFFFFFu, val);
+            if (result != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = result; return result; }
+        }
+    }
+
+    // Fastest path: single-entry direct-mapped cache (2 integer compares)
+    CHAOS_IL2CPP_UINTPTR effective_key = enum_extract_type_handle(type_handle);
+    if (effective_key != 0 && s_enum_str_type_key == effective_key
+        && s_enum_tostring_cache_value == val && s_enum_tostring_cache_name != 0) {
+        return s_enum_tostring_cache_name;
+    }
+
     // Fast path: direct metadata (no resolve_type_arg)
     const auto* meta = enum_resolve_meta(type_handle);
     if (meta != nullptr) {
         // POH cache: zero-alloc on repeated calls for the same type
         ensure_enum_str_cache(type_handle, meta);
         auto cached = lookup_cached_enum_name(val);
-        if (cached != 0) return cached;
+        if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
         for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
             if (meta->fields[i].value == val) {
                 const auto name_len = std::strlen(meta->fields[i].name);
                 auto result = enum_alloc_string(name_len);
                 write_string_data(result, meta->fields[i].name, name_len);
+                s_enum_tostring_cache_value = val;
+                s_enum_tostring_cache_name = result;
                 return result;
             }
         }
@@ -1494,6 +1616,8 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToStringRaw(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_
         const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
         write_string_data(result, start, len);
+        s_enum_tostring_cache_value = val;
+        s_enum_tostring_cache_name = result;
         return result;
     }
 
@@ -1504,7 +1628,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToStringRaw(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_
 
     ensure_enum_str_cache(type_handle, nullptr, desc);
     auto cached = lookup_cached_enum_name(val);
-    if (cached != 0) return cached;
+    if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
 
     const auto* field = find_field_by_value(desc, val);
     if (field == nullptr || field->name_utf8 == nullptr) {
@@ -1515,12 +1639,16 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToStringRaw(CHAOS_IL2CPP_INTPTR type_handle, CHAOS_
         const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
         write_string_data(result, start, len);
+        s_enum_tostring_cache_value = val;
+        s_enum_tostring_cache_name = result;
         return result;
     }
 
     const auto name_len = std::strlen(field->name_utf8);
     auto result = enum_alloc_string(name_len);
     write_string_data(result, field->name_utf8, name_len);
+    s_enum_tostring_cache_value = val;
+    s_enum_tostring_cache_name = result;
     return result;
 }
 

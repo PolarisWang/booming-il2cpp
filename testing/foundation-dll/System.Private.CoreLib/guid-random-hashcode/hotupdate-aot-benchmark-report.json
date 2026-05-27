@@ -8,96 +8,96 @@
       "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 115.28,
-      "postPatchNsPerOp": 115.9,
-      "slowdownPercent": 0.54
+      "postPatchNsPerOp": 162.3,
+      "slowdownPercent": 40.79
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Guid::.ctor:System.Void(System.Byte[])",
       "status": "passed",
       "prePatchNsPerOp": 274.61,
-      "postPatchNsPerOp": 272.9,
-      "slowdownPercent": -0.62
+      "postPatchNsPerOp": 362.9,
+      "slowdownPercent": 32.15
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Guid::NewGuid:System.Guid()",
       "status": "passed",
       "prePatchNsPerOp": 92.88,
-      "postPatchNsPerOp": 84.8,
-      "slowdownPercent": -8.7
+      "postPatchNsPerOp": 124.9,
+      "slowdownPercent": 34.47
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Guid::Parse:System.Guid(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 213.45,
-      "postPatchNsPerOp": 241.9,
-      "slowdownPercent": 13.33
+      "postPatchNsPerOp": 231.2,
+      "slowdownPercent": 8.32
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Guid::TryParse:System.Boolean(System.String,System.Guid&)",
       "status": "passed",
       "prePatchNsPerOp": 39.83,
-      "postPatchNsPerOp": 40.0,
-      "slowdownPercent": 0.43
+      "postPatchNsPerOp": 46.1,
+      "slowdownPercent": 15.74
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Guid::ToString:System.String()",
       "status": "passed",
       "prePatchNsPerOp": 334.97999999999996,
-      "postPatchNsPerOp": 345.6,
-      "slowdownPercent": 3.17
+      "postPatchNsPerOp": 343.1,
+      "slowdownPercent": 2.42
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Random::.ctor:System.Void()",
       "status": "passed",
       "prePatchNsPerOp": 79.2,
-      "postPatchNsPerOp": 84.3,
-      "slowdownPercent": 6.44
+      "postPatchNsPerOp": 99.5,
+      "slowdownPercent": 25.63
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 162.06,
-      "postPatchNsPerOp": 161.6,
-      "slowdownPercent": -0.28
+      "postPatchNsPerOp": 216.0,
+      "slowdownPercent": 33.28
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 164.19,
-      "postPatchNsPerOp": 168.8,
-      "slowdownPercent": 2.81
+      "postPatchNsPerOp": 167.6,
+      "slowdownPercent": 2.08
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Random::NextDouble:System.Double()",
       "status": "passed",
       "prePatchNsPerOp": 165.0,
-      "postPatchNsPerOp": 168.3,
-      "slowdownPercent": 2.0
+      "postPatchNsPerOp": 220.4,
+      "slowdownPercent": 33.58
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])",
       "status": "passed",
       "prePatchNsPerOp": 261.91,
-      "postPatchNsPerOp": 318.5,
-      "slowdownPercent": 21.61
+      "postPatchNsPerOp": 290.6,
+      "slowdownPercent": 10.95
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)",
       "status": "passed",
       "prePatchNsPerOp": 2.9,
-      "postPatchNsPerOp": 2.8,
-      "slowdownPercent": -3.45
+      "postPatchNsPerOp": 2.9,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 12,
@@ -112,15 +112,15 @@
       "methodSubjectId": "System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 10.24,
-      "postPatchNsPerOp": 10.0,
-      "slowdownPercent": -2.34
+      "postPatchNsPerOp": 10.2,
+      "slowdownPercent": -0.39
     }
   ],
   "summary": {
     "totalMethods": 14,
     "nonStubMethods": 14,
-    "averageSlowdownPercent": -0.87,
-    "slowdownFactor": 0.9913,
+    "averageSlowdownPercent": 13.71,
+    "slowdownFactor": 1.1371,
     "slowdownThresholdX": 50.0
   }
 }

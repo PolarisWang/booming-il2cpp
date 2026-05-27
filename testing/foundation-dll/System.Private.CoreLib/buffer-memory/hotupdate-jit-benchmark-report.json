@@ -35,42 +35,27 @@
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Byte*,System.Int32)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Int32,System.Byte[],System.Int32,System.Int32)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::Memmove:System.Void(System.Byte&,System.Byte&,System.UIntPtr)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.Int64,System.Int64)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.UInt64,System.UInt64)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 9,

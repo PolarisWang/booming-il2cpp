@@ -15,6 +15,9 @@ public static class SolutionCorePackBenchmarkWorkloads
             4 => RunObjectAlloc(),
             5 => RunVirtualCall(),
             6 => RunLoopBranch(),
+            7 => RunArrayAccessDecrement(),
+            8 => RunArrayAccessNonUnitStep(),
+            9 => RunArrayAccessCrossBlock(),
             _ => RunArithmeticInt(),
         };
     }
@@ -81,6 +84,44 @@ public static class SolutionCorePackBenchmarkWorkloads
             else
                 sum -= i;
         }
+        return (int)(sum & 0x7FFFFFFF);
+    }
+
+    public static int RunArrayAccessDecrement()
+    {
+        var arr = new int[1000];
+        for (int i = 999; i >= 0; i--)
+            arr[i] = i * 3;
+        long sum = 0;
+        for (int i = 999; i >= 0; i--)
+            sum += arr[i];
+        return (int)(sum & 0x7FFFFFFF);
+    }
+
+    public static int RunArrayAccessNonUnitStep()
+    {
+        var arr = new int[1000];
+        for (int i = 0; i < 1000; i += 2)
+            arr[i] = i;
+        long sum = 0;
+        for (int i = 0; i < 1000; i += 2)
+            sum += arr[i];
+        return (int)(sum & 0x7FFFFFFF);
+    }
+
+    public static int RunArrayAccessCrossBlock()
+    {
+        var arr = new int[1000];
+        for (int i = 0; i < 1000; i++)
+        {
+            if (i < 500)
+                arr[i] = i;
+            else
+                arr[i] = -i;
+        }
+        long sum = 0;
+        for (int i = 0; i < 1000; i++)
+            sum += arr[i];
         return (int)(sum & 0x7FFFFFFF);
     }
 

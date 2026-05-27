@@ -1,7 +1,10 @@
 #include "fast_dispatch.h"
 
+#include <chaos/compiler_hints.h>
+
 #include "instantiation_engine.h"
 #include "vtable_registry.h"
+#include "reflection_query_model.h"
 namespace ri = chaos::il2cpp::runtime_instantiation;
 namespace vr = chaos::il2cpp::vtable_registry;
 
@@ -61,7 +64,14 @@ static void DomainFreeInterpreterObject(void* p) noexcept {
 
 /// Domain-aware destructor + free for ArrayStorage (Handle_NewArr).
 static void DomainFreeArrayStorage(void* p) noexcept {
-    static_cast<interpreter::ArrayStorage*>(p)->~ArrayStorage();
+    auto* arr = static_cast<interpreter::ArrayStorage*>(p);
+    if (arr->is_flat) {
+        if (arr->flat_data != nullptr) {
+            CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(arr->flat_data);
+        }
+    } else {
+        arr->elements.~vector();
+    }
     CHAOS_IL2CPP_DOMAIN_CURRENT_FREE(p);
 }
 
@@ -282,37 +292,37 @@ static bool DispatchExceptionToHandler(FastFrame& frame,
 
 static void Handle_LdcI4(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdcI4");
-    frame.PushI32(instr.immediate_i4);
+    frame.PushI32_NC(instr.immediate_i4);
     ++frame.pc;
 }
 
 static void Handle_LdcI8(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdcI8");
-    frame.PushI64(instr.immediate_i8);
+    frame.PushI64_NC(instr.immediate_i8);
     ++frame.pc;
 }
 
 static void Handle_LdcR4(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdcR4");
-    frame.PushF32(static_cast<float>(instr.immediate_r8));
+    frame.PushF32_NC(static_cast<float>(instr.immediate_r8));
     ++frame.pc;
 }
 
 static void Handle_LdcR8(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdcR8");
-    frame.PushF64(instr.immediate_r8);
+    frame.PushF64_NC(instr.immediate_r8);
     ++frame.pc;
 }
 
 static void Handle_LdStr(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdStr");
-    frame.PushObj(const_cast<char*>(instr.string_operand));
+    frame.PushObj_NC(const_cast<char*>(instr.string_operand));
     ++frame.pc;
 }
 
 static void Handle_LdNull(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdNull");
-    frame.PushNull();
+    frame.PushNull_NC();
     ++frame.pc;
 }
 
@@ -619,7 +629,7 @@ static void Handle_Add(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l + r);
+    frame.PushI32_NC(l + r);
     ++frame.pc;
 }
 
@@ -630,7 +640,7 @@ static void Handle_Sub(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l - r);
+    frame.PushI32_NC(l - r);
     ++frame.pc;
 }
 
@@ -641,7 +651,7 @@ static void Handle_Mul(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l * r);
+    frame.PushI32_NC(l * r);
     ++frame.pc;
 }
 
@@ -652,7 +662,7 @@ static void Handle_Div(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l / r);
+    frame.PushI32_NC(l / r);
     ++frame.pc;
 }
 
@@ -663,7 +673,7 @@ static void Handle_Rem(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l % r);
+    frame.PushI32_NC(l % r);
     ++frame.pc;
 }
 
@@ -672,7 +682,7 @@ static void Handle_Neg(FastFrame& frame, const interpreter::IRInstruction&) noex
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
         AssertInt32Tag(frame, frame.sp - 1);
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(-v);
+    frame.PushI32_NC(-v);
     ++frame.pc;
 }
 
@@ -683,7 +693,7 @@ static void Handle_And(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l & r);
+    frame.PushI32_NC(l & r);
     ++frame.pc;
 }
 
@@ -694,7 +704,7 @@ static void Handle_Or(FastFrame& frame, const interpreter::IRInstruction&) noexc
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l | r);
+    frame.PushI32_NC(l | r);
     ++frame.pc;
 }
 
@@ -705,7 +715,7 @@ static void Handle_Xor(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l ^ r);
+    frame.PushI32_NC(l ^ r);
     ++frame.pc;
 }
 
@@ -714,7 +724,7 @@ static void Handle_Not(FastFrame& frame, const interpreter::IRInstruction&) noex
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
         AssertInt32Tag(frame, frame.sp - 1);
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(~v);
+    frame.PushI32_NC(~v);
     ++frame.pc;
 }
 
@@ -725,7 +735,7 @@ static void Handle_Shl(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t a = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(v << (a & 0x1F));
+    frame.PushI32_NC(v << (a & 0x1F));
     ++frame.pc;
 }
 
@@ -736,7 +746,7 @@ static void Handle_Shr(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t a = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(v >> (a & 0x1F));
+    frame.PushI32_NC(v >> (a & 0x1F));
     ++frame.pc;
 }
 
@@ -747,7 +757,7 @@ static void Handle_ShrUn(FastFrame& frame, const interpreter::IRInstruction&) no
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t a = static_cast<int32_t>(frame.stack[--frame.sp]);
     uint32_t v = static_cast<uint32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(static_cast<int32_t>(v >> (a & 0x1F)));
+    frame.PushI32_NC(static_cast<int32_t>(v >> (a & 0x1F)));
     ++frame.pc;
 }
 
@@ -758,7 +768,7 @@ static void Handle_Ceq(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     uint64_t r = frame.stack[--frame.sp];
     uint64_t l = frame.stack[--frame.sp];
-    frame.PushI32(l == r ? 1 : 0);
+    frame.PushI32_NC(l == r ? 1 : 0);
     ++frame.pc;
 }
 
@@ -769,7 +779,7 @@ static void Handle_Clt(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l < r ? 1 : 0);
+    frame.PushI32_NC(l < r ? 1 : 0);
     ++frame.pc;
 }
 
@@ -780,7 +790,7 @@ static void Handle_Cgt(FastFrame& frame, const interpreter::IRInstruction&) noex
     AssertInt32Tag(frame, frame.sp - 2);
     int32_t r = static_cast<int32_t>(frame.stack[--frame.sp]);
     int32_t l = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(l > r ? 1 : 0);
+    frame.PushI32_NC(l > r ? 1 : 0);
     ++frame.pc;
 }
 
@@ -832,7 +842,7 @@ static void Handle_Box(FastFrame& frame, const interpreter::IRInstruction& instr
     boxed->fields.resize(1);
     boxed->fields[0] = frame.PopIV();
     boxed->type_token = static_cast<uint32_t>(instr.immediate_i4);
-    frame.PushObj(boxed);
+    frame.PushObj_NC(boxed);
     ++frame.pc;
 }
 
@@ -840,12 +850,12 @@ static void Handle_Unbox(FastFrame& frame, const interpreter::IRInstruction&) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_Unbox");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     void* obj = frame.PopObj();
-    if (obj == nullptr) { frame.PushNull(); ++frame.pc; return; }
+    if (obj == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
     auto* boxed = static_cast<interpreter::InterpreterObject*>(obj);
     if (!boxed->fields.empty()) {
         frame.PushIV(boxed->fields[0]);
     } else {
-        frame.PushNull();
+        frame.PushNull_NC();
     }
     ++frame.pc;
 }
@@ -886,11 +896,11 @@ static void Handle_NewObj(FastFrame& frame, const interpreter::IRInstruction& in
         instr.secondary_index == 0u ? 1u : instr.secondary_index);
     storage->fields.resize(field_count);
     storage->type_token = static_cast<uint32_t>(instr.immediate_i4);
-    frame.PushObj(storage);
+    frame.PushObj_NC(storage);
     ++frame.pc;
 }
 
-static void Handle_NewArr(FastFrame& frame, const interpreter::IRInstruction&) noexcept {
+static void Handle_NewArr(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_NewArr");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     uint32_t len = static_cast<uint32_t>(frame.stack[--frame.sp]);
@@ -899,8 +909,40 @@ static void Handle_NewArr(FastFrame& frame, const interpreter::IRInstruction&) n
     if (arr == nullptr) { frame.threw_exception = true; frame.pc = 9999; return; }
     ::new (arr) interpreter::ArrayStorage();
     frame.TrackPool(arr, DomainFreeArrayStorage);
+    arr->type_token = static_cast<uint32_t>(instr.immediate_i4);
+
+    // Check if this is a primitive typed array suitable for flat storage.
+    // Uses the TypeInfoHandle from call_target to query the type name.
+    if (instr.call_target != nullptr) {
+        auto type_handle = static_cast<TypeInfoHandle>(
+            reinterpret_cast<uintptr_t>(instr.call_target));
+        auto* type_desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(type_handle);
+        if (type_desc != nullptr && type_desc->name_utf8 != nullptr) {
+            auto elem_info = interpreter::GetFlatArrayElementInfo(type_desc->name_utf8);
+            if (elem_info.size > 0) {
+                // Flat typed array: allocate contiguous raw memory.
+                arr->is_flat = true;
+                arr->flat_element_size = elem_info.size;
+                arr->flat_element_tag = elem_info.value_tag;
+                arr->flat_length = len;
+                if (len > 0) {
+                    arr->flat_data = CHAOS_IL2CPP_DOMAIN_CURRENT_ALLOCATE(
+                        static_cast<size_t>(len) * elem_info.size);
+                    if (arr->flat_data == nullptr) {
+                        frame.threw_exception = true; frame.pc = 9999; return;
+                    }
+                    std::memset(arr->flat_data, 0, static_cast<size_t>(len) * elem_info.size);
+                }
+                frame.PushObj_NC(arr);
+                ++frame.pc;
+                return;
+            }
+        }
+    }
+
+    // Fallback: reference-type or non-primitive array (existing behavior).
     arr->elements.resize(len);
-    frame.PushObj(arr);
+    frame.PushObj_NC(arr);
     ++frame.pc;
 }
 
@@ -908,8 +950,8 @@ static void Handle_LdLen(FastFrame& frame, const interpreter::IRInstruction&) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdLen");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     auto* arr = static_cast<interpreter::ArrayStorage*>(frame.PopObj());
-    if (arr == nullptr) { frame.PushI32(0); ++frame.pc; return; }
-    frame.PushI32(static_cast<int32_t>(arr->elements.size()));
+    if (arr == nullptr) { frame.PushI32_NC(0); ++frame.pc; return; }
+    frame.PushI32_NC(static_cast<int32_t>(arr->length()));
     ++frame.pc;
 }
 
@@ -917,7 +959,7 @@ static void Handle_LdFld(FastFrame& frame, const interpreter::IRInstruction& ins
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdFld");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     void* obj = frame.PopObj();
-    if (obj == nullptr) { frame.PushNull(); ++frame.pc; return; }
+    if (obj == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
     auto* storage = static_cast<interpreter::InterpreterObject*>(obj);
     uint32_t idx = static_cast<uint32_t>(instr.field_offset);
     // Fast path: well-formed code always has idx < fields.size().
@@ -1279,19 +1321,19 @@ static void FastFrame_PushTagged(FastFrame& frame, uint64_t val, uint8_t tag_byt
     auto tag = static_cast<interpreter::ValueTag>(tag_byte);
     switch (tag) {
     case interpreter::ValueTag::Int32:
-        frame.PushI32(static_cast<int32_t>(val)); break;
+        frame.PushI32_NC(static_cast<int32_t>(val)); break;
     case interpreter::ValueTag::Int64:
-        frame.PushI64(static_cast<int64_t>(val)); break;
+        frame.PushI64_NC(static_cast<int64_t>(val)); break;
     case interpreter::ValueTag::Float32: {
         float fv; std::memcpy(&fv, &val, sizeof(float));
-        frame.PushF32(fv); break;
+        frame.PushF32_NC(fv); break;
     }
     case interpreter::ValueTag::Float64: {
         double dv; std::memcpy(&dv, &val, sizeof(double));
-        frame.PushF64(dv); break;
+        frame.PushF64_NC(dv); break;
     }
     default:
-        frame.PushObj(reinterpret_cast<void*>(val)); break;
+        frame.PushObj_NC(reinterpret_cast<void*>(val)); break;
     }
 }
 
@@ -1598,16 +1640,57 @@ static void Handle_EndFilter(FastFrame& frame, const interpreter::IRInstruction&
 
 // ── Extended fast-path handlers ────────────────────────────────────────
 
+// ── Flat array element read helper ───────────────────────────────────
+// Reads a flat array element at the given index and pushes it onto the
+// frame stack with the correct ValueTag based on flat_element_tag.
+static void PushFlatArrayElement(FastFrame& frame, interpreter::ArrayStorage* arr, uint32_t index) noexcept {
+    void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
+    switch (arr->flat_element_size) {
+    case 1:
+        frame.PushI32_NC(*static_cast<int8_t*>(elem_ptr));
+        return;
+    case 2:
+        frame.PushI32_NC(*static_cast<int16_t*>(elem_ptr));
+        return;
+    case 4:
+        if (arr->flat_element_tag == static_cast<uint8_t>(interpreter::ValueTag::Float32)) {
+            float v;
+            std::memcpy(&v, elem_ptr, sizeof(float));
+            frame.PushF32_NC(v);
+        } else {
+            frame.PushI32_NC(*static_cast<int32_t*>(elem_ptr));
+        }
+        return;
+    case 8:
+        if (arr->flat_element_tag == static_cast<uint8_t>(interpreter::ValueTag::Float64)) {
+            double v;
+            std::memcpy(&v, elem_ptr, sizeof(double));
+            frame.PushF64_NC(v);
+        } else {
+            frame.PushI64_NC(*static_cast<int64_t*>(elem_ptr));
+        }
+        return;
+    default:
+        frame.PushI32_NC(0);
+        return;
+    }
+}
+
 static void Handle_LdElem(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdElem");
     if (frame.sp < 2) { frame.threw_exception = true; frame.pc = 9999; return; }
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    if (arr == nullptr || index >= arr->elements.size()) {
-        frame.PushNull(); ++frame.pc; return;
+    if (arr == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
+
+    if (arr->is_flat) {
+        if (index >= arr->flat_length) { frame.PushNull_NC(); ++frame.pc; return; }
+        PushFlatArrayElement(frame, arr, index);
+    } else {
+        if (index >= arr->elements.size()) { frame.PushNull_NC(); ++frame.pc; return; }
+        frame.PushIV(arr->elements[index]);
     }
-    frame.PushIV(arr->elements[index]);
     ++frame.pc;
 }
 
@@ -1618,7 +1701,12 @@ static void Handle_LdElemNoChk(FastFrame& frame, const interpreter::IRInstructio
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    frame.PushIV(arr->elements[index]);
+
+    if (arr->is_flat) {
+        PushFlatArrayElement(frame, arr, index);
+    } else {
+        frame.PushIV(arr->elements[index]);
+    }
     ++frame.pc;
 }
 
@@ -1631,10 +1719,33 @@ static void Handle_StElemNoChk(FastFrame& frame, const interpreter::IRInstructio
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
-    arr->elements[index] = val;
-    chaos_gc_dirty_card(arr);
+
+    if (arr->is_flat) {
+        // Flat arrays only hold blittable primitives — no write barrier needed.
+        void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
+        switch (arr->flat_element_size) {
+        case 1: *static_cast<int8_t*>(elem_ptr) = static_cast<int8_t>(val.i32); break;
+        case 2: *static_cast<int16_t*>(elem_ptr) = static_cast<int16_t>(val.i32); break;
+        case 4:
+            if (arr->flat_element_tag == static_cast<uint8_t>(interpreter::ValueTag::Float32))
+                std::memcpy(elem_ptr, &val.f32, sizeof(float));
+            else
+                std::memcpy(elem_ptr, &val.i32, sizeof(int32_t));
+            break;
+        case 8:
+            if (arr->flat_element_tag == static_cast<uint8_t>(interpreter::ValueTag::Float64))
+                std::memcpy(elem_ptr, &val.f64, sizeof(double));
+            else
+                std::memcpy(elem_ptr, &val.i64, sizeof(int64_t));
+            break;
+        default: break;
+        }
+    } else {
+        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
+        arr->elements[index] = val;
+        chaos_gc_dirty_card(arr);
+    }
     ++frame.pc;
 }
 
@@ -1646,14 +1757,40 @@ static void Handle_StElem(FastFrame& frame, const interpreter::IRInstruction&) n
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
     if (arr == nullptr) { ++frame.pc; return; }
-    if (index >= arr->elements.size()) {
-        arr->elements.resize(index + 1u);
+
+    if (arr->is_flat) {
+        if (index >= arr->flat_length) {
+            // Flat arrays don't support dynamic resize — bounds error, skip.
+            ++frame.pc; return;
+        }
+        void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
+        switch (arr->flat_element_size) {
+        case 1: *static_cast<int8_t*>(elem_ptr) = static_cast<int8_t>(val.i32); break;
+        case 2: *static_cast<int16_t*>(elem_ptr) = static_cast<int16_t>(val.i32); break;
+        case 4:
+            if (arr->flat_element_tag == static_cast<uint8_t>(interpreter::ValueTag::Float32))
+                std::memcpy(elem_ptr, &val.f32, sizeof(float));
+            else
+                std::memcpy(elem_ptr, &val.i32, sizeof(int32_t));
+            break;
+        case 8:
+            if (arr->flat_element_tag == static_cast<uint8_t>(interpreter::ValueTag::Float64))
+                std::memcpy(elem_ptr, &val.f64, sizeof(double));
+            else
+                std::memcpy(elem_ptr, &val.i64, sizeof(int64_t));
+            break;
+        default: break;
+        }
+    } else {
+        if (index >= arr->elements.size()) {
+            arr->elements.resize(index + 1u);
+        }
+        // SATB pre-write barrier: record old obj pointer before overwriting.
+        using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
+        BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
+        arr->elements[index] = val;
+        chaos_gc_dirty_card(arr);
     }
-    // SATB pre-write barrier: record old obj pointer before overwriting.
-    using chaos::il2cpp::runtime_core::BgcSatbPreWriteBarrier;
-    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&arr->elements[index].obj));
-    arr->elements[index] = val;
-    chaos_gc_dirty_card(arr);
     ++frame.pc;
 }
 
@@ -1664,7 +1801,7 @@ static void Handle_DivUn(FastFrame& frame, const interpreter::IRInstruction&) no
     AssertInt32Tag(frame, frame.sp - 2);
     uint32_t r = static_cast<uint32_t>(frame.stack[--frame.sp]);
     uint32_t l = static_cast<uint32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(static_cast<int32_t>(l / r));
+    frame.PushI32_NC(static_cast<int32_t>(l / r));
     ++frame.pc;
 }
 
@@ -1675,7 +1812,7 @@ static void Handle_RemUn(FastFrame& frame, const interpreter::IRInstruction&) no
     AssertInt32Tag(frame, frame.sp - 2);
     uint32_t r = static_cast<uint32_t>(frame.stack[--frame.sp]);
     uint32_t l = static_cast<uint32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(static_cast<int32_t>(l % r));
+    frame.PushI32_NC(static_cast<int32_t>(l % r));
     ++frame.pc;
 }
 
@@ -1683,7 +1820,7 @@ static void Handle_ConvRUn(FastFrame& frame, const interpreter::IRInstruction&) 
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_ConvRUn");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     uint32_t v = static_cast<uint32_t>(frame.stack[--frame.sp]);
-    frame.PushF32(static_cast<float>(v));
+    frame.PushF32_NC(static_cast<float>(v));
     ++frame.pc;
 }
 
@@ -1691,7 +1828,7 @@ static void Handle_ConvI(FastFrame& frame, const interpreter::IRInstruction&) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_ConvI");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(v);
+    frame.PushI32_NC(v);
     ++frame.pc;
 }
 
@@ -1699,7 +1836,7 @@ static void Handle_ConvU(FastFrame& frame, const interpreter::IRInstruction&) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_ConvU");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     uint32_t v = static_cast<uint32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(static_cast<int32_t>(v));
+    frame.PushI32_NC(static_cast<int32_t>(v));
     ++frame.pc;
 }
 
@@ -1707,8 +1844,8 @@ static void Handle_LdInd(FastFrame& frame, const interpreter::IRInstruction&) no
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdInd");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     void* ptr = reinterpret_cast<void*>(frame.stack[--frame.sp]);
-    if (ptr == nullptr) { frame.PushNull(); ++frame.pc; return; }
-    frame.PushI64(static_cast<int64_t>(*static_cast<uint64_t*>(ptr)));
+    if (ptr == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
+    frame.PushI64_NC(static_cast<int64_t>(*static_cast<uint64_t*>(ptr)));
     ++frame.pc;
 }
 
@@ -1742,7 +1879,7 @@ static void Handle_Switch(FastFrame& frame, const interpreter::IRInstruction& in
 
 static void Handle_LdToken(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdToken");
-    frame.PushI32(instr.immediate_i4);
+    frame.PushI32_NC(instr.immediate_i4);
     ++frame.pc;
 }
 
@@ -1758,13 +1895,13 @@ static void Handle_InitObj(FastFrame& frame, const interpreter::IRInstruction& i
 
 static void Handle_SizeOf(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_SizeOf");
-    frame.PushI32(instr.immediate_i4);
+    frame.PushI32_NC(instr.immediate_i4);
     ++frame.pc;
 }
 
 static void Handle_LdFtn(FastFrame& frame, const interpreter::IRInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdFtn");
-    frame.PushObj(instr.call_target);
+    frame.PushObj_NC(instr.call_target);
     ++frame.pc;
 }
 
@@ -1778,9 +1915,9 @@ static void Handle_LdArgA(FastFrame& frame, const interpreter::IRInstruction& in
     uint32_t idx = static_cast<uint32_t>(instr.operand_index);
     if (idx < frame.arg_count && frame.args != nullptr) {
         auto* arg_base = static_cast<const uint64_t*>(frame.args);
-        frame.PushObj(const_cast<uint64_t*>(&arg_base[idx]));
+        frame.PushObj_NC(const_cast<uint64_t*>(&arg_base[idx]));
     } else {
-        frame.PushNull();
+        frame.PushNull_NC();
     }
     ++frame.pc;
 }
@@ -1789,9 +1926,9 @@ static void Handle_LdLocA(FastFrame& frame, const interpreter::IRInstruction& in
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_LdLocA");
     uint32_t idx = static_cast<uint32_t>(instr.operand_index);
     if (idx < FastFrame::kMaxLocals) {
-        frame.PushObj(&frame.locals[idx]);
+        frame.PushObj_NC(&frame.locals[idx]);
     } else {
-        frame.PushNull();
+        frame.PushNull_NC();
     }
     ++frame.pc;
 }
@@ -1801,9 +1938,9 @@ static void Handle_LocAlloc(FastFrame& frame, const interpreter::IRInstruction& 
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     uint32_t size = static_cast<uint32_t>(frame.stack[--frame.sp]);
     void* mem = CHAOS_IL2CPP_MALLOC(size);
-    if (mem == nullptr) { frame.PushNull(); ++frame.pc; return; }
+    if (mem == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
     std::memset(mem, 0, size);
-    frame.PushObj(mem);
+    frame.PushObj_NC(mem);
     ++frame.pc;
 }
 
@@ -1820,7 +1957,7 @@ static void Handle_LdObj(FastFrame& frame, const interpreter::IRInstruction&) no
     if (iv != nullptr) {
         frame.PushIV(*iv);
     } else {
-        frame.PushNull();
+        frame.PushNull_NC();
     }
     ++frame.pc;
 }
@@ -1874,10 +2011,15 @@ static void Handle_LdElemA(FastFrame& frame, const interpreter::IRInstruction&) 
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    if (arr == nullptr || index >= arr->elements.size()) {
-        frame.PushNull(); ++frame.pc; return;
+    if (arr == nullptr) { frame.PushNull_NC(); ++frame.pc; return; }
+
+    if (arr->is_flat) {
+        if (index >= arr->flat_length) { frame.PushNull_NC(); ++frame.pc; return; }
+        PushFlatArrayElement(frame, arr, index);
+    } else {
+        if (index >= arr->elements.size()) { frame.PushNull_NC(); ++frame.pc; return; }
+        frame.PushIV(arr->elements[index]);
     }
-    frame.PushIV(arr->elements[index]);
     ++frame.pc;
 }
 
@@ -1888,7 +2030,12 @@ static void Handle_LdElemANoChk(FastFrame& frame, const interpreter::IRInstructi
     uint32_t index = static_cast<uint32_t>(frame.stack[--frame.sp]);
     auto* arr = static_cast<interpreter::ArrayStorage*>(
         reinterpret_cast<void*>(frame.stack[--frame.sp]));
-    frame.PushIV(arr->elements[index]);
+
+    if (arr->is_flat) {
+        PushFlatArrayElement(frame, arr, index);
+    } else {
+        frame.PushIV(arr->elements[index]);
+    }
     ++frame.pc;
 }
 
@@ -2107,7 +2254,7 @@ static void Handle_AddOvf(FastFrame& frame, const interpreter::IRInstruction&) n
         frame.pc = 9999;
         return;
     }
-    frame.PushI32(result);
+    frame.PushI32_NC(result);
     ++frame.pc;
 }
 
@@ -2122,7 +2269,7 @@ static void Handle_SubOvf(FastFrame& frame, const interpreter::IRInstruction&) n
         frame.pc = 9999;
         return;
     }
-    frame.PushI32(result);
+    frame.PushI32_NC(result);
     ++frame.pc;
 }
 
@@ -2137,7 +2284,7 @@ static void Handle_MulOvf(FastFrame& frame, const interpreter::IRInstruction&) n
         frame.pc = 9999;
         return;
     }
-    frame.PushI32(result);
+    frame.PushI32_NC(result);
     ++frame.pc;
 }
 
@@ -2146,7 +2293,7 @@ static void Handle_ConvOvfI(FastFrame& frame, const interpreter::IRInstruction&)
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_ConvOvfI");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(v);
+    frame.PushI32_NC(v);
     ++frame.pc;
 }
 
@@ -2155,7 +2302,7 @@ static void Handle_ConvOvfI4(FastFrame& frame, const interpreter::IRInstruction&
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_ConvOvfI4");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI32(v);
+    frame.PushI32_NC(v);
     ++frame.pc;
 }
 
@@ -2164,7 +2311,7 @@ static void Handle_ConvOvfI8(FastFrame& frame, const interpreter::IRInstruction&
     CHAOS_IL2CPP_PROFILE_SCOPE("Handle_ConvOvfI8");
     if (frame.sp < 1) { frame.threw_exception = true; frame.pc = 9999; return; }
     int32_t v = static_cast<int32_t>(frame.stack[--frame.sp]);
-    frame.PushI64(static_cast<int64_t>(v));
+    frame.PushI64_NC(static_cast<int64_t>(v));
     ++frame.pc;
 }
 
@@ -2178,7 +2325,7 @@ static void Handle_ConvOvfU(FastFrame& frame, const interpreter::IRInstruction&)
         frame.pc = 9999;
         return;
     }
-    frame.PushI32(v);
+    frame.PushI32_NC(v);
     ++frame.pc;
 }
 
@@ -2192,7 +2339,7 @@ static void Handle_ConvOvfU4(FastFrame& frame, const interpreter::IRInstruction&
         frame.pc = 9999;
         return;
     }
-    frame.PushI32(v);
+    frame.PushI32_NC(v);
     ++frame.pc;
 }
 
@@ -2206,7 +2353,7 @@ static void Handle_ConvOvfU8(FastFrame& frame, const interpreter::IRInstruction&
         frame.pc = 9999;
         return;
     }
-    frame.PushI64(static_cast<uint64_t>(v));
+    frame.PushI64_NC(static_cast<uint64_t>(v));
     ++frame.pc;
 }
 
@@ -2399,6 +2546,11 @@ bool FastExecute(FastFrame& frame,
         uint32_t prev_pc = frame.pc;
 
         // Debugger breakpoint/stepping check.
+        // Hoisted behind g_dbg_any_breakpoints gate: when no debugger is active
+        // (99.99% of instructions), a single relaxed atomic load eliminates the
+        // patch_method read, null-check, token extraction, and DbgShouldPause call.
+        if (CHAOS_IL2CPP_UNLIKELY(
+                diagnostics::g_dbg_any_breakpoints.load(std::memory_order_relaxed)))
         {
             uint32_t method_token = 0;
             auto* pm = static_cast<PatchMethod*>(frame.patch_method);

@@ -2,14 +2,22 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/interface/dispatch",
-  "capturedAt": "2026-05-25T01:30:38",
+  "capturedAt": "2026-05-27T12:34:03",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 2.5,
+      "acquireReleaseNsPerOp": 2.7,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
+    "fastExecute": {
+      "runCount": 100000,
+      "nsPerCall": 3.1
+    },
+    "callVirt": {
+      "handlerDispatchNs": 3.1,
+      "emptyStackNs": 3.4
+    },
     "poolSize": 32
   },
-  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.5 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\nGC|region|active=0|total_allocated=0\n"
+  "rawOutput": "[2026-05-27T12:34:03][DEBUG][codegen] T4 VEH handler registered\n[2026-05-27T12:34:03][DEBUG][codegen] T4 VEH handler registered\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.7 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 3.1 ns/op\nHandler dispatch overhead (LdcI4): 3.1 ns/call\nCallVirt empty-stack: 3.4 ns/call\n"
 }

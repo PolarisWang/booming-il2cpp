@@ -499,6 +499,11 @@ METHOD_OVERRIDES: dict[tuple[str, str, int], str] = {
     ("Type", "GetType", 1): "skip",  # Requires external runtime type resolution
     ("Type", "GetType", 2): "skip",  # Requires external runtime type resolution
     ("Type", "GetType", 3): "skip",  # Requires external runtime type resolution
+    # Type system methods — use different types to exercise interface scan / parent walk
+    ("Type", "IsAssignableFrom", 1): "typeof(System.IConvertible).IsAssignableFrom(typeof(int))",
+    ("Type", "IsAssignableTo", 1): "typeof(System.IConvertible).IsAssignableTo(typeof(int))",
+    ("Type", "IsInstanceOfType", 1): "typeof(string).IsInstanceOfType(\"hello\")",
+    ("Type", "IsSubclassOf", 1): "typeof(System.MemberAccessException).IsSubclassOf(typeof(System.Exception))",
     # MethodBase.Invoke — requires reflection invoke runtime support
     ("MethodBase", "Invoke", 2): "skip",  # MethodBase.Invoke(object, object[])
     # MethodInfo.GetParameters — requires ParameterInfo array support

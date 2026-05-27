@@ -67,7 +67,7 @@ inline const MethodTable* chaos_object_get_method_table(const void* obj) noexcep
 struct chaos_managed_string {
     ThinLockableHeader header{};
     CHAOS_IL2CPP_INT32 length = 0;
-    const char* utf8_data = nullptr;
+    char* utf8_data = nullptr;
     CHAOS_IL2CPP_UINT64 string_id = 0u;
 };
 
@@ -168,5 +168,28 @@ struct EnumDispatchEntry {
 // Replaces g_chaos_resolve_enum_metadata_by_fnv24 for the common codegen-metadata case.
 // Default nullptr → enum_resolve_meta falls back to g_chaos_resolve_enum_metadata_by_fnv24.
 extern "C" const EnumMetadataTable* (*g_chaos_enum_dispatch_lookup)(CHAOS_IL2CPP_UINT32 fnv24) noexcept;
+
+// ── Per-enum ToString function pointer dispatch ──────────────────────
+// Generated per-enum switch/jump-table functions for zero-allocation,
+// O(1) ToString lookup.  The dispatch table is sorted by fnv24 for
+// binary search, matching the metadata dispatch table pattern.
+// Each per-enum function returns a CHAOS_IL2CPP_STRING_ID (compile-time
+// constant, zero allocation) on match, or 0 for unrecognized values
+// (caller falls through to decimal formatting).
+typedef CHAOS_IL2CPP_INTPTR (*EnumToStringFn)(CHAOS_IL2CPP_INT64 value) noexcept;
+
+#ifndef CHAOS_IL2CPP_ENUM_TOSTRING_DISPATCH_ENTRY_DEFINED
+#define CHAOS_IL2CPP_ENUM_TOSTRING_DISPATCH_ENTRY_DEFINED
+struct EnumToStringDispatchEntry {
+    CHAOS_IL2CPP_UINT32 fnv24;
+    EnumToStringFn to_string_fn;  // nullptr = no generated dispatch for this type
+};
+#endif
+
+// Dispatch lookup function pointer.  Set by ChaosEnumRegisterToStringDispatchTable.
+// Called from the ToString/Format stub hot path.  Returns 0 if no dispatch
+// function exists for the given type or the value is not a named field.
+extern "C" CHAOS_IL2CPP_INTPTR (*g_chaos_enum_tostring_dispatch_lookup)(
+    CHAOS_IL2CPP_UINT32 fnv24, CHAOS_IL2CPP_INT64 value) noexcept;
 
 #endif // CHAOS_IL2CPP_GENERATED_CODE_COMPAT_H_

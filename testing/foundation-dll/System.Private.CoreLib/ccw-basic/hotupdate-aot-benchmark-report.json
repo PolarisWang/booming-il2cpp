@@ -16,39 +16,39 @@
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 2.12,
-      "postPatchNsPerOp": 3.8,
-      "slowdownPercent": 79.25
+      "postPatchNsPerOp": 2.3,
+      "slowdownPercent": 8.49
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 2.26,
-      "postPatchNsPerOp": 4.1,
-      "slowdownPercent": 81.42
+      "postPatchNsPerOp": 2.6,
+      "slowdownPercent": 15.04
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestConstantValue:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 2.25,
-      "postPatchNsPerOp": 2.3,
-      "slowdownPercent": 2.22
+      "postPatchNsPerOp": 3.4,
+      "slowdownPercent": 51.11
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "CcwBasicNativeEntry/CcwBasicNativeEntry::TestDualInterface:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 2.12,
-      "postPatchNsPerOp": 2.7,
-      "slowdownPercent": 27.36
+      "postPatchNsPerOp": 3.8,
+      "slowdownPercent": 79.25
     }
   ],
   "summary": {
     "totalMethods": 5,
     "nonStubMethods": 5,
-    "averageSlowdownPercent": 39.65,
-    "slowdownFactor": 1.3965,
+    "averageSlowdownPercent": 32.37,
+    "slowdownFactor": 1.3237,
     "slowdownThresholdX": 50.0
   }
 }

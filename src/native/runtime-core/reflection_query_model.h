@@ -99,6 +99,10 @@ struct ReflectionQueryTypeDescriptor {
     const void* generic_parameters;
     CHAOS_IL2CPP_UINT32 generic_param_count;
     CHAOS_IL2CPP_UINT32 reserved_flags;
+    /// Pointer to the AOT TypeInfoHot* for this type, or nullptr.
+    /// Populated at startup by ChaosReflectionGetTypeFromHandle.
+    /// Used by hierarchy.cpp fast path to skip O(n) module scan.
+    const void* type_info_ptr;
 };
 
 struct ReflectionQueryImageDescriptor {

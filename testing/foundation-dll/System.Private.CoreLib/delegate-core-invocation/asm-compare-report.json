@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/delegate/core/invocation",
-  "capturedAt": "2026-05-26T21:40:39",
+  "capturedAt": "2026-05-27T21:02:58",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -11,26 +11,26 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 440
+      "max": 1420,
+      "avg": 316.0,
+      "total": 3160
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 38,
-      "avg": 19.6,
-      "total": 196
+      "max": 19,
+      "avg": 10.0,
+      "total": 100
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 24
+      "external_runtime_call": 12
     },
-    "overallIrExpansionRatio": 0.45,
-    "averageExpansionRatio": 0.44,
-    "maxExpansionRatio": 0.86,
-    "minExpansionRatio": 0.02
+    "overallIrExpansionRatio": 0.03,
+    "averageExpansionRatio": 0.2,
+    "maxExpansionRatio": 0.43,
+    "minExpansionRatio": 0.01
   },
   "methodResults": [
     {
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 22,
-        "ratio": 0.5,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,19 +52,9 @@
       "aot": {
         "status": "ok",
         "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0",
-        "instructions": 22
+        "instructions": 11
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -77,7 +67,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -87,8 +77,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 22,
-        "ratio": 0.5,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -99,19 +89,9 @@
       "aot": {
         "status": "ok",
         "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1",
-        "instructions": 22
+        "instructions": 11
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -124,7 +104,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -134,8 +114,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 38,
-        "ratio": 0.86,
+        "aotInstructionCount": 19,
+        "ratio": 0.43,
         "jitCodeSize": 256
       },
       "jit": {
@@ -146,24 +126,9 @@
       "aot": {
         "status": "ok",
         "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2",
-        "instructions": 38
+        "instructions": 19
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Array::Empty<System.Object>:System.Object[]()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -181,7 +146,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 6
+        "external_runtime_call": 3
       }
     },
     {
@@ -190,32 +155,22 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 36,
-        "ratio": 0.82,
-        "jitCodeSize": 256
+        "jitInstructionCount": 1388,
+        "aotInstructionCount": 18,
+        "ratio": 0.01,
+        "jitCodeSize": 3290
       },
       "jit": {
         "status": "ok",
-        "size": 256,
-        "instructions": 44
+        "size": 3290,
+        "instructions": 1388
       },
       "aot": {
         "status": "ok",
         "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3",
-        "instructions": 36
+        "instructions": 18
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -228,7 +183,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -238,8 +193,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 36,
-        "ratio": 0.82,
+        "aotInstructionCount": 18,
+        "ratio": 0.41,
         "jitCodeSize": 256
       },
       "jit": {
@@ -250,19 +205,9 @@
       "aot": {
         "status": "ok",
         "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4",
-        "instructions": 36
+        "instructions": 18
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Delegate::get_Target:System.Object()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -275,7 +220,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -284,15 +229,15 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 1420,
         "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
+        "ratio": 0,
+        "jitCodeSize": 3482
       },
       "jit": {
         "status": "ok",
-        "size": 256,
-        "instructions": 44
+        "size": 3482,
+        "instructions": 1420
       },
       "aot": {
         "status": "ok",
@@ -333,8 +278,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 38,
-        "ratio": 0.86,
+        "aotInstructionCount": 19,
+        "ratio": 0.43,
         "jitCodeSize": 256
       },
       "jit": {
@@ -345,14 +290,9 @@
       "aot": {
         "status": "ok",
         "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7",
-        "instructions": 38
+        "instructions": 19
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Delegate::GetInvocationList:System.Delegate[]()' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -360,7 +300,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {

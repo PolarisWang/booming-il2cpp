@@ -145,7 +145,7 @@ struct chaos_type_System_Private_CoreLib_System_String
 {
 	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR length = 0;
-	const char* utf8_data = nullptr;
+	char* utf8_data = nullptr;
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 

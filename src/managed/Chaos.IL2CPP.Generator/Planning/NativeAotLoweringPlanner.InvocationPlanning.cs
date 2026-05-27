@@ -1794,5 +1794,277 @@ public sealed partial class NativeAotLoweringPlanner
                 enumTypeId, callee, ConstantStr: null, ConstantInt: defined ? 1L : 0L, ArgCount: 2);
         }
     }
-}
 
+    // ── A2.6: TypeInfo* direct API pre-scan ─────────────────────────────
+
+    /// <summary>
+    /// Pre-scan all methods' IR instructions to detect
+    /// <c>typeof(T).IsAssignableFrom(typeof(U))</c> patterns where T and U are
+    /// AOT-known types.  Records fold entries that let the emitter bypass
+    /// <c>ChaosReflectionGetTypeFromHandle</c> and emit
+    /// <c>ChaosReflectionIsAssignableFromPtr(...)</c> directly.
+    /// </summary>
+    private void BuildTypeHierarchyPtrFoldTable(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
+    {
+        _typeHierarchyPtrFoldMap.Clear();
+        if (_allEmittedTypeSubjectIds is not { Count: > 0 })
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] _allEmittedTypeSubjectIds is null or empty, skipping pre-scan");
+            return;
+        }
+
+        Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] _allEmittedTypeSubjectIds.Count = {_allEmittedTypeSubjectIds.Count}");
+        // Dump all type IDs for debugging
+        foreach (var tid in _allEmittedTypeSubjectIds.OrderBy(x => x))
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG]   emitted type: {tid}");
+        int totalCalls = 0, matchedCalls = 0;
+
+        foreach (var method in methodsForLowering)
+        {
+            var instrs = method.Instructions;
+            if (instrs is null) continue;
+
+            for (int i = 0; i < instrs.Count; i++)
+            {
+                var instr = instrs[i];
+                if (instr.OpCode is not (InstructionOpCode.Call or InstructionOpCode.CallVirt))
+                    continue;
+
+                var callee = instr.Callee;
+                if (string.IsNullOrEmpty(callee)) continue;
+
+                totalCalls++;
+                if (callee.Contains("IsAssignableFrom") || callee.Contains("IsAssignableTo") || callee.Contains("IsSubclassOf") || callee.Contains("IsInstanceOfType"))
+                {
+                    Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] Checking call at ilOffset={instr.IlOffset} in method={method.SubjectId}: callee={callee}");
+                }
+
+                if (TryFoldTypeHierarchyPtrCall(instrs, i, callee, out var entry))
+                {
+                    _typeHierarchyPtrFoldMap[instr.IlOffset] = entry;
+                    matchedCalls++;
+                    Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] MATCH at ilOffset={instr.IlOffset}: {entry.PtrFunctionName}({entry.TypeExpr1}, {entry.TypeExpr2 ?? "null"})");
+                }
+            }
+        }
+
+        Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] _typeHierarchyPtrFoldMap.Count = {_typeHierarchyPtrFoldMap.Count} (matched {matchedCalls}/{totalCalls} call sites)");
+    }
+
+    /// <summary>
+    /// For a call to <c>System.Type::IsAssignableFrom</c> (etc.), check whether
+    /// all type arguments are <c>typeof()</c> constants (ldtoken + GetTypeFromHandle).
+    /// If so, produce a <see cref="TypeHierarchyPtrFoldEntry"/> that the emitter
+    /// uses to emit the <c>*Ptr</c> direct API call with pre-resolved symbols.
+    /// </summary>
+    private bool TryFoldTypeHierarchyPtrCall(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
+        int callIndex,
+        string callee,
+        out TypeHierarchyPtrFoldEntry entry)
+    {
+        entry = default;
+
+        // Check declaring type is System.Type and extract method name
+        var methodName = ExtractTypeHierarchyMethodName(callee);
+        if (methodName is null)
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] ExtractTypeHierarchyMethodName returned null for callee={callee}");
+            return false;
+        }
+
+        if (!TypeHierarchyPtrOptimizationMap.TryGetValue(methodName, out var ptrFuncName))
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] methodName={methodName} not in OptimizationMap");
+            return false;
+        }
+
+        Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] TryFold at callIndex={callIndex}, methodName={methodName}, ptrFuncName={ptrFuncName}");
+
+        switch (methodName)
+        {
+            case "IsAssignableFrom":
+            case "IsSubclassOf":
+            case "IsAssignableTo":
+                if (callIndex < 4)
+                {
+                    Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] callIndex={callIndex} < 4, can't match two-arg pattern");
+                    return false;
+                }
+
+                if (!TryGetLdTokenSubjectId(instrs, callIndex - 1, out var subjectId2))
+                {
+                    Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] TryGetLdTokenSubjectId failed at callIndex-1={callIndex-1}");
+                    return false;
+                }
+                if (!TryGetLdTokenSubjectId(instrs, callIndex - 3, out var subjectId1))
+                {
+                    Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] TryGetLdTokenSubjectId failed at callIndex-3={callIndex-3}");
+                    return false;
+                }
+
+                Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] subjectId1={subjectId1}, subjectId2={subjectId2}");
+                Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] AotKnown1={IsTypeAotKnown(subjectId1)}, AotKnown2={IsTypeAotKnown(subjectId2)}");
+
+                if (!IsTypeAotKnown(subjectId1) || !IsTypeAotKnown(subjectId2))
+                {
+                    Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] One or both types not AOT-known");
+                    return false;
+                }
+
+                entry = new TypeHierarchyPtrFoldEntry(
+                    ptrFuncName,
+                    GetNativeTypeInfoSymbol(subjectId1),
+                    GetNativeTypeInfoSymbol(subjectId2));
+                return true;
+
+            case "IsInstanceOfType":
+                if (callIndex < 3) return false;
+
+                if (callIndex < 3) return false;
+                if (!TryGetLdTokenSubjectId(instrs, callIndex - 2, out var typeSubjectId)) return false;
+                if (!IsTypeAotKnown(typeSubjectId)) return false;
+
+                entry = new TypeHierarchyPtrFoldEntry(
+                    ptrFuncName,
+                    GetNativeTypeInfoSymbol(typeSubjectId),
+                    TypeExpr2: null);
+                return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Check if <c>instrs[idx]</c> is <c>call Type::GetTypeFromHandle</c> and
+    /// <c>instrs[idx-1]</c> is <c>ldtoken</c>.  If so, extract the type SubjectId.
+    /// </summary>
+    private static bool TryGetLdTokenSubjectId(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
+        int idx,
+        out string? subjectId)
+    {
+        subjectId = null;
+        if (idx < 1)
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] TryGetLdTokenSubjectId: idx={idx} < 1");
+            return false;
+        }
+
+        // Check: call Type::GetTypeFromHandle
+        var callInstr = instrs[idx];
+        if (callInstr.OpCode is not (InstructionOpCode.Call or InstructionOpCode.CallVirt))
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] TryGetLdTokenSubjectId: instrs[{idx}].OpCode={callInstr.OpCode} (not Call/CallVirt)");
+            return false;
+        }
+
+        if (!IsGetTypeFromHandle(callInstr.Callee))
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] TryGetLdTokenSubjectId: instrs[{idx}].Callee={callInstr.Callee} is not GetTypeFromHandle");
+            return false;
+        }
+
+        // Check: ltoken <type>
+        var ldtokenInstr = instrs[idx - 1];
+        if (ldtokenInstr.Op != "ldtoken")
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] TryGetLdTokenSubjectId: instrs[{idx-1}].Op={ldtokenInstr.Op} (not ldtoken)");
+            return false;
+        }
+
+        subjectId = ldtokenInstr.TargetReference?.SubjectId;
+        if (string.IsNullOrEmpty(subjectId) && ldtokenInstr.Operand is string directId)
+            subjectId = directId;
+
+        Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] TryGetLdTokenSubjectId: idx={idx}, subjectId={subjectId ?? "(null)"}");
+        return !string.IsNullOrEmpty(subjectId);
+    }
+
+    /// <summary>
+    /// Extract the method name from a callee SubjectId like
+    /// <c>"System.Type::IsAssignableFrom"</c> or
+    /// <c>"System.Private.CoreLib/System.Type::IsAssignableFrom:Boolean(System.Type)"</c>.
+    /// Returns the method name only if the declaring type is <c>System.Type</c>.
+    /// </summary>
+    private static string? ExtractTypeHierarchyMethodName(string callee)
+    {
+        if (string.IsNullOrEmpty(callee))
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] ExtractTypeHierarchyMethodName: callee is null/empty");
+            return null;
+        }
+
+        var doubleColon = callee.LastIndexOf("::", StringComparison.Ordinal);
+        if (doubleColon < 0)
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] ExtractTypeHierarchyMethodName: no '::' in callee={callee}");
+            return null;
+        }
+
+        // Check declaring type is System.Type
+        var typePart = callee.Substring(0, doubleColon);
+        var slashIdx = typePart.LastIndexOf('/');
+        var typeName = slashIdx >= 0 ? typePart.Substring(slashIdx + 1) : typePart;
+        if (typeName != "System.Type")
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] ExtractTypeHierarchyMethodName: typeName={typeName} != System.Type in callee={callee}");
+            return null;
+        }
+
+        // Get method name (strip optional ":retType(params)" suffix)
+        var rest = callee.Substring(doubleColon + 2);
+        var colonIdx = rest.IndexOf(':');
+        var methodName = colonIdx >= 0 ? rest.Substring(0, colonIdx) : rest;
+
+        Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] ExtractTypeHierarchyMethodName: methodName={methodName}, callee={callee}");
+        return methodName;
+    }
+
+    /// <summary>
+    /// Check if a callee SubjectId represents <c>System.Type::GetTypeFromHandle</c>.
+    /// </summary>
+    private static bool IsGetTypeFromHandle(string? callee)
+    {
+        if (string.IsNullOrEmpty(callee))
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] IsGetTypeFromHandle: callee is null/empty");
+            return false;
+        }
+
+        var doubleColon = callee.LastIndexOf("::", StringComparison.Ordinal);
+        if (doubleColon < 0)
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] IsGetTypeFromHandle: no '::' in callee={callee}");
+            return false;
+        }
+
+        // Check declaring type is System.Type
+        var typePart = callee.Substring(0, doubleColon);
+        var slashIdx = typePart.LastIndexOf('/');
+        var typeName = slashIdx >= 0 ? typePart.Substring(slashIdx + 1) : typePart;
+        if (typeName != "System.Type")
+        {
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] IsGetTypeFromHandle: typeName={typeName} != System.Type in callee={callee}");
+            return false;
+        }
+
+        // Get method name
+        var rest = callee.Substring(doubleColon + 2);
+        var colonIdx = rest.IndexOf(':');
+        var methodName = colonIdx >= 0 ? rest.Substring(0, colonIdx) : rest;
+
+        bool result = methodName == "GetTypeFromHandle";
+        if (!result)
+            Console.Error.WriteLine($"[TYPEHIERARCHY_DEBUG] IsGetTypeFromHandle: methodName={methodName} != GetTypeFromHandle, callee={callee}");
+        return result;
+    }
+
+    /// <summary>
+    /// Check if a type SubjectId is AOT-known (has a <c>chaos_mt_*</c> symbol).
+    /// </summary>
+    private bool IsTypeAotKnown(string subjectId)
+    {
+        return _allEmittedTypeSubjectIds?.Contains(subjectId) == true;
+    }
+}

@@ -30,10 +30,7 @@
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 4,

@@ -1,44 +1,17 @@
 {
   "family": "collections-generic-core",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 48,
-  "audited": 48,
+  "total_methods": 114,
+  "audited": 114,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 48,
+  "methods_without_assert": 114,
   "passed": true,
   "method_details": [
     {
       "method_name": "ChaosRegisterGcLayouts",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "chaos_bridge_thunk_0",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "chaos_bridge_thunk_1",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "chaos_bridge_thunk_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -74,7 +47,61 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0",
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -92,7 +119,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_2",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -101,7 +128,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_3",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -110,7 +137,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_4",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -146,7 +173,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_8",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -164,7 +191,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_10",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_10",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -173,7 +200,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_11",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_11",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -182,7 +209,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_12",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_12",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -191,7 +218,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_13",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_13",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -200,7 +227,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_14",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_14",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -209,7 +236,106 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_15",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -236,33 +362,6 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "chaos_bridge_thunk_0",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "chaos_bridge_thunk_1",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "chaos_bridge_thunk_2",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
       "method_name": "GetHotpatchEntryCount",
       "subject_id": "",
       "is_stub": false,
@@ -290,7 +389,61 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_0",
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -308,7 +461,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_2",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -317,7 +470,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_3",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -326,7 +479,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_4",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_4",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -362,7 +515,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_8",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -380,7 +533,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_10",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_10",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -389,7 +542,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_11",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_11",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -398,7 +551,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_12",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_12",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -407,7 +560,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_13",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_13",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -416,7 +569,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_14",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_14",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -425,7 +578,448 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_15",
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_CustomEntrySubject_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "CollectionsGenericCoreSubjects_CollectionsGenericCoreNativeEntry_CustomEntryMethod8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

@@ -22,8 +22,10 @@
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
-      "status": "failed",
-      "error": "DIAG: Compile free fn enter (n_instrs=38)\nDIAG: Compile before GetSehHandler\nDIAG: Compile before NativeCodeGenerator ctor\nDIAG: Compile before gen.Generate\nDIAG-PASS: Generate start\nDIAG-PASS: pre-scan done (n_instrs=38)\nDIAG-PASS: register alloc done (coloring=1, cache=5)\nDIAG-PASS: prologue + cooperative mode done\nDIAG-PASS: optimization done (n_instrs=38)\nDIAG-PASS: liveness analysis done\nDIAG-PASS: instruction emission done\nDIAG-PASS: epilogue done\nDIAG-PASS: cold section done\nDIAG-PASS: branch resolution + SEH done\nDIAG-PASS: debug info done\nDIAG-PASS: before buf_.Seal (code_bytes=221)\nJIT CRASH: Code=0xC0000005 RIP=0x0000000000000000 RSP=0x000000DA7116F938 RAX=0x0000000000000001 RBX=0x000002198EAF02F8 RCX=0x0000000000000000 RDX=0x0000000000000002 RSI=0x00007FF64282F650 RDI=0x000002198EAF0508\n"
+      "status": "passed",
+      "prePatchNsPerOp": 29195.37,
+      "postPatchNsPerOp": 0.0,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 3,
@@ -44,18 +46,12 @@
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 7,
@@ -68,18 +64,12 @@
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 0.0,
-      "slowdownPercent": 0.0
+      "status": "stub"
     }
   ],
   "summary": {

@@ -872,7 +872,7 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     sdk_rel = codegen_rel
     if codegen_dir.is_dir():
         for d in sorted(codegen_dir.iterdir()):
-            if d.is_dir() and (d / "chaos-config.cmake").exists():
+            if d.is_dir() and (d / "chaos-config.cmake").exists() and (d / "cmake" / "chaos-targets.cmake").exists():
                 sdk_rel = str(d.resolve()).replace("\\", "/")
                 # Sync runtime libs from codegen/lib/ into per-assembly lib/
                 sdk_lib_dir = d / "lib"
@@ -1770,6 +1770,52 @@ def remediate_supplemental_codegen(native_dir: Path) -> None:
                 header_file.write_text(new_hdr, encoding="utf-8")
                 print(f"    [fix_codegen] added {len(missing_type_ids)} type_id + "
                       f"{len(missing_iface_maps)} iface_map decls in {header_file.name}")
+
+    # Step B2: Add missing struct chaos_type_* forward declarations.
+    # codegen emits reinterpret_cast<chaos_type_System_Private_CoreLib_System_Action*>
+    # for delegate calls, but the delegate type may not be in _allEmittedTypeSubjectIds
+    # (Phase 0 type discovery doesn't track types referenced only through delegate
+    # invocation emission).  This step scans generated cpp files for chaos_type_*
+    # references (excluding chaos_type_id_*, chaos_type_info_*, chaos_type_shape_*)
+    # and adds missing struct forward declarations to the header.
+    type_ref_set: set[str] = set()
+    for gen_file in native_dir.rglob("native-aot.*"):
+        if gen_file.suffix not in (".cpp",):
+            continue
+        gen_text = gen_file.read_text(encoding="utf-8")
+        for m in _re.finditer(r'\bchaos_type_(?!(?:id_|info_|shape_))(\w+)\b', gen_text):
+            type_ref_set.add(f"chaos_type_{m.group(1)}")
+    if type_ref_set:
+        declared_types: set[str] = set()
+        for header_file in native_dir.rglob("native-aot.generated.header.h"):
+            hdr_text = header_file.read_text(encoding="utf-8")
+            for m in _re.finditer(r'struct\s+(chaos_type_\w+)\s*;', hdr_text):
+                declared_types.add(m.group(1))
+        missing_types = sorted(type_ref_set - declared_types)
+        if missing_types:
+            for header_file in native_dir.rglob("native-aot.generated.header.h"):
+                hdr_text = header_file.read_text(encoding="utf-8")
+                new_hdr = hdr_text
+                insert_marker = "// Forward declarations (pipeline fix"
+                if insert_marker not in new_hdr:
+                    insert_marker = "// chaos_type_id extern decls (pipeline fix)"
+                if insert_marker not in new_hdr:
+                    insert_marker = "#pragma once"
+                decl_lines: list[str] = []
+                decl_lines.append("// chaos_type struct forward decls (pipeline fix)")
+                for tsym in missing_types:
+                    decl_lines.append(f"struct {tsym};")
+                insert_pos = new_hdr.rfind(insert_marker)
+                if insert_pos == -1:
+                    insert_pos = new_hdr.find("#pragma once")
+                    if insert_pos != -1:
+                        insert_pos = new_hdr.index('\n', insert_pos) + 1
+                new_hdr = (new_hdr[:insert_pos] + "\n" +
+                           "\n".join(decl_lines) + "\n" +
+                           new_hdr[insert_pos:])
+                header_file.write_text(new_hdr, encoding="utf-8")
+                print(f"    [fix_codegen] added {len(missing_types)} chaos_type_* struct "
+                      f"forward decls in {header_file.name}")
 
     # Step C: Fix constexpr InterfaceMapEntry arrays that reference extern
     # chaos_type_id_* symbols (which are only extern const, not constexpr).

@@ -20,6 +20,15 @@ public sealed partial class NativeAotLoweringPlanner
 	private int _linearScratchCounter;
 	private int _nextInlineId;
 	private string? _pendingEnumBoxSubjectId;
+	private string? _pendingBoxSubjectId;
+
+	private static readonly HashSet<string> ToCharEligiblePrimitives = new()
+	{
+		"System.Byte", "System.SByte", "System.Int16", "System.Int32", "System.Int64",
+		"System.UInt16", "System.UInt32", "System.UInt64",
+		"System.Single", "System.Double",
+		"System.Boolean", "System.Char"
+	};
 
 	// Array bounds check cache for structured slot mode.
 	// When consecutive array operations access the same array and index
@@ -34,6 +43,7 @@ public sealed partial class NativeAotLoweringPlanner
 	// populated by PreScanLoopArraySkips when a loop induction variable
 	// pattern is detected (e.g., for (int i = 0; i < arr.Length; i++) { arr[i]; }).
 	private HashSet<int>? _loopArrayAccessSkipOffsets;
+	private Dictionary<int, int>? _knownArrayLengths;
 
 	private void ResetArrayCheckCache()
 	{
@@ -351,9 +361,11 @@ public sealed partial class NativeAotLoweringPlanner
 	{
 			ResetArrayCheckCache();
 		var filtered = FilterRedundantStoreReloadPairs(instructions);
-		foreach (AotCoreIrInstructionArtifact instruction in filtered)
+		for (int i = 0; i < filtered.Count; i++)
 		{
-			EmitInstruction(builder, instruction, indentation);
+			var instruction = filtered[i];
+			var nextInstruction = (i + 1 < filtered.Count) ? filtered[i + 1] : null;
+			EmitInstruction(builder, instruction, indentation, nextInstruction);
 		}
 	}
 
@@ -420,7 +432,7 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}CHAOS_EH_RETHROW;");
 	}
 
-	private void EmitInstruction(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+	private void EmitInstruction(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation, AotCoreIrInstructionArtifact? nextInstruction = null)
 	{
 		switch (instruction.Op)
 		{
@@ -485,17 +497,25 @@ public sealed partial class NativeAotLoweringPlanner
 		case "ldfld":
 			EmitLinearFieldLoad(builder, instruction, indentation);
 			break;
-		case "call":
-			if (_pendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
-			{
-				EmitFusedEnumBoxToString(builder, instruction, indentation);
-				_pendingEnumBoxSubjectId = null;
-			}
-			else
-				EmitLinearCall(builder, instruction, indentation);
-			break;
+			case "call":
+				if (_pendingBoxSubjectId != null && IsConvertToCharObjectCall(instruction))
+				{
+					EmitFusedConvertCharBoxCall(builder, indentation);
+				}
+				else if (_pendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
+				{
+					EmitFusedEnumBoxToString(builder, instruction, indentation);
+					_pendingEnumBoxSubjectId = null;
+				}
+				else
+					EmitLinearCall(builder, instruction, indentation);
+				break;
 		case "callvirt":
-			if (_pendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
+			if (_pendingBoxSubjectId != null && IsConvertToCharObjectCall(instruction))
+			{
+				EmitFusedConvertCharBoxCall(builder, indentation);
+			}
+			else if (_pendingEnumBoxSubjectId != null && IsEnumToStringCall(instruction))
 			{
 				EmitFusedEnumBoxToString(builder, instruction, indentation);
 				_pendingEnumBoxSubjectId = null;
@@ -1111,6 +1131,16 @@ public sealed partial class NativeAotLoweringPlanner
 				if (boxTargetRef.Kind == AotCoreIrReferenceKind.Type && IsEnumRef(boxTargetRef))
 				{
 					_pendingEnumBoxSubjectId = boxTargetRef.SubjectId;
+					// Skip box emission - raw value stays on eval stack,
+					// consumed by subsequent call/callvirt peephole.
+				}
+				else if (boxTargetRef.Kind == AotCoreIrReferenceKind.Type
+					&& ToCharEligiblePrimitives.Contains(ExtractTypeName(boxTargetRef.SubjectId))
+					&& nextInstruction != null
+					&& (nextInstruction.Op == "call" || nextInstruction.Op == "callvirt")
+					&& IsConvertToCharObjectCall(nextInstruction))
+				{
+					_pendingBoxSubjectId = ExtractTypeName(boxTargetRef.SubjectId);
 					// Skip box emission - raw value stays on eval stack,
 					// consumed by subsequent call/callvirt peephole.
 				}
@@ -2222,6 +2252,39 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		{
 			if (TryInlineAtCallSite(builder, instruction, invocationTarget, indentation))
 				return;
+		}
+
+		// A2.6: TypeInfo* direct API for typeof(T).IsAssignableFrom(typeof(U)) etc.
+		// Bypasses GetTypeFromHandle and emits *Ptr call with direct TypeInfo* symbols.
+		if (_typeHierarchyPtrFoldMap.Count > 0 &&
+			_typeHierarchyPtrFoldMap.TryGetValue(instruction.IlOffset, out var hierarchyFold))
+		{
+			builder.AppendLine(indentation + "{");
+			if (hierarchyFold.TypeExpr2 is not null)
+			{
+				// Two-arg methods: both args are typeof() constants.
+				// Reset depth and push *Ptr result directly (depth-safe).
+				if (_activeStructuredSlotContext is not null)
+					_activeStructuredSlotContext.RestoreDepth(0);
+				else
+					builder.AppendLine(indentation + "    chaos_stack_top -= 2;");
+				EmitEvalStackPush(builder, indentation + "    ",
+					$"{hierarchyFold.PtrFunctionName}({hierarchyFold.TypeExpr1}, {hierarchyFold.TypeExpr2})");
+			}
+			else
+			{
+				// IsInstanceOfType: type arg is typeof(), obj arg is eval stack expression
+				var objExpr = ConsumeEvalStackValueExpression();
+				// Discard the typeof() type arg (keep obj)
+				if (_activeStructuredSlotContext is not null)
+					_activeStructuredSlotContext.RestoreDepth(0);
+				else
+					builder.AppendLine(indentation + "    chaos_stack_top--;");
+				EmitEvalStackPush(builder, indentation + "    ",
+					$"{hierarchyFold.PtrFunctionName}({hierarchyFold.TypeExpr1}, {objExpr})");
+			}
+			builder.AppendLine(indentation + "}");
+			return;
 		}
 
 
@@ -4076,5 +4139,65 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			names[i] = "chaos_fn_arg_" + i.ToString();
 		return string.Join(", ", names);
 	}
+
+
+		private static bool IsConvertToCharObjectCall(AotCoreIrInstructionArtifact instruction)
+		{
+			return instruction.Callee?.Contains("::ToChar:System.Char(System.Object)", System.StringComparison.Ordinal) == true;
+		}
+
+		private static string ExtractTypeName(string subjectId)
+		{
+			var slashIdx = subjectId.LastIndexOf('/');
+			return slashIdx >= 0 ? subjectId.Substring(slashIdx + 1) : subjectId;
+		}
+
+		private static string GetConvertCharNativeFunctionName(string typeSubjectId) => typeSubjectId switch
+		{
+			"System.Byte" => "chaos_convert_tochar_byte",
+			"System.SByte" => "chaos_convert_tochar_sbyte",
+			"System.Int16" => "chaos_convert_tochar_int16",
+			"System.Int32" => "chaos_convert_tochar_int32",
+			"System.Int64" => "chaos_convert_tochar_int64",
+			"System.UInt16" => "chaos_convert_tochar_uint16",
+			"System.UInt32" => "chaos_convert_tochar_uint32",
+			"System.UInt64" => "chaos_convert_tochar_uint64",
+			"System.Single" => "chaos_convert_tochar_single",
+			"System.Double" => "chaos_convert_tochar_double",
+			"System.Boolean" => "chaos_convert_tochar_boolean",
+			"System.Char" => "chaos_convert_tochar_char",
+			_ => throw new System.ArgumentException($"Unsupported type: {typeSubjectId}")
+		};
+
+		private void EmitFusedConvertCharBoxCall(System.Text.StringBuilder builder, string indentation)
+		{
+			string rawValueExpr = ConsumeEvalStackValueExpression();
+			string inlineExpr = _pendingBoxSubjectId switch
+			{
+				"System.Byte" or "System.Char" or "System.UInt16"
+					=> $"static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr})",
+				"System.SByte"
+					=> $"({rawValueExpr} < 0 ? (chaos::il2cpp::runtime_core::chaos_raise_exception(0), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
+				"System.Int16" or "System.Int32" or "System.Int64" or "System.UInt32" or "System.UInt64"
+					=> $"(({rawValueExpr} < 0 || {rawValueExpr} > 0xFFFF) ? (chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0)) : static_cast<CHAOS_IL2CPP_UINT16>({rawValueExpr}))",
+				"System.Boolean" or "System.DateTime"
+					=> $"(chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr)), static_cast<CHAOS_IL2CPP_UINT16>(0))",
+				_ => null
+			};
+
+			if (inlineExpr != null)
+			{
+				EmitEvalStackPush(builder, indentation, "static_cast<CHAOS_IL2CPP_INTPTR>(" + inlineExpr + ")");
+			}
+			else
+			{
+				string nativeFn = GetConvertCharNativeFunctionName(_pendingBoxSubjectId!);
+				builder.AppendLine(indentation + "{");
+				builder.AppendLine(indentation + "    const auto chaos_result = " + nativeFn + "(" + rawValueExpr + ");");
+				EmitEvalStackPush(builder, indentation + "    ", "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result)");
+				builder.AppendLine(indentation + "}");
+			}
+			_pendingBoxSubjectId = null;
+		}
 
 }

@@ -373,6 +373,82 @@ static uint64_t ComputeStableIdFromHandle(CHAOS_IL2CPP_INTPTR handle) noexcept {
     return 0;
 }
 
+// ── Unified TypeInfoHot resolution (all handle types, no GC fallback) ──
+// Handles:
+//   1. Module Registry handles [module_id:32][token:32] → O(1) via GetTypeInfoFromHandle
+//   2. ReflectionQuery handles (bit-63 tagged pointer to descriptor) → O(1) with descriptor cache
+//   3. Pseudo-metadata handles (0x02XXXXXX FNV-1a) → delegated to GetTypeDescriptorFromHandle
+//   4. Raw metadata tokens → delegated
+//
+// Thread-local descriptor cache eliminates O(n) module scan on repeated lookups
+// (benchmark-hot path: same 2+ handles called 100k+ times).
+static inline const TypeInfoHot* GetTypeInfoFromAnyHandle(CHAOS_IL2CPP_INTPTR handle) noexcept {
+    if (handle == 0) return nullptr;
+
+    // Fast path: try Module Registry handle resolution
+    {
+        auto* ti = GetTypeInfoFromHandle(handle);
+        if (ti != nullptr) return ti;
+    }
+
+    // Decode handle to descriptor
+    auto* desc = GetTypeDescriptorFromHandle(handle);
+    if (desc == nullptr) return nullptr;
+
+    // Thread-local small descriptor cache: avoids O(n) module scan on repeated
+    // lookups with the same descriptor (common in benchmark/typeof() hot paths).
+    // 8 entries is generous — typical use has 2-4 distinct descriptors.
+    thread_local const void* s_cache_desc[8] = {};
+    thread_local const TypeInfoHot* s_cache_ti[8] = {};
+    thread_local uint32_t s_cache_count = 0;
+    thread_local bool s_cache_initialized = false;
+
+    if (s_cache_initialized) {
+        for (uint32_t ci = 0; ci < s_cache_count; ci++) {
+            if (s_cache_desc[ci] == desc) {
+                return s_cache_ti[ci];
+            }
+        }
+    }
+
+    // Cache miss — scan ModuleRegistry images for a TypeInfoHot* whose descriptor
+    // pointer identity matches `desc`.
+    const TypeInfoHot* result = nullptr;
+    uint32_t mod_count = GetModuleCount();
+    for (uint32_t mi = 0; mi < mod_count; mi++) {
+        const auto* mod = GetModuleByIndex(mi);
+        if (mod == nullptr || mod->type_info_ptrs == nullptr || mod->image == nullptr) continue;
+        for (uint32_t ti_idx = 0; ti_idx < mod->type_count && ti_idx < mod->image->type_count; ti_idx++) {
+            if (mod->image->types[ti_idx] == desc) {
+                result = mod->type_info_ptrs[ti_idx];
+                break;
+            }
+        }
+        if (result != nullptr) break;
+    }
+
+    // Not found in ModuleRegistry — may be an aot_metadata-only type.
+    // The TypeInfoHot* for aot_metadata-only types is not available
+    // through the ModuleRegistry.  Return nullptr — callers that
+    // receive nullptr will short-circuit to 0 (false).
+    if (result == nullptr) {
+        for (uint32_t i = 0; i < aot_metadata::kAllTypeCount; i++) {
+            if (aot_metadata::kAllTypes[i] == desc) {
+                break;  // Found in aot_metadata, but no TypeInfo* available
+            }
+        }
+    }
+
+    // Store in cache (even nullptr — avoids repeated lookups)
+    if (s_cache_count < 8) {
+        s_cache_desc[s_cache_count] = desc;
+        s_cache_ti[s_cache_count] = result;
+        s_cache_count++;
+    }
+    s_cache_initialized = true;
+    return result;
+}
+
 // ── TypeInfoHot resolution with GC object fallback ───────────────────
 // Extends GetTypeInfoFromHandle to also handle GC Type objects (no tag
 // bit, GC heap pointer) by reading runtime_type_handle at offset 16,

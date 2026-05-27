@@ -133,6 +133,7 @@ function(chaos_apply_subject_variant target_name)
             "${{target_name}}"
             PRIVATE
                 CHAOS_VARIANT_CHECK
+                CHAOS_IL2CPP_CONFIG_CHECK
                 "CHAOS_VARIANT_NAME=\\"CHECK\\"")
         target_compile_options(
             "${{target_name}}"
@@ -147,6 +148,7 @@ function(chaos_apply_subject_variant target_name)
             "${{target_name}}"
             PRIVATE
                 CHAOS_VARIANT_PROFILE
+                CHAOS_IL2CPP_CONFIG_PROFILE
                 "CHAOS_VARIANT_NAME=\\"PROFILE\\"")
         target_compile_options(
             "${{target_name}}"
@@ -161,6 +163,7 @@ function(chaos_apply_subject_variant target_name)
             "${{target_name}}"
             PRIVATE
                 CHAOS_VARIANT_SHIP
+                CHAOS_IL2CPP_CONFIG_SHIP
                 "CHAOS_VARIANT_NAME=\\"SHIP\\"")
         target_compile_options(
             "${{target_name}}"

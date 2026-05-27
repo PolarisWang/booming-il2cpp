@@ -1,7 +1,7 @@
 {
   "family": "garbage-collection",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-26T20:14:10.435881",
+  "generated_at": "2026-05-27T12:29:40.340528",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -18,179 +18,145 @@
         "total_methods": 10
       }
     },
+    "p1_combo_slug_expansion": {
+      "check_id": "p1_combo_slug_expansion",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "VIOLATION",
-      "summary": "0/40 methods with lowering",
+      "status": "ALIGNED",
+      "summary": "All methods have lowering [OK]",
       "details": [],
       "evidence": {
-        "has_lowering": false,
-        "file_has_lowering": false,
+        "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 0,
-        "methods_total": 40
+        "methods_with_lowering": 30,
+        "methods_total": 30
       },
       "per_method": [
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_4",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-          "has_lowering": false
-        },
-        {
-          "name": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-          "has_lowering": false
+          "has_lowering": true
         }
       ]
     },
@@ -223,46 +189,76 @@
       "details": [],
       "evidence": {}
     },
+    "p2_cross_assembly_coverage": {
+      "check_id": "p2_cross_assembly_coverage",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "4 of 4 changed source files are outside expected architecture layers",
+      "summary": "6 of 18 changed source files are outside expected architecture layers",
       "details": [
+        {
+          "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.cpp",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.h",
+          "reason": "outside expected architecture layers"
+        },
         {
           "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GcTypeLayout.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
           "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/benchmark-host/native_aot_main.cpp",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 4,
-        "layer_distribution": {},
+        "changed_source_count": 18,
+        "layer_distribution": {
+          "TestInfra": 2,
+          "Driver": 3,
+          "Common": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 4,
+          "Tests": 1
+        },
         "violations": [
+          {
+            "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.cpp",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.h",
+            "reason": "outside expected architecture layers"
+          },
           {
             "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GcTypeLayout.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
             "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/benchmark-host/native_aot_main.cpp",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -277,6 +273,13 @@
     },
     "p2_no_code_duplication": {
       "check_id": "p2_no_code_duplication",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_shared_type_consistency": {
+      "check_id": "p2_shared_type_consistency",
       "status": "NOT_APPLICABLE",
       "summary": "Cross-family check — run with CrossFamilyContext",
       "details": [],
@@ -324,11 +327,11 @@
     }
   },
   "summary": {
-    "total": 12,
-    "aligned": 7,
+    "total": 15,
+    "aligned": 8,
     "concern": 1,
-    "violation": 1,
-    "not_applicable": 3,
-    "overall": "VIOLATION"
+    "violation": 0,
+    "not_applicable": 6,
+    "overall": "ALIGNED"
   }
 }

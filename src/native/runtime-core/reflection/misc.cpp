@@ -5,6 +5,8 @@
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
 
+using chaos::il2cpp::common::TypeInfoHot;
+
 // ── GetContainsGenericParams ───────────────────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetContainsGenericParams(CHAOS_IL2CPP_INTPTR type_handle) noexcept {
     TypeRef tr;

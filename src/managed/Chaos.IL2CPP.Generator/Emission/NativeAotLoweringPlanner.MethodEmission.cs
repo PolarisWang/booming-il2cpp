@@ -203,6 +203,19 @@ public sealed partial class NativeAotLoweringPlanner
 		if (usesStructuredSlots && slotContext != null)
 		{
 			EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, "	");
+			if (slotContext.FloatLocalSlots is { Count: > 0 })
+			{
+				foreach (var (slot, type) in slotContext.FloatLocalSlots.OrderBy(kv => kv.Key))
+				{
+					string varType = type switch
+					{
+						SlotType.Float64 => "double",
+						SlotType.Float32 => "float",
+						_ => "CHAOS_IL2CPP_INTPTR",
+					};
+					builder.AppendLine($"	{varType} chaos_float_local_{slot}{{}};");
+				}
+			}
 		}
 		else if (!usesStructuredSlots && evalStackSize > 0)
 		{

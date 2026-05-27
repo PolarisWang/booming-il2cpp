@@ -156,6 +156,19 @@ internal static class EnumMetadataExtractor
             sb.AppendLine("};");
             sb.AppendLine();
 
+            // Emit per-enum ToString switch function (returns CHAOS_IL2CPP_STRING_ID on match, 0 on miss)
+            sb.AppendLine($"/// Per-enum ToString dispatch for {et.SubjectId} ({et.Fields.Count} fields).");
+            sb.AppendLine($"/// Returns compile-time string constant on match, 0 for unrecognized values");
+            sb.AppendLine($"/// (caller falls through to decimal formatting).");
+            sb.AppendLine($"static CHAOS_IL2CPP_INTPTR ChaosEnumToString_{uniqueId}(CHAOS_IL2CPP_INT64 value) noexcept {{");
+            foreach (var field in et.Fields)
+            {
+                sb.AppendLine($"    if (value == {field.Value}) return CHAOS_IL2CPP_STRING_ID(\"{EscapeCppString(field.Name)}\");");
+            }
+            sb.AppendLine("    return 0;  // unrecognized value → caller falls through to decimal");
+            sb.AppendLine("}");
+            sb.AppendLine();
+
             // Compute FNV-1a 32-bit hash with collision detection
             uint hash = ComputeFnv1a32(et.SubjectId);
             if (hashToIdentifier.TryGetValue(hash, out var existing))
@@ -229,6 +242,25 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("};");
         sb.AppendLine($"static constexpr CHAOS_IL2CPP_UINT32 kEnumDispatchCount = {sortedFnv24.Count}u;");
         sb.AppendLine();
+
+        // ── Build ToString dispatch table (sorted by FNV-24) ──────────────────
+        sb.AppendLine("// ── ToString dispatch table: sorted by FNV-24 for binary search ──");
+        sb.AppendLine("#ifndef CHAOS_IL2CPP_ENUM_TOSTRING_DISPATCH_ENTRY_DEFINED");
+        sb.AppendLine("#define CHAOS_IL2CPP_ENUM_TOSTRING_DISPATCH_ENTRY_DEFINED");
+        sb.AppendLine("struct EnumToStringDispatchEntry {");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24;");
+        sb.AppendLine("    CHAOS_IL2CPP_INTPTR (*to_string_fn)(CHAOS_IL2CPP_INT64 value) noexcept;");
+        sb.AppendLine("};");
+        sb.AppendLine("#endif");
+        sb.AppendLine($"static constexpr EnumToStringDispatchEntry kEnumToStringDispatchTable[] = {{");
+        foreach (var kv in sortedFnv24)
+        {
+            uint fnv24 = kv.Key & 0xFFFFFF;
+            sb.AppendLine($"    {{ 0x{fnv24:X6}u, &ChaosEnumToString_{kv.Value} }},");
+        }
+        sb.AppendLine("};");
+        sb.AppendLine($"static constexpr CHAOS_IL2CPP_UINT32 kEnumToStringDispatchCount = {sortedFnv24.Count}u;");
+        sb.AppendLine();
         sb.AppendLine("/// Binary search lookup on the sorted dispatch table.");
         sb.AppendLine("/// Returns nullptr if fnv24 not found (fallback to resolve_type_arg +");
         sb.AppendLine("/// chaos_find_enum_metadata).");
@@ -285,6 +317,10 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("    const char* subject_id) noexcept;");
         sb.AppendLine("extern \"C\" const EnumMetadataTable* (*g_chaos_resolve_enum_metadata_by_fnv24)(");
         sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24) noexcept;");
+        sb.AppendLine("extern \"C\" CHAOS_IL2CPP_INTPTR (*g_chaos_enum_tostring_dispatch_lookup)(");
+        sb.AppendLine("    CHAOS_IL2CPP_UINT32 fnv24, CHAOS_IL2CPP_INT64 value) noexcept;");
+        sb.AppendLine("extern \"C\" void ChaosEnumRegisterToStringDispatchTable(");
+        sb.AppendLine("    const EnumToStringDispatchEntry* entries, CHAOS_IL2CPP_UINT32 count) noexcept;");
         sb.AppendLine();
         sb.AppendLine("// Static (internal linkage) so multiple TUs including this header don't ODR-violate.");
         sb.AppendLine("// Only the first page's IIFE calls this; other TUs' copies are dead code.");
@@ -309,6 +345,10 @@ internal static class EnumMetadataExtractor
         sb.AppendLine("    ChaosEnumRegisterDispatchTable(");
         sb.AppendLine("        chaos::il2cpp::codegen::kEnumDispatchTable,");
         sb.AppendLine("        chaos::il2cpp::codegen::kEnumDispatchCount);");
+        sb.AppendLine("    // Register the per-enum ToString dispatch table.");
+        sb.AppendLine("    ChaosEnumRegisterToStringDispatchTable(");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumToStringDispatchTable,");
+        sb.AppendLine("        chaos::il2cpp::codegen::kEnumToStringDispatchCount);");
         sb.AppendLine("}");
         sb.AppendLine();
 

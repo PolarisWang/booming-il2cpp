@@ -116,13 +116,13 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine();
 			builder.AppendLine("    if (chaos_left_length != 0)");
 			builder.AppendLine("    {");
-			builder.AppendLine("        CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data, chaos_left_utf8, chaos_left_length);");
+			builder.AppendLine("        CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data), chaos_left_utf8, chaos_left_length);");
 			builder.AppendLine("    }");
 			builder.AppendLine("    if (chaos_right_length != 0)");
 			builder.AppendLine("    {");
-			builder.AppendLine("        CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data + chaos_left_length, chaos_right_utf8, chaos_right_length);");
+			builder.AppendLine("        CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data + chaos_left_length), chaos_right_utf8, chaos_right_length);");
 			builder.AppendLine("    }");
-			builder.AppendLine("    chaos_str->utf8_data[chaos_combined_length] = '\\0';");
+			builder.AppendLine("    const_cast<char*>(chaos_str->utf8_data)[chaos_combined_length] = '\\0';");
 			builder.AppendLine();
 			builder.AppendLine("    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);");
 			builder.AppendLine("}");
@@ -945,7 +945,7 @@ public sealed partial class NativeAotLoweringPlanner
 						stringBuilder = builder;
 						StringBuilder stringBuilder59 = stringBuilder;
 						handler = new StringBuilder.AppendInterpolatedStringHandler(75, 2, stringBuilder);
-						handler.AppendLiteral("            chaos_array->elements[");
+						handler.AppendLiteral("            chaos_array_get_elements(chaos_array)[");
 						handler.AppendFormatted(num);
 						handler.AppendLiteral("] = chaos_reflection_create_type_value(");
 						handler.AppendFormatted(GetTypeHandleLiteral(item5.GenericArgumentTypeSubjectIds[num]));
@@ -1082,7 +1082,7 @@ public sealed partial class NativeAotLoweringPlanner
 						stringBuilder = builder;
 						StringBuilder stringBuilder72 = stringBuilder;
 						handler = new StringBuilder.AppendInterpolatedStringHandler(90, 2, stringBuilder);
-						handler.AppendLiteral("            chaos_array->elements[");
+						handler.AppendLiteral("            chaos_array_get_elements(chaos_array)[");
 						handler.AppendFormatted(num2);
 						handler.AppendLiteral("] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_constructor_");
 						handler.AppendFormatted(num2);
@@ -1219,7 +1219,7 @@ public sealed partial class NativeAotLoweringPlanner
 						stringBuilder = builder;
 						StringBuilder stringBuilder84 = stringBuilder;
 						handler = new StringBuilder.AppendInterpolatedStringHandler(88, 2, stringBuilder);
-						handler.AppendLiteral("            chaos_array->elements[");
+						handler.AppendLiteral("            chaos_array_get_elements(chaos_array)[");
 						handler.AppendFormatted(num3);
 						handler.AppendLiteral("] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_parameter_");
 						handler.AppendFormatted(num3);
@@ -1672,7 +1672,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("        return 0;");
 			builder.AppendLine("    }");
 			builder.AppendLine();
-			builder.AppendLine("    const auto chaos_type_argument_value = chaos_type_array->elements[0];");
+			builder.AppendLine("    const auto chaos_type_argument_value = chaos_array_get_elements(chaos_type_array)[0];");
 			builder.AppendLine("    if (chaos_type_argument_value == 0)");
 			builder.AppendLine("    {");
 			builder.AppendLine("        return 0;");
@@ -1774,7 +1774,7 @@ public sealed partial class NativeAotLoweringPlanner
 					handler = new StringBuilder.AppendInterpolatedStringHandler(45, 1, stringBuilder);
 					handler.AppendLiteral("            return ");
 					handler.AppendFormatted(item13.NativeSymbol);
-					handler.AppendLiteral("(chaos_args->elements[0]);");
+					handler.AppendLiteral("(chaos_array_get_elements(chaos_args)[0]);");
 					stringBuilder115.AppendLine(ref handler);
 					builder.AppendLine("        }");
 					builder.AppendLine();
@@ -1789,7 +1789,7 @@ public sealed partial class NativeAotLoweringPlanner
 					handler.AppendLiteral(")");
 					stringBuilder116.AppendLine(ref handler);
 					builder.AppendLine("        {");
-					builder.AppendLine("            const auto chaos_arg_value = chaos_args->elements[0];");
+					builder.AppendLine("            const auto chaos_arg_value = chaos_array_get_elements(chaos_args)[0];");
 					builder.AppendLine("            if (chaos_arg_value == 0)");
 					builder.AppendLine("            {");
 					builder.AppendLine("                return 0;");
