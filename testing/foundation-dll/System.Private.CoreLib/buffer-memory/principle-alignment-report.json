@@ -1,7 +1,7 @@
 {
   "family": "buffer-memory",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-25T20:09:45.071456",
+  "generated_at": "2026-05-27T12:25:44.211268",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -18,18 +18,24 @@
         "total_methods": 10
       }
     },
+    "p1_combo_slug_expansion": {
+      "check_id": "p1_combo_slug_expansion",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "CONCERN",
-      "summary": "8/20 methods have lowering (file has lowering in helper functions)",
+      "status": "ALIGNED",
+      "summary": "All methods have lowering [OK]",
       "details": [],
       "evidence": {
         "has_lowering": true,
-        "file_has_lowering": true,
-        "methods_with_lowering": 8,
-        "methods_total": 20,
         "stub_count": 0,
-        "simple_forward_count": 0
+        "simple_forward_count": 0,
+        "methods_with_lowering": 30,
+        "methods_total": 30
       },
       "per_method": [
         {
@@ -38,7 +44,7 @@
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_1",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_2",
@@ -50,23 +56,23 @@
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_4",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_5",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_6",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_7",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_8",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_9",
@@ -78,7 +84,7 @@
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_1",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_2",
@@ -90,23 +96,63 @@
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_4",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_5",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_6",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_7",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_8",
-          "has_lowering": false
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_9",
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_8",
+          "has_lowering": true
         },
         {
           "name": "BufferMemorySubjects_BufferMemorySubjects_Subject_9",
@@ -143,17 +189,32 @@
       "details": [],
       "evidence": {}
     },
+    "p2_cross_assembly_coverage": {
+      "check_id": "p2_cross_assembly_coverage",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "12 of 28 changed source files are outside expected architecture layers",
+      "summary": "6 of 18 changed source files are outside expected architecture layers",
       "details": [
         {
-          "file": "CLAUDE.md",
+          "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.cpp",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+          "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.h",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GcTypeLayout.cs",
           "reason": "outside expected architecture layers"
         },
         {
@@ -161,57 +222,35 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/jit_precode.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 28,
+        "changed_source_count": 18,
         "layer_distribution": {
-          "TestInfra": 6,
-          "ManagedContracts": 2,
-          "Driver": 2,
-          "RuntimeCore": 6
+          "TestInfra": 2,
+          "Driver": 3,
+          "Common": 1,
+          "Interpreter": 1,
+          "RuntimeCore": 4,
+          "Tests": 1
         },
         "violations": [
           {
-            "file": "CLAUDE.md",
+            "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.cpp",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
+            "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.h",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GcTypeLayout.cs",
             "reason": "outside expected architecture layers"
           },
           {
@@ -219,39 +258,7 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/jit_precode.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -266,6 +273,13 @@
     },
     "p2_no_code_duplication": {
       "check_id": "p2_no_code_duplication",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_shared_type_consistency": {
+      "check_id": "p2_shared_type_consistency",
       "status": "NOT_APPLICABLE",
       "summary": "Cross-family check — run with CrossFamilyContext",
       "details": [],
@@ -313,11 +327,11 @@
     }
   },
   "summary": {
-    "total": 12,
-    "aligned": 7,
-    "concern": 2,
+    "total": 15,
+    "aligned": 8,
+    "concern": 1,
     "violation": 0,
-    "not_applicable": 3,
-    "overall": "CONCERN"
+    "not_applicable": 6,
+    "overall": "ALIGNED"
   }
 }

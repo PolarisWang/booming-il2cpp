@@ -2,14 +2,22 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/garbage/collection",
-  "capturedAt": "2026-05-26T20:14:13",
+  "capturedAt": "2026-05-27T12:29:59",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 2.5,
+      "acquireReleaseNsPerOp": 2.9,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
+    "fastExecute": {
+      "runCount": 100000,
+      "nsPerCall": 7004.8
+    },
+    "callVirt": {
+      "handlerDispatchNs": 7050.7,
+      "emptyStackNs": 7755.8
+    },
     "poolSize": 32
   },
-  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.5 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\nGC|region|active=0|total_allocated=0\n"
+  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.9 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 7004.8 ns/op\nHandler dispatch overhead (LdcI4): 7050.7 ns/call\nCallVirt empty-stack: 7755.8 ns/call\n"
 }

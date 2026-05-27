@@ -1,17 +1,53 @@
 {
   "family": "delegate-core-invocation",
   "assembly": "System.Private.CoreLib",
-  "total_methods": 82,
-  "audited": 82,
+  "total_methods": 174,
+  "audited": 174,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 82,
+  "methods_without_assert": 174,
   "passed": true,
   "method_details": [
     {
       "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -92,7 +128,79 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "chaos_bridge_thunk_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_23",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -156,33 +264,6 @@
     },
     {
       "method_name": "chaos_bridge_thunk_9",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "GetHotpatchEntryCount",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RuntimeSubjects",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RuntimeFnTable",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -290,7 +371,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5",
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_5",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -299,7 +380,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6",
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_6",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -335,7 +416,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8",
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -344,7 +425,79 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9",
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c_cctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c_CustomEntryMethod8_b__3_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c_CustomEntryMethod9_b__4_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -389,6 +542,42 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "chaos_bridge_thunk_0",
       "subject_id": "",
       "is_stub": false,
@@ -461,7 +650,79 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "chaos_bridge_thunk_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_23",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -525,33 +786,6 @@
     },
     {
       "method_name": "chaos_bridge_thunk_9",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "GetHotpatchEntryCount",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RuntimeSubjects",
-      "subject_id": "",
-      "is_stub": false,
-      "stub_pattern": "",
-      "has_lowering": true,
-      "assert_fired": false,
-      "audit_status": "PASS"
-    },
-    {
-      "method_name": "RuntimeFnTable",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -659,7 +893,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_5",
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_5",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -668,7 +902,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_6",
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_6",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -704,7 +938,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_8",
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -713,7 +947,601 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_9",
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c_cctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c_CustomEntryMethod8_b__3_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c_CustomEntryMethod9_b__4_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_cctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "void",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_10",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_11",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_12",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_13",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_14",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_15",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_16",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_17",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_18",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_19",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_20",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_21",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_22",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_23",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_2_b__3_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_3_b__4_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_4_b__5_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_Subject_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects___c_Subject_7_b__8_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry_CustomEntryMethod9",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c_cctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c__ctor",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c_CustomEntryMethod8_b__3_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "DelegateCoreInvocationSubjects_DelegateCoreInvocationNativeEntry___c_CustomEntryMethod9_b__4_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

@@ -2,22 +2,22 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/collections/generic/core",
-  "capturedAt": "2026-05-25T19:31:51",
+  "capturedAt": "2026-05-27T12:26:55",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 2.7,
+      "acquireReleaseNsPerOp": 3.0,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
     "fastExecute": {
       "runCount": 100000,
-      "nsPerCall": 1.9
+      "nsPerCall": 2.2
     },
     "callVirt": {
-      "handlerDispatchNs": 2.0,
-      "emptyStackNs": 2.2
+      "handlerDispatchNs": 2.2,
+      "emptyStackNs": 2.4
     },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-25T19:31:51][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T19:31:51][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:31:51][INFO][NUMA] numa_init count=%d\n[2026-05-25T19:31:51][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-25T19:31:51][INFO][OldGen] init done base=0x2907222245376 pages=2\n[2026-05-25T19:31:51][DEBUG][codegen] T4 VEH handler registered\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.7 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 1.9 ns/op\nHandler dispatch overhead (LdcI4): 2.0 ns/call\nCallVirt empty-stack: 2.2 ns/call\n[2026-05-25T19:31:51][DEBUG][BGC] thread_started\n"
+  "rawOutput": "[2026-05-27T12:26:55][DEBUG][codegen] T4 VEH handler registered\n[2026-05-27T12:26:55][DEBUG][codegen] T4 VEH handler registered\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 3.0 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 2.2 ns/op\nHandler dispatch overhead (LdcI4): 2.2 ns/call\nCallVirt empty-stack: 2.4 ns/call\n"
 }

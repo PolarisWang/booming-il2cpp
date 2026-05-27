@@ -2,9 +2,9 @@
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-27T11:41:39",
-  "duration_ms": 50676,
-  "overall_status": "failed",
+  "timestamp": "2026-05-27T13:26:25",
+  "duration_ms": 93581,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -18,6 +18,17 @@
       },
       "errors": [],
       "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
+      "details": {
+        "methodCount": 18,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
+      },
+      "errors": [],
+      "duration_ms": 39494
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -149,7 +160,7 @@
         ]
       },
       "errors": [],
-      "duration_ms": 1769
+      "duration_ms": 2041
     },
     "fact": {
       "stage": "fact",
@@ -163,7 +174,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 30
+      "duration_ms": 156
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -178,59 +189,59 @@
         }
       },
       "errors": [],
-      "duration_ms": 34
+      "duration_ms": 38
     },
     "audit": {
       "stage": "audit",
-      "status": "failed",
-      "summary": "false_passing=0, principle=VIOLATION (mech_passed=True, strict_on_CONCERN=False)",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "VIOLATION",
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 496
+      "duration_ms": 1520
     },
     "asm_compare": {
       "stage": "asm_compare",
       "status": "passed",
-      "summary": "asm-compare: 16/18 methods OK, avg JIT=44.0 instr, avg AOT IR=5.6 instr, expansion=0.14x",
+      "summary": "asm-compare: 18/18 methods OK, avg JIT=44.0 instr, avg AOT IR=5.7 instr, expansion=0.13x",
       "details": {
         "totalMethods": 18,
-        "okCount": 16,
-        "failedCount": 2,
+        "okCount": 18,
+        "failedCount": 0,
         "skippedCount": 0,
         "jitInstructionCount": {
           "min": 44,
           "max": 44,
           "avg": 44.0,
-          "total": 704
+          "total": 792
         },
         "aotInstructionCount": {
           "min": 2,
-          "max": 10,
-          "avg": 5.6,
-          "total": 101
+          "max": 14,
+          "avg": 5.7,
+          "total": 102
         },
         "totalExternalRuntimeCalls": 0,
         "totalVirtualDispatches": 0,
         "totalBoxingOps": 0,
         "topInstructionCategories": {},
-        "overallIrExpansionRatio": 0.14,
-        "averageExpansionRatio": 0.12,
-        "maxExpansionRatio": 0.23,
+        "overallIrExpansionRatio": 0.13,
+        "averageExpansionRatio": 0.13,
+        "maxExpansionRatio": 0.32,
         "minExpansionRatio": 0.05
       },
       "errors": [],
-      "duration_ms": 18868
+      "duration_ms": 22956
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "passed",
-      "summary": "net8-jit=23ns, net10-jit=22ns, mono=21ns, chaos-aot=11ns, chaos-jit=11ns",
+      "summary": "net8-jit=22ns, net10-jit=25ns, mono=24ns, chaos-aot=14ns, chaos-jit=14ns",
       "details": {
         "runtimesAvailable": [
           "net8-jit",
@@ -243,45 +254,45 @@
         "multiRunReportPath": "multi-run/multi-run-report.json",
         "chaosClassification": {
           "chaos_faster_than_all": 5,
-          "chaos_faster_than_jit": 6,
-          "chaos_midfield": 4,
-          "chaos_slower_than_jit": 3,
+          "chaos_faster_than_jit": 4,
+          "chaos_midfield": 5,
+          "chaos_slower_than_jit": 4,
           "not_benchmarked": 0
         },
         "summaries": {
           "net8-jit": {
-            "geometricMeanNs": 22.531571765143887,
+            "geometricMeanNs": 21.791027328891502,
             "okCount": 18,
             "totalMethods": 18
           },
           "net10-jit": {
-            "geometricMeanNs": 21.875578696285114,
+            "geometricMeanNs": 24.887041187773015,
             "okCount": 16,
             "totalMethods": 18
           },
           "mono": {
-            "geometricMeanNs": 21.390740324952155,
+            "geometricMeanNs": 23.619757996651355,
             "okCount": 16,
             "totalMethods": 18
           },
           "chaos-aot": {
-            "geometricMeanNs": 11.124071550940599,
+            "geometricMeanNs": 14.091423817646502,
             "okCount": 18,
             "totalMethods": 18
           },
           "chaos-jit": {
-            "geometricMeanNs": 11.379742602688115,
+            "geometricMeanNs": 13.810194139043086,
             "okCount": 18,
             "totalMethods": 18
           }
         },
-        "chaosAotVsNet8Speedup": 2.0254788601425995,
-        "chaosAotFasterCount": 11,
-        "chaosAotSlowerCount": 6,
-        "chaosAotGeometricMeanNs": 11.124071550940599
+        "chaosAotVsNet8Speedup": 1.5464035154206979,
+        "chaosAotFasterCount": 9,
+        "chaosAotSlowerCount": 9,
+        "chaosAotGeometricMeanNs": 14.091423817646502
       },
       "errors": [],
-      "duration_ms": 28473
+      "duration_ms": 26139
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
@@ -294,7 +305,7 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 430
+      "duration_ms": 540
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
@@ -306,7 +317,7 @@
         "total": 18
       },
       "errors": [],
-      "duration_ms": 29
+      "duration_ms": 42
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -319,7 +330,7 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 433
+      "duration_ms": 519
     },
     "dashboard": {
       "stage": "dashboard",
@@ -329,13 +340,13 @@
         "interpreter": {},
         "irTranslation": {
           "totalMethods": 18,
-          "okCount": 16,
-          "failedCount": 2,
-          "overallIrExpansionRatio": 0.14,
-          "averageExpansionRatio": 0.12,
-          "maxExpansionRatio": 0.23,
+          "okCount": 18,
+          "failedCount": 0,
+          "overallIrExpansionRatio": 0.13,
+          "averageExpansionRatio": 0.13,
+          "maxExpansionRatio": 0.32,
           "jitInstructionAvg": 44.0,
-          "aotInstructionAvg": 5.6,
+          "aotInstructionAvg": 5.7,
           "totalExternalRuntimeCalls": 0,
           "totalVirtualDispatches": 0,
           "totalBoxingOps": 0,
@@ -375,9 +386,9 @@
         },
         "keyRatios": {
           "nativeFasterRatio": 0,
-          "irExpansionRatio": 0.14,
+          "irExpansionRatio": 0.13,
           "interpreterSlowdownFactor": 1.0,
-          "asmPassRate": 88.9
+          "asmPassRate": 100.0
         }
       },
       "errors": [],
@@ -393,13 +404,13 @@
     "interpreter": {},
     "irTranslation": {
       "totalMethods": 18,
-      "okCount": 16,
-      "failedCount": 2,
-      "overallIrExpansionRatio": 0.14,
-      "averageExpansionRatio": 0.12,
-      "maxExpansionRatio": 0.23,
+      "okCount": 18,
+      "failedCount": 0,
+      "overallIrExpansionRatio": 0.13,
+      "averageExpansionRatio": 0.13,
+      "maxExpansionRatio": 0.32,
       "jitInstructionAvg": 44.0,
-      "aotInstructionAvg": 5.6,
+      "aotInstructionAvg": 5.7,
       "totalExternalRuntimeCalls": 0,
       "totalVirtualDispatches": 0,
       "totalBoxingOps": 0,
@@ -439,9 +450,9 @@
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0.14,
+      "irExpansionRatio": 0.13,
       "interpreterSlowdownFactor": 1.0,
-      "asmPassRate": 88.9
+      "asmPassRate": 100.0
     }
   },
   "regression": {

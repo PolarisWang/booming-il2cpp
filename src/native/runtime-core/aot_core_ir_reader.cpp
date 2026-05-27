@@ -500,7 +500,9 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                 // When the resolve_direct_fn callback is provided, look up the
                 // call's subjectId in the kAotDirectFnTable to get the pre-resolved
                 // chaos_external_runtime_* function pointer.
-                if (instr.op_code == interpreter::IROpCode::Call &&
+                if ((instr.op_code == interpreter::IROpCode::Call ||
+                     instr.op_code == interpreter::IROpCode::CallBridge ||
+                     instr.op_code == interpreter::IROpCode::CallVirtConstrained) &&
                     resolve_direct_fn != nullptr)
                 {
                     auto callee = json::JsonParser::FindKey(elem, "callee");

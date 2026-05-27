@@ -1114,13 +1114,55 @@ static void Reg_StSFld(RegisterFrame& frame, const RegisterInstruction& instr) n
 }
 
 // ── NewArr: allocate interpreter array ──────────────────────────────────
+// Custom destructor for ArrayStorage used in T2 path.  Handles flat arrays.
+static void RegFreeArrayStorage(void* p) noexcept {
+    auto* arr = static_cast<ArrayStorage*>(p);
+    if (arr->is_flat) {
+        if (arr->flat_data != nullptr) {
+            CHAOS_IL2CPP_FREE(arr->flat_data);
+        }
+    } else {
+        arr->elements.~vector();
+    }
+    CHAOS_IL2CPP_FREE(p);
+}
+
 static void Reg_NewArr(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_NewArr");
     uint32_t len = static_cast<uint32_t>(frame.regs.reg(instr.src1_reg()));
     auto* arr = static_cast<ArrayStorage*>(CHAOS_IL2CPP_MALLOC(sizeof(ArrayStorage)));
     if (arr == nullptr) { Reg_Unsupported(frame, instr); return; }
     ::new (arr) ArrayStorage();
-    frame.Track(arr, frame.Dtor<ArrayStorage>);
+    frame.Track(arr, RegFreeArrayStorage);
+    arr->type_token = static_cast<uint32_t>(instr.imm.i4);
+
+    // Check for flat typed array (same logic as fast-dispatch Handle_NewArr).
+    if (instr.imm.ptr != nullptr) {
+        auto type_handle = static_cast<TypeInfoHandle>(
+            reinterpret_cast<uintptr_t>(instr.imm.ptr));
+        auto* type_desc = chaos::il2cpp::runtime_core::TryDecodeReflectionQueryTypeHandle(type_handle);
+        if (type_desc != nullptr && type_desc->name_utf8 != nullptr) {
+            auto elem_info = GetFlatArrayElementInfo(type_desc->name_utf8);
+            if (elem_info.size > 0) {
+                arr->is_flat = true;
+                arr->flat_element_size = elem_info.size;
+                arr->flat_element_tag = elem_info.value_tag;
+                arr->flat_length = len;
+                if (len > 0) {
+                    arr->flat_data = CHAOS_IL2CPP_MALLOC(static_cast<size_t>(len) * elem_info.size);
+                    if (arr->flat_data == nullptr) {
+                        Reg_Unsupported(frame, instr); return;
+                    }
+                    std::memset(arr->flat_data, 0, static_cast<size_t>(len) * elem_info.size);
+                }
+                frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(arr),
+                                   static_cast<uint8_t>(ValueTag::ObjectRef));
+                ++frame.pc;
+                return;
+            }
+        }
+    }
+
     arr->elements.resize(len);
     frame.regs.set_reg(instr.dst_reg(), reinterpret_cast<uint64_t>(arr),
                        static_cast<uint8_t>(ValueTag::ObjectRef));
@@ -1130,9 +1172,61 @@ static void Reg_NewArr(RegisterFrame& frame, const RegisterInstruction& instr) n
 // ── LdElem / StElem: array element access ──────────────────────────────
 static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_LdElem");
-    uint32_t index = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));  // src2 = index
-    auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src1_reg()));  // src1 = array
-    if (arr == nullptr || index >= arr->elements.size()) {
+    uint32_t index = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
+    auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src1_reg()));
+    if (arr == nullptr) {
+        frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+        ++frame.pc; return;
+    }
+
+    if (arr->is_flat) {
+        if (index >= arr->flat_length) {
+            frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+            ++frame.pc; return;
+        }
+        void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
+        switch (arr->flat_element_size) {
+        case 1:
+            frame.regs.set_reg(instr.dst_reg(),
+                static_cast<uint64_t>(static_cast<uint32_t>(*static_cast<int8_t*>(elem_ptr))),
+                static_cast<uint8_t>(ValueTag::Int32));
+            break;
+        case 2:
+            frame.regs.set_reg(instr.dst_reg(),
+                static_cast<uint64_t>(static_cast<uint32_t>(*static_cast<int16_t*>(elem_ptr))),
+                static_cast<uint8_t>(ValueTag::Int32));
+            break;
+        case 4:
+            if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float32)) {
+                float v; std::memcpy(&v, elem_ptr, sizeof(float));
+                uint64_t rv; std::memcpy(&rv, &v, sizeof(float));
+                frame.regs.set_reg(instr.dst_reg(), rv, static_cast<uint8_t>(ValueTag::Float32));
+            } else {
+                frame.regs.set_reg(instr.dst_reg(),
+                    static_cast<uint64_t>(static_cast<uint32_t>(*static_cast<int32_t*>(elem_ptr))),
+                    static_cast<uint8_t>(ValueTag::Int32));
+            }
+            break;
+        case 8:
+            if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float64)) {
+                double v; std::memcpy(&v, elem_ptr, sizeof(double));
+                uint64_t rv; std::memcpy(&rv, &v, sizeof(double));
+                frame.regs.set_reg(instr.dst_reg(), rv, static_cast<uint8_t>(ValueTag::Float64));
+            } else {
+                frame.regs.set_reg(instr.dst_reg(),
+                    static_cast<uint64_t>(*static_cast<int64_t*>(elem_ptr)),
+                    static_cast<uint8_t>(ValueTag::Int64));
+            }
+            break;
+        default:
+            frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
+            break;
+        }
+        ++frame.pc;
+        return;
+    }
+
+    if (index >= arr->elements.size()) {
         frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Null));
         ++frame.pc; return;
     }
@@ -1161,11 +1255,43 @@ static void Reg_LdElem(RegisterFrame& frame, const RegisterInstruction& instr) n
 
 static void Reg_StElem(RegisterFrame& frame, const RegisterInstruction& instr) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Reg_StElem");
-    // 3-operand store: src1=value (top), src2=index, src3=array (bottom).
     uint64_t val   = frame.regs.reg(instr.src1_reg());
     uint32_t index = static_cast<uint32_t>(frame.regs.reg(instr.src2_reg()));
     auto* arr = reinterpret_cast<ArrayStorage*>(frame.regs.reg(instr.src3_reg()));
     if (arr == nullptr) { ++frame.pc; return; }
+
+    if (arr->is_flat) {
+        if (index >= arr->flat_length) { ++frame.pc; return; }
+        void* elem_ptr = static_cast<char*>(arr->flat_data) + index * arr->flat_element_size;
+        switch (arr->flat_element_size) {
+        case 1:
+            *static_cast<int8_t*>(elem_ptr) = static_cast<int8_t>(val);
+            break;
+        case 2:
+            *static_cast<int16_t*>(elem_ptr) = static_cast<int16_t>(val);
+            break;
+        case 4:
+            if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float32)) {
+                float fv; std::memcpy(&fv, &val, sizeof(float));
+                std::memcpy(elem_ptr, &fv, sizeof(float));
+            } else {
+                std::memcpy(elem_ptr, &val, sizeof(int32_t));
+            }
+            break;
+        case 8:
+            if (arr->flat_element_tag == static_cast<uint8_t>(ValueTag::Float64)) {
+                double dv; std::memcpy(&dv, &val, sizeof(double));
+                std::memcpy(elem_ptr, &dv, sizeof(double));
+            } else {
+                std::memcpy(elem_ptr, &val, sizeof(int64_t));
+            }
+            break;
+        default: break;
+        }
+        ++frame.pc;
+        return;
+    }
+
     if (index >= arr->elements.size()) {
         arr->elements.resize(index + 1u);
     }
@@ -1196,8 +1322,9 @@ static void Reg_LdLen(RegisterFrame& frame, const RegisterInstruction& instr) no
     if (arr == nullptr) {
         frame.regs.set_reg(instr.dst_reg(), 0, static_cast<uint8_t>(ValueTag::Int32));
     } else {
+        uint32_t len = arr->is_flat ? arr->flat_length : static_cast<uint32_t>(arr->elements.size());
         frame.regs.set_reg(instr.dst_reg(),
-                           static_cast<uint64_t>(arr->elements.size()),
+                           static_cast<uint64_t>(len),
                            static_cast<uint8_t>(ValueTag::Int32));
     }
     ++frame.pc;

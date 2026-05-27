@@ -5,9 +5,25 @@ set(CMAKE_CXX_STANDARD 20)
 # Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions
 # thrown by generated code (throw chaos_managed_exception from unresolved calls).
 add_compile_options(/utf-8 /GS- /FS)
-add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
-add_compile_definitions(CHAOS_IL2CPP_CONFIG_PROFILE)
-add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=2)
+# Config tier: controlled by CHAOS_IL2CPP_CONFIG_TIER cmake variable
+# (set via -D or CMakePresets.json). Defaults to CHECK (debug).
+if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
+  set(CHAOS_IL2CPP_CONFIG_TIER "debug")
+endif()
+if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_PROFILE)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=2)
+elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+else()
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+endif()
+add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).

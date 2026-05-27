@@ -3,6 +3,7 @@
 
 #include <chaos/native_types.h>
 #include <cstddef>
+#include <cstring>
 #include <new>
 #include <vector>
 
@@ -254,10 +255,59 @@ struct InterpreterObject {
     CHAOS_IL2CPP_UINT32 type_token = 0u;
 };
 
-// Lightweight array storage for NewArr / LdElem / StElem.
-struct ArrayStorage {
-    CHAOS_IL2CPP_VECTOR(InterpreterValue) elements = {};
+// Result of GetFlatArrayElementInfo: element size in bytes (0 = use ref array)
+// and the ValueTag for converting elements to InterpreterValue on LdElem.
+struct FlatArrayElementInfo {
+    uint32_t size;
+    uint8_t value_tag;
 };
+
+// Lightweight array storage for NewArr / LdElem / StElem.
+// Has two variants:
+//   is_flat=false: uses std::vector<InterpreterValue> (reference-type arrays)
+//   is_flat=true:  uses contiguous raw memory (primitive typed arrays)
+struct ArrayStorage {
+    CHAOS_IL2CPP_UINT32 type_token = 0u;  // matches InterpreterObject offset 0 for MIC
+    bool is_flat = false;
+
+    // Ref-array: vector of tagged values (used when is_flat == false)
+    CHAOS_IL2CPP_VECTOR(InterpreterValue) elements = {};
+
+    // Flat-array fields (used when is_flat == true)
+    // Mutually exclusive with 'elements' above — flat arrays of primitive types
+    // never contain GC references, so no write barrier is needed for element stores.
+    void*    flat_data        = nullptr;  // contiguous element storage
+    uint32_t flat_length      = 0u;       // element count
+    uint32_t flat_element_size = 0u;      // bytes per element (1/2/4/8)
+    uint8_t  flat_element_tag = 0u;       // ValueTag for element type
+
+    uint32_t length() const noexcept {
+        return is_flat ? flat_length : static_cast<uint32_t>(elements.size());
+    }
+};
+
+/// Returns element info for flat typed arrays based on the array type's display name
+/// (e.g., "Int32[]", "Byte[]").  Returns {0, ObjectRef} for non-flat types.
+inline FlatArrayElementInfo GetFlatArrayElementInfo(const char* type_name) noexcept {
+    if (type_name == nullptr) return {0u, static_cast<uint8_t>(ValueTag::ObjectRef)};
+
+    // Match "<ElementType>[]" patterns for well-known primitive types.
+    // Called once per NewArr (array creation), not per element access.
+    if (std::strcmp(type_name, "Byte[]") == 0 || std::strcmp(type_name, "SByte[]") == 0 || std::strcmp(type_name, "Boolean[]") == 0)
+        return {1u, static_cast<uint8_t>(ValueTag::Int32)};
+    if (std::strcmp(type_name, "Int16[]") == 0 || std::strcmp(type_name, "UInt16[]") == 0 || std::strcmp(type_name, "Char[]") == 0)
+        return {2u, static_cast<uint8_t>(ValueTag::Int32)};
+    if (std::strcmp(type_name, "Int32[]") == 0 || std::strcmp(type_name, "UInt32[]") == 0)
+        return {4u, static_cast<uint8_t>(ValueTag::Int32)};
+    if (std::strcmp(type_name, "Single[]") == 0)
+        return {4u, static_cast<uint8_t>(ValueTag::Float32)};
+    if (std::strcmp(type_name, "Int64[]") == 0 || std::strcmp(type_name, "UInt64[]") == 0)
+        return {8u, static_cast<uint8_t>(ValueTag::Int64)};
+    if (std::strcmp(type_name, "Double[]") == 0)
+        return {8u, static_cast<uint8_t>(ValueTag::Float64)};
+
+    return {0u, static_cast<uint8_t>(ValueTag::ObjectRef)};
+}
 
 // Boxed value type for Box/Unbox.
 struct BoxedValue {

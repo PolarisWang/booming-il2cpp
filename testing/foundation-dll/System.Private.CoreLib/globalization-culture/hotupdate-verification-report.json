@@ -8,7 +8,7 @@
   "stubMethods": 0,
   "realMethods": 13,
   "allMethodsRevertVerified": true,
-  "allMethodsSemanticVerified": true,
+  "allMethodsSemanticVerified": false,
   "d3PatchApplied": false,
   "d3PatchedCount": 0,
   "verificationKind": "hotupdate-proof",

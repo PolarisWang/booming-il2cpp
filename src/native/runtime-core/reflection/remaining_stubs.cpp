@@ -100,7 +100,7 @@ CHAOS_IL2CPP_INTPTR ChaosTypeInequality(CHAOS_IL2CPP_INTPTR type_a, CHAOS_IL2CPP
 
 CHAOS_IL2CPP_INTPTR ChaosTypeGetTypeInfo(CHAOS_IL2CPP_INTPTR type) noexcept {
     // Return the TypeInfoHot* for this type handle, if type_info_ptrs is populated.
-    auto* type_info = GetTypeInfoFromHandle(type);
+    auto* type_info = GetTypeInfoFromAnyHandle(type);
     if (type_info == nullptr) return 0;
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(const_cast<TypeInfoHot*>(type_info));
 }

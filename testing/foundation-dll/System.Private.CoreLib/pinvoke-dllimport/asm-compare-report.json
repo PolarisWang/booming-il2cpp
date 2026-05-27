@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/pinvoke/dllimport",
-  "capturedAt": "2026-05-26T21:28:33",
+  "capturedAt": "2026-05-27T21:57:32",
   "batchMode": true,
   "summary": {
     "totalMethods": 4,
@@ -16,19 +16,19 @@
       "total": 176
     },
     "aotInstructionCount": {
-      "min": 16,
-      "max": 16,
-      "avg": 16.0,
-      "total": 64
+      "min": 8,
+      "max": 8,
+      "avg": 8.0,
+      "total": 32
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {},
-    "overallIrExpansionRatio": 0.36,
-    "averageExpansionRatio": 0.36,
-    "maxExpansionRatio": 0.36,
-    "minExpansionRatio": 0.36
+    "overallIrExpansionRatio": 0.18,
+    "averageExpansionRatio": 0.18,
+    "maxExpansionRatio": 0.18,
+    "minExpansionRatio": 0.18
   },
   "methodResults": [
     {
@@ -38,8 +38,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -50,7 +50,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_0",
-        "instructions": 16
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}
@@ -62,8 +62,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -74,7 +74,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_1",
-        "instructions": 16
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}
@@ -86,8 +86,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -98,7 +98,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_2",
-        "instructions": 16
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}
@@ -110,8 +110,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -122,7 +122,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PinvokeDllimportSubjects_PinvokeDllimportSubjects_Subject_3",
-        "instructions": 16
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}

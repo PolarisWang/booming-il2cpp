@@ -16,24 +16,24 @@
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchAdd:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 3.68,
-      "postPatchNsPerOp": 2.1,
-      "slowdownPercent": -42.93
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": -4.89
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIDispatchSub:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 3.5,
-      "postPatchNsPerOp": 2.1,
-      "slowdownPercent": -40.0
+      "postPatchNsPerOp": 3.3,
+      "slowdownPercent": -5.71
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestDualGetStatus:System.Int32()",
       "status": "passed",
       "prePatchNsPerOp": 3.7,
-      "postPatchNsPerOp": 2.2,
-      "slowdownPercent": -40.54
+      "postPatchNsPerOp": 3.5,
+      "slowdownPercent": -5.41
     },
     {
       "methodIndex": 4,
@@ -47,8 +47,8 @@
   "summary": {
     "totalMethods": 5,
     "nonStubMethods": 5,
-    "averageSlowdownPercent": -41.15,
-    "slowdownFactor": 0.5885,
+    "averageSlowdownPercent": -19.65,
+    "slowdownFactor": 0.8035,
     "slowdownThresholdX": 50.0
   }
 }

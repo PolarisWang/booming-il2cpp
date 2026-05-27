@@ -447,7 +447,9 @@ public sealed partial class NativeAotLoweringPlanner
                 }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0, 1, 2, 3 });
 
-            // GenericShapeDescriptor for String.Concat — resolves 3-arg/4-arg by checking parameter count
+            // GenericShapeDescriptor for String.Concat — resolves 2-arg/3-arg/4-arg by checking parameter count
+            // 2-arg: fully inlined with direct field access + GcAllocateAtomic (avoid ABI/strlen/stack buffer)
+            // 3-arg/4-arg: pair-call composition via ChaosReflectionConcatStringPairValues
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.String",
                 MethodName: "Concat",
@@ -457,6 +459,45 @@ public sealed partial class NativeAotLoweringPlanner
                     var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
                     var stringRetAbi = CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
                     var stringRefAbi = CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType);
+
+                    if (paramTypes.Count == 2)
+                    {
+                        var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    auto* chaos_left = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_arg_0);",
+                            "    auto* chaos_right = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_arg_1);",
+                            "    const auto chaos_left_len = chaos_left != nullptr",
+                            "        ? static_cast<CHAOS_IL2CPP_SIZE>(chaos_left->length) : 0;",
+                            "    const auto chaos_right_len = chaos_right != nullptr",
+                            "        ? static_cast<CHAOS_IL2CPP_SIZE>(chaos_right->length) : 0;",
+                            "    const auto chaos_total = chaos_left_len + chaos_right_len;",
+                            string.Empty,
+                            "    auto* chaos_raw = static_cast<char*>(",
+                            "        chaos::il2cpp::runtime_core::GcAllocateAtomicFastNoZero(",
+                            "            sizeof(chaos_type_System_Private_CoreLib_System_String) + chaos_total + 1));",
+                            "    auto* chaos_str = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_raw);",
+                            "    chaos_str->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();",
+                            "    chaos_str->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_total);",
+                            "    chaos_str->utf8_data = chaos_raw + sizeof(chaos_type_System_Private_CoreLib_System_String);",
+                            "    chaos_str->string_id = 0;",
+                            string.Empty,
+                            "    if (chaos_left_len > 0) {",
+                            "        CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data, chaos_left->utf8_data, chaos_left_len);",
+                            "    }",
+                            "    if (chaos_right_len > 0) {",
+                            "        CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data + chaos_left_len, chaos_right->utf8_data, chaos_right_len);",
+                            "    }",
+                            "    chaos_str->utf8_data[chaos_total] = '\\0';",
+                            string.Empty,
+                            "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);",
+                        ]);
+                        return new GenericShapeResolution(src, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                stringRefAbi, stringRefAbi,
+                            }), stringRetAbi, new HashSet<int> { 0, 1 });
+                    }
 
                     if (paramTypes.Count == 3)
                     {
@@ -1399,24 +1440,10 @@ public sealed partial class NativeAotLoweringPlanner
 
             // === Numeric formatting ===
             // Int32.ToString() fully handled by GenericShapeDescriptor below (bypass Intern, direct GC alloc)
-
-            registry.Register("System.Single", "ToString", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_format_single_to_string",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                {
-                    CreateNativeIntAbiSlot(),
-                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                new HashSet<int> { 0, 1 });
-
-            registry.Register("System.Double", "ToString", ["System.String"],
-                ShapeKind.SimpleForward, "chaos_format_double_to_string",
-                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
-                {
-                    CreateNativeIntAbiSlot(),
-                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                }), CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                new HashSet<int> { 0, 1 });
+            // NOTE: The inline GcAllocateAtomic may trigger nursery GC. Conservative stack scanning
+            // updates chaos_locals[] on the stack but NOT CPU registers, so callers that have cached
+            // a GC-tracked local in a register across the call boundary will read a stale pointer.
+            // GC-safe reloads are added at call sites that cross a GC safepoint.
 
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Int32",
@@ -1432,19 +1459,29 @@ public sealed partial class NativeAotLoweringPlanner
                     [
                         "    auto* chaos_value_slot = chaos_resolve_native_int_slot(chaos_arg_0);",
                         "    const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>(*chaos_value_slot);",
-                        "    char chaos_buf[16];",
-                        "    const auto chaos_fmt = fmt::format_to_n(chaos_buf, sizeof(chaos_buf), \"{}\", chaos_value);",
-                        "    const auto chaos_len = static_cast<CHAOS_IL2CPP_SIZE>(chaos_fmt.size);",
+                        "    // Compute digit count via branch chain (no generic formatting library).",
+                        "    auto chaos_tmp = static_cast<CHAOS_IL2CPP_UINT32>(chaos_value);",
+                        "    CHAOS_IL2CPP_SIZE chaos_len = 1;",
+                        "    if (chaos_tmp >= 10000) { chaos_len = 5; goto chaos_alloc; }",
+                        "    if (chaos_tmp >= 1000) { chaos_len = 4; goto chaos_alloc; }",
+                        "    if (chaos_tmp >= 100)  { chaos_len = 3; goto chaos_alloc; }",
+                        "    if (chaos_tmp >= 10)  { chaos_len = 2; }",
+                        "chaos_alloc:",
                         "    auto* chaos_raw = static_cast<char*>(",
-                        "        chaos::il2cpp::runtime_core::GcAllocateAtomic(",
+                        "        chaos::il2cpp::runtime_core::GcAllocateAtomicFastNoZero(",
                         "            sizeof(chaos_type_System_Private_CoreLib_System_String) + chaos_len + 1));",
                         "    auto* chaos_str = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_raw);",
                         "    chaos_str->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();",
                         "    chaos_str->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_len);",
                         "    chaos_str->utf8_data = chaos_raw + sizeof(chaos_type_System_Private_CoreLib_System_String);",
-                        "    CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data, chaos_buf, chaos_len);",
-                        "    chaos_str->utf8_data[chaos_len] = '\\0';",
                         "    chaos_str->string_id = 0;",
+                        "    // Format digits directly into utf8_data (backward fill).",
+                        "    auto* chaos_p = chaos_str->utf8_data + chaos_len;",
+                        "    *chaos_p = '\\0';",
+                        "    do {",
+                        "        *--chaos_p = static_cast<char>('0' + (chaos_tmp % 10));",
+                        "        chaos_tmp /= 10;",
+                        "    } while (chaos_tmp != 0);",
                         "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);",
                     ]);
                     return new GenericShapeResolution(src, symbol,

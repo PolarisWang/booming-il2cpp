@@ -2,10 +2,50 @@
   "family": "delegate-core-invocation",
   "assembly": "System.Private.CoreLib",
   "mode": "standard",
-  "timestamp": "2026-05-25T21:18:46",
-  "duration_ms": 2578,
+  "timestamp": "2026-05-27T12:28:12",
+  "duration_ms": 69272,
   "overall_status": "failed",
   "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "passed",
+      "summary": "10 methods, 4 custom entries",
+      "details": {
+        "methodCount": 10,
+        "customMethodCount": 4,
+        "hasCustomEntryFile": false,
+        "customMethods": [
+          "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)",
+          "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)",
+          "System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)",
+          "System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)"
+        ]
+      },
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "entry.exe build failed",
+      "details": {
+        "steps": {
+          "build_subjects": "OK",
+          "convert_to_cpp": "OK",
+          "build_entry_exe": "FAILED"
+        }
+      },
+      "errors": [],
+      "duration_ms": 23326
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "entry-jit.exe already exists, skipping rebuild",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
     "managed_fact": {
       "stage": "managed_fact",
       "status": "passed",
@@ -80,23 +120,191 @@
         ]
       },
       "errors": [],
-      "duration_ms": 1745
+      "duration_ms": 1859
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "failed",
+      "summary": "Fact verify=failed (0/0)",
+      "details": {
+        "fact": {
+          "status": "failed",
+          "passed": 0,
+          "total": 0
+        }
+      },
+      "errors": [],
+      "duration_ms": 408
     },
     "fact_jit": {
       "stage": "fact_jit",
-      "status": "failed",
-      "summary": "Fact JIT crashed: No module named 'fact_verifier'",
-      "details": {},
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (10/10)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 10,
+          "total": 10,
+          "exit_code": 0
+        }
+      },
       "errors": [],
-      "duration_ms": 2
+      "duration_ms": 470
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "passed",
+      "summary": "false_passing=0, principle=ALIGNED (mech_passed=True, strict_on_CONCERN=False)",
+      "details": {
+        "falsePassing": 0,
+        "stubsFound": 0,
+        "skipsFound": 0,
+        "principleStatus": "ALIGNED",
+        "methodsWithoutLowering": 0
+      },
+      "errors": [],
+      "duration_ms": 2225
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "passed",
+      "summary": "asm-compare: 10/10 methods OK, avg JIT=44.0 instr, avg AOT IR=12.1 instr, expansion=0.28x",
+      "details": {
+        "totalMethods": 10,
+        "okCount": 10,
+        "failedCount": 0,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 44,
+          "avg": 44.0,
+          "total": 440
+        },
+        "aotInstructionCount": {
+          "min": 3,
+          "max": 40,
+          "avg": 12.1,
+          "total": 121
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0.28,
+        "averageExpansionRatio": 0.28,
+        "maxExpansionRatio": 0.91,
+        "minExpansionRatio": 0.07
+      },
+      "errors": [],
+      "duration_ms": 17396
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=5.5ns/op | FastExecute=4.4ns/op | CallVirt dispatch=4.4ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 5.5,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 4.4
+        },
+        "callVirt": {
+          "handlerDispatchNs": 4.4,
+          "emptyStackNs": 4.8
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 27
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "passed",
+      "summary": "net8-jit=934ns, chaos-aot=3ns, chaos-jit=3ns",
+      "details": {
+        "runtimesAvailable": [
+          "net8-jit",
+          "net10-jit",
+          "mono",
+          "chaos-aot",
+          "chaos-jit"
+        ],
+        "runtimesUnavailable": [],
+        "multiRunReportPath": "multi-run/multi-run-report.json",
+        "chaosClassification": {
+          "chaos_faster_than_all": 4,
+          "chaos_faster_than_jit": 0,
+          "chaos_midfield": 0,
+          "chaos_slower_than_jit": 0,
+          "not_benchmarked": 6
+        },
+        "summaries": {
+          "net8-jit": {
+            "geometricMeanNs": 934.3786084759856,
+            "okCount": 10,
+            "totalMethods": 10
+          },
+          "chaos-aot": {
+            "geometricMeanNs": 3.4080708403854323,
+            "okCount": 4,
+            "totalMethods": 10
+          },
+          "chaos-jit": {
+            "geometricMeanNs": 3.407320424035907,
+            "okCount": 7,
+            "totalMethods": 10
+          }
+        },
+        "chaosAotVsNet8Speedup": 1564.0343943755388,
+        "chaosAotFasterCount": 4,
+        "chaosAotSlowerCount": 0,
+        "chaosAotGeometricMeanNs": 3.4080708403854323
+      },
+      "errors": [],
+      "duration_ms": 23060
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "10/10 passed, 0 failed (stub=4)",
+      "details": {
+        "passedMethods": 10,
+        "failedMethods": 0,
+        "totalMethods": 10,
+        "realMethods": 10,
+        "stubMethods": 4
+      },
+      "errors": [],
+      "duration_ms": 28
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "passed",
+      "summary": "avg_slowdown=-6.0% (0.9x) over 4 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": -6.0,
+        "slowdownFactor": 0.94,
+        "threshold": 50.0,
+        "nonStubMethods": 4
+      },
+      "errors": [],
+      "duration_ms": 161
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "failed",
-      "summary": "HotUpdate JIT fact crashed: No module named 'fact_verifier'",
-      "details": {},
+      "status": "passed",
+      "summary": "10/10 passed, 0 failed",
+      "details": {
+        "passed": 10,
+        "failed": 0,
+        "total": 10
+      },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 33
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -109,32 +317,59 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 727
+      "duration_ms": 170
     },
     "dashboard": {
       "stage": "dashboard",
       "status": "passed",
       "summary": "Dashboard built: 6 sections",
       "details": {
-        "interpreter": {},
+        "interpreter": {
+          "fastFramePoolNsPerOp": 5.5,
+          "fastExecuteNsPerInstr": 0,
+          "callVirtHandlerDispatchNs": 4.4,
+          "callVirtMicHitNs": 0,
+          "callVirtRawFallbackNs": 0,
+          "poolSize": 32
+        },
         "irTranslation": {
           "totalMethods": 10,
           "okCount": 10,
           "failedCount": 0,
-          "overallIrExpansionRatio": 0.45,
-          "averageExpansionRatio": 0.44,
-          "maxExpansionRatio": 0.86,
+          "overallIrExpansionRatio": 0.28,
+          "averageExpansionRatio": 0.28,
+          "maxExpansionRatio": 0.91,
           "jitInstructionAvg": 44.0,
-          "aotInstructionAvg": 19.6,
+          "aotInstructionAvg": 12.1,
           "totalExternalRuntimeCalls": 0,
           "totalVirtualDispatches": 0,
           "totalBoxingOps": 0,
-          "topInstructionCategories": {
-            "external_runtime_call": 24
-          }
+          "topInstructionCategories": {}
         },
-        "performance": {},
+        "performance": {
+          "averageSpeedupPercent": 0,
+          "nativeFasterCount": 0,
+          "managedFasterCount": 0,
+          "matchedCount": 0,
+          "totalMethods": 0,
+          "invalidCount": 0
+        },
         "hotupdate": {
+          "aotFunctional": {
+            "passedMethods": 10,
+            "failedMethods": 0,
+            "totalMethods": 10
+          },
+          "aotOverhead": {
+            "averageSlowdownPercent": -6.0,
+            "slowdownFactor": 0.94,
+            "nonStubMethods": 4
+          },
+          "jitFunctional": {
+            "passedMethods": 10,
+            "failedMethods": 0,
+            "totalMethods": 10
+          },
           "jitOverhead": {
             "averageSlowdownPercent": 0.0,
             "slowdownFactor": 1.0,
@@ -150,40 +385,67 @@
         },
         "keyRatios": {
           "nativeFasterRatio": 0,
-          "irExpansionRatio": 0.45,
-          "interpreterSlowdownFactor": 0,
+          "irExpansionRatio": 0.28,
+          "interpreterSlowdownFactor": 0.94,
           "asmPassRate": 100.0
         }
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     }
   },
   "coverage": {
     "methodCoverage": 0.0,
-    "testedRate": 0.0,
-    "overall": 0.0
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {},
+    "interpreter": {
+      "fastFramePoolNsPerOp": 5.5,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 4.4,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
+    },
     "irTranslation": {
       "totalMethods": 10,
       "okCount": 10,
       "failedCount": 0,
-      "overallIrExpansionRatio": 0.45,
-      "averageExpansionRatio": 0.44,
-      "maxExpansionRatio": 0.86,
+      "overallIrExpansionRatio": 0.28,
+      "averageExpansionRatio": 0.28,
+      "maxExpansionRatio": 0.91,
       "jitInstructionAvg": 44.0,
-      "aotInstructionAvg": 19.6,
+      "aotInstructionAvg": 12.1,
       "totalExternalRuntimeCalls": 0,
       "totalVirtualDispatches": 0,
       "totalBoxingOps": 0,
-      "topInstructionCategories": {
-        "external_runtime_call": 24
-      }
+      "topInstructionCategories": {}
     },
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 0,
+      "invalidCount": 0
+    },
     "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 10,
+        "failedMethods": 0,
+        "totalMethods": 10
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": -6.0,
+        "slowdownFactor": 0.94,
+        "nonStubMethods": 4
+      },
+      "jitFunctional": {
+        "passedMethods": 10,
+        "failedMethods": 0,
+        "totalMethods": 10
+      },
       "jitOverhead": {
         "averageSlowdownPercent": 0.0,
         "slowdownFactor": 1.0,
@@ -199,8 +461,8 @@
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0.45,
-      "interpreterSlowdownFactor": 0,
+      "irExpansionRatio": 0.28,
+      "interpreterSlowdownFactor": 0.94,
       "asmPassRate": 100.0
     }
   },

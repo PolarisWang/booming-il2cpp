@@ -2,6 +2,7 @@
 #define CHAOS_IL2CPP_REFLECTION_API_H_
 
 #include <chaos/native_types.h>
+#include <chaos/type_info.h>
 
 // ── Deferred stub declarations (reflection_api.cpp also includes remaining_stubs.cpp) ──
 #include "runtime_stubs/reflection_stubs.h"
@@ -54,6 +55,11 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOf(CHAOS_IL2CPP_INTPTR type, CHAOS_
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR candidate) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR obj) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableTo(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR candidate) noexcept;
+// ── TypeInfo* direct API (for codegen-level typeof() constant optimization) ──
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOfPtr(const chaos::il2cpp::common::TypeInfoHot* type_info, const chaos::il2cpp::common::TypeInfoHot* base_info) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFromPtr(const chaos::il2cpp::common::TypeInfoHot* target_info, const chaos::il2cpp::common::TypeInfoHot* source_info) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfTypePtr(const chaos::il2cpp::common::TypeInfoHot* type_info, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableToPtr(const chaos::il2cpp::common::TypeInfoHot* target_info, const chaos::il2cpp::common::TypeInfoHot* source_info) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetContainsGenericParams(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamPos(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
@@ -137,6 +143,11 @@ using chaos::il2cpp::runtime_core::ChaosReflectionIsSubclassOf;
 using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableFrom;
 using chaos::il2cpp::runtime_core::ChaosReflectionIsInstanceOfType;
 using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableTo;
+// ── Global scope using declarations for TypeInfo* direct API ──
+using chaos::il2cpp::runtime_core::ChaosReflectionIsSubclassOfPtr;
+using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableFromPtr;
+using chaos::il2cpp::runtime_core::ChaosReflectionIsInstanceOfTypePtr;
+using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableToPtr;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetGenericParamConstraints;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetContainsGenericParams;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetGenericParamPos;

@@ -107,6 +107,26 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<(string MethodId, int IlOffset), EnumAotBakeEntry> _enumAotBakeMap =
         new Dictionary<(string, int), EnumAotBakeEntry>();
 
+    // ── TypeInfo* direct API (A2.6) ──────────────────────────────────────
+    /// Pre-computed fold map for typeof(T).IsAssignableFrom(typeof(U)) type
+    /// hierarchy calls where both arguments are typeof() constants known at
+    /// AOT time.  Maps call-site IlOffset → fold entry with pre-resolved
+    /// TypeInfo* expressions that bypass GetTypeFromHandle entirely.
+    private readonly record struct TypeHierarchyPtrFoldEntry(
+        string PtrFunctionName,
+        string TypeExpr1,
+        string? TypeExpr2);
+
+    private static readonly Dictionary<string, string> TypeHierarchyPtrOptimizationMap = new(StringComparer.Ordinal)
+    {
+        { "IsAssignableFrom", "ChaosReflectionIsAssignableFromPtr" },
+        { "IsSubclassOf",     "ChaosReflectionIsSubclassOfPtr" },
+        { "IsAssignableTo",   "ChaosReflectionIsAssignableToPtr" },
+        { "IsInstanceOfType", "ChaosReflectionIsInstanceOfTypePtr" },
+    };
+
+    private Dictionary<int, TypeHierarchyPtrFoldEntry> _typeHierarchyPtrFoldMap = new();
+
     private CodegenMode _codegenMode = CodegenMode.Aot;
 
     // Verification dispatch manifest (populated by BuildDispatchEntryCode)
@@ -747,6 +767,8 @@ public sealed partial class NativeAotLoweringPlanner
         BuildEnumToStringFoldTable(methodsForLowering);
         // A2.5: Pre-scan for Enum::Parse/GetName/Format/IsDefined with constant args
         BuildEnumAotBakeTable(methodsForLowering);
+        // A2.6: Pre-scan for typeof(T).IsAssignableFrom(typeof(U)) → *Ptr direct API
+        BuildTypeHierarchyPtrFoldTable(methodsForLowering);
 
         var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols, _stubNeedsContext);
         _methodDeclarations = methodDeclarations;

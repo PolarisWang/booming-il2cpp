@@ -2,14 +2,9 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/array/indexing/copy",
-  "capturedAt": "2026-05-26T18:52:19",
+  "capturedAt": "2026-05-27T12:25:00",
   "metrics": {
-    "framePool": {
-      "acquireReleaseNsPerOp": 4.2,
-      "batchCount": 1000,
-      "framesPerBatch": 32
-    },
-    "poolSize": 32
+    "poolSize": 0
   },
-  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 4.2 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\nGC|region|active=0|total_allocated=0\n"
+  "rawOutput": "[2026-05-27T12:25:00][DEBUG][codegen] T4 VEH handler registered\n[2026-05-27T12:25:00][DEBUG][codegen] T4 VEH handler registered\nmicrobench: no-op (hotupdate fallback)\n"
 }

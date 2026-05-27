@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/primitive/numeric/conversions",
-  "capturedAt": "2026-05-26T21:31:44",
+  "capturedAt": "2026-05-27T22:06:15",
   "batchMode": true,
   "summary": {
     "totalMethods": 15,
@@ -11,26 +11,26 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 660
+      "max": 48,
+      "avg": 44.3,
+      "total": 664
     },
     "aotInstructionCount": {
-      "min": 18,
-      "max": 26,
-      "avg": 19.7,
-      "total": 296
+      "min": 9,
+      "max": 13,
+      "avg": 9.9,
+      "total": 148
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 38
+      "external_runtime_call": 19
     },
-    "overallIrExpansionRatio": 0.45,
-    "averageExpansionRatio": 0.45,
-    "maxExpansionRatio": 0.59,
-    "minExpansionRatio": 0.41
+    "overallIrExpansionRatio": 0.22,
+    "averageExpansionRatio": 0.22,
+    "maxExpansionRatio": 0.3,
+    "minExpansionRatio": 0.2
   },
   "methodResults": [
     {
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 26,
-        "ratio": 0.59,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,14 +52,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0",
-        "instructions": 26
+        "instructions": 13
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToBoolean:System.Boolean(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -67,7 +62,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -77,8 +72,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 18,
-        "ratio": 0.41,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -89,14 +84,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_1",
-        "instructions": 18
+        "instructions": 9
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToByte:System.Byte(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -104,7 +94,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -114,8 +104,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 18,
-        "ratio": 0.41,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -126,14 +116,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_2",
-        "instructions": 18
+        "instructions": 9
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToInt16:System.Int16(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -141,7 +126,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -151,8 +136,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 18,
-        "ratio": 0.41,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -163,14 +148,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_3",
-        "instructions": 18
+        "instructions": 9
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -178,7 +158,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -188,8 +168,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -200,14 +180,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4",
-        "instructions": 20
+        "instructions": 10
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToInt64:System.Int64(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -215,7 +190,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -225,8 +200,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -237,14 +212,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5",
-        "instructions": 20
+        "instructions": 10
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToSingle:System.Single(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -252,7 +222,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -262,8 +232,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -274,14 +244,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6",
-        "instructions": 20
+        "instructions": 10
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToDouble:System.Double(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -289,7 +254,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -299,8 +264,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -311,19 +276,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_7",
-        "instructions": 20
+        "instructions": 10
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.String)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -336,7 +291,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -346,8 +301,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -358,19 +313,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8",
-        "instructions": 20
+        "instructions": 10
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -383,7 +328,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -392,32 +337,22 @@
       "shortName": "Subject_9",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "jitInstructionCount": 48,
+        "aotInstructionCount": 10,
+        "ratio": 0.21,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 48
       },
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9",
-        "instructions": 20
+        "instructions": 10
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -430,7 +365,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -440,8 +375,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -452,19 +387,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10",
-        "instructions": 20
+        "instructions": 10
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -477,7 +402,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 4
+        "external_runtime_call": 2
       }
     },
     {
@@ -487,8 +412,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 18,
-        "ratio": 0.41,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -499,14 +424,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11",
-        "instructions": 18
+        "instructions": 9
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -514,7 +434,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -524,8 +444,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 18,
-        "ratio": 0.41,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -536,14 +456,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_12",
-        "instructions": 18
+        "instructions": 9
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -551,7 +466,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -561,8 +476,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -573,14 +488,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13",
-        "instructions": 20
+        "instructions": 10
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Int64::Parse:System.Int64(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -588,7 +498,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     },
     {
@@ -598,8 +508,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 20,
-        "ratio": 0.45,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -610,14 +520,9 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14",
-        "instructions": 20
+        "instructions": 10
       },
       "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Double::Parse:System.Double(System.String)' uses ExternalRuntime dispatch"
-        },
         {
           "severity": "info",
           "category": "external_runtime_call",
@@ -625,7 +530,7 @@
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 1
       }
     }
   ]

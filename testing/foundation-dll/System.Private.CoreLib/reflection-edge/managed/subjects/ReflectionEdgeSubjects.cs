@@ -73,14 +73,14 @@ public static partial class ReflectionEdgeSubjects
     // [8] System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)
     public static void Subject_8()
     {
-        try { var _ = ((typeof(byte).IsAssignableFrom(typeof(byte))) ? 1 : 0); }
+        try { var _ = ((typeof(System.IConvertible).IsAssignableFrom(typeof(int))) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)
     public static void Subject_9()
     {
-        try { var _ = ((typeof(byte).IsSubclassOf(typeof(byte))) ? 1 : 0); }
+        try { var _ = ((typeof(System.MemberAccessException).IsSubclassOf(typeof(System.Exception))) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 

@@ -5,6 +5,9 @@
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
 
+// Bring TypeInfoHot from common namespace (defined in <chaos/type_info.h>)
+using chaos::il2cpp::common::TypeInfoHot;
+
 // ── IsSubclassOf (pointer-based internal helper) ───────────────────
 // Returns 1 if `type` is a subclass of `base`, 0 otherwise.
 // Both pointers must be non-null and already resolved from handles.
@@ -21,6 +24,108 @@ static CHAOS_IL2CPP_INTPTR IsSubclassOfPtr(
     return 0;
 }
 
+// ── TypeInfo* direct API (Scheme B) ──────────────────────────────
+// These functions take raw TypeInfoHot* pointers instead of handles,
+// eliminating handle resolution overhead entirely.
+// Used by the codegen when it can resolve typeof() constants at
+// compile time, and as the internal fast path in handle-based APIs.
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOfPtr(
+    const TypeInfoHot* type_info,
+    const TypeInfoHot* base_info) noexcept
+{
+    return IsSubclassOfPtr(type_info, base_info);
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFromPtr(
+    const TypeInfoHot* target_info,
+    const TypeInfoHot* source_info) noexcept
+{
+    if (target_info == nullptr || source_info == nullptr) return 0;
+    if (target_info == source_info) return 1;
+
+    // Check subclass relationship
+    if (IsSubclassOfPtr(source_info, target_info)) return 1;
+
+    // Interface check: target must be an interface type
+    if (target_info->type_shape != chaos_type_shape_interface) return 0;
+
+    uint64_t target_stable = target_info->stable_id;
+
+    // Walk source's parent chain checking each type's iface_map
+    const auto* walk = source_info;
+    while (walk != nullptr) {
+        const auto* warm = GetWarmPtr(walk);
+        // Bloom filter: skip static iface_map scan if bitmap says miss
+        if (IfaceBitmapMaybeContains(warm, target_stable)) {
+            if (warm->iface_map != nullptr) {
+                for (uint32_t i = 0; i < warm->iface_count; i++) {
+                    if (warm->iface_map[i].iface_stable_id == target_stable) return 1;
+                }
+            }
+        }
+        if (warm->runtime_iface_map != nullptr) {
+            for (uint32_t i = 0; i < warm->runtime_iface_count; i++) {
+                if (warm->runtime_iface_map[i].iface_stable_id == target_stable) return 1;
+            }
+        }
+        walk = walk->parent;
+    }
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfTypePtr(
+    const TypeInfoHot* type_info,
+    CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (type_info == nullptr || obj == 0) return 0;
+
+    const auto* obj_type = chaos_object_get_type_info(
+        reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj)));
+    if (obj_type == nullptr) return 0;
+
+    // Same type pointer → instance
+    if (obj_type == type_info) return 1;
+
+    // Walk parent chain
+    const auto* walk = obj_type;
+    while (walk->parent != nullptr) {
+        if (walk->parent == type_info) return 1;
+        walk = walk->parent;
+    }
+
+    // Interface check
+    if (type_info->type_shape == chaos_type_shape_interface) {
+        uint64_t target_stable = type_info->stable_id;
+        walk = obj_type;
+        while (walk != nullptr) {
+            const auto* warm = GetWarmPtr(walk);
+            if (IfaceBitmapMaybeContains(warm, target_stable)) {
+                if (warm->iface_map != nullptr) {
+                    for (uint32_t i = 0; i < warm->iface_count; i++) {
+                        if (warm->iface_map[i].iface_stable_id == target_stable) return 1;
+                    }
+                }
+            }
+            if (warm->runtime_iface_map != nullptr) {
+                for (uint32_t i = 0; i < warm->runtime_iface_count; i++) {
+                    if (warm->runtime_iface_map[i].iface_stable_id == target_stable) return 1;
+                }
+            }
+            walk = walk->parent;
+        }
+    }
+
+    return 0;
+}
+
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableToPtr(
+    const TypeInfoHot* target_info,
+    const TypeInfoHot* source_info) noexcept
+{
+    return ChaosReflectionIsAssignableFromPtr(source_info, target_info);
+}
+
 // ── IsSubclassOf (handle-based public API) ─────────────────────────
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOf(
     CHAOS_IL2CPP_INTPTR type_handle,
@@ -29,8 +134,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOf(
     if (type_handle == 0 || base_handle == 0) return 0;
     if (type_handle == base_handle) return 0;
 
-    const auto* type_info = GetTypeInfoFromHandle(type_handle);
-    const auto* base_info = GetTypeInfoFromHandle(base_handle);
+    const auto* type_info = GetTypeInfoFromAnyHandle(type_handle);
+    const auto* base_info = GetTypeInfoFromAnyHandle(base_handle);
     if (type_info == nullptr || base_info == nullptr) return 0;
 
     return IsSubclassOfPtr(type_info, base_info);
@@ -48,8 +153,8 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(
     if (target_handle == 0 || source_handle == 0) return 0;
     if (target_handle == source_handle) return 1;
 
-    const auto* target_info = GetTypeInfoFromHandle(target_handle);
-    const auto* source_info = GetTypeInfoFromHandle(source_handle);
+    const auto* target_info = GetTypeInfoFromAnyHandle(target_handle);
+    const auto* source_info = GetTypeInfoFromAnyHandle(source_handle);
     if (target_info == nullptr || source_info == nullptr) return 0;
 
     // Check subclass relationship (using already-resolved pointers)
@@ -95,7 +200,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(
         reinterpret_cast<const void*>(static_cast<CHAOS_IL2CPP_INTPTR>(obj)));
     if (obj_type == nullptr) return 0;
 
-    const auto* target_info = GetTypeInfoFromHandle(type_handle);
+    const auto* target_info = GetTypeInfoFromAnyHandle(type_handle);
     if (target_info == nullptr) return 0;
 
     // Same type pointer → instance
@@ -146,7 +251,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableTo(
 
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetInterfaces(CHAOS_IL2CPP_INTPTR type_handle) {
     using namespace chaos::il2cpp::runtime_core;
-    const auto* type_info = GetTypeInfoFromHandle(type_handle);
+    const auto* type_info = GetTypeInfoFromAnyHandle(type_handle);
     if (type_info == nullptr) return 0;
 
     // ReturnValueBuffer: [0]=count, [1..N]=handles (up to 32 interfaces)

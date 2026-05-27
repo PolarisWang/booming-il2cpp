@@ -2,22 +2,22 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/attributes/custom/metadata",
-  "capturedAt": "2026-05-25T19:12:49",
+  "capturedAt": "2026-05-27T12:25:19",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 3.2,
+      "acquireReleaseNsPerOp": 4.7,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
     "fastExecute": {
       "runCount": 100000,
-      "nsPerCall": 261.8
+      "nsPerCall": 73.4
     },
     "callVirt": {
-      "handlerDispatchNs": 254.9,
-      "emptyStackNs": 280.4
+      "handlerDispatchNs": 77.8,
+      "emptyStackNs": 85.6
     },
     "poolSize": 32
   },
-  "rawOutput": "[2026-05-25T19:12:49][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T19:12:49][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:12:49][INFO][NUMA] numa_init count=%d\n[2026-05-25T19:12:49][INFO][OldGen] init initial_pages=2 numa_nodes=1\n[2026-05-25T19:12:49][INFO][OldGen] init done base=0x2911107153920 pages=2\n[2026-05-25T19:12:49][DEBUG][codegen] T4 VEH handler registered\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 3.2 ns/op (1000 batches x 32 frames)\n[2026-05-25T19:12:49][DEBUG][BGC] thread_started\n[2026-05-25T19:12:49][DEBUG][Finalizer] thread_started id={0}\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 261.8 ns/op\n[2026-05-25T19:12:49][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:12:49][DEBUG][BGC] start_cycle\n[2026-05-25T19:12:49][DEBUG][BGC] root_scan heap=908 oldgen=3 valid=0 marked=0\n[2026-05-25T19:12:49][DEBUG][BGC] root_set_populated\n[2026-05-25T19:12:49][DEBUG][BGC] concurrent_mark_started\n[2026-05-25T19:12:49][DEBUG][BGC] concurrent_mark_begin\n[2026-05-25T19:12:49][DEBUG][BGC] parallel_workers spawned=8\n[2026-05-25T19:12:49][DEBUG][BGC] concurrent_mark_complete\nHandler dispatch overhead (LdcI4): 254.9 ns/call\nCallVirt empty-stack: 280.4 ns/call\n"
+  "rawOutput": "[2026-05-27T12:25:19][DEBUG][codegen] T4 VEH handler registered\n[2026-05-27T12:25:19][DEBUG][codegen] T4 VEH handler registered\nBenchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 4.7 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: 73.4 ns/op\nHandler dispatch overhead (LdcI4): 77.8 ns/call\nCallVirt empty-stack: 85.6 ns/call\n"
 }

@@ -14,32 +14,30 @@
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)",
-      "status": "passed",
-      "prePatchNsPerOp": 6.31,
-      "postPatchNsPerOp": 6.4,
-      "slowdownPercent": 1.43
+      "status": "failed",
+      "error": "[2026-05-27T12:28:11][DEBUG][codegen] T4 VEH handler registered\n[2026-05-27T12:28:11][DEBUG][GcEvents] registered callback 0x7ff73873aaa0 at slot 0\n[2026-05-27T12:28:11][WARN][CRAG] young_collection_no_region\n[2026-05-27T12:28:11][INFO][NUMA] numa_init count=%d\n[2026-05-27T12:28:11][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-27T12:28:11][INFO][OldGen] emergency_reserve_allocated base=0x1386461528064 size=65536\n[2026-05-27T12:28:11][INFO][OldGen] init done base=0x1386431250432 pages=8\n[2026-05-27T12:28:11][INFO][GcLowMem] low-memory monitor started\n[2026-05-27T12:28:11][DEBUG][codegen] T4 VEH handler registered\n[2026-05-27T12:28:11][DEBUG][GcEvents] registered callback 0x7ff73873aaa0 at slot 1\n{\"postPatchNsPerOp\":6.4,\"elapsedMilliseconds\":0.064,\"iterations\":10000,\"methodIndex\":1,\"hotResult\":0}\n[2026-05-27T12:28:11][DEBUG][BGC] thread_started\n[2026-05-27T12:28:11][DEBUG][Finalizer] thread_started id={0"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])",
       "status": "failed",
-      "error": "[2026-05-25T19:43:35][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T19:43:35][DEBUG][GcEvents] registered callback 0x7ff6dcd4aaa0 at slot 0\n[2026-05-25T19:43:35][WARN][CRAG] young_collection_no_region\n[2026-05-25T19:43:35][INFO][NUMA] numa_init count=%d\n[2026-05-25T19:43:35][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-25T19:43:35][INFO][OldGen] emergency_reserve_allocated base=0x1560533270528 size=65536\n[2026-05-25T19:43:35][INFO][OldGen] init done base=0x1560530649088 pages=8\n[2026-05-25T19:43:35][INFO][GcLowMem] low-memory monitor started\n[2026-05-25T19:43:35][DEBUG][codegen] T4 VEH handler registered\n[2026-05-25T19:43:35][DEBUG][GcEvents] registered callback 0x7ff6dcd4aaa0 at slot 1\n[2026-05-25T19:43:35][DEBUG][BGC] thread_started\n[2026-05-25T19:43:35][DEBUG][Finalizer] thread_started id={0}\n"
+      "error": "[2026-05-27T12:28:11][DEBUG][codegen] T4 VEH handler registered\n[2026-05-27T12:28:11][DEBUG][GcEvents] registered callback 0x7ff73873aaa0 at slot 0\n[2026-05-27T12:28:11][WARN][CRAG] young_collection_no_region\n[2026-05-27T12:28:11][INFO][NUMA] numa_init count=%d\n[2026-05-27T12:28:11][INFO][OldGen] init initial_pages=8 numa_nodes=1\n[2026-05-27T12:28:11][INFO][OldGen] emergency_reserve_allocated base=0x1566242308096 size=65536\n[2026-05-27T12:28:11][INFO][OldGen] init done base=0x1566217011200 pages=8\n[2026-05-27T12:28:11][INFO][GcLowMem] low-memory monitor started\n[2026-05-27T12:28:11][DEBUG][codegen] T4 VEH handler registered\n[2026-05-27T12:28:11][DEBUG][GcEvents] registered callback 0x7ff73873aaa0 at slot 1\n[2026-05-27T12:28:11][DEBUG][BGC] thread_started\n"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()",
       "status": "passed",
       "prePatchNsPerOp": 3.4,
-      "postPatchNsPerOp": 2.9,
-      "slowdownPercent": -14.71
+      "postPatchNsPerOp": 4.0,
+      "slowdownPercent": 17.65
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::get_Target:System.Object()",
       "status": "passed",
       "prePatchNsPerOp": 12.02,
-      "postPatchNsPerOp": 2.9,
-      "slowdownPercent": -75.87
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": -65.89
     },
     {
       "methodIndex": 5,
@@ -56,8 +54,8 @@
       "methodSubjectId": "System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()",
       "status": "passed",
       "prePatchNsPerOp": 3.49,
-      "postPatchNsPerOp": 2.9,
-      "slowdownPercent": -16.91
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": 17.48
     },
     {
       "methodIndex": 8,
@@ -72,9 +70,9 @@
   ],
   "summary": {
     "totalMethods": 10,
-    "nonStubMethods": 5,
-    "averageSlowdownPercent": -19.86,
-    "slowdownFactor": 0.8014,
+    "nonStubMethods": 4,
+    "averageSlowdownPercent": -6.0,
+    "slowdownFactor": 0.94,
     "slowdownThresholdX": 50.0
   }
 }

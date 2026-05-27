@@ -115,6 +115,31 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 			}
 		}
+
+		// Pass 3: Detect delegate types via callvirt Invoke pattern.
+		// Delegate types that are only referenced as callee declaring types
+		// (e.g., System.Action used as Assert.Throws<Action> parameter) don't
+		// have TargetReference entries in Pass 1, and their constructors may
+		// not be called directly (Pass 2).  The callvirt Invoke pattern
+		// uniquely identifies delegate usage — any method named "Invoke"
+		// called via callvirt whose declaring type is not yet in the
+		// dictionary is a delegate type.
+		foreach (AotCoreIrMethodArtifact method in aotCoreIr.Methods)
+		{
+			foreach (AotCoreIrInstructionArtifact instruction in method.Instructions)
+			{
+				if (!string.IsNullOrEmpty(instruction.Callee) &&
+					instruction.Op is "callvirt" and not null &&
+					string.Equals(GetMethodName(instruction.Callee), "Invoke", StringComparison.Ordinal))
+				{
+					string declaringType = GetMethodDeclaringTypeSubjectId(instruction.Callee);
+					if (!dictionary.TryGetValue(declaringType, out var existingBase) || string.IsNullOrEmpty(existingBase))
+					{
+						dictionary[declaringType] = "System.Private.CoreLib/System.MulticastDelegate";
+					}
+				}
+			}
+		}
 		return dictionary;
 	}
 
