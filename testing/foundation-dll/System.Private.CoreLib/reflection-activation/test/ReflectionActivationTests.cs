@@ -72,7 +72,7 @@ public partial class ReflectionActivationTests
     public void _System_Private_CoreLib_System_Activator_CreateInstance_System_Object_System_Type_System_Reflection_BindingFlags_System_R()
     {
         // Purpose: Smoke — Activator.CreateInstance with complex param(s)
-            _ = Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!);
+            _ = Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default);
     }
 
     // === needs-manual (operator/protected/etc) ===

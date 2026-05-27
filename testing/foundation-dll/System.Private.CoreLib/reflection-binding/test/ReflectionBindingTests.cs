@@ -92,7 +92,7 @@ public partial class ReflectionBindingTests
     public void _System_Private_CoreLib_System_Reflection_MethodBase_Invoke_System_Object_System_Object_System_Reflection_BindingFlags_Sy()
     {
         // Purpose: Smoke — MethodBase.Invoke with complex param(s)
-            _ = default(MethodInfo)!.Invoke(42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!);
+            _ = default(MethodInfo)!.Invoke(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default);
     }
 
     // === needs-manual (operator/protected/etc) ===

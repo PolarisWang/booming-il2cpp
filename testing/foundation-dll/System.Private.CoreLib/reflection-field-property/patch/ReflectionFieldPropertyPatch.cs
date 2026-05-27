@@ -87,7 +87,7 @@ public static class ReflectionFieldPropertyPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionFieldProperty)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Reflection_FieldInfo_SetValue_System_Void_System_Object_System_Object_System_Reflection_Bi() { default(FieldInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, null!, null!); }
+    public static void Patch_System_Private_CoreLib_System_Reflection_FieldInfo_SetValue_System_Void_System_Object_System_Object_System_Reflection_Bi() { default(FieldInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, default); }
     // Verify FieldInfo.GetRawConstantValue after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.FieldInfo::GetRawConstantValue:System.Object()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionFieldProperty)]
@@ -157,7 +157,7 @@ public static class ReflectionFieldPropertyPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionFieldProperty)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Reflection_PropertyInfo_GetValue_System_Object_System_Object_System_Reflection_BindingFlag() { _ = default(PropertyInfo)!.GetValue(42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!); }
+    public static void Patch_System_Private_CoreLib_System_Reflection_PropertyInfo_GetValue_System_Object_System_Object_System_Reflection_BindingFlag() { _ = default(PropertyInfo)!.GetValue(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default); }
     // Verify PropertyInfo.GetConstantValue after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::GetConstantValue:System.Object()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionFieldProperty)]
@@ -172,7 +172,7 @@ public static class ReflectionFieldPropertyPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionFieldProperty)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Reflection_PropertyInfo_SetValue_System_Void_System_Object_System_Object_System_Reflection() { default(PropertyInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!); }
+    public static void Patch_System_Private_CoreLib_System_Reflection_PropertyInfo_SetValue_System_Void_System_Object_System_Object_System_Reflection() { default(PropertyInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default); }
     // Verify PropertyInfo.GetOptionalCustomModifiers after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Reflection.PropertyInfo::GetOptionalCustomModifiers:System.Type[]()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ReflectionFieldProperty)]

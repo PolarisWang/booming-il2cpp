@@ -11,10 +11,10 @@ using System.Reflection;
 using Chaos.TestFramework;
 using Xunit;
 
-[CapabilityTest("family/System.Collections.Immutable/immutable/hash-set", IncludeBenchmark = true, IncludeHotUpdate = true)]
+[CapabilityTest("family/System.Collections.Immutable/immutable/hash/set", IncludeBenchmark = true, IncludeHotUpdate = true)]
 public partial class ImmutableHashSetTests
 {
-    // AI-generated tests for family/System.Collections.Immutable/immutable/hash-set
+    // AI-generated tests for family/System.Collections.Immutable/immutable/hash/set
 
     // === mixed (smoke) ===
 

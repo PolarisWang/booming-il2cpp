@@ -17,7 +17,7 @@ public static class EnumParsingPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::Format:System.String(System.Type,System.Object,System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Enum_Format_System_String_System_Type_System_Object_System_String() { _ = Enum.Format(typeof(byte), 42, "hello"); }
+    public static void Patch_System_Private_CoreLib_System_Enum_Format_System_String_System_Type_System_Object_System_String() { _ = Enum.Format(typeof(byte), null!, "hello"); }
     // Verify Enum.GetName after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::GetName:System.String(System.RuntimeType,System.UInt64)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
@@ -42,27 +42,27 @@ public static class EnumParsingPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::IsDefined:System.Boolean(System.Type,System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Enum_IsDefined_System_Boolean_System_Type_System_Object() { _ = Enum.IsDefined(typeof(byte), 42); }
+    public static void Patch_System_Private_CoreLib_System_Enum_IsDefined_System_Boolean_System_Type_System_Object() { _ = Enum.IsDefined(typeof(byte), null!); }
     // Verify Enum.Parse after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String() { _ = Enum.Parse(typeof(byte), "hello"); }
+    public static void Patch_System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String() { _ = Enum.Parse(typeof(DayOfWeek), "Monday"); }
     // Verify Enum.Parse after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String_System_Boolean() { _ = Enum.Parse(typeof(byte), "hello", true); }
+    public static void Patch_System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String_System_Boolean() { _ = Enum.Parse(typeof(DayOfWeek), "Monday", true); }
     // Verify Enum.ToString after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::ToString:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Enum_ToString_System_String() { _ = DayOfWeek.Monday.ToString(); }
+    public static void Patch_System_Private_CoreLib_System_Enum_ToString_System_String() { _ = Enum.Format(typeof(byte), (byte)42, "G"); }
     // Verify Enum.ToString after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::ToString:System.String(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Enum_ToString_System_String_System_String() { _ = 42.ToString("X"); }
+    public static void Patch_System_Private_CoreLib_System_Enum_ToString_System_String_System_String() { _ = Enum.Format(typeof(byte), (byte)42, "X"); }
     // Verify Enum.TryParse after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_EnumParsing)]

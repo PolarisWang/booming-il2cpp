@@ -178,10 +178,11 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
     native_dir = testing_base / ctx.slug / "native"
     entry_exe = native_dir / "entry.exe"
     aot_exe = native_dir / "entry-aot.exe"
-    if entry_exe.exists() and not aot_exe.exists():
-        import shutil as _shutil
-        _shutil.copy2(str(entry_exe), str(aot_exe))
-        print(f"  [codegen] saved entry.exe -> entry-aot.exe")
+    if entry_exe.exists():
+        if not aot_exe.exists() or entry_exe.stat().st_mtime > aot_exe.stat().st_mtime:
+            import shutil as _shutil
+            _shutil.copy2(str(entry_exe), str(aot_exe))
+            print(f"  [codegen] saved entry.exe -> entry-aot.exe")
 
     return StageResult(
         stage="codegen", status="passed",

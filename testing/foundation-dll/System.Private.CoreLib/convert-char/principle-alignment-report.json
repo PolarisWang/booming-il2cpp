@@ -1,7 +1,7 @@
 {
   "family": "convert-char",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-25T19:35:32.049284",
+  "generated_at": "2026-05-27T11:40:51.056237",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -9,171 +9,179 @@
       "summary": "10/18 methods are stubs — benchmark data not meaningful",
       "details": [],
       "evidence": {
-        "average_speedup_percent": -16.96,
+        "average_speedup_percent": 21.53,
         "average_native_jit_speedup_percent": 0.0,
-        "managed_faster_count": 3,
-        "native_aot_faster_count": 4,
+        "managed_faster_count": 0,
+        "native_aot_faster_count": 8,
         "native_jit_faster_count": 0,
         "invalid_count": 10,
         "total_methods": 18
       }
     },
+    "p1_combo_slug_expansion": {
+      "check_id": "p1_combo_slug_expansion",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "ALIGNED",
-      "summary": "All methods have lowering [OK]",
+      "status": "VIOLATION",
+      "summary": "0/36 methods with lowering",
       "details": [],
       "evidence": {
-        "has_lowering": true,
+        "has_lowering": false,
+        "file_has_lowering": false,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 36,
+        "methods_with_lowering": 0,
         "methods_total": 36
       },
       "per_method": [
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_0",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_1",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_2",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_3",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_4",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_5",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_6",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_7",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_8",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_9",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_10",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_11",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_12",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_13",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_14",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_15",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_16",
-          "has_lowering": true
+          "has_lowering": false
         },
         {
           "name": "ConvertCharSubjects_ConvertCharSubjects_Subject_17",
-          "has_lowering": true
+          "has_lowering": false
         }
       ]
     },
@@ -199,11 +207,11 @@
       "details": [
         {
           "function": "ChaosDatetimeGetUtcNow",
-          "call_count": 3
+          "call_count": 2
         }
       ],
       "evidence": {
-        "stub_call_count": 3
+        "stub_call_count": 2
       }
     },
     "p2_abstraction_balance": {
@@ -213,115 +221,40 @@
       "details": [],
       "evidence": {}
     },
+    "p2_cross_assembly_coverage": {
+      "check_id": "p2_cross_assembly_coverage",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "12 of 28 changed source files are outside expected architecture layers",
+      "summary": "2 of 6 changed source files are outside expected architecture layers",
       "details": [
-        {
-          "file": "CLAUDE.md",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
-          "reason": "outside expected architecture layers"
-        },
         {
           "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
           "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/native/jit/jit_precode.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 28,
+        "changed_source_count": 6,
         "layer_distribution": {
-          "TestInfra": 6,
-          "ManagedContracts": 2,
-          "Driver": 2,
-          "RuntimeCore": 6
+          "Driver": 1,
+          "RuntimeCore": 3
         },
         "violations": [
-          {
-            "file": "CLAUDE.md",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GeneratedModule.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
-            "reason": "outside expected architecture layers"
-          },
           {
             "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ReflectionObjectEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotEmitter.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
             "file": "src/managed/Chaos.IL2CPP.Generator/RuntimeSupport/RuntimeHelperShapeRegistry.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.GeneratedModule.h.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/NativeAot.TranslationUnit.cpp.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Templates/chaos-config.cmake.scriban",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/native/jit/jit_precode.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/src/python/foundation_dll/pipeline_adapter.py",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -336,6 +269,13 @@
     },
     "p2_no_code_duplication": {
       "check_id": "p2_no_code_duplication",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_shared_type_consistency": {
+      "check_id": "p2_shared_type_consistency",
       "status": "NOT_APPLICABLE",
       "summary": "Cross-family check — run with CrossFamilyContext",
       "details": [],
@@ -383,11 +323,11 @@
     }
   },
   "summary": {
-    "total": 12,
-    "aligned": 7,
+    "total": 15,
+    "aligned": 6,
     "concern": 2,
-    "violation": 0,
-    "not_applicable": 3,
-    "overall": "CONCERN"
+    "violation": 1,
+    "not_applicable": 6,
+    "overall": "VIOLATION"
   }
 }

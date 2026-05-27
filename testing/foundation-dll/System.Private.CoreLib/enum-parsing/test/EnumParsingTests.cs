@@ -22,7 +22,7 @@ public partial class EnumParsingTests
     public void _System_Private_CoreLib_System_Enum_Format_System_String_System_Type_System_Object_System_String()
     {
         // Purpose: Verify Enum.Format with typical input
-            var result = Enum.Format(typeof(byte), 42, "hello");
+            var result = Enum.Format(typeof(byte), null!, "hello");
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -54,7 +54,7 @@ public partial class EnumParsingTests
     public void _System_Private_CoreLib_System_Enum_IsDefined_System_Boolean_System_Type_System_Object()
     {
         // Purpose: Verify Enum.IsDefined with typical input
-            var result = Enum.IsDefined(typeof(byte), 42);
+            var result = Enum.IsDefined(typeof(byte), null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -62,7 +62,7 @@ public partial class EnumParsingTests
     public void _System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String()
     {
         // Purpose: Verify Enum.Parse with typical input
-            var result = Enum.Parse(typeof(byte), "hello");
+            var result = Enum.Parse(typeof(DayOfWeek), "Monday");
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -70,7 +70,7 @@ public partial class EnumParsingTests
     public void _System_Private_CoreLib_System_Enum_Parse_System_Object_System_Type_System_String_System_Boolean()
     {
         // Purpose: Verify Enum.Parse with typical input
-            var result = Enum.Parse(typeof(byte), "hello", true);
+            var result = Enum.Parse(typeof(DayOfWeek), "Monday", true);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -78,7 +78,7 @@ public partial class EnumParsingTests
     public void _System_Private_CoreLib_System_Enum_ToString_System_String()
     {
         // Purpose: Verify Enum.ToString with typical input
-            var result = DayOfWeek.Monday.ToString();
+            var result = Enum.Format(typeof(byte), (byte)42, "G");
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -86,7 +86,7 @@ public partial class EnumParsingTests
     public void _System_Private_CoreLib_System_Enum_ToString_System_String_System_String()
     {
         // Purpose: Verify Enum.ToString with typical input
-            var result = 42.ToString("X");
+            var result = Enum.Format(typeof(byte), (byte)42, "X");
             Xunit.Assert.NotNull((object)result);
     }
 

@@ -198,7 +198,7 @@ public partial class ReflectionFieldPropertyTests
     public void _System_Private_CoreLib_System_Reflection_FieldInfo_SetValue_System_Void_System_Object_System_Object_System_Reflection_Bi()
     {
         // Purpose: Smoke — FieldInfo.SetValue with complex param(s)
-            default(FieldInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, null!, null!);
+            default(FieldInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, default);
     }
 
     [Fact]
@@ -268,13 +268,13 @@ public partial class ReflectionFieldPropertyTests
     public void _System_Private_CoreLib_System_Reflection_PropertyInfo_GetValue_System_Object_System_Object_System_Reflection_BindingFlag()
     {
         // Purpose: Smoke — PropertyInfo.GetValue with complex param(s)
-            _ = default(PropertyInfo)!.GetValue(42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!);
+            _ = default(PropertyInfo)!.GetValue(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default);
     }
 
     [Fact]
     public void _System_Private_CoreLib_System_Reflection_PropertyInfo_SetValue_System_Void_System_Object_System_Object_System_Reflection()
     {
         // Purpose: Smoke — PropertyInfo.SetValue with complex param(s)
-            default(PropertyInfo)!.SetValue(42, 42, System.Reflection.BindingFlags.Default, null!, Array.Empty<System.Object>(), null!);
+            default(PropertyInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default);
     }
 }

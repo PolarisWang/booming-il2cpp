@@ -11,10 +11,10 @@ using System.Reflection;
 using Chaos.TestFramework;
 using Xunit;
 
-[CapabilityTest("family/System.Private.CoreLib/snapshot/prover", IncludeBenchmark = true, IncludeHotUpdate = true)]
+[CapabilityTest("family/SnapshotTestFixtures/snapshot/prover", IncludeBenchmark = true, IncludeHotUpdate = true)]
 public partial class SnapshotProverTests
 {
-    // AI-generated tests for family/System.Private.CoreLib/snapshot/prover
+    // AI-generated tests for family/SnapshotTestFixtures/snapshot/prover
 
     // === simple (all-primitive) ===
 

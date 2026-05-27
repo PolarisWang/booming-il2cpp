@@ -98,7 +98,7 @@ public partial class GuidRandomHashcodeTests
     public void _System_Private_CoreLib_System_HashCode_Add_System_Void_System_Object()
     {
         // Purpose: Verify HashCode.Add with typical input
-            default(HashCode).Add(42);
+            default(HashCode).Add(new object());
     }
 
     [Fact]

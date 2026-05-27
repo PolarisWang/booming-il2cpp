@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Chaos.TestFramework;
 
-// Hot-update stubs for family/System.Collections.Immutable/immutable/sorted-set
+// Hot-update stubs for family/System.Collections.Immutable/immutable/sorted/set
 public static class ImmutableSortedSetHotUpdate
 {
     // Verify ImmutableSortedSet.Create<Byte> after hot-update (patch side)

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Chaos.TestFramework;
 
-// Hot-update stubs for family/System.Collections.Immutable/immutable/hash-set
+// Hot-update stubs for family/System.Collections.Immutable/immutable/hash/set
 public static class ImmutableHashSetHotUpdate
 {
     // Verify ImmutableHashSet.Create<Byte> after hot-update (patch side)
