@@ -471,8 +471,9 @@ def main():
         families = _get_verifyable_families(dlls, lookup)
 
     # Build skip list: by default skip the heaviest stages that need full toolchain.
-    # benchmark is NOT skipped -- it's a required stage in standard mode (5 ledger gates).
-    default_skip = {"hotupdate", "post_hotupdate_benchmark", "asm_compare", "microbench"}
+    # asm_compare (JIT vs AOT instruction-level comparison) is intentionally NOT skipped —
+    # it's a required stage to produce non-zero comparison data. Only skip if explicitly requested.
+    default_skip = {"hotupdate", "post_hotupdate_benchmark", "microbench"}
     skip_stages = list(default_skip.union(set(args.skip)))
 
     verify_results = step_verify_families(families, mode=args.mode,

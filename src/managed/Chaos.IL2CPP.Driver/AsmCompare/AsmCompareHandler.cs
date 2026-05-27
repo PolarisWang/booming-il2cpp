@@ -113,7 +113,16 @@ internal static class AsmCompareHandler
             {
                 var methodName = config.MethodNames[idx];
 
+                // Use contract methodSubjectId for JIT capture (resolves the real
+                // target method in the framework assembly instead of the Subjects
+                // DLL Subject_N wrapper). Falls back to methodName if not provided.
+                var jitMethodName = idx < config.MethodSubjectIds.Count
+                    ? config.MethodSubjectIds[idx]
+                    : methodName;
+
                 // Find method in closure (O(1) from pre-built dictionary)
+                // Uses Subject_N names (methodName) since the AOT closure only
+                // contains Subjects DLL wrapper methods, not framework methods.
                 var aotMethod = methodMap.TryGetValue(methodName, out var found)
                     ? found
                     : FindMethodInClosure(closureResult, methodName);
@@ -141,8 +150,9 @@ internal static class AsmCompareHandler
                 if (needsCpp && emitResult is not null)
                     cppSource = ReadGeneratedCppForMethod(emitResult, aotMethod);
 
-                // Capture JIT asm
-                var jitResult = JitAsmCapture.Capture(config.AssemblyPath, methodName);
+                // Capture JIT asm — use the full methodSubjectId so JitAsmCapture
+                // resolves the real target method from the framework assembly.
+                var jitResult = JitAsmCapture.Capture(config.AssemblyPath, jitMethodName);
 
                 lock (consoleLock)
                 {
@@ -171,13 +181,13 @@ internal static class AsmCompareHandler
                     }
                 }
 
-                // Generate report entry
+                // Generate report entry — label with the real methodSubjectId
                 var entry = config.Format == "json"
                     ? AsmCompareReport.GenerateJsonEntry(
-                        config.AssemblyPath, methodName, jitResult, aotMethod, cppSource, nativeResult, config)
+                        config.AssemblyPath, jitMethodName, jitResult, aotMethod, cppSource, nativeResult, config)
                     : new Dictionary<string, object?>
                     {
-                        ["methodName"] = methodName,
+                        ["methodName"] = jitMethodName,
                         ["status"] = jitResult.Success ? "ok" : "failed",
                     };
 

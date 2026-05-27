@@ -208,11 +208,13 @@ def _discover_subjects_dll(family_slug: str, assembly: str,
 def _run_batch_asm_compare(dll_path: Path, mids: list[str]) -> dict[str, Any]:
     """Run asm-compare once for all methods (Phase 1: batch mode).
 
-    Uses --methods with comma-separated Subject_N names.
-    Pipeline + C++ generation runs once for all methods.
+    Uses --methods with Subject_N names (for AOT pipeline lookup) and
+    --method-subject-ids with full methodSubjectId from the contract (for JIT
+    capture of the real target method rather than the Subjects DLL wrapper).
     """
     short_names = [f"Subject_{i}" for i in range(len(mids))]
     methods_arg = ",".join(short_names)
+    subject_ids_arg = ",".join(mids)
 
     cfg = os.environ.get("CHAOS_BUILD_CONFIG", "Release")
 
@@ -222,6 +224,7 @@ def _run_batch_asm_compare(dll_path: Path, mids: list[str]) -> dict[str, Any]:
         "asm-compare",
         str(dll_path),
         "--methods", methods_arg,
+        "--method-subject-ids", subject_ids_arg,
         "--format", "json",
         "--sections", "metrics,analysis",
     ]
@@ -245,7 +248,7 @@ def _run_batch_asm_compare(dll_path: Path, mids: list[str]) -> dict[str, Any]:
                 {
                     "methodIndex": i,
                     "methodSubjectId": mid,
-                    "shortName": short_names[i],
+                    "shortName": _short_method_name(mid),
                     "status": "error",
                     "error": f"batch asm-compare timed out ({batch_timeout}s)",
                 }
@@ -258,7 +261,7 @@ def _run_batch_asm_compare(dll_path: Path, mids: list[str]) -> dict[str, Any]:
                 {
                     "methodIndex": i,
                     "methodSubjectId": mid,
-                    "shortName": short_names[i],
+                    "shortName": _short_method_name(mid),
                     "status": "error",
                     "error": str(e),
                 }
@@ -284,7 +287,7 @@ def _run_batch_asm_compare(dll_path: Path, mids: list[str]) -> dict[str, Any]:
                 {
                     "methodIndex": i,
                     "methodSubjectId": mid,
-                    "shortName": short_names[i],
+                    "shortName": _short_method_name(mid),
                     "status": "error",
                     "error": f"JSON parse failed: {e}",
                     "stdout": (result.stdout or "")[:500],
@@ -306,7 +309,7 @@ def _run_batch_asm_compare(dll_path: Path, mids: list[str]) -> dict[str, Any]:
     method_results = []
     for i, mid in enumerate(mids):
         entry = results_list[i] if i < len(results_list) else {}
-        normalized = _extract_metrics(entry, mid, short_names[i], i)
+        normalized = _extract_metrics(entry, mid, _short_method_name(mid), i)
         method_results.append(normalized)
 
     return {"methodResults": method_results}
