@@ -24,5 +24,8 @@
     "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()",
     "InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry/InterfaceDispatchPinvokeDllimportPrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()"
   ],
-  "methodCount": 23
+  "methodCount": 23,
+  "methodSubjectCount": 23,
+  "familyId": "family/System.Private.CoreLib/interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
+  "displayName": "Interface Dispatch, Pinvoke DllImport, Primitive Numeric Conversions Core"
 }

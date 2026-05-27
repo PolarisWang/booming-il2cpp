@@ -118,6 +118,213 @@
       ]
     },
     {
+      "assemblyName": "System.Formats.Asn1",
+      "families": [
+        {
+          "familyId": "family/System.Formats.Asn1/decoder",
+          "slug": "decoder",
+          "displayName": "ASN.1 Decoder",
+          "methodCount": 33,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/encoding-rules",
+          "slug": "encoding-rules",
+          "displayName": "ASN.1 Encoding Rules",
+          "methodCount": 5,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/options-errors",
+          "slug": "options-errors",
+          "displayName": "ASN.1 Options And Errors",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/reader",
+          "slug": "reader",
+          "displayName": "ASN.1 Reader",
+          "methodCount": 40,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/tag-model",
+          "slug": "tag-model",
+          "displayName": "ASN.1 Tag Model",
+          "methodCount": 19,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Formats.Asn1/writer",
+          "slug": "writer",
+          "displayName": "ASN.1 Writer",
+          "methodCount": 42,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.IO.Compression.Brotli",
+      "families": [
+        {
+          "familyId": "family/System.IO.Compression.Brotli/decoder",
+          "slug": "decoder",
+          "displayName": "Brotli Decoder",
+          "methodCount": 3,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Compression.Brotli/encoder",
+          "slug": "encoder",
+          "displayName": "Brotli Encoder",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Compression.Brotli/options",
+          "slug": "options",
+          "displayName": "Brotli Options",
+          "methodCount": 3,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Compression.Brotli/stream",
+          "slug": "stream",
+          "displayName": "Brotli Stream",
+          "methodCount": 31,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.IO.Compression.ZipFile",
+      "families": [
+        {
+          "familyId": "family/System.IO.Compression.ZipFile/zip-file-apis",
+          "slug": "zip-file-apis",
+          "displayName": "ZipFile APIs",
+          "methodCount": 34,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Compression.ZipFile/zip-file-extensions",
+          "slug": "zip-file-extensions",
+          "displayName": "ZipFile Extensions",
+          "methodCount": 12,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.IO.Pipelines",
+      "families": [
+        {
+          "familyId": "family/System.IO.Pipelines/options-scheduler",
+          "slug": "options-scheduler",
+          "displayName": "Options And Scheduler",
+          "methodCount": 23,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Pipelines/pipe-core",
+          "slug": "pipe-core",
+          "displayName": "Pipe Core",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Pipelines/read-flush-results",
+          "slug": "read-flush-results",
+          "displayName": "Read And Flush Results",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Pipelines/reader-writer",
+          "slug": "reader-writer",
+          "displayName": "Pipe Reader Writer",
+          "methodCount": 27,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.IO.Pipelines/stream-adapters",
+          "slug": "stream-adapters",
+          "displayName": "Stream Adapters",
+          "methodCount": 1,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
       "assemblyName": "System.Linq",
       "families": [
         {
@@ -250,6 +457,126 @@
             "functional"
           ],
           "migrationStatus": "imported",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Net.ServerSentEvents",
+      "families": [
+        {
+          "familyId": "family/System.Net.ServerSentEvents/formatter",
+          "slug": "formatter",
+          "displayName": "SSE Formatter",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Net.ServerSentEvents/item-parser",
+          "slug": "item-parser",
+          "displayName": "SSE Item Parser",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Net.ServerSentEvents/parser",
+          "slug": "parser",
+          "displayName": "SSE Parser",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Net.ServerSentEvents/sse-item",
+          "slug": "sse-item",
+          "displayName": "SSE Item Model",
+          "methodCount": 7,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.ObjectModel",
+      "families": [
+        {
+          "familyId": "family/System.ObjectModel/collection-change-notifications",
+          "slug": "collection-change-notifications",
+          "displayName": "Collection Change Notifications",
+          "methodCount": 2,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/command-type-metadata",
+          "slug": "command-type-metadata",
+          "displayName": "Command And Type Metadata",
+          "methodCount": 15,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/data-errors",
+          "slug": "data-errors",
+          "displayName": "Data Errors",
+          "methodCount": 6,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/object-model-collections",
+          "slug": "object-model-collections",
+          "displayName": "ObjectModel Collections",
+          "methodCount": 6,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/observable-collections",
+          "slug": "observable-collections",
+          "displayName": "Observable Collections",
+          "methodCount": 8,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.ObjectModel/property-change-notifications",
+          "slug": "property-change-notifications",
+          "displayName": "Property Change Notifications",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "migrated",
           "lastVerified": ""
         }
       ]
@@ -393,7 +720,7 @@
           "familyId": "family/System.Private.CoreLib/exception/throw-diagnostics",
           "slug": "exception-throw-diagnostics",
           "displayName": "Exception Throw Diagnostics",
-          "methodCount": 14,
+          "methodCount": 17,
           "obligations": [
             "functional"
           ],
@@ -404,7 +731,7 @@
           "familyId": "family/System.Private.CoreLib/garbage-collection",
           "slug": "garbage-collection",
           "displayName": "Garbage Collection",
-          "methodCount": 6,
+          "methodCount": 7,
           "obligations": [
             "functional"
           ],
@@ -456,7 +783,7 @@
           "lastVerified": ""
         },
         {
-          "familyId": "family/System.Private.CoreLib/interface/dispatch,pinvoke/dllimport,primitive/numeric/conversions/core",
+          "familyId": "family/System.Private.CoreLib/interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
           "slug": "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
           "displayName": "Interface Dispatch,Pinvoke Dllimport,Primitive Numeric Conversions Core",
           "methodCount": 23,
@@ -773,332 +1100,71 @@
           ],
           "migrationStatus": "imported",
           "lastVerified": ""
-        }
-      ]
-    },
-    {
-      "assemblyName": "System.Formats.Asn1",
-      "families": [
-        {
-          "familyId": "family/System.Formats.Asn1/decoder",
-          "slug": "decoder",
-          "displayName": "ASN.1 Decoder",
-          "methodCount": 33,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
         },
         {
-          "familyId": "family/System.Formats.Asn1/encoding-rules",
-          "slug": "encoding-rules",
-          "displayName": "ASN.1 Encoding Rules",
+          "familyId": "family/System.Private.CoreLib/array-copy",
+          "slug": "array-copy",
+          "displayName": "Array Copy",
           "methodCount": 0,
           "obligations": [
             "functional"
           ],
-          "migrationStatus": "migrated",
+          "migrationStatus": "imported",
           "lastVerified": ""
         },
         {
-          "familyId": "family/System.Formats.Asn1/options-errors",
-          "slug": "options-errors",
-          "displayName": "ASN.1 Options And Errors",
-          "methodCount": 7,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.Formats.Asn1/reader",
-          "slug": "reader",
-          "displayName": "ASN.1 Reader",
-          "methodCount": 40,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.Formats.Asn1/tag-model",
-          "slug": "tag-model",
-          "displayName": "ASN.1 Tag Model",
-          "methodCount": 19,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.Formats.Asn1/writer",
-          "slug": "writer",
-          "displayName": "ASN.1 Writer",
-          "methodCount": 42,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        }
-      ]
-    },
-    {
-      "assemblyName": "System.IO.Compression.Brotli",
-      "families": [
-        {
-          "familyId": "family/System.IO.Compression.Brotli/decoder",
-          "slug": "decoder",
-          "displayName": "Brotli Decoder",
-          "methodCount": 3,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.IO.Compression.Brotli/encoder",
-          "slug": "encoder",
-          "displayName": "Brotli Encoder",
-          "methodCount": 7,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.IO.Compression.Brotli/options",
-          "slug": "options",
-          "displayName": "Brotli Options",
-          "methodCount": 3,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.IO.Compression.Brotli/stream",
-          "slug": "stream",
-          "displayName": "Brotli Stream",
-          "methodCount": 31,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        }
-      ]
-    },
-    {
-      "assemblyName": "System.IO.Compression.ZipFile",
-      "families": [
-        {
-          "familyId": "family/System.IO.Compression.ZipFile/zip-file-apis",
-          "slug": "zip-file-apis",
-          "displayName": "ZipFile APIs",
-          "methodCount": 34,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.IO.Compression.ZipFile/zip-file-extensions",
-          "slug": "zip-file-extensions",
-          "displayName": "ZipFile Extensions",
-          "methodCount": 12,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        }
-      ]
-    },
-    {
-      "assemblyName": "System.IO.Pipelines",
-      "families": [
-        {
-          "familyId": "family/System.IO.Pipelines/options-scheduler",
-          "slug": "options-scheduler",
-          "displayName": "Options And Scheduler",
-          "methodCount": 23,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.IO.Pipelines/pipe-core",
-          "slug": "pipe-core",
-          "displayName": "Pipe Core",
-          "methodCount": 7,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.IO.Pipelines/read-flush-results",
-          "slug": "read-flush-results",
-          "displayName": "Read And Flush Results",
-          "methodCount": 7,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.IO.Pipelines/reader-writer",
-          "slug": "reader-writer",
-          "displayName": "Pipe Reader Writer",
-          "methodCount": 27,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.IO.Pipelines/stream-adapters",
-          "slug": "stream-adapters",
-          "displayName": "Stream Adapters",
-          "methodCount": 1,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        }
-      ]
-    },
-    {
-      "assemblyName": "System.Net.ServerSentEvents",
-      "families": [
-        {
-          "familyId": "family/System.Net.ServerSentEvents/formatter",
-          "slug": "formatter",
-          "displayName": "SSE Formatter",
-          "methodCount": 2,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.Net.ServerSentEvents/item-parser",
-          "slug": "item-parser",
-          "displayName": "SSE Item Parser",
-          "methodCount": 4,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.Net.ServerSentEvents/parser",
-          "slug": "parser",
-          "displayName": "SSE Parser",
-          "methodCount": 8,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.Net.ServerSentEvents/sse-item",
-          "slug": "sse-item",
-          "displayName": "SSE Item Model",
-          "methodCount": 7,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        }
-      ]
-    },
-    {
-      "assemblyName": "System.ObjectModel",
-      "families": [
-        {
-          "familyId": "family/System.ObjectModel/collection-change-notifications",
-          "slug": "collection-change-notifications",
-          "displayName": "Collection Change Notifications",
-          "methodCount": 2,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.ObjectModel/command-type-metadata",
-          "slug": "command-type-metadata",
-          "displayName": "Command And Type Metadata",
-          "methodCount": 15,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.ObjectModel/data-errors",
-          "slug": "data-errors",
-          "displayName": "Data Errors",
+          "familyId": "family/System.Private.CoreLib/generic/custom",
+          "slug": "custom-generics",
+          "displayName": "Custom Generic Types and Methods",
           "methodCount": 6,
           "obligations": [
             "functional"
           ],
-          "migrationStatus": "migrated",
+          "migrationStatus": "imported",
           "lastVerified": ""
         },
         {
-          "familyId": "family/System.ObjectModel/object-model-collections",
-          "slug": "object-model-collections",
-          "displayName": "ObjectModel Collections",
-          "methodCount": 6,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.ObjectModel/observable-collections",
-          "slug": "observable-collections",
-          "displayName": "Observable Collections",
-          "methodCount": 8,
-          "obligations": [
-            "functional"
-          ],
-          "migrationStatus": "migrated",
-          "lastVerified": ""
-        },
-        {
-          "familyId": "family/System.ObjectModel/property-change-notifications",
-          "slug": "property-change-notifications",
-          "displayName": "Property Change Notifications",
+          "familyId": "family/System.Private.CoreLib/eh/stress",
+          "slug": "eh-stress",
+          "displayName": "Exception Handling Stress Test — Interpreter Fallback",
           "methodCount": 4,
           "obligations": [
             "functional"
           ],
-          "migrationStatus": "migrated",
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/generics/stress",
+          "slug": "generics-stress",
+          "displayName": "Generics Stress Test — Interpreter Fallback",
+          "methodCount": 3,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/pinvoke/stress",
+          "slug": "pinvoke-stress",
+          "displayName": "P/Invoke Stress Test — Interpreter Fallback",
+          "methodCount": 4,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        },
+        {
+          "familyId": "family/System.Private.CoreLib/value-typebox",
+          "slug": "value-typebox",
+          "displayName": "Value Type Boxing",
+          "methodCount": 0,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
           "lastVerified": ""
         }
       ]
@@ -1263,6 +1329,22 @@
       ]
     },
     {
+      "assemblyName": "System.Runtime.Serialization",
+      "families": [
+        {
+          "familyId": "family/System.Runtime.Serialization/surrogates-selection",
+          "slug": "surrogates-selection",
+          "displayName": "Serialization Surrogates Selection",
+          "methodCount": 0,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
       "assemblyName": "System.Runtime.Serialization.Formatters",
       "families": [
         {
@@ -1329,6 +1411,22 @@
             "functional"
           ],
           "migrationStatus": "migrated",
+          "lastVerified": ""
+        }
+      ]
+    },
+    {
+      "assemblyName": "System.Security.Claims",
+      "families": [
+        {
+          "familyId": "family/System.Security.Claims/windows-identity",
+          "slug": "windows-identity",
+          "displayName": "Windows Identity",
+          "methodCount": 37,
+          "obligations": [
+            "functional"
+          ],
+          "migrationStatus": "imported",
           "lastVerified": ""
         }
       ]
@@ -1411,7 +1509,7 @@
           "familyId": "family/System.Text.Json/attributes",
           "slug": "attributes",
           "displayName": "JSON Attributes",
-          "methodCount": 0,
+          "methodCount": 23,
           "obligations": [
             "functional"
           ],
