@@ -135,6 +135,8 @@ public sealed partial class NativeAotLoweringPlanner
         public int MaxFloat64Slots => _float64SlotCount;
         public int MaxFloat32Slots => _float32SlotCount;
 
+        public Dictionary<int, SlotType>? FloatLocalSlots { get; set; }
+
         public string AllocatePushTarget(SlotType type = SlotType.NativeInt)
         {
             string slotName = type switch
@@ -519,10 +521,7 @@ public sealed partial class NativeAotLoweringPlanner
                 ctx.RestoreDepth(requiredDepth);
         }
 
-        foreach (var instr in block.BodyInstructions)
-        {
-            EmitInstruction(builder, instr, indentation);
-        }
+        EmitInstructionLookahead(builder, block.BodyInstructions, indentation);
 
         if (block.Terminator != null)
         {
@@ -917,6 +916,21 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // ---- Loop induction variable hoisting ----
+        var prevHoistedIVs = _hoistedIVs;
+        int? hoistedIVSlot = null;
+        if (prevHoistedIVs == null)
+        {
+            var bodyInstrs = new List<AotCoreIrInstructionArtifact>();
+            CollectInstructions(w.Body, bodyInstrs);
+            hoistedIVSlot = DetectInductionVariableSlot(bodyInstrs);
+        }
+        if (hoistedIVSlot.HasValue)
+        {
+            string ivName = $"_iv_{hoistedIVSlot.Value}";
+            _hoistedIVs = new Dictionary<int, string> { { hoistedIVSlot.Value, ivName } };
+        }
+
         if (w.ConditionTerminator == null)
         {
             // No condition 鈥?infinite loop (while (true) { ... })
@@ -961,6 +975,8 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(indentation + "{");
             builder.AppendLine(inner + "while (" + _condition + ")");
             builder.AppendLine(inner + "{");
+            if (hoistedIVSlot.HasValue)
+                builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = chaos_locals[{hoistedIVSlot.Value}];");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
@@ -1017,11 +1033,14 @@ public sealed partial class NativeAotLoweringPlanner
 
             builder.AppendLine(inner + "while (chaos_left " + cmpOp + " chaos_right)");
             builder.AppendLine(inner + "{");
+            if (hoistedIVSlot.HasValue)
+                builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = chaos_locals[{hoistedIVSlot.Value}];");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
         }
-    _loopArrayAccessSkipOffsets = null;
+    _hoistedIVs = prevHoistedIVs;
+	_loopArrayAccessSkipOffsets = null;
     }
 
     // 鈹€鈹€ Do-while loop 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
@@ -1040,6 +1059,8 @@ public sealed partial class NativeAotLoweringPlanner
         {
             var bodyInstrs = new List<AotCoreIrInstructionArtifact>();
             CollectInstructions(dw.Body, bodyInstrs);
+            if (dw.LatchInstructions != null)
+                bodyInstrs.AddRange(dw.LatchInstructions);
             int? ivSlot = DetectInductionVariableSlot(bodyInstrs);
             if (ivSlot.HasValue)
             {
@@ -1050,8 +1071,45 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // ---- Loop induction variable hoisting ----
+        // Promote detected IV to C++ local, eliminate chaos_locals[] traffic.
+        var prevHoistedIVs = _hoistedIVs;
+        int? hoistedIVSlot = null;
+        if (prevHoistedIVs == null)
+        {
+            var bodyInstrs2 = new List<AotCoreIrInstructionArtifact>();
+            CollectInstructions(dw.Body, bodyInstrs2);
+            if (dw.LatchInstructions != null)
+                bodyInstrs2.AddRange(dw.LatchInstructions);
+            hoistedIVSlot = DetectInductionVariableSlot(bodyInstrs2);
+            // Fallback 1: scan latch instructions alone (pattern may be split
+            // across body-latch boundary during pipeline rebuild).
+            if (!hoistedIVSlot.HasValue && dw.LatchInstructions != null && dw.LatchInstructions.Count >= 4)
+                hoistedIVSlot = DetectInductionVariableSlot(dw.LatchInstructions);
+            // Fallback 2: scan last 4 body instructions (some pipeline passes
+            // move the increment op sequence to the body, leaving only the
+            // comparison load in the latch).
+            if (!hoistedIVSlot.HasValue)
+            {
+                // Take last 4, or fewer if body is small (minimum 4 needed for pattern)
+                if (bodyInstrs2.Count >= 4)
+                {
+                    int _startIdx = Math.Max(0, bodyInstrs2.Count - 4);
+                    var _tailSlice = bodyInstrs2.Skip(_startIdx).Take(4).ToList();
+                    hoistedIVSlot = DetectInductionVariableSlot(_tailSlice);
+                }
+            }
+        }
+        if (hoistedIVSlot.HasValue)
+        {
+            string ivName = $"_iv_{hoistedIVSlot.Value}";
+            _hoistedIVs = new Dictionary<int, string> { { hoistedIVSlot.Value, ivName } };
+        }
+
         builder.AppendLine(indentation + "do");
         builder.AppendLine(indentation + "{");
+        if (hoistedIVSlot.HasValue)
+            builder.AppendLine(bodyIndent + $"CHAOS_IL2CPP_INTPTR _iv_{hoistedIVSlot.Value} = chaos_locals[{hoistedIVSlot.Value}];");
         EmitStructuredIRNode(builder, dw.Body, method, bodyIndent);
 
         // Emit latch instructions if present
@@ -1141,7 +1199,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        if (hoistedIVSlot.HasValue)
+            builder.AppendLine(indentation + $"chaos_locals[{hoistedIVSlot.Value}] = _iv_{hoistedIVSlot.Value};");
         builder.AppendLine(indentation + "} while (true);");
+        _hoistedIVs = prevHoistedIVs;
         _loopArrayAccessSkipOffsets = null;
     }
 
@@ -1653,6 +1714,7 @@ public sealed partial class NativeAotLoweringPlanner
         _structuredSlotTypes.Clear();
         _structLocalSlots = IdentifyStructLocalSlots(instructions);
         _floatLocalSlots = IdentifyFloatLocalSlots(instructions);
+        slotContext.FloatLocalSlots = _floatLocalSlots;
         try
         {
             EmitStructuredIRNode(builder, body!, method, "    ");
@@ -2104,10 +2166,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(indentation + "    case " + pcCase.PcValue.ToString() + ":");
             builder.AppendLine(indentation + "    {");
 
-            foreach (var instr in pcCase.Instructions)
-            {
-                EmitInstruction(builder, instr, indentation + "        ");
-            }
+            EmitInstructionLookahead(builder, pcCase.Instructions, indentation + "        ");
 
             if (pcCase.Terminator != null)
             {
@@ -2527,6 +2586,18 @@ public sealed partial class NativeAotLoweringPlanner
             if (instructions[i].Op == "ldloc" &&
                 instructions[i + 1].Op == "ldc.i4" &&
                 instructions[i + 2].Op == "add" &&
+                instructions[i + 3].Op == "stloc")
+            {
+                int ldlocSlot = GetRequiredIntOperand(instructions[i]);
+                int constVal = GetRequiredIntOperand(instructions[i + 1]);
+                int stlocSlot = GetRequiredIntOperand(instructions[i + 3]);
+                if (constVal == 1 && ldlocSlot == stlocSlot)
+                    return ldlocSlot;
+            }
+            // Also detect decrement pattern: ldloc X, ldc.i4 1, sub, stloc X
+            if (instructions[i].Op == "ldloc" &&
+                instructions[i + 1].Op == "ldc.i4" &&
+                instructions[i + 2].Op == "sub" &&
                 instructions[i + 3].Op == "stloc")
             {
                 int ldlocSlot = GetRequiredIntOperand(instructions[i]);

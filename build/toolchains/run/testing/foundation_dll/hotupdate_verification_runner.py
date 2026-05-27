@@ -20,6 +20,8 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from build.toolchains.run.runtime import detect_host_platform
+
 
 def _slug_to_family_id(slug: str) -> str:
     """Reconstruct familyId from directory slug (e.g., 'convert-char' -> 'family/System.Private.CoreLib/convert/char')."""
@@ -66,6 +68,7 @@ def generate_per_family_reports(
         print(f"ERROR: results dir not found: {results_dir}", file=sys.stderr)
         sys.exit(1)
 
+    host_platform = detect_host_platform()
     reports: dict[str, Any] = {}
     json_files = sorted(results_dir.glob("*.json"))
 
@@ -106,6 +109,9 @@ def generate_per_family_reports(
 
         report = {
             "schemaVersion": 2,
+            "platform": host_platform,
+            "os": host_platform.split("-", 1)[0],
+            "arch": host_platform.split("-", 1)[1] if "-" in host_platform else "unknown",
             "assemblyName": assembly_name,
             "familyId": family_id,
             "verificationKind": "hotupdate-proof",

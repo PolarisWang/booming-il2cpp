@@ -27,10 +27,12 @@ for i, family in enumerate(families):
         )
         t1 = time.time()
         ok = proc.returncode == 0
-        # Extract JSON tail
-        for line in reversed(proc.stdout.strip().split('\n')):
-            if line.startswith('{'):
-                try: report = json.loads(line); break
+        # Extract JSON tail (multi-line pretty-printed JSON ends with '}')
+        stdout = proc.stdout.strip()
+        if stdout.endswith('}'):
+            brace = stdout.rfind('\n{')
+            if brace >= 0:
+                try: report = json.loads(stdout[brace:])
                 except: pass
     except subprocess.TimeoutExpired:
         t1 = time.time()

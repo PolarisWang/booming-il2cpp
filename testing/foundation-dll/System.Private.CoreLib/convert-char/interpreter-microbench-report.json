@@ -2,14 +2,14 @@
   "schemaVersion": 1,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/convert/char",
-  "capturedAt": "2026-05-27T23:07:03",
+  "capturedAt": "2026-05-27T23:20:57",
   "metrics": {
     "framePool": {
-      "acquireReleaseNsPerOp": 5.3,
+      "acquireReleaseNsPerOp": 2.9,
       "batchCount": 1000,
       "framesPerBatch": 32
     },
     "poolSize": 32
   },
-  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 5.3 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\n"
+  "rawOutput": "Benchmark 1: FastFramePool (kPoolSize=32): Batch Acquire+Release: 2.9 ns/op (1000 batches x 32 frames)\nBenchmark 2: FastExecute (Subject_0): 100000 runs: -1.0 ns/op (error)\n"
 }

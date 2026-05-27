@@ -7,6 +7,8 @@ from html import escape
 from pathlib import Path
 from typing import Any
 
+from build.toolchains.run.runtime import detect_host_platform
+
 try:
     from testing.trace import trace
 except ImportError:
@@ -1151,6 +1153,9 @@ def build_foundation_dll_audit_payload(repo_root: Path) -> dict[str, Any]:
             "schemaVersion": 1,
             "rows": artifact_rows,
         },
+        "platform": detect_host_platform(),
+        "os": detect_host_platform().split("-", 1)[0],
+        "arch": detect_host_platform().split("-", 1)[1] if "-" in detect_host_platform() else "unknown",
     }
 
 
@@ -3499,9 +3504,11 @@ def _render_dashboard(payload: dict[str, Any], *, root_prefix: str, has_ledger: 
 def _summary_markdown(payload: dict[str, Any]) -> str:
     program = dict(payload.get("program") or {})
     summary = dict(program.get("summary") or {})
+    platform = str(payload.get("platform", "unknown"))
     lines = [
         "# Foundation DLL Audit Summary",
         "",
+        f"- platform: {platform}",
         f"- programId: {program.get('programId') or ''}",
         f"- title: {program.get('title') or ''}",
         f"- dllCount: {summary.get('dllCount') or 0}",
@@ -3510,13 +3517,14 @@ def _summary_markdown(payload: dict[str, Any]) -> str:
         f"- blockedCount: {summary.get('blockedCount') or 0}",
         f"- notStartedCount: {summary.get('notStartedCount') or 0}",
         f"- activeAssembly: {summary.get('activeAssembly') or ''}",
-        "- dashboard: docs/verification/foundation-dll-audit/dashboard.html",
+        f"- dashboard: docs/verification/foundation-dll-audit/{platform}/dashboard.html",
         "",
         "## DLLs",
     ]
     for dll in list(payload.get("dlls") or []):
+        platform = str(payload.get("platform", "unknown"))
         lines.append(
-            f"- {dll.get('assemblyName')}: state={dll.get('dllState')} currentProject={dll.get('currentProject')} detail=docs/verification/foundation-dll-audit/{_dll_detail_relative_path(str(dll.get('assemblyName') or ''))}"
+            f"- {dll.get('assemblyName')}: state={dll.get('dllState')} currentProject={dll.get('currentProject')} detail=docs/verification/foundation-dll-audit/{platform}/{_dll_detail_relative_path(str(dll.get('assemblyName') or ''))}"
         )
     return "\n".join(lines).strip() + "\n"
 
@@ -3664,8 +3672,9 @@ def _write_projection_bundle(repo_root: Path, payload: dict[str, Any], *, output
 def write_foundation_dll_audit_outputs(repo_root: Path) -> dict[str, Any]:
     payload = build_foundation_dll_audit_payload(repo_root)
     has_ledger = bool(payload.get("program", {}).get("summary", {}).get("capabilityClosure"))
-    projection_root = verification_layout_module.foundation_dll_audit_projection_root(repo_root)
-    docs_root = verification_layout_module.docs_foundation_dll_audit_root(repo_root)
+    host_platform = detect_host_platform()
+    projection_root = verification_layout_module.foundation_dll_audit_projection_root(repo_root) / host_platform
+    docs_root = verification_layout_module.docs_foundation_dll_audit_root(repo_root) / host_platform
     report_root = verification_layout_module.archive_report_scope_root(
         repo_root,
         closure_kind="completed",

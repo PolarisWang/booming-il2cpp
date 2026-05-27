@@ -1383,8 +1383,9 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
     double ns_per_op = (elapsed_ms * 1e6) / iterations;
     double ops_per_sec = (iterations / elapsed_ms) * 1000.0;
     printf(
-        "{\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
+        "{\\"platform\\":\\"%s\\",\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
         "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d}\\n",
+        CHAOS_IL2CPP_GetPlatformIdentifier(),
         elapsed_ms, elapsed_ms, ops_per_sec, iterations);
     std::fflush(stdout);
     return 0;
@@ -1450,8 +1451,9 @@ static int RunHotupdateMode() {
     }
 
     printf(
-        "{\\"passedMethods\\":%d,\\"failedMethods\\":0,"
+        "{\\"platform\\":\\"%s\\",\\"passedMethods\\":%d,\\"failedMethods\\":0,"
         "\\"totalMethods\\":%d,\\"allSemantic\\":%s,\\"allRevert\\":%s}\\n",
+        CHAOS_IL2CPP_GetPlatformIdentifier(),
         semantic_passed, kCount,
         all_semantic ? "true" : "false",
         all_revert ? "true" : "false");
@@ -1478,8 +1480,9 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
     }
     double ops_per_sec = (iterations / elapsed_ms) * 1000.0;
     printf(
-        "{\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
+        "{\\"platform\\":\\"%s\\",\\"elapsedMilliseconds\\":%.3f,\\"calibratedMs\\":%.3f,"
         "\\"opsPerSecond\\":%.0f,\\"iterations\\":%d}\\n",
+        CHAOS_IL2CPP_GetPlatformIdentifier(),
         elapsed_ms, elapsed_ms, ops_per_sec, iterations);
     std::fflush(stdout);
     return 0;
@@ -1490,12 +1493,13 @@ int main(int argc, char* argv[]) {
 __JIT_CALL__
 __RUNTIME_INIT_CALL__
 
-    if (argc < 2) {
-        // Default: fact mode
-        return RunFactMode();
+    if (std::strcmp(argv[1], "--platform-info") == 0) {
+        printf("{\\"platform\\":\\"%s\\"}\\n", CHAOS_IL2CPP_GetPlatformIdentifier());
+        std::fflush(stdout);
+        return 0;
     }
 
-    if (std::strcmp(argv[1], "--benchmark") == 0) {
+    if (argc < 2) {
         if (argc < 4) {
             printf("Usage: entry.exe --benchmark <index> <iterations>\\n");
             return 1;
@@ -1524,7 +1528,7 @@ __RUNTIME_INIT_CALL__
     }
 
     printf("Unknown flag: %s\\n", argv[1]);
-    printf("Usage: entry.exe [--benchmark <index> <iters> | --hotupdate | --hotupdate-and-benchmark <index> <iters> | --microbench]\\n");
+    printf("Usage: entry.exe [--platform-info | --benchmark <index> <iters> | --hotupdate | --hotupdate-and-benchmark <index> <iters> | --microbench]\\n");
     return 1;
 }
 '''
