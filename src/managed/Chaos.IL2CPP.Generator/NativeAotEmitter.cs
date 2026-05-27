@@ -333,12 +333,14 @@ public sealed class NativeAotEmitter
         var pages = loweringPlan.TranslationUnitPages;
         int? pageSize = loweringPlan.TranslationUnitPageSize;
 
+        const int autoPageSize = 150;
         // Auto-paging: when the plan doesn't specify pages but the method count
         // exceeds the threshold, create synthetic pages to split the output into
         // multiple translation units. This prevents oversized generated files
         // for test subjects with many methods (e.g. coverage subjects).
-        const int autoPageSize = 150;
-        if (pages is not { Count: > 0 } && templateModel.Methods.Count > autoPageSize)
+        // When the plan explicitly sets pageSize to null, it means the planner
+        // intentionally opted out of paging — respect that decision.
+        if (pageSize.HasValue && pages is not { Count: > 0 } && templateModel.Methods.Count > autoPageSize)
         {
             int totalMethods = templateModel.Methods.Count;
             int pageCount = (totalMethods + autoPageSize - 1) / autoPageSize;

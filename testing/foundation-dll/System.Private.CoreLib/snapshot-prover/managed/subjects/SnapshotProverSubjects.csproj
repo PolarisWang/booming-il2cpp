@@ -15,6 +15,7 @@
     <Compile Include="SnapshotProverSubjects.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
     <ProjectReference Include="../../../../../../tests/snapshots/Chaos.IL2CPP.CodeGen.SnapshotTests/FixtureAssembly/SnapshotTestFixtures.csproj" />
   </ItemGroup>
   <ItemGroup>

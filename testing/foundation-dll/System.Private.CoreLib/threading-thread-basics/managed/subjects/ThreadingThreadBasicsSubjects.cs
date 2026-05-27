@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -6,13 +6,13 @@ set(CMAKE_CXX_STANDARD 20)
 # thrown by generated code (throw chaos_managed_exception from unresolved calls).
 add_compile_options(/utf-8 /GS- /FS)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
-add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
 # The SDK root is the codegen output directory from --sdk-out.
-set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/reflection-event/codegen")
+set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/reflection-event/codegen/ReflectionEventSubjects")
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 
 # Paths
@@ -53,12 +53,18 @@ list(REMOVE_ITEM CHAOS_RUNTIME_STUB_SOURCES
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp"
 )
+# PROFILE globals (compiled from source to avoid stale SDK lib dependency).
+# Only generates symbols when CHAOS_IL2CPP_PROFILE_ENABLED=1 (PROFILE tier).
+set(CHAOS_PROFILE_GLOBALS
+    "${CHAOS_PROJECT_ROOT}/src/native/common/chaos/profile_globals.cpp"
+)
 set(CHAOS_ENTRY_SOURCES
     "runtime-entry.cpp"
     "runtime-patchdata.cpp"
     "verification_dispatch.generated.cpp"
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_RUNTIME_STUB_SOURCES}
+    ${CHAOS_PROFILE_GLOBALS}
     ${CHAOS_AOT_GENERATED_CPP}
 )
 
@@ -70,6 +76,7 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
     "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"  # runtime_stubs headers
+    "${CHAOS_PROJECT_ROOT}/src/native/common"
     "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
     "${CHAOS_PROJECT_ROOT}/src/native"  # parent for bootstrap/bootstrap.h includes
     "${CHAOS_PROJECT_ROOT}/src/native/interpreter"

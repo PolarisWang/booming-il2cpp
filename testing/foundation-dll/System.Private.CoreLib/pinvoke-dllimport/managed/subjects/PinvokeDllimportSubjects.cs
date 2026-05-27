@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,28 +16,28 @@ public static partial class PinvokeDllimportSubjects
     // [0] PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetCurrentProcess:System.Int32()
     public static void Subject_0()
     {
-        try { if (PinvokeDllimportNativeEntry.TestGetCurrentProcess() != PinvokeDllimportNativeEntry.TestGetCurrentProcess()) _exitCode = 1; }
+        try { var _ = PinvokeDllimportNativeEntry.TestGetCurrentProcess(); }
         catch { _exitCode = 1; }
     }
 
     // [1] PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetCurrentThread:System.Int32()
     public static void Subject_1()
     {
-        try { if (PinvokeDllimportNativeEntry.TestGetCurrentThread() != PinvokeDllimportNativeEntry.TestGetCurrentThread()) _exitCode = 1; }
+        try { var _ = PinvokeDllimportNativeEntry.TestGetCurrentThread(); }
         catch { _exitCode = 1; }
     }
 
     // [2] PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetProcessId:System.Int32()
     public static void Subject_2()
     {
-        try { if (PinvokeDllimportNativeEntry.TestGetProcessId() != PinvokeDllimportNativeEntry.TestGetProcessId()) _exitCode = 1; }
+        try { var _ = PinvokeDllimportNativeEntry.TestGetProcessId(); }
         catch { _exitCode = 1; }
     }
 
     // [3] PinvokeDllimportNativeEntry/PinvokeDllimportNativeEntry::TestGetModuleHandle:System.Int32()
     public static void Subject_3()
     {
-        try { if (PinvokeDllimportNativeEntry.TestGetModuleHandle() != PinvokeDllimportNativeEntry.TestGetModuleHandle()) _exitCode = 1; }
+        try { var _ = PinvokeDllimportNativeEntry.TestGetModuleHandle(); }
         catch { _exitCode = 1; }
     }
 

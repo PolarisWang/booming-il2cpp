@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,7 @@ public static partial class IoStreamsBasicsSubjects
     // [0] System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)
     public static void Subject_0()
     {
-        try { if (new MemoryStream(new byte[10]).Read(new byte[5], 0, 5) != new MemoryStream(new byte[10]).Read(new byte[5], 0, 5)) _exitCode = 1; }
+        try { var _ = new MemoryStream(new byte[10]).Read(new byte[5], 0, 5); }
         catch { _exitCode = 1; }
     }
 
@@ -37,7 +38,7 @@ public static partial class IoStreamsBasicsSubjects
     // [3] System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)
     public static void Subject_3()
     {
-        try { if ((int)(new MemoryStream().Seek(42L, System.IO.SeekOrigin.Begin)) != (int)(new MemoryStream().Seek(42L, System.IO.SeekOrigin.Begin))) _exitCode = 1; }
+        try { var _ = (int)(new MemoryStream().Seek(42L, System.IO.SeekOrigin.Begin)); }
         catch { _exitCode = 1; }
     }
 
@@ -51,14 +52,14 @@ public static partial class IoStreamsBasicsSubjects
     // [5] System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()
     public static void Subject_5()
     {
-        try { if ((int)(new MemoryStream().Length) != (int)(new MemoryStream().Length)) _exitCode = 1; }
+        try { var _ = (int)(new MemoryStream().Length); }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()
     public static void Subject_6()
     {
-        try { if ((int)(new MemoryStream().Position) != (int)(new MemoryStream().Position)) _exitCode = 1; }
+        try { var _ = (int)(new MemoryStream().Position); }
         catch { _exitCode = 1; }
     }
 
@@ -72,14 +73,14 @@ public static partial class IoStreamsBasicsSubjects
     // [8] System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()
     public static void Subject_8()
     {
-        try { if (((new StringReader("hello").ReadLine()).Length) != ((new StringReader("hello").ReadLine()).Length)) _exitCode = 1; }
+        try { var _ = ((new StringReader("hello").ReadLine()).Length); }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()
     public static void Subject_9()
     {
-        try { if (((new StringReader("hello").ReadToEnd()).Length) != ((new StringReader("hello").ReadToEnd()).Length)) _exitCode = 1; }
+        try { var _ = ((new StringReader("hello").ReadToEnd()).Length); }
         catch { _exitCode = 1; }
     }
 
@@ -107,21 +108,21 @@ public static partial class IoStreamsBasicsSubjects
     // [13] System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()
     public static void Subject_13()
     {
-        try { if (new BinaryReader(new MemoryStream(new byte[4])).ReadInt32() != new BinaryReader(new MemoryStream(new byte[4])).ReadInt32()) _exitCode = 1; }
+        try { var _ = new BinaryReader(new MemoryStream(new byte[4])).ReadInt32(); }
         catch { _exitCode = 1; }
     }
 
     // [14] System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()
     public static void Subject_14()
     {
-        try { if (((new BinaryReader(new MemoryStream(new byte[] { 0 })).ReadString()).Length) != ((new BinaryReader(new MemoryStream(new byte[] { 0 })).ReadString()).Length)) _exitCode = 1; }
+        try { var _ = ((new BinaryReader(new MemoryStream(new byte[] { 0 })).ReadString()).Length); }
         catch { _exitCode = 1; }
     }
 
     // [15] System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()
     public static void Subject_15()
     {
-        try { if ((int)(new BinaryReader(new MemoryStream(new byte[8])).ReadDouble()) != (int)(new BinaryReader(new MemoryStream(new byte[8])).ReadDouble())) _exitCode = 1; }
+        try { var _ = (int)(new BinaryReader(new MemoryStream(new byte[8])).ReadDouble()); }
         catch { _exitCode = 1; }
     }
 

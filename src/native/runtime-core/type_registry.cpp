@@ -93,7 +93,14 @@ MethodTable* chaos_register_type(
     mt->iface_count        = iface_count;
     mt->runtime_iface_count = 0;
     mt->cold_delta         = 0;
-    mt->_reserved          = 0;
+    // Compute iface_bitmap: 1 << (stable_id & 0x1F) for each static interface
+    {
+        uint32_t bitmap = 0;
+        for (uint32_t i = 0; i < iface_count; i++) {
+            bitmap |= (1u << (iface_map[i].iface_stable_id & 0x1F));
+        }
+        mt->iface_bitmap = bitmap;
+    }
 
     reg.types[reg.count] = mt;
     reg.count++;

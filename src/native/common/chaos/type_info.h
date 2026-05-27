@@ -103,7 +103,7 @@ struct TypeInfoWarm {
     uint32_t                 iface_count;          // [16] 4B — AOT count
     uint32_t                 runtime_iface_count;  // [20] 4B — HotUpdate count
     uint32_t                 cold_delta;           // [24] 4B — to cold section
-    uint32_t                 _reserved;            // [28] 4B
+    uint32_t                 iface_bitmap;         // [28] 4B — bloom filter: bit = 1 << (stable_id & 0x1F)
 };
 
 static_assert(sizeof(TypeInfoWarm) == 32,
@@ -129,6 +129,13 @@ inline const TypeInfoWarm* GetWarmPtr(const TypeInfoHot* hot) noexcept {
 inline TypeInfoWarm* GetWarmPtr(TypeInfoHot* hot) noexcept {
     return reinterpret_cast<TypeInfoWarm*>(
         reinterpret_cast<uint8_t*>(hot) + hot->warm_delta);
+}
+
+/// Fast interface presence test via bloom filter.
+/// Returns false if `stable_id` is definitely NOT in the static iface_map.
+/// Returns true if it MIGHT be (may false-positive — caller must verify).
+inline bool IfaceBitmapMaybeContains(const TypeInfoWarm* warm, uint64_t stable_id) noexcept {
+    return (warm->iface_bitmap & (1u << (stable_id & 0x1F))) != 0;
 }
 
 // ── TypeInfo flags ──────────────────────────────────────────────
@@ -213,7 +220,7 @@ struct MethodTable {
     uint32_t                 iface_count;          // [48] 4B — AOT iface count
     uint32_t                 runtime_iface_count;  // [52] 4B — HotUpdate iface count
     uint32_t                 cold_delta;           // [56] 4B — to cold section / EEClass
-    uint32_t                 _reserved;            // [60] 4B
+    uint32_t                 iface_bitmap;         // [60] 4B — bloom filter: bit = 1 << (stable_id & 0x1F)
 
     /// Cast to TypeInfoHot* (same pointer, first 32B compatible).
     inline const TypeInfoHot* AsTypeInfoHot() const noexcept {

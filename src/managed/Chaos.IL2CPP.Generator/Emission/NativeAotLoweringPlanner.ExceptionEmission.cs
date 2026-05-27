@@ -3567,7 +3567,19 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			}
 			else
 			{
-				string expr = $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}({_lLoad}, {_rLoad}))";
+				// For int32 add/sub/mul, emit direct C++ wrapping expressions
+				// (via uint32 cast for well-defined wrap-on-overflow) instead of
+				// ChaosWrapAdd/Sub/Mul function calls.  This matches how double
+				// arithmetic is emitted (direct C++ operators) and eliminates
+				// ~20-30% call overhead on each loop iteration.
+				// ChaosDiv/ChaosRem still need function dispatch (divide-by-zero check).
+				string expr = helperName switch
+				{
+					"ChaosWrapAdd" => $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>({_lLoad}) + static_cast<CHAOS_IL2CPP_UINT32>({_rLoad})))",
+					"ChaosWrapSub" => $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>({_lLoad}) - static_cast<CHAOS_IL2CPP_UINT32>({_rLoad})))",
+					"ChaosWrapMul" => $"static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>({_lLoad}) * static_cast<CHAOS_IL2CPP_UINT32>({_rLoad})))",
+					_ => $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}({_lLoad}, {_rLoad}))",
+				};
 				EmitEvalStackPush(builder, indentation, expr);
 			}
 		}

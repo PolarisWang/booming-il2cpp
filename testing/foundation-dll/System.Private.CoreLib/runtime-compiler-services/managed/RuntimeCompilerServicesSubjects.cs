@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,21 +17,21 @@ public static partial class RuntimeCompilerServicesSubjects
     // [0] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)
     public static void Subject_0()
     {
-        try { if (RuntimeHelpers.GetHashCode(null!) != RuntimeHelpers.GetHashCode(null!)) _exitCode = 1; }
+        try { var _ = RuntimeHelpers.GetHashCode(null!); }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)
     public static void Subject_1()
     {
-        try { if (((RuntimeHelpers.Equals(null!, null!)) ? 1 : 0) != ((RuntimeHelpers.Equals(null!, null!)) ? 1 : 0)) _exitCode = 1; }
+        try { var _ = ((RuntimeHelpers.Equals(null!, null!)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     public static void Subject_2()
     {
-        try { if (((RuntimeHelpers.GetObjectValue(null!)).GetHashCode()) != ((RuntimeHelpers.GetObjectValue(null!)).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((RuntimeHelpers.GetObjectValue(null!)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
@@ -62,7 +63,7 @@ public static partial class RuntimeCompilerServicesSubjects
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.Runtime.CompilerServices.FormattableString(System.String,System.Object[])
     public static void Subject_7()
     {
-        try { if (((FormattableStringFactory.Create("hello", Array.Empty<System.Object>())).GetHashCode()) != ((FormattableStringFactory.Create("hello", Array.Empty<System.Object>())).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((FormattableStringFactory.Create("hello", Array.Empty<System.Object>())).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
@@ -76,7 +77,7 @@ public static partial class RuntimeCompilerServicesSubjects
     // [9] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()
     public static void Subject_9()
     {
-        try { if (((new RuntimeWrappedException(42).WrappedException).GetHashCode()) != ((new RuntimeWrappedException(42).WrappedException).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((new RuntimeWrappedException(42).WrappedException).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 

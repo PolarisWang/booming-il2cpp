@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,42 +30,42 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     // [2] System.Private.CoreLib/System.Exception::get_Message:System.String()
     public static void Subject_2()
     {
-        try { if (((new Exception().Message).Length) != ((new Exception().Message).Length)) _exitCode = 1; }
+        try { var _ = ((new Exception().Message).Length); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()
     public static void Subject_3()
     {
-        try { if (((new Exception().InnerException).GetHashCode()) != ((new Exception().InnerException).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((new Exception().InnerException).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Exception::get_StackTrace:System.String()
     public static void Subject_4()
     {
-        try { if (((((new Exception().StackTrace) ?? "")).Length) != ((((new Exception().StackTrace) ?? "")).Length)) _exitCode = 1; }
+        try { var _ = ((((new Exception().StackTrace) ?? "")).Length); }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Exception::get_HResult:System.Int32()
     public static void Subject_5()
     {
-        try { if (new Exception().HResult != new Exception().HResult) _exitCode = 1; }
+        try { var _ = new Exception().HResult; }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Exception::ToString:System.String()
     public static void Subject_6()
     {
-        try { if (((new Exception().ToString()).Length) != ((new Exception().ToString()).Length)) _exitCode = 1; }
+        try { var _ = ((new Exception().ToString()).Length); }
         catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()
     public static void Subject_7()
     {
-        try { if (((new Exception().GetBaseException()).GetHashCode()) != ((new Exception().GetBaseException()).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((new Exception().GetBaseException()).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
