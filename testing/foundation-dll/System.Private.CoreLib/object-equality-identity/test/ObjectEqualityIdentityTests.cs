@@ -22,7 +22,7 @@ public partial class ObjectEqualityIdentityTests
     public void _System_Private_CoreLib_System_Object_Equals_System_Boolean_System_Object()
     {
         // Purpose: Verify Object.Equals with typical input
-            var result = new object().Equals(42);
+            var result = new object().Equals(null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -30,7 +30,7 @@ public partial class ObjectEqualityIdentityTests
     public void _System_Private_CoreLib_System_Object_Equals_System_Boolean_System_Object_System_Object()
     {
         // Purpose: Verify Object.Equals with typical input
-            var result = Object.Equals(42, 42);
+            var result = Object.Equals(null!, null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -38,7 +38,7 @@ public partial class ObjectEqualityIdentityTests
     public void _System_Private_CoreLib_System_Object_ReferenceEquals_System_Boolean_System_Object_System_Object()
     {
         // Purpose: Verify Object.ReferenceEquals with typical input
-            var result = Object.ReferenceEquals(42, 42);
+            var result = Object.ReferenceEquals(null!, null!);
             Xunit.Assert.NotNull((object)result);
     }
 

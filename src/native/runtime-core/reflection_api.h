@@ -172,5 +172,7 @@ using chaos::il2cpp::runtime_core::ChaosReflectionGetIsGenericType;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetIsConstructedGeneric;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetIsGenericTypeDef;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetIsPublic;
+using chaos::il2cpp::runtime_core::chaos_reflection_get_is_static;
+using chaos::il2cpp::runtime_core::ChaosReflectionFieldGetIsStatic;
 
 #endif  // CHAOS_IL2CPP_REFLECTION_API_H_

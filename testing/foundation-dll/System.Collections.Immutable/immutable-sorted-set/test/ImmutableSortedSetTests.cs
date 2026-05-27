@@ -11,10 +11,10 @@ using System.Reflection;
 using Chaos.TestFramework;
 using Xunit;
 
-[CapabilityTest("family/System.Collections.Immutable/immutable/sorted-set", IncludeBenchmark = true, IncludeHotUpdate = true)]
+[CapabilityTest("family/System.Collections.Immutable/immutable/sorted/set", IncludeBenchmark = true, IncludeHotUpdate = true)]
 public partial class ImmutableSortedSetTests
 {
-    // AI-generated tests for family/System.Collections.Immutable/immutable/sorted-set
+    // AI-generated tests for family/System.Collections.Immutable/immutable/sorted/set
 
     // === mixed (smoke) ===
 

@@ -48,13 +48,14 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(
     if (target_handle == 0 || source_handle == 0) return 0;
     if (target_handle == source_handle) return 1;
 
-    // Check subclass relationship
-    if (ChaosReflectionIsSubclassOf(source_handle, target_handle)) return 1;
-
-    // Interface check: target must be an interface type
     const auto* target_info = GetTypeInfoFromHandle(target_handle);
     const auto* source_info = GetTypeInfoFromHandle(source_handle);
     if (target_info == nullptr || source_info == nullptr) return 0;
+
+    // Check subclass relationship (using already-resolved pointers)
+    if (IsSubclassOfPtr(source_info, target_info)) return 1;
+
+    // Interface check: target must be an interface type
     if (target_info->type_shape != chaos_type_shape_interface) return 0;
 
     uint64_t target_stable = target_info->stable_id;

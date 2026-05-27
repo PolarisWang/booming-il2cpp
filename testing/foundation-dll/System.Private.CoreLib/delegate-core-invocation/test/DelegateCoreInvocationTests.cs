@@ -40,14 +40,14 @@ public partial class DelegateCoreInvocationTests
     public void _System_Private_CoreLib_System_Delegate_Combine_System_Delegate_System_Delegate_System_Delegate()
     {
         // Purpose: Smoke — Delegate.Combine with complex param(s)
-            _ = Delegate.Combine(null!, null!);
+            _ = Delegate.Combine(default, default);
     }
 
     [Fact]
     public void _System_Private_CoreLib_System_Delegate_Remove_System_Delegate_System_Delegate_System_Delegate()
     {
         // Purpose: Smoke — Delegate.Remove with complex param(s)
-            _ = Delegate.Remove(null!, null!);
+            _ = Delegate.Remove(default, default);
     }
 
     [Fact]

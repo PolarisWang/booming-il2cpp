@@ -29,7 +29,7 @@ public partial class ThreadingMonitorInterlockedTests
     public void _System_Private_CoreLib_System_Threading_Monitor_TryEnter_System_Boolean_System_Object()
     {
         // Purpose: Verify Monitor.TryEnter with typical input
-            var result = Monitor.TryEnter(42);
+            var result = Monitor.TryEnter(null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -37,7 +37,7 @@ public partial class ThreadingMonitorInterlockedTests
     public void _System_Private_CoreLib_System_Threading_Monitor_TryEnter_System_Boolean_System_Object_System_Int32()
     {
         // Purpose: Verify Monitor.TryEnter with typical input
-            var result = Monitor.TryEnter(42, 42);
+            var result = Monitor.TryEnter(null!, 42);
             Xunit.Assert.NotNull((object)result);
     }
 

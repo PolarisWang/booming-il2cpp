@@ -46,11 +46,26 @@ internal static class AsmCompareHandler
             ChaosTrace.Point("asm-compare.pipeline", "codegen");
 
             var pipeline = new PipelinePlan();
+
+            // Resolve target assemblies from methodSubjectIds for full AOT codegen
+            var additionalPaths = new HashSet<string>();
+            foreach (var subjectId in config.MethodSubjectIds)
+            {
+                var slashIdx = subjectId.IndexOf('/');
+                if (slashIdx <= 0) continue;
+                try
+                {
+                    var asm = System.Reflection.Assembly.Load(subjectId[..slashIdx]);
+                    additionalPaths.Add(asm.Location);
+                }
+                catch { /* skip unresolvable — fallback to Subjects DLL only */ }
+            }
+
             var closureResultResult = pipeline.Execute(new ManagedClosureRequest(
                 config.AssemblyPath,
                 tempDir,
                 EntryPointSubjectIdOverride: null,
-                AdditionalAssemblyPaths: null,
+                AdditionalAssemblyPaths: additionalPaths.Count > 0 ? additionalPaths.ToArray() : null,
                 FullAssemblyClosure: true));
             if (closureResultResult.IsFailure)
             {
@@ -113,19 +128,20 @@ internal static class AsmCompareHandler
             {
                 var methodName = config.MethodNames[idx];
 
-                // Use contract methodSubjectId for JIT capture (resolves the real
-                // target method in the framework assembly instead of the Subjects
-                // DLL Subject_N wrapper). Falls back to methodName if not provided.
+                // Use contract methodSubjectId for JIT capture and AOT lookup (resolves the
+                // real target method in the framework assembly instead of the Subjects DLL
+                // Subject_N wrapper). Falls back to methodName if not provided.
                 var jitMethodName = idx < config.MethodSubjectIds.Count
                     ? config.MethodSubjectIds[idx]
                     : methodName;
 
                 // Find method in closure (O(1) from pre-built dictionary)
-                // Uses Subject_N names (methodName) since the AOT closure only
-                // contains Subjects DLL wrapper methods, not framework methods.
-                var aotMethod = methodMap.TryGetValue(methodName, out var found)
+                // Prefer real SubjectId (framework method) over Subject_N wrapper.
+                var aotMethod = methodMap.TryGetValue(jitMethodName, out var found)
                     ? found
-                    : FindMethodInClosure(closureResult, methodName);
+                    : methodMap.TryGetValue(methodName, out var found2)
+                        ? found2
+                        : FindMethodInClosure(closureResult, methodName);
 
                 lock (consoleLock)
                 {

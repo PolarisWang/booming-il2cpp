@@ -22,7 +22,7 @@ public static class ExceptionThrowDiagnosticsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_Exception_ctor_System_Void_System_String_System_Exception() { new Exception("hello", null!); }
+    public static void Patch_System_Private_CoreLib_System_Exception_ctor_System_Void_System_String_System_Exception() { new Exception("hello", default); }
     // Verify Exception.get_Message after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.Exception::get_Message:System.String()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]
@@ -82,4 +82,19 @@ public static class ExceptionThrowDiagnosticsPatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_NotImplementedException_ctor_System_Void_System_String() { new NotImplementedException("hello"); }}
+    public static void Patch_System_Private_CoreLib_System_NotImplementedException_ctor_System_Void_System_String() { new NotImplementedException("hello"); }
+    // Verify OSR.HotLoop after hot-update (host side)
+    [HotUpdateSubjectId("System.Private.CoreLib/OSR::HotLoop:System.Void()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]
+    [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
+    public static void Patch_System_Private_CoreLib_OSR_HotLoop_System_Void() { OSR.HotLoop(); }
+    // Verify Memory.CopyBlock after hot-update (host side)
+    [HotUpdateSubjectId("System.Private.CoreLib/Memory::CopyBlock:System.Void()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]
+    [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
+    public static void Patch_System_Private_CoreLib_Memory_CopyBlock_System_Void() { default(Memory<byte>).CopyBlock(); }
+    // Verify Memory.InitBlock after hot-update (host side)
+    [HotUpdateSubjectId("System.Private.CoreLib/Memory::InitBlock:System.Void()")]
+    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ExceptionThrowDiagnostics)]
+    [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
+    public static void Patch_System_Private_CoreLib_Memory_InitBlock_System_Void() { default(Memory<byte>).InitBlock(); }}

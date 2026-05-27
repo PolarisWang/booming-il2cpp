@@ -22,7 +22,7 @@ public partial class RuntimeCompilerServicesTests
     public void _System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_GetHashCode_System_Int32_System_Object()
     {
         // Purpose: Verify RuntimeHelpers.GetHashCode with typical input
-            var result = RuntimeHelpers.GetHashCode(42);
+            var result = RuntimeHelpers.GetHashCode(null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -30,7 +30,7 @@ public partial class RuntimeCompilerServicesTests
     public void _System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_Equals_System_Boolean_System_Object_System_Object()
     {
         // Purpose: Verify RuntimeHelpers.Equals with typical input
-            var result = RuntimeHelpers.Equals(42, 42);
+            var result = RuntimeHelpers.Equals(null!, null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -38,7 +38,7 @@ public partial class RuntimeCompilerServicesTests
     public void _System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_GetObjectValue_System_Object_System_Object()
     {
         // Purpose: Verify RuntimeHelpers.GetObjectValue with typical input
-            var result = RuntimeHelpers.GetObjectValue(42);
+            var result = RuntimeHelpers.GetObjectValue(null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -46,7 +46,7 @@ public partial class RuntimeCompilerServicesTests
     public void _System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeWrappedException_ctor_System_Void_System_Object()
     {
         // Purpose: Verify RuntimeWrappedException..ctor with typical input
-            new RuntimeWrappedException(42);
+            new RuntimeWrappedException(null!);
     }
 
     [Fact]

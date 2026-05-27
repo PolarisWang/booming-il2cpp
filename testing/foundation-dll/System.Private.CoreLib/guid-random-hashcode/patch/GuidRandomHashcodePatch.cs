@@ -72,7 +72,7 @@ public static class GuidRandomHashcodePatch
     [HotUpdateSubjectId("System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]
     [HotUpdateDirection(HotUpdateDirection.PatchToHost)]
-    public static void Patch_System_Private_CoreLib_System_HashCode_Add_System_Void_System_Object() { default(HashCode).Add(42); }
+    public static void Patch_System_Private_CoreLib_System_HashCode_Add_System_Void_System_Object() { default(HashCode).Add(new object()); }
     // Verify HashCode.ToHashCode after hot-update (host side)
     [HotUpdateSubjectId("System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()")]
     [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_GuidRandomHashcode)]

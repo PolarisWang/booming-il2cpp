@@ -135,7 +135,7 @@ public partial class IoStreamsBasicsTests
     public void _System_Private_CoreLib_System_IO_BinaryWriter_Write_System_Void_System_String()
     {
         // Purpose: Verify BinaryWriter.Write with typical input
-            new BinaryWriter(new MemoryStream()).Write("hello");
+            new BinaryWriter(new MemoryStream()).Write(42);
     }
 
     // === mixed (smoke) ===

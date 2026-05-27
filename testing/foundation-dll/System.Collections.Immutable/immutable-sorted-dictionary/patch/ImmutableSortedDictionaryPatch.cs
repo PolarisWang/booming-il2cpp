@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Chaos.TestFramework;
 
-// Hot-update stubs for family/System.Collections.Immutable/immutable/sorted-dictionary
+// Hot-update stubs for family/System.Collections.Immutable/immutable/sorted/dictionary
 public static class ImmutableSortedDictionaryPatch
 {
     // Verify ImmutableSortedDictionary.Create<string,int> after hot-update (host side)

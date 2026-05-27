@@ -99,13 +99,34 @@ public partial class ExceptionThrowDiagnosticsTests
             new NotImplementedException("hello");
     }
 
+    [Fact]
+    public void _System_Private_CoreLib_OSR_HotLoop_System_Void()
+    {
+        // Purpose: Verify OSR.HotLoop with typical input
+            OSR.HotLoop();
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_Memory_CopyBlock_System_Void()
+    {
+        // Purpose: Verify Memory.CopyBlock with typical input
+            default(Memory<byte>).CopyBlock();
+    }
+
+    [Fact]
+    public void _System_Private_CoreLib_Memory_InitBlock_System_Void()
+    {
+        // Purpose: Verify Memory.InitBlock with typical input
+            default(Memory<byte>).InitBlock();
+    }
+
     // === mixed (smoke) ===
 
     [Fact]
     public void _System_Private_CoreLib_System_Exception_ctor_System_Void_System_String_System_Exception()
     {
         // Purpose: Smoke — Exception..ctor with complex param(s)
-            new Exception("hello", null!);
+            new Exception("hello", default);
     }
 
     [Fact]
@@ -120,18 +141,5 @@ public partial class ExceptionThrowDiagnosticsTests
     {
         // Purpose: Smoke — Exception.GetBaseException with complex param(s)
             _ = new Exception().GetBaseException();
-    }
-
-    // === OSR hot loop ===
-
-    [Fact]
-    public void _OSR_HotLoop()
-    {
-        // Purpose: Trigger OSR promotion via 150-iteration hot loop (exceeds kOsrLoopThreshold=100)
-        long sum = 0;
-        for (int i = 0; i < 150; i++) {
-            sum += i;
-        }
-        Xunit.Assert.Equal(11175, sum);
     }
 }

@@ -22,7 +22,7 @@ public partial class BoxingUnboxingCastsTests
     public void _System_Private_CoreLib_System_Convert_ChangeType_System_Object_System_Object_System_Type()
     {
         // Purpose: Verify Convert.ChangeType with typical input
-            var result = Convert.ChangeType(42, typeof(byte));
+            var result = Convert.ChangeType(null!, typeof(byte));
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -38,7 +38,7 @@ public partial class BoxingUnboxingCastsTests
     public void _System_Private_CoreLib_System_Type_IsInstanceOfType_System_Boolean_System_Object()
     {
         // Purpose: Verify Type.IsInstanceOfType with typical input
-            var result = typeof(byte).IsInstanceOfType(42);
+            var result = typeof(byte).IsInstanceOfType(null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -62,7 +62,7 @@ public partial class BoxingUnboxingCastsTests
     public void _System_Private_CoreLib_System_Runtime_CompilerServices_RuntimeHelpers_GetObjectValue_System_Object_System_Object()
     {
         // Purpose: Verify RuntimeHelpers.GetObjectValue with typical input
-            var result = RuntimeHelpers.GetObjectValue(42);
+            var result = RuntimeHelpers.GetObjectValue(null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -86,7 +86,7 @@ public partial class BoxingUnboxingCastsTests
     public void _System_Private_CoreLib_System_ValueType_Equals_System_Boolean_System_Object()
     {
         // Purpose: Verify ValueType.Equals with typical input
-            var result = ((ValueType)42).Equals(42);
+            var result = ((ValueType)42).Equals(null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -96,7 +96,7 @@ public partial class BoxingUnboxingCastsTests
     public void _System_Private_CoreLib_System_Convert_ChangeType_System_Object_System_Object_System_Type_System_IFormatProvider()
     {
         // Purpose: Smoke — Convert.ChangeType with complex param(s)
-            _ = Convert.ChangeType(42, typeof(byte), null);
+            _ = Convert.ChangeType(null!, typeof(byte), null);
     }
 
     // === needs-manual (operator/protected/etc) ===

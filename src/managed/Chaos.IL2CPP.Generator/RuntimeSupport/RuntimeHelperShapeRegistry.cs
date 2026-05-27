@@ -5334,25 +5334,10 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
-            // === FieldInfo/MethodBase::get_IsStatic (stub returning false; broad prefix covers all System.Reflection.*::get_IsStatic) ===
-            registry.RegisterGeneric(new GenericShapeDescriptor(
-                TypeDisplayNamePrefix: "System.Reflection.",
-                MethodName: "get_IsStatic",
-                Resolver: static (planner, callee, typeArgs) =>
-                {
-                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
-                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INT32", symbol,
-                        "CHAOS_IL2CPP_INTPTR chaos_arg_0",
-                    [
-                        "    (void)chaos_arg_0;",
-                        "    return static_cast<CHAOS_IL2CPP_INT32>(0);",
-                    ]);
-                    return new GenericShapeResolution(src, symbol,
-                        new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                            CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
-                        CreateInt32AbiSlot(),
-                        new HashSet<int> { 0 });
-                }));
+            // === (removed) FieldInfo/MethodBase::get_IsStatic generic stub — replaced by specific
+            //     SimpleForward registrations above (MethodBase at line ~4889, FieldInfo at line ~5841).
+            //     The specific Register() calls produce real C++ calls; this generic shape returned
+            //     hardcoded 0 and ran first due to TryMatchGenericShape priority in the resolver.
 
             // === ParameterInfo::GetOptionalCustomModifiers (stub returning null) ===
             registry.Register("System.Reflection.ParameterInfo", "GetOptionalCustomModifiers", [],
@@ -5833,6 +5818,14 @@ public sealed partial class NativeAotLoweringPlanner
             // === System.Reflection.FieldInfo::get_IsLiteral (SimpleForward stub returning false/0) ===
             registry.Register("System.Reflection.FieldInfo", "get_IsLiteral", [],
                 ShapeKind.SimpleForward, "ChaosReflectionFieldGetIsLiteral",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateInt32AbiSlot(),
+                new HashSet<int> { 0 });
+
+            // === System.Reflection.FieldInfo::get_IsStatic (SimpleForward stub) ===
+            registry.Register("System.Reflection.FieldInfo", "get_IsStatic", [],
+                ShapeKind.SimpleForward, "ChaosReflectionFieldGetIsStatic",
                 new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                     CreateNativeIntAbiSlot("System.Reflection.FieldInfo", AotCoreIrTypeShapeKind.ReferenceType)),
                 CreateInt32AbiSlot(),

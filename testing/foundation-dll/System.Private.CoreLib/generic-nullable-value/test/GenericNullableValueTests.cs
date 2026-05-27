@@ -30,7 +30,7 @@ public partial class GenericNullableValueTests
     public void _System_Private_CoreLib_System_Nullable_1_Equals_System_Boolean_System_Object()
     {
         // Purpose: Verify Nullable.Equals with typical input
-            var result = default(Nullable<int>).Equals(42);
+            var result = default(Nullable<int>).Equals(null!);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -54,7 +54,7 @@ public partial class GenericNullableValueTests
     public void _System_Private_CoreLib_System_ValueType_Equals_System_Boolean_System_Object()
     {
         // Purpose: Verify ValueType.Equals with typical input
-            var result = ((ValueType)42).Equals(42);
+            var result = ((ValueType)42).Equals(null!);
             Xunit.Assert.NotNull((object)result);
     }
 
