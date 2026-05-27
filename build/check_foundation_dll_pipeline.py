@@ -21,7 +21,7 @@ from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[1]
 
-LEDGER = REPO / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
+LEDGER = REPO / "testing" / "foundation-dll" / "_contracts" / "ledger.json"
 PHASE2 = REPO / "build" / "toolchains" / "run" / "testing" / "foundation_dll" / "run_phase2.py"
 REFRESH_CMD = [sys.executable, str(REPO / "build" / "toolchains" / "run" / "run.py"),
                "test", "inventory", "--json"]
@@ -35,7 +35,7 @@ _ORCHESTRATOR_DIR = REPO / "build" / "toolchains" / "run" / "testing" / "foundat
 def _load_ledger():
     """Load the capability-family-ledger and return (dlls_list, lookup_dict)."""
     ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
-    dlls = ledger.get("dlls", [])
+    dlls = ledger.get("assemblies", [])
     lookup = {}
     for dll in dlls:
         aname = dll["assemblyName"]
@@ -238,9 +238,60 @@ def step_verify_families(families, *, mode, skip_stages, verbose, codegen_mode=N
     return results
 
 
+# ── Step 3.5: Cross-family principle checks ────────────────────────────────
+
+def _import_cross_family():
+    """Lazy-import and return (CrossFamilyContext, run_cross_family_checks)."""
+    sys.path.insert(0, str(_ORCHESTRATOR_DIR))
+    sys.path.insert(0, str(_ORCHESTRATOR_DIR.parent.parent))
+    from testing.foundation_dll.principle.context import CrossFamilyContext
+    from testing.foundation_dll.principle import run_cross_family_checks
+    return CrossFamilyContext, run_cross_family_checks
+
+
+def step_cross_family(verify_results):
+    """Run cross-family principle checks for each assembly with verified families.
+
+    Returns dict mapping assembly -> list of CheckResult dicts.
+    """
+    _print_header("Step 3.5: Cross-Family Principle Checks")
+
+    CrossFamilyContext, run_cross_family_checks = _import_cross_family()
+
+    # Group verify_results by assembly
+    asm_families: dict[str, list[tuple[str, dict]]] = {}
+    for (aname, slug), report in verify_results.items():
+        asm_families.setdefault(aname, []).append((slug, report))
+
+    all_cross_results: dict[str, list] = {}
+    check_count = 0
+    concern_count = 0
+
+    for aname in sorted(asm_families.keys()):
+        slugs = [s for s, _ in asm_families[aname]]
+        cross_ctx = CrossFamilyContext.build(aname, slugs)
+        family_count = cross_ctx.family_count()
+        if family_count < 2:
+            print(f"  {aname}: {family_count} family — skipping cross-family checks")
+            continue
+
+        results = run_cross_family_checks(aname, cross_ctx)
+        all_cross_results[aname] = results
+
+        for r in results:
+            check_count += 1
+            if r.status in ("CONCERN", "VIOLATION"):
+                concern_count += 1
+            summary = r.summary[:100] if r.summary else ""
+            print(f"  [{r.status:>12s}] {r.check_id}: {summary}")
+
+    print(f"\n  Cross-family checks: {check_count} total, {concern_count} concern(s)/violation(s)")
+    return all_cross_results
+
+
 # ── Step 4: Results table ───────────────────────────────────────────────
 
-def step_results_table(dlls, verify_results):
+def step_results_table(dlls, verify_results, cross_family_results=None):
     """Print aggregate results table from verify_family() results."""
     _print_header("Step 4: Results Summary")
 
@@ -334,6 +385,25 @@ def step_results_table(dlls, verify_results):
             hu = stages.get("hotupdate", {}).get("status", "skip")[:4]
             print(f"  {label:48s} {overall:>8s} {pre:>5s} {cgn:>8s} {fact:>5s} {audit:>5s} {bench:>6s} {hu:>4s}")
 
+    # Cross-family summary
+    if cross_family_results:
+        print(f"\n  Cross-family checks:")
+        xf_header = f"{'Assembly':28s} {'Checks':>7s} {'Concern':>8s} {'Violation':>10s}"
+        print(f"  {xf_header}")
+        print(f"  {'-'*len(xf_header)}")
+        xf_total_checks = xf_total_concern = xf_total_violation = 0
+        for aname in sorted(cross_family_results):
+            results = cross_family_results[aname]
+            n = len(results)
+            c = sum(1 for r in results if r.status == "CONCERN")
+            v = sum(1 for r in results if r.status == "VIOLATION")
+            xf_total_checks += n
+            xf_total_concern += c
+            xf_total_violation += v
+            print(f"  {aname:28s} {n:7d} {c:8d} {v:10d}")
+        print(f"  {'-'*len(xf_header)}")
+        print(f"  {'TOTAL':28s} {xf_total_checks:7d} {xf_total_concern:8d} {xf_total_violation:10d}")
+
     print()
     return total_fail == 0
 
@@ -416,8 +486,11 @@ def main():
         if overall != "passed":
             errors.append(f"{aname}/{slug}: {overall}")
 
+    # Step 3.5: Cross-family principle checks
+    cross_family_results = step_cross_family(verify_results)
+
     # Step 4: Results summary
-    step_ok = step_results_table(dlls, verify_results)
+    step_ok = step_results_table(dlls, verify_results, cross_family_results=cross_family_results)
     if not step_ok:
         errors.append("Some families have verification failures")
 
