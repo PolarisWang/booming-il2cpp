@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_transport.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_gc_bridge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_threadpool_bridge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_exception_bridge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_hotupdate_bridge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_reflection_bridge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_memorydomain_bridge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_com_bridge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_instance.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_protocol.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_platform.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_transport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_gc_bridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_threadpool_bridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_exception_bridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_hotupdate_bridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_reflection_bridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_memorydomain_bridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_com_bridge.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_instance.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{5D40C117-471E-319F-9C30-C0B396D6E0FA}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{6FB8C6B2-DB09-3EA8-A51C-BE28FDEB747F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -30,6 +30,11 @@ public sealed partial class NativeAotLoweringPlanner
 	private string? _lastCheckedArrayExpr;
 	private string? _lastCheckedIndexExpr;
 
+	// Array access instruction IL offsets to skip bounds checks for,
+	// populated by PreScanLoopArraySkips when a loop induction variable
+	// pattern is detected (e.g., for (int i = 0; i < arr.Length; i++) { arr[i]; }).
+	private HashSet<int>? _loopArrayAccessSkipOffsets;
+
 	private void ResetArrayCheckCache()
 	{
 		_lastCheckedArrayExpr = null;
@@ -1293,36 +1298,36 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitLinearCopyBlock(builder, indentation);
 			break;
 		case "ldelem.i1":
-			EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_element))", indentation);
 			break;
 		case "ldelem.u1":
-			EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT8>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT8>(chaos_element))", indentation);
 			break;
 		case "ldelem.i2":
-			EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_element))", indentation);
 			break;
 		case "ldelem.u2":
-			EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_element))", indentation);
 			break;
 		case "ldelem.i4":
-			EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_element))", indentation);
 			break;
 		case "ldelem.u4":
-			EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT32>(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT32>(chaos_element))", indentation);
 			break;
 		case "ldelem.i8":
-			EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation);
+			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation);
 			break;
 		case "ldelem.r4":
-			EmitLinearArrayLoad(builder, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation);
 			PushSlotType(SlotType.Float32);
 			break;
 		case "ldelem.r8":
-			EmitLinearArrayLoad(builder, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation);
+			EmitLinearArrayLoad(builder, instruction, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation);
 			PushSlotType(SlotType.Float64);
 			break;
 		case "ldelem.ref":
-			EmitLinearArrayLoad(builder, "chaos_element", indentation);
+			EmitLinearArrayLoad(builder, instruction, "chaos_element", indentation);
 			break;
 		case "ldelem":
 		{
@@ -1330,7 +1335,7 @@ public sealed partial class NativeAotLoweringPlanner
 			if (targetRef == null || targetRef.Kind != AotCoreIrReferenceKind.Type)
 			{
 				// No type metadata: fall back to raw pointer load.
-				EmitLinearArrayLoad(builder, "chaos_element", indentation);
+				EmitLinearArrayLoad(builder, instruction, "chaos_element", indentation);
 				break;
 			}
 
@@ -1342,57 +1347,57 @@ public sealed partial class NativeAotLoweringPlanner
 				: targetRef.TypeShape;
 
 			if (typeShape == AotCoreIrTypeShapeKind.ReferenceType || typeShape == AotCoreIrTypeShapeKind.InterfaceType)
-				EmitLinearArrayLoad(builder, "chaos_element", indentation);
+				EmitLinearArrayLoad(builder, instruction, "chaos_element", indentation);
 			else
 				switch (subjectId)
 				{
 				case "System.Byte": case "System.SByte":
-					EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_element))", indentation); break;
 				case "System.Boolean":
-					EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT8>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT8>(chaos_element))", indentation); break;
 				case "System.Int16":
-					EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_element))", indentation); break;
 				case "System.UInt16": case "System.Char":
-					EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT16>(chaos_element))", indentation); break;
 				case "System.Int32":
-					EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_element))", indentation); break;
 				case "System.UInt32":
-					EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT32>(chaos_element))", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_UINT32>(chaos_element))", indentation); break;
 				case "System.Int64": case "System.UInt64":
-					EmitLinearArrayLoad(builder, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation); break;
 				case "System.Single":
-					EmitLinearArrayLoad(builder, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation);
+					EmitLinearArrayLoad(builder, instruction, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation);
 					PushSlotType(SlotType.Float32);
 					break;
 				case "System.Double":
-					EmitLinearArrayLoad(builder, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation);
+					EmitLinearArrayLoad(builder, instruction, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation);
 					PushSlotType(SlotType.Float64);
 					break;
 				default:
-					EmitLinearArrayLoad(builder, "chaos_element", indentation); break;
+					EmitLinearArrayLoad(builder, instruction, "chaos_element", indentation); break;
 				}
 			break;
 		}
 		case "stelem.i1":
-			EmitLinearArrayStore(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw))", indentation, isReferenceElement: false);
+			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw))", indentation, isReferenceElement: false);
 			break;
 		case "stelem.i2":
-			EmitLinearArrayStore(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw))", indentation, isReferenceElement: false);
+			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw))", indentation, isReferenceElement: false);
 			break;
 		case "stelem.i4":
-			EmitLinearArrayStore(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw))", indentation, isReferenceElement: false);
+			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw))", indentation, isReferenceElement: false);
 			break;
 		case "stelem.i8":
-			EmitLinearArrayStore(builder, "static_cast<CHAOS_IL2CPP_INT64>(chaos_value_raw)", indentation, isReferenceElement: false);
+			EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_value_raw)", indentation, isReferenceElement: false);
 			break;
 		case "stelem.r4":
-			EmitLinearArrayStore(builder, "ChaosStoreFloat32(static_cast<CHAOS_IL2CPP_FLOAT32>(chaos_value_raw))", indentation, isReferenceElement: false);
+			EmitLinearArrayStore(builder, instruction, "ChaosStoreFloat32(static_cast<CHAOS_IL2CPP_FLOAT32>(chaos_value_raw))", indentation, isReferenceElement: false);
 			break;
 		case "stelem.r8":
-			EmitLinearArrayStore(builder, "ChaosStoreFloat64(static_cast<CHAOS_IL2CPP_FLOAT64>(chaos_value_raw))", indentation, isReferenceElement: false);
+			EmitLinearArrayStore(builder, instruction, "ChaosStoreFloat64(static_cast<CHAOS_IL2CPP_FLOAT64>(chaos_value_raw))", indentation, isReferenceElement: false);
 			break;
 		case "stelem.ref":
-			EmitLinearArrayStore(builder, "chaos_value", indentation, isReferenceElement: true);
+			EmitLinearArrayStore(builder, instruction, "chaos_value", indentation, isReferenceElement: true);
 			break;
 		case "stelem":
 		{
@@ -1402,7 +1407,7 @@ public sealed partial class NativeAotLoweringPlanner
 				// No type metadata: fall back to raw pointer store.
 				// The element type is unknown at codegen time; the eval stack
 				// already carries the correctly-typed value as CHAOS_IL2CPP_INTPTR.
-				EmitLinearArrayStore(builder, "chaos_value_raw", indentation, isReferenceElement: false);
+				EmitLinearArrayStore(builder, instruction, "chaos_value_raw", indentation, isReferenceElement: false);
 				break;
 			}
 
@@ -1414,24 +1419,24 @@ public sealed partial class NativeAotLoweringPlanner
 				: targetRef.TypeShape;
 
 			if (typeShape == AotCoreIrTypeShapeKind.ReferenceType || typeShape == AotCoreIrTypeShapeKind.InterfaceType)
-				EmitLinearArrayStore(builder, "chaos_value", indentation, isReferenceElement: true);
+				EmitLinearArrayStore(builder, instruction, "chaos_value", indentation, isReferenceElement: true);
 			else
 				switch (subjectId)
 				{
 				case "System.Byte": case "System.SByte": case "System.Boolean":
-					EmitLinearArrayStore(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw))", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw))", indentation, isReferenceElement: false); break;
 				case "System.Int16": case "System.UInt16": case "System.Char":
-					EmitLinearArrayStore(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw))", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw))", indentation, isReferenceElement: false); break;
 				case "System.Int32": case "System.UInt32":
-					EmitLinearArrayStore(builder, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw))", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(chaos_value_raw))", indentation, isReferenceElement: false); break;
 				case "System.Int64": case "System.UInt64":
-					EmitLinearArrayStore(builder, "static_cast<CHAOS_IL2CPP_INT64>(chaos_value_raw)", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_value_raw)", indentation, isReferenceElement: false); break;
 				case "System.Single":
-					EmitLinearArrayStore(builder, "ChaosStoreFloat32(static_cast<CHAOS_IL2CPP_FLOAT32>(chaos_value_raw))", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "ChaosStoreFloat32(static_cast<CHAOS_IL2CPP_FLOAT32>(chaos_value_raw))", indentation, isReferenceElement: false); break;
 				case "System.Double":
-					EmitLinearArrayStore(builder, "ChaosStoreFloat64(static_cast<CHAOS_IL2CPP_FLOAT64>(chaos_value_raw))", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "ChaosStoreFloat64(static_cast<CHAOS_IL2CPP_FLOAT64>(chaos_value_raw))", indentation, isReferenceElement: false); break;
 				default:
-					EmitLinearArrayStore(builder, "chaos_value_raw", indentation, isReferenceElement: false); break;
+					EmitLinearArrayStore(builder, instruction, "chaos_value_raw", indentation, isReferenceElement: false); break;
 				}
 			break;
 		}
@@ -1778,11 +1783,12 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}}}");
 	}
 
-	private void EmitLinearArrayLoad(StringBuilder builder, string pushedValueExpression, string indentation)
+	private void EmitLinearArrayLoad(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string pushedValueExpression, string indentation)
 	{
 		string rawIndexExpr = ConsumeEvalStackValueExpression();
 		string rawArrayExpr = ConsumeEvalStackValueExpression();
-		bool skipChecks = TrySkipArrayChecks(rawArrayExpr, rawIndexExpr);
+		bool skipChecks = (_loopArrayAccessSkipOffsets?.Contains(instruction.IlOffset) == true)
+			|| TrySkipArrayChecks(rawArrayExpr, rawIndexExpr);
 
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>({rawIndexExpr});");
@@ -1802,12 +1808,13 @@ public sealed partial class NativeAotLoweringPlanner
 		EmitEvalStackPush(builder, indentation + "    ", pushedValueExpression);
 		builder.AppendLine($"{indentation}}}");
 	}
-	private void EmitLinearArrayStore(StringBuilder builder, string storedValueExpression, string indentation, bool isReferenceElement)
+	private void EmitLinearArrayStore(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string storedValueExpression, string indentation, bool isReferenceElement)
 	{
 		string rawValueExpr = ConsumeEvalStackValueExpression();
 		string rawIndexExpr = ConsumeEvalStackValueExpression();
 		string rawArrayExpr = ConsumeEvalStackValueExpression();
-		bool skipChecks = TrySkipArrayChecks(rawArrayExpr, rawIndexExpr);
+		bool skipChecks = (_loopArrayAccessSkipOffsets?.Contains(instruction.IlOffset) == true)
+			|| TrySkipArrayChecks(rawArrayExpr, rawIndexExpr);
 
 		builder.AppendLine($"{indentation}{{");
 		builder.AppendLine($"{indentation}    auto chaos_value_raw = {rawValueExpr};");
