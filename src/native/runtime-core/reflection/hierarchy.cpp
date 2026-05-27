@@ -5,27 +5,35 @@
 extern "C" {
 namespace chaos::il2cpp::runtime_core {
 
-// ── IsSubclassOf ───────────────────────────────────────────────────
+// ── IsSubclassOf (pointer-based internal helper) ───────────────────
 // Returns 1 if `type` is a subclass of `base`, 0 otherwise.
-// Uses TypeInfo* parent-chain walk (pointer equality on inline constexpr
-// TypeInfo instances — safe across modules for static AOT types).
-CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOf(
-    CHAOS_IL2CPP_INTPTR type_handle,
-    CHAOS_IL2CPP_INTPTR base_handle) noexcept
+// Both pointers must be non-null and already resolved from handles.
+// Used directly by IsAssignableFrom to avoid redundant handle resolution.
+static CHAOS_IL2CPP_INTPTR IsSubclassOfPtr(
+    const TypeInfoHot* type_info,
+    const TypeInfoHot* base_info) noexcept
 {
-    if (type_handle == 0 || base_handle == 0) return 0;
-    if (type_handle == base_handle) return 0;  // same type is not subclass
-
-    const auto* type_info = GetTypeInfoFromHandle(type_handle);
-    const auto* base_info = GetTypeInfoFromHandle(base_handle);
-    if (type_info == nullptr || base_info == nullptr) return 0;
-
-    // Walk parent chain (TypeInfo::parent forms a cross-module linked list)
+    if (type_info == base_info) return 0;  // same type is not subclass
     while (type_info->parent != nullptr) {
         if (type_info->parent == base_info) return 1;
         type_info = type_info->parent;
     }
     return 0;
+}
+
+// ── IsSubclassOf (handle-based public API) ─────────────────────────
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOf(
+    CHAOS_IL2CPP_INTPTR type_handle,
+    CHAOS_IL2CPP_INTPTR base_handle) noexcept
+{
+    if (type_handle == 0 || base_handle == 0) return 0;
+    if (type_handle == base_handle) return 0;
+
+    const auto* type_info = GetTypeInfoFromHandle(type_handle);
+    const auto* base_info = GetTypeInfoFromHandle(base_handle);
+    if (type_info == nullptr || base_info == nullptr) return 0;
+
+    return IsSubclassOfPtr(type_info, base_info);
 }
 
 // ── IsAssignableFrom ───────────────────────────────────────────────

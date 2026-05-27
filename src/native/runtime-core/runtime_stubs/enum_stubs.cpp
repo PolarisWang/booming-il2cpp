@@ -1100,7 +1100,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
         if (s_enum_str_count == meta->count) {
             // Reuse cached strings (zero-alloc on subsequent calls).
             for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++)
-                accessor->elements[i] = s_enum_str_names[i];
+                accessor_get_elements(accessor)[i] = s_enum_str_names[i];
         } else {
             // Fall back to direct allocation from meta.
             for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
@@ -1108,7 +1108,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
                 const auto name_len = std::strlen(entry->name);
                 auto str_handle = enum_alloc_string(name_len);
                 write_string_data(str_handle, entry->name, name_len);
-                accessor->elements[i] = str_handle;
+                accessor_get_elements(accessor)[i] = str_handle;
             }
         }
 
@@ -1135,7 +1135,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetNames(CHAOS_IL2CPP_INTPTR type) noexcept
         const auto name_len = std::strlen(f.name_utf8);
         auto str_handle = enum_alloc_string(name_len);
         write_string_data(str_handle, f.name_utf8, name_len);
-        accessor->elements[idx++] = str_handle;
+        accessor_get_elements(accessor)[idx++] = str_handle;
     }
 
     s_enum_names_array_key = type_handle;
@@ -1163,7 +1163,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetValues(CHAOS_IL2CPP_INTPTR type) noexcept
         if (arr == 0) return 0;
         auto* accessor = reinterpret_cast<ManagedArrayAccessor*>(arr);
         for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-            accessor->elements[i] = enum_alloc_boxed_int64(meta->fields[i].value);
+            accessor_get_elements(accessor)[i] = enum_alloc_boxed_int64(meta->fields[i].value);
         }
         s_enum_values_array_key = type_handle;
         s_enum_values_array = arr;
@@ -1184,7 +1184,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumGetValues(CHAOS_IL2CPP_INTPTR type) noexcept
     for (CHAOS_IL2CPP_UINT32 i = 0; i < desc->field_count && idx < count; i++) {
         const auto& f = desc->fields[i];
         if (f.name_utf8 == nullptr || std::strncmp(f.name_utf8, "value_", 6) == 0) continue;
-        accessor->elements[idx++] = enum_alloc_boxed_int64(f.constant_value);
+        accessor_get_elements(accessor)[idx++] = enum_alloc_boxed_int64(f.constant_value);
     }
     return arr;
 }

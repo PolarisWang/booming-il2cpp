@@ -294,12 +294,12 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_reflection_create_reference_array(const TypeInfo* chaos_element_type_info, CHAOS_IL2CPP_SIZE chaos_length)");
 			builder.AppendLine("{");
-			builder.AppendLine("    auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array);");
+			builder.AppendLine("    const auto chaos_total_size = sizeof(chaos_managed_array) + chaos_length * sizeof(CHAOS_IL2CPP_INTPTR);");
+			builder.AppendLine("    auto* chaos_array = static_cast<chaos_managed_array*>(CHAOS_IL2CPP_MALLOC_GC(chaos_total_size));");
 			builder.AppendLine("    chaos_array->header.type_info = &chaos_type_info_managed_array.hot;");
 			builder.AppendLine("    chaos_array->element_type_shape = chaos_type_shape_reference;");
 			builder.AppendLine("    chaos_array->element_type_info = chaos_element_type_info;");
 			builder.AppendLine("    chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);");
-			builder.AppendLine("    chaos_array->elements = chaos_length == 0 ? nullptr : static_cast<CHAOS_IL2CPP_INTPTR*>(CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, chaos_length));");
 			builder.AppendLine("    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);");
 			builder.AppendLine("}");
 			builder.AppendLine();

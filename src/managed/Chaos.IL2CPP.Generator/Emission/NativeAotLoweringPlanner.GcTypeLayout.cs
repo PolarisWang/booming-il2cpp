@@ -126,6 +126,11 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine("extern \"C\" void ChaosRegisterGcLayouts() {");
         builder.AppendLine("    auto& registry = chaos::il2cpp::runtime_core::GcLayoutRegistry::Instance();");
         builder.AppendLine();
+        builder.AppendLine("    // Register managed_array (variable-size: header + contiguous element data).");
+        builder.AppendLine("    registry.Register(CHAOS_IL2CPP_UINT64(chaos_type_id_managed_array), sizeof(chaos_managed_array), nullptr, 0,");
+        builder.AppendLine("        static_cast<uint16_t>(sizeof(CHAOS_IL2CPP_INTPTR)),");
+        builder.AppendLine("        static_cast<uint16_t>(offsetof(chaos_managed_array, length)));");
+        builder.AppendLine();
 
         foreach (var (_, TypeSymbol, StableId, GcMemberNames) in entries)
         {

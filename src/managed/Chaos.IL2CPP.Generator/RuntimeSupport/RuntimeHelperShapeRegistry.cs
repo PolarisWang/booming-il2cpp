@@ -1398,12 +1398,7 @@ public sealed partial class NativeAotLoweringPlanner
                 }));
 
             // === Numeric formatting ===
-            registry.Register("System.Int32", "ToString", [],
-                ShapeKind.SimpleForward, "chaos_format_int32_to_string",
-                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
-                    CreateNativeIntAbiSlot()),
-                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
-                new HashSet<int> { 0 });
+            // Int32.ToString() fully handled by GenericShapeDescriptor below (bypass Intern, direct GC alloc)
 
             registry.Register("System.Single", "ToString", ["System.String"],
                 ShapeKind.SimpleForward, "chaos_format_single_to_string",
@@ -1436,10 +1431,21 @@ public sealed partial class NativeAotLoweringPlanner
                         "CHAOS_IL2CPP_INTPTR chaos_arg_0",
                     [
                         "    auto* chaos_value_slot = chaos_resolve_native_int_slot(chaos_arg_0);",
-                        "    const CHAOS_IL2CPP_STRING chaos_formatted = ChaosIl2cpp::Common::format_int32(static_cast<CHAOS_IL2CPP_INT32>(*chaos_value_slot));",
-                        "    const auto chaos_id = chaos::il2cpp::string_table::Intern(",
-                        "        chaos_formatted.c_str(), static_cast<CHAOS_IL2CPP_UINT32>(chaos_formatted.size()));",
-                        "    return chaos_make_string_id_value(chaos_id);",
+                        "    const auto chaos_value = static_cast<CHAOS_IL2CPP_INT32>(*chaos_value_slot);",
+                        "    char chaos_buf[16];",
+                        "    const auto chaos_fmt = fmt::format_to_n(chaos_buf, sizeof(chaos_buf), \"{}\", chaos_value);",
+                        "    const auto chaos_len = static_cast<CHAOS_IL2CPP_SIZE>(chaos_fmt.size);",
+                        "    auto* chaos_raw = static_cast<char*>(",
+                        "        chaos::il2cpp::runtime_core::GcAllocateAtomic(",
+                        "            sizeof(chaos_type_System_Private_CoreLib_System_String) + chaos_len + 1));",
+                        "    auto* chaos_str = reinterpret_cast<chaos_type_System_Private_CoreLib_System_String*>(chaos_raw);",
+                        "    chaos_str->header.type_info = chaos_mt_System_Private_CoreLib_System_String.AsTypeInfoHot();",
+                        "    chaos_str->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_len);",
+                        "    chaos_str->utf8_data = chaos_raw + sizeof(chaos_type_System_Private_CoreLib_System_String);",
+                        "    CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data, chaos_buf, chaos_len);",
+                        "    chaos_str->utf8_data[chaos_len] = '\\0';",
+                        "    chaos_str->string_id = 0;",
+                        "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);",
                     ]);
                     return new GenericShapeResolution(src, symbol,
                         new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(CreateNativeIntAbiSlot()),

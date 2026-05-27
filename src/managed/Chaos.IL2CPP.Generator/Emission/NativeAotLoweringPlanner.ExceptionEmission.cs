@@ -1679,12 +1679,12 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}    {{");
 		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL_FAST();");
 		builder.AppendLine($"{indentation}    }}");
-		builder.AppendLine($"{indentation}    auto* chaos_array = CHAOS_IL2CPP_NEW_GC(chaos_managed_array, {{}});");
+		builder.AppendLine($"{indentation}    const auto chaos_total_size = sizeof(chaos_managed_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_length) * sizeof(CHAOS_IL2CPP_INTPTR);");
+		builder.AppendLine($"{indentation}    auto* chaos_array = static_cast<chaos_managed_array*>(CHAOS_IL2CPP_MALLOC_GC(chaos_total_size));");
 		builder.AppendLine($"{indentation}    chaos_array->header.type_info = &chaos_type_info_managed_array.hot;");
 		builder.AppendLine($"{indentation}    chaos_array->element_type_shape = {GetNativeTypeShapeValue(typeShape)};");
 		builder.AppendLine($"{indentation}    chaos_array->element_type_info = {GetRuntimeTypeInfoExpression(subjectId)};");
 		builder.AppendLine($"{indentation}    chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);");
-		builder.AppendLine($"{indentation}    chaos_array->elements = chaos_length == 0 ? nullptr : CHAOS_IL2CPP_NEW_GC_ARRAY(CHAOS_IL2CPP_INTPTR, static_cast<CHAOS_IL2CPP_SIZE>(chaos_length));");
 		EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array)");
 		builder.AppendLine($"{indentation}}}");
 	}
@@ -1715,7 +1715,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL_FAST();");
 			builder.AppendLine($"{indentation}    }}");
 		}
-		EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)])");
+		EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index))");
 		builder.AppendLine($"{indentation}}}");
 	}
 
@@ -1804,7 +1804,7 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL_FAST();");
 			builder.AppendLine($"{indentation}    }}");
 		}
-		builder.AppendLine($"{indentation}    const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];");
+		builder.AppendLine($"{indentation}    const auto chaos_element = chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];");
 		EmitEvalStackPush(builder, indentation + "    ", pushedValueExpression);
 		builder.AppendLine($"{indentation}}}");
 	}
@@ -1855,9 +1855,9 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (isReferenceElement)
 		{
-			builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(&chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)]));");
+			builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)));");
 		}
-		builder.AppendLine($"{indentation}    chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
+		builder.AppendLine($"{indentation}    chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
 		if (isReferenceElement)
 		{
 			builder.AppendLine($"{indentation}    GC_END_STUBBORN_CHANGE(chaos_array);");

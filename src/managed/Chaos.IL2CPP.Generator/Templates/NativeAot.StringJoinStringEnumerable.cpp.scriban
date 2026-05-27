@@ -37,7 +37,7 @@ extern "C" CHAOS_IL2CPP_INTPTR {{ helper_symbol }}(CHAOS_IL2CPP_INTPTR chaos_arg
         for (CHAOS_IL2CPP_INTPTR chaos_index = 0; chaos_index < chaos_array->length; chaos_index++)
         {
             chaos_append_separator();
-            const auto chaos_current = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+            const auto chaos_current = chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
             if (chaos_current == 0)
             {
                 continue;

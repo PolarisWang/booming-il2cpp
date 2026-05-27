@@ -30,10 +30,9 @@ void ChaosArrayClear(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_
     auto uindex = static_cast<CHAOS_IL2CPP_UINTPTR>(index);
     auto ucount = static_cast<CHAOS_IL2CPP_UINTPTR>(count);
     if (uindex > static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) || ucount > (static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) - uindex)) return;
-    if (arr->elements == nullptr) return;
 
     std::memset(
-        reinterpret_cast<CHAOS_IL2CPP_UINT8*>(arr->elements) + uindex * sizeof(void*),
+        reinterpret_cast<CHAOS_IL2CPP_UINT8*>(accessor_get_elements(arr)) + uindex * sizeof(void*),
         0, ucount * sizeof(void*));
 }
 
