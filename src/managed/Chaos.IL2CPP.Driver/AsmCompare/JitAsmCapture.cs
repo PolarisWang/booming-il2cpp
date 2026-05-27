@@ -173,10 +173,144 @@ internal static class JitAsmCapture
         return alc.LoadFromAssemblyPath(fullPath);
     }
 
+    /// <summary>
+    /// Try to resolve a method from an assembly-prefixed methodSubjectId.
+    /// Format: "AssemblyName/TypeName::MethodName:ReturnType(Params)"
+    /// Returns null if the format doesn't match or resolution fails.
+    /// </summary>
+    private static MethodInfo? ResolveMethodFromSubjectId(string methodId)
+    {
+        // Must contain "/" indicating assembly prefix
+        int slashIdx = methodId.IndexOf('/');
+        if (slashIdx < 0)
+            return null;
+
+        var assemblyName = methodId[..slashIdx];
+        var rest = methodId[(slashIdx + 1)..];
+
+        // Must contain "::" separating type from method
+        int doubleColonIdx = rest.IndexOf("::", StringComparison.Ordinal);
+        if (doubleColonIdx < 0)
+            return null;
+
+        var typeName = rest[..doubleColonIdx];
+        var methodSignature = rest[(doubleColonIdx + 2)..];
+
+        // Extract bare method name (before first ':' or '(')
+        string methodShortName;
+        int colonIdx = methodSignature.IndexOf(':');
+        int parenIdx = methodSignature.IndexOf('(');
+        if (colonIdx >= 0 && (parenIdx < 0 || colonIdx < parenIdx))
+            methodShortName = methodSignature[..colonIdx];
+        else
+            methodShortName = methodSignature;
+
+        // Load the assembly from the default ALC (already loaded)
+        Assembly? assembly;
+        try
+        {
+            assembly = Assembly.Load(assemblyName);
+        }
+        catch
+        {
+            return null;
+        }
+
+        // Resolve the type
+        Type? type;
+        try
+        {
+            type = assembly.GetType(typeName);
+        }
+        catch
+        {
+            type = null;
+        }
+
+        if (type is null)
+        {
+            // Fallback: scan all types in assembly
+            foreach (var t in assembly.GetTypes())
+            {
+                if (t.FullName != null &&
+                    (t.FullName.Equals(typeName, StringComparison.OrdinalIgnoreCase) ||
+                     t.FullName.EndsWith("." + typeName, StringComparison.OrdinalIgnoreCase)))
+                {
+                    type = t;
+                    break;
+                }
+            }
+        }
+
+        if (type is null)
+            return null;
+
+        // Find method by name
+        return FindMethodInType(type, methodShortName);
+    }
+
     public static JitCaptureResult Capture(string assemblyPath, string methodName)
     {
         try
         {
+            // Phase 0: If methodName follows "AssemblyName/TypeName::Method..." format,
+            // resolve the real target method directly from the framework assembly
+            // (instead of capturing the Subjects DLL wrapper methods).
+            MethodInfo? realMethod = null;
+            if (methodName.Contains('/') && methodName.Contains("::"))
+            {
+                realMethod = ResolveMethodFromSubjectId(methodName);
+            }
+
+            if (realMethod is not null)
+            {
+                // JIT-compile the real target method (no Subjects DLL needed)
+                RuntimeHelpers.PrepareMethod(realMethod.MethodHandle);
+                var subjectFnPtr = realMethod.MethodHandle.GetFunctionPointer();
+
+                int subjectMbiSize = Marshal.SizeOf<MEMORY_BASIC_INFORMATION>();
+                int subjectQueryResult = VirtualQuery(subjectFnPtr, out var subjectMbi, subjectMbiSize);
+                if (subjectQueryResult == 0)
+                {
+                    return new JitCaptureResult
+                    {
+                        MethodFullName = realMethod.ToString(),
+                        Error = $"VirtualQuery failed (error {Marshal.GetLastPInvokeError()})"
+                    };
+                }
+
+                if (subjectMbi.State != (uint)MemState.MemCommit ||
+                    (subjectMbi.Protect != PageExecuteRead && subjectMbi.Protect != PageExecuteReadWrite))
+                {
+                    return new JitCaptureResult
+                    {
+                        MethodFullName = realMethod.ToString(),
+                        Error = $"Memory region not executable: state=0x{subjectMbi.State:x} protect=0x{subjectMbi.Protect:x}"
+                    };
+                }
+
+                int subjectMaxSize = Math.Min((int)subjectMbi.RegionSize, 4096);
+                byte[] subjectCode = new byte[subjectMaxSize];
+                Marshal.Copy(subjectFnPtr, subjectCode, 0, subjectMaxSize);
+
+                int subjectActualSize = FindMethodBoundary(subjectCode, subjectMaxSize);
+                byte[] subjectActualCode = new byte[subjectActualSize];
+                Array.Copy(subjectCode, subjectActualCode, subjectActualSize);
+
+                var subjectInstructions = Disassemble(subjectFnPtr, subjectActualCode);
+                string subjectHexDump = FormatHexDump(subjectFnPtr, subjectActualCode, subjectInstructions);
+
+                return new JitCaptureResult
+                {
+                    Address = subjectFnPtr,
+                    Size = subjectActualSize,
+                    Bytes = subjectActualCode,
+                    HexDump = subjectHexDump,
+                    Instructions = subjectInstructions,
+                    MethodFullName = realMethod.ToString(),
+                };
+            }
+
             // Phase 1: Read IL body from assembly metadata (no execution needed)
             var ilBody = ReadIlFromAssembly(assemblyPath, methodName);
 

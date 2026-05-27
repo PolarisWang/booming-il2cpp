@@ -10,6 +10,7 @@ internal sealed class AsmCompareConfig
     public string AssemblyPath { get; init; } = "";
     public string MethodName { get; init; } = "";
     public IReadOnlyList<string> MethodNames { get; init; } = Array.Empty<string>();
+    public IReadOnlyList<string> MethodSubjectIds { get; init; } = Array.Empty<string>();
     public string? OutputPath { get; init; }
     public HashSet<string> Sections { get; init; } = new(StringComparer.OrdinalIgnoreCase);
     public bool AllSections { get; init; } = true;
@@ -34,6 +35,7 @@ internal sealed class AsmCompareConfig
         string? assemblyPath = null;
         string? methodName = null;
         List<string>? methodNames = null;
+        List<string>? methodSubjectIds = null;
         string? outputPath = null;
         HashSet<string>? sections = null;
         bool keepTemp = false;
@@ -49,6 +51,11 @@ internal sealed class AsmCompareConfig
                 case "--methods" when i + 1 < args.Length:
                     methodNames = new List<string>(
                         args[++i].Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
+                    break;
+                case "--method-subject-ids" when i + 1 < args.Length:
+                    var rawIds = args[++i];
+                    methodSubjectIds = new List<string>(
+                        rawIds.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries));
                     break;
                 case "--output" or "-o" when i + 1 < args.Length:
                     outputPath = args[++i];
@@ -109,6 +116,7 @@ internal sealed class AsmCompareConfig
             AssemblyPath = assemblyPath,
             MethodName = methodNames![0],
             MethodNames = methodNames,
+            MethodSubjectIds = methodSubjectIds ?? new List<string>(),
             OutputPath = outputPath,
             Sections = sections ?? new HashSet<string>(AllSectionNames, StringComparer.OrdinalIgnoreCase),
             AllSections = sections is null,

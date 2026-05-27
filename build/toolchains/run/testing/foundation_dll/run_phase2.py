@@ -19,7 +19,7 @@ from testing.foundation_dll.test_code_generator import (
 )
 
 REPO = Path(".")
-LEDGER = REPO / "verification" / "projections" / "foundation-dll-audit" / "capability-family-ledger.json"
+LEDGER = REPO / "testing" / "foundation-dll" / "_contracts" / "ledger.json"
 
 
 def classify_methods(mids):
@@ -281,7 +281,7 @@ def generate(aname, fid, contract_path):
 def main():
     ledger = json.loads(LEDGER.read_text(encoding="utf-8"))
     results = []
-    for dll in ledger["dlls"]:
+    for dll in ledger["assemblies"]:
         aname = dll["assemblyName"]
         for fam in dll["families"]:
             fid = fam.get("familyId", "")
