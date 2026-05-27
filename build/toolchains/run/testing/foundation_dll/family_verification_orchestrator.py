@@ -1948,7 +1948,12 @@ def detect_regression(family_slug: str, assembly: str,
 
 
 def write_report(report: UnifiedReport, family_slug: str, assembly: str) -> Path:
-    """Write the unified report JSON + HTML dashboard to the family directory."""
+    """Write the unified report JSON + HTML dashboard to the family directory.
+
+    When the family passes verification, also updates lastVerified in the
+    foundation-dll ledger (testing/foundation-dll/_contracts/ledger.json).
+    """
+    from datetime import datetime, timezone
     family_dir = _VERIFICATION_BASE / assembly / family_slug
     report_path = family_dir / "unified-verification-report.json"
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -1963,6 +1968,27 @@ def write_report(report: UnifiedReport, family_slug: str, assembly: str) -> Path
         print(f"  [report] HTML dashboard → {html_path}")
     except Exception as e:
         print(f"  [report] HTML dashboard skipped: {e}")
+
+    # Update lastVerified in the foundation-dll ledger when verification passes
+    if report.overall_status == "passed":
+        ledger_path = _VERIFICATION_BASE / "_contracts" / "ledger.json"
+        if ledger_path.exists():
+            try:
+                ledger = json.loads(ledger_path.read_text(encoding="utf-8"))
+                for asm_entry in ledger.get("assemblies", []):
+                    if asm_entry["assemblyName"] == assembly:
+                        for fam in asm_entry.get("families", []):
+                            if fam["slug"] == family_slug:
+                                fam["lastVerified"] = datetime.now(timezone.utc).isoformat()
+                                ledger_path.write_text(
+                                    json.dumps(ledger, indent=2, ensure_ascii=False) + "\n",
+                                    encoding="utf-8",
+                                )
+                                print(f"  [report] lastVerified updated in ledger ({family_slug})")
+                                break
+                        break
+            except Exception as e:
+                print(f"  [report] WARNING: could not update lastVerified: {e}")
 
     return report_path
 
