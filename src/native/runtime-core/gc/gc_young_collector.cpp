@@ -101,6 +101,12 @@ static CHAOS_IL2CPP_SIZE PreciseObjectSize(const void* obj) {
     uint64_t stable_id = layout_registry.ReadStableId(type_info_ptr);
     const auto* layout = layout_registry.Lookup(stable_id);
     if (layout == nullptr || layout->instance_size == 0) return 0;
+    // Variable-size array: total = header_size + element_size * length
+    if (layout->element_size > 0) {
+        CHAOS_IL2CPP_INTPTR length = 0;
+        std::memcpy(&length, static_cast<const uint8_t*>(obj) + layout->length_offset, sizeof(length));
+        return layout->instance_size + layout->element_size * static_cast<CHAOS_IL2CPP_SIZE>(length);
+    }
     return layout->instance_size;
 }
 

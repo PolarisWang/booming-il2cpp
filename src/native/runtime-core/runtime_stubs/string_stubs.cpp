@@ -140,7 +140,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CP
 
     CHAOS_IL2CPP_UINTPTR total = 0;
     for (CHAOS_IL2CPP_UINTPTR i = 0; i < count; ++i) {
-        auto elem_raw = resolve_string_arg(arr->elements[i]);
+        auto elem_raw = resolve_string_arg(accessor_get_elements(arr)[i]);
         auto* elem = reinterpret_cast<const StubStringHeader*>(elem_raw);
         if (elem) total += elem->byte_count;
     }
@@ -158,7 +158,7 @@ CHAOS_IL2CPP_INTPTR ChaosStringJoinSs(CHAOS_IL2CPP_INTPTR separator, CHAOS_IL2CP
             std::memcpy(dest, stub_string_data(reinterpret_cast<const void*>(separator)), sep_len);
             dest += sep_len;
         }
-        auto elem_raw = resolve_string_arg(arr->elements[i]);
+        auto elem_raw = resolve_string_arg(accessor_get_elements(arr)[i]);
         auto* elem = reinterpret_cast<const StubStringHeader*>(elem_raw);
         if (elem && elem->byte_count > 0) {
             std::memcpy(dest, stub_string_data(reinterpret_cast<const void*>(elem_raw)), elem->byte_count);

@@ -140,7 +140,9 @@ void GcLayoutRegistry::ReclaimRetiredTables() {
 
 void GcLayoutRegistry::Register(uint64_t stable_id, uint32_t instance_size,
                                 const uint16_t* pointer_offsets,
-                                uint16_t pointer_count) {
+                                uint16_t pointer_count,
+                                uint16_t element_size,
+                                uint16_t length_offset) {
     if (stable_id == kGcLayoutEmptySlot) return;
 
     std::lock_guard<std::mutex> lock(register_mutex_);
@@ -155,6 +157,8 @@ void GcLayoutRegistry::Register(uint64_t stable_id, uint32_t instance_size,
     layout->instance_size = instance_size;
     layout->pointer_count = (std::min)(pointer_count,
         static_cast<uint16_t>(kGcLayoutMaxInlinePointers));
+    layout->element_size = element_size;
+    layout->length_offset = length_offset;
     layout->_reserved = 0;
     layout->_reserved2 = 0;
 

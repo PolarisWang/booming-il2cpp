@@ -655,11 +655,17 @@ public sealed partial class NativeAotLoweringPlanner
 			bool hasIfaceMap = _referenceTypeImplementedInterfaceSubjectIds.TryGetValue(item3, out var ifaceSubjectIds) && ifaceSubjectIds.Count > 0;
 			string ifaceMapExpr;
 			string ifaceCountExpr;
+			uint ifaceBitmap2 = 0;
 			if (hasIfaceMap)
 			{
 				var sortedIfaceIds = ifaceSubjectIds!.OrderBy(id => ComputeStableTypeId(id)).ToArray();
 				ifaceMapExpr = GetNativeIfaceMapSymbol(item3);
 				ifaceCountExpr = sortedIfaceIds.Length.ToString();
+				// Compute iface_bitmap: 1 << (stable_id & 0x1F) for each static interface
+				foreach (var ifaceId in sortedIfaceIds)
+				{
+					ifaceBitmap2 |= (1u << (int)(ComputeStableTypeId(ifaceId) & 0x1F));
+				}
 				{
 					StringBuilder sb = builder;
 					sb.Append("static constexpr InterfaceMapEntry ");
@@ -698,7 +704,9 @@ public sealed partial class NativeAotLoweringPlanner
 				handler.AppendFormatted(ifaceMapExpr);
 				handler.AppendLiteral(", nullptr, ");
 				handler.AppendFormatted(ifaceCountExpr);
-				handler.AppendLiteral(", 0, 0, 0};");
+				handler.AppendLiteral(", 0, ");
+				handler.AppendFormatted(ifaceBitmap2.ToString());
+				handler.AppendLiteral("};");
 				stringBuilder.AppendLine(ref handler);
 			}
 			{
