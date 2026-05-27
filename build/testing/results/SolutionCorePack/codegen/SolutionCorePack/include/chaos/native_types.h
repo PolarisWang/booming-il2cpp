@@ -99,6 +99,20 @@ namespace chaos { namespace il2cpp { namespace common {
         else \
             CHAOS_IL2CPP_ABORT(); \
     } while(0)
+
+// CHAOS_IL2CPP_FAIL_FAST: direct trap for bounds checks, no indirect jump.
+// Uses __fastfail (noreturn intrinsic) in PROFILE/SHIP configs, enabling the
+// C++ compiler to hoist bounds checks out of loops — the optimizer knows the
+// trap never returns, so checked variables are provably invariant after check.
+// Falls back to CHAOS_IL2CPP_FAIL() in CHECK config for verification mode
+// compatibility (where g_chaos_fail_hook routes failures through SEH).
+#if defined(CHAOS_IL2CPP_CONFIG_CHECK)
+#define CHAOS_IL2CPP_FAIL_FAST() CHAOS_IL2CPP_FAIL()
+#elif defined(_MSC_VER)
+#define CHAOS_IL2CPP_FAIL_FAST() __fastfail(7)  // FAST_FAIL_RANGE_CHECK
+#else
+#define CHAOS_IL2CPP_FAIL_FAST() __builtin_trap()
+#endif
 // HRESULT-style failure check: true when the high bit is set (negative).
 // Defined here for cross-platform use in native-aot codegen output.
 #define CHAOS_IL2CPP_FAILED(hr)    ((hr) < 0)
@@ -286,18 +300,29 @@ namespace chaos { namespace il2cpp { namespace common {
 //    own deallocation mechanism.
 //
 // ========== GC domain — managed object allocation ==========
-// Placement-new onto GcAllocate-zeroed memory.
-// The GcAllocate helpers are defined in runtime_core.cpp.
+// CHAOS_IL2CPP_NEW_GC* macros → GcAllocateFast / GcAllocateAtomicFast
+// (__forceinline fast path in gc_alloc_stubs.h, no PROFILE_SCOPE / global atoms)
 #define CHAOS_IL2CPP_NEW_GC(T, ...) \
-    ::new (chaos::il2cpp::runtime_core::GcAllocate(sizeof(T))) T{__VA_ARGS__}
+    ::new (chaos::il2cpp::runtime_core::GcAllocateFast(sizeof(T))) T{__VA_ARGS__}
 
 // GC non-scanned allocation (pointer-free data, e.g. string UTF-8 bytes)
 #define CHAOS_IL2CPP_NEW_GC_ATOMIC(T, ...) \
-    ::new (chaos::il2cpp::runtime_core::GcAllocateAtomic(sizeof(T))) T{__VA_ARGS__}
+    ::new (chaos::il2cpp::runtime_core::GcAllocateAtomicFast(sizeof(T))) T{__VA_ARGS__}
 
 // Zero-initialized POD array in GC heap (memory already zeroed by GC_MALLOC)
 #define CHAOS_IL2CPP_NEW_GC_ARRAY(T, count) \
-    static_cast<T*>(chaos::il2cpp::runtime_core::GcAllocate(sizeof(T) * (count)))
+    static_cast<T*>(chaos::il2cpp::runtime_core::GcAllocateFast(sizeof(T) * (count)))
+
+// Raw GC allocation for contiguous arrays (single allocation: header + element data).
+// Returns untyped void* — caller must placement-initialize the header fields.
+// Uses NoZero variant — the caller immediately writes all header fields, so the
+// GC allocator's std::memset(0) would be wasted work.
+#define CHAOS_IL2CPP_MALLOC_GC(size) \
+    static_cast<void*>(chaos::il2cpp::runtime_core::GcAllocateFastNoZero(size))
+
+// Atomic (non-scanned) variant of CHAOS_IL2CPP_MALLOC_GC for pointer-free element data.
+#define CHAOS_IL2CPP_MALLOC_ATOMIC_GC(size) \
+    static_cast<void*>(chaos::il2cpp::runtime_core::GcAllocateAtomicFastNoZero(size))
 
 // ========== Domain domain — per-module metadata ==========
 // Allocate through the current TLS domain heap.  Each allocation is tagged

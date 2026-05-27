@@ -238,6 +238,8 @@
     "Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute::get_MethodSubjectId:System.String()",
     "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::.ctor:System.Void(Chaos.TestFramework.VerificationRoute)",
     "Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::get_Route:Chaos.TestFramework.VerificationRoute()",
+    "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
+    "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])",
     "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::.ctor:System.Void()",
     "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BAdder::Compute:System.Int64(System.Int32)",
     "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BICalc::Compute:System.Int64(System.Int32)",
@@ -252,13 +254,13 @@
     "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunStringConcat:System.Int32()",
     "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunVirtualCall:System.Int32()"
   ],
-  "translationUnitMethodCount": 241,
+  "translationUnitMethodCount": 243,
   "translationUnitPageSize": 1024,
   "translationUnitPageCount": 1,
   "translationUnitPages": [
     {
       "pageNumber": 1,
-      "methodCount": 241,
+      "methodCount": 243,
       "path": "generated/runtime/native-reference.runtime-skeleton.page-0001.cpp",
       "firstMethodSubjectId": "Chaos.TestFramework.Runtime/ChaosBenchmarkRunner\u002B\u003C\u003Ec__DisplayClass0_0::.ctor:System.Void()",
       "lastMethodSubjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunVirtualCall:System.Int32()"

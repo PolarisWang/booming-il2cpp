@@ -47,10 +47,7 @@ set(ENTRY_EHA_FLAG $<$<CXX_COMPILER_ID:MSVC>:/EHa>)
 
 # Assembly: SolutionCorePack
 add_library(chaos_gen_SolutionCorePack STATIC
-    ${CHAOS_GEN_DIR}/native-aot.page-0001.cpp
-    ${CHAOS_GEN_DIR}/native-aot.page-0002.cpp
-    ${CHAOS_GEN_DIR}/native-aot.page-0003.cpp
-    ${CHAOS_GEN_DIR}/native-aot.page-0004.cpp
+    ${CHAOS_GEN_DIR}/native-aot.generated.cpp
     ${CHAOS_GEN_DIR}/chaos_generated_module.cpp
 )
 

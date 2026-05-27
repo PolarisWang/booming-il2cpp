@@ -376,6 +376,12 @@ inline void ProfileReset() noexcept {
         g_profile_threads[ti].store(nullptr, std::memory_order_release);
     }
 
+    // Re-register the calling thread on next PROFILE_SCOPE usage.
+    // Without this, g_tls_profile still has its old registration_slot
+    // (e.g. 0) but g_profile_threads[0] is now nullptr — data would
+    // accumulate in TLS but be invisible to ProfileDump.
+    g_tls_profile.registration_slot = -1;
+
     // Free retired nodes — data is intentionally lost on explicit reset.
     while (auto* old_head = g_retired_profile_head.exchange(nullptr,
             std::memory_order_acq_rel)) {

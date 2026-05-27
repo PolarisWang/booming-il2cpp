@@ -1,4 +1,4 @@
-// AUTO-GENERATED from RuntimeHelperShapeRegistry -- DO NOT EDIT
+﻿// AUTO-GENERATED from RuntimeHelperShapeRegistry -- DO NOT EDIT
 // This file is the single source of truth for runtime helper dispatch.
 // All changes must originate in RuntimeHelperShapeRegistry.BuildDefault().
 
@@ -65,7 +65,6 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_DELEGATE_COMBINE_SYSTEM_DELEGATE_SYSTEM_DELEGATE = 0x85382755u,
     SHAPE_SYSTEM_DELEGATE_REMOVE_SYSTEM_DELEGATE_SYSTEM_DELEGATE = 0x36442080u,
     SHAPE_SYSTEM_DOUBLE_PARSE_SYSTEM_STRING = 0x41674909u,
-    SHAPE_SYSTEM_DOUBLE_TOSTRING_SYSTEM_STRING = 0x62DBF072u,
     SHAPE_SYSTEM_ENUM_FORMAT_SYSTEM_TYPE_SYSTEM_OBJECT_SYSTEM_STRING = 0x8E51594Au,
     SHAPE_SYSTEM_ENUM_GETNAMES_SYSTEM_TYPE = 0x14128551u,
     SHAPE_SYSTEM_ENUM_GETNAME_SYSTEM_TYPE_SYSTEM_OBJECT = 0x64C0B65Cu,
@@ -128,7 +127,6 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_HASHCODE_ADD_SYSTEM_OBJECT = 0xFE7E34C3u,
     SHAPE_SYSTEM_INT32_GETHASHCODE = 0xC39C0E38u,
     SHAPE_SYSTEM_INT32_PARSE_SYSTEM_STRING = 0xA63DC304u,
-    SHAPE_SYSTEM_INT32_TOSTRING = 0xE3BF8C09u,
     SHAPE_SYSTEM_INT64_PARSE_SYSTEM_STRING = 0x63EE794Fu,
     SHAPE_SYSTEM_INVALIDOPERATIONEXCEPTION__CTOR_SYSTEM_STRING = 0x637E36D4u,
     SHAPE_SYSTEM_IO_BINARYREADER_READDOUBLE = 0x85F66B4Cu,
@@ -204,6 +202,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_FIELDTYPE = 0xF7101AB7u,
     SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_ISINITONLY = 0xA13A986Fu,
     SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_ISLITERAL = 0xF11C975Cu,
+    SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_ISSTATIC = 0xE7634B51u,
     SHAPE_SYSTEM_REFLECTION_MEMBERINFO_GET_DECLARINGTYPE = 0x8D177D62u,
     SHAPE_SYSTEM_REFLECTION_MEMBERINFO_GET_METADATATOKEN = 0x9AD17BD1u,
     SHAPE_SYSTEM_REFLECTION_MEMBERINFO_GET_NAME = 0x4B1B4F7Cu,
@@ -260,7 +259,6 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_GETRCWUNKNOWN_SYSTEM_INTPTR = 0x5E278808u,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RCWQUERYINTERFACE_SYSTEM_INTPTR_SYSTEM_INTPTR = 0x75E9F4DBu,
     SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RELEASERCW_SYSTEM_INTPTR = 0xA53F92ADu,
-    SHAPE_SYSTEM_SINGLE_TOSTRING_SYSTEM_STRING = 0x4B5B293Du,
     SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING = 0xF6869876u,
     SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING_SYSTEM_STRING = 0x08CB997Au,
     SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING_SYSTEM_STRING_SYSTEM_STRING = 0xEC14DB7Eu,
@@ -351,7 +349,7 @@ enum ShapeId : CHAOS_IL2CPP_UINT32 {
     SHAPE_VOLATILE_READ_SYSTEM_INT32_ = 0x779CC9A5u,
     SHAPE_VOLATILE_WRITE_SYSTEM_INT32__SYSTEM_INT32 = 0x6556008Du,
 
-    SHAPE_COUNT = 337u,
+    SHAPE_COUNT = 335u,
 };
 
 // ---- Compile-time dispatch: NativeInt-returning shapes ----
@@ -481,10 +479,6 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosParseDouble(args...));
     }
-    else if constexpr (S == SHAPE_SYSTEM_DOUBLE_TOSTRING_SYSTEM_STRING) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-            chaos_format_double_to_string(args...));
-    }
     else if constexpr (S == SHAPE_SYSTEM_ENUM_FORMAT_SYSTEM_TYPE_SYSTEM_OBJECT_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosEnumFormat(args...));
@@ -596,10 +590,6 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_GUID_TOSTRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             ChaosGuidToString(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_INT32_TOSTRING) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-            chaos_format_int32_to_string(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_INT64_PARSE_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -944,10 +934,6 @@ CHAOS_IL2CPP_INTPTR DispatchNativeInt(Args... args) {
     else if constexpr (S == SHAPE_SYSTEM_RUNTIME_INTEROPSERVICES_MARSHAL_RCWQUERYINTERFACE_SYSTEM_INTPTR_SYSTEM_INTPTR) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
             MarshalRcwQueryInterface(args...));
-    }
-    else if constexpr (S == SHAPE_SYSTEM_SINGLE_TOSTRING_SYSTEM_STRING) {
-        return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
-            chaos_format_single_to_string(args...));
     }
     else if constexpr (S == SHAPE_SYSTEM_STRING_CONCAT_SYSTEM_STRING_SYSTEM_STRING) {
         return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(
@@ -1540,6 +1526,10 @@ CHAOS_IL2CPP_INT32 DispatchInt32(Args... args) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosReflectionFieldGetIsLiteral(args...));
     }
+    else if constexpr (S == SHAPE_SYSTEM_REFLECTION_FIELDINFO_GET_ISSTATIC) {
+        return static_cast<CHAOS_IL2CPP_INT32>(
+            ChaosReflectionFieldGetIsStatic(args...));
+    }
     else if constexpr (S == SHAPE_SYSTEM_REFLECTION_MEMBERINFO_GET_METADATATOKEN) {
         return static_cast<CHAOS_IL2CPP_INT32>(
             ChaosReflectionGetMetadataToken(args...));
@@ -1667,7 +1657,7 @@ extern ShapeRuntimeEntry g_runtime_shape_entries[kMaxRuntimeShapeEntries];
 extern CHAOS_IL2CPP_UINT32 g_runtime_shape_count;
 
 // ---- Compile-time completeness verification ----
-static_assert(SHAPE_COUNT == 337u,
+static_assert(SHAPE_COUNT == 335u,
     "Number of registered shapes changed. Regenerate this header from RuntimeHelperShapeRegistry.");
 
 #pragma pack(pop)

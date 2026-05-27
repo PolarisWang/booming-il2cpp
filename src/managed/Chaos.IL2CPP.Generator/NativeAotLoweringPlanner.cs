@@ -115,17 +115,24 @@ public sealed partial class NativeAotLoweringPlanner
     private readonly record struct TypeHierarchyPtrFoldEntry(
         string PtrFunctionName,
         string TypeExpr1,
-        string? TypeExpr2);
+        string? TypeExpr2,
+        int[] SkipIlOffsets);  // IlOffsets of ltoken + GetTypeFromHandle to DCE
 
     private static readonly Dictionary<string, string> TypeHierarchyPtrOptimizationMap = new(StringComparer.Ordinal)
     {
         { "IsAssignableFrom", "ChaosReflectionIsAssignableFromPtr" },
         { "IsSubclassOf",     "ChaosReflectionIsSubclassOfPtr" },
         { "IsAssignableTo",   "ChaosReflectionIsAssignableToPtr" },
-        { "IsInstanceOfType", "ChaosReflectionIsInstanceOfTypePtr" },
+        // IsInstanceOfType excluded: the object argument may be a CHAOS_IL2CPP_STRING_ID
+        // (tagged integer hash from ldstr), not a managed object pointer.  Passing a tagged
+        // integer to ChaosReflectionIsInstanceOfTypePtr causes SIGSEGV in
+        // chaos_object_get_type_info.  The non-optimized virtual dispatch path handles
+        // StringId arguments correctly through the managed Type::IsInstanceOfType
+        // implementation.
     };
 
     private Dictionary<(string MethodNativeSymbol, int IlOffset), TypeHierarchyPtrFoldEntry> _typeHierarchyPtrFoldMap = new();
+    private Dictionary<string, HashSet<int>> _typeHierarchyPtrSkipIlOffsets = new();
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
 

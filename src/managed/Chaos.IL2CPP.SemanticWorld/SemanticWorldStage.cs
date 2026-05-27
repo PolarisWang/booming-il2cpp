@@ -12,6 +12,12 @@ public sealed class SemanticWorldStage
         "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String,System.String)";
     private const string PairStringConcatMethodSubjectId =
         "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.String)";
+    private const string FusedConcatWithInt32DisplaySubjectId =
+        "System.Private.CoreLib/System.String::Concat(System.String,System.Int32)";
+    private const string FusedConcatWithInt32MethodSubjectId =
+        "System.Private.CoreLib/System.String::Concat:System.String(System.String,System.Int32)";
+    private const string Int32ToStringDisplaySubjectId =
+        "System.Private.CoreLib/System.Int32::ToString()";
     private const string StringJoinStringEnumerableSubjectId =
         "System.Private.CoreLib/System.String::Join(System.String,System.Collections.Generic.IEnumerable<System.String>)";
     private const string GenericStringJoinEnumerableSubjectIdPrefix =
@@ -83,6 +89,7 @@ public sealed class SemanticWorldStage
                 .. loadedWorld.Properties.Select(property => CreateCanonicalSubject("property", property.SubjectId)),
                 .. loadedWorld.Methods.Select(method => CreateCanonicalSubject("method", method.SubjectId)),
                 CreateCanonicalSubject("method", ThreePartStringConcatMethodSubjectId, PairStringConcatMethodSubjectId),
+                CreateCanonicalSubject("method", FusedConcatWithInt32MethodSubjectId),
             ],
         };
     }
@@ -214,6 +221,21 @@ public sealed class SemanticWorldStage
                 continue;
             }
 
+            // Fuse: String.Concat(string, Int32.ToString()) → String.ConcatWithInt32(string, int32)
+            if (instruction.Op == "call" &&
+                MethodSubjectIdEquals(instruction.Callee, PairStringConcatDisplaySubjectId) &&
+                canonicalized.Count >= 1)
+            {
+                var prevInstr = canonicalized[^1];
+                if (prevInstr.Op is "call" or "callvirt" &&
+                    MethodSubjectIdEquals(prevInstr.Callee, Int32ToStringDisplaySubjectId))
+                {
+                    canonicalized.RemoveAt(canonicalized.Count - 1);
+                    canonicalized.Add(CreateFusedConcatWithInt32Instruction());
+                    continue;
+                }
+            }
+
             canonicalized.Add(instruction);
         }
 
@@ -232,6 +254,22 @@ public sealed class SemanticWorldStage
                 AssemblyName = "System.Private.CoreLib",
                 SubjectKind = "method",
                 SubjectId = PairStringConcatMethodSubjectId,
+            },
+        };
+    }
+
+    private static ManagedInstructionModel CreateFusedConcatWithInt32Instruction()
+    {
+        return new ManagedInstructionModel
+        {
+            Op = "call",
+            Callee = FusedConcatWithInt32MethodSubjectId,
+            ResultType = "System.String",
+            Reference = new ManagedInstructionReference
+            {
+                AssemblyName = "System.Private.CoreLib",
+                SubjectKind = "method",
+                SubjectId = FusedConcatWithInt32MethodSubjectId,
             },
         };
     }
@@ -373,6 +411,7 @@ public sealed class SemanticWorldStage
             switch (normalizedCallee)
             {
                 case PairStringConcatDisplaySubjectId:
+                case FusedConcatWithInt32DisplaySubjectId:
                     capabilities.Add("requires-string-concat");
                     break;
                 case ConsoleWriteLineStringSubjectId:

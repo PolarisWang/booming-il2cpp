@@ -462,6 +462,25 @@ public sealed partial class NativeAotLoweringPlanner
 
                     if (paramTypes.Count == 2)
                     {
+                        // Fused: String.Concat(string, int32) → single ChaosStringConcatWithFormattedInt32 call
+                        if (paramTypes[1].Trim() == "System.Int32")
+                        {
+                            var fusedSrc = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                                "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                            [
+                                "    auto val = *reinterpret_cast<const CHAOS_IL2CPP_INT32*>(chaos_arg_1);",
+                                "    return chaos::il2cpp::runtime_core::ChaosStringConcatWithFormattedInt32(chaos_arg_0, val);",
+                            ]);
+                            return new GenericShapeResolution(fusedSrc, symbol,
+                                new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                                {
+                                    CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                    CreateNativeIntAbiSlot(),
+                                }),
+                                CreateNativeIntAbiSlot("System.Private.CoreLib/System.String", AotCoreIrTypeShapeKind.ReferenceType),
+                                new HashSet<int> { 0, 1 });
+                        }
+
                         var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
                             "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
                         [
@@ -483,12 +502,12 @@ public sealed partial class NativeAotLoweringPlanner
                             "    chaos_str->string_id = 0;",
                             string.Empty,
                             "    if (chaos_left_len > 0) {",
-                            "        CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data, chaos_left->utf8_data, chaos_left_len);",
+                            "        CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data), chaos_left->utf8_data, chaos_left_len);",
                             "    }",
                             "    if (chaos_right_len > 0) {",
-                            "        CHAOS_IL2CPP_MEMCPY(chaos_str->utf8_data + chaos_left_len, chaos_right->utf8_data, chaos_right_len);",
+                            "        CHAOS_IL2CPP_MEMCPY(const_cast<char*>(chaos_str->utf8_data + chaos_left_len), chaos_right->utf8_data, chaos_right_len);",
                             "    }",
-                            "    chaos_str->utf8_data[chaos_total] = '\\0';",
+                            "    const_cast<char*>(chaos_str->utf8_data)[chaos_total] = '\\0';",
                             string.Empty,
                             "    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_str);",
                         ]);
@@ -1476,7 +1495,7 @@ public sealed partial class NativeAotLoweringPlanner
                         "    chaos_str->utf8_data = chaos_raw + sizeof(chaos_type_System_Private_CoreLib_System_String);",
                         "    chaos_str->string_id = 0;",
                         "    // Format digits directly into utf8_data (backward fill).",
-                        "    auto* chaos_p = chaos_str->utf8_data + chaos_len;",
+                        "    auto* chaos_p = const_cast<char*>(chaos_str->utf8_data + chaos_len);",
                         "    *chaos_p = '\\0';",
                         "    do {",
                         "        *--chaos_p = static_cast<char>('0' + (chaos_tmp % 10));",

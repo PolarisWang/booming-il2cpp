@@ -1,8 +1,8 @@
-{
+﻿{
   "schemaVersion": 2,
   "assemblyName": "SolutionCorePack",
-  "methodCount": 240,
-  "defaultStringId": 4967655369593882103,
+  "methodCount": 242,
+  "defaultStringId": 5067587310023285725,
   "methods": [
     {
       "index": 0,
@@ -3263,7 +3263,7 @@
     },
     {
       "index": 228,
-      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32",
+      "nativeSymbol": "SolutionCorePack_DeclaredBenchmarkNativeHost_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackDeclaredBenchmarkHost_Execute_System_Int32",
       "paramCount": 1,
       "params": [
         {
@@ -3275,55 +3275,79 @@
     },
     {
       "index": 229,
+      "nativeSymbol": "SolutionCorePack_DeclaredBenchmarkNativeHost_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackDeclaredBenchmarkHost_Main_System_String",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 230,
+      "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_InvokeWorkload_System_Int32",
+      "paramCount": 1,
+      "params": [
+        {
+          "isString": false,
+          "isThis": false
+        }
+      ],
+      "isInstance": false
+    },
+    {
+      "index": 231,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArithmeticDouble",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 230,
+      "index": 232,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArithmeticInt",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 231,
+      "index": 233,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArrayAccess",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 232,
+      "index": 234,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunLoopBranch",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 233,
+      "index": 235,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunObjectAlloc",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 234,
+      "index": 236,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunStringConcat",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 235,
+      "index": 237,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunVirtualCall",
       "paramCount": 0,
       "params": [],
       "isInstance": false
     },
     {
-      "index": 236,
+      "index": 238,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder__ctor",
       "paramCount": 1,
       "params": [
@@ -3335,7 +3359,7 @@
       "isInstance": true
     },
     {
-      "index": 237,
+      "index": 239,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_Adder_Compute_System_Int32",
       "paramCount": 2,
       "params": [
@@ -3351,7 +3375,7 @@
       "isInstance": true
     },
     {
-      "index": 238,
+      "index": 240,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj__ctor_System_Int32",
       "paramCount": 2,
       "params": [
@@ -3367,7 +3391,7 @@
       "isInstance": true
     },
     {
-      "index": 239,
+      "index": 241,
       "nativeSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_SmallObj_get_Value",
       "paramCount": 1,
       "params": [

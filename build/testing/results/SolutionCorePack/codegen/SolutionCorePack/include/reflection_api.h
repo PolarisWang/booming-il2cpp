@@ -2,6 +2,7 @@
 #define CHAOS_IL2CPP_REFLECTION_API_H_
 
 #include <chaos/native_types.h>
+#include <chaos/type_info.h>
 
 // ── Deferred stub declarations (reflection_api.cpp also includes remaining_stubs.cpp) ──
 #include "runtime_stubs/reflection_stubs.h"
@@ -41,6 +42,7 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionInvokeMethod(CHAOS_IL2CPP_INTPTR method_handl
 CHAOS_IL2CPP_INTPTR ChaosReflectionMakeGenericMethod(CHAOS_IL2CPP_INTPTR method_handle, CHAOS_IL2CPP_INTPTR type_args);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetCustomAttribute(CHAOS_IL2CPP_INTPTR member_handle, CHAOS_IL2CPP_INTPTR attribute_type_handle);
 CHAOS_IL2CPP_INTPTR ChaosReflectionConcatStringPairValues(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INTPTR right);
+CHAOS_IL2CPP_INTPTR ChaosStringConcatWithFormattedInt32(CHAOS_IL2CPP_INTPTR left, CHAOS_IL2CPP_INT32 value);
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetTypeFullName(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetAssemblyQualifiedName(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetReflectedType(CHAOS_IL2CPP_INTPTR member_handle) noexcept;
@@ -54,6 +56,11 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOf(CHAOS_IL2CPP_INTPTR type, CHAOS_
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR candidate) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR obj) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableTo(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR candidate) noexcept;
+// ── TypeInfo* direct API (for codegen-level typeof() constant optimization) ──
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsSubclassOfPtr(const chaos::il2cpp::common::TypeInfoHot* type_info, const chaos::il2cpp::common::TypeInfoHot* base_info) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFromPtr(const chaos::il2cpp::common::TypeInfoHot* target_info, const chaos::il2cpp::common::TypeInfoHot* source_info) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfTypePtr(const chaos::il2cpp::common::TypeInfoHot* type_info, CHAOS_IL2CPP_INTPTR obj) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableToPtr(const chaos::il2cpp::common::TypeInfoHot* target_info, const chaos::il2cpp::common::TypeInfoHot* source_info) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamConstraints(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetContainsGenericParams(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosReflectionGetGenericParamPos(CHAOS_IL2CPP_INTPTR type_handle) noexcept;
@@ -124,6 +131,7 @@ using chaos::il2cpp::runtime_core::ChaosReflectionInvokeMethod;
 using chaos::il2cpp::runtime_core::ChaosReflectionMakeGenericMethod;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetCustomAttribute;
 using chaos::il2cpp::runtime_core::ChaosReflectionConcatStringPairValues;
+using chaos::il2cpp::runtime_core::ChaosStringConcatWithFormattedInt32;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetTypeFullName;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetAssemblyQualifiedName;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetReflectedType;
@@ -137,6 +145,11 @@ using chaos::il2cpp::runtime_core::ChaosReflectionIsSubclassOf;
 using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableFrom;
 using chaos::il2cpp::runtime_core::ChaosReflectionIsInstanceOfType;
 using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableTo;
+// ── Global scope using declarations for TypeInfo* direct API ──
+using chaos::il2cpp::runtime_core::ChaosReflectionIsSubclassOfPtr;
+using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableFromPtr;
+using chaos::il2cpp::runtime_core::ChaosReflectionIsInstanceOfTypePtr;
+using chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableToPtr;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetGenericParamConstraints;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetContainsGenericParams;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetGenericParamPos;
@@ -172,5 +185,7 @@ using chaos::il2cpp::runtime_core::ChaosReflectionGetIsGenericType;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetIsConstructedGeneric;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetIsGenericTypeDef;
 using chaos::il2cpp::runtime_core::ChaosReflectionGetIsPublic;
+using chaos::il2cpp::runtime_core::chaos_reflection_get_is_static;
+using chaos::il2cpp::runtime_core::ChaosReflectionFieldGetIsStatic;
 
 #endif  // CHAOS_IL2CPP_REFLECTION_API_H_

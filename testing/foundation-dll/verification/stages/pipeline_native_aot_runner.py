@@ -1668,6 +1668,47 @@ def remediate_page_file_declarations(native_dir: Path) -> None:
     remediate_supplemental_codegen(native_dir)
 
 
+def remediate_delegate_struct_definitions(native_dir: Path) -> None:
+    """Replace forward declarations of System.Action with the full 48-byte
+    DelegateObject layout. The codegen generates code that uses this struct
+    (e.g. reinterpret_cast) but only emits a forward declaration, causing C2027."""
+    _FORWARD_DECL = 'struct chaos_type_System_Private_CoreLib_System_Action;'
+    _FULL_DEF = '''struct chaos_type_System_Private_CoreLib_System_Action {
+    void* type_info;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_target;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count;
+    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token;
+    CHAOS_IL2CPP_UINT32 _pad;
+};'''
+    for header_file in native_dir.rglob("native-aot.generated.header.h"):
+        text = header_file.read_text(encoding="utf-8")
+        changed = False
+
+        # Fix 1: Replace System.Action forward declaration with full 48-byte DelegateObject
+        if _FORWARD_DECL in text and 'chaos_type_System_Private_CoreLib_System_Action {' not in text:
+            text = text.replace(_FORWARD_DECL, _FULL_DEF)
+            changed = True
+            print(f"    [fix_struct] promoted System.Action forward decl to full definition "
+                  f"in {header_file.name}")
+
+        # Fix 2: Remove extern MethodTable declarations that conflict with inline
+        # definitions in the .cpp file. MSVC fails with LNK2001 when an extern
+        # declaration precedes an inline definition in the same TU.
+        for m in list(__import__('re').finditer(
+                r'^extern MethodTable (chaos_mt_\w+);', text, __import__('re').MULTILINE)):
+            sym = m.group(1)
+            # Remove the extern line (the inline definition in .cpp is sufficient)
+            line = m.group(0)
+            text = text.replace(line, f'// {line}  (removed extern; defined inline in .cpp)')
+            changed = True
+            print(f"    [fix_struct] removed extern {sym} (inline definition in .cpp)")
+
+        if changed:
+            header_file.write_text(text, encoding="utf-8")
+
+
 def remediate_supplemental_codegen(native_dir: Path) -> None:
     """Fix converter-vs-runtime version mismatches in supplemental-metadata codegen.
 
@@ -2097,6 +2138,9 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     remediate_flat_layout_includes(native_dir)
     remediate_forward_declarations(native_dir)
     remediate_page_file_declarations(native_dir)
+    # Fix missing struct definitions in generated headers (codegen emits
+    # forward declarations for delegate types used in reinterpret_cast)
+    remediate_delegate_struct_definitions(native_dir)
 
     # Fix s_hotpatch_module cross-page linkage in page-split families.
     # Codegen defines "extern constexpr HotpatchModuleV0 s_hotpatch_module"

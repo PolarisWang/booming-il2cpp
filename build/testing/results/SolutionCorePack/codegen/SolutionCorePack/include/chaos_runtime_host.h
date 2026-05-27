@@ -29,6 +29,7 @@
 #include <cstdio>
 #include <cstdlib>
 
+#include <cstring>
 #include <chaos/common.h>
 #include "codegen_bridge.h"
 #include "runtime_abi.h"
@@ -244,6 +245,28 @@ private:
                 kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(+[](CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR len1, CHAOS_IL2CPP_INTPTR len2) -> CHAOS_IL2CPP_INTPTR {
                     return ChaosArrayCreateInstance2D(type, static_cast<CHAOS_IL2CPP_INT32>(len1), static_cast<CHAOS_IL2CPP_INT32>(len2));
                 });
+                continue;
+            }
+
+            // Unsafe.CopyBlock (cpblk) — wire to memcpy for AOT scenarios where
+            // the codegen emits bridge thunks without a managed implementation.
+            if (std::strstr(sub, "Unsafe::CopyBlock:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(
+                    +[](CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INTPTR src, CHAOS_IL2CPP_INTPTR count) {
+                        std::memcpy(reinterpret_cast<void*>(dest),
+                                    reinterpret_cast<const void*>(src),
+                                    static_cast<size_t>(count));
+                    });
+                continue;
+            }
+            // Unsafe.InitBlock (initblk) — wire to memset.
+            if (std::strstr(sub, "Unsafe::InitBlock:")) {
+                kChaosExternalRuntimeFnTable[i] = reinterpret_cast<void*>(
+                    +[](CHAOS_IL2CPP_INTPTR dest, CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_INTPTR count) {
+                        std::memset(reinterpret_cast<void*>(dest),
+                                    static_cast<int>(static_cast<CHAOS_IL2CPP_UINT8>(value)),
+                                    static_cast<size_t>(count));
+                    });
                 continue;
             }
 

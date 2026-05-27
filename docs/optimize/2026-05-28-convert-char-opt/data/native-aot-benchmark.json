@@ -1,0 +1,189 @@
+{
+  "schemaVersion": 1,
+  "assemblyName": "System.Private.CoreLib",
+  "familyId": "family/System.Private.CoreLib/convert/char",
+  "warmupIterations": 100,
+  "measureIterations": 100000,
+  "results": [
+    {
+      "elapsedMilliseconds": 105.971,
+      "calibratedMs": 105.971,
+      "opsPerSecond": 943658,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 0,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)"
+    },
+    {
+      "elapsedMilliseconds": 0.285,
+      "calibratedMs": 0.285,
+      "opsPerSecond": 351370344,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 1,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)"
+    },
+    {
+      "elapsedMilliseconds": 0.189,
+      "calibratedMs": 0.189,
+      "opsPerSecond": 529941706,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 2,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)"
+    },
+    {
+      "elapsedMilliseconds": 109.154,
+      "calibratedMs": 109.154,
+      "opsPerSecond": 916136,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 3,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)"
+    },
+    {
+      "elapsedMilliseconds": 1.127,
+      "calibratedMs": 1.127,
+      "opsPerSecond": 88762649,
+      "iterations": 100000,
+      "allocatedBytes": 800000,
+      "allocPerOp": 8.0,
+      "methodIndex": 4,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)"
+    },
+    {
+      "elapsedMilliseconds": 0.25,
+      "calibratedMs": 0.25,
+      "opsPerSecond": 399520575,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 5,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)"
+    },
+    {
+      "elapsedMilliseconds": 0.19,
+      "calibratedMs": 0.19,
+      "opsPerSecond": 527148129,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 6,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)"
+    },
+    {
+      "elapsedMilliseconds": 0.297,
+      "calibratedMs": 0.297,
+      "opsPerSecond": 336473755,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 7,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)"
+    },
+    {
+      "elapsedMilliseconds": 0.262,
+      "calibratedMs": 0.262,
+      "opsPerSecond": 381388253,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 8,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)"
+    },
+    {
+      "elapsedMilliseconds": 107.899,
+      "calibratedMs": 107.899,
+      "opsPerSecond": 926789,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 9,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)"
+    },
+    {
+      "elapsedMilliseconds": 112.453,
+      "calibratedMs": 112.453,
+      "opsPerSecond": 889260,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 10,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)"
+    },
+    {
+      "elapsedMilliseconds": 0.256,
+      "calibratedMs": 0.256,
+      "opsPerSecond": 390015601,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 11,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)"
+    },
+    {
+      "elapsedMilliseconds": 0.251,
+      "calibratedMs": 0.251,
+      "opsPerSecond": 399201597,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 12,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)"
+    },
+    {
+      "elapsedMilliseconds": 0.932,
+      "calibratedMs": 0.932,
+      "opsPerSecond": 107284626,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 13,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)"
+    },
+    {
+      "elapsedMilliseconds": 0.539,
+      "calibratedMs": 0.539,
+      "opsPerSecond": 185632077,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 14,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)"
+    },
+    {
+      "elapsedMilliseconds": 0.264,
+      "calibratedMs": 0.264,
+      "opsPerSecond": 379075057,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 15,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)"
+    },
+    {
+      "elapsedMilliseconds": 0.173,
+      "calibratedMs": 0.173,
+      "opsPerSecond": 577367206,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 16,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)"
+    },
+    {
+      "elapsedMilliseconds": 0.284,
+      "calibratedMs": 0.284,
+      "opsPerSecond": 352609309,
+      "iterations": 100000,
+      "allocatedBytes": 0,
+      "allocPerOp": 0.0,
+      "methodIndex": 17,
+      "methodSubjectId": "System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)"
+    }
+  ]
+}

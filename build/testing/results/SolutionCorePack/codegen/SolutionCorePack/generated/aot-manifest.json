@@ -21,6 +21,12 @@
       "reason": "generated-direct-call"
     },
     {
+      "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])",
+      "reason": "generated-direct-call"
+    },
+    {
       "assemblyName": "SolutionCorePack",
       "subjectKind": "method",
       "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
@@ -36,6 +42,12 @@
       "assemblyName": "Chaos.TestFramework.Sdk",
       "subjectKind": "method",
       "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntryKind:Chaos.TestFramework.ChaosSubjectEntryKind()",
+      "reason": "generated-direct-call"
+    },
+    {
+      "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
       "reason": "generated-direct-call"
     },
     {
@@ -3394,6 +3406,18 @@
     },
     {
       "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "type",
+      "subjectId": "System.Private.CoreLib/System.Int32",
+      "reason": "boxed-value-type"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
+      "subjectKind": "method",
+      "subjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String,System.Object,System.String)",
+      "reason": "external-call"
+    },
+    {
+      "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.Int32::ToString:System.String()",
       "reason": "external-call"
@@ -3409,12 +3433,6 @@
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.String::get_Length:System.Int32()",
       "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "type",
-      "subjectId": "System.Private.CoreLib/System.Int32",
-      "reason": "boxed-value-type"
     },
     {
       "assemblyName": "System.Private.CoreLib",
@@ -3654,12 +3672,6 @@
       "assemblyName": "System.Private.CoreLib",
       "subjectKind": "method",
       "subjectId": "System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)",
-      "reason": "external-call"
-    },
-    {
-      "assemblyName": "System.Private.CoreLib",
-      "subjectKind": "method",
-      "subjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String,System.Object,System.String)",
       "reason": "external-call"
     },
     {

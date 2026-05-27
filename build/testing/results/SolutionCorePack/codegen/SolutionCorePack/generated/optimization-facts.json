@@ -19,6 +19,11 @@
     },
     {
       "subjectKind": "type",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost",
+      "reason": "closed-world-type"
+    },
+    {
+      "subjectKind": "type",
       "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj",
       "reason": "closed-world-type"
     },
@@ -334,6 +339,11 @@
     },
     {
       "subjectKind": "method",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
       "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
       "reason": "closed-world-method"
     },
@@ -345,6 +355,11 @@
     {
       "subjectKind": "method",
       "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntryKind:Chaos.TestFramework.ChaosSubjectEntryKind()",
+      "reason": "closed-world-method"
+    },
+    {
+      "subjectKind": "method",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
       "reason": "closed-world-method"
     },
     {
@@ -4561,6 +4576,13 @@
       "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::CurrentMethodIndex",
       "dataKind": "value",
       "requiresBoxing": true
+    },
+    {
+      "subjectKind": "parameter",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])::parameter[0]:args",
+      "dataKind": "array",
+      "elementType": "System.String",
+      "requiresBoxing": false
     },
     {
       "subjectKind": "parameter",

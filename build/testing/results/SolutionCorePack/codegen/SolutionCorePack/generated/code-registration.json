@@ -1462,6 +1462,23 @@
           "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::Throws\u00601:System.Void(System.Action,System.String)"
         }
       ]
+    },
+    {
+      "moduleName": "SolutionCorePack.DeclaredBenchmarkNativeHost.dll",
+      "registrations": [
+        {
+          "registrationKind": "methodPointer",
+          "slot": 0,
+          "symbol": "SolutionCorePack_DeclaredBenchmarkNativeHost_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackDeclaredBenchmarkHost_Main_System_String",
+          "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])"
+        },
+        {
+          "registrationKind": "methodPointer",
+          "slot": 1,
+          "symbol": "SolutionCorePack_DeclaredBenchmarkNativeHost_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackDeclaredBenchmarkHost_Execute_System_Int32",
+          "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)"
+        }
+      ]
     }
   ],
   "typeCapabilities": []

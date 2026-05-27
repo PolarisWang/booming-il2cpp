@@ -30,10 +30,9 @@ void ChaosArrayClear(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_
     auto uindex = static_cast<CHAOS_IL2CPP_UINTPTR>(index);
     auto ucount = static_cast<CHAOS_IL2CPP_UINTPTR>(count);
     if (uindex > static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) || ucount > (static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length) - uindex)) return;
-    if (arr->elements == nullptr) return;
 
     std::memset(
-        reinterpret_cast<CHAOS_IL2CPP_UINT8*>(arr->elements) + uindex * sizeof(void*),
+        reinterpret_cast<CHAOS_IL2CPP_UINT8*>(accessor_get_elements(arr)) + uindex * sizeof(void*),
         0, ucount * sizeof(void*));
 }
 
@@ -46,22 +45,8 @@ CHAOS_IL2CPP_INT32 ChaosArrayGetLength(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_I
 }
 
 // ── Type marshalling helpers ──
-CHAOS_IL2CPP_INTPTR ChaosStoreInt64(CHAOS_IL2CPP_INT64 value) noexcept
-{
-    return static_cast<CHAOS_IL2CPP_INTPTR>(value);
-}
-
-CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept
-{
-    CHAOS_IL2CPP_INT32 bits;
-    std::memcpy(&bits, &value, sizeof(bits));
-    return static_cast<CHAOS_IL2CPP_INTPTR>(bits);
-}
-
-CHAOS_IL2CPP_INT64 ChaosLoadInt64(CHAOS_IL2CPP_INTPTR value) noexcept
-{
-    return static_cast<CHAOS_IL2CPP_INT64>(value);
-}
+// Implemented as CHAOS_IL2CPP_FORCEINLINE in misc_stubs.h to eliminate
+// function call overhead (~10-20 cycles) for trivial identity casts.
 
 // ── Buffer ──
 CHAOS_IL2CPP_INT32 ChaosBufferByteLength(CHAOS_IL2CPP_INTPTR array) noexcept

@@ -3,23 +3,28 @@
   "artifactKind": "managedClosureManifest",
   "assemblyName": "SolutionCorePack",
   "entrySubjectId": "",
-  "inputAssemblyPath": "artifacts/subjects/SolutionCorePack/runs/benchmark-SolutionCorePack-managed-1779734088/matrices/windows-managed-benchmark/host-input/SolutionCorePack.dll",
+  "inputAssemblyPath": "artifact/verification-catalog/workspaces/subjects/SolutionCorePack/managed-tests/bin/Release/net8.0/SolutionCorePack.dll",
   "additionalAssemblyPaths": [
-    "artifacts/subjects/SolutionCorePack/runs/benchmark-SolutionCorePack-managed-1779734088/matrices/windows-managed-benchmark/host-input/Chaos.TestFramework.Runtime.dll",
-    "artifacts/subjects/SolutionCorePack/runs/benchmark-SolutionCorePack-managed-1779734088/matrices/windows-managed-benchmark/host-input/Chaos.TestFramework.Sdk.dll"
+    "artifact/verification-catalog/workspaces/subjects/SolutionCorePack/managed-tests/bin/Release/net8.0/Chaos.TestFramework.Runtime.dll",
+    "artifact/verification-catalog/workspaces/subjects/SolutionCorePack/managed-tests/bin/Release/net8.0/Chaos.TestFramework.Sdk.dll",
+    "artifact/verification-catalog/workspaces/subjects/SolutionCorePack/managed-tests/bin/Release/net8.0/SolutionCorePack.DeclaredBenchmarkNativeHost.dll"
   ],
   "resolvedAssemblies": [
     {
       "assemblyName": "Chaos.TestFramework.Runtime",
-      "path": "artifacts/subjects/SolutionCorePack/runs/benchmark-SolutionCorePack-managed-1779734088/matrices/windows-managed-benchmark/host-input/Chaos.TestFramework.Runtime.dll"
+      "path": "artifact/verification-catalog/workspaces/subjects/SolutionCorePack/managed-tests/bin/Release/net8.0/Chaos.TestFramework.Runtime.dll"
     },
     {
       "assemblyName": "Chaos.TestFramework.Sdk",
-      "path": "artifacts/subjects/SolutionCorePack/runs/benchmark-SolutionCorePack-managed-1779734088/matrices/windows-managed-benchmark/host-input/Chaos.TestFramework.Sdk.dll"
+      "path": "artifact/verification-catalog/workspaces/subjects/SolutionCorePack/managed-tests/bin/Release/net8.0/Chaos.TestFramework.Sdk.dll"
     },
     {
       "assemblyName": "SolutionCorePack",
-      "path": "artifacts/subjects/SolutionCorePack/runs/benchmark-SolutionCorePack-managed-1779734088/matrices/windows-managed-benchmark/host-input/SolutionCorePack.dll"
+      "path": "artifact/verification-catalog/workspaces/subjects/SolutionCorePack/managed-tests/bin/Release/net8.0/SolutionCorePack.dll"
+    },
+    {
+      "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+      "path": "artifact/verification-catalog/workspaces/subjects/SolutionCorePack/managed-tests/bin/Release/net8.0/SolutionCorePack.DeclaredBenchmarkNativeHost.dll"
     },
     {
       "assemblyName": "System.Collections",
@@ -51,7 +56,7 @@
     }
   ],
   "fullAssemblyClosure": true,
-  "inputModuleVersionId": "eb6cd151-9845-4a77-99c7-3d53b3ceee71",
+  "inputModuleVersionId": "6b56bc0c-69ad-4a20-a661-7566db92efc4",
   "artifacts": [
     {
       "kind": "typedIlIr",

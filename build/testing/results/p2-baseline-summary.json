@@ -1,0 +1,450 @@
+{
+  "array-copy": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 1.0
+  },
+  "array-indexing-copy": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 81.0
+  },
+  "attributes-custom-metadata": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 118.0
+  },
+  "boxing-unboxing-casts": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 80.0
+  },
+  "buffer-memory": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 88.0
+  },
+  "ccw-basic": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 88.0
+  },
+  "codegen-edge-cases": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 90.0
+  },
+  "collections-generic-core": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 79.0
+  },
+  "convert-char": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 95.0
+  },
+  "custom-generics": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 101.0
+  },
+  "delegate-core-invocation": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 95.0
+  },
+  "dispatch-basic": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 91.0
+  },
+  "eh-stress": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 75.0
+  },
+  "enum-parsing": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 85.0
+  },
+  "enumerator-iteration": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 0.0
+  },
+  "error-info-basic": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 93.0
+  },
+  "exception-handling": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 1.0
+  },
+  "exception-throw-diagnostics": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 842.0
+  },
+  "garbage-collection": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 239.0
+  },
+  "generic-nullable-value": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 193.0
+  },
+  "generic-supplement": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 100.0
+  },
+  "generics-stress": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 182.0
+  },
+  "globalization-culture": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 212.0
+  },
+  "guid-random-hashcode": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 43.0
+  },
+  "interface-dispatch": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 214.0
+  },
+  "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 127.0
+  },
+  "io-streams-basics": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 214.0
+  },
+  "math-numerics": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 211.0
+  },
+  "numerics-bitops": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 1.0
+  },
+  "numerics-floating-point": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 1.0
+  },
+  "object-equality-identity": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 182.0
+  },
+  "pinvoke-dllimport": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 216.0
+  },
+  "pinvoke-stress": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 326.0
+  },
+  "primitive-numeric-conversions": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 170.0
+  },
+  "primitive-numeric-conversions-core": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 230.0
+  },
+  "rcw-basic": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 215.0
+  },
+  "reflection-activation": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 179.0
+  },
+  "reflection-assembly": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 335.0
+  },
+  "reflection-binding": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 170.0
+  },
+  "reflection-customattr": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 176.0
+  },
+  "reflection-edge": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 196.0
+  },
+  "reflection-event": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 212.0
+  },
+  "reflection-field-property": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 188.0
+  },
+  "reflection-generics": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 96.0
+  },
+  "reflection-hotupdate": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 214.0
+  },
+  "reflection-member-basics": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 108.0
+  },
+  "reflection-member-complete": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 41.0
+  },
+  "reflection-module": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 50.0
+  },
+  "reflection-parameters": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 30.0
+  },
+  "reflection-type": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 37.0
+  },
+  "runtime-compiler-services": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 36.0
+  },
+  "snapshot-prover": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 94.0
+  },
+  "span-memory-buffers": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 267.0
+  },
+  "string-char-text-core": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 260.0
+  },
+  "string-construction": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 221.0
+  },
+  "text-ebcdic": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 1.0
+  },
+  "thread-sync": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 573.0
+  },
+  "threading-monitor-interlocked": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 228.0
+  },
+  "threading-sync": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 225.0
+  },
+  "threading-tasks-primitives": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 161.0
+  },
+  "threading-thread-basics": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 195.0
+  },
+  "time-date-time-timespan": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 102.0
+  },
+  "type-runtime-handles": {
+    "status": "FAIL",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 195.0
+  },
+  "value-typebox": {
+    "status": "PASS",
+    "stagesPassed": null,
+    "stagesFailed": null,
+    "hasRegression": "?",
+    "elapsed_s": 1.0
+  }
+}

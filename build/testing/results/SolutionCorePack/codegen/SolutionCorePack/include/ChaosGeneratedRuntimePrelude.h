@@ -36,8 +36,19 @@ struct chaos_managed_array
     CHAOS_IL2CPP_UINT8 element_type_shape = 0;
     const TypeInfo* element_type_info = nullptr;
     CHAOS_IL2CPP_INTPTR length = 0;
-    CHAOS_IL2CPP_INTPTR* elements = nullptr;
+    // elements pointer removed — element data is contiguous after the header.
+    // Use chaos_array_get_elements() to access the inline element storage.
 };
+
+// Access inline element storage at the end of the contiguous array allocation.
+inline CHAOS_IL2CPP_INTPTR* chaos_array_get_elements(chaos_managed_array* arr) noexcept {
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<uint8_t*>(arr) + sizeof(chaos_managed_array));
+}
+inline const CHAOS_IL2CPP_INTPTR* chaos_array_get_elements(const chaos_managed_array* arr) noexcept {
+    return reinterpret_cast<const CHAOS_IL2CPP_INTPTR*>(
+        reinterpret_cast<const uint8_t*>(arr) + sizeof(chaos_managed_array));
+}
 
 // ── Type shape constants ─────────────────────────────────────────────
 constexpr CHAOS_IL2CPP_UINT8 chaos_type_shape_reference = 1;
@@ -212,6 +223,7 @@ inline bool chaos_is_array_type_compatible(
 // to file scope creates ambiguity.
 using chaos::il2cpp::jit::chaos_managed_pointer_local_slot_tag;
 using chaos::il2cpp::jit::chaos_managed_array;
+using chaos::il2cpp::jit::chaos_array_get_elements;
 using chaos::il2cpp::jit::chaos_type_info_managed_array;
 using chaos::il2cpp::jit::chaos_normalize_native_int_argument;
 using chaos::il2cpp::jit::chaos_resolve_managed_value_pointer;

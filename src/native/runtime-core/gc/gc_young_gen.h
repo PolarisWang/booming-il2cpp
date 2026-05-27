@@ -28,7 +28,7 @@ struct Region;
 /// Default size of the shared young generation region.
 /// Set to 16 MB to accommodate 256 concurrent TLABs (64 KB each)
 /// before triggering a young GC.
-static constexpr CHAOS_IL2CPP_SIZE kDefaultYoungRegionSize = 16 * 1024 * 1024;  // 16 MB
+static constexpr CHAOS_IL2CPP_SIZE kDefaultYoungRegionSize = 64 * 1024 * 1024;  // 64 MB
 
 /// Default TLAB size per thread.
 /// Each thread carves a 64 KB buffer from the shared young region.

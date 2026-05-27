@@ -51,9 +51,15 @@ struct GcPointerOffset {
 /// The layout is designed for the scanner to read instance_size and
 /// pointer_count in one cache line, then iterate pointer_offsets[]
 /// in the second cache line.
+///
+/// For variable-size array types (element_size > 0), instance_size is the
+/// fixed header size and the total object size is computed at runtime as
+/// instance_size + element_size * length.
 struct alignas(64) GcTypeLayout {
-    uint32_t instance_size;       // total object size in bytes (including header)
+    uint32_t instance_size;       // total object size (header for variable-size)
     uint16_t pointer_count;       // number of pointer fields (0 = pointer-free)
+    uint16_t element_size;        // 0 = fixed size, >0 = bytes per element (variable-size array)
+    uint16_t length_offset;       // byte offset of 'length' field from object start
     uint16_t _reserved;           // padding
     uint32_t _reserved2;          // padding
     GcPointerOffset pointer_offsets[kGcLayoutMaxInlinePointers];  // sorted offsets (may be partial when pointer_count < kGcLayoutMaxInlinePointers)
@@ -157,11 +163,14 @@ public:
 
     /// Register a GC layout for a type identified by stable_id.
     /// @param stable_id  The type's FNV-1a stable ID.
-    /// @param instance_size  Total object size.
+    /// @param instance_size  Total object size (header size for variable-size arrays).
     /// @param pointer_offsets  Array of byte offsets for pointer fields.
     /// @param pointer_count  Number of entries in pointer_offsets.
+    /// @param element_size  For variable-size types: bytes per element (0 = fixed size).
+    /// @param length_offset  For variable-size types: offset of 'length' field.
     void Register(uint64_t stable_id, uint32_t instance_size,
-                  const uint16_t* pointer_offsets, uint16_t pointer_count);
+                  const uint16_t* pointer_offsets, uint16_t pointer_count,
+                  uint16_t element_size = 0, uint16_t length_offset = 0);
 
     /// Look up a layout by stable_id.
     /// Returns nullptr if no layout is registered.

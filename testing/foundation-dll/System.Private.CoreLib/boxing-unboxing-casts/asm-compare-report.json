@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/boxing/unboxing/casts",
-  "capturedAt": "2026-05-28T00:02:58",
+  "capturedAt": "2026-05-28T01:39:22",
   "batchMode": true,
   "summary": {
     "totalMethods": 11,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 16,
-      "avg": 12.6,
-      "total": 139
+      "max": 13,
+      "avg": 11.3,
+      "total": 124
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 26
     },
-    "overallIrExpansionRatio": 0.29,
-    "averageExpansionRatio": 0.29,
-    "maxExpansionRatio": 0.36,
+    "overallIrExpansionRatio": 0.26,
+    "averageExpansionRatio": 0.26,
+    "maxExpansionRatio": 0.3,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -124,8 +124,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -136,7 +136,7 @@
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_2",
-        "instructions": 16
+        "instructions": 13
       },
       "analysis": [
         {
@@ -166,8 +166,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 15,
-        "ratio": 0.34,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -178,7 +178,7 @@
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_3",
-        "instructions": 15
+        "instructions": 12
       },
       "analysis": [
         {
@@ -203,8 +203,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -215,7 +215,7 @@
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_4",
-        "instructions": 16
+        "instructions": 13
       },
       "analysis": [
         {
@@ -245,8 +245,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -257,7 +257,7 @@
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_5",
-        "instructions": 16
+        "instructions": 13
       },
       "analysis": [
         {
@@ -432,8 +432,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 15,
-        "ratio": 0.34,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -444,7 +444,7 @@
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10",
-        "instructions": 15
+        "instructions": 12
       },
       "analysis": [
         {

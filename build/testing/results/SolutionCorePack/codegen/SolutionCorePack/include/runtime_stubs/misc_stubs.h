@@ -10,10 +10,21 @@
 void    ChaosArrayClear(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index, CHAOS_IL2CPP_INT32 count) noexcept;
 CHAOS_IL2CPP_INT32 ChaosArrayGetLength(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 dimension) noexcept;
 
-// Type marshalling
-CHAOS_IL2CPP_INTPTR ChaosStoreInt64(CHAOS_IL2CPP_INT64 value) noexcept;
-CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept;
-CHAOS_IL2CPP_INT64  ChaosLoadInt64(CHAOS_IL2CPP_INTPTR value) noexcept;
+// Type marshalling — force-inline to eliminate call overhead for trivial casts.
+// On x64, CHAOS_IL2CPP_INTPTR ≡ int64_t, so ChaosStoreInt64 is a no-op identity.
+// Without forceinline, each call generates function prologue/epilogue (~10-20
+// cycles) for what should be zero instructions.
+CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INTPTR ChaosStoreInt64(CHAOS_IL2CPP_INT64 value) noexcept {
+    return static_cast<CHAOS_IL2CPP_INTPTR>(value);
+}
+CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INTPTR ChaosStoreFloat32(CHAOS_IL2CPP_FLOAT32 value) noexcept {
+    CHAOS_IL2CPP_INT32 bits;
+    std::memcpy(&bits, &value, sizeof(bits));
+    return static_cast<CHAOS_IL2CPP_INTPTR>(bits);
+}
+CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INT64  ChaosLoadInt64(CHAOS_IL2CPP_INTPTR value) noexcept {
+    return static_cast<CHAOS_IL2CPP_INT64>(value);
+}
 
 // ── Float64 bit-cast helpers (force-inline for AOT hot path) ──
 // These eliminate 2 out-of-line function calls per double operation

@@ -11,7 +11,23 @@ enum class RuntimeMode;
 
 /* GC allocation helpers for generated code. GcAllocate returns zeroed memory
    (scanned for pointers). GcAllocateAtomic returns zeroed memory that is NOT
-   scanned for pointers — use for pointer-free data (e.g. string UTF-8 bytes). */
+   scanned for pointers — use for pointer-free data (e.g. string UTF-8 bytes).
+
+   Fast path (generated code, CHAOS_IL2CPP_NEW_GC macro):
+     GcAllocateFast / GcAllocateAtomicFast — __forceinline in gc_alloc_stubs.h,
+     no PROFILE_SCOPE, no global atomics, ~30ns/alloc (SHIP config).
+
+   Profiled path (non-hot-path callers, diagnostic use):
+     GcAllocateProfiled / GcAllocateAtomicProfiled — out-of-line in
+     gc_alloc_stubs.cpp, retains PROFILE_SCOPE + global atomic stats. */
+void* GcAllocateFast(CHAOS_IL2CPP_SIZE size);
+void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size);
+void* GcAllocateProfiled(CHAOS_IL2CPP_SIZE size);
+void* GcAllocateAtomicProfiled(CHAOS_IL2CPP_SIZE size);
+
+// Legacy aliases for separately-compiled runtime stubs (string_stubs, etc.)
+// that call GcAllocate/GcAllocateAtomic by name.  Resolved to thin wrappers
+// in gc_alloc_stubs.cpp that delegate to the profiled variants.
 void* GcAllocate(CHAOS_IL2CPP_SIZE size);
 void* GcAllocateAtomic(CHAOS_IL2CPP_SIZE size);
 RuntimeStatus TypeQueryCapability(TypeInfoHandle type, RuntimeTypeCapabilityInfoV0* out_capability_info);

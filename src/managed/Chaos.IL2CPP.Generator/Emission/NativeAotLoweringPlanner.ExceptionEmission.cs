@@ -518,6 +518,16 @@ public sealed partial class NativeAotLoweringPlanner
 
 	private void EmitInstruction(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation, AotCoreIrInstructionArtifact? nextInstruction = null)
 	{
+		// A2.6 DCE: Skip dead ltoken + GetTypeFromHandle when TypeInfo* fold fires.
+		if (_typeHierarchyPtrSkipIlOffsets.Count > 0 &&
+		    _currentMethodNativeSymbol != null &&
+		    (instruction.Op == "ldtoken" || instruction.Op == "call") &&
+		    _typeHierarchyPtrSkipIlOffsets.TryGetValue(_currentMethodNativeSymbol, out var skipOffsets) &&
+		    skipOffsets.Contains(instruction.IlOffset))
+		{
+			return;
+		}
+
 		switch (instruction.Op)
 		{
 		case "ldc.i4":
@@ -1487,22 +1497,30 @@ public sealed partial class NativeAotLoweringPlanner
 		case "ldelem":
 		{
 			var targetRef = instruction.TargetReference;
-			if (targetRef == null || targetRef.Kind != AotCoreIrReferenceKind.Type)
+			string? subjectId = null;
+			AotCoreIrTypeShapeKind typeShape = AotCoreIrTypeShapeKind.ValueType;
+
+			if (targetRef != null && targetRef.Kind == AotCoreIrReferenceKind.Type)
 			{
-				// No type metadata: fall back to raw pointer load.
-				EmitLinearArrayLoad(builder, instruction, "chaos_element", indentation);
-				break;
+				subjectId = HasArrayElementReference(targetRef)
+					? targetRef.ArrayElementSubjectId!
+					: targetRef.SubjectId;
+				typeShape = HasArrayElementReference(targetRef)
+					? targetRef.ArrayElementTypeShape
+					: targetRef.TypeShape;
+			}
+			else if (instruction.Operand is string operandTypeName)
+			{
+				// Generic ldelem with Operand as type name (no TargetReference)
+				subjectId = operandTypeName;
 			}
 
-			string subjectId = HasArrayElementReference(targetRef)
-				? targetRef.ArrayElementSubjectId!
-				: targetRef.SubjectId;
-			AotCoreIrTypeShapeKind typeShape = HasArrayElementReference(targetRef)
-				? targetRef.ArrayElementTypeShape
-				: targetRef.TypeShape;
-
-			if (typeShape == AotCoreIrTypeShapeKind.ReferenceType || typeShape == AotCoreIrTypeShapeKind.InterfaceType)
+			if (subjectId == null
+				|| typeShape == AotCoreIrTypeShapeKind.ReferenceType
+				|| typeShape == AotCoreIrTypeShapeKind.InterfaceType)
+			{
 				EmitLinearArrayLoad(builder, instruction, "chaos_element", indentation);
+			}
 			else
 				switch (subjectId)
 				{
@@ -1551,30 +1569,33 @@ public sealed partial class NativeAotLoweringPlanner
 		case "stelem.r8":
 			EmitLinearArrayStore(builder, instruction, "ChaosStoreFloat64(static_cast<CHAOS_IL2CPP_FLOAT64>(chaos_value_raw))", indentation, isReferenceElement: false);
 			break;
-		case "stelem.ref":
-			EmitLinearArrayStore(builder, instruction, "chaos_value", indentation, isReferenceElement: true);
-			break;
 		case "stelem":
 		{
 			var targetRef = instruction.TargetReference;
-			if (targetRef == null || targetRef.Kind != AotCoreIrReferenceKind.Type)
+			string? subjectId = null;
+			AotCoreIrTypeShapeKind typeShape = AotCoreIrTypeShapeKind.ValueType;
+
+			if (targetRef != null && targetRef.Kind == AotCoreIrReferenceKind.Type)
 			{
-				// No type metadata: fall back to raw pointer store.
-				// The element type is unknown at codegen time; the eval stack
-				// already carries the correctly-typed value as CHAOS_IL2CPP_INTPTR.
-				EmitLinearArrayStore(builder, instruction, "chaos_value_raw", indentation, isReferenceElement: false);
-				break;
+				subjectId = HasArrayElementReference(targetRef)
+					? targetRef.ArrayElementSubjectId!
+					: targetRef.SubjectId;
+				typeShape = HasArrayElementReference(targetRef)
+					? targetRef.ArrayElementTypeShape
+					: targetRef.TypeShape;
+			}
+			else if (instruction.Operand is string operandTypeName)
+			{
+				// Generic stelem with Operand as type name (no TargetReference)
+				subjectId = operandTypeName;
 			}
 
-			string subjectId = HasArrayElementReference(targetRef)
-				? targetRef.ArrayElementSubjectId!
-				: targetRef.SubjectId;
-			AotCoreIrTypeShapeKind typeShape = HasArrayElementReference(targetRef)
-				? targetRef.ArrayElementTypeShape
-				: targetRef.TypeShape;
-
-			if (typeShape == AotCoreIrTypeShapeKind.ReferenceType || typeShape == AotCoreIrTypeShapeKind.InterfaceType)
-				EmitLinearArrayStore(builder, instruction, "chaos_value", indentation, isReferenceElement: true);
+			if (subjectId == null
+				|| typeShape == AotCoreIrTypeShapeKind.ReferenceType
+				|| typeShape == AotCoreIrTypeShapeKind.InterfaceType)
+			{
+				EmitLinearArrayStore(builder, instruction, "chaos_value_raw", indentation, isReferenceElement: false);
+			}
 			else
 				switch (subjectId)
 				{
@@ -1593,8 +1614,9 @@ public sealed partial class NativeAotLoweringPlanner
 				default:
 					EmitLinearArrayStore(builder, instruction, "chaos_value_raw", indentation, isReferenceElement: false); break;
 				}
-			break;
-		}
+				break;
+			}
+
 		case "ldobj":
 			EmitLinearLoadObjectValue(builder, instruction, indentation);
 			break;
@@ -2406,12 +2428,8 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine(indentation + "{");
 			if (hierarchyFold.TypeExpr2 is not null)
 			{
-				// Two-arg methods: both args are typeof() constants.
-				// Reset depth and push *Ptr result directly (depth-safe).
-				if (_activeStructuredSlotContext is not null)
-					_activeStructuredSlotContext.RestoreDepth(0);
-				else
-					builder.AppendLine(indentation + "    chaos_stack_top -= 2;");
+				// Two-arg methods: DCE already skipped ltoken + GetTypeFromHandle,
+				// so stack is clean.  Just push the *Ptr call result.
 				EmitEvalStackPush(builder, indentation + "    ",
 					$"{hierarchyFold.PtrFunctionName}({hierarchyFold.TypeExpr1}, {hierarchyFold.TypeExpr2})");
 			}
@@ -2419,11 +2437,7 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			{
 				// IsInstanceOfType: type arg is typeof(), obj arg is eval stack expression
 				var objExpr = ConsumeEvalStackValueExpression();
-				// Discard the typeof() type arg (keep obj)
-				if (_activeStructuredSlotContext is not null)
-					_activeStructuredSlotContext.RestoreDepth(0);
-				else
-					builder.AppendLine(indentation + "    chaos_stack_top--;");
+				// DCE skipped the type handle push, stack has only the obj arg
 				EmitEvalStackPush(builder, indentation + "    ",
 					$"{hierarchyFold.PtrFunctionName}({hierarchyFold.TypeExpr1}, {objExpr})");
 			}

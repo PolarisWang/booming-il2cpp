@@ -21,6 +21,12 @@
       "metadataToken": 33554451
     },
     {
+      "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost",
+      "definitionSubjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost",
+      "metadataToken": 33554434
+    },
+    {
       "assemblyName": "SolutionCorePack",
       "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj",
       "definitionSubjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj",
@@ -407,6 +413,14 @@
       "parameterCount": 2
     },
     {
+      "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])",
+      "definitionSubjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])",
+      "declaringTypeSubjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost",
+      "metadataToken": 100663297,
+      "parameterCount": 1
+    },
+    {
       "assemblyName": "SolutionCorePack",
       "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
       "definitionSubjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
@@ -429,6 +443,14 @@
       "declaringTypeSubjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection",
       "metadataToken": 100663298,
       "parameterCount": 0
+    },
+    {
+      "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
+      "definitionSubjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
+      "declaringTypeSubjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost",
+      "metadataToken": 100663298,
+      "parameterCount": 1
     },
     {
       "assemblyName": "SolutionCorePack",

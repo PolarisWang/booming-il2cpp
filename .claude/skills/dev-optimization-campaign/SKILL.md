@@ -1,6 +1,6 @@
 ---
 name: dev-optimization-campaign
-description: 多 family 性能优化战役的编排技能。三级优化（L1快速/L2标准/L3深度），按复杂度分级验证。四阶段框架：① 全量 family verification 修复 → ② 测试代码与生成代码逻辑对齐 → ③ AOT/JIT 性能收敛 → ④ 热更性能保障（仅L3）。L1 用 commit message 代 docs/optimize/。所有级别至少通过 fact + benchmark。禁止 hack 测试代码。
+description: 多 family 性能优化战役的编排技能。三级优化（L1快速/L2标准/L3深度），按复杂度分级验证。四阶段框架：① 全量 family verification 修复 → ② 测试代码与生成代码逻辑对齐 → ③ AOT/JIT 性能收敛 → ④ 热更性能保障（仅L3）。L1 用 commit message 代 docs/optimize/。所有级别至少通过 fact + benchmark。数据完整性为硬性要求（benchmark timing>0, hotupdate semantic_changed>0）。禁止 hack 测试代码。
 ---
 
 # 优化战役编排 — 四阶段收敛流程
@@ -14,6 +14,7 @@ description: 多 family 性能优化战役的编排技能。三级优化（L1快
 5. **数据驱动决策** — 方案选择必须基于 CoreCLR/Mono/Unity IL2CPP 横向对比，不得凭直觉
 6. **Commit 可审计** — 每个优化 round 的 commit message 必须包含性能对比表
 7. **禁止 hack 测试代码** — 发现问题时必须直接修复 codegen 或 il2cpp runtime，不得修改测试用例跳过断言
+8. **数据完整性是硬性要求** — benchmark 的 `elapsedMilliseconds` 必须有正数、hotupdate 必须检测到语义变化。数据不全 = stage failed，不等同于"跳过"
 
 ## 优化级别
 
@@ -38,29 +39,41 @@ description: 多 family 性能优化战役的编排技能。三级优化（L1快
 2. **保持测试框架通用性** — 测试代码是通用验证工具，不是某个优化的专属补丁。优化完成后所有已有测试仍应通过
 3. **修改测试框架需谨慎** — 如确需修改测试框架/工具链，必须在 README.md 中说明修改动机和影响范围，并经 Coordinator 或架构负责人评审
 
+## 工作目录保护（强制）
+
+1. **必须使用 worktree** — 所有开发在 worktree 中完成，禁止直接在 main 分支的工作目录中修改代码
+   ```bash
+   git worktree add optimization-campaign/workers/<worker-id>/worktree claim/<family>/<worker-id>
+   cd optimization-campaign/workers/<worker-id>/worktree
+   ```
+2. **不走 worktree 必须在 plan/README 中注明理由** — 无理由直接在 main 工作视为违规
+3. **犯规处理** — 在 main 直接工作导致 dirty 状态时，必须：stash → worktree → apply → 重跑 verification 确认无污染
+
 ## 工作流
 
 ```
 Phase 0 ─ Baseline（所有级别）
-  创建 state.json → 跑 baseline benchmark → 评估 family 健康度
+  创建 state.json → 工具链预检 → 跑 baseline benchmark → 评估 family 健康度
               ↓
 Phase 1 ─ 验证修复（所有级别必过 fact + benchmark）
-  L1: fact + benchmark  →  全部绿
-  L2: fact + benchmark + diff audit  →  全部绿
-  L3: 完整 16-stage pipeline  →  全部绿
+  L1: fact + benchmark → 数据完整性验证 → 全部绿
+  L2: fact + benchmark + diff audit → 数据完整性验证 → 全部绿
+  L3: 完整 16-stage pipeline → 数据完整性验证（timing>0 + semantic_changed>0）→ 全部绿
               ↓
 Phase 2 ─ 逻辑对齐（L2/L3 必做，L1 可选）
   逐方法对比测试代码逻辑 vs 生成代码逻辑
   → 不对齐就修复 codegen → 再跑 verification 确认
               ↓
-Phase 3 ─ 性能收敛（L2/L3 目标，L1 不强制 vs .NET 8）
-  L1: 不自证退化即可
-  L2/L3: native-aot vs .NET 8 ≤ 20%（可豁免论证）
-  → 不满足就诊断分析 → 优化 → build → benchmark → 直到收敛
+Phase 3 ─ 性能收敛（三重退出条件）
+  条件1: Pipeline 通过
+  条件2: 数据有效（所有 benchmark 有正数 timing）
+  条件3: 性能达标（vs .NET 8 ≤ 20%）
+  三者全部满足才算收敛
               ↓
-Phase 4 ─ 热更性能保障（仅 L3）
-  L3: hotupdate 后 vs hotupdate 前 ≤ 100%
-  → 不满足就继续优化 → 直到达标
+Phase 4 ─ 热更性能保障（二重退出条件，仅 L3）
+  条件1: Patch 有语义变化（semantic_changed > 0）
+  条件2: 性能开销 ≤ 100%
+  条件1 不满足 → 退回 Phase 1 P5 修复
               ↓
 验收成功
 ```
@@ -74,20 +87,12 @@ optimization-campaign/
 │   ├── array-indexing-copy.json    # 本地 baseline 数据（不提交，仅本地产生）
 │   └── ...
 ├── workers/
-│   ├── agent-01/
-│   │   ├── status.md       # Worker 进度日志（不提交）
-│   │   ├── blocker.md      # 阻塞项（不提交）
-│   │   └── results/        # 过程结果（不提交）
-│   └── agent-02/
-│       └── ...
-└── aggregate/
-    └── comparison-report.json  # 聚合报告（提交）
-│   ├── agent-01/
-│   │   ├── status.md       # Worker 进度日志（不提交）
-│   │   ├── blocker.md      # 阻塞项（不提交）
-│   │   └── results/        # 过程结果（不提交）
-│   └── agent-02/
-│       └── ...
+│   ├── <worker-id>/
+│   │   ├── FAMILY_PROFILE.md  # Family 基本信息、工具链能力矩阵、性能基线（提交）
+│   │   ├── status.md          # Worker 进度日志（不提交）
+│   │   ├── blocker.md         # 阻塞项（不提交）
+│   │   └── results/           # 过程结果（不提交）
+│   └── ...
 └── aggregate/
     └── comparison-report.json  # Coordinator 聚合产物（提交）
 
@@ -102,6 +107,29 @@ docs/optimize/
     └── ...
 ```
 
+### FAMILY_PROFILE.md 内容模板
+
+```markdown
+# Family Profile: <family-name>
+
+## 基本信息
+- assembly: <assembly-name>
+- methodCount: N
+- subjectEntryCount: N
+
+## 工具链能力矩阵
+| 能力 | 可用 | 备注 |
+|------|------|------|
+| AOT benchmark | ✅/❌ | |
+| JIT benchmark | ✅/❌ | 如果不可用，记录原因（如 entry-jit.exe 返回 -1.0） |
+| Hotupdate semantic detection | ✅/❌ | 如果不可用，记录原因（如语义检测总是 0） |
+
+## 性能基线
+| 方法 | AOT (ns/op) | JIT (ns/op) | .NET 8 (ns/op) |
+|------|------------|-------------|----------------|
+| Subject_0 | ... | ... | ... |
+```
+
 ### 各目录 git 提交规则
 
 | 路径 | 提交规则 |
@@ -110,21 +138,33 @@ docs/optimize/
 | `docs/optimize/YYYY-MM-DD-xxx/` 全部 | 提交 — 正式交付物 |
 | `optimization-campaign/state.json` | 提交 — 战役全局状态 |
 | `optimization-campaign/aggregate/comparison-report.json` | 提交 — 正式聚合报告 |
+| `optimization-campaign/workers/*/FAMILY_PROFILE.md` | 提交 — family 档案 |
 | `optimization-campaign/baseline/*.json` | **不提交**（太大，仅本地） |
-| `optimization-campaign/workers/*/` | **不提交**（过程产物） |
+| `optimization-campaign/workers/*/`（除 FAMILY_PROFILE.md） | **不提交**（过程产物） |
 
 ## Phase 0：Baseline（Coordinator 独占，单机执行）
 
 1. 创建 `optimization-campaign/` 目录
 2. 选定 families，写 `state.json`
-3. 逐 family 跑 baseline benchmark
-4. 评估 family 健康度：
+3. **工具链预检**（新增）— 在跑 baseline 前先验证工具链完整性：
+   ```bash
+   # 1. JIT benchmark 预检
+   entry-jit.exe --benchmark 0 1000
+   # 结果必须 > 0ms，否则标记为 "jit-benchmark-unsupported" 并写入 FAMILY_PROFILE.md
+
+   # 2. Hotupdate 预检
+   entry.exe --hotupdate
+   # 检查 semantic_changed > 0，否则标记为 "hotupdate-semantic-unsupported" 并写入 FAMILY_PROFILE.md
+   ```
+4. 逐 family 跑 baseline benchmark
+5. 评估 family 健康度：
    ```
    healthy:  >=80% methods completed
    partial:  1%-79% methods completed
    broken:   0% methods completed（标为 excluded）
    ```
-5. 推进 phase → `baseline_done`，开放 claim
+6. 编写 FAMILY_PROFILE.md（工具链能力矩阵 + 性能基线）
+7. 推进 phase → `baseline_done`，开放 claim
 
 > **级别说明**：Phase 0 不涉及级别区分，所有 family 统一跑相同的 baseline benchmark。级别在 Phase 1 诊断阶段自评。
 
@@ -140,13 +180,31 @@ baseline 结果写入 `optimization-campaign/baseline/<family>.json`。
 
 ## Phase 1：验证修复
 
-### 验证要求（按级别）
+### 验证要求（按级别 — stage × level × 数据质量矩阵）
 
-| 级别 | 验证内容 | 说明 |
-|------|---------|------|
-| **L1** | fact (100% passed) + benchmark (0 failed) | 无额外要求 |
-| **L2** | fact + benchmark + diff audit | 检查桥接模式、异常处理、不必要的 GC 分配 |
-| **L3** | 全部 16 stage | 含 codegen/jit_codegen/managed_fact/audit/asm_compare/hotupdate 系列 |
+| stage | L1 要求 | L2 要求 | L3 要求 |
+|-------|---------|---------|---------|
+| preflight | exit=0 | exit=0 | exit=0 |
+| codegen | exit=0 | exit=0 | exit=0 |
+| jit_codegen | — | — | exit=0 |
+| managed_fact | — | — | exit=0 |
+| fact | exit=0 + 100% passed | exit=0 + 100% passed | exit=0 + 100% passed |
+| fact_jit | — | — | exit=0 + 100% passed |
+| audit | — | passed | passed |
+| asm_compare | — | — | passed |
+| microbench | — | — | exit=0 |
+| benchmark | exit=0 | exit=0 + timing>0 | exit=0 + timing>0 + alloc data |
+| hotupdate | — | — | exit=0 + semantic_changed>0 |
+| hotupdate_aot_benchmark | — | — | exit=0 + timing>0 |
+| hotupdate_jit_fact | — | — | exit=0 + semantic_changed>0 |
+| hotupdate_jit_benchmark | — | — | exit=0 + timing>0 |
+| dashboard | — | — | passed |
+| aggregate | — | — | passed |
+
+**数据完整性规则**：
+- `elapsedMilliseconds` 必须 > 0（至少 AOT benchmark 路径）。全 -1.0 = stage failed
+- `allSemantic` 必须为 true（hotupdate 检测到语义变化）。false = stage failed
+- 数据不完整 → 走修复流程，不能跳过
 
 原则：L1/L2 不要求完整 pipeline。跳过 stage 必须在 status.md 或 README.md 中注明理由。
 
@@ -185,7 +243,9 @@ git push origin --delete claim/<family>/<worker-id>
 # 完成：通过 PR 合并回 main（含 docs/optimize/ 产物），合并后 claim 自动释放
 ```
 
-### 2. 隔离开发（推荐用 worktree）
+### 2. 隔离开发（必须用 worktree）
+
+**必须**使用 worktree 进行开发，禁止直接在 main 分支修改：
 
 ```bash
 git worktree add optimization-campaign/workers/<worker-id>/worktree claim/<family>/<worker-id>
@@ -216,7 +276,24 @@ cd optimization-campaign/workers/<worker-id>/worktree
 python -m verification.entry_points.cli --slug <family> --assembly System.Private.CoreLib --mode strict
 ```
 
-### 4. 修复策略
+### 4. 数据完整性验证（新增子步骤）
+
+benchmark 和 hotupdate 阶段完成后，显式验证数据质量：
+
+```bash
+# 1. AOT benchmark timing > 0
+python -c "import json; d=json.load(open('native-aot-benchmark.json')); assert all(r.get('elapsedMilliseconds',-1) > 0 for r in d['results']), 'AOT benchmark has -1.0 timing'"
+
+# 2. JIT benchmark timing > 0（或标记为 unsupported）
+python -c "import json; d=json.load(open('native-jit-benchmark.json')); assert all(r.get('elapsedMilliseconds',-1) > 0 for r in d['results']), 'JIT benchmark has -1.0 timing'"
+
+# 3. Hotupdate semantic_changed > 0
+python -c "import json; d=json.load(open('hotupdate-result.json')); assert d.get('semanticChangedCount', 0) > 0, 'hotupdate no semantic change'"
+```
+
+数据不完整 → 走 P4/P5 修复流程，不能跳过。
+
+### 5. 修复策略
 
 检查每个 stage 的输出，按以下优先级修复：
 
@@ -226,10 +303,32 @@ python -m verification.entry_points.cli --slug <family> --assembly System.Privat
 | P1 | fact / fact_jit / managed_fact | Assert 失败 → 检查翻译语义正确性 |
 | P2 | audit | 原则审计不通过 → 对齐架构规范 |
 | P3 | asm_compare | 指令扩展比异常 → 检查 lowering 路径 |
-| P4 | benchmark | 性能数据缺失 → 检查 benchmark harness |
-| P5 | hotupdate 系列 | 补丁应用失败 → 修复 hotpatch 机制 |
+| **P4** | **benchmark** | **见下方诊断树** |
+| **P5** | **hotupdate 系列** | **见下方诊断树** |
 
-修复后重新跑完整管线，直到 16 个 stage 全部通过。
+#### P4 诊断树：benchmark 性能数据缺失
+
+```
+P4 benchmark 性能数据缺失：
+  ├─ entry.exe 返回 -1.0？
+  │   ├─ 是 → 检查 dispatch thunks 类型与 runtime-entry 模板是否匹配
+  │   │   └─ 匹配？→ 检查 dispatch 函数是否有 EH 保护
+  │   └─ 否 → 检查 benchmark harness 的 CLI 解析逻辑
+  └─ 修复后重新跑 benchmark stage
+```
+
+#### P5 诊断树：hotupdate 无语义变化
+
+```
+P5 hotupdate 无语义变化：
+  ├─ baseline_values 全部为 0？
+  │   ├─ 是 → ChaosDispatchMethod 返回 dispatch status 而非方法返回值
+  │   │   └─ 改用 fact-json 模式（比对 per-method pass/fail）做前后对比
+  │   └─ 否 → patch 确实没改变行为，在 README 注明
+  └─ 修复后重新跑 hotupdate stage
+```
+
+修复后重新跑完整管线，直到所有 stage 全部通过且数据完整性验证通过。
 
 ## Phase 2：逻辑对齐
 
@@ -263,7 +362,17 @@ testing/foundation-dll/System.Private.CoreLib/<family>/codegen/native-aot.genera
 
 **禁止**：为让验证通过而修改测试代码的预期值或跳过断言。
 
-## Phase 3：性能收敛
+## Phase 3：性能收敛（三重退出条件）
+
+### 退出条件
+
+Phase 3 收敛要求以下**三个条件全部满足**：
+
+1. **Pipeline 通过** — 所有必选 stage 返回 passed
+2. **数据有效** — 所有 benchmark 有正数 timing（`elapsedMilliseconds > 0`）
+3. **性能达标** — vs .NET 8 差距在允许范围内（见下方目标）
+
+三者任一不满足 → 不视为收敛。
 
 ### 性能目标（按级别）
 
@@ -361,9 +470,18 @@ hu_aot_overhead = (hu_aot_ns - aot_ns) / aot_ns * 100
 
 优化必须在 worker 的本机平台上完成收敛验证。如果优化涉及平台相关代码，应额外在异平台验证。
 
-## Phase 4：热更性能保障（仅 L3）
+## Phase 4：热更性能保障（二重退出条件，仅 L3）
 
 > **适用范围**：Phase 4 仅对 **L3 深度优化**必选。L1/L2 优化可直接跳过，无需说明理由。
+
+### 退出条件
+
+Phase 4 收敛要求以下**两个条件全部满足**：
+
+1. **Patch 有语义变化** — `semantic_changed_count > 0`（patch 确实改变了方法行为）
+2. **性能开销 ≤ 100%** — hotupdate 后比 hotupdate 前最多慢一倍
+
+条件 1 不满足 → 退回 Phase 1 P5 修复（修复语义检测机制，不满足条件 1 不得进入 benchmark）
 
 ### 目标
 
@@ -471,7 +589,9 @@ AOT + JIT 双路径都必须满足。
 - [ ] L1: fact + benchmark passed（不自证退化）
 - [ ] L2: Phase 2 逻辑对齐 + diff audit
 - [ ] L2/L3: Phase 3 vs .NET 8 ≤ 20%（或已论证豁免）
+- [ ] **L2/L3: Phase 3 数据完整性（benchmark timing > 0）**
 - [ ] L3: Phase 1 16-stage 全部 passed
+- [ ] **L3: Phase 4 hotupdate 语义变化（semantic_changed > 0）**
 - [ ] L3: Phase 4 hotupdate 开销 ≤ 100%
 - [ ] L3: 跨平台验证通过（涉及平台相关代码时）
 - [ ] L3: 或在 README.md 中已注明理论极限并经 Coordinator 确认
@@ -483,11 +603,13 @@ AOT + JIT 双路径都必须满足。
 
 ### 收敛条件定义
 
-#### Phase 3: 性能收敛
-
-收敛标准是与 .NET 8 JIT 对比，**不是与优化前的 baseline 对比**：
+#### Phase 3: 性能收敛（三重退出条件）
 
 ```
+条件1: Pipeline 通过
+条件2: 数据有效 — 所有 benchmark 有正数 timing（elapsedMilliseconds > 0）
+条件3: 性能达标 — vs .NET 8 差距 ≤ 20%
+
 aot_slowdown_vs_net8 = (chaos_aot_ns - net8_ns) / net8_ns * 100
 jit_slowdown_vs_net8 = (chaos_jit_ns - net8_ns) / net8_ns * 100
 
@@ -501,9 +623,12 @@ jit_slowdown_vs_net8 = (chaos_jit_ns - net8_ns) / net8_ns * 100
 
 **跨平台收敛**：优化必须在 worker 的本机平台上完成收敛验证。如果优化涉及平台相关代码（汇编指令、ABI 约定、内存布局等），worker 应在本机之外至少一个异平台（如 Linux/macOS）上验证收敛结果。
 
-#### Phase 4: 热更性能保障
+#### Phase 4: 热更性能保障（二重退出条件）
 
 ```
+条件1: Patch 有语义变化 — semantic_changed_count > 0
+条件2: 性能开销 ≤ 100%
+
 AOT:  hu_aot_overhead = (hu_aot_ns - aot_ns) / aot_ns * 100
 JIT:  hu_jit_overhead = (hu_jit_ns - jit_ns) / jit_ns * 100
 
@@ -652,10 +777,12 @@ git push origin main
 | 阶段 | L1 | L2 | L3 |
 |------|----|----|----|
 | 诊断 | 30min | 1h | 2h |
+| 工具链预检 | 5min | 5min | 5min |
 | 实现 | 30min | 1h | 2h+ |
 | build + benchmark | 15min | 30min | 1h+ |
+| 数据完整性验证 | 5min | 5min | 5min |
 | 文档 + commit | 5min | 30min | 1h |
-| **总计** | **1.5h** | **3h** | **6h+** |
+| **总计** | **1.5h** | **3.5h** | **6.5h+** |
 
 超过时间上限应暂停并在 blocker.md 中记录阻塞原因。
 
@@ -674,24 +801,27 @@ git push origin main
 
 1. ✅ fact 验证 100% passed，0 failed
 2. ✅ benchmark 数据完整，0 failed
-3. ✅ 不自证退化（优化后不比优化前慢超过 10%，如有已在 README.md 中注明根因）
-4. ✅ commit message 包含性能对比表和根因
-5. ✅ 禁止 hack 测试代码
+3. ✅ **benchmark 数据有效 — 至少 AOT 路径的 elapsedMilliseconds > 0（全 -1.0 = 不通过）**
+4. ✅ 不自证退化（优化后不比优化前慢超过 10%，如有已在 README.md 中注明根因）
+5. ✅ commit message 包含性能对比表和根因
+6. ✅ 禁止 hack 测试代码
 
 ### L2 额外要求
 
-6. ✅ Phase 2: 测试代码与生成代码逻辑对齐
-7. ✅ diff audit 通过（桥接模式、异常处理、GC 分配检查）
-8. ✅ 轻量 README.md（优化动机 + 方案对比 + 数据表）
+7. ✅ Phase 2: 测试代码与生成代码逻辑对齐
+8. ✅ diff audit 通过（桥接模式、异常处理、GC 分配检查）
+9. ✅ 轻量 README.md（优化动机 + 方案对比 + 数据表）
 
 ### L3 额外要求
 
-9. ✅ Phase 1: 16 stage 全部 passed
-10. ✅ Phase 3: native-aot vs .NET 8 差距 ≤ 20%（或已论证豁免）
-11. ✅ Phase 3: native-jit vs .NET 8 差距 ≤ 20%（或已论证豁免）
-12. ✅ Phase 4: hotupdate AOT 开销 ≤ 100%
-13. ✅ Phase 4: hotupdate JIT 开销 ≤ 100%
-14. ✅ docs/optimize/ 完整 README.md（含横向方案对比 + 收敛检查表）
-15. ✅ 跨平台验证通过（涉及平台相关代码时）
+10. ✅ Phase 1: 16 stage 全部 passed
+11. ✅ **Phase 3: 数据完整性（所有 benchmark 有正数 timing）**
+12. ✅ Phase 3: native-aot vs .NET 8 差距 ≤ 20%（或已论证豁免）
+13. ✅ Phase 3: native-jit vs .NET 8 差距 ≤ 20%（或已论证豁免）
+14. ✅ **Phase 4: hotupdate 语义变化（semantic_changed > 0）**
+15. ✅ Phase 4: hotupdate AOT 开销 ≤ 100%
+16. ✅ Phase 4: hotupdate JIT 开销 ≤ 100%
+17. ✅ docs/optimize/ 完整 README.md（含横向方案对比 + 收敛检查表）
+18. ✅ 跨平台验证通过（涉及平台相关代码时）
 
 > L1/L2 不需要满足 L3 的要求。L1 不需要满足 L2 的要求。

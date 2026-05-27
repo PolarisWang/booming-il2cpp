@@ -23,6 +23,11 @@
       "sourceKind": "ReferencedAot"
     },
     {
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost",
+      "metadataToken": 33554434,
+      "sourceKind": "ReferencedAot"
+    },
+    {
       "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads\u002BSmallObj",
       "metadataToken": 33554435,
       "sourceKind": "ReferencedAot"
@@ -340,6 +345,11 @@
       "sourceKind": "ReferencedAot"
     },
     {
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])",
+      "metadataToken": 100663297,
+      "sourceKind": "ReferencedAot"
+    },
+    {
       "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
       "metadataToken": 100663298,
       "sourceKind": "ReferencedAot"
@@ -351,6 +361,11 @@
     },
     {
       "subjectId": "Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntryKind:Chaos.TestFramework.ChaosSubjectEntryKind()",
+      "metadataToken": 100663298,
+      "sourceKind": "ReferencedAot"
+    },
+    {
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
       "metadataToken": 100663298,
       "sourceKind": "ReferencedAot"
     },

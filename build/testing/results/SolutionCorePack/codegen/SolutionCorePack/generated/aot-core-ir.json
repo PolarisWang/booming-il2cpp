@@ -649,6 +649,269 @@
       "declaringAssemblyName": "Chaos.TestFramework.Sdk"
     },
     {
+      "methodId": "solution-core-pack-declared-benchmark-native-host.chaos-generated-managed-tests-solution-core-pack-solution-core-pack-declared-benchmark-host.main",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])",
+      "signature": "System.Int32 Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main(System.String[])",
+      "identity": {
+        "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+        "declaringTypeSubjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost",
+        "definitionSubjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])",
+        "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main:System.Int32(System.String[])",
+        "methodId": "solution-core-pack-declared-benchmark-native-host.chaos-generated-managed-tests-solution-core-pack-solution-core-pack-declared-benchmark-host.main",
+        "signature": "System.Int32 Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Main(System.String[])"
+      },
+      "nativeSymbol": "SolutionCorePack_DeclaredBenchmarkNativeHost_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackDeclaredBenchmarkHost_Main_System_String",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 2,
+          "typeShape": 1
+        }
+      ],
+      "localCount": 1,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.String[]",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 1,
+          "resultType": "ChaosManagedHostRequest",
+          "callee": "Chaos.TestFramework.Runtime/ChaosManagedHostArguments::Parse:ChaosManagedHostRequest(System.String[])",
+          "reference": {
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectKind": "method",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostArguments::Parse:ChaosManagedHostRequest(System.String[])"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostArguments::Parse:ChaosManagedHostRequest(System.String[])",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostArguments_Parse_System_String",
+          "targetParameterCount": 1,
+          "targetReturnType": "ChaosManagedHostRequest",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "stloc",
+          "opCode": 8,
+          "operand": 0,
+          "ilOffset": 6,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 7,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 9,
+          "resultType": "System.String",
+          "callee": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_CollectionPath:System.String()",
+          "reference": {
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectKind": "method",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_CollectionPath:System.String()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_CollectionPath:System.String()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_get_CollectionPath",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.String",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 2,
+          "ilOffset": 14,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 15,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 17,
+          "resultType": "System.Int32",
+          "callee": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_EntryIndex:System.Int32()",
+          "reference": {
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectKind": "method",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_EntryIndex:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_EntryIndex:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_get_EntryIndex",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 22,
+          "resultType": "System.Void",
+          "callee": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader::EnsureEntryExists:System.Void(System.String,ChaosManagedHostKind,System.Int32)",
+          "reference": {
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectKind": "method",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader::EnsureEntryExists:System.Void(System.String,ChaosManagedHostKind,System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosTestCollectionLoader::EnsureEntryExists:System.Void(System.String,ChaosManagedHostKind,System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "Chaos_TestFramework_Runtime_ChaosTestCollectionLoader_EnsureEntryExists_System_String_ChaosManagedHostKind_System_Int32",
+          "targetParameterCount": 3,
+          "targetReturnType": "System.Void",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldloca",
+          "opCode": 76,
+          "operand": 0,
+          "ilOffset": 27,
+          "resultType": "System.IntPtr",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 29,
+          "resultType": "System.Int32",
+          "callee": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_EntryIndex:System.Int32()",
+          "reference": {
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectKind": "method",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_EntryIndex:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "Chaos.TestFramework.Runtime",
+            "subjectId": "Chaos.TestFramework.Runtime/ChaosManagedHostRequest::get_EntryIndex:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "Chaos_TestFramework_Runtime_ChaosManagedHostRequest_get_EntryIndex",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 34,
+          "resultType": "System.Int32",
+          "callee": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
+          "reference": {
+            "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+            "subjectKind": "method",
+            "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+            "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SolutionCorePack_DeclaredBenchmarkNativeHost_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackDeclaredBenchmarkHost_Execute_System_Int32",
+          "targetParameterCount": 1,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 39,
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost"
+    },
+    {
       "methodId": "solution-core-pack.chaos-generated-managed-tests-solution-core-pack-solution-core-pack-benchmark-workloads.run-arithmetic-int",
       "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
       "signature": "System.Int32 Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt()",
@@ -1116,6 +1379,496 @@
       "isSuppressGCTransition": false,
       "hasBlittableStructReturn": false,
       "declaringAssemblyName": "Chaos.TestFramework.Sdk"
+    },
+    {
+      "methodId": "solution-core-pack-declared-benchmark-native-host.chaos-generated-managed-tests-solution-core-pack-solution-core-pack-declared-benchmark-host.execute",
+      "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
+      "signature": "System.Int32 Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute(System.Int32)",
+      "identity": {
+        "assemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost",
+        "declaringTypeSubjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost",
+        "definitionSubjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
+        "subjectId": "SolutionCorePack.DeclaredBenchmarkNativeHost/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute:System.Int32(System.Int32)",
+        "methodId": "solution-core-pack-declared-benchmark-native-host.chaos-generated-managed-tests-solution-core-pack-solution-core-pack-declared-benchmark-host.execute",
+        "signature": "System.Int32 Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackDeclaredBenchmarkHost::Execute(System.Int32)"
+      },
+      "nativeSymbol": "SolutionCorePack_DeclaredBenchmarkNativeHost_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackDeclaredBenchmarkHost_Execute_System_Int32",
+      "isStatic": true,
+      "returnType": "System.Int32",
+      "returnAbi": {
+        "carrierKindCode": 1,
+        "typeShape": 2
+      },
+      "parameterCount": 1,
+      "parameterAbis": [
+        {
+          "carrierKindCode": 1,
+          "typeShape": 2
+        }
+      ],
+      "localCount": 0,
+      "exceptionRegionCount": 0,
+      "exceptionRegions": [],
+      "instructions": [
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 0,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "switch",
+          "opCode": 69,
+          "operand": [
+            36,
+            44,
+            52,
+            60,
+            68,
+            76,
+            84
+          ],
+          "ilOffset": 1,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "br",
+          "opCode": 17,
+          "operand": 92,
+          "ilOffset": 34,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 36,
+          "resultType": "System.Int32",
+          "callee": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticDouble:System.Int32()",
+          "reference": {
+            "assemblyName": "SolutionCorePack",
+            "subjectKind": "method",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticDouble:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SolutionCorePack",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticDouble:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArithmeticDouble",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 41,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 42,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 43,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 44,
+          "resultType": "System.Int32",
+          "callee": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
+          "reference": {
+            "assemblyName": "SolutionCorePack",
+            "subjectKind": "method",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SolutionCorePack",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArithmeticInt:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArithmeticInt",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 49,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 50,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 51,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 52,
+          "resultType": "System.Int32",
+          "callee": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArrayAccess:System.Int32()",
+          "reference": {
+            "assemblyName": "SolutionCorePack",
+            "subjectKind": "method",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArrayAccess:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SolutionCorePack",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunArrayAccess:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunArrayAccess",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 57,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 58,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 59,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 60,
+          "resultType": "System.Int32",
+          "callee": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunLoopBranch:System.Int32()",
+          "reference": {
+            "assemblyName": "SolutionCorePack",
+            "subjectKind": "method",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunLoopBranch:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SolutionCorePack",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunLoopBranch:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunLoopBranch",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 65,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 66,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 67,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 68,
+          "resultType": "System.Int32",
+          "callee": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunObjectAlloc:System.Int32()",
+          "reference": {
+            "assemblyName": "SolutionCorePack",
+            "subjectKind": "method",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunObjectAlloc:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SolutionCorePack",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunObjectAlloc:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunObjectAlloc",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 73,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 74,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 75,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 76,
+          "resultType": "System.Int32",
+          "callee": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunStringConcat:System.Int32()",
+          "reference": {
+            "assemblyName": "SolutionCorePack",
+            "subjectKind": "method",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunStringConcat:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SolutionCorePack",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunStringConcat:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunStringConcat",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 81,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 82,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 83,
+          "isPreserveSig": false
+        },
+        {
+          "op": "call",
+          "opCode": 14,
+          "ilOffset": 84,
+          "resultType": "System.Int32",
+          "callee": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunVirtualCall:System.Int32()",
+          "reference": {
+            "assemblyName": "SolutionCorePack",
+            "subjectKind": "method",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunVirtualCall:System.Int32()"
+          },
+          "targetReference": {
+            "kind": 3,
+            "assemblyName": "SolutionCorePack",
+            "subjectId": "SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads::RunVirtualCall:System.Int32()",
+            "typeShape": 0,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "targetSymbol": "SolutionCorePack_Chaos_Generated_ManagedTests_SolutionCorePack_SolutionCorePackBenchmarkWorkloads_RunVirtualCall",
+          "targetParameterCount": 0,
+          "targetReturnType": "System.Int32",
+          "dispatchKindCode": 3,
+          "isPreserveSig": false
+        },
+        {
+          "op": "pop",
+          "opCode": 47,
+          "ilOffset": 89,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldc.i4",
+          "opCode": 0,
+          "operand": 0,
+          "ilOffset": 90,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ret",
+          "opCode": 53,
+          "ilOffset": 91,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "entryIndex",
+          "ilOffset": 92,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldarg",
+          "opCode": 6,
+          "operand": 0,
+          "ilOffset": 97,
+          "resultType": "System.Int32",
+          "isPreserveSig": false
+        },
+        {
+          "op": "box",
+          "opCode": 35,
+          "operand": "System.Private.CoreLib/System.Int32",
+          "ilOffset": 98,
+          "resultType": "System.Object",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "type",
+            "subjectId": "System.Private.CoreLib/System.Int32"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.Int32",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 9,
+          "isPreserveSig": false
+        },
+        {
+          "op": "ldstr",
+          "opCode": 4,
+          "operand": "Unknown declared benchmark entry index.",
+          "ilOffset": 103,
+          "resultType": "System.String",
+          "isPreserveSig": false
+        },
+        {
+          "op": "newobj",
+          "opCode": 34,
+          "ilOffset": 108,
+          "resultType": "System.Private.CoreLib/System.ArgumentOutOfRangeException",
+          "callee": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String,System.Object,System.String)",
+          "reference": {
+            "assemblyName": "System.Private.CoreLib",
+            "subjectKind": "method",
+            "subjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String,System.Object,System.String)"
+          },
+          "targetReference": {
+            "kind": 1,
+            "assemblyName": "System.Private.CoreLib",
+            "subjectId": "System.Private.CoreLib/System.ArgumentOutOfRangeException",
+            "typeShape": 1,
+            "arrayElementTypeShape": 0,
+            "isSealed": false,
+            "isComImport": false,
+            "comInterfaceTypeKind": 0,
+            "declaringTypeShape": 0
+          },
+          "runtimeServiceKind": 1,
+          "isPreserveSig": false
+        },
+        {
+          "op": "throw",
+          "opCode": 48,
+          "ilOffset": 113,
+          "resultType": "System.Void",
+          "isPreserveSig": false
+        }
+      ],
+      "isPInvoke": false,
+      "isUnmanagedCallersOnly": false,
+      "importCallingConvention": 0,
+      "importCharSet": 0,
+      "importSetLastError": false,
+      "isInternalLink": false,
+      "isSuppressGCTransition": false,
+      "hasBlittableStructReturn": false,
+      "declaringAssemblyName": "SolutionCorePack.DeclaredBenchmarkNativeHost"
     },
     {
       "methodId": "solution-core-pack.chaos-generated-managed-tests-solution-core-pack-solution-core-pack-benchmark-workloads.run-arithmetic-double",
