@@ -958,12 +958,6 @@ bool g_log_use_stderr = false;
 
 #include "chaos_runtime_host.h"
 
-#define CHAOS_IL2CPP_COMMON_EH_H_
-#define CHAOS_EH_TRY               try {
-#define CHAOS_EH_CATCH_BEGIN       } catch (const chaos_managed_exception& chaos_exception) {
-#define CHAOS_EH_END               }
-#define CHAOS_EH_EXCEPTION_OBJ     (chaos_exception.object_value)
-
 #include <chaos/hotpatch_dispatch.h>
 #include <patch_loader.h>
 
@@ -1079,7 +1073,7 @@ static int RunHotupdateMode() {
         int i = kSubjectSlotMap[si];
         CHAOS_EH_TRY
             CHAOS_IL2CPP_INT32 result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+                GetHotpatchEntries(), kAotMethodCount, i, nullptr);
             baseline_values[si] = result;
             baseline_ok[si] = true;
         CHAOS_EH_CATCH_BEGIN

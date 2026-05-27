@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,14 +27,14 @@ public static partial class ThreadingMonitorInterlockedSubjects
     // [2] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)
     public static void Subject_2()
     {
-        try { if (((Monitor.TryEnter(null!)) ? 1 : 0) != ((Monitor.TryEnter(null!)) ? 1 : 0)) _exitCode = 1; }
+        try { var _ = ((Monitor.TryEnter(null!)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)
     public static void Subject_3()
     {
-        try { if (((Monitor.TryEnter(null!, 42)) ? 1 : 0) != ((Monitor.TryEnter(null!, 42)) ? 1 : 0)) _exitCode = 1; }
+        try { var _ = ((Monitor.TryEnter(null!, 42)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
@@ -87,7 +88,7 @@ public static partial class ThreadingMonitorInterlockedSubjects
     // [13] System.Private.CoreLib/System.Threading.Volatile::Read:System.Int32(System.Int32&)
     public static void Subject_13()
     {
-        try { if (((System.Func<int>)(() => { int __v = 42; return System.Threading.Volatile.Read(ref __v); }))() != ((System.Func<int>)(() => { int __v = 42; return System.Threading.Volatile.Read(ref __v); }))()) _exitCode = 1; }
+        try { var _ = ((System.Func<int>)(() => { int __v = 42; return System.Threading.Volatile.Read(ref __v); }))(); }
         catch { _exitCode = 1; }
     }
 

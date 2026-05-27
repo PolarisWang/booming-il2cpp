@@ -1,0 +1,74 @@
+{
+  "ns_per_cycle": null,
+  "total_benchmark_ns": -10000000.0,
+  "num_methods": 10,
+  "scopes_by_total_ns": [],
+  "scopes_by_avg_ns": [],
+  "scopes_by_count": [],
+  "method_timings": [
+    {
+      "method_index": 0,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "method_index": 1,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "method_index": 2,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "method_index": 3,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "method_index": 4,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "method_index": 5,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "method_index": 6,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "method_index": 7,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "method_index": 8,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    },
+    {
+      "method_index": 9,
+      "elapsed_ms": -1.0,
+      "ops_per_second": 0,
+      "allocated_bytes": 0
+    }
+  ],
+  "family": "array-indexing-copy",
+  "iterations": 100000,
+  "captured_at": "2026-05-27T08:50:20",
+  "mode": "benchmark"
+}

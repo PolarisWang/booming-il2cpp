@@ -5696,1298 +5696,575 @@ static constexpr GenericMethodAotEntryV0 s_method_aot_entries[1] = { { 0, 0, 0, 
 static constexpr CHAOS_IL2CPP_UINT32 s_method_aot_entry_args[1] = { 0 };
 
 
-// ── Bridge/import thunks ──
-extern "C" void* kChaosExternalRuntimeFnTable[];
 
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosBenchmarkRunner+<>c__DisplayClass0_0::entry
-extern "C" void chaos_bridge_thunk_0(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[0])();
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.Dictionary<System.String,System.Object>::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_1(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[1])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::<PatchAssemblyNames>k__BackingField
-extern "C" void chaos_bridge_thunk_10(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[11])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::<EntryIndex>k__BackingField
-extern "C" void chaos_bridge_thunk_100(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[131])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::<StableId>k__BackingField
-extern "C" void chaos_bridge_thunk_101(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[132])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::<Alias>k__BackingField
-extern "C" void chaos_bridge_thunk_102(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[133])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::<AssemblyName>k__BackingField
-extern "C" void chaos_bridge_thunk_103(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[134])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::<DeclaringType>k__BackingField
-extern "C" void chaos_bridge_thunk_104(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[135])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::<MethodName>k__BackingField
-extern "C" void chaos_bridge_thunk_105(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[136])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollectionEntry::<MethodSignature>k__BackingField
-extern "C" void chaos_bridge_thunk_106(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[137])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollectionLoader::JsonOptions
-extern "C" void chaos_bridge_thunk_107(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[138])();
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<ChaosTestCollection>:ChaosTestCollection(System.String,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_108(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[139])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollectionLoader+<>c__DisplayClass4_0::entryIndex
-extern "C" void chaos_bridge_thunk_109(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[140])();
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.List<ChaosHotUpdateEntryBinding>::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_11(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[12])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String,System.Object,System.String)
-extern "C" void chaos_bridge_thunk_110(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[141])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<ChaosManagedHostKind>:System.Void(ChaosManagedHostKind)
-extern "C" void chaos_bridge_thunk_111(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[142])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosManagedHostKind
-extern "C" void chaos_bridge_thunk_112(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[143])();
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializerOptions::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_113(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[144])();
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonNamingPolicy::get_CamelCase:JsonNamingPolicy()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_114(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[145])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializerOptions::set_PropertyNamingPolicy:System.Void(JsonNamingPolicy)
-extern "C" void chaos_bridge_thunk_115(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[146])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializerOptions::set_WriteIndented:System.Void(System.Boolean)
-extern "C" void chaos_bridge_thunk_116(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[147])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/RuntimeTrace::JsonOptions
-extern "C" void chaos_bridge_thunk_117(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[148])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Environment::GetEnvironmentVariable:System.String(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_118(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[149])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/RuntimeTrace::_tracePath
-extern "C" void chaos_bridge_thunk_119(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[150])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::<EntryBindings>k__BackingField
-extern "C" void chaos_bridge_thunk_12(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[13])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/RuntimeTrace::_traceId
-extern "C" void chaos_bridge_thunk_120(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[151])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Path::GetDirectoryName:System.String(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_121(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[152])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String::IsNullOrEmpty:System.Boolean(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_122(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[153])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Directory::CreateDirectory:System.IO.DirectoryInfo(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_123(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[154])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.Dictionary<System.String,System.Object>
-extern "C" void chaos_bridge_thunk_124(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[157])();
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.Dictionary<System.String,System.Object>::GetEnumerator:System.Collections.Generic.Dictionary+Enumerator<System.String,System.Object>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_125(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[158])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.Dictionary+Enumerator<System.String,System.Object>::get_Current:System.Collections.Generic.KeyValuePair<System.String,System.Object>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_126(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[159])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Collections.Generic.KeyValuePair<System.String,System.Object>::Deconstruct:System.Void(System.String&,System.Object&)
-extern "C" void chaos_bridge_thunk_127(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[160])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.Dictionary+Enumerator<System.String,System.Object>::MoveNext:System.Boolean()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_128(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[161])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.Dictionary+Enumerator<System.String,System.Object>::Dispose:System.Void()
-extern "C" void chaos_bridge_thunk_129(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[162])();
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializerOptions::.ctor:System.Void(JsonSerializerDefaults)
-extern "C" void chaos_bridge_thunk_13(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[14])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Serialize<System.Collections.Generic.Dictionary<System.String,System.Object>>:System.String(System.Collections.Generic.Dictionary<System.String,System.Object>,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_130(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[163])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Environment::get_NewLine:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_131(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[164])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.File::AppendAllText:System.Void(System.String,System.String)
-extern "C" void chaos_bridge_thunk_132(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[165])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Diagnostics.Stopwatch::StartNew:System.Diagnostics.Stopwatch()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_133(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[166])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Action::Invoke:System.Void()
-extern "C" void chaos_bridge_thunk_134(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[167])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Diagnostics.Stopwatch::Stop:System.Void()
-extern "C" void chaos_bridge_thunk_135(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[168])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Diagnostics.Stopwatch::get_Elapsed:System.TimeSpan()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_136(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[169])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.TimeSpan::get_TotalMilliseconds:System.Double()
-extern "C" double chaos_bridge_thunk_137(void)
-{
-	auto result = reinterpret_cast<double(*)()>(kChaosExternalRuntimeFnTable[170])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Double
-extern "C" void chaos_bridge_thunk_138(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[172])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Exception::GetType:System.Type()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_139(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[173])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializerOptions::set_PropertyNameCaseInsensitive:System.Void(System.Boolean)
-extern "C" void chaos_bridge_thunk_14(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[15])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/!!0
-extern "C" void chaos_bridge_thunk_140(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[174])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/!!0::Equals:System.Boolean(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_141(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[175])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::CurrentMethodIndex
-extern "C" void chaos_bridge_thunk_142(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[176])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<Modes>k__BackingField
-extern "C" void chaos_bridge_thunk_143(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[177])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Attribute::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_144(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[178])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<Category>k__BackingField
-extern "C" void chaos_bridge_thunk_145(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[179])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<Metrics>k__BackingField
-extern "C" void chaos_bridge_thunk_146(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[180])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<Alias>k__BackingField
-extern "C" void chaos_bridge_thunk_147(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[181])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<Archetype>k__BackingField
-extern "C" void chaos_bridge_thunk_148(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[182])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<Capability>k__BackingField
-extern "C" void chaos_bridge_thunk_149(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[183])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifestLoader::JsonOptions
-extern "C" void chaos_bridge_thunk_15(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[16])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<CapabilityFamily>k__BackingField
-extern "C" void chaos_bridge_thunk_150(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[184])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<HotUpdateCapability>k__BackingField
-extern "C" void chaos_bridge_thunk_151(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[185])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<InvocationCount>k__BackingField
-extern "C" void chaos_bridge_thunk_152(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[186])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<IterationCount>k__BackingField
-extern "C" void chaos_bridge_thunk_153(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[187])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<MaxAllocBytes>k__BackingField
-extern "C" void chaos_bridge_thunk_154(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[188])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<MinOpsPerSec>k__BackingField
-extern "C" void chaos_bridge_thunk_155(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[189])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<P99Ms>k__BackingField
-extern "C" void chaos_bridge_thunk_156(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[190])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<Requires>k__BackingField
-extern "C" void chaos_bridge_thunk_157(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[191])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkAttribute::<WarmupCount>k__BackingField
-extern "C" void chaos_bridge_thunk_158(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[192])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkProfileAttribute::<Profile>k__BackingField
-extern "C" void chaos_bridge_thunk_159(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[193])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String::IsNullOrWhiteSpace:System.Boolean(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_16(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkRouteAttribute::<Route>k__BackingField
-extern "C" void chaos_bridge_thunk_160(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[194])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.BenchmarkSubjectIdAttribute::<MethodSubjectId>k__BackingField
-extern "C" void chaos_bridge_thunk_161(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[195])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityFamilyIdAttribute::<FamilyId>k__BackingField
-extern "C" void chaos_bridge_thunk_162(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[196])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::<IncludeNativeProof>k__BackingField
-extern "C" void chaos_bridge_thunk_163(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[197])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::<ExecutionModes>k__BackingField
-extern "C" void chaos_bridge_thunk_164(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[198])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::<FamilyId>k__BackingField
-extern "C" void chaos_bridge_thunk_165(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[199])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::<IncludeBenchmark>k__BackingField
-extern "C" void chaos_bridge_thunk_166(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[200])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.CapabilityTestAttribute::<IncludeHotUpdate>k__BackingField
-extern "C" void chaos_bridge_thunk_167(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[201])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::LastFailedMethodIndex
-extern "C" void chaos_bridge_thunk_168(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[203])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertState::ExitCode
-extern "C" void chaos_bridge_thunk_169(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[204])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)
-extern "C" void chaos_bridge_thunk_17(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[18])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Byte::TryParse:System.Boolean(System.String,System.Byte&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_170(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[205])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.UInt16::TryParse:System.Boolean(System.String,System.UInt16&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_171(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[206])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Byte>
-extern "C" void chaos_bridge_thunk_172(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[207])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.UInt16>
-extern "C" void chaos_bridge_thunk_173(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[208])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Byte>::.ctor:System.Void(System.Byte)
-extern "C" void chaos_bridge_thunk_174(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[209])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.UInt16>::.ctor:System.Void(System.UInt16)
-extern "C" void chaos_bridge_thunk_175(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[210])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection
-extern "C" void chaos_bridge_thunk_176(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[213])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Byte>::get_Value:System.Byte()
-extern "C" CHAOS_IL2CPP_UINT8 chaos_bridge_thunk_177(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)()>(kChaosExternalRuntimeFnTable[214])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.UInt16>::get_Value:System.UInt16()
-extern "C" CHAOS_IL2CPP_UINT16 chaos_bridge_thunk_178(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_UINT16(*)()>(kChaosExternalRuntimeFnTable[215])();
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::<EntryKind>k__BackingField
-extern "C" void chaos_bridge_thunk_179(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[216])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.File::Exists:System.Boolean(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_18(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[19])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::<EntrySlice>k__BackingField
-extern "C" void chaos_bridge_thunk_180(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[217])();
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<Chaos.TestFramework.ChaosSubjectEntryKind>::get_Default:System.Collections.Generic.EqualityComparer<Chaos.TestFramework.ChaosSubjectEntryKind>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_181(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[218])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<Chaos.TestFramework.ChaosSubjectEntryKind>::Equals:System.Boolean(Chaos.TestFramework.ChaosSubjectEntryKind,Chaos.TestFramework.ChaosSubjectEntryKind)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_182(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[219])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<Chaos.TestFramework.ChaosSubjectSlice>::get_Default:System.Collections.Generic.EqualityComparer<Chaos.TestFramework.ChaosSubjectSlice>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_183(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[220])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<Chaos.TestFramework.ChaosSubjectSlice>::Equals:System.Boolean(Chaos.TestFramework.ChaosSubjectSlice,Chaos.TestFramework.ChaosSubjectSlice)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_184(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[221])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<Chaos.TestFramework.ChaosSubjectEntryKind>::GetHashCode:System.Int32(Chaos.TestFramework.ChaosSubjectEntryKind)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_185(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[222])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<Chaos.TestFramework.ChaosSubjectSlice>::GetHashCode:System.Int32(Chaos.TestFramework.ChaosSubjectSlice)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_186(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[223])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryKind::ToString:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_187(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[224])();
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectSlice::ToString:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_188(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[225])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Boolean::ToString:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_189(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[226])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.FileNotFoundException::.ctor:System.Void(System.String,System.String)
-extern "C" void chaos_bridge_thunk_19(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[20])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::<Category>k__BackingField
-extern "C" void chaos_bridge_thunk_190(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[227])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::<Alias>k__BackingField
-extern "C" void chaos_bridge_thunk_191(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[228])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::<Archetype>k__BackingField
-extern "C" void chaos_bridge_thunk_192(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[229])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::<Capability>k__BackingField
-extern "C" void chaos_bridge_thunk_193(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[230])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::<CapabilityFamily>k__BackingField
-extern "C" void chaos_bridge_thunk_194(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[231])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::<Evidence>k__BackingField
-extern "C" void chaos_bridge_thunk_195(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[232])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::<HotUpdateCapability>k__BackingField
-extern "C" void chaos_bridge_thunk_196(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[233])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::<Priority>k__BackingField
-extern "C" void chaos_bridge_thunk_197(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[234])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosUnitTestAttribute::<Requires>k__BackingField
-extern "C" void chaos_bridge_thunk_198(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[235])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateDirectionAttribute::<Direction>k__BackingField
-extern "C" void chaos_bridge_thunk_199(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[236])();
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.Dictionary<System.String,System.Object>::set_Item:System.Void(System.String,System.Object)
-extern "C" void chaos_bridge_thunk_2(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[2])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.File::ReadAllText:System.String(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_20(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[21])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.HotUpdateSubjectIdAttribute::<MethodSubjectId>k__BackingField
-extern "C" void chaos_bridge_thunk_200(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[237])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.MethodSubjectIdAttribute::<MethodSubjectId>k__BackingField
-extern "C" void chaos_bridge_thunk_201(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[238])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.VerificationRouteAttribute::<Route>k__BackingField
-extern "C" void chaos_bridge_thunk_202(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[239])();
-}
-
-// Bridge/import thunk for: SolutionCorePack/Chaos.Generated.ManagedTests.SolutionCorePack.SolutionCorePackBenchmarkWorkloads+SmallObj::<Value>k__BackingField
-extern "C" void chaos_bridge_thunk_203(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[240])();
-}
-
-// Bridge/import thunk for: System.Text.Json/JsonSerializer::Deserialize<ChaosHotUpdateBindingManifest>:ChaosHotUpdateBindingManifest(System.String,JsonSerializerOptions)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_21(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[22])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
+// Managed method: Chaos.TestFramework.Runtime/ChaosManagedHostReflection::ResolveMethod(System.Type,System.String,System.String)
+extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Runtime_ChaosManagedHostReflection_ResolveMethod_System_Type_System_String_System_String(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
+{
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
+	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_locals{};
+	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
+	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
+	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
+	CHAOS_IL2CPP_INTPTR _s0;
+	CHAOS_IL2CPP_INTPTR _s1;
+	CHAOS_IL2CPP_INTPTR _s2;
+	CHAOS_IL2CPP_INTPTR _s3;
+	CHAOS_IL2CPP_INTPTR _s4;
+	CHAOS_IL2CPP_INTPTR _s5;
+	CHAOS_IL2CPP_INTPTR _s6;
+	CHAOS_IL2CPP_INTPTR _s7;
+	CHAOS_IL2CPP_INTPTR _s8;
+	CHAOS_IL2CPP_INTPTR _s9;
+	CHAOS_IL2CPP_INTPTR _s10;
+	CHAOS_IL2CPP_INTPTR _s11;
+	CHAOS_IL2CPP_INTPTR _s12;
+	CHAOS_IL2CPP_INTPTR _s13;
+	CHAOS_IL2CPP_INTPTR _s14;
+	CHAOS_IL2CPP_INTPTR _s15;
+	CHAOS_IL2CPP_INTPTR _s16;
+	CHAOS_IL2CPP_INTPTR _s17;
+	CHAOS_IL2CPP_INTPTR _s18;
+	CHAOS_IL2CPP_INTPTR _s19;
+	CHAOS_IL2CPP_INTPTR _s20;
+	CHAOS_IL2CPP_INTPTR _s21;
+	CHAOS_IL2CPP_INTPTR _s22;
+	CHAOS_IL2CPP_INTPTR _s23;
+	CHAOS_IL2CPP_INTPTR _s24;
+	CHAOS_IL2CPP_INTPTR _s25;
+	CHAOS_IL2CPP_INTPTR _s26;
+	CHAOS_IL2CPP_INTPTR _s27;
+	CHAOS_IL2CPP_INTPTR _s28;
+	CHAOS_IL2CPP_INTPTR _s29;
+	CHAOS_IL2CPP_INTPTR _s30;
+	CHAOS_IL2CPP_INTPTR _s31;
+	CHAOS_IL2CPP_INTPTR _s32;
+	CHAOS_IL2CPP_INTPTR _s33;
+	CHAOS_IL2CPP_INTPTR _s34;
+	CHAOS_IL2CPP_INTPTR _s35;
+	CHAOS_IL2CPP_INTPTR _s36;
+	CHAOS_IL2CPP_INTPTR _s37;
+	CHAOS_IL2CPP_INTPTR _s38;
+	CHAOS_IL2CPP_INTPTR _s39;
+	CHAOS_IL2CPP_INTPTR _s40;
+	CHAOS_IL2CPP_INTPTR _s41;
+	CHAOS_IL2CPP_INTPTR _s42;
+	CHAOS_IL2CPP_INTPTR _s43;
+	CHAOS_IL2CPP_INTPTR _s44;
+	CHAOS_IL2CPP_INTPTR _s45;
+	CHAOS_IL2CPP_INTPTR _s46;
+	CHAOS_IL2CPP_INTPTR _s47;
+	CHAOS_IL2CPP_INTPTR _s48;
+	CHAOS_IL2CPP_INTPTR _s49;
+	CHAOS_IL2CPP_INTPTR _s50;
+	CHAOS_IL2CPP_INTPTR _s51;
+	CHAOS_IL2CPP_INTPTR _s52;
+	CHAOS_IL2CPP_INTPTR _s53;
+	CHAOS_IL2CPP_INTPTR _s54;
+	CHAOS_IL2CPP_INTPTR _s55;
+	CHAOS_IL2CPP_INTPTR _s56;
+	CHAOS_IL2CPP_INTPTR _s57;
+	CHAOS_IL2CPP_INTPTR _s58;
+	CHAOS_IL2CPP_INTPTR _s59;
+	CHAOS_IL2CPP_INTPTR _s60;
+	CHAOS_IL2CPP_INTPTR _s61;
+	CHAOS_IL2CPP_INTPTR _s62;
+	CHAOS_IL2CPP_INTPTR _s63;
+	CHAOS_IL2CPP_INTPTR _s64;
+	CHAOS_IL2CPP_INTPTR _s65;
+	CHAOS_IL2CPP_INTPTR _s66;
+	CHAOS_IL2CPP_INTPTR _s67;
+	CHAOS_IL2CPP_INTPTR _s68;
+	CHAOS_IL2CPP_INTPTR _s69;
+	CHAOS_IL2CPP_INTPTR _s70;
+	CHAOS_IL2CPP_INTPTR _s71;
+	CHAOS_IL2CPP_INTPTR _s72;
+	CHAOS_IL2CPP_INTPTR _s73;
+	CHAOS_IL2CPP_INTPTR _s74;
+	CHAOS_IL2CPP_INTPTR _s75;
+	CHAOS_IL2CPP_INTPTR _s76;
+	CHAOS_IL2CPP_INTPTR _s77;
+	CHAOS_IL2CPP_INTPTR _s78;
+	CHAOS_IL2CPP_INTPTR _s79;
+	CHAOS_IL2CPP_INTPTR _s80;
+	CHAOS_IL2CPP_INTPTR _s81;
+	CHAOS_IL2CPP_INTPTR _s82;
+	CHAOS_IL2CPP_INTPTR _s83;
+	CHAOS_IL2CPP_INTPTR _s84;
+	CHAOS_IL2CPP_INTPTR _s85;
+	CHAOS_IL2CPP_INTPTR _s86;
+	CHAOS_IL2CPP_INTPTR _s87;
+	CHAOS_IL2CPP_INTPTR _s88;
+	CHAOS_IL2CPP_INTPTR _s89;
+	CHAOS_IL2CPP_INTPTR _s90;
+	CHAOS_IL2CPP_INTPTR _s91;
+	CHAOS_IL2CPP_INTPTR _s92;
+	CHAOS_IL2CPP_INTPTR _s93;
+	CHAOS_IL2CPP_INTPTR _s94;
+	CHAOS_IL2CPP_INTPTR _s95;
+	CHAOS_IL2CPP_INTPTR _s96;
+	CHAOS_IL2CPP_INTPTR _s97;
+	CHAOS_IL2CPP_INTPTR _s98;
+	CHAOS_IL2CPP_INTPTR _s99;
+	CHAOS_IL2CPP_INTPTR _s100;
+	CHAOS_IL2CPP_INTPTR _s101;
+	CHAOS_IL2CPP_INTPTR _s102;
+	CHAOS_IL2CPP_INTPTR _s103;
+	_s0 = chaos_args[1];
+	{
+		const auto chaos_arg_0 = _s0;
+		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
+		_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+	}
+	{
+		if (_s1 == 0)
+		{
+			_s2 = chaos_args[2];
+			{
+				const auto chaos_arg_0 = _s2;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[17])(chaos_arg_0);
+				_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s3) == static_cast<CHAOS_IL2CPP_INTPTR>(_s4) ? 1 : 0);
+			chaos_locals[0] = _s5;
+			_s6 = 0;
+			chaos_locals[1] = _s6;
+			_s7 = chaos_args[0];
+			_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(56);
+			{
+				const auto chaos_raw_arg_1 = _s8;
+				const auto chaos_arg_1 = chaos_raw_arg_1;
+				const auto chaos_arg_0 = _s7;
+				const auto chaos_result = ChaosReflectionGetMethodsBindingflags(chaos_arg_0, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_1));
+				_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			chaos_locals[2] = _s9;
+			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+			chaos_locals[3] = _s10;
+			_s11 = chaos_locals[2];
+			_s12 = chaos_locals[3];
+			{
+				const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s12);
+				auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s11);
+				if (chaos_array == nullptr)
+				{
+					CHAOS_IL2CPP_FAIL_FAST();
+				}
+				if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+				{
+					CHAOS_IL2CPP_FAIL_FAST();
+				}
+				const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+				_s13 = chaos_element;
+			}
+			chaos_locals[4] = _s13;
+			_s14 = chaos_locals[4];
+			{
+				const auto chaos_arg_0 = _s14;
+				const auto chaos_result = ChaosReflectionGetMemberName(chaos_arg_0);
+				_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			_s16 = chaos_args[1];
+			_s17 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+			{
+				const auto chaos_arg_2 = _s17;
+				const auto chaos_arg_1 = _s16;
+				const auto chaos_arg_0 = _s15;
+				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+				_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				if (_s18 != 0)
+				{
+					_s19 = chaos_locals[0];
+					{
+						if (_s19 != 0)
+						{
+							_s20 = chaos_locals[4];
+							{
+								// Inlined: Chaos.TestFramework.Runtime/ChaosManagedHostReflection::BuildMethodSignature:System.String(System.Reflection.MethodInfo)
+								auto chaos_inline_arg_0 = _s20;
+								CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
+								{
+									_s21 = CHAOS_IL2CPP_STRING_ID(", ");
+								}
+								_s22 = chaos_inline_arg_0;
+								{
+									const auto chaos_arg_0 = _s22;
+									const auto chaos_result = ChaosReflectionGetParameters(chaos_arg_0);
+									_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+								}
+								chaos_ensure_type_initialized_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c();
+								_s24 = chaos_static_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c____9__4_0;
+								_s25 = _s24;
+								if (_s25 != 0) goto chaos_inline_label_0_0;
+								chaos_ensure_type_initialized_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c();
+								_s26 = chaos_static_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c____9;
+								{
+									// Hotpatch-aware ldftn wrapper (slot 67)
+									static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
+										auto& _d_entry = s_hotpatch_entries[67];
+										if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+											&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+										{
+											alignas(16) uint8_t _d_ab[16];
+											ArgBuffer _d_bw(_d_ab);
+											_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+											_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_1));
+											CHAOS_IL2CPP_INTPTR _d_ret{};
+											::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+												_d_entry.method_key, _d_ab, &_d_ret);
+											return _d_ret;
+										}
+										return reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+									};
+								_s27 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+								}
+								{
+									const auto chaos_method_ptr = _s27;
+									const auto chaos_target = _s26;
+									auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Reflection_ParameterInfo_System_String_, {});
+									chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Reflection_ParameterInfo_System_String_.AsTypeInfoHot();
+									chaos_object->chaos_delegate_target = chaos_target;
+									chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+									_s28 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+								}
+								_s29 = _s28;
+								{
+									auto chaos_value = _s29;
+								chaos_ensure_type_initialized_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c();
+									chaos_static_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c____9__4_0 = chaos_value;
+								}
+							chaos_inline_label_0_0:
+							{
+								{
+									const auto chaos_arg_1 = _s28;
+									const auto chaos_arg_0 = _s23;
+									const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[100])(chaos_arg_0, chaos_arg_1);
+									_s30 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+								}
+							}
+								{
+									const auto chaos_arg_1 = _s30;
+									const auto chaos_arg_0 = _s21;
+									const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[101])(chaos_arg_0, chaos_arg_1);
+									_s31 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+								}
+								chaos_locals[5] = _s31;
+								_s32 = chaos_inline_arg_0;
+								{
+									const auto chaos_arg_0 = _s32;
+									const auto chaos_result = ChaosReflectionGetMemberName(chaos_arg_0);
+									_s33 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+								}
+								{
+									_s34 = CHAOS_IL2CPP_STRING_ID("(");
+								}
+								_s35 = chaos_locals[5];
+								{
+									_s36 = CHAOS_IL2CPP_STRING_ID(")");
+								}
+								{
+									const auto chaos_arg_3 = _s36;
+									const auto chaos_arg_2 = _s35;
+									const auto chaos_arg_1 = _s34;
+									const auto chaos_arg_0 = _s33;
+									const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_System_String_System_String_(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
+									_s37 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+								}
+								chaos_inline_retval0 = _s37;
+								goto chaos_inline_end0;
+							chaos_inline_end0:
+								;
+								_s38 = chaos_inline_retval0;
+							}
+							_s39 = chaos_args[2];
+							_s40 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+							{
+								const auto chaos_arg_2 = _s40;
+								const auto chaos_arg_1 = _s39;
+								const auto chaos_arg_0 = _s38;
+								const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+								_s41 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+							}
+							{
+								if (_s41 != 0)
+								{
+									_s42 = chaos_locals[4];
+									return _s42;
+								}
+							}
+						}
+						_s43 = chaos_locals[1];
+						{
+							if (_s43 == 0)
+							{
+								_s44 = chaos_locals[4];
+								chaos_locals[1] = _s44;
+							}
+						}
+					}
+				}
+				_s45 = chaos_locals[3];
+				_s46 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+				_s47 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s45)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s46))));
+				chaos_locals[3] = _s47;
+				do
+				{
+						_s48 = chaos_locals[2];
+						_s49 = chaos_locals[3];
+						{
+							const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s49);
+							auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s48);
+							if (chaos_array == nullptr)
+							{
+								CHAOS_IL2CPP_FAIL_FAST();
+							}
+							if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
+							{
+								CHAOS_IL2CPP_FAIL_FAST();
+							}
+							const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
+							_s50 = chaos_element;
+						}
+						chaos_locals[4] = _s50;
+						_s51 = chaos_locals[4];
+						{
+							const auto chaos_arg_0 = _s51;
+							const auto chaos_result = ChaosReflectionGetMemberName(chaos_arg_0);
+							_s52 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+						}
+						_s53 = chaos_args[1];
+						_s54 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+						{
+							const auto chaos_arg_2 = _s54;
+							const auto chaos_arg_1 = _s53;
+							const auto chaos_arg_0 = _s52;
+							const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+							_s55 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+						}
+						{
+							if (_s55 != 0)
+							{
+								_s56 = chaos_locals[0];
+								{
+									if (_s56 != 0)
+									{
+										_s57 = chaos_locals[4];
+										{
+											// Inlined: Chaos.TestFramework.Runtime/ChaosManagedHostReflection::BuildMethodSignature:System.String(System.Reflection.MethodInfo)
+											auto chaos_inline_arg_0 = _s57;
+											CHAOS_IL2CPP_INTPTR chaos_inline_retval1{};
+											{
+												_s58 = CHAOS_IL2CPP_STRING_ID(", ");
+											}
+											_s59 = chaos_inline_arg_0;
+											{
+												const auto chaos_arg_0 = _s59;
+												const auto chaos_result = ChaosReflectionGetParameters(chaos_arg_0);
+												_s60 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+											}
+											chaos_ensure_type_initialized_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c();
+											_s61 = chaos_static_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c____9__4_0;
+											_s62 = _s61;
+											if (_s62 != 0) goto chaos_inline_label_1_0;
+											chaos_ensure_type_initialized_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c();
+											_s63 = chaos_static_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c____9;
+											{
+												// Hotpatch-aware ldftn wrapper (slot 67)
+												static auto* chaos_ftn_thunk = +[](CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1) -> CHAOS_IL2CPP_INTPTR {
+													auto& _d_entry = s_hotpatch_entries[67];
+													if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d_entry)
+														&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d_entry))
+													{
+														alignas(16) uint8_t _d_ab[16];
+														ArgBuffer _d_bw(_d_ab);
+														_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_0));
+														_d_bw.WritePtr(reinterpret_cast<void*>(chaos_fn_arg_1));
+														CHAOS_IL2CPP_INTPTR _d_ret{};
+														::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
+															_d_entry.method_key, _d_ab, &_d_ret);
+														return _d_ret;
+													}
+													return reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(_d_entry.direct_ptr)(chaos_fn_arg_0, chaos_fn_arg_1);
+												};
+											_s64 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_ftn_thunk);
+											}
+											{
+												const auto chaos_method_ptr = _s64;
+												const auto chaos_target = _s63;
+												auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_Func_System_Reflection_ParameterInfo_System_String_, {});
+												chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_Func_System_Reflection_ParameterInfo_System_String_.AsTypeInfoHot();
+												chaos_object->chaos_delegate_target = chaos_target;
+												chaos_object->chaos_delegate_method_ptr = chaos_method_ptr;
+												_s65 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+											}
+											_s66 = _s65;
+											{
+												auto chaos_value = _s66;
+											chaos_ensure_type_initialized_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c();
+												chaos_static_Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c____9__4_0 = chaos_value;
+											}
+										chaos_inline_label_1_0:
+										{
+											{
+												const auto chaos_arg_1 = _s65;
+												const auto chaos_arg_0 = _s60;
+												const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[100])(chaos_arg_0, chaos_arg_1);
+												_s67 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+											}
+										}
+											{
+												const auto chaos_arg_1 = _s67;
+												const auto chaos_arg_0 = _s58;
+												const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[101])(chaos_arg_0, chaos_arg_1);
+												_s68 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+											}
+											chaos_locals[5] = _s68;
+											_s69 = chaos_inline_arg_0;
+											{
+												const auto chaos_arg_0 = _s69;
+												const auto chaos_result = ChaosReflectionGetMemberName(chaos_arg_0);
+												_s70 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+											}
+											{
+												_s71 = CHAOS_IL2CPP_STRING_ID("(");
+											}
+											_s72 = chaos_locals[5];
+											{
+												_s73 = CHAOS_IL2CPP_STRING_ID(")");
+											}
+											{
+												const auto chaos_arg_3 = _s73;
+												const auto chaos_arg_2 = _s72;
+												const auto chaos_arg_1 = _s71;
+												const auto chaos_arg_0 = _s70;
+												const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_System_String_System_String_(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
+												_s74 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+											}
+											chaos_inline_retval1 = _s74;
+											goto chaos_inline_end1;
+										chaos_inline_end1:
+											;
+											_s75 = chaos_inline_retval1;
+										}
+										_s76 = chaos_args[2];
+										_s77 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
+										{
+											const auto chaos_arg_2 = _s77;
+											const auto chaos_arg_1 = _s76;
+											const auto chaos_arg_0 = _s75;
+											const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_arg_0, chaos_arg_1, chaos_arg_2);
+											_s78 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+										}
+										{
+											if (_s78 != 0)
+											{
+												_s79 = chaos_locals[4];
+												return _s79;
+											}
+										}
+									}
+									_s80 = chaos_locals[1];
+									{
+										if (_s80 == 0)
+										{
+											_s81 = chaos_locals[4];
+											chaos_locals[1] = _s81;
+										}
+									}
+								}
+							}
+							_s82 = chaos_locals[3];
+							_s83 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
+							_s84 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s82)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s83))));
+							chaos_locals[3] = _s84;
+						}
+						_s85 = chaos_locals[3];
+						_s86 = chaos_locals[2];
+						_s87 = [&](){ auto* _c_arr = reinterpret_cast<chaos_managed_array*>(_s86); return _c_arr ? static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_c_arr->length)) : CHAOS_IL2CPP_INTPTR{}; }();
+						_s87 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s87));
+						if (!(static_cast<CHAOS_IL2CPP_INT32>(_s85) < static_cast<CHAOS_IL2CPP_INT32>(_s87))) break;
+				} while (true);
+				_s88 = chaos_locals[1];
+				_s89 = _s88;
+				{
+					if (_s89 != 0)
+					{
+						return _s88;
+					}
+					else
+					{
+						{
+							_s90 = CHAOS_IL2CPP_STRING_ID("unable to resolve managed host method: ");
+						}
+						_s91 = chaos_args[0];
+						{
+							const auto chaos_arg_0 = _s91;
+							const auto chaos_result = ChaosReflectionGetTypeFullName(chaos_arg_0);
+							_s92 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+						}
+						{
+							_s93 = CHAOS_IL2CPP_STRING_ID("::");
+						}
+						_s94 = chaos_args[1];
+						{
+							const auto chaos_arg_3 = _s94;
+							const auto chaos_arg_2 = _s93;
+							const auto chaos_arg_1 = _s92;
+							const auto chaos_arg_0 = _s90;
+							const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__Concat_System_String_System_String_System_String_System_String_System_String_(chaos_arg_0, chaos_arg_1, chaos_arg_2, chaos_arg_3);
+							_s95 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+						}
+						{
+							const auto chaos_arg_1 = _s95;
+							auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_InvalidOperationException, {});
+							chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_InvalidOperationException.AsTypeInfoHot();
+							chaos_external_runtime_System_Private_CoreLib_System_InvalidOperationException___ctor_System_Void_System_String_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
+							_s96 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+						}
+						CHAOS_EH_THROW(_s96);
+					}
+				}
+			}
+		}
+		else
+		{
+			{
+				_s97 = CHAOS_IL2CPP_STRING_ID("managed host entry is missing methodName for type '");
+			}
+			_s98 = chaos_args[0];
+			{
+				const auto chaos_arg_0 = _s98;
+				const auto chaos_result = ChaosReflectionGetTypeFullName(chaos_arg_0);
+				_s99 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_1 = _s99;
+				const auto chaos_arg_0 = _s97;
+				const auto chaos_result = ChaosReflectionConcatStringPairValues(chaos_arg_0, chaos_arg_1);
+				_s100 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				_s101 = CHAOS_IL2CPP_STRING_ID("'.");
+			}
+			{
+				const auto chaos_arg_1 = _s101;
+				const auto chaos_arg_0 = _s100;
+				const auto chaos_result = ChaosReflectionConcatStringPairValues(chaos_arg_0, chaos_arg_1);
+				_s102 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
+			}
+			{
+				const auto chaos_arg_1 = _s102;
+				auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_InvalidOperationException, {});
+				chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_InvalidOperationException.AsTypeInfoHot();
+				chaos_external_runtime_System_Private_CoreLib_System_InvalidOperationException___ctor_System_Void_System_String_(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object), chaos_arg_1);
+				_s103 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
+			}
+			CHAOS_EH_THROW(_s103);
+		}
+	}
 }
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::<HostKind>k__BackingField
-extern "C" void chaos_bridge_thunk_22(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[23])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::<EntryIndex>k__BackingField
-extern "C" void chaos_bridge_thunk_23(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[24])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::<AssemblyName>k__BackingField
-extern "C" void chaos_bridge_thunk_24(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[25])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateEntryBinding::<StableId>k__BackingField
-extern "C" void chaos_bridge_thunk_25(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[26])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::BaseDirectoryResolverRegistered
-extern "C" void chaos_bridge_thunk_26(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[27])();
-}
-
-// Bridge/import thunk for: System.Threading/AsyncLocal<System.String>::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_27(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[28])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor::PreferredAssemblyBaseDirectory
-extern "C" void chaos_bridge_thunk_28(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[29])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor+<>c__DisplayClass11_0::assemblyName
-extern "C" void chaos_bridge_thunk_29(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[30])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Int32
-extern "C" void chaos_bridge_thunk_3(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[3])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.AppDomain::get_CurrentDomain:System.AppDomain()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_30(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[31])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.AppDomain::GetAssemblies:System.Reflection.Assembly[]()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_31(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[32])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Func<System.Reflection.Assembly,System.Boolean>::.ctor:System.Void(System.Object,System.IntPtr)
-extern "C" void chaos_bridge_thunk_32(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[33])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Linq/Enumerable::FirstOrDefault<System.Reflection.Assembly>:System.Reflection.Assembly(System.Collections.Generic.IEnumerable<System.Reflection.Assembly>,System.Func<System.Reflection.Assembly,System.Boolean>)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_33(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[34])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Threading/AsyncLocal<System.String>::get_Value:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_34(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[35])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Threading/AsyncLocal<System.String>::set_Value:System.Void(System.String)
-extern "C" void chaos_bridge_thunk_35(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[36])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.List<System.String>::GetEnumerator:System.Collections.Generic.List+Enumerator<System.String>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_36(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[37])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.List+Enumerator<System.String>::get_Current:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_37(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[38])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.List+Enumerator<System.String>::MoveNext:System.Boolean()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_38(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[39])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.List+Enumerator<System.String>::Dispose:System.Void()
-extern "C" void chaos_bridge_thunk_39(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[40])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Action::.ctor:System.Void(System.Object,System.IntPtr)
-extern "C" void chaos_bridge_thunk_4(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[4])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean,System.Boolean)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_40(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[41])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.TypeLoadException::.ctor:System.Void(System.String)
-extern "C" void chaos_bridge_thunk_41(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[43])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.MissingMethodException::.ctor:System.Void(System.String,System.String)
-extern "C" void chaos_bridge_thunk_42(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[45])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.TargetInvocationException
-extern "C" void chaos_bridge_thunk_43(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[47])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosAssertionException
-extern "C" void chaos_bridge_thunk_44(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[49])();
-}
-
-// Bridge/import thunk for: System.Runtime.Loader/AssemblyLoadContext::get_Default:AssemblyLoadContext()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_45(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[50])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Runtime.Loader/AssemblyLoadContext::LoadFromAssemblyPath:System.Reflection.Assembly(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_46(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[51])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.AssemblyName::.ctor:System.Void(System.String)
-extern "C" void chaos_bridge_thunk_47(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[52])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.Assembly::Load:System.Reflection.Assembly(System.Reflection.AssemblyName)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_48(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[53])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor+<>O::<0>__ResolveFromBaseDirectory
-extern "C" void chaos_bridge_thunk_49(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[54])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String::Empty
-extern "C" void chaos_bridge_thunk_5(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[6])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Func<AssemblyLoadContext,System.Reflection.AssemblyName,System.Reflection.Assembly>::.ctor:System.Void(System.Object,System.IntPtr)
-extern "C" void chaos_bridge_thunk_50(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[55])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Runtime.Loader/AssemblyLoadContext::add_Resolving:System.Void(System.Func<AssemblyLoadContext,System.Reflection.AssemblyName,System.Reflection.Assembly>)
-extern "C" void chaos_bridge_thunk_51(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[56])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.AppContext::get_BaseDirectory:System.String()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_52(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[57])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.IO.Path::Combine:System.String(System.String,System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_53(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[58])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateExecutor+<>c__DisplayClass6_0::entryIndex
-extern "C" void chaos_bridge_thunk_54(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[59])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Func<ChaosTestCollectionEntry,System.Boolean>::.ctor:System.Void(System.Object,System.IntPtr)
-extern "C" void chaos_bridge_thunk_55(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[60])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Linq/Enumerable::FirstOrDefault<ChaosTestCollectionEntry>:ChaosTestCollectionEntry(System.Collections.Generic.IEnumerable<ChaosTestCollectionEntry>,System.Func<ChaosTestCollectionEntry,System.Boolean>)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_56(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[61])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Runtime.CompilerServices.DefaultInterpolatedStringHandler::AppendFormatted<System.Int32>:System.Void(System.Int32)
-extern "C" void chaos_bridge_thunk_57(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[64])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String::Equals:System.Boolean(System.String,System.String,System.StringComparison)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_58(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[70])(chaos_fn_arg_0, chaos_fn_arg_1, chaos_fn_arg_2);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Array::Empty<System.String>:System.String[]()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_59(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[71])();
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::<SubjectId>k__BackingField
-extern "C" void chaos_bridge_thunk_6(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[7])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::<CollectionPath>k__BackingField
-extern "C" void chaos_bridge_thunk_60(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[75])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::<BindingManifestPath>k__BackingField
-extern "C" void chaos_bridge_thunk_61(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[76])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest::<EntryIndex>k__BackingField
-extern "C" void chaos_bridge_thunk_62(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[77])();
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<System.String>::get_Default:System.Collections.Generic.EqualityComparer<System.String>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_63(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[78])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<System.String>::Equals:System.Boolean(System.String,System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_64(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[79])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<System.Int32>::get_Default:System.Collections.Generic.EqualityComparer<System.Int32>()
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_65(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)()>(kChaosExternalRuntimeFnTable[80])();
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<System.Int32>::Equals:System.Boolean(System.Int32,System.Int32)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_66(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[81])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateHostRequest
-extern "C" void chaos_bridge_thunk_67(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[82])();
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<System.String>::GetHashCode:System.Int32(System.String)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_68(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[83])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.EqualityComparer<System.Int32>::GetHashCode:System.Int32(System.Int32)
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_69(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[84])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::<CollectionPath>k__BackingField
-extern "C" void chaos_bridge_thunk_7(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[8])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Text.StringBuilder::Append:System.Text.StringBuilder(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_70(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[85])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_71(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[86])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Text.StringBuilder::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_72(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[88])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_73(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[89])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Int32>
-extern "C" void chaos_bridge_thunk_74(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[91])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Int32::TryParse:System.Boolean(System.String,System.Int32&)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_75(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[92])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Int32>::.ctor:System.Void(System.Int32)
-extern "C" void chaos_bridge_thunk_76(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[93])(chaos_fn_arg_0);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Nullable<System.Int32>::get_Value:System.Int32()
-extern "C" CHAOS_IL2CPP_INT32 chaos_bridge_thunk_77(void)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)()>(kChaosExternalRuntimeFnTable[95])();
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosManagedHostReflection+<>c::<>9__4_0
-extern "C" void chaos_bridge_thunk_78(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[97])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosManagedHostReflection+<>c::<>9
-extern "C" void chaos_bridge_thunk_79(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[98])();
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.List<System.String>::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_8(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[9])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Func<System.Reflection.ParameterInfo,System.String>::.ctor:System.Void(System.Object,System.IntPtr)
-extern "C" void chaos_bridge_thunk_80(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[99])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Linq/Enumerable::Select<System.Reflection.ParameterInfo,System.String>:System.Collections.Generic.IEnumerable<System.String>(System.Collections.Generic.IEnumerable<System.Reflection.ParameterInfo>,System.Func<System.Reflection.ParameterInfo,System.String>)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_81(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[100])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.String::Join:System.String(System.String,System.Collections.Generic.IEnumerable<System.String>)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_82(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[101])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosManagedHostReflection+<>O::<0>__FormatParameterType
-extern "C" void chaos_bridge_thunk_83(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[109])();
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Func<System.Type,System.String>::.ctor:System.Void(System.Object,System.IntPtr)
-extern "C" void chaos_bridge_thunk_84(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[110])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Linq/Enumerable::Select<System.Type,System.String>:System.Collections.Generic.IEnumerable<System.String>(System.Collections.Generic.IEnumerable<System.Type>,System.Func<System.Type,System.String>)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_85(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[111])(chaos_fn_arg_0, chaos_fn_arg_1);
-	return result;
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.ArgumentNullException::ThrowIfNull:System.Void(System.Object,System.String)
-extern "C" void chaos_bridge_thunk_86(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[112])(chaos_fn_arg_0, chaos_fn_arg_1);
-}
-
-// Bridge/import thunk for: System.Private.CoreLib/System.Reflection.Assembly::LoadFrom:System.Reflection.Assembly(System.String)
-extern "C" CHAOS_IL2CPP_INTPTR chaos_bridge_thunk_87(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[113])(chaos_fn_arg_0);
-	return result;
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosManagedHostRequest::<CollectionPath>k__BackingField
-extern "C" void chaos_bridge_thunk_88(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[116])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosManagedHostRequest::<EntryIndex>k__BackingField
-extern "C" void chaos_bridge_thunk_89(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[117])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosHotUpdateBindingManifest::<PatchProjectIds>k__BackingField
-extern "C" void chaos_bridge_thunk_9(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[10])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosManagedHostRequest
-extern "C" void chaos_bridge_thunk_90(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[118])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosProofRunner+<>c__DisplayClass0_0::entry
-extern "C" void chaos_bridge_thunk_91(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[119])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollection::<SchemaVersion>k__BackingField
-extern "C" void chaos_bridge_thunk_92(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[123])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollection::<SubjectId>k__BackingField
-extern "C" void chaos_bridge_thunk_93(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[124])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollection::<SubjectKind>k__BackingField
-extern "C" void chaos_bridge_thunk_94(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[125])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollection::<WarningCodes>k__BackingField
-extern "C" void chaos_bridge_thunk_95(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[126])();
-}
-
-// Bridge/import thunk for: System.Collections/System.Collections.Generic.List<ChaosTestCollectionEntry>::.ctor:System.Void()
-extern "C" void chaos_bridge_thunk_96(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[127])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollection::<DeclaredUnitTests>k__BackingField
-extern "C" void chaos_bridge_thunk_97(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[128])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollection::<DeclaredBenchmarks>k__BackingField
-extern "C" void chaos_bridge_thunk_98(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[129])();
-}
-
-// Bridge/import thunk for: Chaos.TestFramework.Runtime/ChaosTestCollection::<FrameworkReferenced>k__BackingField
-extern "C" void chaos_bridge_thunk_99(void)
-{
-	reinterpret_cast<void(*)()>(kChaosExternalRuntimeFnTable[130])();
-}
-
-
 
 // Managed method: Chaos.TestFramework.Runtime/ChaosManagedHostReflection+<>c::.cctor()
 extern "C" void Chaos_TestFramework_Runtime_ChaosManagedHostReflection___c_cctor(void)
@@ -7389,7 +6666,7 @@ extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Runtime_ChaosManagedHostReques
 		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
+	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s3)) * static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s4))));
 	{
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[80])();
 		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
@@ -7404,7 +6681,7 @@ extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Runtime_ChaosManagedHostReques
 		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[84])(chaos_arg_0);
 		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
+	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s6)) + static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s9))));
 	return static_cast<CHAOS_IL2CPP_INT32>(_s10);
 }
 
@@ -12361,7 +11638,7 @@ extern "C" CHAOS_IL2CPP_UINT8 Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosS
 		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s7 = chaos_locals[3];
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
+	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s6)) - static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s7))));
 	{
 		const auto chaos_arg_2 = _s8;
 		const auto chaos_arg_1 = _s4;
@@ -12464,7 +11741,7 @@ extern "C" CHAOS_IL2CPP_UINT16 Chaos_TestFramework_Sdk_Chaos_TestFramework_Chaos
 		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
 	}
 	_s7 = chaos_locals[3];
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapSub(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s7)));
+	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s6)) - static_cast<CHAOS_IL2CPP_UINT32>(static_cast<CHAOS_IL2CPP_INT32>(_s7))));
 	{
 		const auto chaos_arg_2 = _s8;
 		const auto chaos_arg_1 = _s4;
@@ -12512,956 +11789,6 @@ extern "C" CHAOS_IL2CPP_UINT16 Chaos_TestFramework_Sdk_Chaos_TestFramework_Chaos
 			CHAOS_EH_THROW(_s18);
 		}
 	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntryArguments::TryParse(System.String[],Chaos.TestFramework.ChaosSubjectEntrySelection&)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_TryParse_System_String_Chaos_TestFramework_ChaosSubjectEntrySelection(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 5) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INTPTR _s6;
-	CHAOS_IL2CPP_INTPTR _s7;
-	CHAOS_IL2CPP_INTPTR _s8;
-	CHAOS_IL2CPP_INTPTR _s9;
-	CHAOS_IL2CPP_INTPTR _s10;
-	CHAOS_IL2CPP_INTPTR _s11;
-	CHAOS_IL2CPP_INTPTR _s12;
-	CHAOS_IL2CPP_INTPTR _s13;
-	CHAOS_IL2CPP_INTPTR _s14;
-	CHAOS_IL2CPP_INTPTR _s15;
-	CHAOS_IL2CPP_INTPTR _s16;
-	CHAOS_IL2CPP_INTPTR _s17;
-	CHAOS_IL2CPP_INTPTR _s18;
-	CHAOS_IL2CPP_INTPTR _s19;
-	CHAOS_IL2CPP_INTPTR _s20;
-	CHAOS_IL2CPP_INTPTR _s21;
-	CHAOS_IL2CPP_INTPTR _s22;
-	CHAOS_IL2CPP_INTPTR _s23;
-	CHAOS_IL2CPP_INTPTR _s24;
-	CHAOS_IL2CPP_INTPTR _s25;
-	CHAOS_IL2CPP_INTPTR _s26;
-	CHAOS_IL2CPP_INTPTR _s27;
-	CHAOS_IL2CPP_INTPTR _s28;
-	CHAOS_IL2CPP_INTPTR _s29;
-	CHAOS_IL2CPP_INTPTR _s30;
-	CHAOS_IL2CPP_INTPTR _s31;
-	CHAOS_IL2CPP_INTPTR _s32;
-	CHAOS_IL2CPP_INTPTR _s33;
-	CHAOS_IL2CPP_INTPTR _s34;
-	CHAOS_IL2CPP_INTPTR _s35;
-	CHAOS_IL2CPP_INTPTR _s36;
-	CHAOS_IL2CPP_INTPTR _s37;
-	CHAOS_IL2CPP_INTPTR _s38;
-	CHAOS_IL2CPP_INTPTR _s39;
-	CHAOS_IL2CPP_INTPTR _s40;
-	CHAOS_IL2CPP_INTPTR _s41;
-	CHAOS_IL2CPP_INTPTR _s42;
-	CHAOS_IL2CPP_INTPTR _s43;
-	CHAOS_IL2CPP_INTPTR _s44;
-	CHAOS_IL2CPP_INTPTR _s45;
-	CHAOS_IL2CPP_INTPTR _s46;
-	CHAOS_IL2CPP_INTPTR _s47;
-	CHAOS_IL2CPP_INTPTR _s48;
-	CHAOS_IL2CPP_INTPTR _s49;
-	CHAOS_IL2CPP_INTPTR _s50;
-	CHAOS_IL2CPP_INTPTR _s51;
-	CHAOS_IL2CPP_INTPTR _s52;
-	CHAOS_IL2CPP_INTPTR _s53;
-	CHAOS_IL2CPP_INTPTR _s54;
-	CHAOS_IL2CPP_INTPTR _s55;
-	CHAOS_IL2CPP_INTPTR _s56;
-	CHAOS_IL2CPP_INTPTR _s57;
-	CHAOS_IL2CPP_INTPTR _s58;
-	CHAOS_IL2CPP_INTPTR _s59;
-	CHAOS_IL2CPP_INTPTR _s60;
-	CHAOS_IL2CPP_INTPTR _s61;
-	CHAOS_IL2CPP_INTPTR _s62;
-	CHAOS_IL2CPP_INTPTR _s63;
-	CHAOS_IL2CPP_INTPTR _s64;
-	CHAOS_IL2CPP_INTPTR _s65;
-	CHAOS_IL2CPP_INTPTR _s66;
-	CHAOS_IL2CPP_INTPTR _s67;
-	CHAOS_IL2CPP_INTPTR _s68;
-	CHAOS_IL2CPP_INTPTR _s69;
-	CHAOS_IL2CPP_INTPTR _s70;
-	CHAOS_IL2CPP_INTPTR _s71;
-	CHAOS_IL2CPP_INTPTR _s72;
-	CHAOS_IL2CPP_INTPTR _s73;
-	CHAOS_IL2CPP_INTPTR _s74;
-	CHAOS_IL2CPP_INTPTR _s75;
-	CHAOS_IL2CPP_INTPTR _s76;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-	{
-		const auto chaos_address = _s0;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-	{
-		const auto chaos_address = _s1;
-		if ((chaos_address & chaos_managed_pointer_local_slot_tag) != 0)
-		{
-			auto* chaos_slot = reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(static_cast<CHAOS_IL2CPP_UINTPTR>(chaos_address & ~chaos_managed_pointer_local_slot_tag));
-			*chaos_slot = 0;
-		}
-		else
-		{
-			*reinterpret_cast<CHAOS_IL2CPP_INTPTR*>(chaos_address) = 0;
-		}
-	}
-	_s2 = chaos_args[0];
-	_s3 = _s2;
-	{
-		if (_s3 == 0)
-		{
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[71])();
-				_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-		}
-		chaos_locals[2] = _s4;
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-		chaos_locals[3] = _s5;
-		_s6 = chaos_locals[2];
-		_s7 = chaos_locals[3];
-		{
-			const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s7);
-			auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s6);
-			if (chaos_array == nullptr)
-			{
-				CHAOS_IL2CPP_FAIL_FAST();
-			}
-			if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
-			{
-				CHAOS_IL2CPP_FAIL_FAST();
-			}
-			const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
-			_s8 = chaos_element;
-		}
-		chaos_locals[4] = _s8;
-		_s9 = chaos_locals[4];
-		{
-			_s10 = CHAOS_IL2CPP_STRING_ID("--chaos-entry-kind=");
-		}
-		_s11 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
-		{
-			const auto chaos_arg_2 = _s11;
-			const auto chaos_arg_1 = _s10;
-			const auto chaos_arg_0 = _s9;
-			if (chaos_arg_0 == 0)
-			{
-				::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-			}
-			const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__StartsWith_System_Boolean_System_String_System_StringComparison_(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-			_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-		}
-		{
-			if (_s12 == 0)
-			{
-				_s13 = chaos_locals[4];
-				{
-					_s14 = CHAOS_IL2CPP_STRING_ID("--chaos-entry-slice=");
-				}
-				_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
-				{
-					const auto chaos_arg_2 = _s15;
-					const auto chaos_arg_1 = _s14;
-					const auto chaos_arg_0 = _s13;
-					if (chaos_arg_0 == 0)
-					{
-						::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-					}
-					const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__StartsWith_System_Boolean_System_String_System_StringComparison_(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-					_s16 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-				}
-				{
-					if (_s16 != 0)
-					{
-						_s17 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-						_s18 = chaos_locals[4];
-						{
-							_s19 = CHAOS_IL2CPP_STRING_ID("--chaos-entry-slice=");
-						}
-						{
-							_s20 = CHAOS_IL2CPP_STRING_ID("EntrySlicePrefix");
-						}
-						{
-							const auto chaos_arg_2 = _s20;
-							const auto chaos_arg_1 = _s19;
-							const auto chaos_arg_0 = _s18;
-							auto& _d186 = s_hotpatch_entries[186];
-							CHAOS_IL2CPP_UINT16 _d_hpresult{};
-							if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d186)
-								&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d186))
-							{
-								alignas(16) uint8_t _d_ab[24];
-								ArgBuffer _d_bw(_d_ab);
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-								_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_2));
-								::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-									_d186.method_key, _d_ab, &_d_hpresult);
-							}
-							else
-							{
-								_d_hpresult = Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_ParseUInt16_System_String_System_String_System_String(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-							}
-							_s21 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-						}
-						{
-							const auto chaos_arg_0 = _s21;
-							reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[210])(chaos_arg_0);
-						}
-					}
-				}
-			}
-			else
-			{
-				_s22 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-				_s23 = chaos_locals[4];
-				{
-					_s24 = CHAOS_IL2CPP_STRING_ID("--chaos-entry-kind=");
-				}
-				{
-					_s25 = CHAOS_IL2CPP_STRING_ID("EntryKindPrefix");
-				}
-				{
-					const auto chaos_arg_2 = _s25;
-					const auto chaos_arg_1 = _s24;
-					const auto chaos_arg_0 = _s23;
-					auto& _d185 = s_hotpatch_entries[185];
-					CHAOS_IL2CPP_UINT8 _d_hpresult{};
-					if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d185)
-						&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d185))
-					{
-						alignas(16) uint8_t _d_ab[24];
-						ArgBuffer _d_bw(_d_ab);
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-						_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_2));
-						::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-							_d185.method_key, _d_ab, &_d_hpresult);
-					}
-					else
-					{
-						_d_hpresult = Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_ParseByte_System_String_System_String_System_String(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-					}
-					_s26 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-				}
-				{
-					const auto chaos_arg_0 = _s26;
-					reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[209])(chaos_arg_0);
-				}
-			}
-			_s27 = chaos_locals[3];
-			_s28 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-			_s29 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s27), static_cast<CHAOS_IL2CPP_INT32>(_s28)));
-			chaos_locals[3] = _s29;
-			do
-			{
-					_s30 = chaos_locals[2];
-					_s31 = chaos_locals[3];
-					{
-						const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s31);
-						auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s30);
-						if (chaos_array == nullptr)
-						{
-							CHAOS_IL2CPP_FAIL_FAST();
-						}
-						if (chaos_index < 0 || static_cast<CHAOS_IL2CPP_INTPTR>(chaos_index) >= chaos_array->length)
-						{
-							CHAOS_IL2CPP_FAIL_FAST();
-						}
-						const auto chaos_element = chaos_array->elements[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];
-						_s32 = chaos_element;
-					}
-					chaos_locals[4] = _s32;
-					_s33 = chaos_locals[4];
-					{
-						_s34 = CHAOS_IL2CPP_STRING_ID("--chaos-entry-kind=");
-					}
-					_s35 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
-					{
-						const auto chaos_arg_2 = _s35;
-						const auto chaos_arg_1 = _s34;
-						const auto chaos_arg_0 = _s33;
-						if (chaos_arg_0 == 0)
-						{
-							::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-						}
-						const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__StartsWith_System_Boolean_System_String_System_StringComparison_(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-						_s36 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					{
-						if (_s36 == 0)
-						{
-							_s37 = chaos_locals[4];
-							{
-								_s38 = CHAOS_IL2CPP_STRING_ID("--chaos-entry-slice=");
-							}
-							_s39 = static_cast<CHAOS_IL2CPP_INTPTR>(4);
-							{
-								const auto chaos_arg_2 = _s39;
-								const auto chaos_arg_1 = _s38;
-								const auto chaos_arg_0 = _s37;
-								if (chaos_arg_0 == 0)
-								{
-									::chaos::il2cpp::runtime_core::RaiseNullReferenceException();
-								}
-								const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_String__StartsWith_System_Boolean_System_String_System_StringComparison_(chaos_arg_0, chaos_arg_1, static_cast<CHAOS_IL2CPP_INT32>(chaos_arg_2));
-								_s40 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-							}
-							{
-								if (_s40 != 0)
-								{
-									_s41 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-									_s42 = chaos_locals[4];
-									{
-										_s43 = CHAOS_IL2CPP_STRING_ID("--chaos-entry-slice=");
-									}
-									{
-										_s44 = CHAOS_IL2CPP_STRING_ID("EntrySlicePrefix");
-									}
-									{
-										const auto chaos_arg_2 = _s44;
-										const auto chaos_arg_1 = _s43;
-										const auto chaos_arg_0 = _s42;
-										auto& _d186 = s_hotpatch_entries[186];
-										CHAOS_IL2CPP_UINT16 _d_hpresult{};
-										if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d186)
-											&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d186))
-										{
-											alignas(16) uint8_t _d_ab[24];
-											ArgBuffer _d_bw(_d_ab);
-											_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-											_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-											_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_2));
-											::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-												_d186.method_key, _d_ab, &_d_hpresult);
-										}
-										else
-										{
-											_d_hpresult = Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_ParseUInt16_System_String_System_String_System_String(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-										}
-										_s45 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-									}
-									{
-										const auto chaos_arg_0 = _s45;
-										reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[210])(chaos_arg_0);
-									}
-								}
-							}
-						}
-						else
-						{
-							_s46 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-							_s47 = chaos_locals[4];
-							{
-								_s48 = CHAOS_IL2CPP_STRING_ID("--chaos-entry-kind=");
-							}
-							{
-								_s49 = CHAOS_IL2CPP_STRING_ID("EntryKindPrefix");
-							}
-							{
-								const auto chaos_arg_2 = _s49;
-								const auto chaos_arg_1 = _s48;
-								const auto chaos_arg_0 = _s47;
-								auto& _d185 = s_hotpatch_entries[185];
-								CHAOS_IL2CPP_UINT8 _d_hpresult{};
-								if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d185)
-									&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d185))
-								{
-									alignas(16) uint8_t _d_ab[24];
-									ArgBuffer _d_bw(_d_ab);
-									_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-									_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-									_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_2));
-									::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-										_d185.method_key, _d_ab, &_d_hpresult);
-								}
-								else
-								{
-									_d_hpresult = Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryArguments_ParseByte_System_String_System_String_System_String(chaos_arg_0, chaos_arg_1, chaos_arg_2);
-								}
-								_s50 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-							}
-							{
-								const auto chaos_arg_0 = _s50;
-								reinterpret_cast<void(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[209])(chaos_arg_0);
-							}
-						}
-						_s51 = chaos_locals[3];
-						_s52 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-						_s53 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s51), static_cast<CHAOS_IL2CPP_INT32>(_s52)));
-						chaos_locals[3] = _s53;
-					}
-					_s54 = chaos_locals[3];
-					_s55 = chaos_locals[2];
-					_s56 = [&](){ auto* _c_arr = reinterpret_cast<chaos_managed_array*>(_s55); return _c_arr ? static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_c_arr->length)) : CHAOS_IL2CPP_INTPTR{}; }();
-					_s56 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT32>(_s56));
-					if (!(static_cast<CHAOS_IL2CPP_INT32>(_s54) < static_cast<CHAOS_IL2CPP_INT32>(_s56))) break;
-			} while (true);
-			_s57 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-			{
-				const auto chaos_arg_0 = _s57;
-				const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Byte___get_HasValue_System_Boolean__(chaos_arg_0);
-				_s58 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			{
-				if (_s58 == 0)
-				{
-					_s59 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-					{
-						const auto chaos_arg_0 = _s59;
-						const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_UInt16___get_HasValue_System_Boolean__(chaos_arg_0);
-						_s60 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					{
-						if (_s60 == 0)
-						{
-							_s61 = chaos_args[1];
-							{
-								auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s61);
-								*chaos_value = chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection{};
-							}
-							_s62 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-							return _s62;
-						}
-					}
-				}
-				_s63 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-				{
-					const auto chaos_arg_0 = _s63;
-					const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_Byte___get_HasValue_System_Boolean__(chaos_arg_0);
-					_s64 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-				}
-				{
-					if (_s64 != 0)
-					{
-						_s65 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-						{
-							const auto chaos_arg_0 = _s65;
-							const auto chaos_result = chaos_external_runtime_System_Private_CoreLib_System_Nullable_System_UInt16___get_HasValue_System_Boolean__(chaos_arg_0);
-							_s66 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-						}
-						{
-							if (_s66 != 0)
-							{
-							}
-						}
-					}
-					{
-						_s67 = CHAOS_IL2CPP_STRING_ID("compact subject entry selection requires both kind and slice arguments.");
-					}
-					{
-						_s68 = CHAOS_IL2CPP_STRING_ID("args");
-					}
-					{
-						auto* chaos_object = CHAOS_IL2CPP_NEW_GC(chaos_type_System_Private_CoreLib_System_ArgumentException, {});
-						chaos_object->header.type_info = chaos_mt_System_Private_CoreLib_System_ArgumentException.AsTypeInfoHot();
-						_s69 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_object);
-					}
-					CHAOS_EH_THROW(_s69);
-					_s70 = chaos_args[1];
-					_s71 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[0]);
-					{
-						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT8(*)(void)>(kChaosExternalRuntimeFnTable[214])();
-						_s72 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					_s73 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[1]);
-					{
-						const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_UINT16(*)(void)>(kChaosExternalRuntimeFnTable[215])();
-						_s74 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-					}
-					{
-						const auto chaos_raw_arg_2 = _s74;
-						const auto chaos_arg_2 = chaos_raw_arg_2;
-						const auto chaos_raw_arg_1 = _s73;
-						const auto chaos_arg_1 = chaos_raw_arg_1;
-						CHAOS_IL2CPP_INTPTR chaos_value = 0;
-						Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection__ctor_Chaos_TestFramework_ChaosSubjectEntryKind_Chaos_TestFramework_ChaosSubjectSlice(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_value) | chaos_managed_pointer_local_slot_tag, *chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryKind>(chaos_arg_1), *chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectSlice>(chaos_arg_2));
-						_s75 = chaos_value;
-					}
-					{
-						auto* chaos_source = reinterpret_cast<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection*>(_s75);
-						auto* chaos_destination = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s72);
-						if (chaos_source == nullptr)
-						{
-							CHAOS_IL2CPP_FAIL_FAST();
-						}
-						*chaos_destination = *chaos_source;
-						if (chaos_is_gc_pointer(chaos_destination))
-						{
-							chaos_gc_dirty_card(chaos_destination);
-						}
-					}
-					_s76 = static_cast<CHAOS_IL2CPP_INTPTR>(1);
-					return _s76;
-				}
-			}
-		}
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::.ctor(Chaos.TestFramework.ChaosSubjectEntryKind,Chaos.TestFramework.ChaosSubjectSlice)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection__ctor_Chaos_TestFramework_ChaosSubjectEntryKind_Chaos_TestFramework_ChaosSubjectSlice(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryKind chaos_fn_arg_1, chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectSlice chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	auto chaos_abi_param_1 = chaos_fn_arg_1;
-	chaos_args[1] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_abi_param_1);
-	auto chaos_abi_param_2 = chaos_fn_arg_2;
-	chaos_args[2] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_abi_param_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	_s0 = chaos_args[0];
-	_s1 = chaos_args[1];
-	{
-		auto chaos_value = _s1;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_value_owner = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s0);
-		chaos_value_owner->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntryKind_k__BackingField = chaos_value;
-		if (chaos_is_gc_pointer(chaos_value_owner))
-		{
-			chaos_gc_dirty_card(chaos_value_owner);
-		}
-	}
-	_s2 = chaos_args[0];
-	_s3 = chaos_args[2];
-	{
-		auto chaos_value = _s3;
-		if (chaos_is_string_id(chaos_value))
-		{
-			chaos_value = chaos_string_materialize(chaos_value);
-		}
-		auto* chaos_value_owner = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s2);
-		chaos_value_owner->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntrySlice_k__BackingField = chaos_value;
-		if (chaos_is_gc_pointer(chaos_value_owner))
-		{
-			chaos_gc_dirty_card(chaos_value_owner);
-		}
-	}
-	return;
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Deconstruct(Chaos.TestFramework.ChaosSubjectEntryKind&,Chaos.TestFramework.ChaosSubjectSlice&)
-extern "C" void Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Deconstruct_Chaos_TestFramework_ChaosSubjectEntryKind_Chaos_TestFramework_ChaosSubjectSlice(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1, CHAOS_IL2CPP_INTPTR chaos_fn_arg_2)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 3) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	chaos_args[2] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_2);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INTPTR _s6;
-	CHAOS_IL2CPP_INTPTR _s7;
-	CHAOS_IL2CPP_INTPTR _s8;
-	CHAOS_IL2CPP_INTPTR _s9;
-	_s0 = chaos_args[1];
-	_s1 = chaos_args[0];
-	{
-		// Inlined: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntryKind:Chaos.TestFramework.ChaosSubjectEntryKind()
-		auto chaos_inline_arg_0 = _s1;
-		CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
-		_s2 = chaos_inline_arg_0;
-		{
-			auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s2);
-			_s3 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntryKind_k__BackingField;
-		}
-		chaos_inline_retval0 = _s3;
-		goto chaos_inline_end0;
-	chaos_inline_end0:
-		;
-		_s4 = chaos_inline_retval0;
-	}
-	{
-		auto chaos_value_raw = _s4;
-		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw);
-		const auto chaos_address = _s0;
-		chaos_store_indirect<CHAOS_IL2CPP_INT8>(chaos_address, chaos_value);
-	}
-	_s5 = chaos_args[2];
-	_s6 = chaos_args[0];
-	{
-		// Inlined: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntrySlice:Chaos.TestFramework.ChaosSubjectSlice()
-		auto chaos_inline_arg_0 = _s6;
-		CHAOS_IL2CPP_INTPTR chaos_inline_retval1{};
-		_s7 = chaos_inline_arg_0;
-		{
-			auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s7);
-			_s8 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntrySlice_k__BackingField;
-		}
-		chaos_inline_retval1 = _s8;
-		goto chaos_inline_end1;
-	chaos_inline_end1:
-		;
-		_s9 = chaos_inline_retval1;
-	}
-	{
-		auto chaos_value_raw = _s9;
-		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw);
-		const auto chaos_address = _s5;
-		chaos_store_indirect<CHAOS_IL2CPP_INT16>(chaos_address, chaos_value);
-	}
-	return;
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Equals(Chaos.TestFramework.ChaosSubjectEntrySelection)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Equals_Chaos_TestFramework_ChaosSubjectEntrySelection(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	auto chaos_abi_param_1 = chaos_fn_arg_1;
-	chaos_args[1] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_abi_param_1);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INTPTR _s6;
-	CHAOS_IL2CPP_INTPTR _s7;
-	CHAOS_IL2CPP_INTPTR _s8;
-	CHAOS_IL2CPP_INTPTR _s9;
-	CHAOS_IL2CPP_INTPTR _s10;
-	CHAOS_IL2CPP_INTPTR _s11;
-	CHAOS_IL2CPP_INTPTR _s12;
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[218])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s1);
-		_s2 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntryKind_k__BackingField;
-	}
-	_s3 = chaos_args[1];
-	{
-		auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s3);
-		_s4 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntryKind_k__BackingField;
-	}
-	{
-		const auto chaos_arg_1 = _s4;
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[219])(chaos_arg_0, chaos_arg_1);
-		_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	{
-		if (_s5 == 0)
-		{
-			_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			return _s6;
-		}
-		else
-		{
-			{
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[220])();
-				_s7 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			_s8 = chaos_args[0];
-			{
-				auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s8);
-				_s9 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntrySlice_k__BackingField;
-			}
-			_s10 = chaos_args[1];
-			{
-				auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s10);
-				_s11 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntrySlice_k__BackingField;
-			}
-			{
-				const auto chaos_arg_1 = _s11;
-				const auto chaos_arg_0 = _s9;
-				const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(CHAOS_IL2CPP_INTPTR, CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[221])(chaos_arg_0, chaos_arg_1);
-				_s12 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-			}
-			return _s12;
-		}
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::Equals(System.Object)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Equals_System_Object(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0, CHAOS_IL2CPP_INTPTR chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	chaos_args[1] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_1);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INTPTR _s6;
-	_s0 = chaos_args[1];
-	{
-		const auto chaos_value = _s0;
-		auto chaos_matches = false;
-		if (chaos_value != 0)
-		{
-			auto* chaos_header = reinterpret_cast<ThinLockableHeader*>(chaos_value);
-			chaos_matches = chaos_object_get_type_info(chaos_header) == chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection.AsTypeInfoHot() || chaos_object_get_type_info(chaos_header)->stable_id == (chaos_mt_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection.AsTypeInfoHot())->stable_id;
-		}
-		_s1 = chaos_matches ? chaos_value : 0;
-	}
-	{
-		if (_s1 == 0)
-		{
-			_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			return _s2;
-		}
-		else
-		{
-			_s3 = chaos_args[0];
-			_s4 = chaos_args[1];
-			chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection chaos_unbox_any_value_0{};
-			{
-				auto* chaos_boxed = reinterpret_cast<chaos_boxed_type_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection*>(_s4);
-				if (chaos_boxed == nullptr)
-				{
-					CHAOS_IL2CPP_FAIL_FAST();
-				}
-				chaos_unbox_any_value_0 = chaos_boxed->value;
-				_s5 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_unbox_any_value_0);
-			}
-			{
-				const auto chaos_arg_1 = _s5;
-				const auto chaos_raw_arg_0 = _s3;
-				const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s3);
-				auto& _d190 = s_hotpatch_entries[190];
-				CHAOS_IL2CPP_INTPTR _d_hpresult{};
-				if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d190)
-					&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d190))
-				{
-					alignas(16) uint8_t _d_ab[16];
-					ArgBuffer _d_bw(_d_ab);
-					_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-					_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-					::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-						_d190.method_key, _d_ab, &_d_hpresult);
-				}
-				else
-				{
-					_d_hpresult = Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Equals_Chaos_TestFramework_ChaosSubjectEntrySelection(chaos_arg_0, *chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(chaos_arg_1));
-				}
-				_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-			}
-			return _s6;
-		}
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntryKind()
-extern "C" chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryKind Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_get_EntryKind(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s0);
-		_s1 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntryKind_k__BackingField;
-	}
-	return *chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntryKind>(_s1);
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntrySlice()
-extern "C" chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectSlice Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_get_EntrySlice(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	_s0 = chaos_args[0];
-	{
-		auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s0);
-		_s1 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntrySlice_k__BackingField;
-	}
-	return *chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectSlice>(_s1);
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_IsNone()
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_get_IsNone(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INTPTR _s6;
-	CHAOS_IL2CPP_INTPTR _s7;
-	CHAOS_IL2CPP_INTPTR _s8;
-	CHAOS_IL2CPP_INTPTR _s9;
-	CHAOS_IL2CPP_INTPTR _s10;
-	_s0 = chaos_args[0];
-	{
-		// Inlined: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntryKind:Chaos.TestFramework.ChaosSubjectEntryKind()
-		auto chaos_inline_arg_0 = _s0;
-		CHAOS_IL2CPP_INTPTR chaos_inline_retval0{};
-		_s1 = chaos_inline_arg_0;
-		{
-			auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s1);
-			_s2 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntryKind_k__BackingField;
-		}
-		chaos_inline_retval0 = _s2;
-		goto chaos_inline_end0;
-	chaos_inline_end0:
-		;
-		_s3 = chaos_inline_retval0;
-	}
-	{
-		if (_s3 != 0)
-		{
-			_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			return _s4;
-		}
-		else
-		{
-			_s5 = chaos_args[0];
-			{
-				// Inlined: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::get_EntrySlice:Chaos.TestFramework.ChaosSubjectSlice()
-				auto chaos_inline_arg_0 = _s5;
-				CHAOS_IL2CPP_INTPTR chaos_inline_retval1{};
-				_s6 = chaos_inline_arg_0;
-				{
-					auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s6);
-					_s7 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntrySlice_k__BackingField;
-				}
-				chaos_inline_retval1 = _s7;
-				goto chaos_inline_end1;
-			chaos_inline_end1:
-				;
-				_s8 = chaos_inline_retval1;
-			}
-			_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-			_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INTPTR>(_s8) == static_cast<CHAOS_IL2CPP_INTPTR>(_s9) ? 1 : 0);
-			return _s10;
-		}
-	}
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::GetHashCode()
-extern "C" CHAOS_IL2CPP_INT32 Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_GetHashCode(CHAOS_IL2CPP_INTPTR chaos_fn_arg_0)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	chaos_args[0] = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_fn_arg_0);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INTPTR _s6;
-	CHAOS_IL2CPP_INTPTR _s7;
-	CHAOS_IL2CPP_INTPTR _s8;
-	CHAOS_IL2CPP_INTPTR _s9;
-	CHAOS_IL2CPP_INTPTR _s10;
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[218])();
-		_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s1 = chaos_args[0];
-	{
-		auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s1);
-		_s2 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntryKind_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s2;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[222])(chaos_arg_0);
-		_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(-1521134295);
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapMul(static_cast<CHAOS_IL2CPP_INT32>(_s3), static_cast<CHAOS_IL2CPP_INT32>(_s4)));
-	{
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR(*)(void)>(kChaosExternalRuntimeFnTable[220])();
-		_s6 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s7 = chaos_args[0];
-	{
-		auto* chaos_value = chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(_s7);
-		_s8 = chaos_value->field_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection___EntrySlice_k__BackingField;
-	}
-	{
-		const auto chaos_arg_0 = _s8;
-		const auto chaos_result = reinterpret_cast<CHAOS_IL2CPP_INT32(*)(CHAOS_IL2CPP_INTPTR)>(kChaosExternalRuntimeFnTable[223])(chaos_arg_0);
-		_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_result);
-	}
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(ChaosWrapAdd(static_cast<CHAOS_IL2CPP_INT32>(_s6), static_cast<CHAOS_IL2CPP_INT32>(_s9)));
-	return static_cast<CHAOS_IL2CPP_INT32>(_s10);
-}
-
-// Managed method: Chaos.TestFramework.Sdk/Chaos.TestFramework.ChaosSubjectEntrySelection::op_Equality(Chaos.TestFramework.ChaosSubjectEntrySelection,Chaos.TestFramework.ChaosSubjectEntrySelection)
-extern "C" CHAOS_IL2CPP_INTPTR Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_op_Equality_Chaos_TestFramework_ChaosSubjectEntrySelection_Chaos_TestFramework_ChaosSubjectEntrySelection(chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection chaos_fn_arg_0, chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection chaos_fn_arg_1)
-{
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 2) chaos_args{};
-	CHAOS_IL2CPP_ARRAY(CHAOS_IL2CPP_INTPTR, 1) chaos_locals{};
-	auto chaos_abi_param_0 = chaos_fn_arg_0;
-	chaos_args[0] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_abi_param_0);
-	auto chaos_abi_param_1 = chaos_fn_arg_1;
-	chaos_args[1] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_abi_param_1);
-	CHAOS_IL2CPP_INTPTR _s0;
-	CHAOS_IL2CPP_INTPTR _s1;
-	CHAOS_IL2CPP_INTPTR _s2;
-	_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_args[0]);
-	_s1 = chaos_args[1];
-	{
-		const auto chaos_arg_1 = _s1;
-		const auto chaos_raw_arg_0 = _s0;
-		const auto chaos_arg_0 = chaos_normalize_native_int_argument(_s0);
-		auto& _d190 = s_hotpatch_entries[190];
-		CHAOS_IL2CPP_INTPTR _d_hpresult{};
-		if (::chaos::il2cpp::runtime_core::HotpatchIsActive(_d190)
-			&& !::chaos::il2cpp::runtime_core::HotpatchShouldKeepNative(_d190))
-		{
-			alignas(16) uint8_t _d_ab[16];
-			ArgBuffer _d_bw(_d_ab);
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_0));
-			_d_bw.WritePtr(reinterpret_cast<void*>(chaos_arg_1));
-			::chaos::il2cpp::runtime_core::InterpreterEntryDirect(
-				_d190.method_key, _d_ab, &_d_hpresult);
-		}
-		else
-		{
-			_d_hpresult = Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection_Equals_Chaos_TestFramework_ChaosSubjectEntrySelection(chaos_arg_0, *chaos_resolve_managed_value_pointer<chaos_valuetype_Chaos_TestFramework_Sdk_Chaos_TestFramework_ChaosSubjectEntrySelection>(chaos_arg_1));
-		}
-		_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(_d_hpresult);
-	}
-	return _s2;
 }
 
 

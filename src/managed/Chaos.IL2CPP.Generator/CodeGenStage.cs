@@ -6,7 +6,7 @@ namespace Chaos.IL2CPP.Generator;
 public sealed class CodeGenStage
 {
     private const int AuditTranslationUnitPageSize = 1024;
-    private const int NativeAotPageSize = 150;
+    private const int NativeAotPageSize = 999999;
 
     public string Name => "CodeGen";
 

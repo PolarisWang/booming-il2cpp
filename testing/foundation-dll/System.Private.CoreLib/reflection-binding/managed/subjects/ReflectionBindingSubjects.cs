@@ -3,6 +3,7 @@
 // Assembly: System.Private.CoreLib
 // Variant: subjects
 
+using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -17,70 +18,70 @@ public static partial class ReflectionBindingSubjects
     // [0] System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String)
     public static void Subject_0()
     {
-        try { if (((typeof(byte).GetMethod("hello")).GetHashCode()) != ((typeof(byte).GetMethod("hello")).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetMethod("hello")).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Reflection.BindingFlags)
     public static void Subject_1()
     {
-        try { if (((typeof(byte).GetMethod("hello", System.Reflection.BindingFlags.Default)).GetHashCode()) != ((typeof(byte).GetMethod("hello", System.Reflection.BindingFlags.Default)).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetMethod("hello", System.Reflection.BindingFlags.Default)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])
     public static void Subject_2()
     {
-        try { if (((typeof(byte).GetMethod("hello", Array.Empty<System.Type>())).GetHashCode()) != ((typeof(byte).GetMethod("hello", Array.Empty<System.Type>())).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetMethod("hello", Array.Empty<System.Type>())).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String)
     public static void Subject_3()
     {
-        try { if (((typeof(byte).GetField("hello")).GetHashCode()) != ((typeof(byte).GetField("hello")).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetField("hello")).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String,System.Reflection.BindingFlags)
     public static void Subject_4()
     {
-        try { if (((typeof(byte).GetField("hello", System.Reflection.BindingFlags.Default)).GetHashCode()) != ((typeof(byte).GetField("hello", System.Reflection.BindingFlags.Default)).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetField("hello", System.Reflection.BindingFlags.Default)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String)
     public static void Subject_5()
     {
-        try { if (((typeof(byte).GetProperty("hello")).GetHashCode()) != ((typeof(byte).GetProperty("hello")).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetProperty("hello")).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Reflection.BindingFlags)
     public static void Subject_6()
     {
-        try { if (((typeof(byte).GetProperty("hello", System.Reflection.BindingFlags.Default)).GetHashCode()) != ((typeof(byte).GetProperty("hello", System.Reflection.BindingFlags.Default)).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetProperty("hello", System.Reflection.BindingFlags.Default)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Type[])
     public static void Subject_7()
     {
-        try { if (((typeof(byte).GetProperty("hello", Array.Empty<System.Type>())).GetHashCode()) != ((typeof(byte).GetProperty("hello", Array.Empty<System.Type>())).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetProperty("hello", Array.Empty<System.Type>())).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [8] System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String)
     public static void Subject_8()
     {
-        try { if (((typeof(byte).GetEvent("hello")).GetHashCode()) != ((typeof(byte).GetEvent("hello")).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetEvent("hello")).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String,System.Reflection.BindingFlags)
     public static void Subject_9()
     {
-        try { if (((typeof(byte).GetEvent("hello", System.Reflection.BindingFlags.Default)).GetHashCode()) != ((typeof(byte).GetEvent("hello", System.Reflection.BindingFlags.Default)).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((typeof(byte).GetEvent("hello", System.Reflection.BindingFlags.Default)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
@@ -93,7 +94,7 @@ public static partial class ReflectionBindingSubjects
     // [11] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_11()
     {
-        try { if (((default(MethodInfo)!.Invoke(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()) != ((default(MethodInfo)!.Invoke(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode())) _exitCode = 1; }
+        try { var _ = ((default(MethodInfo)!.Invoke(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 

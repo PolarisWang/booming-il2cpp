@@ -98,4 +98,5 @@ print(f"NET8 data:      {net8_ok}/{len(families)}")
 print(f"HU+NET8 both:   {hu_net8_valid}")
 print(f"Within 3x:      {hu_net8_within_3x}")
 for slug, ratio in violations:
-    print(f"  VIOLATION: {slug}: {ratio:.2f}x ({1/ratio:.1f}x slower)")
+    slower = f"{1/ratio:.1f}x" if ratio and ratio > 0 else "N/A"
+    print(f"  VIOLATION: {slug}: {ratio:.2f}x ({slower} slower)")

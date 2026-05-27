@@ -55,9 +55,12 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsAssignableFrom(
     const auto* walk = source_info;
     while (walk != nullptr) {
         const auto* warm = GetWarmPtr(walk);
-        if (warm->iface_map != nullptr) {
-            for (uint32_t i = 0; i < warm->iface_count; i++) {
-                if (warm->iface_map[i].iface_stable_id == target_stable) return 1;
+        // Bloom filter: skip static iface_map scan if bitmap says miss
+        if (IfaceBitmapMaybeContains(warm, target_stable)) {
+            if (warm->iface_map != nullptr) {
+                for (uint32_t i = 0; i < warm->iface_count; i++) {
+                    if (warm->iface_map[i].iface_stable_id == target_stable) return 1;
+                }
             }
         }
         if (warm->runtime_iface_map != nullptr) {
@@ -102,9 +105,12 @@ CHAOS_IL2CPP_INTPTR ChaosReflectionIsInstanceOfType(
         walk = obj_type;
         while (walk != nullptr) {
             const auto* warm = GetWarmPtr(walk);
-            if (warm->iface_map != nullptr) {
-                for (uint32_t i = 0; i < warm->iface_count; i++) {
-                    if (warm->iface_map[i].iface_stable_id == target_stable) return 1;
+            // Bloom filter: skip static iface_map scan if bitmap says miss
+            if (IfaceBitmapMaybeContains(warm, target_stable)) {
+                if (warm->iface_map != nullptr) {
+                    for (uint32_t i = 0; i < warm->iface_count; i++) {
+                        if (warm->iface_map[i].iface_stable_id == target_stable) return 1;
+                    }
                 }
             }
             if (warm->runtime_iface_map != nullptr) {
