@@ -168,27 +168,28 @@ def generate_verification_dispatch(
     write('')
 
     # ── RunBenchmark ────────────────────────────────────────────────
-    # Uses ChaosDispatchMethod in the timing loop with kDefaultArgThunks
-    # so the actual function body is executed regardless of JIT/AOT mode.
-    # (JIT nullptr mode is only valid via direct_ptr, which doesn't work
-    # when the file is compiled in AOT mode.)
-    #
-    # NOTE: returns double (not a struct) to match the extern declaration
-    # in family_entrypoint_generator.py's runtime-entry.cpp template.
-    # Returning a struct on x64 Windows uses hidden-pointer calling
-    # convention which mismatches the explicit extern "C" double declaration.
+    # Returns BenchmarkResult (struct) matching the runtime-entry.cpp template
+    # declaration. On x64 Windows, structs use hidden-pointer calling convention
+    # while double uses XMM0 — mismatch causes caller to read uninitialized stack.
     write("// ── RunBenchmark: timing loop via ChaosDispatchMethod ───────────────────")
+    write('struct BenchmarkResult {')
+    write('    double elapsed_ms;')
+    write('    int64_t allocated_bytes;')
+    write('};')
     write('')
-    write('extern "C" double RunBenchmark(int entry_index, int iterations) {')
+    write('extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {')
     write('    if (entry_index < 0 || entry_index >= kAotMethodCount)')
-    write('        return -1.0;')
+    write('        return {-1.0, 0};')
     write('    auto* entries = GetHotpatchEntries();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
     write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {thunks});')
     write('    }')
     write('    auto end = std::chrono::steady_clock::now();')
-    write('    return std::chrono::duration<double, std::milli>(end - start).count();')
+    write('    BenchmarkResult result;')
+    write('    result.elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();')
+    write('    result.allocated_bytes = 0;')
+    write('    return result;')
     write('}')
     write('')
 

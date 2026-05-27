@@ -1066,40 +1066,64 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
 
 static int RunHotupdateMode() {
     const int kCount = kSubjectEntryCount;
-    // R6: Phase 1 — baseline, capture return values
-    CHAOS_IL2CPP_INT32 baseline_values[256] = {0};
+    // Pre-patch: capture per-method pass/fail via ChaosDispatchMethod.
+    // Post-patch: capture pass/fail + return value via ChaosDispatchMethodGetValue
+    // (InterpreterEntryDirect captures actual return in __chaos_ret[0]).
+    //
+    // Pre-patch and post-patch use different dispatch paths (direct_ptr vs
+    // InterpreterEntryDirect), so comparing raw RAX values is unreliable
+    // for void-returning methods.  We compare pass/fail (always reliable)
+    // and log post-patch return values for inspection.
+    printf("{\\n");
     bool baseline_ok[256] = {false};
+    bool baseline_caught[256] = {false};
+    printf("\\"baselineFact\\":[");
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
+        bool caught = false;
         CHAOS_EH_TRY
-            CHAOS_IL2CPP_INT32 result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
                 GetHotpatchEntries(), kAotMethodCount, i, nullptr);
-            baseline_values[si] = result;
             baseline_ok[si] = true;
         CHAOS_EH_CATCH_BEGIN
+            caught = true;
         CHAOS_EH_END
+        baseline_caught[si] = caught;
+        if (si > 0) printf(",");
+        printf("{\\"si\\":%d,\\"passed\\":%s}",
+               si, caught ? "false" : "true");
     }
-    // R6: Phase 2 — apply patch and compare return values
+    printf("],");
+    // Post-patch: apply patch and capture per-method pass/fail + return value
     auto* patch_ctx = ApplyHotpatchIfAvailable();
     int semantic_passed = 0;
     int semantic_changed_count = 0;
+    printf("\\"patchedFact\\":[");
     for (int si = 0; si < kCount; si++) {
-        int i = kSubjectSlotMap[si];
-        CHAOS_IL2CPP_INT32 patched_result = -1;
-        bool patched_ok = false;
-        CHAOS_EH_TRY
-            patched_result = chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
-            patched_ok = true;
-        CHAOS_EH_CATCH_BEGIN
-        CHAOS_EH_END
         if (!baseline_ok[si]) { continue; }
+        int i = kSubjectSlotMap[si];
+        int64_t patched_value = 0;
+        bool patched_caught = false;
+        CHAOS_EH_TRY
+            patched_value = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+        CHAOS_EH_CATCH_BEGIN
+            patched_caught = true;
+        CHAOS_EH_END
+        if (semantic_passed > 0) printf(",");
+        printf("{\\"si\\":%d,\\"passed\\":%s,\\"value\\":%" PRId64 "}",
+               si, patched_caught ? "false" : "true",
+               patched_caught ? 0 : patched_value);
         semantic_passed++;
-        if (patched_ok && baseline_values[si] != patched_result) {
+        // Semantic change: compare pass/fail status (reliable for all methods).
+        // Post-patch return value is logged for manual inspection (patch methods
+        // returning sentinel ints will show here via InterpreterEntryDirect).
+        if (baseline_caught[si] != patched_caught) {
             semantic_changed_count++;
         }
     }
-    // R6: Phase 3 — revert and verify cleanup
+    printf("],");
+    // Revert and verify cleanup
     if (patch_ctx != nullptr) {
         chaos::il2cpp::runtime_core::Unpatch(patch_ctx);
     }

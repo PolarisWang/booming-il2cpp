@@ -1,36 +1,17 @@
 ---
 name: dev-optimization-campaign
-description: 多 family 性能优化战役的编排技能。三级优化（L1快速/L2标准/L3深度），按复杂度分级验证。四阶段框架：① 全量 family verification 修复 → ② 测试代码与生成代码逻辑对齐 → ③ AOT/JIT 性能收敛 → ④ 热更性能保障（仅L3）。L1 用 commit message 代 docs/optimize/。所有级别至少通过 fact + benchmark。禁止 hack 测试代码。
+description: 多 family 性能优化战役的编排技能。跨设备 git 异步协调：coordinator 先跑 baseline，worker 在 worktree 中独立优化。四阶段流程：① 全量 family verification 修复 → ② 测试代码与生成代码逻辑对齐 → ③ AOT/JIT 性能收敛 → ④ 热更性能保障。每次优化必须产出中文 docs/optimize/ 完整分析文档，commit 必须含性能对比数据。禁止 hack 测试代码，必须直接修复 codegen 或 il2cpp 项目。
 ---
 
 # 优化战役编排 — 四阶段收敛流程
 
 ## 核心原则
 
-1. **优化分三级** — L1（快速）/ L2（标准）/ L3（深度），按代码量和影响面分级，不同级别不同验证和文档要求
-2. **L1 文档对标 commit message** — L1 优化用 commit message 作为文档载体，不强制 docs/optimize/
-3. **L2/L3 必出分析文档** — L2 出轻量 README.md，L3 出完整 docs/optimize/ 模板
-4. **文档语言统一为中文** — 所有分析文档、方案对比、README.md、commit message 均使用中文书写（代码片段、数据表、专业术语缩写除外）
-5. **数据驱动决策** — 方案选择必须基于 CoreCLR/Mono/Unity IL2CPP 横向对比，不得凭直觉
-6. **Commit 可审计** — 每个优化 round 的 commit message 必须包含性能对比表
-7. **禁止 hack 测试代码** — 发现问题时必须直接修复 codegen 或 il2cpp runtime，不得修改测试用例跳过断言
-
-## 优化级别
-
-优化按复杂度和影响面分为三级，级别由 Agent 在诊断阶段自评并在 status.md 中注明：
-
-| 级别 | 适用场景 | 典型代码量 | 验证要求 | 文档要求 |
-|------|---------|-----------|---------|---------|
-| **L1 快速优化** | 盒消除、inline bridge、小范围 stub 优化 | ≤3 文件 / ≤100 行新增 | fact + benchmark | commit message |
-| **L2 标准优化** | AOT bake、缓存引入、stub 重写、emitter 模式扩展 | 3-10 文件 | fact + benchmark + diff audit | 轻量 README.md |
-| **L3 深度优化** | 架构变更、GC 策略、新 runtime 路径、影响全局的修改 | >10 文件或涉及 runtime-core | 16-stage + 热更 + 回归 | docs/optimize/ 完整模板 |
-
-级别自评规则：
-- **L3 默认触发**：修改 `src/native/runtime-core/`、GC、bootstrap、hot-update 目录
-- **L2 默认触发**：修改 codegen emitter/planner、runtime_stubs
-- **L1 默认触发**：小范围 codegen emission 修改、单文件 stub 优化、纯内联替换
-- Agent 可申请升降级（如少文件但影响全局 → 升到 L3）
-- 级别变更需在 status.md 中记录理由
+1. **每次优化必须交付分析文档** — `docs/optimize/YYYY-MM-DD-<标题>/` 是正式交付物，不写文档不算完成
+2. **文档语言统一为中文** — 所有分析文档、方案对比、README.md、commit message 均使用中文书写（代码片段、数据表、专业术语缩写除外）
+3. **数据驱动决策** — 方案选择必须基于 CoreCLR/Mono/Unity IL2CPP 横向对比，不得凭直觉
+4. **四阶段收敛** — 验证修复 → 逻辑对齐 → 性能收敛 → 热更保障，必须四阶段全部通过才算验收成功
+5. **Commit 可审计** — 每个优化 round 的 commit message 必须包含性能对比表
 
 ## 修复原则
 
@@ -41,25 +22,22 @@ description: 多 family 性能优化战役的编排技能。三级优化（L1快
 ## 工作流
 
 ```
-Phase 0 ─ Baseline（所有级别）
-  创建 state.json → 跑 baseline benchmark → 评估 family 健康度
+Phase 1 ─ 验证修复
+  git pull → 跑完整 16 stage family verification 管线
+  → 修复所有报错 stage → 全部绿
               ↓
-Phase 1 ─ 验证修复（所有级别必过 fact + benchmark）
-  L1: fact + benchmark  →  全部绿
-  L2: fact + benchmark + diff audit  →  全部绿
-  L3: 完整 16-stage pipeline  →  全部绿
-              ↓
-Phase 2 ─ 逻辑对齐（L2/L3 必做，L1 可选）
+Phase 2 ─ 逻辑对齐
   逐方法对比测试代码逻辑 vs 生成代码逻辑
   → 不对齐就修复 codegen → 再跑 verification 确认
               ↓
-Phase 3 ─ 性能收敛（L2/L3 目标，L1 不强制 vs .NET 8）
-  L1: 不自证退化即可
-  L2/L3: native-aot vs .NET 8 ≤ 20%（可豁免论证）
-  → 不满足就诊断分析 → 优化 → build → benchmark → 直到收敛
+Phase 3 ─ 性能收敛
+  native-aot vs .NET 8 ≤ 20%
+  native-jit vs .NET 8 ≤ 20%
+  → 不满足就诊断分析 → 优化实现 → build → 再 benchmark → 直到收敛
               ↓
-Phase 4 ─ 热更性能保障（仅 L3）
-  L3: hotupdate 后 vs hotupdate 前 ≤ 100%
+Phase 4 ─ 热更性能保障
+  hotupdate 后性能 vs hotupdate 前性能 ≤ 100%（最多慢一倍）
+  AOT + JIT 双路径验证
   → 不满足就继续优化 → 直到达标
               ↓
 验收成功
@@ -69,19 +47,11 @@ Phase 4 ─ 热更性能保障（仅 L3）
 
 ```
 optimization-campaign/
-├── state.json              # 战役全局状态（可提交，与 aggregate/ 统一管理）
+├── state.json              # 仅 Phase 0 本地使用，不提交 git
 ├── baseline/
-│   ├── array-indexing-copy.json    # 本地 baseline 数据（不提交，仅本地产生）
+│   ├── array-indexing-copy.json    # 仅 Phase 0 本地使用，不提交 git
 │   └── ...
 ├── workers/
-│   ├── agent-01/
-│   │   ├── status.md       # Worker 进度日志（不提交）
-│   │   ├── blocker.md      # 阻塞项（不提交）
-│   │   └── results/        # 过程结果（不提交）
-│   └── agent-02/
-│       └── ...
-└── aggregate/
-    └── comparison-report.json  # 聚合报告（提交）
 │   ├── agent-01/
 │   │   ├── status.md       # Worker 进度日志（不提交）
 │   │   ├── blocker.md      # 阻塞项（不提交）
@@ -108,15 +78,15 @@ docs/optimize/
 |------|---------|
 | `docs/optimize/INDEX.md` | 提交 — 项目正式索引 |
 | `docs/optimize/YYYY-MM-DD-xxx/` 全部 | 提交 — 正式交付物 |
-| `optimization-campaign/state.json` | 提交 — 战役全局状态 |
 | `optimization-campaign/aggregate/comparison-report.json` | 提交 — 正式聚合报告 |
 | `optimization-campaign/baseline/*.json` | **不提交**（太大，仅本地） |
 | `optimization-campaign/workers/*/` | **不提交**（过程产物） |
+| `optimization-campaign/state.json` | **不提交**（仅本地协调） |
 
 ## Phase 0：Baseline（Coordinator 独占，单机执行）
 
 1. 创建 `optimization-campaign/` 目录
-2. 选定 families，写 `state.json`
+2. 选定 families，写 `state.json`（仅本地）
 3. 逐 family 跑 baseline benchmark
 4. 评估 family 健康度：
    ```
@@ -125,8 +95,6 @@ docs/optimize/
    broken:   0% methods completed（标为 excluded）
    ```
 5. 推进 phase → `baseline_done`，开放 claim
-
-> **级别说明**：Phase 0 不涉及级别区分，所有 family 统一跑相同的 baseline benchmark。级别在 Phase 1 诊断阶段自评。
 
 ### Baseline benchmark 命令
 
@@ -139,16 +107,6 @@ done
 baseline 结果写入 `optimization-campaign/baseline/<family>.json`。
 
 ## Phase 1：验证修复
-
-### 验证要求（按级别）
-
-| 级别 | 验证内容 | 说明 |
-|------|---------|------|
-| **L1** | fact (100% passed) + benchmark (0 failed) | 无额外要求 |
-| **L2** | fact + benchmark + diff audit | 检查桥接模式、异常处理、不必要的 GC 分配 |
-| **L3** | 全部 16 stage | 含 codegen/jit_codegen/managed_fact/audit/asm_compare/hotupdate 系列 |
-
-原则：L1/L2 不要求完整 pipeline。跳过 stage 必须在 status.md 或 README.md 中注明理由。
 
 ### 1. Claim 协议（Git push 原子性）
 
@@ -265,26 +223,14 @@ testing/foundation-dll/System.Private.CoreLib/<family>/codegen/native-aot.genera
 
 ## Phase 3：性能收敛
 
-### 性能目标（按级别）
-
-| 级别 | 要求 |
-|------|------|
-| **L1** | 不自证退化（优化后不比优化前慢超过 10%） |
-| **L2/L3** | native-aot vs .NET 8 ≤ 20% + native-jit vs .NET 8 ≤ 20% |
+### 性能目标
 
 ```
-aot_slowdown_vs_net8 = (chaos_aot_ns - net8_ns) / net8_ns * 100
-jit_slowdown_vs_net8 = (chaos_jit_ns - net8_ns) / net8_ns * 100
+native-aot vs .NET 8:  slowdown_vs_net8 <= 20%
+native-jit vs .NET 8:  slowdown_vs_net8 <= 20%
 ```
 
-### 豁免（仅 L2/L3）
-
-以下情况可豁免 vs .NET 8 目标，但必须在 README.md 中论证：
-1. **理论极限**：当前实现已逼近平台理论极限（如 bridge call 开销、GC 分配必要）
-2. **无 .NET 8 基线**：.NET 8 无法运行该测试（如涉及本机互操作）
-3. **架构性差距**：AOT vs JIT 存在架构性差异且无法消除（如泛型编译）
-
-豁免需附基准数据（证明当前值与理论极限的差距 ≤ 20%）和明确的不可达根因。
+两者均为**硬要求**，不得放宽。
 
 ### 多运行时 Benchmark + 内存分配采集
 
@@ -361,9 +307,7 @@ hu_aot_overhead = (hu_aot_ns - aot_ns) / aot_ns * 100
 
 优化必须在 worker 的本机平台上完成收敛验证。如果优化涉及平台相关代码，应额外在异平台验证。
 
-## Phase 4：热更性能保障（仅 L3）
-
-> **适用范围**：Phase 4 仅对 **L3 深度优化**必选。L1/L2 优化可直接跳过，无需说明理由。
+## Phase 4：热更性能保障
 
 ### 目标
 
@@ -399,11 +343,7 @@ AOT + JIT 双路径都必须满足。
 3. 重新 build → benchmark
 4. 直到达标
 
-## 核心交付物
-
-> **级别说明**：以下模板内容适用于 L3 优化（完整版）。L2 只需「优化对象 + 问题根因 + 性能数据表」。L1 用 commit message 代文档。
-
-### L3: docs/optimize/README.md 模板
+## 核心交付物：docs/optimize/README.md 模板
 
 ```markdown
 # 优化：<标题>
@@ -468,13 +408,14 @@ AOT + JIT 双路径都必须满足。
 
 ## 收敛检查
 
-- [ ] L1: fact + benchmark passed（不自证退化）
-- [ ] L2: Phase 2 逻辑对齐 + diff audit
-- [ ] L2/L3: Phase 3 vs .NET 8 ≤ 20%（或已论证豁免）
-- [ ] L3: Phase 1 16-stage 全部 passed
-- [ ] L3: Phase 4 hotupdate 开销 ≤ 100%
-- [ ] L3: 跨平台验证通过（涉及平台相关代码时）
-- [ ] L3: 或在 README.md 中已注明理论极限并经 Coordinator 确认
+- [ ] Phase 1: 16 stage 全部 passed
+- [ ] Phase 2: 测试代码与生成代码逻辑对齐
+- [ ] Phase 3: native-aot vs .NET 8 ≤ 20%
+- [ ] Phase 3: native-jit vs .NET 8 ≤ 20%
+- [ ] Phase 3: 跨平台验证通过（涉及平台相关代码时）
+- [ ] Phase 4: hotupdate AOT 开销 ≤ 100%
+- [ ] Phase 4: hotupdate JIT 开销 ≤ 100%
+- [ ] 或在 README.md 中已注明理论极限并经 Coordinator 确认
 
 ## 遗留问题
 
@@ -495,9 +436,7 @@ jit_slowdown_vs_net8 = (chaos_jit_ns - net8_ns) / net8_ns * 100
 即 优化后比 .NET 8 最多慢 20%
 ```
 
-**适用范围**：此要求仅对 L2/L3 为硬目标。L1 优化不自证退化即可。
-
-**豁免**：参见 Phase 3 的豁免章节（理论极限 / 无基线 / 架构性差距可豁免）。
+**硬要求**，任何一条不满足都算未收敛。
 
 **跨平台收敛**：优化必须在 worker 的本机平台上完成收敛验证。如果优化涉及平台相关代码（汇编指令、ABI 约定、内存布局等），worker 应在本机之外至少一个异平台（如 Linux/macOS）上验证收敛结果。
 
@@ -510,8 +449,6 @@ JIT:  hu_jit_overhead = (hu_jit_ns - jit_ns) / jit_ns * 100
 要求: hu_aot_overhead <= 100%  且  hu_jit_overhead <= 100%
 即  hotupdate 后最多比 hotupdate 前慢一倍
 ```
-
-**适用范围**：仅 L3 必选。L1/L2 跳过无需说明。
 
 AOT + JIT 双路径都必须满足。
 
@@ -528,49 +465,7 @@ Phase 3 或 Phase 4 未收敛时，Worker **不得**提交完成：
 
 ## Commit 规范
 
-按优化级别使用不同的 commit message 模板：
-
-### L1: 简洁版
-
-```
-<type>: optimize <family> — <简短描述>
-
-- root_cause: <一句话根因>
-- fix_strategy: <修复策略>
-- performance: baseline=Xns → optimized=Yns (allocPerOp Z→W)
-```
-
-示例：
-```
-perf: box elimination for Enum::Format(Type, Object, String)
-
-- root_cause: box 分配 + read_boxed_value 在桥接调用中产生额外开销
-- fix_strategy: ChaosEnumFormatRaw 跳过盒分配，codegen 走 inline 路径
-- performance: Subject_8 1590ns→1345ns (allocPerOp 48→32)
-```
-
-### L2: 标准版
-
-```
-<type>: optimize <family> — <简短描述>
-
-## 性能对比
-
-| method | baseline | optimized | vs .NET 8 | speedup |
-|--------|----------|-----------|-----------|---------|
-| Foo    | 100ns    | 72ns      | +20%      | 1.39x   |
-| Bar    | 250ns    | 210ns     | +16.7%    | 1.19x   |
-
-## 根因
-
-<一句话根因>
-
-## 关键决策
-
-<方案选择理由>
-```
-
-### L3: 完整版
+每个优化 round 的 commit 必须包含各阶段性能对比表：
 
 ```
 <type>: optimize <family> — <简短描述>
@@ -582,24 +477,28 @@ perf: box elimination for Enum::Format(Type, Object, String)
 | method | platform | baseline | optimized | .NET 8 | vs .NET 8 | speedup |
 |--------|----------|----------|-----------|--------|-----------|---------|
 | Foo    | windows-x64 | 100ns | 72ns | 60ns | +20% | 1.39x |
+| Bar    | windows-x64 | 250ns | 210ns | 180ns | +16.7% | 1.19x |
 
 ### native-jit vs .NET 8
 
 | method | platform | baseline | optimized | .NET 8 | vs .NET 8 | speedup |
 |--------|----------|----------|-----------|--------|-----------|---------|
+| Foo    | windows-x64 | 120ns | 90ns | 60ns | +50% | 1.33x |
 
 ### Phase 4: 热更开销
 
 | method | platform | 热更前 | 热更后 | 开销 | 路径 |
 |--------|----------|--------|--------|------|------|
+| Foo    | windows-x64 | 72ns | 95ns | +32% | AOT |
+| Foo    | windows-x64 | 90ns | 120ns | +33% | JIT |
 
 ## 根因
 
-<一句话根因>
+<一句话根因，如 "String.Concat 走 bridge call 产生了不必要的 GC 分配">
 
 ## 关键决策
 
-<方案选择的核心理由>
+<方案选择的核心理由，如 "方案 B 因为 xxxx 性能更好">
 ```
 
 ### Commit 内容范围
@@ -647,17 +546,13 @@ git push origin main
 
 ## Worker 时间预算
 
-按级别分配时间预算：
-
-| 阶段 | L1 | L2 | L3 |
-|------|----|----|----|
-| 诊断 | 30min | 1h | 2h |
-| 实现 | 30min | 1h | 2h+ |
-| build + benchmark | 15min | 30min | 1h+ |
-| 文档 + commit | 5min | 30min | 1h |
-| **总计** | **1.5h** | **3h** | **6h+** |
-
-超过时间上限应暂停并在 blocker.md 中记录阻塞原因。
+| 阶段 | 时间上限 | 说明 |
+|------|---------|------|
+| 诊断 + README 文档 | 2 小时 | 先分析再动手 |
+| 单轮优化（含 build） | 30 分钟 | 心流窗口 |
+| Benchmark | 15 分钟 | 自动化 |
+| 文档更新 + commit | 15 分钟 | 收口 |
+| 整轮（诊断到 commit） | 3 小时 | 超过应暂停并写出 blocker |
 
 **超时不自动释放 claim**（跨设备无 coordinator 实时监控）。Worker 应自己评估时间，主动在 blocker.md 中记录阻塞原因。
 
@@ -670,28 +565,13 @@ git push origin main
 
 ## 验收口径
 
-### 通用（所有级别必过）
-
-1. ✅ fact 验证 100% passed，0 failed
-2. ✅ benchmark 数据完整，0 failed
-3. ✅ 不自证退化（优化后不比优化前慢超过 10%，如有已在 README.md 中注明根因）
-4. ✅ commit message 包含性能对比表和根因
-5. ✅ 禁止 hack 测试代码
-
-### L2 额外要求
-
-6. ✅ Phase 2: 测试代码与生成代码逻辑对齐
-7. ✅ diff audit 通过（桥接模式、异常处理、GC 分配检查）
-8. ✅ 轻量 README.md（优化动机 + 方案对比 + 数据表）
-
-### L3 额外要求
-
-9. ✅ Phase 1: 16 stage 全部 passed
-10. ✅ Phase 3: native-aot vs .NET 8 差距 ≤ 20%（或已论证豁免）
-11. ✅ Phase 3: native-jit vs .NET 8 差距 ≤ 20%（或已论证豁免）
-12. ✅ Phase 4: hotupdate AOT 开销 ≤ 100%
-13. ✅ Phase 4: hotupdate JIT 开销 ≤ 100%
-14. ✅ docs/optimize/ 完整 README.md（含横向方案对比 + 收敛检查表）
-15. ✅ 跨平台验证通过（涉及平台相关代码时）
-
-> L1/L2 不需要满足 L3 的要求。L1 不需要满足 L2 的要求。
+1. ✅ `docs/optimize/YYYY-MM-DD-<标题>/README.md` 完整（问题分析 + 横向对比 + 方案选择 + 四阶段数据）
+2. ✅ Phase 1: 16 stage 全部 passed
+3. ✅ Phase 2: 测试代码与生成代码逻辑对齐
+4. ✅ Phase 3: native-aot vs .NET 8 差距 ≤ 20%
+5. ✅ Phase 3: native-jit vs .NET 8 差距 ≤ 20%
+6. ✅ Phase 4: hotupdate AOT 开销 ≤ 100%
+7. ✅ Phase 4: hotupdate JIT 开销 ≤ 100%
+8. ✅ commit message 包含四阶段性能对比表
+9. ✅ 跨平台验证通过（涉及平台相关代码时）
+10. ✅ 无退化超过 10% 的方法（如有，已在 README.md 中注明根因）
