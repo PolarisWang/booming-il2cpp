@@ -287,21 +287,21 @@ public static partial class SerializerSubjects
     // [37] System.Text.Json/System.Text.Json.JsonSerializer::Deserialize{TValue}:TValue(System.Text.Json.Utf8JsonReader&,System.Text.Json.Serialization.Metadata.JsonTypeInfo{TValue})
     public static void CustomEntrySubject_37()
     {
-        try { var utf8 = Encoding.UTF8.GetBytes(TestJson); var reader = new Utf8JsonReader(utf8); var ti = (JsonTypeInfo<TestObj>)null!; Assert.Throws(() => JsonSerializer.Deserialize<TestObj>(ref reader, ti)); }
+        try { Assert.Throws(() => { var utf8b = Encoding.UTF8.GetBytes(TestJson); var r = new Utf8JsonReader(utf8b); r.Read(); JsonSerializer.Deserialize<TestObj>(ref r, (JsonTypeInfo<TestObj>)null!); }); }
         catch { _exitCode = 1; }
     }
 
     // [38] System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Object(System.Text.Json.Utf8JsonReader&,System.Text.Json.Serialization.Metadata.JsonTypeInfo)
     public static void CustomEntrySubject_38()
     {
-        try { var utf8 = Encoding.UTF8.GetBytes(TestJson); var reader = new Utf8JsonReader(utf8); var ti = (JsonTypeInfo)null!; Assert.Throws(() => JsonSerializer.Deserialize(ref reader, ti)); }
+        try { Assert.Throws(() => { var utf8b = Encoding.UTF8.GetBytes(TestJson); var r = new Utf8JsonReader(utf8b); r.Read(); JsonSerializer.Deserialize(ref r, (JsonTypeInfo)null!); }); }
         catch { _exitCode = 1; }
     }
 
     // [39] System.Text.Json/System.Text.Json.JsonSerializer::Deserialize:System.Object(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.Serialization.JsonSerializerContext)
     public static void CustomEntrySubject_39()
     {
-        try { var utf8 = Encoding.UTF8.GetBytes(TestJson); var reader = new Utf8JsonReader(utf8); var ctx = (JsonSerializerContext)null!; Assert.Throws(() => JsonSerializer.Deserialize(ref reader, typeof(TestObj), ctx)); }
+        try { Assert.Throws(() => { var utf8b = Encoding.UTF8.GetBytes(TestJson); var r = new Utf8JsonReader(utf8b); r.Read(); JsonSerializer.Deserialize(ref r, typeof(TestObj), (JsonSerializerContext)null!); }); }
         catch { _exitCode = 1; }
     }
 

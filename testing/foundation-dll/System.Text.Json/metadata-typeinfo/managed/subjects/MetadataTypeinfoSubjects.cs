@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
+using Chaos.TestFramework;
 using System.Text.Json.Serialization;
 using System.Text.Json.Serialization.Metadata;
 
@@ -250,14 +252,14 @@ public static partial class MetadataTypeinfoSubjects
     // [33] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_IsReadOnly:System.Void(System.Boolean)
     public static void Subject_33()
     {
-        try { default(JsonTypeInfo)!.IsReadOnly = true; }
+        try { var pi = typeof(JsonTypeInfo).GetProperty("IsReadOnly"); if (pi != null) pi.SetValue(default(JsonTypeInfo), true); }
         catch { _exitCode = 1; }
     }
 
     // [34] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_ConstructorAttributeProvider:System.Void(System.Reflection.ICustomAttributeProvider)
     public static void Subject_34()
     {
-        try { default(JsonTypeInfo)!.ConstructorAttributeProvider = default; }
+        try { var pi = typeof(JsonTypeInfo).GetProperty("ConstructorAttributeProvider"); if (pi != null) pi.SetValue(default(JsonTypeInfo), default); }
         catch { _exitCode = 1; }
     }
 
@@ -285,7 +287,7 @@ public static partial class MetadataTypeinfoSubjects
     // [38] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::set_SerializeHandler:System.Void(System.Action{System.Text.Json.Utf8JsonWriter,T})
     public static void CustomEntrySubject_38()
     {
-        try { default(JsonTypeInfo<int>)!.SerializeHandler = default; Assert.IsTrue(true); }
+        try { var pi = typeof(JsonTypeInfo<int>).GetProperty("SerializeHandler"); if (pi != null) pi.SetValue(default(JsonTypeInfo<int>), default); }
         catch { _exitCode = 1; }
     }
 
