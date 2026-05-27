@@ -1473,6 +1473,114 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
     return 0;
 }
 
+/// Enum.Format(Type, Int64, String) — box-free variant for box-eliminated codegen.
+/// Same as ChaosEnumFormat but takes a raw int64 value instead of a boxed object.
+CHAOS_IL2CPP_INTPTR ChaosEnumFormatRaw(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INT64 raw_value, CHAOS_IL2CPP_INTPTR format_str) noexcept
+{
+    if (type == 0 || format_str == 0) return 0;
+
+    const CHAOS_IL2CPP_INT64 val = raw_value;
+
+    // Validate enum type before format processing — non-enum types (e.g. byte)
+    // must throw, even for unrecognized format strings like "hello"
+    {
+        const auto* meta = enum_resolve_meta(type);
+        if (meta == nullptr) {
+            const auto* desc = resolve_type_arg(type);
+            if (check_enum_type(desc) == nullptr) return 0;
+        }
+    }
+
+    // Read format specifier
+    CHAOS_IL2CPP_UINTPTR fmt_len = 0;
+    const char* fmt_data = get_string_data(format_str, fmt_len);
+    const bool is_g = (fmt_len >= 1 && (fmt_data[0] == 'G' || fmt_data[0] == 'g'));
+    const bool is_d = (fmt_len >= 1 && (fmt_data[0] == 'D' || fmt_data[0] == 'd'));
+    const bool is_x = (fmt_len >= 1 && (fmt_data[0] == 'X' || fmt_data[0] == 'x'));
+
+    if (is_g || fmt_len == 0) {
+        if (g_chaos_enum_tostring_dispatch_lookup) {
+            CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type);
+            uint32_t val_low32 = static_cast<uint32_t>(handle & 0xFFFFFFFFu);
+            if ((val_low32 & 0xFF000000u) == 0x02000000u && (val_low32 & 0xFFFFFFu) != 0u) {
+                auto result = g_chaos_enum_tostring_dispatch_lookup(val_low32 & 0xFFFFFFu, val);
+                if (result != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = result; return result; }
+            }
+        }
+
+        CHAOS_IL2CPP_UINTPTR effective_key = enum_extract_type_handle(type);
+        if (effective_key != 0 && s_enum_str_type_key == effective_key
+            && s_enum_tostring_cache_value == val && s_enum_tostring_cache_name != 0) {
+            return s_enum_tostring_cache_name;
+        }
+
+        const auto* meta = enum_resolve_meta(type);
+        if (meta != nullptr) {
+            ensure_enum_str_cache(type, meta);
+            auto cached = lookup_cached_enum_name(val);
+            if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
+            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
+                if (meta->fields[i].value == val) {
+                    const auto name_len = std::strlen(meta->fields[i].name);
+                    auto result = enum_alloc_string(name_len);
+                    write_string_data(result, meta->fields[i].name, name_len);
+                    s_enum_tostring_cache_value = val;
+                    s_enum_tostring_cache_name = result;
+                    return result;
+                }
+            }
+        } else {
+            const auto* desc = resolve_type_arg(type);
+            if (desc != nullptr) {
+                ensure_enum_str_cache(type, nullptr, desc);
+                auto cached = lookup_cached_enum_name(val);
+                if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
+
+                const auto* field = find_field_by_value(desc, val);
+                if (field != nullptr && field->name_utf8 != nullptr) {
+                    const auto name_len = std::strlen(field->name_utf8);
+                    auto result = enum_alloc_string(name_len);
+                    write_string_data(result, field->name_utf8, name_len);
+                    s_enum_tostring_cache_value = val;
+                    s_enum_tostring_cache_name = result;
+                    return result;
+                }
+            }
+        }
+    }
+
+    if (is_g || is_d) {
+        char buf[32];
+        char* const buf_end = buf + sizeof(buf);
+        char* start = format_i64_dec(buf_end, val);
+        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
+        auto result = enum_alloc_string(len);
+        write_string_data(result, start, len);
+        return result;
+    }
+
+    if (is_x) {
+        unsigned int width = 0;
+        if (fmt_len > 1) {
+            width = 0;
+            for (CHAOS_IL2CPP_UINTPTR i = 1; i < fmt_len; i++) {
+                if (fmt_data[i] >= '0' && fmt_data[i] <= '9') {
+                    width = width * 10 + static_cast<unsigned int>(fmt_data[i] - '0');
+                } else break;
+            }
+        }
+        char buf[32];
+        char* const buf_end = buf + sizeof(buf);
+        char* start = format_u64_hex(buf_end, static_cast<uint64_t>(val), width);
+        const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
+        auto result = enum_alloc_string(len);
+        write_string_data(result, start, len);
+        return result;
+    }
+
+    return 0;
+}
+
 /// Enum.ToString() — instance method, returns the name of this enum value.
 /// Reads a reference TypeInfoHandle from the boxed type header.
 CHAOS_IL2CPP_INTPTR ChaosEnumToString(CHAOS_IL2CPP_INTPTR this_obj) noexcept
