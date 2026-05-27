@@ -47,12 +47,14 @@ def _load_json(path: Path) -> dict[str, Any] | None:
 
 
 def _discover_platforms(audit_root: Path) -> list[str]:
-    """Scan audit_root for platform directories (skip aggregate/)."""
+    """Scan audit_root for platform directories (skip aggregate/, dlls/, and other known non-platform dirs)."""
     platforms: list[str] = []
     if not audit_root.is_dir():
         return platforms
+    # Known non-platform directories to skip
+    skip_dirs = {"aggregate", "dlls"}
     for entry in sorted(audit_root.iterdir()):
-        if entry.is_dir() and entry.name != "aggregate":
+        if entry.is_dir() and entry.name not in skip_dirs:
             platforms.append(entry.name)
     return platforms
 
