@@ -1,16 +1,16 @@
 ---
 name: dev-optimization-campaign
-description: 多 family 性能优化战役的编排技能。跨设备 git 异步协调：coordinator 先跑 baseline，worker 在 worktree 中独立优化，每次优化必须产出中文 docs/optimize/ 完整分析文档，commit 必须含性能对比数据。禁止 hack 测试代码，必须直接修复 codegen 或 il2cpp 项目。支持跨平台验证：每个 worker 的优化必须在所有目标平台上验证收敛。
+description: 多 family 性能优化战役的编排技能。跨设备 git 异步协调：coordinator 先跑 baseline，worker 在 worktree 中独立优化。四阶段流程：① 全量 family verification 修复 → ② 测试代码与生成代码逻辑对齐 → ③ AOT/JIT 性能收敛 → ④ 热更性能保障。每次优化必须产出中文 docs/optimize/ 完整分析文档，commit 必须含性能对比数据。禁止 hack 测试代码，必须直接修复 codegen 或 il2cpp 项目。
 ---
 
-# 优化战役编排 — 跨设备文档驱动模式
+# 优化战役编排 — 四阶段收敛流程
 
 ## 核心原则
 
 1. **每次优化必须交付分析文档** — `docs/optimize/YYYY-MM-DD-<标题>/` 是正式交付物，不写文档不算完成
 2. **文档语言统一为中文** — 所有分析文档、方案对比、README.md、commit message 均使用中文书写（代码片段、数据表、专业术语缩写除外）
 3. **数据驱动决策** — 方案选择必须基于 CoreCLR/Mono/Unity IL2CPP 横向对比，不得凭直觉
-4. **收敛验证** — 优化后 vs .NET 8 差距在 20% 以内（`slowdown_vs_net8 <= 20%`），否则必须继续分析优化
+4. **四阶段收敛** — 验证修复 → 逻辑对齐 → 性能收敛 → 热更保障，必须四阶段全部通过才算验收成功
 5. **Commit 可审计** — 每个优化 round 的 commit message 必须包含性能对比表
 
 ## 修复原则
@@ -22,18 +22,25 @@ description: 多 family 性能优化战役的编排技能。跨设备 git 异步
 ## 工作流
 
 ```
-Phase 0 ─ Coordinator: 全量 baseline → 推入 repo
+Phase 1 ─ 验证修复
+  git pull → 跑完整 16 stage family verification 管线
+  → 修复所有报错 stage → 全部绿
               ↓
-Phase 1 ─ Workers（跨设备，git 异步协调）:
-  1. git pull → 扫描 docs/optimize/INDEX.md 看哪些 family 已完成
-  2. git push claim 一个 family
-  3. 在 worktree 中隔离开发
-  4. 写 docs/optimize/YYYY-MM-DD-<标题>/README.md
-  5. 优化 → build → benchmark
-  6. 更新 README.md 中的数据 + 收敛检查
-  7. Git add + commit（含性能对比表）+ push
+Phase 2 ─ 逻辑对齐
+  逐方法对比测试代码逻辑 vs 生成代码逻辑
+  → 不对齐就修复 codegen → 再跑 verification 确认
               ↓
-Phase 2 ─ Coordinator: 聚合对比报告
+Phase 3 ─ 性能收敛
+  native-aot vs .NET 8 ≤ 20%
+  native-jit vs .NET 8 ≤ 20%
+  → 不满足就诊断分析 → 优化实现 → build → 再 benchmark → 直到收敛
+              ↓
+Phase 4 ─ 热更性能保障
+  hotupdate 后性能 vs hotupdate 前性能 ≤ 100%（最多慢一倍）
+  AOT + JIT 双路径验证
+  → 不满足就继续优化 → 直到达标
+              ↓
+验收成功
 ```
 
 ## 目录契约
@@ -99,7 +106,7 @@ done
 
 baseline 结果写入 `optimization-campaign/baseline/<family>.json`。
 
-## Phase 1：并行优化（Worker 独立执行）
+## Phase 1：验证修复
 
 ### 1. Claim 协议（Git push 原子性）
 
@@ -143,38 +150,89 @@ git worktree add optimization-campaign/workers/<worker-id>/worktree claim/<famil
 cd optimization-campaign/workers/<worker-id>/worktree
 ```
 
-### 3. 标准优化循环
-
-```
-claim success
-  → 诊断分析并写 README.md 草案
-  → 优化实现
-  → build + benchmark
-  → 更新 README.md 数据 + 收敛检查
-  → commit + push（含性能对比表）
-  → 如果未收敛 → 回到"优化实现"继续迭代
-```
-
-### 4. 标准诊断流程（6 阶段）
-
-#### Phase A — 测试用例正确性（Fact Validation）
+### 3. 跑完整 16-stage family verification 管线
 
 ```bash
-entry.exe --fact-json
-# 检查 JSON 输出：全部 passed==true
-# 任何 failed → blocking issue，先修验证再继续
+# 全量 16 个 stage：
+#   0  preflight
+#   1  codegen (AOT)
+#   2  jit_codegen
+#   3  managed_fact (.NET8)
+#   4  fact (AOT)
+#   5  fact_jit (JIT)
+#   6  audit
+#   7  asm_compare
+#   8  microbench
+#   9  benchmark (5-way)
+#  10  hotupdate (AOT Fact)
+#  11  hotupdate_aot_benchmark
+#  12  hotupdate_jit_fact
+#  13  hotupdate_jit_benchmark
+#  14  dashboard
+#  15  aggregate
+
+python -m verification.entry_points.cli --slug <family> --assembly System.Private.CoreLib --mode strict
 ```
 
-#### Phase B — 生成代码正确性（Codegen Audit）
+### 4. 修复策略
 
-读取 `native-aot.generated.cpp`，对每个 Subject_N 函数分析：
-- 桥接调用模式：`kChaosExternalRuntimeFnTable` bridge call vs 内联实现
-- 异常处理：`CHAOS_EH_TRY/CATCH` 结构是否正确
-- 类型转换：`static_cast` 是否合理
-- GC 分配：`CHAOS_IL2CPP_NEW_GC` / `CHAOS_IL2CPP_NEW_GC_ARRAY` 是否必要
-- **不必要的 GC 分配**：new 出临时对象后立即使用并丢弃（应改用栈分配或已有实例）
+检查每个 stage 的输出，按以下优先级修复：
 
-#### Phase C — 多运行时 Benchmark + 内存分配采集
+| 优先级 | 失败 stage | 修复方向 |
+|--------|-----------|---------|
+| P0 | codegen / jit_codegen | C++ 编译错误 → 修复 codegen 发射逻辑 |
+| P1 | fact / fact_jit / managed_fact | Assert 失败 → 检查翻译语义正确性 |
+| P2 | audit | 原则审计不通过 → 对齐架构规范 |
+| P3 | asm_compare | 指令扩展比异常 → 检查 lowering 路径 |
+| P4 | benchmark | 性能数据缺失 → 检查 benchmark harness |
+| P5 | hotupdate 系列 | 补丁应用失败 → 修复 hotpatch 机制 |
+
+修复后重新跑完整管线，直到 16 个 stage 全部通过。
+
+## Phase 2：逻辑对齐
+
+### 目标
+
+确认测试代码（C# Subject + Test）与生成的 native C++ 代码逻辑完全对齐。不对齐时必须修复 codegen 或 runtime，不得修改测试代码。
+
+### 检查方法
+
+逐方法对比：
+
+```bash
+# 1. 找到测试代码和生成代码
+testing/foundation-dll/System.Private.CoreLib/<family>/managed/subjects/<Family>Subjects.cs
+testing/foundation-dll/System.Private.CoreLib/<family>/codegen/native-aot.generated.cpp
+
+# 2. 对每个 Subject_N 函数，检查：
+```
+
+检查要点：
+
+1. **桥接调用模式** — C# 中调用的方法，在 C++ 中是通过 `kChaosExternalRuntimeFnTable` bridge call 还是内联实现？两者语义是否一致？
+2. **异常处理路径** — C# 的 try/catch 是否正确映射到 `CHAOS_EH_TRY/CATCH`？
+3. **类型转换** — `static_cast` / `reinterpret_cast` 是否与 IL 语义一致？
+4. **GC 分配** — `new T{}` 是否对应 `CHAOS_IL2CPP_NEW_GC`？是否有不必要的堆分配？
+5. **返回值** — Subject_N 的 `Run(int)` 返回值是否与 C# 的预期一致？
+
+### 不对齐的处理
+
+发现不对齐 → 根因分析 → 修复 codegen（emitter / planner / Scriban 模板）或 runtime → 重新跑 Phase 1 全量 verification 确认修复正确。
+
+**禁止**：为让验证通过而修改测试代码的预期值或跳过断言。
+
+## Phase 3：性能收敛
+
+### 性能目标
+
+```
+native-aot vs .NET 8:  slowdown_vs_net8 <= 20%
+native-jit vs .NET 8:  slowdown_vs_net8 <= 20%
+```
+
+两者均为**硬要求**，不得放宽。
+
+### 多运行时 Benchmark + 内存分配采集
 
 收集全部运行时的 ns/op 和 alloc/op 数据：
 - chaos-aot（native AOT）
@@ -182,8 +240,6 @@ entry.exe --fact-json
 - net8-jit（.NET 8 JIT 基线）
 - chaos-hu-aot（hotupdate AOT）
 - chaos-hu-jit（hotupdate JIT）
-
-**跨平台要求**：优化前后必须至少在本机平台完成 benchmark 数据采集。如优化涉及平台相关代码（如指令选择、ABI 约定、内存布局），应额外在受影响平台上验证：
 
 ```bash
 # 本机平台：优化主验证
@@ -195,37 +251,97 @@ entry.exe --benchmark <method_index> <iterations>    # 自动嵌入平台标识
 
 平台自动识别：所有 benchmark JSON 输出自动包含 `"platform"` 字段（由编译期宏确定），无需手动指定 `--platform` 参数。
 
-#### Phase D — 与托管基线对比（vs .NET 8/10 JIT）
+### 与托管基线对比
 
 ```
 aot_slowdown_vs_net8 = (chaos_aot_ns - net8_ns) / net8_ns * 100
+jit_slowdown_vs_net8 = (chaos_jit_ns - net8_ns) / net8_ns * 100
 ```
 
 分类标记：
-- "faster-than-net8": AOT 比 .NET 8 快
+- "faster-than-net8": 比 .NET 8 快
 - "within-noise": ±50% 以内
-- "slower-than-net8": AOT 比 .NET 8 慢 50%+
-- "critically-slow": AOT 比 .NET 8 慢 200%+（优先优化）
+- "slower-than-net8": 比 .NET 8 慢 50%+
+- "critically-slow": 比 .NET 8 慢 200%+（优先优化）
 
-**分配对比**：如果 chaos-aot 和 net8-jit 都有 allocPerOp 数据：
-- `extra_allocs = chaos_aot_alloc_per_op - net8_alloc_per_op`
+**分配对比**：如果 chaos-aot/jit 和 net8-jit 都有 allocPerOp 数据：
+- `extra_allocs = chaos_alloc_per_op - net8_alloc_per_op`
 - extra_allocs > 0 → 标记为"分配瓶颈"，high priority
 
-#### Phase E — HotUpdate 开销分析
+### 诊断流程（6 阶段）
 
+#### Phase A — Fact Validation
+```bash
+entry.exe --fact-json
+# 全部 passed==true
+```
+
+#### Phase B — Codegen Audit
+读取 `native-aot.generated.cpp`，逐 Subject_N 函数分析：
+- 桥接调用模式
+- 异常处理结构
+- 不必要的 GC 分配
+- 寄存器/栈使用效率
+
+#### Phase C — 多运行时 Benchmark
+收集 5 个运行时的 ns/op + alloc/op
+
+#### Phase D — vs .NET 8 对比
+计算 aot/jit 的 slowdown_vs_net8，分类标记
+
+#### Phase E — HotUpdate 开销分析
 ```
 hu_aot_overhead = (hu_aot_ns - aot_ns) / aot_ns * 100
 ```
 分类：low(<10%) / moderate(10-50%) / high(50-100%) / critical(>100%)
 
 #### Phase F — 综合瓶颈排名
-
-- P0: codegen 正确性问题（fact failed、异常路径未接通）
+- P0: codegen 正确性问题
 - P1: vs .NET 8 严重退化（critically-slow）
-- P2: hotupdate 开销过高（critical-overhead）
-- P3: vs .NET 8 明显退化（slower）
-- P4: **过度分配** — native allocPerOp 显著高于 managed
-- P5: 绝对值最慢（内部热点排名）
+- P2: hotupdate 开销过高
+- P3: vs .NET 8 明显退化
+- P4: 过度分配
+- P5: 绝对值最慢
+
+### 跨平台收敛
+
+优化必须在 worker 的本机平台上完成收敛验证。如果优化涉及平台相关代码，应额外在异平台验证。
+
+## Phase 4：热更性能保障
+
+### 目标
+
+热更新（hotpatch）应用后的方法性能，不得比热更前慢超过 100%。
+
+### 测量方法
+
+```bash
+# Phase 4a: HotUpdate AOT 性能
+entry.exe --hotupdate-and-benchmark <method_index> <iterations>
+
+# Phase 4b: HotUpdate JIT 性能
+entry-jit.exe --hotupdate-and-benchmark <method_index> <iterations>
+```
+
+### 计算方式
+
+```
+AOT:  hu_aot_overhead = (hu_aot_ns - aot_ns) / aot_ns * 100
+JIT:  hu_jit_overhead = (hu_jit_ns - jit_ns) / jit_ns * 100
+
+要求: hu_aot_overhead <= 100% 且 hu_jit_overhead <= 100%
+即    hotupdate 后最多比 hotupdate 前慢一倍
+```
+
+AOT + JIT 双路径都必须满足。
+
+### 不满足的处理
+
+如果 `hu_overhead > 100%`，必须：
+1. 分析 hotpatch 机制的开销来源（dispatch 间接跳转、thunk 开销、patch 上下文切换）
+2. 优化 hotpatch dispatch 路径
+3. 重新 build → benchmark
+4. 直到达标
 
 ## 核心交付物：docs/optimize/README.md 模板
 
@@ -263,18 +379,42 @@ hu_aot_overhead = (hu_aot_ns - aot_ns) / aot_ns * 100
 ### 最终选择
 <选择的方案名称 + 选择理由>
 
-## 优化后数据
+## 各阶段交付
+
+### Phase 1: 验证修复
+<列出 16 stage 运行结果，全部 passed>
+
+### Phase 2: 逻辑对齐
+<列出的测试代码与生成代码对齐检查结果>
+
+### Phase 3: 性能收敛
 
 | 方法 | 平台 | baseline (ns/op) | 优化后 (ns/op) | .NET 8 (ns/op) | vs .NET 8 | 提升幅度 | 备注 |
 |------|------|------------------|----------------|----------------|-----------|---------|------|
 | ...  | windows-x64 | ... | ... | ... | +X% | +XX% | |
 
+**native-jit vs .NET 8:**
+
+| 方法 | 平台 | baseline (ns/op) | 优化后 (ns/op) | .NET 8 (ns/op) | vs .NET 8 | 提升幅度 |
+|------|------|------------------|----------------|----------------|-----------|---------|
+| ...  | windows-x64 | ... | ... | ... | +X% | +XX% |
+
+### Phase 4: 热更性能保障
+
+| 方法 | 平台 | 热更前 (ns/op) | 热更后 (ns/op) | 开销 | 路径 |
+|------|------|----------------|----------------|------|------|
+| ...  | windows-x64 | ... | ... | +X% | AOT |
+| ...  | windows-x64 | ... | ... | +X% | JIT |
+
 ## 收敛检查
 
-- [ ] 全部 fact passed
-- [ ] 无退化方法（退化 > 10% 需说明并回退）
-- [ ] 优化后 vs .NET 8 差距在 20% 以内（`slowdown_vs_net8 <= 20%`）
-- [ ] 跨平台验证：本机平台收敛；涉及平台相关代码时至少在另一个平台验证
+- [ ] Phase 1: 16 stage 全部 passed
+- [ ] Phase 2: 测试代码与生成代码逻辑对齐
+- [ ] Phase 3: native-aot vs .NET 8 ≤ 20%
+- [ ] Phase 3: native-jit vs .NET 8 ≤ 20%
+- [ ] Phase 3: 跨平台验证通过（涉及平台相关代码时）
+- [ ] Phase 4: hotupdate AOT 开销 ≤ 100%
+- [ ] Phase 4: hotupdate JIT 开销 ≤ 100%
 - [ ] 或在 README.md 中已注明理论极限并经 Coordinator 确认
 
 ## 遗留问题
@@ -284,50 +424,73 @@ hu_aot_overhead = (hu_aot_ns - aot_ns) / aot_ns * 100
 
 ### 收敛条件定义
 
+#### Phase 3: 性能收敛
+
 收敛标准是与 .NET 8 JIT 对比，**不是与优化前的 baseline 对比**：
 
 ```
-slowdown_vs_net8 = (optimized_ns - net8_ns) / net8_ns * 100
+aot_slowdown_vs_net8 = (chaos_aot_ns - net8_ns) / net8_ns * 100
+jit_slowdown_vs_net8 = (chaos_jit_ns - net8_ns) / net8_ns * 100
 
-要求: slowdown_vs_net8 <= 20%
+要求: aot_slowdown_vs_net8 <= 20%  且  jit_slowdown_vs_net8 <= 20%
 即 优化后比 .NET 8 最多慢 20%
 ```
 
-**跨平台收敛**：优化必须在 worker 的本机平台上完成收敛验证。如果优化涉及平台相关代码（汇编指令、ABI 约定、内存布局等），worker 应在本机之外至少一个异平台（如 Linux/macOS）上验证收敛结果。跨平台验证结果记录在 README.md 的"跨平台验证"小节：
+**硬要求**，任何一条不满足都算未收敛。
 
-```markdown
-## 跨平台验证
+**跨平台收敛**：优化必须在 worker 的本机平台上完成收敛验证。如果优化涉及平台相关代码（汇编指令、ABI 约定、内存布局等），worker 应在本机之外至少一个异平台（如 Linux/macOS）上验证收敛结果。
 
-| 平台 | slowdown_vs_net8 | 状态 |
-|------|-----------------|------|
-| windows-x64 | +15.2% | ✅ 收敛 |
-| linux-x64 | +18.7% | ✅ 收敛 |
+#### Phase 4: 热更性能保障
+
+```
+AOT:  hu_aot_overhead = (hu_aot_ns - aot_ns) / aot_ns * 100
+JIT:  hu_jit_overhead = (hu_jit_ns - jit_ns) / jit_ns * 100
+
+要求: hu_aot_overhead <= 100%  且  hu_jit_overhead <= 100%
+即  hotupdate 后最多比 hotupdate 前慢一倍
 ```
 
-所有平台验证 JSON 输出自动包含 `"platform"` 字段，无需手动指定平台参数。
+AOT + JIT 双路径都必须满足。
 
-若未收敛（`slowdown_vs_net8 > 20%`），Worker **不得** 提交完成，必须：
+#### 未收敛处理
+
+Phase 3 或 Phase 4 未收敛时，Worker **不得**提交完成：
 1. 回到诊断阶段，深入分析根因
 2. 寻找替代优化方案
 3. 重新优化 → build → benchmark
-4. 再次对比 .NET 8 数据
+4. 再次对比目标数据
 5. 直到收敛或达到理论极限并在 README.md 中注明
 
-**理论极限豁免**：如果经分析确认当前方案已逼近理论极限（如算法本身限制、硬件指令集限制），可在 README.md 中详细论证并注明 `slowdown_vs_net8` 值及不可达标的根因。此豁免需经 Coordinator 评审确认。
+**理论极限豁免**：如果经分析确认当前方案已逼近理论极限，可在 README.md 中详细论证并注明未达标值及不可达标的根因。此豁免需经 Coordinator 评审确认。
 
 ## Commit 规范
 
-每个优化 round 的 commit 必须包含性能对比表：
+每个优化 round 的 commit 必须包含各阶段性能对比表：
 
 ```
 <type>: optimize <family> — <简短描述>
 
-## 性能对比
+## Phase 3: 性能对比
+
+### native-aot vs .NET 8
 
 | method | platform | baseline | optimized | .NET 8 | vs .NET 8 | speedup |
 |--------|----------|----------|-----------|--------|-----------|---------|
 | Foo    | windows-x64 | 100ns | 72ns | 60ns | +20% | 1.39x |
 | Bar    | windows-x64 | 250ns | 210ns | 180ns | +16.7% | 1.19x |
+
+### native-jit vs .NET 8
+
+| method | platform | baseline | optimized | .NET 8 | vs .NET 8 | speedup |
+|--------|----------|----------|-----------|--------|-----------|---------|
+| Foo    | windows-x64 | 120ns | 90ns | 60ns | +50% | 1.33x |
+
+### Phase 4: 热更开销
+
+| method | platform | 热更前 | 热更后 | 开销 | 路径 |
+|--------|----------|--------|--------|------|------|
+| Foo    | windows-x64 | 72ns | 95ns | +32% | AOT |
+| Foo    | windows-x64 | 90ns | 120ns | +33% | JIT |
 
 ## 根因
 
@@ -402,9 +565,13 @@ git push origin main
 
 ## 验收口径
 
-1. ✅ `docs/optimize/YYYY-MM-DD-<标题>/README.md` 完整（问题分析 + 横向对比 + 方案选择 + 数据）
-2. ✅ fact 验证通过（全部 passed）
-3. ✅ benchmark 数据完整
-4. ✅ 收敛检查通过（vs .NET 8 差距在 20% 以内或注明理论极限并经 Coordinator 确认）
-5. ✅ commit message 包含性能对比表
-6. ✅ 与 baseline 对比：无退化超过 10% 的方法（如有，已在 README.md 中注明根因）
+1. ✅ `docs/optimize/YYYY-MM-DD-<标题>/README.md` 完整（问题分析 + 横向对比 + 方案选择 + 四阶段数据）
+2. ✅ Phase 1: 16 stage 全部 passed
+3. ✅ Phase 2: 测试代码与生成代码逻辑对齐
+4. ✅ Phase 3: native-aot vs .NET 8 差距 ≤ 20%
+5. ✅ Phase 3: native-jit vs .NET 8 差距 ≤ 20%
+6. ✅ Phase 4: hotupdate AOT 开销 ≤ 100%
+7. ✅ Phase 4: hotupdate JIT 开销 ≤ 100%
+8. ✅ commit message 包含四阶段性能对比表
+9. ✅ 跨平台验证通过（涉及平台相关代码时）
+10. ✅ 无退化超过 10% 的方法（如有，已在 README.md 中注明根因）
