@@ -29,7 +29,7 @@ extern "C" int32_t GetHotpatchEntryCount() noexcept;
 // ── RunFactAll: dispatch ALL methods across ALL registered modules ────
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {
     chaos_gc_enter_no_gc_region();
-{% if is_jit %}
+{{ if is_jit }}
     // JIT mode: use subject-slot iteration to skip intrinsic stubs
     auto* entries = GetHotpatchEntries();
     CHAOS_IL2CPP_INT32 failures = 0;
@@ -43,12 +43,12 @@ extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {
     }
     chaos_gc_leave_no_gc_region();
     return failures;
-{% else %}
+{{ else }}
     // AOT mode: use ChaosDispatchMethodAllModules for full coverage
     auto result = ChaosDispatchMethodAllModules(CHAOS_DISPATCH_THUNKS);
     chaos_gc_leave_no_gc_region();
     return result;
-{% end %}
+{{ end }}
 }
 
 // ── RunBenchmark: timing loop via ChaosDispatchMethod ───────────────
@@ -83,7 +83,7 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
 // ── RunHotpatchAll: dispatch ALL methods across ALL modules (post-patch) ──
 extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {
     chaos_gc_enter_no_gc_region();
-{% if is_jit %}
+{{ if is_jit }}
     auto* entries = GetHotpatchEntries();
     CHAOS_IL2CPP_INT32 failures = 0;
     for (int32_t si = 0; si < kSubjectEntryCount; si++) {
@@ -96,11 +96,11 @@ extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() {
     }
     chaos_gc_leave_no_gc_region();
     return failures;
-{% else %}
+{{ else }}
     auto result = ChaosDispatchMethodAllModules(CHAOS_DISPATCH_THUNKS);
     chaos_gc_leave_no_gc_region();
     return result;
-{% end %}
+{{ end }}
 }
 
 // ── RunHotpatchBenchmark: timing loop (post-patch) ──────────────────
