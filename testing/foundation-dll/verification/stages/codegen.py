@@ -23,8 +23,11 @@ def _find_contract(assembly: str, slug: str) -> Path | None:
     return None
 
 
-def _run_test_project_generator_emit(contract_path: Path | None, output_dir: Path) -> bool:
+def _run_test_project_generator_emit(contract_path: Path | None, output_dir: Path, extra_flags: list[str] | None = None) -> bool:
     """Run TestProjectGenerator emit to generate verification_dispatch.generated.cpp.
+
+    Args:
+        extra_flags: Additional flags to pass to TPG (e.g. ["--jit"], ["--config-tier", "profile"]).
 
     Returns True if successful, False otherwise (caller should fall back to sentinel).
     """
@@ -48,11 +51,12 @@ def _run_test_project_generator_emit(contract_path: Path | None, output_dir: Pat
             print(f"  [codegen] TestProjectGenerator DLL not found after build: {generator_dll}")
             return False
 
-    result = subprocess.run(
-        ["dotnet", "exec", str(generator_dll), "emit",
-         "--contract", str(contract_path),
-         "--output", str(output_dir)],
-        capture_output=True, text=True, timeout=120)
+    cmd = ["dotnet", "exec", str(generator_dll), "emit",
+           "--contract", str(contract_path),
+           "--output", str(output_dir)]
+    if extra_flags:
+        cmd.extend(extra_flags)
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
 
     if result.returncode != 0:
         print(f"  [codegen] TestProjectGenerator emit FAILED (rc={result.returncode})")
@@ -207,7 +211,8 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
     native_dir = testing_base / ctx.slug / "native"
     contract_path = _find_contract(ctx.assembly, ctx.slug)
 
-    if not _run_test_project_generator_emit(contract_path, native_dir):
+    tpg_flags = ["--config-tier", ctx.native_config]
+    if not _run_test_project_generator_emit(contract_path, native_dir, extra_flags=tpg_flags):
         print(f"  [codegen] WARNING: TestProjectGenerator emit failed (continuing with sentinel dispatch)")
     else:
         print(f"  [codegen] Regenerated verification_dispatch.generated.cpp via TestProjectGenerator")
@@ -290,6 +295,15 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
             summary=f"JIT codegen failed: {jit_result.get('message', 'unknown')}",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
+
+    # Regenerate dispatch via TPG with JIT mode, then incremental rebuild
+    contract_path = _find_contract(ctx.assembly, ctx.slug)
+    tpg_flags = ["--jit", "--config-tier", ctx.native_config]
+    if _run_test_project_generator_emit(contract_path, native_dir, extra_flags=tpg_flags):
+        print(f"  [jit_codegen] Regenerated dispatch via TPG (JIT mode)")
+        _incremental_dispatch_rebuild(native_dir)
+    else:
+        print(f"  [jit_codegen] WARNING: TPG emit failed (continuing with existing dispatch)")
 
     if entry_exe.exists():
         import shutil as _shutil
