@@ -35,7 +35,9 @@ from verification.stages.hotupdate import (
 # ── Required stages per mode ───────────────────────────────────────
 
 REQUIRED_STAGES_STANDARD = {"preflight", "codegen", "jit_codegen", "fact", "audit"}
-REQUIRED_STAGES_STRICT = REQUIRED_STAGES_STANDARD | {
+REQUIRED_STAGES_STRICT = {
+    "preflight", "codegen", "jit_codegen", "managed_fact", "fact", "fact_jit",
+    "audit", "asm_compare", "microbench", "benchmark",
     "hotupdate", "hotupdate_aot_benchmark",
     "hotupdate_jit_fact", "hotupdate_jit_benchmark",
 }

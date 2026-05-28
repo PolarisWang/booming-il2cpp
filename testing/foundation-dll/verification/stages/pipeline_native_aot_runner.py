@@ -813,22 +813,75 @@ def inject_eha_directive(cmakelists: Path) -> None:
         cmakelists.write_text(text, encoding="utf-8")
 
 
-def _sync_runtime_libs_to_sdk(codegen_dir: Path) -> None:
-    """Copy runtime libs from codegen/lib/ into the per-assembly SDK lib/."""
+def _sync_runtime_libs_to_sdk(codegen_dir: Path, repo_root: Path | None = None) -> None:
+    """Copy runtime libs into the per-assembly SDK lib/ directories.
+
+    Tries codegen/lib/ first (root-level SDK output from legacy runs),
+    then falls back to repo artifacts/presets/ (canonical prebuilt location).
+    """
     if not codegen_dir.is_dir():
+        print(f"    [sync_libs] codegen_dir not found: {codegen_dir}")
         return
+
+    def _copy_libs(source_lib_dir: Path) -> bool:
+        """Copy all .lib files from source_lib_dir into per-assembly SDK lib/ dirs."""
+        if not source_lib_dir.is_dir():
+            print(f"    [sync_libs] source_lib_dir not found: {source_lib_dir}")
+            return False
+        any_copied = False
+        for d in sorted(codegen_dir.iterdir()):
+            if not d.is_dir():
+                continue
+            sdk_lib_dir = d / "lib"
+            if not sdk_lib_dir.is_dir():
+                print(f"    [sync_libs] sdk_lib_dir not found for {d.name}: {sdk_lib_dir}")
+                continue
+            for lib_file in sorted(source_lib_dir.iterdir()):
+                if lib_file.suffix == ".lib" and not (sdk_lib_dir / lib_file.name).exists():
+                    shutil.copy2(str(lib_file), str(sdk_lib_dir / lib_file.name))
+                    any_copied = True
+        if any_copied:
+            print(f"    [sync_libs] copied from {source_lib_dir.name}")
+        return any_copied
+
+    # Try primary: codegen/lib/ (legacy root-level SDK output)
     parent_lib_dir = codegen_dir / "lib"
-    if not parent_lib_dir.is_dir():
-        return
-    for d in sorted(codegen_dir.iterdir()):
-        if not d.is_dir():
-            continue
-        sdk_lib_dir = d / "lib"
-        if not sdk_lib_dir.is_dir():
-            continue
-        for lib_file in sorted(parent_lib_dir.iterdir()):
-            if lib_file.suffix == ".lib" and not (sdk_lib_dir / lib_file.name).exists():
-                shutil.copy2(str(lib_file), str(sdk_lib_dir / lib_file.name))
+    if parent_lib_dir.is_dir():
+        print(f"    [sync_libs] trying parent_lib_dir: {parent_lib_dir}")
+        if _copy_libs(parent_lib_dir):
+            return
+
+    # Fallback: repo artifacts/presets/<platform>/ — collect all .lib from RelWithDebInfo
+    if repo_root is not None:
+        presets_dir = repo_root / "artifacts" / "presets"
+        # In a git worktree, _REPO_ROOT resolves to the worktree root, not the
+        # real repo root. Walk up from repo_root to find artifacts/presets.
+        if not presets_dir.is_dir():
+            parent = repo_root.parent
+            while parent is not None and parent != parent.parent:
+                candidate = parent / "artifacts" / "presets"
+                if candidate.is_dir():
+                    presets_dir = candidate
+                    break
+                parent = parent.parent
+        if presets_dir.is_dir():
+            print(f"    [sync_libs] fallback to presets: {presets_dir}")
+            for pd in sorted(presets_dir.iterdir()):
+                if pd.name.startswith("windows-x64-reference") and pd.is_dir():
+                    found = list(pd.rglob("*.lib"))
+                    print(f"    [sync_libs] found {len(found)} libs in {pd.name}")
+                    for lib_file in sorted(found):
+                        for d in sorted(codegen_dir.iterdir()):
+                            if not d.is_dir():
+                                continue
+                            sdk_lib_dir = d / "lib"
+                            if not sdk_lib_dir.is_dir():
+                                continue
+                            if not (sdk_lib_dir / lib_file.name).exists():
+                                shutil.copy2(str(lib_file), str(sdk_lib_dir / lib_file.name))
+                    return
+        else:
+            print(f"    [sync_libs] presets_dir not found: {presets_dir}")
 
 
 def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Path, *, is_jit: bool = False, config_tier: str = "CHECK") -> None:
@@ -2144,7 +2197,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     # The codegen regenerates codegen/<AssemblyName>/lib/chaos_codegen.lib
     # but NOT the runtime libs (chaos_common.lib, etc.).  Copy them from
     # codegen/lib/ so find_package(chaos) resolves all dependencies.
-    _sync_runtime_libs_to_sdk(codegen_dir)
+    _sync_runtime_libs_to_sdk(codegen_dir, repo_root=_REPO_ROOT)
 
     # Use separate build directories for AOT (build/) and JIT (build_jit/)
     # to avoid MSBuild file-lock conflicts when the JIT stage follows AOT.
