@@ -39,7 +39,7 @@ from verification.stages.native_code_generator import slug_from_family_id, famil
 
 def collect_required_usings(method_subject_ids: list[str]) -> set[str]:
     """Collect the using directives needed by the generated code."""
-    usings = {"System", "System.Collections.Generic", "System.Linq"}
+    usings = {"System", "System.Collections.Generic", "System.Linq", "System.IO", "System.Threading"}
     for subject_id in method_subject_ids:
         parsed = parse_method_subject_id(subject_id)
         add_type_using_from_full_path(parsed.get("type_path", ""), usings)
