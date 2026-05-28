@@ -13,7 +13,13 @@
 #include <gc/gc_api.h>
 #include <gc/gc_helpers.h>
 
-#include <intrin.h>  // _ReturnAddress()
+#if defined(_MSC_VER)
+#include <intrin.h>  // _ReturnAddress(), __readgsqword
+#else
+#include <x86intrin.h>
+// _ReturnAddress is MSVC-specific; GCC/Clang use __builtin_return_address.
+#define _ReturnAddress() __builtin_return_address(0)
+#endif
 
 // SATB pre-write barrier — provided by gc_bgc.cpp (compiled directly in test
 // targets as MSVC-format .obj to avoid __tls_index issues with GNU ar archives).
@@ -285,6 +291,8 @@ namespace {
     uint32_t g_cached_tls_tlab_offset = 0;
 }
 
+#if defined(_WIN32) || defined(_WIN64)
+
 void chaos::il2cpp::jit::InitTlsTlabInfo() noexcept {
     if (g_cached_tls_index != 0) return;  // already initialized
 
@@ -338,6 +346,8 @@ void chaos::il2cpp::jit::EmitLoadTlsTlab(CodeBuffer& buf) noexcept {
         buf.Emit32(g_cached_tls_tlab_offset);
     }
 }
+
+#endif  // _WIN32 || _WIN64
 
 extern "C" void* CodegenBox(uint64_t value, uint8_t tag, uint32_t type_token) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::Box");

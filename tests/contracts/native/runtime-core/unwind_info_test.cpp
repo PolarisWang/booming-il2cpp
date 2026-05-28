@@ -6,7 +6,9 @@
 #include "code_buffer.h"
 #include "unwind_info.h"
 #include <cstdio>
+#if defined(_WIN32) || defined(_WIN64)
 #include <windows.h>
+#endif
 
 using chaos::il2cpp::codegen::CodeBuffer;
 using chaos::il2cpp::codegen::EmitUnwindInfo;

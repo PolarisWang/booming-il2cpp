@@ -50,6 +50,7 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(src/native/engine-bridge)
     add_subdirectory(src/native/support)
     add_subdirectory(src/native/bootstrap)
+    add_subdirectory(src/native/codegen)
     add_subdirectory(src/native/benchmark-host)
     add_subdirectory(src/native/proof-host)
 
@@ -66,12 +67,79 @@ if(ROADMAP0_PRESET_TARGET STREQUAL "windows-x64-reference")
     add_subdirectory(testing/foundation-dll)
 
     # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
-    add_subdirectory(testing)
+    # Windows only: imports prebuilt .lib files, uses MSVC-specific flags.
+    if(MSVC)
+        add_subdirectory(testing)
+    endif()
 
     # ── Architecture check targets ─────────────────────────────────────
     # Each native module gets a per-module check target.
     # Run: cmake --build <build-dir> --target check_arch_<module>
     # Or:  cmake --build <build-dir> --target check_arch  (all modules)
+    if(Python3_FOUND)
+        set(CHAOS_NATIVE_MODULES
+            chaos_common
+            chaos_runtime_core
+            chaos_hot_update
+            chaos_interpreter
+            chaos_jit
+            chaos_support
+            chaos_bootstrap
+            chaos_engine_bridge
+            chaos_benchmark_host
+            chaos_proof_host)
+        foreach(MODULE ${CHAOS_NATIVE_MODULES})
+            add_custom_target(check_arch_${MODULE}
+                COMMAND ${Python3_EXECUTABLE} build/check_arch.py --module ${MODULE}
+                WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+                COMMENT "Checking ${MODULE} architecture compliance..."
+            )
+        endforeach()
+        add_custom_target(check_arch
+            COMMAND ${Python3_EXECUTABLE} build/check_arch.py --ci
+            WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
+            COMMENT "Checking all native modules for architecture compliance..."
+        )
+    endif()
+elseif(ROADMAP0_PRESET_TARGET STREQUAL "linux-x64-reference")
+    add_compile_definitions(CHAOS_IL2CPP_TARGET_PLATFORM_LINUX=1)
+    include(cmake/config-tier.cmake)
+    find_package(Python3 QUIET)
+
+    add_subdirectory(third_party/fmt fmt_build)
+    add_subdirectory(third_party/unordered_dense unordered_dense_build)
+    add_subdirectory(src/native/common)
+    add_subdirectory(src/native/diagnostics)
+    add_subdirectory(src/native/runtime-core)
+    add_subdirectory(src/native/hot-update)
+    add_subdirectory(src/native/interpreter)
+    add_subdirectory(src/native/jit)
+    add_subdirectory(src/native/engine-bridge)
+    add_subdirectory(src/native/support)
+    add_subdirectory(src/native/bootstrap)
+    add_subdirectory(src/native/codegen)
+    add_subdirectory(src/native/benchmark-host)
+    add_subdirectory(src/native/proof-host)
+
+    add_subdirectory(tests/contracts/native/abi)
+    add_subdirectory(tests/contracts/native/engine-binding)
+    add_subdirectory(tests/contracts/native/hot-update)
+    add_subdirectory(tests/contracts/native/interpreter)
+    add_subdirectory(tests/contracts/native/gc)
+    add_subdirectory(tests/contracts/native/runtime-core)
+    add_subdirectory(tests/contracts/native/common)
+    add_subdirectory(tests/perf/unordered-map-bench)
+
+    # ── Foundation DLL native family skeletons ────────────────────
+    add_subdirectory(testing/foundation-dll)
+
+    # ── Native testing suite (GoogleTest-based unit/stress/benchmark) ─────
+    # Windows only: imports prebuilt .lib files, uses MSVC-specific flags.
+    if(MSVC)
+        add_subdirectory(testing)
+    endif()
+
+    # ── Architecture check targets ─────────────────────────────────────
     if(Python3_FOUND)
         set(CHAOS_NATIVE_MODULES
             chaos_common

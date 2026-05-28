@@ -29,7 +29,7 @@ void GcRegisterStaticRootRange(void* start, CHAOS_IL2CPP_SIZE size,
     std::lock_guard<std::mutex> lock(g_static_roots_mutex);
 
     g_static_roots.push_back({start, end, domain_id});
-    CHAOS_IL2CPP_LOG_DEBUG("GC_STATIC", "register_range start=%p end=%p domain=%u size=%llu",
+    CHAOS_IL2CPP_LOG_DEBUG_M("GC_STATIC", "register_range start=%p end=%p domain=%u size=%llu",
         start, end, domain_id, static_cast<unsigned long long>(size));
 }
 
@@ -39,14 +39,14 @@ void GcUnregisterStaticRootRange(void* start) noexcept {
     std::lock_guard<std::mutex> lock(g_static_roots_mutex);
     for (size_t i = 0; i < g_static_roots.size(); ++i) {
         if (g_static_roots[i].start == start) {
-            CHAOS_IL2CPP_LOG_DEBUG("GC_STATIC", "unregister_range start=%p domain=%u",
+            CHAOS_IL2CPP_LOG_DEBUG_M("GC_STATIC", "unregister_range start=%p domain=%u",
                 start, g_static_roots[i].domain_id);
             g_static_roots[i] = g_static_roots.back();
             g_static_roots.pop_back();
             return;
         }
     }
-    CHAOS_IL2CPP_LOG_WARN("GC_STATIC", "unregister_range start=%p not found", start);
+    CHAOS_IL2CPP_LOG_WARN_M("GC_STATIC", "unregister_range start=%p not found", start);
 }
 
 void GcUnregisterDomainStaticRoots(CHAOS_IL2CPP_UINT32 domain_id) noexcept {
@@ -62,7 +62,7 @@ void GcUnregisterDomainStaticRoots(CHAOS_IL2CPP_UINT32 domain_id) noexcept {
         }
     }
     if (count > 0) {
-        CHAOS_IL2CPP_LOG_DEBUG("GC_STATIC", "unregister_domain domain=%u count=%zu",
+        CHAOS_IL2CPP_LOG_DEBUG_M("GC_STATIC", "unregister_domain domain=%u count=%zu",
             domain_id, count);
     }
 }

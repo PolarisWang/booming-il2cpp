@@ -4,7 +4,8 @@
 # (GC, ThreadPool, Exception).  Uses Windows Named Pipes for transport.
 #
 # This is a platform-specific module gated on _WIN32.  On unsupported
-# platforms, add_subdirectory is skipped (see root CMakeLists.txt).
+# platforms, the library is skipped (the entire subdirectory is only
+# added on Windows by the parent CMakeLists.txt checks).
 
 cmake_minimum_required(VERSION 3.20)
 project(chaos_eventpipe LANGUAGES CXX)

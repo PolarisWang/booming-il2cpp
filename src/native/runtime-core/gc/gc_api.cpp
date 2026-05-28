@@ -73,7 +73,7 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
     bool gc_ran = false;
     if (!hard_limit_exceeded &&
         !GcIsInNoGcRegion() && G_Scheduler().TryClaimGcSlot()) {
-        CHAOS_IL2CPP_LOG_WARN("GC_API", "OOM: triggering blocking full GC for size={0}",
+        CHAOS_IL2CPP_LOG_WARN_M("GC_API", "OOM: triggering blocking full GC for size={0}",
             static_cast<unsigned long long>(size));
         uint32_t gen = threading::RequestGlobalSafepoint();
         chaos_gc_collect();
@@ -103,7 +103,7 @@ void* HandleOomCondition(void* (*retry_alloc)(void*), void* retry_context,
     }
 
     // Step 4: All attempts failed — fire OOM event.
-    CHAOS_IL2CPP_LOG_ERROR("GC_API", "OOM: all recovery attempts failed for size={0}",
+    CHAOS_IL2CPP_LOG_ERROR_M("GC_API", "OOM: all recovery attempts failed for size={0}",
         static_cast<unsigned long long>(size));
     GcEtwFireGcOom();
     tls_in_oom_handler = false;
@@ -180,7 +180,7 @@ extern "C" CHAOS_IL2CPP_UINT64 CHAOS_RUNTIME_ABI_CALL chaos_gc_create_async_pinn
 extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_collect_with_mode(
     CHAOS_IL2CPP_INT32 generation, CHAOS_IL2CPP_INT32 mode) noexcept
 {
-    CHAOS_IL2CPP_LOG_DEBUG("GC_API",
+    CHAOS_IL2CPP_LOG_DEBUG_M("GC_API",
         "collect_with_mode gen=%d mode=%d", (int)generation, (int)mode);
 
     // Map mode to scheduler state.
@@ -267,11 +267,11 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_set_latency_mode(
     CHAOS_IL2CPP_INT32 mode) noexcept
 {
     auto lm = static_cast<GcLatencyMode>(mode);
-    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "set_latency_mode mode=%d", (int)lm);
+    CHAOS_IL2CPP_LOG_DEBUG_M("GC_API", "set_latency_mode mode=%d", (int)lm);
 
     // Validate mode range.
     if (lm < GcLatencyMode::BATCH || lm > GcLatencyMode::NO_GC_REGION) {
-        CHAOS_IL2CPP_LOG_WARN("GC_API", "set_latency_mode invalid_mode=%d", (int)mode);
+        CHAOS_IL2CPP_LOG_WARN_M("GC_API", "set_latency_mode invalid_mode=%d", (int)mode);
         return;
     }
 
@@ -492,7 +492,7 @@ thread_local int tls_no_gc_region_depth = 0;
 
 extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_enter_no_gc_region() noexcept {
     ++tls_no_gc_region_depth;
-    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "enter_no_gc_region depth=%d", tls_no_gc_region_depth);
+    CHAOS_IL2CPP_LOG_DEBUG_M("GC_API", "enter_no_gc_region depth=%d", tls_no_gc_region_depth);
 }
 
 extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_leave_no_gc_region() noexcept {
@@ -501,7 +501,7 @@ extern "C" void CHAOS_RUNTIME_ABI_CALL chaos_gc_leave_no_gc_region() noexcept {
         return;
     }
     --tls_no_gc_region_depth;
-    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "leave_no_gc_region depth=%d", tls_no_gc_region_depth);
+    CHAOS_IL2CPP_LOG_DEBUG_M("GC_API", "leave_no_gc_region depth=%d", tls_no_gc_region_depth);
 
     // When counter reaches zero, trigger any deferred GC.
     if (tls_no_gc_region_depth == 0) {
@@ -556,7 +556,7 @@ extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_try_start_no_gc_re
 
     // Budget sufficient — enter no-GC region.
     ++tls_no_gc_region_depth;
-    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "try_start_no_gc_region depth=%d budget=%lld available=%lld",
+    CHAOS_IL2CPP_LOG_DEBUG_M("GC_API", "try_start_no_gc_region depth=%d budget=%lld available=%lld",
         tls_no_gc_region_depth,
         static_cast<long long>(total_size),
         static_cast<long long>(available));
@@ -574,7 +574,7 @@ extern "C" CHAOS_IL2CPP_INT32 CHAOS_RUNTIME_ABI_CALL chaos_gc_end_no_gc_region()
     }
 
     --tls_no_gc_region_depth;
-    CHAOS_IL2CPP_LOG_DEBUG("GC_API", "end_no_gc_region depth=%d", tls_no_gc_region_depth);
+    CHAOS_IL2CPP_LOG_DEBUG_M("GC_API", "end_no_gc_region depth=%d", tls_no_gc_region_depth);
 
     if (tls_no_gc_region_depth == 0) {
         auto kind = G_Scheduler().DecideCollection();

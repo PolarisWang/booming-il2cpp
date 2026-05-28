@@ -18,6 +18,10 @@
 #include <sched.h>
 #include <unistd.h>
 
+// GCC unwinder .eh_frame registration — no header provides these on all GCC versions.
+extern "C" void __register_frame(const void*);
+extern "C" void __deregister_frame(const void*);
+
 // ── kSpinLimitHard — spinlock warning threshold
 static constexpr uint32_t kSpinLimitHard = 1024 * 1024;
 

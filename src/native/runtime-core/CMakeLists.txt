@@ -80,7 +80,6 @@ add_library(chaos_runtime_core STATIC
     aot_core_ir_reader.cpp
     aot_core_ir_reader.h
     core/delegate_helpers.cpp
-    core/delegate_thunks.cpp
     core/delegate_helpers.h
     method_table.cpp
     method_table.h
@@ -227,6 +226,9 @@ if(CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB)
         CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB=${CHAOS_IL2CPP_GC_HEAP_SOFT_LIMIT_MB})
 endif()
 target_compile_options(chaos_runtime_core PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/utf-8 /EHa /GS- /FS>)
+
+# guid_stubs uses SSE4.1 intrinsics (_mm_blendv_epi8).
+set_source_files_properties(runtime_stubs/guid_stubs.cpp PROPERTIES COMPILE_OPTIONS "-msse4.1")
 target_include_directories(
     chaos_runtime_core
     PUBLIC
@@ -245,14 +247,17 @@ if(WIN32)
     target_link_libraries(chaos_runtime_core PUBLIC chaos_debugger)
     target_link_libraries(chaos_runtime_core PRIVATE bcrypt)
 elseif(UNIX AND NOT APPLE AND NOT ANDROID)
+    target_link_libraries(chaos_runtime_core PUBLIC chaos_interpreter)
     target_link_libraries(chaos_runtime_core PRIVATE numa)
 endif()
 
-# NUMA platform sources: only compile the appropriate file for each platform.
+# Platform-specific sources
 if(WIN32)
     target_sources(chaos_runtime_core PRIVATE gc/gc_numa_win.cpp)
 elseif(UNIX AND NOT APPLE AND NOT ANDROID)
-    target_sources(chaos_runtime_core PRIVATE gc/gc_numa_linux.cpp)
+    target_sources(chaos_runtime_core PRIVATE
+        gc/gc_numa_linux.cpp
+        runtime_stubs/linux_platform_stubs.cpp)
 else()
     target_sources(chaos_runtime_core PRIVATE gc/gc_numa_other.cpp)
 endif()

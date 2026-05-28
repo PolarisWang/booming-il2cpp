@@ -71,7 +71,7 @@ void GcRegisterSlotMapsFromSection(const void* begin, const void* end) {
         uint32_t entry_total;
         std::memcpy(&entry_total, ptr, sizeof(entry_total));
         if (entry_total < 12u) {  // minimum: entry_total(4) + code_address(8)
-            CHAOS_IL2CPP_LOG_WARN("CRAG", "slot_map_section_entry_too_small: %u", entry_total);
+            CHAOS_IL2CPP_LOG_WARN_M("CRAG", "slot_map_section_entry_too_small: %u", entry_total);
             break;
         }
 
@@ -88,7 +88,7 @@ void GcRegisterSlotMapsFromSection(const void* begin, const void* end) {
         uint32_t expected_min = 12u + 8u  // packed header
             + sm->num_gc_slots * static_cast<uint32_t>(sizeof(uint32_t));
         if (entry_total < expected_min) {
-            CHAOS_IL2CPP_LOG_WARN("CRAG",
+            CHAOS_IL2CPP_LOG_WARN_M("CRAG",
                 "slot_map_section_entry_size_mismatch: expected>=%u, got=%u",
                 expected_min, entry_total);
             break;

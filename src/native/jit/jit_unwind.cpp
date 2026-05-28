@@ -12,10 +12,10 @@ namespace chaos::il2cpp::jit {
 // assertion fires on a new platform or toolchain, the emission logic must
 // be adjusted for the target ABI.
 static_assert(sizeof(void*) == 8, "x64 is required — only 64-bit targets are supported");
-static_assert(offsetof(UnwindCode, code_offset) == 0,
-              "UnwindCode.code_offset must be at offset 0 for Win64 UNWIND_CODE layout");
 
 #if defined(_WIN64)
+static_assert(offsetof(UnwindCode, code_offset) == 0,
+              "UnwindCode.code_offset must be at offset 0 for Win64 UNWIND_CODE layout");
 
 uint32_t EmitUnwindInfo(
     CodeBuffer& buf,
@@ -167,30 +167,30 @@ uint32_t EmitDwarfCie(CodeBuffer& buf) noexcept {
     buf.Emit32(0);           // placeholder: total length (excluding this field)
 
     buf.Emit32(0);           // cie_id = 0 (CIE marker)
-    buf.Emit8(1);            // version = 1
-    buf.Emit8('z');          // augmentation = "zR\0"
-    buf.Emit8('R');
-    buf.Emit8(0);
-    buf.Emit8(1);            // code_align = ULEB128(1)
-    buf.Emit8(0x78);         // data_align = SLEB128(-8)
-    buf.Emit8(16);           // ret_addr_reg = ULEB128(16)
-    buf.Emit8(1);            // aug_len = ULEB128(1)
-    buf.Emit8(0x1B);         // fde_encoding = DW_EH_PE_pcrel | DW_EH_PE_sdata4
+    buf.EmitByte(1);            // version = 1
+    buf.EmitByte('z');          // augmentation = "zR\0"
+    buf.EmitByte('R');
+    buf.EmitByte(0);
+    buf.EmitByte(1);            // code_align = ULEB128(1)
+    buf.EmitByte(0x78);         // data_align = SLEB128(-8)
+    buf.EmitByte(16);           // ret_addr_reg = ULEB128(16)
+    buf.EmitByte(1);            // aug_len = ULEB128(1)
+    buf.EmitByte(0x1B);         // fde_encoding = DW_EH_PE_pcrel | DW_EH_PE_sdata4
 
     // Initial instructions: CFA = RSP + 8 (after CALL, ret addr on stack)
-    buf.Emit8(0x0C);         // DW_CFA_def_cfa
-    buf.Emit8(7);            // ULEB128: register 7 (RSP in DWARF)
-    buf.Emit8(8);            // ULEB128: offset 8
+    buf.EmitByte(0x0C);         // DW_CFA_def_cfa
+    buf.EmitByte(7);            // ULEB128: register 7 (RSP in DWARF)
+    buf.EmitByte(8);            // ULEB128: offset 8
 
     // DW_CFA_offset(16, 1): return address at CFA-8
-    buf.Emit8(0x90);         // opcode = 0x80 | 16
-    buf.Emit8(1);            // ULEB128: CFA + 1 * (-8) = CFA - 8
+    buf.EmitByte(0x90);         // opcode = 0x80 | 16
+    buf.EmitByte(1);            // ULEB128: CFA + 1 * (-8) = CFA - 8
 
     // Pad to 4-byte boundary
     uint32_t content = buf.pos() - start - 4;
     uint32_t pad = (4 - (content % 4)) % 4;
     for (uint32_t i = 0; i < pad; ++i)
-        buf.Emit8(0);
+        buf.EmitByte(0);
 
     // Patch length
     buf.Patch32(length_off, buf.pos() - start - 4);
@@ -230,13 +230,13 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
     // the prologue itself is incorrect, but all T4 execution is post-prologue.
 
     // DW_CFA_def_cfa(6, 16): CFA = RBP + 16
-    buf.Emit8(0x0C);         // DW_CFA_def_cfa
-    buf.Emit8(kX64ToDwarfReg[5]);  // RBP → DWARF 6
-    buf.Emit8(16);
+    buf.EmitByte(0x0C);         // DW_CFA_def_cfa
+    buf.EmitByte(kX64ToDwarfReg[5]);  // RBP → DWARF 6
+    buf.EmitByte(16);
 
     // DW_CFA_offset(16, 1): return address at CFA-8
-    buf.Emit8(0x90);
-    buf.Emit8(1);
+    buf.EmitByte(0x90);
+    buf.EmitByte(1);
 
     // For each pushed register in prologue order:
     //   push_reg_nums[0]=RBP at CFA-16 → factored offset 2
@@ -246,15 +246,15 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
     for (uint32_t i = 0; i < num_push_regs; ++i) {
         uint8_t dwarf_reg = kX64ToDwarfReg[push_reg_nums[i] & 0x0F];
         uint8_t factored = static_cast<uint8_t>(2 + i);
-        buf.Emit8(static_cast<uint8_t>(0x80 | dwarf_reg));
-        buf.Emit8(factored);
+        buf.EmitByte(static_cast<uint8_t>(0x80 | dwarf_reg));
+        buf.EmitByte(factored);
     }
 
     // Pad to 4-byte boundary
     uint32_t content = buf.pos() - fde_start - 4;
     uint32_t pad = (4 - (content % 4)) % 4;
     for (uint32_t i = 0; i < pad; ++i)
-        buf.Emit8(0);
+        buf.EmitByte(0);
 
     // Patch length
     buf.Patch32(length_off, buf.pos() - fde_start - 4);

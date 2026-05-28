@@ -54,7 +54,7 @@ public:
         if (tls_forbid_suspend_depth == 0) {
             uint64_t elapsed = FastTickMs() - enter_tick_;
             if (elapsed > 10) {
-                CHAOS_IL2CPP_LOG_WARN("THREAD",
+                CHAOS_IL2CPP_LOG_WARN_M("THREAD",
                     "ForbidSuspendScope held %llu ms (possible long critical section)",
                     static_cast<unsigned long long>(elapsed));
             }

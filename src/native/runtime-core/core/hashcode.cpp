@@ -1,5 +1,7 @@
+#include <chaos/native_types.h>
+#include <cstring>
+
 namespace chaos::il2cpp::runtime_core {
-namespace {
 
 static CHAOS_IL2CPP_UINT32 BitCastSingleToUInt32(float value) {
     CHAOS_IL2CPP_UINT32 bits = 0u;
@@ -86,5 +88,4 @@ static CHAOS_IL2CPP_INT32 HashCodeCombine4(CHAOS_IL2CPP_UINT32 hc1, CHAOS_IL2CPP
     return static_cast<CHAOS_IL2CPP_INT32>(HashCodeMixFinal(hash));
 }
 
-}  // anonymous namespace
 }  // namespace chaos::il2cpp::runtime_core

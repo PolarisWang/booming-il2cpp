@@ -773,7 +773,9 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/capacity_stress_test.cpp")
 endif()
 
 # codegen_native_test — native code generation + execution integration tests (Phase 3d)
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
+# Requires code_generator.h from the codegen module (Phase 3d).
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp"
+   AND EXISTS "${REPO_ROOT}/src/native/codegen/code_generator.h")
     add_executable(chaos_codegen_native_test codegen_native_test.cpp ${CHAOS_GC_TEST_STUBS})
     target_compile_features(chaos_codegen_native_test PRIVATE cxx_std_20)
     target_compile_definitions(chaos_codegen_native_test PRIVATE
@@ -790,6 +792,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
             "${REPO_ROOT}/src/native/interpreter"
             "${REPO_ROOT}/src/native/interpreter/generated"
             "${REPO_ROOT}/src/native/codegen"
+            "${REPO_ROOT}/src/native/jit"
             "${REPO_ROOT}/third_party/fmt/include"
             "${REPO_ROOT}/third_party/unordered_dense/include")
     target_link_libraries(
@@ -806,7 +809,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/codegen_native_test.cpp")
 endif()
 
 # unwind_info_test — standalone UNWIND_INFO layout byte-level verification
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp")
+# Windows only: uses SEH / windows.h types for unwind info validation.
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp" AND MSVC)
     add_executable(chaos_unwind_info_test unwind_info_test.cpp)
     target_compile_features(chaos_unwind_info_test PRIVATE cxx_std_17)
     target_compile_definitions(chaos_unwind_info_test PRIVATE
@@ -817,7 +821,8 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/unwind_info_test.cpp")
         PRIVATE
             "${REPO_ROOT}/src/native/codegen"
             "${REPO_ROOT}/src/native/common"
-            "${REPO_ROOT}/src/native/runtime-core")
+            "${REPO_ROOT}/src/native/runtime-core"
+            "${REPO_ROOT}/src/native/jit")
     target_link_libraries(
         chaos_unwind_info_test
         PRIVATE

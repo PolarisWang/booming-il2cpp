@@ -8,7 +8,9 @@ add_library(chaos_benchmark_host STATIC
     native_aot_main.cpp)
 
 target_compile_features(chaos_benchmark_host PUBLIC cxx_std_17)
-target_compile_options(chaos_benchmark_host PRIVATE /utf-8)
+if(MSVC)
+    target_compile_options(chaos_benchmark_host PRIVATE /utf-8)
+endif()
 target_link_libraries(chaos_benchmark_host PUBLIC chaos_runtime_core chaos_bootstrap)
 target_include_directories(chaos_benchmark_host PUBLIC "${CMAKE_CURRENT_LIST_DIR}")
 
@@ -39,6 +41,7 @@ if(MSVC)
 endif()
 
 # WIN32_SEH variant — structured exception handling via RaiseException/__except
+if(WIN32)
 add_executable(chaos_eh_benchmark_win32_seh
     eh_benchmark.cpp)
 target_compile_features(chaos_eh_benchmark_win32_seh PRIVATE cxx_std_17)
@@ -46,11 +49,12 @@ target_compile_definitions(chaos_eh_benchmark_win32_seh PRIVATE CHAOS_IL2CPP_EH_
 if(MSVC)
     target_compile_options(chaos_eh_benchmark_win32_seh PRIVATE /utf-8 /EHca)
 endif()
+endif()
 
 # Aggregate target to build all three EH benchmark variants
 add_custom_target(chaos_eh_benchmark_all
     DEPENDS
         chaos_eh_benchmark_cpp_throw
         chaos_eh_benchmark_setjmp
-        chaos_eh_benchmark_win32_seh
+        $<$<BOOL:$<PLATFORM_ID:Windows>>:chaos_eh_benchmark_win32_seh>
     COMMENT "Building all EH benchmark variants")

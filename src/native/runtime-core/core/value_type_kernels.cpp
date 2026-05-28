@@ -1,5 +1,6 @@
+#include <chaos/native_types.h>
+
 namespace chaos::il2cpp::runtime_core {
-namespace {
 
 static float VectorMinElement(float left_value, float right_value) { return CHAOS_IL2CPP_FMIN(left_value, right_value); }
 static float VectorMaxElement(float left_value, float right_value) { return CHAOS_IL2CPP_FMAX(left_value, right_value); }
@@ -399,5 +400,4 @@ CHAOS_IL2CPP_INT32 TimeOnlyCompareTicksValue(CHAOS_IL2CPP_INT64 left_value, CHAO
 
 bool TimeOnlyEqualsTicksValue(CHAOS_IL2CPP_INT64 left_value, CHAOS_IL2CPP_INT64 right_value) { return left_value == right_value; }
 
-}  // anonymous namespace
 }  // namespace chaos::il2cpp::runtime_core

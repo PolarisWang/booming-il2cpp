@@ -14,7 +14,9 @@
 # Consumers include it via <diagnostics/hotupdate_events.h> or path.
 
 add_subdirectory(debugger)
-add_subdirectory(eventpipe)
+if(WIN32)
+    add_subdirectory(eventpipe)
+endif()
 
 # SOS requires DbgEng SDK — the root CMakeLists.txt checks this conditionally.
 # This umbrella defers the check to the parent scope.

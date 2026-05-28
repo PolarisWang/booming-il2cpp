@@ -91,7 +91,7 @@ void GcScanInterpFrameChain(void* root_frame,
         } else {
             // Unknown frame type — stop chain walk to prevent
             // misinterpretation of arbitrary memory as frame pointers.
-            CHAOS_IL2CPP_LOG_WARN("CRAG",
+            CHAOS_IL2CPP_LOG_WARN_M("CRAG",
                 "interp_frame_unknown_type: 0x%08x, stopping chain walk",
                 frame_type);
             break;

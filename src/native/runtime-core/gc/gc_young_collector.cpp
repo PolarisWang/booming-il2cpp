@@ -728,7 +728,7 @@ phase3:
                     : (current_size - recommended);
                 if (diff > current_size / 6 && recommended > 0) {
                     ResizeGen1Region(recommended);
-                    CHAOS_IL2CPP_LOG_DEBUG("CRAG",
+                    CHAOS_IL2CPP_LOG_DEBUG_M("CRAG",
                         "gen1_resize: {0} -> {1} bytes",
                         static_cast<unsigned long long>(current_size),
                         static_cast<unsigned long long>(recommended));
@@ -755,7 +755,7 @@ phase3:
                         std::memory_order_relaxed)) {
                     G_YoungGen().promotion_age_threshold_.store(
                         scheduler_threshold, std::memory_order_release);
-                    CHAOS_IL2CPP_LOG_DEBUG("CRAG",
+                    CHAOS_IL2CPP_LOG_DEBUG_M("CRAG",
                         "promotion_age_threshold: {0} (scheduler, "
                         "occ={1:.2f})",
                         scheduler_threshold, occupancy);

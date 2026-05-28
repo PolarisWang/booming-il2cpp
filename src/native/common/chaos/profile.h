@@ -40,10 +40,11 @@
 #include <cstdio>
 #include <atomic>
 #include <new>
+#if defined(_MSC_VER)
 #include <intrin.h>
-
-#ifdef _MSC_VER
 #pragma intrinsic(__rdtsc)
+#elif defined(__x86_64__) || defined(__i386__)
+#include <x86intrin.h>
 #endif
 
 // Expansion helper: ensures __LINE__ and other special macros expand

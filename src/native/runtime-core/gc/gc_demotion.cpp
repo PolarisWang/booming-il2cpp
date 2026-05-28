@@ -232,7 +232,7 @@ void DemotionRelocate(const std::vector<DemotionEntry>& entries,
     }
     GcRelocateHandles(handle_relocs);
 
-    CHAOS_IL2CPP_LOG_DEBUG("CRAG", "demotion_relocate: {0} entries relocated",
+    CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "demotion_relocate: {0} entries relocated",
         static_cast<unsigned long>(entries.size()));
 }
 

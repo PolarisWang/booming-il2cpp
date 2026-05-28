@@ -394,7 +394,7 @@ bool ReaderWriterLockSlimExitWrite(uint32_t rw_handle) noexcept {
     #ifndef NDEBUG
     int32_t tid = threading::GetCurrentThreadId();
     if (entry->debug_writer_tid != tid) {
-        CHAOS_IL2CPP_LOG_ERROR("RWLock",
+        CHAOS_IL2CPP_LOG_ERROR_M("RWLock",
             "ExitWrite by TID %d but writer is TID %d", tid, entry->debug_writer_tid);
         return false;
     }

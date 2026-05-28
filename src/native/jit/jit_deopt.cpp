@@ -7,7 +7,13 @@
 
 #include <cstring>
 
+#if defined(_MSC_VER)
 #include <intrin.h>  // _AddressOfReturnAddress()
+#else
+#include <cstdint>
+// GCC/Clang: _AddressOfReturnAddress() via __builtin_return_address
+#define _AddressOfReturnAddress() __builtin_return_address(0)
+#endif
 
 namespace chaos::il2cpp::jit {
 

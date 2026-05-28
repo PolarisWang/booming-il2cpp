@@ -515,7 +515,7 @@ bool TestBitwiseAnd()
     IRMethod method;
     IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 3; method.instructions.push_back(a);
     IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 6; method.instructions.push_back(b);
-    IRInstruction and; and.op_code = IROpCode::And; method.instructions.push_back(and);
+    IRInstruction and_inst; and_inst.op_code = IROpCode::And; method.instructions.push_back(and_inst);
     IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
 
     ExecutionFrame frame = {};
@@ -530,7 +530,7 @@ bool TestBitwiseOr()
     IRMethod method;
     IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 3; method.instructions.push_back(a);
     IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 6; method.instructions.push_back(b);
-    IRInstruction or; or.op_code = IROpCode::Or; method.instructions.push_back(or);
+    IRInstruction or_inst; or_inst.op_code = IROpCode::Or; method.instructions.push_back(or_inst);
     IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
 
     ExecutionFrame frame = {};
@@ -545,7 +545,7 @@ bool TestBitwiseXor()
     IRMethod method;
     IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 3; method.instructions.push_back(a);
     IRInstruction b; b.op_code = IROpCode::LdcI4; b.immediate_i4 = 6; method.instructions.push_back(b);
-    IRInstruction xor; xor.op_code = IROpCode::Xor; method.instructions.push_back(xor);
+    IRInstruction xor_inst; xor_inst.op_code = IROpCode::Xor; method.instructions.push_back(xor_inst);
     IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
 
     ExecutionFrame frame = {};
@@ -559,7 +559,7 @@ bool TestBitwiseNot()
     // ldc.i4.0 → not → ret  →  ~0 = -1
     IRMethod method;
     IRInstruction a; a.op_code = IROpCode::LdcI4; a.immediate_i4 = 0; method.instructions.push_back(a);
-    IRInstruction not; not.op_code = IROpCode::Not; method.instructions.push_back(not);
+    IRInstruction not_inst; not_inst.op_code = IROpCode::Not; method.instructions.push_back(not_inst);
     IRInstruction ret; ret.op_code = IROpCode::Ret; method.instructions.push_back(ret);
 
     ExecutionFrame frame = {};

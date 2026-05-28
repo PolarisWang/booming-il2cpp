@@ -69,7 +69,7 @@ static int g_sub      = 0;
     do { ++g_sub; printf("\n    SUB %d: %s ... ", g_sub, name); } while (0)
 
 #define PASS()          puts("PASS")
-#define FAIL(msg)       do { ++g_failures; printf("FAIL: %s\n", msg); } while (0)
+#define FAIL(...)       do { ++g_failures; printf("FAIL: "); printf(__VA_ARGS__); printf("\n"); } while (0)
 
 using namespace chaos::il2cpp::runtime_core;
 using namespace chaos::il2cpp::memory_domain;
@@ -304,7 +304,6 @@ static CHAOS_IL2CPP_INTPTR AllocateSingleDelegate(
     auto* obj = static_cast<LocalDelegate*>(
         g_old_gen.Allocate(sizeof(LocalDelegate), true));
     obj->type_info = type_info;
-    obj->sync_state = 0;
     obj->chaos_delegate_target = target;
     obj->chaos_delegate_method_ptr = method_ptr;
     obj->chaos_delegate_invocation_list = 0;
@@ -816,7 +815,6 @@ static void ScenarioE3() {
         auto* delegate = static_cast<LocalDelegate*>(
             g_old_gen.Allocate(sizeof(LocalDelegate), true));
         delegate->type_info = &g_delegate_type_a;
-        delegate->sync_state = 0;
         delegate->chaos_delegate_target = static_cast<CHAOS_IL2CPP_INTPTR>(i);
         delegate->chaos_delegate_method_ptr = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&g_delegate_type_a);
         delegate->chaos_delegate_invocation_list = 0;

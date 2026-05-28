@@ -33,6 +33,7 @@
 #include <cstring>
 #if !defined(_WIN32) && !defined(_WIN64) && !defined(__APPLE__)
 #include <signal.h>
+#include <sys/resource.h>
 #endif
 
 namespace chaos::il2cpp::runtime_core::threading {
@@ -91,7 +92,7 @@ int32_t OsThreadPriorityFromManaged(ManagedThreadPriority pri) noexcept {
     }
     errno = 0;
     if (setpriority(PRIO_PROCESS, 0, nice_value) != 0 && errno != 0) {
-        CHAOS_IL2CPP_LOG_WARN("Thread", "setpriority failed: {0}", std::strerror(errno));
+        CHAOS_IL2CPP_LOG_WARN_M("Thread", "setpriority failed: {0}", std::strerror(errno));
     }
     return nice_value;
 #endif
@@ -559,7 +560,7 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
 
                     if (!preemptive_attempted && elapsed_ns >= kSafepointTimeoutNs) {
                         preemptive_attempted = true;
-                        CHAOS_IL2CPP_LOG_WARN("Safepoint",
+                        CHAOS_IL2CPP_LOG_WARN_M("Safepoint",
                             "safepoint timeout: {0} threads unresponsive after {1}ms, "
                             "attempting preemptive suspend",
                             s_remaining, elapsed_ns / 1000000);
@@ -586,7 +587,7 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
                                 t->preemptive_suspended.store(true, std::memory_order_release);
 #else
                                 // iOS: no force-suspend available. Log and continue.
-                                CHAOS_IL2CPP_LOG_WARN("Safepoint",
+                                CHAOS_IL2CPP_LOG_WARN_M("Safepoint",
                                     "thread {0} unresponsive, "
                                     "cannot preemptively suspend on iOS",
                                     t->managed_id);
@@ -598,7 +599,7 @@ extern "C" uint32_t RequestGlobalSafepoint() noexcept {
 
                     if (preemptive_attempted && elapsed_ns >= kSafepointHardTimeoutNs) {
                         hard_timeout = true;
-                        CHAOS_IL2CPP_LOG_ERROR("Safepoint",
+                        CHAOS_IL2CPP_LOG_ERROR_M("Safepoint",
                             "safepoint hard timeout: {0} threads still unresponsive "
                             "after {1}ms, forcing release",
                             s_remaining, elapsed_ns / 1000000);

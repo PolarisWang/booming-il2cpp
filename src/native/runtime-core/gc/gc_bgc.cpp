@@ -404,7 +404,7 @@ void BgcController::StwCompact() {
                             promoted_bytes += psize;
                         } else {
                             oom = true;
-                            CHAOS_IL2CPP_LOG_ERROR("BGC",
+                            CHAOS_IL2CPP_LOG_ERROR_M("BGC",
                                 "gen1_promote OOM at offset={0}",
                                 static_cast<unsigned long long>(
                                     promote_cur - sv_begin));
@@ -433,7 +433,7 @@ void BgcController::StwCompact() {
                         "gen1_promote OOM — leaving Gen1 intact");
                 }
             } else {
-                CHAOS_IL2CPP_LOG_DEBUG("BGC",
+                CHAOS_IL2CPP_LOG_DEBUG_M("BGC",
                     "gen1_keep: survival={0:.2f} above threshold",
                     survival);
                 G_Scheduler().RecordBgcGen1Keep(
@@ -1159,7 +1159,7 @@ void BgcController::FinalizerThreadMain() noexcept {
     threading::RegisterThread(thread_id, nullptr);
     threading::EnterPreemptiveMode();
     finalizer_thread_id_ = std::this_thread::get_id();
-    CHAOS_IL2CPP_LOG_DEBUG("Finalizer", "thread_started id={0}", thread_id);
+    CHAOS_IL2CPP_LOG_DEBUG_M("Finalizer", "thread_started id={0}", thread_id);
 
     // Signal Start() that finalizer thread startup is complete.
     finalizer_thread_started_.store(true, std::memory_order_release);
@@ -1196,13 +1196,13 @@ void BgcController::FinalizerThreadMain() noexcept {
                 entry.finalizer(entry.obj);
             } catch (...) {
                 entry.retry_count++;
-                CHAOS_IL2CPP_LOG_WARN("Finalizer",
+                CHAOS_IL2CPP_LOG_WARN_M("Finalizer",
                     "finalizer exception obj={0} retry={1}/{2}",
                     entry.obj, entry.retry_count, kFinalizerMaxRetries);
 
                 if (entry.retry_count >= kFinalizerMaxRetries) {
                     entry.is_dead = true;
-                    CHAOS_IL2CPP_LOG_ERROR("Finalizer",
+                    CHAOS_IL2CPP_LOG_ERROR_M("Finalizer",
                         "finalizer permanently skipped obj={0}", entry.obj);
                 } else {
                     // Re-queue for retry.
@@ -1559,7 +1559,7 @@ bool BgcController::AllocateGen1MarkBitmap() noexcept {
 
     auto* bitmap = static_cast<uint8_t*>(CHAOS_IL2CPP_MALLOC(bitmap_bytes));
     if (bitmap == nullptr) {
-        CHAOS_IL2CPP_LOG_ERROR("BGC", "gen1_bitmap OOM span=%llu",
+        CHAOS_IL2CPP_LOG_ERROR_M("BGC", "gen1_bitmap OOM span=%llu",
             static_cast<unsigned long long>(span));
         return false;
     }

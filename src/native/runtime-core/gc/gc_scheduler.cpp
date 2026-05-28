@@ -254,7 +254,7 @@ BgcScope GcScheduler::DecideBgcScope() noexcept {
                 scope = BgcScope::GEN2_ONLY;
             }
 
-            CHAOS_IL2CPP_LOG_DEBUG("CRAG",
+            CHAOS_IL2CPP_LOG_DEBUG_M("CRAG",
                 "bgc_scope={0} gen1_occ={1:.2f} gen1_surv={2:.2f} gen2_frag={3:.2f}",
                 static_cast<int>(scope), occupancy, gen1_survival,
                 static_cast<double>(frag));
@@ -431,7 +431,7 @@ void GcScheduler::AddExternalMemoryPressure(CHAOS_IL2CPP_INT64 bytes) noexcept {
     // Edge trigger: crossed threshold upward → request a full GC.
     if (prev < adaptive_threshold && current >= adaptive_threshold) {
         RequestFullGc();
-        CHAOS_IL2CPP_LOG_DEBUG("GC_API",
+        CHAOS_IL2CPP_LOG_DEBUG_M("GC_API",
             "external_memory_pressure triggered GC: total=%lld threshold=%lld",
             static_cast<long long>(current),
             static_cast<long long>(adaptive_threshold));
@@ -447,7 +447,7 @@ void GcScheduler::RemoveExternalMemoryPressure(CHAOS_IL2CPP_INT64 bytes) noexcep
         external_memory_pressure_.store(0, std::memory_order_relaxed);
     }
 
-    CHAOS_IL2CPP_LOG_DEBUG("GC_API",
+    CHAOS_IL2CPP_LOG_DEBUG_M("GC_API",
         "external_memory_pressure removed: delta=%lld total=%lld",
         static_cast<long long>(bytes),
         static_cast<long long>(external_memory_pressure_.load(std::memory_order_relaxed)));

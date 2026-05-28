@@ -9,7 +9,9 @@ add_library(chaos_bootstrap STATIC
 
 target_compile_features(chaos_bootstrap PUBLIC cxx_std_17)
 target_compile_definitions(chaos_bootstrap PRIVATE CHAOS_RUNTIME_ABI_EXPORTS _CRT_SECURE_NO_WARNINGS)
-target_compile_options(chaos_bootstrap PRIVATE /utf-8)
+if(MSVC)
+    target_compile_options(chaos_bootstrap PRIVATE /utf-8)
+endif()
 target_include_directories(
     chaos_bootstrap
     PUBLIC

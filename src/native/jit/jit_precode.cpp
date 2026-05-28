@@ -43,6 +43,7 @@
 #endif
 
 #include <chaos/eh.h>            // CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN
+#include <generated_code_compat.h>  // chaos_managed_exception for CHAOS_EH_CATCH_BEGIN
 
 #include <cstdlib>
 #include <cstring>

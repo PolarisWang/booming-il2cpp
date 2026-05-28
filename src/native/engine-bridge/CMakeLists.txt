@@ -5,7 +5,9 @@ add_library(chaos_engine_bridge STATIC
     engine_bridge.h)
 
 target_compile_features(chaos_engine_bridge PUBLIC cxx_std_17)
-target_compile_options(chaos_engine_bridge PRIVATE /utf-8)
+if(MSVC)
+    target_compile_options(chaos_engine_bridge PRIVATE /utf-8)
+endif()
 target_include_directories(
     chaos_engine_bridge
     PUBLIC

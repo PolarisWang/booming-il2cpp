@@ -10,7 +10,7 @@ add_library(chaos_jit STATIC
     jit_unwind.cpp
     jit_binary_reader.cpp
     jit_precode.cpp
-    WinSehHandler.cpp
+    $<$<PLATFORM_ID:Windows>:WinSehHandler.cpp>
     $<$<PLATFORM_ID:Linux>:LinuxSehHandler.cpp>
     tree/jit_intrinsics.cpp
     tree/jit_bounds_check.cpp
