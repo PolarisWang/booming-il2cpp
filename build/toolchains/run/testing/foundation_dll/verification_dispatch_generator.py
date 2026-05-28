@@ -223,16 +223,19 @@ def generate_verification_dispatch(
     # ── RunHotpatchBenchmark ──────────────────────────────────────
     # Timing loop via ChaosDispatchMethod, semantically for post-hotpatch measurement.
     write("// ── RunHotpatchBenchmark: timing loop via ChaosDispatchMethod (post-patch) ──")
-    write('extern "C" double RunHotpatchBenchmark(int entry_index, int iterations) {')
+    write('extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations) {')
     write('    if (entry_index < 0 || entry_index >= kAotMethodCount)')
-    write('        return -1.0;')
+    write('        return {-1.0, 0};')
     write('    auto* entries = GetHotpatchEntries();')
     write('    auto start = std::chrono::steady_clock::now();')
     write('    for (int i = 0; i < iterations; i++) {')
     write(f'        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, {thunks});')
     write('    }')
     write('    auto end = std::chrono::steady_clock::now();')
-    write('    return std::chrono::duration<double, std::milli>(end - start).count();')
+    write('    BenchmarkResult result;')
+    write('    result.elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();')
+    write('    result.allocated_bytes = 0;')
+    write('    return result;')
     write('}')
 
     # ── Write output ────────────────────────────────────────────────
