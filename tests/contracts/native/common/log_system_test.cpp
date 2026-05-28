@@ -24,7 +24,12 @@
 #include <fstream>
 #include <algorithm>
 
+#if defined(_WIN32) || defined(_WIN64)
 #include <io.h>
+#include <fcntl.h>   // _O_TEXT
+#else
+#include <unistd.h>
+#endif
 
 // ════════════════════════════════════════════════════════════════════════════
 // Test infrastructure
@@ -53,7 +58,11 @@ struct StdoutCapture {
 
     bool Begin() {
         fflush(stdout);
+#if defined(_WIN32) || defined(_WIN64)
         saved_fd = _dup(_fileno(stdout));
+#else
+        saved_fd = dup(fileno(stdout));
+#endif
         if (saved_fd < 0) return false;
         FILE* f = freopen(kCapturePath, "w", stdout);
         return f != nullptr;
@@ -63,8 +72,13 @@ struct StdoutCapture {
         fflush(stdout);
         // Restore original stdout
         if (saved_fd >= 0) {
+#if defined(_WIN32) || defined(_WIN64)
             _dup2(saved_fd, _fileno(stdout));
             _close(saved_fd);
+#else
+            dup2(saved_fd, fileno(stdout));
+            close(saved_fd);
+#endif
             saved_fd = -1;
         }
         // Read captured content

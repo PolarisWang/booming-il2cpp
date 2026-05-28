@@ -45,7 +45,7 @@ void GcNumaInit() noexcept {
     }
 
     g_numa_node_count.store(count, std::memory_order_release);
-    CHAOS_IL2CPP_LOG_INFO("NUMA", "numa_init count=%d", count);
+    CHAOS_IL2CPP_LOG_INFO_M("NUMA", "numa_init count=%d", count);
 }
 
 int GcNumaNodeCount() noexcept {

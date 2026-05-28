@@ -2,7 +2,9 @@ add_executable(ir_precompile
     main.cpp)
 
 target_compile_features(ir_precompile PRIVATE cxx_std_17)
-target_compile_options(ir_precompile PRIVATE /utf-8)
+if(MSVC)
+    target_compile_options(ir_precompile PRIVATE /utf-8)
+endif()
 
 target_link_libraries(ir_precompile
     PRIVATE

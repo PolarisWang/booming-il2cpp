@@ -107,8 +107,44 @@
 
     }  // namespace chaos::il2cpp::diagnostics
 
+#elif defined(__linux__)
+
+    #include <cstddef>
+    #include <cstdint>
+
+    namespace chaos::il2cpp::diagnostics {
+
+    /// Platform-specific pipe handle type (Linux stub: uses int fd).
+    using EpPlatformHandle = int;
+
+    /// Invalid handle sentinel.
+    #define kEpInvalidHandle (-1)
+
+    /// Create a named pipe server instance (Linux stub — no-op, always fails).
+    inline EpPlatformHandle EpCreatePipe(const wchar_t* /*pipe_name*/) noexcept {
+        return kEpInvalidHandle;
+    }
+
+    /// Wait for a client to connect to the pipe (Linux stub — no-op).
+    inline bool EpWaitForClient(EpPlatformHandle /*pipe*/, void* /*overlapped*/) noexcept {
+        return false;
+    }
+
+    /// Write data to the pipe (Linux stub — no-op).
+    inline bool EpWritePipe(EpPlatformHandle /*pipe*/, const void* /*data*/, uint32_t /*data_size*/, void* /*overlapped*/) noexcept {
+        return false;
+    }
+
+    /// Disconnect the pipe (Linux stub — no-op).
+    inline void EpDisconnectPipe(EpPlatformHandle /*pipe*/) noexcept {}
+
+    /// Close the pipe handle (Linux stub — no-op).
+    inline void EpClosePipe(EpPlatformHandle /*pipe*/) noexcept {}
+
+    }  // namespace chaos::il2cpp::diagnostics
+
 #else
-    #error "EventPipe is currently only supported on Windows platforms"
+    #error "EventPipe: unsupported platform (port to Linux Unix socket or disable CHAOS_IL2CPP_EVENTPIPE)"
 #endif  // _WIN32 || _WIN64
 
 #endif  // CHAOS_IL2CPP_EVENTPIPE

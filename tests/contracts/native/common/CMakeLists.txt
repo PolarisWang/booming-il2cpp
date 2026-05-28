@@ -27,4 +27,5 @@ target_include_directories(
 target_link_libraries(
     chaos_log_system_test
     PRIVATE
-        chaos_common)
+        chaos_common
+        chaos_runtime_core)

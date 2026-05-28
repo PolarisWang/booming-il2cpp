@@ -129,7 +129,7 @@ public:
         // If ptr is the last allocation in the current region, just extend.
         if (ptr != nullptr && IsInCurrentRegion(ptr)) {
             CHAOS_IL2CPP_SIZE needed = AlignUp(new_size, sizeof(void*));
-            if ((reinterpret_cast<char*>(ptr) + needed) <= current_end_) {
+            if ((reinterpret_cast<CHAOS_IL2CPP_SIZE>(ptr) + needed) <= current_end_) {
                 current_pos_ = reinterpret_cast<CHAOS_IL2CPP_SIZE>(ptr) + needed;
                 return ptr;
             }
@@ -355,7 +355,7 @@ void DomainFreeTagged(void* ptr) {
     // Validate: must have the magic tag bit.  GC domain and Raw domain
     // pointers (even-aligned, bit 0 = 0) are caught here.
     if (!IsTaggedAllocation(hdr->heap_or_tagged)) {
-        CHAOS_IL2CPP_LOG_WARN("MemoryDomain",
+        CHAOS_IL2CPP_LOG_WARN_M("MemoryDomain",
             "DomainFreeTagged: pointer %p lacks domain magic tag (bit 0 = 0) — "
             "likely a GC or Raw domain pointer.  Skipping free to prevent heap corruption.",
             ptr);
@@ -380,7 +380,7 @@ void* DomainCurrentReallocateTagged(void* ptr, CHAOS_IL2CPP_SIZE new_size) {
 
     // Validate tag before processing.
     if (!IsTaggedAllocation(old_hdr->heap_or_tagged)) {
-        CHAOS_IL2CPP_LOG_WARN("MemoryDomain",
+        CHAOS_IL2CPP_LOG_WARN_M("MemoryDomain",
             "DomainCurrentReallocateTagged: pointer %p lacks domain magic tag — "
             "cannot determine originating heap.  Returning nullptr (original block untouched).",
             ptr);

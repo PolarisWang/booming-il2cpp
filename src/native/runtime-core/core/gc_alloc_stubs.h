@@ -1,4 +1,4 @@
-// gc_alloc_stubs.h — __forceinline fast-path GcAllocate for CHAOS_IL2CPP_NEW_GC
+// gc_alloc_stubs.h — forceinline fast-path GcAllocate for CHAOS_IL2CPP_NEW_GC
 //
 // The inline definitions here replace the out-of-line GcAllocate/GcAllocateAtomic
 // from gc_alloc_stubs.cpp for hot allocation paths.  Generated code that uses
@@ -15,6 +15,7 @@
 #define CHAOS_IL2CPP_GC_ALLOC_STUBS_H_
 
 #include <chaos/native_types.h>
+#include <chaos/compiler_hints.h>
 
 #include "gc/gc_region.h"
 #include "gc/gc_stats.h"
@@ -31,7 +32,7 @@ extern thread_local CHAOS_IL2CPP_SIZE tls_alloc_fast_bytes;
 /// Fast-path GcAllocate — inlined at every CHAOS_IL2CPP_NEW_GC call site.
 /// No PROFILE_SCOPE, no global atomics, no ETW — pure TLAB bump + zero-init.
 /// ~30ns/alloc (SHIP) vs ~78ns old out-of-line path.
-__forceinline inline void* GcAllocateFast(CHAOS_IL2CPP_SIZE size) {
+CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFast(CHAOS_IL2CPP_SIZE size) {
     if (GcStressShouldTrigger()) [[unlikely]] {
         tls_in_gc_stress = true;
         chaos_gc_collect();
@@ -47,7 +48,7 @@ __forceinline inline void* GcAllocateFast(CHAOS_IL2CPP_SIZE size) {
 }
 
 /// Fast-path GcAllocateAtomic — same as GcAllocateFast but for pointer-free data.
-__forceinline inline void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
+CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
     if (GcStressShouldTrigger()) [[unlikely]] {
         tls_in_gc_stress = true;
         chaos_gc_collect();
@@ -64,7 +65,7 @@ __forceinline inline void* GcAllocateAtomicFast(CHAOS_IL2CPP_SIZE size) {
 
 /// Fast-path GcAllocate WITHOUT zero-init — for callers that immediately
 /// write every byte (e.g., CHAOS_IL2CPP_MALLOC_GC for array allocations).
-__forceinline void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
+CHAOS_IL2CPP_FORCEINLINE void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
     if (GcStressShouldTrigger()) [[unlikely]] {
         tls_in_gc_stress = true;
         chaos_gc_collect();
@@ -80,7 +81,7 @@ __forceinline void* GcAllocateFastNoZero(CHAOS_IL2CPP_SIZE size) {
 }
 
 /// Fast-path GcAllocateAtomic WITHOUT zero-init (atomic/pointer-free variant).
-__forceinline void* GcAllocateAtomicFastNoZero(CHAOS_IL2CPP_SIZE size) {
+CHAOS_IL2CPP_FORCEINLINE void* GcAllocateAtomicFastNoZero(CHAOS_IL2CPP_SIZE size) {
     if (GcStressShouldTrigger()) [[unlikely]] {
         tls_in_gc_stress = true;
         chaos_gc_collect();

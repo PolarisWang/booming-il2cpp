@@ -32,6 +32,12 @@
  #include <windows.h>
 #endif
 
+// GCC unwinder .eh_frame registration — no header declares these on all GCC versions.
+#if defined(__linux__)
+extern "C" void __register_frame(const void*);
+extern "C" void __deregister_frame(const void*);
+#endif
+
 namespace chaos::il2cpp::jit {
 
 // ── Frame layout constants ─────────────────────────────────────────────────
@@ -281,7 +287,9 @@ private:
     void SpillCachedRegs() noexcept;
     void SpillGcRefCachedRegs() noexcept;
     void EmitCallWithSpill(uint8_t reg) noexcept;
-    uint32_t EmitRuntimeHelperCall(void* target_fn) noexcept;
+    template <typename T>
+    uint32_t EmitRuntimeHelperCall(T* target_fn) noexcept { return EmitRuntimeHelperCallImpl(reinterpret_cast<void*>(target_fn)); }
+    uint32_t EmitRuntimeHelperCallImpl(void* target_fn) noexcept;
 
     void LoadGpr(uint8_t x64_reg, uint32_t vreg) noexcept;
     void StoreGpr(uint8_t x64_reg, uint32_t vreg) noexcept;
@@ -970,7 +978,7 @@ void NativeCodeGenerator::EmitCallWithSpill(uint8_t reg) noexcept {
     }
 }
 
-uint32_t NativeCodeGenerator::EmitRuntimeHelperCall(void* target_fn) noexcept {
+uint32_t NativeCodeGenerator::EmitRuntimeHelperCallImpl(void* target_fn) noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::RuntimeHelperCall");
     if (config_.enable_register_caching && cached_slots_used_) SpillCachedRegs();
     if (has_graph_coloring_) {
@@ -2190,10 +2198,10 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             // R8 = bump counter pointer (8 bytes, at kFrameSize + align_adj + xmm_save).
             enc_.EmitLeaRM(kR8, kRSP,
                 static_cast<int32_t>(kFrameSize + frame_align_adj_ + xmm_save_size_));
-            EmitRuntimeHelperCall(::CodegenLocAlloc);
+            EmitRuntimeHelperCall(reinterpret_cast<void*>(::CodegenLocAlloc));
         } else {
             // Fallback: heap allocation (no stack reserve — rare edge case).
-            EmitRuntimeHelperCall(::CodegenLocAlloc);
+            EmitRuntimeHelperCall(reinterpret_cast<void*>(::CodegenLocAlloc));
         }
         StoreGpr(kRAX, instr.dst_reg());
         return true;
@@ -2547,7 +2555,7 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
         // call CodegenCallVirt
         uint32_t call_pos = buf_.pos();
-        EmitRuntimeHelperCall(::CodegenCallVirt);
+        EmitRuntimeHelperCall(reinterpret_cast<void*>(::CodegenCallVirt));
         {
             uint32_t call_token = 0, call_module = 0;
             if (config_.call_cache != nullptr && current_instr_index_ < config_.call_cache_count) {
@@ -4042,7 +4050,7 @@ JitMethod* NativeCodeGenerator::Generate() noexcept {
             // t_deopt_state.osr_resume_pc and resolves it through the
             // persisted instr_offsets table to an absolute native address.
             enc_.EmitSubRI(kRSP, 32);                // shadow space for Win64
-            EmitRuntimeHelperCall(::OsrResolveLoopHeader);
+            EmitRuntimeHelperCall(reinterpret_cast<void*>(::OsrResolveLoopHeader));
             enc_.EmitAddRI(kRSP, 32);                // restore shadow space
 
             // RAX now holds the target native address (or nullptr if resolution failed).

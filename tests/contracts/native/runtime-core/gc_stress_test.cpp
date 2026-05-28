@@ -495,7 +495,6 @@ static bool RunScenarioA(GcStatsSnapshot* stats_out) {
     // Background monitor thread: dumps progress every 5s while workers run.
     std::atomic<bool> monitor_done{false};
     std::thread monitor([&]() {
-        HANDLE err = GetStdHandle(STD_ERROR_HANDLE);
         char buf[256];
         for (int iter = 0; !monitor_done.load(std::memory_order_acquire); ++iter) {
             int phase1 = 0, phase2 = 0, phase3 = 0;
@@ -507,8 +506,7 @@ static bool RunScenarioA(GcStatsSnapshot* stats_out) {
             }
             int n = std::snprintf(buf, sizeof(buf), "[MONITOR] iter=%d reg=%d nursery=%d alloc=%d\n",
                 iter, phase1, phase2, phase3);
-            DWORD written;
-            WriteFile(err, buf, static_cast<DWORD>(n), &written, nullptr);
+            fwrite(buf, 1, n, stderr);
             // Poll interval: 5 seconds
             for (int s = 0; s < 50 && !monitor_done.load(std::memory_order_acquire); ++s)
                 std::this_thread::sleep_for(std::chrono::milliseconds(100));
@@ -2651,6 +2649,8 @@ static int run_scenarios(int start_from = 0, int end_at = 20) {
 // Main
 // ════════════════════════════════════════════════════════════════════════════
 
+#if defined(_WIN32) || defined(_WIN64)
+
 static LONG WINAPI CrashHandler(EXCEPTION_POINTERS* ep) {
     fprintf(stderr, "\n*** CRASH: Exception code=0x%08lX at address=%p ***\n",
             ep->ExceptionRecord->ExceptionCode,
@@ -2682,6 +2682,8 @@ static LONG WINAPI CrashHandler(EXCEPTION_POINTERS* ep) {
 
     return EXCEPTION_CONTINUE_SEARCH;  // Let the OS handle it (crash dump etc)
 }
+
+#endif  // _WIN32 || _WIN64
 
 int main(int argc, char** argv) {
     // Optional arguments:
@@ -2716,7 +2718,9 @@ int main(int argc, char** argv) {
     }
 #endif
 
+#if defined(_WIN32) || defined(_WIN64)
     SetUnhandledExceptionFilter(CrashHandler);
+#endif
 
     ApplyStressScale();
 

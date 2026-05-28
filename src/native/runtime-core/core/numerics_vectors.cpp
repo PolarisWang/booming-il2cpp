@@ -1,5 +1,7 @@
+#include <chaos/native_types.h>
+#include <cmath>
+
 namespace chaos::il2cpp::runtime_core {
-namespace {
 
 static RuntimeNumericsVector2Carrier MakeVector2(float x, float y) { return RuntimeNumericsVector2Carrier{ x, y }; }
 static RuntimeNumericsVector3Carrier MakeVector3(float x, float y, float z) { return RuntimeNumericsVector3Carrier{ x, y, z }; }
@@ -177,7 +179,6 @@ RuntimeNumericsVector4Carrier Vector4Transform(RuntimeNumericsVector4Carrier v, 
 bool Vector4TryCopyTo(RuntimeNumericsVector4Carrier v, float* d, CHAOS_IL2CPP_SIZE dl, CHAOS_IL2CPP_SIZE si) { return VectorTryCopyToRaw(v, d, dl, si); }
 
 // Vector64/128/256/512 — declared in runtime_core.h, require external linkage.
-}  // anonymous namespace
 
 RuntimeIntrinsicVector64Carrier Vector64Reinterpret(RuntimeIntrinsicVector64Carrier v) { return v; }
 RuntimeIntrinsicVector128Carrier Vector128Reinterpret(RuntimeIntrinsicVector128Carrier v) { return v; }

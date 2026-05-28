@@ -36,11 +36,15 @@ struct DeoptTlsState {
 extern thread_local DeoptTlsState g_jit_deopt_state;
 
 /// Emit inline x64 TLS access sequence to load &tls_tlab into RAX.
+/// Windows only — uses GS-segment TLS (__tls_index / __readgsqword).
+/// On Linux/Mac, inline TLAB access is not emitted.
+#if defined(_WIN32) || defined(_WIN64)
 void EmitLoadTlsTlab(CodeBuffer& buf) noexcept;
-
-/// Initialize cached TLS info (__tls_index, tls_tlab offset) for use by
-/// JIT-emitted inline TLS access.  Must be called once during runtime init.
 void InitTlsTlabInfo() noexcept;
+#else
+inline void EmitLoadTlsTlab(CodeBuffer&) noexcept {}
+inline void InitTlsTlabInfo() noexcept {}
+#endif
 
 }  // namespace chaos::il2cpp::jit
 

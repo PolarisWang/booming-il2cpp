@@ -227,7 +227,7 @@ Gen1CollectionResult GcGen1Collection() {
 
     // Tier 1: Very small span — promote all with no counting needed.
     if (span <= 4096) {
-        CHAOS_IL2CPP_LOG_DEBUG("CRAG", "gen1_early_exit: span=%llu bytes",
+        CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "gen1_early_exit: span=%llu bytes",
             static_cast<unsigned long long>(span));
         auto& tiny_layout = GcLayoutRegistry::Instance();
         char* tiny_cur = s_begin;
@@ -299,7 +299,7 @@ Gen1CollectionResult GcGen1Collection() {
         result.objects_in_gen1 = ec_count;
 
         if (ec_count <= kGen1MinPromoteThreshold) {
-            CHAOS_IL2CPP_LOG_DEBUG("CRAG", "gen1_early_exit: objects=%llu span=%llu",
+            CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "gen1_early_exit: objects=%llu span=%llu",
                 static_cast<unsigned long long>(ec_count),
                 static_cast<unsigned long long>(span));
             char* ec2_cur = s_begin;
@@ -385,7 +385,7 @@ Gen1CollectionResult GcGen1Collection() {
                 result.bytes_promoted += obj_size;
             } else {
                 result.promotion_failed = true;
-                CHAOS_IL2CPP_LOG_ERROR("CRAG", "gen1 drain: Gen2 OOM at object offset={0}",
+                CHAOS_IL2CPP_LOG_ERROR_M("CRAG", "gen1 drain: Gen2 OOM at object offset={0}",
                     static_cast<unsigned long long>(drain_cur - s_begin));
             }
             drain_cur += obj_size;

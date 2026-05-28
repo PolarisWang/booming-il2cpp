@@ -22,6 +22,9 @@ static_assert(sizeof(int32_t) == 4, "int32_t must be 4 bytes");
 #elif defined(__linux__)
   #include <sys/mman.h> // munmap
   #include <sched.h>    // sched_yield
+  // GCC unwinder .eh_frame registration — no header provides this on all GCC versions.
+  extern "C" void __register_frame(const void*);
+  extern "C" void __deregister_frame(const void*);
 #endif
 
 // ── kSpinLimitHard — If the spinlock spins this many iterations without
@@ -326,8 +329,10 @@ static void OnGcSafepoint(chaos::il2cpp::runtime_core::GcEvent /*event*/,
 // and T4 demotion callbacks (VEH is Windows-specific).
 // ═══════════════════════════════════════════════════════════════════════════
 
+#if defined(_WIN32) || defined(_WIN64)
 // Forward declaration for VEH callback (defined later in this TU).
 static LONG WINAPI JitVectoredExceptionHandler(EXCEPTION_POINTERS* ep) noexcept;
+#endif
 
 void WinSehHandler::Initialize() noexcept {
 #if defined(_WIN32) || defined(_WIN64)

@@ -43,7 +43,7 @@ void GcNumaInit() noexcept {
     }
 
     g_numa_node_count.store(count, std::memory_order_release);
-    CHAOS_IL2CPP_LOG_INFO("NUMA", "numa_init count=%d", count);
+    CHAOS_IL2CPP_LOG_INFO_M("NUMA", "numa_init count=%d", count);
 }
 
 int GcNumaNodeCount() noexcept {
@@ -127,7 +127,7 @@ void* GcNumaVirtualAlloc(CHAOS_IL2CPP_SIZE size, int node) noexcept {
     int mbind_ret = ::mbind(mem, size, MPOL_BIND, &mask,
                             sizeof(mask) * 8, MPOL_MF_STRICT | MPOL_MF_MOVE);
     if (mbind_ret != 0) {
-        CHAOS_IL2CPP_LOG_DEBUG("NUMA", "mbind(node=%d, size=%zu) failed: errno=%d",
+        CHAOS_IL2CPP_LOG_DEBUG_M("NUMA", "mbind(node=%d, size=%zu) failed: errno=%d",
                                 node, size, errno);
     }
     return mem;

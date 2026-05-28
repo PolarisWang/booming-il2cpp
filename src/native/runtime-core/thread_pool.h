@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <atomic>
 #include <chrono>
+#include <cmath>
 #include <deque>
 #include <chaos/native_types.h>
 

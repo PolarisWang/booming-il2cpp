@@ -4,7 +4,6 @@
 
 #include <cstdio>
 #include <atomic>
-#include <intrin.h>
 
 #include "core/gc_alloc_stubs.h"
 #include "gc_bgc.h"
@@ -596,7 +595,7 @@ void ResizeGen1Region(CHAOS_IL2CPP_SIZE new_size) {
     auto* new_gen1 = RegionManager::Instance().AllocateRegion(
         RegionKind::REGION_GEN1, new_size);
     if (new_gen1 == nullptr) {
-        CHAOS_IL2CPP_LOG_WARN("CRAG", "gen1_resize_oom size={0}",
+        CHAOS_IL2CPP_LOG_WARN_M("CRAG", "gen1_resize_oom size={0}",
             static_cast<unsigned long long>(new_size));
         return;
     }
@@ -632,7 +631,7 @@ TLAB TlabClaimFromYoungGen() noexcept {
     } else if (expected == 1) {
         // Another thread is initializing — spin-wait.
         while (s_young_gen_state.load(std::memory_order_acquire) != 2) {
-            _mm_pause();
+            CHAOS_IL2CPP_PAUSE_HINT();
         }
     }
 
@@ -1379,7 +1378,7 @@ extern "C" void chaos_gc_keepalive(CHAOS_IL2CPP_INTPTR obj) noexcept {
 /// buffers, P/Invoke buffers, GCHandleType.Pinned targets).
 /// ABI export: callable from managed/NativeAOT code.
 extern "C" void* chaos_gc_allocate_pinned(CHAOS_IL2CPP_SIZE size) noexcept {
-    CHAOS_IL2CPP_LOG_DEBUG("CRAG", "chaos_gc_allocate_pinned size={0}",
+    CHAOS_IL2CPP_LOG_DEBUG_M("CRAG", "chaos_gc_allocate_pinned size={0}",
         static_cast<unsigned long long>(size));
     return GcAllocatePinned(size);
 }

@@ -26,10 +26,9 @@
 #include <stdexcept>
 #include <csignal>
 #include <cstddef>
-#define NOMINMAX
-#include <windows.h>
 
 #include <chaos/native_types.h>
+#include <chaos/seh_compat.h>
 #include "gc/gc_bgc.h"
 #include "gc_region.h"
 #include "gc_scheduler.h"
@@ -474,7 +473,7 @@ static uint64_t CountTree(TreeNode* node) {
 
 static void TreeWalkThread(TreeNode* my_tree, std::atomic<bool>* start_signal,
                            std::atomic<bool>* survived_flag, int thread_id) {
-    __try {
+    CHAOS_SEH_TRY {
     threading::RegisterThread(threading::AllocateThreadId(), nullptr);
 
     // Keep root alive via volatile for BGC conservative stack scan.
@@ -518,9 +517,9 @@ static void TreeWalkThread(TreeNode* my_tree, std::atomic<bool>* start_signal,
     survived_flag->store(ok, std::memory_order_release);
 
     threading::UnregisterThread();
-    } __except(EXCEPTION_EXECUTE_HANDLER) {
+    } CHAOS_SEH_EXCEPT(EXCEPTION_EXECUTE_HANDLER) {
         printf("  CRASH[%d]: thread crashed with exception 0x%lx\n",
-               thread_id, GetExceptionCode());
+               thread_id, CHAOS_SEH_GET_CODE());
         fflush(stdout);
         survived_flag->store(false, std::memory_order_release);
         threading::UnregisterThread();

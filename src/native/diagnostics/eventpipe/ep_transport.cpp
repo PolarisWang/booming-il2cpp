@@ -3,6 +3,8 @@
 // Windows Named Pipe server with OVERLAPPED I/O.
 // Single-client (one receiver at a time).  If the client disconnects,
 // the server resets and waits for a new connection.
+//
+// Linux: stubbed out — EventPipe transport is a no-op.
 
 #include "ep_transport.h"
 
@@ -17,6 +19,8 @@
 #include <thread>
 
 namespace chaos::il2cpp::diagnostics {
+
+#if defined(_WIN32) || defined(_WIN64)
 
 namespace {
 
@@ -197,6 +201,15 @@ void EpTransportWrite(const void* data, uint32_t data_size) noexcept {
 bool EpTransportIsConnected() noexcept {
     return g_connected.load(std::memory_order_acquire);
 }
+
+#else  // Linux stub
+
+bool EpTransportInitialize(uint32_t /*pid*/) noexcept { return false; }
+void EpTransportShutdown() noexcept {}
+void EpTransportWrite(const void* /*data*/, uint32_t /*data_size*/) noexcept {}
+bool EpTransportIsConnected() noexcept { return false; }
+
+#endif  // _WIN32 || _WIN64
 
 }  // namespace chaos::il2cpp::diagnostics
 

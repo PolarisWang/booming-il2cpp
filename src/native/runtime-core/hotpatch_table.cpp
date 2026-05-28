@@ -3,7 +3,15 @@
 #include <algorithm>
 #include <atomic>
 #include <cstring>
+#if defined(_MSC_VER)
 #include <intrin.h>
+#else
+// GCC/Clang __sync_* builtins provide equivalent atomic ops on uint32_t.
+// On LP64 Linux, long is 64-bit, so operate on uint32_t* directly.
+#define _InterlockedAnd(ptr, val)    __sync_fetch_and_and(reinterpret_cast<volatile uint32_t*>(ptr), static_cast<uint32_t>(val))
+#define _InterlockedOr(ptr, val)     __sync_fetch_and_or(reinterpret_cast<volatile uint32_t*>(ptr), static_cast<uint32_t>(val))
+#define _InterlockedIncrement(ptr)   __sync_add_and_fetch(reinterpret_cast<volatile uint32_t*>(ptr), 1u)
+#endif
 
 namespace chaos::il2cpp::runtime_core {
 

@@ -286,6 +286,7 @@ CHAOS_IL2CPP_SIZE LargeObjectHeap::Sweep() {
 
         // DIAGNOSTIC: check if this address looks like a valid VirtualAlloc
         // before freeing. Prevents crash from double-free or invalid pointer.
+#if defined(_WIN32) || defined(_WIN64)
         MEMORY_BASIC_INFORMATION mbi;
         if (VirtualQuery(excess, &mbi, sizeof(mbi)) == sizeof(mbi) &&
             mbi.State == MEM_COMMIT && mbi.AllocationBase == excess) {
@@ -297,6 +298,11 @@ CHAOS_IL2CPP_SIZE LargeObjectHeap::Sweep() {
                 static_cast<unsigned long long>(excess->payload_size),
                 static_cast<unsigned long>(mbi.State));
         }
+#else
+        // Linux/macOS: munmap is safe on any mapped address, and mmap'd
+        // segments are always valid here. Skip the VirtualQuery check.
+        FreeSegment(excess);
+#endif
     }
 
     return reclaimed;

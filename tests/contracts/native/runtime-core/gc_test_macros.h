@@ -45,12 +45,16 @@
 // B-family: simple CHECK(cond, msg)
 // ════════════════════════════════════════════════════════════════════════════
 
-#define GC_CHECK(cond, msg) do {                                           \
+#define GC_CHECK(cond, ...) do {                                              \
     if (!(cond)) {                                                          \
-        printf("  FAIL [%s:%d]: %s\n", __FILE__, __LINE__, msg);           \
+        printf("  FAIL [%s:%d]: ", __FILE__, __LINE__);                     \
+        printf(__VA_ARGS__);                                                \
+        printf("\n");                                                       \
         ++g_failures;                                                       \
     } else {                                                                \
-        printf("  PASS: %s\n", msg);                                        \
+        printf("  PASS: ");                                                 \
+        printf(__VA_ARGS__);                                                \
+        printf("\n");                                                       \
     }                                                                       \
 } while(0)
 
@@ -66,6 +70,6 @@
 #define FAIL(msg)   GC_FAIL(msg)
 
 // B-family backward compat
-#define CHECK(cond, msg) GC_CHECK(cond, msg)
+#define CHECK(cond, ...) GC_CHECK(cond, __VA_ARGS__)
 
 #endif  // CHAOS_GC_TEST_MACROS_H_

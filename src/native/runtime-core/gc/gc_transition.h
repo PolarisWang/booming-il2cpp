@@ -18,6 +18,7 @@
 //   GC_TRANSITION_TO_COOPERATIVE();
 
 #include "thread_state.h"
+#include <chaos/compiler_hints.h>
 #include <atomic>
 
 namespace chaos::il2cpp::runtime_core {
@@ -27,7 +28,7 @@ constexpr uint32_t kGcModePreemptive  = 1u;
 
 /// Transition from COOPERATIVE to PREEMPTIVE mode.
 /// Must be called before entering native code that may block.
-__forceinline void GcTransitionToPreemptive() noexcept {
+CHAOS_IL2CPP_FORCEINLINE void GcTransitionToPreemptive() noexcept {
     auto* thread = threading::tls_this_thread;
     if (thread == nullptr) return;
     thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
@@ -37,7 +38,7 @@ __forceinline void GcTransitionToPreemptive() noexcept {
 
 /// Transition from PREEMPTIVE to COOPERATIVE mode.
 /// Must be called after returning from native code.
-__forceinline void GcTransitionToCooperative() noexcept {
+CHAOS_IL2CPP_FORCEINLINE void GcTransitionToCooperative() noexcept {
     auto* thread = threading::tls_this_thread;
     if (thread == nullptr) return;
     thread->gc_mode.store(kGcModeCooperative, std::memory_order_release);
