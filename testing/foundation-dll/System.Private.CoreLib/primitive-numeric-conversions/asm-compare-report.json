@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/primitive/numeric/conversions",
-  "capturedAt": "2026-05-27T22:06:15",
+  "capturedAt": "2026-05-28T13:02:48",
   "batchMode": true,
   "summary": {
     "totalMethods": 15,
@@ -11,15 +11,15 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 48,
-      "avg": 44.3,
-      "total": 664
+      "max": 44,
+      "avg": 44.0,
+      "total": 660
     },
     "aotInstructionCount": {
       "min": 9,
-      "max": 13,
-      "avg": 9.9,
-      "total": 148
+      "max": 10,
+      "avg": 9.3,
+      "total": 140
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 19
     },
-    "overallIrExpansionRatio": 0.22,
-    "averageExpansionRatio": 0.22,
-    "maxExpansionRatio": 0.3,
+    "overallIrExpansionRatio": 0.21,
+    "averageExpansionRatio": 0.21,
+    "maxExpansionRatio": 0.23,
     "minExpansionRatio": 0.2
   },
   "methodResults": [
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,7 +52,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_0",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -168,8 +168,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -180,7 +180,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_4",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -200,8 +200,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -212,7 +212,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_5",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -232,8 +232,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -244,7 +244,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_6",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -337,15 +337,15 @@
       "shortName": "Subject_9",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 48,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 10,
-        "ratio": 0.21,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 48
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -476,8 +476,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -488,7 +488,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_13",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -508,8 +508,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -520,7 +520,7 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_14",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {

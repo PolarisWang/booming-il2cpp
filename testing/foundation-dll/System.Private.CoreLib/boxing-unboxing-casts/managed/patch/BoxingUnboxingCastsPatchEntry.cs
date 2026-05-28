@@ -45,9 +45,8 @@ public static partial class BoxingUnboxingCastsPatchEntry
     }
 
     // [6] System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
-    public static int Subject_6()
+    public static void CustomEntryMethod6()
     {
-        return unchecked((int)(0xB0000000u + 6));
     }
 
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
@@ -86,7 +85,7 @@ public static partial class BoxingUnboxingCastsPatchEntry
                 case 3: Subject_3(); break;
                 case 4: Subject_4(); break;
                 case 5: Subject_5(); break;
-                case 6: Subject_6(); break;
+                case 6: CustomEntryMethod6(); break;
                 case 7: Subject_7(); break;
                 case 8: Subject_8(); break;
                 case 9: Subject_9(); break;

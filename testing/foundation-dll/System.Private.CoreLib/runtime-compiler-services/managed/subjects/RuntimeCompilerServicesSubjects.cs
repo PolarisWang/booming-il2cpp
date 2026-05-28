@@ -6,8 +6,10 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 public static partial class RuntimeCompilerServicesSubjects
 {
@@ -17,21 +19,21 @@ public static partial class RuntimeCompilerServicesSubjects
     // [0] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)
     public static void Subject_0()
     {
-        try { var _ = RuntimeHelpers.GetHashCode(null!); }
+        try { _ = RuntimeHelpers.GetHashCode(null!); }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)
     public static void Subject_1()
     {
-        try { var _ = ((RuntimeHelpers.Equals(null!, null!)) ? 1 : 0); }
+        try { _ = ((RuntimeHelpers.Equals(null!, null!)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     public static void Subject_2()
     {
-        try { var _ = ((RuntimeHelpers.GetObjectValue(null!)).GetHashCode()); }
+        try { _ = ((RuntimeHelpers.GetObjectValue(null!)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
@@ -63,7 +65,7 @@ public static partial class RuntimeCompilerServicesSubjects
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.Runtime.CompilerServices.FormattableString(System.String,System.Object[])
     public static void Subject_7()
     {
-        try { var _ = ((FormattableStringFactory.Create("hello", Array.Empty<System.Object>())).GetHashCode()); }
+        try { _ = ((FormattableStringFactory.Create("hello", Array.Empty<System.Object>())).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
@@ -77,7 +79,7 @@ public static partial class RuntimeCompilerServicesSubjects
     // [9] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::get_WrappedException:System.Object()
     public static void Subject_9()
     {
-        try { var _ = ((new RuntimeWrappedException(42).WrappedException).GetHashCode()); }
+        try { _ = ((new RuntimeWrappedException(42).WrappedException).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 

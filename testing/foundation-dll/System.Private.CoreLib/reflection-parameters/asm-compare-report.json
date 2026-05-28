@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/parameters",
-  "capturedAt": "2026-05-28T01:28:56",
+  "capturedAt": "2026-05-28T13:54:40",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 9,
-      "max": 13,
-      "avg": 10.7,
-      "total": 107
+      "max": 12,
+      "avg": 10.4,
+      "total": 104
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -29,7 +29,7 @@
     },
     "overallIrExpansionRatio": 0.24,
     "averageExpansionRatio": 0.24,
-    "maxExpansionRatio": 0.3,
+    "maxExpansionRatio": 0.27,
     "minExpansionRatio": 0.2
   },
   "methodResults": [
@@ -188,8 +188,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -200,7 +200,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_4",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {

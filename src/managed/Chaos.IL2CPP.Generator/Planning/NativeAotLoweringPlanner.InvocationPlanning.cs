@@ -1905,9 +1905,17 @@ public sealed partial class NativeAotLoweringPlanner
             case "IsInstanceOfType":
                 if (callIndex < 3) return false;
 
-                if (callIndex < 3) return false;
                 if (!TryGetLdTokenSubjectId(instrs, callIndex - 2, out var typeSubjectId)) return false;
                 if (!IsTypeAotKnown(typeSubjectId)) return false;
+
+                // SAFETY: if the object argument is a ldstr (produces CHAOS_IL2CPP_STRING_ID,
+                // a bit-63 tagged integer), we cannot fold because
+                // ChaosReflectionIsInstanceOfTypePtr calls chaos_object_get_type_info on the
+                // object pointer, which would segfault on a tagged integer.  The non-optimized
+                // virtual dispatch path handles StringId correctly through the managed
+                // Type::IsInstanceOfType implementation.
+                if (callIndex >= 1 && instrs[callIndex - 1].Op == "ldstr")
+                    return false;
 
                 // Collect IlOffsets of dead instructions (ltoken + GetTypeFromHandle for the type arg)
                 var skipOffsets1 = new[]

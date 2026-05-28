@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/generics",
-  "capturedAt": "2026-05-28T01:31:29",
+  "capturedAt": "2026-05-28T13:36:32",
   "batchMode": true,
   "summary": {
     "totalMethods": 12,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 10,
-      "max": 14,
-      "avg": 12.2,
-      "total": 146
+      "max": 12,
+      "avg": 11.2,
+      "total": 134
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 30
     },
-    "overallIrExpansionRatio": 0.28,
-    "averageExpansionRatio": 0.28,
-    "maxExpansionRatio": 0.32,
+    "overallIrExpansionRatio": 0.25,
+    "averageExpansionRatio": 0.25,
+    "maxExpansionRatio": 0.27,
     "minExpansionRatio": 0.23
   },
   "methodResults": [
@@ -240,8 +240,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -252,7 +252,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_5",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -277,8 +277,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -289,7 +289,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_6",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -314,8 +314,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -326,7 +326,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_7",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -351,8 +351,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -363,7 +363,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionGenericsSubjects_ReflectionGenericsSubjects_Subject_8",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {

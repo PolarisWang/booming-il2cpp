@@ -124,16 +124,18 @@ public sealed partial class NativeAotLoweringPlanner
     private sealed class StructuredSlotEmissionContext
     {
         private int _depth;
-        private int _intSlotCount;
-        private int _float64SlotCount;
-        private int _float32SlotCount;
+        private int _peakIntDepth;
+        private int _peakFloat64Depth;
+        private int _peakFloat32Depth;
+        private int _peakInt64Depth;
 
         private readonly List<(string name, SlotType type)> _slotInfo = new();
 
         public int Depth => _depth;
-        public int MaxIntSlots => _intSlotCount;
-        public int MaxFloat64Slots => _float64SlotCount;
-        public int MaxFloat32Slots => _float32SlotCount;
+        public int MaxIntSlots => _peakIntDepth;
+        public int MaxFloat64Slots => _peakFloat64Depth;
+        public int MaxFloat32Slots => _peakFloat32Depth;
+        public int MaxInt64Slots => _peakInt64Depth;
 
         public Dictionary<int, SlotType>? FloatLocalSlots { get; set; }
 
@@ -141,10 +143,18 @@ public sealed partial class NativeAotLoweringPlanner
         {
             string slotName = type switch
             {
-                SlotType.Float64 => FormatDoubleSlotName(_float64SlotCount++),
-                SlotType.Float32 => FormatFloatSlotName(_float32SlotCount++),
-                _ => FormatStructuredSlotName(_intSlotCount++),
+                SlotType.Float64 => FormatDoubleSlotName(_depth),
+                SlotType.Float32 => FormatFloatSlotName(_depth),
+                SlotType.Int64 => FormatInt64SlotName(_depth),
+                _ => FormatStructuredSlotName(_depth),
             };
+            // Track peak depth per type (depth+1 because depth is pre-push)
+            int newDepth = _depth + 1;
+            if (type == SlotType.Float64) _peakFloat64Depth = Math.Max(_peakFloat64Depth, newDepth);
+            else if (type == SlotType.Float32) _peakFloat32Depth = Math.Max(_peakFloat32Depth, newDepth);
+            else if (type == SlotType.Int64) _peakInt64Depth = Math.Max(_peakInt64Depth, newDepth);
+            else _peakIntDepth = Math.Max(_peakIntDepth, newDepth);
+
             if (_depth < _slotInfo.Count)
                 _slotInfo[_depth] = (slotName, type);
             else
@@ -157,7 +167,7 @@ public sealed partial class NativeAotLoweringPlanner
         {
             if (_depth <= 0)
             {
-                System.Console.Error.WriteLine($"DIAG: PopValue underflow depth={_depth} slotInfo.Cnt={_slotInfo.Count} intSlots={_intSlotCount} f64={_float64SlotCount} f32={_float32SlotCount}");
+                System.Console.Error.WriteLine($"DIAG: PopValue underflow depth={_depth} slotInfo.Cnt={_slotInfo.Count} peakInt={_peakIntDepth} f64={_peakFloat64Depth} f32={_peakFloat32Depth} i64={_peakInt64Depth}");
                 throw new InvalidOperationException("structured slot stack underflow.");
             }
 
@@ -202,6 +212,7 @@ public sealed partial class NativeAotLoweringPlanner
     private static string FormatStructuredSlotName(int slotIndex) => $"_s{slotIndex}";
     private static string FormatDoubleSlotName(int slotIndex) => $"_d{slotIndex}";
     private static string FormatFloatSlotName(int slotIndex) => $"_f{slotIndex}";
+    private static string FormatInt64SlotName(int slotIndex) => $"_i{slotIndex}";
 
     private void EmitStructuredMethodReturn(StringBuilder builder, AotCoreIrAbiSlotArtifact returnAbi, string indentation)
     {
@@ -245,7 +256,11 @@ public sealed partial class NativeAotLoweringPlanner
                     builder.AppendLine(indentation + $"return ChaosLoadFloat64({valueExpression});");
                 return;
             case AotCoreIrAbiCarrierKind.Int64:
-                builder.AppendLine(indentation + $"return ChaosLoadInt64({valueExpression});");
+                // Typed slot (_iN) is already an int64_t — return directly
+                if (valueExpression.StartsWith("_i", StringComparison.Ordinal))
+                    builder.AppendLine(indentation + $"return {valueExpression};");
+                else
+                    builder.AppendLine(indentation + $"return ChaosLoadInt64({valueExpression});");
                 return;
             case AotCoreIrAbiCarrierKind.UInt64:
                 builder.AppendLine(indentation + $"return chaos_load_uint64({valueExpression});");
@@ -310,7 +325,7 @@ public sealed partial class NativeAotLoweringPlanner
         _activeStructuredSlotContext.Discard(count);
     }
 
-    private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, string indentation)
+    private static void EmitStructuredSlotDeclarations(StringBuilder builder, int maxIntSlots, int maxFloat64Slots, int maxFloat32Slots, int maxInt64Slots, string indentation)
     {
         for (int i = 0; i < maxIntSlots; i++)
             builder.AppendLine($"{indentation}CHAOS_IL2CPP_INTPTR {FormatStructuredSlotName(i)};");
@@ -318,6 +333,8 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine($"{indentation}double {FormatDoubleSlotName(i)};");
         for (int i = 0; i < maxFloat32Slots; i++)
             builder.AppendLine($"{indentation}float {FormatFloatSlotName(i)};");
+        for (int i = 0; i < maxInt64Slots; i++)
+            builder.AppendLine($"{indentation}CHAOS_IL2CPP_INT64 {FormatInt64SlotName(i)};");
     }
 
     // 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
@@ -1124,11 +1141,97 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 _hoistedArrayBaseSlots = invariantArraySlots;
                 _slotVarToLocalSlot = new Dictionary<string, int>();
+                builder.AppendLine(bodyIndent + "{");
                 foreach (var kvp in invariantArraySlots)
                 {
                     int slot = kvp.Key;
                     string basePtr = kvp.Value;
                     builder.AppendLine(bodyIndent + $"auto* {basePtr} = chaos_array_get_elements(reinterpret_cast<chaos_managed_array*>(chaos_locals[{slot}]));");
+                }
+            }
+        }
+
+        // ---- Invariant local hoisting (E6) ----
+        // Hoist ldloc's of slots that are never stloc'd inside the loop body.
+        var prevHoistedInvariantLocals = _hoistedInvariantLocals;
+        _hoistedInvariantLocals = null;
+        if (prevHoistedInvariantLocals == null && bodyInstrs3.Count > 0)
+        {
+            var readSlots = new HashSet<int>();
+            var writtenSlots2 = new HashSet<int>();
+            CollectWrittenSlots(dw.Body, writtenSlots2);
+            foreach (var instr in bodyInstrs3)
+            {
+                if (instr.Op == "ldloc" && TryGetIntOperand(instr, out int ldSlot))
+                    readSlots.Add(ldSlot);
+            }
+            readSlots.ExceptWith(writtenSlots2);
+            if (hoistedIVSlot.HasValue)
+                readSlots.Remove(hoistedIVSlot.Value);
+            if (_accumulatorSlots is not null)
+            {
+                foreach (var accSlot in _accumulatorSlots.Keys)
+                    readSlots.Remove(accSlot);
+            }
+            if (readSlots.Count > 0)
+            {
+                var hoisted = new Dictionary<int, (string VarName, SlotType SlotType)>();
+                foreach (int slot in readSlots.OrderBy(s => s))
+                {
+                    string varName = $"_hld_{slot}";
+                    SlotType slotType;
+                    string declType;
+                    string loadExpr;
+                    if (_int64LocalSlots is not null && _int64LocalSlots.Contains(slot))
+                    {
+                        slotType = SlotType.Int64;
+                        declType = "CHAOS_IL2CPP_INT64";
+                        loadExpr = $"ChaosLoadInt64(chaos_locals[{slot}])";
+                    }
+                    else if (_floatLocalSlots is not null && _floatLocalSlots.TryGetValue(slot, out var fType) && fType != SlotType.NativeInt)
+                    {
+                        slotType = fType;
+                        declType = fType == SlotType.Float64 ? "double" : "float";
+                        string wrapper = fType == SlotType.Float64 ? "ChaosLoadFloat64" : "ChaosLoadFloat32";
+                        loadExpr = $"{wrapper}(chaos_locals[{slot}])";
+                    }
+                    else if (_structLocalSlots is not null && _structLocalSlots.Contains(slot))
+                    {
+                        slotType = SlotType.NativeInt;
+                        declType = "CHAOS_IL2CPP_INTPTR";
+                        loadExpr = $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[{slot}])";
+                    }
+                    else
+                    {
+                        slotType = SlotType.NativeInt;
+                        declType = "CHAOS_IL2CPP_INTPTR";
+                        loadExpr = $"chaos_locals[{slot}]";
+                    }
+                    builder.AppendLine(bodyIndent + $"{declType} {varName} = {loadExpr};");
+                    hoisted[slot] = (varName, slotType);
+                }
+                _hoistedInvariantLocals = hoisted;
+            }
+        }
+
+        // ---- Accumulator promotion (E7) ----
+        var prevAccumulatorSlots = _accumulatorSlots;
+        _accumulatorSlots = null;
+        if (prevAccumulatorSlots == null && prevHoistedIVs == null)
+        {
+            var accBodyInstrs = new List<AotCoreIrInstructionArtifact>();
+            CollectInstructions(dw.Body, accBodyInstrs);
+            if (dw.LatchInstructions != null)
+                accBodyInstrs.AddRange(dw.LatchInstructions);
+            var accResult = DetectAccumulatorSlots(accBodyInstrs);
+            if (accResult is { Count: > 0 })
+            {
+                _accumulatorSlots = accResult;
+                foreach (var kvp in accResult)
+                {
+                    int slot = kvp.Key;
+                    string accName = kvp.Value;
+                    builder.AppendLine(bodyIndent + $"CHAOS_IL2CPP_INT64 {accName} = ChaosLoadInt64(chaos_locals[{slot}]);");
                 }
             }
         }
@@ -1228,11 +1331,21 @@ public sealed partial class NativeAotLoweringPlanner
 
         if (hoistedIVSlot.HasValue)
             builder.AppendLine(indentation + $"chaos_locals[{hoistedIVSlot.Value}] = _iv_{hoistedIVSlot.Value};");
+        // E7: Write back accumulator variables to chaos_locals after the loop
+        if (_accumulatorSlots is { Count: > 0 })
+        {
+            foreach (var kvp in _accumulatorSlots)
+                builder.AppendLine(indentation + $"chaos_locals[{kvp.Key}] = ChaosStoreInt64({kvp.Value});");
+        }
         builder.AppendLine(indentation + "} while (true);");
+        if (_hoistedArrayBaseSlots is { Count: > 0 })
+            builder.AppendLine(bodyIndent + "}");
         _hoistedIVs = prevHoistedIVs;
         _loopArrayAccessSkipOffsets = null;
         _hoistedArrayBaseSlots = null;
         _slotVarToLocalSlot = null;
+        _hoistedInvariantLocals = prevHoistedInvariantLocals;
+        _accumulatorSlots = prevAccumulatorSlots;
     }
 
     // 鈹€鈹€ Switch 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
@@ -2639,6 +2752,67 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// Scans instructions for the accumulator promotion pattern:
+    /// A local slot that is read exactly once (first access) and written exactly
+    /// once (last access) in the loop body. This is a loop-carried dependency
+    /// (e.g. sum += array[i]) that can be promoted to a C++ local variable
+    /// to eliminate chaos_locals[N] memory round-trips per iteration.
+    /// Only 64-bit integer accumulators are promoted (int32 IVs are already
+    /// handled by D2 IV hoisting in the do-while emitter).
+    /// Returns a map: slot number → accumulator variable name (_acc_N).
+    /// </summary>
+    private static Dictionary<int, string>? DetectAccumulatorSlots(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+    {
+        var readCount = new Dictionary<int, int>();
+        var writeCount = new Dictionary<int, int>();
+
+        foreach (var instr in instructions)
+        {
+            if (instr.Op == "ldloc" && TryGetIntOperand(instr, out int ldSlot))
+                readCount[ldSlot] = readCount.GetValueOrDefault(ldSlot) + 1;
+            else if (instr.Op == "stloc" && TryGetIntOperand(instr, out int stSlot))
+                writeCount[stSlot] = writeCount.GetValueOrDefault(stSlot) + 1;
+        }
+
+        var result = new Dictionary<int, string>();
+        foreach (int slot in readCount.Keys)
+        {
+            // Criteria: read exactly once, written exactly once.
+            // This means the slot value is loaded from chaos_locals at loop entry
+            // and stored back at loop exit — a loop-carried dependency pattern
+            // that can be promoted to a C++ local variable.
+            if (readCount.TryGetValue(slot, out int rc) && rc == 1 &&
+                writeCount.TryGetValue(slot, out int wc) && wc == 1)
+            {
+                result[slot] = $"_acc_{slot}";
+            }
+        }
+
+        return result.Count > 0 ? result : null;
+    }
+
+    /// <summary>
+    /// Tries to extract an integer operand from an IR instruction.
+    /// Handles both direct int and JSON-deserialized JsonElement operands.
+    /// </summary>
+    private static bool TryGetIntOperand(AotCoreIrInstructionArtifact instruction, out int value)
+    {
+        object? operand = instruction.Operand;
+        if (operand is int intVal)
+        {
+            value = intVal;
+            return true;
+        }
+        if (operand is System.Text.Json.JsonElement { ValueKind: System.Text.Json.JsonValueKind.Number } je && je.TryGetInt32(out int jeVal))
+        {
+            value = jeVal;
+            return true;
+        }
+        value = 0;
+        return false;
     }
 
     /// <summary>

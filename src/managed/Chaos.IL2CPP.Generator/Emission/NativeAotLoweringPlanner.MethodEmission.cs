@@ -203,7 +203,7 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		if (usesStructuredSlots && slotContext != null)
 		{
-			EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, "	");
+			EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots, "	");
 			if (slotContext.FloatLocalSlots is { Count: > 0 })
 			{
 				foreach (var (slot, type) in slotContext.FloatLocalSlots.OrderBy(kv => kv.Key))

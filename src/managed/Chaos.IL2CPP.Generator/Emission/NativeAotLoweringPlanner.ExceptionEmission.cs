@@ -55,6 +55,11 @@ public sealed partial class NativeAotLoweringPlanner
 	// chaos_locals[] traffic, keeping the IV in a register across loop iterations.
 	private Dictionary<int, string>? _hoistedIVs;
 
+	// Hoisted invariant locals for do-while loops: maps chaos_locals slot → C++ local variable name.
+	// These locals are ldloc'd but never stloc'd inside the loop, so the load is hoisted
+	// before the loop, eliminating per-iteration chaos_locals[] read traffic.
+	private Dictionary<int, (string VarName, SlotType SlotType)>? _hoistedInvariantLocals;
+
 	// Hoisted array base pointers for do-while loops: maps chaos_locals slot → C++ base pointer variable name.
 	// When set, array load/store for these slots use direct base pointer access instead of
 	// calling chaos_array_get_elements(reinterpret_cast<chaos_managed_array*>(...)) every iteration.
@@ -62,6 +67,10 @@ public sealed partial class NativeAotLoweringPlanner
 	// Tracks slot variable names (_sN) to their chaos_locals source slot index.
 	// Used by EmitLinearArrayLoad/Store to resolve hoisted array base pointers.
 	private Dictionary<string, int>? _slotVarToLocalSlot;
+
+	// Accumulator variables for do-while loops: maps chaos_locals slot → C++ local variable name.
+	// These are loop-carried dependency chains (ldloc->add/sub->stloc) promoted to C++ locals.
+	private Dictionary<int, string>? _accumulatorSlots;
 
 	private void ResetArrayCheckCache()
 	{
@@ -716,7 +725,11 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 		case "ldc.i8":
 		{
-			EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64({FormatInt64Literal(GetRequiredInt64Operand(instruction))})");
+			string _i8lit = FormatInt64Literal(GetRequiredInt64Operand(instruction));
+			if (_activeStructuredSlotContext is not null)
+				EmitEvalStackPush(builder, indentation, _i8lit, SlotType.Int64);
+			else
+				EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64({_i8lit})");
 			PushSlotType(SlotType.Int64);
 			break;
 		}
@@ -747,6 +760,20 @@ public sealed partial class NativeAotLoweringPlanner
 						case "ldloc":
 		{
 			int ldlocSlot = GetRequiredIntOperand(instruction);
+			// E6: hoisted invariant local check (before all other branches)
+			if (_hoistedInvariantLocals is not null && _hoistedInvariantLocals.TryGetValue(ldlocSlot, out var _hldInfo))
+			{
+				EmitEvalStackPush(builder, indentation, _hldInfo.VarName, _hldInfo.SlotType);
+				PushSlotType(_hldInfo.SlotType);
+				break;
+			}
+			// E7: accumulator slot check (bypasses chaos_locals load)
+			if (_accumulatorSlots is not null && _accumulatorSlots.TryGetValue(ldlocSlot, out var _accName))
+			{
+				EmitEvalStackPush(builder, indentation, _accName, SlotType.Int64);
+				PushSlotType(SlotType.Int64);
+				break;
+			}
 			if (_structLocalSlots is not null && _structLocalSlots.Contains(ldlocSlot))
 				EmitEvalStackPush(builder, indentation, $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&chaos_locals[{ldlocSlot}])");
 			else if (_floatLocalSlots is not null && _floatLocalSlots.TryGetValue(ldlocSlot, out var ldlocType) && ldlocType != SlotType.NativeInt)
@@ -898,11 +925,17 @@ public sealed partial class NativeAotLoweringPlanner
 			{
 				SlotType.Float32 => $"ChaosStoreFloat32({stlocValue})",
 				SlotType.Float64 => $"ChaosStoreFloat64({stlocValue})",
+				SlotType.Int64 => $"ChaosStoreInt64({stlocValue})",
 				_ => stlocValue,
 			};
 			builder.AppendLine($"{indentation}chaos_locals[{GetRequiredIntOperand(instruction)}] = {storedExpr};");
 			// If this slot is a hoisted IV, also update the C++ local
 			int _stlocSlot = GetRequiredIntOperand(instruction);
+			// E7: accumulator slot write-back
+			if (_accumulatorSlots is not null && _accumulatorSlots.TryGetValue(_stlocSlot, out var _accName))
+			{
+			    builder.AppendLine($"{indentation}{_accName} = {stlocValue};");
+			}
 			if (_hoistedIVs is not null && _hoistedIVs.TryGetValue(_stlocSlot, out var _ivName))
 			    builder.AppendLine($"{indentation}{_ivName} = {storedExpr};");
 			break;
@@ -2073,6 +2106,14 @@ public sealed partial class NativeAotLoweringPlanner
 		// The ChaosLoadFloat* wrappers would do double->intptr truncation -> memcpy = garbage.
 		if (_activeStructuredSlotContext is not null && _slotType is SlotType.Float32 or SlotType.Float64)
 			return AccessEvalStackTopExpression();
+			// In structured mode, _iN slots are already int64_t C++ variables.
+			if (_activeStructuredSlotContext is not null && _slotType is SlotType.Int64)
+			{
+				var expr = AccessEvalStackTopExpression();
+				if (expr.StartsWith("_i", StringComparison.Ordinal))
+					return expr;
+				return $"ChaosLoadInt64({expr})";
+			}
 		return _slotType switch
 		{
 			SlotType.Float32 => $"ChaosLoadFloat32({AccessEvalStackTopExpression()})",
@@ -4153,19 +4194,29 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			else if (isInt64Op)
 			{
 				string _rLoadInt64 = _rIsInt64
-				    ? $"ChaosLoadInt64({_rExpr})"
+				    ? (_activeStructuredSlotContext is not null && _rExpr.StartsWith("_i", StringComparison.Ordinal)
+				        ? _rExpr
+				        : $"ChaosLoadInt64({_rExpr})")
 				    : $"static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_INT32>({_rExpr}))";
 				string _lLoadInt64 = _lIsInt64
-				    ? $"ChaosLoadInt64({_lExpr})"
+				    ? (_activeStructuredSlotContext is not null && _lExpr.StartsWith("_i", StringComparison.Ordinal)
+				        ? _lExpr
+				        : $"ChaosLoadInt64({_lExpr})")
 				    : $"static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_INT32>({_lExpr}))";
 				string int64Expr = helperName switch
 				{
-					"ChaosWrapAdd" => $"ChaosStoreInt64({_lLoadInt64} + {_rLoadInt64})",
-					"ChaosWrapSub" => $"ChaosStoreInt64({_lLoadInt64} - {_rLoadInt64})",
-					"ChaosWrapMul" => $"ChaosStoreInt64({_lLoadInt64} * {_rLoadInt64})",
-					_ => $"ChaosStoreInt64({helperName}({_lLoadInt64}, {_rLoadInt64}))",
+					"ChaosWrapAdd" => $"{_lLoadInt64} + {_rLoadInt64}",
+					"ChaosWrapSub" => $"{_lLoadInt64} - {_rLoadInt64}",
+					"ChaosWrapMul" => $"{_lLoadInt64} * {_rLoadInt64}",
+					_ => $"{helperName}({_lLoadInt64}, {_rLoadInt64})",
 				};
-				EmitEvalStackPush(builder, indentation, int64Expr, SlotType.Int64);
+				// In structured mode, EmitEvalStackPush with SlotType.Int64 allocates _iN
+				// which is already CHAOS_IL2CPP_INT64 (int64_t), so no ChaosStoreInt64 wrapper needed.
+				// In pc-dispatch mode, ChaosStoreInt64 is still needed.
+				if (_activeStructuredSlotContext is not null)
+					EmitEvalStackPush(builder, indentation, int64Expr, SlotType.Int64);
+				else
+					EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64({int64Expr})", SlotType.Int64);
 			}
 			else
 			{
