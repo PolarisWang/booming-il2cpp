@@ -73,6 +73,14 @@ class VerificationPipeline:
         ("hotupdate_jit_benchmark", run_hotupdate_jit_bench, "HotUpdate JIT Bench"),
     ]
 
+    # Stages that require actual methods (skipped when codegen reports 0 methods)
+    METHOD_DEPENDENT_STAGES = {
+        "managed_fact", "cross_verify", "fact", "fact_jit",
+        "asm_compare", "microbench", "benchmark",
+        "hotupdate", "hotupdate_aot_benchmark",
+        "hotupdate_jit_fact", "hotupdate_jit_benchmark",
+    }
+
     # Stages that cause fatal early termination on failure
     FATAL_STAGES = {"preflight"}
 
@@ -89,10 +97,18 @@ class VerificationPipeline:
         print(f"Family Verify: {self.ctx.slug} [{self.ctx.assembly}] mode={self.ctx.mode}")
         print(f"{'='*60}\n")
 
+        _zero_methods = False
+
         for idx, (name, runner, label) in enumerate(self.STAGES):
             if name in self.ctx.skip_stages:
                 stages[name] = StageResult(stage=name, status="skipped", summary="Explicitly skipped")
                 print(f"[{idx}/{total}] {label}... skipped")
+                continue
+
+            # Codegen reported 0 methods → skip all method-dependent stages
+            if _zero_methods and name in self.METHOD_DEPENDENT_STAGES:
+                stages[name] = StageResult(stage=name, status="n/a", summary="0 methods — stage not applicable")
+                print(f"[{idx}/{total}] {label}... n/a")
                 continue
 
             print(f"[{idx}/{total}] {label}...")
@@ -105,6 +121,10 @@ class VerificationPipeline:
 
             stages[name] = sr
             print(f"  {sr.status}: {sr.summary}")
+
+            # Track 0-method result from codegen
+            if name == "codegen" and "0 methods" in (sr.summary or ""):
+                _zero_methods = True
 
             # Fatal termination check
             if name in self.FATAL_STAGES and sr.status in ("failed", "error"):
@@ -145,11 +165,11 @@ def _aggregate(ctx: FamilyContext, stages: dict[str, StageResult], total_duratio
     if errors or failures:
         overall_status = "failed"
     else:
-        required_ran = any(
-            name in stages and stages[name].status == "passed"
+        required_ok = any(
+            name in stages and stages[name].status in ("passed", "n/a")
             for name in required
         )
-        overall_status = "passed" if required_ran else "skipped"
+        overall_status = "passed" if required_ok else "skipped"
 
     return UnifiedReport(
         family=ctx.slug,
@@ -170,8 +190,9 @@ def _compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
     passed = sum(1 for sr in stages.values() if sr.status == "passed")
     failed = sum(1 for sr in stages.values() if sr.status == "failed")
     skipped = sum(1 for sr in stages.values() if sr.status == "skipped")
+    na = sum(1 for sr in stages.values() if sr.status == "n/a")
     total = len(stages)
-    non_skipped = total - skipped
+    non_skipped = total - skipped - na
 
     rate = round(passed / non_skipped * 100, 1) if non_skipped else 100.0
 
@@ -180,6 +201,7 @@ def _compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
         "stagesPassed": passed,
         "stagesFailed": failed,
         "stagesSkipped": skipped,
+        "stagesN_A": na,
         "stagesTotal": total,
     }
 

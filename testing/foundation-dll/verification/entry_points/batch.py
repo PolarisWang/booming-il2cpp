@@ -23,6 +23,9 @@ _TESTING_ROOT = _VERIFICATION_ROOT.parent
 SKIP_SLUGS = {
     "aggregation", "filtering", "immutable-array", "immutable-list", "reports",
     "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
+    # Empty families — 0 methods, no subjects, placeholders never populated
+    "array-copy", "enumerator-iteration", "exception-handling",
+    "numerics-bitops", "numerics-floating-point", "text-ebcdic", "value-typebox",
 }
 
 
