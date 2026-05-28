@@ -27,17 +27,18 @@ target_compile_features(chaos::runtime INTERFACE
 # Prebuilt native runtime libraries
 # Includes jit and debugger because the prebuilt runtime libs reference
 # JIT symbols (RegisterJitSehHandler, Compile, etc.) and debugger symbols.
+# CMAKE_STATIC_LIBRARY_SUFFIX resolves to .lib (Windows) or .a (Linux/macOS).
 target_link_libraries(chaos::runtime INTERFACE
-    "${CHAOS_SDK_ROOT}/lib/chaos_common.lib"
-    "${CHAOS_SDK_ROOT}/lib/chaos_support.lib"
-    "${CHAOS_SDK_ROOT}/lib/chaos_fmt.lib"
-    "${CHAOS_SDK_ROOT}/lib/chaos_runtime_core.lib"
-    "${CHAOS_SDK_ROOT}/lib/chaos_interpreter.lib"
-    "${CHAOS_SDK_ROOT}/lib/chaos_bootstrap.lib"
-    "${CHAOS_SDK_ROOT}/lib/chaos_hot_update.lib"
-    "${CHAOS_SDK_ROOT}/lib/chaos_eventpipe.lib"
-    "${CHAOS_SDK_ROOT}/lib/chaos_jit.lib"
-    "${CHAOS_SDK_ROOT}/lib/chaos_debugger.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_common${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/chaos_support${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/chaos_fmt${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/chaos_runtime_core${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/chaos_interpreter${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/chaos_bootstrap${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/chaos_hot_update${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/chaos_eventpipe${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/chaos_jit${CMAKE_STATIC_LIBRARY_SUFFIX}"
+    "${CHAOS_SDK_ROOT}/lib/chaos_debugger${CMAKE_STATIC_LIBRARY_SUFFIX}"
 )
 
 # ── chaos::codegen (STATIC IMPORTED) ────────────────────────────────────
@@ -52,5 +53,5 @@ target_include_directories(chaos::codegen INTERFACE
 )
 
 set_target_properties(chaos::codegen PROPERTIES
-    IMPORTED_LOCATION "${CHAOS_SDK_ROOT}/lib/chaos_codegen.lib"
+    IMPORTED_LOCATION "${CHAOS_SDK_ROOT}/lib/chaos_codegen${CMAKE_STATIC_LIBRARY_SUFFIX}"
 )

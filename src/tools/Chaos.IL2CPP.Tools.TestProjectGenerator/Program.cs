@@ -46,13 +46,16 @@ public static class Program
 
               generate --assemblies <dll1.dll> [dll2.dll ...] --contract <contract.json> --output <dir>
                        [--jit] [--config-tier check|profile|ship] [--platform windows|linux|osx]
-                  Generate standardized C++ test project.
-                  Scans subjects from contract, runs IL2CPP codegen, emits C++ project.
+                  Full project generation: runs IL2CPP codegen, then emits complete C++
+                  project (entry.cpp/h, dispatch.cpp, CMakeLists.txt, CMakePresets.json,
+                  runtime-patchdata.cpp, chaos-sdk cmake, metadata).
+                  Use for standalone projects without the verification pipeline.
 
               emit --contract <contract.json> --output <dir>
                    [--jit] [--config-tier check|profile|ship] [--platform windows|linux|osx]
-                  Emit dispatch.cpp and metadata from contract only (no codegen).
-                  Expects codegen output to already exist in the output directory.
+                  Emit dispatch.cpp and metadata from contract only (no IL2CPP codegen).
+                  Faster than 'generate' — use when codegen output already exists.
+                  Expects codegen output (--sdk-out) to already exist in the output directory.
 
 
             Options:
