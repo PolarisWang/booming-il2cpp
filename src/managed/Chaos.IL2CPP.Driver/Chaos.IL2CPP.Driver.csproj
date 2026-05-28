@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <InternalsVisibleTo Include="Chaos.IL2CPP.Driver.Tests" />
+    <InternalsVisibleTo Include="Chaos.IL2CPP.Tools.TestProjectGenerator" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chaos.IL2CPP.Generator\Chaos.IL2CPP.Generator.csproj" />
