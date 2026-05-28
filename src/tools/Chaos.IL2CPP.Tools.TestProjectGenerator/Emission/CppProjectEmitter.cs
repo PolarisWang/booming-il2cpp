@@ -1,6 +1,8 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Chaos.IL2CPP.Tools.TestProjectGenerator.Codegen;
 using Chaos.IL2CPP.Tools.TestProjectGenerator.Metadata;
+using Chaos.IL2CPP.Tools.TestProjectGenerator.Templating;
 
 namespace Chaos.IL2CPP.Tools.TestProjectGenerator.Emission;
 
@@ -10,30 +12,67 @@ public sealed class CppProjectEmitter
     {
         WriteIndented = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     };
 
-    public void EmitDispatchOnly(string outputDir, IReadOnlyList<SubjectModel> subjects)
+    private static readonly string[] AllTemplateNames =
+    [
+        "TestProject.Entry.cpp.scriban",
+        "TestProject.Entry.h.scriban",
+        "TestProject.Dispatch.cpp.scriban",
+        "TestProject.CMakeLists.txt.scriban",
+        "TestProject.CMakePresets.json.scriban",
+        "TestProject.RuntimePatchdata.cpp.scriban",
+        "TestProject.chaos-config.cmake.scriban",
+        "TestProject.chaos-targets.cmake.scriban",
+        "TestProject.metadata.json.scriban",
+    ];
+
+    /// <summary>
+    /// Emit only dispatch.cpp and metadata (no codegen required).
+    /// Used by the verification pipeline to generate verification_dispatch.generated.cpp
+    /// after entry.exe has been built with sentinel dispatch.
+    /// </summary>
+    public void EmitDispatchOnly(
+        string outputDir,
+        IReadOnlyList<SubjectModel> subjects,
+        bool isJit = false,
+        string configTier = "check",
+        bool isWindows = true)
     {
         Directory.CreateDirectory(outputDir);
 
-        // 1. Generate dispatch.cpp
-        var dispatchEmitter = new DispatchEmitter();
-        var dispatchCode = dispatchEmitter.GenerateDispatch(subjects);
+        var model = new ProjectModelBuilder().Build(
+            subjects: subjects,
+            isJit: isJit,
+            configTier: configTier,
+            isWindows: isWindows,
+            hasPatchData: false,
+            patchDataSize: 0,
+            patchDataHostClass: "",
+            projectName: "entry");
+
+        // verification_dispatch.generated.cpp
+        var dispatchCode = TemplateCatalog.Render("TestProject.Dispatch.cpp.scriban", model);
         File.WriteAllText(Path.Combine(outputDir, "verification_dispatch.generated.cpp"), dispatchCode);
 
-        // 2. Generate metadata/subjects.json
-        var metadataDir = Path.Combine(outputDir, "metadata");
-        Directory.CreateDirectory(metadataDir);
-        var metadataJson = GenerateSubjectsJson(subjects);
-        File.WriteAllText(Path.Combine(metadataDir, "subjects.json"), metadataJson);
+        // metadata/subjects.json
+        GenerateMetadataJson(outputDir, subjects);
     }
 
-    public void Emit(string outputDir, CodegenResult codegen, IReadOnlyList<SubjectModel> subjects)
+    /// <summary>
+    /// Full project emit: copies SDK + codegen outputs, generates all source files
+    /// via Scriban templates, writes CMake build system and metadata.
+    /// </summary>
+    public void Emit(
+        string outputDir,
+        CodegenResult codegen,
+        IReadOnlyList<SubjectModel> subjects,
+        bool isJit = false,
+        string configTier = "check",
+        bool isWindows = true)
     {
-        var emitter = new EntryPointEmitter();
-        var dispatchEmitter = new DispatchEmitter();
-
-        // 1. Copy SDK files from codegen output (everything except generated/) to chaos-sdk/
+        // ── 1. Copy SDK files (everything except generated/) to chaos-sdk/ ──
         var sdkDst = Path.Combine(outputDir, "chaos-sdk");
         Directory.CreateDirectory(sdkDst);
         foreach (var entry in Directory.GetFileSystemEntries(codegen.OutputDir))
@@ -47,7 +86,7 @@ public sealed class CppProjectEmitter
                 File.Copy(entry, dest, overwrite: true);
         }
 
-        // 2. Copy codegen generated files to subjects/
+        // ── 2. Copy codegen generated files to subjects/ ──
         var subjectsDir = Path.Combine(outputDir, "subjects");
         Directory.CreateDirectory(subjectsDir);
         foreach (var genDir in codegen.GeneratedDirs)
@@ -58,117 +97,48 @@ public sealed class CppProjectEmitter
                 File.Copy(file, Path.Combine(subjectsDir, Path.GetFileName(file)), overwrite: true);
         }
 
-        // 3. Generate entry.cpp
-        var entryCode = emitter.GenerateEntryPoint(subjects);
-        File.WriteAllText(Path.Combine(outputDir, "entry.cpp"), entryCode);
+        // ── 3. Build Scriban model ──
+        var model = new ProjectModelBuilder().Build(
+            subjects: subjects,
+            isJit: isJit,
+            configTier: configTier,
+            isWindows: isWindows,
+            hasPatchData: false,
+            patchDataSize: 0,
+            patchDataHostClass: "",
+            projectName: "entry");
 
-        // 4. Generate entry.h
-        File.WriteAllText(Path.Combine(outputDir, "entry.h"), emitter.GenerateEntryHeader());
+        // ── 4. Render templates → output files ──
+        RenderToFile("TestProject.Entry.cpp.scriban", model, outputDir, "entry.cpp");
+        RenderToFile("TestProject.Entry.h.scriban", model, outputDir, "entry.h");
+        RenderToFile("TestProject.Dispatch.cpp.scriban", model, outputDir, "dispatch.cpp");
+        RenderToFile("TestProject.CMakeLists.txt.scriban", model, outputDir, "CMakeLists.txt");
+        RenderToFile("TestProject.CMakePresets.json.scriban", model, outputDir, "CMakePresets.json");
+        RenderToFile("TestProject.RuntimePatchdata.cpp.scriban", model, outputDir, "runtime-patchdata.cpp");
 
-        // 5. Generate dispatch.cpp
-        var dispatchCode = dispatchEmitter.GenerateDispatch(subjects);
-        File.WriteAllText(Path.Combine(outputDir, "dispatch.cpp"), dispatchCode);
+        // chaos-sdk cmake files
+        var cmakeDir = Path.Combine(sdkDst, "cmake");
+        Directory.CreateDirectory(cmakeDir);
+        RenderToFile("TestProject.chaos-config.cmake.scriban", model, cmakeDir, "chaos-config.cmake");
+        RenderToFile("TestProject.chaos-targets.cmake.scriban", model, cmakeDir, "chaos-targets.cmake");
 
-        // 6. Generate CMakeLists.txt
-        var cmakeCode = GenerateCmake(outputDir);
-        File.WriteAllText(Path.Combine(outputDir, "CMakeLists.txt"), cmakeCode);
+        // metadata/subjects.json
+        GenerateMetadataJson(outputDir, subjects);
+    }
 
-        // 7. Generate metadata/subjects.json
+    private static void RenderToFile(string templateName, Scriban.Runtime.ScriptObject model, string outputDir, string outputFileName)
+    {
+        var rendered = TemplateCatalog.Render(templateName, model);
+        var path = Path.Combine(outputDir, outputFileName);
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllText(path, rendered);
+    }
+
+    private static void GenerateMetadataJson(string outputDir, IReadOnlyList<SubjectModel> subjects)
+    {
         var metadataDir = Path.Combine(outputDir, "metadata");
         Directory.CreateDirectory(metadataDir);
-        var metadataJson = GenerateSubjectsJson(subjects);
-        File.WriteAllText(Path.Combine(metadataDir, "subjects.json"), metadataJson);
 
-    }
-
-    private static string GenerateCmake(string outputDir)
-    {
-        // Find repo root by looking for CLAUDE.md
-        var repoRoot = FindRepoRoot().Replace('\\', '/');
-        var repoRootEscaped = repoRoot.Replace("\\", "/");
-
-        return $$"""
-            cmake_minimum_required(VERSION 3.20)
-            project(entry CXX)
-            set(CMAKE_CXX_STANDARD 20)
-
-            add_compile_options(/utf-8 /GS- /FS)
-            if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
-              set(CHAOS_IL2CPP_CONFIG_TIER "debug")
-            endif()
-
-            # chaos-sdk (provides chaos::runtime target)
-            set(CHAOS_SDK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/chaos-sdk")
-            find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
-
-            set(CHAOS_PROJECT_ROOT "{{repoRootEscaped}}")
-
-            # Codegen sources
-            file(GLOB CHAOS_CODEGEN_CPP "subjects/*.cpp")
-
-            # Native stubs in this directory
-            file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
-            list(REMOVE_ITEM CHAOS_NATIVE_STUBS
-                "${CMAKE_CURRENT_SOURCE_DIR}/entry.cpp"
-            )
-
-            # Runtime stub sources from the source tree
-            file(GLOB CHAOS_RUNTIME_STUB_SOURCES
-                "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/*.cpp"
-            )
-            list(REMOVE_ITEM CHAOS_RUNTIME_STUB_SOURCES
-                "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
-                "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp"
-            )
-
-            set(CHAOS_PROFILE_GLOBALS
-                "${CHAOS_PROJECT_ROOT}/src/native/common/chaos/profile_globals.cpp"
-            )
-
-            add_executable(entry
-                entry.cpp
-                ${CHAOS_CODEGEN_CPP}
-                ${CHAOS_NATIVE_STUBS}
-                ${CHAOS_RUNTIME_STUB_SOURCES}
-                ${CHAOS_PROFILE_GLOBALS}
-            )
-
-            target_include_directories(entry PRIVATE
-                "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
-                "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
-                "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"
-                "${CHAOS_PROJECT_ROOT}/src/native/common"
-                "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
-                "${CHAOS_PROJECT_ROOT}/src/native"
-                "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
-                "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
-                "${CHAOS_PROJECT_ROOT}/src/native/support"
-                "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
-                "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
-                "${CMAKE_CURRENT_SOURCE_DIR}"
-                "${CMAKE_CURRENT_SOURCE_DIR}/subjects"
-            )
-
-            target_compile_options(entry PRIVATE /EHa)
-            target_link_libraries(entry PRIVATE chaos::runtime)
-            target_link_options(entry PRIVATE /FORCE:MULTIPLE)
-            """;
-    }
-
-    private static string FindRepoRoot()
-    {
-        var dir = AppContext.BaseDirectory;
-        while (dir is not null)
-        {
-            if (File.Exists(Path.Combine(dir, "CLAUDE.md")))
-                return dir;
-            dir = Path.GetDirectoryName(dir);
-        }
-        return "";
-    }
-
-    private static string GenerateSubjectsJson(IReadOnlyList<SubjectModel> subjects)
-    {
         var entries = subjects.Select((s, i) => new
         {
             index = i,
@@ -196,9 +166,9 @@ public sealed class CppProjectEmitter
             },
         };
 
-        return JsonSerializer.Serialize(obj, JsonOptions);
+        var json = JsonSerializer.Serialize(obj, JsonOptions);
+        File.WriteAllText(Path.Combine(metadataDir, "subjects.json"), json);
     }
-
 
     private static void CopyDirectory(string sourceDir, string destDir)
     {

@@ -45,12 +45,20 @@ public static class Program
                   Read subjects from a contract.json file.
 
               generate --assemblies <dll1.dll> [dll2.dll ...] --contract <contract.json> --output <dir>
+                       [--jit] [--config-tier check|profile|ship] [--platform windows|linux|osx]
                   Generate standardized C++ test project.
                   Scans subjects from contract, runs IL2CPP codegen, emits C++ project.
 
               emit --contract <contract.json> --output <dir>
+                   [--jit] [--config-tier check|profile|ship] [--platform windows|linux|osx]
                   Emit dispatch.cpp and metadata from contract only (no codegen).
                   Expects codegen output to already exist in the output directory.
+
+
+            Options:
+              --jit                  Enable JIT mode (default: AOT)
+              --config-tier <tier>   Build configuration: check, profile, or ship (default: check)
+              --platform <os>        Target platform: windows, linux, or osx (default: windows)
             """);
     }
 
@@ -97,18 +105,25 @@ public static class Program
 
         // Step 2: Run IL2CPP codegen
         Console.WriteLine("  [2/3] Running IL2CPP codegen...");
+        var codegenMode = parsed.IsJit ? "jit" : "aot";
         var orchestrator = new Codegen.CodegenOrchestrator();
-        var codegenResult = orchestrator.Run(parsed.Assemblies, Path.Combine(parsed.OutputDir, "codegen"));
+        var codegenResult = orchestrator.Run(parsed.Assemblies, Path.Combine(parsed.OutputDir, "codegen"), codegenMode);
 
         if (!codegenResult.Success)
             return Error($"Codegen failed: {codegenResult.Error}");
 
         Console.WriteLine($"        {codegenResult.GeneratedDirs.Count} generated directories");
 
-        // Step 3: Emit C++ project
+        // Step 3: Emit C++ project via Scriban templates
         Console.WriteLine("  [3/3] Emitting C++ project...");
         var emitter = new CppProjectEmitter();
-        emitter.Emit(parsed.OutputDir, codegenResult, subjects);
+        emitter.Emit(
+            parsed.OutputDir,
+            codegenResult,
+            subjects,
+            isJit: parsed.IsJit,
+            configTier: parsed.ConfigTier,
+            isWindows: parsed.IsWindows);
         Console.WriteLine($"        entry.cpp, dispatch.cpp, CMakeLists.txt, metadata/subjects.json written");
 
         Console.WriteLine("  Done.");
@@ -134,10 +149,15 @@ public static class Program
             Console.WriteLine("  [WARNING] No subjects found — generating empty dispatch.");
         }
 
-        // Step 2: Emit dispatch + metadata only (no codegen, no SDK copy)
+        // Step 2: Emit dispatch + metadata only via Scriban templates
         Console.WriteLine("  [2/2] Emitting dispatch.cpp and metadata...");
         var emitter = new CppProjectEmitter();
-        emitter.EmitDispatchOnly(parsed.OutputDir, subjects);
+        emitter.EmitDispatchOnly(
+            parsed.OutputDir,
+            subjects,
+            isJit: parsed.IsJit,
+            configTier: parsed.ConfigTier,
+            isWindows: parsed.IsWindows);
         Console.WriteLine($"        verification_dispatch.generated.cpp, metadata/subjects.json written");
 
         Console.WriteLine("  Done.");
@@ -150,11 +170,22 @@ public static class Program
         return 1;
     }
 
-    private static (List<string> Assemblies, string? OutputDir, string? ContractPath) ParseArgs(string[] args)
+    private sealed record ParsedArgs(
+        List<string> Assemblies,
+        string? OutputDir,
+        string? ContractPath,
+        bool IsJit,
+        string ConfigTier,
+        bool IsWindows);
+
+    private static ParsedArgs ParseArgs(string[] args)
     {
         var assemblies = new List<string>();
         string? outputDir = null;
         string? contractPath = null;
+        bool isJit = false;
+        var configTier = "check";
+        var isWindows = true;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -175,9 +206,23 @@ public static class Program
                     if (i + 1 < args.Length)
                         contractPath = args[++i];
                     break;
+                case "--jit":
+                    isJit = true;
+                    break;
+                case "--config-tier":
+                    if (i + 1 < args.Length)
+                        configTier = args[++i];
+                    break;
+                case "--platform":
+                    if (i + 1 < args.Length)
+                    {
+                        var platform = args[++i].ToLowerInvariant();
+                        isWindows = platform is "windows" or "win";
+                    }
+                    break;
             }
         }
 
-        return (assemblies, outputDir, contractPath);
+        return new ParsedArgs(assemblies, outputDir, contractPath, isJit, configTier, isWindows);
     }
 }

@@ -9,10 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Scriban" Version="5.12.1" />
     <PackageReference Include="System.Reflection.MetadataLoadContext" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\managed\Chaos.IL2CPP.Driver\Chaos.IL2CPP.Driver.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Templates\**\*.scriban">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
