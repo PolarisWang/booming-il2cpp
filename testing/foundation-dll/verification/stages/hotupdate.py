@@ -339,8 +339,21 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
 
     # Copy rebuilt exe back to native_dir so pipeline stages use the new binary
     import shutil as _shutil
-    _shutil.copy2(str(build_dir / "RelWithDebInfo" / "entry.exe"),
-                  str(native_dir / "entry.exe"))
+    import time as _time
+    src_exe = build_dir / "RelWithDebInfo" / "entry.exe"
+    dst_exe = native_dir / "entry.exe"
+    for _copy_attempt in range(5):
+        try:
+            if dst_exe.exists():
+                dst_exe.unlink()
+            _shutil.copy2(str(src_exe), str(dst_exe))
+            break
+        except (PermissionError, OSError) as _e:
+            if _copy_attempt < 4:
+                _time.sleep(1 << _copy_attempt)
+            else:
+                print(f"  [hotupdate] entry.exe copy FAILED: {_e}")
+                return False
     print(f"  [hotupdate] entry.exe rebuild OK")
     return True
 
