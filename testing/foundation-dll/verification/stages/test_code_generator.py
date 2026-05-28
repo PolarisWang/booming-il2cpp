@@ -56,6 +56,9 @@ INSTANCE_EXPR_MAP: dict[str, str] = {
     "List": "new List<int>()",
     "Dictionary": "new Dictionary<string, int>()",
     "Stream": "new MemoryStream()",
+    "IEnumerable": "new byte[0]",
+    "IEnumerator": "new byte[0].GetEnumerator()!",
+    "IDisposable": "new MemoryStream()",
     "TextReader": "new StringReader(\"hello\")",
     "TextWriter": "new StringWriter()",
     "BinaryReader": "default(BinaryReader)!",
@@ -204,6 +207,8 @@ INSTANCE_EXPR_MAP: dict[str, str] = {
     "SEHException": "default(SEHException)!",
     # Generated-marshalling types
     "ComObject": "default(ComObject)!",
+    # Encoding instance methods
+    "Encoding": "Encoding.UTF8",
 }
 
 INSTANCE_ALTERNATIVE_EXPR_MAP: dict[str, str] = {
@@ -304,6 +309,7 @@ STATIC_METHODS_BY_TYPE: dict[str, frozenset[str]] = {
         "Sort", "BinarySearch", "IndexOf", "LastIndexOf", "Reverse", "Clear",
         "Copy", "Resize", "Find", "FindAll", "Exists", "ConvertAll",
         "TrueForAll", "Empty", "AsReadOnly", "CreateInstance",
+        "ConstrainedCopy",
     }),
     "GCHandle": frozenset({"Alloc", "FromIntPtr", "ToIntPtr"}),
     # RuntimeInformation static properties (checked in _try_property_access before STATIC_TYPES)
@@ -367,6 +373,18 @@ STATIC_METHODS_BY_TYPE: dict[str, frozenset[str]] = {
     "JsonTypeInfo": frozenset({
         "CreateJsonTypeInfo",
     }),
+    # ExceptionDispatchInfo static methods
+    "ExceptionDispatchInfo": frozenset({"Capture"}),
+    # BitOperations static methods (numerics-bitops family)
+    "BitOperations": frozenset({"PopCount", "LeadingZeroCount", "TrailingZeroCount"}),
+    # MathF static methods (numerics-floating-point family)
+    "MathF": frozenset({"Floor", "Ceiling", "Sqrt", "Abs"}),
+    # Double static methods (numerics-floating-point family)
+    "Double": frozenset({"IsNaN", "IsInfinity", "IsNegativeInfinity"}),
+    # Single static methods (numerics-floating-point family)
+    "Single": frozenset({"IsNaN"}),
+    # Encoding static methods (text-ebcdic family)
+    "Encoding": frozenset({"GetEncoding", "Convert", "get_ASCII"}),
 }
 
 # Param-count-aware static methods: (type_name, method_name, param_count)
@@ -1098,6 +1116,13 @@ def parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
         type_name = ".".join(parts[-2:]) if len(parts) >= 2 else raw_type
     else:
         type_name = raw_type.rsplit(".", 1)[-1]
+
+    # Normalize CLR {T} generic notation to backtick format for downstream.
+    # e.g., "IEnumerable{T}" → "IEnumerable`1", "Dictionary{TKey,TValue}" → "Dictionary`2"
+    generic_match = re.search(r"\{([^}]+)\}", type_name)
+    if generic_match:
+        param_count = len(generic_match.group(1).split(","))
+        type_name = type_name.replace(generic_match.group(0), f"`{param_count}")
 
     # Strip CLR backtick suffix: "Nullable`1" -> "Nullable", but record arity
     arity = 0
