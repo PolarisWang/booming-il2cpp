@@ -172,6 +172,54 @@ inline int32_t ChaosDispatchMethodBench(
     return 0;
 }
 
+// ── ChaosDispatchMethodGetValue (capture method return value) ────────────
+// Like ChaosDispatchMethod but captures and returns the actual method return
+// value as int64_t (RAX / __chaos_ret[0]) instead of dispatch status code.
+//
+// AOT mode with hotpatch active: uses __chaos_ret[0] from InterpreterEntryDirect
+// AOT mode with direct_ptr:      calls through int64_t(*)() to capture RAX
+// JIT mode:                      same as direct_ptr path
+//
+// Returns INT64_MIN on invalid index. Returns 0 for thunks-only paths.
+// NOTE: For void-returning methods the captured value is ABI-defined (RAX
+// after callee returns) and may be garbage.  Only reliable for methods
+// known to return a value (e.g., patch methods with sentinel returns).
+inline int64_t ChaosDispatchMethodGetValue(
+    const HotpatchEntryV0* entries,
+    int32_t count,
+    int32_t index,
+    void (* const* thunks)() noexcept = nullptr) noexcept
+{
+    if (index < 0 || index >= count) return INT64_MIN;
+    auto& entry = entries[index];
+
+#if defined(CHAOS_IL2CPP_JIT_MODE)
+    if (thunks) {
+        thunks[index]();
+        return 0;
+    }
+    auto fn = reinterpret_cast<int64_t(*)()>(entry.direct_ptr);
+    if (fn == nullptr) return INT64_MIN;
+    return fn();
+#else
+    if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
+        uint64_t __chaos_args[4] = {};
+        uint64_t __chaos_ret[2] = {};
+        InterpreterEntryDirect(entry.method_key, __chaos_args, __chaos_ret);
+        return static_cast<int64_t>(__chaos_ret[0]);
+    }
+    if (thunks) {
+        thunks[index]();
+        return 0;
+    }
+    if (entry.direct_ptr) {
+        auto fn = reinterpret_cast<int64_t(*)()>(entry.direct_ptr);
+        return fn();
+    }
+    return 0;
+#endif
+}
+
 }  // namespace runtime_core
 }  // namespace il2cpp
 }  // namespace chaos

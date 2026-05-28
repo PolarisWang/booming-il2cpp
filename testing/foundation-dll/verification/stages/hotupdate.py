@@ -364,8 +364,10 @@ def _load_method_count(ctx: FamilyContext) -> int:
 def _run_hotupdate_fact(exe_path: Path) -> dict[str, Any]:
     """Run entry.exe --hotupdate and parse JSON result.
 
-    R6: Also parses semanticChangedCount and allSemantic to verify
-    that the patch actually changed behavior.
+    Returns a dict with status, passedMethods, allSemantic, etc.
+    Status is "failed" when allSemantic is false (patch detected no
+    semantic change) — this indicates the patch may not have been
+    effective or the detection mechanism is broken.
     """
     try:
         r = subprocess.run(
@@ -405,10 +407,14 @@ def _run_hotupdate_fact(exe_path: Path) -> dict[str, Any]:
 
                 status = "passed" if failed == 0 else "failed"
 
-                # R6: If allSemantic is false, the patch didn't change behavior
-                # This is a warning — patch may not have been effective
+                # R6: allSemantic=false means no method changed pass/fail
+                # behavior after patching.  This is a HARD FAILURE: either
+                # the patch didn't take effect, or the detection mechanism
+                # is broken (e.g. ChaosDispatchMethod returning dispatch
+                # status instead of method return value).
                 if not all_semantic and passed > 0:
-                    print(f"    [hotupdate] WARNING: patch applied but no semantic change detected "
+                    status = "failed"
+                    print(f"    [hotupdate] FAILED: no semantic change detected "
                           f"(changed={semantic_changed}/{total})")
 
                 # R6: If revert failed, mark as warning

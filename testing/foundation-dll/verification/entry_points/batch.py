@@ -39,7 +39,7 @@ def discover_families(assembly: str = "System.Private.CoreLib") -> list[str]:
 
 
 def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages: set[str] | None = None,
-               native_config: str = "check") -> dict:
+               native_config: str = "check", mode: str = "standard") -> dict:
     family_dir = _TESTING_ROOT / assembly / slug
     ctx = FamilyContext(
         slug=slug,
@@ -47,6 +47,7 @@ def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages:
         family_dir=family_dir,
         skip_stages=skip_stages or set(),
         native_config=native_config,
+        mode=mode,
     )
 
     print(f"\n{'='*60}")
@@ -110,6 +111,8 @@ def main() -> None:
                         help="Resume from a specific slug (skip families before this)")
     parser.add_argument("--native-config", choices=["check", "profile", "ship"], default="check",
                         help="Native build config (default: check)")
+    parser.add_argument("--mode", choices=["standard", "strict"], default="standard",
+                        help="Verification mode — strict requires all stages (default: standard)")
     args = parser.parse_args()
 
     if args.family:
@@ -147,7 +150,7 @@ def main() -> None:
 
     for i, slug in enumerate(slugs):
         print(f"\n[{i+1}/{len(slugs)}] ", end="")
-        result = run_family(slug, args.assembly, skip_stages, native_config=args.native_config)
+        result = run_family(slug, args.assembly, skip_stages, native_config=args.native_config, mode=args.mode)
         results.append(result)
 
         if result["status"] == "passed":
