@@ -875,7 +875,6 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     # always linked via chaos::runtime (chaos-targets.cmake), so their
     # unresolved JIT-debug-contract symbols require FORCE:MULTIPLE even in
     # AOT-only builds.
-    force_multiple = '\ntarget_link_options(entry PRIVATE /FORCE:MULTIPLE)'
     jit_include = (
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/jit"\n'
     ) if is_jit else ''
@@ -888,9 +887,12 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'project(chaos_entry CXX)\n'
         f'set(CMAKE_CXX_STANDARD 20)\n'
         f'\n'
-        f'# Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions\n'
-        f'# thrown by generated code (throw chaos_managed_exception from unresolved calls).\n'
-        f'add_compile_options(/utf-8 /GS- /FS)\n'
+        f'# Compiler settings — platform-specific\n'
+        f'if(WIN32)\n'
+        f'  add_compile_options(/utf-8 /GS- /FS)\n'
+        f'else()\n'
+        f'  add_compile_options(-fexceptions -finput-charset=utf-8)\n'
+        f'endif()\n'
         f'add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)\n'
         f'add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)\n'
         f'{jit_define}'
@@ -949,10 +951,16 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'\n'
         f'add_executable(entry ${{CHAOS_ENTRY_SOURCES}})\n'
         f'target_include_directories(entry PRIVATE ${{CHAOS_ENTRY_INCLUDES}})\n'
-        f'target_compile_options(entry PRIVATE /EHa)\n'
         f'target_link_libraries(entry PRIVATE\n'
         f'    chaos::runtime\n'
-        f'){force_multiple}\n'
+        f')\n'
+        f'if(WIN32)\n'
+        f'  target_compile_options(entry PRIVATE /EHa)\n'
+        f'  target_link_options(entry PRIVATE /FORCE:MULTIPLE)\n'
+        f'else()\n'
+        f'  target_compile_options(entry PRIVATE -fexceptions -fpermissive -D__cdecl=)\n'
+        f'  target_link_options(entry PRIVATE -Wl,--allow-multiple-definition)\n'
+        f'endif()\n'
     )
     cmakelists.parent.mkdir(parents=True, exist_ok=True)
     cmakelists.write_text(cmake_content, encoding="utf-8")
@@ -1794,6 +1802,134 @@ def write_sentinel_dispatch(dispatch_cpp: Path) -> None:
     dispatch_cpp.write_text(content, encoding="utf-8")
 
 
+def _setup_linux_sdk_libs(codegen_dir: Path, family_slug: str, verification: Path) -> None:
+    """Set up prebuilt .a symlinks in the SDK lib/ directory for Linux.
+
+    The generated chaos-targets.cmake references .lib files (e.g. chaos_common.lib,
+    chaos_runtime_core.lib). On Linux these don't exist because the prebuilt native
+    libraries use .a extension. This function creates symlinks from the linux-debug
+    preset .a files to the expected .lib names in the codegen SDK lib/ directory.
+
+    For libraries that don't exist on Linux (e.g. chaos_eventpipe is only built
+    on Windows), an empty stub .a archive is created.
+    """
+    sdk_lib_dir = codegen_dir / "lib"
+    sdk_lib_dir.mkdir(parents=True, exist_ok=True)
+
+    # Map expected .lib names to their .a paths in the linux-debug preset
+    linux_preset_lib = _REPO_ROOT / "artifacts" / "presets" / "linux-debug"
+
+    lib_map = {
+        "chaos_common.lib": linux_preset_lib / "src" / "native" / "common" / "libchaos_common.a",
+        "chaos_support.lib": linux_preset_lib / "src" / "native" / "support" / "libchaos_support.a",
+        "chaos_fmt.lib": linux_preset_lib / "fmt_build" / "libchaos_fmt.a",
+        "chaos_runtime_core.lib": linux_preset_lib / "src" / "native" / "runtime-core" / "libchaos_runtime_core.a",
+        "chaos_interpreter.lib": linux_preset_lib / "src" / "native" / "interpreter" / "libchaos_interpreter.a",
+        "chaos_bootstrap.lib": linux_preset_lib / "src" / "native" / "bootstrap" / "libchaos_bootstrap.a",
+        "chaos_hot_update.lib": linux_preset_lib / "src" / "native" / "hot-update" / "libchaos_hot_update.a",
+        "chaos_jit.lib": linux_preset_lib / "src" / "native" / "jit" / "libchaos_jit.a",
+        "chaos_debugger.lib": linux_preset_lib / "src" / "native" / "diagnostics" / "debugger" / "libchaos_debugger.a",
+        # chaos_eventpipe is Windows-only (not built in linux-debug preset)
+        "chaos_eventpipe.lib": None,
+        # chaos_codegen is the precompiled generated code — not produced by
+        # the convert-to-cpp pipeline on any platform. CMake validates
+        # IMPORTED_LOCATION at configure time, so create a stub.
+        "chaos_codegen.lib": None,
+    }
+
+    created_count = 0
+    for lib_name, src_path in lib_map.items():
+        dst = sdk_lib_dir / lib_name
+        if dst.exists():
+            continue
+        if src_path and src_path.exists():
+            dst.symlink_to(os.path.relpath(src_path, sdk_lib_dir))
+            created_count += 1
+        else:
+            # Create empty stub archive for libraries not available on Linux
+            # (e.g. chaos_eventpipe is Windows-only, chaos_codegen is not
+            # produced by the current convert-to-cpp pipeline)
+            _create_empty_archive(dst)
+
+    if created_count:
+        print(f"    [linux-sdk] linked {created_count} prebuilt .a files into SDK lib/")
+
+    # ── Patch chaos-targets.cmake: wrap INTERFACE link libs in --start-group ──
+    # On Linux, static library ordering matters — ld processes archives left to
+    # right and only resolves symbols known at that point. Circular dependencies
+    # between runtime libs (e.g. jit ↔ runtime_core) require --start-group to
+    # make ld rescan until no new symbols are resolved.
+    targets_cmake = codegen_dir / "cmake" / "chaos-targets.cmake"
+    if targets_cmake.exists():
+        content = targets_cmake.read_text(encoding="utf-8")
+        # Match the exact INTERFACE link libraries block for chaos::runtime
+        old_block = (
+            'target_link_libraries(chaos::runtime INTERFACE\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_common.lib"\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_support.lib"\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_fmt.lib"\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_runtime_core.lib"\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_interpreter.lib"\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_bootstrap.lib"\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_hot_update.lib"\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_eventpipe.lib"\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_jit.lib"\n'
+            '    "${CHAOS_SDK_ROOT}/lib/chaos_debugger.lib"\n'
+            ')\n'
+        )
+        new_block = (
+            'if(CMAKE_SYSTEM_NAME STREQUAL "Linux")\n'
+            '  # --start-group/--end-group: circular deps between static libs\n'
+            '  # require ld to rescan archives until no new symbols are resolved.\n'
+            '  target_link_libraries(chaos::runtime INTERFACE\n'
+            '      "-Wl,--start-group"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_common.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_support.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_fmt.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_runtime_core.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_interpreter.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_bootstrap.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_hot_update.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_eventpipe.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_jit.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_debugger.lib"\n'
+            '      "-Wl,--end-group"\n'
+            '      "-lnuma"\n'
+            '  )\n'
+            'else()\n'
+            '  target_link_libraries(chaos::runtime INTERFACE\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_common.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_support.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_fmt.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_runtime_core.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_interpreter.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_bootstrap.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_hot_update.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_eventpipe.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_jit.lib"\n'
+            '      "${CHAOS_SDK_ROOT}/lib/chaos_debugger.lib"\n'
+            '  )\n'
+            'endif()\n'
+        )
+        if old_block in content:
+            content = content.replace(old_block, new_block, 1)
+            targets_cmake.write_text(content, encoding="utf-8")
+            print(f"    [linux-sdk] patched {targets_cmake.name}: added --start-group wrapper for Linux")
+        else:
+            print(f"    [linux-sdk] WARNING: could not find INTERFACE link block in {targets_cmake.name}")
+    else:
+        print(f"    [linux-sdk] WARNING: {targets_cmake.name} not found at {targets_cmake}")
+
+
+def _create_empty_archive(path: Path) -> None:
+    """Create an empty static library archive."""
+    # ar(1) format: magic string "!<arch>\n" followed by empty symbol table.
+    # The linker happily accepts an empty archive — it simply finds no symbols.
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(b"!<arch>\n")
+    print(f"    [linux-sdk] created empty stub archive: {path.name}")
+
+
 def build_entry_executable(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe", is_jit: bool = False) -> bool:
     v = verification or _VERIFICATION
     native_dir = v / family_slug / "native"
@@ -1979,11 +2115,21 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     if not build_dir.exists():
         build_dir.mkdir(parents=True, exist_ok=True)
 
-    # Step 1: CMake configure
+    # Step 1: CMake configure (platform-dependent generator)
     print(f"    [build_entry] cmake configure...")
+    is_linux = sys.platform != "win32"
+    if is_linux:
+        # On Linux, ensure SDK lib references are set up before cmake configure.
+        # The generated chaos-targets.cmake references .lib files but the
+        # prebuilt native libs from the linux-debug preset are .a files.
+        _setup_linux_sdk_libs(codegen_dir, family_slug, v)
+        cfg_cmd = ["cmake", "-S", str(native_dir), "-B", str(build_dir),
+                    "-G", "Ninja"]
+    else:
+        cfg_cmd = ["cmake", "-S", str(native_dir), "-B", str(build_dir),
+                    "-G", "Visual Studio 17 2022", "-A", "x64"]
     cfg_result = subprocess.run(
-        ["cmake", "-S", str(native_dir), "-B", str(build_dir),
-         "-G", "Visual Studio 17 2022", "-A", "x64"],
+        cfg_cmd,
         capture_output=True, text=True, timeout=120,
     )
     if cfg_result.returncode != 0:
@@ -1992,18 +2138,21 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             print(f"      {line}")
         return False
 
-    # Step 1b: Patch vcxproj files to use /EHs /EHc- (extern "C" exception propagation)
-    patch_script = _HERE.parents[0] / "_patch_vcxproj.py"
-    if patch_script.exists():
-        subprocess.run([sys.executable, str(patch_script), str(build_dir)],
-                      capture_output=True, text=True, timeout=30)
-        print(f"    [build_entry] vcxproj patched for /EHs /EHc-")
+    # Step 1b: Patch vcxproj files (Windows only) to use /EHs /EHc-
+    if not is_linux:
+        patch_script = _HERE.parents[0] / "_patch_vcxproj.py"
+        if patch_script.exists():
+            subprocess.run([sys.executable, str(patch_script), str(build_dir)],
+                          capture_output=True, text=True, timeout=30)
+            print(f"    [build_entry] vcxproj patched for /EHs /EHc-")
 
-    # Step 2: CMake build (entry target, RelWithDebInfo)
+    # Step 2: CMake build
     print(f"    [build_entry] cmake build...")
+    build_cmd = ["cmake", "--build", str(build_dir), "--target", "entry"]
+    if not is_linux:
+        build_cmd.extend(["--config", "RelWithDebInfo"])
     build_result = subprocess.run(
-        ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
-         "--target", "entry"],
+        build_cmd,
         capture_output=True, text=True, timeout=300,
     )
     if build_result.returncode != 0:
@@ -2012,13 +2161,20 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             print(f"      {line}")
         return False
 
-    # Step 3: Locate entry.exe
-    exe_candidates = [
-        build_dir / "RelWithDebInfo" / "entry.exe",
-        build_dir / "Release" / "entry.exe",
-        build_dir / "Debug" / "entry.exe",
-        build_dir / "entry.exe",
-    ]
+    # Step 3: Locate entry binary
+    if is_linux:
+        # Single-config generators (Ninja) put output directly in build dir
+        exe_candidates = [
+            build_dir / output_name,
+            build_dir / "entry",
+        ]
+    else:
+        exe_candidates = [
+            build_dir / "RelWithDebInfo" / output_name,
+            build_dir / "Release" / output_name,
+            build_dir / "Debug" / output_name,
+            build_dir / output_name,
+        ]
     exe_path = None
     for c in exe_candidates:
         if c.exists():
