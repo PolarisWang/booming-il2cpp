@@ -55,6 +55,14 @@ public sealed partial class NativeAotLoweringPlanner
 	// chaos_locals[] traffic, keeping the IV in a register across loop iterations.
 	private Dictionary<int, string>? _hoistedIVs;
 
+	// Hoisted array base pointers for do-while loops: maps chaos_locals slot → C++ base pointer variable name.
+	// When set, array load/store for these slots use direct base pointer access instead of
+	// calling chaos_array_get_elements(reinterpret_cast<chaos_managed_array*>(...)) every iteration.
+	private Dictionary<int, string>? _hoistedArrayBaseSlots;
+	// Tracks slot variable names (_sN) to their chaos_locals source slot index.
+	// Used by EmitLinearArrayLoad/Store to resolve hoisted array base pointers.
+	private Dictionary<string, int>? _slotVarToLocalSlot;
+
 	private void ResetArrayCheckCache()
 	{
 		_lastCheckedArrayExpr = null;
@@ -78,7 +86,7 @@ public sealed partial class NativeAotLoweringPlanner
 	// NativeInt (plain integer-as-pointer).  Consumers (conv.i4,
 	// ceq, etc.) use this to emit ChaosLoadFloat32/ChaosLoadFloat64
 	// before operating on the value.
-	private enum SlotType : byte { NativeInt, Float32, Float64 }
+	private enum SlotType : byte { NativeInt, Int64, Float32, Float64 }
 
 	private readonly Stack<SlotType> _structuredSlotTypes = new();
 
@@ -99,6 +107,16 @@ public sealed partial class NativeAotLoweringPlanner
 	/// corresponding SlotType, enabling direct _dN/_fN slot allocation.
 	/// </summary>
 	private Dictionary<int, SlotType>? _floatLocalSlots;
+
+	/// <summary>
+	/// Local slots that hold Int64 values (packed via ChaosStoreInt64 into
+	/// CHAOS_IL2CPP_INTPTR slots). Populated per-method in
+	/// <c>EmitViaStructuredIR</c> by <c>IdentifyInt64LocalSlots</c>.
+	/// When set, ldloc for any slot in this set pushes SlotType.Int64,
+	/// enabling EmitLinearBinaryArithmetic to emit 64-bit arithmetic instead
+	/// of int32 truncation.
+	/// </summary>
+	private HashSet<int>? _int64LocalSlots;
 
 	private static HashSet<int> IdentifyStructLocalSlots(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
 	{
@@ -262,6 +280,167 @@ public sealed partial class NativeAotLoweringPlanner
 		}
 
 		return result;
+	}
+
+	/// <summary>
+	/// Pre-scan the instruction list to identify which local slots hold
+	/// Int64 values. Simulates the eval stack type stack linearly, recording
+	/// the slot for each stloc of an Int64-typed value. This enables ldloc
+	/// to push SlotType.Int64, so that EmitLinearBinaryArithmetic emits
+	/// 64-bit arithmetic instead of int32 truncation.
+	/// </summary>
+	private static HashSet<int> IdentifyInt64LocalSlots(IReadOnlyList<AotCoreIrInstructionArtifact> instructions)
+	{
+		var int64Locals = new HashSet<int>();
+		var typeStack = new Stack<SlotType>();
+
+		for (int i = 0; i < instructions.Count; i++)
+		{
+			var op = instructions[i].Op;
+			switch (op)
+			{
+				// Int64 producers
+				case "conv.i8":
+				case "conv.u8":
+				case "conv.ovf.i8":
+				case "conv.ovf.u8":
+				case "conv.ovf.i8.un":
+				case "conv.ovf.u8.un":
+				case "ldc.i8":
+				case "ldind.i8":
+				case "ldelem.i8":
+					typeStack.Push(SlotType.Int64);
+					break;
+
+				// stloc: pop type and record for this local slot
+				case "stloc":
+					if (typeStack.Count > 0)
+					{
+						int slot = GetRequiredIntOperand(instructions[i]);
+						SlotType storedType = typeStack.Pop();
+						if (storedType == SlotType.Int64)
+							int64Locals.Add(slot);
+					}
+					break;
+
+				// ldloc: conservative — push NativeInt (overridden by int64Locals in emission)
+				case "ldloc":
+					typeStack.Push(SlotType.NativeInt);
+					break;
+
+				// Binary arithmetic: Int64 + any → Int64 (promotion)
+				case "add": case "sub": case "mul": case "div": case "rem":
+				case "add.ovf": case "add.ovf.un":
+				case "sub.ovf": case "sub.ovf.un":
+				case "mul.ovf": case "mul.ovf.un":
+				case "div.un": case "rem.un":
+					if (typeStack.Count >= 2)
+					{
+						SlotType rightType = typeStack.Pop();
+						SlotType leftType = typeStack.Pop();
+						bool isInt64Result = (rightType == SlotType.Int64 || leftType == SlotType.Int64);
+						bool isFloatResult = rightType is SlotType.Float32 or SlotType.Float64 ||
+						                     leftType is SlotType.Float32 or SlotType.Float64;
+						if (isFloatResult)
+							typeStack.Push(SlotType.Float64);
+						else if (isInt64Result)
+							typeStack.Push(SlotType.Int64);
+						else
+							typeStack.Push(SlotType.NativeInt);
+					}
+					break;
+
+				// Conv narrowing: Int64 → NativeInt
+				case "conv.i4": case "conv.u4":
+				case "conv.i2": case "conv.u2":
+				case "conv.i1": case "conv.u1":
+				case "conv.i": case "conv.u":
+					if (typeStack.Count > 0)
+					{
+						typeStack.Pop();
+						typeStack.Push(SlotType.NativeInt);
+					}
+					break;
+
+				// Conv float: Int64 → Float64
+				case "conv.r4":
+				case "conv.r.un":
+					if (typeStack.Count > 0)
+					{
+						typeStack.Pop();
+						typeStack.Push(SlotType.Float32);
+					}
+					break;
+				case "conv.r8":
+					if (typeStack.Count > 0)
+					{
+						typeStack.Pop();
+						typeStack.Push(SlotType.Float64);
+					}
+					break;
+
+				// ldelem: element type determined by opcode
+				case "ldelem.r8":
+					typeStack.Push(SlotType.Float64);
+					break;
+				case "ldelem.r4":
+					typeStack.Push(SlotType.Float32);
+					break;
+
+				// ceq/cgt/clt: always produce integer (NativeInt)
+				case "ceq": case "cgt": case "clt":
+				case "cgt.un": case "clt.un":
+					if (typeStack.Count >= 2)
+					{
+						typeStack.Pop();
+						typeStack.Pop();
+					}
+					typeStack.Push(SlotType.NativeInt);
+					break;
+
+				// Instructions that push one value (default to NativeInt)
+				case "ldc.i4": case "ldnull":
+				case "ldarg": case "ldarga": case "ldloca":
+				case "ldsfld": case "ldfld": case "ldlen":
+				case "ldind.i4": case "ldind.i":
+				case "ldind.u4":
+				case "ldind.ref": case "ldobj":
+				case "ldelem.i4": case "ldelem.u4":
+				case "ldelem.i2": case "ldelem.u2":
+				case "ldelem.i1": case "ldelem.u1":
+				case "ldelem.ref":
+				case "newarr": case "box": case "isinst": case "castclass":
+					typeStack.Push(SlotType.NativeInt);
+					break;
+
+				// Instructions with no stack effect
+				case "nop": case "br": case "leave": case "endfinally":
+				case "brtrue": case "brfalse":
+				case "beq": case "bge": case "bgt": case "ble": case "blt":
+				case "bne.un": case "bge.un": case "bgt.un": case "ble.un": case "blt.un":
+				case "switch":
+					break;
+
+				// pop: remove one value
+				case "pop":
+					if (typeStack.Count > 0)
+						typeStack.Pop();
+					break;
+
+				// dup: duplicate top
+				case "dup":
+					if (typeStack.Count > 0)
+						typeStack.Push(typeStack.Peek());
+					break;
+
+				// Default: assume unknown ops produce NativeInt
+				default:
+					typeStack.Push(SlotType.NativeInt);
+					break;
+			}
+		}
+
+		return int64Locals;
 	}
 
 	private SlotType PeekSlotType()
@@ -538,6 +717,7 @@ public sealed partial class NativeAotLoweringPlanner
 		case "ldc.i8":
 		{
 			EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64({FormatInt64Literal(GetRequiredInt64Operand(instruction))})");
+			PushSlotType(SlotType.Int64);
 			break;
 		}
 		case "ldc.r8":
@@ -580,12 +760,20 @@ public sealed partial class NativeAotLoweringPlanner
 				EmitEvalStackPush(builder, indentation, $"{wrapper}(chaos_locals[{ldlocSlot}])", ldlocType);
 				PushSlotType(ldlocType);
 			}
+			else if (_int64LocalSlots is not null && _int64LocalSlots.Contains(ldlocSlot))
+			{
+				EmitEvalStackPush(builder, indentation, $"ChaosLoadInt64(chaos_locals[{ldlocSlot}])", SlotType.Int64);
+				PushSlotType(SlotType.Int64);
+			}
 			else
 			{
 				string _ldSrc = _hoistedIVs is not null && _hoistedIVs.TryGetValue(ldlocSlot, out var _ivName)
 				    ? _ivName
 				    : $"chaos_locals[{ldlocSlot}]";
 				EmitEvalStackPush(builder, indentation, _ldSrc);
+				// Track slot variable → chaos_locals mapping for array base hoisting
+				if (_slotVarToLocalSlot is not null && _activeStructuredSlotContext is not null && _ldSrc.StartsWith("chaos_locals[", StringComparison.Ordinal))
+				    _slotVarToLocalSlot[AccessEvalStackTopExpression()] = ldlocSlot;
 				PushSlotType(SlotType.NativeInt);
 			}
 			break;
@@ -971,8 +1159,8 @@ public sealed partial class NativeAotLoweringPlanner
 			string _loadExpr = PrepareConvOvfValue();
 			ConsumeEvalStackValueExpression();
 			ConsumeSlotType();
-			EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>({_loadExpr}))", SlotType.NativeInt);
-			PushSlotType(SlotType.NativeInt);
+			EmitEvalStackPush(builder, indentation, $"ChaosStoreInt64(static_cast<CHAOS_IL2CPP_INT64>({_loadExpr}))", SlotType.Int64);
+			PushSlotType(SlotType.Int64);
 			break;
 		}
 		case "conv.r4":
@@ -1463,36 +1651,64 @@ public sealed partial class NativeAotLoweringPlanner
 			EmitLinearCopyBlock(builder, indentation);
 			break;
 		case "ldelem.i1":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT8");
+			PushSlotType(SlotType.NativeInt);
 			break;
 		case "ldelem.u1":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT8");
+			PushSlotType(SlotType.NativeInt);
 			break;
 		case "ldelem.i2":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT16");
+			PushSlotType(SlotType.NativeInt);
 			break;
 		case "ldelem.u2":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT16");
+			PushSlotType(SlotType.NativeInt);
 			break;
 		case "ldelem.i4":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT32");
+			PushSlotType(SlotType.NativeInt);
 			break;
 		case "ldelem.u4":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT32");
+			PushSlotType(SlotType.NativeInt);
 			break;
 		case "ldelem.i8":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation);
+			PushSlotType(SlotType.Int64);
 			break;
 		case "ldelem.r4":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation);
 			PushSlotType(SlotType.Float32);
 			break;
 		case "ldelem.r8":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation);
 			PushSlotType(SlotType.Float64);
 			break;
 		case "ldelem.ref":
+			ConsumeSlotType();
+			ConsumeSlotType();
 			EmitLinearArrayLoad(builder, instruction, "chaos_element", indentation);
+			PushSlotType(SlotType.NativeInt);
 			break;
 		case "ldelem":
 		{
@@ -1525,24 +1741,56 @@ public sealed partial class NativeAotLoweringPlanner
 				switch (subjectId)
 				{
 				case "System.Byte": case "System.SByte":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT8"); break;
+					ConsumeSlotType();
+					ConsumeSlotType();
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT8");
+					PushSlotType(SlotType.NativeInt);
+					break;
 				case "System.Boolean":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT8"); break;
+					ConsumeSlotType();
+					ConsumeSlotType();
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT8");
+					PushSlotType(SlotType.NativeInt);
+					break;
 				case "System.Int16":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT16"); break;
+					ConsumeSlotType();
+					ConsumeSlotType();
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT16");
+					PushSlotType(SlotType.NativeInt);
+					break;
 				case "System.UInt16": case "System.Char":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT16"); break;
+					ConsumeSlotType();
+					ConsumeSlotType();
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT16");
+					PushSlotType(SlotType.NativeInt);
+					break;
 				case "System.Int32":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT32"); break;
+					ConsumeSlotType();
+					ConsumeSlotType();
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_INT32");
+					PushSlotType(SlotType.NativeInt);
+					break;
 				case "System.UInt32":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT32"); break;
+					ConsumeSlotType();
+					ConsumeSlotType();
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INTPTR>(chaos_element)", indentation, elementType: "CHAOS_IL2CPP_UINT32");
+					PushSlotType(SlotType.NativeInt);
+					break;
 				case "System.Int64": case "System.UInt64":
-					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation); break;
+					ConsumeSlotType();
+					ConsumeSlotType();
+					EmitLinearArrayLoad(builder, instruction, "static_cast<CHAOS_IL2CPP_INT64>(chaos_element)", indentation);
+					PushSlotType(SlotType.Int64);
+					break;
 				case "System.Single":
+					ConsumeSlotType();
+					ConsumeSlotType();
 					EmitLinearArrayLoad(builder, instruction, "ChaosStoreFloat32(ChaosLoadFloat32(chaos_element))", indentation);
 					PushSlotType(SlotType.Float32);
 					break;
 				case "System.Double":
+					ConsumeSlotType();
+					ConsumeSlotType();
 					EmitLinearArrayLoad(builder, instruction, "ChaosStoreFloat64(ChaosLoadFloat64(chaos_element))", indentation);
 					PushSlotType(SlotType.Float64);
 					break;
@@ -1829,6 +2077,7 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			SlotType.Float32 => $"ChaosLoadFloat32({AccessEvalStackTopExpression()})",
 			SlotType.Float64 => $"ChaosLoadFloat64({AccessEvalStackTopExpression()})",
+			SlotType.Int64 => $"ChaosLoadInt64({AccessEvalStackTopExpression()})",
 			_ => useUintptrDefault
 				? $"static_cast<CHAOS_IL2CPP_UINTPTR>({AccessEvalStackTopExpression()})"
 				: AccessEvalStackTopExpression(),
@@ -1960,6 +2209,36 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}}}");
 	}
 
+
+	/// <summary>
+	/// Resolve rawArrayExpr to a hoisted array base pointer variable name, or null if not hoisted.
+	/// Checks both direct chaos_locals[N] expressions and _sN slot variable references.
+	/// </summary>
+	private string? TryResolveHoistedArrayBase(string rawArrayExpr)
+	{
+		if (_hoistedArrayBaseSlots == null)
+			return null;
+
+		int? slot = null;
+
+		// Direct match: "chaos_locals[N]"
+		if (rawArrayExpr.StartsWith("chaos_locals[", StringComparison.Ordinal))
+		{
+			int endBracket = rawArrayExpr.IndexOf(']', 13);
+			if (endBracket > 13 && int.TryParse(rawArrayExpr.AsSpan(13, endBracket - 13), out int directSlot))
+				slot = directSlot;
+		}
+
+		// Slot variable match: _sN via _slotVarToLocalSlot tracking
+		if (slot == null && _slotVarToLocalSlot != null && _slotVarToLocalSlot.TryGetValue(rawArrayExpr, out int trackedSlot))
+			slot = trackedSlot;
+
+		if (slot.HasValue && _hoistedArrayBaseSlots.TryGetValue(slot.Value, out var basePtr))
+			return basePtr;
+
+		return null;
+	}
+
 	private void EmitLinearArrayLoad(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string pushedValueExpression, string indentation, string? elementType = null)
 	{
 		string rawIndexExpr = ConsumeEvalStackValueExpression();
@@ -1981,13 +2260,25 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL_FAST();");
 			builder.AppendLine($"{indentation}    }}");
 		}
-		if (elementType != null)
+		string? _hoistedBase = TryResolveHoistedArrayBase(rawArrayExpr);
+		if (_hoistedBase != null)
 		{
-			builder.AppendLine($"{indentation}    const auto chaos_element = *reinterpret_cast<{elementType}*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index));");
+			// Hoisted array base pointer: direct index access, no reinterpret_cast/chaos_array_get_elements overhead
+			if (elementType != null)
+				builder.AppendLine($"{indentation}    const auto chaos_element = *reinterpret_cast<{elementType}*>({_hoistedBase} + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index));");
+			else
+				builder.AppendLine($"{indentation}    const auto chaos_element = {_hoistedBase}[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}    const auto chaos_element = chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];");
+			if (elementType != null)
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_element = *reinterpret_cast<{elementType}*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index));");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}    const auto chaos_element = chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)];");
+			}
 		}
 		EmitEvalStackPush(builder, indentation + "    ", pushedValueExpression);
 		builder.AppendLine($"{indentation}}}");
@@ -2041,13 +2332,25 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			builder.AppendLine($"{indentation}    BgcSatbPreWriteBarrier(reinterpret_cast<void**>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)));");
 		}
-		if (elementType != null)
+		string? _hoistedBase = TryResolveHoistedArrayBase(rawArrayExpr);
+		if (_hoistedBase != null)
 		{
-			builder.AppendLine($"{indentation}    *reinterpret_cast<{elementType}*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)) = static_cast<{elementType}>(chaos_value);");
+			// Hoisted array base pointer: direct index access
+			if (elementType != null)
+				builder.AppendLine($"{indentation}    *reinterpret_cast<{elementType}*>({_hoistedBase} + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)) = static_cast<{elementType}>(chaos_value);");
+			else
+				builder.AppendLine($"{indentation}    {_hoistedBase}[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
 		}
 		else
 		{
-			builder.AppendLine($"{indentation}    chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
+			if (elementType != null)
+			{
+				builder.AppendLine($"{indentation}    *reinterpret_cast<{elementType}*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)) = static_cast<{elementType}>(chaos_value);");
+			}
+			else
+			{
+				builder.AppendLine($"{indentation}    chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;");
+			}
 		}
 		if (isReferenceElement)
 		{
@@ -2422,25 +2725,32 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 		// A2.6: TypeInfo* direct API for typeof(T).IsAssignableFrom(typeof(U)) etc.
 		// Bypasses GetTypeFromHandle and emits *Ptr call with direct TypeInfo* symbols.
+		// The *Ptr call is emitted as a pre-try variable to avoid SEH frame overhead
+		// (the call is noexcept — only compares pointers, no managed exception possible).
 		if (_typeHierarchyPtrFoldMap.Count > 0 &&
 			_typeHierarchyPtrFoldMap.TryGetValue((_currentMethodNativeSymbol ?? "", instruction.IlOffset), out var hierarchyFold))
 		{
-			builder.AppendLine(indentation + "{");
+			// Build the *Ptr call expression
+			string callExpr;
 			if (hierarchyFold.TypeExpr2 is not null)
 			{
-				// Two-arg methods: DCE already skipped ltoken + GetTypeFromHandle,
-				// so stack is clean.  Just push the *Ptr call result.
-				EmitEvalStackPush(builder, indentation + "    ",
-					$"{hierarchyFold.PtrFunctionName}({hierarchyFold.TypeExpr1}, {hierarchyFold.TypeExpr2})");
+				// Two-arg methods: stack is clean (DCE skipped ltoken + GetTypeFromHandle)
+				callExpr = $"{hierarchyFold.PtrFunctionName}({hierarchyFold.TypeExpr1}, {hierarchyFold.TypeExpr2})";
 			}
 			else
 			{
 				// IsInstanceOfType: type arg is typeof(), obj arg is eval stack expression
 				var objExpr = ConsumeEvalStackValueExpression();
-				// DCE skipped the type handle push, stack has only the obj arg
-				EmitEvalStackPush(builder, indentation + "    ",
-					$"{hierarchyFold.PtrFunctionName}({hierarchyFold.TypeExpr1}, {objExpr})");
+				callExpr = $"{hierarchyFold.PtrFunctionName}({hierarchyFold.TypeExpr1}, {objExpr})";
 			}
+
+			// Emit as pre-try initialization (outside SEH frame)
+			var pretryName = $"_type_hierarchy_pretry_{_preTryFoldInitializers?.Count ?? 0}";
+			(_preTryFoldInitializers ??= new()).Add((pretryName, callExpr));
+
+			// Inside try-block: just reference the pre-computed value
+			builder.AppendLine(indentation + "{");
+			EmitEvalStackPush(builder, indentation + "    ", pretryName);
 			builder.AppendLine(indentation + "}");
 			return;
 		}
@@ -3798,6 +4108,9 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		bool _rIsFloat = _rType is SlotType.Float32 or SlotType.Float64;
 		bool _lIsFloat = _lType is SlotType.Float32 or SlotType.Float64;
 		bool isFloatOp = _lIsFloat || _rIsFloat;
+		bool _rIsInt64 = _rType is SlotType.Int64;
+		bool _lIsInt64 = _lType is SlotType.Int64;
+		bool isInt64Op = _lIsInt64 || _rIsInt64;
 
 		// In structured mode, _dN/_fN typed slots are already float/double C++ vars -> use directly
 		string _rLoad = isFloatOp
@@ -3806,14 +4119,22 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		            ? _rExpr
 		            : $"ChaosLoadFloat64({_rExpr})")
 		        : $"static_cast<double>({_rExpr})")
-		    : $"static_cast<CHAOS_IL2CPP_INT32>({_rExpr})";
+		    : isInt64Op
+		        ? (_rIsInt64
+		            ? $"ChaosLoadInt64({_rExpr})"
+		            : $"static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_INT32>({_rExpr}))")
+		        : $"static_cast<CHAOS_IL2CPP_INT32>({_rExpr})";
 		string _lLoad = isFloatOp
 		    ? (_lIsFloat
 		        ? (_activeStructuredSlotContext is not null && (_lExpr.StartsWith("_d", StringComparison.Ordinal) || _lExpr.StartsWith("_f", StringComparison.Ordinal))
 		            ? _lExpr
 		            : $"ChaosLoadFloat64({_lExpr})")
 		        : $"static_cast<double>({_lExpr})")
-		    : $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})";
+		    : isInt64Op
+		        ? (_lIsInt64
+		            ? $"ChaosLoadInt64({_lExpr})"
+		            : $"static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_INT32>({_lExpr}))")
+		        : $"static_cast<CHAOS_IL2CPP_INT32>({_lExpr})";
 
 		if (_activeStructuredSlotContext is not null)
 		{
@@ -3828,6 +4149,23 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 					"ChaosRem"     => $"fmod({_lLoad}, {_rLoad})",
 				};
 				EmitEvalStackPush(builder, indentation, floatExpr, SlotType.Float64);
+			}
+			else if (isInt64Op)
+			{
+				string _rLoadInt64 = _rIsInt64
+				    ? $"ChaosLoadInt64({_rExpr})"
+				    : $"static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_INT32>({_rExpr}))";
+				string _lLoadInt64 = _lIsInt64
+				    ? $"ChaosLoadInt64({_lExpr})"
+				    : $"static_cast<CHAOS_IL2CPP_INT64>(static_cast<CHAOS_IL2CPP_INT32>({_lExpr}))";
+				string int64Expr = helperName switch
+				{
+					"ChaosWrapAdd" => $"ChaosStoreInt64({_lLoadInt64} + {_rLoadInt64})",
+					"ChaosWrapSub" => $"ChaosStoreInt64({_lLoadInt64} - {_rLoadInt64})",
+					"ChaosWrapMul" => $"ChaosStoreInt64({_lLoadInt64} * {_rLoadInt64})",
+					_ => $"ChaosStoreInt64({helperName}({_lLoadInt64}, {_rLoadInt64}))",
+				};
+				EmitEvalStackPush(builder, indentation, int64Expr, SlotType.Int64);
 			}
 			else
 			{
@@ -3853,11 +4191,13 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine($"{indentation}    const auto chaos_left = {_lLoad};");
 			string expr = isFloatOp
 			    ? BuildFloatArithmeticExpression(helperName, "chaos_left", "chaos_right")
-			    : $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(chaos_left, chaos_right))";
+			    : isInt64Op
+			        ? $"ChaosStoreInt64({helperName}(chaos_left, chaos_right))"
+			        : $"static_cast<CHAOS_IL2CPP_INTPTR>({helperName}(chaos_left, chaos_right))";
 			EmitEvalStackPush(builder, indentation + "    ", expr);
 			builder.AppendLine($"{indentation}}}");
 		}
-		PushSlotType(isFloatOp ? SlotType.Float64 : SlotType.NativeInt);
+		PushSlotType(isFloatOp ? SlotType.Float64 : isInt64Op ? SlotType.Int64 : SlotType.NativeInt);
 	}
 
 	/// <summary>

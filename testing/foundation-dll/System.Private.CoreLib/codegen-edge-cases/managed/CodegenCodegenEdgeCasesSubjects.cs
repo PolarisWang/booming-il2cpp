@@ -37,7 +37,7 @@ public static partial class CodegenCodegenEdgeCasesSubjects
     // [3] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)
     public static void Subject_3()
     {
-        try { var _ = CodegenEdgeCasesSubjects.Subject_3(42); }
+        try { _ = CodegenEdgeCasesSubjects.Subject_3(42); }
         catch { _exitCode = 1; }
     }
 

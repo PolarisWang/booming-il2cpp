@@ -16,21 +16,21 @@ public static partial class GenericNullableValueSubjects
     // [0] System.Private.CoreLib/System.Nullable`1::get_HasValue:System.Boolean()
     public static void Subject_0()
     {
-        try { var _ = ((default(Nullable<int>).HasValue) ? 1 : 0); }
+        try { _ = ((default(Nullable<int>).HasValue) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Nullable`1::get_Value:T()
     public static void Subject_1()
     {
-        try { var _ = ((((int?)42).Value).GetHashCode()); }
+        try { _ = ((((int?)42).Value).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T()
     public static void Subject_2()
     {
-        try { var _ = ((default(Nullable<int>).GetValueOrDefault()).GetHashCode()); }
+        try { _ = ((default(Nullable<int>).GetValueOrDefault()).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
@@ -42,42 +42,42 @@ public static partial class GenericNullableValueSubjects
     // [4] System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)
     public static void Subject_4()
     {
-        try { var _ = ((default(Nullable<int>).Equals(null!)) ? 1 : 0); }
+        try { _ = ((default(Nullable<int>).Equals(null!)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Nullable`1::GetHashCode:System.Int32()
     public static void Subject_5()
     {
-        try { var _ = default(Nullable<int>).GetHashCode(); }
+        try { _ = default(Nullable<int>).GetHashCode(); }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Nullable`1::ToString:System.String()
     public static void Subject_6()
     {
-        try { var _ = ((default(Nullable<int>).ToString()).Length); }
+        try { _ = ((default(Nullable<int>).ToString()).Length); }
         catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
     public static void Subject_7()
     {
-        try { var _ = ((((ValueType)42).Equals(null!)) ? 1 : 0); }
+        try { _ = ((((ValueType)42).Equals(null!)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [8] System.Private.CoreLib/System.ValueType::GetHashCode:System.Int32()
     public static void Subject_8()
     {
-        try { var _ = ((ValueType)42).GetHashCode(); }
+        try { _ = ((ValueType)42).GetHashCode(); }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.ValueType::ToString:System.String()
     public static void Subject_9()
     {
-        try { var _ = ((((ValueType)42).ToString()).Length); }
+        try { _ = ((((ValueType)42).ToString()).Length); }
         catch { _exitCode = 1; }
     }
 

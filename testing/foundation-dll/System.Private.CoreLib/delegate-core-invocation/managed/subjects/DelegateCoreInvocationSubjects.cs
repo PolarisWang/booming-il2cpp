@@ -17,35 +17,35 @@ public static partial class DelegateCoreInvocationSubjects
     // [0] System.Private.CoreLib/System.Delegate::Combine:System.Delegate(System.Delegate,System.Delegate)
     public static void Subject_0()
     {
-        try { var _ = ((Delegate.Combine(default, default)).GetHashCode()); }
+        try { _ = ((Delegate.Combine(default, default)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Delegate::Remove:System.Delegate(System.Delegate,System.Delegate)
     public static void Subject_1()
     {
-        try { var _ = ((Delegate.Remove(default, default)).GetHashCode()); }
+        try { _ = ((Delegate.Remove(default, default)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Delegate::DynamicInvoke:System.Object(System.Object[])
     public static void Subject_2()
     {
-        try { var _ = ((new System.Action(() => {}).DynamicInvoke()).GetHashCode()); }
+        try { _ = ((new System.Action(() => {}).DynamicInvoke()).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Delegate::get_Method:System.Reflection.MethodInfo()
     public static void Subject_3()
     {
-        try { var _ = ((new System.Action(() => {}).Method).GetHashCode()); }
+        try { _ = ((new System.Action(() => {}).Method).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Delegate::get_Target:System.Object()
     public static void Subject_4()
     {
-        try { var _ = ((new System.Action(() => {}).Target).GetHashCode()); }
+        try { _ = ((new System.Action(() => {}).Target).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
@@ -62,7 +62,7 @@ public static partial class DelegateCoreInvocationSubjects
     // [7] System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()
     public static void Subject_7()
     {
-        try { var _ = ((new System.Action(() => {}).GetInvocationList()).Length); }
+        try { _ = ((new System.Action(() => {}).GetInvocationList()).Length); }
         catch { _exitCode = 1; }
     }
 

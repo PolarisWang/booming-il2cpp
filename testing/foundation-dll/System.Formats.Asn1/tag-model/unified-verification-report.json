@@ -2,9 +2,9 @@
   "family": "tag-model",
   "assembly": "System.Formats.Asn1",
   "mode": "standard",
-  "timestamp": "2026-05-24T18:00:44",
-  "duration_ms": 35270,
-  "overall_status": "passed",
+  "timestamp": "2026-05-28T10:57:50",
+  "duration_ms": 92242,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -28,44 +28,167 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Formats.Asn1\\tag-model\\managed\\subjects\\build-output\\TagModelSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 28174
+      "duration_ms": 52166
     },
     "jit_codegen": {
       "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "entry-jit.exe already exists, skipping rebuild",
+      "status": "failed",
+      "summary": "JIT codegen failed",
       "details": {},
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 24635
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "passed",
+      "summary": "Fact net8.0: passed=0 failed=0 skipped=19",
+      "details": {
+        "totalMethods": 19,
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "skippedMethods": 19,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsConstructed:System.Formats.Asn1.Asn1Tag()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::AsPrimitive:System.Formats.Asn1.Asn1Tag()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::CalculateEncodedSize:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Decode:System.Formats.Asn1.Asn1Tag(System.ReadOnlySpan{System.Byte},System.Int32&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 4,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Encode:System.Int32(System.Span{System.Byte})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 5,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Equals:System.Boolean(System.Formats.Asn1.Asn1Tag)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 6,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::Equals:System.Boolean(System.Object)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 7,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::get_IsConstructed:System.Boolean()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 8,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::get_TagClass:System.Formats.Asn1.TagClass()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 9,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::get_TagValue:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 10,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::GetHashCode:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 11,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::HasSameClassAndValue:System.Boolean(System.Formats.Asn1.Asn1Tag)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 12,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::op_Equality:System.Boolean(System.Formats.Asn1.Asn1Tag,System.Formats.Asn1.Asn1Tag)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 13,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::op_Inequality:System.Boolean(System.Formats.Asn1.Asn1Tag,System.Formats.Asn1.Asn1Tag)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 14,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::ToString:System.String()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 15,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryDecode:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.Asn1Tag&,System.Int32&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 16,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::TryEncode:System.Boolean(System.Span{System.Byte},System.Int32&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 17,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::.ctor:System.Void(System.Formats.Asn1.UniversalTagNumber,System.Boolean)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 18,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.Asn1Tag::.ctor:System.Void(System.Formats.Asn1.TagClass,System.Int32,System.Boolean)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          }
+        ]
+      },
+      "errors": [],
+      "duration_ms": 2710
     },
     "fact": {
       "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (19/19)",
+      "status": "failed",
+      "summary": "Fact verify=failed (0/0)",
       "details": {
         "fact": {
-          "status": "passed",
-          "passed": 19,
-          "total": 19
+          "status": "failed",
+          "passed": 0,
+          "total": 0
         }
       },
       "errors": [],
-      "duration_ms": 472
+      "duration_ms": 408
     },
     "fact_jit": {
       "stage": "fact_jit",
-      "status": "passed",
-      "summary": "Fact JIT verify=passed (19/19)",
-      "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 19,
-          "total": 19,
-          "exit_code": 0
-        }
-      },
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT fact",
+      "details": {},
       "errors": [],
-      "duration_ms": 35
+      "duration_ms": 0
     },
     "audit": {
       "stage": "audit",
@@ -79,60 +202,88 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 2102
+      "duration_ms": 1550
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
-      "errors": [],
-      "duration_ms": 32
-    },
-    "microbench": {
-      "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=5.4ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
+      "summary": "asm-compare: 17/19 methods OK, avg JIT=44.0 instr, avg AOT IR=28.1 instr, expansion=0.71x",
       "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 5.4,
-          "batchCount": 1000,
-          "framesPerBatch": 32
+        "totalMethods": 19,
+        "okCount": 17,
+        "failedCount": 2,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 44,
+          "avg": 44.0,
+          "total": 748
         },
-        "poolSize": 32
+        "aotInstructionCount": {
+          "min": 10,
+          "max": 40,
+          "avg": 28.1,
+          "total": 533
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {
+          "external_runtime_call": 2
+        },
+        "overallIrExpansionRatio": 0.71,
+        "averageExpansionRatio": 0.69,
+        "maxExpansionRatio": 0.91,
+        "minExpansionRatio": 0.5
       },
       "errors": [],
-      "duration_ms": 33
+      "duration_ms": 1068
     },
     "benchmark": {
       "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All 19 non-stub methods are invalid (no managed harness)",
-      "details": {},
-      "errors": [],
-      "duration_ms": 3249
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "19/19 passed, 0 failed (stub=0)",
+      "status": "failed",
+      "summary": "net8-jit benchmark produced no valid results",
       "details": {
-        "passedMethods": 19,
-        "failedMethods": 0,
-        "totalMethods": 19,
-        "realMethods": 19,
-        "stubMethods": 0
+        "runtimesAvailable": [
+          "net8-jit",
+          "net10-jit",
+          "mono",
+          "chaos-aot",
+          "chaos-jit"
+        ],
+        "runtimesUnavailable": [],
+        "multiRunReportPath": "multi-run/multi-run-report.json",
+        "chaosClassification": {
+          "chaos_faster_than_all": 0,
+          "chaos_faster_than_jit": 0,
+          "chaos_midfield": 0,
+          "chaos_slower_than_jit": 0,
+          "not_benchmarked": 19
+        },
+        "summaries": {
+          "chaos-aot": {
+            "geometricMeanNs": 9.440854836777703,
+            "okCount": 19,
+            "totalMethods": 19
+          },
+          "chaos-jit": {
+            "geometricMeanNs": 9.253114364041794,
+            "okCount": 19,
+            "totalMethods": 19
+          }
+        },
+        "chaosAotGeometricMeanNs": 9.440854836777703
       },
       "errors": [],
-      "duration_ms": 31
+      "duration_ms": 9057
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=25.29% (1.3x) over 19 methods (AOT patched path)",
+      "summary": "avg_slowdown=18.79% (1.2x) over 19 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": 25.29,
-        "slowdownFactor": 1.2529,
+        "averageSlowdownPercent": 18.79,
+        "slowdownFactor": 1.1879,
         "threshold": 50.0,
         "nonStubMethods": 19
       },
@@ -141,73 +292,125 @@
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "19/19 passed, 0 failed",
-      "details": {
-        "passed": 19,
-        "failed": 0,
-        "total": 19
-      },
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT hotupdate",
+      "details": {},
       "errors": [],
-      "duration_ms": 26
+      "duration_ms": 0
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "entry-jit.exe not found",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "dashboard": {
+      "stage": "dashboard",
       "status": "passed",
-      "summary": "avg_slowdown=33.01% (1.3x) over 6 methods (JIT patched path)",
+      "summary": "Dashboard built: 6 sections",
       "details": {
-        "averageSlowdownPercent": 33.01,
-        "slowdownFactor": 1.3300999999999998,
-        "threshold": 50.0,
-        "nonStubMethods": 6
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 19,
+          "okCount": 17,
+          "failedCount": 2,
+          "overallIrExpansionRatio": 0.71,
+          "averageExpansionRatio": 0.69,
+          "maxExpansionRatio": 0.91,
+          "jitInstructionAvg": 44.0,
+          "aotInstructionAvg": 28.1,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {
+            "external_runtime_call": 2
+          }
+        },
+        "performance": {
+          "averageSpeedupPercent": 0,
+          "nativeFasterCount": 0,
+          "managedFasterCount": 0,
+          "matchedCount": 0,
+          "totalMethods": 0,
+          "invalidCount": 0
+        },
+        "hotupdate": {
+          "aotOverhead": {
+            "averageSlowdownPercent": 18.79,
+            "slowdownFactor": 1.1879,
+            "nonStubMethods": 19
+          }
+        },
+        "managedFact": {
+          "totalMethods": 19,
+          "passedMethods": 0,
+          "failedMethods": 0,
+          "skippedMethods": 19,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0.71,
+          "interpreterSlowdownFactor": 1.1879,
+          "asmPassRate": 89.5
+        }
       },
       "errors": [],
-      "duration_ms": 583
+      "duration_ms": 1
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
+    "methodCoverage": 0.0,
     "testedRate": 100.0,
     "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 5.4,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 0,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
-    },
-    "irTranslation": {},
-    "performance": {},
-    "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 19,
-        "failedMethods": 0,
-        "totalMethods": 19
-      },
-      "aotOverhead": {
-        "averageSlowdownPercent": 25.29,
-        "slowdownFactor": 1.2529,
-        "nonStubMethods": 19
-      },
-      "jitFunctional": {
-        "passedMethods": 19,
-        "failedMethods": 0,
-        "totalMethods": 19
-      },
-      "jitOverhead": {
-        "averageSlowdownPercent": 33.01,
-        "slowdownFactor": 1.3300999999999998,
-        "nonStubMethods": 6
+    "interpreter": {},
+    "irTranslation": {
+      "totalMethods": 19,
+      "okCount": 17,
+      "failedCount": 2,
+      "overallIrExpansionRatio": 0.71,
+      "averageExpansionRatio": 0.69,
+      "maxExpansionRatio": 0.91,
+      "jitInstructionAvg": 44.0,
+      "aotInstructionAvg": 28.1,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {
+        "external_runtime_call": 2
       }
+    },
+    "performance": {
+      "averageSpeedupPercent": 0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 0,
+      "invalidCount": 0
+    },
+    "hotupdate": {
+      "aotOverhead": {
+        "averageSlowdownPercent": 18.79,
+        "slowdownFactor": 1.1879,
+        "nonStubMethods": 19
+      }
+    },
+    "managedFact": {
+      "totalMethods": 19,
+      "passedMethods": 0,
+      "failedMethods": 0,
+      "skippedMethods": 19,
+      "tfm": "net8.0"
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 1.2529,
-      "asmPassRate": 0.0
+      "irExpansionRatio": 0.71,
+      "interpreterSlowdownFactor": 1.1879,
+      "asmPassRate": 89.5
     }
   },
   "regression": {

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/attributes/custom/metadata",
-  "capturedAt": "2026-05-27T23:46:52",
+  "capturedAt": "2026-05-28T10:58:13",
   "batchMode": true,
   "summary": {
     "totalMethods": 9,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 17,
-      "avg": 13.9,
-      "total": 125
+      "max": 16,
+      "avg": 13.2,
+      "total": 119
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 40
     },
-    "overallIrExpansionRatio": 0.32,
-    "averageExpansionRatio": 0.32,
-    "maxExpansionRatio": 0.39,
+    "overallIrExpansionRatio": 0.3,
+    "averageExpansionRatio": 0.3,
+    "maxExpansionRatio": 0.36,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -362,8 +362,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 17,
-        "ratio": 0.39,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
         "jitCodeSize": 256
       },
       "jit": {
@@ -374,7 +374,7 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_6",
-        "instructions": 17
+        "instructions": 14
       },
       "analysis": [
         {
@@ -409,8 +409,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 17,
-        "ratio": 0.39,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
         "jitCodeSize": 256
       },
       "jit": {
@@ -421,7 +421,7 @@
       "aot": {
         "status": "ok",
         "symbol": "AttributesCustomMetadataSubjects_AttributesCustomMetadataSubjects_Subject_7",
-        "instructions": 17
+        "instructions": 14
       },
       "analysis": [
         {

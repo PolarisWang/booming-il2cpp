@@ -17,7 +17,7 @@ public static partial class IoStreamsBasicsSubjects
     // [0] System.Private.CoreLib/System.IO.Stream::Read:System.Int32(System.Byte[],System.Int32,System.Int32)
     public static void Subject_0()
     {
-        try { var _ = new MemoryStream(new byte[10]).Read(new byte[5], 0, 5); }
+        try { _ = new MemoryStream(new byte[10]).Read(new byte[5], 0, 5); }
         catch { _exitCode = 1; }
     }
 
@@ -38,7 +38,7 @@ public static partial class IoStreamsBasicsSubjects
     // [3] System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)
     public static void Subject_3()
     {
-        try { var _ = (int)(new MemoryStream().Seek(42L, System.IO.SeekOrigin.Begin)); }
+        try { _ = (int)(new MemoryStream().Seek(42L, System.IO.SeekOrigin.Begin)); }
         catch { _exitCode = 1; }
     }
 
@@ -52,14 +52,14 @@ public static partial class IoStreamsBasicsSubjects
     // [5] System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()
     public static void Subject_5()
     {
-        try { var _ = (int)(new MemoryStream().Length); }
+        try { _ = (int)(new MemoryStream().Length); }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.IO.Stream::get_Position:System.Int64()
     public static void Subject_6()
     {
-        try { var _ = (int)(new MemoryStream().Position); }
+        try { _ = (int)(new MemoryStream().Position); }
         catch { _exitCode = 1; }
     }
 
@@ -73,14 +73,14 @@ public static partial class IoStreamsBasicsSubjects
     // [8] System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()
     public static void Subject_8()
     {
-        try { var _ = ((new StringReader("hello").ReadLine()).Length); }
+        try { _ = ((new StringReader("hello").ReadLine()).Length); }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()
     public static void Subject_9()
     {
-        try { var _ = ((new StringReader("hello").ReadToEnd()).Length); }
+        try { _ = ((new StringReader("hello").ReadToEnd()).Length); }
         catch { _exitCode = 1; }
     }
 
@@ -108,21 +108,21 @@ public static partial class IoStreamsBasicsSubjects
     // [13] System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()
     public static void Subject_13()
     {
-        try { var _ = new BinaryReader(new MemoryStream(new byte[4])).ReadInt32(); }
+        try { _ = new BinaryReader(new MemoryStream(new byte[4])).ReadInt32(); }
         catch { _exitCode = 1; }
     }
 
     // [14] System.Private.CoreLib/System.IO.BinaryReader::ReadString:System.String()
     public static void Subject_14()
     {
-        try { var _ = ((new BinaryReader(new MemoryStream(new byte[] { 0 })).ReadString()).Length); }
+        try { _ = ((new BinaryReader(new MemoryStream(new byte[] { 0 })).ReadString()).Length); }
         catch { _exitCode = 1; }
     }
 
     // [15] System.Private.CoreLib/System.IO.BinaryReader::ReadDouble:System.Double()
     public static void Subject_15()
     {
-        try { var _ = (int)(new BinaryReader(new MemoryStream(new byte[8])).ReadDouble()); }
+        try { _ = (int)(new BinaryReader(new MemoryStream(new byte[8])).ReadDouble()); }
         catch { _exitCode = 1; }
     }
 

@@ -976,7 +976,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(inner + "while (" + _condition + ")");
             builder.AppendLine(inner + "{");
             if (hoistedIVSlot.HasValue)
-                builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = chaos_locals[{hoistedIVSlot.Value}];");
+                builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = static_cast<CHAOS_IL2CPP_INT32>(chaos_locals[{hoistedIVSlot.Value}]);");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
@@ -1034,7 +1034,7 @@ public sealed partial class NativeAotLoweringPlanner
             builder.AppendLine(inner + "while (chaos_left " + cmpOp + " chaos_right)");
             builder.AppendLine(inner + "{");
             if (hoistedIVSlot.HasValue)
-                builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = chaos_locals[{hoistedIVSlot.Value}];");
+                builder.AppendLine(bodyIndent + $"_iv_{hoistedIVSlot.Value} = static_cast<CHAOS_IL2CPP_INT32>(chaos_locals[{hoistedIVSlot.Value}]);");
             EmitStructuredIRNode(builder, w.Body, method, bodyIndent);
             builder.AppendLine(inner + "}");
             builder.AppendLine(indentation + "}");
@@ -1106,10 +1106,37 @@ public sealed partial class NativeAotLoweringPlanner
             _hoistedIVs = new Dictionary<int, string> { { hoistedIVSlot.Value, ivName } };
         }
 
+        // ---- Array base pointer hoisting ----
+        // Detect loop-invariant array local slots and hoist the base pointer computation
+        // (reinterpret_cast + chaos_array_get_elements) outside the loop body.
+        _hoistedArrayBaseSlots = null;
+        _slotVarToLocalSlot = null;
+        var bodyInstrs3 = new List<AotCoreIrInstructionArtifact>();
+        CollectInstructions(dw.Body, bodyInstrs3);
+        if (dw.LatchInstructions != null)
+            bodyInstrs3.AddRange(dw.LatchInstructions);
+        if (bodyInstrs3.Count > 0)
+        {
+            var writtenSlots = new HashSet<int>();
+            CollectWrittenSlots(dw.Body, writtenSlots);
+            var invariantArraySlots = DetectInvariantArraySlots(bodyInstrs3, writtenSlots);
+            if (invariantArraySlots.Count > 0)
+            {
+                _hoistedArrayBaseSlots = invariantArraySlots;
+                _slotVarToLocalSlot = new Dictionary<string, int>();
+                foreach (var kvp in invariantArraySlots)
+                {
+                    int slot = kvp.Key;
+                    string basePtr = kvp.Value;
+                    builder.AppendLine(bodyIndent + $"auto* {basePtr} = chaos_array_get_elements(reinterpret_cast<chaos_managed_array*>(chaos_locals[{slot}]));");
+                }
+            }
+        }
+
         builder.AppendLine(indentation + "do");
         builder.AppendLine(indentation + "{");
         if (hoistedIVSlot.HasValue)
-            builder.AppendLine(bodyIndent + $"CHAOS_IL2CPP_INTPTR _iv_{hoistedIVSlot.Value} = chaos_locals[{hoistedIVSlot.Value}];");
+            builder.AppendLine(bodyIndent + $"CHAOS_IL2CPP_INT32 _iv_{hoistedIVSlot.Value} = static_cast<CHAOS_IL2CPP_INT32>(chaos_locals[{hoistedIVSlot.Value}]);");
         EmitStructuredIRNode(builder, dw.Body, method, bodyIndent);
 
         // Emit latch instructions if present
@@ -1204,6 +1231,8 @@ public sealed partial class NativeAotLoweringPlanner
         builder.AppendLine(indentation + "} while (true);");
         _hoistedIVs = prevHoistedIVs;
         _loopArrayAccessSkipOffsets = null;
+        _hoistedArrayBaseSlots = null;
+        _slotVarToLocalSlot = null;
     }
 
     // 鈹€鈹€ Switch 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€
@@ -1714,6 +1743,7 @@ public sealed partial class NativeAotLoweringPlanner
         _structuredSlotTypes.Clear();
         _structLocalSlots = IdentifyStructLocalSlots(instructions);
         _floatLocalSlots = IdentifyFloatLocalSlots(instructions);
+        _int64LocalSlots = IdentifyInt64LocalSlots(instructions);
         slotContext.FloatLocalSlots = _floatLocalSlots;
         try
         {
@@ -1725,6 +1755,7 @@ public sealed partial class NativeAotLoweringPlanner
             _structuredSlotTypes.Clear();
             _structLocalSlots = null;
             _floatLocalSlots = null;
+            _int64LocalSlots = null;
         }
         return slotContext;
     }
@@ -2658,6 +2689,79 @@ public sealed partial class NativeAotLoweringPlanner
                             written.Add(GetRequiredIntOperand(instr));
                 break;
         }
+    }
+
+    /// <summary>
+    /// Scans a flat instruction list for array accesses (ldelem/stelem) and identifies
+    /// loop-invariant chaos_locals slots used as array sources.
+    /// Returns a map: slot number → base pointer variable name.
+    /// </summary>
+    private Dictionary<int, string> DetectInvariantArraySlots(
+        List<AotCoreIrInstructionArtifact> instructions,
+        HashSet<int> writtenSlots)
+    {
+        // Simulate eval stack: track whether each stack entry represents a chaos_locals[N] value
+        // null = computed/unknown expression, string = "chaos_locals[N]" or similar
+        var stack = new List<string?>();
+        var result = new Dictionary<int, string>();
+
+        foreach (var instr in instructions)
+        {
+            string op = instr.Op;
+
+            // Determine pop/push counts
+            int popCount = EstimatePopCount(op);
+            int pushCount = EstimatePushCount(op);
+
+            // === Before popping: check if this instruction is an array access ===
+            if (op.StartsWith("ldelem", StringComparison.Ordinal) || op == "ldelem")
+            {
+                // ldelem: stack has [..., array, index] → array is 2nd from top
+                if (stack.Count >= 2)
+                {
+                    string? arraySource = stack[stack.Count - 2];
+                    if (arraySource != null && arraySource.StartsWith("chaos_locals[", StringComparison.Ordinal))
+                    {
+                        int slot = int.Parse(arraySource.AsSpan(13, arraySource.Length - 14));
+                        if (!writtenSlots.Contains(slot))
+                        {
+                            string basePtr = $"_arr_base_{slot}";
+                            result.TryAdd(slot, basePtr);
+                        }
+                    }
+                }
+            }
+            else if (op.StartsWith("stelem", StringComparison.Ordinal) || op == "stelem")
+            {
+                // stelem: stack has [..., array, index, value] → array is 3rd from top
+                if (stack.Count >= 3)
+                {
+                    string? arraySource = stack[stack.Count - 3];
+                    if (arraySource != null && arraySource.StartsWith("chaos_locals[", StringComparison.Ordinal))
+                    {
+                        int slot = int.Parse(arraySource.AsSpan(13, arraySource.Length - 14));
+                        if (!writtenSlots.Contains(slot))
+                        {
+                            string basePtr = $"_arr_base_{slot}";
+                            result.TryAdd(slot, basePtr);
+                        }
+                    }
+                }
+            }
+
+            // === Pop from stack ===
+            for (int i = 0; i < popCount && stack.Count > 0; i++)
+                stack.RemoveAt(stack.Count - 1);
+
+            // === Push to stack ===
+            string? pushedValue = null;
+            if (op == "ldloc")
+                pushedValue = $"chaos_locals[{GetRequiredIntOperand(instr)}]";
+            for (int i = 0; i < pushCount; i++)
+                stack.Add(pushedValue);
+        }
+
+        return result;
     }
 
     /// <summary>

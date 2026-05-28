@@ -94,7 +94,7 @@ public partial class ConvertCharTests
     public void _System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Object()
     {
         // Purpose: Verify Convert.ToChar with typical input
-            var result = Convert.ToChar(null!);
+            var result = Convert.ToChar((object)42);
             Xunit.Assert.NotNull((object)result);
     }
 
@@ -152,7 +152,7 @@ public partial class ConvertCharTests
     public void _System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Object_System_IFormatProvider()
     {
         // Purpose: Smoke — Convert.ToChar with complex param(s)
-            _ = Convert.ToChar(null!, null);
+            _ = Convert.ToChar((object)42, null);
     }
 
     [Fact]

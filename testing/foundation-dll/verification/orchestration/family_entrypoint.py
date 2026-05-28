@@ -455,6 +455,12 @@ def generate_project_file(
                     if has_custom_entry and f.name == custom_cs_name:
                         continue
                     extra_cs += f'    <Compile Include="{f.name}" />\n'
+            # Also scan subjects/ subdirectory for handwritten .cs files (e.g. compound family NativeEntry.cs)
+            subjects_dir = output_dir / "subjects"
+            if subjects_dir.is_dir():
+                for f in sorted(subjects_dir.iterdir()):
+                    if f.suffix == ".cs" and f.name not in (cs_file_name, "Program.cs"):
+                        extra_cs += f'    <Compile Include="subjects/{f.name}" />\n'
         custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
         # Always add Chaos.TestFramework.Sdk reference for subjects variant
         sdk_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
@@ -524,6 +530,19 @@ def generate_project_file(
         "  </ItemGroup>\n"
     )
 
+    extra_cs = ""
+    if output_dir is not None and output_dir.is_dir():
+        for f in sorted(output_dir.iterdir()):
+            if f.suffix == ".cs" and f.name not in (cs_file_name, "Program.cs"):
+                if has_custom_entry and f.name == f"{class_name}.Custom.cs":
+                    continue
+                extra_cs += f'    <Compile Include="{f.name}" />\n'
+        # Also scan subjects/ subdirectory for handwritten .cs files (e.g. compound family NativeEntry.cs)
+        subjects_dir = output_dir / "subjects"
+        if subjects_dir.is_dir():
+            for f in sorted(subjects_dir.iterdir()):
+                if f.suffix == ".cs" and f.name not in (cs_file_name, "Program.cs"):
+                    extra_cs += f'    <Compile Include="subjects/{f.name}" />\n'
     custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
 
     return (
@@ -541,6 +560,7 @@ def generate_project_file(
         "  <ItemGroup>\n"
         f'    <Compile Include="{cs_file_name}" />\n'
         f'    <Compile Include="Program.cs" />\n'
+        f"{extra_cs}"
         f"{custom_cs}"
         "  </ItemGroup>\n"
         "</Project>\n"
@@ -594,6 +614,14 @@ def build_project_safe(csproj_path: Path, build_out: Path) -> subprocess.Complet
     for f in src_dir.iterdir():
         if f.suffix == ".cs":
             shutil.copy2(f, temp_dir / f.name)
+    # Also copy files from subjects/ subdirectory for compound families
+    subjects_src = src_dir / "subjects"
+    if subjects_src.is_dir():
+        subjects_dst = temp_dir / "subjects"
+        subjects_dst.mkdir(parents=True, exist_ok=True)
+        for f in subjects_src.iterdir():
+            if f.suffix == ".cs":
+                shutil.copy2(f, subjects_dst / f.name)
 
     result = subprocess.run(
         ["dotnet", "build", str(temp_csproj), "-o", str(temp_out_dir), "--nologo", "-v", "quiet"],
@@ -759,6 +787,7 @@ def generate_and_build(
             assembly_name=assembly_name, class_name=class_name,
             cs_file_name=cs_file_name, variant="benchmark",
             has_custom_entry=False, target_framework=target_framework,
+            output_dir=output_dir,
         )
 
         output_dir.mkdir(parents=True, exist_ok=True)

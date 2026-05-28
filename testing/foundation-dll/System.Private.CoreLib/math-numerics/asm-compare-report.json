@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/math/numerics",
-  "capturedAt": "2026-05-27T21:51:00",
+  "capturedAt": "2026-05-28T12:27:54",
   "batchMode": true,
   "summary": {
     "totalMethods": 18,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 9,
-      "max": 12,
-      "avg": 10.4,
-      "total": 187
+      "max": 11,
+      "avg": 9.7,
+      "total": 175
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 18
     },
-    "overallIrExpansionRatio": 0.24,
-    "averageExpansionRatio": 0.24,
-    "maxExpansionRatio": 0.27,
+    "overallIrExpansionRatio": 0.22,
+    "averageExpansionRatio": 0.22,
+    "maxExpansionRatio": 0.25,
     "minExpansionRatio": 0.2
   },
   "methodResults": [
@@ -72,8 +72,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -84,7 +84,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_1",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -104,8 +104,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -116,7 +116,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_2",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -136,8 +136,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -148,7 +148,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_3",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -168,8 +168,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -180,7 +180,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_4",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -200,8 +200,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -212,7 +212,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_5",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -264,8 +264,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -276,7 +276,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_7",
-        "instructions": 11
+        "instructions": 10
       },
       "analysis": [
         {
@@ -328,8 +328,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -340,7 +340,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_9",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -360,8 +360,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -372,7 +372,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_10",
-        "instructions": 11
+        "instructions": 10
       },
       "analysis": [
         {
@@ -392,8 +392,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -404,7 +404,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_11",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -424,8 +424,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -436,7 +436,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_12",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -456,8 +456,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -468,7 +468,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_13",
-        "instructions": 11
+        "instructions": 10
       },
       "analysis": [
         {
@@ -584,8 +584,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -596,7 +596,7 @@
       "aot": {
         "status": "ok",
         "symbol": "MathNumericsSubjects_MathNumericsSubjects_Subject_17",
-        "instructions": 12
+        "instructions": 11
       },
       "analysis": [
         {

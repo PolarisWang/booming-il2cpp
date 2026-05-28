@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/io/streams/basics",
-  "capturedAt": "2026-05-27T21:47:04",
+  "capturedAt": "2026-05-28T12:14:50",
   "batchMode": true,
   "summary": {
     "totalMethods": 18,
@@ -18,8 +18,8 @@
     "aotInstructionCount": {
       "min": 8,
       "max": 15,
-      "avg": 10.7,
-      "total": 193
+      "avg": 10.5,
+      "total": 189
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -136,8 +136,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -148,7 +148,7 @@
       "aot": {
         "status": "ok",
         "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_3",
-        "instructions": 13
+        "instructions": 12
       },
       "analysis": [
         {
@@ -200,8 +200,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -212,7 +212,7 @@
       "aot": {
         "status": "ok",
         "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_5",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -232,8 +232,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -244,7 +244,7 @@
       "aot": {
         "status": "ok",
         "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_6",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {
@@ -535,8 +535,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -547,7 +547,7 @@
       "aot": {
         "status": "ok",
         "symbol": "IoStreamsBasicsSubjects_IoStreamsBasicsSubjects_Subject_15",
-        "instructions": 13
+        "instructions": 12
       },
       "analysis": [
         {

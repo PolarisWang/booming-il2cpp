@@ -14,6 +14,7 @@
   <ItemGroup>
     <Compile Include="GenericSupplementSubjects.cs" />
     <Compile Include="GenericSupplementNativeEntry.cs" />
+    <Compile Include="subjects/GenericSupplementNativeEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

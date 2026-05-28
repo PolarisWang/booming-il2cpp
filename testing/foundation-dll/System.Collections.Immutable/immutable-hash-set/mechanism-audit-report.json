@@ -1,15 +1,33 @@
 {
   "family": "immutable-hash-set",
   "assembly": "System.Collections.Immutable",
-  "total_methods": 26,
-  "audited": 26,
+  "total_methods": 57,
+  "audited": 57,
   "false_passing": 0,
   "stubs_found": 0,
   "skips_found": 0,
   "methods_without_lowering": 0,
-  "methods_without_assert": 26,
+  "methods_without_assert": 57,
   "passed": true,
   "method_details": [
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
     {
       "method_name": "RuntimeSubjects",
       "subject_id": "",
@@ -29,7 +47,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "void",
+      "method_name": "chaos_bridge_thunk_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -38,7 +56,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RunNativeAot",
+      "method_name": "chaos_bridge_thunk_1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -47,7 +65,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RunNativeAotAll",
+      "method_name": "chaos_bridge_thunk_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -56,7 +74,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RunNativeAotBench",
+      "method_name": "chaos_bridge_thunk_3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -65,7 +83,43 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "BenchmarkMethod",
+      "method_name": "chaos_bridge_thunk_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -128,6 +182,24 @@
       "audit_status": "PASS"
     },
     {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
       "method_name": "RuntimeSubjects",
       "subject_id": "",
       "is_stub": false,
@@ -146,7 +218,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "void",
+      "method_name": "chaos_bridge_thunk_0",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -155,7 +227,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RunNativeAot",
+      "method_name": "chaos_bridge_thunk_1",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -164,7 +236,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RunNativeAotAll",
+      "method_name": "chaos_bridge_thunk_2",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -173,7 +245,7 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "RunNativeAotBench",
+      "method_name": "chaos_bridge_thunk_3",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",
@@ -182,7 +254,214 @@
       "audit_status": "PASS"
     },
     {
-      "method_name": "BenchmarkMethod",
+      "method_name": "chaos_bridge_thunk_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_8",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ImmutableHashSetSubjects_ImmutableHashSetSubjects_CustomEntrySubject_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosJitRegisterAll",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "ChaosRegisterGcLayouts",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "GetHotpatchEntryCount",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeSubjects",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "RuntimeFnTable",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_0",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_1",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_2",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_3",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_4",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_5",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_6",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_7",
+      "subject_id": "",
+      "is_stub": false,
+      "stub_pattern": "",
+      "has_lowering": true,
+      "assert_fired": false,
+      "audit_status": "PASS"
+    },
+    {
+      "method_name": "chaos_bridge_thunk_8",
       "subject_id": "",
       "is_stub": false,
       "stub_pattern": "",

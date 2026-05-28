@@ -29,14 +29,14 @@ public static partial class BufferMemorySubjects
     // [2] System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)
     public static void Subject_2()
     {
-        try { var _ = Buffer.ByteLength(Array.Empty<byte>()); }
+        try { _ = Buffer.ByteLength(Array.Empty<byte>()); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)
     public static void Subject_3()
     {
-        try { var _ = (int)(Buffer.GetByte(new byte[4], 0)); }
+        try { _ = (int)(Buffer.GetByte(new byte[4], 0)); }
         catch { _exitCode = 1; }
     }
 

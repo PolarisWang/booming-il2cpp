@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/generic/nullable/value",
-  "capturedAt": "2026-05-27T21:29:16",
+  "capturedAt": "2026-05-28T11:58:43",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 16,
-      "avg": 12.0,
-      "total": 120
+      "max": 15,
+      "avg": 11.1,
+      "total": 111
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 10
     },
-    "overallIrExpansionRatio": 0.27,
-    "averageExpansionRatio": 0.27,
-    "maxExpansionRatio": 0.36,
+    "overallIrExpansionRatio": 0.25,
+    "averageExpansionRatio": 0.25,
+    "maxExpansionRatio": 0.34,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 15,
-        "ratio": 0.34,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,7 +52,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_0",
-        "instructions": 15
+        "instructions": 12
       },
       "analysis": [
         {
@@ -170,8 +170,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 16,
-        "ratio": 0.36,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -182,7 +182,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_4",
-        "instructions": 16
+        "instructions": 13
       },
       "analysis": [],
       "instructionCategories": {}
@@ -250,8 +250,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 15,
-        "ratio": 0.34,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -262,7 +262,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_7",
-        "instructions": 15
+        "instructions": 12
       },
       "analysis": [
         {

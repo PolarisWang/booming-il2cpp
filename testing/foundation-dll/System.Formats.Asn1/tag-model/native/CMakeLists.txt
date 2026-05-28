@@ -7,6 +7,7 @@ set(CMAKE_CXX_STANDARD 20)
 add_compile_options(/utf-8 /GS- /FS)
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
+add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
@@ -19,14 +20,32 @@ set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Formats.Asn1/tag-model/codegen")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
-file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
-# Also search native/ (pipeline syncs codegen output there after convert-to-cpp)
-file(GLOB CHAOS_CODEGEN_NATIVE_CPP "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp")
-# Use codegen path if available, fall back to native path (avoids compiling both)
-if(CHAOS_CODEGEN_CPP)
-  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_CPP})
-else()
+# JIT mode: exclude codegen/generated/native-aot.generated.cpp (stale flat
+# layout from old --output runs, has empty ChaosJitRegisterAll stub).
+# Keep *Subjects/generated/native-aot.generated.cpp (current --sdk-out output).
+file(GLOB CHAOS_CODEGEN_CPP
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/generated/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/generated/generated/chaos_generated_module.cpp"
+)
+file(GLOB CHAOS_CODEGEN_NATIVE_CPP
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/generated/generated/native-aot.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/generated/generated/native-aot.page-*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/generated/generated/chaos_generated_module.cpp"
+)
+# Prefer native (pipeline post-processed) copies over codegen originals
+if(CHAOS_CODEGEN_NATIVE_CPP)
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
+else()
+  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_CPP})
 endif()
 file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
 list(REMOVE_ITEM CHAOS_NATIVE_STUBS
@@ -59,23 +78,13 @@ set(CHAOS_ENTRY_INCLUDES
     "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
     "${CHAOS_CODEGEN_DIR}/NumericAggregationSubjects/generated"
     "${CMAKE_CURRENT_SOURCE_DIR}"
+    "${CHAOS_PROJECT_ROOT}/src/native/jit"
 )
 
 add_executable(entry ${CHAOS_ENTRY_SOURCES})
 target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_compile_options(entry PRIVATE /EHa)
 target_link_libraries(entry PRIVATE
-
-# Enable link-time optimization (LTO/LTCG) for release/profile builds
-if(MSVC)
-  set_target_properties(entry PROPERTIES
-    INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE
-    INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO TRUE
-  )
-else()
-  set_target_properties(entry PROPERTIES
-    INTERPROCEDURAL_OPTIMIZATION TRUE
-  )
-endif()
     chaos::runtime
 )
+target_link_options(entry PRIVATE /FORCE:MULTIPLE)

@@ -10,6 +10,7 @@
 
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
+#include "string_table.h"
 #include "gc_helpers.h"
 #include "runtime_stubs/stream_state.h"
 
@@ -39,19 +40,37 @@ static CHAOS_IL2CPP_INTPTR alloc_string(const char* data, size_t len) noexcept {
 }
 
 /// Read a managed string's content into a C++ string.
+/// Handles both raw managed object pointers and compile-time string IDs
+/// (CHAOS_IL2CPP_STRING_ID constants from AOT codegen).
 static std::string read_managed_string(CHAOS_IL2CPP_INTPTR str_handle) noexcept {
     if (str_handle == 0) return {};
+
+    // Handle compile-time tagged string IDs (from CHAOS_IL2CPP_STRING_ID)
+    if (chaos_is_string_id(str_handle)) {
+        auto id = chaos_extract_string_id(str_handle);
+        auto sv = chaos::il2cpp::string_table::Resolve(id);
+        if (sv.utf8_data != nullptr) {
+            return std::string(sv.utf8_data, sv.byte_count);
+        }
+        return {};
+    }
+
+    // Raw managed object pointer path
     int32_t len = *reinterpret_cast<const int32_t*>(str_handle + 16);
     const char* data = *reinterpret_cast<const char* const*>(str_handle + 24);
     return std::string(data, static_cast<size_t>(len > 0 ? len : 0));
 }
 
-/// Read a managed byte[] into a vector. Length at offset 16, data starts at offset 24.
+/// Read a managed byte[] into a vector. Uses chaos_managed_array layout:
+///   header(16) + element_type_shape(1) + padding(7) + element_type_info(8) + length(8) + data[]
+/// Length at offset 32, data starts at offset 40.
+static constexpr CHAOS_IL2CPP_SIZE kManagedArrayLengthOffset = 32;
+static constexpr CHAOS_IL2CPP_SIZE kManagedArrayDataOffset = 40;
 static std::vector<uint8_t> read_managed_byte_array(CHAOS_IL2CPP_INTPTR arr_handle) noexcept {
     if (arr_handle == 0) return {};
-    int64_t len = *reinterpret_cast<const int64_t*>(arr_handle + 16);
+    int64_t len = *reinterpret_cast<const int64_t*>(arr_handle + kManagedArrayLengthOffset);
     if (len <= 0) return {};
-    const uint8_t* data = reinterpret_cast<const uint8_t*>(arr_handle + 24);
+    const uint8_t* data = reinterpret_cast<const uint8_t*>(arr_handle + kManagedArrayDataOffset);
     return std::vector<uint8_t>(data, data + len);
 }
 
@@ -167,8 +186,8 @@ CHAOS_IL2CPP_INT32 ChaosStreamRead(CHAOS_IL2CPP_INTPTR stream, CHAOS_IL2CPP_INTP
     int64_t to_read = count < avail ? static_cast<int64_t>(count) : avail;
     if (to_read <= 0) return 0;
 
-    // Write into managed byte[] at offset+16 (header skip)
-    auto* dest = reinterpret_cast<uint8_t*>(buffer) + 24 + offset;
+    // Write into managed byte[] at offset 40 (after chaos_managed_array header)
+    auto* dest = reinterpret_cast<uint8_t*>(buffer) + kManagedArrayDataOffset + offset;
     std::memcpy(dest, state->buffer.data() + state->position, static_cast<size_t>(to_read));
     state->position += to_read;
     return static_cast<CHAOS_IL2CPP_INT32>(to_read);
@@ -179,8 +198,8 @@ void ChaosStreamWrite(CHAOS_IL2CPP_INTPTR stream, CHAOS_IL2CPP_INTPTR buffer, CH
     if (!state || state->kind != StreamKind::MemoryStream) return;
     if (count <= 0) return;
 
-    // Read from managed byte[] at offset+24 (skip header)
-    auto* src = reinterpret_cast<const uint8_t*>(buffer) + 24 + offset;
+    // Read from managed byte[] at offset 40 (after chaos_managed_array header)
+    auto* src = reinterpret_cast<const uint8_t*>(buffer) + kManagedArrayDataOffset + offset;
     auto pos = static_cast<size_t>(state->position);
     auto cnt = static_cast<size_t>(count);
 

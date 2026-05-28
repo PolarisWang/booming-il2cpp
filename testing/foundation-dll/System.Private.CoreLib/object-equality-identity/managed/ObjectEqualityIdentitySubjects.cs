@@ -16,42 +16,42 @@ public static partial class ObjectEqualityIdentitySubjects
     // [0] System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)
     public static void Subject_0()
     {
-        try { var _ = ((new object().Equals(null!)) ? 1 : 0); }
+        try { _ = ((new object().Equals(null!)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)
     public static void Subject_1()
     {
-        try { var _ = ((Object.Equals(null!, null!)) ? 1 : 0); }
+        try { _ = ((Object.Equals(null!, null!)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)
     public static void Subject_2()
     {
-        try { var _ = ((Object.ReferenceEquals(null!, null!)) ? 1 : 0); }
+        try { _ = ((Object.ReferenceEquals(null!, null!)) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Object::GetHashCode:System.Int32()
     public static void Subject_3()
     {
-        try { var _ = new object().GetHashCode(); }
+        try { _ = new object().GetHashCode(); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Object::ToString:System.String()
     public static void Subject_4()
     {
-        try { var _ = ((new object().ToString()).Length); }
+        try { _ = ((new object().ToString()).Length); }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Object::GetType:System.Type()
     public static void Subject_5()
     {
-        try { var _ = ((new object().GetType()).GetHashCode()); }
+        try { _ = ((new object().GetType()).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 

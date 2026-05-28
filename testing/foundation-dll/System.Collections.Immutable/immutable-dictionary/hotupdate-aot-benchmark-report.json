@@ -8,31 +8,31 @@
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableDictionary::Create<string,int>:System.Collections.Immutable.ImmutableDictionary<System.String,System.Int32>()",
       "status": "passed",
       "prePatchNsPerOp": 3.5,
-      "postPatchNsPerOp": 3.8,
-      "slowdownPercent": 8.57
+      "postPatchNsPerOp": 3.9,
+      "slowdownPercent": 11.43
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableDictionary::Create<Byte,Byte>:System.Collections.Immutable.ImmutableDictionary<System.Byte,System.Byte>()",
       "status": "passed",
       "prePatchNsPerOp": 5.53,
-      "postPatchNsPerOp": 3.8,
-      "slowdownPercent": -31.28
+      "postPatchNsPerOp": 3.9,
+      "slowdownPercent": -29.48
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableDictionary::Create<string,string>:System.Collections.Immutable.ImmutableDictionary<System.String,System.String>()",
       "status": "passed",
       "prePatchNsPerOp": 3.49,
-      "postPatchNsPerOp": 5.2,
-      "slowdownPercent": 49.0
+      "postPatchNsPerOp": 3.9,
+      "slowdownPercent": 11.75
     }
   ],
   "summary": {
     "totalMethods": 3,
     "nonStubMethods": 3,
-    "averageSlowdownPercent": 8.76,
-    "slowdownFactor": 1.0876000000000001,
+    "averageSlowdownPercent": -2.1,
+    "slowdownFactor": 0.9790000000000001,
     "slowdownThresholdX": 50.0
   }
 }

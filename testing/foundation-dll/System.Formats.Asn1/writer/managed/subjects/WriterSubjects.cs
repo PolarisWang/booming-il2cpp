@@ -131,7 +131,8 @@ public static partial class WriterSubjects
     // [17] System.Formats.Asn1/System.Formats.Asn1.AsnWriter::TryEncode:System.Boolean(System.Span{System.Byte},System.Int32&)
     public static void Subject_17()
     {
-        try { if (((default(AsnWriter)!.TryEncode(default(Span<byte>), out _)) ? 1 : 0) != ((default(AsnWriter)!.TryEncode(default(Span<byte>), out _)) ? 1 : 0)) _exitCode = 1; }
+            System.Int32 refLocal_1 = 42;
+        try { if (((default(AsnWriter)!.TryEncode(default(Span<byte>), out refLocal_1)) ? 1 : 0) != ((default(AsnWriter)!.TryEncode(default(Span<byte>), out refLocal_1)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

@@ -5,6 +5,11 @@
 #include <chaos/log.h>
 #include "generated_code_compat.h"
 
+#include <cstring>
+
+#include "gc/gc_layout.h"
+#include "gc/gc_helpers.h"
+
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
 
@@ -50,6 +55,36 @@ CHAOS_IL2CPP_INTPTR ChaosObjectGetType(CHAOS_IL2CPP_INTPTR obj) noexcept {
     (void)obj;
     static CHAOS_IL2CPP_UINT8 s_sentinel = 0;
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(&s_sentinel);
+}
+
+// ── MemberwiseClone ──────────────────────────────────────────────────
+// Returns a shallow copy of the managed object at @a obj.
+// Uses GcLayoutRegistry to determine the object size, allocates a new GC
+// object via GcAllocate (scanned), and memcpy the instance data.
+//
+// Phase-1 limitation: GcLayout must be registered for the source type.
+// Without it, returns the source pointer as identity (no crash but no clone).
+// Full GcLayoutRegistry coverage deferred to Phase 1b.
+CHAOS_IL2CPP_INTPTR ChaosObjectMemberwiseClone(CHAOS_IL2CPP_INTPTR obj) noexcept
+{
+    if (obj == 0) return 0;
+
+    auto* src = reinterpret_cast<void*>(obj);
+    auto* ti = chaos_object_get_type_info(src);
+    if (ti == nullptr) return 0;
+
+    auto& registry = GcLayoutRegistry::Instance();
+    auto* layout = registry.Lookup(ti->stable_id);
+    if (layout == nullptr) {
+        // No GcLayout registered — fall back to identity (Phase 1b).
+        return obj;
+    }
+
+    auto* clone = GcAllocate(layout->instance_size);
+    if (clone == nullptr) return 0;
+
+    std::memcpy(clone, src, layout->instance_size);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(clone);
 }
 
 }  // extern "C"

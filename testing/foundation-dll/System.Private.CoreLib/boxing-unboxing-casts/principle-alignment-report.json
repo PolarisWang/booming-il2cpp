@@ -1,7 +1,7 @@
 {
   "family": "boxing-unboxing-casts",
   "assembly": "System.Private.CoreLib",
-  "generated_at": "2026-05-27T12:24:42.191984",
+  "generated_at": "2026-05-28T11:01:44.627561",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
@@ -34,10 +34,54 @@
         "has_lowering": true,
         "stub_count": 0,
         "simple_forward_count": 0,
-        "methods_with_lowering": 33,
-        "methods_total": 33
+        "methods_with_lowering": 44,
+        "methods_total": 44
       },
       "per_method": [
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_6",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_7",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_8",
+          "has_lowering": true
+        },
+        {
+          "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_9",
+          "has_lowering": true
+        },
         {
           "name": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0",
           "has_lowering": true
@@ -211,16 +255,8 @@
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "6 of 18 changed source files are outside expected architecture layers",
+      "summary": "7 of 8 changed source files are outside expected architecture layers",
       "details": [
-        {
-          "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.h",
-          "reason": "outside expected architecture layers"
-        },
         {
           "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
           "reason": "outside expected architecture layers"
@@ -230,33 +266,32 @@
           "reason": "outside expected architecture layers"
         },
         {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
           "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
           "reason": "outside expected architecture layers"
         },
         {
           "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
           "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
+          "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 18,
+        "changed_source_count": 8,
         "layer_distribution": {
-          "TestInfra": 2,
-          "Driver": 3,
-          "Common": 1,
-          "Interpreter": 1,
-          "RuntimeCore": 4,
-          "Tests": 1
+          "RuntimeCore": 1
         },
         "violations": [
-          {
-            "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "build/testing/results/SolutionCorePack/codegen/SolutionCorePack/generated/chaos_generated_module.h",
-            "reason": "outside expected architecture layers"
-          },
           {
             "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
             "reason": "outside expected architecture layers"
@@ -266,11 +301,23 @@
             "reason": "outside expected architecture layers"
           },
           {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
             "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
             "file": "src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
             "reason": "outside expected architecture layers"
           }
         ]

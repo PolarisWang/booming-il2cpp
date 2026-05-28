@@ -1067,6 +1067,14 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateNativeIntAbiSlot("System.Private.CoreLib/System.Type", AotCoreIrTypeShapeKind.ReferenceType),
                 new HashSet<int> { 0 });
 
+            // === Object.MemberwiseClone (SimpleForward) ===
+            registry.Register("System.Object", "MemberwiseClone", [],
+                ShapeKind.SimpleForward, "ChaosObjectMemberwiseClone",
+                new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
+                    CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
+                CreateNativeIntAbiSlot("System.Private.CoreLib/System.Object", AotCoreIrTypeShapeKind.ReferenceType),
+                new HashSet<int> { 0 });
+
             // === Object::Equals static (two-arg overload) ===
             registry.Register("System.Object", "Equals", ["System.Object", "System.Object"],
                 ShapeKind.SimpleForward, "ChaosObjectEqualsStatic",
