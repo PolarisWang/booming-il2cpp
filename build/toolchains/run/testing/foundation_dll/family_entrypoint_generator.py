@@ -1493,13 +1493,25 @@ int main(int argc, char* argv[]) {
 __JIT_CALL__
 __RUNTIME_INIT_CALL__
 
+    if (argc < 2) {
+        // Default mode: run fact verification
+        int failed_count = RunFactAll();
+        if (failed_count == 0) {
+            printf("Passed: %d/%d\\n", kSubjectEntryCount, kSubjectEntryCount);
+            return 0;
+        } else {
+            printf("Passed: %d/%d\\n", kSubjectEntryCount - failed_count, kSubjectEntryCount);
+            return 1;
+        }
+    }
+
     if (std::strcmp(argv[1], "--platform-info") == 0) {
         printf("{\\"platform\\":\\"%s\\"}\\n", CHAOS_IL2CPP_GetPlatformIdentifier());
         std::fflush(stdout);
         return 0;
     }
 
-    if (argc < 2) {
+    if (std::strcmp(argv[1], "--benchmark") == 0) {
         if (argc < 4) {
             printf("Usage: entry.exe --benchmark <index> <iterations>\\n");
             return 1;
