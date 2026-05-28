@@ -12,5 +12,6 @@
     "System.Private.CoreLib/System.Collections.Generic.IEnumerable{T}::GetEnumerator:System.Collections.Generic.IEnumerator{T}()",
     "System.Private.CoreLib/System.Collections.Generic.IEnumerator{T}::get_Current:T()",
     "System.Private.CoreLib/System.IDisposable::Dispose:System.Void()"
-  ]
+  ],
+  "methodSubjectCount": 7
 }
