@@ -3,7 +3,9 @@
     <ProjectReference Include="..\Chaos.IL2CPP.Contracts\Chaos.IL2CPP.Contracts.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.Loader\Chaos.IL2CPP.Loader.csproj" />
     <ProjectReference Include="..\Chaos.IL2CPP.MetadataWriter\Chaos.IL2CPP.MetadataWriter.csproj" />
-    <ProjectReference Include="..\..\..\third_party\scriban\src\Scriban\Scriban.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Scriban" Version="5.12.1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chaos.IL2CPP.Generator.Generators\Chaos.IL2CPP.Generator.Generators.csproj"
