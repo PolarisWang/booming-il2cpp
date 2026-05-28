@@ -2,15 +2,84 @@
 
 from __future__ import annotations
 
+import json
+import shutil
 import subprocess
 import time
 from pathlib import Path
 
 from verification.orchestration.context import FamilyContext, StageResult
 from verification.orchestration.family_entrypoint import generate_and_build
-from verification.orchestration.dispatch_generator import generate_verification_dispatch
 
 _REPO_ROOT = Path(__file__).resolve().parents[4]
+
+
+def _find_contract(assembly: str, slug: str) -> Path | None:
+    """Find the contract file for a family."""
+    for fname in ("contract.json", "capability-family-contract.json"):
+        path = _REPO_ROOT / "testing" / "foundation-dll" / assembly / slug / fname
+        if path.exists():
+            return path
+    return None
+
+
+def _run_test_project_generator_emit(contract_path: Path | None, output_dir: Path) -> bool:
+    """Run TestProjectGenerator emit to generate verification_dispatch.generated.cpp.
+
+    Returns True if successful, False otherwise (caller should fall back to sentinel).
+    """
+    if contract_path is None or not contract_path.exists():
+        print(f"  [codegen] TestProjectGenerator: no contract at {contract_path}")
+        return False
+
+    generator_proj = _REPO_ROOT / "src" / "tools" / "Chaos.IL2CPP.Tools.TestProjectGenerator"
+    generator_dll = generator_proj / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Tools.TestProjectGenerator.dll"
+
+    # Build the generator tool if DLL doesn't exist
+    if not generator_dll.exists():
+        print(f"  [codegen] Building TestProjectGenerator...")
+        build_result = subprocess.run(
+            ["dotnet", "build", str(generator_proj), "-c", "Release", "--nologo", "-v", "quiet"],
+            capture_output=True, text=True, timeout=120)
+        if build_result.returncode != 0:
+            print(f"  [codegen] TestProjectGenerator build FAILED: {build_result.stderr[:200]}")
+            return False
+        if not generator_dll.exists():
+            print(f"  [codegen] TestProjectGenerator DLL not found after build: {generator_dll}")
+            return False
+
+    result = subprocess.run(
+        ["dotnet", "exec", str(generator_dll), "emit",
+         "--contract", str(contract_path),
+         "--output", str(output_dir)],
+        capture_output=True, text=True, timeout=120)
+
+    if result.returncode != 0:
+        print(f"  [codegen] TestProjectGenerator emit FAILED (rc={result.returncode})")
+        for line in (result.stderr.splitlines() + result.stdout.splitlines())[-10:]:
+            print(f"      {line}")
+        return False
+
+    # Print generator output
+    for line in result.stdout.splitlines():
+        print(f"      {line}")
+
+    return True
+
+
+def _incremental_dispatch_rebuild(native_dir: Path) -> None:
+    """Incremental cmake rebuild after dispatch regeneration."""
+    build_dir = native_dir / "build"
+    if not build_dir.exists():
+        return
+    for obj in build_dir.rglob("verification_dispatch*"):
+        if obj.is_file():
+            obj.unlink()
+    rebuild = subprocess.run(
+        ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry"],
+        capture_output=True, text=True, timeout=300)
+    if rebuild.returncode != 0:
+        print(f"  [codegen] WARNING: dispatch rebuild failed (continuing)")
 
 
 def _read_contract(assembly: str, slug: str) -> dict | None:
@@ -18,7 +87,6 @@ def _read_contract(assembly: str, slug: str) -> dict | None:
     for fname in ("contract.json", "capability-family-contract.json"):
         testing_path = _REPO_ROOT / "testing" / "foundation-dll" / assembly / slug / fname
         if testing_path.exists():
-            import json
             return json.loads(testing_path.read_text(encoding="utf-8"))
     return None
 
@@ -101,7 +169,6 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
     # Isolate subjects DLL into clean input directory
     clean_input_dir = codegen_dir / "_subjects_input"
     clean_input_dir.mkdir(parents=True, exist_ok=True)
-    import shutil
     clean_dll = clean_input_dir / dll_path.name
     shutil.copy2(str(dll_path), str(clean_dll))
     for ext in (".pdb", ".deps.json"):
@@ -135,44 +202,18 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # 4. Generate verification dispatch code (overwrites sentinel, incremental rebuild)
-    print(f"  [codegen] Generating dispatch code...")
-    codegen_dir_path = testing_base / ctx.slug / "codegen"
-    manifest_path = None
-    for d in codegen_dir_path.iterdir():
-        if d.is_dir() and d.name.endswith("Subjects"):
-            candidate = d / "native-aot.methods.json"
-            if candidate.exists():
-                manifest_path = candidate
-                break
-            candidate = d / "generated" / "native-aot.methods.json"
-            if candidate.exists():
-                manifest_path = candidate
-                break
-    if manifest_path is None:
-        flat_manifest = codegen_dir_path / "generated" / "native-aot.methods.json"
-        if flat_manifest.exists():
-            manifest_path = flat_manifest
+    # 4. Generate verification dispatch code via TestProjectGenerator (overwrites sentinel, incremental rebuild)
+    print(f"  [codegen] Generating dispatch code via TestProjectGenerator...")
+    native_dir = testing_base / ctx.slug / "native"
+    contract_path = _find_contract(ctx.assembly, ctx.slug)
 
-    if manifest_path:
-        dispatch_output = testing_base / ctx.slug / "native" / "verification_dispatch.generated.cpp"
-        generate_verification_dispatch(str(manifest_path), str(dispatch_output))
-        print(f"  [codegen] Regenerated verification_dispatch.generated.cpp")
-
-        # Incremental rebuild
-        native_dir = testing_base / ctx.slug / "native"
-        build_dir = native_dir / "build"
-        if build_dir.exists():
-            for obj in build_dir.rglob("verification_dispatch*"):
-                if obj.is_file():
-                    obj.unlink()
-            rebuild = subprocess.run(
-                ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry"],
-                capture_output=True, text=True, timeout=300)
-            if rebuild.returncode != 0:
-                print(f"  [codegen] WARNING: dispatch rebuild failed (continuing)")
+    if not _run_test_project_generator_emit(contract_path, native_dir):
+        print(f"  [codegen] WARNING: TestProjectGenerator emit failed (continuing with sentinel dispatch)")
     else:
-        print(f"  [codegen] WARNING: manifest not found, dispatch generation skipped")
+        print(f"  [codegen] Regenerated verification_dispatch.generated.cpp via TestProjectGenerator")
+
+    # Incremental rebuild after dispatch regeneration
+    _incremental_dispatch_rebuild(native_dir)
 
     # 5. Save AOT binary
     native_dir = testing_base / ctx.slug / "native"
@@ -180,8 +221,7 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
     aot_exe = native_dir / "entry-aot.exe"
     if entry_exe.exists():
         if not aot_exe.exists() or entry_exe.stat().st_mtime > aot_exe.stat().st_mtime:
-            import shutil as _shutil
-            _shutil.copy2(str(entry_exe), str(aot_exe))
+            shutil.copy2(str(entry_exe), str(aot_exe))
             print(f"  [codegen] saved entry.exe -> entry-aot.exe")
 
     return StageResult(
