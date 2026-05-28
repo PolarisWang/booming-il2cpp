@@ -12,7 +12,13 @@ public sealed class CodegenResult
 
 public sealed class CodegenOrchestrator
 {
-    public CodegenResult Run(IReadOnlyList<string> assemblyPaths, string outputDir)
+    /// <summary>
+    /// Run IL2CPP codegen on the given assemblies.
+    /// </summary>
+    /// <param name="assemblyPaths">Paths to managed DLLs to compile.</param>
+    /// <param name="outputDir">Output directory for codegen artifacts (--sdk-out).</param>
+    /// <param name="codegenMode">Codegen mode: "aot" or "jit".</param>
+    public CodegenResult Run(IReadOnlyList<string> assemblyPaths, string outputDir, string codegenMode = "aot")
     {
         try
         {
@@ -40,6 +46,12 @@ public sealed class CodegenOrchestrator
             args.Add("--sdk-out");
             args.Add(Path.GetFullPath(outputDir));
             args.Add("--full-closure");
+
+            if (codegenMode == "jit")
+            {
+                args.Add("--mode");
+                args.Add("jit");
+            }
 
             // Run ConvertToCppHandler directly — output goes to Console
             var exitCode = ConvertToCppHandler.Run([.. args]);
