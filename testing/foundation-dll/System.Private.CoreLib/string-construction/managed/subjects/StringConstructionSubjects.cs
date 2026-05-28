@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class StringConstructionSubjects
 {
@@ -37,35 +39,35 @@ public static partial class StringConstructionSubjects
     // [3] System.Private.CoreLib/System.String::IsNullOrEmpty:System.Boolean(System.String)
     public static void Subject_3()
     {
-        try { var _ = ((String.IsNullOrEmpty("hello")) ? 1 : 0); }
+        try { _ = ((String.IsNullOrEmpty("hello")) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.String::IsNullOrWhiteSpace:System.Boolean(System.String)
     public static void Subject_4()
     {
-        try { var _ = ((String.IsNullOrWhiteSpace("hello")) ? 1 : 0); }
+        try { _ = ((String.IsNullOrWhiteSpace("hello")) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.String::Copy:System.String(System.String)
     public static void Subject_5()
     {
-        try { var _ = ((String.Copy("hello")).Length); }
+        try { _ = ((String.Copy("hello")).Length); }
         catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.String::Intern:System.String(System.String)
     public static void Subject_6()
     {
-        try { var _ = ((String.Intern("hello")).Length); }
+        try { _ = ((String.Intern("hello")).Length); }
         catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.String::IsInterned:System.String(System.String)
     public static void Subject_7()
     {
-        try { var _ = ((String.IsInterned("hello")).Length); }
+        try { _ = ((String.IsInterned("hello")).Length); }
         catch { _exitCode = 1; }
     }
 

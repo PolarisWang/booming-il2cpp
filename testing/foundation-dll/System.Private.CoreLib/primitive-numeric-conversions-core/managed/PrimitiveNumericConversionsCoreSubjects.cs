@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class PrimitiveNumericConversionsCoreSubjects
 {
@@ -16,70 +18,70 @@ public static partial class PrimitiveNumericConversionsCoreSubjects
     // [0] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()
     public static void Subject_0()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestByteToInt(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestByteToInt(); }
         catch { _exitCode = 1; }
     }
 
     // [1] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()
     public static void Subject_1()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToLong(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToLong(); }
         catch { _exitCode = 1; }
     }
 
     // [2] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()
     public static void Subject_2()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToShort(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToShort(); }
         catch { _exitCode = 1; }
     }
 
     // [3] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()
     public static void Subject_3()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToByte(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToByte(); }
         catch { _exitCode = 1; }
     }
 
     // [4] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()
     public static void Subject_4()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestFloatToDouble(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestFloatToDouble(); }
         catch { _exitCode = 1; }
     }
 
     // [5] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()
     public static void Subject_5()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestDoubleToFloat(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestDoubleToFloat(); }
         catch { _exitCode = 1; }
     }
 
     // [6] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()
     public static void Subject_6()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToDouble(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToDouble(); }
         catch { _exitCode = 1; }
     }
 
     // [7] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()
     public static void Subject_7()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestDoubleToInt(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestDoubleToInt(); }
         catch { _exitCode = 1; }
     }
 
     // [8] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()
     public static void Subject_8()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestUintToLong(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestUintToLong(); }
         catch { _exitCode = 1; }
     }
 
     // [9] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()
     public static void Subject_9()
     {
-        try { var _ = PrimitiveNumericConversionsCoreNativeEntry.TestLongToInt(); }
+        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestLongToInt(); }
         catch { _exitCode = 1; }
     }
 

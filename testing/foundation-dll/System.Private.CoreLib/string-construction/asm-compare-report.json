@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/string/construction",
-  "capturedAt": "2026-05-27T23:01:57",
+  "capturedAt": "2026-05-28T13:09:02",
   "batchMode": true,
   "summary": {
     "totalMethods": 8,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 9,
-      "max": 13,
-      "avg": 10.8,
-      "total": 86
+      "max": 11,
+      "avg": 10.0,
+      "total": 80
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 10
     },
-    "overallIrExpansionRatio": 0.24,
-    "averageExpansionRatio": 0.25,
-    "maxExpansionRatio": 0.3,
+    "overallIrExpansionRatio": 0.23,
+    "averageExpansionRatio": 0.23,
+    "maxExpansionRatio": 0.25,
     "minExpansionRatio": 0.2
   },
   "methodResults": [
@@ -128,8 +128,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -140,7 +140,7 @@
       "aot": {
         "status": "ok",
         "symbol": "StringConstructionSubjects_StringConstructionSubjects_Subject_3",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -160,8 +160,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -172,7 +172,7 @@
       "aot": {
         "status": "ok",
         "symbol": "StringConstructionSubjects_StringConstructionSubjects_Subject_4",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {

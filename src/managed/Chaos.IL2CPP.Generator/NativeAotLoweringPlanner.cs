@@ -124,15 +124,10 @@ public sealed partial class NativeAotLoweringPlanner
     // interface check combined) to eliminate redundant traversals.
     private static readonly Dictionary<string, string> TypeHierarchyPtrOptimizationMap = new(StringComparer.Ordinal)
     {
-        { "IsAssignableFrom", "chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableFromPtrFast" },
-        { "IsSubclassOf",     "chaos::il2cpp::runtime_core::ChaosReflectionIsSubclassOfPtrFast" },
-        { "IsAssignableTo",   "chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableToPtrFast" },
-        // IsInstanceOfType excluded: the object argument may be a CHAOS_IL2CPP_STRING_ID
-        // (tagged integer hash from ldstr), not a managed object pointer.  Passing a tagged
-        // integer to ChaosReflectionIsInstanceOfTypePtr causes SIGSEGV in
-        // chaos_object_get_type_info.  The non-optimized virtual dispatch path handles
-        // StringId arguments correctly through the managed Type::IsInstanceOfType
-        // implementation.
+        { "IsAssignableFrom", "ChaosReflectionIsAssignableFromPtr" },
+        { "IsSubclassOf",     "ChaosReflectionIsSubclassOfPtr" },
+        { "IsAssignableTo",   "ChaosReflectionIsAssignableToPtr" },
+        { "IsInstanceOfType", "ChaosReflectionIsInstanceOfTypePtr" },
     };
 
     private Dictionary<(string MethodNativeSymbol, int IlOffset), TypeHierarchyPtrFoldEntry> _typeHierarchyPtrFoldMap = new();

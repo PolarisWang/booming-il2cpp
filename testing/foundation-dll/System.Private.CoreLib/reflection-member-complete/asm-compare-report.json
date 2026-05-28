@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/member/complete",
-  "capturedAt": "2026-05-28T01:15:10",
+  "capturedAt": "2026-05-28T13:47:53",
   "batchMode": true,
   "summary": {
     "totalMethods": 22,
@@ -11,15 +11,15 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 48,
-      "avg": 44.2,
-      "total": 972
+      "max": 44,
+      "avg": 44.0,
+      "total": 968
     },
     "aotInstructionCount": {
       "min": 9,
-      "max": 13,
-      "avg": 11.6,
-      "total": 256
+      "max": 12,
+      "avg": 10.5,
+      "total": 232
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 29
     },
-    "overallIrExpansionRatio": 0.26,
-    "averageExpansionRatio": 0.27,
-    "maxExpansionRatio": 0.3,
+    "overallIrExpansionRatio": 0.24,
+    "averageExpansionRatio": 0.24,
+    "maxExpansionRatio": 0.27,
     "minExpansionRatio": 0.2
   },
   "methodResults": [
@@ -358,8 +358,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -370,7 +370,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_9",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -390,8 +390,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -402,7 +402,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_10",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -422,8 +422,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -434,7 +434,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_11",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -486,8 +486,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -498,7 +498,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_13",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -518,8 +518,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -530,7 +530,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_14",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -550,8 +550,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -562,7 +562,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_15",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -614,8 +614,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -626,7 +626,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_17",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -646,8 +646,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -658,7 +658,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionMemberCompleteSubjects_ReflectionMemberCompleteSubjects_Subject_18",
-        "instructions": 13
+        "instructions": 10
       },
       "analysis": [
         {
@@ -709,15 +709,15 @@
       "shortName": "Subject_20",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 48,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 12,
-        "ratio": 0.25,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 48
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

@@ -6,8 +6,10 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 public static partial class BoxingUnboxingCastsSubjects
 {
@@ -57,11 +59,6 @@ public static partial class BoxingUnboxingCastsSubjects
     }
 
     // [6] System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
-    public static void Subject_6()
-    {
-        // needs-manual — MemberwiseClone requires manual implementation: System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
-    }
-
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     public static void Subject_7()
     {

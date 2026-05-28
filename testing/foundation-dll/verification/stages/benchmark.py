@@ -172,6 +172,8 @@ def _param_type_to_expr(pt: str, i_val: str, idx: int) -> str | None:
         elem_type = pt[:-2]
         if elem_type == 'System.Byte':
             return 'new byte[]{1,2,3,4,5}'
+        if elem_type == 'System.Char':
+            return "new char[]{'A', 'B', 'C'}"
         if elem_type == 'System.Int32':
             return 'new int[]{1,2,3}'
         if elem_type == 'System.String':
@@ -289,6 +291,20 @@ def _is_static_declaring_type(dt: str) -> bool:
 # The code generator normally uses an instance receiver (e.g. typeof(int) for Type),
 # but these specific methods must be called with the type name directly.
 _KNOWN_STATIC_METHODS: dict[str, set[str]] = {
+    'System.String': {
+        'IsNullOrEmpty',
+        'IsNullOrWhiteSpace',
+        'Copy',
+        'Intern',
+        'IsInterned',
+        'Concat',
+        'Format',
+        'Join',
+        'Compare',
+        'CompareOrdinal',
+        'Equals',
+        'ReferenceEquals',
+    },
     'System.Type': {
         'GetType',
         'GetTypeFromHandle',
@@ -341,15 +357,12 @@ def _generate_generic_call(mid: str, idx: int) -> tuple[str, bool]:
         if method_name == 'GetObjectValue':
             return f'System.Runtime.CompilerServices.RuntimeHelpers.GetObjectValue({i_expr})', False
 
-    is_string_ctor = declaring_type == 'System.String' and method_name == '.ctor'
-    is_instance = not _is_static_declaring_type(declaring_type) and not is_string_ctor
+    is_instance = not _is_static_declaring_type(declaring_type) and not (
+        declaring_type == 'System.String' and method_name == '.ctor'
+    )
 
     # Build receiver expression
-    if is_string_ctor:
-        # string.ctor — use string.Create or direct constructor via typeof
-        # These are tricky; fall through to reflection
-        return '', False
-    elif is_instance:
+    if is_instance:
         # For instance methods on types like System.RuntimeType, System.Reflection.*Info
         # we need an instance. Use typeof(T) for Type, or Activator for others.
         if declaring_type == 'System.RuntimeType':
@@ -379,6 +392,8 @@ def _generate_generic_call(mid: str, idx: int) -> tuple[str, bool]:
             receiver = 'default(System.Threading.CancellationToken)'
         elif declaring_type == 'System.Array':
             receiver = 'new byte[]{1,2,3}'
+        elif declaring_type == 'System.String':
+            receiver = '"hello"'
         elif declaring_type == 'System.Exception':
             receiver = 'new System.Exception()'
         elif declaring_type == 'System.ArgumentException':
@@ -610,6 +625,15 @@ def _generate_call_expr(mid: str, idx: int) -> tuple[str, bool]:
     method_name = m.group(2)
     param_str = m.group(3)
     param_types = [p.strip() for p in param_str.split(',') if p.strip()]
+
+    # System.String constructors — use valid arguments for benchmarking
+    if declaring_type == 'System.String' and method_name == '.ctor':
+        if len(param_types) == 1 and param_types[0] == 'System.Char[]':
+            return "new string(new char[]{'A', 'B', 'C'})", False
+        if len(param_types) == 2 and param_types[0] == 'System.Char' and param_types[1] == 'System.Int32':
+            return f'new string((char)({ipart} & 0xFF), 3)', False
+        if len(param_types) == 3 and param_types[0] == 'System.Char[]' and param_types[1] == 'System.Int32' and param_types[2] == 'System.Int32':
+            return "new string(new char[]{'A', 'B', 'C', 'D', 'E'}, 0, 3)", False
 
     # Xxx.Parse(string)
     if method_name == 'Parse' and param_types == ['System.String']:

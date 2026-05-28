@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/boxing/unboxing/casts",
-  "capturedAt": "2026-05-28T12:50:27",
+  "capturedAt": "2026-05-28T13:47:04",
   "batchMode": true,
   "summary": {
     "totalMethods": 11,
@@ -16,21 +16,21 @@
       "total": 484
     },
     "aotInstructionCount": {
-      "min": 1,
-      "max": 13,
-      "avg": 11.3,
-      "total": 124
+      "min": 10,
+      "max": 14,
+      "avg": 12.5,
+      "total": 137
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 26
+      "external_runtime_call": 27
     },
-    "overallIrExpansionRatio": 0.26,
-    "averageExpansionRatio": 0.26,
-    "maxExpansionRatio": 0.3,
-    "minExpansionRatio": 0.02
+    "overallIrExpansionRatio": 0.28,
+    "averageExpansionRatio": 0.28,
+    "maxExpansionRatio": 0.32,
+    "minExpansionRatio": 0.23
   },
   "methodResults": [
     {
@@ -287,8 +287,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
         "jitCodeSize": 256
       },
       "jit": {
@@ -298,11 +298,19 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_6",
-        "instructions": 1
+        "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_CustomEntrySubject_6",
+        "instructions": 14
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 7,

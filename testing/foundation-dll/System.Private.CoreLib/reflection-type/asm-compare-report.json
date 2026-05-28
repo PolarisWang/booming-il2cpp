@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/type",
-  "capturedAt": "2026-05-28T01:31:56",
+  "capturedAt": "2026-05-28T13:57:47",
   "batchMode": true,
   "summary": {
     "totalMethods": 43,
@@ -17,9 +17,9 @@
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 14,
-      "avg": 11.8,
-      "total": 508
+      "max": 13,
+      "avg": 10.8,
+      "total": 463
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,9 +27,9 @@
     "topInstructionCategories": {
       "external_runtime_call": 92
     },
-    "overallIrExpansionRatio": 0.27,
-    "averageExpansionRatio": 0.27,
-    "maxExpansionRatio": 0.32,
+    "overallIrExpansionRatio": 0.24,
+    "averageExpansionRatio": 0.24,
+    "maxExpansionRatio": 0.3,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -359,8 +359,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -371,7 +371,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_9",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -396,8 +396,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -408,7 +408,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_10",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -433,8 +433,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -445,7 +445,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_11",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -470,8 +470,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -482,7 +482,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_12",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -507,8 +507,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -519,7 +519,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_13",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -544,8 +544,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -556,7 +556,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_14",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -581,8 +581,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -593,7 +593,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_15",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -618,8 +618,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -630,7 +630,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_16",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -655,8 +655,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -667,7 +667,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_17",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -692,8 +692,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -704,7 +704,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_18",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -729,8 +729,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -741,7 +741,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_19",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -766,8 +766,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -778,7 +778,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_20",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -803,8 +803,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -815,7 +815,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_21",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -840,8 +840,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -852,7 +852,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_22",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
@@ -877,8 +877,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -889,7 +889,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_23",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
