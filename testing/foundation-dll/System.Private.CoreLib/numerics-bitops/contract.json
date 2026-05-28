@@ -13,5 +13,6 @@
     "System.Private.CoreLib/System.Numerics.BitOperations::LeadingZeroCount:System.Int32(System.UInt32)",
     "System.Private.CoreLib/System.Numerics.BitOperations::TrailingZeroCount:System.Int32(System.UInt32)",
     "System.Private.CoreLib/System.Math::DivRem:System.Int32(System.Int32,System.Int32,System.Int32&)"
-  ]
+  ],
+  "methodSubjectCount": 8
 }

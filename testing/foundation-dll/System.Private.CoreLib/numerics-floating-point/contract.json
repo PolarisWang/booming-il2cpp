@@ -13,5 +13,6 @@
     "System.Private.CoreLib/System.Double::IsInfinity:System.Boolean(System.Double)",
     "System.Private.CoreLib/System.Double::IsNegativeInfinity:System.Boolean(System.Double)",
     "System.Private.CoreLib/System.Single::IsNaN:System.Boolean(System.Single)"
-  ]
+  ],
+  "methodSubjectCount": 8
 }

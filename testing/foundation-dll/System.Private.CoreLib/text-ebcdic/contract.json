@@ -10,5 +10,6 @@
     "System.Private.CoreLib/System.Text.Encoding::GetBytes:System.Byte[](System.String)",
     "System.Private.CoreLib/System.Text.Encoding::Convert:System.Byte[](System.Text.Encoding,System.Text.Encoding,System.Byte[])",
     "System.Private.CoreLib/System.Text.Encoding::get_ASCII:System.Text.Encoding()"
-  ]
+  ],
+  "methodSubjectCount": 5
 }

@@ -10,6 +10,5 @@
     "System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)",
     "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
     "System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)"
-  ],
-  "methodSubjectCount": 5
+  ]
 }
