@@ -2,9 +2,9 @@
   "family": "immutable-sorted-dictionary",
   "assembly": "System.Collections.Immutable",
   "mode": "standard",
-  "timestamp": "2026-05-22T06:38:15",
-  "duration_ms": 98416,
-  "overall_status": "passed",
+  "timestamp": "2026-05-28T10:50:21",
+  "duration_ms": 74834,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -31,49 +31,70 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Collections.Immutable\\immutable-sorted-dictionary\\managed\\subjects\\build-output\\ImmutableSortedDictionarySubjects.dll"
       },
       "errors": [],
-      "duration_ms": 31384
+      "duration_ms": 38623
     },
     "jit_codegen": {
       "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "status": "failed",
+      "summary": "JIT codegen failed",
       "details": {},
       "errors": [],
-      "duration_ms": 34352
+      "duration_ms": 23464
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "passed",
+      "summary": "Fact net8.0: passed=0 failed=0 skipped=2",
+      "details": {
+        "totalMethods": 2,
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "skippedMethods": 2,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedDictionary::Create<string,int>:System.Collections.Immutable.ImmutableSortedDictionary<System.String,System.Int32>()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedDictionary::Create<Byte,Byte>:System.Collections.Immutable.ImmutableSortedDictionary<System.Byte,System.Byte>()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          }
+        ]
+      },
+      "errors": [],
+      "duration_ms": 2400
     },
     "fact": {
       "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (2/2)",
+      "status": "failed",
+      "summary": "Fact verify=failed (0/0)",
       "details": {
         "fact": {
-          "status": "passed",
-          "passed": 2,
-          "total": 2
+          "status": "failed",
+          "passed": 0,
+          "total": 0
         }
       },
       "errors": [],
-      "duration_ms": 358
+      "duration_ms": 383
     },
     "fact_jit": {
       "stage": "fact_jit",
-      "status": "passed",
-      "summary": "Fact JIT verify=passed (2/2)",
-      "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 2,
-          "total": 2,
-          "exit_code": 0
-        }
-      },
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT fact",
+      "details": {},
       "errors": [],
-      "duration_ms": 356
+      "duration_ms": 0
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
+      "summary": "false_passing=0, principle=ALIGNED (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
@@ -82,149 +103,219 @@
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1240
+      "duration_ms": 771
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
-      "errors": [],
-      "duration_ms": 1
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=3.0ns/op | FastExecute=3.6ns/op | CallVirt dispatch=3.8ns",
+      "status": "failed",
+      "summary": "asm-compare: 0/2 methods OK, avg JIT=0 instr, avg AOT IR=17.0 instr, expansion=0x",
       "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 3.0,
-          "batchCount": 1000,
-          "framesPerBatch": 32
+        "totalMethods": 2,
+        "okCount": 0,
+        "failedCount": 2,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 0,
+          "max": 0,
+          "avg": 0,
+          "total": 0
         },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 3.6
+        "aotInstructionCount": {
+          "min": 17,
+          "max": 17,
+          "avg": 17.0,
+          "total": 34
         },
-        "callVirt": {
-          "handlerDispatchNs": 3.8,
-          "emptyStackNs": 4.2
-        },
-        "poolSize": 32
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0,
+        "averageExpansionRatio": 0
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 1676
     },
     "benchmark": {
       "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All 2 non-stub methods are invalid (no managed harness)",
-      "details": {},
-      "errors": [],
-      "duration_ms": 26381
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "2/2 passed, 0 failed (stub=0)",
+      "status": "failed",
+      "summary": "net8-jit benchmark produced no valid results",
       "details": {
-        "passedMethods": 2,
-        "failedMethods": 0,
-        "totalMethods": 2,
-        "realMethods": 2,
-        "stubMethods": 0
+        "runtimesAvailable": [
+          "net8-jit",
+          "net10-jit",
+          "mono",
+          "chaos-aot",
+          "chaos-jit"
+        ],
+        "runtimesUnavailable": [],
+        "multiRunReportPath": "multi-run/multi-run-report.json",
+        "chaosClassification": {
+          "chaos_faster_than_all": 0,
+          "chaos_faster_than_jit": 0,
+          "chaos_midfield": 0,
+          "chaos_slower_than_jit": 0,
+          "not_benchmarked": 2
+        },
+        "summaries": {
+          "chaos-aot": {
+            "geometricMeanNs": 4.4,
+            "okCount": 2,
+            "totalMethods": 2
+          },
+          "chaos-jit": {
+            "geometricMeanNs": 3.48,
+            "okCount": 2,
+            "totalMethods": 2
+          }
+        },
+        "chaosAotGeometricMeanNs": 4.4
       },
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 7356
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
       "status": "passed",
-      "summary": "avg_slowdown=8.12% (1.1x) over 2 methods (AOT patched path)",
+      "summary": "avg_slowdown=29.64% (1.3x) over 2 methods (AOT patched path)",
       "details": {
-        "averageSlowdownPercent": 8.12,
-        "slowdownFactor": 1.0812,
+        "averageSlowdownPercent": 29.64,
+        "slowdownFactor": 1.2963999999999998,
         "threshold": 50.0,
         "nonStubMethods": 2
       },
       "errors": [],
-      "duration_ms": 56
+      "duration_ms": 54
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "2/2 passed, 0 failed",
-      "details": {
-        "passed": 2,
-        "failed": 0,
-        "total": 2
-      },
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT hotupdate",
+      "details": {},
       "errors": [],
-      "duration_ms": 27
+      "duration_ms": 0
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "entry-jit.exe not found",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "dashboard": {
+      "stage": "dashboard",
       "status": "passed",
-      "summary": "avg_slowdown=148.54% (2.5x) over 2 methods (JIT patched path)",
+      "summary": "Dashboard built: 6 sections",
       "details": {
-        "averageSlowdownPercent": 148.54,
-        "slowdownFactor": 2.4854,
-        "threshold": 50.0,
-        "nonStubMethods": 2
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 2,
+          "okCount": 0,
+          "failedCount": 2,
+          "overallIrExpansionRatio": 0,
+          "averageExpansionRatio": 0,
+          "maxExpansionRatio": 0,
+          "jitInstructionAvg": 0,
+          "aotInstructionAvg": 17.0,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {}
+        },
+        "performance": {
+          "averageSpeedupPercent": 0,
+          "nativeFasterCount": 0,
+          "managedFasterCount": 0,
+          "matchedCount": 0,
+          "totalMethods": 0,
+          "invalidCount": 0
+        },
+        "hotupdate": {
+          "aotOverhead": {
+            "averageSlowdownPercent": 29.64,
+            "slowdownFactor": 1.2963999999999998,
+            "nonStubMethods": 2
+          }
+        },
+        "managedFact": {
+          "totalMethods": 2,
+          "passedMethods": 0,
+          "failedMethods": 0,
+          "skippedMethods": 2,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0,
+          "interpreterSlowdownFactor": 1.2963999999999998,
+          "asmPassRate": 0.0
+        }
       },
       "errors": [],
-      "duration_ms": 4199
+      "duration_ms": 1
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
+    "methodCoverage": 0.0,
     "testedRate": 100.0,
     "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 3.0,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 3.8,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
+    "interpreter": {},
+    "irTranslation": {
+      "totalMethods": 2,
+      "okCount": 0,
+      "failedCount": 2,
+      "overallIrExpansionRatio": 0,
+      "averageExpansionRatio": 0,
+      "maxExpansionRatio": 0,
+      "jitInstructionAvg": 0,
+      "aotInstructionAvg": 17.0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
     },
-    "irTranslation": {},
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 0,
+      "invalidCount": 0
+    },
     "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 2,
-        "failedMethods": 0,
-        "totalMethods": 2
-      },
       "aotOverhead": {
-        "averageSlowdownPercent": 8.12,
-        "slowdownFactor": 1.0812,
-        "nonStubMethods": 2
-      },
-      "jitFunctional": {
-        "passedMethods": 2,
-        "failedMethods": 0,
-        "totalMethods": 2
-      },
-      "jitOverhead": {
-        "averageSlowdownPercent": 148.54,
-        "slowdownFactor": 2.4854,
+        "averageSlowdownPercent": 29.64,
+        "slowdownFactor": 1.2963999999999998,
         "nonStubMethods": 2
       }
+    },
+    "managedFact": {
+      "totalMethods": 2,
+      "passedMethods": 0,
+      "failedMethods": 0,
+      "skippedMethods": 2,
+      "tfm": "net8.0"
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 1.0812,
+      "interpreterSlowdownFactor": 1.2963999999999998,
       "asmPassRate": 0.0
     }
   },
   "regression": {
     "benchmark": {
-      "status": "no_baseline",
-      "message": "Baseline auto-created from this run",
+      "status": "matched",
+      "baselineMetrics": {
+        "totalMethods": 2,
+        "matchedCount": 0,
+        "nativeFasterCount": 0,
+        "managedFasterCount": 0,
+        "averageSpeedupPercent": 0.0
+      },
       "currentMetrics": {
         "totalMethods": 2,
         "matchedCount": 0,

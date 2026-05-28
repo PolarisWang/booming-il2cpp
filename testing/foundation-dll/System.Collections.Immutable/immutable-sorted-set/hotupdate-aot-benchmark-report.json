@@ -16,39 +16,39 @@
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Byte>:System.Collections.Immutable.ImmutableSortedSet<System.Byte>(System.Byte)",
       "status": "passed",
       "prePatchNsPerOp": 3.5,
-      "postPatchNsPerOp": 3.4,
-      "slowdownPercent": -2.86
+      "postPatchNsPerOp": 5.8,
+      "slowdownPercent": 65.71
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Byte>:System.Collections.Immutable.ImmutableSortedSet<System.Byte>(System.Byte,System.Byte)",
       "status": "passed",
       "prePatchNsPerOp": 199.03,
-      "postPatchNsPerOp": 194.0,
-      "slowdownPercent": -2.53
+      "postPatchNsPerOp": 225.2,
+      "slowdownPercent": 13.15
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Int32>:System.Collections.Immutable.ImmutableSortedSet<System.Int32>()",
       "status": "passed",
       "prePatchNsPerOp": 3.54,
-      "postPatchNsPerOp": 3.4,
-      "slowdownPercent": -3.95
+      "postPatchNsPerOp": 5.9,
+      "slowdownPercent": 66.67
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableSortedSet::Create<Int32>:System.Collections.Immutable.ImmutableSortedSet<System.Int32>(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 3.45,
-      "postPatchNsPerOp": 3.4,
-      "slowdownPercent": -1.45
+      "postPatchNsPerOp": 5.7,
+      "slowdownPercent": 65.22
     }
   ],
   "summary": {
     "totalMethods": 5,
     "nonStubMethods": 5,
-    "averageSlowdownPercent": -1.87,
-    "slowdownFactor": 0.9813,
+    "averageSlowdownPercent": 42.44,
+    "slowdownFactor": 1.4243999999999999,
     "slowdownThresholdX": 50.0
   }
 }

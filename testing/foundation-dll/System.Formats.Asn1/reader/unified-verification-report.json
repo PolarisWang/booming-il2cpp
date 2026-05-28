@@ -2,9 +2,9 @@
   "family": "reader",
   "assembly": "System.Formats.Asn1",
   "mode": "standard",
-  "timestamp": "2026-05-22T06:40:14",
-  "duration_ms": 116002,
-  "overall_status": "passed",
+  "timestamp": "2026-05-28T10:56:18",
+  "duration_ms": 93391,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -31,111 +31,380 @@
         "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Formats.Asn1\\reader\\managed\\subjects\\build-output\\ReaderSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 33881
+      "duration_ms": 42381
     },
     "jit_codegen": {
       "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "status": "failed",
+      "summary": "JIT codegen failed",
       "details": {},
       "errors": [],
-      "duration_ms": 33548
+      "duration_ms": 25290
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "passed",
+      "summary": "Fact net8.0: passed=0 failed=0 skipped=40",
+      "details": {
+        "totalMethods": 40,
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "skippedMethods": 40,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::Clone:System.Formats.Asn1.AsnReader()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::get_HasData:System.Boolean()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::get_RuleSet:System.Formats.Asn1.AsnEncodingRules()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekContentBytes:System.ReadOnlyMemory{System.Byte}()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 4,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekEncodedValue:System.ReadOnlyMemory{System.Byte}()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 5,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::PeekTag:System.Formats.Asn1.Asn1Tag()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 6,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte{}(System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 7,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBoolean:System.Boolean(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 8,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadCharacterString:System.String(System.Formats.Asn1.UniversalTagNumber,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 9,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEncodedValue:System.ReadOnlyMemory{System.Byte}()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 10,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedBytes:System.ReadOnlyMemory{System.Byte}(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 11,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue{TEnum}:TEnum(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 12,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadEnumeratedValue:System.Enum(System.Type,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 13,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadGeneralizedTime:System.DateTimeOffset(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 14,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadInteger:System.Numerics.BigInteger(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 15,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadIntegerBytes:System.ReadOnlyMemory{System.Byte}(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 16,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitList:System.Collections.BitArray(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 17,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue{TFlagsEnum}:TFlagsEnum(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 18,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNamedBitListValue:System.Enum(System.Type,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 19,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadNull:System.Void(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 20,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadObjectIdentifier:System.String(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 21,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadOctetString:System.Byte{}(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 22,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSequence:System.Formats.Asn1.AsnReader(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 23,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 24,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadSetOf:System.Formats.Asn1.AsnReader(System.Boolean,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 25,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 26,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadUtcTime:System.DateTimeOffset(System.Int32,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 27,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::ThrowIfNotEmpty:System.Void()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 28,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadBitString:System.Boolean(System.Span{System.Byte},System.Int32&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 29,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadCharacterString:System.Boolean(System.Span{System.Char},System.Formats.Asn1.UniversalTagNumber,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 30,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadCharacterStringBytes:System.Boolean(System.Span{System.Byte},System.Formats.Asn1.Asn1Tag,System.Int32&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 31,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 32,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 33,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadOctetString:System.Boolean(System.Span{System.Byte},System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 34,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32&,System.ReadOnlyMemory{System.Byte}&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 35,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.Formats.Asn1.Asn1Tag,System.ReadOnlyMemory{System.Byte}&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 36,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory{System.Byte}&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 37,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 38,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 39,
+            "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnReader::.ctor:System.Void(System.ReadOnlyMemory{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Formats.Asn1.AsnReaderOptions)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          }
+        ]
+      },
+      "errors": [],
+      "duration_ms": 2790
     },
     "fact": {
       "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (40/40)",
+      "status": "failed",
+      "summary": "Fact verify=failed (0/0)",
       "details": {
         "fact": {
-          "status": "passed",
-          "passed": 40,
-          "total": 40
+          "status": "failed",
+          "passed": 0,
+          "total": 0
         }
       },
       "errors": [],
-      "duration_ms": 481
+      "duration_ms": 410
     },
     "fact_jit": {
       "stage": "fact_jit",
-      "status": "passed",
-      "summary": "Fact JIT verify=passed (40/40)",
-      "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 40,
-          "total": 40,
-          "exit_code": 0
-        }
-      },
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT fact",
+      "details": {},
       "errors": [],
-      "duration_ms": 973
+      "duration_ms": 0
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN",
+      "summary": "false_passing=0, principle=ALIGNED (mech_passed=True, strict_on_CONCERN=False)",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
         "skipsFound": 0,
-        "principleStatus": "CONCERN",
+        "principleStatus": "ALIGNED",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 3559
+      "duration_ms": 9687
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
-      "errors": [],
-      "duration_ms": 0
-    },
-    "microbench": {
-      "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=3.1ns/op | FastExecute=5.4ns/op | CallVirt dispatch=5.3ns",
+      "summary": "asm-compare: 35/40 methods OK, avg JIT=44.0 instr, avg AOT IR=28.2 instr, expansion=0.73x",
       "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 3.1,
-          "batchCount": 1000,
-          "framesPerBatch": 32
+        "totalMethods": 40,
+        "okCount": 35,
+        "failedCount": 5,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 44,
+          "max": 44,
+          "avg": 44.0,
+          "total": 1540
         },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 5.4
+        "aotInstructionCount": {
+          "min": 1,
+          "max": 46,
+          "avg": 28.2,
+          "total": 1128
         },
-        "callVirt": {
-          "handlerDispatchNs": 5.3,
-          "emptyStackNs": 5.9
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {
+          "external_runtime_call": 22
         },
-        "poolSize": 32
+        "overallIrExpansionRatio": 0.73,
+        "averageExpansionRatio": 0.68,
+        "maxExpansionRatio": 1.05,
+        "minExpansionRatio": 0.18
       },
       "errors": [],
-      "duration_ms": 30
+      "duration_ms": 1061
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "failed",
-      "summary": "Benchmark stage crashed: [Errno 22] Invalid argument",
-      "details": {},
-      "errors": [],
-      "duration_ms": 0
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "40/40 passed, 0 failed (stub=2)",
+      "summary": "net8-jit benchmark produced no valid results",
       "details": {
-        "passedMethods": 40,
-        "failedMethods": 0,
-        "totalMethods": 40,
-        "realMethods": 40,
-        "stubMethods": 2
+        "runtimesAvailable": [
+          "net8-jit",
+          "net10-jit",
+          "mono",
+          "chaos-aot",
+          "chaos-jit"
+        ],
+        "runtimesUnavailable": [],
+        "multiRunReportPath": "multi-run/multi-run-report.json",
+        "chaosClassification": {
+          "chaos_faster_than_all": 0,
+          "chaos_faster_than_jit": 0,
+          "chaos_midfield": 0,
+          "chaos_slower_than_jit": 0,
+          "not_benchmarked": 40
+        },
+        "summaries": {
+          "chaos-aot": {
+            "geometricMeanNs": 7.159431321677932,
+            "okCount": 40,
+            "totalMethods": 40
+          },
+          "chaos-jit": {
+            "geometricMeanNs": 7.1682167981867275,
+            "okCount": 39,
+            "totalMethods": 40
+          }
+        },
+        "chaosAotGeometricMeanNs": 7.159431321677932
       },
       "errors": [],
-      "duration_ms": 34
+      "duration_ms": 10577
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
@@ -148,77 +417,129 @@
         "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 1148
+      "duration_ms": 1067
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "40/40 passed, 0 failed",
-      "details": {
-        "passed": 40,
-        "failed": 0,
-        "total": 40
-      },
+      "status": "skipped",
+      "summary": "entry-jit.exe not found — cannot run JIT hotupdate",
+      "details": {},
       "errors": [],
-      "duration_ms": 49
+      "duration_ms": 0
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "entry-jit.exe not found",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "dashboard": {
+      "stage": "dashboard",
       "status": "passed",
-      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
+      "summary": "Dashboard built: 6 sections",
       "details": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "threshold": 50.0,
-        "nonStubMethods": 0
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 40,
+          "okCount": 35,
+          "failedCount": 5,
+          "overallIrExpansionRatio": 0.73,
+          "averageExpansionRatio": 0.68,
+          "maxExpansionRatio": 1.05,
+          "jitInstructionAvg": 44.0,
+          "aotInstructionAvg": 28.2,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {
+            "external_runtime_call": 22
+          }
+        },
+        "performance": {
+          "averageSpeedupPercent": 0,
+          "nativeFasterCount": 0,
+          "managedFasterCount": 0,
+          "matchedCount": 0,
+          "totalMethods": 0,
+          "invalidCount": 0
+        },
+        "hotupdate": {
+          "aotOverhead": {
+            "averageSlowdownPercent": 0.0,
+            "slowdownFactor": 1.0,
+            "nonStubMethods": 0
+          }
+        },
+        "managedFact": {
+          "totalMethods": 40,
+          "passedMethods": 0,
+          "failedMethods": 0,
+          "skippedMethods": 40,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0.73,
+          "interpreterSlowdownFactor": 1.0,
+          "asmPassRate": 87.5
+        }
       },
       "errors": [],
-      "duration_ms": 40028
+      "duration_ms": 1
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
+    "methodCoverage": 0.0,
     "testedRate": 100.0,
     "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 3.1,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 5.3,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
+    "interpreter": {},
+    "irTranslation": {
+      "totalMethods": 40,
+      "okCount": 35,
+      "failedCount": 5,
+      "overallIrExpansionRatio": 0.73,
+      "averageExpansionRatio": 0.68,
+      "maxExpansionRatio": 1.05,
+      "jitInstructionAvg": 44.0,
+      "aotInstructionAvg": 28.2,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {
+        "external_runtime_call": 22
+      }
     },
-    "irTranslation": {},
-    "performance": {},
+    "performance": {
+      "averageSpeedupPercent": 0,
+      "nativeFasterCount": 0,
+      "managedFasterCount": 0,
+      "matchedCount": 0,
+      "totalMethods": 0,
+      "invalidCount": 0
+    },
     "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 40,
-        "failedMethods": 0,
-        "totalMethods": 40
-      },
       "aotOverhead": {
-        "averageSlowdownPercent": 0.0,
-        "slowdownFactor": 1.0,
-        "nonStubMethods": 0
-      },
-      "jitFunctional": {
-        "passedMethods": 40,
-        "failedMethods": 0,
-        "totalMethods": 40
-      },
-      "jitOverhead": {
         "averageSlowdownPercent": 0.0,
         "slowdownFactor": 1.0,
         "nonStubMethods": 0
       }
     },
+    "managedFact": {
+      "totalMethods": 40,
+      "passedMethods": 0,
+      "failedMethods": 0,
+      "skippedMethods": 40,
+      "tfm": "net8.0"
+    },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0,
+      "irExpansionRatio": 0.73,
       "interpreterSlowdownFactor": 1.0,
-      "asmPassRate": 0.0
+      "asmPassRate": 87.5
     }
   },
   "regression": {

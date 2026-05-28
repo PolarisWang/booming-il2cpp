@@ -8,40 +8,40 @@
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::DecodeLength:System.Nullable{System.Int32}(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&)",
       "status": "passed",
       "prePatchNsPerOp": 7.4,
-      "postPatchNsPerOp": 5.3,
-      "slowdownPercent": -28.38
+      "postPatchNsPerOp": 5.4,
+      "slowdownPercent": -27.03
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadBitString:System.Byte{}(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 5.27,
-      "postPatchNsPerOp": 6.7,
-      "slowdownPercent": 27.13
+      "postPatchNsPerOp": 6.1,
+      "slowdownPercent": 15.75
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadBoolean:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 3.87,
-      "postPatchNsPerOp": 3.8,
-      "slowdownPercent": -1.81
+      "postPatchNsPerOp": 6.9,
+      "slowdownPercent": 78.29
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadCharacterString:System.String(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Formats.Asn1.UniversalTagNumber,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 10.129999999999999,
-      "postPatchNsPerOp": 5.9,
-      "slowdownPercent": -41.76
+      "postPatchNsPerOp": 10.8,
+      "slowdownPercent": 6.61
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadEncodedValue:System.Formats.Asn1.Asn1Tag(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Int32&,System.Int32&)",
       "status": "passed",
       "prePatchNsPerOp": 5.93,
-      "postPatchNsPerOp": 5.7,
-      "slowdownPercent": -3.88
+      "postPatchNsPerOp": 9.3,
+      "slowdownPercent": 56.83
     },
     {
       "methodIndex": 5,
@@ -61,40 +61,40 @@
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadEnumeratedValue:System.Enum(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Type,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 203.89,
-      "postPatchNsPerOp": 212.7,
-      "slowdownPercent": 4.32
+      "postPatchNsPerOp": 276.7,
+      "slowdownPercent": 35.71
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadGeneralizedTime:System.DateTimeOffset(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 6.09,
-      "postPatchNsPerOp": 5.7,
-      "slowdownPercent": -6.4
+      "postPatchNsPerOp": 6.6,
+      "slowdownPercent": 8.37
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadInteger:System.Numerics.BigInteger(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 7.77,
-      "postPatchNsPerOp": 5.7,
-      "slowdownPercent": -26.64
+      "postPatchNsPerOp": 9.8,
+      "slowdownPercent": 26.13
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadIntegerBytes:System.ReadOnlySpan{System.Byte}(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 6.91,
-      "postPatchNsPerOp": 5.6,
-      "slowdownPercent": -18.96
+      "postPatchNsPerOp": 9.5,
+      "slowdownPercent": 37.48
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadNamedBitList:System.Collections.BitArray(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 6.67,
-      "postPatchNsPerOp": 5.9,
-      "slowdownPercent": -11.54
+      "postPatchNsPerOp": 10.7,
+      "slowdownPercent": 60.42
     },
     {
       "methodIndex": 12,
@@ -106,40 +106,40 @@
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadNamedBitListValue:System.Enum(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Type,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 210.52,
-      "postPatchNsPerOp": 205.7,
-      "slowdownPercent": -2.29
+      "postPatchNsPerOp": 246.0,
+      "slowdownPercent": 16.85
     },
     {
       "methodIndex": 14,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadNull:System.Void(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 3.15,
-      "postPatchNsPerOp": 3.0,
-      "slowdownPercent": -4.76
+      "postPatchNsPerOp": 5.2,
+      "slowdownPercent": 65.08
     },
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadObjectIdentifier:System.String(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 6.15,
-      "postPatchNsPerOp": 5.9,
-      "slowdownPercent": -4.07
+      "postPatchNsPerOp": 6.0,
+      "slowdownPercent": -2.44
     },
     {
       "methodIndex": 16,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadOctetString:System.Byte{}(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 4.4,
-      "postPatchNsPerOp": 4.3,
-      "slowdownPercent": -2.27
+      "postPatchNsPerOp": 4.4,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 17,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadSequence:System.Void(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Int32&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 6.43,
-      "postPatchNsPerOp": 3.0,
-      "slowdownPercent": -53.34
+      "postPatchNsPerOp": 3.2,
+      "slowdownPercent": -50.23
     },
     {
       "methodIndex": 18,
@@ -154,16 +154,16 @@
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::ReadUtcTime:System.DateTimeOffset(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Int32,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 5.87,
-      "postPatchNsPerOp": 5.7,
-      "slowdownPercent": -2.9
+      "postPatchNsPerOp": 6.4,
+      "slowdownPercent": 9.03
     },
     {
       "methodIndex": 20,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryDecodeLength:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Nullable{System.Int32}&,System.Int32&)",
       "status": "passed",
       "prePatchNsPerOp": 3.84,
-      "postPatchNsPerOp": 3.8,
-      "slowdownPercent": -1.04
+      "postPatchNsPerOp": 3.9,
+      "slowdownPercent": 1.56
     },
     {
       "methodIndex": 21,
@@ -178,95 +178,95 @@
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadCharacterString:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Char},System.Formats.Asn1.AsnEncodingRules,System.Formats.Asn1.UniversalTagNumber,System.Int32&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 4.52,
-      "postPatchNsPerOp": 4.4,
-      "slowdownPercent": -2.65
+      "postPatchNsPerOp": 4.5,
+      "slowdownPercent": -0.44
     },
     {
       "methodIndex": 23,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadCharacterStringBytes:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Formats.Asn1.Asn1Tag,System.Int32&,System.Int32&)",
       "status": "passed",
       "prePatchNsPerOp": 4.74,
-      "postPatchNsPerOp": 4.2,
-      "slowdownPercent": -11.39
+      "postPatchNsPerOp": 4.3,
+      "slowdownPercent": -9.28
     },
     {
       "methodIndex": 24,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadEncodedValue:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Formats.Asn1.Asn1Tag&,System.Int32&,System.Int32&,System.Int32&)",
       "status": "passed",
       "prePatchNsPerOp": 4.18,
-      "postPatchNsPerOp": 4.0,
-      "slowdownPercent": -4.31
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": -1.91
     },
     {
       "methodIndex": 25,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadInt32:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 4.33,
-      "postPatchNsPerOp": 7.8,
-      "slowdownPercent": 80.14
+      "postPatchNsPerOp": 8.7,
+      "slowdownPercent": 100.92
     },
     {
       "methodIndex": 26,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadInt64:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int64&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 4.1,
-      "postPatchNsPerOp": 4.0,
-      "slowdownPercent": -2.44
+      "postPatchNsPerOp": 4.1,
+      "slowdownPercent": 0.0
     },
     {
       "methodIndex": 27,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadOctetString:System.Boolean(System.ReadOnlySpan{System.Byte},System.Span{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 4.42,
-      "postPatchNsPerOp": 4.2,
-      "slowdownPercent": -4.98
+      "postPatchNsPerOp": 4.3,
+      "slowdownPercent": -2.71
     },
     {
       "methodIndex": 28,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadPrimitiveBitString:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Int32&,System.ReadOnlySpan{System.Byte}&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 4.47,
-      "postPatchNsPerOp": 4.4,
-      "slowdownPercent": -1.57
+      "postPatchNsPerOp": 8.7,
+      "slowdownPercent": 94.63
     },
     {
       "methodIndex": 29,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Formats.Asn1.Asn1Tag,System.ReadOnlySpan{System.Byte}&,System.Int32&)",
       "status": "passed",
       "prePatchNsPerOp": 4.63,
-      "postPatchNsPerOp": 4.2,
-      "slowdownPercent": -9.29
+      "postPatchNsPerOp": 6.1,
+      "slowdownPercent": 31.75
     },
     {
       "methodIndex": 30,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.ReadOnlySpan{System.Byte}&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 4.49,
-      "postPatchNsPerOp": 4.2,
-      "slowdownPercent": -6.46
+      "postPatchNsPerOp": 8.5,
+      "slowdownPercent": 89.31
     },
     {
       "methodIndex": 31,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadUInt32:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.UInt32&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 4.27,
-      "postPatchNsPerOp": 4.2,
-      "slowdownPercent": -1.64
+      "postPatchNsPerOp": 8.0,
+      "slowdownPercent": 87.35
     },
     {
       "methodIndex": 32,
       "methodSubjectId": "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadUInt64:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.UInt64&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})",
       "status": "passed",
       "prePatchNsPerOp": 5.96,
-      "postPatchNsPerOp": 4.0,
-      "slowdownPercent": -32.89
+      "postPatchNsPerOp": 5.9,
+      "slowdownPercent": -1.01
     }
   ],
   "summary": {
     "totalMethods": 33,
     "nonStubMethods": 31,
-    "averageSlowdownPercent": -5.22,
-    "slowdownFactor": 0.9478,
+    "averageSlowdownPercent": 23.92,
+    "slowdownFactor": 1.2392,
     "slowdownThresholdX": 50.0
   }
 }

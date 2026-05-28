@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/garbage/collection",
-  "capturedAt": "2026-05-27T21:25:31",
+  "capturedAt": "2026-05-28T11:55:28",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -18,8 +18,8 @@
     "aotInstructionCount": {
       "min": 7,
       "max": 12,
-      "avg": 9.3,
-      "total": 93
+      "avg": 9.2,
+      "total": 92
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -210,8 +210,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -222,7 +222,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-        "instructions": 10
+        "instructions": 9
       },
       "analysis": [
         {

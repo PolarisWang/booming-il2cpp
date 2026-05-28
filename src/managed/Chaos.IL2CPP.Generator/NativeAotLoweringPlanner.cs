@@ -118,11 +118,15 @@ public sealed partial class NativeAotLoweringPlanner
         string? TypeExpr2,
         int[] SkipIlOffsets);  // IlOffsets of ltoken + GetTypeFromHandle to DCE
 
+    // NOTE: These map to CHAOS_IL2CPP_FORCEINLINE functions in hierarchy_fast_api.h
+    // (included in the generated code TU), enabling cross-TU inlining into SEH-protected
+    // methods. The *PtrFast variants also use a single merged parent walk (subclass +
+    // interface check combined) to eliminate redundant traversals.
     private static readonly Dictionary<string, string> TypeHierarchyPtrOptimizationMap = new(StringComparer.Ordinal)
     {
-        { "IsAssignableFrom", "ChaosReflectionIsAssignableFromPtr" },
-        { "IsSubclassOf",     "ChaosReflectionIsSubclassOfPtr" },
-        { "IsAssignableTo",   "ChaosReflectionIsAssignableToPtr" },
+        { "IsAssignableFrom", "chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableFromPtrFast" },
+        { "IsSubclassOf",     "chaos::il2cpp::runtime_core::ChaosReflectionIsSubclassOfPtrFast" },
+        { "IsAssignableTo",   "chaos::il2cpp::runtime_core::ChaosReflectionIsAssignableToPtrFast" },
         // IsInstanceOfType excluded: the object argument may be a CHAOS_IL2CPP_STRING_ID
         // (tagged integer hash from ldstr), not a managed object pointer.  Passing a tagged
         // integer to ChaosReflectionIsInstanceOfTypePtr causes SIGSEGV in
@@ -133,6 +137,10 @@ public sealed partial class NativeAotLoweringPlanner
 
     private Dictionary<(string MethodNativeSymbol, int IlOffset), TypeHierarchyPtrFoldEntry> _typeHierarchyPtrFoldMap = new();
     private Dictionary<string, HashSet<int>> _typeHierarchyPtrSkipIlOffsets = new();
+
+    // Pre-try TypeInfo* fold initializers: emitted BEFORE CHAOS_EH_TRY so the
+    // *Ptr call avoids SEH frame setup/teardown overhead.
+    private List<(string VarName, string Expression)>? _preTryFoldInitializers;
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
 
@@ -1090,6 +1098,10 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Saves ~500 KB of C++ parsing per translation unit when no enums are present.
         if (!string.IsNullOrEmpty(enumMetaHeader))
             includes_.Add("\"enum_metadata.generated.h\"");
+        // Hierarchy fast API — only needed when TypeInfo* ptr fold is active
+        // (typeof(T).IsAssignableFrom(typeof(U)) → *PtrFast inlined calls).
+        if (_typeHierarchyPtrFoldMap is { Count: > 0 })
+            includes_.Add("\"reflection/hierarchy_fast_api.h\"");
         // Native bridge headers (e.g., "convert.h") from external runtime
         // helpers that map to direct native function calls.
         includes_.AddRange(

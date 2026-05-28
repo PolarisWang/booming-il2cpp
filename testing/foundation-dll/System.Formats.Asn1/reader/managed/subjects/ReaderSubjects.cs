@@ -60,7 +60,8 @@ public static partial class ReaderSubjects
     // [6] System.Formats.Asn1/System.Formats.Asn1.AsnReader::ReadBitString:System.Byte{}(System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_6()
     {
-        try { if (((default(AsnReader)!.ReadBitString(out _, default)).Length) != ((default(AsnReader)!.ReadBitString(out _, default)).Length)) _exitCode = 1; }
+            System.Int32 refLocal_0 = 42;
+        try { if (((default(AsnReader)!.ReadBitString(out refLocal_0, default)).Length) != ((default(AsnReader)!.ReadBitString(out refLocal_0, default)).Length)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
@@ -210,77 +211,90 @@ public static partial class ReaderSubjects
     // [28] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadBitString:System.Boolean(System.Span{System.Byte},System.Int32&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_28()
     {
-        try { if (((default(AsnReader)!.TryReadBitString(default(Span<byte>), out _, out _, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadBitString(default(Span<byte>), out _, out _, default)) ? 1 : 0)) _exitCode = 1; }
+            System.Int32 refLocal_1 = 42;
+            System.Int32 refLocal_2 = 42;
+        try { if (((default(AsnReader)!.TryReadBitString(default(Span<byte>), out refLocal_1, out refLocal_2, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadBitString(default(Span<byte>), out refLocal_1, out refLocal_2, default)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [29] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadCharacterString:System.Boolean(System.Span{System.Char},System.Formats.Asn1.UniversalTagNumber,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_29()
     {
-        try { if (((default(AsnReader)!.TryReadCharacterString(default(Span<char>), default, out _, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadCharacterString(default(Span<char>), default, out _, default)) ? 1 : 0)) _exitCode = 1; }
+            System.Int32 refLocal_2 = 42;
+        try { if (((default(AsnReader)!.TryReadCharacterString(default(Span<char>), default, out refLocal_2, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadCharacterString(default(Span<char>), default, out refLocal_2, default)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [30] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadCharacterStringBytes:System.Boolean(System.Span{System.Byte},System.Formats.Asn1.Asn1Tag,System.Int32&)
     public static void Subject_30()
     {
-        try { if (((default(AsnReader)!.TryReadCharacterStringBytes(default(Span<byte>), default, out _)) ? 1 : 0) != ((default(AsnReader)!.TryReadCharacterStringBytes(default(Span<byte>), default, out _)) ? 1 : 0)) _exitCode = 1; }
+            System.Int32 refLocal_2 = 42;
+        try { if (((default(AsnReader)!.TryReadCharacterStringBytes(default(Span<byte>), default, out refLocal_2)) ? 1 : 0) != ((default(AsnReader)!.TryReadCharacterStringBytes(default(Span<byte>), default, out refLocal_2)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [31] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt32:System.Boolean(System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_31()
     {
-        try { if (((default(AsnReader)!.TryReadInt32(out _, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadInt32(out _, default)) ? 1 : 0)) _exitCode = 1; }
+            System.Int32 refLocal_0 = 42;
+        try { if (((default(AsnReader)!.TryReadInt32(out refLocal_0, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadInt32(out refLocal_0, default)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [32] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadInt64:System.Boolean(System.Int64&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_32()
     {
-        try { if (((default(AsnReader)!.TryReadInt64(out _, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadInt64(out _, default)) ? 1 : 0)) _exitCode = 1; }
+            System.Int64 refLocal_0 = 42L;
+        try { if (((default(AsnReader)!.TryReadInt64(out refLocal_0, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadInt64(out refLocal_0, default)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [33] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadOctetString:System.Boolean(System.Span{System.Byte},System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_33()
     {
-        try { if (((default(AsnReader)!.TryReadOctetString(default(Span<byte>), out _, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadOctetString(default(Span<byte>), out _, default)) ? 1 : 0)) _exitCode = 1; }
+            System.Int32 refLocal_1 = 42;
+        try { if (((default(AsnReader)!.TryReadOctetString(default(Span<byte>), out refLocal_1, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadOctetString(default(Span<byte>), out refLocal_1, default)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [34] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveBitString:System.Boolean(System.Int32&,System.ReadOnlyMemory{System.Byte}&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_34()
     {
-        try { if (((default(AsnReader)!.TryReadPrimitiveBitString(out _, out _, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadPrimitiveBitString(out _, out _, default)) ? 1 : 0)) _exitCode = 1; }
+            System.Int32 refLocal_0 = 42;
+            System.ReadOnlyMemory<System.Byte> refLocal_1 = default;
+        try { if (((default(AsnReader)!.TryReadPrimitiveBitString(out refLocal_0, out refLocal_1, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadPrimitiveBitString(out refLocal_0, out refLocal_1, default)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [35] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveCharacterStringBytes:System.Boolean(System.Formats.Asn1.Asn1Tag,System.ReadOnlyMemory{System.Byte}&)
     public static void Subject_35()
     {
-        try { if (((default(AsnReader)!.TryReadPrimitiveCharacterStringBytes(default, out _)) ? 1 : 0) != ((default(AsnReader)!.TryReadPrimitiveCharacterStringBytes(default, out _)) ? 1 : 0)) _exitCode = 1; }
+            System.ReadOnlyMemory<System.Byte> refLocal_1 = default;
+        try { if (((default(AsnReader)!.TryReadPrimitiveCharacterStringBytes(default, out refLocal_1)) ? 1 : 0) != ((default(AsnReader)!.TryReadPrimitiveCharacterStringBytes(default, out refLocal_1)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [36] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadPrimitiveOctetString:System.Boolean(System.ReadOnlyMemory{System.Byte}&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_36()
     {
-        try { if (((default(AsnReader)!.TryReadPrimitiveOctetString(out _, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadPrimitiveOctetString(out _, default)) ? 1 : 0)) _exitCode = 1; }
+            System.ReadOnlyMemory<System.Byte> refLocal_0 = default;
+        try { if (((default(AsnReader)!.TryReadPrimitiveOctetString(out refLocal_0, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadPrimitiveOctetString(out refLocal_0, default)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [37] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt32:System.Boolean(System.UInt32&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_37()
     {
-        try { if (((default(AsnReader)!.TryReadUInt32(out _, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadUInt32(out _, default)) ? 1 : 0)) _exitCode = 1; }
+            System.UInt32 refLocal_0 = 42u;
+        try { if (((default(AsnReader)!.TryReadUInt32(out refLocal_0, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadUInt32(out refLocal_0, default)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 
     // [38] System.Formats.Asn1/System.Formats.Asn1.AsnReader::TryReadUInt64:System.Boolean(System.UInt64&,System.Nullable{System.Formats.Asn1.Asn1Tag})
     public static void Subject_38()
     {
-        try { if (((default(AsnReader)!.TryReadUInt64(out _, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadUInt64(out _, default)) ? 1 : 0)) _exitCode = 1; }
+            System.UInt64 refLocal_0 = 42uL;
+        try { if (((default(AsnReader)!.TryReadUInt64(out refLocal_0, default)) ? 1 : 0) != ((default(AsnReader)!.TryReadUInt64(out refLocal_0, default)) ? 1 : 0)) _exitCode = 1; }
         catch { _exitCode = 1; }
     }
 

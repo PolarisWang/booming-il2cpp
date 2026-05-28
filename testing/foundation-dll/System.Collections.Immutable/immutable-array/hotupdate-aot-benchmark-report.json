@@ -8,8 +8,8 @@
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Byte>:System.Collections.Immutable.ImmutableArray<System.Byte>()",
       "status": "passed",
       "prePatchNsPerOp": 3.4,
-      "postPatchNsPerOp": 3.8,
-      "slowdownPercent": 11.76
+      "postPatchNsPerOp": 3.9,
+      "slowdownPercent": 14.71
     },
     {
       "methodIndex": 1,
@@ -40,23 +40,23 @@
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 3.54,
-      "postPatchNsPerOp": 3.8,
-      "slowdownPercent": 7.34
+      "postPatchNsPerOp": 3.9,
+      "slowdownPercent": 10.17
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<String>:System.Collections.Immutable.ImmutableArray<System.String>(System.String)",
       "status": "passed",
       "prePatchNsPerOp": 4.66,
-      "postPatchNsPerOp": 8.4,
-      "slowdownPercent": 80.26
+      "postPatchNsPerOp": 9.3,
+      "slowdownPercent": 99.57
     }
   ],
   "summary": {
     "totalMethods": 6,
     "nonStubMethods": 6,
-    "averageSlowdownPercent": 11.37,
-    "slowdownFactor": 1.1137000000000001,
+    "averageSlowdownPercent": 15.55,
+    "slowdownFactor": 1.1555,
     "slowdownThresholdX": 50.0
   }
 }

@@ -1,27 +1,41 @@
 {
   "family": "options-errors",
   "assembly": "System.Formats.Asn1",
-  "generated_at": "2026-05-22T06:39:24.027937",
+  "generated_at": "2026-05-28T10:54:35.178692",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
-      "summary": "No benchmark data available — benchmarks not run for this family",
+      "summary": "7/7 methods are stubs — benchmark data not meaningful",
+      "details": [],
+      "evidence": {
+        "average_speedup_percent": 0.0,
+        "average_native_jit_speedup_percent": null,
+        "managed_faster_count": 0,
+        "native_aot_faster_count": 0,
+        "native_jit_faster_count": 0,
+        "invalid_count": 7,
+        "total_methods": 7
+      }
+    },
+    "p1_combo_slug_expansion": {
+      "check_id": "p1_combo_slug_expansion",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
       "details": [],
       "evidence": {}
     },
     "p1_lowering": {
       "check_id": "p1_lowering",
-      "status": "CONCERN",
-      "summary": "10/14 methods have lowering (file has lowering in helper functions)",
+      "status": "ALIGNED",
+      "summary": "All methods have lowering [OK]",
       "details": [],
       "evidence": {
         "has_lowering": true,
-        "file_has_lowering": true,
-        "methods_with_lowering": 10,
-        "methods_total": 14,
         "stub_count": 0,
-        "simple_forward_count": 0
+        "simple_forward_count": 0,
+        "methods_with_lowering": 21,
+        "methods_total": 21
       },
       "per_method": [
         {
@@ -46,11 +60,11 @@
         },
         {
           "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_5",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_6",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_0",
@@ -74,11 +88,39 @@
         },
         {
           "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_5",
-          "has_lowering": false
+          "has_lowering": true
         },
         {
           "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_6",
-          "has_lowering": false
+          "has_lowering": true
+        },
+        {
+          "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_0",
+          "has_lowering": true
+        },
+        {
+          "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_1",
+          "has_lowering": true
+        },
+        {
+          "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_2",
+          "has_lowering": true
+        },
+        {
+          "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_3",
+          "has_lowering": true
+        },
+        {
+          "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_4",
+          "has_lowering": true
+        },
+        {
+          "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_5",
+          "has_lowering": true
+        },
+        {
+          "name": "OptionsErrorsSubjects_OptionsErrorsSubjects_Subject_6",
+          "has_lowering": true
         }
       ]
     },
@@ -111,25 +153,36 @@
       "details": [],
       "evidence": {}
     },
+    "p2_cross_assembly_coverage": {
+      "check_id": "p2_cross_assembly_coverage",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "CONCERN",
-      "summary": "22 of 53 changed source files are outside expected architecture layers",
+      "summary": "7 of 8 changed source files are outside expected architecture layers",
       "details": [
-        {
-          "file": "build/vs2022/testing/Temporary/LastTest.log",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
-          "reason": "outside expected architecture layers"
-        },
         {
           "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GcTypeLayout.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
+          "reason": "outside expected architecture layers"
+        },
+        {
+          "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
           "reason": "outside expected architecture layers"
         },
         {
@@ -137,101 +190,34 @@
           "reason": "outside expected architecture layers"
         },
         {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/entry.exe",
-          "reason": "outside expected architecture layers"
-        },
-        {
-          "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+          "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
           "reason": "outside expected architecture layers"
         }
       ],
       "evidence": {
-        "changed_source_count": 53,
+        "changed_source_count": 8,
         "layer_distribution": {
-          "TestInfra": 3,
-          "Codegen": 4,
-          "HotUpdate": 1,
-          "Interpreter": 5,
-          "RuntimeCore": 10,
-          "BuildConfig": 1,
-          "Contracts": 1,
-          "Tests": 6
+          "RuntimeCore": 1
         },
         "violations": [
-          {
-            "file": "build/vs2022/testing/Temporary/LastTest.log",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/AotCoreIrLowering.cs",
-            "reason": "outside expected architecture layers"
-          },
           {
             "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ExceptionEmission.cs",
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredControlFlow.cs",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.GcTypeLayout.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.MethodEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.ObjectModelEmission.cs",
+            "reason": "outside expected architecture layers"
+          },
+          {
+            "file": "src/managed/Chaos.IL2CPP.Generator/Emission/NativeAotLoweringPlanner.StructuredIR.cs",
             "reason": "outside expected architecture layers"
           },
           {
@@ -239,71 +225,7 @@
             "reason": "outside expected architecture layers"
           },
           {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.StaticInitializationPlanning.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.Generator/Properties/AssemblyInfo.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "src/managed/Chaos.IL2CPP.MetadataWriter/MetadataWriterStage.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/_core/python/project_pipeline_adapter.py",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/RuntimeSelfTest/native-aot.methods.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/_input/RuntimeSelfTest.dll",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-core-ir.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/aot-manifest.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/metadata-registration.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/optimization-facts.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/preserve-descriptor.json",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/codegen/runtime-entry.cpp",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/managed/src/IntegrationProof.cs",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/entry-aot.exe",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/entry-jit.exe",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/entry.exe",
-            "reason": "outside expected architecture layers"
-          },
-          {
-            "file": "testing/project-test/runtime-self-test/native/runtime-entry.cpp",
+            "file": "src/managed/Chaos.IL2CPP.Generator/Planning/NativeAotLoweringPlanner.InvocationPlanning.cs",
             "reason": "outside expected architecture layers"
           }
         ]
@@ -318,6 +240,13 @@
     },
     "p2_no_code_duplication": {
       "check_id": "p2_no_code_duplication",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_shared_type_consistency": {
+      "check_id": "p2_shared_type_consistency",
       "status": "NOT_APPLICABLE",
       "summary": "Cross-family check — run with CrossFamilyContext",
       "details": [],
@@ -364,11 +293,11 @@
     }
   },
   "summary": {
-    "total": 12,
-    "aligned": 7,
-    "concern": 2,
+    "total": 15,
+    "aligned": 8,
+    "concern": 1,
     "violation": 0,
-    "not_applicable": 3,
-    "overall": "CONCERN"
+    "not_applicable": 6,
+    "overall": "ALIGNED"
   }
 }

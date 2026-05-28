@@ -16,35 +16,35 @@ public static partial class CcwBasicSubjects
     // [0] CcwBasicNativeEntry/CcwBasicNativeEntry::Run:System.Int32(System.Int32)
     public static void Subject_0()
     {
-        try { var _ = CcwBasicNativeEntry.Run(42); }
+        try { _ = CcwBasicNativeEntry.Run(42); }
         catch { _exitCode = 1; }
     }
 
     // [1] CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathAdd:System.Int32()
     public static void Subject_1()
     {
-        try { var _ = CcwBasicNativeEntry.TestSimpleMathAdd(); }
+        try { _ = CcwBasicNativeEntry.TestSimpleMathAdd(); }
         catch { _exitCode = 1; }
     }
 
     // [2] CcwBasicNativeEntry/CcwBasicNativeEntry::TestSimpleMathMul:System.Int32()
     public static void Subject_2()
     {
-        try { var _ = CcwBasicNativeEntry.TestSimpleMathMul(); }
+        try { _ = CcwBasicNativeEntry.TestSimpleMathMul(); }
         catch { _exitCode = 1; }
     }
 
     // [3] CcwBasicNativeEntry/CcwBasicNativeEntry::TestConstantValue:System.Int32()
     public static void Subject_3()
     {
-        try { var _ = CcwBasicNativeEntry.TestConstantValue(); }
+        try { _ = CcwBasicNativeEntry.TestConstantValue(); }
         catch { _exitCode = 1; }
     }
 
     // [4] CcwBasicNativeEntry/CcwBasicNativeEntry::TestDualInterface:System.Int32()
     public static void Subject_4()
     {
-        try { var _ = CcwBasicNativeEntry.TestDualInterface(); }
+        try { _ = CcwBasicNativeEntry.TestDualInterface(); }
         catch { _exitCode = 1; }
     }
 

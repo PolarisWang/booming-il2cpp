@@ -16,28 +16,28 @@ public static partial class GenericSupplementSubjects
     // [0] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()
     public static void Subject_0()
     {
-        try { var _ = GenericSupplementNativeEntry.TestSupplementalMetadataRoundtrip(); }
+        try { _ = GenericSupplementNativeEntry.TestSupplementalMetadataRoundtrip(); }
         catch { _exitCode = 1; }
     }
 
     // [1] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()
     public static void Subject_1()
     {
-        try { var _ = GenericSupplementNativeEntry.TestTypeLookupBySubjectId(); }
+        try { _ = GenericSupplementNativeEntry.TestTypeLookupBySubjectId(); }
         catch { _exitCode = 1; }
     }
 
     // [2] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()
     public static void Subject_2()
     {
-        try { var _ = GenericSupplementNativeEntry.TestTypeLookupByToken(); }
+        try { _ = GenericSupplementNativeEntry.TestTypeLookupByToken(); }
         catch { _exitCode = 1; }
     }
 
     // [3] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()
     public static void Subject_3()
     {
-        try { var _ = GenericSupplementNativeEntry.TestGenericInstantiation(); }
+        try { _ = GenericSupplementNativeEntry.TestGenericInstantiation(); }
         catch { _exitCode = 1; }
     }
 

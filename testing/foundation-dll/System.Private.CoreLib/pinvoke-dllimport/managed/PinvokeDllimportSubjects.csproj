@@ -14,6 +14,7 @@
   <ItemGroup>
     <Compile Include="PinvokeDllimportSubjects.cs" />
     <Compile Include="PinvokeDllimportNativeEntry.cs" />
+    <Compile Include="subjects/PinvokeDllimportNativeEntry.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

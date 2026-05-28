@@ -138,11 +138,11 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 				if (IsReflectionMemberHelperSubjectId(instruction.Callee ?? string.Empty) || MatchesMethodSubject(instruction.Callee ?? string.Empty, "System.Reflection.MethodInfo", "MakeGenericMethod", "System.Type[]"))
 				{
-					TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodInfo", "System.Private.CoreLib/System.Object");
+					TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodInfo", "System.Private.CoreLib/System.Reflection.MethodBase");
 				}
 				if (string.Equals(ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee ?? string.Empty), "System.Private.CoreLib/System.Type::GetConstructors(System.Reflection.BindingFlags)", StringComparison.Ordinal))
 				{
-					TrackReferenceType("System.Private.CoreLib/System.Reflection.ConstructorInfo", "System.Private.CoreLib/System.Object");
+					TrackReferenceType("System.Private.CoreLib/System.Reflection.ConstructorInfo", "System.Private.CoreLib/System.Reflection.MethodBase");
 				}
 				if (string.Equals(ManagedNaming.NormalizeSubjectIdAssembly(instruction.Callee ?? string.Empty), "System.Private.CoreLib/System.Type::GetField(System.String)", StringComparison.Ordinal))
 				{
@@ -385,8 +385,9 @@ public sealed partial class NativeAotLoweringPlanner
 		// Ensure System.Type is always tracked (used in reflection and runtime type helpers)
 		TrackReferenceType("System.Private.CoreLib/System.Type", "System.Private.CoreLib/System.Object");
 		// Ensure reflection types used by ReflectionObjectEmission are tracked
-		TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodInfo", null);
-		TrackReferenceType("System.Private.CoreLib/System.Reflection.ConstructorInfo", null);
+		TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodBase", "System.Private.CoreLib/System.Object");
+		TrackReferenceType("System.Private.CoreLib/System.Reflection.MethodInfo", "System.Private.CoreLib/System.Reflection.MethodBase");
+		TrackReferenceType("System.Private.CoreLib/System.Reflection.ConstructorInfo", "System.Private.CoreLib/System.Reflection.MethodBase");
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.FieldInfo", null);
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.Assembly", null);
 		TrackReferenceType("System.Private.CoreLib/System.Reflection.AssemblyName", null);

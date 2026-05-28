@@ -140,6 +140,7 @@ public sealed partial class NativeAotLoweringPlanner
 		ValidateMethod(method);
 		_linearScratchCounter = 0;
 		_nextInlineId = 0;
+		_preTryFoldInitializers = null;  // reset per-method
 
 		// P/Invoke methods: emit LoadLibrary + GetProcAddress wrapper instead of IL body.
 		if (method.IsPInvoke)
@@ -228,6 +229,14 @@ public sealed partial class NativeAotLoweringPlanner
 			stringBuilder6.AppendLine(ref handler);
 			builder.AppendLine("	CHAOS_IL2CPP_SIZE chaos_stack_top = 0;");
 		}
+		// Pre-try TypeInfo* fold evaluations (outside SEH frame)
+		if (_preTryFoldInitializers is { Count: > 0 })
+		{
+			builder.AppendLine("	// Pre-try TypeInfo* fold evaluations (outside SEH frame)");
+			foreach (var (varName, expr) in _preTryFoldInitializers)
+				builder.AppendLine($"	const auto {varName} = {expr};");
+		}
+
 		builder.Append(bodyBuilder);
 		builder.AppendLine("}");
 	}

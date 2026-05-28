@@ -57,7 +57,7 @@ public static partial class CollectionsGenericCoreSubjects
     // [7] System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()
     public static void Subject_7()
     {
-        try { var _ = ((new List<int>().ToArray()).Length); }
+        try { _ = ((new List<int>().ToArray()).Length); }
         catch { _exitCode = 1; }
     }
 
@@ -69,7 +69,7 @@ public static partial class CollectionsGenericCoreSubjects
     // [9] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()
     public static void Subject_9()
     {
-        try { var _ = new Dictionary<string, int>().Count; }
+        try { _ = new Dictionary<string, int>().Count; }
         catch { _exitCode = 1; }
     }
 

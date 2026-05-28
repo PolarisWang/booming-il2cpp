@@ -101,9 +101,12 @@ public partial class BoxingUnboxingCastsTests
 
     // === needs-manual (operator/protected/etc) ===
 
-    [Fact(Skip = "needs-manual — MemberwiseClone requires manual implementation")]
+    [Fact]
     public void _System_Private_CoreLib_System_Object_MemberwiseClone_System_Object()
     {
-        // TODO: Object.MemberwiseClone needs manual impl
+        var accessor = new BoxingUnboxingCastsSubjects.MemberwiseCloneAccessor();
+        var clone = accessor.ShallowClone();
+        Xunit.Assert.NotNull(clone);
+        Xunit.Assert.NotSame(accessor, clone);
     }
 }

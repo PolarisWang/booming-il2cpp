@@ -51,13 +51,13 @@ public static partial class OptionsErrorsSubjects
     // [5] System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_SkipSetSortOrderVerification:System.Void(System.Boolean)
     public static void Subject_5()
     {
-        // TODO: System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_SkipSetSortOrderVerification:System.Void(System.Boolean) could not be auto-generated
+        // needs-manual — set_SkipSetSortOrderVerification with 1 params requires manual implementation: System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_SkipSetSortOrderVerification:System.Void(System.Boolean)
     }
 
     // [6] System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_UtcTimeTwoDigitYearMax:System.Void(System.Int32)
     public static void Subject_6()
     {
-        // TODO: System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_UtcTimeTwoDigitYearMax:System.Void(System.Int32) could not be auto-generated
+        // needs-manual — set_UtcTimeTwoDigitYearMax with 1 params requires manual implementation: System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_UtcTimeTwoDigitYearMax:System.Void(System.Int32)
     }
 
 }

@@ -8,71 +8,71 @@
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create<string,int>:System.Collections.Frozen.FrozenDictionary<System.String,System.Int32>()",
       "status": "passed",
       "prePatchNsPerOp": 94.14,
-      "postPatchNsPerOp": 91.3,
-      "slowdownPercent": -3.02
+      "postPatchNsPerOp": 94.6,
+      "slowdownPercent": 0.49
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create<Byte,Byte>:System.Collections.Frozen.FrozenDictionary<System.Byte,System.Byte>()",
       "status": "passed",
       "prePatchNsPerOp": 93.81,
-      "postPatchNsPerOp": 92.9,
-      "slowdownPercent": -0.97
+      "postPatchNsPerOp": 103.7,
+      "slowdownPercent": 10.54
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenDictionary::Create<string,string>:System.Collections.Frozen.FrozenDictionary<System.String,System.String>()",
       "status": "passed",
       "prePatchNsPerOp": 91.11,
-      "postPatchNsPerOp": 93.5,
-      "slowdownPercent": 2.62
+      "postPatchNsPerOp": 97.6,
+      "slowdownPercent": 7.12
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Byte>:System.Collections.Frozen.FrozenSet<System.Byte>()",
       "status": "passed",
       "prePatchNsPerOp": 93.5,
-      "postPatchNsPerOp": 92.0,
-      "slowdownPercent": -1.6
+      "postPatchNsPerOp": 122.0,
+      "slowdownPercent": 30.48
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Byte>:System.Collections.Frozen.FrozenSet<System.Byte>(System.Byte)",
       "status": "passed",
       "prePatchNsPerOp": 189.69,
-      "postPatchNsPerOp": 193.6,
-      "slowdownPercent": 2.06
+      "postPatchNsPerOp": 206.5,
+      "slowdownPercent": 8.86
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Byte>:System.Collections.Frozen.FrozenSet<System.Byte>(System.Byte,System.Byte)",
       "status": "passed",
       "prePatchNsPerOp": 190.09,
-      "postPatchNsPerOp": 194.9,
-      "slowdownPercent": 2.53
+      "postPatchNsPerOp": 199.0,
+      "slowdownPercent": 4.69
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Int32>:System.Collections.Frozen.FrozenSet<System.Int32>()",
       "status": "passed",
       "prePatchNsPerOp": 90.73,
-      "postPatchNsPerOp": 91.5,
-      "slowdownPercent": 0.85
+      "postPatchNsPerOp": 93.8,
+      "slowdownPercent": 3.38
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Collections.Immutable/System.Collections.Frozen.FrozenSet::Create<Int32>:System.Collections.Frozen.FrozenSet<System.Int32>(System.Int32)",
       "status": "passed",
       "prePatchNsPerOp": 193.37,
-      "postPatchNsPerOp": 241.7,
-      "slowdownPercent": 24.99
+      "postPatchNsPerOp": 192.2,
+      "slowdownPercent": -0.61
     }
   ],
   "summary": {
     "totalMethods": 8,
     "nonStubMethods": 8,
-    "averageSlowdownPercent": 3.43,
-    "slowdownFactor": 1.0343,
+    "averageSlowdownPercent": 8.12,
+    "slowdownFactor": 1.0812,
     "slowdownThresholdX": 50.0
   }
 }

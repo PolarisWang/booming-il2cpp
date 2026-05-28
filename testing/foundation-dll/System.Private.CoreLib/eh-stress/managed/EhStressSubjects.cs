@@ -16,28 +16,28 @@ public static partial class EhStressSubjects
     // [0] System.Private.CoreLib/System.Array::GetValue:System.Object(System.Int32)
     public static void Subject_0()
     {
-        try { var _ = ((new int[1].GetValue(0)).GetHashCode()); }
+        try { _ = ((new int[1].GetValue(0)).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.String)
     public static void Subject_1()
     {
-        try { var _ = Convert.ToInt32("42"); }
+        try { _ = Convert.ToInt32("42"); }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)
     public static void Subject_2()
     {
-        try { var _ = int.Parse("42"); }
+        try { _ = int.Parse("42"); }
         catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)
     public static void Subject_3()
     {
-        try { var _ = "hello".IndexOf('A'); }
+        try { _ = "hello".IndexOf('A'); }
         catch { _exitCode = 1; }
     }
 

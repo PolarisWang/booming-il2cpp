@@ -299,12 +299,15 @@ public sealed partial class NativeAotLoweringPlanner
                 continue;
 
             bool hasGcRef = false;
+            bool hasAnyField = false; // rejects header-only types where sizeof(struct) < managed object size
             string? current = typeId;
             var visited = new HashSet<string>(StringComparer.Ordinal);
             while (current != null && referenceTypeSubjectIds.Contains(current) && visited.Add(current))
             {
                 if (fieldsByDeclaringType.TryGetValue(current, out var fieldList))
                 {
+                    if (fieldList.Count > 0)
+                        hasAnyField = true;
                     foreach (string fieldSubjectId in fieldList)
                     {
                         string? fieldType = fieldTypeMap.GetValueOrDefault(fieldSubjectId);
@@ -320,7 +323,7 @@ public sealed partial class NativeAotLoweringPlanner
                 current = next;
             }
 
-            if (!hasGcRef)
+            if (!hasGcRef && hasAnyField)
                 safe.Add(typeId);
         }
         return safe;
