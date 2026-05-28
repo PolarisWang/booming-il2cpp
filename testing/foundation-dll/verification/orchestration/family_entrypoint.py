@@ -1095,32 +1095,38 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
 
 static int RunHotupdateMode() {
     const int kCount = kSubjectEntryCount;
-    // Pre-patch: capture per-method pass/fail via ChaosDispatchMethod.
-    // Post-patch: capture pass/fail + return value via ChaosDispatchMethodGetValue
-    // (InterpreterEntryDirect captures actual return in __chaos_ret[0]).
+    // Pre-patch: capture per-method pass/fail AND return value via
+    // ChaosDispatchMethodGetValue.  The pre-patch value for void-returning
+    // AOT methods may be undefined (RAX garbage), but is useful for comparison
+    // when the patch changes the return type (void->sentinel int).
     //
-    // Pre-patch and post-patch use different dispatch paths (direct_ptr vs
-    // InterpreterEntryDirect), so comparing raw RAX values is unreliable
-    // for void-returning methods.  We compare pass/fail (always reliable)
-    // and log post-patch return values for inspection.
+    // Post-patch: same function - InterpreterEntryDirect captures the managed
+    // patch method's actual return value in __chaos_ret[0].
+    //
+    // Semantic change is detected by comparing both pass/fail AND return values
+    // (if they differ, the patch actually changed behavior - e.g. sentinel-based
+    // patches return 0xB0000000+N vs the original void (garbage RAX)).
     printf("{\\n");
     bool baseline_ok[256] = {false};
     bool baseline_caught[256] = {false};
+    int64_t baseline_value[256] = {0};
     printf("\\"baselineFact\\":[");
     for (int si = 0; si < kCount; si++) {
         int i = kSubjectSlotMap[si];
+        int64_t bv = 0;
         bool caught = false;
         CHAOS_EH_TRY
-            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
-                GetHotpatchEntries(), kAotMethodCount, i, nullptr);
+            bv = chaos::il2cpp::runtime_core::ChaosDispatchMethodGetValue(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
             baseline_ok[si] = true;
         CHAOS_EH_CATCH_BEGIN
             caught = true;
         CHAOS_EH_END
         baseline_caught[si] = caught;
+        baseline_value[si] = bv;
         if (si > 0) printf(",");
-        printf("{\\"si\\":%d,\\"passed\\":%s}",
-               si, caught ? "false" : "true");
+        printf("{\\"si\\":%d,\\"passed\\":%s,\\"value\\":%" PRId64 "}",
+               si, caught ? "false" : "true", bv);
     }
     printf("],");
     // Post-patch: apply patch and capture per-method pass/fail + return value
@@ -1144,10 +1150,14 @@ static int RunHotupdateMode() {
                si, patched_caught ? "false" : "true",
                patched_caught ? 0 : patched_value);
         semantic_passed++;
-        // Semantic change: compare pass/fail status (reliable for all methods).
-        // Post-patch return value is logged for manual inspection (patch methods
-        // returning sentinel ints will show here via InterpreterEntryDirect).
-        if (baseline_caught[si] != patched_caught) {
+        // Semantic change: compare pass/fail status AND return value.
+        // Comparing values catches sentinel-based changes where the patch
+        // returns a different int (e.g. 0xB0000000+N) while both paths
+        // succeed without throwing.  For void->int transitions, the
+        // pre-patch value may be undefined (RAX garbage), but any
+        // difference still means the patch changed behavior.
+        if (baseline_caught[si] != patched_caught ||
+            baseline_value[si] != patched_value) {
             semantic_changed_count++;
         }
     }
