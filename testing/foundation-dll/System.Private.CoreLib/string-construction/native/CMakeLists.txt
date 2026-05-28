@@ -28,12 +28,12 @@ add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
 # The SDK root is the codegen output directory from --sdk-out.
-set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/string-construction/codegen/StringConstructionSubjects")
+set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/.claude/worktrees/string-construction-opt-2/testing/foundation-dll/System.Private.CoreLib/string-construction/codegen/StringConstructionSubjects")
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 
 # Paths
-set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/string-construction/codegen")
+set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp/.claude/worktrees/string-construction-opt-2")
+set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/.claude/worktrees/string-construction-opt-2/testing/foundation-dll/System.Private.CoreLib/string-construction/codegen")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 # JIT mode: sources at *Subjects/generated/* (single-level, R1 fix).
