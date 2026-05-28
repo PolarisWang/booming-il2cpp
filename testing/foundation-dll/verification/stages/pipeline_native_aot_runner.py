@@ -2322,8 +2322,24 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         return False
 
     # Copy entry.exe to native/ for discovery by orchestrator
+    # Retry loop: msbuild may briefly hold file handles after cmake --build completes
     target_dir = native_dir
-    shutil.copy2(str(exe_path), str(target_dir / output_name))
+    target_path = target_dir / output_name
+    for copy_attempt in range(5):
+        try:
+            # Remove existing target first (may be locked by prior run)
+            if target_path.exists():
+                target_path.unlink()
+            shutil.copy2(str(exe_path), str(target_path))
+            break
+        except (PermissionError, OSError) as e:
+            if copy_attempt < 4:
+                wait = 1 << copy_attempt
+                print(f"    [build_entry] copy locked, retry #{copy_attempt} after {wait}s...")
+                time.sleep(wait)
+            else:
+                print(f"    [build_entry] copy FAILED after retries: {e}")
+                return False
     size = (target_dir / output_name).stat().st_size
     print(f"    [build_entry] {output_name} OK: {size} bytes -> {target_dir / output_name}")
     return True
