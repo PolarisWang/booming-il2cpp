@@ -9,6 +9,7 @@ import json
 import re
 import shutil
 import subprocess
+import sys
 import time
 from pathlib import Path
 from typing import Any
@@ -20,6 +21,28 @@ _DRIVER_DLL = (
     _REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"
     / "bin" / "Release" / "net8.0" / "Chaos.IL2CPP.Driver.dll"
 )
+_IS_LINUX = sys.platform.startswith("linux")
+
+
+def _find_entry_binary(build_dir: Path) -> Path | None:
+    """Locate the built entry binary in a cmake build directory.
+
+    On Windows/MSVC: build_dir/RelWithDebInfo/entry.exe
+    On Linux/Ninja:  build_dir/entry            (no config subdir, no .exe)
+    """
+    if _IS_LINUX:
+        candidate = build_dir / "entry"
+        return candidate if candidate.exists() else None
+    for cfg in ("RelWithDebInfo", "Release", "Debug", ""):
+        base = build_dir / cfg if cfg else build_dir
+        candidate = base / "entry.exe"
+        if candidate.exists():
+            return candidate
+    # Fallback: search for any entry* binary
+    for f in build_dir.rglob("entry*"):
+        if f.is_file() and f.name.startswith("entry") and not f.suffix == ".o":
+            return f
+    return None
 
 
 def _has_patch_project(ctx: FamilyContext) -> bool:
@@ -196,7 +219,9 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
         return False
 
     patchdata = native_dir / "subjects.patchdata"
-    aot_core_ir = native_dir / f"{ctx.slug.capitalize()}Subjects" / "generated" / "aot-core-ir.json"
+    # Convert hyphenated slug to PascalCase (e.g. "buffer-memory" → "BufferMemorySubjects")
+    subjects_class = "".join(part.capitalize() for part in ctx.slug.replace("-", "_").split("_"))
+    aot_core_ir = native_dir / f"{subjects_class}Subjects" / "generated" / "aot-core-ir.json"
     if not aot_core_ir.exists():
         aot_core_ir = None
         for d in native_dir.iterdir():
@@ -316,17 +341,19 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
         capture_output=True, text=True, timeout=300,
     )
     if r.returncode != 0:
-        # MSBuild often returns non-zero even when the link succeeds — e.g. missing
-        # ZERO_CHECK.vcxproj (a cmake housekeeping project) causes MSB3202, but the
-        # actual compilation and linking still produce entry.exe.  Check whether the
-        # binary was actually produced before declaring failure.
-        exe_produced = (build_dir / "RelWithDebInfo" / "entry.exe").exists()
+        # MSBuild on Windows often returns non-zero even when the link succeeds —
+        # e.g. missing ZERO_CHECK.vcxproj (a cmake housekeeping project) causes
+        # MSB3202, but the actual compilation and linking still produce entry.exe.
+        # On Linux/Ninja, returncode is reliable — check binary anyway.
+        exe_produced = _find_entry_binary(build_dir)
         if exe_produced:
             print(f"  [hotupdate] entry.exe rebuild OK (exit={r.returncode}, exe produced)")
-            # Copy rebuilt exe back to native_dir so pipeline stages use the new binary
             import shutil as _shutil
-            _shutil.copy2(str(build_dir / "RelWithDebInfo" / "entry.exe"),
-                          str(native_dir / "entry.exe"))
+            _shutil.copy2(str(exe_produced), str(native_dir / "entry.exe"))
+            if _IS_LINUX:
+                # On Linux, ensure native_dir/entry.exe is executable
+                native_exe = native_dir / "entry.exe"
+                native_exe.chmod(native_exe.stat().st_mode | 0o111)
             return True
         print(f"  [hotupdate] entry.exe rebuild FAILED (exit={r.returncode})")
         for line in (r.stderr or "").splitlines()[-15:]:
@@ -340,13 +367,18 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
     # Copy rebuilt exe back to native_dir so pipeline stages use the new binary
     import shutil as _shutil
     import time as _time
-    src_exe = build_dir / "RelWithDebInfo" / "entry.exe"
+    src_exe = _find_entry_binary(build_dir)
+    if src_exe is None:
+        print(f"  [hotupdate] entry binary not found in {build_dir} after successful build")
+        return False
     dst_exe = native_dir / "entry.exe"
     for _copy_attempt in range(5):
         try:
             if dst_exe.exists():
                 dst_exe.unlink()
             _shutil.copy2(str(src_exe), str(dst_exe))
+            if _IS_LINUX:
+                dst_exe.chmod(dst_exe.stat().st_mode | 0o111)
             break
         except (PermissionError, OSError) as _e:
             if _copy_attempt < 4:
