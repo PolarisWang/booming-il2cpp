@@ -15,6 +15,7 @@
     "System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)"
   ],
   "methodSubjectCount": 8,
+  "customEntryIndices": [7],
   "functionalObligation": {
     "required": true
   },

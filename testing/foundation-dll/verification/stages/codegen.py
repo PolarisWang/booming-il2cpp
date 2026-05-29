@@ -74,14 +74,17 @@ def _run_test_project_generator_emit(contract_path: Path | None, output_dir: Pat
     return True
 
 
-def _incremental_dispatch_rebuild(native_dir: Path) -> None:
+def _incremental_dispatch_rebuild(native_dir: Path, build_subdir: str = "build") -> None:
     """Incremental cmake rebuild after dispatch regeneration.
 
     Deletes stale object files for dispatch and runtime-entry so that
     Ninja recompiles them from the TPG-emitted sources (which include
     --fact-json support that the old committed runtime-entry.cpp lacks).
+
+    Args:
+        build_subdir: cmake build subdirectory name ("build" for AOT, "build_jit" for JIT).
     """
-    build_dir = native_dir / "build"
+    build_dir = native_dir / build_subdir
     if not build_dir.exists():
         return
     for pattern in ("verification_dispatch*", "runtime-entry*"):
@@ -89,7 +92,7 @@ def _incremental_dispatch_rebuild(native_dir: Path) -> None:
             if obj.is_file():
                 obj.unlink()
     rebuild = subprocess.run(
-        ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry"],
+        ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry", "--parallel"],
         capture_output=True, text=True, timeout=300)
     if rebuild.returncode != 0:
         print(f"  [codegen] WARNING: dispatch rebuild failed (continuing)")
@@ -238,6 +241,29 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
             shutil.copy2(str(entry_exe), str(aot_exe))
             print(f"  [codegen] saved entry.exe -> entry-aot.exe")
 
+    # 6. Build JIT entry.exe to avoid duplicate work in jit_codegen stage
+    # The AOT codegen already produced the C++ sources. Building JIT mode only
+    # requires a second cmake build (separate build_jit/ directory), no need to
+    # re-run dotnet build or convert-to-cpp.
+    jit_exe = native_dir / "entry-jit.exe"
+    if not jit_exe.exists():
+        print(f"  [codegen] Building JIT entry.exe (pre-build for jit_codegen stage)...")
+        jit_build_ok = build_entry_executable(
+            ctx.slug, verification=testing_base, config_tier=ctx.native_config, is_jit=True)
+        if jit_build_ok:
+            # After JIT build, entry.exe is the JIT version save it as entry-jit.exe
+            if entry_exe.exists():
+                shutil.copy2(str(entry_exe), str(jit_exe))
+                print(f"  [codegen] saved entry.exe -> entry-jit.exe ({jit_exe.stat().st_size} bytes)")
+            # Restore AOT entry.exe
+            if aot_exe.exists():
+                shutil.copy2(str(aot_exe), str(entry_exe))
+                print(f"  [codegen] restored entry-aot.exe -> entry.exe")
+        else:
+            print(f"  [codegen] WARNING: JIT entry.exe pre-build failed (jit_codegen stage will rebuild)")
+    else:
+        print(f"  [codegen] entry-jit.exe already exists, skipping JIT pre-build")
+
     return StageResult(
         stage="codegen", status="passed",
         summary="Entrypoint built and IL2CPP compile OK",
@@ -287,8 +313,6 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
                 duration_ms=int((time.perf_counter() - start) * 1000),
             )
 
-    from verification.stages.pipeline_native_aot_runner import run_family as _run_old_family
-
     testing_base = _get_testing_base(ctx.assembly)
     native_dir = testing_base / ctx.slug / "native"
     entry_exe = native_dir / "entry.exe"
@@ -299,23 +323,34 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
         _shutil.copy2(str(entry_exe), str(aot_backup))
         print(f"  [jit_codegen] backed up entry.exe -> entry-aot.exe")
 
-    jit_result = _run_old_family(ctx.slug, assembly_name=ctx.assembly, codegen_mode="jit")
-    if not jit_result.get("success"):
-        if aot_backup.exists():
-            import shutil as _shutil
-            _shutil.copy2(str(aot_backup), str(entry_exe))
-        return StageResult(
-            stage="jit_codegen", status="failed",
-            summary=f"JIT codegen failed: {jit_result.get('message', 'unknown')}",
-            duration_ms=int((time.perf_counter() - start) * 1000),
-        )
+    # P0 optimization: if codegen stage already pre-built entry-jit.exe, skip
+    # the expensive _run_old_family() (which re-runs dotnet build + convert-to-cpp).
+    # Only do TPG emit + incremental cmake rebuild from build_jit/.
+    if jit_exe.exists():
+        print(f"  [jit_codegen] using pre-built JIT binary from codegen stage, incremental update only...")
+        jit_build_ok = True
+    else:
+        # Fall back to full JIT codegen pipeline (subjects DLL + convert-to-cpp + cmake build)
+        from verification.stages.pipeline_native_aot_runner import run_family as _run_old_family
+        jit_result = _run_old_family(ctx.slug, assembly_name=ctx.assembly, codegen_mode="jit")
+        jit_build_ok = jit_result.get("success", False)
+        if not jit_build_ok:
+            if aot_backup.exists():
+                import shutil as _shutil
+                _shutil.copy2(str(aot_backup), str(entry_exe))
+            return StageResult(
+                stage="jit_codegen", status="failed",
+                summary=f"JIT codegen failed: {jit_result.get('message', 'unknown')}",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
 
     # Regenerate dispatch via TPG with JIT mode, then incremental rebuild
     contract_path = _find_contract(ctx.assembly, ctx.slug)
     tpg_flags = ["--jit", "--config-tier", ctx.native_config]
     if _run_test_project_generator_emit(contract_path, native_dir, extra_flags=tpg_flags):
         print(f"  [jit_codegen] Regenerated dispatch via TPG (JIT mode)")
-        _incremental_dispatch_rebuild(native_dir)
+        # Use build_jit/ (JIT cmake config) for incremental rebuild, not build/ (AOT)
+        _incremental_dispatch_rebuild(native_dir, build_subdir="build_jit")
     else:
         print(f"  [jit_codegen] WARNING: TPG emit failed (continuing with existing dispatch)")
 

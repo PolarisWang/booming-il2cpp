@@ -59,9 +59,8 @@ public static partial class ReflectionMemberCompleteSubjects
     }
 
     // [6] System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()
-    public static void Subject_6()
+    public static void CustomEntrySubject_6()
     {
-        // non-callable: System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()
     }
 
     // [7] System.Private.CoreLib/System.Reflection.MethodBase::get_MethodHandle:System.RuntimeMethodHandle()
@@ -100,10 +99,8 @@ public static partial class ReflectionMemberCompleteSubjects
     }
 
     // [12] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
-    public static void Subject_12()
+    public static void CustomEntrySubject_12()
     {
-        try { _ = ((0).GetHashCode()); }
-        catch { _exitCode = 1; }
     }
 
     // [13] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsStatic:System.Boolean()
@@ -128,10 +125,8 @@ public static partial class ReflectionMemberCompleteSubjects
     }
 
     // [16] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
-    public static void Subject_16()
+    public static void CustomEntrySubject_16()
     {
-        try { _ = ((0).GetHashCode()); }
-        catch { _exitCode = 1; }
     }
 
     // [17] System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanRead:System.Boolean()
@@ -149,9 +144,8 @@ public static partial class ReflectionMemberCompleteSubjects
     }
 
     // [19] System.Private.CoreLib/System.Reflection.PropertyInfo::GetIndexParameters:System.Reflection.ParameterInfo[]()
-    public static void Subject_19()
+    public static void CustomEntrySubject_19()
     {
-        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetIndexParameters:System.Reflection.ParameterInfo[]()
     }
 
     // [20] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldHandle:System.RuntimeFieldHandle()

@@ -16,27 +16,23 @@ public static partial class GarbageCollectionSubjects
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.GC::Collect:System.Void()
-    public static void Subject_0()
+    public static void CustomEntrySubject_0()
     {
-        // non-callable: System.Private.CoreLib/System.GC::Collect:System.Void()
     }
 
     // [1] System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()
-    public static void Subject_1()
+    public static void CustomEntrySubject_1()
     {
-        // non-callable: System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()
     }
 
     // [2] System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)
-    public static void Subject_2()
+    public static void CustomEntrySubject_2()
     {
-        // non-callable: System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)
     }
 
     // [3] System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)
-    public static void Subject_3()
+    public static void CustomEntrySubject_3()
     {
-        // non-callable: System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)
     }
 
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
@@ -47,15 +43,13 @@ public static partial class GarbageCollectionSubjects
     }
 
     // [5] System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)
-    public static void Subject_5()
+    public static void CustomEntrySubject_5()
     {
-        // non-callable: System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)
     }
 
     // [6] System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()
-    public static void Subject_6()
+    public static void CustomEntrySubject_6()
     {
-        // non-callable: System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()
     }
 
 }

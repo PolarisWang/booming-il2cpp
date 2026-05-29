@@ -45,11 +45,6 @@ public static partial class SpanMemoryBuffersSubjects
     }
 
     // [4] System.Private.CoreLib/System.Span`1::CopyTo:System.Void(System.Span`1)
-    public static void Subject_4()
-    {
-        // non-callable: System.Private.CoreLib/System.Span`1::CopyTo:System.Void(System.Span`1)
-    }
-
     // [5] System.Private.CoreLib/System.Span`1::get_Empty:System.Span`1()
     public static void Subject_5()
     {
@@ -72,11 +67,6 @@ public static partial class SpanMemoryBuffersSubjects
     }
 
     // [8] System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()
-    public static void Subject_8()
-    {
-        // non-callable: System.Private.CoreLib/System.ReadOnlySpan`1::ToArray:T[]()
-    }
-
     // [9] System.Private.CoreLib/System.Memory`1::Slice:System.Memory`1(System.Int32)
     public static void Subject_9()
     {
@@ -92,21 +82,6 @@ public static partial class SpanMemoryBuffersSubjects
     }
 
     // [11] System.Private.CoreLib/System.Memory`1::ToArray:T[]()
-    public static void Subject_11()
-    {
-        // non-callable: System.Private.CoreLib/System.Memory`1::ToArray:T[]()
-    }
-
     // [12] System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.ReadOnlySpan`1)
-    public static void Subject_12()
-    {
-        // non-callable: System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.ReadOnlySpan`1)
-    }
-
     // [13] System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.Span`1)
-    public static void Subject_13()
-    {
-        // non-callable: System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.Span`1)
-    }
-
 }

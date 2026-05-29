@@ -14,7 +14,7 @@
   <ItemGroup>
     <Compile Include="BufferMemorySubjects.cs" />
     <Compile Include="BufferMemoryNativeEntry.Custom.cs" />
-    <Compile Include="subjects/BufferMemoryNativeEntry.Custom.cs" />
+    <Compile Include="BufferMemorySubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

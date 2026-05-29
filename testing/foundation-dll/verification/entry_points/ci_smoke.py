@@ -30,7 +30,7 @@ SKIP_STAGES = {"asm_compare", "microbench", "benchmark", "hotupdate"}
 
 
 def run_smoke_family(slug: str, assembly: str = "System.Private.CoreLib") -> dict:
-    family_dir = _TESTING_ROOT / "foundation-dll" / assembly / slug
+    family_dir = _TESTING_ROOT / assembly / slug
     if not family_dir.exists():
         return {
             "slug": slug, "status": "crashed", "error": f"Family directory not found: {family_dir}",

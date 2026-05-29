@@ -18,27 +18,23 @@ public static partial class ReflectionActivationSubjects
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)
-    public static void Subject_0()
+    public static void CustomEntrySubject_0()
     {
-        // non-callable: System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)
     }
 
     // [1] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])
-    public static void Subject_1()
+    public static void CustomEntrySubject_1()
     {
-        // non-callable: System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])
     }
 
     // [2] System.Private.CoreLib/System.Activator::CreateInstance:T()
-    public static void Subject_2()
+    public static void CustomEntrySubject_2()
     {
-        // needs-manual — CreateInstance with 0 params requires manual implementation: System.Private.CoreLib/System.Activator::CreateInstance:T()
     }
 
     // [3] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
-    public static void Subject_3()
+    public static void CustomEntrySubject_3()
     {
-        // non-callable: System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     }
 
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)

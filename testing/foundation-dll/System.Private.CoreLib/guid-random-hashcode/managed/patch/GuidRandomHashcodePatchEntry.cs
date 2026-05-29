@@ -39,9 +39,8 @@ public static partial class GuidRandomHashcodePatchEntry
     }
 
     // [5] System.Private.CoreLib/System.Guid::ToString:System.String()
-    public static int Subject_5()
+    public static void CustomEntryMethod5()
     {
-        return unchecked((int)(0xB0000000u + 5));
     }
 
     // [6] System.Private.CoreLib/System.Random::.ctor:System.Void()
@@ -51,27 +50,23 @@ public static partial class GuidRandomHashcodePatchEntry
     }
 
     // [7] System.Private.CoreLib/System.Random::Next:System.Int32()
-    public static int Subject_7()
+    public static void CustomEntryMethod7()
     {
-        return unchecked((int)(0xB0000000u + 7));
     }
 
     // [8] System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)
-    public static int Subject_8()
+    public static void CustomEntryMethod8()
     {
-        return unchecked((int)(0xB0000000u + 8));
     }
 
     // [9] System.Private.CoreLib/System.Random::NextDouble:System.Double()
-    public static int Subject_9()
+    public static void CustomEntryMethod9()
     {
-        return unchecked((int)(0xB0000000u + 9));
     }
 
     // [10] System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])
-    public static int Subject_10()
+    public static void CustomEntryMethod10()
     {
-        return unchecked((int)(0xB0000000u + 10));
     }
 
     // [11] System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)
@@ -81,9 +76,8 @@ public static partial class GuidRandomHashcodePatchEntry
     }
 
     // [12] System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()
-    public static int Subject_12()
+    public static void CustomEntryMethod12()
     {
-        return unchecked((int)(0xB0000000u + 12));
     }
 
     // [13] System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)
@@ -103,14 +97,14 @@ public static partial class GuidRandomHashcodePatchEntry
                 case 2: Subject_2(); break;
                 case 3: Subject_3(); break;
                 case 4: Subject_4(); break;
-                case 5: Subject_5(); break;
+                case 5: CustomEntryMethod5(); break;
                 case 6: Subject_6(); break;
-                case 7: Subject_7(); break;
-                case 8: Subject_8(); break;
-                case 9: Subject_9(); break;
-                case 10: Subject_10(); break;
+                case 7: CustomEntryMethod7(); break;
+                case 8: CustomEntryMethod8(); break;
+                case 9: CustomEntryMethod9(); break;
+                case 10: CustomEntryMethod10(); break;
                 case 11: Subject_11(); break;
-                case 12: Subject_12(); break;
+                case 12: CustomEntryMethod12(); break;
                 case 13: Subject_13(); break;
             }
         }

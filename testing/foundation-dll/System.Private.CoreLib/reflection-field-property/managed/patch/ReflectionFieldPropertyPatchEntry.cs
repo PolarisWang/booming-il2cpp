@@ -93,27 +93,23 @@ public static partial class ReflectionFieldPropertyPatchEntry
     }
 
     // [14] System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)
-    public static int Subject_14()
+    public static void CustomEntryMethod14()
     {
-        return unchecked((int)(0xB0000000u + 14));
     }
 
     // [15] System.Private.CoreLib/System.Reflection.FieldInfo::GetRawConstantValue:System.Object()
-    public static int Subject_15()
+    public static void CustomEntryMethod15()
     {
-        return unchecked((int)(0xB0000000u + 15));
     }
 
     // [16] System.Private.CoreLib/System.Reflection.FieldInfo::GetOptionalCustomModifiers:System.Type[]()
-    public static int Subject_16()
+    public static void CustomEntryMethod16()
     {
-        return unchecked((int)(0xB0000000u + 16));
     }
 
     // [17] System.Private.CoreLib/System.Reflection.FieldInfo::GetRequiredCustomModifiers:System.Type[]()
-    public static int Subject_17()
+    public static void CustomEntryMethod17()
     {
-        return unchecked((int)(0xB0000000u + 17));
     }
 
     // [18] System.Private.CoreLib/System.Reflection.PropertyInfo::get_Attributes:System.Reflection.PropertyAttributes()
@@ -129,15 +125,13 @@ public static partial class ReflectionFieldPropertyPatchEntry
     }
 
     // [20] System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[]()
-    public static int Subject_20()
+    public static void CustomEntryMethod20()
     {
-        return unchecked((int)(0xB0000000u + 20));
     }
 
     // [21] System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[](System.Boolean)
-    public static int Subject_21()
+    public static void CustomEntryMethod21()
     {
-        return unchecked((int)(0xB0000000u + 21));
     }
 
     // [22] System.Private.CoreLib/System.Reflection.PropertyInfo::get_GetMethod:System.Reflection.MethodInfo()
@@ -147,15 +141,13 @@ public static partial class ReflectionFieldPropertyPatchEntry
     }
 
     // [23] System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo()
-    public static int Subject_23()
+    public static void CustomEntryMethod23()
     {
-        return unchecked((int)(0xB0000000u + 23));
     }
 
     // [24] System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo(System.Boolean)
-    public static int Subject_24()
+    public static void CustomEntryMethod24()
     {
-        return unchecked((int)(0xB0000000u + 24));
     }
 
     // [25] System.Private.CoreLib/System.Reflection.PropertyInfo::get_SetMethod:System.Reflection.MethodInfo()
@@ -165,51 +157,43 @@ public static partial class ReflectionFieldPropertyPatchEntry
     }
 
     // [26] System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo()
-    public static int Subject_26()
+    public static void CustomEntryMethod26()
     {
-        return unchecked((int)(0xB0000000u + 26));
     }
 
     // [27] System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo(System.Boolean)
-    public static int Subject_27()
+    public static void CustomEntryMethod27()
     {
-        return unchecked((int)(0xB0000000u + 27));
     }
 
     // [28] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
-    public static int Subject_28()
+    public static void CustomEntryMethod28()
     {
-        return unchecked((int)(0xB0000000u + 28));
     }
 
     // [29] System.Private.CoreLib/System.Reflection.PropertyInfo::GetConstantValue:System.Object()
-    public static int Subject_29()
+    public static void CustomEntryMethod29()
     {
-        return unchecked((int)(0xB0000000u + 29));
     }
 
     // [30] System.Private.CoreLib/System.Reflection.PropertyInfo::GetRawConstantValue:System.Object()
-    public static int Subject_30()
+    public static void CustomEntryMethod30()
     {
-        return unchecked((int)(0xB0000000u + 30));
     }
 
     // [31] System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
-    public static int Subject_31()
+    public static void CustomEntryMethod31()
     {
-        return unchecked((int)(0xB0000000u + 31));
     }
 
     // [32] System.Private.CoreLib/System.Reflection.PropertyInfo::GetOptionalCustomModifiers:System.Type[]()
-    public static int Subject_32()
+    public static void CustomEntryMethod32()
     {
-        return unchecked((int)(0xB0000000u + 32));
     }
 
     // [33] System.Private.CoreLib/System.Reflection.PropertyInfo::GetRequiredCustomModifiers:System.Type[]()
-    public static int Subject_33()
+    public static void CustomEntryMethod33()
     {
-        return unchecked((int)(0xB0000000u + 33));
     }
 
     public static void Run(int entryIndex)
@@ -232,26 +216,26 @@ public static partial class ReflectionFieldPropertyPatchEntry
                 case 11: Subject_11(); break;
                 case 12: Subject_12(); break;
                 case 13: Subject_13(); break;
-                case 14: Subject_14(); break;
-                case 15: Subject_15(); break;
-                case 16: Subject_16(); break;
-                case 17: Subject_17(); break;
+                case 14: CustomEntryMethod14(); break;
+                case 15: CustomEntryMethod15(); break;
+                case 16: CustomEntryMethod16(); break;
+                case 17: CustomEntryMethod17(); break;
                 case 18: Subject_18(); break;
                 case 19: Subject_19(); break;
-                case 20: Subject_20(); break;
-                case 21: Subject_21(); break;
+                case 20: CustomEntryMethod20(); break;
+                case 21: CustomEntryMethod21(); break;
                 case 22: Subject_22(); break;
-                case 23: Subject_23(); break;
-                case 24: Subject_24(); break;
+                case 23: CustomEntryMethod23(); break;
+                case 24: CustomEntryMethod24(); break;
                 case 25: Subject_25(); break;
-                case 26: Subject_26(); break;
-                case 27: Subject_27(); break;
-                case 28: Subject_28(); break;
-                case 29: Subject_29(); break;
-                case 30: Subject_30(); break;
-                case 31: Subject_31(); break;
-                case 32: Subject_32(); break;
-                case 33: Subject_33(); break;
+                case 26: CustomEntryMethod26(); break;
+                case 27: CustomEntryMethod27(); break;
+                case 28: CustomEntryMethod28(); break;
+                case 29: CustomEntryMethod29(); break;
+                case 30: CustomEntryMethod30(); break;
+                case 31: CustomEntryMethod31(); break;
+                case 32: CustomEntryMethod32(); break;
+                case 33: CustomEntryMethod33(); break;
             }
         }
         catch

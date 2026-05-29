@@ -13,7 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="EnumParsingSubjects.cs" />
-    <Compile Include="subjects/EnumParsingSubjects.Custom.cs" />
+    <Compile Include="EnumParsingSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

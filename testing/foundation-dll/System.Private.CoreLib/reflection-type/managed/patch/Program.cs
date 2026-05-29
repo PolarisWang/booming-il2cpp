@@ -4,9 +4,9 @@ public class Program
     static int Main()
     {
         int failures = 0;
-        ReflectionTypePatchEntry._exitCode = 0; ReflectionTypePatchEntry.Method0(); failures += ReflectionTypePatchEntry._exitCode << 0;
-        ReflectionTypePatchEntry._exitCode = 0; ReflectionTypePatchEntry.Method1(); failures += ReflectionTypePatchEntry._exitCode << 1;
-        ReflectionTypePatchEntry._exitCode = 0; ReflectionTypePatchEntry.Method2(); failures += ReflectionTypePatchEntry._exitCode << 2;
+        ReflectionTypePatchEntry._exitCode = 0; ReflectionTypePatchEntry.CustomEntryMethod0(); failures += ReflectionTypePatchEntry._exitCode << 0;
+        ReflectionTypePatchEntry._exitCode = 0; ReflectionTypePatchEntry.CustomEntryMethod1(); failures += ReflectionTypePatchEntry._exitCode << 1;
+        ReflectionTypePatchEntry._exitCode = 0; ReflectionTypePatchEntry.CustomEntryMethod2(); failures += ReflectionTypePatchEntry._exitCode << 2;
         ReflectionTypePatchEntry._exitCode = 0; ReflectionTypePatchEntry.Method3(); failures += ReflectionTypePatchEntry._exitCode << 3;
         ReflectionTypePatchEntry._exitCode = 0; ReflectionTypePatchEntry.Method4(); failures += ReflectionTypePatchEntry._exitCode << 4;
         ReflectionTypePatchEntry._exitCode = 0; ReflectionTypePatchEntry.Method5(); failures += ReflectionTypePatchEntry._exitCode << 5;

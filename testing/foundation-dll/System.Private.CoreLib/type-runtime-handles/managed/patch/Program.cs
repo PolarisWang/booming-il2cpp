@@ -4,9 +4,9 @@ public class Program
     static int Main()
     {
         int failures = 0;
-        TypeRuntimeHandlesPatchEntry._exitCode = 0; TypeRuntimeHandlesPatchEntry.Method0(); failures += TypeRuntimeHandlesPatchEntry._exitCode << 0;
-        TypeRuntimeHandlesPatchEntry._exitCode = 0; TypeRuntimeHandlesPatchEntry.Method1(); failures += TypeRuntimeHandlesPatchEntry._exitCode << 1;
-        TypeRuntimeHandlesPatchEntry._exitCode = 0; TypeRuntimeHandlesPatchEntry.Method2(); failures += TypeRuntimeHandlesPatchEntry._exitCode << 2;
+        TypeRuntimeHandlesPatchEntry._exitCode = 0; TypeRuntimeHandlesPatchEntry.CustomEntryMethod0(); failures += TypeRuntimeHandlesPatchEntry._exitCode << 0;
+        TypeRuntimeHandlesPatchEntry._exitCode = 0; TypeRuntimeHandlesPatchEntry.CustomEntryMethod1(); failures += TypeRuntimeHandlesPatchEntry._exitCode << 1;
+        TypeRuntimeHandlesPatchEntry._exitCode = 0; TypeRuntimeHandlesPatchEntry.CustomEntryMethod2(); failures += TypeRuntimeHandlesPatchEntry._exitCode << 2;
         TypeRuntimeHandlesPatchEntry._exitCode = 0; TypeRuntimeHandlesPatchEntry.Method3(); failures += TypeRuntimeHandlesPatchEntry._exitCode << 3;
         TypeRuntimeHandlesPatchEntry._exitCode = 0; TypeRuntimeHandlesPatchEntry.Method4(); failures += TypeRuntimeHandlesPatchEntry._exitCode << 4;
         TypeRuntimeHandlesPatchEntry._exitCode = 0; TypeRuntimeHandlesPatchEntry.Method5(); failures += TypeRuntimeHandlesPatchEntry._exitCode << 5;

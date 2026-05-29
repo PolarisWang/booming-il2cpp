@@ -18,25 +18,29 @@ public static partial class CodegenCodegenEdgeCasesSubjects
     // [0] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_0:System.Void()
     public static void Subject_0()
     {
-        // non-callable: System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_0:System.Void()
+        try { CodegenEdgeCasesSubjects.Subject_0(); }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)
     public static void Subject_1()
     {
-        // non-callable: System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)
+        try { CodegenEdgeCasesSubjects.Subject_1(42); }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()
     public static void Subject_2()
     {
-        // non-callable: System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()
+        try { CodegenEdgeCasesSubjects.Subject_2(); }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)
     public static void Subject_3()
     {
-        // non-callable: System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)
+        try { _ = CodegenEdgeCasesSubjects.Subject_3(42); }
+        catch { _exitCode = 1; }
     }
 
 }

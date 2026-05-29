@@ -821,7 +821,8 @@
     "JsonSerializerOptions|AddContext{TContext}|0": "skip",
     "JsonTypeInfo|set_IsReadOnly|1": "skip",
     "JsonTypeInfo|set_ConstructorAttributeProvider|1": "skip",
-    "JsonSerializerOptions|TryGetTypeInfo|2": "skip"
+    "JsonSerializerOptions|TryGetTypeInfo|2": "skip",
+    "Enum|BoxToString|0": "skip"
   },
   "_SKIP_AUDIT": {},
   "TYPE_DEFAULT_MAP": {

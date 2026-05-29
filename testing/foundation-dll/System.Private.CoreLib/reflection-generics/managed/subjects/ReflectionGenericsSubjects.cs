@@ -16,29 +16,9 @@ public static partial class ReflectionGenericsSubjects
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Type::GetGenericTypeDefinition:System.Type()
-    public static void Subject_0()
-    {
-        // non-callable: System.Private.CoreLib/System.Type::GetGenericTypeDefinition:System.Type()
-    }
-
     // [1] System.Private.CoreLib/System.Type::MakeGenericType:System.Type(System.Type[])
-    public static void Subject_1()
-    {
-        // non-callable: System.Private.CoreLib/System.Type::MakeGenericType:System.Type(System.Type[])
-    }
-
     // [2] System.Private.CoreLib/System.Type::GetGenericArguments:System.Type[]()
-    public static void Subject_2()
-    {
-        // non-callable: System.Private.CoreLib/System.Type::GetGenericArguments:System.Type[]()
-    }
-
     // [3] System.Private.CoreLib/System.Type::GetGenericParameterConstraints:System.Type[]()
-    public static void Subject_3()
-    {
-        // non-callable: System.Private.CoreLib/System.Type::GetGenericParameterConstraints:System.Type[]()
-    }
-
     // [4] System.Private.CoreLib/System.Type::get_GenericParameterPosition:System.Int32()
     public static void Subject_4()
     {
@@ -75,21 +55,6 @@ public static partial class ReflectionGenericsSubjects
     }
 
     // [9] System.Private.CoreLib/System.Type::MakeArrayType:System.Type()
-    public static void Subject_9()
-    {
-        // non-callable: System.Private.CoreLib/System.Type::MakeArrayType:System.Type()
-    }
-
     // [10] System.Private.CoreLib/System.Type::MakeByRefType:System.Type()
-    public static void Subject_10()
-    {
-        // non-callable: System.Private.CoreLib/System.Type::MakeByRefType:System.Type()
-    }
-
     // [11] System.Private.CoreLib/System.Type::MakePointerType:System.Type()
-    public static void Subject_11()
-    {
-        // non-callable: System.Private.CoreLib/System.Type::MakePointerType:System.Type()
-    }
-
 }

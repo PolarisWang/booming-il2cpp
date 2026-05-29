@@ -51,33 +51,28 @@ public static partial class GlobalizationCulturePatchEntry
     }
 
     // [7] System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)
-    public static int Subject_7()
+    public static void CustomEntryMethod7()
     {
-        return unchecked((int)(0xB0000000u + 7));
     }
 
     // [8] System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)
-    public static int Subject_8()
+    public static void CustomEntryMethod8()
     {
-        return unchecked((int)(0xB0000000u + 8));
     }
 
     // [9] System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)
-    public static int Subject_9()
+    public static void CustomEntryMethod9()
     {
-        return unchecked((int)(0xB0000000u + 9));
     }
 
     // [10] System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)
-    public static int Subject_10()
+    public static void CustomEntryMethod10()
     {
-        return unchecked((int)(0xB0000000u + 10));
     }
 
     // [11] System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)
-    public static int Subject_11()
+    public static void CustomEntryMethod11()
     {
-        return unchecked((int)(0xB0000000u + 11));
     }
 
     // [12] System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()
@@ -99,11 +94,11 @@ public static partial class GlobalizationCulturePatchEntry
                 case 4: Subject_4(); break;
                 case 5: Subject_5(); break;
                 case 6: Subject_6(); break;
-                case 7: Subject_7(); break;
-                case 8: Subject_8(); break;
-                case 9: Subject_9(); break;
-                case 10: Subject_10(); break;
-                case 11: Subject_11(); break;
+                case 7: CustomEntryMethod7(); break;
+                case 8: CustomEntryMethod8(); break;
+                case 9: CustomEntryMethod9(); break;
+                case 10: CustomEntryMethod10(); break;
+                case 11: CustomEntryMethod11(); break;
                 case 12: Subject_12(); break;
             }
         }

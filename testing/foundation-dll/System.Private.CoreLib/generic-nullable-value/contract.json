@@ -17,6 +17,7 @@
     "System.Private.CoreLib/System.ValueType::ToString:System.String()"
   ],
   "methodSubjectCount": 10,
+  "customEntryIndices": [3],
   "functionalObligation": {
     "required": true
   },

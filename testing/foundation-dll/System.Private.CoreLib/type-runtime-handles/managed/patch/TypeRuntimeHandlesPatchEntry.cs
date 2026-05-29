@@ -9,21 +9,18 @@ public static partial class TypeRuntimeHandlesPatchEntry
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
-    public static int Subject_0()
+    public static void CustomEntryMethod0()
     {
-        return unchecked((int)(0xB0000000u + 0));
     }
 
     // [1] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
-    public static int Subject_1()
+    public static void CustomEntryMethod1()
     {
-        return unchecked((int)(0xB0000000u + 1));
     }
 
     // [2] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
-    public static int Subject_2()
+    public static void CustomEntryMethod2()
     {
-        return unchecked((int)(0xB0000000u + 2));
     }
 
     // [3] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)
@@ -92,9 +89,9 @@ public static partial class TypeRuntimeHandlesPatchEntry
         {
             switch (entryIndex)
             {
-                case 0: Subject_0(); break;
-                case 1: Subject_1(); break;
-                case 2: Subject_2(); break;
+                case 0: CustomEntryMethod0(); break;
+                case 1: CustomEntryMethod1(); break;
+                case 2: CustomEntryMethod2(); break;
                 case 3: Subject_3(); break;
                 case 4: Subject_4(); break;
                 case 5: Subject_5(); break;

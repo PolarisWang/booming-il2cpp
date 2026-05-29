@@ -11,5 +11,6 @@
     "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
     "System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)"
   ],
-  "methodSubjectCount": 5
+  "methodSubjectCount": 5,
+  "customEntryIndices": [0, 1, 2, 3]
 }

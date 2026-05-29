@@ -37,44 +37,46 @@ public static partial class GenericNullableValueSubjects
     }
 
     // [3] System.Private.CoreLib/System.Nullable`1::GetValueOrDefault:T(T)
-    public static void CustomEntrySubject_3()
-    {
-    }
-
     // [4] System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)
     public static void Subject_4()
     {
-        // non-callable: System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)
+        try { _ = ((default(Nullable<int>).Equals(null!)) ? 1 : 0); }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Nullable`1::GetHashCode:System.Int32()
     public static void Subject_5()
     {
-        // non-callable: System.Private.CoreLib/System.Nullable`1::GetHashCode:System.Int32()
+        try { _ = default(Nullable<int>).GetHashCode(); }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Nullable`1::ToString:System.String()
     public static void Subject_6()
     {
-        // non-callable: System.Private.CoreLib/System.Nullable`1::ToString:System.String()
+        try { _ = ((default(Nullable<int>).ToString()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
     public static void Subject_7()
     {
-        // non-callable: System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
+        try { _ = ((((ValueType)42).Equals(null!)) ? 1 : 0); }
+        catch { _exitCode = 1; }
     }
 
     // [8] System.Private.CoreLib/System.ValueType::GetHashCode:System.Int32()
     public static void Subject_8()
     {
-        // non-callable: System.Private.CoreLib/System.ValueType::GetHashCode:System.Int32()
+        try { _ = ((ValueType)42).GetHashCode(); }
+        catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.ValueType::ToString:System.String()
     public static void Subject_9()
     {
-        // non-callable: System.Private.CoreLib/System.ValueType::ToString:System.String()
+        try { _ = ((((ValueType)42).ToString()).Length); }
+        catch { _exitCode = 1; }
     }
 
 }

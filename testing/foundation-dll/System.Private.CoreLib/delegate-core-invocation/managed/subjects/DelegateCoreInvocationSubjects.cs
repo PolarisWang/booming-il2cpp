@@ -52,15 +52,7 @@ public static partial class DelegateCoreInvocationSubjects
     }
 
     // [5] System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)
-    public static void CustomEntrySubject_5()
-    {
-    }
-
     // [6] System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)
-    public static void CustomEntrySubject_6()
-    {
-    }
-
     // [7] System.Private.CoreLib/System.MulticastDelegate::GetInvocationList:System.Delegate[]()
     public static void Subject_7()
     {
@@ -69,13 +61,5 @@ public static partial class DelegateCoreInvocationSubjects
     }
 
     // [8] System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)
-    public static void CustomEntrySubject_8()
-    {
-    }
-
     // [9] System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)
-    public static void CustomEntrySubject_9()
-    {
-    }
-
 }

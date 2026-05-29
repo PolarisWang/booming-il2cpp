@@ -1,7 +1,9 @@
 """Batch runner — run full pipeline on all families and collect results.
 
 Usage:
-    python -m verification.entry_points.batch [--output REPORT_PATH]
+    python -m verification.entry_points.batch [--output REPORT_PATH] [--concurrency N]
+
+Runs families in parallel when --concurrency > 1.
 """
 
 from __future__ import annotations
@@ -9,6 +11,7 @@ from __future__ import annotations
 import json
 import sys
 import time
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from pathlib import Path
 
 from .._path import _HERE as _VERIFICATION_ROOT
@@ -38,8 +41,10 @@ def discover_families(assembly: str = "System.Private.CoreLib") -> list[str]:
     return [s for s in slugs if s not in SKIP_SLUGS]
 
 
-def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages: set[str] | None = None,
-               native_config: str = "check", mode: str = "standard") -> dict:
+def _run_single_family(args: tuple) -> dict:
+    """Run one family in a sub-process worker.  Each worker gets its own
+    imports and stdout — safe for ProcessPoolExecutor."""
+    slug, assembly, skip_stages, native_config, mode = args
     family_dir = _TESTING_ROOT / assembly / slug
     ctx = FamilyContext(
         slug=slug,
@@ -96,6 +101,14 @@ def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages:
         }
 
 
+def run_family(slug: str, assembly: str = "System.Private.CoreLib", skip_stages: set[str] | None = None,
+               native_config: str = "check", mode: str = "standard") -> dict:
+    """Run one family (sequential, in-process).  Used both directly and by
+    the parallel runner (which calls _run_single_family in subprocesses)."""
+    # Delegate to _run_single_family for a consistent code path
+    return _run_single_family((slug, assembly, skip_stages or set(), native_config, mode))
+
+
 def main() -> None:
     import argparse
 
@@ -109,6 +122,8 @@ def main() -> None:
                         help="Comma-separated stages to skip: preflight,codegen,jit_codegen,fact,fact_jit,audit,asm_compare,microbench,benchmark,hotupdate")
     parser.add_argument("--resume", default=None,
                         help="Resume from a specific slug (skip families before this)")
+    parser.add_argument("--concurrency", "-j", type=int, default=1,
+                        help="Number of families to run in parallel (default: 1, sequential)")
     parser.add_argument("--native-config", choices=["check", "profile", "ship"], default="check",
                         help="Native build config (default: check)")
     parser.add_argument("--mode", choices=["standard", "strict"], default="standard",
@@ -124,7 +139,8 @@ def main() -> None:
     if args.skip_stages:
         skip_stages = set(s.strip() for s in args.skip_stages.split(","))
 
-    print(f"Discovered {len(slugs)} families to run")
+    print(f"Discovered {len(slugs)} families to run"
+          f"{'' if args.concurrency <= 1 else f' (concurrency={args.concurrency})'}")
 
     resume_from = args.resume
     if resume_from:
@@ -141,28 +157,15 @@ def main() -> None:
         output_path = _TESTING_ROOT / "results" / "batch-report.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    results: list[dict] = []
     total_start = time.perf_counter()
+    results: list[dict] = []
     passed = 0
     failed = 0
     crashed = 0
     skipped_count = 0
 
-    for i, slug in enumerate(slugs):
-        print(f"\n[{i+1}/{len(slugs)}] ", end="")
-        result = run_family(slug, args.assembly, skip_stages, native_config=args.native_config, mode=args.mode)
-        results.append(result)
-
-        if result["status"] == "passed":
-            passed += 1
-        elif result["status"] == "skipped":
-            skipped_count += 1
-        elif result["status"] == "crashed":
-            crashed += 1
-        else:
-            failed += 1
-
-        report = {
+    def _save_snapshot() -> None:
+        report_snapshot = {
             "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
             "assembly": args.assembly,
             "total_families": len(slugs),
@@ -171,9 +174,61 @@ def main() -> None:
             "crashed": crashed,
             "skipped": skipped_count,
             "elapsed_seconds": round(time.perf_counter() - total_start, 1),
-            "results": results,
+            "results": [r for r in results if r is not None],
         }
-        output_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
+        output_path.write_text(json.dumps(report_snapshot, indent=2, ensure_ascii=False), encoding="utf-8")
+
+    def _accumulate(r: dict) -> None:
+        nonlocal passed, failed, crashed, skipped_count
+        if r["status"] == "passed":
+            passed += 1
+        elif r["status"] == "skipped":
+            skipped_count += 1
+        elif r["status"] == "crashed":
+            crashed += 1
+        else:
+            failed += 1
+
+    worker_args = [
+        (slug, args.assembly, skip_stages, args.native_config, args.mode)
+        for slug in slugs
+    ]
+
+    if args.concurrency <= 1:
+        # ── Sequential (original mode) ──
+        for i, wargs in enumerate(worker_args):
+            print(f"\n[{i+1}/{len(slugs)}] ", end="")
+            result = _run_single_family(wargs)
+            results.append(result)
+            _accumulate(result)
+            _save_snapshot()
+    else:
+        # ── Parallel ──
+        results = [None] * len(worker_args)
+        next_to_report = 0
+
+        with ProcessPoolExecutor(max_workers=args.concurrency) as executor:
+            fut_map = {executor.submit(_run_single_family, wargs): i
+                       for i, wargs in enumerate(worker_args)}
+            for fut in as_completed(fut_map):
+                idx = fut_map[fut]
+                try:
+                    result = fut.result()
+                except Exception as e:
+                    slug = slugs[idx]
+                    result = {
+                        "slug": slug, "status": "crashed", "duration_seconds": 0,
+                        "error": str(e), "stages": {},
+                        "coverage": {"stagesPassed": 0, "stagesTotal": 15, "stagePassRate": 0},
+                    }
+                results[idx] = result
+
+                # Report progress in order
+                while next_to_report < len(results) and results[next_to_report] is not None:
+                    r = results[next_to_report]
+                    _accumulate(r)
+                    next_to_report += 1
+                _save_snapshot()
 
     total_time = time.perf_counter() - total_start
     print(f"\n{'='*60}")
@@ -186,16 +241,22 @@ def main() -> None:
     print(f"  Report: {output_path}")
     print(f"{'='*60}")
 
-    report["elapsed_seconds"] = round(total_time, 1)
-    report["passed"] = passed
-    report["failed"] = failed
-    report["skipped"] = skipped_count
-    report["crashed"] = crashed
-    output_path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
+    final_report = {
+        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "assembly": args.assembly,
+        "total_families": len(slugs),
+        "passed": passed,
+        "failed": failed,
+        "skipped": skipped_count,
+        "crashed": crashed,
+        "elapsed_seconds": round(total_time, 1),
+        "results": [r for r in results if r is not None],
+    }
+    output_path.write_text(json.dumps(final_report, indent=2, ensure_ascii=False), encoding="utf-8")
 
     try:
-        report["parsed"] = [parse_family(r) for r in report.get("results", [])]
-        dashboard_html = generate_dashboard_html(report)
+        final_report["parsed"] = [parse_family(r) for r in final_report.get("results", [])]
+        dashboard_html = generate_dashboard_html(final_report)
         dashboard_path = output_path.with_name("deep-dashboard.html")
         dashboard_path.write_text(dashboard_html, encoding="utf-8")
         print(f"  Dashboard: {dashboard_path} ({len(dashboard_html) // 1024} KB)")

@@ -65,10 +65,6 @@ public static partial class SnapshotProverSubjects
     }
 
     // [8] SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()
-    public static void CustomEntrySubject_8()
-    {
-    }
-
     // [9] SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()
     public static void Subject_9()
     {

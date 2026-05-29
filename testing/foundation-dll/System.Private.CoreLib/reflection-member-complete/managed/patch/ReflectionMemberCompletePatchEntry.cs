@@ -45,9 +45,8 @@ public static partial class ReflectionMemberCompletePatchEntry
     }
 
     // [6] System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()
-    public static int Subject_6()
+    public static void CustomEntryMethod6()
     {
-        return unchecked((int)(0xB0000000u + 6));
     }
 
     // [7] System.Private.CoreLib/System.Reflection.MethodBase::get_MethodHandle:System.RuntimeMethodHandle()
@@ -81,9 +80,8 @@ public static partial class ReflectionMemberCompletePatchEntry
     }
 
     // [12] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
-    public static int Subject_12()
+    public static void CustomEntryMethod12()
     {
-        return unchecked((int)(0xB0000000u + 12));
     }
 
     // [13] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsStatic:System.Boolean()
@@ -105,9 +103,8 @@ public static partial class ReflectionMemberCompletePatchEntry
     }
 
     // [16] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
-    public static int Subject_16()
+    public static void CustomEntryMethod16()
     {
-        return unchecked((int)(0xB0000000u + 16));
     }
 
     // [17] System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanRead:System.Boolean()
@@ -123,9 +120,8 @@ public static partial class ReflectionMemberCompletePatchEntry
     }
 
     // [19] System.Private.CoreLib/System.Reflection.PropertyInfo::GetIndexParameters:System.Reflection.ParameterInfo[]()
-    public static int Subject_19()
+    public static void CustomEntryMethod19()
     {
-        return unchecked((int)(0xB0000000u + 19));
     }
 
     // [20] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldHandle:System.RuntimeFieldHandle()
@@ -152,20 +148,20 @@ public static partial class ReflectionMemberCompletePatchEntry
                 case 3: Subject_3(); break;
                 case 4: Subject_4(); break;
                 case 5: Subject_5(); break;
-                case 6: Subject_6(); break;
+                case 6: CustomEntryMethod6(); break;
                 case 7: Subject_7(); break;
                 case 8: Subject_8(); break;
                 case 9: Subject_9(); break;
                 case 10: Subject_10(); break;
                 case 11: Subject_11(); break;
-                case 12: Subject_12(); break;
+                case 12: CustomEntryMethod12(); break;
                 case 13: Subject_13(); break;
                 case 14: Subject_14(); break;
                 case 15: Subject_15(); break;
-                case 16: Subject_16(); break;
+                case 16: CustomEntryMethod16(); break;
                 case 17: Subject_17(); break;
                 case 18: Subject_18(); break;
-                case 19: Subject_19(); break;
+                case 19: CustomEntryMethod19(); break;
                 case 20: Subject_20(); break;
                 case 21: Subject_21(); break;
             }

@@ -19,9 +19,14 @@ import re
 import shutil
 import subprocess
 import sys
-import sys
 import time
 from pathlib import Path
+
+# Ensure stdout/stderr can handle UTF-8 output in GBK terminals
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+if hasattr(sys.stderr, 'reconfigure'):
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
 
 _HERE = Path(__file__).resolve().parent
 _REPO_ROOT = _HERE.parents[3]  # D:/agent/booming-il2cpp
@@ -666,7 +671,12 @@ def _sync_runtime_libs_to_sdk(codegen_dir: Path, repo_root: Path | None = None) 
                 print(f"    [sync_libs] sdk_lib_dir not found for {d.name}: {sdk_lib_dir}")
                 continue
             for lib_file in sorted(source_lib_dir.iterdir()):
-                if lib_file.suffix == ".lib" and not (sdk_lib_dir / lib_file.name).exists():
+                if lib_file.suffix != ".lib":
+                    continue
+                target = sdk_lib_dir / lib_file.name
+                # Always overwrite codegen stubs (8-byte placeholders) with real libs.
+                if target.exists() and target.stat().st_size > 100:
+                    continue
                     shutil.copy2(str(lib_file), str(sdk_lib_dir / lib_file.name))
                     any_copied = True
         if any_copied:
@@ -706,8 +716,11 @@ def _sync_runtime_libs_to_sdk(codegen_dir: Path, repo_root: Path | None = None) 
                             sdk_lib_dir = d / "lib"
                             if not sdk_lib_dir.is_dir():
                                 continue
-                            if not (sdk_lib_dir / lib_file.name).exists():
-                                shutil.copy2(str(lib_file), str(sdk_lib_dir / lib_file.name))
+                            target = sdk_lib_dir / lib_file.name
+                            # Always overwrite codegen stubs (8-byte placeholders).
+                            if target.exists() and target.stat().st_size > 100:
+                                continue
+                            shutil.copy2(str(lib_file), str(target))
                     return
         else:
             print(f"    [sync_libs] presets_dir not found: {presets_dir}")
@@ -1114,7 +1127,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             print(f"    [build_entry] cleaned stale: {stale_name.name}")
     # Also clean codegen-sync subdirectories
     for stale_dir in sorted(native_dir.iterdir()):
-        if stale_dir.is_dir() and stale_dir.name not in ("build",):
+        if stale_dir.is_dir() and stale_dir.name not in ("build", "build_jit"):
             shutil.rmtree(stale_dir)
             print(f"    [build_entry] cleaned stale directory: {stale_dir.name}")
     stale_jit_stubs = native_dir / "jit_stubs.cpp"
@@ -1267,13 +1280,21 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     # Use separate build directories for AOT (build/) and JIT (build_jit/)
     # to avoid MSBuild file-lock conflicts when the JIT stage follows AOT.
     build_dir = native_dir / ("build_jit" if is_jit else "build")
-    # Remove stale cmake cache to avoid generator/platform mismatch errors
+
+    # Incremental build: keep existing build cache for faster recompilation.
+    # Only remove CMakeCache.txt to force reconfiguration; all .obj/.lib files
+    # from previous runs are preserved so cmake --build only recompiles sources
+    # whose timestamps changed (generated C++ files).  Fall back to clean build
+    # if incremental configure or build fails.
+    did_clean_build = False
     if build_dir.exists():
-        try:
-            shutil.rmtree(build_dir)
-        except PermissionError:
-            print(f"    [build_entry] warning: could not remove build_dir, continuing anyway")
-    if not build_dir.exists():
+        cache_file = build_dir / "CMakeCache.txt"
+        if cache_file.exists():
+            try:
+                cache_file.unlink()
+            except OSError:
+                pass
+    else:
         build_dir.mkdir(parents=True, exist_ok=True)
 
     # ── Platform detection ───────────────────────────────────────────
@@ -1302,6 +1323,27 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         if cfg_result.returncode == 0:
             break
 
+    # Fallback: if all 3 incremental configure retries failed, do a clean build
+    if cfg_result is None or cfg_result.returncode != 0:
+        print(f"    [build_entry] incremental configure FAILED after retries, falling back to clean build...")
+        if build_dir.exists():
+            shutil.rmtree(build_dir)
+        build_dir.mkdir(parents=True, exist_ok=True)
+        did_clean_build = True
+        for cfg_attempt in range(3):
+            if cfg_attempt > 0:
+                wait = 1 << cfg_attempt
+                print(f"    [build_entry] cmake configure (clean) retry #{cfg_attempt} after {wait}s...")
+                time.sleep(wait)
+            cfg_result = subprocess.run(cmake_args, capture_output=True, text=True, timeout=120,)
+            if cfg_result.returncode == 0:
+                break
+        if cfg_result is None or cfg_result.returncode != 0:
+            print(f"    [build_entry] clean configure ALSO FAILED, giving up")
+            for line in (cfg_result.stderr.splitlines() + cfg_result.stdout.splitlines())[-25:]:
+                print(f"      {line}")
+            return False
+
     # Step 1b: Patch vcxproj files (Windows only — Ninja doesn't generate vcxproj)
     if not is_linux:
         patch_script = _HERE.parents[0] / "_patch_vcxproj.py"
@@ -1312,7 +1354,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
 
     # Step 2: CMake build with retry for transient failures
     print(f"    [build_entry] cmake build (platform={'linux' if is_linux else 'windows'})...")
-    build_args = ["cmake", "--build", str(build_dir), "--target", "entry"]
+    build_args = ["cmake", "--build", str(build_dir), "--target", "entry", "--parallel"]
     if not is_linux:
         build_args += ["--config", "RelWithDebInfo"]
     build_result = None
@@ -1324,6 +1366,35 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         build_result = subprocess.run(build_args, capture_output=True, text=True, timeout=300,)
         if build_result.returncode == 0:
             break
+    if build_result and build_result.returncode != 0:
+        # Fallback to clean build if incremental build failed and we haven't
+        # already done a clean build during configure fallback
+        if not did_clean_build:
+            print(f"    [build_entry] incremental build FAILED after retries, falling back to clean build...")
+            if build_dir.exists():
+                shutil.rmtree(build_dir)
+            build_dir.mkdir(parents=True, exist_ok=True)
+            did_clean_build = True
+            # Re-run configure from scratch
+            for cfg_attempt in range(3):
+                if cfg_attempt > 0:
+                    wait = 1 << cfg_attempt
+                    print(f"    [build_entry] cmake configure (clean) retry #{cfg_attempt} after {wait}s...")
+                    time.sleep(wait)
+                cfg_result = subprocess.run(cmake_args, capture_output=True, text=True, timeout=120,)
+                if cfg_result.returncode == 0:
+                    break
+            if cfg_result and cfg_result.returncode == 0:
+                # Re-run build after clean configure
+                for build_attempt in range(3):
+                    if build_attempt > 0:
+                        wait = 1 << build_attempt
+                        print(f"    [build_entry] cmake build (clean) retry #{build_attempt} after {wait}s...")
+                        time.sleep(wait)
+                    build_result = subprocess.run(build_args, capture_output=True, text=True, timeout=300,)
+                    if build_result.returncode == 0:
+                        break
+
     if build_result and build_result.returncode != 0:
         print(f"    [build_entry] cmake build FAILED after retries")
         for line in (build_result.stderr.splitlines() + build_result.stdout.splitlines())[-25:]:

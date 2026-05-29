@@ -17,23 +17,8 @@ public static partial class ReflectionTypeSubjects
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
-    public static void Subject_0()
-    {
-        // needs-manual — GetType with 1 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
-    }
-
     // [1] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
-    public static void Subject_1()
-    {
-        // needs-manual — GetType with 2 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
-    }
-
     // [2] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
-    public static void Subject_2()
-    {
-        // needs-manual — GetType with 3 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
-    }
-
     // [3] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)
     public static void Subject_3()
     {
@@ -212,85 +197,99 @@ public static partial class ReflectionTypeSubjects
     // [28] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()
     public static void Subject_28()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()
+        try { _ = ((typeof(byte).GetMethods()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [29] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)
     public static void Subject_29()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)
+        try { _ = ((typeof(byte).GetMethods(System.Reflection.BindingFlags.Default)).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [30] System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()
     public static void Subject_30()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()
+        try { _ = ((typeof(byte).GetFields()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [31] System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)
     public static void Subject_31()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)
+        try { _ = ((typeof(byte).GetFields(System.Reflection.BindingFlags.Default)).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [32] System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()
     public static void Subject_32()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()
+        try { _ = ((typeof(byte).GetProperties()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [33] System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)
     public static void Subject_33()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)
+        try { _ = ((typeof(byte).GetProperties(System.Reflection.BindingFlags.Default)).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [34] System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()
     public static void Subject_34()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()
+        try { _ = ((typeof(byte).GetEvents()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [35] System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()
     public static void Subject_35()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()
+        try { _ = ((typeof(byte).GetConstructors()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [36] System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)
     public static void Subject_36()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)
+        try { _ = ((typeof(byte).GetConstructors(System.Reflection.BindingFlags.Default)).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [37] System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()
     public static void Subject_37()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()
+        try { _ = ((typeof(byte).GetMembers()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [38] System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()
     public static void Subject_38()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()
+        try { _ = ((typeof(byte).GetInterfaces()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [39] System.Private.CoreLib/System.Type::GetElementType:System.Type()
     public static void Subject_39()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetElementType:System.Type()
+        try { _ = ((typeof(byte).GetElementType()).GetHashCode()); }
+        catch { _exitCode = 1; }
     }
 
     // [40] System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()
     public static void Subject_40()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()
+        try { _ = ((typeof(byte).GetNestedTypes()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [41] System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)
     public static void Subject_41()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)
+        try { _ = ((typeof(byte).GetNestedType("hello")).GetHashCode()); }
+        catch { _exitCode = 1; }
     }
 
     // [42] System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()

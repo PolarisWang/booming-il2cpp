@@ -16,15 +16,13 @@ public static partial class ObjectEqualityIdentitySubjects
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)
-    public static void Subject_0()
+    public static void CustomEntrySubject_0()
     {
-        // non-callable: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)
     }
 
     // [1] System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)
-    public static void Subject_1()
+    public static void CustomEntrySubject_1()
     {
-        // non-callable: System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)
     }
 
     // [2] System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)
@@ -35,27 +33,23 @@ public static partial class ObjectEqualityIdentitySubjects
     }
 
     // [3] System.Private.CoreLib/System.Object::GetHashCode:System.Int32()
-    public static void Subject_3()
+    public static void CustomEntrySubject_3()
     {
-        // non-callable: System.Private.CoreLib/System.Object::GetHashCode:System.Int32()
     }
 
     // [4] System.Private.CoreLib/System.Object::ToString:System.String()
-    public static void Subject_4()
+    public static void CustomEntrySubject_4()
     {
-        // non-callable: System.Private.CoreLib/System.Object::ToString:System.String()
     }
 
     // [5] System.Private.CoreLib/System.Object::GetType:System.Type()
-    public static void Subject_5()
+    public static void CustomEntrySubject_5()
     {
-        // non-callable: System.Private.CoreLib/System.Object::GetType:System.Type()
     }
 
     // [6] System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
-    public static void Subject_6()
+    public static void CustomEntrySubject_6()
     {
-        // non-callable: System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
     }
 
 }

@@ -9,27 +9,23 @@ public static partial class ReflectionActivationPatchEntry
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)
-    public static int Subject_0()
+    public static void CustomEntryMethod0()
     {
-        return unchecked((int)(0xB0000000u + 0));
     }
 
     // [1] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])
-    public static int Subject_1()
+    public static void CustomEntryMethod1()
     {
-        return unchecked((int)(0xB0000000u + 1));
     }
 
     // [2] System.Private.CoreLib/System.Activator::CreateInstance:T()
-    public static int Subject_2()
+    public static void CustomEntryMethod2()
     {
-        return unchecked((int)(0xB0000000u + 2));
     }
 
     // [3] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
-    public static int Subject_3()
+    public static void CustomEntryMethod3()
     {
-        return unchecked((int)(0xB0000000u + 3));
     }
 
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
@@ -62,10 +58,10 @@ public static partial class ReflectionActivationPatchEntry
         {
             switch (entryIndex)
             {
-                case 0: Subject_0(); break;
-                case 1: Subject_1(); break;
-                case 2: Subject_2(); break;
-                case 3: Subject_3(); break;
+                case 0: CustomEntryMethod0(); break;
+                case 1: CustomEntryMethod1(); break;
+                case 2: CustomEntryMethod2(); break;
+                case 3: CustomEntryMethod3(); break;
                 case 4: Subject_4(); break;
                 case 5: Subject_5(); break;
                 case 6: Subject_6(); break;

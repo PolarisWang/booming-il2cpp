@@ -13,7 +13,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ExceptionThrowDiagnosticsSubjects.cs" />
-    <Compile Include="subjects/ExceptionThrowDiagnosticsSubjects.Custom.cs" />
+    <Compile Include="ExceptionThrowDiagnosticsSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
