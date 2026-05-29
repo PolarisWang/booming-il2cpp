@@ -1001,6 +1001,7 @@ def ensure_micro_benchmark_source(native_dir: Path) -> None:
         'struct BenchmarkResult {\n'
         '    double elapsed_ms;\n'
         '    int64_t allocated_bytes;\n'
+        '    bool caught_exception;\n'
         '};\n'
         'extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);\n'
         '\n'
@@ -1076,15 +1077,16 @@ def write_sentinel_dispatch(dispatch_cpp: Path) -> None:
         'struct BenchmarkResult {\n'
         '    double elapsed_ms;\n'
         '    int64_t allocated_bytes;\n'
+        '    bool caught_exception;\n'
         '};\n'
         '\n'
         'extern "C" const int kSubjectEntryCount;\n'
         'extern "C" const int kSubjectSlotMap[];\n'
         '\n'
         'extern "C" CHAOS_IL2CPP_INT32 RunFactAll() { return 0; }\n'
-        'extern "C" BenchmarkResult RunBenchmark(int, int) { return {-1.0, 0}; }\n'
+        'extern "C" BenchmarkResult RunBenchmark(int, int) { return {-1.0, 0, false}; }\n'
         'extern "C" CHAOS_IL2CPP_INT32 RunHotpatchAll() { return 0; }\n'
-        'extern "C" BenchmarkResult RunHotpatchBenchmark(int, int) { return {-1.0, 0}; }\n'
+        'extern "C" BenchmarkResult RunHotpatchBenchmark(int, int) { return {-1.0, 0, false}; }\n'
     )
     dispatch_cpp.parent.mkdir(parents=True, exist_ok=True)
     dispatch_cpp.write_text(content, encoding="utf-8")

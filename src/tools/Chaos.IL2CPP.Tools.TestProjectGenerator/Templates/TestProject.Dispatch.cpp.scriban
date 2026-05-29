@@ -60,20 +60,31 @@ extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {
 struct BenchmarkResult {
     double elapsed_ms;
     int64_t allocated_bytes;
+    bool caught_exception;
 };
 
 extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     if (entry_index < 0 || entry_index >= kAotMethodCount)
-        return {-1.0, 0};
+        return {-1.0, 0, false};
     auto* entries = GetHotpatchEntries();
-    // Warmup
-    ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_DISPATCH_THUNKS);
+    // Warmup (may throw managed exception — caught via C++ EH)
+    try {
+        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_DISPATCH_THUNKS);
+    } catch(...) {
+        return {-1.0, 0, true};
+    }
+
     CHAOS_IL2CPP_PROFILE_RESET();
     chaos_gc_enter_no_gc_region();
     auto alloc_before = chaos_gc_get_allocated_bytes_for_current_thread();
     auto start = std::chrono::steady_clock::now();
-    for (int i = 0; i < iterations; i++) {
-        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_DISPATCH_THUNKS);
+    try {
+        for (int i = 0; i < iterations; i++) {
+            ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_DISPATCH_THUNKS);
+        }
+    } catch(...) {
+        chaos_gc_leave_no_gc_region();
+        return {-1.0, 0, true};
     }
     auto end = std::chrono::steady_clock::now();
     auto alloc_after = chaos_gc_get_allocated_bytes_for_current_thread();
@@ -81,6 +92,7 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     BenchmarkResult result;
     result.elapsed_ms = std::chrono::duration<double, std::milli>(end - start).count();
     result.allocated_bytes = alloc_after - alloc_before;
+    result.caught_exception = false;
     CHAOS_IL2CPP_PROFILE_DUMP();
     return result;
 }

@@ -305,7 +305,7 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
             'using chaos::il2cpp::runtime_core::FastFrame;\n'
             '\n'
             'extern "C" const int kAotMethodCount;\n'
-            'struct BenchmarkResult { double elapsed_ms; int64_t allocated_bytes; };\n'
+            'struct BenchmarkResult { double elapsed_ms; int64_t allocated_bytes; bool caught_exception; };\n'
             'extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations);\n'
             '\n'
             'extern "C" void RunMicrobench() {\n'
