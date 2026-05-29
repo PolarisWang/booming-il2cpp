@@ -19,6 +19,7 @@ import re
 import shutil
 import subprocess
 import sys
+import sys
 import time
 from pathlib import Path
 
@@ -171,8 +172,9 @@ def build_subjects_dll(
             subjects_native = subjects_dir / "GenericSupplementNativeEntry.cs"
             subjects_native.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
         extra_refs = ["../../../../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj"]
-    # frozen-collections requires FrozenDictionary.Create which needs net10.0+
-    tfm = "net10.0"
+    # Use net8.0 TFM for .NET 8 SDK compatibility. net10.0 requires
+    # .NET 10 SDK which is not available on all platforms.
+    tfm = "net8.0"
     result = generate_and_build(
         subjects_dir,
         assembly_name=assembly_name,
@@ -246,9 +248,8 @@ def build_entrypoint(
             dest = entrypoint_dir / f.name
             dest.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
 
-    # Use net10.0 TFM so foundation DLL APIs (e.g. System.Formats.Asn1.DecodeLength)
-    # that were added in .NET 9+ are available during subjects compilation.
-    tfm = "net10.0"
+    # Use net8.0 TFM for .NET 8 SDK compatibility.
+    tfm = "net8.0"
     result = generate_and_build(
         entrypoint_dir,
         assembly_name=assembly_name,
@@ -808,8 +809,7 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     # chaos_jit.lib (JIT debug contract symbols) and chaos_debugger.lib are
     # always linked via chaos::runtime (chaos-targets.cmake), so their
     # unresolved JIT-debug-contract symbols require FORCE:MULTIPLE even in
-    # AOT-only builds.
-    force_multiple = '\ntarget_link_options(entry PRIVATE /FORCE:MULTIPLE)'
+    # AOT-only builds (handled via CMake generator expression in template).
     jit_include = (
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/jit"\n'
     ) if is_jit else ''
@@ -822,9 +822,16 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'project(chaos_entry CXX)\n'
         f'set(CMAKE_CXX_STANDARD 20)\n'
         f'\n'
-        f'# Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions\n'
-        f'# thrown by generated code (throw chaos_managed_exception from unresolved calls).\n'
-        f'add_compile_options(/utf-8 /GS- /FS)\n'
+        f'# Compiler settings — platform-conditional\n'
+        f'# MSVC: /EHa needed for catch(...) to intercept C++ exceptions from generated code.\n'
+        f'# GCC/Clang: -fexceptions -finput-charset=utf-8\n'
+        f'add_compile_options(\n'
+        f'    "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>"\n'
+        f'    "$<$<CXX_COMPILER_ID:MSVC>:/GS->"\n'
+        f'    "$<$<CXX_COMPILER_ID:MSVC>:/FS>"\n'
+        f'    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>"\n'
+        f'    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-finput-charset=utf-8>"\n'
+        f')\n'
         f'# Config tier: controlled by CHAOS_IL2CPP_CONFIG_TIER cmake variable\n'
         f'# (set via -D or CMakePresets.json). Defaults to CHECK (debug).\n'
         f'if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)\n'
@@ -917,10 +924,15 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'\n'
         f'add_executable(entry ${{CHAOS_ENTRY_SOURCES}})\n'
         f'target_include_directories(entry PRIVATE ${{CHAOS_ENTRY_INCLUDES}})\n'
-        f'target_compile_options(entry PRIVATE /EHa)\n'
-        f'target_link_libraries(entry PRIVATE\n'
-        f'    chaos::runtime\n'
-        f'){force_multiple}\n'
+        f'target_compile_options(entry PRIVATE\n'
+        f'    "$<$<CXX_COMPILER_ID:MSVC>:/EHa>"\n'
+        f'    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>"\n'
+        f')\n'
+        f'target_link_libraries(entry PRIVATE chaos::runtime)\n'
+        f'target_link_options(entry PRIVATE\n'
+        f'    "$<$<CXX_COMPILER_ID:MSVC>:/FORCE:MULTIPLE>"\n'
+        f'    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wl,--allow-multiple-definition>"\n'
+        f')\n'
     )
     cmakelists.parent.mkdir(parents=True, exist_ok=True)
     cmakelists.write_text(cmake_content, encoding="utf-8")
@@ -1263,49 +1275,52 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     if not build_dir.exists():
         build_dir.mkdir(parents=True, exist_ok=True)
 
+    # ── Platform detection ───────────────────────────────────────────
+    is_linux = sys.platform.startswith("linux")
+
     # Step 1: CMake configure (with retry for transient Windows file-lock failures)
-    print(f"    [build_entry] cmake configure...")
+    print(f"    [build_entry] cmake configure (platform={'linux' if is_linux else 'windows'})...")
     cfg_result = None
+
+    cmake_args = ["cmake", "-S", str(native_dir), "-B", str(build_dir)]
+    if is_linux:
+        cmake_args += ["-G", "Ninja",
+                       f"-DCMAKE_BUILD_TYPE={config_tier.lower()}",
+                       f"-DCHAOS_IL2CPP_CONFIG_TIER={config_tier.lower()}",
+                       "-DCHAOS_IL2CPP_JIT_MODE=ON" if is_jit else "-DCHAOS_IL2CPP_JIT_MODE=OFF"]
+    else:
+        cmake_args += ["-G", "Visual Studio 17 2022", "-A", "x64",
+                       f"-DCHAOS_IL2CPP_CONFIG_TIER={config_tier.lower()}",
+                       "-DCHAOS_IL2CPP_JIT_MODE=ON" if is_jit else "-DCHAOS_IL2CPP_JIT_MODE=OFF"]
     for cfg_attempt in range(3):
         if cfg_attempt > 0:
             wait = 1 << cfg_attempt  # 2, 4 seconds
             print(f"    [build_entry] cmake configure retry #{cfg_attempt} after {wait}s...")
             time.sleep(wait)
-        cfg_result = subprocess.run(
-            ["cmake", "-S", str(native_dir), "-B", str(build_dir),
-             "-G", "Visual Studio 17 2022", "-A", "x64",
-             f"-DCHAOS_IL2CPP_CONFIG_TIER={config_tier.lower()}",
-             "-DCHAOS_IL2CPP_JIT_MODE=ON" if is_jit else "-DCHAOS_IL2CPP_JIT_MODE=OFF"],
-            capture_output=True, text=True, timeout=120,
-        )
+        cfg_result = subprocess.run(cmake_args, capture_output=True, text=True, timeout=120,)
         if cfg_result.returncode == 0:
             break
-    if cfg_result and cfg_result.returncode != 0:
-        print(f"    [build_entry] cmake configure FAILED after retries")
-        for line in (cfg_result.stderr.splitlines() + cfg_result.stdout.splitlines())[-20:]:
-            print(f"      {line}")
-        return False
 
-    # Step 1b: Patch vcxproj files to use /EHs /EHc- (extern "C" exception propagation)
-    patch_script = _HERE.parents[0] / "_patch_vcxproj.py"
-    if patch_script.exists():
-        subprocess.run([sys.executable, str(patch_script), str(build_dir)],
-                      capture_output=True, text=True, timeout=30)
-        print(f"    [build_entry] vcxproj patched for /EHs /EHc-")
+    # Step 1b: Patch vcxproj files (Windows only — Ninja doesn't generate vcxproj)
+    if not is_linux:
+        patch_script = _HERE.parents[0] / "_patch_vcxproj.py"
+        if patch_script.exists():
+            subprocess.run([sys.executable, str(patch_script), str(build_dir)],
+                          capture_output=True, text=True, timeout=30)
+            print(f"    [build_entry] vcxproj patched for /EHs /EHc-")
 
-    # Step 2: CMake build (entry target, RelWithDebInfo) with retry for transient failures
-    print(f"    [build_entry] cmake build...")
+    # Step 2: CMake build with retry for transient failures
+    print(f"    [build_entry] cmake build (platform={'linux' if is_linux else 'windows'})...")
+    build_args = ["cmake", "--build", str(build_dir), "--target", "entry"]
+    if not is_linux:
+        build_args += ["--config", "RelWithDebInfo"]
     build_result = None
     for build_attempt in range(3):
         if build_attempt > 0:
             wait = 1 << build_attempt  # 2, 4 seconds
             print(f"    [build_entry] cmake build retry #{build_attempt} after {wait}s...")
             time.sleep(wait)
-        build_result = subprocess.run(
-            ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo",
-             "--target", "entry"],
-            capture_output=True, text=True, timeout=300,
-        )
+        build_result = subprocess.run(build_args, capture_output=True, text=True, timeout=300,)
         if build_result.returncode == 0:
             break
     if build_result and build_result.returncode != 0:
@@ -1314,13 +1329,17 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             print(f"      {line}")
         return False
 
-    # Step 3: Locate entry.exe
-    exe_candidates = [
-        build_dir / "RelWithDebInfo" / "entry.exe",
-        build_dir / "Release" / "entry.exe",
-        build_dir / "Debug" / "entry.exe",
-        build_dir / "entry.exe",
-    ]
+    # Step 3: Locate binary (entry.exe on Windows, entry on Linux)
+    exe_name = "entry.exe" if not is_linux else "entry"
+    if is_linux:
+        exe_candidates = [build_dir / exe_name]
+    else:
+        exe_candidates = [
+            build_dir / "RelWithDebInfo" / exe_name,
+            build_dir / "Release" / exe_name,
+            build_dir / "Debug" / exe_name,
+            build_dir / exe_name,
+        ]
     exe_path = None
     for c in exe_candidates:
         if c.exists():
@@ -1328,7 +1347,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             break
 
     if exe_path is None:
-        print(f"    [build_entry] entry.exe not found in build output")
+        print(f"    [build_entry] {exe_name} not found in build output")
         return False
 
     # Copy entry.exe to native/ for discovery by orchestrator
