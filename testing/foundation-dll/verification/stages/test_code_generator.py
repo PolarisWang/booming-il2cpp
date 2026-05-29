@@ -84,6 +84,28 @@ _NEEDS_MANUAL_METHODS: set[tuple[str, str]] = {tuple(x) for x in _DATA.get("_NEE
 _SKIP_AUDIT: dict[tuple[str, str, int], str] = _load_tuple_dict("_SKIP_AUDIT")
 _GENERIC_ARGS_MAP: dict[int, str] = _load_int_dict("_GENERIC_ARGS_MAP")
 
+# Hardcoded constants (not loaded from JSON — used directly in code)
+STATIC_TYPES = frozenset({
+    "Convert", "Math", "MemoryMarshal", "RuntimeHelpers",
+    "BitConverter", "Buffer", "Activator", "Interlocked", "Monitor",
+    "ZipFileExtensions", "RuntimeInformation", "JsonSerializer",
+})
+
+_ACRONYMS = frozenset({"io", "id", "db", "ui", "os", "ip"})
+
+BASE_USINGS = "\n".join([
+    "using System;",
+    "using System.IO;",
+    "using System.Threading;",
+    "using System.Threading.Tasks;",
+    "using System.Globalization;",
+    "using System.Linq;",
+    "using System.Runtime.CompilerServices;",
+    "using System.Runtime.InteropServices;",
+    "using System.Collections.Generic;",
+    "using System.Reflection;",
+])
+
 
 def parse_method_subject_id(method_subject_id: str) -> dict[str, Any]:
     """Parse a methodSubjectId into its components.
