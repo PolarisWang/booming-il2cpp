@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
@@ -710,9 +711,13 @@ public sealed partial class NativeAotLoweringPlanner
         AssemblyReflectionSupportModel? assemblyReflectionSupport = null;
         ReflectionMemberSupportModel? reflectionMemberSupport = null;
         StaticFieldDataSupportModel? staticFieldDataSupport = null;
+        var _sw = Stopwatch.StartNew();
+        long _tPhase0 = 0, _tPhase1 = 0, _tPhase2 = 0, _tPhase3 = 0, _tPhase4 = 0, _tPhase5 = 0;
+        long _tEnumCollect = 0, _tEnumMap = 0, _tStaticInit = 0, _tExtHelpers = 0, _tExtDispatch = 0, _tBridgeThunks = 0;
 
         try
         {
+            _tPhase0 = _sw.ElapsedMilliseconds;
             Parallel.Invoke(
                 () => customAttributeSupport = BuildCustomAttributeSupportModel(
                     methodsForLowering,
@@ -742,15 +747,23 @@ public sealed partial class NativeAotLoweringPlanner
         _assemblyReflectionSupport = assemblyReflectionSupport!;
         _reflectionMemberSupport = reflectionMemberSupport!;
         _staticFieldDataSupport = staticFieldDataSupport!;
+        _tPhase1 = _sw.ElapsedMilliseconds;
         _enumTypeSubjectIds = CollectEnumTypeSubjectIds(_reflectionMemberSupport, _cachedClosureAssemblyPaths);
+        _tEnumCollect = _sw.ElapsedMilliseconds;
         _enumValueToNameMap = BuildEnumValueToNameMap();
+        _tEnumMap = _sw.ElapsedMilliseconds;
         _staticInitializationSupport = BuildStaticInitializationSupportModel(
             methodsForLowering,
             closureManifest);
+        _tStaticInit = _sw.ElapsedMilliseconds;
         var externalRuntimeHelpers = CollectExternalRuntimeHelpers(methodsForLowering, _staticInitializationSupport);
+        _tExtHelpers = _sw.ElapsedMilliseconds;
         _externalRuntimeHelpers = externalRuntimeHelpers;
         CollectExternalRuntimeDispatchEntries(methodsForLowering);
+        _tExtDispatch = _sw.ElapsedMilliseconds;
         CollectBridgeImportThunks(methodsForLowering);
+        _tBridgeThunks = _sw.ElapsedMilliseconds;
+        _tPhase2 = _sw.ElapsedMilliseconds;
         var objectModelBuilder = new StringBuilder(65536);
         EmitRuntimePrelude(objectModelBuilder, externalRuntimeHelpers, _staticFieldDataSupport);
         EmitObjectModelDeclarations(objectModelBuilder, methodsForLowering, externalRuntimeHelpers, metadataRegistration);
@@ -779,6 +792,7 @@ public sealed partial class NativeAotLoweringPlanner
         BuildEnumAotBakeTable(methodsForLowering);
         // A2.6: Pre-scan for typeof(T).IsAssignableFrom(typeof(U)) → *Ptr direct API
         BuildTypeHierarchyPtrFoldTable(methodsForLowering);
+        _tPhase3 = _sw.ElapsedMilliseconds;
 
         var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols, _stubNeedsContext);
         _methodDeclarations = methodDeclarations;
@@ -800,6 +814,7 @@ public sealed partial class NativeAotLoweringPlanner
                 };
             })
             .ToList();
+        _tPhase4 = _sw.ElapsedMilliseconds;
 
         // Capture pc-dispatch count from the static counter.
         // Incremented during BuildMethodSourceSafe → EmitViaStructuredIR → EmitPcDispatch.
@@ -1107,6 +1122,22 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 .Where(h => !string.IsNullOrEmpty(h))
                 .Distinct(StringComparer.Ordinal)
                 .Select(h => h!));
+
+        _tPhase5 = _sw.ElapsedMilliseconds;
+        Console.Error.WriteLine(
+            $"[T] TIMING:assemble={_tPhase0}ms|" +
+            $"parallel_models={_tPhase1 - _tPhase0}ms|" +
+            $"enum_collect={_tEnumCollect - _tPhase1}ms|" +
+            $"enum_map={_tEnumMap - _tEnumCollect}ms|" +
+            $"static_init={_tStaticInit - _tEnumMap}ms|" +
+            $"ext_helpers={_tExtHelpers - _tStaticInit}ms|" +
+            $"ext_dispatch={_tExtDispatch - _tExtHelpers}ms|" +
+            $"bridge_thunks={_tBridgeThunks - _tExtDispatch}ms|" +
+            $"post_parse_enum_helpers={_tPhase2 - _tPhase1}ms|" +
+            $"object_model_emit={_tPhase3 - _tPhase2}ms|" +
+            $"method_bodies={_tPhase4 - _tPhase3}ms|" +
+            $"registration_dispatch={_tPhase5 - _tPhase4}ms|" +
+            $"total={_tPhase5}ms");
 
         return new NativeAotTemplateModel
         {
