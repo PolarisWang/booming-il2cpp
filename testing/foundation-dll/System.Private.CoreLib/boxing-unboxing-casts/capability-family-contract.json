@@ -31,5 +31,7 @@
     "required": false
   },
   "reviewBundleRequired": true,
-  "customEntryIndices": [6]
+  "customEntryIndices": [
+    6
+  ]
 }
