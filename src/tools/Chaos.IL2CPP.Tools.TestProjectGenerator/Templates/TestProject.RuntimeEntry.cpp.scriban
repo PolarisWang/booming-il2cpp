@@ -69,6 +69,7 @@ extern "C" void (*kDefaultArgThunks[])() noexcept;
 struct BenchmarkResult {
     double elapsed_ms;
     int64_t allocated_bytes;
+    bool caught_exception;
 };
 
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll();
@@ -155,6 +156,10 @@ static int RunFactJsonMode() {
 static int RunBenchmarkMode(int entry_index, int iterations) {
     CHAOS_IL2CPP_PROFILE_SCOPE("RunBenchmarkMode");
     auto result = RunBenchmark(entry_index, iterations);
+    if (result.caught_exception) {
+        printf("{\"elapsedMilliseconds\":-1.0,\"error\":\"managed exception\"}\n");
+        return 1;
+    }
     if (result.elapsed_ms < 0.0) {
         printf("{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\n");
         return 1;
@@ -184,7 +189,9 @@ static int RunBenchmarkAllMode(int iterations) {
         auto result = RunBenchmark(i, iterations);
         if (!first) printf(",");
         first = false;
-        if (result.elapsed_ms < 0.0) {
+        if (result.caught_exception) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"managed exception\"}", i);
+        } else if (result.elapsed_ms < 0.0) {
             printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}", i);
         } else {
             double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
