@@ -20,7 +20,7 @@ verification/
     engine.py              # VerificationPipeline 管线引擎
     context.py             # FamilyContext/StageResult 数据模型
     family_entrypoint.py   # codegen 自动生成入口
-    dispatch_generator.py  # 验证调度代码生成
+    # (dispatch 代码生成已迁移到 TestProjectGenerator emit)
 
   stages/                  # 13 阶段执行器
     preflight.py           # Stage 0: Contract 完整性检测

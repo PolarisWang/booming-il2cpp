@@ -118,29 +118,25 @@ public static partial class ReflectionFieldPropertySubjects
     // [14] System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)
     public static void Subject_14()
     {
-        try { default(FieldInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, default); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)
     }
 
     // [15] System.Private.CoreLib/System.Reflection.FieldInfo::GetRawConstantValue:System.Object()
     public static void Subject_15()
     {
-        try { _ = ((default(FieldInfo)!.GetRawConstantValue()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.FieldInfo::GetRawConstantValue:System.Object()
     }
 
     // [16] System.Private.CoreLib/System.Reflection.FieldInfo::GetOptionalCustomModifiers:System.Type[]()
     public static void Subject_16()
     {
-        try { _ = ((default(FieldInfo)!.GetOptionalCustomModifiers()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.FieldInfo::GetOptionalCustomModifiers:System.Type[]()
     }
 
     // [17] System.Private.CoreLib/System.Reflection.FieldInfo::GetRequiredCustomModifiers:System.Type[]()
     public static void Subject_17()
     {
-        try { _ = ((default(FieldInfo)!.GetRequiredCustomModifiers()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.FieldInfo::GetRequiredCustomModifiers:System.Type[]()
     }
 
     // [18] System.Private.CoreLib/System.Reflection.PropertyInfo::get_Attributes:System.Reflection.PropertyAttributes()
@@ -160,15 +156,13 @@ public static partial class ReflectionFieldPropertySubjects
     // [20] System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[]()
     public static void Subject_20()
     {
-        try { _ = ((default(PropertyInfo)!.GetAccessors()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[]()
     }
 
     // [21] System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[](System.Boolean)
     public static void Subject_21()
     {
-        try { _ = ((default(PropertyInfo)!.GetAccessors(true)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[](System.Boolean)
     }
 
     // [22] System.Private.CoreLib/System.Reflection.PropertyInfo::get_GetMethod:System.Reflection.MethodInfo()
@@ -181,15 +175,13 @@ public static partial class ReflectionFieldPropertySubjects
     // [23] System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo()
     public static void Subject_23()
     {
-        try { _ = ((default(PropertyInfo)!.GetGetMethod()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo()
     }
 
     // [24] System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo(System.Boolean)
     public static void Subject_24()
     {
-        try { _ = ((default(PropertyInfo)!.GetGetMethod(true)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo(System.Boolean)
     }
 
     // [25] System.Private.CoreLib/System.Reflection.PropertyInfo::get_SetMethod:System.Reflection.MethodInfo()
@@ -202,57 +194,49 @@ public static partial class ReflectionFieldPropertySubjects
     // [26] System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo()
     public static void Subject_26()
     {
-        try { _ = ((default(PropertyInfo)!.GetSetMethod()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo()
     }
 
     // [27] System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo(System.Boolean)
     public static void Subject_27()
     {
-        try { _ = ((default(PropertyInfo)!.GetSetMethod(true)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo(System.Boolean)
     }
 
     // [28] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_28()
     {
-        try { _ = ((default(PropertyInfo)!.GetValue(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     }
 
     // [29] System.Private.CoreLib/System.Reflection.PropertyInfo::GetConstantValue:System.Object()
     public static void Subject_29()
     {
-        try { _ = ((default(PropertyInfo)!.GetConstantValue()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetConstantValue:System.Object()
     }
 
     // [30] System.Private.CoreLib/System.Reflection.PropertyInfo::GetRawConstantValue:System.Object()
     public static void Subject_30()
     {
-        try { _ = ((default(PropertyInfo)!.GetRawConstantValue()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetRawConstantValue:System.Object()
     }
 
     // [31] System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_31()
     {
-        try { default(PropertyInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     }
 
     // [32] System.Private.CoreLib/System.Reflection.PropertyInfo::GetOptionalCustomModifiers:System.Type[]()
     public static void Subject_32()
     {
-        try { _ = ((default(PropertyInfo)!.GetOptionalCustomModifiers()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetOptionalCustomModifiers:System.Type[]()
     }
 
     // [33] System.Private.CoreLib/System.Reflection.PropertyInfo::GetRequiredCustomModifiers:System.Type[]()
     public static void Subject_33()
     {
-        try { _ = ((default(PropertyInfo)!.GetRequiredCustomModifiers()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetRequiredCustomModifiers:System.Type[]()
     }
 
 }

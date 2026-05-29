@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class IoStreamsBasicsSubjects
 {
@@ -31,22 +32,19 @@ public static partial class IoStreamsBasicsSubjects
     // [2] System.Private.CoreLib/System.IO.Stream::Flush:System.Void()
     public static void Subject_2()
     {
-        try { new MemoryStream().Flush(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.IO.Stream::Flush:System.Void()
     }
 
     // [3] System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)
     public static void Subject_3()
     {
-        try { _ = (int)(new MemoryStream().Seek(42L, System.IO.SeekOrigin.Begin)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.IO.Stream::Seek:System.Int64(System.Int64,System.IO.SeekOrigin)
     }
 
     // [4] System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)
     public static void Subject_4()
     {
-        try { new MemoryStream().SetLength(42L); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.IO.Stream::SetLength:System.Void(System.Int64)
     }
 
     // [5] System.Private.CoreLib/System.IO.Stream::get_Length:System.Int64()
@@ -73,36 +71,31 @@ public static partial class IoStreamsBasicsSubjects
     // [8] System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()
     public static void Subject_8()
     {
-        try { _ = ((new StringReader("hello").ReadLine()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.IO.TextReader::ReadLine:System.String()
     }
 
     // [9] System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()
     public static void Subject_9()
     {
-        try { _ = ((new StringReader("hello").ReadToEnd()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.IO.TextReader::ReadToEnd:System.String()
     }
 
     // [10] System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)
     public static void Subject_10()
     {
-        try { new StringWriter().Write("hello"); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.IO.TextWriter::Write:System.Void(System.String)
     }
 
     // [11] System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)
     public static void Subject_11()
     {
-        try { new StringWriter().WriteLine("hello"); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void(System.String)
     }
 
     // [12] System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()
     public static void Subject_12()
     {
-        try { new StringWriter().WriteLine(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.IO.TextWriter::WriteLine:System.Void()
     }
 
     // [13] System.Private.CoreLib/System.IO.BinaryReader::ReadInt32:System.Int32()

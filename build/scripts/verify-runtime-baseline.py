@@ -14,13 +14,18 @@ toolchains_root = Path(__file__).resolve().parents[1] / "toolchains" / "run"
 if str(toolchains_root) not in sys.path:
     sys.path.insert(0, str(toolchains_root))
 
+# Add verification tooling path for migrated utilities
+_FD_VERIFICATION = Path(__file__).resolve().parents[1] / "testing" / "foundation-dll" / "verification"
+if str(_FD_VERIFICATION) not in sys.path:
+    sys.path.insert(0, str(_FD_VERIFICATION))
+
 from core import tooling as tooling_module
 from testing import contracts as contracts_module
 from testing import public_specs as public_specs_module
 from testing import subject_executor as subject_executor_module
 from testing import subject_planner as subject_planner_module
 from testing import subjects as subjects_module
-from testing.foundation_dll.hotupdate_verification_runner import generate_per_family_reports as generate_hotupdate_reports
+from tooling.hotupdate_verification_runner import generate_per_family_reports as generate_hotupdate_reports
 
 
 DEFAULT_WINDOWS_VISUAL_STUDIO_GENERATOR = "Visual Studio 17 2022"

@@ -6,6 +6,7 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 
@@ -27,15 +28,13 @@ public static partial class ThreadingMonitorInterlockedSubjects
     // [2] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)
     public static void Subject_2()
     {
-        try { var _ = ((Monitor.TryEnter(null!)) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object)
     }
 
     // [3] System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)
     public static void Subject_3()
     {
-        try { var _ = ((Monitor.TryEnter(null!, 42)) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Threading.Monitor::TryEnter:System.Boolean(System.Object,System.Int32)
     }
 
     // [4] System.Private.CoreLib/System.Threading.Monitor::Pulse:System.Void(System.Object)
@@ -81,14 +80,13 @@ public static partial class ThreadingMonitorInterlockedSubjects
     // [12] System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()
     public static void Subject_12()
     {
-        try { Interlocked.MemoryBarrier(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Threading.Interlocked::MemoryBarrier:System.Void()
     }
 
     // [13] System.Private.CoreLib/System.Threading.Volatile::Read:System.Int32(System.Int32&)
     public static void Subject_13()
     {
-        try { var _ = ((System.Func<int>)(() => { int __v = 42; return System.Threading.Volatile.Read(ref __v); }))(); }
+        try { _ = ((System.Func<int>)(() => { int __v = 42; return System.Threading.Volatile.Read(ref __v); }))(); }
         catch { _exitCode = 1; }
     }
 

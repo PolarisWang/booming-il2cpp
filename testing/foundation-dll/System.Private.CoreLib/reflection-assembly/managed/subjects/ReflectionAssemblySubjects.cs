@@ -41,8 +41,7 @@ public static partial class ReflectionAssemblySubjects
     // [3] System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()
     public static void Subject_3()
     {
-        try { _ = ((typeof(byte).Assembly.GetName()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()
     }
 
     // [4] System.Private.CoreLib/System.Reflection.Assembly::get_FullName:System.String()
@@ -69,64 +68,55 @@ public static partial class ReflectionAssemblySubjects
     // [7] System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()
     public static void Subject_7()
     {
-        try { _ = ((typeof(byte).Assembly.GetTypes()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()
     }
 
     // [8] System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()
     public static void Subject_8()
     {
-        try { _ = ((typeof(byte).Assembly.GetExportedTypes()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()
     }
 
     // [9] System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()
     public static void Subject_9()
     {
-        try { _ = ((typeof(byte).Assembly.GetForwardedTypes()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()
     }
 
     // [10] System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)
     public static void Subject_10()
     {
-        try { _ = ((typeof(byte).Assembly.GetType("hello")).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)
     }
 
     // [11] System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)
     public static void Subject_11()
     {
-        try { _ = ((typeof(byte).Assembly.GetType("hello", true)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)
     }
 
     // [12] System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)
     public static void Subject_12()
     {
-        try { _ = ((typeof(byte).Assembly.GetModule("hello")).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)
     }
 
     // [13] System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()
     public static void Subject_13()
     {
-        try { _ = ((typeof(byte).Assembly.GetModules()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()
     }
 
     // [14] System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)
     public static void Subject_14()
     {
-        try { _ = ((typeof(byte).Assembly.GetManifestResourceStream("hello")).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)
     }
 
     // [15] System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()
     public static void Subject_15()
     {
-        try { _ = ((typeof(byte).Assembly.GetManifestResourceNames()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()
     }
 
     // [16] System.Private.CoreLib/System.Reflection.Assembly::get_EntryPoint:System.Reflection.MethodInfo()

@@ -27,7 +27,7 @@ extern "C" void ChaosJitRegisterAll() {}
 
 ### 构建
 
-MSVC 编译生成的 C++ → `entry.exe`，链接 `chaos_runtime_core`。由 `pipeline_native_aot_runner.py` 中的 `_build_entry_exe()` 驱动。
+MSVC 编译生成的 C++ → `entry.exe`，链接 `chaos_runtime_core`。由 `pipeline_native_aot_runner.py` 中的 `build_entry_executable()` 驱动。
 
 ### Fact
 
@@ -82,7 +82,7 @@ entry-aot.exe (AOT 构建)
   → 恢复 entry.exe = entry-aot.exe
 ```
 
-`family_verification_orchestrator.py:964-973`：
+新管线 `testing/foundation-dll/verification/stages/codegen.py`（`run_jit_codegen`）：
 
 ```python
 build_ok = _build_entry_exe(family_slug, ..., output_name="entry-jit.exe", is_jit=True)
@@ -172,8 +172,8 @@ JIT 构建额外包含：
 
 | 职责 | 路径 |
 |------|------|
-| 验证编排 | `build/toolchains/run/testing/foundation_dll/family_verification_orchestrator.py` |
-| Native AOT runner | `build/toolchains/run/testing/foundation_dll/pipeline_native_aot_runner.py` |
+| 验证编排 | `testing/foundation-dll/verification/orchestration/engine.py` |
+| Native AOT runner | `testing/foundation-dll/verification/stages/pipeline_native_aot_runner.py` |
 | Codegen JIT 发射 | `src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs` |
 | JitEntry 注册表发射 | `src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.ModuleRegistration.cs` |
 | JIT 注册头文件 | `src/native/runtime-core/jit_registration.h` |

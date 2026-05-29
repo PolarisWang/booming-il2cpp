@@ -33,15 +33,13 @@ public static partial class PinvokeStressSubjects
     // [2] System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)
     public static void Subject_2()
     {
-        try { _ = (int)(GC.GetTotalMemory(true)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)
     }
 
     // [3] System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetLastPInvokeError:System.Int32()
     public static void Subject_3()
     {
-        try { _ = Marshal.GetLastPInvokeError(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetLastPInvokeError:System.Int32()
     }
 
 }

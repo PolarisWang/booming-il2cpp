@@ -7,6 +7,12 @@
 //
 // These stubs allow test executables to link on Linux.  They are NOT
 // functionally correct — they are build-compatibility stubs only.
+//
+// Windows note: This file uses GCC __attribute__((weak)) and is only
+// needed on Linux.  On MSVC, the AOT/debugger symbols are provided by
+// prebuilt libraries, so skip this file entirely.
+
+#ifndef _WIN32
 
 #include <cstdint>
 
@@ -44,3 +50,5 @@ void DbgNotifyPaused(uint32_t, uint32_t) noexcept {}
 bool DbgShouldStopAtCurrentPosition(int) noexcept { return false; }
 
 }  // namespace chaos::il2cpp::diagnostics
+
+#endif  // _WIN32

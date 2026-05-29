@@ -45,11 +45,11 @@ chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-cor
 ### 端到端示例
 
 ```bash
-# 1. 生成入口点 DLL（由 Python 编排脚本完成）
-python build/toolchains/run/testing/foundation_dll/family_entrypoint_generator.py \
-    --assembly-name System.Private.CoreLib \
-    --family-id family/System.Private.CoreLib/convert/char \
-    --variant patch
+# 1. 生成入口点 DLL（由新管线 verification pipeline 自动完成）
+#    旧: python build/toolchains/run/testing/foundation_dll/family_entrypoint_generator.py ...
+#    新: 由 testing/foundation-dll/verification/stages/codegen.py 自动编排
+#    手动触发:
+python -m verification.entry_points.cli <family-slug> --skip <stages>
 
 # 2. 生成 .patchdata
 chaos-il2cpp emit-patch-data \

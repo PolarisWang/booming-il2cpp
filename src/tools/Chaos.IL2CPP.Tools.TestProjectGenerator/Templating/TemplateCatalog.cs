@@ -13,6 +13,7 @@ internal static class TemplateCatalog
 
     private static readonly string[] TemplateNames =
     [
+        "TestProject.RuntimeEntry.cpp.scriban",
         "TestProject.CMakeLists.txt.scriban",
         "TestProject.CMakePresets.json.scriban",
         "TestProject.Entry.cpp.scriban",

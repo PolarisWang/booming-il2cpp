@@ -355,7 +355,7 @@ Leaf 方法 ~200-290x slowdown 是 interpreter 设计的已知特性（每条指
 | ApplyPatchFromMemory | `src/native/runtime-core/hot-update/patch_loader.cpp` |
 | PatchMetadataCache | `src/native/runtime-core/hot-update/patch_metadata_cache.cpp` |
 | InterpreterEntryDirect | `src/native/runtime-core/hot-update/interpreter_entry.cpp` |
-| Hotpatch 验证 runner | `build/toolchains/run/testing/foundation_dll/hotpatch_runner.py` |
-| 验证报告生成器 | `build/toolchains/run/testing/foundation_dll/hotupdate_verification_runner.py` |
+| Hotpatch 验证 runner | `testing/foundation-dll/verification/tooling/hotupdate_verification_runner.py` |
+| 验证报告生成器 | `testing/foundation-dll/verification/tooling/hotupdate_verification_runner.py` |
 | HotUpdate 架构概览 | `wiki/03-功能模块/06-il2cpp核心架构/01-翻译管线/18-热更新架构.md` |
 | Hotpatch 决策文档 | `wiki/03-功能模块/06-il2cpp核心架构/04-历史决策/18-HotUpdateDispatchHotpatch-决策.md` |

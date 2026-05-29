@@ -153,21 +153,24 @@ public sealed partial class NativeAotLoweringPlanner
 					TrackReferenceType("System.Private.CoreLib/System.Reflection.ParameterInfo", "System.Private.CoreLib/System.Object");
 				}
 				AotCoreIrReferenceArtifact? targetReference = instruction.TargetReference;
+				// Track delegate type for invoke callvirt so the type struct
+				// (and its base chain MulticastDelegate/Delegate/Object) is
+				// emitted for reinterpret_cast<T*> in EmitLinearDelegateInvoke.
+				// This must run for ALL instructions (not only those with null
+				// TargetReference) because delegate types referenced via Method-kind
+				// TargetReference would otherwise be missed by the type tracking.
+				if (!string.IsNullOrEmpty(instruction.Callee) &&
+					instruction.Op is "callvirt" &&
+					string.Equals(GetMethodName(instruction.Callee), "Invoke", StringComparison.Ordinal))
+				{
+					string declaringType = GetMethodDeclaringTypeSubjectId(instruction.Callee);
+					if (IsDelegateTypeSubjectId(declaringType, _referenceTypeBaseSubjectIds))
+					{
+						TrackReferenceType(declaringType, null);
+					}
+				}
 				if (targetReference is null)
 				{
-					// Track delegate type for invoke callvirt so the type struct
-					// (and its base chain MulticastDelegate/Delegate/Object) is
-					// emitted for reinterpret_cast<T*> in EmitLinearDelegateInvoke.
-					if (!string.IsNullOrEmpty(instruction.Callee) &&
-						instruction.Op is "callvirt" &&
-						string.Equals(GetMethodName(instruction.Callee), "Invoke", StringComparison.Ordinal))
-					{
-						string declaringType = GetMethodDeclaringTypeSubjectId(instruction.Callee);
-						if (IsDelegateTypeSubjectId(declaringType, _referenceTypeBaseSubjectIds))
-						{
-							TrackReferenceType(declaringType, null);
-						}
-					}
 					continue;
 				}
 				flag = targetReference.Kind == AotCoreIrReferenceKind.Type;
@@ -556,7 +559,7 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 				{
 					StringBuilder sb = builder;
-					sb.Append("static constexpr InterfaceMapEntry ");
+					sb.Append("static const InterfaceMapEntry ");
 					sb.Append(ifaceMapExpr);
 					sb.AppendLine("[] = {");
 					for (int i = 0; i < sortedIfaceIds.Length; i++)
@@ -695,7 +698,7 @@ public sealed partial class NativeAotLoweringPlanner
 				}
 				{
 					StringBuilder sb = builder;
-					sb.Append("static constexpr InterfaceMapEntry ");
+					sb.Append("static const InterfaceMapEntry ");
 					sb.Append(ifaceMapExpr);
 					sb.AppendLine("[] = {");
 					for (int i = 0; i < sortedIfaceIds.Length; i++)
@@ -959,6 +962,16 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		foreach (string typeSubjectId in GetReferenceTypeEmissionOrder(referenceTypeSubjectIds, referenceTypeBaseSubjectIds))
 		{
 			var ns = ManagedNaming.NormalizeSubjectIdAssembly(typeSubjectId);
+			// Skip concrete delegate types (e.g. System.Action, System.Func<,>):
+			// the shared header provides full flat struct definitions for these.
+			// System.Delegate and System.MulticastDelegate still need their inherited
+			// definitions here because the header only forward-declares them.
+			if (IsDelegateTypeSubjectId(typeSubjectId, referenceTypeBaseSubjectIds) &&
+			    !string.Equals(ns, "System.Private.CoreLib/System.Delegate", StringComparison.Ordinal) &&
+			    !string.Equals(ns, "System.Private.CoreLib/System.MulticastDelegate", StringComparison.Ordinal))
+			{
+				continue;
+			}
 			// Decimal is a value type that may appear in referenceTypeSubjectIds when
 			// used via newobj (boxed heap allocation). Emit a minimal struct with header only.
 			bool num2 = string.Equals(ns, "System.Private.CoreLib/System.String", StringComparison.Ordinal);

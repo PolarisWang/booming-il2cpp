@@ -7,7 +7,9 @@ using Chaos.TestFramework;
 using SnapshotTestFixtures;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class SnapshotProverSubjects
 {
@@ -17,57 +19,49 @@ public static partial class SnapshotProverSubjects
     // [0] SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()
     public static void Subject_0()
     {
-        try { var _ = ArithmeticOps.RunAdd(); }
-        catch { _exitCode = 1; }
+        // non-callable: SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()
     }
 
     // [1] SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()
     public static void Subject_1()
     {
-        try { var _ = VoidCaller.DoNothing(); }
-        catch { _exitCode = 1; }
+        // non-callable: SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()
     }
 
     // [2] SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()
     public static void Subject_2()
     {
-        try { var _ = MathHelper.RunSquare(); }
-        catch { _exitCode = 1; }
+        // non-callable: SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()
     }
 
     // [3] SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()
     public static void Subject_3()
     {
-        try { var _ = FlowControl.IsPositive(); }
-        catch { _exitCode = 1; }
+        // non-callable: SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()
     }
 
     // [4] SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()
     public static void Subject_4()
     {
-        try { var _ = CallVirtHelper.CreateAndUse(); }
-        catch { _exitCode = 1; }
+        // non-callable: SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()
     }
 
     // [5] SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()
     public static void Subject_5()
     {
-        try { var _ = BoxingHelper.BoxAndUnbox(); }
-        catch { _exitCode = 1; }
+        // non-callable: SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()
     }
 
     // [6] SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()
     public static void Subject_6()
     {
-        try { var _ = ConversionHelper.ConvertToInt(); }
-        catch { _exitCode = 1; }
+        // non-callable: SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()
     }
 
     // [7] SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()
     public static void Subject_7()
     {
-        try { var _ = LoopHelper.SumToFive(); }
-        catch { _exitCode = 1; }
+        // non-callable: SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()
     }
 
     // [8] SnapshotTestFixtures/LdftnHelper::GetFnPtr:System.Int32()
@@ -78,8 +72,7 @@ public static partial class SnapshotProverSubjects
     // [9] SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()
     public static void Subject_9()
     {
-        try { var _ = GenericsVirtEhDemo.DemoCombine(); }
-        catch { _exitCode = 1; }
+        // non-callable: SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()
     }
 
 }

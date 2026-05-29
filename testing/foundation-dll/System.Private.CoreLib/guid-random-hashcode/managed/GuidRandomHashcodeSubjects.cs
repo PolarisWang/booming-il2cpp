@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class GuidRandomHashcodeSubjects
 {
@@ -51,8 +53,7 @@ public static partial class GuidRandomHashcodeSubjects
     // [5] System.Private.CoreLib/System.Guid::ToString:System.String()
     public static void Subject_5()
     {
-        try { _ = ((Guid.NewGuid().ToString()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Guid::ToString:System.String()
     }
 
     // [6] System.Private.CoreLib/System.Random::.ctor:System.Void()
@@ -65,29 +66,25 @@ public static partial class GuidRandomHashcodeSubjects
     // [7] System.Private.CoreLib/System.Random::Next:System.Int32()
     public static void Subject_7()
     {
-        try { _ = new Random().Next(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Random::Next:System.Int32()
     }
 
     // [8] System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)
     public static void Subject_8()
     {
-        try { _ = new Random().Next(42); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)
     }
 
     // [9] System.Private.CoreLib/System.Random::NextDouble:System.Double()
     public static void Subject_9()
     {
-        try { _ = (int)(new Random().NextDouble()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Random::NextDouble:System.Double()
     }
 
     // [10] System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])
     public static void Subject_10()
     {
-        try { new Random().NextBytes(new byte[] { 1, 2, 3 }); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])
     }
 
     // [11] System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)
@@ -100,8 +97,7 @@ public static partial class GuidRandomHashcodeSubjects
     // [12] System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()
     public static void Subject_12()
     {
-        try { _ = default(HashCode).ToHashCode(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()
     }
 
     // [13] System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)

@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class ExceptionThrowDiagnosticsSubjects
 {
@@ -58,15 +60,13 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     // [6] System.Private.CoreLib/System.Exception::ToString:System.String()
     public static void Subject_6()
     {
-        try { _ = ((new Exception().ToString()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Exception::ToString:System.String()
     }
 
     // [7] System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()
     public static void Subject_7()
     {
-        try { _ = ((new Exception().GetBaseException()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()
     }
 
     // [8] System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/exception/throw/diagnostics",
-  "capturedAt": "2026-05-28T11:36:17",
+  "capturedAt": "2026-05-29T02:57:10",
   "batchMode": true,
   "summary": {
     "totalMethods": 17,
@@ -11,26 +11,26 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 748
+      "max": 1505,
+      "avg": 129.9,
+      "total": 2209
     },
     "aotInstructionCount": {
-      "min": 9,
+      "min": 1,
       "max": 52,
-      "avg": 15.9,
-      "total": 271
+      "avg": 14.9,
+      "total": 253
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 14
+      "external_runtime_call": 10
     },
-    "overallIrExpansionRatio": 0.36,
-    "averageExpansionRatio": 0.36,
+    "overallIrExpansionRatio": 0.11,
+    "averageExpansionRatio": 0.33,
     "maxExpansionRatio": 1.18,
-    "minExpansionRatio": 0.2
+    "minExpansionRatio": 0.01
   },
   "methodResults": [
     {
@@ -231,8 +231,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -243,23 +243,10 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_6",
-        "instructions": 10
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 7,
@@ -268,8 +255,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -280,23 +267,10 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_7",
-        "instructions": 10
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 8,
@@ -400,15 +374,15 @@
       "shortName": "Subject_12",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 1505,
         "aotInstructionCount": 9,
-        "ratio": 0.2,
-        "jitCodeSize": 256
+        "ratio": 0.01,
+        "jitCodeSize": 4010
       },
       "jit": {
         "status": "ok",
-        "size": 256,
-        "instructions": 44
+        "size": 4010,
+        "instructions": 1505
       },
       "aot": {
         "status": "ok",

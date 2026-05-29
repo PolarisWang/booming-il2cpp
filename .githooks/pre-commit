@@ -33,25 +33,6 @@ else
     echo "=== [check_arch] All staged native files pass architecture checks ==="
 fi
 
-echo "=== [foundation-dll] Checking foundation DLL pipeline ==="
-
-STAGED_FOUNDATION=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^build/toolchains/run/testing/foundation_dll/|^verification/projections/foundation-dll-audit/' || true)
-
-if [ -z "$STAGED_FOUNDATION" ]; then
-    echo "=== [foundation-dll] No foundation DLL files staged, skipping ==="
-else
-    echo "Staged foundation DLL files — running pipeline check..."
-    python build/check_foundation_dll_pipeline.py
-    PIPELINE_EXIT=$?
-    if [ "$PIPELINE_EXIT" -ne 0 ]; then
-        echo ""
-        echo "ERROR: Foundation DLL pipeline check failed."
-        echo "Fix the issues above or use 'git commit --no-verify' to bypass."
-        exit 1
-    fi
-    echo "=== [foundation-dll] Pipeline check passed ==="
-fi
-
 echo "=== [trace] Checking trace point coverage in staged C++ files ==="
 
 STAGED_CPP_TRACE=$(git diff --cached --name-only --diff-filter=ACMR | grep -E '^src/native/.*\.cpp' || true)

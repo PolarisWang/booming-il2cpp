@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/primitive/numeric/conversions",
-  "capturedAt": "2026-05-28T13:02:48",
+  "capturedAt": "2026-05-29T04:13:16",
   "batchMode": true,
   "summary": {
     "totalMethods": 15,
@@ -16,21 +16,21 @@
       "total": 660
     },
     "aotInstructionCount": {
-      "min": 9,
+      "min": 1,
       "max": 10,
-      "avg": 9.3,
-      "total": 140
+      "avg": 7.0,
+      "total": 105
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 19
+      "external_runtime_call": 12
     },
-    "overallIrExpansionRatio": 0.21,
-    "averageExpansionRatio": 0.21,
+    "overallIrExpansionRatio": 0.16,
+    "averageExpansionRatio": 0.16,
     "maxExpansionRatio": 0.23,
-    "minExpansionRatio": 0.2
+    "minExpansionRatio": 0.02
   },
   "methodResults": [
     {
@@ -301,8 +301,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -313,23 +313,10 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_8",
-        "instructions": 10
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 9,
@@ -338,8 +325,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -350,23 +337,10 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_9",
-        "instructions": 10
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 10,
@@ -375,8 +349,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -387,23 +361,10 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_10",
-        "instructions": 10
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Decimal::op_Explicit:System.Int32(System.Decimal)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 11,
@@ -412,8 +373,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -424,18 +385,10 @@
       "aot": {
         "status": "ok",
         "symbol": "PrimitiveNumericConversionsSubjects_PrimitiveNumericConversionsSubjects_Subject_11",
-        "instructions": 9
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 12,

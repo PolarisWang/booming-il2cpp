@@ -105,29 +105,26 @@ class MechanismAuditReport:
         return asdict(self)
 
 
-# ── _METHOD_OVERRIDES parser ──────────────────────────────────────────
+# ── _METHOD_OVERRIDES loader ──────────────────────────────────────────────
 
 def _parse_method_overrides() -> dict[tuple[str, str, int], str]:
-    """Extract _METHOD_OVERRIDES dict from test_code_generator.py."""
-    if not _TEST_CODE_GENERATOR.exists():
+    """Load METHOD_OVERRIDES from JSON data file (shared with test_code_generator)."""
+    json_path = _HERE / "test_code_generator_data.json"
+    if not json_path.exists():
         return {}
 
-    source = _TEST_CODE_GENERATOR.read_text(encoding="utf-8")
     try:
-        tree = ast.parse(source)
-    except SyntaxError:
+        raw = json.loads(json_path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
         return {}
 
-    for node in ast.walk(tree):
-        # _METHOD_OVERRIDES uses type annotation: `_METHOD_OVERRIDES: dict[...] = {`
-        if isinstance(node, ast.AnnAssign) and isinstance(node.target, ast.Name) and node.target.id == "_METHOD_OVERRIDES":
-            try:
-                raw = ast.literal_eval(node.value)
-                if isinstance(raw, dict):
-                    return raw
-            except (ValueError, TypeError):
-                return {}
-    return {}
+    overrides = raw.get("METHOD_OVERRIDES", {})
+    result = {}
+    for k, v in overrides.items():
+        parts = k.split("|")
+        if len(parts) == 3:
+            result[(parts[0], parts[1], int(parts[2]))] = v
+    return result
 
 
 def _get_skip_entries(relevant_type_names: set[str] | None = None) -> dict[tuple[str, str, int], str]:

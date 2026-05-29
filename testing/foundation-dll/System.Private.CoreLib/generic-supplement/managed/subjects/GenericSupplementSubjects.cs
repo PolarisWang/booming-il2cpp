@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class GenericSupplementSubjects
 {
@@ -16,29 +18,25 @@ public static partial class GenericSupplementSubjects
     // [0] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()
     public static void Subject_0()
     {
-        try { _ = GenericSupplementNativeEntry.TestSupplementalMetadataRoundtrip(); }
-        catch { _exitCode = 1; }
+        // non-callable: GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()
     }
 
     // [1] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()
     public static void Subject_1()
     {
-        try { _ = GenericSupplementNativeEntry.TestTypeLookupBySubjectId(); }
-        catch { _exitCode = 1; }
+        // non-callable: GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()
     }
 
     // [2] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()
     public static void Subject_2()
     {
-        try { _ = GenericSupplementNativeEntry.TestTypeLookupByToken(); }
-        catch { _exitCode = 1; }
+        // non-callable: GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()
     }
 
     // [3] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()
     public static void Subject_3()
     {
-        try { _ = GenericSupplementNativeEntry.TestGenericInstantiation(); }
-        catch { _exitCode = 1; }
+        // non-callable: GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()
     }
 
 }

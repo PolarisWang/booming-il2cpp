@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/buffer/memory",
-  "capturedAt": "2026-05-28T11:02:07",
+  "capturedAt": "2026-05-29T02:21:38",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -18,17 +18,17 @@
     "aotInstructionCount": {
       "min": 1,
       "max": 14,
-      "avg": 5.1,
-      "total": 51
+      "avg": 4.3,
+      "total": 43
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 5
+      "external_runtime_call": 3
     },
-    "overallIrExpansionRatio": 0.12,
-    "averageExpansionRatio": 0.11,
+    "overallIrExpansionRatio": 0.1,
+    "averageExpansionRatio": 0.1,
     "maxExpansionRatio": 0.32,
     "minExpansionRatio": 0.02
   },
@@ -96,8 +96,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -108,23 +108,10 @@
       "aot": {
         "status": "ok",
         "symbol": "BufferMemorySubjects_BufferMemorySubjects_Subject_2",
-        "instructions": 9
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Array::Empty<System.Byte>:System.Byte[]()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 3,

@@ -2,35 +2,35 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/span/memory/buffers",
-  "capturedAt": "2026-05-27T22:52:54",
+  "capturedAt": "2026-05-29T05:07:57",
   "batchMode": true,
   "summary": {
     "totalMethods": 14,
-    "okCount": 12,
-    "failedCount": 2,
+    "okCount": 14,
+    "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
       "max": 44,
       "avg": 44.0,
-      "total": 528
+      "total": 616
     },
     "aotInstructionCount": {
-      "min": 11,
+      "min": 1,
       "max": 21,
-      "avg": 15.3,
-      "total": 214
+      "avg": 11.1,
+      "total": 156
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 27
+      "external_runtime_call": 20
     },
-    "overallIrExpansionRatio": 0.41,
-    "averageExpansionRatio": 0.36,
+    "overallIrExpansionRatio": 0.25,
+    "averageExpansionRatio": 0.25,
     "maxExpansionRatio": 0.48,
-    "minExpansionRatio": 0.25
+    "minExpansionRatio": 0.02
   },
   "methodResults": [
     {
@@ -198,8 +198,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -210,18 +210,10 @@
       "aot": {
         "status": "ok",
         "symbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_4",
-        "instructions": 13
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Span<System.Byte>::CopyTo:System.Void(System.Span<System.Byte>)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 5,
@@ -341,8 +333,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -353,18 +345,10 @@
       "aot": {
         "status": "ok",
         "symbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_8",
-        "instructions": 13
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.ReadOnlySpan<System.Byte>::ToArray:System.Byte[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 9,
@@ -447,8 +431,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -459,92 +443,58 @@
       "aot": {
         "status": "ok",
         "symbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_11",
-        "instructions": 13
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Memory<System.Byte>::ToArray:System.Byte[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.ReadOnlySpan`1)",
       "shortName": "Subject_12",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
-        "aotInstructionCount": 12,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_12",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference<System.Byte>:System.Byte&(System.ReadOnlySpan<System.Byte>)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 13,
       "methodSubjectId": "System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference:T&(System.Span`1)",
       "shortName": "Subject_13",
-      "status": "warning",
+      "status": "ok",
       "metrics": {
-        "jitInstructionCount": 0,
-        "aotInstructionCount": 12,
-        "ratio": 0,
-        "jitCodeSize": 0
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
       },
       "jit": {
-        "status": "failed",
-        "size": null,
-        "instructions": null
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "SpanMemoryBuffersSubjects_SpanMemoryBuffersSubjects_Subject_13",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Runtime.InteropServices.MemoryMarshal::GetReference<System.Byte>:System.Byte&(System.Span<System.Byte>)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Byte::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     }
   ]
 }

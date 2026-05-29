@@ -19,57 +19,49 @@ public static partial class ReflectionEdgeSubjects
     // [0] System.Private.CoreLib/System.Type::GetElementType:System.Type()
     public static void Subject_0()
     {
-        try { _ = ((typeof(byte).GetElementType()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetElementType:System.Type()
     }
 
     // [1] System.Private.CoreLib/System.Type::MakeArrayType:System.Type()
     public static void Subject_1()
     {
-        try { _ = ((typeof(byte).MakeArrayType()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::MakeArrayType:System.Type()
     }
 
     // [2] System.Private.CoreLib/System.Type::MakeArrayType:System.Type(System.Int32)
     public static void Subject_2()
     {
-        try { _ = ((typeof(byte).MakeArrayType(42)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::MakeArrayType:System.Type(System.Int32)
     }
 
     // [3] System.Private.CoreLib/System.Type::MakeByRefType:System.Type()
     public static void Subject_3()
     {
-        try { _ = ((typeof(byte).MakeByRefType()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::MakeByRefType:System.Type()
     }
 
     // [4] System.Private.CoreLib/System.Type::MakePointerType:System.Type()
     public static void Subject_4()
     {
-        try { _ = ((typeof(byte).MakePointerType()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::MakePointerType:System.Type()
     }
 
     // [5] System.Private.CoreLib/System.Type::GetGenericTypeDefinition:System.Type()
     public static void Subject_5()
     {
-        try { _ = ((typeof(byte).GetGenericTypeDefinition()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetGenericTypeDefinition:System.Type()
     }
 
     // [6] System.Private.CoreLib/System.Type::GetEnumUnderlyingType:System.Type()
     public static void Subject_6()
     {
-        try { _ = ((typeof(byte).GetEnumUnderlyingType()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetEnumUnderlyingType:System.Type()
     }
 
     // [7] System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String,System.Reflection.BindingFlags)
     public static void Subject_7()
     {
-        try { _ = ((typeof(byte).GetNestedType("hello", System.Reflection.BindingFlags.Default)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String,System.Reflection.BindingFlags)
     }
 
     // [8] System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)
@@ -89,8 +81,7 @@ public static partial class ReflectionEdgeSubjects
     // [10] System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()
     public static void Subject_10()
     {
-        try { _ = ((typeof(byte).GetInterfaces()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()
     }
 
 }

@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class CodegenCodegenEdgeCasesSubjects
 {
@@ -16,29 +18,25 @@ public static partial class CodegenCodegenEdgeCasesSubjects
     // [0] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_0:System.Void()
     public static void Subject_0()
     {
-        try { CodegenEdgeCasesSubjects.Subject_0(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_0:System.Void()
     }
 
     // [1] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)
     public static void Subject_1()
     {
-        try { CodegenEdgeCasesSubjects.Subject_1(42); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)
     }
 
     // [2] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()
     public static void Subject_2()
     {
-        try { CodegenEdgeCasesSubjects.Subject_2(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()
     }
 
     // [3] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)
     public static void Subject_3()
     {
-        try { _ = CodegenEdgeCasesSubjects.Subject_3(42); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)
     }
 
 }

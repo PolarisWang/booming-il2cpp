@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class MathNumericsSubjects
 {
@@ -16,36 +18,31 @@ public static partial class MathNumericsSubjects
     // [0] System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)
     public static void Subject_0()
     {
-        try { _ = Math.Abs(42); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Abs:System.Int32(System.Int32)
     }
 
     // [1] System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)
     public static void Subject_1()
     {
-        try { _ = (int)(Math.Abs(42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Abs:System.Double(System.Double)
     }
 
     // [2] System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)
     public static void Subject_2()
     {
-        try { _ = (int)(Math.Ceiling(42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Ceiling:System.Double(System.Double)
     }
 
     // [3] System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)
     public static void Subject_3()
     {
-        try { _ = (int)(Math.Floor(42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Floor:System.Double(System.Double)
     }
 
     // [4] System.Private.CoreLib/System.Math::Round:System.Double(System.Double)
     public static void Subject_4()
     {
-        try { _ = (int)(Math.Round(42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Round:System.Double(System.Double)
     }
 
     // [5] System.Private.CoreLib/System.Math::Round:System.Double(System.Double,System.Int32)
@@ -58,71 +55,61 @@ public static partial class MathNumericsSubjects
     // [6] System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)
     public static void Subject_6()
     {
-        try { _ = Math.Max(42, 42); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Max:System.Int32(System.Int32,System.Int32)
     }
 
     // [7] System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)
     public static void Subject_7()
     {
-        try { _ = (int)(Math.Max(42.0, 42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Max:System.Double(System.Double,System.Double)
     }
 
     // [8] System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)
     public static void Subject_8()
     {
-        try { _ = Math.Min(42, 42); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Min:System.Int32(System.Int32,System.Int32)
     }
 
     // [9] System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)
     public static void Subject_9()
     {
-        try { _ = (int)(Math.Sqrt(42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Sqrt:System.Double(System.Double)
     }
 
     // [10] System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)
     public static void Subject_10()
     {
-        try { _ = (int)(Math.Pow(42.0, 42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Pow:System.Double(System.Double,System.Double)
     }
 
     // [11] System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)
     public static void Subject_11()
     {
-        try { _ = (int)(Math.Sin(42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Sin:System.Double(System.Double)
     }
 
     // [12] System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)
     public static void Subject_12()
     {
-        try { _ = (int)(Math.Cos(42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::Cos:System.Double(System.Double)
     }
 
     // [13] System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)
     public static void Subject_13()
     {
-        try { _ = (int)(Math.BigMul(42, 42)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Math::BigMul:System.Int64(System.Int32,System.Int32)
     }
 
     // [14] System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)
     public static void Subject_14()
     {
-        try { _ = ((BitConverter.GetBytes(42)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Int32)
     }
 
     // [15] System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)
     public static void Subject_15()
     {
-        try { _ = ((BitConverter.GetBytes(42.0)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.BitConverter::GetBytes:System.Byte[](System.Double)
     }
 
     // [16] System.Private.CoreLib/System.BitConverter::ToInt32:System.Int32(System.Byte[],System.Int32)

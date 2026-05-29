@@ -19,22 +19,19 @@ public static partial class RuntimeCompilerServicesSubjects
     // [0] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)
     public static void Subject_0()
     {
-        try { _ = RuntimeHelpers.GetHashCode(null!); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetHashCode:System.Int32(System.Object)
     }
 
     // [1] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)
     public static void Subject_1()
     {
-        try { _ = ((RuntimeHelpers.Equals(null!, null!)) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::Equals:System.Boolean(System.Object,System.Object)
     }
 
     // [2] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     public static void Subject_2()
     {
-        try { _ = ((RuntimeHelpers.GetObjectValue(null!)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     }
 
     // [3] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::RunClassConstructor:System.Void(System.RuntimeTypeHandle)
@@ -65,8 +62,7 @@ public static partial class RuntimeCompilerServicesSubjects
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.Runtime.CompilerServices.FormattableString(System.String,System.Object[])
     public static void Subject_7()
     {
-        try { _ = ((FormattableStringFactory.Create("hello", Array.Empty<System.Object>())).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Runtime.CompilerServices.FormattableStringFactory::Create:System.Runtime.CompilerServices.FormattableString(System.String,System.Object[])
     }
 
     // [8] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeWrappedException::.ctor:System.Void(System.Object)

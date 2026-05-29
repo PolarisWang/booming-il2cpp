@@ -16,8 +16,8 @@ import sys
 import subprocess
 from pathlib import Path
 
-# Add the pipeline directory to sys.path
-_PIPELINE_DIR = Path(__file__).resolve().parent / "build" / "toolchains" / "run" / "testing" / "foundation_dll"
+# Add the verification tooling directory to sys.path
+_PIPELINE_DIR = Path(__file__).resolve().parent / "testing" / "foundation-dll" / "verification" / "tooling"
 sys.path.insert(0, str(_PIPELINE_DIR))
 
 from verification_dispatch_generator import generate_verification_dispatch

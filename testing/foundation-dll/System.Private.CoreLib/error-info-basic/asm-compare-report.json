@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/error/info/basic",
-  "capturedAt": "2026-05-28T11:24:42",
+  "capturedAt": "2026-05-29T02:45:34",
   "batchMode": true,
   "summary": {
     "totalMethods": 5,
@@ -16,19 +16,19 @@
       "total": 220
     },
     "aotInstructionCount": {
-      "min": 8,
-      "max": 9,
-      "avg": 8.2,
-      "total": 41
+      "min": 1,
+      "max": 1,
+      "avg": 1.0,
+      "total": 5
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {},
-    "overallIrExpansionRatio": 0.19,
-    "averageExpansionRatio": 0.18,
-    "maxExpansionRatio": 0.2,
-    "minExpansionRatio": 0.18
+    "overallIrExpansionRatio": 0.02,
+    "averageExpansionRatio": 0.02,
+    "maxExpansionRatio": 0.02,
+    "minExpansionRatio": 0.02
   },
   "methodResults": [
     {
@@ -38,8 +38,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -50,7 +50,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_0",
-        "instructions": 9
+        "instructions": 1
       },
       "analysis": [],
       "instructionCategories": {}
@@ -62,8 +62,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 8,
-        "ratio": 0.18,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -74,7 +74,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_1",
-        "instructions": 8
+        "instructions": 1
       },
       "analysis": [],
       "instructionCategories": {}
@@ -86,8 +86,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 8,
-        "ratio": 0.18,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -98,7 +98,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_2",
-        "instructions": 8
+        "instructions": 1
       },
       "analysis": [],
       "instructionCategories": {}
@@ -110,8 +110,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 8,
-        "ratio": 0.18,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -122,7 +122,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_3",
-        "instructions": 8
+        "instructions": 1
       },
       "analysis": [],
       "instructionCategories": {}
@@ -134,8 +134,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 8,
-        "ratio": 0.18,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -146,7 +146,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ErrorInfoBasicSubjects_ErrorInfoBasicSubjects_Subject_4",
-        "instructions": 8
+        "instructions": 1
       },
       "analysis": [],
       "instructionCategories": {}

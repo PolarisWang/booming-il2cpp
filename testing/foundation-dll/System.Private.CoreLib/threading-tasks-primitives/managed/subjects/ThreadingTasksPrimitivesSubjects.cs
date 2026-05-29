@@ -6,6 +6,7 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -83,7 +84,7 @@ public static partial class ThreadingTasksPrimitivesSubjects
     // [13] System.Private.CoreLib/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()
     public static void Subject_13()
     {
-        try { var _ = ((Thread.CurrentThread).GetHashCode()); }
+        try { _ = ((Thread.CurrentThread).GetHashCode()); }
         catch { _exitCode = 1; }
     }
 

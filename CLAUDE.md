@@ -56,15 +56,22 @@
 - 设计讨论必须在 `docs/discuss/` 完成
 - 每个功能的 STATUS.md 必须包含 `## 架构映射` 小节（记录格式见 `dev-architecture-first-development` 技能）
 
+## 技能调用
+
+技能源代码在 `skills/library/skills/`（git 跟踪）。`.claude/skills/dev-skill-registry` 是注册中心，索引了所有技能的名称、触发信号和路径。
+
+当用户请求 `/dev-<name>` 或提及某个技能时，按以下顺序解析：
+1. 检查该技能是否在 `.claude/skills/` 中注册（可直接通过 Skill 工具调用）
+2. 如果不在，读取 `skills/discovery/skill-index.md` 或 `dev-skill-registry` 的索引，找到技能在 `skills/library/skills/<name>/SKILL.md` 的路径
+3. 读取对应 SKILL.md 并遵循其指令执行
+
+注册中心不包含具体技能逻辑，只做索引路由。所有技能的修改在 `skills/library/skills/` 中完成。
+
 ## 项目文档原则
 
 - `wiki/` 记录长期知识，`docs/` 记录过程
 - 仅当任务确实产生长期有效知识时才更新 wiki
 - 历史决策只保留最终方案，不保留讨论过程
-
-## 技能系统
-
-技能通过 `.claude/skills/` 注册，支持 `/dev-<skill-name>` 或 Skill 工具调用。完整技能目录见 `skills/discovery/skill-index.md`（自动加载）。自进化系统详情见 `skills/` 目录。
 
 ## Native 调试/性能分析规范
 

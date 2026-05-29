@@ -18,11 +18,11 @@ import subprocess
 import textwrap
 from pathlib import Path
 
-# Add the pipeline directory to sys.path
-_PIPELINE_DIR = Path(__file__).resolve().parent / "build" / "toolchains" / "run" / "testing" / "foundation_dll"
+# Add the new pipeline directory to sys.path
+_PIPELINE_DIR = Path(__file__).resolve().parent / "testing" / "foundation-dll" / "verification" / "stages"
 sys.path.insert(0, str(_PIPELINE_DIR))
 
-from pipeline_native_aot_runner import build_entry_executable, ensure_cmake_lists_file
+from pipeline_native_aot_runner import build_entry_executable, ensure_cmake_lists_file  # type: ignore[import-unverified]
 
 _VERIFICATION_BASE = Path("testing/foundation-dll/System.Private.CoreLib")
 
