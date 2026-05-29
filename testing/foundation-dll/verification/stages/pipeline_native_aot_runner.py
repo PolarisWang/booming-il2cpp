@@ -832,7 +832,6 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>"\n'
         f'    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-finput-charset=utf-8>"\n'
         f'    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wno-error=invalid-offsetof>"\n'
-        f'    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wno-error=extern-initialized>"\n'
         f')\n'
         f'# Config tier: controlled by CHAOS_IL2CPP_CONFIG_TIER cmake variable\n'
         f'# (set via -D or CMakePresets.json). Defaults to CHECK (debug).\n'
