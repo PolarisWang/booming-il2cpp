@@ -14,7 +14,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T00:54:47.611851+00:00"
         },
         {
           "familyId": "family/System.Collections.Immutable/frozen/collections",
@@ -25,7 +25,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:02:38.136425+00:00"
         },
         {
           "familyId": "family/System.Collections.Immutable/immutable/array",
@@ -36,7 +36,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T00:59:15.411616+00:00"
         },
         {
           "familyId": "family/System.Collections.Immutable/immutable/dictionary",
@@ -47,7 +47,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T01:01:37.273498+00:00"
         },
         {
           "familyId": "family/System.Collections.Immutable/immutable/hash/set",
@@ -58,7 +58,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T01:03:59.076506+00:00"
         },
         {
           "familyId": "family/System.Collections.Immutable/immutable/interlocked",
@@ -80,7 +80,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T01:06:49.842093+00:00"
         },
         {
           "familyId": "family/System.Collections.Immutable/immutable/queue/stack",
@@ -91,7 +91,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:05:55.878646+00:00"
         },
         {
           "familyId": "family/System.Collections.Immutable/immutable/sorted/dictionary",
@@ -102,7 +102,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:06:26.919438+00:00"
         },
         {
           "familyId": "family/System.Collections.Immutable/immutable/sorted/set",
@@ -113,7 +113,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:06:57.095877+00:00"
         }
       ]
     },
@@ -129,7 +129,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:07:30.329962+00:00"
         },
         {
           "familyId": "family/System.Formats.Asn1/encoding-rules",
@@ -151,7 +151,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:08:16.220744+00:00"
         },
         {
           "familyId": "family/System.Formats.Asn1/reader",
@@ -162,7 +162,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:08:51.535358+00:00"
         },
         {
           "familyId": "family/System.Formats.Asn1/tag-model",
@@ -173,7 +173,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:09:42.018293+00:00"
         },
         {
           "familyId": "family/System.Formats.Asn1/writer",
@@ -184,7 +184,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:10:33.094645+00:00"
         }
       ]
     },
@@ -200,7 +200,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:11:25.918948+00:00"
         },
         {
           "familyId": "family/System.IO.Compression.Brotli/encoder",
@@ -211,7 +211,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:12:18.696815+00:00"
         },
         {
           "familyId": "family/System.IO.Compression.Brotli/options",
@@ -222,7 +222,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:13:11.532565+00:00"
         },
         {
           "familyId": "family/System.IO.Compression.Brotli/stream",
@@ -233,7 +233,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:14:10.585505+00:00"
         }
       ]
     },
@@ -249,7 +249,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:15:07.384095+00:00"
         },
         {
           "familyId": "family/System.IO.Compression.ZipFile/zip-file-extensions",
@@ -260,7 +260,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:15:59.858616+00:00"
         }
       ]
     },
@@ -276,7 +276,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:16:57.962942+00:00"
         },
         {
           "familyId": "family/System.IO.Pipelines/pipe-core",
@@ -287,7 +287,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:17:51.336597+00:00"
         },
         {
           "familyId": "family/System.IO.Pipelines/read-flush-results",
@@ -298,7 +298,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:18:43.706721+00:00"
         },
         {
           "familyId": "family/System.IO.Pipelines/reader-writer",
@@ -309,7 +309,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:19:39.923400+00:00"
         },
         {
           "familyId": "family/System.IO.Pipelines/stream-adapters",
@@ -320,7 +320,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:20:32.307478+00:00"
         }
       ]
     },
@@ -358,7 +358,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:23:00.430971+00:00"
         },
         {
           "familyId": "family/System.Linq/grouping-lookup",
@@ -615,7 +615,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T00:51:13.412129+00:00"
         },
         {
           "familyId": "family/System.Private.CoreLib/buffer/memory",
@@ -670,7 +670,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": "2026-05-27T15:21:28.219804+00:00"
+          "lastVerified": "2026-05-28T18:29:27.947036+00:00"
         },
         {
           "familyId": "family/System.Private.CoreLib/delegate/core-invocation",
@@ -703,7 +703,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:34:09.883384+00:00"
         },
         {
           "familyId": "family/System.Private.CoreLib/error/info/basic",
@@ -813,7 +813,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:32:54.281980+00:00"
         },
         {
           "familyId": "family/System.Private.CoreLib/object/equality-identity",
@@ -1033,7 +1033,7 @@
             "functional"
           ],
           "migrationStatus": "imported",
-          "lastVerified": ""
+          "lastVerified": "2026-05-28T18:31:41.695834+00:00"
         },
         {
           "familyId": "family/System.Private.CoreLib/threading/monitor-interlocked",

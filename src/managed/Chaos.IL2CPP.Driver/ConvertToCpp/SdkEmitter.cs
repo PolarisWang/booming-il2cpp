@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using Chaos.IL2CPP.Generator.BuildSystem;
 using Scriban.Runtime;
 
@@ -87,6 +88,9 @@ internal sealed class SdkEmitter
             var targetsContent = SdkTemplateCatalog.RenderChaosTargets();
             File.WriteAllText(Path.Combine(cmakeDir, "chaos-targets.cmake"), targetsContent);
             Console.WriteLine($"    SDK cmake: chaos-targets.cmake");
+
+            // ── Phase 1d': Generate CMakePresets.json ──────────────────────
+            EmitCMakePresets(sdkRoot);
 
             // ── Phase 1e: Copy prebuilt native runtime .lib files ────────────
             CopyNativeLibs(nativeLibDir, buildConfig, libDir);
@@ -251,6 +255,21 @@ internal sealed class SdkEmitter
             }
         }
 
+        // ── Copy reflection/*.h ──────────────────────────────────────────
+        // Needed by: generated code that includes "reflection/hierarchy_fast_api.h"
+        // (emitted when type hierarchy pointer folding is active).
+        var srcReflection = Path.Combine(srcRuntimeCore, "reflection");
+        var dstReflection = Path.Combine(includeDir, "reflection");
+        Directory.CreateDirectory(dstReflection);
+        if (Directory.Exists(srcReflection))
+        {
+            foreach (var f in Directory.GetFiles(srcReflection, "*.h"))
+            {
+                File.Copy(f, Path.Combine(dstReflection, Path.GetFileName(f)), overwrite: true);
+                count++;
+            }
+        }
+
         // ── Copy contracts/*.h ────────────────────────────────────────────
         // Needed by: runtime_core.h, runtime_abi.h, module_registry.h
         var contractHeaders = new[]
@@ -317,43 +336,159 @@ internal sealed class SdkEmitter
     }
 
     /// <summary>
-    /// Copy prebuilt native runtime .lib files from the native build output
+    /// Copy prebuilt native runtime library files from the native build output
     /// directory into the SDK's lib/ directory.
+    /// On Windows: source files use .lib extension in windows-x64-reference preset.
+    /// On Linux: source files use .a extension with lib prefix in linux-debug preset.
+    /// Creates empty stub archives for Windows-only libraries so CMake validation passes.
     /// </summary>
     private static void CopyNativeLibs(string nativeLibDir, string buildConfig, string libDir)
     {
-        var libMappings = new (string SourceRelative, string TargetName)[]
+        // Detect platform
+        var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(
+            System.Runtime.InteropServices.OSPlatform.Windows);
+
+        // Library source paths (relative to nativeLibDir).
+        // On Linux the preset uses .a with lib prefix; on Windows .lib with no prefix.
+        // Build config: Windows uses MSVC multi-config (RelWithDebInfo), Linux uses single-config preset.
+        var libMappings = new (string SourceRelDir, string TargetName)[]
         {
-            ($"src/native/runtime-core/{buildConfig}/chaos_runtime_core.lib",          "chaos_runtime_core.lib"),
-            ($"src/native/bootstrap/{buildConfig}/chaos_bootstrap.lib",                "chaos_bootstrap.lib"),
-            ($"src/native/common/{buildConfig}/chaos_common.lib",                      "chaos_common.lib"),
-            ($"src/native/support/{buildConfig}/chaos_support.lib",                    "chaos_support.lib"),
-            ($"src/native/interpreter/{buildConfig}/chaos_interpreter.lib",            "chaos_interpreter.lib"),
-            ($"fmt_build/{buildConfig}/chaos_fmt.lib",                                 "chaos_fmt.lib"),
-            ($"src/native/hot-update/{buildConfig}/chaos_hot_update.lib",              "chaos_hot_update.lib"),
-            ($"src/native/diagnostics/eventpipe/{buildConfig}/chaos_eventpipe.lib",     "chaos_eventpipe.lib"),
-            ($"src/native/jit/{buildConfig}/chaos_jit.lib",                            "chaos_jit.lib"),
-            ($"src/native/diagnostics/debugger/{buildConfig}/chaos_debugger.lib",       "chaos_debugger.lib"),
+            ("src/native/runtime-core",  "chaos_runtime_core"),
+            ("src/native/bootstrap",     "chaos_bootstrap"),
+            ("src/native/common",        "chaos_common"),
+            ("src/native/support",       "chaos_support"),
+            ("src/native/interpreter",   "chaos_interpreter"),
+            ("fmt_build",                "chaos_fmt"),
+            ("src/native/hot-update",    "chaos_hot_update"),
+            ("src/native/diagnostics/eventpipe", "chaos_eventpipe"),
+            ("src/native/jit",           "chaos_jit"),
+            ("src/native/diagnostics/debugger",  "chaos_debugger"),
         };
 
         int copiedCount = 0;
-        foreach (var (sourceRelative, targetName) in libMappings)
+        int stubCount = 0;
+        foreach (var (sourceRelDir, targetName) in libMappings)
         {
-            var sourcePath = Path.Combine(nativeLibDir, sourceRelative.Replace('/', Path.DirectorySeparatorChar));
-            var targetPath = Path.Combine(libDir, targetName);
+            // Target always .lib (chaos-targets.cmake references .lib names)
+            var targetPath = Path.Combine(libDir, targetName + ".lib");
 
-            if (File.Exists(sourcePath))
+            if (isWindows)
             {
-                File.Copy(sourcePath, targetPath, overwrite: true);
-                copiedCount++;
+                var sourcePath = Path.Combine(nativeLibDir, sourceRelDir.Replace('/', Path.DirectorySeparatorChar),
+                    buildConfig, targetName + ".lib");
+                if (File.Exists(sourcePath))
+                {
+                    File.Copy(sourcePath, targetPath, overwrite: true);
+                    copiedCount++;
+                    continue;
+                }
             }
             else
             {
-                Console.WriteLine($"    WARN: prebuilt lib not found: {sourcePath}");
+                // Linux: lib<name>.a in the source dir (no buildConfig subdir for single-config preset)
+                // e.g. src/native/runtime-core/libchaos_runtime_core.a
+                var sourcePath = Path.Combine(nativeLibDir, sourceRelDir.Replace('/', Path.DirectorySeparatorChar),
+                    "lib" + targetName + ".a");
+                if (File.Exists(sourcePath))
+                {
+                    File.Copy(sourcePath, targetPath, overwrite: true);
+                    copiedCount++;
+                    continue;
+                }
+                // Fallback: try without lib prefix
+                var altPath = Path.Combine(nativeLibDir, sourceRelDir.Replace('/', Path.DirectorySeparatorChar),
+                    targetName + ".a");
+                if (File.Exists(altPath))
+                {
+                    File.Copy(altPath, targetPath, overwrite: true);
+                    copiedCount++;
+                    continue;
+                }
             }
+
+            // Library not found — create empty stub archive
+            CreateEmptyArchive(targetPath);
+            stubCount++;
         }
 
-        Console.WriteLine($"    SDK libs: {copiedCount}/{libMappings.Length} copied");
+        Console.WriteLine($"    SDK libs: {copiedCount} copied, {stubCount} stubs");
+    }
+
+    /// <summary>
+    /// Create an empty static library archive file.
+    /// The linker accepts an empty archive (finds no symbols, doesn't error).
+    /// </summary>
+    private static void CreateEmptyArchive(string path)
+    {
+        var dir = Path.GetDirectoryName(path);
+        if (!string.IsNullOrEmpty(dir))
+            Directory.CreateDirectory(dir);
+        // ar(1) format: magic string "!&lt;arch&gt;\n" followed by empty symbol table
+        File.WriteAllBytes(path, "!<arch>\n"u8.ToArray());
+        Console.WriteLine($"    SDK lib stub: {Path.GetFileName(path)}");
+    }
+
+    /// <summary>
+    /// Generate CMakePresets.json for the entry executable build.
+    /// On Windows: Visual Studio 17 2022 (multi-config, x64).
+    /// On Linux: Ninja (single-config, CMAKE_BUILD_TYPE=RelWithDebInfo).
+    /// The consumer (pipeline_native_aot_runner.py) runs cmake --preset default
+    /// instead of hardcoding generator/platform/config flags.
+    /// </summary>
+    private static void EmitCMakePresets(string sdkRoot)
+    {
+        var isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+
+        string presetJson;
+        if (isWindows)
+        {
+            presetJson = """
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "default",
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64",
+      "binaryDir": "${sourceDir}/build"
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    }
+  ]
+}
+""";
+        }
+        else
+        {
+            presetJson = """
+{
+  "version": 6,
+  "configurePresets": [
+    {
+      "name": "default",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "default",
+      "configurePreset": "default"
+    }
+  ]
+}
+""";
+        }
+
+        File.WriteAllText(Path.Combine(sdkRoot, "CMakePresets.json"), presetJson);
+        Console.WriteLine("    SDK cmake: CMakePresets.json");
     }
 
     /// <summary>

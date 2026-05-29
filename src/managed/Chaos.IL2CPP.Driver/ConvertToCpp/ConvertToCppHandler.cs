@@ -118,7 +118,10 @@ internal static class ConvertToCppHandler
 
             // Generate CMakeLists.txt (always, even in SDK mode — lives in generated/)
             var repoRoot = ResolveRepoRoot();
-            var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", "windows-x64-reference");
+            var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(
+                System.Runtime.InteropServices.OSPlatform.Windows);
+            var nativePresetDir = isWindows ? "windows-x64-reference" : "linux-debug";
+            var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
             var cmakeGen = new Chaos.IL2CPP.Generator.BuildSystem.CmakeGenerator(repoRoot);
             var singleCmakeContent = cmakeGen.Generate(
                 new[] { emitResult }.ToList(),
@@ -191,7 +194,10 @@ internal static class ConvertToCppHandler
 
             // Generate CMakeLists.txt using real emit results
             var repoRoot = ResolveRepoRoot();
-            var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", "windows-x64-reference");
+            var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(
+                System.Runtime.InteropServices.OSPlatform.Windows);
+            var nativePresetDir = isWindows ? "windows-x64-reference" : "linux-debug";
+            var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
             var cmakeGen = new Chaos.IL2CPP.Generator.BuildSystem.CmakeGenerator(repoRoot);
             var cmakeContent = cmakeGen.Generate(
                 emitResults.Select(r => new NativeAotResult
