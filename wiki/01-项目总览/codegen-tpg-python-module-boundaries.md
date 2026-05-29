@@ -98,6 +98,31 @@ Phase 2 优化战役中清理了 5 个 `remediate_*` Python 后处理函数（�
 
 **根因**：历史上团队图快在 Python 层打补丁，导致 codegen emitter 长期带病运行，每次 runtime 升级都引发 remediate 连锁失效。
 
+## 合约文件统一化
+
+所有 family 的合约文件已完成从 `contract.json` 到 `capability-family-contract.json` 的统一迁移：
+
+- **文件名统一**：152 个 legacy `contract.json` 已迁移，所有 family 仅使用 `capability-family-contract.json`
+- **集中查找**：`verification/orchestration/context.py` 提供 `resolve_contract_path()` 和 `load_contract()` 作为唯一合约查找入口
+- **消费者清理**：`codegen.py`、`pre_verification_audit.py`、`discovery.py`、`family_entrypoint.py` 中所有双重文件名检查已替换为集中式调用
+- **测试修复**：`test_preflight.py`、`test_context.py`、`test_engine.py` 中的测试夹具已更新为新文件名
+
+## Stage Registry 完整性
+
+`stages/__init__.py` 的 `STAGE_REGISTRY` 已补充所有缺失阶段（`managed_fact`、`cross_verify`），与 `engine.py` 保持一致。当前注册 16 个阶段。
+
+## Sentinel Dispatch 验证
+
+`codegen.py` 新增 `_is_sentinel_dispatch()` 验证，TPG emit 失败或 sentinel 存根残留时显式报错（而非静默降级通过）。
+
+## Config Tier 默认值修复
+
+CMake 模板中 `config_tier` 默认值从 `"debug"` 改为 `"check"`，与 CLI 保持一致。未知值触发 `message(WARNING)` 警告。
+
+## build_call_expr 统一
+
+新增 `build_call_expr_safe()` 统一入口，替代 `build_call_expr_for_benchmark` 和 `build_call_expr_for_semantic_patch` 中的重复安全逻辑（auto-callable 检查、ref 参数处理、fallback 策略）。旧函数保留为薄包装器。
+
 ## 相关文档
 
 - [`仓库目录与产物边界.md`](./仓库目录与产物边界.md) — 仓库顶层目录职责

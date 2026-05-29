@@ -9,7 +9,9 @@
     "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseFormatter::WriteAsync{T}:System.Threading.Tasks.Task(System.Collections.Generic.IAsyncEnumerable{System.Net.ServerSentEvents.SseItem{T}},System.IO.Stream,System.Action{System.Net.ServerSentEvents.SseItem{T},System.Buffers.IBufferWriter{System.Byte}},System.Threading.CancellationToken)"
   ],
   "methodSubjectCount": 2,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    1
+  ],
   "functionalObligation": {
     "required": true
   },

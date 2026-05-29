@@ -466,6 +466,59 @@ def build_call_expr_with_ref_locals(
     return (prelude, call_expr)
 
 
+def build_call_expr_safe(
+    parsed: dict[str, Any],
+    *,
+    type_map: dict[str, str] | None = None,
+    instance_map: dict[str, str] | None = None,
+    ref_mode: str = "ref_locals",
+) -> tuple[str, str]:
+    """Build a C# call expression with safety checks and ref parameter handling.
+
+    Unified entry point that encompasses the safety patterns previously
+    duplicated across build_call_expr_for_benchmark and
+    build_call_expr_for_semantic_patch in family_entrypoint.py.
+
+    Returns (prelude, call_expr) where prelude contains local variable
+    declarations for ref params (empty string if none). Returns ("", "")
+    if the method cannot be auto-called.
+
+    Args:
+        parsed: Parsed method subject ID dict.
+        type_map: Optional type→default-value map override.
+        instance_map: Optional type→instance-expr map override.
+        ref_mode: Ref parameter handling strategy:
+            "ref_locals" — declare named locals (observable side effects).
+            "refs" — use out _ discard (simpler but loses side effects).
+            "none" — skip ref param handling (may produce invalid C# for ref methods).
+    """
+    tn = parsed["type_name"]
+    mn = parsed["method_name"]
+    pt = parsed["param_types"]
+    param_count = len(pt)
+
+    if has_blocked_param(pt):
+        return ("", "")
+
+    if has_ref_param(pt):
+        if ref_mode == "ref_locals":
+            try:
+                return build_call_expr_with_ref_locals(parsed, type_map=type_map, instance_map=instance_map)
+            except Exception:
+                pass
+        if ref_mode in ("ref_locals", "refs"):
+            try:
+                return build_call_expr_with_refs(parsed, type_map=type_map, instance_map=instance_map)
+            except Exception:
+                return ("", "")
+        return ("", "")
+
+    try:
+        return ("", build_call_expr(parsed, type_map=type_map, instance_map=instance_map))
+    except Exception:
+        return ("", "")
+
+
 def cast_return_to_int(ret: str, call_expr: str) -> str:
     """Wrap a call expression so it produces an int for exit code comparison.
 

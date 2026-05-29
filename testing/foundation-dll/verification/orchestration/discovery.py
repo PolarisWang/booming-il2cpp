@@ -40,11 +40,10 @@ def discover_families(assembly: str = "System.Private.CoreLib",
     slugs: list[str] = []
 
     for d in all_dirs:
-        has_cap = (d / "capability-family-contract.json").exists()
-        has_legacy = (d / "contract.json").exists()
+        has_contract = (d / "capability-family-contract.json").exists()
         slug = d.name
 
-        if not has_cap and not has_legacy:
+        if not has_contract:
             if verbose:
                 print(f"  [discover] skip {slug}/ — no contract file found")
             continue
@@ -54,10 +53,7 @@ def discover_families(assembly: str = "System.Private.CoreLib",
                 print(f"  [discover] skip {slug}/ — in SKIP_SLUGS")
             continue
 
-        if has_legacy and not has_cap:
-            if verbose:
-                print(f"  [discover] {slug}/ — using legacy contract.json (not yet migrated)")
-        elif verbose:
+        if verbose:
             print(f"  [discover] {slug}/ — capability-family-contract.json")
         slugs.append(slug)
 

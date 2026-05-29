@@ -30,7 +30,9 @@
     "System.IO.Pipelines/System.IO.Pipelines.StreamPipeWriterOptions::.ctor:System.Void(System.Buffers.MemoryPool{System.Byte},System.Int32,System.Boolean)"
   ],
   "methodSubjectCount": 23,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    19
+  ],
   "functionalObligation": {
     "required": true
   },

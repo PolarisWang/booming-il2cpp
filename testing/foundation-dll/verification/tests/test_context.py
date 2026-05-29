@@ -41,7 +41,7 @@ class TestFamilyContext:
 
     def test_properties(self):
         ctx = FamilyContext(slug="test", assembly="Test.Asm", family_dir=Path("/base/test"))
-        assert ctx.contract_path == Path("/base/test/contract.json")
+        assert ctx.contract_path == Path("/base/test/capability-family-contract.json")
         assert ctx.native_dir == Path("/base/test/native")
         assert ctx.managed_dir == Path("/base/test/managed")
         assert ctx.entry_exe_path == Path("/base/test/native/entry.exe")

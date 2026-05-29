@@ -47,7 +47,7 @@ class TestVerificationPipeline:
         assert "preflight" in VerificationPipeline.FATAL_STAGES
 
     def test_run_returns_report(self, tmp_path):
-        contract_path = tmp_path / "contract.json"
+        contract_path = tmp_path / "capability-family-contract.json"
         contract_path.write_text('{"methodSubjectIds": ["Test::Method"]}', encoding="utf-8")
         ctx = FamilyContext(
             slug="integration-test",

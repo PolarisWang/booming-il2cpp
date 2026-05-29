@@ -9,19 +9,18 @@ import subprocess
 import time
 from pathlib import Path
 
-from verification.orchestration.context import FamilyContext, StageResult
+from verification.orchestration.context import FamilyContext, StageResult, resolve_contract_path, load_contract
 from verification.orchestration.family_entrypoint import generate_and_build
 
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
 def _find_contract(assembly: str, slug: str) -> Path | None:
-    """Find the contract file for a family."""
-    for fname in ("contract.json", "capability-family-contract.json"):
-        path = _REPO_ROOT / "testing" / "foundation-dll" / assembly / slug / fname
-        if path.exists():
-            return path
-    return None
+    """Find the contract file for a family using canonical path."""
+    from verification.orchestration.context import resolve_contract_path
+    from verification._path import _HERE as _VERIFICATION_ROOT
+    path = resolve_contract_path(_VERIFICATION_ROOT.parent / assembly / slug)
+    return path if path.exists() else None
 
 
 def _run_test_project_generator_emit(contract_path: Path | None, output_dir: Path, extra_flags: list[str] | None = None) -> bool:
@@ -137,12 +136,10 @@ def _is_sentinel_dispatch(dispatch_cpp: Path) -> bool:
 
 
 def _read_contract(assembly: str, slug: str) -> dict | None:
-    """Read contract from testing/ path (contract.json or capability-family-contract.json)."""
-    for fname in ("contract.json", "capability-family-contract.json"):
-        testing_path = _REPO_ROOT / "testing" / "foundation-dll" / assembly / slug / fname
-        if testing_path.exists():
-            return json.loads(testing_path.read_text(encoding="utf-8"))
-    return None
+    """Read contract using canonical loader from context."""
+    from verification._path import _HERE as _VERIFICATION_ROOT
+    family_dir = _VERIFICATION_ROOT.parent / assembly / slug
+    return load_contract(family_dir)
 
 
 def _get_testing_base(assembly: str) -> Path:
@@ -415,13 +412,35 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
 
     if entry_exe.exists():
         import shutil as _shutil
-        _shutil.copy2(str(entry_exe), str(jit_exe))
-        print(f"  [jit_codegen] entry.exe -> entry-jit.exe ({jit_exe.stat().st_size} bytes)")
+        import time as _time
+        for _copy_attempt in range(5):
+            try:
+                if jit_exe.exists():
+                    jit_exe.unlink()
+                _shutil.copy2(str(entry_exe), str(jit_exe))
+                print(f"  [jit_codegen] entry.exe -> entry-jit.exe ({jit_exe.stat().st_size} bytes)")
+                break
+            except (PermissionError, OSError) as _e:
+                if _copy_attempt < 4:
+                    _time.sleep(1 << _copy_attempt)
+                else:
+                    print(f"  [jit_codegen] WARNING: could not save entry-jit.exe: {_e}")
 
     if aot_backup.exists():
         import shutil as _shutil
-        _shutil.copy2(str(aot_backup), str(entry_exe))
-        print(f"  [jit_codegen] restored entry.exe from entry-aot.exe")
+        import time as _time
+        for _copy_attempt in range(5):
+            try:
+                if entry_exe.exists():
+                    entry_exe.unlink()
+                _shutil.copy2(str(aot_backup), str(entry_exe))
+                print(f"  [jit_codegen] restored entry.exe from entry-aot.exe")
+                break
+            except (PermissionError, OSError) as _e:
+                if _copy_attempt < 4:
+                    _time.sleep(1 << _copy_attempt)
+                else:
+                    print(f"  [jit_codegen] WARNING: could not restore entry.exe: {_e}")
 
     return StageResult(
         stage="jit_codegen", status="passed",
