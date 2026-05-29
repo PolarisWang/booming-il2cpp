@@ -14,6 +14,128 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import FamilyContext, StageResult
+from verification.stages.test_code_generator import parse_method_subject_id, is_auto_callable
+from verification.orchestration.family_entrypoint import build_call_expr_for_benchmark
+
+_REPO_ROOT = Path(__file__).resolve().parents[4]
+
+
+def _read_contract_json(contract_path: Path) -> dict | None:
+    """Read method subject IDs from a contract JSON file."""
+    if not contract_path or not contract_path.exists():
+        return None
+    try:
+        data = json.loads(contract_path.read_text(encoding="utf-8"))
+        mids = data.get("methodSubjectIds", [])
+        if not mids:
+            mids = [m["methodSubjectId"] for m in data.get("methodContracts", [])]
+        return {"methodSubjectIds": mids, **data}
+    except (OSError, json.JSONDecodeError, KeyError):
+        return None
+
+
+def generate_managed_fact_harness(harness_dir: Path, subject_ids: list[str], assembly: str, family_slug: str) -> bool:
+    """Generate ManagedFactHarness.cs and .csproj for running managed reference values."""
+    harness_dir.mkdir(parents=True, exist_ok=True)
+
+    usings: set[str] = {"System", "System.Collections.Generic", "System.Text.Json"}
+    method_blocks: list[str] = []
+
+    for idx, subject_id in enumerate(subject_ids):
+        parsed = parse_method_subject_id(subject_id)
+        if not is_auto_callable(parsed):
+            method_blocks.append(f"""            {{ // [{idx}] skipped — not auto-callable
+                results.Add(new MethodResult {{
+                    MethodIndex = {idx},
+                    MethodSubjectId = "{subject_id}",
+                    Status = "skipped",
+                    ExceptionMessage = "not_auto_callable",
+                }});
+            }}""")
+            continue
+
+        prelude, call_expr = build_call_expr_for_benchmark(subject_id)
+        if not call_expr:
+            method_blocks.append(f"""            {{ // [{idx}] skipped — no call expression
+                results.Add(new MethodResult {{
+                    MethodIndex = {idx},
+                    MethodSubjectId = "{subject_id}",
+                    Status = "skipped",
+                    ExceptionMessage = "no_call_expr",
+                }});
+            }}""")
+            continue
+
+        ret = parsed["return_type"]
+        is_void = ret in ("System.Void", "") or not ret
+
+        # Build the call statement
+        if is_void:
+            call_stmt = f"{call_expr};"
+        else:
+            call_stmt = f"_ = {call_expr};"
+
+        method_blocks.append(f"""            {{ // [{idx}] {parsed['method_name']}
+                try {{
+                    {call_stmt}
+                    results.Add(new MethodResult {{
+                        MethodIndex = {idx},
+                        MethodSubjectId = "{subject_id}",
+                        Status = "passed",
+                    }});
+                }}
+                catch (Exception ex) {{
+                    results.Add(new MethodResult {{
+                        MethodIndex = {idx},
+                        MethodSubjectId = "{subject_id}",
+                        Status = "failed",
+                        ExceptionMessage = ex.Message,
+                    }});
+                }}
+            }}""")
+
+    results_block = "\n".join(method_blocks)
+
+    cs_source = f"""// Auto-generated managed fact harness
+// Family: {family_slug}, Assembly: {assembly}
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+
+class ManagedFactHarness
+{{
+    struct MethodResult
+    {{
+        public int MethodIndex {{ get; set; }}
+        public string MethodSubjectId {{ get; set; }}
+        public string Status {{ get; set; }}
+        public string ExceptionMessage {{ get; set; }}
+    }}
+
+    static void Main()
+    {{
+        var results = new List<MethodResult>();
+{results_block}
+        string json = JsonSerializer.Serialize(new {{ results }}, new JsonSerializerOptions {{ PropertyNamingPolicy = JsonNamingPolicy.CamelCase }});
+        Console.WriteLine(json);
+    }}
+}}
+"""
+    csproj = f"""<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StartupObject>ManagedFactHarness</StartupObject>
+  </PropertyGroup>
+</Project>
+"""
+    cs_path = harness_dir / "ManagedFactHarness.cs"
+    csproj_path = harness_dir / "ManagedFactHarness.csproj"
+    cs_path.write_text(cs_source, encoding="utf-8")
+    csproj_path.write_text(csproj, encoding="utf-8")
+    return True
 
 
 def run_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
@@ -97,18 +219,40 @@ def run_fact_jit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRes
 def run_managed_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
     """Stage 3.5: Run managed fact harness and save golden-values.json.
 
-    The managed fact harness is at {family_dir}/managed_test/fact/ManagedFactHarness.cs.
-    If the harness doesn't exist, this stage is skipped.
+    Auto-generates the harness from the contract each run to ensure the
+    latest call-expression logic is used.
     """
     start = time.perf_counter()
 
     harness_dir = ctx.family_dir / "managed_test" / "fact"
     csproj = harness_dir / "ManagedFactHarness.csproj"
 
-    if not csproj.exists():
+    # Always regenerate the harness to use the latest call-expression logic
+    contract_data = _read_contract_json(ctx.contract_path)
+    if contract_data is None:
         return StageResult(
             stage="managed_fact", status="skipped",
-            summary="ManagedFactHarness.csproj not found",
+            summary="contract not found, cannot generate managed fact harness",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+    subject_ids = contract_data.get("methodSubjectIds", [])
+    if not subject_ids:
+        subject_ids = [m["methodSubjectId"] for m in contract_data.get("methodContracts", [])]
+    if not subject_ids:
+        return StageResult(
+            stage="managed_fact", status="skipped",
+            summary="0 methods in contract",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    print(f"  [managed_fact] Generating harness for {len(subject_ids)} methods...")
+    ok = generate_managed_fact_harness(
+        harness_dir, subject_ids, ctx.assembly, ctx.slug,
+    )
+    if not ok:
+        return StageResult(
+            stage="managed_fact", status="failed",
+            summary="harness generation failed",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 

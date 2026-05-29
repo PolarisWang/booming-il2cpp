@@ -72,13 +72,19 @@ def _run_test_project_generator_emit(contract_path: Path | None, output_dir: Pat
 
 
 def _incremental_dispatch_rebuild(native_dir: Path) -> None:
-    """Incremental cmake rebuild after dispatch regeneration."""
+    """Incremental cmake rebuild after dispatch regeneration.
+
+    Deletes stale object files for dispatch and runtime-entry so that
+    Ninja recompiles them from the TPG-emitted sources (which include
+    --fact-json support that the old committed runtime-entry.cpp lacks).
+    """
     build_dir = native_dir / "build"
     if not build_dir.exists():
         return
-    for obj in build_dir.rglob("verification_dispatch*"):
-        if obj.is_file():
-            obj.unlink()
+    for pattern in ("verification_dispatch*", "runtime-entry*"):
+        for obj in build_dir.rglob(pattern):
+            if obj.is_file():
+                obj.unlink()
     rebuild = subprocess.run(
         ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry"],
         capture_output=True, text=True, timeout=300)
