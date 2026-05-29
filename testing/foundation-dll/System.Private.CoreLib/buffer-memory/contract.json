@@ -17,7 +17,10 @@
     "System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)"
   ],
   "methodSubjectCount": 10,
-  "customEntryIndices": [1, 2, 4, 5, 6, 7, 8],
+  "customEntryIndices": [
+    1,
+    6
+  ],
   "functionalObligation": {
     "required": true
   },

@@ -8,10 +8,16 @@ from pathlib import Path
 from typing import Any
 
 from verification.orchestration.context import FamilyContext, StageResult
+from verification.stages.pre_verification_audit import audit_family
 
 
 def run_preflight(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
-    """Verify contract.json exists and contains valid methodSubjectIds."""
+    """Verify contract exists, then run test-code audit.
+
+    Returns FAILED if the test code is not meaningful (missing handwritten
+    implementations for non-auto-callable methods). Returns PASSED with a
+    warning if metadata is stale but tests are otherwise intact.
+    """
     start = time.perf_counter()
     contract_path = ctx.contract_path
 
@@ -45,13 +51,52 @@ def run_preflight(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    return StageResult(
-        stage="preflight", status="passed",
-        summary=f"{len(mids)} methods",
-        details={
-            "methodCount": len(mids),
-            "familyId": contract.get("familyId", ""),
-            "displayName": contract.get("displayName", ""),
+    # ── Run test-code audit ──
+    audit = audit_family(ctx.slug, ctx.assembly)
+    audit_elapsed = int((time.perf_counter() - start) * 1000)
+
+    base_details = {
+        "methodCount": len(mids),
+        "familyId": contract.get("familyId", ""),
+        "displayName": contract.get("displayName", ""),
+        "auditVerdict": audit["verdict"],
+        "auditSummary": audit["summary"],
+        "auditIssues": len(audit["issues"]),
+        "nonCallableCount": audit["non_callable_count"],
+        "coveredNonCallableCount": audit["covered_non_callable_count"],
+        "uncoveredCount": audit.get("uncovered_count", 0),
+        "declaredMissingCount": audit.get("declared_missing_count", 0),
+        "auditDetails": {
+            "checks": audit["checks"],
+            "issues": audit["issues"],
         },
-        duration_ms=int((time.perf_counter() - start) * 1000),
+    }
+
+    if audit["verdict"] == "PASS":
+        return StageResult(
+            stage="preflight", status="passed",
+            summary=f"{len(mids)} methods, audit: {audit['summary']}",
+            details=base_details,
+            duration_ms=audit_elapsed,
+        )
+
+    if audit["verdict"] == "STALE_METADATA":
+        return StageResult(
+            stage="preflight", status="passed",
+            summary=f"{len(mids)} methods, audit: {audit['summary']}",
+            details=base_details,
+            duration_ms=audit_elapsed,
+        )
+
+    # MISSING_HANDWRITTEN → block the pipeline
+    errors = [
+        i["message"] for i in audit["issues"]
+        if i["severity"] in ("FAIL", "ERROR")
+    ]
+    return StageResult(
+        stage="preflight", status="failed",
+        summary=f"Test code audit FAILED: {audit['summary']}",
+        details=base_details,
+        errors=errors,
+        duration_ms=audit_elapsed,
     )

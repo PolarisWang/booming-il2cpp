@@ -24,7 +24,7 @@
     "System.Private.CoreLib/Memory::InitBlock:System.Void()"
   ],
   "methodSubjectCount": 17,
-  "customEntryIndices": [14, 15, 16],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

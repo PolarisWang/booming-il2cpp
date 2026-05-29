@@ -40,10 +40,7 @@
     "System.Formats.Asn1/System.Formats.Asn1.AsnDecoder::TryReadUInt64:System.Boolean(System.ReadOnlySpan{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.UInt64&,System.Int32&,System.Nullable{System.Formats.Asn1.Asn1Tag})"
   ],
   "methodSubjectCount": 33,
-  "customEntryIndices": [
-    6,
-    12
-  ],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

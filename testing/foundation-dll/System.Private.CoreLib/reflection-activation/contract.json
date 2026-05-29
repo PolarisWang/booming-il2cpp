@@ -15,7 +15,9 @@
     "System.Private.CoreLib/System.Reflection.ConstructorInfo::Invoke:System.Object(System.Object[])"
   ],
   "methodSubjectCount": 8,
-  "customEntryIndices": [0, 1, 2, 3],
+  "customEntryIndices": [
+    2
+  ],
   "functionalObligation": {
     "required": true
   },

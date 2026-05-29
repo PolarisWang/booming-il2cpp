@@ -25,26 +25,48 @@ _TESTING_ROOT = _VERIFICATION_ROOT.parent
 
 SKIP_SLUGS = {
     "aggregation", "filtering", "immutable-array", "immutable-list", "reports",
-    "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
+    "interface-dispatch", "pinvoke-dllimport", "primitive-numeric-conversions-core",
 }
 
 
-def discover_families(assembly: str = "System.Private.CoreLib") -> list[str]:
+def discover_families(assembly: str = "System.Private.CoreLib", verbose: bool = False) -> list[str]:
     families_dir = _TESTING_ROOT / assembly
-    slugs = sorted([
-        d.name for d in families_dir.iterdir()
-        if d.is_dir() and (
-            (d / "capability-family-contract.json").exists() or
-            (d / "contract.json").exists()
-        )
-    ])
-    return [s for s in slugs if s not in SKIP_SLUGS]
+    if not families_dir.is_dir():
+        print(f"WARNING: Assembly directory not found: {families_dir}")
+        return []
+
+    all_dirs = sorted(d for d in families_dir.iterdir() if d.is_dir())
+    slugs: list[str] = []
+
+    for d in all_dirs:
+        has_cap = (d / "capability-family-contract.json").exists()
+        has_legacy = (d / "contract.json").exists()
+        slug = d.name
+
+        if not has_cap and not has_legacy:
+            if verbose:
+                print(f"  [discover] skip {slug}/ — no contract file found")
+            continue
+
+        if slug in SKIP_SLUGS:
+            if verbose:
+                print(f"  [discover] skip {slug}/ — in SKIP_SLUGS")
+            continue
+
+        if has_legacy and not has_cap:
+            if verbose:
+                print(f"  [discover] {slug}/ — using legacy contract.json (not yet migrated)")
+        elif verbose:
+            print(f"  [discover] {slug}/ — capability-family-contract.json")
+        slugs.append(slug)
+
+    return slugs
 
 
 def _run_single_family(args: tuple) -> dict:
     """Run one family in a sub-process worker.  Each worker gets its own
     imports and stdout — safe for ProcessPoolExecutor."""
-    slug, assembly, skip_stages, native_config, mode = args
+    slug, assembly, skip_stages, native_config, mode, timeout, resume = args
     family_dir = _TESTING_ROOT / assembly / slug
     ctx = FamilyContext(
         slug=slug,
@@ -53,6 +75,8 @@ def _run_single_family(args: tuple) -> dict:
         skip_stages=skip_stages or set(),
         native_config=native_config,
         mode=mode,
+        stage_timeout_seconds=timeout,
+        resume=resume,
     )
 
     print(f"\n{'='*60}")
@@ -97,7 +121,7 @@ def _run_single_family(args: tuple) -> dict:
             "duration_seconds": round(duration, 1),
             "error": str(e),
             "stages": {},
-            "coverage": {"stagesPassed": 0, "stagesTotal": 15, "stagePassRate": 0},
+            "coverage": {"stagesPassed": 0, "stagesTotal": 16, "stagePassRate": 0},
         }
 
 
@@ -126,21 +150,32 @@ def main() -> None:
                         help="Number of families to run in parallel (default: 1, sequential)")
     parser.add_argument("--native-config", choices=["check", "profile", "ship"], default="check",
                         help="Native build config (default: check)")
-    parser.add_argument("--mode", choices=["standard", "strict"], default="standard",
-                        help="Verification mode — strict requires all stages (default: standard)")
+    parser.add_argument("--resume", default=None,
+                        help="Resume from a specific slug (skip families before this)")
+    parser.add_argument("--stage-resume", action="store_true",
+                        help="Skip already-passed stages within each family from previous run")
+    parser.add_argument("--timeout", type=int, default=0,
+                        help="Per-stage timeout in seconds (0 = no timeout)")
+    parser.add_argument("--verbose", "-v", action="store_true",
+                        help="Verbose discovery logging")
     args = parser.parse_args()
 
     if args.family:
         slugs = [args.family]
     else:
-        slugs = discover_families(args.assembly)
+        slugs = discover_families(args.assembly, verbose=args.verbose)
 
     skip_stages = set()
     if args.skip_stages:
         skip_stages = set(s.strip() for s in args.skip_stages.split(","))
 
     print(f"Discovered {len(slugs)} families to run"
-          f"{'' if args.concurrency <= 1 else f' (concurrency={args.concurrency})'}")
+          f"{'' if args.concurrency <= 1 else f' (concurrency={args.concurrency})'}"
+          f"{' [STAGE-RESUME]' if args.stage_resume else ''}"
+          f"{' [TIMEOUT=' + str(args.timeout) + 's]' if args.timeout > 0 else ''}")
+    if args.verbose:
+        for s in slugs:
+            print(f"  - {s}")
 
     resume_from = args.resume
     if resume_from:
@@ -190,7 +225,7 @@ def main() -> None:
             failed += 1
 
     worker_args = [
-        (slug, args.assembly, skip_stages, args.native_config, args.mode)
+        (slug, args.assembly, skip_stages, args.native_config, args.mode, args.timeout, args.stage_resume)
         for slug in slugs
     ]
 
@@ -219,7 +254,7 @@ def main() -> None:
                     result = {
                         "slug": slug, "status": "crashed", "duration_seconds": 0,
                         "error": str(e), "stages": {},
-                        "coverage": {"stagesPassed": 0, "stagesTotal": 15, "stagePassRate": 0},
+                        "coverage": {"stagesPassed": 0, "stagesTotal": 16, "stagePassRate": 0},
                     }
                 results[idx] = result
 

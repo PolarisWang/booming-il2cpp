@@ -14,7 +14,10 @@
     "System.Net.ServerSentEvents/System.Net.ServerSentEvents.SseItem`1::.ctor:System.Void(T,System.String)"
   ],
   "methodSubjectCount": 7,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    4,
+    5
+  ],
   "functionalObligation": {
     "required": true
   },

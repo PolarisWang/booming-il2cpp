@@ -13,7 +13,9 @@
     "System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()"
   ],
   "methodSubjectCount": 6,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    5
+  ],
   "functionalObligation": {
     "required": true
   },

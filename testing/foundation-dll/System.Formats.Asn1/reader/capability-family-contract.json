@@ -47,10 +47,7 @@
     "System.Formats.Asn1/System.Formats.Asn1.AsnReader::.ctor:System.Void(System.ReadOnlyMemory{System.Byte},System.Formats.Asn1.AsnEncodingRules,System.Formats.Asn1.AsnReaderOptions)"
   ],
   "methodSubjectCount": 40,
-  "customEntryIndices": [
-    11,
-    17
-  ],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

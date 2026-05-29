@@ -329,7 +329,7 @@ def _build_stage_rows_from_coverage(slug: str, coverage: dict[str, Any] | None) 
     passed = coverage.get("stagesPassed", 0)
     failed = coverage.get("stagesFailed", 0)
     skipped = coverage.get("stagesSkipped", 0)
-    total = coverage.get("stagesTotal", 15)
+    total = coverage.get("stagesTotal", 0)
 
     return f"""\
 <tr class="stage-row status-{'passed' if failed == 0 else 'failed'}">
@@ -463,7 +463,7 @@ def _build_coverage_bar(coverage: dict[str, Any] | None) -> str:
     passed = coverage.get("stagesPassed", 0)
     failed = coverage.get("stagesFailed", 0)
     skipped = coverage.get("stagesSkipped", 0)
-    total = coverage.get("stagesTotal", 15)
+    total = coverage.get("stagesTotal", 0)
     non_skipped = total - skipped
     rate = coverage.get("stagePassRate", 0)
     if total == 0:

@@ -16,7 +16,10 @@
     "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::WriteAsPropertyName:System.Void(System.Text.Json.Utf8JsonWriter,T,System.Text.Json.JsonSerializerOptions)"
   ],
   "methodSubjectCount": 9,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    5,
+    6
+  ],
   "functionalObligation": {
     "required": true
   },

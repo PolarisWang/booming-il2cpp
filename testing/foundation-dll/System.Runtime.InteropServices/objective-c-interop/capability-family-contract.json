@@ -11,7 +11,9 @@
     "System.Runtime.InteropServices/System.Runtime.InteropServices.ObjectiveC.ObjectiveCMarshal::SetMessageSendPendingException:System.Void(System.Exception)"
   ],
   "methodSubjectCount": 4,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    1
+  ],
   "functionalObligation": {
     "required": true
   },

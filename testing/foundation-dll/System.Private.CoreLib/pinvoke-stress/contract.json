@@ -11,7 +11,7 @@
     "System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetLastPInvokeError:System.Int32()"
   ],
   "methodSubjectCount": 4,
-  "customEntryIndices": [2, 3],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

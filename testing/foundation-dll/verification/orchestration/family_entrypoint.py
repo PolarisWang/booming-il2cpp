@@ -247,6 +247,12 @@ def generate_entrypoint_source(
             continue
 
         if variant == "patch":
+            # Patch variant generates stub Subject_N() methods for emit-patch-data.
+            # These stubs use 0xB0000000u + idx as marker values so the emit-patch-data
+            # tool can distinguish auto-generated stubs from real CustomEntryMethod
+            # implementations. The actual semantic verification (before vs after patch)
+            # happens inside entry.exe --hotupdate, which compares real AOT-compiled
+            # return values — not these stubs.
             lines.append(f"{ns_indent}    public static int {method_prefix}{idx}()")
             lines.append(f"{ns_indent}    {{")
             lines.append(f"{ns_indent}        return unchecked((int)(0xB0000000u + {idx}));")

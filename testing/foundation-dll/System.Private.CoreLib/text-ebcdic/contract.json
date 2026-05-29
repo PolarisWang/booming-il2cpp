@@ -12,8 +12,5 @@
     "System.Private.CoreLib/System.Text.Encoding::get_ASCII:System.Text.Encoding()"
   ],
   "methodSubjectCount": 5,
-  "customEntryIndices": [
-    1,
-    2
-  ]
+  "customEntryIndices": []
 }

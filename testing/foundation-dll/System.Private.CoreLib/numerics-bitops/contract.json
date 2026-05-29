@@ -15,5 +15,5 @@
     "System.Private.CoreLib/System.Math::DivRem:System.Int32(System.Int32,System.Int32,System.Int32&)"
   ],
   "methodSubjectCount": 8,
-  "customEntryIndices": [0, 1, 2, 7]
+  "customEntryIndices": []
 }

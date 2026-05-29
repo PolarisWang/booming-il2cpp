@@ -11,12 +11,7 @@
     "System.Collections.Immutable/System.Collections.Immutable.ImmutableArray::Create<Int32>:System.Collections.Immutable.ImmutableArray<System.Int32>(System.Int32)"
   ],
   "methodSubjectCount": 4,
-  "customEntryIndices": [
-    0,
-    1,
-    2,
-    3
-  ],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

@@ -17,11 +17,7 @@
     "System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()"
   ],
   "methodSubjectCount": 10,
-  "customEntryIndices": [
-    7,
-    8,
-    9
-  ],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

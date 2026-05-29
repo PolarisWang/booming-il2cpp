@@ -30,7 +30,9 @@
     "System.Security.Principal.Windows/System.Security.Principal.IdentityReferenceCollection::set_Item:System.Void(System.Security.Principal.IdentityReference)"
   ],
   "methodSubjectCount": 23,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    22
+  ],
   "functionalObligation": {
     "required": true
   },
