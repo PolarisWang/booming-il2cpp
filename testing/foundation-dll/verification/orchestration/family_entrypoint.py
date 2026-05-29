@@ -24,10 +24,10 @@ from typing import Any
 
 _REPO_ROOT = Path(__file__).resolve().parents[4]
 
-from verification.stages.test_code_generator import (METHOD_OVERRIDES, build_call_expr, build_call_expr_with_refs,
-                                                     build_call_expr_with_ref_locals, cast_return_to_int,
-                                                     default_expr, get_skip_reason, has_blocked_param, has_ref_param,
-                                                     is_auto_callable,
+from verification.stages.test_code_generator import (METHOD_OVERRIDES, build_call_expr, build_call_expr_safe,
+                                                     build_call_expr_with_refs, build_call_expr_with_ref_locals,
+                                                     cast_return_to_int, default_expr, get_skip_reason,
+                                                     has_blocked_param, has_ref_param, is_auto_callable,
                                                      parse_method_subject_id, ref_return_expr,
                                                      INSTANCE_ALTERNATIVE_EXPR_MAP, TYPE_ALTERNATIVE_MAP)
 from verification.stages.native_code_generator import slug_from_family_id, family_namespace_slug, method_slot_name
@@ -88,54 +88,16 @@ def build_call_expr_for_benchmark(subject_id: str) -> tuple[str, str]:
     parsed = parse_method_subject_id(subject_id)
     if not is_auto_callable(parsed):
         return ("", "")
-    param_count = len(parsed["param_types"])
-    override = METHOD_OVERRIDES.get((parsed["type_name"], parsed["method_name"], param_count))
-    if override is not None and override != "skip":
-        tn, mn = parsed["type_name"], parsed["method_name"]
-        if (
-            param_count >= 1
-            and parsed["param_types"][0] == "System.String"
-            and (
-                (tn == "Convert" and mn.startswith("To"))
-                or (tn == "Guid" and mn == ".ctor")
-            )
-        ) or (param_count == 0):
-            return ("", override)
-    if has_blocked_param(parsed["param_types"]):
-        return ("", "")
-    if has_ref_param(parsed["param_types"]):
-        try:
-            return build_call_expr_with_ref_locals(parsed)
-        except Exception:
-            try:
-                return build_call_expr_with_refs(parsed)
-            except Exception:
-                return ("", "")
-    try:
-        return ("", build_call_expr(parsed))
-    except Exception:
-        return ("", "")
+    return build_call_expr_safe(parsed, ref_mode="ref_locals")
 
 
 def build_call_expr_for_semantic_patch(subject_id: str) -> tuple[str, str]:
     parsed = parse_method_subject_id(subject_id)
     if not is_auto_callable(parsed):
         return ("", "")
-    param_count = len(parsed["param_types"])
-    override = METHOD_OVERRIDES.get((parsed["type_name"], parsed["method_name"], param_count))
-    if override is not None and override != "skip":
-        return ("", override)
-    if has_blocked_param(parsed["param_types"]):
-        return ("", "")
-    if has_ref_param(parsed["param_types"]):
-        try:
-            return build_call_expr_with_refs(parsed, type_map=TYPE_ALTERNATIVE_MAP, instance_map=INSTANCE_ALTERNATIVE_EXPR_MAP)
-        except Exception:
-            return ("", "")
-    try:
-        return ("", build_call_expr(parsed, type_map=TYPE_ALTERNATIVE_MAP, instance_map=INSTANCE_ALTERNATIVE_EXPR_MAP))
-    except Exception:
-        return ("", "")
+    return build_call_expr_safe(parsed, ref_mode="refs",
+                                type_map=TYPE_ALTERNATIVE_MAP,
+                                instance_map=INSTANCE_ALTERNATIVE_EXPR_MAP)
 
 
 _SYSTEM_TYPE_TO_CSHARP: dict[str, str] = {
@@ -632,6 +594,23 @@ def build_project_safe(csproj_path: Path, build_out: Path) -> subprocess.Complet
             if f.suffix == ".cs":
                 shutil.copy2(f, subjects_dst / f.name)
 
+    # Diagnostic: warn if expected files are missing in temp dir
+    expected_prefixes = {src_dir.name}
+    if subjects_src.is_dir():
+        expected_prefixes.add("subjects")
+    found_files = {f.name for f in temp_dir.rglob("*.cs")}
+    missing = [f.name for f in sorted(src_dir.glob("*.cs"))
+               if f.name not in found_files]
+    if missing:
+        print(f"  [entrypoint] WARNING: build_project_safe temp copy missing {len(missing)} file(s): "
+              f"{', '.join(missing[:5])}")
+    if subjects_src.is_dir():
+        subjects_missing = [f.name for f in sorted(subjects_src.glob("*.cs"))
+                           if f.name not in found_files]
+        if subjects_missing:
+            print(f"  [entrypoint] WARNING: build_project_safe temp copy missing subjects file(s): "
+                  f"{', '.join(subjects_missing[:5])}")
+
     result = subprocess.run(
         ["dotnet", "build", str(temp_csproj), "-o", str(temp_out_dir), "--nologo", "-v", "quiet"],
         capture_output=True, text=True,
@@ -755,13 +734,11 @@ def generate_and_build(
     # Try multiple contract locations: computed slug, then actual output_dir parent(s)
     candidate_paths = [
         _REPO_ROOT / "testing" / "foundation-dll" / assembly_name / family_slug / "capability-family-contract.json",
-        _REPO_ROOT / "testing" / "foundation-dll" / assembly_name / family_slug / "contract.json",
     ]
     for parent in [output_dir, output_dir.parent]:
-        for fname in ("capability-family-contract.json", "contract.json"):
-            candidate = parent / fname
-            if candidate not in candidate_paths:
-                candidate_paths.append(candidate)
+        candidate = parent / "capability-family-contract.json"
+        if candidate not in candidate_paths:
+            candidate_paths.append(candidate)
     contract = None
     for cp in candidate_paths:
         if cp.exists():

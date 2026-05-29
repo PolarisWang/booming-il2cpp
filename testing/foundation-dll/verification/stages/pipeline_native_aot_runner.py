@@ -674,11 +674,24 @@ def _sync_runtime_libs_to_sdk(codegen_dir: Path, repo_root: Path | None = None) 
                 if lib_file.suffix != ".lib":
                     continue
                 target = sdk_lib_dir / lib_file.name
-                # Always overwrite codegen stubs (8-byte placeholders) with real libs.
-                if target.exists() and target.stat().st_size > 100:
-                    continue
-                    shutil.copy2(str(lib_file), str(sdk_lib_dir / lib_file.name))
+                # Overwrite codegen stubs (8-byte placeholders) but keep real libs.
+                if not target.exists() or target.stat().st_size <= 100:
+                    shutil.copy2(str(lib_file), str(target))
                     any_copied = True
+        # Also sync to shared _runtime_libs/ directory
+        shared_lib_dir = codegen_dir.parent / "_runtime_libs"
+        shared_lib_dir.mkdir(parents=True, exist_ok=True)
+        shared_count = 0
+        for lib_file in sorted(source_lib_dir.iterdir()):
+            if lib_file.suffix != ".lib":
+                continue
+            target = shared_lib_dir / lib_file.name
+            if not target.exists() or target.stat().st_size <= 100:
+                shutil.copy2(str(lib_file), str(target))
+                shared_count += 1
+        if shared_count > 0:
+            print(f"    [sync_libs] synced {shared_count} libs to shared {shared_lib_dir.name}/")
+
         if any_copied:
             print(f"    [sync_libs] copied from {source_lib_dir.name}")
         return any_copied
@@ -864,7 +877,7 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)\n'
         f'  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)\n'
         f'else()\n'
-        f'  message(WARNING "Unknown CHAOS_IL2CPP_CONFIG_TIER: \'${CHAOS_IL2CPP_CONFIG_TIER}\'. Expected check / profile / ship. Defaulting to CHECK.")\n'
+        f'  message(WARNING "Unknown CHAOS_IL2CPP_CONFIG_TIER: \'${{CHAOS_IL2CPP_CONFIG_TIER}}\'. Expected check / profile / ship. Defaulting to CHECK.")\n'
         f'  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)\n'
         f'  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)\n'
         f'  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)\n'
@@ -1100,8 +1113,9 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     cmakelists = native_dir / "CMakeLists.txt"
 
     # MAX_PATH pre-check: MSVC 260-char path limit. If the longest generated .cpp
-    # path exceeds 256 chars, cmake build will fail with C1083.  The three sub-families
-    # covered by the combo slug already pass individually, so skip gracefully.
+    # path exceeds 260 chars, cmake build may fail with C1083.
+    # For such cases, create a junction with a shorter path name to work around
+    # the limit.
     max_src_len = 0
     longest_src = ""
     for src in native_dir.rglob("*.cpp"):
@@ -1109,11 +1123,39 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         if len(src_str) > max_src_len:
             max_src_len = len(src_str)
             longest_src = src_str
-    if max_src_len >= 256:
-        print(f"    [build_entry] MAX_PATH: longest .cpp path ({max_src_len} chars) exceeds 256-char limit")
+    if max_src_len >= 260:
+        print(f"    [build_entry] MAX_PATH: longest .cpp path ({max_src_len} chars) exceeds 260-char limit")
         print(f"      Longest: {longest_src}")
-        print(f"      SKIPPING build — individual sub-families already provide coverage")
-        return True
+        if not is_linux:
+            # Create a junction with shorter path: testing/foundation-dll/_{short_hash}
+            import hashlib
+            short_hash = hashlib.md5(family_slug.encode()).hexdigest()[:8]
+            junction_target = native_dir.parents[1] / f"_{short_hash}" / family_slug / "native"
+            junction_target.mkdir(parents=True, exist_ok=True)
+            try:
+                subprocess.run(["cmd", "/c", "mklink", "/J",
+                               str(junction_target).replace("/", "\\"),
+                               str(native_dir).replace("/", "\\")],
+                              capture_output=True, text=True, timeout=10)
+                print(f"      Created junction: {junction_target}")
+                # Re-check with the junction path
+                max_relaxed = 0
+                for src in native_dir.rglob("*.cpp"):
+                    relaxed = len(str(src)) - len(str(native_dir)) + len(str(junction_target))
+                    if relaxed > max_relaxed:
+                        max_relaxed = relaxed
+                if max_relaxed >= 260:
+                    print(f"      Still exceeds limit ({max_relaxed}), falling back to skip")
+                    shutil.rmtree(junction_target, ignore_errors=True)
+                else:
+                    print(f"      Junction reduces max path to {max_relaxed}, proceeding with redirected build...")
+                    # Redirect native_dir to junction for cmake
+                    native_dir = junction_target
+            except Exception as e:
+                print(f"      Junction creation failed: {e}")
+        else:
+            print(f"      SKIPPING build — linux fallback not implemented")
+            return True
 
     # Clean stale generated files from native/ before re-generation.
     # Keeps CMakeLists.txt, handwritten files, and entry.exe (build output).
@@ -1317,6 +1359,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                        "-DCHAOS_IL2CPP_JIT_MODE=ON" if is_jit else "-DCHAOS_IL2CPP_JIT_MODE=OFF"]
     else:
         cmake_args += ["-G", "Visual Studio 17 2022", "-A", "x64",
+                       "-DCMAKE_USE_WIN32_LONG_PATHS=ON",
                        f"-DCHAOS_IL2CPP_CONFIG_TIER={config_tier.lower()}",
                        "-DCHAOS_IL2CPP_JIT_MODE=ON" if is_jit else "-DCHAOS_IL2CPP_JIT_MODE=OFF"]
     for cfg_attempt in range(3):
@@ -1428,12 +1471,12 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         return False
 
     # Copy entry.exe to native/ for discovery by orchestrator
-    # Retry loop: msbuild may briefly hold file handles after cmake --build completes
+    # Retry loop: use MoveFileExW (Windows) to atomically replace even
+    # when the target is in-use (Defender scan, prior process handle).
     target_dir = native_dir
     target_path = target_dir / output_name
     for copy_attempt in range(5):
         try:
-            # Remove existing target first (may be locked by prior run)
             if target_path.exists():
                 target_path.unlink()
             shutil.copy2(str(exe_path), str(target_path))
@@ -1444,6 +1487,23 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                 print(f"    [build_entry] copy locked, retry #{copy_attempt} after {wait}s...")
                 time.sleep(wait)
             else:
+                # Last resort: try ReplaceFileW / MoveFileExW on Windows
+                # to atomically replace even when target is in-use.
+                if hasattr(os, "_name") and os.name == "nt":
+                    try:
+                        import ctypes
+                        MOVEFILE_REPLACE_EXISTING = 0x1
+                        MOVEFILE_WRITE_THROUGH = 0x8
+                        tmp = target_path.with_suffix(".exe.tmp")
+                        shutil.copy2(str(exe_path), str(tmp))
+                        ctypes.windll.kernel32.MoveFileExW(
+                            str(tmp), str(target_path),
+                            MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH,
+                        )
+                        if target_path.exists():
+                            break
+                    except Exception as e2:
+                        print(f"    [build_entry] MoveFileExW also failed: {e2}")
                 print(f"    [build_entry] copy FAILED after retries: {e}")
                 return False
     size = (target_dir / output_name).stat().st_size

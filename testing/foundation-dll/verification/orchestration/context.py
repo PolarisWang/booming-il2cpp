@@ -8,6 +8,38 @@ from pathlib import Path
 from typing import Any, Callable
 
 
+# ---------------------------------------------------------------------------
+# Contract path resolution — single canonical lookup for all consumers.
+# ---------------------------------------------------------------------------
+
+_CONTRACT_FILENAME = "capability-family-contract.json"
+
+
+def resolve_contract_path(family_dir: Path) -> Path:
+    """Return the canonical contract file path for a family directory.
+
+    All families should use capability-family-contract.json as the single
+    contract file.  This function enforces that convention and provides a
+    clear error if the file is missing.
+    """
+    path = family_dir / _CONTRACT_FILENAME
+    return path
+
+
+def load_contract(family_dir: Path) -> dict[str, Any] | None:
+    """Load and return the contract dict for a family directory.
+
+    Returns None if the contract file does not exist or cannot be parsed.
+    """
+    path = resolve_contract_path(family_dir)
+    if not path.exists():
+        return None
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError):
+        return None
+
+
 @dataclass
 class ParallelGroup:
     """A group of independent stages that execute in parallel.
@@ -86,16 +118,13 @@ class FamilyContext:
 
     @property
     def contract_path(self) -> Path:
-        # capability-family-contract.json is the new standard; fall back to
-        # contract.json for families not yet migrated.
-        cap = self.family_dir / "capability-family-contract.json"
-        if cap.exists():
-            print(f"[context] Using contract: {cap.name}")
-            return cap
-        fallback = self.family_dir / "contract.json"
-        if fallback.exists():
-            print(f"[context] Using contract: {fallback.name} (legacy, not yet migrated to capability-family-contract.json)")
-        return fallback
+        """Return the canonical contract path for this family.
+
+        All families have migrated to capability-family-contract.json as the
+        single contract file. See resolve_contract_path() for the standalone
+        utility used by code outside of FamilyContext.
+        """
+        return resolve_contract_path(self.family_dir)
 
     @property
     def native_dir(self) -> Path:

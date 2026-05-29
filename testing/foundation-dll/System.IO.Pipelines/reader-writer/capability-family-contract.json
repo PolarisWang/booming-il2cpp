@@ -34,7 +34,10 @@
     "System.IO.Pipelines/System.IO.Pipelines.PipeWriter::WriteAsync:System.Threading.Tasks.ValueTask{System.IO.Pipelines.FlushResult}(System.ReadOnlyMemory{System.Byte},System.Threading.CancellationToken)"
   ],
   "methodSubjectCount": 27,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    10,
+    25
+  ],
   "functionalObligation": {
     "required": true
   },

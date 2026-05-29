@@ -32,6 +32,9 @@ from verification.stages.test_code_generator import (
     cast_return_to_int,
 )
 
+# Canonical contract lookup (single source of truth)
+from verification.orchestration.context import resolve_contract_path, load_contract
+
 _HERE = Path(__file__).resolve().parent  # verification/stages/
 _VERIFICATION_ROOT = _HERE.parent          # verification/
 _TESTING_ROOT = _VERIFICATION_ROOT.parent  # testing/
@@ -96,7 +99,7 @@ def audit_family(
             "family_slug": slug,
             "assembly": assembly,
             "verdict": "ERROR",
-            "summary": "No contract.json or capability-family-contract.json found",
+            "summary": "No capability-family-contract.json found",
             "method_count": 0,
             "handwritten_count": 0,
             "checks": {},
@@ -250,44 +253,8 @@ def audit_family(
 
 
 def _load_contract(family_dir: Path) -> dict[str, Any] | None:
-    """Load and merge contract information from family_dir.
-
-    Priority:
-      1. capability-family-contract.json -- primary (new standard).
-      2. contract.json -- legacy fallback (may have richer customEntryIndices).
-
-    Merges customEntryIndices from the legacy contract if the primary contract
-    has an empty customEntryIndices array (common pattern: the new standard
-    file defers this field to the legacy file).
-    """
-    primary = None
-    legacy = None
-    for name in ("capability-family-contract.json", "contract.json"):
-        path = family_dir / name
-        if path.exists():
-            try:
-                data = json.loads(path.read_text(encoding="utf-8"))
-                if name == "capability-family-contract.json":
-                    primary = data
-                else:
-                    legacy = data
-            except (json.JSONDecodeError, OSError):
-                continue
-
-    contract = primary or legacy
-    if contract is None:
-        return None
-
-    # Merge customEntryIndices from legacy contract ONLY if the primary contract
-    # does not have the field at all (None). If primary explicitly has the field
-    # (even as empty list), trust the primary.
-    if primary is not None and legacy is not None:
-        if primary.get("customEntryIndices") is None:
-            leg_indices = legacy.get("customEntryIndices")
-            if leg_indices is not None:
-                contract["customEntryIndices"] = leg_indices
-
-    return contract
+    """Load contract using canonical loader from context."""
+    return load_contract(family_dir)
 
 
 def _build_summary(
@@ -355,7 +322,7 @@ def fix_family(report: dict[str, Any]) -> None:
         print("[fix] Nothing to fix -- all clean")
         return
 
-    # ── Step 2: Update customEntryIndices in all contract files ──
+    # ── Step 2: Update customEntryIndices in capability-family-contract.json ──
     contract = _load_contract(family_dir)
     if contract is not None:
         current_indices = set(contract.get("customEntryIndices") or [])
@@ -364,19 +331,18 @@ def fix_family(report: dict[str, Any]) -> None:
         current_indices -= oob_indices
         sorted_indices = sorted(current_indices)
 
-        for fname in ("capability-family-contract.json", "contract.json"):
-            cpath = family_dir / fname
-            if cpath.exists():
-                try:
-                    cdata = json.loads(cpath.read_text(encoding="utf-8"))
-                    cdata["customEntryIndices"] = sorted_indices
-                    cpath.write_text(
-                        json.dumps(cdata, indent=2, ensure_ascii=False) + "\n",
-                        encoding="utf-8",
-                    )
-                    print(f"[fix] Updated customEntryIndices in {fname}")
-                except (json.JSONDecodeError, OSError) as e:
-                    print(f"[fix] WARNING: Could not update {fname}: {e}")
+        cpath = resolve_contract_path(family_dir)
+        if cpath.exists():
+            try:
+                cdata = json.loads(cpath.read_text(encoding="utf-8"))
+                cdata["customEntryIndices"] = sorted_indices
+                cpath.write_text(
+                    json.dumps(cdata, indent=2, ensure_ascii=False) + "\\n",
+                    encoding="utf-8",
+                )
+                print(f"[fix] Updated customEntryIndices in {cpath.name}")
+            except (json.JSONDecodeError, OSError) as e:
+                print(f"[fix] WARNING: Could not update {cpath.name}: {e}")
     else:
         print("[fix] WARNING: No contract file found to update")
 
@@ -433,16 +399,9 @@ def fix_family(report: dict[str, Any]) -> None:
 
 
 def _find_contract_path(family_dir: Path) -> Path | None:
-    """Return the path to the writable contract file.
-
-    Prefers capability-family-contract.json (new standard) but falls back
-    to contract.json (legacy) if only that exists.
-    """
-    for name in ("capability-family-contract.json", "contract.json"):
-        path = family_dir / name
-        if path.exists():
-            return path
-    return None
+    """Return the path to the contract file, using canonical resolution."""
+    path = resolve_contract_path(family_dir)
+    return path if path.exists() else None
 
 
 def _find_method_by_index(report: dict[str, Any], idx: int) -> dict[str, Any] | None:

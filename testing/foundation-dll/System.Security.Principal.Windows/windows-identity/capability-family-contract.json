@@ -38,7 +38,12 @@
     "System.Security.Principal.Windows/System.Security.Principal.WindowsIdentity::.ctor:System.Void(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)"
   ],
   "methodSubjectCount": 31,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    21,
+    22,
+    23,
+    24
+  ],
   "functionalObligation": {
     "required": true
   },

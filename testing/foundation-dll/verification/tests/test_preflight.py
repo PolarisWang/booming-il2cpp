@@ -15,7 +15,7 @@ class TestPreflight:
         assert "Contract not found" in result.summary
 
     def test_contract_invalid_json(self, tmp_path):
-        contract_path = tmp_path / "contract.json"
+        contract_path = tmp_path / "capability-family-contract.json"
         contract_path.write_text("not json", encoding="utf-8")
         ctx = FamilyContext(slug="bad-json", assembly="Test.Asm", family_dir=tmp_path)
         result = run_preflight(ctx, {})
@@ -23,7 +23,7 @@ class TestPreflight:
         assert "Failed to read contract" in result.summary
 
     def test_empty_method_subject_ids(self, tmp_path):
-        contract_path = tmp_path / "contract.json"
+        contract_path = tmp_path / "capability-family-contract.json"
         contract_path.write_text(json.dumps({"methodSubjectIds": []}), encoding="utf-8")
         ctx = FamilyContext(slug="empty", assembly="Test.Asm", family_dir=tmp_path)
         result = run_preflight(ctx, {})
@@ -31,7 +31,7 @@ class TestPreflight:
         assert "No methodSubjectIds" in result.summary
 
     def test_missing_method_subject_ids_key(self, tmp_path):
-        contract_path = tmp_path / "contract.json"
+        contract_path = tmp_path / "capability-family-contract.json"
         contract_path.write_text(json.dumps({"familyId": "test"}), encoding="utf-8")
         ctx = FamilyContext(slug="no-key", assembly="Test.Asm", family_dir=tmp_path)
         result = run_preflight(ctx, {})
@@ -40,7 +40,7 @@ class TestPreflight:
 
     def test_valid_contract(self, tmp_path):
         mids = ["Subject1::Method1", "Subject2::Method2", "Subject3::Method3"]
-        contract_path = tmp_path / "contract.json"
+        contract_path = tmp_path / "capability-family-contract.json"
         contract_path.write_text(json.dumps({
             "methodSubjectIds": mids,
             "familyId": "test-family",

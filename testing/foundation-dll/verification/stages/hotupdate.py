@@ -356,7 +356,20 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
         if exe_produced:
             print(f"  [hotupdate] entry.exe rebuild OK (exit={r.returncode}, exe produced)")
             import shutil as _shutil
-            _shutil.copy2(str(exe_produced), str(native_dir / "entry.exe"))
+            import time as _time
+            for _copy_attempt in range(5):
+                try:
+                    dst = native_dir / "entry.exe"
+                    if dst.exists():
+                        dst.unlink()
+                    _shutil.copy2(str(exe_produced), str(dst))
+                    break
+                except (PermissionError, OSError) as _e:
+                    if _copy_attempt < 4:
+                        _time.sleep(1 << _copy_attempt)
+                    else:
+                        print(f"  [hotupdate] entry.exe copy FAILED: {_e}")
+                        return False
             if _IS_LINUX:
                 # On Linux, ensure native_dir/entry.exe is executable
                 native_exe = native_dir / "entry.exe"
