@@ -11,7 +11,7 @@ from .preflight import run_preflight
 from .codegen import run_codegen, run_jit_codegen
 
 # fact
-from .fact import run_fact, run_fact_jit, run_fact_cross_verify
+from .fact import run_fact, run_fact_jit, run_fact_cross_verify, run_managed_fact, run_cross_verify
 
 # microbench
 from .microbench import run_microbench
@@ -38,6 +38,8 @@ STAGE_REGISTRY: list[tuple[str, str, bool]] = [
     ("preflight",              "run_preflight",               True),
     ("codegen",                "run_codegen",                 True),
     ("jit_codegen",            "run_jit_codegen",             True),
+    ("managed_fact",           "run_managed_fact",            True),
+    ("cross_verify",           "run_cross_verify",            True),
     ("fact",                   "run_fact",                    True),
     ("fact_jit",               "run_fact_jit",                True),
     ("fact_cross_verify",      "run_fact_cross_verify",       True),
@@ -68,6 +70,8 @@ _FUNC_MODULE_OVERRIDES = {
     "run_hotupdate_aot_bench": "hotupdate",
     "run_fact_jit": "fact",
     "run_fact_cross_verify": "fact",
+    "run_managed_fact": "fact",
+    "run_cross_verify": "fact",
     "run_jit_codegen": "codegen",
     "run_hotupdate": "hotupdate",
 }
@@ -102,6 +106,7 @@ def lookup_stage(name: str):
 __all__ = [
     "run_preflight", "run_codegen", "run_jit_codegen",
     "run_fact", "run_fact_jit", "run_fact_cross_verify",
+    "run_managed_fact", "run_cross_verify",
     "run_microbench", "run_audit", "run_asm_compare",
     "run_benchmark",
     "run_hotupdate", "run_hotupdate_aot_bench",

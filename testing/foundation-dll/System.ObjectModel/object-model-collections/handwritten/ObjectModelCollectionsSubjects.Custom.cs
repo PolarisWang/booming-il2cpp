@@ -9,6 +9,6 @@ public static partial class ObjectModelCollectionsSubjects
 {
     // [5] System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()
     public static void CustomEntrySubject_5()
-    {        try { /* TODO: invoke the actual method */ }        catch { _exitCode = 1; }    }
+    {        try { _ = default(KeyedCollection<byte, byte>)![]; } catch { _exitCode = 1; }    }
 
 }

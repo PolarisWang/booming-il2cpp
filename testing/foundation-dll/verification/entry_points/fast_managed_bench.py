@@ -25,29 +25,18 @@ ASSEMBLY = "System.Private.CoreLib"
 TECH_TFMS = [("net10-jit", "net10.0"), ("net8-jit", "net8.0")]
 ITERATIONS = 100000
 
-SKIP_SLUGS = {
-    "aggregation", "filtering", "immutable-array", "immutable-list", "reports",
-    "interface-dispatch", "pinvoke-dllimport", "primitive-numeric-conversions-core",
-}
+from verification.orchestration.discovery import discover_families, SKIP_SLUGS
 
 
-def discover_families() -> list[str]:
-    families_dir = _TESTING_ROOT / ASSEMBLY
-    slugs = sorted([
-        d.name for d in families_dir.iterdir()
-        if d.is_dir() and (
-            (d / "capability-family-contract.json").exists() or
-            (d / "contract.json").exists()
-        )
-    ])
-    return [s for s in slugs if s not in SKIP_SLUGS]
-
-
-def run_one_family(slug: str) -> dict:
+def run_one_family(slug: str, skip_stages: set[str] | None = None,
+                   mode: str = "standard", stage_timeout: int = 0,
+                   stage_resume: bool = False) -> dict:
     """Generate harness, build and run for each TFM, save results."""
     result = {"slug": slug, "status": "ok"}
     family_dir = _TESTING_ROOT / ASSEMBLY / slug
-    ctx = FamilyContext(slug=slug, assembly=ASSEMBLY, family_dir=family_dir)
+    ctx = FamilyContext(slug=slug, assembly=ASSEMBLY, family_dir=family_dir,
+                        skip_stages=skip_stages or set(), mode=mode,
+                        stage_timeout_seconds=stage_timeout, resume=stage_resume)
 
     mids = _load_method_subject_ids(ctx)
     if not mids:
@@ -128,19 +117,33 @@ def run_one_family(slug: str) -> dict:
     return result
 
 
-def main():
+def main(argv: list[str] | None = None):
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--parallel", type=int, default=1, help="Parallel workers")
     parser.add_argument("--family", default=None)
-    args = parser.parse_args()
+    parser.add_argument("--mode", choices=["standard", "strict"], default="standard",
+                        help="Verification mode (default: standard)")
+    parser.add_argument("--timeout", type=int, default=0,
+                        help="Per-stage timeout in seconds (0 = no timeout)")
+    parser.add_argument("--skip-stages", default=None,
+                        help="Comma-separated stages to skip")
+    parser.add_argument("--stage-resume", action="store_true",
+                        help="Skip already-passed stages from previous run")
+    args = parser.parse_args(argv)
 
     if args.family:
         slugs = [args.family]
     else:
-        slugs = discover_families()
+        slugs = discover_families(ASSEMBLY)
 
-    print(f"Running {len(slugs)} families, parallel={args.parallel}")
+    print(f"Running {len(slugs)} families, parallel={args.parallel}"
+          f"{' [STAGE-RESUME]' if args.stage_resume else ''}"
+          f"{' [TIMEOUT=' + str(args.timeout) + 's]' if args.timeout > 0 else ''}")
+
+    skip_stages = set()
+    if args.skip_stages:
+        skip_stages = set(s.strip() for s in args.skip_stages.split(","))
 
     results = []
     total_ok = 0
@@ -151,7 +154,7 @@ def main():
 
     if args.parallel > 1:
         with ThreadPoolExecutor(max_workers=args.parallel) as ex:
-            futs = {ex.submit(run_one_family, s): s for s in slugs}
+            futs = {ex.submit(run_one_family, s, skip_stages, args.mode, args.timeout, args.stage_resume): s for s in slugs}
             for fut in as_completed(futs):
                 slug = futs[fut]
                 try:
@@ -171,7 +174,7 @@ def main():
                     print(f"[{slug}] FAILED: {r.get('reason', '?')}")
     else:
         for slug in slugs:
-            r = run_one_family(slug)
+            r = run_one_family(slug, skip_stages, args.mode, args.timeout, args.stage_resume)
             results.append(r)
             if r["status"] == "ok":
                 total_ok += r.get("ok", 0)

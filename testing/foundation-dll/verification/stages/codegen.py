@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import re
 import shutil
 import subprocess
 import time
@@ -91,6 +92,43 @@ def _incremental_dispatch_rebuild(native_dir: Path, build_subdir: str = "build")
         for obj in build_dir.rglob(pattern):
             if obj.is_file():
                 obj.unlink()
+
+
+# Sentinel dispatch detection — patterns characteristic of the
+# placeholder stub (vs. real TPG-generated dispatch code).
+_SENTINEL_MARKER_RE = re.compile(
+    r'sentinel\s*\(pre-(codegen|TPG)\)',
+    re.IGNORECASE,
+)
+
+
+def _is_sentinel_dispatch(dispatch_cpp: Path) -> bool:
+    """Check whether verification_dispatch.generated.cpp is a sentinel stub.
+
+    Returns True if the file:
+      - Does not exist, OR
+      - Contains the sentinel marker comment, OR
+      - Lacks a ChaosDispatchMethodAllModules / ChaosDispatchMethod call
+        (which every real TPG-generated dispatch includes).
+    """
+    if not dispatch_cpp.is_file():
+        return True
+    try:
+        text = dispatch_cpp.read_text(encoding="utf-8")
+    except OSError:
+        return True
+
+    # Explicit sentinel marker
+    if _SENTINEL_MARKER_RE.search(text):
+        return True
+
+    # Real dispatch always calls through the AOT dispatch API
+    if "ChaosDispatchMethodAllModules" in text or "ChaosDispatchMethod" in text:
+        return False
+
+    # Falls through — no sentinel marker and no dispatch call.
+    # Conservative: treat as sentinel so the pipeline fails closed.
+    return True
     rebuild = subprocess.run(
         ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry", "--parallel"],
         capture_output=True, text=True, timeout=300)
@@ -222,12 +260,25 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
     print(f"  [codegen] Generating dispatch code via TestProjectGenerator...")
     native_dir = testing_base / ctx.slug / "native"
     contract_path = _find_contract(ctx.assembly, ctx.slug)
+    dispatch_cpp = native_dir / "verification_dispatch.generated.cpp"
 
     tpg_flags = ["--config-tier", ctx.native_config]
-    if not _run_test_project_generator_emit(contract_path, native_dir, extra_flags=tpg_flags):
-        print(f"  [codegen] WARNING: TestProjectGenerator emit failed (continuing with sentinel dispatch)")
-    else:
-        print(f"  [codegen] Regenerated verification_dispatch.generated.cpp via TestProjectGenerator")
+    tpg_ok = _run_test_project_generator_emit(contract_path, native_dir, extra_flags=tpg_flags)
+
+    # Validate: must be real dispatch, not sentinel
+    if not tpg_ok or _is_sentinel_dispatch(dispatch_cpp):
+        return StageResult(
+            stage="codegen", status="failed",
+            summary=(
+                "TestProjectGenerator emit FAILED — verification_dispatch.generated.cpp "
+                "is still a sentinel stub. All fact/benchmark stages would silently pass "
+                "without running any test. Fix TPG configuration or contract before retrying."
+            ),
+            details={"steps": {"tpg_emit": {"success": tpg_ok}}},
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    print(f"  [codegen] Regenerated verification_dispatch.generated.cpp via TestProjectGenerator")
 
     # Incremental rebuild after dispatch regeneration
     _incremental_dispatch_rebuild(native_dir)
@@ -347,12 +398,20 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
     # Regenerate dispatch via TPG with JIT mode, then incremental rebuild
     contract_path = _find_contract(ctx.assembly, ctx.slug)
     tpg_flags = ["--jit", "--config-tier", ctx.native_config]
+    dispatch_cpp = native_dir / "verification_dispatch.generated.cpp"
     if _run_test_project_generator_emit(contract_path, native_dir, extra_flags=tpg_flags):
         print(f"  [jit_codegen] Regenerated dispatch via TPG (JIT mode)")
         # Use build_jit/ (JIT cmake config) for incremental rebuild, not build/ (AOT)
         _incremental_dispatch_rebuild(native_dir, build_subdir="build_jit")
     else:
-        print(f"  [jit_codegen] WARNING: TPG emit failed (continuing with existing dispatch)")
+        # AOT codegen already validated the dispatch — safe to reuse
+        if _is_sentinel_dispatch(dispatch_cpp):
+            return StageResult(
+                stage="jit_codegen", status="failed",
+                summary="No valid dispatch file available for JIT (AOT codegen did not produce one either)",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+        print(f"  [jit_codegen] TPG emit failed, reusing AOT-generated dispatch")
 
     if entry_exe.exists():
         import shutil as _shutil

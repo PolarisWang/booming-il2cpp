@@ -28,6 +28,8 @@ from verification.stages.test_code_generator import (
     is_auto_callable,
     method_skip_reason,
     parse_method_subject_id,
+    build_call_expr,
+    cast_return_to_int,
 )
 
 _HERE = Path(__file__).resolve().parent  # verification/stages/
@@ -451,6 +453,85 @@ def _find_method_by_index(report: dict[str, Any], idx: int) -> dict[str, Any] | 
 
 
 # ---------------------------------------------------------------------------
+# Fill mode: replace TODO stub bodies with real call expressions
+# ---------------------------------------------------------------------------
+
+_FILL_RE = re.compile(
+    r'(public\s+static\s+void\s+CustomEntrySubject_)(\d+)(\s*\(\)\s*\{\s*)'
+    r'try\s*\{\s*/\*\s*TODO:\s*invoke the actual method\s*\*/\s*\}'
+    r'\s*catch\s*\{\s*_exitCode\s*=\s*1;\s*\}'
+    r'(\s*\}\s*)'
+)
+
+
+def fill_handwritten_stubs(slug: str, assembly: str) -> int:
+    """Replace TODO stub bodies with real call expressions in handwritten Custom.cs files.
+
+    For each CustomEntrySubject_N() that still has the auto-generated TODO body,
+    generates a real C# call expression using build_call_expr() and wraps it in
+    try/catch with _exitCode = 1 on failure.
+
+    Returns the count of methods that were filled.
+    """
+    family_dir = _TESTING_ROOT / assembly / slug
+    handwritten_dir = family_dir / "handwritten"
+
+    if not handwritten_dir.is_dir():
+        print("[fill] No handwritten/ directory found")
+        return 0
+
+    contract = _load_contract(family_dir)
+    if contract is None:
+        print("[fill] No contract found")
+        return 0
+
+    method_ids = contract.get("methodSubjectIds", [])
+    filled_count = 0
+
+    for cs_file in sorted(handwritten_dir.glob("*.Custom.cs")):
+        original = cs_file.read_text(encoding="utf-8")
+        if "TODO: invoke the actual method" not in original:
+            continue  # already filled
+
+        def _replacer(m: re.Match) -> str:
+            nonlocal filled_count
+            idx = int(m.group(2))
+            prefix = m.group(1)
+            sig_and_open = m.group(3)
+            close = m.group(4)
+
+            if idx >= len(method_ids):
+                print(f"[fill] WARNING: {cs_file.name} references index {idx} "
+                      f"but methodSubjectIds has only {len(method_ids)} entries -- skipping")
+                return m.group(0)
+
+            parsed = parse_method_subject_id(method_ids[idx])
+            ret_type = parsed.get("return_type", "").strip()
+
+            try:
+                call_expr = build_call_expr(parsed)
+            except Exception as e:
+                print(f"[fill] WARNING: build_call_expr failed for #{idx} "
+                      f"({method_ids[idx]}): {e} -- keeping TODO")
+                return m.group(0)
+
+            if ret_type in ("System.Void", ""):
+                body = f"try {{ {call_expr}; }} catch {{ _exitCode = 1; }}"
+            else:
+                body = f"try {{ _ = {call_expr}; }} catch {{ _exitCode = 1; }}"
+
+            filled_count += 1
+            return f"{prefix}{idx}{sig_and_open}{body}{close}"
+
+        new_text = _FILL_RE.sub(_replacer, original)
+        if new_text != original:
+            cs_file.write_text(new_text, encoding="utf-8")
+            print(f"[fill] Updated {cs_file.name} ({filled_count} method(s) so far)")
+
+    return filled_count
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -468,6 +549,10 @@ def main() -> None:
         help="Auto-fix missing handwritten stubs and stale metadata",
     )
     parser.add_argument(
+        "--fill", action="store_true",
+        help="Fill TODO stub bodies with generated call expressions",
+    )
+    parser.add_argument(
         "--json", action="store_true",
         help="Output raw JSON report (default: human-readable summary)",
     )
@@ -477,9 +562,14 @@ def main() -> None:
 
     if args.fix:
         fix_family(report)
-        # Re-audit after fix
         report = audit_family(args.family_slug, args.assembly)
         print("\n--- Re-audit after fix ---")
+
+    if args.fill:
+        filled = fill_handwritten_stubs(args.family_slug, args.assembly)
+        print(f"\n--- Fill: {filled} method(s) updated ---")
+        report = audit_family(args.family_slug, args.assembly)
+        print("\n--- Re-audit after fill ---")
 
     if args.json:
         print(json.dumps(report, indent=2, ensure_ascii=False))

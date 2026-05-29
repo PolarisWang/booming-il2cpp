@@ -8,10 +8,10 @@ from verification.orchestration.engine import (
     REQUIRED_STAGES_STANDARD,
     REQUIRED_STAGES_STRICT,
     VerificationPipeline,
-    _aggregate,
-    _build_dashboard,
-    _compute_coverage,
-    _detect_regression,
+    aggregate_report,
+    build_dashboard_metrics,
+    compute_coverage,
+    detect_regression,
 )
 
 
@@ -67,21 +67,21 @@ class TestVerificationPipeline:
 class TestComputeCoverage:
     def test_all_passed(self, sample_stages):
         stages = {name: StageResult(stage=name, status="passed") for name in sample_stages}
-        cov = _compute_coverage(stages)
+        cov = compute_coverage(stages)
         assert cov["stagePassRate"] == 100.0
         assert cov["stagesPassed"] == 5
         assert cov["stagesFailed"] == 0
         assert cov["stagesTotal"] == 5
 
     def test_mixed_status(self, sample_stages):
-        cov = _compute_coverage(sample_stages)
+        cov = compute_coverage(sample_stages)
         assert cov["stagesPassed"] == 3
         assert cov["stagesFailed"] == 1
         assert cov["stagesSkipped"] == 1
         assert cov["stagesTotal"] == 5
 
     def test_empty_stages(self):
-        cov = _compute_coverage({})
+        cov = compute_coverage({})
         assert cov["stagePassRate"] == 100.0
         assert cov["stagesTotal"] == 0
 
@@ -91,7 +91,7 @@ class TestComputeCoverage:
 class TestBuildDashboard:
     def test_no_benchmark(self):
         stages = {"preflight": StageResult(stage="preflight", status="passed")}
-        dash = _build_dashboard(stages)
+        dash = build_dashboard_metrics(stages)
         assert dash == {}
 
     def test_benchmark_summary(self):
@@ -132,7 +132,7 @@ class TestBuildDashboard:
                 },
             ),
         }
-        dash = _build_dashboard(stages)
+        dash = build_dashboard_metrics(stages)
         ratios = dash["keyRatios"]
         assert ratios["nativeFasterRatio"] == 1.0
         assert ratios["nativeAotOpsPerSecond"] == 200_000_000
@@ -143,7 +143,7 @@ class TestBuildDashboard:
 
     def test_benchmark_summary_empty_details(self):
         stages = {"benchmark": StageResult(stage="benchmark", status="passed", details={})}
-        dash = _build_dashboard(stages)
+        dash = build_dashboard_metrics(stages)
         ratios = dash["keyRatios"]
         assert ratios["nativeFasterRatio"] == 0
         assert ratios["managedFasterRatio"] == 0
@@ -162,7 +162,7 @@ class TestDetectRegression:
         )
 
     def test_no_baseline(self, tmp_path):
-        reg = _detect_regression(self._deep_ctx(tmp_path))
+        reg = detect_regression(self._deep_ctx(tmp_path))
         assert reg["hasRegression"] is False
         assert reg["benchmark"]["status"] == "no_baseline"
 
@@ -173,7 +173,7 @@ class TestDetectRegression:
             assembly="Test.Assembly",
             family_dir=family_dir,
         )
-        reg = _detect_regression(ctx)
+        reg = detect_regression(ctx)
         assert reg["benchmark"]["status"] == "no_baseline"
 
 
@@ -193,7 +193,7 @@ class TestAggregate:
     def test_all_pass_standard(self, tmp_path, sample_stages):
         ctx = self._ctx(tmp_path=tmp_path)
         stages = {name: StageResult(stage=name, status="passed") for name in sample_stages}
-        report = _aggregate(ctx, stages, 1000)
+        report = aggregate_report(ctx, stages, 1000)
         assert report.overall_status == "passed"
         assert report.family == "test-family"
         assert report.assembly == "Test.Assembly"
@@ -202,7 +202,7 @@ class TestAggregate:
 
     def test_required_failure(self, tmp_path, sample_stages):
         ctx = self._ctx(tmp_path=tmp_path)
-        report = _aggregate(ctx, sample_stages, 500)
+        report = aggregate_report(ctx, sample_stages, 500)
         assert report.overall_status == "failed"
 
     def test_strict_mode_requires_hotupdate(self, tmp_path, sample_stages):
@@ -210,19 +210,19 @@ class TestAggregate:
         stages = {name: StageResult(stage=name, status="passed") for name in sample_stages}
         for hu in ("hotupdate", "hotupdate_aot_benchmark", "hotupdate_jit_fact", "hotupdate_jit_benchmark"):
             stages[hu] = StageResult(stage=hu, status="passed")
-        report = _aggregate(ctx, stages, 1000)
+        report = aggregate_report(ctx, stages, 1000)
         assert report.overall_status == "passed"
 
     def test_report_contains_coverage(self, tmp_path, sample_stages):
         ctx = self._ctx(tmp_path=tmp_path)
         stages = {name: StageResult(stage=name, status="passed") for name in sample_stages}
-        report = _aggregate(ctx, stages, 100)
+        report = aggregate_report(ctx, stages, 100)
         assert report.coverage["stagePassRate"] == 100.0
         assert report.coverage["stagesTotal"] == 5
 
     def test_report_contains_stages(self, tmp_path, sample_stages):
         ctx = self._ctx(tmp_path=tmp_path)
-        report = _aggregate(ctx, sample_stages, 200)
+        report = aggregate_report(ctx, sample_stages, 200)
         assert "preflight" in report.stages
         assert "codegen" in report.stages
         assert report.stages["preflight"]["status"] == "passed"

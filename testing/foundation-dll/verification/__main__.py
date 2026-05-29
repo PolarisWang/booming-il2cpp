@@ -10,7 +10,7 @@ Usage:
 
     # Batch all families
     python -m verification --batch
-    python -m verification --batch --mode strict --resume convert-char
+    python -m verification --batch --mode strict --from-slug convert-char
 
     # CI smoke test (4 families, quick 6-stage)
     python -m verification --ci
@@ -28,14 +28,14 @@ import sys
 from pathlib import Path
 
 
-def _setup_path() -> None:
+def setup_path() -> None:
     """Ensure testing/foundation-dll/ is on sys.path so 'verification' is importable."""
     pkg_root = Path(__file__).resolve().parent.parent  # testing/foundation-dll/
     if str(pkg_root) not in sys.path:
         sys.path.insert(0, str(pkg_root))
 
 
-def _build_parser() -> argparse.ArgumentParser:
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Foundation-dll verification pipeline — single entry point",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -69,8 +69,8 @@ def _build_parser() -> argparse.ArgumentParser:
 
     # ── Mode-specific flags ──────────────────────────────────────────
     spec = parser.add_argument_group("mode-specific flags")
-    spec.add_argument("--resume", default=None,
-                      help="[batch] Resume from this slug")
+    spec.add_argument("--from-slug", default=None,
+                      help="[batch] Skip families before this slug (resume from here)")
     spec.add_argument("--families", default=None,
                       help="[ci] Comma-separated family slugs")
     spec.add_argument("--parallel", type=int, default=None,
@@ -80,10 +80,10 @@ def _build_parser() -> argparse.ArgumentParser:
 
 
 def main() -> None:
-    _setup_path()
+    setup_path()
 
     # Now verification package is on sys.path
-    parser = _build_parser()
+    parser = build_parser()
     args = parser.parse_args()
 
     skip_stages = set()
@@ -92,16 +92,16 @@ def main() -> None:
 
     # Dispatch by mode
     if args.batch:
-        _run_batch(args, skip_stages)
+        run_batch_mode(args, skip_stages)
     elif args.ci:
-        _run_ci(args, skip_stages)
+        run_ci_mode(args, skip_stages)
     elif args.managed_bench:
-        _run_managed_bench(args)
+        run_managed_bench_mode(args)
     else:
-        _run_single(args, skip_stages)
+        run_single_family(args, skip_stages)
 
 
-def _run_single(args: argparse.Namespace, skip_stages: set[str]) -> None:
+def run_single_family(args: argparse.Namespace, skip_stages: set[str]) -> None:
     """Single-family mode (default)."""
     if not args.slug:
         print("ERROR: --slug is required in single-family mode")
@@ -112,9 +112,9 @@ def _run_single(args: argparse.Namespace, skip_stages: set[str]) -> None:
     from verification.orchestration.engine import VerificationPipeline
     from verification.analysis.perf_store import auto_save_perf_data
 
-    from verification.entry_points.cli import _resolve_family_dir
+    from verification.entry_points.cli import resolve_family_dir
 
-    family_dir = _resolve_family_dir(args.slug, args.assembly)
+    family_dir = resolve_family_dir(args.slug, args.assembly)
     if not family_dir.exists():
         print(f"ERROR: Family directory not found: {family_dir}")
         sys.exit(1)
@@ -143,9 +143,10 @@ def _run_single(args: argparse.Namespace, skip_stages: set[str]) -> None:
     sys.exit(0 if report.overall_status == "passed" else 1)
 
 
-def _run_batch(args: argparse.Namespace, skip_stages: set[str]) -> None:
+def run_batch_mode(args: argparse.Namespace, skip_stages: set[str]) -> None:
     """Batch all families."""
-    from verification.entry_points.batch import discover_families, main as batch_main
+    from verification.orchestration.discovery import discover_families
+    from verification.entry_points.batch import main as batch_main
 
     if args.slug:
         # Single family via --batch flag (convenience)
@@ -167,10 +168,8 @@ def _run_batch(args: argparse.Namespace, skip_stages: set[str]) -> None:
 
         sys.exit(0 if result["status"] == "passed" else 1)
     else:
-        # Full batch run
-        # Reconstruct sys.argv for batch.main() to consume
-        import shlex
-        batch_argv = [sys.argv[0]]
+        # Full batch run — build argv and pass to batch.main()
+        batch_argv = []
         if args.assembly != "System.Private.CoreLib":
             batch_argv += ["--assembly", args.assembly]
         if args.mode != "standard":
@@ -179,25 +178,19 @@ def _run_batch(args: argparse.Namespace, skip_stages: set[str]) -> None:
             batch_argv += ["--native-config", args.native_config]
         if args.skip_stages:
             batch_argv += ["--skip-stages", args.skip_stages]
-        if args.resume:
-            batch_argv += ["--resume", args.resume]
+        if args.from_slug:
+            batch_argv += ["--from-slug", args.from_slug]
         if args.output:
             batch_argv += ["--output", args.output]
 
-        old_argv = sys.argv
-        sys.argv = batch_argv
-        try:
-            batch_main()
-        finally:
-            sys.argv = old_argv
+        batch_main(batch_argv if batch_argv else None)
 
 
-def _run_ci(args: argparse.Namespace, skip_stages: set[str]) -> None:
+def run_ci_mode(args: argparse.Namespace, skip_stages: set[str]) -> None:
     """CI smoke test — 4 families, quick 6-stage."""
     from verification.entry_points.ci_smoke import main as ci_main
 
-    import shlex
-    ci_argv = [sys.argv[0]]
+    ci_argv = []
     if args.assembly != "System.Private.CoreLib":
         ci_argv += ["--assembly", args.assembly]
     if args.families:
@@ -207,20 +200,14 @@ def _run_ci(args: argparse.Namespace, skip_stages: set[str]) -> None:
     if args.output:
         ci_argv += ["--output", args.output]
 
-    old_argv = sys.argv
-    sys.argv = ci_argv
-    try:
-        ci_main()
-    finally:
-        sys.argv = old_argv
+    ci_main(ci_argv if ci_argv else None)
 
 
-def _run_managed_bench(args: argparse.Namespace) -> None:
+def run_managed_bench_mode(args: argparse.Namespace) -> None:
     """Managed-only benchmark."""
     from verification.entry_points.fast_managed_bench import main as bench_main
 
-    import shlex
-    bench_argv = [sys.argv[0]]
+    bench_argv = []
     if args.assembly != "System.Private.CoreLib":
         bench_argv += ["--assembly", args.assembly]
     if args.output:
@@ -228,12 +215,7 @@ def _run_managed_bench(args: argparse.Namespace) -> None:
     if args.parallel is not None:
         bench_argv += ["--parallel", str(args.parallel)]
 
-    old_argv = sys.argv
-    sys.argv = bench_argv
-    try:
-        bench_main()
-    finally:
-        sys.argv = old_argv
+    bench_main(bench_argv if bench_argv else None)
 
 
 if __name__ == "__main__":
