@@ -18,29 +18,25 @@ public static partial class ReflectionGenericsSubjects
     // [0] System.Private.CoreLib/System.Type::GetGenericTypeDefinition:System.Type()
     public static void Subject_0()
     {
-        try { _ = ((typeof(byte).GetGenericTypeDefinition()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetGenericTypeDefinition:System.Type()
     }
 
     // [1] System.Private.CoreLib/System.Type::MakeGenericType:System.Type(System.Type[])
     public static void Subject_1()
     {
-        try { _ = ((typeof(byte).MakeGenericType(Array.Empty<System.Type>())).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::MakeGenericType:System.Type(System.Type[])
     }
 
     // [2] System.Private.CoreLib/System.Type::GetGenericArguments:System.Type[]()
     public static void Subject_2()
     {
-        try { _ = ((typeof(byte).GetGenericArguments()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetGenericArguments:System.Type[]()
     }
 
     // [3] System.Private.CoreLib/System.Type::GetGenericParameterConstraints:System.Type[]()
     public static void Subject_3()
     {
-        try { _ = ((typeof(byte).GetGenericParameterConstraints()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetGenericParameterConstraints:System.Type[]()
     }
 
     // [4] System.Private.CoreLib/System.Type::get_GenericParameterPosition:System.Int32()
@@ -81,22 +77,19 @@ public static partial class ReflectionGenericsSubjects
     // [9] System.Private.CoreLib/System.Type::MakeArrayType:System.Type()
     public static void Subject_9()
     {
-        try { _ = ((typeof(byte).MakeArrayType()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::MakeArrayType:System.Type()
     }
 
     // [10] System.Private.CoreLib/System.Type::MakeByRefType:System.Type()
     public static void Subject_10()
     {
-        try { _ = ((typeof(byte).MakeByRefType()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::MakeByRefType:System.Type()
     }
 
     // [11] System.Private.CoreLib/System.Type::MakePointerType:System.Type()
     public static void Subject_11()
     {
-        try { _ = ((typeof(byte).MakePointerType()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::MakePointerType:System.Type()
     }
 
 }

@@ -17,6 +17,7 @@ public sealed class CppProjectEmitter
 
     private static readonly string[] AllTemplateNames =
     [
+        "TestProject.RuntimeEntry.cpp.scriban",
         "TestProject.Entry.cpp.scriban",
         "TestProject.Entry.h.scriban",
         "TestProject.Dispatch.cpp.scriban",
@@ -51,6 +52,10 @@ public sealed class CppProjectEmitter
             patchDataSize: 0,
             patchDataHostClass: "",
             projectName: "entry");
+
+        // runtime-entry.cpp
+        var entryCode = TemplateCatalog.Render("TestProject.RuntimeEntry.cpp.scriban", model);
+        File.WriteAllText(Path.Combine(outputDir, "runtime-entry.cpp"), entryCode);
 
         // verification_dispatch.generated.cpp
         var dispatchCode = TemplateCatalog.Render("TestProject.Dispatch.cpp.scriban", model);
@@ -109,6 +114,7 @@ public sealed class CppProjectEmitter
             projectName: "entry");
 
         // ── 4. Render templates → output files ──
+        RenderToFile("TestProject.RuntimeEntry.cpp.scriban", model, outputDir, "runtime-entry.cpp");
         RenderToFile("TestProject.Entry.cpp.scriban", model, outputDir, "entry.cpp");
         RenderToFile("TestProject.Entry.h.scriban", model, outputDir, "entry.h");
         RenderToFile("TestProject.Dispatch.cpp.scriban", model, outputDir, "dispatch.cpp");

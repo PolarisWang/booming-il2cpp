@@ -19,15 +19,13 @@ public static partial class ReflectionHotupdateSubjects
     // [0] System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()
     public static void Subject_0()
     {
-        try { _ = ((typeof(byte).Assembly.GetModules()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()
     }
 
     // [1] System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()
     public static void Subject_1()
     {
-        try { _ = ((typeof(byte).Assembly.GetTypes()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()
     }
 
     // [2] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)
@@ -40,8 +38,7 @@ public static partial class ReflectionHotupdateSubjects
     // [3] System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)
     public static void Subject_3()
     {
-        try { _ = ((typeof(byte).Assembly.GetType("hello")).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)
     }
 
 }

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/parameters",
-  "capturedAt": "2026-05-28T13:54:40",
+  "capturedAt": "2026-05-29T04:56:04",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -16,21 +16,21 @@
       "total": 440
     },
     "aotInstructionCount": {
-      "min": 9,
+      "min": 1,
       "max": 12,
-      "avg": 10.4,
-      "total": 104
+      "avg": 7.4,
+      "total": 74
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 14
+      "external_runtime_call": 11
     },
-    "overallIrExpansionRatio": 0.24,
-    "averageExpansionRatio": 0.24,
+    "overallIrExpansionRatio": 0.17,
+    "averageExpansionRatio": 0.17,
     "maxExpansionRatio": 0.27,
-    "minExpansionRatio": 0.2
+    "minExpansionRatio": 0.02
   },
   "methodResults": [
     {
@@ -284,8 +284,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -296,18 +296,10 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_7",
-        "instructions": 11
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 8,
@@ -316,8 +308,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -328,18 +320,10 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_8",
-        "instructions": 11
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 9,
@@ -348,8 +332,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -360,18 +344,10 @@
       "aot": {
         "status": "ok",
         "symbol": "ReflectionParametersSubjects_ReflectionParametersSubjects_Subject_9",
-        "instructions": 11
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     }
   ]
 }

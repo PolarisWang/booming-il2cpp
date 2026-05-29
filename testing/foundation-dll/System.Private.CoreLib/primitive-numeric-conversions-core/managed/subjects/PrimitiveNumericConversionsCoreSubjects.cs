@@ -18,71 +18,61 @@ public static partial class PrimitiveNumericConversionsCoreSubjects
     // [0] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()
     public static void Subject_0()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestByteToInt(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()
     }
 
     // [1] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()
     public static void Subject_1()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToLong(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()
     }
 
     // [2] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()
     public static void Subject_2()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToShort(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()
     }
 
     // [3] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()
     public static void Subject_3()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToByte(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToByte:System.Int32()
     }
 
     // [4] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()
     public static void Subject_4()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestFloatToDouble(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestFloatToDouble:System.Int32()
     }
 
     // [5] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()
     public static void Subject_5()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestDoubleToFloat(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToFloat:System.Int32()
     }
 
     // [6] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()
     public static void Subject_6()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestIntToDouble(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToDouble:System.Int32()
     }
 
     // [7] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()
     public static void Subject_7()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestDoubleToInt(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestDoubleToInt:System.Int32()
     }
 
     // [8] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()
     public static void Subject_8()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestUintToLong(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestUintToLong:System.Int32()
     }
 
     // [9] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()
     public static void Subject_9()
     {
-        try { _ = PrimitiveNumericConversionsCoreNativeEntry.TestLongToInt(); }
-        catch { _exitCode = 1; }
+        // non-callable: PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestLongToInt:System.Int32()
     }
 
 }

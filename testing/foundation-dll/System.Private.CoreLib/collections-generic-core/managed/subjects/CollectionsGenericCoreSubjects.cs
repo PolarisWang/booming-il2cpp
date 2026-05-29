@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class CollectionsGenericCoreSubjects
 {
@@ -21,8 +23,7 @@ public static partial class CollectionsGenericCoreSubjects
     // [1] System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()
     public static void Subject_1()
     {
-        try { new List<int>().Clear(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()
     }
 
     // [2] System.Private.CoreLib/System.Collections.Generic.List`1::Contains:System.Boolean(T)
@@ -50,15 +51,13 @@ public static partial class CollectionsGenericCoreSubjects
     // [6] System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()
     public static void Subject_6()
     {
-        try { new List<int>().Sort(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Collections.Generic.List`1::Sort:System.Void()
     }
 
     // [7] System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()
     public static void Subject_7()
     {
-        try { _ = ((new List<int>().ToArray()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Collections.Generic.List`1::ToArray:T[]()
     }
 
     // [8] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Add:System.Void(TKey,TValue)

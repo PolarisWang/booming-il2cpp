@@ -172,8 +172,6 @@ run_pnc_fact.bat
 
 # Build debug scripts
 build/_*.bat
-build/toolchains/run/testing/foundation_dll/_*.bat
-build/toolchains/run/testing/foundation_dll/fact_l2_verifier.py
 build/bdwgc_build/
 build/fmt_build/
 build/src/
@@ -200,7 +198,6 @@ tests/**/build/*.vcxproj.filters
 tests/**/build/*.sln
 
 # Debug ad-hoc scripts
-build/toolchains/run/testing/foundation_dll/_fix_eh_*.py
 
 # Root-level scratch and debug scripts (not part of the project)
 analyze_crash.bat

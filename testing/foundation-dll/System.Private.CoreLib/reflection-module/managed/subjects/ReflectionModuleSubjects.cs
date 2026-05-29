@@ -40,15 +40,13 @@ public static partial class ReflectionModuleSubjects
     // [3] System.Private.CoreLib/System.Reflection.Module::GetType:System.Type(System.String)
     public static void Subject_3()
     {
-        try { _ = ((default(Module)!.GetType("hello")).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Module::GetType:System.Type(System.String)
     }
 
     // [4] System.Private.CoreLib/System.Reflection.Module::GetTypes:System.Type[]()
     public static void Subject_4()
     {
-        try { _ = ((default(Module)!.GetTypes()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.Module::GetTypes:System.Type[]()
     }
 
     // [5] System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)

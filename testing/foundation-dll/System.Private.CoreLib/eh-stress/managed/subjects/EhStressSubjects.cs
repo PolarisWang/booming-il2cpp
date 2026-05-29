@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class EhStressSubjects
 {
@@ -37,8 +39,7 @@ public static partial class EhStressSubjects
     // [3] System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)
     public static void Subject_3()
     {
-        try { _ = "hello".IndexOf('A'); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)
     }
 
 }

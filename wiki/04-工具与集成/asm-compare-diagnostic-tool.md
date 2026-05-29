@@ -419,8 +419,8 @@ chaos-il2cpp asm-compare \
   --sections metrics,analysis
   
 # 通过 Python 验证管线自动调用（batch + cache）
-python build/check_foundation_dll_pipeline.py --family convert-char \
-  --skip hotupdate post_hotupdate_benchmark microbench
+# 新管线: testing/foundation-dll/verification/orchestration/engine.py
+# 运行方式: python -m verification.orchestration.main --family convert-char --skip hotupdate ...
 ```
 
 ### 复杂案例验证

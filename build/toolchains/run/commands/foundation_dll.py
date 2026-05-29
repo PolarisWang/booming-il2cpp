@@ -4,25 +4,43 @@ import sys
 from pathlib import Path
 from typing import Any, Callable
 
+_REPO_ROOT: Path | None = None
+
+
+def _resolve_repo_root() -> Path:
+    """Lazy resolve repo root — allows import before repo dir exists."""
+    global _REPO_ROOT
+    if _REPO_ROOT is None:
+        _REPO_ROOT = Path(__file__).resolve().parents[4]
+    return _REPO_ROOT
+
+
+def _ensure_tooling_path() -> None:
+    """Add the verification tooling package to sys.path."""
+    root = _resolve_repo_root()
+    tooling_path = str(root / "testing" / "foundation-dll" / "verification")
+    if tooling_path not in sys.path:
+        sys.path.insert(0, tooling_path)
+
+
+_ensure_tooling_path()
+
+from tooling import execution_entry as execution_entry_module
+from tooling import candidate_ledger_generator as denominator_derive_module
+from tooling import candidate_ledger_promoter as denominator_promote_module
+from tooling import projection_consistency_verifier as projection_consistency_module
+
 try:
     from ..core.result import CommandResult
     from ..testing import foundation_dll_audit_generator as audit_generator_module
-    from ..testing.foundation_dll import execution_entry as execution_entry_module
-    from ..testing.foundation_dll import candidate_ledger_generator as denominator_derive_module
-    from ..testing.foundation_dll import candidate_ledger_promoter as denominator_promote_module
     from ..testing import inventory_generator as inventory_generator_module
-    from ..testing.foundation_dll import projection_consistency_verifier as projection_consistency_module
     from ..testing.events import build_event
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from core.result import CommandResult
     from testing import foundation_dll_audit_generator as audit_generator_module
-    from testing.foundation_dll import execution_entry as execution_entry_module
-    from testing.foundation_dll import candidate_ledger_generator as denominator_derive_module
-    from testing.foundation_dll import candidate_ledger_promoter as denominator_promote_module
     from testing import inventory_generator as inventory_generator_module
-    from testing.foundation_dll import projection_consistency_verifier as projection_consistency_module
     from testing.events import build_event
 
 
@@ -248,57 +266,6 @@ def _handle_execute(
     return _success(command_text, host_platform, payload)
 
 
-def _handle_verify_family(
-    repo_root: Path,
-    host_platform: str,
-    command_text: str,
-    options: dict[str, Any],
-    progress_callback: Callable[[dict[str, Any]], None] | None = None,
-) -> CommandResult:
-    family_slug = str(_get_option(options, "family") or "").strip()
-    assembly = str(_get_option(options, "assembly") or "System.Private.CoreLib")
-    mode = str(_get_option(options, "mode") or "standard")
-    skip_raw = _get_option(options, "skip")
-    skip_stages = [s.strip() for s in skip_raw.split(",") if s.strip()] if skip_raw else None
-    codegen_mode = str(_get_option(options, "codegen_mode") or "").strip() or None
-
-    if not family_slug:
-        return _failure(command_text, host_platform, "--family is required (e.g. --family convert-char)")
-
-    _emit_event(progress_callback, event_type="stage-start", completed=0, total=7, active_unit=f"foundation-dll verify-family {family_slug}")
-
-    try:
-        from ..testing.foundation_dll.family_verification_orchestrator import verify_family
-    except ImportError:
-        root = Path(__file__).resolve().parents[1]
-        sys.path.insert(0, str(root))
-        from testing.foundation_dll.family_verification_orchestrator import verify_family
-
-    payload = verify_family(family_slug, assembly=assembly, mode=mode, skip_stages=skip_stages, codegen_mode=codegen_mode)
-    report = payload.get("unifiedReport", payload)
-    overall = report.get("overall_status", "failed")
-
-    _emit_event(progress_callback, event_type="progress", completed=7, total=7, active_unit=f"foundation-dll verify-family {family_slug}", step_status=overall)
-
-    text_lines = [f"Family: {family_slug}", f"Overall: {overall}"]
-    for stage_name, stage in report.get("stages", {}).items():
-        text_lines.append(f"  {stage_name}: {stage.get('status', '?')} — {stage.get('summary', '')}")
-    text_lines.append(f"Coverage: {report.get('coverage', {})}")
-    text = "\n".join(text_lines) + "\n"
-
-    if overall == "passed":
-        return _success(command_text, host_platform, payload, text=text)
-    else:
-        return CommandResult.failure(
-            command=command_text,
-            host_platform=host_platform,
-            target="foundation-dll",
-            errors=[f"verify-family {family_slug}: {overall}"],
-            payload=payload,
-            text=text,
-        )
-
-
 def handle(
     command: dict,
     repo_root: Path,
@@ -324,8 +291,6 @@ def handle(
             return _handle_onboard(repo_root, host_platform, command_text, opts, progress_callback=progress_callback)
         if command_id == "foundation-dll-execute":
             return _handle_execute(repo_root, host_platform, command_text, opts)
-        if command_id == "foundation-dll-verify-family":
-            return _handle_verify_family(repo_root, host_platform, command_text, opts, progress_callback=progress_callback)
         return _failure(command_text, host_platform, f"unsupported foundation-dll command: {command_id}")
     except Exception as error:
         return _failure(command_text, host_platform, str(error))

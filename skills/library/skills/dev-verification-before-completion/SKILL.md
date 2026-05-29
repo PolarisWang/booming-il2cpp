@@ -56,8 +56,7 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
   - `verification/projections/foundation-dll-audit/family-verification-claims.json`
   - `verification/projections/foundation-dll-audit/family-verification.json`
 - 典型命中点包括：
-  - `build/toolchains/run/testing/foundation_dll/family_verification_claims.py`
-  - `build/toolchains/run/testing/foundation_dll/verification_kernel.py`
+  - `testing/foundation-dll/verification/tooling/derive.py`
   - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
   - `Native Proof Detail`、family progress、tooltip detail
 - 命中时，默认需要执行 `run test inventory --json`，而不是只改 HTML 或局部 JSON
@@ -177,11 +176,7 @@ python skills/tooling/learning/evolve.py auto-evolve
 如果本轮改动触及以下任一文件，完成前必须运行 dashboard 数据约束检查：
 
 - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
-- `build/toolchains/run/testing/foundation_dll/verification_kernel.py`
-- `build/toolchains/run/testing/foundation_dll/family_verification_claims.py`
-- `build/toolchains/run/testing/foundation_dll/gap_analyzer.py`
-- `build/toolchains/run/testing/foundation_dll/derive.py`
-- `build/toolchains/run/testing/foundation_dll/truth_contracts.py`
+- `testing/foundation-dll/verification/tooling/derive.py`
 
 命中时执行以下检查：
 

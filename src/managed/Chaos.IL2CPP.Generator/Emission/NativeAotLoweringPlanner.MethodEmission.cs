@@ -201,6 +201,11 @@ public sealed partial class NativeAotLoweringPlanner
 			_currentMethodNativeSymbol = null;
 			_currentMethodArtifact = null;
 		}
+		// Use the larger of ComputeMaxEvalStackDepth and the actual peak depth
+		// tracked by StructuredSlotEmissionContext (the latter may be higher for
+		// generic methods where StringId emission or inlined code expands depth).
+		if (!usesStructuredSlots && slotContext != null)
+			evalStackSize = Math.Max(evalStackSize, slotContext.MaxIntSlots);
 		if (usesStructuredSlots && slotContext != null)
 		{
 			EmitStructuredSlotDeclarations(builder, slotContext.MaxIntSlots, slotContext.MaxFloat64Slots, slotContext.MaxFloat32Slots, slotContext.MaxInt64Slots, "	");

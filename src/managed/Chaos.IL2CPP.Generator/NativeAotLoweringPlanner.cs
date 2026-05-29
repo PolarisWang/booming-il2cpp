@@ -1036,7 +1036,9 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
 
         // If enum types exist, append an IIFE that registers the generated enum
         // metadata tables and dispatch table at static init time.
-        if (!string.IsNullOrEmpty(enumMetaHeader))
+        // The header may be non-empty (e.g., "No enum types found" comment) without
+        // defining ChaosRegisterEnumGeneratedMetadata, so check for the function name.
+        if (!string.IsNullOrEmpty(enumMetaHeader) && enumMetaHeader.Contains("ChaosRegisterEnumGeneratedMetadata"))
         {
             moduleRegistrationCode += @"
     // Register generated enum metadata (tables + dispatch + type descriptors).
@@ -1096,7 +1098,7 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         // Hierarchy fast API — only needed when TypeInfo* ptr fold is active
         // (typeof(T).IsAssignableFrom(typeof(U)) → *PtrFast inlined calls).
         if (_typeHierarchyPtrFoldMap is { Count: > 0 })
-            includes_.Add("\"reflection/hierarchy_fast_api.h\"");
+            includes_.Add("\"reflection_api.h\"");
         // Native bridge headers (e.g., "convert.h") from external runtime
         // helpers that map to direct native function calls.
         includes_.AddRange(
@@ -1185,9 +1187,35 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         bool hasAnyForwardDeclarations = false;
         foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
         {
-            sb.Append("struct ");
-            sb.Append(GetNativeTypeSymbol(typeId));
-            sb.AppendLine(";");
+            // Concrete delegate types (e.g. System.Action, System.Func<,>) need full
+            // flat struct definitions in the shared header so that page files can access
+            // delegate members (chaos_delegate_invocation_count, etc.) via reinterpret_cast.
+            // The root Delegate/MulticastDelegate types keep forward declarations — their
+            // full inherited definitions are only on page 0 (object model section).
+            bool isConcreteDelegate = IsDelegateTypeSubjectId(typeId, _referenceTypeBaseSubjectIds)
+                && !string.Equals(typeId, DelegateTypeSubjectId, StringComparison.Ordinal)
+                && !string.Equals(typeId, MulticastDelegateTypeSubjectId, StringComparison.Ordinal);
+
+            if (isConcreteDelegate)
+            {
+                sb.Append("struct ");
+                sb.Append(GetNativeTypeSymbol(typeId));
+                sb.AppendLine(" {");
+                sb.AppendLine("    PureTypeHeader header{};");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;");
+                sb.AppendLine("    CHAOS_IL2CPP_UINT32 _pad = 0;");
+                sb.AppendLine("};");
+            }
+            else
+            {
+                sb.Append("struct ");
+                sb.Append(GetNativeTypeSymbol(typeId));
+                sb.AppendLine(";");
+            }
 
             sb.Append("struct ");
             sb.Append(GetNativeBoxTypeSymbol(typeId));
@@ -1268,6 +1296,24 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
                 sb.Append(" = static_cast<CHAOS_IL2CPP_INTPTR>(");
                 sb.Append(ifaceStableId.ToString());
                 sb.AppendLine("ULL);");
+            }
+            sb.AppendLine();
+        }
+
+        // ── Non-interface type ID extern declarations ──
+        // Page files reference chaos_type_id_* symbols for non-interface types
+        // (e.g. delegate type references in reinterpret_cast, array element types).
+        // These are defined in the object model (page 0); other pages need extern
+        // declarations to resolve cross-TU references.
+        if (_allEmittedTypeSubjectIds is { Count: > 0 })
+        {
+            foreach (var typeId in _allEmittedTypeSubjectIds.OrderBy(id => id, StringComparer.Ordinal))
+            {
+                if (allInterfaceTypeIds.Count > 0 && allInterfaceTypeIds.Contains(typeId))
+                    continue; // already declared as inline constexpr above
+                sb.Append("extern const uint64_t ");
+                sb.Append(GetNativeTypeIdSymbol(typeId));
+                sb.AppendLine(";");
             }
             sb.AppendLine();
         }

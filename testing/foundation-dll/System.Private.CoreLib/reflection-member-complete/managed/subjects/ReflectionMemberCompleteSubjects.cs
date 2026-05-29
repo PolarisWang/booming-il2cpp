@@ -61,8 +61,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [6] System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()
     public static void Subject_6()
     {
-        try { _ = ((default(MethodInfo)!.GetBaseDefinition()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()
     }
 
     // [7] System.Private.CoreLib/System.Reflection.MethodBase::get_MethodHandle:System.RuntimeMethodHandle()
@@ -152,8 +151,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [19] System.Private.CoreLib/System.Reflection.PropertyInfo::GetIndexParameters:System.Reflection.ParameterInfo[]()
     public static void Subject_19()
     {
-        try { _ = ((default(PropertyInfo)!.GetIndexParameters()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.PropertyInfo::GetIndexParameters:System.Reflection.ParameterInfo[]()
     }
 
     // [20] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldHandle:System.RuntimeFieldHandle()

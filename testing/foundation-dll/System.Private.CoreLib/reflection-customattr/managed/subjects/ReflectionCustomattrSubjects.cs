@@ -19,22 +19,19 @@ public static partial class ReflectionCustomattrSubjects
     // [0] System.Private.CoreLib/System.Reflection.MemberInfo::IsDefined:System.Boolean(System.Type,System.Boolean)
     public static void Subject_0()
     {
-        try { _ = ((default(MemberInfo)!.IsDefined(typeof(byte), true)) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.MemberInfo::IsDefined:System.Boolean(System.Type,System.Boolean)
     }
 
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::GetCustomAttribute:System.Object(System.Type,System.Boolean)
     public static void Subject_1()
     {
-        try { _ = ((default(MemberInfo)!.GetCustomAttribute(typeof(byte), true)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.MemberInfo::GetCustomAttribute:System.Object(System.Type,System.Boolean)
     }
 
     // [2] System.Private.CoreLib/System.Reflection.MemberInfo::GetCustomAttributes:System.Object[](System.Boolean)
     public static void Subject_2()
     {
-        try { _ = ((default(MemberInfo)!.GetCustomAttributes(true)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.MemberInfo::GetCustomAttributes:System.Object[](System.Boolean)
     }
 
 }

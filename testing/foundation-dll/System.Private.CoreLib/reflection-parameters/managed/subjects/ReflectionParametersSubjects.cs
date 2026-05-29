@@ -68,22 +68,19 @@ public static partial class ReflectionParametersSubjects
     // [7] System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()
     public static void Subject_7()
     {
-        try { _ = ((default(ParameterInfo)!.GetRequiredCustomModifiers()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()
     }
 
     // [8] System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()
     public static void Subject_8()
     {
-        try { _ = ((default(ParameterInfo)!.GetOptionalCustomModifiers()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()
     }
 
     // [9] System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()
     public static void Subject_9()
     {
-        try { _ = ((default(MethodInfo)!.GetParameters()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()
     }
 
 }

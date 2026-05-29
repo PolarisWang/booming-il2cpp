@@ -13,7 +13,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BoxingUnboxingCastsSubjects.cs" />
-    <Compile Include="subjects/BoxingUnboxingCastsSubjects.Custom.cs" />
     <Compile Include="BoxingUnboxingCastsSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>

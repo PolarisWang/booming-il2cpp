@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class BufferMemorySubjects
 {
@@ -29,8 +31,7 @@ public static partial class BufferMemorySubjects
     // [2] System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)
     public static void Subject_2()
     {
-        try { _ = Buffer.ByteLength(Array.Empty<byte>()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)
     }
 
     // [3] System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)

@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/collections/generic/core",
-  "capturedAt": "2026-05-28T11:08:12",
+  "capturedAt": "2026-05-29T02:27:57",
   "batchMode": true,
   "summary": {
     "totalMethods": 16,
@@ -11,26 +11,26 @@
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
-      "max": 807,
-      "avg": 131.4,
-      "total": 2102
+      "max": 44,
+      "avg": 44.0,
+      "total": 704
     },
     "aotInstructionCount": {
       "min": 1,
       "max": 18,
-      "avg": 4.1,
-      "total": 65
+      "avg": 2.6,
+      "total": 41
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 8
+      "external_runtime_call": 5
     },
-    "overallIrExpansionRatio": 0.03,
-    "averageExpansionRatio": 0.08,
+    "overallIrExpansionRatio": 0.06,
+    "averageExpansionRatio": 0.06,
     "maxExpansionRatio": 0.41,
-    "minExpansionRatio": 0.01
+    "minExpansionRatio": 0.02
   },
   "methodResults": [
     {
@@ -64,8 +64,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 8,
-        "ratio": 0.18,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -76,18 +76,10 @@
       "aot": {
         "status": "ok",
         "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_1",
-        "instructions": 8
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::Clear:System.Void()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 2,
@@ -214,31 +206,23 @@
       "shortName": "Subject_6",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 807,
-        "aotInstructionCount": 8,
-        "ratio": 0.01,
-        "jitCodeSize": 3770
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3770,
-        "instructions": 807
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_6",
-        "instructions": 8
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::Sort:System.Void()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 7,
@@ -247,8 +231,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -259,18 +243,10 @@
       "aot": {
         "status": "ok",
         "symbol": "CollectionsGenericCoreSubjects_CollectionsGenericCoreSubjects_Subject_7",
-        "instructions": 11
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Collections/System.Collections.Generic.List<System.Int32>::ToArray:System.Int32[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 8,
@@ -358,15 +334,15 @@
       "shortName": "Subject_11",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 679,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 1,
-        "ratio": 0,
-        "jitCodeSize": 3002
+        "ratio": 0.02,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3002,
-        "instructions": 679
+        "size": 256,
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

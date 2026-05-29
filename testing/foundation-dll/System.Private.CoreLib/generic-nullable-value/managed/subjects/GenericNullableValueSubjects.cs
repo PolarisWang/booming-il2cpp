@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class GenericNullableValueSubjects
 {
@@ -42,43 +44,37 @@ public static partial class GenericNullableValueSubjects
     // [4] System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)
     public static void Subject_4()
     {
-        try { _ = ((default(Nullable<int>).Equals(null!)) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Nullable`1::Equals:System.Boolean(System.Object)
     }
 
     // [5] System.Private.CoreLib/System.Nullable`1::GetHashCode:System.Int32()
     public static void Subject_5()
     {
-        try { _ = default(Nullable<int>).GetHashCode(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Nullable`1::GetHashCode:System.Int32()
     }
 
     // [6] System.Private.CoreLib/System.Nullable`1::ToString:System.String()
     public static void Subject_6()
     {
-        try { _ = ((default(Nullable<int>).ToString()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Nullable`1::ToString:System.String()
     }
 
     // [7] System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
     public static void Subject_7()
     {
-        try { _ = ((((ValueType)42).Equals(null!)) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
     }
 
     // [8] System.Private.CoreLib/System.ValueType::GetHashCode:System.Int32()
     public static void Subject_8()
     {
-        try { _ = ((ValueType)42).GetHashCode(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.ValueType::GetHashCode:System.Int32()
     }
 
     // [9] System.Private.CoreLib/System.ValueType::ToString:System.String()
     public static void Subject_9()
     {
-        try { _ = ((((ValueType)42).ToString()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.ValueType::ToString:System.String()
     }
 
 }

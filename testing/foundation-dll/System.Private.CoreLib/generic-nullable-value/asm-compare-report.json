@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/generic/nullable/value",
-  "capturedAt": "2026-05-28T11:58:43",
+  "capturedAt": "2026-05-29T03:18:55",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -18,17 +18,17 @@
     "aotInstructionCount": {
       "min": 1,
       "max": 15,
-      "avg": 11.1,
-      "total": 111
+      "avg": 4.8,
+      "total": 48
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 10
+      "external_runtime_call": 5
     },
-    "overallIrExpansionRatio": 0.25,
-    "averageExpansionRatio": 0.25,
+    "overallIrExpansionRatio": 0.11,
+    "averageExpansionRatio": 0.11,
     "maxExpansionRatio": 0.34,
     "minExpansionRatio": 0.02
   },
@@ -170,8 +170,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -182,7 +182,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_4",
-        "instructions": 13
+        "instructions": 1
       },
       "analysis": [],
       "instructionCategories": {}
@@ -194,8 +194,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -206,7 +206,7 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_5",
-        "instructions": 11
+        "instructions": 1
       },
       "analysis": [],
       "instructionCategories": {}
@@ -218,8 +218,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -230,18 +230,10 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_6",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 7,
@@ -250,8 +242,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -262,18 +254,10 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_7",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 8,
@@ -282,8 +266,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -294,18 +278,10 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_8",
-        "instructions": 10
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 1
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 9,
@@ -314,8 +290,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
@@ -326,23 +302,10 @@
       "aot": {
         "status": "ok",
         "symbol": "GenericNullableValueSubjects_GenericNullableValueSubjects_Subject_9",
-        "instructions": 11
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     }
   ]
 }

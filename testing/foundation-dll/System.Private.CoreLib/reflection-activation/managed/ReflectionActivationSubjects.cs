@@ -20,15 +20,13 @@ public static partial class ReflectionActivationSubjects
     // [0] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)
     public static void Subject_0()
     {
-        try { _ = ((Activator.CreateInstance(typeof(byte))).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type)
     }
 
     // [1] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])
     public static void Subject_1()
     {
-        try { _ = ((Activator.CreateInstance(typeof(byte), Array.Empty<System.Object>())).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Object[])
     }
 
     // [2] System.Private.CoreLib/System.Activator::CreateInstance:T()
@@ -40,8 +38,7 @@ public static partial class ReflectionActivationSubjects
     // [3] System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     public static void Subject_3()
     {
-        try { _ = ((Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Activator::CreateInstance:System.Object(System.Type,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
     }
 
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)

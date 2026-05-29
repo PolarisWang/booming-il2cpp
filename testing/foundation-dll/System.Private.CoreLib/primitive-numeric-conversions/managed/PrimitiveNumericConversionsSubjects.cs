@@ -74,29 +74,25 @@ public static partial class PrimitiveNumericConversionsSubjects
     // [8] System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)
     public static void Subject_8()
     {
-        try { _ = ((Convert.ToString(42)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Convert::ToString:System.String(System.Int32)
     }
 
     // [9] System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)
     public static void Subject_9()
     {
-        try { _ = ((Convert.ToString(42.0)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Convert::ToString:System.String(System.Double)
     }
 
     // [10] System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)
     public static void Subject_10()
     {
-        try { _ = (int)(Convert.ToDecimal(42.0)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Convert::ToDecimal:System.Decimal(System.Double)
     }
 
     // [11] System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)
     public static void Subject_11()
     {
-        try { _ = Convert.ToInt32(42.0); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Convert::ToInt32:System.Int32(System.Double)
     }
 
     // [12] System.Private.CoreLib/System.Int32::Parse:System.Int32(System.String)

@@ -212,99 +212,85 @@ public static partial class ReflectionTypeSubjects
     // [28] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()
     public static void Subject_28()
     {
-        try { _ = ((typeof(byte).GetMethods()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()
     }
 
     // [29] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)
     public static void Subject_29()
     {
-        try { _ = ((typeof(byte).GetMethods(System.Reflection.BindingFlags.Default)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)
     }
 
     // [30] System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()
     public static void Subject_30()
     {
-        try { _ = ((typeof(byte).GetFields()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()
     }
 
     // [31] System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)
     public static void Subject_31()
     {
-        try { _ = ((typeof(byte).GetFields(System.Reflection.BindingFlags.Default)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)
     }
 
     // [32] System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()
     public static void Subject_32()
     {
-        try { _ = ((typeof(byte).GetProperties()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()
     }
 
     // [33] System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)
     public static void Subject_33()
     {
-        try { _ = ((typeof(byte).GetProperties(System.Reflection.BindingFlags.Default)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)
     }
 
     // [34] System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()
     public static void Subject_34()
     {
-        try { _ = ((typeof(byte).GetEvents()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()
     }
 
     // [35] System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()
     public static void Subject_35()
     {
-        try { _ = ((typeof(byte).GetConstructors()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()
     }
 
     // [36] System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)
     public static void Subject_36()
     {
-        try { _ = ((typeof(byte).GetConstructors(System.Reflection.BindingFlags.Default)).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)
     }
 
     // [37] System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()
     public static void Subject_37()
     {
-        try { _ = ((typeof(byte).GetMembers()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()
     }
 
     // [38] System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()
     public static void Subject_38()
     {
-        try { _ = ((typeof(byte).GetInterfaces()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()
     }
 
     // [39] System.Private.CoreLib/System.Type::GetElementType:System.Type()
     public static void Subject_39()
     {
-        try { _ = ((typeof(byte).GetElementType()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetElementType:System.Type()
     }
 
     // [40] System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()
     public static void Subject_40()
     {
-        try { _ = ((typeof(byte).GetNestedTypes()).Length); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()
     }
 
     // [41] System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)
     public static void Subject_41()
     {
-        try { _ = ((typeof(byte).GetNestedType("hello")).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)
     }
 
     // [42] System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()

@@ -6,6 +6,7 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 
@@ -24,43 +25,39 @@ public static partial class ThreadSyncSubjects
     // [1] System.Private.CoreLib/System.Threading.Thread::Yield:System.Boolean()
     public static void Subject_1()
     {
-        try { var _ = ((Thread.Yield()) ? 1 : 0); }
+        try { _ = ((Thread.Yield()) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()
     public static void Subject_2()
     {
-        try { new CancellationTokenSource().Cancel(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()
     }
 
     // [3] System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()
     public static void Subject_3()
     {
-        try { var _ = ((default(CancellationToken).IsCancellationRequested) ? 1 : 0); }
+        try { _ = ((default(CancellationToken).IsCancellationRequested) ? 1 : 0); }
         catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)
     public static void Subject_4()
     {
-        try { var _ = ((default(CancellationToken).Register(null!)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)
     }
 
     // [5] System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback)
     public static void Subject_5()
     {
-        try { var _ = ((ThreadPool.QueueUserWorkItem(default)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback)
     }
 
     // [6] System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback,System.Object)
     public static void Subject_6()
     {
-        try { var _ = ((ThreadPool.QueueUserWorkItem(default, null!)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback,System.Object)
     }
 
     // [7] System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)

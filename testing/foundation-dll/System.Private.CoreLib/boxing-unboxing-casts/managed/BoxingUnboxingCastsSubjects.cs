@@ -19,15 +19,13 @@ public static partial class BoxingUnboxingCastsSubjects
     // [0] System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)
     public static void Subject_0()
     {
-        try { _ = ((Convert.ChangeType(null!, typeof(byte))).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)
     }
 
     // [1] System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)
     public static void Subject_1()
     {
-        try { _ = ((Convert.ChangeType(null!, typeof(byte), null)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)
     }
 
     // [2] System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)
@@ -62,8 +60,7 @@ public static partial class BoxingUnboxingCastsSubjects
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     public static void Subject_7()
     {
-        try { _ = ((RuntimeHelpers.GetObjectValue(null!)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
     }
 
     // [8] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
@@ -83,8 +80,7 @@ public static partial class BoxingUnboxingCastsSubjects
     // [10] System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
     public static void Subject_10()
     {
-        try { _ = ((((ValueType)42).Equals(null!)) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
     }
 
 }

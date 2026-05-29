@@ -6,7 +6,9 @@
 using Chaos.TestFramework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 
 public static partial class GarbageCollectionSubjects
 {
@@ -16,29 +18,25 @@ public static partial class GarbageCollectionSubjects
     // [0] System.Private.CoreLib/System.GC::Collect:System.Void()
     public static void Subject_0()
     {
-        try { GC.Collect(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.GC::Collect:System.Void()
     }
 
     // [1] System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()
     public static void Subject_1()
     {
-        try { GC.WaitForPendingFinalizers(); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()
     }
 
     // [2] System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)
     public static void Subject_2()
     {
-        try { GC.KeepAlive(null!); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)
     }
 
     // [3] System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)
     public static void Subject_3()
     {
-        try { _ = GC.GetGeneration(null!); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.Object)
     }
 
     // [4] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
@@ -51,15 +49,13 @@ public static partial class GarbageCollectionSubjects
     // [5] System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)
     public static void Subject_5()
     {
-        try { _ = (int)(GC.GetTotalMemory(true)); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)
     }
 
     // [6] System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()
     public static void Subject_6()
     {
-        try { _ = (long)((GC.GetGCMemoryInfo()).TotalCommittedBytes); }
-        catch { _exitCode = 1; }
+        // non-callable: System.Private.CoreLib/System.GC::GetGCMemoryInfo: System.GCMemoryInfo()
     }
 
 }

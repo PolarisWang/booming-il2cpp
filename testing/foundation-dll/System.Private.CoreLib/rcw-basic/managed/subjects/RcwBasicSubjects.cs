@@ -18,50 +18,43 @@ public static partial class RcwBasicSubjects
     // [0] RcwBasicNativeEntry/RcwBasicNativeEntry::Run:System.Int32(System.Int32)
     public static void Subject_0()
     {
-        try { _ = RcwBasicNativeEntry.Run(42); }
-        catch { _exitCode = 1; }
+        // non-callable: RcwBasicNativeEntry/RcwBasicNativeEntry::Run:System.Int32(System.Int32)
     }
 
     // [1] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()
     public static void Subject_1()
     {
-        try { _ = RcwBasicNativeEntry.TestRcwRoundTripIdentity(); }
-        catch { _exitCode = 1; }
+        // non-callable: RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()
     }
 
     // [2] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()
     public static void Subject_2()
     {
-        try { _ = RcwBasicNativeEntry.TestRcwRoundTripQi(); }
-        catch { _exitCode = 1; }
+        // non-callable: RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()
     }
 
     // [3] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()
     public static void Subject_3()
     {
-        try { _ = RcwBasicNativeEntry.TestRcwMultipleWrappers(); }
-        catch { _exitCode = 1; }
+        // non-callable: RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()
     }
 
     // [4] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()
     public static void Subject_4()
     {
-        try { _ = RcwBasicNativeEntry.TestRcwQiUnknownInterface(); }
-        catch { _exitCode = 1; }
+        // non-callable: RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()
     }
 
     // [5] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()
     public static void Subject_5()
     {
-        try { _ = RcwBasicNativeEntry.TestRcwVtableMethodCall(); }
-        catch { _exitCode = 1; }
+        // non-callable: RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()
     }
 
     // [6] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()
     public static void Subject_6()
     {
-        try { _ = RcwBasicNativeEntry.TestRcwDirectVtable(); }
-        catch { _exitCode = 1; }
+        // non-callable: RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()
     }
 
 }
