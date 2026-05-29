@@ -14,7 +14,7 @@
   <ItemGroup>
     <Compile Include="CcwBasicSubjects.cs" />
     <Compile Include="CcwBasicNativeEntry.cs" />
-    <Compile Include="subjects/CcwBasicNativeEntry.cs" />
+    <Compile Include="CcwBasicSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

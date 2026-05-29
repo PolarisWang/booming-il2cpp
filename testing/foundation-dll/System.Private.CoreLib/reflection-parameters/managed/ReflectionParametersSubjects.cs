@@ -66,21 +66,18 @@ public static partial class ReflectionParametersSubjects
     }
 
     // [7] System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()
-    public static void Subject_7()
+    public static void CustomEntrySubject_7()
     {
-        // non-callable: System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()
     }
 
     // [8] System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()
-    public static void Subject_8()
+    public static void CustomEntrySubject_8()
     {
-        // non-callable: System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()
     }
 
     // [9] System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()
-    public static void Subject_9()
+    public static void CustomEntrySubject_9()
     {
-        // non-callable: System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()
     }
 
 }

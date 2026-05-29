@@ -33,33 +33,28 @@ public static partial class TimeDateTimeTimespanPatchEntry
     }
 
     // [4] System.Private.CoreLib/System.DateTime::ToString:System.String()
-    public static int Subject_4()
+    public static void CustomEntryMethod4()
     {
-        return unchecked((int)(0xB0000000u + 4));
     }
 
     // [5] System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)
-    public static int Subject_5()
+    public static void CustomEntryMethod5()
     {
-        return unchecked((int)(0xB0000000u + 5));
     }
 
     // [6] System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)
-    public static int Subject_6()
+    public static void CustomEntryMethod6()
     {
-        return unchecked((int)(0xB0000000u + 6));
     }
 
     // [7] System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)
-    public static int Subject_7()
+    public static void CustomEntryMethod7()
     {
-        return unchecked((int)(0xB0000000u + 7));
     }
 
     // [8] System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)
-    public static int Subject_8()
+    public static void CustomEntryMethod8()
     {
-        return unchecked((int)(0xB0000000u + 8));
     }
 
     // [9] System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)
@@ -114,11 +109,11 @@ public static partial class TimeDateTimeTimespanPatchEntry
                 case 1: Subject_1(); break;
                 case 2: Subject_2(); break;
                 case 3: Subject_3(); break;
-                case 4: Subject_4(); break;
-                case 5: Subject_5(); break;
-                case 6: Subject_6(); break;
-                case 7: Subject_7(); break;
-                case 8: Subject_8(); break;
+                case 4: CustomEntryMethod4(); break;
+                case 5: CustomEntryMethod5(); break;
+                case 6: CustomEntryMethod6(); break;
+                case 7: CustomEntryMethod7(); break;
+                case 8: CustomEntryMethod8(); break;
                 case 9: Subject_9(); break;
                 case 10: Subject_10(); break;
                 case 11: Subject_11(); break;

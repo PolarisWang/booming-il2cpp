@@ -14,6 +14,7 @@
   <ItemGroup>
     <Compile Include="ThreadingTasksPrimitivesSubjects.cs" />
     <Compile Include="ThreadingTasksPrimitivesNativeEntry.Custom.cs" />
+    <Compile Include="ThreadingTasksPrimitivesSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

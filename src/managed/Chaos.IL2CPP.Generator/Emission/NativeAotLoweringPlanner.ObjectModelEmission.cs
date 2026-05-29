@@ -18,6 +18,7 @@ namespace Chaos.IL2CPP.Generator;
 
 public sealed partial class NativeAotLoweringPlanner
 {
+    HashSet<string> _typesWithFinalizer = new(StringComparer.Ordinal);
 	private static readonly List<string> s_emptyFieldList = new List<string>(0);
 
 	private (int vtableOffset, int methodCount) ComputeInterfaceVtableInfo(string ifaceSubjectId)
@@ -1232,6 +1233,31 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 		_allEmittedTypeSubjectIds.UnionWith(interfaceTypeSubjectIds);
 		_allEmittedTypeSubjectIds.UnionWith(valueTypeSubjectIds);
 		_allEmittedTypeSubjectIds.UnionWith(hashSet3);
+		// Post-scan: ensure delegate types detected by CollectReachableDelegateTypeSubjectIds
+		// (which has broader detection than the inline callvirt Invoke scanner) are tracked.
+		// Without this, delegate types like System.Action used via Assert.Throws(Action) may
+		// have their chaos_type_* struct definition omitted from the shared header, causing C2061.
+		foreach (var delegateTypeId in CollectReachableDelegateTypeSubjectIds(reachableMethods))
+		{
+			if (!string.Equals(delegateTypeId, DelegateTypeSubjectId, StringComparison.Ordinal) &&
+			    !string.Equals(delegateTypeId, MulticastDelegateTypeSubjectId, StringComparison.Ordinal) &&
+			    !referenceTypeSubjectIds.Contains(delegateTypeId))
+			{
+				TrackReferenceType(delegateTypeId, null);
+				_allEmittedTypeSubjectIds.Add(delegateTypeId);
+			}
+		}
+		// Build cached set of types with a non-static Finalize method (for O(1) lookup).
+		_typesWithFinalizer.Clear();
+		foreach (var m in _methodsBySubjectId.Values)
+		{
+			if (!m.IsStatic &&
+			    string.Equals(GetMethodName(m.SubjectId), "Finalize", StringComparison.Ordinal) &&
+			    !m.Identity.DeclaringTypeSubjectId.Contains("/System.Object"))
+			{
+				_typesWithFinalizer.Add(m.Identity.DeclaringTypeSubjectId);
+			}
+		}
 		void TrackAbiSlotCarrier(AotCoreIrAbiSlotArtifact abiSlot)
 		{
 			if (abiSlot.CarrierKindCode == AotCoreIrAbiCarrierKind.ValueTypeByValue && !string.IsNullOrEmpty(abiSlot.TypeSubjectId))

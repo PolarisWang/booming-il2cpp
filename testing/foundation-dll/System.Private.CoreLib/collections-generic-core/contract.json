@@ -23,6 +23,7 @@
     "System.Private.CoreLib/System.Collections.Generic.HashSet`1::Remove:System.Boolean(T)"
   ],
   "methodSubjectCount": 16,
+  "customEntryIndices": [0, 1, 2, 3, 4, 6, 7, 8, 10, 11, 12, 13, 14, 15],
   "functionalObligation": {
     "required": true
   },

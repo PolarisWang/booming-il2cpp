@@ -51,9 +51,8 @@ public static partial class GuidRandomHashcodeSubjects
     }
 
     // [5] System.Private.CoreLib/System.Guid::ToString:System.String()
-    public static void Subject_5()
+    public static void CustomEntrySubject_5()
     {
-        // non-callable: System.Private.CoreLib/System.Guid::ToString:System.String()
     }
 
     // [6] System.Private.CoreLib/System.Random::.ctor:System.Void()
@@ -64,27 +63,23 @@ public static partial class GuidRandomHashcodeSubjects
     }
 
     // [7] System.Private.CoreLib/System.Random::Next:System.Int32()
-    public static void Subject_7()
+    public static void CustomEntrySubject_7()
     {
-        // non-callable: System.Private.CoreLib/System.Random::Next:System.Int32()
     }
 
     // [8] System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)
-    public static void Subject_8()
+    public static void CustomEntrySubject_8()
     {
-        // non-callable: System.Private.CoreLib/System.Random::Next:System.Int32(System.Int32)
     }
 
     // [9] System.Private.CoreLib/System.Random::NextDouble:System.Double()
-    public static void Subject_9()
+    public static void CustomEntrySubject_9()
     {
-        // non-callable: System.Private.CoreLib/System.Random::NextDouble:System.Double()
     }
 
     // [10] System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])
-    public static void Subject_10()
+    public static void CustomEntrySubject_10()
     {
-        // non-callable: System.Private.CoreLib/System.Random::NextBytes:System.Void(System.Byte[])
     }
 
     // [11] System.Private.CoreLib/System.HashCode::Add:System.Void(System.Object)
@@ -95,9 +90,8 @@ public static partial class GuidRandomHashcodeSubjects
     }
 
     // [12] System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()
-    public static void Subject_12()
+    public static void CustomEntrySubject_12()
     {
-        // non-callable: System.Private.CoreLib/System.HashCode::ToHashCode:System.Int32()
     }
 
     // [13] System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)

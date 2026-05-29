@@ -16,6 +16,7 @@
     "System.Private.CoreLib/System.Attribute::get_TypeId:System.Object()"
   ],
   "methodSubjectCount": 9,
+  "customEntryIndices": [8],
   "functionalObligation": {
     "required": true
   },

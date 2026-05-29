@@ -487,6 +487,8 @@ public sealed class CppProjectEmitter
             "entry-jit.exe", // JIT binary — must survive AOT cleanup for subsequent pipeline stages
             "entry.exe",     // AOT binary — must survive JIT cleanup for subsequent pipeline stages
             "entry-aot.exe", // AOT backup — must survive JIT cleanup for restore
+            "CMakeLists.txt",       // needed by hotupdate rebuild
+            "CMakePresets.json",    // needed by hotupdate rebuild
         };
         var keepDirs = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
         {

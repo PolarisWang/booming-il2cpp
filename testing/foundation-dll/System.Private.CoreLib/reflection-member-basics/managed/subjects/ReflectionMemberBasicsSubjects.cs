@@ -38,17 +38,7 @@ public static partial class ReflectionMemberBasicsSubjects
     }
 
     // [3] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
-    public static void Subject_3()
-    {
-        // needs-manual — Invoke with 2 params requires manual implementation: System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
-    }
-
     // [4] System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]()
-    public static void Subject_4()
-    {
-        // needs-manual — GetParameters with 0 params requires manual implementation: System.Private.CoreLib/System.Reflection.MethodInfo::GetParameters:System.Reflection.ParameterInfo[]()
-    }
-
     // [5] System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()
     public static void Subject_5()
     {
@@ -78,12 +68,6 @@ public static partial class ReflectionMemberBasicsSubjects
     }
 
     // [9] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
-    public static void Subject_9()
-    {
-        try { _ = ((0).GetHashCode()); }
-        catch { _exitCode = 1; }
-    }
-
     // [10] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object)
     public static void Subject_10()
     {
@@ -106,10 +90,4 @@ public static partial class ReflectionMemberBasicsSubjects
     }
 
     // [13] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
-    public static void Subject_13()
-    {
-        try { _ = ((0).GetHashCode()); }
-        catch { _exitCode = 1; }
-    }
-
 }

@@ -12,7 +12,7 @@ public class Program
         AttributesCustomMetadataPatchEntry._exitCode = 0; AttributesCustomMetadataPatchEntry.Method5(); failures += AttributesCustomMetadataPatchEntry._exitCode << 5;
         AttributesCustomMetadataPatchEntry._exitCode = 0; AttributesCustomMetadataPatchEntry.Method6(); failures += AttributesCustomMetadataPatchEntry._exitCode << 6;
         AttributesCustomMetadataPatchEntry._exitCode = 0; AttributesCustomMetadataPatchEntry.Method7(); failures += AttributesCustomMetadataPatchEntry._exitCode << 7;
-        AttributesCustomMetadataPatchEntry._exitCode = 0; AttributesCustomMetadataPatchEntry.Method8(); failures += AttributesCustomMetadataPatchEntry._exitCode << 8;
+        AttributesCustomMetadataPatchEntry._exitCode = 0; AttributesCustomMetadataPatchEntry.CustomEntryMethod8(); failures += AttributesCustomMetadataPatchEntry._exitCode << 8;
         return failures;
     }
 }

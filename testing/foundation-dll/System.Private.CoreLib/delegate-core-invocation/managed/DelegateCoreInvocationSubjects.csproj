@@ -14,6 +14,7 @@
   <ItemGroup>
     <Compile Include="DelegateCoreInvocationSubjects.cs" />
     <Compile Include="subjects/DelegateCoreInvocationNativeEntry.Custom.cs" />
+    <Compile Include="DelegateCoreInvocationSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

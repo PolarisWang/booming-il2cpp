@@ -14,6 +14,7 @@
   <ItemGroup>
     <Compile Include="SnapshotProverSubjects.cs" />
     <Compile Include="SnapshotProverNativeEntry.Custom.cs" />
+    <Compile Include="SnapshotProverSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

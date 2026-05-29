@@ -37,9 +37,4 @@ public static partial class EhStressSubjects
     }
 
     // [3] System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)
-    public static void Subject_3()
-    {
-        // non-callable: System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)
-    }
-
 }

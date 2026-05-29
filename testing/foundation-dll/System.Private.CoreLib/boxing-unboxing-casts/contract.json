@@ -18,6 +18,7 @@
     "System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)"
   ],
   "methodSubjectCount": 11,
+  "customEntryIndices": [0, 1, 6, 7, 10],
   "functionalObligation": {
     "required": true
   },

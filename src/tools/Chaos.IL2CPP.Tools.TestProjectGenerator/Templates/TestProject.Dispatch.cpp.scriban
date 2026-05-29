@@ -22,9 +22,14 @@ extern "C" const int kSubjectSlotMap[];
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
 extern "C" int32_t GetHotpatchEntryCount() noexcept;
 
-// Benchmark functions use nullptr thunks. ChaosDispatchMethod falls through
-// to entry.direct_ptr from the hotpatch entries.
+// JIT mode: use kDefaultArgThunks to bypass JIT precode trampoline.
+// AOT mode: nullptr falls through to entry.direct_ptr (hotpatch-aware).
+{{ if is_jit }}
+extern "C" void (*kDefaultArgThunks[])() noexcept;
+#define CHAOS_DISPATCH_THUNKS kDefaultArgThunks
+{{ else }}
 #define CHAOS_DISPATCH_THUNKS nullptr
+{{ end }}
 
 // ── RunFactAll: dispatch ALL methods across ALL registered modules ────
 extern "C" CHAOS_IL2CPP_INT32 RunFactAll() {

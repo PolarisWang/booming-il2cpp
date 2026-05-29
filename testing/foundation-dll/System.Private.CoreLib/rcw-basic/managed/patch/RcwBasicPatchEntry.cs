@@ -9,45 +9,38 @@ public static partial class RcwBasicPatchEntry
     public static int _exitCode;
 
     // [0] RcwBasicNativeEntry/RcwBasicNativeEntry::Run:System.Int32(System.Int32)
-    public static int Subject_0()
+    public static void CustomEntryMethod0()
     {
-        return unchecked((int)(0xB0000000u + 0));
     }
 
     // [1] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripIdentity:System.Int32()
-    public static int Subject_1()
+    public static void CustomEntryMethod1()
     {
-        return unchecked((int)(0xB0000000u + 1));
     }
 
     // [2] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwRoundTripQi:System.Int32()
-    public static int Subject_2()
+    public static void CustomEntryMethod2()
     {
-        return unchecked((int)(0xB0000000u + 2));
     }
 
     // [3] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwMultipleWrappers:System.Int32()
-    public static int Subject_3()
+    public static void CustomEntryMethod3()
     {
-        return unchecked((int)(0xB0000000u + 3));
     }
 
     // [4] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwQiUnknownInterface:System.Int32()
-    public static int Subject_4()
+    public static void CustomEntryMethod4()
     {
-        return unchecked((int)(0xB0000000u + 4));
     }
 
     // [5] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwVtableMethodCall:System.Int32()
-    public static int Subject_5()
+    public static void CustomEntryMethod5()
     {
-        return unchecked((int)(0xB0000000u + 5));
     }
 
     // [6] RcwBasicNativeEntry/RcwBasicNativeEntry::TestRcwDirectVtable:System.Int32()
-    public static int Subject_6()
+    public static void CustomEntryMethod6()
     {
-        return unchecked((int)(0xB0000000u + 6));
     }
 
     public static void Run(int entryIndex)
@@ -56,13 +49,13 @@ public static partial class RcwBasicPatchEntry
         {
             switch (entryIndex)
             {
-                case 0: Subject_0(); break;
-                case 1: Subject_1(); break;
-                case 2: Subject_2(); break;
-                case 3: Subject_3(); break;
-                case 4: Subject_4(); break;
-                case 5: Subject_5(); break;
-                case 6: Subject_6(); break;
+                case 0: CustomEntryMethod0(); break;
+                case 1: CustomEntryMethod1(); break;
+                case 2: CustomEntryMethod2(); break;
+                case 3: CustomEntryMethod3(); break;
+                case 4: CustomEntryMethod4(); break;
+                case 5: CustomEntryMethod5(); break;
+                case 6: CustomEntryMethod6(); break;
             }
         }
         catch

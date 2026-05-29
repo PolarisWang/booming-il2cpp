@@ -13,7 +13,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ReflectionAssemblySubjects.cs" />
-    <Compile Include="subjects/ReflectionAssemblySubjects.Custom.cs" />
     <Compile Include="ReflectionAssemblySubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>

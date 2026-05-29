@@ -60,13 +60,15 @@ public static partial class ExceptionThrowDiagnosticsSubjects
     // [6] System.Private.CoreLib/System.Exception::ToString:System.String()
     public static void Subject_6()
     {
-        // non-callable: System.Private.CoreLib/System.Exception::ToString:System.String()
+        try { _ = ((new Exception().ToString()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()
     public static void Subject_7()
     {
-        // non-callable: System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()
+        try { _ = ((new Exception().GetBaseException()).GetHashCode()); }
+        catch { _exitCode = 1; }
     }
 
     // [8] System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)

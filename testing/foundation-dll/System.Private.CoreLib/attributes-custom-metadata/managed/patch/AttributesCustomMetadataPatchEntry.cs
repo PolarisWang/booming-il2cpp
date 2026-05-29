@@ -57,9 +57,8 @@ public static partial class AttributesCustomMetadataPatchEntry
     }
 
     // [8] System.Private.CoreLib/System.Attribute::get_TypeId:System.Object()
-    public static int Subject_8()
+    public static void CustomEntryMethod8()
     {
-        return unchecked((int)(0xB0000000u + 8));
     }
 
     public static void Run(int entryIndex)
@@ -76,7 +75,7 @@ public static partial class AttributesCustomMetadataPatchEntry
                 case 5: Subject_5(); break;
                 case 6: Subject_6(); break;
                 case 7: Subject_7(); break;
-                case 8: Subject_8(); break;
+                case 8: CustomEntryMethod8(); break;
             }
         }
         catch

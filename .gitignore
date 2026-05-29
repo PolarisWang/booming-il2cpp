@@ -31,6 +31,18 @@ deploy/
 !contracts/artifacts/v0/schemas/**
 !contracts/native/v0/
 
+# Pipeline temp files
+testing/foundation-dll/_batch_resume.*
+testing/foundation-dll/_launch_batch.py
+testing/foundation-dll/batch-full-report.json
+
+# ASM comparison reports (regenerated every pipeline run)
+**/asm-compare-report.json
+
+# Pipeline scratch log
+tmp_stderr.txt
+tmp_stdout.txt
+
 # Generated managed solution directory (csproj + sln + bin/obj)
 solution/
 

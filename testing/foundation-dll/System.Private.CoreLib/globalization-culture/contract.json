@@ -20,6 +20,7 @@
     "System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()"
   ],
   "methodSubjectCount": 13,
+  "customEntryIndices": [7, 8, 9, 10, 11],
   "functionalObligation": {
     "required": true
   },

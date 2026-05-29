@@ -17,6 +17,7 @@
     "System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)"
   ],
   "methodSubjectCount": 10,
+  "customEntryIndices": [5, 6, 8, 9],
   "functionalObligation": {
     "required": true
   },

@@ -27,9 +27,8 @@ public static partial class EhStressPatchEntry
     }
 
     // [3] System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)
-    public static int Subject_3()
+    public static void CustomEntryMethod3()
     {
-        return unchecked((int)(0xB0000000u + 3));
     }
 
     public static void Run(int entryIndex)
@@ -41,7 +40,7 @@ public static partial class EhStressPatchEntry
                 case 0: Subject_0(); break;
                 case 1: Subject_1(); break;
                 case 2: Subject_2(); break;
-                case 3: Subject_3(); break;
+                case 3: CustomEntryMethod3(); break;
             }
         }
         catch

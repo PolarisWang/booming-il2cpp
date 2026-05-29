@@ -50,6 +50,7 @@
     "System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()"
   ],
   "methodSubjectCount": 43,
+  "customEntryIndices": [0, 1, 2],
   "functionalObligation": {
     "required": true
   },

@@ -17,23 +17,8 @@ public static partial class TypeRuntimeHandlesSubjects
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
-    public static void Subject_0()
-    {
-        // needs-manual — GetType with 1 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String)
-    }
-
     // [1] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
-    public static void Subject_1()
-    {
-        // needs-manual — GetType with 2 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean)
-    }
-
     // [2] System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
-    public static void Subject_2()
-    {
-        // needs-manual — GetType with 3 params requires manual implementation: System.Private.CoreLib/System.Type::GetType:System.Type(System.String,System.Boolean,System.Boolean)
-    }
-
     // [3] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)
     public static void Subject_3()
     {
@@ -93,13 +78,15 @@ public static partial class TypeRuntimeHandlesSubjects
     // [11] System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()
     public static void Subject_11()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()
+        try { _ = ((typeof(byte).GetMethods()).Length); }
+        catch { _exitCode = 1; }
     }
 
     // [12] System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()
     public static void Subject_12()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()
+        try { _ = ((typeof(byte).GetFields()).Length); }
+        catch { _exitCode = 1; }
     }
 
 }

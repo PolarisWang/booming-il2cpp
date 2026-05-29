@@ -11,5 +11,6 @@
     "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Array,System.Int64)",
     "System.Private.CoreLib/System.Array::Copy:System.Void(System.Array,System.Int64,System.Array,System.Int64,System.Int64)"
   ],
-  "methodSubjectCount": 5
+  "methodSubjectCount": 5,
+  "customEntryIndices": [1, 2]
 }

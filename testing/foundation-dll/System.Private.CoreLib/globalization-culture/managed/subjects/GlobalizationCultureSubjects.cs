@@ -66,35 +66,10 @@ public static partial class GlobalizationCultureSubjects
     }
 
     // [7] System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)
-    public static void Subject_7()
-    {
-        // non-callable: System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String)
-    }
-
     // [8] System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)
-    public static void Subject_8()
-    {
-        // non-callable: System.Private.CoreLib/System.Globalization.CompareInfo::Compare:System.Int32(System.String,System.String,System.Globalization.CompareOptions)
-    }
-
     // [9] System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)
-    public static void Subject_9()
-    {
-        // non-callable: System.Private.CoreLib/System.Globalization.CompareInfo::IndexOf:System.Int32(System.String,System.String)
-    }
-
     // [10] System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)
-    public static void Subject_10()
-    {
-        // non-callable: System.Private.CoreLib/System.Globalization.TextInfo::ToUpper:System.String(System.String)
-    }
-
     // [11] System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)
-    public static void Subject_11()
-    {
-        // non-callable: System.Private.CoreLib/System.Globalization.TextInfo::ToLower:System.String(System.String)
-    }
-
     // [12] System.Private.CoreLib/System.Globalization.TextInfo::get_CultureName:System.String()
     public static void Subject_12()
     {

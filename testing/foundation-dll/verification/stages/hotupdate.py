@@ -23,6 +23,11 @@ _DRIVER_DLL = (
 )
 _IS_LINUX = sys.platform.startswith("linux")
 
+# Module-level flag: ensures chaos_runtime_core.lib is only rebuilt+synced once
+# per process lifetime.  The lib itself doesn't change between hotupdate stages;
+# only runtime-patchdata.cpp changes (compiled and linked into entry.exe).
+_runtime_lib_synced = False
+
 
 def _find_entry_binary(build_dir: Path) -> Path | None:
     """Locate the built entry binary in a cmake build directory.
@@ -242,8 +247,9 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
     _generate_runtime_patchdata_cpp(patchdata, native_dir / "runtime-patchdata.cpp", host_class)
 
     runtime_core_build = _REPO_ROOT / "build" / "vs2022" / "src" / "native" / "runtime-core"
-    if runtime_core_build.exists():
-        print(f"  [hotupdate] Rebuilding chaos_runtime_core.lib...")
+    global _runtime_lib_synced
+    if runtime_core_build.exists() and not _runtime_lib_synced:
+        print(f"  [hotupdate] Rebuilding chaos_runtime_core.lib (once per run)...")
         subprocess.run(
             ["cmake", "--build", str(runtime_core_build), "--config", "RelWithDebInfo", "--parallel"],
             capture_output=True, text=True, timeout=300,
@@ -274,6 +280,7 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
                 if copied == 0:
                     copied = 1
             print(f"  [hotupdate] Copied chaos_runtime_core.lib to {copied} SDK lib dir(s)")
+        _runtime_lib_synced = True
 
     print(f"  [hotupdate] Rebuilding entry.exe with patchdata...")
     build_dir = native_dir / "build"
@@ -337,7 +344,7 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
                 capture_output=True, text=True, timeout=120,
             )
     r = subprocess.run(
-        ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry"],
+        ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry", "--parallel"],
         capture_output=True, text=True, timeout=300,
     )
     if r.returncode != 0:

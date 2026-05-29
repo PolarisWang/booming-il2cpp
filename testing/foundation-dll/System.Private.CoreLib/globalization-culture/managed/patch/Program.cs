@@ -11,11 +11,11 @@ public class Program
         GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.Method4(); failures += GlobalizationCulturePatchEntry._exitCode << 4;
         GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.Method5(); failures += GlobalizationCulturePatchEntry._exitCode << 5;
         GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.Method6(); failures += GlobalizationCulturePatchEntry._exitCode << 6;
-        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.Method7(); failures += GlobalizationCulturePatchEntry._exitCode << 7;
-        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.Method8(); failures += GlobalizationCulturePatchEntry._exitCode << 8;
-        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.Method9(); failures += GlobalizationCulturePatchEntry._exitCode << 9;
-        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.Method10(); failures += GlobalizationCulturePatchEntry._exitCode << 10;
-        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.Method11(); failures += GlobalizationCulturePatchEntry._exitCode << 11;
+        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.CustomEntryMethod7(); failures += GlobalizationCulturePatchEntry._exitCode << 7;
+        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.CustomEntryMethod8(); failures += GlobalizationCulturePatchEntry._exitCode << 8;
+        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.CustomEntryMethod9(); failures += GlobalizationCulturePatchEntry._exitCode << 9;
+        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.CustomEntryMethod10(); failures += GlobalizationCulturePatchEntry._exitCode << 10;
+        GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.CustomEntryMethod11(); failures += GlobalizationCulturePatchEntry._exitCode << 11;
         GlobalizationCulturePatchEntry._exitCode = 0; GlobalizationCulturePatchEntry.Method12(); failures += GlobalizationCulturePatchEntry._exitCode << 12;
         return failures;
     }

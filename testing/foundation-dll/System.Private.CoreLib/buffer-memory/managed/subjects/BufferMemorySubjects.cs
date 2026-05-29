@@ -23,17 +23,7 @@ public static partial class BufferMemorySubjects
     }
 
     // [1] System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr)
-    public static void Subject_1()
-    {
-        // needs-manual — BulkMoveWithWriteBarrier with 3 params requires manual implementation: System.Private.CoreLib/System.Buffer::BulkMoveWithWriteBarrier:System.Void(System.Byte&,System.Byte&,System.UIntPtr)
-    }
-
     // [2] System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)
-    public static void Subject_2()
-    {
-        // non-callable: System.Private.CoreLib/System.Buffer::ByteLength:System.Int32(System.Array)
-    }
-
     // [3] System.Private.CoreLib/System.Buffer::GetByte:System.Byte(System.Array,System.Int32)
     public static void Subject_3()
     {
@@ -42,35 +32,10 @@ public static partial class BufferMemorySubjects
     }
 
     // [4] System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Byte*,System.Int32)
-    public static void Subject_4()
-    {
-        // non-callable: System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Byte*,System.Int32)
-    }
-
     // [5] System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Int32,System.Byte[],System.Int32,System.Int32)
-    public static void Subject_5()
-    {
-        // non-callable: System.Private.CoreLib/System.Buffer::Memcpy:System.Void(System.Byte*,System.Int32,System.Byte[],System.Int32,System.Int32)
-    }
-
     // [6] System.Private.CoreLib/System.Buffer::Memmove:System.Void(System.Byte&,System.Byte&,System.UIntPtr)
-    public static void Subject_6()
-    {
-        // needs-manual — Memmove with 3 params requires manual implementation: System.Private.CoreLib/System.Buffer::Memmove:System.Void(System.Byte&,System.Byte&,System.UIntPtr)
-    }
-
     // [7] System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.Int64,System.Int64)
-    public static void Subject_7()
-    {
-        // non-callable: System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.Int64,System.Int64)
-    }
-
     // [8] System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.UInt64,System.UInt64)
-    public static void Subject_8()
-    {
-        // non-callable: System.Private.CoreLib/System.Buffer::MemoryCopy:System.Void(System.Void*,System.Void*,System.UInt64,System.UInt64)
-    }
-
     // [9] System.Private.CoreLib/System.Buffer::SetByte:System.Void(System.Array,System.Int32,System.Byte)
     public static void Subject_9()
     {

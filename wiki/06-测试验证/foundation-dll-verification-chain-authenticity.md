@@ -172,6 +172,10 @@ JIT 构建额外包含：
 
 | 职责 | 路径 |
 |------|------|
+| 统一 CLI 入口 | `testing/foundation-dll/verification/__main__.py`（`python -m verification [flags]`） |
+| 单 family 入口 | `testing/foundation-dll/verification/entry_points/cli.py` |
+| Batch 入口 | `testing/foundation-dll/verification/entry_points/batch.py` |
+| CI smoke 入口 | `testing/foundation-dll/verification/entry_points/ci_smoke.py` |
 | 验证编排 | `testing/foundation-dll/verification/orchestration/engine.py` |
 | Native AOT runner | `testing/foundation-dll/verification/stages/pipeline_native_aot_runner.py` |
 | Codegen JIT 发射 | `src/managed/Chaos.IL2CPP.Generator/NativeAotLoweringPlanner.cs` |
@@ -180,6 +184,20 @@ JIT 构建额外包含：
 | JIT 编译器引擎 | `src/native/jit/jit_engine.cpp` |
 | 层级升级入口 | `src/native/interpreter/interp_entry/entry_direct.cpp` |
 | Driver 配置 | `src/managed/Chaos.IL2CPP.Driver/ConvertToCpp/ConvertToCppConfig.cs` |
+
+### 统一入口用法
+
+```bash
+cd testing/foundation-dll
+python -m verification --slug convert-char          # 单 family（默认）
+python -m verification --batch                      # 全量 batch
+python -m verification --ci                         # CI quick（4 families × 6 stage）
+python -m verification --managed-bench              # managed-only benchmark
+python -m verification --slug X --mode strict       # strict mode（15 stages）
+python -m verification --batch --skip benchmark,hotupdate  # 跳过耗时 stage
+```
+
+老入口（`python -m verification.entry_points.batch --family X`）仍然可用。`testing/scripts/robust-batch.py` 和 `run-batch-verification.py` 已删除（功能由 `--skip` 参数覆盖）。
 
 ---
 

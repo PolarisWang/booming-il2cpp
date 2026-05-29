@@ -30,20 +30,8 @@ public static partial class ThreadingSyncSubjects
     }
 
     // [2] System.Private.CoreLib/System.Threading.SemaphoreSlim::Wait:System.Void()
-    public static void CustomEntrySubject_2()
-    {
-    }
-
     // [3] System.Private.CoreLib/System.Threading.SemaphoreSlim::Release:System.Int32()
-    public static void CustomEntrySubject_3()
-    {
-    }
-
     // [4] System.Private.CoreLib/System.Threading.SemaphoreSlim::get_CurrentCount:System.Int32()
-    public static void CustomEntrySubject_4()
-    {
-    }
-
     // [5] System.Private.CoreLib/System.Threading.ManualResetEvent::.ctor:System.Void(System.Boolean)
     public static void Subject_5()
     {
@@ -52,20 +40,8 @@ public static partial class ThreadingSyncSubjects
     }
 
     // [6] System.Private.CoreLib/System.Threading.ManualResetEvent::Set:System.Boolean()
-    public static void CustomEntrySubject_6()
-    {
-    }
-
     // [7] System.Private.CoreLib/System.Threading.ManualResetEvent::Reset:System.Boolean()
-    public static void CustomEntrySubject_7()
-    {
-    }
-
     // [8] System.Private.CoreLib/System.Threading.ManualResetEvent::WaitOne:System.Boolean()
-    public static void CustomEntrySubject_8()
-    {
-    }
-
     // [9] System.Private.CoreLib/System.Threading.AutoResetEvent::.ctor:System.Void(System.Boolean)
     public static void Subject_9()
     {
@@ -74,20 +50,8 @@ public static partial class ThreadingSyncSubjects
     }
 
     // [10] System.Private.CoreLib/System.Threading.AutoResetEvent::Set:System.Boolean()
-    public static void CustomEntrySubject_10()
-    {
-    }
-
     // [11] System.Private.CoreLib/System.Threading.AutoResetEvent::Reset:System.Boolean()
-    public static void CustomEntrySubject_11()
-    {
-    }
-
     // [12] System.Private.CoreLib/System.Threading.AutoResetEvent::WaitOne:System.Boolean()
-    public static void CustomEntrySubject_12()
-    {
-    }
-
     // [13] System.Private.CoreLib/System.Threading.SpinLock::.ctor:System.Void(System.Boolean)
     public static void Subject_13()
     {
@@ -96,18 +60,6 @@ public static partial class ThreadingSyncSubjects
     }
 
     // [14] System.Private.CoreLib/System.Threading.SpinLock::Enter:System.Void(System.Boolean&)
-    public static void CustomEntrySubject_14()
-    {
-    }
-
     // [15] System.Private.CoreLib/System.Threading.SpinLock::Exit:System.Void()
-    public static void CustomEntrySubject_15()
-    {
-    }
-
     // [16] System.Private.CoreLib/System.Threading.SpinWait::SpinOnce:System.Void()
-    public static void CustomEntrySubject_16()
-    {
-    }
-
 }

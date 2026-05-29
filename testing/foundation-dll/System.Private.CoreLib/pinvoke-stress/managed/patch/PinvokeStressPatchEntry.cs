@@ -21,15 +21,13 @@ public static partial class PinvokeStressPatchEntry
     }
 
     // [2] System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)
-    public static int Subject_2()
+    public static void CustomEntryMethod2()
     {
-        return unchecked((int)(0xB0000000u + 2));
     }
 
     // [3] System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetLastPInvokeError:System.Int32()
-    public static int Subject_3()
+    public static void CustomEntryMethod3()
     {
-        return unchecked((int)(0xB0000000u + 3));
     }
 
     public static void Run(int entryIndex)
@@ -40,8 +38,8 @@ public static partial class PinvokeStressPatchEntry
             {
                 case 0: Subject_0(); break;
                 case 1: Subject_1(); break;
-                case 2: Subject_2(); break;
-                case 3: Subject_3(); break;
+                case 2: CustomEntryMethod2(); break;
+                case 3: CustomEntryMethod3(); break;
             }
         }
         catch

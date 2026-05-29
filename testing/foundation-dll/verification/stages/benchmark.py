@@ -1595,6 +1595,58 @@ def _run_single_benchmark(
     return result
 
 
+def _run_benchmark_all(
+    exe_path: Path, method_indices: list[int], iterations: int = 100000,
+    collect_profile: bool = False,
+) -> list[dict[str, Any]] | None:
+    """Run entry.exe --benchmark-all to benchmark multiple methods in one call.
+
+    Returns a list of per-method result dicts, or None if --benchmark-all
+    is not supported by the entry.exe (falls through to per-method mode).
+    """
+    try:
+        r = subprocess.run(
+            [str(exe_path), "--benchmark-all", str(iterations)],
+            capture_output=True, text=True, timeout=300,
+        )
+    except (subprocess.TimeoutExpired, OSError):
+        return None
+
+    output = (r.stdout or "").strip()
+    try:
+        data = json.loads(output)
+    except json.JSONDecodeError:
+        return None
+
+    raw_results = data.get("benchmarkAll")
+    if not isinstance(raw_results, list):
+        return None
+
+    # Build a lookup from methodIndex -> result
+    by_index: dict[int, dict] = {}
+    for entry in raw_results:
+        mi = entry.get("methodIndex")
+        if mi is not None:
+            by_index[mi] = entry
+
+    # Return results in the requested order
+    ordered = []
+    for mi in method_indices:
+        entry = by_index.get(mi)
+        if entry is None:
+            ordered.append({"methodIndex": mi, "error": "missing from batch output"})
+        else:
+            ordered.append(entry)
+
+            # Attach PROFILE data if collected (stderr)
+            if collect_profile and r.stderr:
+                profile = _parse_profile_data(r.stderr)
+                if profile["has_profile_data"]:
+                    entry["profile"] = profile
+
+    return ordered
+
+
 def _run_all_benchmarks(
     ctx: FamilyContext, exe_path: Path, label: str,
     collect_profile: bool = False,
@@ -1654,31 +1706,49 @@ def _run_all_benchmarks(
     if value_gate_failures:
         print(f"    [benchmark/{label}] value gate: {len(value_gate_failures)} methods excluded from benchmark")
 
+    # ── Try --benchmark-all (single invocation) first, fall back to per-method ──
     results: list[dict[str, Any]] = []
     total_ops = 0.0
     ok_count = 0
     fail_count = 0
+    used_batch_mode = False
 
-    for i in range(method_count):
-        if i in value_gate_failures:
-            results.append({
-                "methodIndex": i,
-                "error": "value_gate_failed",
-                "opsPerSecond": 0,
-            })
-            fail_count += 1
-            continue
+    # Methods excluded by value gate
+    for i in value_gate_failures:
+        results.append({
+            "methodIndex": i,
+            "error": "value_gate_failed",
+            "opsPerSecond": 0,
+        })
+        fail_count += 1
 
-        result = _run_single_benchmark(exe_path, i, collect_profile=collect_profile)
-        results.append(result)
-        if result and "error" not in result:
-            total_ops += result.get("opsPerSecond", 0)
-            ok_count += 1
+    remaining = [i for i in range(method_count) if i not in value_gate_failures]
+    if remaining:
+        batch_result = _run_benchmark_all(exe_path, remaining, collect_profile=collect_profile)
+        if batch_result is not None:
+            used_batch_mode = True
+            results.extend(batch_result)
+            for r in batch_result:
+                if r and "error" not in r:
+                    total_ops += r.get("opsPerSecond", 0)
+                    ok_count += 1
+                else:
+                    fail_count += 1
         else:
-            fail_count += 1
+            # Fall back to per-method subprocess
+            for i in remaining:
+                result = _run_single_benchmark(exe_path, i, collect_profile=collect_profile)
+                results.append(result)
+                if result and "error" not in result:
+                    total_ops += result.get("opsPerSecond", 0)
+                    ok_count += 1
+                else:
+                    fail_count += 1
+
+    mode = "batch" if used_batch_mode else "per-method"
 
     avg_ops = total_ops / ok_count if ok_count > 0 else 0.0
-    print(f"  [benchmark/{label}] {ok_count}/{method_count} OK, avg {avg_ops:.0f} ops/s"
+    print(f"  [benchmark/{label}] {ok_count}/{method_count} OK ({mode}), avg {avg_ops:.0f} ops/s"
           f" ({len(value_gate_failures)} value-gate skipped)")
 
     # Aggregate PROFILE data across methods (when collected)

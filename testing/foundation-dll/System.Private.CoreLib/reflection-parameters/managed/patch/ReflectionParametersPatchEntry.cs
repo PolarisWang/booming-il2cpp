@@ -51,21 +51,18 @@ public static partial class ReflectionParametersPatchEntry
     }
 
     // [7] System.Private.CoreLib/System.Reflection.ParameterInfo::GetRequiredCustomModifiers:System.Type[]()
-    public static int Subject_7()
+    public static void CustomEntryMethod7()
     {
-        return unchecked((int)(0xB0000000u + 7));
     }
 
     // [8] System.Private.CoreLib/System.Reflection.ParameterInfo::GetOptionalCustomModifiers:System.Type[]()
-    public static int Subject_8()
+    public static void CustomEntryMethod8()
     {
-        return unchecked((int)(0xB0000000u + 8));
     }
 
     // [9] System.Private.CoreLib/System.Reflection.MethodBase::GetParameters:System.Reflection.ParameterInfo[]()
-    public static int Subject_9()
+    public static void CustomEntryMethod9()
     {
-        return unchecked((int)(0xB0000000u + 9));
     }
 
     public static void Run(int entryIndex)
@@ -81,9 +78,9 @@ public static partial class ReflectionParametersPatchEntry
                 case 4: Subject_4(); break;
                 case 5: Subject_5(); break;
                 case 6: Subject_6(); break;
-                case 7: Subject_7(); break;
-                case 8: Subject_8(); break;
-                case 9: Subject_9(); break;
+                case 7: CustomEntryMethod7(); break;
+                case 8: CustomEntryMethod8(); break;
+                case 9: CustomEntryMethod9(); break;
             }
         }
         catch

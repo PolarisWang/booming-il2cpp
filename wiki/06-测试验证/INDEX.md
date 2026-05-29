@@ -82,6 +82,7 @@
 
 ## 最近更新
 
+- `2026-05-29`：新增统一 CLI 入口 `verification/__main__.py`，支持 `--slug`/`--batch`/`--ci`/`--managed-bench` 四种模式。删除 `testing/scripts/robust-batch.py` 和 `run-batch-verification.py`（功能由 `--skip` 参数覆盖）。修复 `ci_smoke.py` 路径 bug。更新 [`foundation-dll-verification-chain-authenticity.md`](./foundation-dll-verification-chain-authenticity.md) 关键文件路径表。
 - `2026-05-24`：新增 [`foundation-dll-verification-chain-authenticity.md`](./foundation-dll-verification-chain-authenticity.md)，追溯 AOT/JIT 验证链路真实性，确认 codegen→构建→运行时整条链路为真实 il2cpp/JIT 路径；JitEntry 新接口迁移状态已确认完成。
 - `2026-05-20`：Native C++ 单元测试全部迁移到 GoogleTest（`testing/` 目录，28 个 ctest 目标）。更新 [`测试方法清单.md`](./测试方法清单.md)，新增第九章 Native C++ 单元测试。
 - `2026-05-09`：更新 [`FactStatic-Native验证Gate流程.md`](./FactStatic-Native验证Gate流程.md)，补充 handwrite partial class 集成模式、`handwritten/` 覆盖保护规则、`_exitCode` 模式说明

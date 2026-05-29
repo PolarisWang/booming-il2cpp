@@ -58,15 +58,7 @@ public static partial class EnumParsingSubjects
     }
 
     // [6] System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)
-    public static void CustomEntrySubject_6()
-    {
-    }
-
     // [7] System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)
-    public static void CustomEntrySubject_7()
-    {
-    }
-
     // [8] System.Private.CoreLib/System.Enum::ToString:System.String()
     public static void Subject_8()
     {
@@ -82,18 +74,6 @@ public static partial class EnumParsingSubjects
     }
 
     // [10] System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object&)
-    public static void CustomEntrySubject_10()
-    {
-    }
-
     // [11] System.Private.CoreLib/System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object&)
-    public static void CustomEntrySubject_11()
-    {
-    }
-
     // [12] System.Private.CoreLib/System.Enum::BoxToString:System.String()
-    public static void CustomEntrySubject_12()
-    {
-    }
-
 }

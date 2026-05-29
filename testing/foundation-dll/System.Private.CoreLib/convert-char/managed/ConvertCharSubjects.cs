@@ -18,109 +18,127 @@ public static partial class ConvertCharSubjects
     // [0] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)
     public static void Subject_0()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)
+        try { _ = (int)(Convert.ToChar(true)); }
+        catch { _exitCode = 1; }
     }
 
     // [1] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)
     public static void Subject_1()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)
+        try { _ = (int)(Convert.ToChar((byte)42)); }
+        catch { _exitCode = 1; }
     }
 
     // [2] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)
     public static void Subject_2()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)
+        try { _ = (int)(Convert.ToChar('A')); }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)
     public static void Subject_3()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)
+        try { _ = (int)(Convert.ToChar(DateTime.UtcNow)); }
+        catch { _exitCode = 1; }
     }
 
     // [4] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)
     public static void Subject_4()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)
+        try { _ = (int)(Convert.ToChar(42m)); }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)
     public static void Subject_5()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)
+        try { _ = (int)(Convert.ToChar(42.0)); }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)
     public static void Subject_6()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)
+        try { _ = (int)(Convert.ToChar((short)42)); }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)
     public static void Subject_7()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)
+        try { _ = (int)(Convert.ToChar(42)); }
+        catch { _exitCode = 1; }
     }
 
     // [8] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)
     public static void Subject_8()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)
+        try { _ = (int)(Convert.ToChar(42L)); }
+        catch { _exitCode = 1; }
     }
 
     // [9] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
     public static void Subject_9()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
+        try { _ = (int)(Convert.ToChar(null!)); }
+        catch { _exitCode = 1; }
     }
 
     // [10] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)
     public static void Subject_10()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)
+        try { _ = (int)(Convert.ToChar(null!, null)); }
+        catch { _exitCode = 1; }
     }
 
     // [11] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)
     public static void Subject_11()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)
+        try { _ = (int)(Convert.ToChar((sbyte)42)); }
+        catch { _exitCode = 1; }
     }
 
     // [12] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)
     public static void Subject_12()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)
+        try { _ = (int)(Convert.ToChar(42.0f)); }
+        catch { _exitCode = 1; }
     }
 
     // [13] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)
     public static void Subject_13()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)
+        try { _ = (int)(Convert.ToChar("hello")); }
+        catch { _exitCode = 1; }
     }
 
     // [14] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)
     public static void Subject_14()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)
+        try { _ = (int)(Convert.ToChar("hello", null)); }
+        catch { _exitCode = 1; }
     }
 
     // [15] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)
     public static void Subject_15()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)
+        try { _ = (int)(Convert.ToChar((ushort)42)); }
+        catch { _exitCode = 1; }
     }
 
     // [16] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)
     public static void Subject_16()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)
+        try { _ = (int)(Convert.ToChar(42u)); }
+        catch { _exitCode = 1; }
     }
 
     // [17] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)
     public static void Subject_17()
     {
-        // non-callable: System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)
+        try { _ = (int)(Convert.ToChar(42uL)); }
+        catch { _exitCode = 1; }
     }
 
 }

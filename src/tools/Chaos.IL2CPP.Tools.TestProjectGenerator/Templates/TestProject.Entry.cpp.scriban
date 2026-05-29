@@ -4,6 +4,7 @@
 // Modes:
 //   (no args)            — fact: run all subject entries, print Passed: N/M
 //   --benchmark N I      — benchmark method N for I iterations
+//   --benchmark-all I    — benchmark ALL methods for I iterations, aggregated JSON
 //   --hotupdate          — hotpatch fact: baseline + apply + semantic-check + revert
 //   --hotupdate-and-benchmark N I — post-patch benchmark
 //   --microbench         — interpreter microbenchmarks
@@ -180,6 +181,34 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
     return 0;
 }
 
+// ── --benchmark-all: benchmark ALL methods in one invocation ────────
+static int RunBenchmarkAllMode(int iterations) {
+    const int kCount = kSubjectEntryCount;
+    printf("{\"benchmarkAll\":[");
+    bool first = true;
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+        auto result = RunBenchmark(i, iterations);
+        if (!first) printf(",");
+        first = false;
+        if (result.elapsed_ms < 0.0) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}", i);
+        } else {
+            double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
+            double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
+            printf(
+                "{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,"
+                "\"opsPerSecond\":%.0f,\"iterations\":%d,"
+                "\"allocatedBytes\":%" PRId64 ",\"allocPerOp\":%.1f}",
+                i, result.elapsed_ms, ops_per_sec, iterations,
+                result.allocated_bytes, alloc_per_op);
+        }
+    }
+    printf("]}\n");
+    std::fflush(stdout);
+    return 0;
+}
+
 static int RunHotupdateMode() {
     const int kCount = kSubjectEntryCount;
     // Dynamic allocation to support arbitrary method counts
@@ -345,6 +374,12 @@ int main(int argc, char* argv[]) {
     if (std::strcmp(argv[1], "--benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --benchmark <index> <iterations>\n"); return 1; }
         ret = RunBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        goto shutdown;
+    }
+
+    if (std::strcmp(argv[1], "--benchmark-all") == 0) {
+        if (argc < 3) { printf("Usage: entry.exe --benchmark-all <iterations>\n"); return 1; }
+        ret = RunBenchmarkAllMode(std::atoi(argv[2]));
         goto shutdown;
     }
 

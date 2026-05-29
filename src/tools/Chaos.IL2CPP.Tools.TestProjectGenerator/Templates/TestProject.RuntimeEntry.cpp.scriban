@@ -5,6 +5,7 @@
 //   (no args)            — fact: run all subject entries, print Passed: N/M
 //   --fact-json          — per-method JSON output (value-level verification)
 //   --benchmark N I      — benchmark method N for I iterations
+//   --benchmark-all I    — benchmark ALL methods for I iterations, aggregated JSON
 //   --hotupdate          — hotpatch fact: baseline + apply + semantic-check + revert
 //   --hotupdate-and-benchmark N I — post-patch benchmark
 //   --microbench         — interpreter microbenchmarks
@@ -52,9 +53,17 @@ extern "C" const MetadataRegistrationV0 chaos_codegen_metadata_registration;
 extern "C" const CodegenRegistrationOptionsV0 chaos_codegen_options;
 extern "C" void ChaosRegisterGcLayouts();
 
-// kDefaultArgThunks no longer needed — hotpatch_dispatch.h falls through to
-// entry.direct_ptr when thunks==nullptr. Works for both AOT and JIT modes.
+// kDefaultArgThunks: in AOT mode, nullptr is safe because ChaosDispatchMethod
+// falls through to entry.direct_ptr (set by SetDirectDispatch).
+// In JIT mode, direct_ptr is REPLACED by RegisterJitEntryMethods() with
+// JIT precode trampoline → JIT compilation → hang. Use kDefaultArgThunks
+// to call AOT function body directly (verification tests AOT codegen).
+{{ if is_jit }}
+extern "C" void (*kDefaultArgThunks[])() noexcept;
+#define CHAOS_USE_DEFAULT_THUNKS kDefaultArgThunks
+{{ else }}
 #define CHAOS_USE_DEFAULT_THUNKS nullptr
+{{ end }}
 
 // Benchmark result struct (must match verification_dispatch.generated.cpp)
 struct BenchmarkResult {
@@ -159,6 +168,36 @@ static int RunBenchmarkMode(int entry_index, int iterations) {
         "\"allocatedBytes\":%" PRId64 ",\"allocPerOp\":%.1f}\n",
         result.elapsed_ms, result.elapsed_ms, ops_per_sec, iterations,
         result.allocated_bytes, alloc_per_op);
+    std::fflush(stdout);
+    return 0;
+}
+
+// ── --benchmark-all: benchmark ALL methods in one invocation ────────
+// Returns a JSON array with one entry per method, avoiding the overhead
+// of launching N separate entry.exe processes.
+static int RunBenchmarkAllMode(int iterations) {
+    const int kCount = kSubjectEntryCount;
+    printf("{\"benchmarkAll\":[");
+    bool first = true;
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+        auto result = RunBenchmark(i, iterations);
+        if (!first) printf(",");
+        first = false;
+        if (result.elapsed_ms < 0.0) {
+            printf("{\"methodIndex\":%d,\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}", i);
+        } else {
+            double ops_per_sec = (iterations / result.elapsed_ms) * 1000.0;
+            double alloc_per_op = static_cast<double>(result.allocated_bytes) / iterations;
+            printf(
+                "{\"methodIndex\":%d,\"elapsedMilliseconds\":%.3f,"
+                "\"opsPerSecond\":%.0f,\"iterations\":%d,"
+                "\"allocatedBytes\":%" PRId64 ",\"allocPerOp\":%.1f}",
+                i, result.elapsed_ms, ops_per_sec, iterations,
+                result.allocated_bytes, alloc_per_op);
+        }
+    }
+    printf("]}\n");
     std::fflush(stdout);
     return 0;
 }
@@ -339,6 +378,12 @@ int main(int argc, char* argv[]) {
     if (std::strcmp(argv[1], "--benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --benchmark <index> <iterations>\n"); return 1; }
         ret = RunBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        goto shutdown;
+    }
+
+    if (std::strcmp(argv[1], "--benchmark-all") == 0) {
+        if (argc < 3) { printf("Usage: entry.exe --benchmark-all <iterations>\n"); return 1; }
+        ret = RunBenchmarkAllMode(std::atoi(argv[2]));
         goto shutdown;
     }
 

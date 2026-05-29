@@ -44,35 +44,10 @@ public static partial class TimeDateTimeTimespanSubjects
     }
 
     // [4] System.Private.CoreLib/System.DateTime::ToString:System.String()
-    public static void Subject_4()
-    {
-        // non-callable: System.Private.CoreLib/System.DateTime::ToString:System.String()
-    }
-
     // [5] System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)
-    public static void Subject_5()
-    {
-        // non-callable: System.Private.CoreLib/System.DateTime::ToString:System.String(System.String)
-    }
-
     // [6] System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)
-    public static void Subject_6()
-    {
-        // non-callable: System.Private.CoreLib/System.DateTime::AddDays:System.DateTime(System.Double)
-    }
-
     // [7] System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)
-    public static void Subject_7()
-    {
-        // non-callable: System.Private.CoreLib/System.DateTime::AddHours:System.DateTime(System.Double)
-    }
-
     // [8] System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)
-    public static void Subject_8()
-    {
-        // non-callable: System.Private.CoreLib/System.DateTime::AddMinutes:System.DateTime(System.Double)
-    }
-
     // [9] System.Private.CoreLib/System.DateTime::Compare:System.Int32(System.DateTime,System.DateTime)
     public static void Subject_9()
     {

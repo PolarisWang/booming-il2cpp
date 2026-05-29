@@ -11,6 +11,7 @@
     "System.Private.CoreLib/System.String::IndexOf:System.Int32(System.Char)"
   ],
   "methodSubjectCount": 4,
+  "customEntryIndices": [3],
   "functionalObligation": {
     "required": true
   },

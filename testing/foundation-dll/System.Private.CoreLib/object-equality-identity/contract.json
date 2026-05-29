@@ -14,6 +14,7 @@
     "System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()"
   ],
   "methodSubjectCount": 7,
+  "customEntryIndices": [0, 1, 3, 4, 5, 6],
   "functionalObligation": {
     "required": true
   },

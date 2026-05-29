@@ -15,6 +15,7 @@
     <Compile Include="PrimitiveNumericConversionsCoreSubjects.cs" />
     <Compile Include="PrimitiveNumericConversionsCoreNativeEntry.cs" />
     <Compile Include="subjects/PrimitiveNumericConversionsCoreNativeEntry.cs" />
+    <Compile Include="PrimitiveNumericConversionsCoreSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

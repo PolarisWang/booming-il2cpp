@@ -67,11 +67,22 @@ public sealed class CodegenOrchestrator
             }
 
             // Collect generated directories
-            // Driver writes to sdkRoot/generated/ when --sdk-out is used
+            // Driver writes to sdkRoot/<assembly-name>/generated/ when --sdk-out is used
             var generatedDirs = new List<string>();
-            var generatedPath = Path.Combine(outputDir, "generated");
-            if (Directory.Exists(generatedPath))
-                generatedDirs.Add(generatedPath);
+            if (Directory.Exists(outputDir))
+            {
+                // Per-assembly layout: <sdk-out>/<assembly>/generated/
+                foreach (var subDir in Directory.GetDirectories(outputDir))
+                {
+                    var genDir = Path.Combine(subDir, "generated");
+                    if (Directory.Exists(genDir) && Directory.GetFiles(genDir, "*.cpp").Length > 0)
+                        generatedDirs.Add(genDir);
+                }
+                // Flat layout fallback: <sdk-out>/generated/
+                var flatGen = Path.Combine(outputDir, "generated");
+                if (generatedDirs.Count == 0 && Directory.Exists(flatGen))
+                    generatedDirs.Add(flatGen);
+            }
 
             return new CodegenResult
             {

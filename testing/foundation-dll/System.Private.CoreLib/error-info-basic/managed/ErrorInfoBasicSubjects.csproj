@@ -15,6 +15,7 @@
     <Compile Include="ErrorInfoBasicSubjects.cs" />
     <Compile Include="ErrorInfoBasicNativeEntry.cs" />
     <Compile Include="subjects/ErrorInfoBasicNativeEntry.cs" />
+    <Compile Include="ErrorInfoBasicSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

@@ -73,9 +73,4 @@ public static partial class AttributesCustomMetadataSubjects
     }
 
     // [8] System.Private.CoreLib/System.Attribute::get_TypeId:System.Object()
-    public static void Subject_8()
-    {
-        // needs-manual — get_TypeId with 0 params requires manual implementation: System.Private.CoreLib/System.Attribute::get_TypeId:System.Object()
-    }
-
 }

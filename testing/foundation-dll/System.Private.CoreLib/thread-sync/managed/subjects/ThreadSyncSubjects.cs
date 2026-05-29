@@ -32,7 +32,8 @@ public static partial class ThreadSyncSubjects
     // [2] System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()
     public static void Subject_2()
     {
-        // non-callable: System.Private.CoreLib/System.Threading.CancellationTokenSource::Cancel:System.Void()
+        try { new CancellationTokenSource().Cancel(); }
+        catch { _exitCode = 1; }
     }
 
     // [3] System.Private.CoreLib/System.Threading.CancellationToken::get_IsCancellationRequested:System.Boolean()
@@ -45,25 +46,23 @@ public static partial class ThreadSyncSubjects
     // [4] System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)
     public static void Subject_4()
     {
-        // non-callable: System.Private.CoreLib/System.Threading.CancellationToken::Register:System.Threading.CancellationTokenRegistration(System.Action)
+        try { _ = ((default(CancellationToken).Register(null!)).GetHashCode()); }
+        catch { _exitCode = 1; }
     }
 
     // [5] System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback)
     public static void Subject_5()
     {
-        // non-callable: System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback)
+        try { _ = ((ThreadPool.QueueUserWorkItem(default)).GetHashCode()); }
+        catch { _exitCode = 1; }
     }
 
     // [6] System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback,System.Object)
     public static void Subject_6()
     {
-        // non-callable: System.Private.CoreLib/System.Threading.ThreadPool::QueueUserWorkItem:System.Threading.WaitCallback(System.Threading.WaitCallback,System.Object)
+        try { _ = ((ThreadPool.QueueUserWorkItem(default, null!)).GetHashCode()); }
+        catch { _exitCode = 1; }
     }
 
     // [7] System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)
-    public static void Subject_7()
-    {
-        // needs-manual — .ctor with 2 params requires manual implementation: System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)
-    }
-
 }

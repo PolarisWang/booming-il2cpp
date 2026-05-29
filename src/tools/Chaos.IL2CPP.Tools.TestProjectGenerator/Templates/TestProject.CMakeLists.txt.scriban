@@ -6,9 +6,10 @@ project({{ project_name }} CXX)
 set(CMAKE_CXX_STANDARD 20)
 
 # ── Compiler settings ──
+# /EHa needed for catch(...) to intercept C++ exceptions thrown by generated code.
 if(MSVC)
   add_compile_options(/utf-8 /GS- /FS)
-  set(CHAOS_EHA_FLAG /EHa)
+  set(CHAOS_EHA_FLAG "/EHa")
   set(CHAOS_FORCE_MULTIPLE /FORCE:MULTIPLE)
 else()
   add_compile_options(-Wall -Wextra -Wno-unused-parameter)
@@ -34,57 +35,93 @@ else()
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL={{ defines.log_level }})
 endif()
 
-{% if is_jit %}
+{{ if is_jit }}
 add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
-{% end %}
+{{ end }}
 
-# ── chaos-sdk (self-contained, provides chaos::runtime target) ──
-set(CHAOS_SDK_DIR "${CMAKE_CURRENT_SOURCE_DIR}/chaos-sdk")
+# ── Paths ──
+set(CHAOS_SDK_DIR "{{ sdk_dir }}")
+set(CHAOS_PROJECT_ROOT "{{ project_root }}")
+set(CHAOS_CODEGEN_DIR "{{ codegen_dir }}")
+
+# Find chaos SDK — provides chaos::runtime (prebuilt libs + flags)
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 
 # ── Source files ──
-# Codegen-generated subjects
-file(GLOB CHAOS_CODEGEN_CPP "subjects/*.cpp")
+# Prefer flat subjects/*.cpp (copied locally by TPG for MAX_PATH compatibility).
+# Fall back to codegen_dir/*Subjects/generated/*.cpp for in-place codegen builds.
+file(GLOB CHAOS_CODEGEN_FLAT_CPP "${CMAKE_CURRENT_SOURCE_DIR}/subjects/*.cpp")
+file(GLOB CHAOS_CODEGEN_NATIVE_CPP
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/chaos_generated_module.cpp"
+)
 
-# Native stubs in this directory (exclude entry point and dispatch)
+if(CHAOS_CODEGEN_FLAT_CPP)
+  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_FLAT_CPP})
+else()
+  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
+endif()
+
+# Native stubs in this directory (exclude TPG-generated and entry files)
 file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
 list(REMOVE_ITEM CHAOS_NATIVE_STUBS
+    "${CMAKE_CURRENT_SOURCE_DIR}/runtime-entry.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/entry.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/dispatch.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/verification_dispatch.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/runtime-patchdata.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 
-# Runtime stubs from the SDK (self-contained)
+# Runtime stubs from the source tree
 file(GLOB CHAOS_RUNTIME_STUB_SOURCES
-    "${CHAOS_SDK_DIR}/runtime_stubs/*.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/*.cpp"
 )
 list(REMOVE_ITEM CHAOS_RUNTIME_STUB_SOURCES
-    "${CHAOS_SDK_DIR}/runtime_stubs/guid_stubs.cpp"
-    "${CHAOS_SDK_DIR}/runtime_stubs/threading_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp"
 )
 
-# Profile globals
+# PROFILE globals (compiled from source to avoid stale SDK lib dependency)
 set(CHAOS_PROFILE_GLOBALS
-    "${CHAOS_SDK_DIR}/include/chaos/profile_globals.cpp"
+    "${CHAOS_PROJECT_ROOT}/src/native/common/chaos/profile_globals.cpp"
 )
 
-add_executable({{ project_name }}
-    entry.cpp
-    ${CHAOS_CODEGEN_CPP}
+set(CHAOS_ENTRY_SOURCES
+    "runtime-entry.cpp"
+    "runtime-patchdata.cpp"
+    "verification_dispatch.generated.cpp"
     ${CHAOS_NATIVE_STUBS}
     ${CHAOS_RUNTIME_STUB_SOURCES}
     ${CHAOS_PROFILE_GLOBALS}
+    ${CHAOS_AOT_GENERATED_CPP}
 )
 
 # ── Include directories ──
-target_include_directories({{ project_name }} PRIVATE
-    "${CHAOS_SDK_DIR}/include"
-    "${CHAOS_SDK_DIR}/include/chaos"
-    "${CHAOS_SDK_DIR}/include/gc"
-    "${CHAOS_SDK_DIR}/include/runtime_stubs"
+set(CHAOS_ENTRY_INCLUDES
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/gc"
+    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs"
+    "${CHAOS_PROJECT_ROOT}/src/native/common"
+    "${CHAOS_PROJECT_ROOT}/src/native/bootstrap"
+    "${CHAOS_PROJECT_ROOT}/src/native"
+    "${CHAOS_PROJECT_ROOT}/src/native/interpreter"
+    "${CHAOS_PROJECT_ROOT}/src/native/interpreter/generated"
+    "${CHAOS_PROJECT_ROOT}/src/native/support"
+    "${CHAOS_PROJECT_ROOT}/src/native/hot-update"
+    "${CHAOS_PROJECT_ROOT}/third_party/unordered_dense/include"
+{{ for s in subjects }}
+    "${CHAOS_CODEGEN_DIR}/{{ s.assembly_name }}/generated"
+{{ end }}
     "${CMAKE_CURRENT_SOURCE_DIR}"
-    "${CMAKE_CURRENT_SOURCE_DIR}/subjects"
+{{ if is_jit }}
+    "${CHAOS_PROJECT_ROOT}/src/native/jit"
+{{ end }}
 )
 
+add_executable({{ project_name }} ${CHAOS_ENTRY_SOURCES})
+target_include_directories({{ project_name }} PRIVATE ${CHAOS_ENTRY_INCLUDES})
 target_compile_options({{ project_name }} PRIVATE ${CHAOS_EHA_FLAG})
 target_link_libraries({{ project_name }} PRIVATE chaos::runtime)
 target_link_options({{ project_name }} PRIVATE ${CHAOS_FORCE_MULTIPLE})
