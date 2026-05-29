@@ -1,8 +1,34 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Chaos.IL2CPP.Tools.TestProjectGenerator.Emission;
 using Chaos.IL2CPP.Tools.TestProjectGenerator.Metadata;
 
 namespace Chaos.IL2CPP.Tools.TestProjectGenerator;
+
+// ── Server protocol types ─────────────────────────────────────────────
+// Line-delimited JSON on stdin/stdout:
+//   → {"id":1,"cmd":"generate","contract":"...","output":"...","jit":false,...}
+//   ← {"id":1,"status":"ok","entryExe":"..."}
+//   → {"id":2,"cmd":"exit"}
+//   ← {"id":2,"status":"ok"}
+internal record ServerCommand(
+    [property: JsonPropertyName("id")] int Id,
+    [property: JsonPropertyName("cmd")] string Cmd,
+    [property: JsonPropertyName("contract")] string? Contract = null,
+    [property: JsonPropertyName("output")] string? Output = null,
+    [property: JsonPropertyName("jit")] bool Jit = false,
+    [property: JsonPropertyName("configTier")] string ConfigTier = "check",
+    [property: JsonPropertyName("skipCodegen")] bool SkipCodegen = false,
+    [property: JsonPropertyName("codegenDir")] string? CodegenDir = null,
+    [property: JsonPropertyName("projectRoot")] string? ProjectRoot = null,
+    [property: JsonPropertyName("assemblies")] List<string>? Assemblies = null,
+    [property: JsonPropertyName("sourceOnly")] bool SourceOnly = false);
+
+internal record ServerResponse(
+    [property: JsonPropertyName("id")] int Id,
+    [property: JsonPropertyName("status")] string Status,
+    [property: JsonPropertyName("entryExe")] string? EntryExe = null,
+    [property: JsonPropertyName("error")] string? Error = null);
 
 public static class Program
 {
@@ -10,6 +36,12 @@ public static class Program
     {
         WriteIndented = true,
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+    };
+
+    private static readonly JsonSerializerOptions ServerJsonOptions = new()
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
     };
 
     private static readonly ContractReader ContractReader = new();
@@ -28,6 +60,7 @@ public static class Program
             "scan" => RunScan(args[1..]),
             "generate" => RunGenerate(args[1..]),
             "emit" => RunEmit(args[1..]),
+            "server" => RunServer(),
             _ => Error($"Unknown command: {command}")
         };
     }
@@ -46,23 +79,200 @@ public static class Program
 
               generate --assemblies <dll1.dll> [dll2.dll ...] --contract <contract.json> --output <dir>
                        [--jit] [--config-tier check|profile|ship] [--platform windows|linux|osx]
-                  Full project generation: runs IL2CPP codegen, then emits complete C++
-                  project (entry.cpp/h, dispatch.cpp, CMakeLists.txt, CMakePresets.json,
-                  runtime-patchdata.cpp, chaos-sdk cmake, metadata).
-                  Use for standalone projects without the verification pipeline.
+                       [--project-root <path>] [--source-only] [--skip-codegen]
+                       [--codegen-dir <path>]
+                  Full project generation: runs IL2CPP codegen, emits complete C++ project,
+                  then builds the native executable by default.
+
+              server  (no args)
+                  Start TPG server mode. Reads line-delimited JSON commands from stdin,
+                  writes JSON responses to stdout. All progress goes to stderr.
 
               emit --contract <contract.json> --output <dir>
                    [--jit] [--config-tier check|profile|ship] [--platform windows|linux|osx]
                   Emit dispatch.cpp and metadata from contract only (no IL2CPP codegen).
-                  Faster than 'generate' — use when codegen output already exists.
-                  Expects codegen output (--sdk-out) to already exist in the output directory.
 
 
             Options:
               --jit                  Enable JIT mode (default: AOT)
               --config-tier <tier>   Build configuration: check, profile, or ship (default: check)
               --platform <os>        Target platform: windows, linux, or osx (default: windows)
+              --project-root <path>  Chaos repository root (auto-detected from assembly path)
+              --source-only          Only emit source files, skip native build (default: build)
+              --skip-codegen         Skip IL2CPP codegen step (use with --codegen-dir)
+              --codegen-dir <path>   Path to existing codegen output (for --skip-codegen)
             """);
+    }
+
+    // ── Server mode ──────────────────────────────────────────────────────
+    // Reads line-delimited JSON commands from stdin, processes them, writes
+    // JSON responses to stdout.  Keeps the process alive (no dotnet exec
+    // overhead per family).  Progress output goes to stderr.
+    private static int RunServer()
+    {
+        Console.Error.WriteLine("[TPG server] started, reading commands from stdin...");
+        string? line;
+        while ((line = Console.In.ReadLine()) != null)
+        {
+            line = line.Trim();
+            if (string.IsNullOrEmpty(line)) continue;
+
+            ServerCommand? cmd;
+            try { cmd = JsonSerializer.Deserialize<ServerCommand>(line, ServerJsonOptions); }
+            catch (JsonException ex)
+            {
+                var resp = new ServerResponse(0, "error", Error: $"Invalid JSON: {ex.Message}");
+                Console.WriteLine(JsonSerializer.Serialize(resp, ServerJsonOptions));
+                continue;
+            }
+            if (cmd is null) continue;
+
+            switch (cmd.Cmd)
+            {
+                case "generate":
+                {
+                    var result = ExecuteServerGenerate(cmd);
+                    Console.WriteLine(JsonSerializer.Serialize(result, ServerJsonOptions));
+                    break;
+                }
+                case "exit":
+                {
+                    var resp = new ServerResponse(cmd.Id, "ok");
+                    Console.WriteLine(JsonSerializer.Serialize(resp, ServerJsonOptions));
+                    Console.Error.WriteLine("[TPG server] exiting");
+                    return 0;
+                }
+                default:
+                {
+                    var resp = new ServerResponse(cmd.Id, "error", Error: $"Unknown command: {cmd.Cmd}");
+                    Console.WriteLine(JsonSerializer.Serialize(resp, ServerJsonOptions));
+                    break;
+                }
+            }
+        }
+        return 0;
+    }
+
+    private static ServerResponse ExecuteServerGenerate(ServerCommand cmd)
+    {
+        if (string.IsNullOrEmpty(cmd.Contract))
+            return new ServerResponse(cmd.Id, "error", Error: "Missing 'contract' field");
+        if (string.IsNullOrEmpty(cmd.Output))
+            return new ServerResponse(cmd.Id, "error", Error: "Missing 'output' field");
+
+        var contractPath = cmd.Contract;
+        var outputDir = cmd.Output;
+
+        var projectRoot = cmd.ProjectRoot;
+        if (projectRoot is not null)
+            projectRoot = Path.GetFullPath(projectRoot);
+
+        var codegenBase = cmd.CodegenDir is not null
+            ? Path.GetFullPath(cmd.CodegenDir)
+            : Path.GetFullPath(Path.Combine(outputDir, "codegen"));
+
+        // Step 1: Read subjects from contract
+        Console.Error.WriteLine("  [1/3] Reading subjects from contract...");
+        var subjects = ContractReader.ReadContract(contractPath);
+        Console.Error.WriteLine($"        Found {subjects.Count} subjects");
+
+        // Step 2: Codegen (or skip)
+        Codegen.CodegenResult codegenResult;
+        if (cmd.SkipCodegen)
+        {
+            Console.Error.WriteLine("  [2/3] Skipping codegen, using existing output...");
+            var generatedDirs = new List<string>();
+            if (Directory.Exists(codegenBase))
+            {
+                foreach (var subDir in Directory.GetDirectories(codegenBase))
+                {
+                    var genDir = Path.Combine(subDir, "generated");
+                    if (Directory.Exists(genDir) && Directory.GetFiles(genDir, "*.cpp").Length > 0)
+                        generatedDirs.Add(genDir);
+                }
+            }
+
+            codegenResult = new Codegen.CodegenResult
+            {
+                Success = true,
+                OutputDir = codegenBase,
+                GeneratedDirs = generatedDirs,
+            };
+        }
+        else
+        {
+            Console.Error.WriteLine("  [2/3] Running IL2CPP codegen...");
+            var codegenMode = cmd.Jit ? "jit" : "aot";
+            var orchestrator = new Codegen.CodegenOrchestrator();
+            codegenResult = orchestrator.Run(cmd.Assemblies ?? [], codegenBase, codegenMode);
+
+            if (!codegenResult.Success)
+                return new ServerResponse(cmd.Id, "error", Error: codegenResult.Error);
+
+            Console.Error.WriteLine($"        {codegenResult.GeneratedDirs.Count} generated directories");
+        }
+
+        // Resolve SDK directory
+        var sdkDir = codegenBase;
+        if (codegenBase is not null && Directory.Exists(codegenBase))
+        {
+            // Check if codegenBase itself is a valid SDK root
+            if (File.Exists(Path.Combine(codegenBase, "chaos-config.cmake")))
+            {
+                sdkDir = codegenBase;
+            }
+            else
+            {
+                // Check subdirectories for per-assembly SDK layout
+                foreach (var subDir in Directory.GetDirectories(codegenBase))
+                {
+                    if (File.Exists(Path.Combine(subDir, "chaos-config.cmake")) &&
+                        File.Exists(Path.Combine(subDir, "cmake", "chaos-targets.cmake")))
+                    {
+                        sdkDir = subDir;
+                        break;
+                    }
+                }
+
+                // If not found, check parent directory (pipeline mode:
+                // codegenBase = <SubjectDir>/generated/, config lives in <SubjectDir>/)
+                if (sdkDir == codegenBase)
+                {
+                    var parent = Path.GetDirectoryName(codegenBase);
+                    if (parent is not null && File.Exists(Path.Combine(parent, "chaos-config.cmake")))
+                    {
+                        sdkDir = parent;
+                    }
+                }
+            }
+        }
+
+        // Step 3: Emit + optionally build
+        Console.Error.WriteLine("  [3/3] Emitting C++ project...");
+        var emitter = new CppProjectEmitter();
+
+        if (cmd.SourceOnly)
+        {
+            emitter.Emit(
+                outputDir, codegenResult, subjects,
+                isJit: cmd.Jit, configTier: cmd.ConfigTier,
+                isWindows: true, projectRoot: projectRoot,
+                codegenDir: codegenBase, sdkDir: sdkDir);
+            Console.Error.WriteLine("        Sources written (source-only mode)");
+            return new ServerResponse(cmd.Id, "ok");
+        }
+
+        var exePath = emitter.GenerateAndBuild(
+            outputDir, codegenResult, subjects,
+            isJit: cmd.Jit, configTier: cmd.ConfigTier,
+            isWindows: true, projectRoot: projectRoot,
+            codegenDir: codegenBase, sdkDir: sdkDir);
+
+        if (exePath is null)
+            return new ServerResponse(cmd.Id, "error", Error: "Build failed");
+
+        Console.Error.WriteLine($"        entry.exe produced at: {exePath}");
+        return new ServerResponse(cmd.Id, "ok", EntryExe: exePath);
     }
 
     private static int RunScan(string[] args)
@@ -96,6 +306,20 @@ public static class Program
         if (parsed.ContractPath is null)
             return Error("No contract specified. Use --contract <contract.json>");
 
+        // Auto-detect project root from assembly path if not explicitly provided
+        var projectRoot = parsed.ProjectRoot;
+        if (projectRoot is null && parsed.Assemblies.Count > 0)
+        {
+            projectRoot = DetectProjectRoot(parsed.Assemblies[0]);
+        }
+        if (projectRoot is not null)
+            projectRoot = Path.GetFullPath(projectRoot);
+
+        // Resolve codegen directory (--codegen-dir or default to <output>/codegen)
+        var codegenBase = parsed.CodegenDir is not null
+            ? Path.GetFullPath(parsed.CodegenDir)
+            : Path.GetFullPath(Path.Combine(parsed.OutputDir, "codegen"));
+
         // Step 1: Read subjects from contract
         Console.WriteLine("  [1/3] Reading subjects from contract...");
         var subjects = ContractReader.ReadContract(parsed.ContractPath);
@@ -106,28 +330,111 @@ public static class Program
             Console.WriteLine("  [WARNING] No subjects found — generating empty project.");
         }
 
-        // Step 2: Run IL2CPP codegen
-        Console.WriteLine("  [2/3] Running IL2CPP codegen...");
-        var codegenMode = parsed.IsJit ? "jit" : "aot";
-        var orchestrator = new Codegen.CodegenOrchestrator();
-        var codegenResult = orchestrator.Run(parsed.Assemblies, Path.Combine(parsed.OutputDir, "codegen"), codegenMode);
+        // Step 2: Run IL2CPP codegen (skip if --skip-codegen is set)
+        Codegen.CodegenResult codegenResult;
+        if (parsed.SkipCodegen)
+        {
+            Console.WriteLine("  [2/3] Skipping codegen (--skip-codegen), using existing output...");
+            var generatedDirs = new List<string>();
+            if (Directory.Exists(codegenBase))
+            {
+                foreach (var subDir in Directory.GetDirectories(codegenBase))
+                {
+                    var genDir = Path.Combine(subDir, "generated");
+                    if (Directory.Exists(genDir) && Directory.GetFiles(genDir, "*.cpp").Length > 0)
+                        generatedDirs.Add(genDir);
+                }
+            }
 
-        if (!codegenResult.Success)
-            return Error($"Codegen failed: {codegenResult.Error}");
+            codegenResult = new Codegen.CodegenResult
+            {
+                Success = true,
+                OutputDir = codegenBase,
+                GeneratedDirs = generatedDirs,
+            };
+        }
+        else
+        {
+            Console.WriteLine("  [2/3] Running IL2CPP codegen...");
+            var codegenMode = parsed.IsJit ? "jit" : "aot";
+            var orchestrator = new Codegen.CodegenOrchestrator();
+            codegenResult = orchestrator.Run(parsed.Assemblies, codegenBase, codegenMode);
 
-        Console.WriteLine($"        {codegenResult.GeneratedDirs.Count} generated directories");
+            if (!codegenResult.Success)
+                return Error($"Codegen failed: {codegenResult.Error}");
+
+            Console.WriteLine($"        {codegenResult.GeneratedDirs.Count} generated directories");
+        }
+
+        // Resolve SDK directory: find chaos-config.cmake in codegen output subdirectories
+        var sdkDir = codegenBase; // fallback
+        if (codegenBase is not null && Directory.Exists(codegenBase))
+        {
+            // Check if codegenBase itself is a valid SDK root
+            if (File.Exists(Path.Combine(codegenBase, "chaos-config.cmake")))
+            {
+                sdkDir = codegenBase;
+            }
+            else
+            {
+                foreach (var subDir in Directory.GetDirectories(codegenBase))
+                {
+                    if (File.Exists(Path.Combine(subDir, "chaos-config.cmake")) &&
+                        File.Exists(Path.Combine(subDir, "cmake", "chaos-targets.cmake")))
+                    {
+                        sdkDir = subDir;
+                        break;
+                    }
+                }
+
+                // Not found — check parent (pipeline mode: codegenBase is generated/, config in parent)
+                if (sdkDir == codegenBase)
+                {
+                    var parent = Path.GetDirectoryName(codegenBase);
+                    if (parent is not null && File.Exists(Path.Combine(parent, "chaos-config.cmake")))
+                    {
+                        sdkDir = parent;
+                    }
+                }
+            }
+        }
 
         // Step 3: Emit C++ project via Scriban templates
         Console.WriteLine("  [3/3] Emitting C++ project...");
         var emitter = new CppProjectEmitter();
-        emitter.Emit(
-            parsed.OutputDir,
-            codegenResult,
-            subjects,
-            isJit: parsed.IsJit,
-            configTier: parsed.ConfigTier,
-            isWindows: parsed.IsWindows);
-        Console.WriteLine($"        entry.cpp, dispatch.cpp, CMakeLists.txt, metadata/subjects.json written");
+
+        if (parsed.SourceOnly)
+        {
+            // Source-only mode: emit files but don't build
+            emitter.Emit(
+                parsed.OutputDir,
+                codegenResult,
+                subjects,
+                isJit: parsed.IsJit,
+                configTier: parsed.ConfigTier,
+                isWindows: parsed.IsWindows,
+                projectRoot: projectRoot,
+                codegenDir: codegenBase,
+                sdkDir: sdkDir);
+            Console.WriteLine($"        runtime-entry.cpp, dispatch.cpp, CMakeLists.txt, metadata/subjects.json written");
+        }
+        else
+        {
+            // Default: emit + build
+            var exePath = emitter.GenerateAndBuild(
+                parsed.OutputDir,
+                codegenResult,
+                subjects,
+                isJit: parsed.IsJit,
+                configTier: parsed.ConfigTier,
+                isWindows: parsed.IsWindows,
+                projectRoot: projectRoot,
+                codegenDir: codegenBase,
+                sdkDir: sdkDir);
+            if (exePath is null)
+                return Error("Build failed — executable not produced");
+            Console.WriteLine($"        entry.exe produced at: {exePath}");
+        }
 
         Console.WriteLine("  Done.");
         return 0;
@@ -179,7 +486,11 @@ public static class Program
         string? ContractPath,
         bool IsJit,
         string ConfigTier,
-        bool IsWindows);
+        bool IsWindows,
+        string? ProjectRoot,
+        bool SourceOnly,
+        bool SkipCodegen,
+        string? CodegenDir);
 
     private static ParsedArgs ParseArgs(string[] args)
     {
@@ -189,6 +500,10 @@ public static class Program
         bool isJit = false;
         var configTier = "check";
         var isWindows = true;
+        string? projectRoot = null;
+        var sourceOnly = false;
+        var skipCodegen = false;
+        string? codegenDir = null;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -223,9 +538,38 @@ public static class Program
                         isWindows = platform is "windows" or "win";
                     }
                     break;
+                case "--project-root":
+                    if (i + 1 < args.Length)
+                        projectRoot = args[++i];
+                    break;
+                case "--source-only":
+                    sourceOnly = true;
+                    break;
+                case "--skip-codegen":
+                    skipCodegen = true;
+                    break;
+                case "--codegen-dir":
+                    if (i + 1 < args.Length)
+                        codegenDir = args[++i];
+                    break;
             }
         }
 
-        return new ParsedArgs(assemblies, outputDir, contractPath, isJit, configTier, isWindows);
+        return new ParsedArgs(assemblies, outputDir, contractPath, isJit, configTier, isWindows, projectRoot, sourceOnly, skipCodegen, codegenDir);
+    }
+
+    /// <summary>
+    /// Walk up from a DLL path to find the repo root (looks for src/ directory).
+    /// </summary>
+    private static string? DetectProjectRoot(string assemblyPath)
+    {
+        var dir = new DirectoryInfo(Path.GetDirectoryName(Path.GetFullPath(assemblyPath))!);
+        while (dir is not null)
+        {
+            if (Directory.Exists(Path.Combine(dir.FullName, "src")))
+                return dir.FullName.Replace("\\", "/");
+            dir = dir.Parent;
+        }
+        return null;
     }
 }
