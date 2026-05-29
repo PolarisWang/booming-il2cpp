@@ -40,10 +40,56 @@ python -m verification.entry_points.cli <family-slug> --assembly System.Private.
 
 ## 常见错误
 
-- 用“应该”“可能”“看起来”代替验证结果
+- 用”应该””可能””看起来”代替验证结果
 - 只跑部分验证就宣称全通过
 - 只看运行日志，不刷新 formal source
 - 没有 formal object 就归档 `completed`
+
+## Pipeline 失败诊断
+
+如果 Foundation DLL family verification 失败，按以下表格快速定位根因：
+
+| 失败阶段 | 典型标志 | 常见根因 | 排查方向 |
+|----------|----------|----------|----------|
+| `preflight` | “capability-family-contract.json not found” | contract JSON 缺失或格式错误 | 检查 `family_dir/` 下 contract 文件；`json.load` 是否报错 |
+| `codegen` | “Build error” / “MSBuild failed” | IL 注入失败、codegen 模板语法错误、Scriban 解析异常 | 检查 codegen/build-output/ 下的构建日志；重跑 `--verbose` |
+| `jit_codegen` | “JIT codegen failed” | JIT 模式 codegen 输出路径问题，或 SDK 路径解析失败 | 检查 `entry-jit.exe` 是否生成、SDK 版本是否匹配 |
+| `fact` | “Fact X failed” / “exit code non-zero” | Native 构建时断言失败、entry-aot.exe 运行时崩溃 | 用 `--native-config check` 重新构建；检查 entry-aot.exe 输出 |
+| `audit` | “Mechanism violation” / “Principle violation” | Codegen 输出不符合 IL2CPP 翻译规范 | 检查具体 violation 详情；确认 codegen 翻译路径正确 |
+| `asm_compare` | “asm pass rate < 100%” | AOT vs JIT 汇编差异超出阈值 | 检查 asm_compare 详情 JSON，定位差异方法 |
+| `benchmark` | “OpsPerSecond too low” / “slowdown > 20%” | 性能回退，与 .NET 8 基线差距过大 | `check-net8-slowdown.sh` 查看具体比率；profile 模式采集热点 |
+| `hotupdate` | “semantic_changed_count == 0” | 热更新方法语义未正确标记变更 | 检查 patch 生成是否正确；hotupdate SubjectId 映射 |
+| `timeout` | “Timed out after Ns” | 阶段被 `--timeout` 强制中止，通常是卡在 native 构建或 dotnet restore | 检查日志看卡在哪一步；增加超时重试 |
+
+如果多个 stage 同时失败，通常根因在靠前的 stage（preflight/codegen）—— 修复后重跑即可。
+
+## Post-Pipeline 验证
+
+Pipeline 跑完后，对通过的家庭执行以下三项验证确认数据质量：
+
+### 验证项
+
+| 检查 | 脚本 | 说明 |
+|------|------|------|
+| 基准计时 | `run_family_validations()` | 确认所有 benchmark 的 `elapsedMilliseconds > 0` |
+| .NET 8 性能偏差 | `run_family_validations()` | 确认 AOT/JIT 对比 .NET 8 的 slowdown ≤ 20% |
+| HotUpdate 完整性 | `run_family_validations()` | 确认 `semantic_changed_count > 0` 且 overhead ≤ 100% |
+
+### 触发方式
+
+**自动（batch 模式）**：加 `--validate` 参数，跑完每个 family 后自动执行对应检查：
+
+```bash
+python -m verification.entry_points.batch --validate
+```
+
+**手动（单 family）**：验证函数可直接调用：
+
+```python
+from verification.entry_points.batch import run_family_validations
+failures = run_family_validations("convert-char")
+assert not failures, failures
+```
 
 ## 项目绑定
 

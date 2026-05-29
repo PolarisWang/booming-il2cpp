@@ -21,7 +21,7 @@ from verification.analysis.perf_store import auto_save_perf_data
 _TESTING_ROOT = _VERIFICATION_ROOT.parent  # testing/
 
 
-def _resolve_family_dir(slug: str, assembly: str) -> Path:
+def resolve_family_dir(slug: str, assembly: str) -> Path:
     return _TESTING_ROOT / assembly / slug
 
 
@@ -44,7 +44,7 @@ def main() -> None:
                         help="Skip already-passed stages from previous run")
 
     args = parser.parse_args()
-    family_dir = _resolve_family_dir(args.family_slug, args.assembly)
+    family_dir = resolve_family_dir(args.family_slug, args.assembly)
 
     if not family_dir.exists():
         print(f"ERROR: Family directory not found: {family_dir}")

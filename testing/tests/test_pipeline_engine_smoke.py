@@ -9,43 +9,14 @@ from __future__ import annotations
 
 import json
 import time
-import sys
 import tempfile
 from pathlib import Path
-from unittest.mock import MagicMock
-
-# ── Path setup — allow running from repo root ─────────────────────
-_HERE = Path(__file__).resolve().parent
-_REPO = _HERE.parent.parent
-sys.path.insert(0, str(_REPO / "testing" / "foundation-dll"))
 
 from verification.orchestration.context import FamilyContext, StageResult, UnifiedReport, ParallelGroup
-from verification.orchestration.engine import VerificationPipeline, _print_failure_summary, _format_duration
-
-# ── Test helpers ──────────────────────────────────────────────────
-
-PASSED = 0
-FAILED = 0
-ERRORS: list[str] = []
+from verification.orchestration.engine import VerificationPipeline, print_failure_summary, format_duration
 
 
-def _test(name: str):
-    """Decorate a test function.  Appends to ERRORS on failure."""
-    def decorator(fn):
-        def wrapper(*a, **kw):
-            global PASSED, FAILED
-            try:
-                fn(*a, **kw)
-                PASSED += 1
-            except Exception as e:
-                FAILED += 1
-                ERRORS.append(f"{name}: {e}")
-        wrapper._test_name = name
-        return wrapper
-    return decorator
-
-
-def _make_ctx(slug: str = "smoke-test", **kw) -> FamilyContext:
+def make_context(slug: str = "smoke-test", **kw) -> FamilyContext:
     """Create a minimal FamilyContext for testing."""
     return FamilyContext(
         slug=slug,
@@ -55,7 +26,7 @@ def _make_ctx(slug: str = "smoke-test", **kw) -> FamilyContext:
     )
 
 
-def _dummy_runner(status: str = "passed", summary: str = "ok", delay: float = 0):
+def dummy_runner(status: str = "passed", summary: str = "ok", delay: float = 0):
     """Create a stage runner function that returns a fixed StageResult."""
     def runner(ctx, stages):
         if delay:
@@ -66,44 +37,39 @@ def _dummy_runner(status: str = "passed", summary: str = "ok", delay: float = 0)
 
 # ── Test: _count_stages ───────────────────────────────────────────
 
-@_test("count_stages: all sequential")
 def test_count_stages_all_sequential():
     stages = [
-        ("a", _dummy_runner(), "A"),
-        ("b", _dummy_runner(), "B"),
-        ("c", _dummy_runner(), "C"),
+        ("a", dummy_runner(), "A"),
+        ("b", dummy_runner(), "B"),
+        ("c", dummy_runner(), "C"),
     ]
-    assert VerificationPipeline._count_stages(stages) == 3
+    assert VerificationPipeline.count_stages(stages) == 3
 
 
-@_test("count_stages: with parallel group")
 def test_count_stages_with_parallel():
     stages = [
-        ("a", _dummy_runner(), "A"),
+        ("a", dummy_runner(), "A"),
         ParallelGroup([
-            ("b1", _dummy_runner(), "B1"),
-            ("b2", _dummy_runner(), "B2"),
+            ("b1", dummy_runner(), "B1"),
+            ("b2", dummy_runner(), "B2"),
         ]),
-        ("c", _dummy_runner(), "C"),
+        ("c", dummy_runner(), "C"),
     ]
-    assert VerificationPipeline._count_stages(stages) == 4
+    assert VerificationPipeline.count_stages(stages) == 4
 
 
 # ── Test: _format_duration ────────────────────────────────────────
 
-@_test("format_duration: seconds")
 def test_format_seconds():
-    assert _format_duration(45) == "45s"
+    assert format_duration(45) == "45s"
 
 
-@_test("format_duration: minutes")
 def test_format_minutes():
-    assert _format_duration(125) == "2m5s"
+    assert format_duration(125) == "2m5s"
 
 
 # ── Test: StageResult dataclass ───────────────────────────────────
 
-@_test("StageResult to_dict")
 def test_stage_result_to_dict():
     sr = StageResult(stage="preflight", status="passed", summary="all good", duration_ms=42)
     d = sr.to_dict()
@@ -114,7 +80,6 @@ def test_stage_result_to_dict():
 
 # ── Test: UnifiedReport load_from_file ────────────────────────────
 
-@_test("UnifiedReport load_from_file valid")
 def test_report_load_valid():
     data = {
         "family": "test", "assembly": "X", "mode": "standard",
@@ -133,17 +98,14 @@ def test_report_load_valid():
         p.unlink()
 
 
-@_test("UnifiedReport load_from_file missing")
 def test_report_load_missing():
     assert UnifiedReport.load_from_file(Path("/nonexistent/report.json")) is None
 
 
 # ── Test: Resume logic ────────────────────────────────────────────
 
-@_test("pipeline resume skips passed stages")
 def test_pipeline_resume():
     """Verify that a stage marked as 'passed' in the previous report is skipped."""
-    # Create a previous report with preflight and codegen passed
     prev = {
         "family": "smoke", "assembly": "X", "mode": "standard",
         "overall_status": "passed", "stages": {
@@ -173,7 +135,6 @@ def test_pipeline_resume():
     report_path = actual_results_dir / "unified-verification-report.json"
     report_path.write_text(json.dumps(prev), encoding="utf-8")
 
-    # Build a mini-pipeline
     pipeline = VerificationPipeline(ctx)
     pipeline.STAGES = [
         ("preflight", tracking_runner("preflight"), "Preflight"),
@@ -183,13 +144,11 @@ def test_pipeline_resume():
 
     report = pipeline.run()
     assert report.overall_status == "passed"
-    # preflight and codegen were in resume_passed, so only audit should execute
     assert executed == ["audit"], f"Expected only audit to execute, got: {executed}"
 
 
 # ── Test: Skip stages ─────────────────────────────────────────────
 
-@_test("pipeline skip_stages config")
 def test_pipeline_skip_stages():
     executed = []
 
@@ -199,7 +158,7 @@ def test_pipeline_skip_stages():
             return StageResult(stage=name, status="passed")
         return runner
 
-    ctx = _make_ctx(skip_stages={"codegen"})
+    ctx = make_context(skip_stages={"codegen"})
     pipeline = VerificationPipeline(ctx)
     pipeline.STAGES = [
         ("preflight", tracking_runner("preflight"), "Preflight"),
@@ -215,12 +174,11 @@ def test_pipeline_skip_stages():
 
 # ── Test: Timeout ─────────────────────────────────────────────────
 
-@_test("pipeline stage timeout")
 def test_pipeline_timeout():
-    ctx = _make_ctx(stage_timeout_seconds=1)  # 1s timeout
+    ctx = make_context(stage_timeout_seconds=1)
     pipeline = VerificationPipeline(ctx)
     pipeline.STAGES = [
-        ("preflight", _dummy_runner(delay=3), "Preflight"),  # 3s > 1s → timeout
+        ("preflight", dummy_runner(delay=3), "Preflight"),
     ]
 
     report = pipeline.run()
@@ -231,7 +189,6 @@ def test_pipeline_timeout():
 
 # ── Test: ParallelGroup execution ─────────────────────────────────
 
-@_test("pipeline parallel group")
 def test_pipeline_parallel_group():
     order = []
 
@@ -243,7 +200,7 @@ def test_pipeline_parallel_group():
             return StageResult(stage=name, status="passed")
         return runner
 
-    ctx = _make_ctx()
+    ctx = make_context()
     pipeline = VerificationPipeline(ctx)
     pipeline.STAGES = [
         ("first", tracking_runner("first"), "First"),
@@ -255,28 +212,19 @@ def test_pipeline_parallel_group():
     ]
 
     report = pipeline.run()
-    # Custom stage names don't match required stages, so overall_status may be "skipped"
-    # Check individual stage results instead
     stages_dict = report.stages
     assert stages_dict.get("first", {}).get("status") == "passed"
     assert stages_dict.get("p1", {}).get("status") == "passed"
     assert stages_dict.get("p2", {}).get("status") == "passed"
     assert stages_dict.get("last", {}).get("status") == "passed"
-    # first runs before the group
     assert order.index("first") < order.index("p1")
     assert order.index("first") < order.index("p2")
-    # last runs after both parallel stages
     assert order.index("last") > order.index("p1")
     assert order.index("last") > order.index("p2")
-    # p1 and p2 may be in any order (concurrent), but p2 (no delay) should finish before p1 (0.2s delay)
-    # This is probabilistic: make it a soft check since thread scheduling is not guaranteed
-    if order.index("p2") > order.index("p1"):
-        print("NOTE: p2 finished after p1 despite no delay (scheduler variance)")
 
 
 # ── Test: Fatal stage termination ─────────────────────────────────
 
-@_test("pipeline fatal stage stops pipeline")
 def test_pipeline_fatal():
     executed = []
 
@@ -286,7 +234,7 @@ def test_pipeline_fatal():
             return StageResult(stage=name, status="failed")
         return runner
 
-    ctx = _make_ctx()
+    ctx = make_context()
     pipeline = VerificationPipeline(ctx)
     pipeline.STAGES = [
         ("preflight", tracking_runner("preflight"), "Preflight"),
@@ -294,51 +242,18 @@ def test_pipeline_fatal():
     ]
 
     pipeline.run()
-    # preflight is FATAL → pipeline stops, codegen never runs
     assert executed == ["preflight"]
 
 
 # ── Test: _print_failure_summary ──────────────────────────────────
 
-@_test("_print_failure_summary formats correctly")
 def test_failure_summary():
     stages = {
         "preflight": StageResult(stage="preflight", status="passed"),
         "codegen": StageResult(stage="codegen", status="failed", summary="compile error"),
         "benchmark": StageResult(stage="benchmark", status="error", summary="OOM"),
     }
-    # Test that this doesn't crash
     try:
-        _print_failure_summary(stages)
+        print_failure_summary(stages)
     except Exception as e:
         raise AssertionError(f"_print_failure_summary crashed: {e}")
-
-
-# ── Main ──────────────────────────────────────────────────────────
-
-def main():
-    global PASSED, FAILED
-    # Collect all test_ functions
-    test_fns = [(name, fn) for name, fn in globals().items()
-                if name.startswith("test_") and callable(fn)]
-
-    print(f"Running {len(test_fns)} pipeline engine smoke tests...\n")
-
-    for name, fn in test_fns:
-        fn()
-
-    print(f"\n{'='*50}")
-    print(f"  PASSED: {PASSED}")
-    print(f"  FAILED: {FAILED}")
-    print(f"{'='*50}")
-
-    if ERRORS:
-        print("\nErrors:")
-        for err in ERRORS:
-            print(f"  - {err}")
-
-    return 0 if FAILED == 0 else 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())

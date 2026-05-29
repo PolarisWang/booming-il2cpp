@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/boxing/unboxing/casts",
-  "capturedAt": "2026-05-29T08:58:22",
+  "capturedAt": "2026-05-29T23:32:51",
   "batchMode": true,
   "summary": {
     "totalMethods": 11,
@@ -16,21 +16,21 @@
       "total": 484
     },
     "aotInstructionCount": {
-      "min": 1,
+      "min": 10,
       "max": 14,
-      "avg": 8.5,
-      "total": 94
+      "avg": 12.5,
+      "total": 137
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 18
+      "external_runtime_call": 27
     },
-    "overallIrExpansionRatio": 0.19,
-    "averageExpansionRatio": 0.19,
+    "overallIrExpansionRatio": 0.28,
+    "averageExpansionRatio": 0.28,
     "maxExpansionRatio": 0.32,
-    "minExpansionRatio": 0.02
+    "minExpansionRatio": 0.23
   },
   "methodResults": [
     {
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,10 +52,28 @@
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_0",
-        "instructions": 1
+        "instructions": 12
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
     },
     {
       "methodIndex": 1,
@@ -64,8 +82,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -76,10 +94,28 @@
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_1",
-        "instructions": 1
+        "instructions": 13
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
     },
     {
       "methodIndex": 2,
@@ -283,8 +319,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -295,10 +331,23 @@
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_7",
-        "instructions": 1
+        "instructions": 10
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 8,
@@ -391,8 +440,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -403,10 +452,18 @@
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_Subject_10",
-        "instructions": 1
+        "instructions": 12
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     }
   ]
 }

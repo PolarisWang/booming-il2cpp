@@ -9,10 +9,10 @@ public static partial class SerializerOptionsSubjects
 {
     // [6] System.Text.Json/System.Text.Json.JsonSerializerOptions::AddContext{TContext}:System.Void()
     public static void CustomEntrySubject_6()
-    {        try { /* TODO: invoke the actual method */ }        catch { _exitCode = 1; }    }
+    {        try { default(JsonSerializerOptions)!.AddContext{TContext}(); } catch { _exitCode = 1; }    }
 
     // [71] System.Text.Json/System.Text.Json.JsonSerializerOptions::TryGetTypeInfo:System.Boolean(System.Type,System.Text.Json.Serialization.Metadata.JsonTypeInfo&)
     public static void CustomEntrySubject_71()
-    {        try { /* TODO: invoke the actual method */ }        catch { _exitCode = 1; }    }
+    {        try { _ = default(JsonSerializerOptions)!.TryGetTypeInfo(typeof(byte), out null!); } catch { _exitCode = 1; }    }
 
 }

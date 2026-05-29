@@ -55,7 +55,7 @@ REQUIRED_STAGES_STRICT = {
 
 # ── Helpers ────────────────────────────────────────────────────────
 
-def _format_duration(seconds: float) -> str:
+def format_duration(seconds: float) -> str:
     """Format seconds to human-readable string."""
     if seconds < 60:
         return f"{seconds:.0f}s"
@@ -68,7 +68,7 @@ def _format_duration(seconds: float) -> str:
     return f"{hours}h{minutes}m"
 
 
-def _print_failure_summary(stages: dict[str, StageResult]) -> None:
+def print_failure_summary(stages: dict[str, StageResult]) -> None:
     """Print a compact table of all failed / error stages."""
     failures = [(name, sr) for name, sr in stages.items()
                 if sr.status in ("failed", "error")]
@@ -79,7 +79,7 @@ def _print_failure_summary(stages: dict[str, StageResult]) -> None:
     print(f"  FAILURE SUMMARY ({len(failures)} stage(s))")
     print(f"  {'─' * 50}")
     for name, sr in failures:
-        dur = _format_duration(sr.duration_ms / 1000) if sr.duration_ms else "-"
+        dur = format_duration(sr.duration_ms / 1000) if sr.duration_ms else "-"
         summary = (sr.summary[:80] + "..") if len(sr.summary) > 80 else sr.summary
         print(f"  [{dur}] {name}: {sr.status.upper()} — {summary}")
     print(f"  {'─' * 50}\n")
@@ -145,7 +145,7 @@ class VerificationPipeline:
         self.ctx = ctx
 
     @staticmethod
-    def _count_stages(stages: list) -> int:
+    def count_stages(stages: list) -> int:
         """Count total individual stages, flattening ParallelGroup entries."""
         total = 0
         for entry in stages:
@@ -155,7 +155,7 @@ class VerificationPipeline:
                 total += 1
         return total
 
-    def _load_resume_state(self) -> set[str]:
+    def load_resume_state(self) -> set[str]:
         """If resume mode is on and a previous report exists, return the set of
         stage names that already passed in the last run."""
         if not self.ctx.resume:
@@ -175,9 +175,9 @@ class VerificationPipeline:
     def run(self) -> UnifiedReport:
         """Execute the full pipeline, returning a UnifiedReport."""
         overall_start = time.perf_counter()
-        total = self._count_stages(self.STAGES)
+        total = self.count_stages(self.STAGES)
         stages: dict[str, StageResult] = {}
-        resume_passed = self._load_resume_state()
+        resume_passed = self.load_resume_state()
 
         print(f"\n{'='*60}")
         print(f"Family Verify: {self.ctx.slug} [{self.ctx.assembly}] mode={self.ctx.mode}"
@@ -185,12 +185,12 @@ class VerificationPipeline:
               f"{' [TIMEOUT=' + str(self.ctx.stage_timeout_seconds) + 's]' if self.ctx.stage_timeout_seconds > 0 else ''}")
         print(f"{'='*60}\n")
 
-        _zero_methods = False
+        has_zero_methods = False
         global_idx = 0
 
-        def _run_single(name: str, runner: Any, label: str, idx: int) -> StageResult:
+        def run_single_stage(name: str, runner: Any, label: str, idx: int) -> StageResult:
             """Run a single stage and return the result.  Handles skip/zero-methods/resume."""
-            nonlocal _zero_methods
+            nonlocal has_zero_methods
 
             # Resume: skip if already passed in previous run
             if name in resume_passed:
@@ -201,7 +201,7 @@ class VerificationPipeline:
                 print(f"[{idx}/{total}] {label}... skipped")
                 return StageResult(stage=name, status="skipped", summary="Explicitly skipped")
 
-            if _zero_methods and name in self.METHOD_DEPENDENT_STAGES:
+            if has_zero_methods and name in self.METHOD_DEPENDENT_STAGES:
                 print(f"[{idx}/{total}] {label}... n/a")
                 return StageResult(stage=name, status="n/a", summary="0 methods — stage not applicable")
 
@@ -246,13 +246,13 @@ class VerificationPipeline:
             if completed > 0:
                 remaining = total - completed
                 eta = (elapsed / completed) * remaining
-                eta_str = f" [ETA {_format_duration(eta)}]"
+                eta_str = f" [ETA {format_duration(eta)}]"
 
-            print(f"  [{_format_duration(elapsed)}{eta_str}] {sr.status}: {sr.summary}")
+            print(f"  [{format_duration(elapsed)}{eta_str}] {sr.status}: {sr.summary}")
 
             # Track 0-method result from codegen (only codegen stage, which is always sequential)
             if name == "codegen" and "0 methods" in (sr.summary or ""):
-                _zero_methods = True
+                has_zero_methods = True
 
             return sr
 
@@ -260,13 +260,13 @@ class VerificationPipeline:
             if isinstance(entry, ParallelGroup):
                 # ── Parallel group ──
                 group = entry
-                elapsed = _format_duration(time.perf_counter() - overall_start)
+                elapsed = format_duration(time.perf_counter() - overall_start)
                 print(f"\n  [{elapsed}] >>> Parallel group ({len(group.stages)} stages)")
                 futures = {}
                 with ThreadPoolExecutor(max_workers=min(len(group.stages), 4)) as pool:
                     for name, runner, label in group.stages:
                         global_idx += 1
-                        fut = pool.submit(_run_single, name, runner, label, global_idx)
+                        fut = pool.submit(run_single_stage, name, runner, label, global_idx)
                         futures[fut] = name
 
                     completed_in_group = 0
@@ -276,14 +276,14 @@ class VerificationPipeline:
                         stages[name] = sr
                         completed_in_group += 1
 
-                elapsed = _format_duration(time.perf_counter() - overall_start)
+                elapsed = format_duration(time.perf_counter() - overall_start)
                 print(f"  [{elapsed}] <<< Parallel group done\n")
 
             else:
                 # ── Sequential stage ──
                 global_idx += 1
                 name, runner, label = entry
-                sr = _run_single(name, runner, label, global_idx)
+                sr = run_single_stage(name, runner, label, global_idx)
                 stages[name] = sr
 
                 # Fatal termination check
@@ -294,15 +294,15 @@ class VerificationPipeline:
         # Aggregate
         total_ms = int((time.perf_counter() - overall_start) * 1000)
         print(f"\n[{total}/{total}] Aggregating...")
-        report = _aggregate(self.ctx, stages, total_ms)
+        report = aggregate_report(self.ctx, stages, total_ms)
 
         # Failure summary table
-        _print_failure_summary(stages)
+        print_failure_summary(stages)
 
         # Print final summary
         print(f"\n{'='*60}")
         print(f"Result: {report.overall_status}")
-        print(f"Duration: {_format_duration(total_ms / 1000)}")
+        print(f"Duration: {format_duration(total_ms / 1000)}")
         if report.coverage:
             cov = report.coverage
             print(f"Coverage: {cov.get('stagesPassed', 0)}/{cov.get('stagesTotal', 0)} passed"
@@ -314,12 +314,12 @@ class VerificationPipeline:
 
 # ── Aggregation ────────────────────────────────────────────────────
 
-def _aggregate(ctx: FamilyContext, stages: dict[str, StageResult], total_duration_ms: int) -> UnifiedReport:
+def aggregate_report(ctx: FamilyContext, stages: dict[str, StageResult], total_duration_ms: int) -> UnifiedReport:
     """Aggregate all stage results into the final unified report."""
     stages_map = {name: sr.to_dict() for name, sr in stages.items()}
-    coverage = _compute_coverage(stages)
-    dashboard = _build_dashboard(stages)
-    regression = _detect_regression(ctx)
+    coverage = compute_coverage(stages)
+    dashboard = build_dashboard_metrics(stages)
+    regression = detect_regression(ctx)
 
     required = REQUIRED_STAGES_STRICT if ctx.mode == "strict" else REQUIRED_STAGES_STANDARD
     failures = [name for name, sr in stages.items() if name in required and sr.status == "failed"]
@@ -348,7 +348,7 @@ def _aggregate(ctx: FamilyContext, stages: dict[str, StageResult], total_duratio
     )
 
 
-def _compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
+def compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
     """Compute verification coverage metrics."""
     passed = sum(1 for sr in stages.values() if sr.status == "passed")
     failed = sum(1 for sr in stages.values() if sr.status == "failed")
@@ -369,7 +369,7 @@ def _compute_coverage(stages: dict[str, StageResult]) -> dict[str, float]:
     }
 
 
-def _build_dashboard(stages: dict[str, StageResult]) -> dict[str, Any]:
+def build_dashboard_metrics(stages: dict[str, StageResult]) -> dict[str, Any]:
     """Build comprehensive dashboard from stage results."""
     dashboard: dict[str, Any] = {}
 
@@ -419,7 +419,7 @@ def _build_dashboard(stages: dict[str, StageResult]) -> dict[str, Any]:
     return dashboard
 
 
-def _detect_regression(ctx: FamilyContext) -> dict[str, Any]:
+def detect_regression(ctx: FamilyContext) -> dict[str, Any]:
     """Detect regressions by comparing with stored baseline."""
     result: dict[str, Any] = {
         "hasRegression": False,

@@ -76,12 +76,12 @@ def run_smoke_family(slug: str, assembly: str = "System.Private.CoreLib") -> dic
         }
 
 
-def main() -> None:
+def main(argv: list[str] | None = None) -> None:
     import argparse
     parser = argparse.ArgumentParser(description="CI smoke test for foundation-dll pipeline")
     parser.add_argument("--assembly", default="System.Private.CoreLib")
     parser.add_argument("--families", default=None, help="Comma-separated family slugs (default: 4 representative families)")
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     families = args.families.split(",") if args.families else DEFAULT_FAMILIES
     print(f"Foundation-DLL CI Smoke Test")

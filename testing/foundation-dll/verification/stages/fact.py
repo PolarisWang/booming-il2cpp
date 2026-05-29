@@ -107,6 +107,7 @@ def generate_managed_fact_harness(harness_dir: Path, subject_ids: list[str], ass
 // Family: {family_slug}, Assembly: {assembly}
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
 class ManagedFactHarness
