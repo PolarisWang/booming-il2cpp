@@ -16,8 +16,8 @@ namespace Chaos.IL2CPP.Driver;
 
 internal static class JitAsmCapture
 {
-    // ── Win32 P/Invoke ──────────────────────────────────────────────────────
-
+    // ── Win32 P/Invoke (platform-specific) ──────────────────────────────────
+#if WINDOWS
     [StructLayout(LayoutKind.Sequential)]
     private struct MEMORY_BASIC_INFORMATION
     {
@@ -46,6 +46,36 @@ internal static class JitAsmCapture
 
     private const uint PageExecuteRead = 0x20;
     private const uint PageExecuteReadWrite = 0x40;
+#endif
+
+    // ── Platform-safe code buffer sizing ─────────────────────────────────────
+    /// <summary>
+    /// Determine safe capture buffer size. On Windows, uses VirtualQuery to
+    /// validate the memory region is executable. On other platforms, defaults
+    /// to 4096 and lets FindMethodBoundary detect the actual method end.
+    /// </summary>
+    private static int GetSafeCaptureSize(IntPtr fnPtr, out string? error)
+    {
+#if WINDOWS
+        int mbiSize = Marshal.SizeOf<MEMORY_BASIC_INFORMATION>();
+        if (VirtualQuery(fnPtr, out var mbi, mbiSize) == 0)
+        {
+            error = $"VirtualQuery failed (error {Marshal.GetLastPInvokeError()})";
+            return 0;
+        }
+        if (mbi.State != (uint)MemState.MemCommit ||
+            (mbi.Protect != PageExecuteRead && mbi.Protect != PageExecuteReadWrite))
+        {
+            error = $"Memory region not executable: state=0x{mbi.State:x} protect=0x{mbi.Protect:x}";
+            return 0;
+        }
+        error = null;
+        return Math.Min((int)mbi.RegionSize, 4096);
+#else
+        error = null;
+        return 4096;
+#endif
+    }
 
     // ── Result types ────────────────────────────────────────────────────────
 
@@ -291,28 +321,15 @@ internal static class JitAsmCapture
                 RuntimeHelpers.PrepareMethod(realMethod.MethodHandle);
                 var subjectFnPtr = realMethod.MethodHandle.GetFunctionPointer();
 
-                int subjectMbiSize = Marshal.SizeOf<MEMORY_BASIC_INFORMATION>();
-                int subjectQueryResult = VirtualQuery(subjectFnPtr, out var subjectMbi, subjectMbiSize);
-                if (subjectQueryResult == 0)
+                int subjectMaxSize = GetSafeCaptureSize(subjectFnPtr, out var subjectError);
+                if (subjectError is not null)
                 {
                     return new JitCaptureResult
                     {
                         MethodFullName = realMethod.ToString(),
-                        Error = $"VirtualQuery failed (error {Marshal.GetLastPInvokeError()})"
+                        Error = subjectError
                     };
                 }
-
-                if (subjectMbi.State != (uint)MemState.MemCommit ||
-                    (subjectMbi.Protect != PageExecuteRead && subjectMbi.Protect != PageExecuteReadWrite))
-                {
-                    return new JitCaptureResult
-                    {
-                        MethodFullName = realMethod.ToString(),
-                        Error = $"Memory region not executable: state=0x{subjectMbi.State:x} protect=0x{subjectMbi.Protect:x}"
-                    };
-                }
-
-                int subjectMaxSize = Math.Min((int)subjectMbi.RegionSize, 4096);
                 byte[] subjectCode = new byte[subjectMaxSize];
                 Marshal.Copy(subjectFnPtr, subjectCode, 0, subjectMaxSize);
 
@@ -367,32 +384,17 @@ internal static class JitAsmCapture
 
             var fnPtr = method.MethodHandle.GetFunctionPointer();
 
-            // Query memory region
-            int mbiSize = Marshal.SizeOf<MEMORY_BASIC_INFORMATION>();
-            int result = VirtualQuery(fnPtr, out var mbi, mbiSize);
-            if (result == 0)
-            {
-                return new JitCaptureResult
-                {
-                    IlBody = ilBody,
-                    MethodFullName = method.ToString(),
-                    Error = $"VirtualQuery failed (error {Marshal.GetLastPInvokeError()})"
-                };
-            }
-
-            if (mbi.State != (uint)MemState.MemCommit ||
-                (mbi.Protect != PageExecuteRead && mbi.Protect != PageExecuteReadWrite))
-            {
-                return new JitCaptureResult
-                {
-                    IlBody = ilBody,
-                    MethodFullName = method.ToString(),
-                    Error = $"Memory region not executable: state=0x{mbi.State:x} protect=0x{mbi.Protect:x}"
-                };
-            }
-
             // Determine actual code size by scanning for method boundaries
-            int maxSize = Math.Min((int)mbi.RegionSize, 4096); // cap at 4KB
+            int maxSize = GetSafeCaptureSize(fnPtr, out var mbiError);
+            if (mbiError is not null)
+            {
+                return new JitCaptureResult
+                {
+                    IlBody = ilBody,
+                    MethodFullName = method.ToString(),
+                    Error = mbiError
+                };
+            }
             byte[] code = new byte[maxSize];
             Marshal.Copy(fnPtr, code, 0, maxSize);
 

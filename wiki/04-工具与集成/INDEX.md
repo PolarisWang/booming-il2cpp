@@ -8,6 +8,7 @@
 
 最近更新：
 
+- `2026-05-28`：新增 `linux-dev-toolchain.md`，记录 Linux 推荐工具链与配置。
 - `2026-05-21`：新增 `il2cpp-generator-project-structure.md`，收口 `CodeGen → Generator` 重命名后的项目结构、命名空间与三层分离约束。
 - `2026-04-17`：更新 `il2cpp-core-structure-and-scriban-governance.md`，收口 `ObjectModel` / `ExternalRuntimeHelpers`，并同步 `LoaderStage` / `LinkerStage` / `ManagedClosureContracts` 的结构治理结论。
 - `2026-04-19`：新增 `scriban-usage-and-codegen-rules.md`，明确 IL2CPP / Python codegen 默认优先 `Scriban`，能力不足时先扩展 `Scriban`。
@@ -34,6 +35,7 @@
 | [`统一测试框架.md`](./统一测试框架.md) | 统一测试框架 `run test` | 测试框架全貌：`Chaos.TestFramework.Sdk/Runtime` 分层、collection/manifest 规则、CLI 命令树（`run test`）、Foundation-DLL 独立管线、Native GoogleTest 注册方式、formal refresh 入口 `run test inventory --json`。 |
 | [`统一追踪体系.md`](./统一追踪体系.md) | 统一追踪体系 | 跨语言 JSONL trace 系统，覆盖 Python/C#/C++ 三层，span 层级，`trace-analyze` 性能分析，**错误排查工作流（日常开发查错首选）**。 |
 | [`il2cpp-core-structure-and-scriban-governance.md`](./il2cpp-core-structure-and-scriban-governance.md) | IL2CPP core structure and Scriban governance | 固化 `IL2CPP` 核心代码层的 planner / emitter / template 结构治理，以及 ObjectModel / ExternalRuntimeHelpers / Loader / Linker / Contracts 的长期拆分边界。 |
+| [`linux-dev-toolchain.md`](./linux-dev-toolchain.md) | Linux dev toolchain | Linux 推荐开发工具链：GCC 14、Ninja、CMake 31、Clang 19、CCache、Mold、GDB、Valgrind、Perf，以及 .NET SDK 配置和 CMakePresets 现状。 |
 | [`il2cpp-generator-project-structure.md`](./il2cpp-generator-project-structure.md) | Generator project structure | 固化 `Chaos.IL2CPP.Generator` 项目结构、命名空间边界、Planner/Emitter/Template 三层分离约束，以及 `CodeGen → Generator` 重命名记录。 |
 | [`scriban-usage-and-codegen-rules.md`](./scriban-usage-and-codegen-rules.md) | Scriban usage and codegen rules | 说明 `Scriban` 在 IL2CPP 与 Python codegen 中的正式使用方式、扩展顺序与禁止事项。 |
 | [`project-graph-ingestion-v1.md`](./project-graph-ingestion-v1.md) | project graph ingestion | 固化 `Chaos.IL2CPP.ProjectGraph`、`project-graph.json` 与 golden convert 接线。 |

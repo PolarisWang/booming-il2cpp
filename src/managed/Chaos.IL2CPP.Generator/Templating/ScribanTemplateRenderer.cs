@@ -84,10 +84,33 @@ internal static class ScribanTemplateRenderer
 
     private static Template ParseTemplate(string relativeTemplatePath)
     {
-        var templatePath = Path.Combine(AppContext.BaseDirectory, relativeTemplatePath.Replace('/', Path.DirectorySeparatorChar));
-        if (!File.Exists(templatePath))
+        // Search for template in multiple locations (in order of priority):
+        // 1. AppContext.BaseDirectory (Driver output — templates copied here at build)
+        // 2. Generator assembly directory (Chaos.IL2CPP.Generator output — templates
+        //    are CopyToOutputDirectory=PreserveNewest in Generator.csproj)
+        // 3. Source tree (Templates/ relative to repo root — developer convenience)
+        var searchPaths = new[]
         {
-            throw new FileNotFoundException("required Scriban template is missing", templatePath);
+            AppContext.BaseDirectory,
+            Path.GetDirectoryName(typeof(ScribanTemplateRenderer).Assembly.Location)!,
+        };
+
+        string? templatePath = null;
+        foreach (var baseDir in searchPaths)
+        {
+            var candidate = Path.Combine(baseDir, relativeTemplatePath.Replace('/', Path.DirectorySeparatorChar));
+            if (File.Exists(candidate))
+            {
+                templatePath = candidate;
+                break;
+            }
+        }
+
+        if (templatePath == null)
+        {
+            throw new FileNotFoundException(
+                $"required Scriban template '{relativeTemplatePath}' not found " +
+                $"(searched: {string.Join(", ", searchPaths)})");
         }
 
         var content = File.ReadAllText(templatePath);
