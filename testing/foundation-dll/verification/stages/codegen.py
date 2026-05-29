@@ -67,6 +67,9 @@ def _run_test_project_generator_emit(contract_path: Path | None, output_dir: Pat
     # Print generator output
     for line in result.stdout.splitlines():
         print(f"      {line}")
+    for line in result.stderr.splitlines():
+        if "TIMING" in line:
+            print(f"      {line}")
 
     return True
 
@@ -291,7 +294,7 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
     entry_exe = native_dir / "entry.exe"
     aot_backup = native_dir / "entry-aot.exe"
 
-    if entry_exe.exists() and not aot_backup.exists():
+    if entry_exe.exists():
         import shutil as _shutil
         _shutil.copy2(str(entry_exe), str(aot_backup))
         print(f"  [jit_codegen] backed up entry.exe -> entry-aot.exe")
