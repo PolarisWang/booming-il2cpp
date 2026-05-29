@@ -8,9 +8,7 @@
     "System.Collections.Immutable/System.Collections.Immutable.ImmutableInterlocked::Update<string>(System.String&,System.Func{System.String,System.String})"
   ],
   "methodSubjectCount": 1,
-  "customEntryIndices": [
-    0
-  ],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true,
     "benchmarkRequired": false,

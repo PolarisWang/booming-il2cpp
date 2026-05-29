@@ -14,7 +14,10 @@
     "System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_UtcTimeTwoDigitYearMax:System.Void(System.Int32)"
   ],
   "methodSubjectCount": 7,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    5,
+    6
+  ],
   "functionalObligation": {
     "required": true
   },

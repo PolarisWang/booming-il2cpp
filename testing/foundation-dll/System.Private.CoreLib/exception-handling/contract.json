@@ -13,5 +13,5 @@
     "System.Private.CoreLib/System.Runtime.ExceptionServices.ExceptionDispatchInfo::Capture:System.Runtime.ExceptionServices.ExceptionDispatchInfo(System.Exception)"
   ],
   "methodSubjectCount": 6,
-  "customEntryIndices": [0, 4]
+  "customEntryIndices": []
 }

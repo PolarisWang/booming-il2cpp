@@ -41,7 +41,10 @@
     "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SerializationObjectManager::.ctor:System.Void(System.Runtime.Serialization.StreamingContext)"
   ],
   "methodSubjectCount": 34,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    0,
+    1
+  ],
   "functionalObligation": {
     "required": true
   },

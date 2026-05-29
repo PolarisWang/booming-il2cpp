@@ -42,5 +42,5 @@
     "required": false
   },
   "reviewBundleRequired": true,
-  "customEntryIndices": [6, 12, 16, 19]
+  "customEntryIndices": []
 }

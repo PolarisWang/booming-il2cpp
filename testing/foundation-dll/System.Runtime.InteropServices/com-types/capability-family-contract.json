@@ -29,7 +29,18 @@
     "System.Runtime.InteropServices/System.Runtime.InteropServices.ComTypes.IEnumSTATDATA::Skip:System.Int32(System.Int32)"
   ],
   "methodSubjectCount": 22,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    1,
+    5,
+    7,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    18
+  ],
   "functionalObligation": {
     "required": true
   },

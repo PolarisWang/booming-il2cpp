@@ -13,14 +13,20 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 
 ### Foundation DLL 专项检查
 
-如果当前工作涉及 foundation DLL 能力族，必须在 `dev-foundation-dll-verification-pipeline` 通过后才能声称完成。该管线包含：
+如果当前工作涉及 foundation DLL 能力族，必须通过以下验证后才能声称完成：
 
 1. **Codegen Pipeline** — `batch_native_aot_runner.py` 通过
 2. **Data Integrity** — claims/coverage/ledger 一致
 3. **Three-Gate Verification** — Fact + Benchmark + HotUpdate 全部通过
 4. **Aggregate & Dashboard** — 报告已生成、dashboard 已刷新
 
-**禁止**：未跑完 `dev-foundation-dll-verification-pipeline` 就归档 foundation-dll 相关任务。
+验证命令：
+
+```bash
+python -m verification.entry_points.cli <family-slug> --assembly System.Private.CoreLib --mode strict
+```
+
+**禁止**：未跑完以上验证就归档 foundation-dll 相关任务。
 
 ## 闸门
 
@@ -53,18 +59,17 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 ## Foundation DLL family verification 补充约束
 
 - 如果本轮改动触及 foundation-dll family verification authority、projection、dashboard 或 detail 消费链路，完成前必须判断是否应该刷新：
-  - `verification/projections/foundation-dll-audit/family-verification-claims.json`
-  - `verification/projections/foundation-dll-audit/family-verification.json`
+  - `docs/verification/foundation-dll-audit/family-verification-claims.json`
+  - `docs/verification/foundation-dll-audit/family-verification.json`
 - 典型命中点包括：
   - `testing/foundation-dll/verification/tooling/derive.py`
   - `build/toolchains/run/testing/foundation_dll_audit_generator.py`
   - `Native Proof Detail`、family progress、tooltip detail
 - 命中时，默认需要执行 `run test inventory --json`，而不是只改 HTML 或局部 JSON
 - 完成前至少核对：
-  - `verification/projections/foundation-dll-audit/family-verification-claims.json`
-  - `verification/projections/foundation-dll-audit/family-verification.json`
-  - `verification/projections/foundation-dll-audit/dlls/*.json`
   - `docs/verification/foundation-dll-audit/family-verification-claims.json`
+  - `docs/verification/foundation-dll-audit/family-verification.json`
+  - `docs/verification/foundation-dll-audit/dlls/*.json`
 
 ## CodeGen 快照测试专项检查
 
@@ -92,9 +97,11 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
 只要 `dotnet build` / `dotnet test` / `msbuild` 崩溃：
 
 - 当前验证立即视为失败
-- 必须保留 `stderr`、`binlog`、堆栈或 dump
-- 必须查明并修复根因后重跑
-- 根因未修复前，不得宣称通过
+- **先重试一次**（部分崩溃是 OOM 或磁盘抖动导致）
+- 重试仍崩溃时：
+  - 必须保留 `stderr`、`binlog`、堆栈或 dump
+  - 必须查明并修复根因后重跑
+  - 根因未修复前，不得宣称通过
 
 ## 结果汇报
 
@@ -135,6 +142,16 @@ description: 在即将声称工作完成、已修复或已通过时使用；在�
   - codegenStubPath: [... / n/a]
 - test_result: [passed / failed]
 - wiki: [updated:<path> / n/a]
+```
+
+如果当前不涉及 verification data 刷新，可以使用简化版：
+
+```markdown
+## 完成证据（简化）
+- arch_review: [ok / blocker-fixed / n/a]
+- verification: [命令已执行 / 输出已确认]
+- test_result: [passed / failed]
+- summaryPath: <path>
 ```
 
 ## 底线

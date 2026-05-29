@@ -13,7 +13,10 @@
     "System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})"
   ],
   "methodSubjectCount": 6,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    2,
+    5
+  ],
   "functionalObligation": {
     "required": true
   },

@@ -33,6 +33,6 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "customEntryIndices": [4, 8, 11, 12, 13],
+  "customEntryIndices": [],
   "reviewBundleRequired": true
 }

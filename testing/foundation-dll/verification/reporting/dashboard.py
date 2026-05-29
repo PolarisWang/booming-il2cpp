@@ -157,12 +157,13 @@ STAGE_CN: dict[str, dict[str, str | dict[str, str]]] = {
     },
 }
 
-# All 15 stage keys in pipeline order
+# All stage keys in pipeline order (cross_verify and cleanup are post-aggregate)
 STAGE_KEYS = [
-    "preflight", "codegen", "jit_codegen", "managed_fact", "fact", "fact_jit",
+    "preflight", "codegen", "jit_codegen", "managed_fact", "cross_verify",
+    "fact", "fact_jit",
     "audit", "asm_compare", "microbench", "benchmark",
     "hotupdate", "hotupdate_aot_benchmark", "hotupdate_jit_fact",
-    "hotupdate_jit_benchmark", "dashboard",
+    "hotupdate_jit_benchmark", "cleanup", "dashboard",
 ]
 
 METRIC_CN: dict[str, dict[str, str]] = {

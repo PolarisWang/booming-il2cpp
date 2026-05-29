@@ -23,7 +23,10 @@
     "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.ObjectManager::.ctor:System.Void(System.Runtime.Serialization.ISurrogateSelector,System.Runtime.Serialization.StreamingContext)"
   ],
   "methodSubjectCount": 16,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    7,
+    8
+  ],
   "functionalObligation": {
     "required": true
   },

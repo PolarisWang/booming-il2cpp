@@ -22,7 +22,10 @@
     "System.ObjectModel/System.Windows.Markup.ValueSerializerAttribute::.ctor:System.Void(System.String)"
   ],
   "methodSubjectCount": 15,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    7,
+    10
+  ],
   "functionalObligation": {
     "required": true
   },

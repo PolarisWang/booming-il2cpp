@@ -41,7 +41,16 @@
     "System.IO.Compression.ZipFile/System.IO.Compression.ZipFile::OpenReadAsync:System.Threading.Tasks.Task{System.IO.Compression.ZipArchive}(System.String,System.Threading.CancellationToken)"
   ],
   "methodSubjectCount": 34,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    13,
+    14,
+    17,
+    18,
+    21,
+    22,
+    25,
+    26
+  ],
   "functionalObligation": {
     "required": true
   },

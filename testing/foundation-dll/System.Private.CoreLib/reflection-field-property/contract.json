@@ -41,7 +41,7 @@
     "System.Private.CoreLib/System.Reflection.PropertyInfo::GetRequiredCustomModifiers:System.Type[]()"
   ],
   "methodSubjectCount": 34,
-  "customEntryIndices": [14, 15, 16, 17, 20, 21, 23, 24, 26, 27, 28, 29, 30, 31, 32, 33],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

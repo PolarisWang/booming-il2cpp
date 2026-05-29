@@ -11,5 +11,6 @@
     "System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()",
     "System.Private.CoreLib/System.Exception::ToString:System.String()",
     "System.Private.CoreLib/System.Runtime.ExceptionServices.ExceptionDispatchInfo::Capture:System.Runtime.ExceptionServices.ExceptionDispatchInfo(System.Exception)"
-  ]
+  ],
+  "customEntryIndices": []
 }

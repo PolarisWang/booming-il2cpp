@@ -36,7 +36,12 @@
     "System.Runtime.InteropServices/System.Runtime.InteropServices.GCHandle::ToIntPtr:System.IntPtr(System.Runtime.InteropServices.GCHandle)"
   ],
   "methodSubjectCount": 29,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    1,
+    24,
+    25,
+    27
+  ],
   "functionalObligation": {
     "required": true
   },

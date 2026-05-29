@@ -38,6 +38,10 @@ def main() -> None:
                         help="Verbose output")
     parser.add_argument("--native-config", choices=["check", "profile", "ship"], default="check",
                         help="Native build config (default: check)")
+    parser.add_argument("--timeout", type=int, default=0,
+                        help="Per-stage timeout in seconds (0 = no timeout)")
+    parser.add_argument("--resume", action="store_true",
+                        help="Skip already-passed stages from previous run")
 
     args = parser.parse_args()
     family_dir = _resolve_family_dir(args.family_slug, args.assembly)
@@ -55,6 +59,8 @@ def main() -> None:
         skip_stages=set(args.skip),
         verbose=args.verbose,
         native_config=args.native_config,
+        stage_timeout_seconds=args.timeout,
+        resume=args.resume,
     )
 
     pipeline = VerificationPipeline(ctx)

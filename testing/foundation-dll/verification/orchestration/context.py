@@ -5,7 +5,24 @@ from __future__ import annotations
 import json
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
+
+
+@dataclass
+class ParallelGroup:
+    """A group of independent stages that execute in parallel.
+
+    Each stage in the group gets its own runner invocation.  The pipeline
+    waits for all stages in the group to complete before moving to the
+    next sequential step.
+
+    Usage in STAGES list:
+        ParallelGroup([
+            ("fact", run_fact, "Fact AOT"),
+            ("fact_jit", run_fact_jit, "Fact JIT"),
+        ])
+    """
+    stages: list[tuple[str, Callable, str]]
 
 
 @dataclass
@@ -64,6 +81,8 @@ class FamilyContext:
     verbose: bool = False
     codegen_mode: str | None = None
     native_config: str = "check"
+    stage_timeout_seconds: int = 0      # 0 = no timeout; >0 = per-stage max wall-clock
+    resume: bool = False                # True = skip already-passed stages from previous run
 
     @property
     def contract_path(self) -> Path:
@@ -71,8 +90,12 @@ class FamilyContext:
         # contract.json for families not yet migrated.
         cap = self.family_dir / "capability-family-contract.json"
         if cap.exists():
+            print(f"[context] Using contract: {cap.name}")
             return cap
-        return self.family_dir / "contract.json"
+        fallback = self.family_dir / "contract.json"
+        if fallback.exists():
+            print(f"[context] Using contract: {fallback.name} (legacy, not yet migrated to capability-family-contract.json)")
+        return fallback
 
     @property
     def native_dir(self) -> Path:
@@ -137,3 +160,15 @@ class UnifiedReport:
 
     def to_json(self) -> str:
         return json.dumps(self.to_dict(), indent=2, ensure_ascii=False)
+
+    @staticmethod
+    def load_from_file(path: Path) -> UnifiedReport | None:
+        """Load a unified report from a JSON file.  Returns None on failure."""
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+            stages_raw = data.pop("stages", {})
+            report = UnifiedReport(**data)
+            report.stages = stages_raw
+            return report
+        except (OSError, json.JSONDecodeError, TypeError):
+            return None

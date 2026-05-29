@@ -12,7 +12,7 @@
     "DispatchBasicNativeEntry/DispatchBasicNativeEntry::TestIUnknownGetValue:System.Int32()"
   ],
   "methodSubjectCount": 5,
-  "customEntryIndices": [0, 1, 2, 3, 4],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

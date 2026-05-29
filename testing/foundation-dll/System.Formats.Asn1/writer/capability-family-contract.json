@@ -49,13 +49,7 @@
     "System.Formats.Asn1/System.Formats.Asn1.AsnWriter::.ctor:System.Void(System.Formats.Asn1.AsnEncodingRules,System.Int32)"
   ],
   "methodSubjectCount": 42,
-  "customEntryIndices": [
-    3,
-    4,
-    5,
-    24,
-    32
-  ],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

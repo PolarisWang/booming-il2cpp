@@ -21,17 +21,18 @@ description: >
 
 ```
 Step  1: Setup Worktree → EnterWorktree + claim family
-Step  2: Run Pipeline  → python -m verification.entry_points.batch --family <slug> --mode strict
+Step  2: Run Pipeline  → python -m verification.entry_points.cli <slug> --mode strict --native-config profile
 Step  3: Diagnose      → 对每个 failed stage 输出根因
-Step  4: Fix & Rerun   → 修复 + 重跑，最多 3 次。超限写 blocker.md → abort
-Step  5: Perf Check    → benchmark timing > 0？不满足回 Step 4
-Step  6: .NET 8 对比    → vs .NET 8 ≤ 20%？不满足 → 诊断 + 优化 + 重跑，最多 3 次
-Step  7: HotUpdate Check → semantic_changed > 0？overhead ≤ 100%？不满足 → 修复 + 重跑，最多 3 次
+Step  4: Fix & Rerun   → 修复 + 重跑（--native-config check），最多 3 次。超限写 blocker.md → abort
+Step  5: Perf Check    → 从已有报告验证 benchmark timing > 0（不重跑 pipeline）
+Step  6: .NET 8 对比    → 跑 pipeline（--native-config profile），vs .NET 8 ≤ 20%？不满足 → 诊断 + 优化 + 重跑，最多 3 次
+Step  7: HotUpdate Check → 跑 pipeline（--native-config profile），semantic_changed > 0？overhead ≤ 100%？不满足 → 修复 + 重跑，最多 3 次
 Step  8: 文档           → 写 docs/optimize/YYYY-MM-DD-<slug>/README.md
 Step  9: Commit         → git add + git commit（含性能表）
 Step 10: Push           → git push origin claim/<slug>/<worker-id>
 Step 11: Merge → Cleanup → checkout main → merge → push → del worktree branch
-Step 12: Pull           → git pull origin main（确保 main 最新且干净）
+Step 12: CI Verify      → 等待 CI 通过（超时 10 min）
+Step 13: Pull           → git pull origin main（确保 main 最新且干净）
 ```
 
 ## 自动化执行说明
@@ -41,23 +42,28 @@ Step 12: Pull           → git pull origin main（确保 main 最新且干净�
 - 长时间步骤（pipeline run、benchmark）每 60 秒输出一次 keepalive
 - Abort 时输出 `optimization-campaign/workers/<worker-id>/blocker.md`，然后跳到 Step 11 清理，不留在 worktree
 
+## Native config 选择
+
+| 用途 | Config | LOG_LEVEL | ASSERT | PROFILE_SCOPE |
+|------|--------|-----------|--------|---------------|
+| 诊断/调试（Step 4 修复循环） | `check` | DEBUG | 启用 | 启用 |
+| 性能测量（Step 2/6/7 数据采集） | `profile` | INFO | 关 | 启用 |
+
+优化战役中，**数据采集步骤用 `profile`** 获得更真实的性能数据，**修复迭代用 `check`** 获得完整诊断能力。
+
 ---
 
 ## Step 1: Setup Worktree
 
-### 创建 worktree
+### 创建 worktree + claim 分支
+
+调用 `EnterWorktree(name=<worker-id>)` 进入隔离环境。然后在 worktree 内创建 claim 分支并推送：
 
 ```bash
-# 确保 main 最新
-git checkout main
-git pull origin main
-
-# 创建 claim 分支
+# worktree 内创建 claim 分支
 git checkout -b claim/<slug>/<worker-id>
 git push origin claim/<slug>/<worker-id>
 ```
-
-调用 `EnterWorktree(name=<worker-id>)` 进入隔离环境。
 
 ### Claim family
 
@@ -74,25 +80,70 @@ git push origin claim/<slug>/<worker-id>
 
 ---
 
+## Step 1.5: Pre-verification Test Audit
+
+在跑完整 pipeline 之前，先审计受试 family 的测试代码完整性，确认测试有意义并在需要时自动补充手写测试。
+
+### 1.5.1 运行审计
+
+```bash
+python -m verification.stages.pre_verification_audit <slug> --assembly System.Private.CoreLib --json
+```
+
+### 1.5.2 解读判决
+
+读取 stdout 的 JSON 输出，根据 `verdict` 字段决定后续动作：
+
+| 判决 | 含义 | 动作 |
+|------|------|------|
+| `PASS` | 测试代码完整有意义 | → 进入 Step 2 |
+| `MISSING_HANDWRITTEN` | 有方法不可 auto-call 且无 handwritten 实现 | → 执行 1.5.3 补充 |
+| `STALE_METADATA` | contract.json 的 customEntryIndices 与实际情况不同步 | → 执行 1.5.3 自动修复 |
+
+### 1.5.3 自动修复
+
+```bash
+python -m verification.stages.pre_verification_audit <slug> --assembly System.Private.CoreLib --fix
+```
+
+`--fix` 会做两件事：
+1. 更新 `capability-family-contract.json` 的 `customEntryIndices`（添加缺失索引、移除冗余索引）
+2. 在 `handwritten/` 下生成缺失的 `{ClassName}.Custom.cs` 存根文件（含 TODO 注释）
+
+生成后检查 `handwritten/*.Custom.cs` 中的 `TODO` 注释，判断是否需要补充真实实现。然后重新运行审计确认：
+
+```bash
+python -m verification.stages.pre_verification_audit <slug> --assembly System.Private.CoreLib --json
+```
+
+### 出口条件
+
+- ✅ 审计 verdict = `PASS` → 进入 Step 2
+- ⚠️ 需要修复且已修复完毕，重审计 PASS → 进入 Step 2
+- ❌ 非 auto-callable 方法过多（>50%）→ 考虑是否跳过此 family 优化
+
+---
+
 ## Step 2: Run Pipeline
 
 ```bash
-python -m verification.entry_points.batch \
-    --family <slug> \
+python -m verification.entry_points.cli \
+    <slug> \
     --assembly System.Private.CoreLib \
     --mode strict \
-    --output verification-report.json
+    --native-config profile \
+    --verbose
 ```
 
-收集所有 stage 的 status。每 60s 输出 keepalive 防止会话超时。
+> 首次运行使用 `profile` config 获取真实性能基线。如果 pipeline 因 assertion 失败等诊断问题挂掉，切到 `--native-config check` 重新诊断根因。
 
-**出口条件**：pipeline 执行完毕（无论 pass/fail），`verification-report.json` 已写入。
+**出口条件**：pipeline 执行完毕（无论 pass/fail），`unified-verification-report.json` 已写入。
 
 ---
 
 ## Step 3: Diagnose
 
-读取 `verification-report.json`，对每个 status=`failed` 或 status=`error` 的 stage 输出诊断：
+读取 `unified-verification-report.json`（位于 `testing/results/foundation-dll/System.Private.CoreLib/<slug>/`），对每个 status=`failed` 或 status=`error` 的 stage 输出诊断：
 
 | Stage | 诊断要点 |
 |-------|---------|
@@ -112,7 +163,7 @@ python -m verification.entry_points.batch \
 对每个 failed stage 执行修复：
 
 1. 根据 Step 3 的诊断根因修改代码（codegen / runtime / test）
-2. 重新跑 pipeline（同 Step 2）
+2. 重新跑 pipeline（同 Step 2，但 **切换为 `--native-config check`** 获得完整 ASSERT 和 DEBUG 日志以便验证修复）
 3. 如果修复后仍失败 → `attempt += 1`，回到 Step 3 重新诊断
 4. `attempt > max_attempts(3)` → 写 `blocker.md`，跳到 Step 11 Cleanup
 
@@ -120,24 +171,12 @@ python -m verification.entry_points.batch \
 
 ---
 
-## Step 5: Perf Check
+## Step 5: Perf Check（轻量，不重跑 pipeline）
 
-验证 benchmark 数据完整性：
+直接从 Step 4 输出的 `unified-verification-report.json` 中提取 benchmark 数据验证 timing 完整性，无需再跑一次 pipeline：
 
 ```bash
-python -c "
-import json
-d = json.load(open('verification-report.json'))
-for stage_name, stage in d['stages'].items():
-    if 'benchmark' in stage_name:
-        details = stage.get('details', {})
-        for runtime in ['native-aot', 'native-jit']:
-            results = details.get(runtime, {}).get('results', [])
-            for r in results:
-                t = r.get('elapsedMilliseconds', -1)
-                assert t > 0, f'{stage_name}/{runtime}: elapsedMilliseconds={t}'
-print('All timing > 0')
-"
+bash testing/scripts/check-perf-timings.sh <slug>
 ```
 
 **出口条件**：
@@ -149,14 +188,20 @@ print('All timing > 0')
 ## Step 6: .NET 8 对比
 
 ```bash
-python -m verification.entry_points.batch \
-    --family <slug> \
+python -m verification.entry_points.cli \
+    <slug> \
     --assembly System.Private.CoreLib \
     --mode strict \
-    --output perf-report.json
+    --native-config profile \
+    --verbose
 ```
 
-从 `perf-report.json` 提取 native-aot 和 native-jit 的 ns/op，对比 .NET 8 基线：
+报告路径：`testing/results/foundation-dll/System.Private.CoreLib/<slug>/unified-verification-report.json`
+从该报告中提取 native-aot 和 native-jit 的 ns/op，对比 .NET 8 基线：
+
+```bash
+bash testing/scripts/check-net8-slowdown.sh <slug>
+```
 
 检查条件：
 - `aot_slowdown_vs_net8 <= 20%`
@@ -172,11 +217,20 @@ python -m verification.entry_points.batch \
 ## Step 7: HotUpdate Check
 
 ```bash
-python -m verification.entry_points.batch \
-    --family <slug> \
+python -m verification.entry_points.cli \
+    <slug> \
     --assembly System.Private.CoreLib \
     --mode strict \
-    --output hu-report.json
+    --native-config profile \
+    --verbose
+```
+
+报告路径：`testing/results/foundation-dll/System.Private.CoreLib/<slug>/unified-verification-report.json`
+
+验证 HotUpdate 数据：
+
+```bash
+bash testing/scripts/check-hotupdate.sh <slug>
 ```
 
 检查条件：
@@ -279,8 +333,13 @@ git pull origin main
 # Merge claim 分支
 git merge claim/<slug>/<worker-id> --no-edit
 
-# 如果 merge 失败 → 解决冲突 → 继续
-# 冲突解决策略：保留 main 的 config 文件，取 claim 分支的 codegen/runtime 变更
+# 如果 merge 失败 → 按文件类型分层解决冲突：
+#   - build/工具链文件 + docs/ + 测试数据 JSON → 保留 main 版本
+#   - testing/foundation-dll/ 下的合约、entry 文件 → 取 main 版本（claim 分支的属于临时生成）
+#   - src/native/ 下的 runtime/codegen 变更 → 取 claim 分支版本
+#   - docs/optimize/ 下的优化文档 → 取 claim 分支版本
+#   - 其他文件按具体 diff 逐条确认
+# 解决方法：git checkout --ours/--theirs <path> + git add
 
 # Push main
 git push origin main
@@ -297,7 +356,20 @@ git branch -D claim/<slug>/<worker-id>
 
 ---
 
-## Step 12: Pull
+## Step 12: CI 验证
+
+```bash
+bash testing/scripts/verify-ci.sh --timeout 10 --branch main
+```
+
+**出口条件**：
+- CI passed → 进入 Step 13
+- CI failed → 诊断根因，提交修复 PR（不破坏 main），不在当前 worktree 修复
+- 超时 → 手动检查 CI 状态，确认通过后继续
+
+---
+
+## Step 13: Pull
 
 ```bash
 git pull origin main
@@ -352,7 +424,8 @@ docs/optimize/
 | 9 Commit | 1 min | — |
 | 10 Push | 1 min | — |
 | 11 Merge → Cleanup | 3 min | — |
-| 12 Pull | 1 min | — |
+| 12 CI Verify | 10 min | 超时后手动检查 |
+| 13 Pull | 1 min | — |
 | **总计** | **~3 hours** | |
 
 超限写 blocker.md，不是停下来等人。
@@ -367,4 +440,4 @@ docs/optimize/
 4. ✅ Step 6: vs .NET 8 ≤ 20%（AOT + JIT，或 blocker.md 已记录）
 5. ✅ Step 7: hotupdate semantic_changed > 0 + overhead ≤ 100%（或 blocker.md 已记录）
 6. ✅ Step 8-9: docs/optimize/ 完整 + git commit
-7. ✅ Step 10-12: main 已合并 + worktree 已删除 + main 已 pull
+7. ✅ Step 10-12: main 已合并 + CI 已通过 + worktree 已删除 + main 已 pull

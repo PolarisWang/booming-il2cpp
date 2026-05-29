@@ -27,7 +27,7 @@ ITERATIONS = 100000
 
 SKIP_SLUGS = {
     "aggregation", "filtering", "immutable-array", "immutable-list", "reports",
-    "interface-dispatch,pinvoke-dllimport,primitive-numeric-conversions-core",
+    "interface-dispatch", "pinvoke-dllimport", "primitive-numeric-conversions-core",
 }
 
 

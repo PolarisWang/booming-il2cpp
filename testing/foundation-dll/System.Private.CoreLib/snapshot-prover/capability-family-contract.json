@@ -18,9 +18,7 @@
     "SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()"
   ],
   "methodSubjectCount": 10,
-  "customEntryIndices": [
-    8
-  ],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

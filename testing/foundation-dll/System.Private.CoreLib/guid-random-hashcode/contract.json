@@ -21,7 +21,7 @@
     "System.Private.CoreLib/System.HashCode::Combine:System.Int32(System.Int32,System.Int32)"
   ],
   "methodSubjectCount": 14,
-  "customEntryIndices": [5, 7, 8, 9, 10, 12],
+  "customEntryIndices": [],
   "functionalObligation": {
     "required": true
   },

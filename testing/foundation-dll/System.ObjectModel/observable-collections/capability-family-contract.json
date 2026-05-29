@@ -15,7 +15,10 @@
     "System.ObjectModel/System.Collections.ObjectModel.ReadOnlyObservableCollection`1::.ctor:System.Void(System.Collections.ObjectModel.ObservableCollection{T})"
   ],
   "methodSubjectCount": 8,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    0,
+    2
+  ],
   "functionalObligation": {
     "required": true
   },
