@@ -25,12 +25,13 @@ public sealed partial class NativeAotLoweringPlanner
 		if (_vtableSlotMap == null)
 			return (0, 0);
 
+		if (!_methodsByDeclaringType.TryGetValue(ifaceSubjectId, out var ifaceMethods))
+			return (0, 0);
+
 		var slots = new List<int>();
-		foreach (var method in _methodsBySubjectId.Values)
+		foreach (var method in ifaceMethods)
 		{
 			if (method.IsStatic) continue;
-			if (!string.Equals(method.Identity.DeclaringTypeSubjectId, ifaceSubjectId, StringComparison.Ordinal))
-				continue;
 
 			var sig = GetMethodSignatureSuffix(method.SubjectId);
 			if (_vtableSlotMap.TryGetValue(sig, out int slot))
@@ -417,7 +418,9 @@ public sealed partial class NativeAotLoweringPlanner
 			var vtableLengths = new Dictionary<string, int>(StringComparer.Ordinal);
 			var slotMap = new Dictionary<string, int>(StringComparer.Ordinal);
 			var methodsByDeclaringTypeVT = new Dictionary<string, List<AotCoreIrMethodArtifact>>(StringComparer.Ordinal);
-			foreach (var method in _methodsBySubjectId.Values)
+
+		var slots = new List<int>();
+		foreach (var method in _methodsBySubjectId.Values)
 			{
 				var dt = method.Identity.DeclaringTypeSubjectId;
 				if (string.IsNullOrEmpty(dt)) continue;
@@ -1475,12 +1478,6 @@ builder.AppendLine("bool chaos_is_array_store_compatible(const chaos_managed_arr
 
 	private bool TypeHasFinalizer(string typeSubjectId)
 	{
-		// System.Object has a default (empty) Finalize — not a real finalizer.
-		if (typeSubjectId.Contains("/System.Object"))
-			return false;
-		return _methodsBySubjectId.Values.Any(m =>
-			!m.IsStatic &&
-			string.Equals(GetMethodName(m.SubjectId), "Finalize", StringComparison.Ordinal) &&
-			string.Equals(m.Identity.DeclaringTypeSubjectId, typeSubjectId, StringComparison.Ordinal));
+		return _typesWithFinalizer.Contains(typeSubjectId);
 	}
 }
