@@ -44,7 +44,18 @@
     "System.Security.Claims/System.Security.Principal.GenericPrincipal::IsInRole:System.Boolean(System.String)"
   ],
   "methodSubjectCount": 37,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    31,
+    32,
+    33,
+    35,
+    36
+  ],
   "functionalObligation": {
     "required": true
   },

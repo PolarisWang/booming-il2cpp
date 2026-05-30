@@ -43,7 +43,11 @@
   "methodSubjectCount": 34,
   "customEntryIndices": [
     0,
-    1
+    1,
+    18,
+    19,
+    20,
+    21
   ],
   "functionalObligation": {
     "required": true

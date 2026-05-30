@@ -42,5 +42,21 @@
     "required": false
   },
   "reviewBundleRequired": true,
-  "customEntryIndices": []
+  "customEntryIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    13,
+    14,
+    15,
+    17,
+    18,
+    19,
+    20,
+    21
+  ]
 }

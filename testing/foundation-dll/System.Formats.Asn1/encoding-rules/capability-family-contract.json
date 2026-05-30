@@ -12,7 +12,11 @@
     "System.Formats.Asn1/System.Formats.Asn1.AsnEncodingRules::Equals:System.Boolean(System.Object)"
   ],
   "methodSubjectCount": 5,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    2,
+    3,
+    4
+  ],
   "functionalObligation": {
     "required": true
   },

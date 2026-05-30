@@ -18,7 +18,13 @@
     "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.SurrogateSelector::.ctor:System.Void()"
   ],
   "methodSubjectCount": 11,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
   "functionalObligation": {
     "required": true
   },
