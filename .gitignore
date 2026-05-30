@@ -348,6 +348,9 @@ testing/results/
 # Foundation-DLL pipeline run logs and results
 testing/foundation-dll/results/
 
+# Local NuGet package cache (packed by pipeline for TestFramework.SDK/Runner)
+testing/_packages/
+
 # Build-level verification pipeline output (entirely generated)
 build/testing/results/
 
