@@ -107,6 +107,8 @@ def generate_per_family_reports(
             }
             method_results.append(entry)
 
+        semantic_changed_count = sum(1 for r in raw_results if r.get("semanticVerified", False))
+
         report = {
             "schemaVersion": 2,
             "platform": host_platform,
@@ -115,10 +117,18 @@ def generate_per_family_reports(
             "assemblyName": assembly_name,
             "familyId": family_id,
             "verificationKind": "hotupdate-proof",
-            "allMethodsRevertVerified": all(r.get("revertVerified", False) for r in raw_results),
-            "allMethodsSemanticVerified": all(r.get("semanticVerified", False) for r in raw_results),
+            # Consumer-compatible top-level fields
+            "d3PatchApplied": data.get("d3PatchApplied", False),
+            "d3PatchedCount": data.get("d3PatchedCount", 0),
+            "semanticChangedCount": semantic_changed_count,
+            "totalMethods": total,
+            "passedMethods": passed,
+            "failedMethods": failed,
+            # Backward-compat renamed fields
             "hotpatchPatchApplied": data.get("d3PatchApplied", False),
             "hotpatchPatchedCount": data.get("d3PatchedCount", 0),
+            "allMethodsRevertVerified": all(r.get("revertVerified", False) for r in raw_results),
+            "allMethodsSemanticVerified": all(r.get("semanticVerified", False) for r in raw_results),
             "summary": {
                 "totalMethods": total,
                 "passedMethods": passed,

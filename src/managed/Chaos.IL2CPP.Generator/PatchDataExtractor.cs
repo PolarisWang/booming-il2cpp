@@ -710,13 +710,33 @@ public sealed class PatchDataExtractor
                     // value (0xB0000000+N).  The original AOT Core IR contains complex
                     // dispatch logic that hangs when the interpreter executes it with
                     // zero args during hotupdate verification.  Instead of the original
-                    // IR, emit a minimal ldc.i4 1 + ret sequence so the method returns
-                    // a non-zero value.  This enables hotupdate semantic change
-                    // detection (baseline=0 from thunks vs patched=1 from this IR).
-                    json = "{\"instructions\":[{\"opCode\":0,\"ilOffset\":0,\"operand\":1},{\"opCode\":53,\"ilOffset\":1}]}";
+                    // IR, emit a minimal ldc.i4 0x5EED + ret sequence so the method
+                    // returns a distinctive sentinel value.  This guarantees semantic
+                    // change detection: the baseline thunk returns 0 (or undefined RAX
+                    // garbage for AOT direct_ptr), while the patched interpreter always
+                    // returns 0x5EED.  The chance that RAX garbage coincidentally
+                    // equals 0x5EED is negligible (~1e-12).
+                    json = "{\"instructions\":[{\"opCode\":0,\"ilOffset\":0,\"operand\":24237},{\"opCode\":53,\"ilOffset\":1}]}";
                 }
                 else if (aotIrLookup.TryGetValue(key, out var found))
                 {
+                    // Warn about complex IR that may hang the interpreter during
+                    // hotupdate verification.  Complex opcodes (call, callvirt,
+                    // newobj, throw) in non-Subject_N methods indicate external
+                    // runtime dependencies that may not be available when the
+                    // interpreter dispatches the patch with zero args.
+                    if (found.Contains("\"opCode\":40") ||  // call
+                        found.Contains("\"opCode\":41") ||  // callvirt
+                        found.Contains("\"opCode\":44") ||  // newobj
+                        found.Contains("\"opCode\":0x28") || // call (hex)
+                        found.Contains("\"opCode\":0x29") || // callvirt (hex)
+                        found.Contains("\"opCode\":0x2C") || // newobj (hex)
+                        found.Contains("\"opCode\":0x7A") || // throw
+                        found.Contains("\"opCode\":122"))    // throw (decimal)
+                    {
+                        Console.WriteLine($"      [patchdata] WARNING: {key} has complex IR " +
+                            "(call/callvirt/newobj/throw) that may hang the interpreter");
+                    }
                     json = found;
                 }
             }

@@ -6,9 +6,9 @@ public sealed class MetadataReader
 {
     private static readonly (string, SubjectKind)[] AttributeMappings =
     [
-        ("MethodSubjectId", SubjectKind.Fact),
-        ("BenchmarkSubjectId", SubjectKind.Benchmark),
-        ("HotUpdateSubjectId", SubjectKind.HotUpdate),
+        ("Fact", SubjectKind.Fact),
+        ("Benchmark", SubjectKind.Benchmark),
+        ("HotUpdate", SubjectKind.HotUpdate),
     ];
 
     public List<SubjectModel> ReadAssemblies(IReadOnlyList<string> assemblyPaths)

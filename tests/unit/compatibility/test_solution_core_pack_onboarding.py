@@ -22,7 +22,6 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureContracts.cs"
 DRIVER_ENTRY_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "DriverEntry.cs"
 LOADER_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Loader" / "LoaderStage.cs"
-WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 CMAKE_PATH = REPO_ROOT / "CMakeLists.txt"
 MANIFEST_PATH = SOLUTION_CORE_PACK_OWNER_MANIFEST_PATH
 SOURCE_PROJECT_PATH = SOLUTION_CORE_PACK_PROOFS_PROJECT_PATH
@@ -72,29 +71,17 @@ class SolutionCorePackOnboardingTests(unittest.TestCase):
         contracts_source = CONTRACTS_PATH.read_text(encoding="utf-8")
         driver_source = DRIVER_ENTRY_PATH.read_text(encoding="utf-8")
         loader_source = LOADER_STAGE_PATH.read_text(encoding="utf-8")
-        workers_source = WORKERS_PATH.read_text(encoding="utf-8")
 
         self.assertIn("EntryPointSubjectIdOverride", contracts_source)
         self.assertIn("--entry-point-subject-id", driver_source)
         self.assertIn("EntryPointSubjectIdOverride", driver_source)
         self.assertIn("EntryPointSubjectIdOverride", loader_source)
-        self.assertIn("--entry-point-subject-id", workers_source)
 
     def test_subject_scoped_proof_build_is_routed_from_worker_to_root_cmake(self) -> None:
         cmake_source = CMAKE_PATH.read_text(encoding="utf-8")
-        workers_source = WORKERS_PATH.read_text(encoding="utf-8")
 
         self.assertNotIn("CHAOS_SUBJECT_PROOF_ROOT", cmake_source)
         self.assertNotIn("add_subdirectory(\"${CHAOS_SUBJECT_PROOF_ROOT}\"", cmake_source)
-        self.assertNotIn(
-            'subject_proof_root = repo_root / "subjects" / str(selection["subjectId"]) / "validation" / "proof" / "native-reference"',
-            workers_source,
-        )
-        self.assertIn("_materialize_windows_native_reference_cmake_source(", workers_source)
-        self.assertIn(
-            'f"-DCHAOS_SUBJECT_REPO_ROOT={repo_root}"',
-            workers_source,
-        )
 
     def test_solution_core_pack_manifest_and_proof_slice_are_realized(self) -> None:
         manifest = json.loads(MANIFEST_PATH.read_text(encoding="utf-8"))

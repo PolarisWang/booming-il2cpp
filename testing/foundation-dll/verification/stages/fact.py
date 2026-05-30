@@ -574,3 +574,269 @@ def run_fact_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) ->
         details={"fact": fact_details, "fact_jit": jit_details},
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
+
+
+# ── Managed Patch Fact (golden patched values) ─────────────────────
+
+def _find_patch_class_name(patch_dir: Path) -> str | None:
+    """Scan managed/patch/ dir for *PatchEntry.cs, return the class name."""
+    if not patch_dir.is_dir():
+        return None
+    for cs_file in patch_dir.glob("*PatchEntry.cs"):
+        text = cs_file.read_text(encoding="utf-8")
+        for line in text.splitlines():
+            m = re.search(r'(?:public\s+)?(?:static\s+)?(?:partial\s+)?class\s+(\w+PatchEntry)\b', line)
+            if m:
+                return m.group(1)
+    return None
+
+
+def generate_managed_patch_harness(
+    harness_dir: Path,
+    method_count: int,
+    patch_class_name: str,
+    patch_dll_path: Path,
+    family_slug: str,
+) -> bool:
+    """Generate ManagedPatchHarness.cs that calls patch Subject_N() methods and captures return values."""
+    harness_dir.mkdir(parents=True, exist_ok=True)
+
+    method_calls: list[str] = []
+    for idx in range(method_count):
+        method_calls.append(f"""            {{ // [{idx}]
+                try {{
+                    int val = {patch_class_name}.Subject_{idx}();
+                    results.Add(new MethodResult {{ MethodIndex = {idx}, Value = val, Caught = false }});
+                }} catch (Exception ex) {{
+                    results.Add(new MethodResult {{ MethodIndex = {idx}, Value = 0, Caught = true, ExceptionMessage = ex.Message }});
+                }}
+            }}""")
+
+    calls_block = "\n".join(method_calls)
+
+    cs_source = f"""// Auto-generated managed patch fact harness
+// Family: {family_slug}
+using System;
+using System.Collections.Generic;
+using System.Text.Json;
+
+class ManagedPatchHarness
+{{
+    struct MethodResult
+    {{
+        public int MethodIndex {{ get; set; }}
+        public int Value {{ get; set; }}
+        public bool Caught {{ get; set; }}
+        public string ExceptionMessage {{ get; set; }}
+    }}
+
+    static void Main()
+    {{
+        var results = new List<MethodResult>();
+{calls_block}
+        string json = JsonSerializer.Serialize(new {{ results }}, new JsonSerializerOptions {{ PropertyNamingPolicy = JsonNamingPolicy.CamelCase }});
+        Console.WriteLine(json);
+    }}
+}}
+"""
+    csproj = f"""<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <StartupObject>ManagedPatchHarness</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="{patch_dll_path}" />
+  </ItemGroup>
+</Project>
+"""
+    cs_path = harness_dir / "ManagedPatchHarness.cs"
+    csproj_path = harness_dir / "ManagedPatchHarness.csproj"
+    cs_path.write_text(cs_source, encoding="utf-8")
+    csproj_path.write_text(csproj, encoding="utf-8")
+    return True
+
+
+def run_managed_patch_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
+    """Run managed patch DLL under .NET to generate golden patched values.
+
+    Builds the patch DLL, generates a harness that calls each Subject_N() method,
+    runs under dotnet, and saves patched-golden-values.json for cross-verification.
+    """
+    start = time.perf_counter()
+
+    # Read contract for method count
+    contract_data = _read_contract_json(ctx.contract_path)
+    if contract_data is None:
+        return StageResult(
+            stage="managed_patch_fact", status="skipped",
+            summary="contract not found",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+    subject_ids = contract_data.get("methodSubjectIds", [])
+    if not subject_ids:
+        subject_ids = [m["methodSubjectId"] for m in contract_data.get("methodContracts", [])]
+    method_count = len(subject_ids)
+    if method_count == 0:
+        return StageResult(
+            stage="managed_patch_fact", status="skipped",
+            summary="0 methods in contract",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Find patch entry
+    patch_dir = ctx.family_dir / "managed" / "patch"
+    if not patch_dir.is_dir():
+        return StageResult(
+            stage="managed_patch_fact", status="skipped",
+            summary=f"no managed/patch/ directory found at {patch_dir}",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    patch_class_name = _find_patch_class_name(patch_dir)
+    if patch_class_name is None:
+        return StageResult(
+            stage="managed_patch_fact", status="skipped",
+            summary="no *PatchEntry.cs with class found in managed/patch/",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Build patch DLL
+    csproj_path = patch_dir / f"{patch_class_name}.csproj"
+    if not csproj_path.exists():
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary=f"patch csproj not found at {csproj_path}",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    print(f"  [managed_patch_fact] Building patch DLL {csproj_path}...")
+    try:
+        build_r = subprocess.run(
+            ["dotnet", "build", str(csproj_path), "--configuration", "Release", "--nologo", "-v", "q"],
+            capture_output=True, timeout=120,
+        )
+    except subprocess.TimeoutExpired:
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary="patch build timed out (120s)",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    if build_r.returncode != 0:
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary=f"patch build failed: {build_r.stderr[:200] if build_r.stderr else 'unknown'}",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Locate built DLL
+    patch_dll = patch_dir / "bin" / "Release" / "net8.0" / f"{patch_class_name}.dll"
+    if not patch_dll.exists():
+        # Fallback: search for the DLL
+        candidates = list(patch_dir.rglob(f"{patch_class_name}.dll"))
+        patch_dll = candidates[0] if candidates else patch_dll
+        if not patch_dll.exists():
+            return StageResult(
+                stage="managed_patch_fact", status="failed",
+                summary=f"patch DLL not found at {patch_dll}",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+
+    # Generate harness
+    harness_dir = ctx.family_dir / "managed_test" / "patch_fact"
+    print(f"  [managed_patch_fact] Generating harness for {method_count} methods (class={patch_class_name})...")
+    ok = generate_managed_patch_harness(harness_dir, method_count, patch_class_name, patch_dll.resolve(), ctx.slug)
+    if not ok:
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary="harness generation failed",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Build harness
+    harness_csproj = harness_dir / "ManagedPatchHarness.csproj"
+    print(f"  [managed_patch_fact] Building harness at {harness_dir}...")
+    try:
+        build_r = subprocess.run(
+            ["dotnet", "build", str(harness_csproj), "--configuration", "Release", "--nologo", "-v", "q"],
+            capture_output=True, timeout=120,
+        )
+    except subprocess.TimeoutExpired:
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary="harness build timed out (120s)",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    if build_r.returncode != 0:
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary=f"harness build failed: {build_r.stderr[:200] if build_r.stderr else 'unknown'}",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Run harness
+    print(f"  [managed_patch_fact] Running managed patch harness...")
+    try:
+        r = subprocess.run(
+            ["dotnet", "run", "--no-build", "--project", str(harness_dir), "--configuration", "Release"],
+            capture_output=True, text=True, timeout=120,
+        )
+    except subprocess.TimeoutExpired:
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary="harness run timed out (120s)",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+    except OSError as e:
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary=str(e),
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    if r.returncode != 0:
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary=f"harness exit_code={r.returncode}: {r.stderr[:200]}",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Parse JSON
+    try:
+        data = json.loads(r.stdout)
+    except json.JSONDecodeError as e:
+        return StageResult(
+            stage="managed_patch_fact", status="failed",
+            summary=f"JSON parse failed: {e}",
+            details={"raw_output": r.stdout[:500]},
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    results = data.get("results", [])
+    matched = sum(1 for rr in results if not rr.get("caught", True))
+    caught = sum(1 for rr in results if rr.get("caught", False))
+    total = len(results)
+
+    # Save patched-golden-values.json
+    golden_path = ctx.family_dir / "native" / "patched-golden-values.json"
+    golden_path.parent.mkdir(parents=True, exist_ok=True)
+    golden_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    print(f"  [managed_patch_fact] Saved patched-golden-values.json ({matched} matched, {caught} caught)")
+
+    status = "passed" if caught == 0 else "failed"
+    summary = f"matched={matched} caught={caught}/{total}"
+    print(f"  [managed_patch_fact] Result: {status} ({summary})")
+
+    return StageResult(
+        stage="managed_patch_fact", status=status,
+        summary=summary,
+        details={
+            "matched": matched, "caught": caught, "total": total,
+            "results": results,
+        },
+        duration_ms=int((time.perf_counter() - start) * 1000),
+    )

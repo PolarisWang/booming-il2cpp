@@ -337,7 +337,7 @@ def fix_family(report: dict[str, Any]) -> None:
                 cdata = json.loads(cpath.read_text(encoding="utf-8"))
                 cdata["customEntryIndices"] = sorted_indices
                 cpath.write_text(
-                    json.dumps(cdata, indent=2, ensure_ascii=False) + "\\n",
+                    json.dumps(cdata, indent=2, ensure_ascii=False) + "\n",
                     encoding="utf-8",
                 )
                 print(f"[fix] Updated customEntryIndices in {cpath.name}")

@@ -16,7 +16,6 @@ ANDROID_HOST_ROOT = SUBJECT_ROOT / "validation" / "mobile" / "android-host"
 IOS_HOST_ROOT = SUBJECT_ROOT / "validation" / "mobile" / "ios-host"
 SUBJECTS_MODULE_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subjects.py"
 CMAKE_PATH = REPO_ROOT / "CMakeLists.txt"
-WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 
 
 def load_module(path: Path, module_name: str):
@@ -190,7 +189,6 @@ class MobileHelloWorldProofTests(unittest.TestCase):
 
     def test_mobile_subject_host_roots_are_routed_from_worker_to_root_cmake(self) -> None:
         cmake_source = CMAKE_PATH.read_text(encoding="utf-8")
-        workers_source = WORKERS_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
             "CHAOS_SUBJECT_ANDROID_HOST_ROOT",
@@ -199,14 +197,6 @@ class MobileHelloWorldProofTests(unittest.TestCase):
             'add_subdirectory("${CHAOS_SUBJECT_IOS_HOST_ROOT}"',
         ]:
             self.assertIn(required_fragment, cmake_source)
-
-        for required_fragment in [
-            'validation" / "mobile" / "android-host"',
-            'validation" / "mobile" / "ios-host"',
-            "CHAOS_SUBJECT_ANDROID_HOST_ROOT",
-            "CHAOS_SUBJECT_IOS_HOST_ROOT",
-        ]:
-            self.assertIn(required_fragment, workers_source)
 
 
 if __name__ == "__main__":

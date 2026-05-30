@@ -142,21 +142,19 @@ C# Codegen 工具（`ConvertToCppHandler.cs`）不再生成 `CMakeLists.txt`。�
 - **头文件搜索**由 `target_link_libraries(entry PRIVATE chaos::runtime)` 的 `INTERFACE_INCLUDE_DIRECTORIES` 自动提供，模板中无需显式添加 SDK 头文件路径
 - **`CmakeGenerator.cs` 和 `BuildSystemTemplateCatalog.cs`** 已标记为 `[Obsolete]`，仅保留用于测试兼容，新模板开发使用 `SdkTemplateCatalog`
 
-## TestFramework.SDK / Runner 本地 NuGet 源
+## TestFramework.SDK 本地 NuGet 源
 
-`Chaos.TestFramework.Sdk` 和 `Chaos.TestFramework.Runner` 已改为 NuGet 包方式引用（而非源项目 ProjectReference）：
+`Chaos.TestFramework.Sdk` 以 NuGet 包方式引用（而非源项目 ProjectReference）：
 
 - **本地源**：`testing/_packages/`（`nuget.config` 已在 `testing/` 中配置）
-- **版本锁定**：当前版本 `0.1.0`，在 `src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj` 和 `Chaos.TestFramework.Runner.csproj` 中定义
+- **版本锁定**：当前版本 `0.1.0`，在 `src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj` 中定义
 - **自动打包**：Python 管线在 `generate_and_build()` 时自动调用 `_ensure_sdk_packed()` 打包到本地源
 - **生成项目**：`family_entrypoint.py` 的 `generate_project_file()` 使用 `PackageReference` 而非 `ProjectReference`
-- **遗留项目**：已有 hand-written `.csproj`（约 154 个）仍使用 `ProjectReference`，保持不变
 
 ### 版本号更新规则
 
 修改 SDK API 时，在以下文件中同步更新 `Version`：
 - `src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj`
-- `src/reference/Chaos.TestFramework.Runner/Chaos.TestFramework.Runner.csproj`
 
 同时更新 `family_entrypoint.py` 中的 `_SDK_VERSION` 常量。
 

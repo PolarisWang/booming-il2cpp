@@ -1,22 +1,5 @@
-// Lightweight assertion helpers for foundation-dll Subject verification.
-//
-// Non-generic overloads only — ensures safe codegen without generic instantiation.
-// Used by auto-generated Subject_N methods and handwritten CustomEntrySubject_N.
-//
-// On failure, throws AssertionException — the Subject_N try/catch wrapper
-// (already present in all auto-generated subjects) catches it and sets
-// _exitCode = 1.  This avoids a separate exit-code field that codegen would
-// need to route to the native runner.
-//
-// Usage: subjects add `using Chaos.TestFramework;` and call directly:
-//   Assert.AreEqual(42, result);
-//   Assert.IsTrue(condition);
-//   Assert.Throws(() => { risky_call(); });
-
 namespace Chaos.TestFramework;
 
-/// <summary>Thrown by Assert methods on failure. Caught by Subject_N try/catch
-/// wrappers or by the managed proof runner.</summary>
 internal class AssertionException : System.Exception
 {
     public AssertionException(string message) : base(message) { }
@@ -24,6 +7,13 @@ internal class AssertionException : System.Exception
 
 public static class Assert
 {
+    [ThreadStatic] private static int s_exitCode;
+
+    internal static void Reset() => s_exitCode = 0;
+    internal static void RecordFailure() => s_exitCode = 1;
+    internal static int Complete() { int c = s_exitCode; s_exitCode = 0; return c; }
+    internal static int ExitCode => s_exitCode;
+
     public static void AreEqual(int expected, int actual, string? message = null)
     {
         if (expected != actual)
@@ -135,12 +125,13 @@ public static class Assert
     public static void Throws(System.Action action)
     {
         try { action(); Fail("Expected exception but none thrown"); }
-        catch (AssertionException) { throw; }  // let assertion failures propagate
-        catch { /* expected */ }
+        catch (AssertionException) { throw; }
+        catch { }
     }
 
     public static void Fail(string message)
     {
+        s_exitCode = 1;
         System.Console.Error.WriteLine($"[ASSERT FAIL] {message}");
         throw new AssertionException(message);
     }

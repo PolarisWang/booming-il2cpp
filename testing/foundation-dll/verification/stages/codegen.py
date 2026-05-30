@@ -81,16 +81,29 @@ def _incremental_dispatch_rebuild(native_dir: Path, build_subdir: str = "build")
     Ninja recompiles them from the TPG-emitted sources (which include
     --fact-json support that the old committed runtime-entry.cpp lacks).
 
+    Retries with exponential backoff on Windows file-lock races
+    (the parallel AOT build may still hold handles on .obj files).
+
     Args:
         build_subdir: cmake build subdirectory name ("build" for AOT, "build_jit" for JIT).
     """
+    import time as _time
     build_dir = native_dir / build_subdir
     if not build_dir.exists():
         return
     for pattern in ("verification_dispatch*", "runtime-entry*"):
         for obj in build_dir.rglob(pattern):
-            if obj.is_file():
-                obj.unlink()
+            if not obj.is_file():
+                continue
+            for _attempt in range(5):
+                try:
+                    obj.unlink()
+                    break
+                except (PermissionError, OSError):
+                    if _attempt < 4:
+                        _time.sleep(1 << _attempt)
+                    else:
+                        print(f"  [codegen] WARNING: could not remove stale {obj.name}: file locked")
 
 
 # Sentinel dispatch detection — patterns characteristic of the

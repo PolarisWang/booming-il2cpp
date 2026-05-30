@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
-    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Runner\Chaos.TestFramework.Runner.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentElementNativeEntry.cs" />

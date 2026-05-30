@@ -11,7 +11,7 @@ from .preflight import run_preflight
 from .codegen import run_codegen, run_jit_codegen
 
 # fact
-from .fact import run_fact, run_fact_jit, run_fact_cross_verify, run_managed_fact, run_cross_verify
+from .fact import run_fact, run_fact_jit, run_fact_cross_verify, run_managed_fact, run_cross_verify, run_managed_patch_fact
 
 # microbench
 from .microbench import run_microbench
@@ -31,6 +31,7 @@ from .hotupdate import (
     run_hotupdate_aot_bench,
     run_hotupdate_jit_fact,
     run_hotupdate_jit_bench,
+    run_patch_cross_verify,
 )
 
 # Stage registry: ordered list of (stage_name, function, enabled_by_default)
@@ -40,6 +41,7 @@ STAGE_REGISTRY: list[tuple[str, str, bool]] = [
     ("jit_codegen",            "run_jit_codegen",             True),
     ("managed_fact",           "run_managed_fact",            True),
     ("cross_verify",           "run_cross_verify",            True),
+    ("managed_patch_fact",     "run_managed_patch_fact",      True),
     ("fact",                   "run_fact",                    True),
     ("fact_jit",               "run_fact_jit",                True),
     ("fact_cross_verify",      "run_fact_cross_verify",       True),
@@ -48,6 +50,7 @@ STAGE_REGISTRY: list[tuple[str, str, bool]] = [
     ("asm_compare",            "run_asm_compare",             True),
     ("benchmark",              "run_benchmark",               True),
     ("hotupdate",              "run_hotupdate",               True),
+    ("patch_cross_verify",     "run_patch_cross_verify",      True),
     ("hotupdate_aot_benchmark","run_hotupdate_aot_bench",     True),
     ("hotupdate_jit_fact",     "run_hotupdate_jit_fact",      True),
     ("hotupdate_jit_benchmark","run_hotupdate_jit_bench",     True),
@@ -72,8 +75,10 @@ _FUNC_MODULE_OVERRIDES = {
     "run_fact_cross_verify": "fact",
     "run_managed_fact": "fact",
     "run_cross_verify": "fact",
+    "run_managed_patch_fact": "fact",
     "run_jit_codegen": "codegen",
     "run_hotupdate": "hotupdate",
+    "run_patch_cross_verify": "hotupdate",
 }
 
 
@@ -107,9 +112,11 @@ __all__ = [
     "run_preflight", "run_codegen", "run_jit_codegen",
     "run_fact", "run_fact_jit", "run_fact_cross_verify",
     "run_managed_fact", "run_cross_verify",
+    "run_managed_patch_fact",
     "run_microbench", "run_audit", "run_asm_compare",
     "run_benchmark",
     "run_hotupdate", "run_hotupdate_aot_bench",
     "run_hotupdate_jit_fact", "run_hotupdate_jit_bench",
+    "run_patch_cross_verify",
     "STAGE_REGISTRY", "get_stage_names", "get_default_stages", "lookup_stage",
 ]

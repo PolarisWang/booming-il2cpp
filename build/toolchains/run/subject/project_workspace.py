@@ -14,12 +14,10 @@ try:
     from ..core.common import combine_process_output, read_json, run_process, write_json
     from ..testing import compiled_catalog as compiled_catalog_module
     from ..testing import declared_metadata_labels as declared_metadata_labels_module
-    from ..testing import generated_hotupdate_hosts as generated_hotupdate_hosts_module
-    from ..testing import generated_managed_hosts as generated_managed_hosts_module
-    from ..testing import template_assets as template_assets_module
     from ..testing import subject_executor as subject_executor_module
     from ..testing import subject_planner as subject_planner_module
     from ..testing import subjects as subjects_module
+    from ..testing import template_assets as template_assets_module
     from ..testing import verification_layout as verification_layout_module
     from ..testing.events import build_event
 except ImportError:
@@ -29,12 +27,10 @@ except ImportError:
     from core.common import combine_process_output, read_json, run_process, write_json
     from testing import compiled_catalog as compiled_catalog_module
     from testing import declared_metadata_labels as declared_metadata_labels_module
-    from testing import generated_hotupdate_hosts as generated_hotupdate_hosts_module
-    from testing import generated_managed_hosts as generated_managed_hosts_module
-    from testing import template_assets as template_assets_module
     from testing import subject_executor as subject_executor_module
     from testing import subject_planner as subject_planner_module
     from testing import subjects as subjects_module
+    from testing import template_assets as template_assets_module
     from testing import verification_layout as verification_layout_module
     from testing.events import build_event
 
@@ -1839,19 +1835,6 @@ def _subject_solution_native_project_paths(
     ]
 
 
-def _native_benchmark_host_project_suffix(*, host_kind: str, native_filtered: bool) -> str:
-    if host_kind != "benchmark-host" or not native_filtered:
-        raise ValueError(
-            "managed workspace generation only supports the transitional native benchmark host suffix"
-        )
-    return "DeclaredBenchmarkNativeHost"
-
-
-def _declared_benchmark_supports_mode(entry: dict[str, Any], mode: str) -> bool:
-    supported_modes = declared_metadata_labels_module.supported_modes_from_mask(entry.get("modes"))
-    return mode in supported_modes
-
-
 def _subject_managed_test_projects(
     repo_root: Path,
     *,
@@ -1882,7 +1865,6 @@ def _subject_managed_test_projects(
     collection_path = generated_root / "declared-tests.collection.json"
     write_json(collection_path, declared_catalog)
 
-    subject_project_references = [str(item.get("projectPath") or "") for item in managed_projects if str(item.get("projectPath") or "")]
     records: list[dict[str, Any]] = []
     solution_project_paths: list[str] = []
     important_outputs: list[dict[str, str]] = []
@@ -1891,11 +1873,6 @@ def _subject_managed_test_projects(
         repo_root,
         repo_root / "src" / "reference" / "Chaos.TestFramework.Runtime" / "Chaos.TestFramework.Runtime.csproj",
     )
-    native_benchmark_entries = [
-        dict(entry)
-        for entry in benchmark_entries
-        if _declared_benchmark_supports_mode(entry, "native")
-    ]
 
     for project_id_suffix, host_kind, entries in (
         ("proof-host", "proof-host", unit_entries),
@@ -1913,67 +1890,6 @@ def _subject_managed_test_projects(
                 "collectionPath": _path_text(repo_root, collection_path),
                 "executionModel": "shared-runtime-host",
             }
-        )
-
-    host_specs = [
-        (
-            "benchmark-host-native",
-            "benchmark-host",
-            native_benchmark_entries,
-            "ChaosGeneratedDeclaredNativeBenchmarks.g.cs",
-            True,
-        ),
-    ]
-    for project_id_suffix, host_kind, entries, generated_source_name, native_filtered in host_specs:
-        if not entries:
-            continue
-
-        host_suffix = _native_benchmark_host_project_suffix(
-            host_kind=host_kind,
-            native_filtered=native_filtered,
-        )
-        assembly_name = f"{subject_id}.{host_suffix}"
-        generated_source_path = generated_root / generated_source_name
-        project_path = managed_tests_root / f"{assembly_name}.csproj"
-        project_references = [
-            _relative_path_text(project_path.parent, repo_root / reference_path)
-            for reference_path in subject_project_references
-        ]
-        generated_source_path.write_text(
-            generated_managed_hosts_module.render_declared_test_host_source(
-                subject_id=subject_id,
-                host_kind=host_kind,
-                entries=entries,
-            ),
-            encoding="utf-8",
-        )
-        project_path.write_text(
-            generated_managed_hosts_module.render_declared_test_host_project(
-                subject_id=subject_id,
-                host_kind=host_kind,
-                project_references=project_references,
-                generated_source_path=_relative_path_text(project_path.parent, generated_source_path),
-                assembly_name=assembly_name,
-                project_dir=project_path.parent,
-            ),
-            encoding="utf-8",
-        )
-        record = {
-            "projectId": f"managed-test/{subject_id}/{project_id_suffix}",
-            "projectPath": _path_text(repo_root, project_path),
-            "assemblyName": assembly_name,
-            "hostKind": host_kind,
-            "collectionPath": _path_text(repo_root, collection_path),
-            "generatedSourcePath": _path_text(repo_root, generated_source_path),
-        }
-        records.append(record)
-        solution_project_paths.append(record["projectPath"])
-        important_outputs.append({"label": "Benchmark host project", "path": record["projectPath"]})
-        artifacts.extend(
-            [
-                record["projectPath"],
-                record["generatedSourcePath"],
-            ]
         )
 
     return records, solution_project_paths, important_outputs, artifacts
@@ -2063,39 +1979,27 @@ def _subject_hotupdate_test_projects(
     artifacts = [
         _path_text(repo_root, binding_manifest_path),
     ]
-    host_specs = [
-        ("proof-host", unit_entries, "ChaosGeneratedHotUpdateProofHost.g.cs", f"{subject_id}.HotUpdateProofHost"),
-        ("benchmark-host", benchmark_entries, "ChaosGeneratedHotUpdateBenchmarkHost.g.cs", f"{subject_id}.HotUpdateBenchmarkHost"),
-    ]
-    for host_kind, entries, generated_source_name, assembly_name in host_specs:
+    shared_runtime_project_path = _path_text(
+        repo_root,
+        repo_root / "src" / "reference" / "Chaos.TestFramework.Runtime" / "Chaos.TestFramework.Runtime.csproj",
+    )
+
+    for host_kind, entries in (
+        ("proof-host", unit_entries),
+        ("benchmark-host", benchmark_entries),
+    ):
         if not entries:
             continue
 
-        generated_source_path = generated_root / generated_source_name
-        project_path = hotupdate_tests_root / f"{assembly_name}.csproj"
-        generated_source_path.write_text(
-            generated_hotupdate_hosts_module.render_declared_hotupdate_host_source(
-                subject_id=subject_id,
-                host_kind=host_kind,
-            ),
-            encoding="utf-8",
-        )
-        project_path.write_text(
-            generated_hotupdate_hosts_module.render_declared_hotupdate_host_project(
-                assembly_name=assembly_name,
-                generated_source_path=_relative_path_text(project_path.parent, generated_source_path),
-            ),
-            encoding="utf-8",
-        )
         record = {
             "projectId": f"hotupdate-test/{subject_id}/{host_kind}",
-            "projectPath": _path_text(repo_root, project_path),
-            "assemblyName": assembly_name,
+            "projectPath": shared_runtime_project_path,
+            "assemblyName": "Chaos.TestFramework.Runtime",
             "hostKind": host_kind,
             "collectionPath": _path_text(repo_root, collection_path),
             "bindingManifestPath": _path_text(repo_root, binding_manifest_path),
-            "generatedSourcePath": _path_text(repo_root, generated_source_path),
             "patchProjectIds": patch_project_ids,
+            "executionModel": "shared-runtime-host",
         }
         records.append(record)
         solution_project_paths.append(record["projectPath"])
@@ -2105,12 +2009,7 @@ def _subject_hotupdate_test_projects(
                 "path": record["projectPath"],
             }
         )
-        artifacts.extend(
-            [
-                record["projectPath"],
-                record["generatedSourcePath"],
-            ]
-        )
+        artifacts.append(record["projectPath"])
 
     return records, solution_project_paths, important_outputs, artifacts
 
@@ -2195,14 +2094,6 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
         project_id = str(item.get("projectId") or "")
         if host_kind and project_id and host_kind not in managed_test_projects_by_host_kind:
             managed_test_projects_by_host_kind[host_kind] = project_id
-    native_benchmark_managed_test_project_id = next(
-        (
-            str(item.get("projectId") or "")
-            for item in managed_test_projects
-            if str(item.get("projectId") or "").endswith("/benchmark-host-native")
-        ),
-        "",
-    )
     hotupdate_test_projects_by_host_kind = {
         str(item.get("hostKind") or ""): str(item.get("projectId") or "")
         for item in hotupdate_test_projects
@@ -2388,8 +2279,7 @@ def generate_subject_workspace(repo_root: Path, host_platform: str, options: dic
                         **base_payload,
                         "deliveryKind": "direct-run-host",
                         "hostKind": "benchmark-host",
-                        "managedTestProjectId": native_benchmark_managed_test_project_id
-                        or managed_test_projects_by_host_kind.get("benchmark-host", ""),
+                        "managedTestProjectId": managed_test_projects_by_host_kind.get("benchmark-host", ""),
                     }
                 )
                 matrix_native_test_project_ids.append(project_id)
