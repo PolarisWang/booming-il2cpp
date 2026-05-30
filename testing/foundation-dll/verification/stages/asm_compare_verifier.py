@@ -198,10 +198,10 @@ def _discover_subjects_dll(family_slug: str, assembly: str,
             continue
         dlls = list(dll_dir.glob("*Subjects.dll"))
         if dlls:
-            return dlls[0]
+            return dlls[0].resolve()
         dlls = list(dll_dir.glob("*.dll"))
         if dlls:
-            return dlls[0]
+            return dlls[0].resolve()
     return None
 
 

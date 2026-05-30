@@ -29,7 +29,7 @@ public static partial class WriterSubjects
     // [0] System.Text.Json/System.Text.Json.Utf8JsonWriter::Dispose:System.Void()
     public static void CustomEntrySubject_0()
     {
-        try { using var ms = new MemoryStream(); var w = new Utf8JsonWriter(ms); w.Dispose(); Assert.IsTrue(true); }
+        try { using var ms = new MemoryStream(); var w = new Utf8JsonWriter(ms); w.WriteNumberValue(42); w.Dispose(); Assert.IsTrue(ms.ToArray().Length > 0); }
         catch { _exitCode = 1; }
     }
 
@@ -78,28 +78,28 @@ public static partial class WriterSubjects
     // [7] System.Text.Json/System.Text.Json.Utf8JsonWriter::get_Options:System.Text.Json.JsonWriterOptions()
     public static void CustomEntrySubject_7()
     {
-        try { var ms = MakeWriter(out var w); var o = w.Options; Assert.IsTrue(true); }
+        try { var ms = MakeWriter(out var w); var o = w.Options; Assert.AreEqual(0, o.IndentSize); }
         catch { _exitCode = 1; }
     }
 
     // [8] System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void()
     public static void CustomEntrySubject_8()
     {
-        try { var ms = MakeWriter(out var w); w.Reset(); Assert.IsTrue(true); }
+        try { var ms = MakeWriter(out var w); w.WriteNumberValue(42); w.Flush(); var ms2 = new MemoryStream(); w.Reset(ms2); w.WriteNumberValue(7); w.Flush(); Assert.IsTrue(ms2.ToArray().Length > 0); }
         catch { _exitCode = 1; }
     }
 
     // [9] System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.IO.Stream)
     public static void CustomEntrySubject_9()
     {
-        try { var ms = MakeWriter(out var w); using var ms2 = new MemoryStream(); w.Reset(ms2); Assert.IsTrue(true); }
+        try { var ms = MakeWriter(out var w); using var ms2 = new MemoryStream(); w.Reset(ms2); w.WriteNumberValue(42); w.Flush(); Assert.IsTrue(ms2.ToArray().Length > 0); }
         catch { _exitCode = 1; }
     }
 
     // [10] System.Text.Json/System.Text.Json.Utf8JsonWriter::Reset:System.Void(System.Buffers.IBufferWriter{System.Byte})
     public static void CustomEntrySubject_10()
     {
-        try { var ms = MakeWriter(out var w); var bw = new ArrayBufferWriter<byte>(); w.Reset(bw); Assert.IsTrue(true); }
+        try { var ms = MakeWriter(out var w); var bw = new ArrayBufferWriter<byte>(); w.Reset(bw); w.WriteNumberValue(42); w.Flush(); Assert.IsTrue(bw.WrittenCount > 0); }
         catch { _exitCode = 1; }
     }
 
@@ -897,14 +897,14 @@ public static partial class WriterSubjects
     // [124] System.Text.Json/System.Text.Json.Utf8JsonWriter::set_BytesPending:System.Void(System.Int32)
     public static void CustomEntrySubject_124()
     {
-        try { var ms = MakeWriter(out var w); Assert.IsTrue(true); /* internal setter effective via write */ }
+        try { var ms = MakeWriter(out var w); w.WriteNumberValue(42); Assert.IsTrue(w.BytesPending > 0); }
         catch { _exitCode = 1; }
     }
 
     // [125] System.Text.Json/System.Text.Json.Utf8JsonWriter::set_BytesCommitted:System.Void(System.Int64)
     public static void CustomEntrySubject_125()
     {
-        try { var ms = MakeWriter(out var w); Assert.IsTrue(true); /* internal setter effective via write+flush */ }
+        try { var ms = MakeWriter(out var w); w.WriteNumberValue(42); w.Flush(); Assert.IsTrue(w.BytesCommitted > 0); }
         catch { _exitCode = 1; }
     }
 }

@@ -53,8 +53,10 @@ class TestVerificationPipeline:
         assert names[2] == "jit_codegen"
         assert names[3] == "managed_fact"
         assert names[4] == "cross_verify"
+        assert names[5] == "managed_patch_fact"
+        assert names[14] == "multi_patch_hotupdate"
         assert names[-1] == "cleanup"
-        assert len(names) == 18
+        assert len(names) == 19
 
     def test_fatal_stages_contains_preflight(self):
         assert "preflight" in VerificationPipeline.FATAL_STAGES

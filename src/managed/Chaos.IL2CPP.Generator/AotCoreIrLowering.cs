@@ -76,15 +76,6 @@ public sealed class AotCoreIrLowering
         IReadOnlyDictionary<string, string> targetSymbols,
         IReadOnlyDictionary<string, GenericInstantiationDemandModel> genericDemandLookup)
     {
-        // Subject_N methods are synthesized test entry points whose full IL dispatch
-        // logic is too complex for the interpreter to execute during hotupdate verification.
-        // Emit minimal IR (ldc.i4 1 + ret) so the interpreter can execute the patch body
-        // without hanging on the full call chain.
-        if (IsSubjectMethodName(method.Name))
-        {
-            return BuildSubjectMethodMinimalIr(method, typedMethod, targetSymbols);
-        }
-
         var typedBlocks = typedMethod.Blocks.ToDictionary(block => block.BlockId, StringComparer.Ordinal);
         var instructions = new List<AotCoreIrInstructionArtifact>();
 

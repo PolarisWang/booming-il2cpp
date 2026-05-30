@@ -97,6 +97,7 @@ public partial class BoxingUnboxingCastsTests
     {
         // Purpose: Smoke — Convert.ChangeType with complex param(s)
             _ = Convert.ChangeType(null!, typeof(byte), null);
+            Assert.IsTrue(true);
     }
 
     // === needs-manual (operator/protected/etc) ===

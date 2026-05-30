@@ -840,8 +840,14 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
 def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
     """Stage 11: HotUpdate JIT Fact — run entry-jit.exe --hotupdate.
 
-    P1: Ensures entry-jit.exe has current patchdata by rebuilding if stale
-    (compares runtime-patchdata.cpp mtime vs entry-jit.exe mtime).
+    P1: Ensures entry-jit.exe has current patchdata by calling
+    _ensure_patch_data() first, then rebuilding entry-jit.exe with the
+    generated runtime-patchdata.cpp.
+
+    NOTE: _ensure_patch_data() regenerates runtime-patchdata.cpp and
+    rebuilds entry.exe (AOT binary). The entry-jit.exe rebuild is done
+    separately below via build_entry_executable(), which compiles the same
+    runtime-patchdata.cpp into the JIT binary.
     """
     start = time.perf_counter()
 
@@ -860,27 +866,33 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # P1: Check if entry-jit.exe is stale vs runtime-patchdata.cpp
-    # and rebuild if needed so the JIT binary has current patchdata.
-    patchdata_cpp = ctx.native_dir / "runtime-patchdata.cpp"
-    if patchdata_cpp.exists():
-        patch_mtime = patchdata_cpp.stat().st_mtime
-        jit_mtime = exe_path.stat().st_mtime
-        if patch_mtime > jit_mtime:
-            print(f"  [hotupdate_jit_fact] runtime-patchdata.cpp is newer than entry-jit.exe — "
-                  f"rebuilding with current patchdata...")
-            from verification.stages.pipeline_native_aot_runner import build_entry_executable
-            rebuild_ok = build_entry_executable(
-                ctx.slug, verification=ctx.family_dir.parent,
-                config_tier=ctx.native_config,
-                output_name="entry-jit.exe", is_jit=True, skip_prep=True,
-            )
-            if not rebuild_ok:
-                return StageResult(
-                    stage="hotupdate_jit_fact", status="failed",
-                    summary="entry-jit.exe rebuild with patchdata failed",
-                    duration_ms=int((time.perf_counter() - start) * 1000),
-                )
+    # Regenerate patchdata and runtime-patchdata.cpp.
+    # This is necessary because previous AOT hotupdate stages' finally blocks
+    # wrote a sentinel (size=0) over runtime-patchdata.cpp, so entry-jit.exe
+    # would otherwise stale-check against an empty sentinel and never rebuild
+    # with real patchdata.
+    hu_indices = _load_hotupdate_indices(ctx)
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
+        return StageResult(
+            stage="hotupdate_jit_fact", status="failed",
+            summary="_ensure_patch_data failed — cannot rebuild entry-jit.exe with patchdata",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Rebuild entry-jit.exe with the freshly generated runtime-patchdata.cpp.
+    # _ensure_patch_data() rebuilds entry.exe (AOT); we need the JIT binary too.
+    from verification.stages.pipeline_native_aot_runner import build_entry_executable
+    rebuild_ok = build_entry_executable(
+        ctx.slug, verification=ctx.family_dir.parent,
+        config_tier=ctx.native_config,
+        output_name="entry-jit.exe", is_jit=True, skip_prep=True,
+    )
+    if not rebuild_ok:
+        return StageResult(
+            stage="hotupdate_jit_fact", status="failed",
+            summary="entry-jit.exe rebuild with patchdata failed",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
 
     try:
         print(f"  [hotupdate_jit_fact] Running {exe_path} --hotupdate...")
@@ -892,7 +904,7 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
         print(f"  [hotupdate_jit_fact] Result: {status} ({passed}/{total})")
 
         details = dict(result)
-        details["hotupdateMethodIndices"] = _load_hotupdate_indices(ctx)
+        details["hotupdateMethodIndices"] = hu_indices
 
         return StageResult(
             stage="hotupdate_jit_fact", status=status,
@@ -994,6 +1006,22 @@ def run_patch_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -
 
     # Rebuild entry.exe with patchdata (hotupdate stage's finally cleans up)
     hu_indices = _load_hotupdate_indices(ctx)
+
+    # Filter golden values to only include methods that actually have patch
+    # entries.  The managed harness calls Subject_N() for all methods (the
+    # patch DLL defines all of them), but emit-patch-data with --subject-indices
+    # only emits patch entries for the hotupdate subset.  Methods without patch
+    # entries will still run the original AOT body, not Subject_N(), so their
+    # return values won't match golden — skip them.
+    if hu_indices:
+        golden_by_index = {idx: gr for idx, gr in golden_by_index.items()
+                           if idx in hu_indices}
+        if not golden_by_index:
+            return StageResult(
+                stage="patch_cross_verify", status="skipped",
+                summary="no golden values overlap with hotupdateMethodIndices",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
     if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
         return StageResult(
             stage="patch_cross_verify", status="failed",

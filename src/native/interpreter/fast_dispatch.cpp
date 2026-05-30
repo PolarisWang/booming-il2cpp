@@ -1440,6 +1440,33 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
                     return;
                 }
             }
+            // ── Monomorphic shortcut via call_cache / instr.direct_fn ────
+            // When vtable resolution failed (null secondary_index, or
+            // ResolveVirtualMethodPointer returned nullptr), use the
+            // declaring type's AOT direct_fn as a best-effort fallback.
+            //
+            // Two sources:
+            //   1. mic.direct_ptr — set by Phase 2.3 when PrecacheCallTarget
+            //      missed but deserializer resolved direct_fn (non-patched).
+            //   2. instr.direct_fn — deserializer's own resolution, also
+            //      available for patched methods (since CallVirt now included
+            //      in direct_fn resolution at aot_core_ir_reader.cpp:503-506).
+            //
+            // This is correct for monomorphic call sites (the common case
+            // in benchmarks).  For polymorphic sites, the declaring type's
+            // method may be the wrong override — but this is still better
+            // than going through method_invoke (~1500-2200ns).
+            void* dfn = (mic.direct_ptr != nullptr) ? mic.direct_ptr : instr.direct_fn;
+            if (dfn != nullptr && ac <= 8) {
+                CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirt_DirectFn");
+                uint64_t result = CallDirectVoidPtr(dfn, pa.args, ac);
+                if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
+                    frame.stack[frame.sp] = result;
+                    frame.stack_tags[frame.sp] = mic.ret_tag;
+                }
+                ++frame.pc;
+                return;
+            }
         }
     }
 

@@ -182,7 +182,7 @@ public static partial class MetadataTypeinfoSubjects
     // [23] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_CreateObject:System.Void(System.Func{System.Object})
     public static void CustomEntrySubject_23()
     {
-        try { default(JsonTypeInfo)!.CreateObject = default; Assert.IsTrue(true); }
+        try { Assert.Throws<NullReferenceException>(() => default(JsonTypeInfo)!.CreateObject = default); }
         catch { _exitCode = 1; }
     }
 
@@ -196,28 +196,28 @@ public static partial class MetadataTypeinfoSubjects
     // [25] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnDeserialized:System.Void(System.Action{System.Object})
     public static void CustomEntrySubject_25()
     {
-        try { default(JsonTypeInfo)!.OnDeserialized = default; Assert.IsTrue(true); }
+        try { Assert.Throws<NullReferenceException>(() => default(JsonTypeInfo)!.OnDeserialized = default); }
         catch { _exitCode = 1; }
     }
 
     // [26] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnDeserializing:System.Void(System.Action{System.Object})
     public static void CustomEntrySubject_26()
     {
-        try { default(JsonTypeInfo)!.OnDeserializing = default; Assert.IsTrue(true); }
+        try { Assert.Throws<NullReferenceException>(() => default(JsonTypeInfo)!.OnDeserializing = default); }
         catch { _exitCode = 1; }
     }
 
     // [27] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnSerialized:System.Void(System.Action{System.Object})
     public static void CustomEntrySubject_27()
     {
-        try { default(JsonTypeInfo)!.OnSerialized = default; Assert.IsTrue(true); }
+        try { Assert.Throws<NullReferenceException>(() => default(JsonTypeInfo)!.OnSerialized = default); }
         catch { _exitCode = 1; }
     }
 
     // [28] System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnSerializing:System.Void(System.Action{System.Object})
     public static void CustomEntrySubject_28()
     {
-        try { default(JsonTypeInfo)!.OnSerializing = default; Assert.IsTrue(true); }
+        try { Assert.Throws<NullReferenceException>(() => default(JsonTypeInfo)!.OnSerializing = default); }
         catch { _exitCode = 1; }
     }
 

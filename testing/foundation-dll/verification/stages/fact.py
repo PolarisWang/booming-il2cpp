@@ -423,11 +423,16 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             except json.JSONDecodeError:
                 continue
 
-    native_by_index: dict[int, dict] = {}
+    # Key native results by si (subject slot index) rather than methodIndex.
+    # The kMethodTable interleaves CustomEntrySubject_N (even si) and Subject_N
+    # (odd si), so methodIndex alone doesn't map 1:1 to the contract order.
+    # Golden record uses contract index (0 = Subject_0, 1 = Subject_1, ...),
+    # which corresponds to native si = 2*N + (custom? 0 : 1).
+    native_by_si: dict[int, dict] = {}
     for nr in native_data.get("factResults", []):
-        idx = nr.get("methodIndex", nr.get("si", -1))
-        if idx >= 0:
-            native_by_index[idx] = nr
+        si = nr.get("si", -1)
+        if si >= 0:
+            native_by_si[si] = nr
 
     # ── 2. Load golden record (primary: managed_record, fallback: managed_fact) ──
     golden_by_index: dict[int, dict] = {}
@@ -470,15 +475,31 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
     # thing: "did the method complete without an unhandled exception?"
     #
     # We iterate only golden indices (the subject methods we care about).
-    # Extra native entries (e.g. probe/helper methods from codegen) are
-    # counted separately as informational and excluded from comparison.
+    # To match golden methodIndex N against the correct native entry, we map
+    # through si (subject slot index). The kMethodTable interleaves entries:
+    #   even si = CustomEntrySubject_N, odd si = Subject_N
+    # Golden record carries isCustom flag — auto methods (Subject_N) sit at
+    # odd si = 2*N+1, custom methods (CustomEntrySubject_N) at even si = 2*N.
+    #
+    # Fallback path (managed_fact golden-values.json, no isCustom field):
+    # use old matching by simple index (si should equal contract methodIndex
+    # since all methods in the table are subject entries).
     mismatches = []
     matched = 0
     golden_not_in_native = 0
+    expected_sis: set[int] = set()
 
     for idx in sorted(golden_by_index.keys()):
         golden = golden_by_index[idx]
-        native = native_by_index.get(idx)
+        is_custom = golden.get("isCustom")
+        if is_custom is not None:
+            # Managed_record golden path: map via slot interleave
+            expected_si = 2 * idx + (1 if not is_custom else 0)
+        else:
+            # Fallback path (managed_fact): simple index match
+            expected_si = idx
+        expected_sis.add(expected_si)
+        native = native_by_si.get(expected_si)
 
         if native is None:
             golden_not_in_native += 1
@@ -503,7 +524,7 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             })
 
     total_checked = len(golden_by_index) - golden_not_in_native
-    native_extra = sum(1 for idx in native_by_index if idx not in golden_by_index)
+    native_extra = sum(1 for si in native_by_si if si not in expected_sis)
 
     if mismatches:
         status = "failed"

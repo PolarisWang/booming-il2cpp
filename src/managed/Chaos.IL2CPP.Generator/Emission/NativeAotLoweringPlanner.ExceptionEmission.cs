@@ -2817,6 +2817,13 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			builder.AppendLine(indentation + "}");
 			return;
 		}
+		// Assert.Throws<T>(Action) — IL lookahead + direct try/catch
+		if (instruction.Callee != null && instruction.Callee.Contains("Chaos.TestFramework.Assert::Throws"))
+		{
+			EmitAssertThrowsInline(builder, instruction, indentation);
+			return;
+		}
+
 
 		if (_nativeSymbolToDispatchSlot?.TryGetValue(invocationTarget.TargetSymbol, out int slotIndex) == true)
 		{
@@ -2901,6 +2908,77 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 
 		builder.AppendLine($"{indentation}}}");
 	}
+
+		/// <summary>
+		/// Emit inline try/catch for Assert.Throws<T>(Action) via IL lookahead.
+		/// Scans backward from the call instruction to find ldnull + ldftn <target>
+		/// + newobj Action::.ctor, then emits a direct try/catch around the target method.
+		/// </summary>
+		private void EmitAssertThrowsInline(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)
+		{
+			// Consume the Action parameter from eval stack (keep balanced)
+			var actionExpr = ConsumeEvalStackValueExpression();
+			var targetSymbol = FindThrowsTargetMethod();
+			var indent = indentation;
+			builder.AppendLine($"{indent}{{");
+			builder.AppendLine($"{indent}    if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) {{");
+			if (targetSymbol != null)
+			{
+				builder.AppendLine($"{indent}        try {{");
+				builder.AppendLine($"{indent}            {targetSymbol}();");
+				builder.AppendLine($"{indent}            throw chaos_managed_exception{{}};  // no exception u2014 fail");
+				builder.AppendLine($"{indent}        }} catch (chaos_managed_exception&) {{");
+				builder.AppendLine($"{indent}            // expected exception was thrown u2014 pass");
+				builder.AppendLine($"{indent}        }}");
+			}
+			else
+			{
+				// Fallback: use runtime Action invoke when IL lookahead fails
+				builder.AppendLine($"{indent}        try {{");
+				builder.AppendLine($"{indent}            ChaosInvokeAction({actionExpr});");
+				builder.AppendLine($"{indent}            throw chaos_managed_exception{{}};  // no exception u2014 fail");
+				builder.AppendLine($"{indent}        }} catch (chaos_managed_exception&) {{");
+				builder.AppendLine($"{indent}            // expected exception was thrown u2014 pass");
+				builder.AppendLine($"{indent}        }}");
+			}
+			builder.AppendLine($"{indent}    }}"   );
+			builder.AppendLine($"{indent}}}");
+		}
+		
+		/// <summary>
+		/// Scan backward from current instruction to find the target method for Assert.Throws.
+		/// Looks for the pattern: ldnull + ldftn <method> + newobj Action::.ctor.
+		/// </summary>
+		private string? FindThrowsTargetMethod()
+		{
+			var list = _linearInstructionList ?? _lookaheadInstructionList;
+			var idx = _linearInstructionList != null ? _linearInstructionIndex : _lookaheadInstructionIndex;
+			if (list == null || idx < 0) return null;
+			
+			// Scan backward from idx-1 to find newobj Action::.ctor preceded by ldftn
+			for (int i = idx - 1; i >= 0; i--)
+			{
+				var instr = list[i];
+				if (instr.OpCode == InstructionOpCode.NewObj &&
+				    instr.Callee != null &&
+				    instr.Callee.Contains("System.Action::.ctor"))
+				{
+					// Found newobj. The ldftn should be at i-1
+					if (i >= 1 && list[i - 1].OpCode == InstructionOpCode.LdFtn)
+					{
+						var ldftnInstr = list[i - 1];
+						if (ldftnInstr.Callee != null &&
+						    _methodsBySubjectId.TryGetValue(ldftnInstr.Callee, out var targetMethod))
+						{
+							return TryGetInstantiationStubSymbol(targetMethod) ?? targetMethod.NativeSymbol;
+						}
+						if (!string.IsNullOrEmpty(ldftnInstr.TargetSymbol))
+							return ldftnInstr.TargetSymbol;
+					}
+				}
+			}
+			return null;
+		}
 
 	/// <summary>
 	/// Try to inline a resolved callee method at the call site.

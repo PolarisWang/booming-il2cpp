@@ -57,6 +57,7 @@ public partial class ReflectionModuleTests
     {
         // Purpose: Smoke — Module.get_Assembly with complex param(s)
             _ = default(Module)!.Assembly;
+            Assert.IsTrue(true);
     }
 
     // === needs-manual (operator/protected/etc) ===

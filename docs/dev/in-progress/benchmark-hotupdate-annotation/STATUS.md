@@ -33,6 +33,14 @@
 - Hotupdate: semanticChangedCount=9, all stages pass
 - 4 pre-existing failures (unrelated to annotation changes)
 
+### Additional: D3 runner pipeline integration (bridge report)
+- Added `_write_hotupdate_report_from_pipeline()` in `cli.py` — bridges pipeline's hotupdate stages (Stage 9-12) to the `hotupdate-verification-report.json` format that `check-hotupdate.sh` expects
+- Pipeline now writes both `unified-verification-report.json` and `hotupdate-verification-report.json` to the results directory
+- `check-hotupdate.sh` finds the bridge report via fallback path (`testing/results/foundation-dll/...`)
+- `d3PatchApplied=True` with real `semanticChangedCount` from pipeline stages, so the script validates semantic change and overhead correctly
+- Golden patched values validation already implemented via `run_managed_patch_fact()` + `patch_cross_verify()` stages (from Phase 2)
+- Commit `67a6a988d` pushed to main
+
 ## Files modified (complete list)
 | File | Change |
 |------|--------|
@@ -42,4 +50,5 @@
 | `src/managed/Chaos.IL2CPP.Generator/PatchDataExtractor.cs` | Added --subject-only/--subject-indices filtering, ExtractSubjectIndex() |
 | `src/managed/Chaos.IL2CPP.Driver/DriverEntry.cs` | Added --subject-only/--subject-indices arg parsing |
 | `testing/foundation-dll/verification/stages/pre_verification_audit.py` | Added p4 annotation check + --fix-annotations with managed_fact integration |
+| `testing/foundation-dll/verification/entry_points/cli.py` | Added _write_hotupdate_report_from_pipeline() bridge, writes hotupdate-verification-report.json |
 | 157x `capability-family-contract.json` | Added benchmarkMethodIndices + hotupdateMethodIndices |

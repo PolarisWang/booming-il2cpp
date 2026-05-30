@@ -39,6 +39,12 @@ endif()
 add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 {{ end }}
 
+# ── Verification toggle ──
+if(NOT DEFINED CHAOS_IL2CPP_VERIFICATION_ENABLED)
+  set(CHAOS_IL2CPP_VERIFICATION_ENABLED "{{ verification_enabled }}")
+endif()
+add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=${CHAOS_IL2CPP_VERIFICATION_ENABLED})
+
 # ── Paths ──
 set(CHAOS_SDK_DIR "{{ sdk_dir }}")
 set(CHAOS_PROJECT_ROOT "{{ project_root }}")

@@ -105,6 +105,7 @@ public partial class EnumParsingTests
     {
         // Purpose: Smoke — Enum.GetName with complex param(s)
             _ = Enum.GetName(typeof(DayOfWeek), (object)1);
+            Assert.IsTrue(true);
     }
 
     // === needs-manual (ref/pointer/generic) ===

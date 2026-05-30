@@ -212,7 +212,7 @@ public static partial class NodesSubjects
     // [27] System.Text.Json/System.Text.Json.Nodes.JsonNode::get_Options:System.Nullable{System.Text.Json.Nodes.JsonNodeOptions}()
     public static void CustomEntrySubject_27()
     {
-        try { var o = JsonNode.Parse("42")!.Options; Assert.IsTrue(true); }
+        try { var o = JsonNode.Parse("42")!.Options; Assert.IsNotNull(o); }
         catch { _exitCode = 1; }
     }
 
@@ -807,14 +807,14 @@ public static partial class NodesSubjects
     // [113] System.Text.Json/System.Text.Json.Nodes.JsonNode::get_Item:System.Text.Json.Nodes.JsonNode()
     public static void CustomEntrySubject_113()
     {
-        try { var node = JsonNode.Parse("42")!; Assert.IsTrue(true); }
+        try { var node = JsonNode.Parse("42")!; Assert.AreEqual(42, (int)node); }
         catch { _exitCode = 1; }
     }
 
     // [114] System.Text.Json/System.Text.Json.Nodes.JsonNode::set_Item:System.Void(System.Text.Json.Nodes.JsonNode)
     public static void CustomEntrySubject_114()
     {
-        try { var node = JsonValue.Create(42)!; Assert.IsTrue(true); }
+        try { var node = JsonValue.Create(42)!; Assert.AreEqual(42, (int)node); }
         catch { _exitCode = 1; }
     }
 

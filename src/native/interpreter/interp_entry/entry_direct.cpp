@@ -472,7 +472,24 @@ void InterpreterEntryDirect(
     if (ir == nullptr) return;
     if (ir->instructions.empty()) return;
     const auto instr_count = ir->instructions.size();
-    if (instr_count == 1) return;
+    // ── Binary IR fallback: placeholder cached_ir ─────────────────────
+    // When the patch method uses pre-allocated register IR (v2+ binary
+    // path), cached_ir contains a 1-instr placeholder while the real
+    // body lives in cached_reg_method.  Route to tier upgrade and then
+    // RegisterExecute (Step B) instead of returning — ensures real
+    // method body is executed, ret_buf is written, and call_count is
+    // incremented for tier promotion.
+    //
+    // Genuine 1-instr methods (e.g. empty void stubs with no reg_method)
+    // still return fast at this point.
+    if (instr_count == 1) {
+        auto* reg_m = static_cast<interpreter::RegisterMethod*>(
+            patch_method->cached_reg_method);
+        if (reg_m == nullptr || reg_m->instructions.empty()) {
+            return;
+        }
+        // Fall through to tier upgrade + RegisterExecute below.
+    }
 
     // ── Step 1c: 2-instr fast path ───────────────────────────────────
     if (instr_count == 2 && ir->seh_clauses.empty()) {

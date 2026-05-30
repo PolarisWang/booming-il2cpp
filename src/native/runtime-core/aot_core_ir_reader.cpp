@@ -502,7 +502,8 @@ interpreter::IRMethod DeserializeAotCoreIrMethod(
                 // chaos_external_runtime_* function pointer.
                 if ((instr.op_code == interpreter::IROpCode::Call ||
                      instr.op_code == interpreter::IROpCode::CallBridge ||
-                     instr.op_code == interpreter::IROpCode::CallVirtConstrained) &&
+                     instr.op_code == interpreter::IROpCode::CallVirtConstrained ||
+                     instr.op_code == interpreter::IROpCode::CallVirt) &&
                     resolve_direct_fn != nullptr)
                 {
                     auto callee = json::JsonParser::FindKey(elem, "callee");

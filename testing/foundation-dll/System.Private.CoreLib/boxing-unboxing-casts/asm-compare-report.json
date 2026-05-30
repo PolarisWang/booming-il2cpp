@@ -2,34 +2,34 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/boxing/unboxing/casts",
-  "capturedAt": "2026-05-30T12:47:17",
+  "capturedAt": "2026-05-30T15:20:13",
   "batchMode": true,
   "summary": {
     "totalMethods": 11,
-    "okCount": 11,
-    "failedCount": 0,
+    "okCount": 10,
+    "failedCount": 1,
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
       "max": 44,
       "avg": 44.0,
-      "total": 484
+      "total": 440
     },
     "aotInstructionCount": {
       "min": 2,
-      "max": 14,
-      "avg": 3.1,
-      "total": 34
+      "max": 11,
+      "avg": 2.8,
+      "total": 31
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 1
+      "external_runtime_call": 2
     },
     "overallIrExpansionRatio": 0.07,
-    "averageExpansionRatio": 0.07,
-    "maxExpansionRatio": 0.32,
+    "averageExpansionRatio": 0.05,
+    "maxExpansionRatio": 0.05,
     "minExpansionRatio": 0.05
   },
   "methodResults": [
@@ -181,32 +181,37 @@
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()",
       "shortName": "Subject_6",
-      "status": "ok",
+      "status": "warning",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
-        "jitCodeSize": 256
+        "jitInstructionCount": 0,
+        "aotInstructionCount": 11,
+        "ratio": 0,
+        "jitCodeSize": 0
       },
       "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
+        "status": "failed",
+        "size": null,
+        "instructions": null
       },
       "aot": {
         "status": "ok",
         "symbol": "BoxingUnboxingCastsSubjects_BoxingUnboxingCastsSubjects_CustomEntrySubject_6",
-        "instructions": 14
+        "instructions": 11
       },
       "analysis": [
         {
           "severity": "info",
           "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'Chaos.TestFramework.Sdk/Chaos.TestFramework.Assert::IsNotNull:System.Void(System.Object,System.String)' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 1
+        "external_runtime_call": 2
       }
     },
     {

@@ -22,20 +22,20 @@ public partial class ImmutableDictionaryTests
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableDictionary_Create_string_int_System_Collections_Immut()
     {
         // Purpose: Smoke — ImmutableDictionary.Create<string,int> with complex param(s)
-            _ = ImmutableDictionary.Create<string,int>();
+            Assert.IsTrue(ImmutableDictionary.Create<string,int>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableDictionary_Create_Byte_Byte_System_Collections_Immuta()
     {
         // Purpose: Smoke — ImmutableDictionary.Create<Byte,Byte> with complex param(s)
-            _ = ImmutableDictionary.Create<Byte,Byte>();
+            Assert.IsTrue(ImmutableDictionary.Create<Byte,Byte>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableDictionary_Create_string_string_System_Collections_Im()
     {
         // Purpose: Smoke — ImmutableDictionary.Create<string,string> with complex param(s)
-            _ = ImmutableDictionary.Create<string,string>();
+            Assert.IsTrue(ImmutableDictionary.Create<string,string>().IsEmpty);
     }
 }
