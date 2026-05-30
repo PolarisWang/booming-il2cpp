@@ -1440,6 +1440,21 @@ static void Handle_CallVirt(FastFrame& frame, const interpreter::IRInstruction& 
                     return;
                 }
             }
+            // ── Monomorphic shortcut via call_cache / instr.direct_fn ────
+            // When vtable resolution failed (null secondary_index, or
+            // ResolveVirtualMethodPointer returned nullptr), use the
+            // declaring type's AOT direct_fn as a best-effort fallback.
+            void* dfn = (mic.direct_ptr != nullptr) ? mic.direct_ptr : instr.direct_fn;
+            if (dfn != nullptr && ac <= 8) {
+                CHAOS_IL2CPP_PROFILE_SCOPE("Handle_CallVirt_DirectFn");
+                uint64_t result = CallDirectVoidPtr(dfn, pa.args, ac);
+                if (mic.ret_tag != static_cast<uint8_t>(interpreter::ValueTag::Void)) {
+                    frame.stack[frame.sp] = result;
+                    frame.stack_tags[frame.sp] = mic.ret_tag;
+                }
+                ++frame.pc;
+                return;
+            }
         }
     }
 
