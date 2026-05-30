@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -40,7 +41,8 @@ public sealed class NativeAotEmitter
         MetadataRegistrationArtifact metadataRegistration,
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
         string outputRootPath,
-        CodegenMode mode = CodegenMode.Aot)
+        CodegenMode mode = CodegenMode.Aot,
+        HashSet<string>? subjectMethods = null)
     {
         ValidateLoweringPlan(loweringPlan, closureManifest);
         var entryMethod = LoadEntryMethod(aotCoreIr, loweringPlan.EntrySubjectId);
@@ -55,7 +57,8 @@ public sealed class NativeAotEmitter
             metadataRegistration,
             supplementalMetadataTemplate,
             fullAssemblyMode: isFullAssembly,
-            mode: mode);
+            mode: mode,
+            subjectMethods: subjectMethods);
 
         var (generatedSources, generatedArtifacts) = BuildGeneratedSources(
             templateModel, loweringPlan);

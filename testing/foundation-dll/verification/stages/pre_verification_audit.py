@@ -9,10 +9,11 @@ Usage:
     python -m verification.stages.pre_verification_audit convert-char --assembly System.Private.CoreLib
     python -m verification.stages.pre_verification_audit convert-char --assembly System.Private.CoreLib --fix
     python -m verification.stages.pre_verification_audit convert-char --assembly System.Private.CoreLib --fix-annotations
+    python -m verification.stages.pre_verification_audit enum-parsing --assembly System.Private.CoreLib --estimate-roi
 
 Exit codes:
-    0 = PASS (all methods have meaningful test coverage)
-    1 = Issues found (missing handwritten, stale metadata, etc.)
+    0 = PASS (all methods have meaningful test coverage, or ROI gate passed)
+    1 = Issues found (missing handwritten, stale metadata, or ROI gate failed)
 """
 
 from __future__ import annotations
@@ -74,6 +75,14 @@ def _resolve_class_name(slug: str) -> str:
     "enumerator-iteration" -> "EnumeratorIteration"
     """
     return "".join(part.capitalize() for part in slug.split("-"))
+
+
+def _safe_float(value: Any) -> float:
+    """Safely convert to float, returning 0.0 on failure."""
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return 0.0
 
 
 # ---------------------------------------------------------------------------
@@ -864,6 +873,312 @@ def verify_freeze(slug: str, assembly: str) -> bool:
 
 
 # ---------------------------------------------------------------------------
+# ROI estimation (T-B3)
+# ---------------------------------------------------------------------------
+
+
+def _find_summary_by_runtime(report: dict[str, Any], runtime: str) -> dict[str, Any] | None:
+    """Find the summary entry for a given runtime name."""
+    for s in report.get("summaries", []):
+        if s.get("runtime") == runtime:
+            return s
+    return None
+
+
+def estimate_roi(
+    slug: str,
+    assembly: str,
+) -> dict[str, Any]:
+    """Estimate ROI for optimizing a family.
+
+    Analyzes benchmark data from multi-run-report.json, classifies bottleneck
+    type (dispatch-bound / alloc-bound / metadata-bound / mixed), and estimates
+    potential performance improvement.
+
+    Returns a structured ROI report dict and writes optimization-opportunity.md.
+
+    ROI gate:
+      - conservative_improvement >= 20% -> PASS
+      - conservative_improvement < 20%  -> WARN
+    """
+    family_dir = _TESTING_ROOT / assembly / slug
+    report_path = family_dir / "multi-run" / "multi-run-report.json"
+
+    if not report_path.exists():
+        print(f"ERROR: No benchmark data at {report_path}", file=sys.stderr)
+        print(f"Run the benchmark pipeline first.", file=sys.stderr)
+        sys.exit(1)
+
+    try:
+        report = json.loads(report_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"ERROR: Could not read benchmark report: {e}", file=sys.stderr)
+        sys.exit(1)
+
+    # ── Summary-level data ──
+    chaos_aot_summary = _find_summary_by_runtime(report, "chaos-aot")
+    chaos_jit_summary = _find_summary_by_runtime(report, "chaos-jit")
+    net8_summary = _find_summary_by_runtime(report, "net8-jit")
+
+    chaos_aot_ns = _safe_float(chaos_aot_summary.get("geometric_mean_ns")) if chaos_aot_summary else 0.0
+    chaos_jit_ns = _safe_float(chaos_jit_summary.get("geometric_mean_ns")) if chaos_jit_summary else 0.0
+    net8_ns = _safe_float(net8_summary.get("geometric_mean_ns")) if net8_summary else 0.0
+
+    method_count = chaos_aot_summary.get("method_count", 0) if chaos_aot_summary else 0
+    stub_count = chaos_aot_summary.get("stub_count", 0) if chaos_aot_summary else 0
+    throws_count = chaos_aot_summary.get("throws_count", 0) if chaos_aot_summary else 0
+
+    slowdown_vs_net8 = (chaos_aot_ns / net8_ns) if chaos_aot_ns > 0 and net8_ns > 0 else 0.0
+
+    # ── Per-method analysis ──
+    methods_data: list[dict[str, Any]] = report.get("methods", [])
+    dispatch_high_count = 0
+    metadata_high_count = 0
+    valid_count = 0
+    method_details: list[dict[str, Any]] = []
+
+    for m in methods_data:
+        chaos_aot_sample = m.get("samples", {}).get("chaos-aot", {})
+        chaos_jit_sample = m.get("samples", {}).get("chaos-jit", {})
+        net8_sample = m.get("samples", {}).get("net8-jit", {})
+
+        chaos_aot_mean = _safe_float(chaos_aot_sample.get("mean_ns"))
+        chaos_jit_mean = _safe_float(chaos_jit_sample.get("mean_ns"))
+        net8_mean = _safe_float(net8_sample.get("mean_ns"))
+
+        dispatch_ratio = (
+            (chaos_aot_mean / chaos_jit_mean)
+            if chaos_aot_mean > 0 and chaos_jit_mean > 0
+            else 0.0
+        )
+        metadata_ratio = (
+            (chaos_aot_mean / net8_mean)
+            if chaos_aot_mean > 0 and net8_mean > 0
+            else 0.0
+        )
+
+        if chaos_aot_mean > 0:
+            valid_count += 1
+        if dispatch_ratio > 1.5:
+            dispatch_high_count += 1
+        if metadata_ratio > 3.0:
+            metadata_high_count += 1
+
+        method_details.append({
+            "method_index": m.get("method_index"),
+            "label": m.get("label", ""),
+            "chaos_aot_ns": round(chaos_aot_mean, 2),
+            "chaos_jit_ns": round(chaos_jit_mean, 2),
+            "net8_ns": round(net8_mean, 2),
+            "dispatch_ratio": round(dispatch_ratio, 2),
+            "metadata_ratio": round(metadata_ratio, 2),
+        })
+
+    # ── Bottleneck classification ──
+    alloc_stub_throw = stub_count + throws_count
+    dispatch_pct = (dispatch_high_count / valid_count * 100) if valid_count > 0 else 0.0
+    metadata_pct = (metadata_high_count / valid_count * 100) if valid_count > 0 else 0.0
+    alloc_pct = (alloc_stub_throw / method_count * 100) if method_count > 0 else 0.0
+
+    bottleneck_types: list[tuple[str, float]] = []
+    if dispatch_pct > 30:
+        bottleneck_types.append(("dispatch-bound", dispatch_pct))
+    if alloc_pct > 20:
+        bottleneck_types.append(("alloc-bound", alloc_pct))
+    if metadata_pct > 50:
+        bottleneck_types.append(("metadata-bound", metadata_pct))
+
+    if not bottleneck_types:
+        bottleneck_type = "metadata-bound"
+        analysis_rationale = (
+            "Insufficient differentiation in the three ratio metrics; "
+            "defaulting to metadata-bound (the most common bottleneck)"
+        )
+    elif len(bottleneck_types) >= 2:
+        bottleneck_type = "mixed"
+        type_strs = ", ".join(f"{t}({p:.0f}%)" for t, p in bottleneck_types)
+        analysis_rationale = f"Multiple bottleneck types detected: {type_strs}"
+    else:
+        bottleneck_type = bottleneck_types[0][0]
+        analysis_rationale = (
+            f"Primary: {bottleneck_types[0][0]} "
+            f"({bottleneck_types[0][1]:.0f}% of methods affected)"
+        )
+
+    # ── Improvement estimation ──
+    _OPTIMISTIC_MAP = {
+        "dispatch-bound": 80,
+        "alloc-bound": 50,
+        "metadata-bound": 30,
+    }
+    _CONSERVATIVE_MAP = {
+        "dispatch-bound": 50,
+        "alloc-bound": 20,
+        "metadata-bound": 10,
+    }
+
+    if bottleneck_type == "mixed":
+        total_w = sum(p for _, p in bottleneck_types)
+        optimistic_pct = sum(
+            _OPTIMISTIC_MAP[t] * (p / total_w) for t, p in bottleneck_types
+        )
+        conservative_pct = sum(
+            _CONSERVATIVE_MAP[t] * (p / total_w) for t, p in bottleneck_types
+        )
+    else:
+        optimistic_pct = _OPTIMISTIC_MAP.get(bottleneck_type, 30)
+        conservative_pct = _CONSERVATIVE_MAP.get(bottleneck_type, 10)
+
+    optimistic_ns = chaos_aot_ns * (1 - optimistic_pct / 100)
+    conservative_ns = chaos_aot_ns * (1 - conservative_pct / 100)
+
+    # ── Gate logic ──
+    roi_pass = conservative_pct >= 20
+
+    roi_result: dict[str, Any] = {
+        "family_slug": slug,
+        "assembly": assembly,
+        "current_performance": {
+            "chaos_aot_ns": round(chaos_aot_ns, 2),
+            "slowdown_vs_net8": round(slowdown_vs_net8, 2),
+            "method_count": method_count,
+            "stub_count": stub_count,
+            "throws_count": throws_count,
+        },
+        "bottleneck_analysis": {
+            "type": bottleneck_type,
+            "dispatch_pct": round(dispatch_pct, 1),
+            "metadata_pct": round(metadata_pct, 1),
+            "alloc_pct": round(alloc_pct, 1),
+            "rationale": analysis_rationale,
+            "method_details": method_details,
+        },
+        "estimated_improvement": {
+            "optimistic_pct": round(optimistic_pct, 0),
+            "conservative_pct": round(conservative_pct, 0),
+            "optimistic_ns": round(optimistic_ns, 2),
+            "conservative_ns": round(conservative_ns, 2),
+        },
+        "roi_pass": roi_pass,
+    }
+
+    # ── Write optimization-opportunity.md ──
+    _write_optimization_opportunity(family_dir, roi_result)
+
+    return roi_result
+
+
+def _write_optimization_opportunity(
+    family_dir: Path,
+    roi: dict[str, Any],
+) -> None:
+    """Write optimization-opportunity.md to the family directory."""
+    slug = roi["family_slug"]
+    perf = roi["current_performance"]
+    bottleneck = roi["bottleneck_analysis"]
+    improvement = roi["estimated_improvement"]
+
+    lines: list[str] = [
+        f"# 优化机会: {slug}",
+        "",
+        "## 当前性能",
+        f"- chaos-aot: {perf['chaos_aot_ns']}ns (geometric mean)",
+        f"- vs .NET 8: {perf['slowdown_vs_net8']}x slowdown",
+        f"- 方法数: {perf['method_count']}",
+        f"- stub/throw: {perf['stub_count'] + perf['throws_count']}",
+        "",
+        "## 瓶颈分析",
+        f"- 类型: {bottleneck['type']}",
+        f"- 分析依据: {bottleneck['rationale']}",
+        f"  - dispatch-bound 方法占比: {bottleneck['dispatch_pct']}%",
+        f"  - metadata-bound 方法占比: {bottleneck['metadata_pct']}%",
+        f"  - alloc-bound 方法占比: {bottleneck['alloc_pct']}%",
+        "",
+        "## 预期收益",
+        f"- 乐观: {perf['chaos_aot_ns']}ns -> {improvement['optimistic_ns']}ns "
+        f"({improvement['optimistic_pct']:.0f}% improvement)",
+        f"- 保守: {perf['chaos_aot_ns']}ns -> {improvement['conservative_ns']}ns "
+        f"({improvement['conservative_pct']:.0f}% improvement)",
+        "",
+        "## 建议方案",
+    ]
+
+    bt = bottleneck["type"]
+    if bt == "dispatch-bound":
+        lines.extend([
+            "- 方案 1: 将 interpreter dispatch 替换为直接 native 调用 (预估工时: 2-3d)",
+            "- 方案 2: 为热点路径生成特化 dispatch stub (预估工时: 1-2d)",
+        ])
+    elif bt == "alloc-bound":
+        lines.extend([
+            "- 方案 1: 减少热点路径的 GC allocation (预估工时: 3-5d)",
+            "- 方案 2: 使用 struct 代替 class 避免堆分配 (预估工时: 2-3d)",
+        ])
+    elif bt == "metadata-bound":
+        lines.extend([
+            "- 方案 1: 缓存 metadata lookup 结果,减少重复查询 (预估工时: 4-6d)",
+            "- 方案 2: 优化 metadata 数据结构,降低查找开销 (预估工时: 5-8d)",
+        ])
+    elif bt == "mixed":
+        lines.extend([
+            "- 方案 1: 综合优化 — 优先解决 dispatch 瓶颈 (预估工时: 3-5d)",
+            "- 方案 2: 架构级重构 — 减少 metadata 层开销 (预估工时: 1-2w)",
+        ])
+
+    lines.extend([
+        "",
+        "## 方法级明细",
+        "",
+        "| # | 方法 | chaos-aot (ns) | chaos-jit (ns) | net8 (ns) | dispatch_ratio | metadata_ratio |",
+        "|---|------|---------------|---------------|----------|---------------|---------------|",
+    ])
+
+    for md in bottleneck.get("method_details", []):
+        lines.append(
+            f"| {md['method_index']} | {md['label']} | "
+            f"{md['chaos_aot_ns']:.2f} | {md['chaos_jit_ns']:.2f} | "
+            f"{md['net8_ns']:.2f} | {md['dispatch_ratio']:.2f} | {md['metadata_ratio']:.2f} |"
+        )
+
+    lines.append("")
+
+    md_path = family_dir / "optimization-opportunity.md"
+    md_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    print(f"[estimate-roi] Wrote {md_path}")
+
+
+def _print_roi_human_readable(roi: dict[str, Any]) -> None:
+    """Print a human-readable ROI summary."""
+    perf = roi["current_performance"]
+    bottleneck = roi["bottleneck_analysis"]
+    improvement = roi["estimated_improvement"]
+
+    gate_str = "PASS" if roi["roi_pass"] else "WARN (below 20% threshold)"
+
+    print(f"Family: {roi['family_slug']} [{roi['assembly']}]")
+    print(f"ROI Gate: {gate_str}")
+    print(f"Chaos-AOT: {perf['chaos_aot_ns']}ns geometric mean")
+    print(f"vs .NET 8: {perf['slowdown_vs_net8']}x slowdown")
+    print(f"Methods: {perf['method_count']} ({perf['stub_count']} stubs, {perf['throws_count']} throws)")
+    print()
+    print(f"Bottleneck: {bottleneck['type']}")
+    print(f"  dispatch-bound: {bottleneck['dispatch_pct']}% of methods")
+    print(f"  metadata-bound: {bottleneck['metadata_pct']}% of methods")
+    print(f"  alloc-bound: {bottleneck['alloc_pct']}% of methods")
+    print(f"  Rationale: {bottleneck['rationale']}")
+    print()
+    print(f"Estimated improvement:")
+    print(f"  Optimistic: {improvement['optimistic_pct']:.0f}% -> {improvement['optimistic_ns']}ns")
+    print(f"  Conservative: {improvement['conservative_pct']:.0f}% -> {improvement['conservative_ns']}ns")
+    print()
+    if roi["roi_pass"]:
+        print("  => PASS (conservative >= 20%)")
+    else:
+        print("  => WARN (conservative < 20%)")
+    print()
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -897,6 +1212,10 @@ def main() -> None:
         help="Verify subject files match frozen manifest",
     )
     parser.add_argument(
+        "--estimate-roi", action="store_true",
+        help="Estimate ROI and classify bottleneck type for this family",
+    )
+    parser.add_argument(
         "--json", action="store_true",
         help="Output raw JSON report (default: human-readable summary)",
     )
@@ -910,6 +1229,16 @@ def main() -> None:
     if args.verify_freeze:
         ok = verify_freeze(args.family_slug, args.assembly)
         sys.exit(0 if ok else 1)
+        return
+
+    # ROI estimation as standalone command
+    if args.estimate_roi:
+        roi = estimate_roi(args.family_slug, args.assembly)
+        if args.json:
+            print(json.dumps(roi, indent=2, ensure_ascii=False))
+        else:
+            _print_roi_human_readable(roi)
+        sys.exit(0 if roi["roi_pass"] else 1)
         return
 
     report = audit_family(args.family_slug, args.assembly)
