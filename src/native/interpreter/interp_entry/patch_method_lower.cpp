@@ -105,6 +105,27 @@ void PatchMethodLowerIR(uintptr_t method_key) noexcept {
                 if (instr.call_target != nullptr) {
                     call_cache[i] = runtime_instantiation::PrecacheCallTarget(
                         instr.call_target);
+                    // Phase 2.3: Fallback to direct_fn when PrecacheCallTarget
+                    // couldn't resolve direct_ptr but the JSON deserialization
+                    // already set direct_fn via the three-tier ResolveDirectFn
+                    // callback.  This catches cases where:
+                    //   - call_target resolves to a valid MethodInfoHandle
+                    //   - BUT PrecacheCallTarget's HotpatchNameRegistry lookup
+                    //     misses (subject_id parsing format mismatch, etc.)
+                    //   - AND ResolveDirectFn found the entry via AotDirectTable
+                    //     or ExternalRuntimeFnTable
+                    //
+                    // Without this fallback, Handle_Call goes through
+                    // method_invoke (~1500-2200ns) for every call instruction
+                    // even though the AOT function pointer is available.
+                    if (call_cache[i].ret_tag == 0xFF &&
+                        instr.direct_fn != nullptr &&
+                        instr.direct_ret_tag != 0xFF) {
+                        call_cache[i].ret_tag = instr.direct_ret_tag;
+                        call_cache[i].direct_ptr = instr.direct_fn;
+                        call_cache[i].is_struct_ret = false;
+                        call_cache[i].struct_size = 0;
+                    }
                 } else if (instr.direct_fn != nullptr && instr.direct_ret_tag != 0xFF) {
                     // direct_fn with pre-computed return tag — fill CachedCallInfo
                     // so Handle_Call/InterpreterDispatchRaw can call the AOT thunk
