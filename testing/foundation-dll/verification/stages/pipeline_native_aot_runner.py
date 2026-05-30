@@ -603,14 +603,13 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     families whose handwritten CMakeLists.txt contains family-specific overrides
     (extra includes, library references, stub exclusions).
 
-    When is_jit=True:
-      - Adds JIT include path (src/native/jit)
-      - Adds CHAOS_IL2CPP_JIT_MODE compile definition
-      - Excludes flat layout glob pattern (*Subjects/generated/native-aot.generated.cpp)
-        to avoid duplicate ChaosJitRegisterAll symbol (stale AOT output contains
-        an empty stub that conflicts with the JIT-generated real implementation).
-
     config_tier controls compile definitions (CHECK=DEBUG, PROFILE=INFO, SHIP=ERROR).
+
+    Note: is_jit parameter is deprecated. JIT mode is controlled at cmake configure
+    time via the CHAOS_IL2CPP_JIT_MODE cmake variable (set with -D flag in
+    build_entry_executable). The template now reads this variable and conditionally
+    adds the JIT compile definition. The JIT include path is always present
+    (harmless for AOT builds).
     """
 
     # Always regenerate from template based on current settings.
@@ -653,48 +652,37 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
     # runs also use *Subjects/generated/*, so we need to explicitly exclude
     # AOT-generated files that contain the empty ChaosJitRegisterAll{} stub
     # when running in JIT mode.
-    if is_jit:
-        codegen_glob = (
-            f'file(GLOB CHAOS_CODEGEN_CPP\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
-            f')\n'
-            f'file(GLOB CHAOS_CODEGEN_NATIVE_CPP\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
-            f')\n'
-        )
-        glob_comment = (
-            f'# JIT mode: sources at *Subjects/generated/* (single-level, R1 fix).\n'
-        )
-    else:
-        codegen_glob = (
-            f'file(GLOB CHAOS_CODEGEN_CPP\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
-            f')\n'
-            f'file(GLOB CHAOS_CODEGEN_NATIVE_CPP\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
-            f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
-            f')\n'
-        )
-        glob_comment = (
-            f'# AOT mode: sources at *Subjects/generated/* (single-level, R1 fix).\n'
-        )
+    codegen_glob = (
+        f'file(GLOB CHAOS_CODEGEN_CPP\n'
+        f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
+        f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
+        f'    "${{CHAOS_CODEGEN_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
+        f')\n'
+        f'file(GLOB CHAOS_CODEGEN_NATIVE_CPP\n'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.generated.cpp"\n'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/native-aot.page-*.cpp"\n'
+        f'    "${{CMAKE_CURRENT_SOURCE_DIR}}/*Subjects/generated/chaos_generated_module.cpp"\n'
+        f')\n'
+    )
+    glob_comment = (
+        f'# Sources at *Subjects/generated/* (single-level, R1 fix).\n'
+    )
     # chaos_jit.lib (JIT debug contract symbols) and chaos_debugger.lib are
     # always linked via chaos::runtime (chaos-targets.cmake), so their
     # unresolved JIT-debug-contract symbols require FORCE:MULTIPLE even in
     # AOT-only builds (handled via CMake generator expression in template).
+    # JIT include path is always present (harmless for AOT builds, avoids
+    # CMakeLists.txt race between parallel AOT+JIT codegen builds).
+    # JIT mode compile definition is controlled at cmake configure time via
+    # the CHAOS_IL2CPP_JIT_MODE cmake variable, not by the template content.
     jit_include = (
         f'    "${{CHAOS_PROJECT_ROOT}}/src/native/jit"\n'
-    ) if is_jit else ''
-    jit_define = (
-        f'add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)\n'
-    ) if is_jit else ''
+    )
+    jit_mode_guard = (
+        f'if(CHAOS_IL2CPP_JIT_MODE)\n'
+        f'    add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)\n'
+        f'endif()\n'
+    )
 
     cmake_content = (
         f'cmake_minimum_required(VERSION 3.20)\n'
@@ -735,7 +723,7 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)\n'
         f'  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)\n'
         f'endif()\n'
-        f'{jit_define}'
+        f'{jit_mode_guard}'
         f'\n'
         f'# Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and\n'
         f'# chaos::codegen (precompiled generated code) via find_package(chaos).\n'
@@ -962,7 +950,7 @@ def write_sentinel_entry(entry_cpp: Path) -> None:
     print(f"    [build_entry] sentinel runtime-entry.cpp created")
 
 
-def build_entry_executable(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe", is_jit: bool = False) -> bool:
+def build_entry_executable(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe", is_jit: bool = False, skip_prep: bool = False) -> bool:
     v = verification or _VERIFICATION
     native_dir = v / family_slug / "native"
     cmakelists = native_dir / "CMakeLists.txt"
@@ -1012,172 +1000,176 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             print(f"      SKIPPING build — linux fallback not implemented")
             return True
 
-    # Clean stale generated files from native/ before re-generation.
-    # Keeps CMakeLists.txt, handwritten files, and entry.exe (build output).
-    # Removes all *.cpp/*.h that are auto-generated or synced from codegen.
-    for stale_name in list(native_dir.iterdir()):
-        if not stale_name.is_file():
-            continue
-        if stale_name.name in ("CMakeLists.txt", "CMakeCache.txt"):
-            continue
-        if stale_name.suffix in (".cpp", ".h") and stale_name.name not in (
-            # Handwritten / TPG-generated files to preserve
-            "runtime-entry.cpp",
-            "verification_dispatch.generated.cpp",
-        ):
-            stale_name.unlink()
-            print(f"    [build_entry] cleaned stale: {stale_name.name}")
-    # Also clean codegen-sync subdirectories
-    for stale_dir in sorted(native_dir.iterdir()):
-        if stale_dir.is_dir() and stale_dir.name not in ("build", "build_jit"):
-            shutil.rmtree(stale_dir)
-            print(f"    [build_entry] cleaned stale directory: {stale_dir.name}")
-    stale_jit_stubs = native_dir / "jit_stubs.cpp"
-    if stale_jit_stubs.exists():
-        stale_jit_stubs.unlink()
-        print(f"    [build_entry] cleaned stale jit_stubs.cpp")
+    if not skip_prep:
+        # Clean stale generated files from native/ before re-generation.
+        # Keeps CMakeLists.txt, handwritten files, and entry.exe (build output).
+        # Removes all *.cpp/*.h that are auto-generated or synced from codegen.
+        for stale_name in list(native_dir.iterdir()):
+            if not stale_name.is_file():
+                continue
+            if stale_name.name in ("CMakeLists.txt", "CMakeCache.txt"):
+                continue
+            if stale_name.suffix in (".cpp", ".h") and stale_name.name not in (
+                # Handwritten / TPG-generated files to preserve
+                "runtime-entry.cpp",
+                "verification_dispatch.generated.cpp",
+            ):
+                stale_name.unlink()
+                print(f"    [build_entry] cleaned stale: {stale_name.name}")
+        # Also clean codegen-sync subdirectories
+        for stale_dir in sorted(native_dir.iterdir()):
+            if stale_dir.is_dir() and stale_dir.name not in ("build", "build_jit"):
+                shutil.rmtree(stale_dir)
+                print(f"    [build_entry] cleaned stale directory: {stale_dir.name}")
+        stale_jit_stubs = native_dir / "jit_stubs.cpp"
+        if stale_jit_stubs.exists():
+            stale_jit_stubs.unlink()
+            print(f"    [build_entry] cleaned stale jit_stubs.cpp")
 
     # Auto-generate CMakeLists.txt if missing (e.g. after clean delete)
     ensure_cmake_lists_file(cmakelists, family_slug, v, is_jit=is_jit, config_tier=config_tier)
 
-    # Ensure runtime-patchdata.cpp exists (sentinel if not generated)
-    patchdata_cpp = native_dir / "runtime-patchdata.cpp"
-    if not patchdata_cpp.exists():
-        write_sentinel_patch_data(v / family_slug)
-        print(f"    [build_entry] sentinel runtime-patchdata.cpp generated")
+    if not skip_prep:
+        # Ensure runtime-patchdata.cpp exists (sentinel if not generated)
+        patchdata_cpp = native_dir / "runtime-patchdata.cpp"
+        if not patchdata_cpp.exists():
+            write_sentinel_patch_data(v / family_slug)
+            print(f"    [build_entry] sentinel runtime-patchdata.cpp generated")
 
-    # Ensure microbench.cpp exists for --microbench support
-    ensure_micro_benchmark_source(native_dir)
+        # Ensure microbench.cpp exists for --microbench support
+        ensure_micro_benchmark_source(native_dir)
 
-    # Generate runtime-entry.cpp sentinel for initial cmake configure.
-    # The real file is generated by TestProjectGenerator emit after codegen.
-    native_runtime_entry = native_dir / "runtime-entry.cpp"
-    if not native_runtime_entry.exists():
-        write_sentinel_entry(native_runtime_entry)
-    # Sync generated .cpp from codegen/<Assembly>/ to native/<Assembly>/
-    # so the native CMakeLists.txt compiles the latest codegen output.
-    codegen_dir = v / family_slug / "codegen"
-    synced_names = set()
-    if codegen_dir.exists():
-        for subdir in sorted(codegen_dir.iterdir()):
-            if not subdir.is_dir() or subdir.name in ("build", "generated", "hot-update"):
-                continue
-            # Sync ALL generated files (.cpp, .h) from codegen to native
-            # After R1 fix: files land at codegen/<Assembly>/generated/* (single-level)
-            src = subdir / "generated"
-            if not src.exists():
-                print(f"    [build_entry] skipping {subdir.name}: no generated/ subdir")
-                continue
-            dst = native_dir / subdir.name / "generated"
-            # Clean stale native files before sync — the converter may change
-            # output layout (e.g. switched to page-split output), and stale files
-            # from previous runs cause build errors.
-            if dst.exists():
-                shutil.rmtree(dst)
-            dst.mkdir(parents=True, exist_ok=True)
-            for src_file in src.rglob("*"):
-                if src_file.is_file():
-                    rel = src_file.relative_to(src)
-                    target = dst / rel
-                    target.parent.mkdir(parents=True, exist_ok=True)
-                    target.write_bytes(src_file.read_bytes())
-            synced_names.add(subdir.name)
-            print(f"    [build_entry] synced {src.relative_to(codegen_dir)} to native/")
+        # Generate runtime-entry.cpp sentinel for initial cmake configure.
+        # The real file is generated by TestProjectGenerator emit after codegen.
+        native_runtime_entry = native_dir / "runtime-entry.cpp"
+        if not native_runtime_entry.exists():
+            write_sentinel_entry(native_runtime_entry)
 
-    # Handle assembly name mismatch: codegen output directory (from the DLL assembly
-    # name) may differ from what CMakeLists.txt expects (e.g. InterfaceDispatchNativeEntry
-    # vs InterfaceDispatchSubjects).  If the CMakeLists-expected file is missing or stale,
-    # re-sync from the best available codegen source.
-    if cmakelists.exists() and codegen_dir.exists() and synced_names:
-        expected_cmake_dirs = set()
-        for line in cmakelists.read_text(encoding="utf-8").splitlines():
-            m = re.search(r'\$\{CHAOS_GEN_DIR\}/([^/]+)/generated/native-aot\.generated\.cpp', line)
-            if m:
-                expected_cmake_dirs.add(m.group(1))
-        missing_expected = expected_cmake_dirs - synced_names
-        if missing_expected:
-            # Find codegen sources available for the missing names
-            for expected in sorted(missing_expected):
-                expected_native = native_dir / expected / "generated" / "native-aot.generated.cpp"
-                # Check if a corresponding codegen source exists (converter writes
-                # directly to codegen/<AssemblyName>/generated/ — no flat layout step)
-                expected_codegen = codegen_dir / expected / "generated" / "native-aot.generated.cpp"
-                if expected_codegen.exists():
-                    # Already has its own codegen output — sync it
-                    expected_native.parent.mkdir(parents=True, exist_ok=True)
-                    expected_native.write_text(expected_codegen.read_text(encoding="utf-8"), encoding="utf-8")
-                    print(f"    [build_entry] synced {expected_codegen.relative_to(codegen_dir)} to native/ (delayed)")
-                else:
-                    # Assembly name mismatch — find best source (most recently modified)
-                    def _find_cpp_source(s):
-                        return codegen_dir / s / "generated" / "native-aot.generated.cpp"
-                    best_src = max(
-                        (_find_cpp_source(s) for s in synced_names),
-                        key=lambda p: p.stat().st_mtime if p.exists() else 0,
-                    )
-                    expected_native.parent.mkdir(parents=True, exist_ok=True)
-                    expected_native.write_text(best_src.read_text(encoding="utf-8"), encoding="utf-8")
-                    print(f"    [build_entry] synced {best_src.relative_to(codegen_dir)} -> {expected}/generated/ (assembly name mismatch)")
+        # Sync generated .cpp from codegen/<Assembly>/ to native/<Assembly>/
+        # so the native CMakeLists.txt compiles the latest codegen output.
+        codegen_dir = v / family_slug / "codegen"
+        synced_names = set()
+        if codegen_dir.exists():
+            for subdir in sorted(codegen_dir.iterdir()):
+                if not subdir.is_dir() or subdir.name in ("build", "generated", "hot-update"):
+                    continue
+                # Sync ALL generated files (.cpp, .h) from codegen to native
+                # After R1 fix: files land at codegen/<Assembly>/generated/* (single-level)
+                src = subdir / "generated"
+                if not src.exists():
+                    print(f"    [build_entry] skipping {subdir.name}: no generated/ subdir")
+                    continue
+                dst = native_dir / subdir.name / "generated"
+                # Clean stale native files before sync — the converter may change
+                # output layout (e.g. switched to page-split output), and stale files
+                # from previous runs cause build errors.
+                if dst.exists():
+                    shutil.rmtree(dst)
+                dst.mkdir(parents=True, exist_ok=True)
+                for src_file in src.rglob("*"):
+                    if src_file.is_file():
+                        rel = src_file.relative_to(src)
+                        target = dst / rel
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        target.write_bytes(src_file.read_bytes())
+                synced_names.add(subdir.name)
+                print(f"    [build_entry] synced {src.relative_to(codegen_dir)} to native/")
+
+        # Handle assembly name mismatch: codegen output directory (from the DLL assembly
+        # name) may differ from what CMakeLists.txt expects (e.g. InterfaceDispatchNativeEntry
+        # vs InterfaceDispatchSubjects).  If the CMakeLists-expected file is missing or stale,
+        # re-sync from the best available codegen source.
+        if cmakelists.exists() and codegen_dir.exists() and synced_names:
+            expected_cmake_dirs = set()
+            for line in cmakelists.read_text(encoding="utf-8").splitlines():
+                m = re.search(r'\$\{CHAOS_GEN_DIR\}/([^/]+)/generated/native-aot\.generated\.cpp', line)
+                if m:
+                    expected_cmake_dirs.add(m.group(1))
+            missing_expected = expected_cmake_dirs - synced_names
+            if missing_expected:
+                # Find codegen sources available for the missing names
+                for expected in sorted(missing_expected):
+                    expected_native = native_dir / expected / "generated" / "native-aot.generated.cpp"
+                    # Check if a corresponding codegen source exists (converter writes
+                    # directly to codegen/<AssemblyName>/generated/ — no flat layout step)
+                    expected_codegen = codegen_dir / expected / "generated" / "native-aot.generated.cpp"
+                    if expected_codegen.exists():
+                        # Already has its own codegen output — sync it
+                        expected_native.parent.mkdir(parents=True, exist_ok=True)
+                        expected_native.write_text(expected_codegen.read_text(encoding="utf-8"), encoding="utf-8")
+                        print(f"    [build_entry] synced {expected_codegen.relative_to(codegen_dir)} to native/ (delayed)")
+                    else:
+                        # Assembly name mismatch — find best source (most recently modified)
+                        def _find_cpp_source(s):
+                            return codegen_dir / s / "generated" / "native-aot.generated.cpp"
+                        best_src = max(
+                            (_find_cpp_source(s) for s in synced_names),
+                            key=lambda p: p.stat().st_mtime if p.exists() else 0,
+                        )
+                        expected_native.parent.mkdir(parents=True, exist_ok=True)
+                        expected_native.write_text(best_src.read_text(encoding="utf-8"), encoding="utf-8")
+                        print(f"    [build_entry] synced {best_src.relative_to(codegen_dir)} -> {expected}/generated/ (assembly name mismatch)")
 
     # Ensure CMakeLists.txt exists — auto-generate from template if missing
     # (families deleted and regenerated from scratch won't have native/CMakeLists.txt)
     ensure_cmake_lists_file(cmakelists, family_slug, v, is_jit=is_jit, config_tier=config_tier)
 
-    # Ensure verification_dispatch.generated.cpp exists
-    # The real file is generated by the orchestrator after codegen; the sentinel
-    # ensures cmake configure can find the source file during initial build.
-    dispatch_cpp = native_dir / "verification_dispatch.generated.cpp"
-    if not dispatch_cpp.exists():
-        write_sentinel_dispatch(dispatch_cpp)
-        print(f"    [build_entry] sentinel verification_dispatch.generated.cpp created")
+    if not skip_prep:
+        # Ensure verification_dispatch.generated.cpp exists
+        # The real file is generated by the orchestrator after codegen; the sentinel
+        # ensures cmake configure can find the source file during initial build.
+        dispatch_cpp = native_dir / "verification_dispatch.generated.cpp"
+        if not dispatch_cpp.exists():
+            write_sentinel_dispatch(dispatch_cpp)
+            print(f"    [build_entry] sentinel verification_dispatch.generated.cpp created")
 
-    # Fix s_hotpatch_module cross-page linkage in page-split families.
-    # Codegen defines "extern constexpr HotpatchModuleV0 s_hotpatch_module"
-    # at namespace scope in page-0001.cpp, and references it from other page
-    # files with fully-qualified names (e.g.,
-    # "&chaos::il2cpp::codegen::XXXSubjects::s_hotpatch_module").
-    #
-    # The issue: ChaosJitRegisterAll() is generated OUTSIDE the namespace
-    # block (at file scope).  If the pipeline strips the class qualification
-    # to just "s_hotpatch_module", the unqualified name cannot resolve to the
-    # namespace-scoped variable from file scope.
-    #
-    # Fix: add an extern declaration inside the namespace block in each page
-    # file that does NOT define s_hotpatch_module (all except page-0001).
-    # The fully-qualified references are left intact — they resolve correctly
-    # from both inside and outside the namespace when the extern is present.
-    for page_file in sorted(native_dir.rglob("native-aot.page-*.cpp")):
-        text = page_file.read_text(encoding="utf-8")
-        # Only touch files that reference s_hotpatch_module
-        if 's_hotpatch_module' not in text:
-            continue
-        # Skip the file that defines s_hotpatch_module (page-0001.cpp)
-        if 'extern constexpr HotpatchModuleV0 s_hotpatch_module' in text:
-            continue
-        # Check if it already has a namespace-scope extern declaration
-        ns_decl = 'extern const HotpatchModuleV0 s_hotpatch_module;'
-        if ns_decl in text:
-            continue
-        # Find the namespace opening and add extern declaration inside it
-        ns_match = re.search(
-            r'(namespace\s+chaos::il2cpp::codegen::\w+\s*\{)',
-            text,
-        )
-        if ns_match:
-            insert_pos = ns_match.end()
-            text = (
-                text[:insert_pos] +
-                f'\n// Pipeline fix: extern declaration for cross-page s_hotpatch_module linkage\n{ns_decl}\n' +
-                text[insert_pos:]
+        # Fix s_hotpatch_module cross-page linkage in page-split families.
+        # Codegen defines "extern constexpr HotpatchModuleV0 s_hotpatch_module"
+        # at namespace scope in page-0001.cpp, and references it from other page
+        # files with fully-qualified names (e.g.,
+        # "&chaos::il2cpp::codegen::XXXSubjects::s_hotpatch_module").
+        #
+        # The issue: ChaosJitRegisterAll() is generated OUTSIDE the namespace
+        # block (at file scope).  If the pipeline strips the class qualification
+        # to just "s_hotpatch_module", the unqualified name cannot resolve to the
+        # namespace-scoped variable from file scope.
+        #
+        # Fix: add an extern declaration inside the namespace block in each page
+        # file that does NOT define s_hotpatch_module (all except page-0001).
+        # The fully-qualified references are left intact — they resolve correctly
+        # from both inside and outside the namespace when the extern is present.
+        for page_file in sorted(native_dir.rglob("native-aot.page-*.cpp")):
+            text = page_file.read_text(encoding="utf-8")
+            # Only touch files that reference s_hotpatch_module
+            if 's_hotpatch_module' not in text:
+                continue
+            # Skip the file that defines s_hotpatch_module (page-0001.cpp)
+            if 'extern constexpr HotpatchModuleV0 s_hotpatch_module' in text:
+                continue
+            # Check if it already has a namespace-scope extern declaration
+            ns_decl = 'extern const HotpatchModuleV0 s_hotpatch_module;'
+            if ns_decl in text:
+                continue
+            # Find the namespace opening and add extern declaration inside it
+            ns_match = re.search(
+                r'(namespace\s+chaos::il2cpp::codegen::\w+\s*\{)',
+                text,
             )
-            page_file.write_text(text, encoding="utf-8")
-            print(f"    [build_entry] added s_hotpatch_module extern in {page_file.name}")
+            if ns_match:
+                insert_pos = ns_match.end()
+                text = (
+                    text[:insert_pos] +
+                    f'\n// Pipeline fix: extern declaration for cross-page s_hotpatch_module linkage\n{ns_decl}\n' +
+                    text[insert_pos:]
+                )
+                page_file.write_text(text, encoding="utf-8")
+                print(f"    [build_entry] added s_hotpatch_module extern in {page_file.name}")
 
-    # ── Sync runtime libs into per-assembly SDK lib/ ────────────────
-    # The codegen regenerates codegen/<AssemblyName>/lib/chaos_codegen.lib
-    # but NOT the runtime libs (chaos_common.lib, etc.).  Copy them from
-    # codegen/lib/ so find_package(chaos) resolves all dependencies.
-    _sync_runtime_libs_to_sdk(codegen_dir, repo_root=_REPO_ROOT)
+        # ── Sync runtime libs into per-assembly SDK lib/ ────────────────
+        # The codegen regenerates codegen/<AssemblyName>/lib/chaos_codegen.lib
+        # but NOT the runtime libs (chaos_common.lib, etc.).  Copy them from
+        # codegen/lib/ so find_package(chaos) resolves all dependencies.
+        _sync_runtime_libs_to_sdk(codegen_dir, repo_root=_REPO_ROOT)
 
     # Use separate build directories for AOT (build/) and JIT (build_jit/)
     # to avoid MSBuild file-lock conflicts when the JIT stage follows AOT.

@@ -177,6 +177,10 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    # ── Step timing tracking ──
+    step_times: dict[str, float] = {}
+    _step = time.perf_counter()
+
     # 1. Generate C# entrypoint subjects
     print(f"  [codegen] Generating entrypoint...")
     family_id = contract.get("familyId", f"family/{ctx.assembly}/{ctx.slug.replace('-', '/')}")
@@ -202,6 +206,10 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
             details={"steps": {"entrypoint": ep_result}},
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
+
+    step_times["entrypoint"] = time.perf_counter() - _step
+    _step = time.perf_counter()
+    print(f"    [codegen timing] entrypoint + subjects build: {step_times['entrypoint']:.2f}s")
 
     # 2. Run chaos-il2cpp convert-to-cpp
     print(f"  [codegen] Running IL2CPP codegen...")
@@ -243,24 +251,22 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
 
     generate_coverage_json(ctx.slug, ctx.assembly, mids, verification=testing_base)
 
-    # 3. Build entry.exe (full clean build with sentinel dispatch)
-    print(f"  [codegen] Building entry.exe...")
-    build_ok = build_entry_executable(ctx.slug, verification=testing_base)
-    if not build_ok:
-        return StageResult(
-            stage="codegen", status="failed",
-            summary="entry.exe build failed",
-            duration_ms=int((time.perf_counter() - start) * 1000),
-        )
+    step_times["il2cpp_codegen"] = time.perf_counter() - _step
+    _step = time.perf_counter()
+    print(f"    [codegen timing] IL2CPP codegen: {step_times['il2cpp_codegen']:.2f}s")
 
-    # 4. Generate verification dispatch code via TestProjectGenerator (overwrites sentinel, incremental rebuild)
+    # 3. Generate verification dispatch code via TestProjectGenerator (before native builds
+    #    so both AOT and JIT compile the real dispatch — no sentinel + incremental rebuild)
     print(f"  [codegen] Generating dispatch code via TestProjectGenerator...")
     native_dir = testing_base / ctx.slug / "native"
     contract_path = _find_contract(ctx.assembly, ctx.slug)
     dispatch_cpp = native_dir / "verification_dispatch.generated.cpp"
 
     tpg_flags = ["--config-tier", ctx.native_config]
+    tpg_start = time.perf_counter()
     tpg_ok = _run_test_project_generator_emit(contract_path, native_dir, extra_flags=tpg_flags)
+    tpg_elapsed = time.perf_counter() - tpg_start
+    print(f"    [TPG timing] emit took {tpg_elapsed:.2f}s")
 
     # Validate: must be real dispatch, not sentinel
     if not tpg_ok or _is_sentinel_dispatch(dispatch_cpp):
@@ -276,12 +282,49 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
         )
 
     print(f"  [codegen] Regenerated verification_dispatch.generated.cpp via TestProjectGenerator")
+    step_times["tpg"] = time.perf_counter() - _step
+    _step = time.perf_counter()
+    print(f"    [codegen timing] TPG emit: {step_times['tpg']:.2f}s")
 
-    # Incremental rebuild after dispatch regeneration
-    _incremental_dispatch_rebuild(native_dir)
+    # 4. Build AOT entry.exe (with prep for codegen sync, incremental after first run)
+    print(f"  [codegen] Building AOT entry.exe...")
+    aot_ok = build_entry_executable(
+        ctx.slug, verification=testing_base, config_tier=ctx.native_config,
+        is_jit=False,
+    )
+    if not aot_ok:
+        return StageResult(
+            stage="codegen", status="failed",
+            summary="entry.exe build failed",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
 
-    # 5. Save AOT binary
-    native_dir = testing_base / ctx.slug / "native"
+    step_times["native_aot"] = time.perf_counter() - _step
+    _step = time.perf_counter()
+    print(f"    [codegen timing] AOT build: {step_times['native_aot']:.2f}s")
+
+    # 5. Build JIT entry-jit.exe if not already cached (skip_prep — C++ sources
+    # already synced by AOT build). Uses output_name="entry-jit.exe" so the
+    # binary is written directly, avoiding the entry.exe save/restore dance.
+    jit_exe = native_dir / "entry-jit.exe"
+    if not jit_exe.exists():
+        print(f"  [codegen] Building JIT entry-jit.exe...")
+        jit_ok = build_entry_executable(
+            ctx.slug, verification=testing_base, config_tier=ctx.native_config,
+            is_jit=True, output_name="entry-jit.exe", skip_prep=True,
+        )
+        if jit_ok:
+            print(f"  [codegen] JIT entry-jit.exe built successfully")
+        else:
+            print(f"  [codegen] WARNING: JIT entry-jit.exe build failed (jit_codegen stage will rebuild)")
+    else:
+        print(f"  [codegen] entry-jit.exe already exists, skipping JIT pre-build")
+
+    step_times["native_jit"] = time.perf_counter() - _step
+    _step = time.perf_counter()
+    print(f"    [codegen timing] JIT build: {step_times['native_jit']:.2f}s")
+
+    # 6. Save AOT binary for jit_codegen stage restore
     entry_exe = native_dir / "entry.exe"
     aot_exe = native_dir / "entry-aot.exe"
     if entry_exe.exists():
@@ -289,28 +332,13 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
             shutil.copy2(str(entry_exe), str(aot_exe))
             print(f"  [codegen] saved entry.exe -> entry-aot.exe")
 
-    # 6. Build JIT entry.exe to avoid duplicate work in jit_codegen stage
-    # The AOT codegen already produced the C++ sources. Building JIT mode only
-    # requires a second cmake build (separate build_jit/ directory), no need to
-    # re-run dotnet build or convert-to-cpp.
-    jit_exe = native_dir / "entry-jit.exe"
-    if not jit_exe.exists():
-        print(f"  [codegen] Building JIT entry.exe (pre-build for jit_codegen stage)...")
-        jit_build_ok = build_entry_executable(
-            ctx.slug, verification=testing_base, config_tier=ctx.native_config, is_jit=True)
-        if jit_build_ok:
-            # After JIT build, entry.exe is the JIT version save it as entry-jit.exe
-            if entry_exe.exists():
-                shutil.copy2(str(entry_exe), str(jit_exe))
-                print(f"  [codegen] saved entry.exe -> entry-jit.exe ({jit_exe.stat().st_size} bytes)")
-            # Restore AOT entry.exe
-            if aot_exe.exists():
-                shutil.copy2(str(aot_exe), str(entry_exe))
-                print(f"  [codegen] restored entry-aot.exe -> entry.exe")
-        else:
-            print(f"  [codegen] WARNING: JIT entry.exe pre-build failed (jit_codegen stage will rebuild)")
-    else:
-        print(f"  [codegen] entry-jit.exe already exists, skipping JIT pre-build")
+    total_codegen = time.perf_counter() - start
+    print(f"    [codegen timing] TOTAL: {total_codegen:.2f}s"
+          f"  (entrypoint={step_times['entrypoint']:.2f}s"
+          f"  il2cpp={step_times['il2cpp_codegen']:.2f}s"
+          f"  tpg={step_times['tpg']:.2f}s"
+          f"  aot={step_times['native_aot']:.2f}s"
+          f"  jit={step_times['native_jit']:.2f}s)")
 
     return StageResult(
         stage="codegen", status="passed",
@@ -396,7 +424,11 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
     contract_path = _find_contract(ctx.assembly, ctx.slug)
     tpg_flags = ["--jit", "--config-tier", ctx.native_config]
     dispatch_cpp = native_dir / "verification_dispatch.generated.cpp"
-    if _run_test_project_generator_emit(contract_path, native_dir, extra_flags=tpg_flags):
+    tpg_start = time.perf_counter()
+    tpg_ok = _run_test_project_generator_emit(contract_path, native_dir, extra_flags=tpg_flags)
+    tpg_elapsed = time.perf_counter() - tpg_start
+    print(f"    [TPG timing] JIT emit took {tpg_elapsed:.2f}s")
+    if tpg_ok:
         print(f"  [jit_codegen] Regenerated dispatch via TPG (JIT mode)")
         # Use build_jit/ (JIT cmake config) for incremental rebuild, not build/ (AOT)
         _incremental_dispatch_rebuild(native_dir, build_subdir="build_jit")
