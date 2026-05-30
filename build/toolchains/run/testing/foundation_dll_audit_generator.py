@@ -1213,8 +1213,8 @@ def _build_source_paths(assembly_name: str, slug: str) -> dict[str, str]:
 def _extract_method_code_snippet(repo_root: Path, file_path: str, subject_id: str) -> str:
     """Extract method code from a source file by matching SubjectId attribute.
 
-    Tries multiple patterns: MethodSubjectId/BenchmarkSubjectId/HotUpdateSubjectId
-    attributes, comment-based patterns, and partial short-name matches.
+    Tries multiple patterns: derived method name (from [Fact]/[Benchmark]/[HotUpdate]
+    + naming convention), comment-based patterns, and partial short-name matches.
     If the specified file doesn't match, falls back to scanning sibling .cpp files
     under the broader native/ directory tree (handles skeleton files at
     native/RuntimeSkeletonPage*.cpp, not just native/genuine/generated/*.cpp).
@@ -1249,18 +1249,41 @@ def _extract_method_code_snippet(repo_root: Path, file_path: str, subject_id: st
             continue
         target_line = -1
         escaped_sid = re.escape(subject_id)
-        attr_patterns = [
-            rf'MethodSubjectId\("{escaped_sid}"\)',
-            rf'BenchmarkSubjectId\("{escaped_sid}"\)',
-            rf'HotUpdateSubjectId\("{escaped_sid}"\)',
+
+        # Strategy 1: Match derived method name (new [Fact]/[Benchmark]/[HotUpdate] pattern)
+        # The generator uses member_name(): sanitize subject_id, prefix with Method/Benchmark/HotUpdate/Patch
+        sanitized = re.sub(r"[^A-Za-z0-9]+", "_", subject_id).strip("_")
+        sanitized = sanitized[:120] if sanitized else "Placeholder"
+        method_variants = [
+            f"Method_{sanitized}",
+            f"Benchmark_{sanitized}",
+            f"HotUpdate_{sanitized}",
+            f"Patch_{sanitized}",
         ]
         for i, line in enumerate(lines):
-            for pat in attr_patterns:
-                if re.search(pat, line):
-                    target_line = i
+            stripped = line.strip()
+            if stripped.startswith("public") and "void " in stripped:
+                for variant in method_variants:
+                    if re.search(rf'\b{re.escape(variant)}\s*\(', stripped):
+                        target_line = i
+                        break
+                if target_line >= 0:
                     break
-            if target_line >= 0:
-                break
+
+        if target_line < 0:
+            # Strategy 2: Try old-style attribute patterns (legacy files only)
+            attr_patterns = [
+                rf'MethodSubjectId\("{escaped_sid}"\)',
+                rf'BenchmarkSubjectId\("{escaped_sid}"\)',
+                rf'HotUpdateSubjectId\("{escaped_sid}"\)',
+            ]
+            for i, line in enumerate(lines):
+                for pat in attr_patterns:
+                    if re.search(pat, line):
+                        target_line = i
+                        break
+                if target_line >= 0:
+                    break
         if target_line < 0:
             # Try comment-based pattern: // full SubjectId
             for i, line in enumerate(lines):

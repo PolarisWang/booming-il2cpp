@@ -31,10 +31,8 @@ def test_scan_case_indexes_from_generated_source() -> None:
             "using Chaos.TestFramework;\n"
             "public static class ConvertCharGeneratedTests\n"
             "{\n"
-            "    [MethodSubjectId(\"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)\")]\n"
-            "    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ConvertChar)]\n"
-            "    [VerificationRoute(VerificationRoute.Native)]\n"
-            "    public static void Method_System_Convert_ToChar_System_Boolean() { }\n"
+            "    [Fact]\n"
+            "    public static void Method_System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Boolean() { }\n"
             "}\n",
             encoding="utf-8",
         )
@@ -42,11 +40,8 @@ def test_scan_case_indexes_from_generated_source() -> None:
             "using Chaos.TestFramework;\n"
             "public static class ConvertCharGeneratedBenchmarks\n"
             "{\n"
-            "    [BenchmarkSubjectId(\"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)\")]\n"
-            "    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ConvertChar)]\n"
-            "    [BenchmarkRoute(BenchmarkRoute.Native)]\n"
-            "    [BenchmarkProfile(BenchmarkProfile.Default)]\n"
-            "    public static void Benchmark_System_Convert_ToChar_System_Boolean() { }\n"
+            "    [Benchmark]\n"
+            "    public static void Benchmark_System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Boolean() { }\n"
             "}\n",
             encoding="utf-8",
         )
@@ -54,10 +49,8 @@ def test_scan_case_indexes_from_generated_source() -> None:
             "using Chaos.TestFramework;\n"
             "public static class ConvertCharGeneratedHotUpdate\n"
             "{\n"
-            "    [HotUpdateSubjectId(\"System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)\")]\n"
-            "    [CapabilityFamilyId(CapabilityFamilyId.SystemPrivateCoreLib_ConvertChar)]\n"
-            "    [HotUpdateDirection(HotUpdateDirection.HostToPatch)]\n"
-            "    public static void HotUpdate_System_Convert_ToChar_System_Boolean() { }\n"
+            "    [HotUpdate]\n"
+            "    public static void HotUpdate_System_Private_CoreLib_System_Convert_ToChar_System_Char_System_Boolean() { }\n"
             "}\n",
             encoding="utf-8",
         )
