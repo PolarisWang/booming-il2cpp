@@ -879,6 +879,36 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    # P1: Verify runtime-patchdata.cpp has real data (not the sentinel from AOT finally blocks).
+    # The sentinel has kPatchDataSize=0; real data has kPatchDataSize > 0.
+    patchdata_cpp = ctx.native_dir / "runtime-patchdata.cpp"
+    if patchdata_cpp.exists():
+        pdc = patchdata_cpp.read_text(encoding="utf-8")
+        m = re.search(r'kPatchDataSize\s*=\s*(\d+)\s*u?;', pdc)
+        patchdata_size = int(m.group(1)) if m else 0
+        if patchdata_size == 0:
+            return StageResult(
+                stage="hotupdate_jit_fact", status="failed",
+                summary=f"runtime-patchdata.cpp has sentinel data (size=0) after _ensure_patch_data",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+        print(f"  [hotupdate_jit_fact] runtime-patchdata.cpp verified: kPatchDataSize={patchdata_size}")
+    else:
+        return StageResult(
+            stage="hotupdate_jit_fact", status="failed",
+            summary="runtime-patchdata.cpp missing after _ensure_patch_data",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # P2: Delete build_jit/ to force a clean build.  Ninja's incremental build
+    # sometimes fails to detect runtime-patchdata.cpp changes (stale .obj) on
+    # Windows, resulting in entry-jit.exe without real patchdata.
+    jit_build_dir = ctx.native_dir / "build_jit"
+    if jit_build_dir.exists():
+        import shutil as _shutil
+        _shutil.rmtree(jit_build_dir, ignore_errors=True)
+        print(f"  [hotupdate_jit_fact] deleted stale build_jit/ to force clean JIT rebuild")
+
     # Rebuild entry-jit.exe with the freshly generated runtime-patchdata.cpp.
     # _ensure_patch_data() rebuilds entry.exe (AOT); we need the JIT binary too.
     from verification.stages.pipeline_native_aot_runner import build_entry_executable
@@ -893,6 +923,17 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
             summary="entry-jit.exe rebuild with patchdata failed",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
+
+    # P3: Verify entry-jit.exe contains TXAP magic (i.e. real patchdata was linked in).
+    if exe_path.exists():
+        exe_bytes = exe_path.read_bytes()
+        if b'TXAP' not in exe_bytes:
+            return StageResult(
+                stage="hotupdate_jit_fact", status="failed",
+                summary=f"entry-jit.exe has no TXAP magic ({exe_path.stat().st_size} bytes) — patchdata not linked",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+        print(f"  [hotupdate_jit_fact] entry-jit.exe verified: TXAP magic found ({exe_path.stat().st_size} bytes)")
 
     try:
         print(f"  [hotupdate_jit_fact] Running {exe_path} --hotupdate...")
