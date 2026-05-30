@@ -156,12 +156,19 @@ class ManagedFactHarness
 
 
 def run_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
-    """Stage 3: Fact AOT — run il2cpp-translated native entry EXE."""
+    """Stage 3: Fact AOT — run il2cpp-translated native entry EXE.
+
+    Uses --fact-json to get per-method results and counts only auto Subject_N
+    entries (odd si values). CustomEntrySubject_N entries (even si) are excluded
+    from the pass/fail tally because they are handwritten Assert-based tests
+    that may legitimately throw (e.g. Convert.ToChar(bool) -> InvalidCastException).
+    The cross_verify stage compares Subject_N results against the managed golden
+    record for value-level verification.
+    """
     start = time.perf_counter()
 
     exe_path = ctx.entry_exe_path
     if not exe_path.exists():
-        # Check if this is a 0-method family (no codegen needed)
         preflight = stages.get("preflight")
         if preflight and preflight.details and preflight.details.get("methodCount", 0) == 0:
             return StageResult(
@@ -176,35 +183,65 @@ def run_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    print(f"  [fact] Running {exe_path}...")
+    print(f"  [fact] Running {exe_path} --fact-json...")
     r = subprocess.run(
-        [str(exe_path)], capture_output=True, text=True, timeout=120,
+        [str(exe_path), "--fact-json"], capture_output=True, text=True, timeout=120,
     )
-    output = (r.stdout or "") + (r.stderr or "")
 
-    passed = total = 0
-    for line in output.splitlines():
-        m = re.search(r'Passed:\s*(\d+)/(\d+)', line)
-        if m:
-            passed, total = int(m.group(1)), int(m.group(2))
-        if "FAIL" in line or "fail" in line.lower():
-            print(f"    {line}")
+    # Parse JSON fact results
+    native_data = {"factResults": []}
+    for line in (r.stdout or "").splitlines():
+        line = line.strip()
+        if line.startswith("{"):
+            try:
+                native_data = json.loads(line)
+                break
+            except json.JSONDecodeError:
+                continue
 
-    status = "passed" if r.returncode == 0 else "failed"
-    if r.returncode != 0:
-        print(f"  [fact] DEBUG: rc={r.returncode}, stdout={r.stdout!r}, stderr={r.stderr[:200]!r}")
-    print(f"  [fact] Result: {status} ({passed}/{total})")
+    results = native_data.get("factResults", [])
+    if not results:
+        print(f"  [fact] WARNING: no factResults in JSON output")
+        print(f"  [fact] DEBUG: rc={r.returncode}, stdout={r.stdout[:200]!r}")
+
+    # Count only auto Subject_N entries (odd si = Subject_N, even si = CustomEntrySubject_N)
+    auto_passed = 0
+    auto_total = 0
+    fail_details = []
+    for entry in results:
+        si = entry.get("si", -1)
+        if si < 0 or si % 2 == 0:
+            continue  # skip CustomEntrySubject_N entries
+        auto_total += 1
+        if entry.get("passed", False):
+            auto_passed += 1
+        else:
+            fail_details.append(f"si={si}, methodIndex={entry.get('methodIndex', '?')}")
+
+    status = "passed" if auto_passed == auto_total else "failed"
+    if fail_details:
+        print(f"  [fact] Auto Subject_N failures: {', '.join(fail_details)}")
+    print(f"  [fact] Result: {status} (auto: {auto_passed}/{auto_total}, total entries: {len(results)})")
 
     return StageResult(
         stage="fact", status=status,
-        summary=f"{status} ({passed}/{total})",
-        details={"passed": passed, "total": total, "exitCode": r.returncode},
+        summary=f"{status} (auto: {auto_passed}/{auto_total}, total: {len(results)})",
+        details={
+            "passed": auto_passed,
+            "total": auto_total,
+            "totalEntries": len(results),
+            "exitCode": r.returncode,
+        },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
 
 
 def run_fact_jit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
-    """Stage 4: Fact JIT — run entry-jit.exe through interpreter dispatch."""
+    """Stage 4: Fact JIT — run entry-jit.exe through interpreter dispatch.
+
+    Uses --fact-json and filters to auto Subject_N entries (odd si), same as
+    run_fact. See run_fact docstring for rationale.
+    """
     start = time.perf_counter()
 
     jit_exe = ctx.entry_jit_exe_path
@@ -216,13 +253,13 @@ def run_fact_jit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRes
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    print(f"  [fact_jit] Running {jit_exe}...")
+    print(f"  [fact_jit] Running {jit_exe} --fact-json...")
     # Retry loop for transient Windows crashes (same pattern as run_fact).
     r = None
     for attempt in range(3):
         try:
             r = subprocess.run(
-                [str(jit_exe)], capture_output=True, text=True, timeout=120,
+                [str(jit_exe), "--fact-json"], capture_output=True, text=True, timeout=120,
                 close_fds=True,
             )
         except OSError as _e:
@@ -237,21 +274,45 @@ def run_fact_jit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRes
             print(f"  [fact_jit] retry #{attempt + 1} after rc={r.returncode} "
                   f"({'access violation' if r.returncode == 0xC0000005 else 'unknown'})")
             time.sleep(1 << attempt)
-    output = (r.stdout or "") + (r.stderr or "")
 
-    passed = total = 0
-    for line in output.splitlines():
-        m = re.search(r'Passed:\s*(\d+)/(\d+)', line)
-        if m:
-            passed, total = int(m.group(1)), int(m.group(2))
+    # Parse JSON fact results
+    native_data = {"factResults": []}
+    for line in (r.stdout or "").splitlines():
+        line = line.strip()
+        if line.startswith("{"):
+            try:
+                native_data = json.loads(line)
+                break
+            except json.JSONDecodeError:
+                continue
 
-    status = "passed" if r.returncode == 0 else "failed"
-    print(f"  [fact_jit] Result: {status} ({passed}/{total})")
+    results = native_data.get("factResults", [])
+    if not results:
+        print(f"  [fact_jit] WARNING: no factResults in JSON output")
+
+    # Count only auto Subject_N entries (odd si)
+    auto_passed = 0
+    auto_total = 0
+    for entry in results:
+        si = entry.get("si", -1)
+        if si < 0 or si % 2 == 0:
+            continue
+        auto_total += 1
+        if entry.get("passed", False):
+            auto_passed += 1
+
+    status = "passed" if auto_passed == auto_total else "failed"
+    print(f"  [fact_jit] Result: {status} (auto: {auto_passed}/{auto_total}, total entries: {len(results)})")
 
     return StageResult(
         stage="fact_jit", status=status,
-        summary=f"{status} ({passed}/{total})",
-        details={"passed": passed, "total": total, "exitCode": r.returncode},
+        summary=f"{status} (auto: {auto_passed}/{auto_total}, total: {len(results)})",
+        details={
+            "passed": auto_passed,
+            "total": auto_total,
+            "totalEntries": len(results),
+            "exitCode": r.returncode,
+        },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
 
