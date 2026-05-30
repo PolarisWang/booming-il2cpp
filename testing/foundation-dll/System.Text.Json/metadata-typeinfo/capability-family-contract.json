@@ -98,5 +98,11 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "reviewBundleRequired": true
+  "reviewBundleRequired": true,
+  "benchmarkMethodIndices": [
+    2
+  ],
+  "hotupdateMethodIndices": [
+    2
+  ]
 }

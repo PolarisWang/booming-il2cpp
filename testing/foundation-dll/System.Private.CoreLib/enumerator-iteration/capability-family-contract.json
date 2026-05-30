@@ -13,5 +13,17 @@
     "System.Private.CoreLib/System.Collections.Generic.IEnumerator{T}::get_Current:T()",
     "System.Private.CoreLib/System.IDisposable::Dispose:System.Void()"
   ],
-  "customEntryIndices": []
+  "customEntryIndices": [],
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    3,
+    4,
+    6
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    4
+  ]
 }

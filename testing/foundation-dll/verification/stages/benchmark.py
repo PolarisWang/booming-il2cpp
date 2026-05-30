@@ -60,6 +60,22 @@ def _parse_profile_data(stderr_text: str) -> dict[str, Any]:
     }
 
 
+def _load_benchmark_indices(ctx: FamilyContext) -> list[int]:
+    """Load benchmarkMethodIndices from contract. Fall back to all subjects."""
+    contract_path = ctx.contract_path
+    if not contract_path.exists():
+        return []
+    try:
+        c = json.loads(contract_path.read_text(encoding="utf-8"))
+        indices = c.get("benchmarkMethodIndices")
+        if indices is not None and len(indices) > 0:
+            return sorted(indices)
+        mids = c.get("methodSubjectIds", [])
+        return list(range(len(mids)))
+    except Exception:
+        return []
+
+
 # ── Native benchmark runners ────────────────────────────────────────────
 
 def _load_method_count(ctx: FamilyContext) -> int:
@@ -181,9 +197,10 @@ def _run_all_benchmarks(
     R5: Before timing, runs --fact-json to verify all methods pass (value gate).
     Methods that fail the value gate are excluded from benchmark timing.
     """
-    method_count = _load_method_count(ctx)
-    if method_count == 0:
-        return {"status": "skipped", "summary": "no methods in contract"}
+    method_indices = _load_benchmark_indices(ctx)
+    if not method_indices:
+        return {"status": "skipped", "summary": "no benchmark methods in contract"}
+    method_count = len(method_indices)
 
     # R5: Value gate — pre-verify all methods before benchmarking
     value_gate_failures: set[int] = set()
@@ -247,7 +264,7 @@ def _run_all_benchmarks(
         })
         fail_count += 1
 
-    remaining = [i for i in range(method_count) if i not in value_gate_failures]
+    remaining = [i for i in method_indices if i not in value_gate_failures]
     if remaining:
         batch_result = _run_benchmark_all(exe_path, remaining, collect_profile=collect_profile)
         if batch_result is not None:
@@ -361,11 +378,11 @@ def run_benchmark(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
     """Stage 8: native benchmark (native-aot + native-jit)."""
     start = time.perf_counter()
 
-    method_count = _load_method_count(ctx)
-    if method_count == 0:
+    method_indices = _load_benchmark_indices(ctx)
+    if not method_indices:
         return StageResult(
             stage="benchmark", status="skipped",
-            summary="no methods in contract",
+            summary="no benchmark methods in contract",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 

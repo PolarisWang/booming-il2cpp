@@ -18,7 +18,9 @@ public sealed class PatchDataExtractor
     // Track string insertion order for correct offset computation.
     private readonly List<(string Key, uint Offset)> _insertOrder = new();
 
-    public void Extract(string dllPath, string outputPath, string? aotCoreIrPath = null, string? genuineIrPath = null, string? direction = null)
+    public void Extract(string dllPath, string outputPath, string? aotCoreIrPath = null,
+        string? genuineIrPath = null, string? direction = null,
+        bool subjectOnly = false, string? subjectIndices = null)
     {
         using var stream = File.OpenRead(dllPath);
         using var peReader = new PEReader(stream);
@@ -112,6 +114,25 @@ public sealed class PatchDataExtractor
         var methodDefs = BuildMethodDefs(mr, StrOff, AllocBlob);
         var memberRefs = BuildMemberRefs(mr, StrOff, AllocBlob);
         var userStringBytes = BuildUserStringHeap(mr);
+
+        // ── Subject-only filtering ──
+        if (subjectOnly && !string.IsNullOrEmpty(subjectIndices))
+        {
+            var allowed = subjectIndices
+                .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Select(int.Parse)
+                .ToHashSet();
+            methodDefs = methodDefs
+                .Where(entry => {
+                    var mh = MetadataTokens.MethodDefinitionHandle((int)entry.token);
+                    if (mh.IsNil) return false;
+                    var md = mr.GetMethodDefinition(mh);
+                    var name = mr.GetString(md.Name);
+                    var idx = ExtractSubjectIndex(name);
+                    return idx.HasValue && allowed.Contains(idx.Value);
+                })
+                .ToList();
+        }
 
         // ── Optional AotCoreIr JSON section ──
         byte[]? aotCoreIrSection = null;
@@ -564,6 +585,32 @@ public sealed class PatchDataExtractor
             var idx = (int)entries[i].signature_offset;
             entries[i].signature_offset = idx < blobOffsets.Length ? blobOffsets[idx] : 0;
         }
+    }
+
+    /// <summary>
+    /// Extract the subject index from a method name matching Subject_N, CustomEntrySubject_N,
+    /// or CustomEntryMethodN patterns (same as NativeAotLoweringPlanner.ExtractSubjectIndex).
+    /// Returns null if the method name is not a subject method.
+    /// </summary>
+    private static int? ExtractSubjectIndex(string name)
+    {
+        if (name.StartsWith("Subject_", StringComparison.Ordinal))
+        {
+            if (int.TryParse(name.AsSpan(8), out var idx))
+                return idx;
+        }
+        else if (name.StartsWith("CustomEntrySubject_", StringComparison.Ordinal))
+        {
+            if (int.TryParse(name.AsSpan(19), out var idx))
+                return idx;
+        }
+        else if (name.StartsWith("CustomEntryMethod", StringComparison.Ordinal))
+        {
+            var span = name.AsSpan(16);
+            if (span.Length > 0 && int.TryParse(span, out var idx))
+                return idx;
+        }
+        return null;
     }
 
     private static uint SizeOf<T>() => (uint)Marshal.SizeOf<T>();

@@ -33,5 +33,15 @@
   "customEntryIndices": [
     1,
     6
+  ],
+  "benchmarkMethodIndices": [
+    0,
+    2,
+    3,
+    9
+  ],
+  "hotupdateMethodIndices": [
+    2,
+    3
   ]
 }

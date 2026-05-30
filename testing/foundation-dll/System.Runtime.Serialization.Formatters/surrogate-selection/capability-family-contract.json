@@ -37,5 +37,17 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "reviewBundleRequired": true
+  "reviewBundleRequired": true,
+  "benchmarkMethodIndices": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "hotupdateMethodIndices": [
+    7,
+    8
+  ]
 }

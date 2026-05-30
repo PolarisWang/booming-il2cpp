@@ -11,5 +11,19 @@
     "System.Private.CoreLib/System.Object::Equals:System.Boolean(System.Object,System.Object)",
     "System.Private.CoreLib/System.Object::ReferenceEquals:System.Boolean(System.Object,System.Object)"
   ],
-  "customEntryIndices": []
+  "customEntryIndices": [],
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ]
 }

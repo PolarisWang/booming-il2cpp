@@ -21,5 +21,9 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "reviewBundleRequired": true
+  "reviewBundleRequired": true,
+  "benchmarkMethodIndices": [
+    0
+  ],
+  "hotupdateMethodIndices": []
 }
