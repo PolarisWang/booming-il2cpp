@@ -30,6 +30,7 @@ public partial class ReflectionEventTests
         // Purpose: Type.GetEvent(name) resolves or returns null without throwing.
         var evt = typeof(System.Timers.Timer).GetEvent("Elapsed");
         // Event may not resolve in AOT — just verify no crash
+        Assert.IsNotNull(evt);
     }
 
     [Fact]
@@ -54,6 +55,7 @@ public partial class ReflectionEventTests
     {
         // Purpose: EventInfo.Name on a resolved event does not throw.
         var evt = typeof(System.Timers.Timer).GetEvent("Elapsed");
+        Assert.IsNotNull(evt);
         if (evt != null)
         {
             _ = evt.Name;
@@ -65,6 +67,7 @@ public partial class ReflectionEventTests
     {
         // Purpose: EventInfo.EventHandlerType on a resolved event does not throw.
         var evt = typeof(System.Timers.Timer).GetEvent("Elapsed");
+        Assert.IsNotNull(evt);
         if (evt != null)
         {
             _ = evt.EventHandlerType;

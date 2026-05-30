@@ -157,7 +157,8 @@ def _build_patch_dll(ctx: FamilyContext, patch_subdir: str = "patch") -> Path | 
 
 def _run_emit_patch_data(dll_path: str, output_path: str,
                          aot_core_ir_path: str | None = None,
-                         direction: str = "forward") -> bool:
+                         direction: str = "forward",
+                         subject_indices: list[int] | None = None) -> bool:
     """Run chaos-il2cpp emit-patch-data CLI on a patch DLL.
 
     Args:
@@ -165,6 +166,8 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
         output_path: Output path for the .patchdata file.
         aot_core_ir_path: Optional path to aot-core-ir.json for baseline IR comparison.
         direction: Hot-update direction ("forward" or "bidirectional").
+        subject_indices: If provided and non-empty, pass --subject-only and
+                         --subject-indices to emit only subject methods' patch entries.
 
     Returns:
         True if the patch data was emitted and validated successfully.
@@ -177,14 +180,75 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
         cmd += ["--aot-core-ir", aot_core_ir_path]
     if direction:
         cmd += ["--direction", direction]
+    if subject_indices:
+        indices_str = ",".join(str(i) for i in subject_indices)
+        cmd += ["--subject-only", "--subject-indices", indices_str]
+
+    # P1: Use a temp output path to avoid Windows file-lock races between
+    # successive pipeline stages.  Multiple stages call _ensure_patch_data()
+    # with the same output path (subjects.patchdata), and the previous dotnet
+    # process may still hold a file handle when the next one starts, causing
+    # "The process cannot access the file because it is being used by another
+    # process."  Writing to a temp path and renaming atomically avoids this.
+    output = Path(output_path)
+    import os as _os
+    import tempfile as _tempfile
+    tmp_fd, tmp_path_str = _tempfile.mkstemp(
+        suffix=".patchdata", prefix="_emit_tmp_",
+        dir=str(output.parent),
+    )
+    _os.close(tmp_fd)
+    tmp_path = Path(tmp_path_str)
+
+    # Replace output_path with temp path in the command
+    # cmd = ["dotnet", "exec", driver, "emit-patch-data", dll_path, output_path, ...]
+    cmd[5] = tmp_path_str
 
     r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if r.returncode != 0:
         print(f"    [hotupdate] emit-patch-data FAILED (exit={r.returncode})")
         for line in (r.stderr or "").splitlines()[-5:]:
             print(f"      {line}")
+        # Clean up temp file on failure
+        if tmp_path.exists():
+            tmp_path.unlink(missing_ok=True)
         return False
 
+    # P2: Atomically replace old output with temp file.
+    # On Windows, Path.rename() fails with ERROR_ALREADY_EXISTS (183) when the
+    # target exists.  os.replace() calls MoveFileExW with
+    # MOVEFILE_REPLACE_EXISTING, but this can still fail with ERROR_ACCESS_DENIED
+    # (5) when the target is held open without FILE_SHARE_WRITE (e.g., antivirus
+    # scanning or a concurrent process that hasn't fully released its handle).
+    # Retry with exponential backoff to handle transient lock contention.
+    import time as _time
+    for _replace_attempt in range(10):
+        try:
+            _os.replace(str(tmp_path), str(output))
+            break
+        except OSError as _e:
+            if _replace_attempt < 9:
+                _wait = 0.1 * (1 << _replace_attempt)  # 100ms, 200ms, ... 51.2s
+                print(f"    [hotupdate] replace locked (attempt {_replace_attempt}): {_e}, retry in {_wait*1000:.0f}ms")
+                _time.sleep(_wait)
+            else:
+                print(f"    [hotupdate] replace FAILED after 10 retries: {_e}")
+                # Last resort: copy instead of rename (copy works when the target
+                # is opened with FILE_SHARE_READ even without FILE_SHARE_WRITE).
+                # The temp file will be cleaned up below.
+                import shutil as _shutil
+                try:
+                    _shutil.copy2(str(tmp_path), str(output))
+                    print(f"    [hotupdate] replaced via copy fallback")
+                except OSError as _e2:
+                    print(f"    [hotupdate] copy fallback ALSO FAILED: {_e2}")
+                    if tmp_path.exists():
+                        tmp_path.unlink(missing_ok=True)
+                    return False
+    # Clean up temp file if it still exists (shouldn't after os.replace, but
+    # copy fallback and edge cases on Windows may leave it).
+    if tmp_path.exists():
+        tmp_path.unlink(missing_ok=True)
     last_line = (r.stdout or "").strip().splitlines()[-1] if r.stdout else ""
     print(f"    [hotupdate] {last_line}")
 
@@ -299,7 +363,8 @@ def _detect_host_class(native_dir: Path) -> str:
 
 
 def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch",
-                       direction: str = "forward") -> bool:
+                       direction: str = "forward",
+                       hotupdate_indices: list[int] | None = None) -> bool:
     """Build patch DLL -> emit-patch-data -> generate runtime-patchdata.cpp -> rebuild entry.exe.
 
     Args:
@@ -349,7 +414,9 @@ def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch",
     dll_str = str(dll)
     pd_str = str(patchdata)
     aot_str = str(aot_core_ir) if aot_core_ir is not None else None
-    ok = _run_emit_patch_data(dll_str, pd_str, aot_core_ir_path=aot_str, direction=direction)
+    ok = _run_emit_patch_data(dll_str, pd_str, aot_core_ir_path=aot_str,
+                               direction=direction,
+                               subject_indices=hotupdate_indices)
     if not ok or not patchdata.exists():
         print("  [hotupdate] _ensure_patch_data: emit-patch-data failed")
         return False
@@ -549,6 +616,22 @@ def _load_method_count(ctx: FamilyContext) -> int:
         return 0
 
 
+def _load_hotupdate_indices(ctx: FamilyContext) -> list[int]:
+    """Load hotupdateMethodIndices from contract. Fall back to all subjects."""
+    contract_path = ctx.contract_path
+    if not contract_path.exists():
+        return []
+    try:
+        c = json.loads(contract_path.read_text(encoding="utf-8"))
+        indices = c.get("hotupdateMethodIndices")
+        if indices is not None and len(indices) > 0:
+            return sorted(indices)
+        mids = c.get("methodSubjectIds", [])
+        return list(range(len(mids)))
+    except Exception:
+        return []
+
+
 def _run_hotupdate_fact(exe_path: Path) -> dict[str, Any]:
     """Run entry.exe --hotupdate and parse JSON result.
 
@@ -699,7 +782,8 @@ def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    if not _ensure_patch_data(ctx):
+    hu_indices = _load_hotupdate_indices(ctx)
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
         return StageResult(
             stage="hotupdate", status="failed",
             summary="patch data build failed",
@@ -730,6 +814,7 @@ def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
         print(f"  [hotupdate] Result: {status} ({passed}/{total})")
 
         details = dict(result)
+        details["hotupdateMethodIndices"] = hu_indices
         if patch_microbench:
             details["patchMicrobench"] = patch_microbench
 
@@ -765,11 +850,11 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    method_count = _load_method_count(ctx)
-    if method_count == 0:
+    hu_indices = _load_hotupdate_indices(ctx)
+    if not hu_indices:
         return StageResult(
             stage="hotupdate_aot_benchmark", status="skipped",
-            summary="no methods in contract",
+            summary="no hotupdate methods in contract",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
@@ -780,7 +865,7 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    if not _ensure_patch_data(ctx):
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
         return StageResult(
             stage="hotupdate_aot_benchmark", status="failed",
             summary="patch data build failed",
@@ -788,22 +873,22 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
         )
 
     try:
-        print(f"  [hotupdate_aot_bench] Running {method_count} methods...")
+        print(f"  [hotupdate_aot_bench] Running {len(hu_indices)} methods...")
         results: list[dict[str, Any]] = []
         ok_count = 0
-        for i in range(method_count):
+        for i in hu_indices:
             r = _run_hotupdate_benchmark(exe_path, i)
             results.append(r)
             if "error" not in r:
                 ok_count += 1
 
         status = "passed" if ok_count > 0 else "failed"
-        print(f"  [hotupdate_aot_bench] Result: {status} ({ok_count}/{method_count})")
+        print(f"  [hotupdate_aot_bench] Result: {status} ({ok_count}/{len(hu_indices)})")
 
         return StageResult(
             stage="hotupdate_aot_benchmark", status=status,
-            summary=f"{status} ({ok_count}/{method_count})",
-            details={"results": results, "okCount": ok_count, "totalMethods": method_count},
+            summary=f"{status} ({ok_count}/{len(hu_indices)})",
+            details={"results": results, "okCount": ok_count, "totalMethods": len(hu_indices)},
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
     finally:
@@ -813,8 +898,14 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
 def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
     """Stage 11: HotUpdate JIT Fact — run entry-jit.exe --hotupdate.
 
-    P1: Ensures entry-jit.exe has current patchdata by rebuilding if stale
-    (compares runtime-patchdata.cpp mtime vs entry-jit.exe mtime).
+    P1: Ensures entry-jit.exe has current patchdata by calling
+    _ensure_patch_data() first, then rebuilding entry-jit.exe with the
+    generated runtime-patchdata.cpp.
+
+    NOTE: _ensure_patch_data() regenerates runtime-patchdata.cpp and
+    rebuilds entry.exe (AOT binary). The entry-jit.exe rebuild is done
+    separately below via build_entry_executable(), which compiles the same
+    runtime-patchdata.cpp into the JIT binary.
     """
     start = time.perf_counter()
 
@@ -833,27 +924,74 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # P1: Check if entry-jit.exe is stale vs runtime-patchdata.cpp
-    # and rebuild if needed so the JIT binary has current patchdata.
+    # Regenerate patchdata and runtime-patchdata.cpp.
+    # This is necessary because previous AOT hotupdate stages' finally blocks
+    # wrote a sentinel (size=0) over runtime-patchdata.cpp, so entry-jit.exe
+    # would otherwise stale-check against an empty sentinel and never rebuild
+    # with real patchdata.
+    hu_indices = _load_hotupdate_indices(ctx)
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
+        return StageResult(
+            stage="hotupdate_jit_fact", status="failed",
+            summary="_ensure_patch_data failed — cannot rebuild entry-jit.exe with patchdata",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # P1: Verify runtime-patchdata.cpp has real data (not the sentinel from AOT finally blocks).
+    # The sentinel has kPatchDataSize=0; real data has kPatchDataSize > 0.
     patchdata_cpp = ctx.native_dir / "runtime-patchdata.cpp"
     if patchdata_cpp.exists():
-        patch_mtime = patchdata_cpp.stat().st_mtime
-        jit_mtime = exe_path.stat().st_mtime
-        if patch_mtime > jit_mtime:
-            print(f"  [hotupdate_jit_fact] runtime-patchdata.cpp is newer than entry-jit.exe — "
-                  f"rebuilding with current patchdata...")
-            from verification.stages.pipeline_native_aot_runner import build_entry_executable
-            rebuild_ok = build_entry_executable(
-                ctx.slug, verification=ctx.family_dir.parent,
-                config_tier=ctx.native_config,
-                output_name="entry-jit.exe", is_jit=True, skip_prep=True,
+        pdc = patchdata_cpp.read_text(encoding="utf-8")
+        m = re.search(r'kPatchDataSize\s*=\s*(\d+)\s*u?;', pdc)
+        patchdata_size = int(m.group(1)) if m else 0
+        if patchdata_size == 0:
+            return StageResult(
+                stage="hotupdate_jit_fact", status="failed",
+                summary=f"runtime-patchdata.cpp has sentinel data (size=0) after _ensure_patch_data",
+                duration_ms=int((time.perf_counter() - start) * 1000),
             )
-            if not rebuild_ok:
-                return StageResult(
-                    stage="hotupdate_jit_fact", status="failed",
-                    summary="entry-jit.exe rebuild with patchdata failed",
-                    duration_ms=int((time.perf_counter() - start) * 1000),
-                )
+        print(f"  [hotupdate_jit_fact] runtime-patchdata.cpp verified: kPatchDataSize={patchdata_size}")
+    else:
+        return StageResult(
+            stage="hotupdate_jit_fact", status="failed",
+            summary="runtime-patchdata.cpp missing after _ensure_patch_data",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # P2: Delete build_jit/ to force a clean build.  Ninja's incremental build
+    # sometimes fails to detect runtime-patchdata.cpp changes (stale .obj) on
+    # Windows, resulting in entry-jit.exe without real patchdata.
+    jit_build_dir = ctx.native_dir / "build_jit"
+    if jit_build_dir.exists():
+        import shutil as _shutil
+        _shutil.rmtree(jit_build_dir, ignore_errors=True)
+        print(f"  [hotupdate_jit_fact] deleted stale build_jit/ to force clean JIT rebuild")
+
+    # Rebuild entry-jit.exe with the freshly generated runtime-patchdata.cpp.
+    # _ensure_patch_data() rebuilds entry.exe (AOT); we need the JIT binary too.
+    from verification.stages.pipeline_native_aot_runner import build_entry_executable
+    rebuild_ok = build_entry_executable(
+        ctx.slug, verification=ctx.family_dir.parent,
+        config_tier=ctx.native_config,
+        output_name="entry-jit.exe", is_jit=True, skip_prep=True,
+    )
+    if not rebuild_ok:
+        return StageResult(
+            stage="hotupdate_jit_fact", status="failed",
+            summary="entry-jit.exe rebuild with patchdata failed",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # P3: Verify entry-jit.exe contains TXAP magic (i.e. real patchdata was linked in).
+    if exe_path.exists():
+        exe_bytes = exe_path.read_bytes()
+        if b'TXAP' not in exe_bytes:
+            return StageResult(
+                stage="hotupdate_jit_fact", status="failed",
+                summary=f"entry-jit.exe has no TXAP magic ({exe_path.stat().st_size} bytes) — patchdata not linked",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+        print(f"  [hotupdate_jit_fact] entry-jit.exe verified: TXAP magic found ({exe_path.stat().st_size} bytes)")
 
     try:
         print(f"  [hotupdate_jit_fact] Running {exe_path} --hotupdate...")
@@ -864,10 +1002,13 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
 
         print(f"  [hotupdate_jit_fact] Result: {status} ({passed}/{total})")
 
+        details = dict(result)
+        details["hotupdateMethodIndices"] = hu_indices
+
         return StageResult(
             stage="hotupdate_jit_fact", status=status,
             summary=f"{status} ({passed}/{total})",
-            details=result,
+            details=details,
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
     finally:
@@ -886,30 +1027,30 @@ def run_hotupdate_jit_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    method_count = _load_method_count(ctx)
-    if method_count == 0:
+    hu_indices = _load_hotupdate_indices(ctx)
+    if not hu_indices:
         return StageResult(
             stage="hotupdate_jit_benchmark", status="skipped",
-            summary="no methods in contract",
+            summary="no hotupdate methods in contract",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    print(f"  [hotupdate_jit_bench] Running {method_count} methods...")
+    print(f"  [hotupdate_jit_bench] Running {len(hu_indices)} methods...")
     results: list[dict[str, Any]] = []
     ok_count = 0
-    for i in range(method_count):
+    for i in hu_indices:
         r = _run_hotupdate_benchmark(exe_path, i)
         results.append(r)
         if "error" not in r:
             ok_count += 1
 
     status = "passed" if ok_count > 0 else "failed"
-    print(f"  [hotupdate_jit_bench] Result: {status} ({ok_count}/{method_count})")
+    print(f"  [hotupdate_jit_bench] Result: {status} ({ok_count}/{len(hu_indices)})")
 
     return StageResult(
         stage="hotupdate_jit_benchmark", status=status,
-        summary=f"{status} ({ok_count}/{method_count})",
-        details={"results": results, "okCount": ok_count, "totalMethods": method_count},
+        summary=f"{status} ({ok_count}/{len(hu_indices)})",
+        details={"results": results, "okCount": ok_count, "totalMethods": len(hu_indices)},
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
 
@@ -963,7 +1104,24 @@ def run_patch_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -
         )
 
     # Rebuild entry.exe with patchdata (hotupdate stage's finally cleans up)
-    if not _ensure_patch_data(ctx):
+    hu_indices = _load_hotupdate_indices(ctx)
+
+    # Filter golden values to only include methods that actually have patch
+    # entries.  The managed harness calls Subject_N() for all methods (the
+    # patch DLL defines all of them), but emit-patch-data with --subject-indices
+    # only emits patch entries for the hotupdate subset.  Methods without patch
+    # entries will still run the original AOT body, not Subject_N(), so their
+    # return values won't match golden — skip them.
+    if hu_indices:
+        golden_by_index = {idx: gr for idx, gr in golden_by_index.items()
+                           if idx in hu_indices}
+        if not golden_by_index:
+            return StageResult(
+                stage="patch_cross_verify", status="skipped",
+                summary="no golden values overlap with hotupdateMethodIndices",
+                duration_ms=int((time.perf_counter() - start) * 1000),
+            )
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
         return StageResult(
             stage="patch_cross_verify", status="failed",
             summary="_ensure_patch_data failed — cannot run --hotupdate",
@@ -1072,6 +1230,7 @@ def run_patch_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -
             "mismatches": mismatches,
             "totalChecked": total_checked,
             "skipped": skipped,
+            "hotupdateMethodIndices": hu_indices,
         },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
@@ -1141,6 +1300,7 @@ def run_multi_patch_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]
         return False
 
     # Round 1: first patch
+    hu_indices = _load_hotupdate_indices(ctx)
     if has_first:
         print(f"  [multi_patch] === Round 1: patch_first ===")
         # Write sentinel first to ensure clean state
@@ -1148,7 +1308,7 @@ def run_multi_patch_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]
         _rebuild_entry_with_patchdata()
 
         # Build and apply first patch
-        ok = _ensure_patch_data(ctx, patch_subdir="patch_first")
+        ok = _ensure_patch_data(ctx, patch_subdir="patch_first", hotupdate_indices=hu_indices)
         if not ok:
             round_results.append({"round": 1, "patch": "patch_first", "status": "failed",
                                   "error": "_ensure_patch_data failed"})
@@ -1166,7 +1326,7 @@ def run_multi_patch_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]
         _write_sentinel_patchdata(ctx.native_dir)
         _rebuild_entry_with_patchdata()
 
-        ok = _ensure_patch_data(ctx, patch_subdir="patch_second")
+        ok = _ensure_patch_data(ctx, patch_subdir="patch_second", hotupdate_indices=hu_indices)
         if not ok:
             round_results.append({"round": 2, "patch": "patch_second", "status": "failed",
                                   "error": "_ensure_patch_data failed"})

@@ -30,6 +30,7 @@ from verification.stages.fact import (
     run_fact, run_fact_jit, run_managed_fact, run_cross_verify,
     run_managed_patch_fact,
 )
+from verification.stages.managed_subject_record import run_managed_record
 from verification.stages.audit import run_audit
 from verification.stages.asm_compare import run_asm_compare
 from verification.stages.microbench import run_microbench
@@ -85,7 +86,7 @@ def _cross_validate_hotupdate(stages: dict[str, StageResult]) -> str | None:
 
 REQUIRED_STAGES_STANDARD = {"preflight", "codegen", "jit_codegen", "fact", "audit"}
 REQUIRED_STAGES_STRICT = {
-    "preflight", "codegen", "jit_codegen", "managed_fact", "cross_verify",
+    "preflight", "codegen", "jit_codegen", "managed_fact", "managed_record", "cross_verify",
     "managed_patch_fact", "patch_cross_verify",
     "fact", "fact_jit",
     "audit", "asm_compare", "microbench", "benchmark",
@@ -154,7 +155,8 @@ class VerificationPipeline:
         ("codegen", run_codegen, "Codegen (AOT)"),
         ("jit_codegen", run_jit_codegen, "JitCodegen"),
         ("managed_fact", run_managed_fact, "Managed Fact (.NET)"),
-        ("cross_verify", run_cross_verify, "Cross-Verify (Managed vs Native)"),
+        ("managed_record", run_managed_record, "Managed Subject Record (Golden)"),
+        ("cross_verify", run_cross_verify, "Cross-Verify (Golden vs AOT)"),
         ("managed_patch_fact", run_managed_patch_fact, "Managed Patch Fact (.NET)"),
         ParallelGroup([
             ("fact", run_fact, "Fact AOT"),
@@ -166,6 +168,7 @@ class VerificationPipeline:
         ]),
         ("hotupdate", run_hotupdate, "HotUpdate AOT Fact"),
         ("patch_cross_verify", run_patch_cross_verify, "Patch Cross-Verify"),
+        ("multi_patch_hotupdate", run_multi_patch_hotupdate, "Multi-Patch HotUpdate"),
         ParallelGroup([
             ("hotupdate_aot_benchmark", run_hotupdate_aot_bench, "HotUpdate AOT Bench"),
             ("hotupdate_jit_fact", run_hotupdate_jit_fact, "HotUpdate JIT Fact"),
@@ -176,7 +179,7 @@ class VerificationPipeline:
 
     # Stages that require actual methods (skipped when codegen reports 0 methods)
     METHOD_DEPENDENT_STAGES = {
-        "managed_fact", "cross_verify", "managed_patch_fact", "patch_cross_verify",
+        "managed_fact", "managed_record", "cross_verify", "managed_patch_fact", "patch_cross_verify",
         "fact", "fact_jit",
         "asm_compare", "microbench", "benchmark",
         "hotupdate", "hotupdate_aot_benchmark",

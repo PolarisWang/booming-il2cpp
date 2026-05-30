@@ -22,13 +22,13 @@ public partial class ImmutableSortedDictionaryTests
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableSortedDictionary_Create_string_int_System_Collections()
     {
         // Purpose: Smoke — ImmutableSortedDictionary.Create<string,int> with complex param(s)
-            _ = ImmutableSortedDictionary.Create<string,int>();
+            Assert.IsTrue(ImmutableSortedDictionary.Create<string,int>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableSortedDictionary_Create_Byte_Byte_System_Collections_()
     {
         // Purpose: Smoke — ImmutableSortedDictionary.Create<Byte,Byte> with complex param(s)
-            _ = ImmutableSortedDictionary.Create<Byte,Byte>();
+            Assert.IsTrue(ImmutableSortedDictionary.Create<Byte,Byte>().IsEmpty);
     }
 }

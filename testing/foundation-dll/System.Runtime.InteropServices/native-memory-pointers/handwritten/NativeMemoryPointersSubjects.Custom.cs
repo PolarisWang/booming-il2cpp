@@ -79,4 +79,140 @@ public static partial class NativeMemoryPointersSubjects
     public static void CustomEntrySubject_136()
     {        try { Marshal.ThrowExceptionForHR(42, out Guid.Empty, IntPtr.Zero); } catch { _exitCode = 1; }    }
 
+    // [163] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Dispose:System.Void()
+    public static void CustomEntrySubject_163()
+    {        try { default(UnmanagedMemoryAccessor)!.Dispose(); } catch { _exitCode = 1; }    }
+
+    // [164] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanRead:System.Boolean()
+    public static void CustomEntrySubject_164()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.CanRead; } catch { _exitCode = 1; }    }
+
+    // [165] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_CanWrite:System.Boolean()
+    public static void CustomEntrySubject_165()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.CanWrite; } catch { _exitCode = 1; }    }
+
+    // [166] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::get_Capacity:System.Int64()
+    public static void CustomEntrySubject_166()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.Capacity; } catch { _exitCode = 1; }    }
+
+    // [167] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Read{T}:System.Void(System.Int64,T&)
+    public static void CustomEntrySubject_167()
+    {        try { default(UnmanagedMemoryAccessor)!.Read{T}(42L, out default); } catch { _exitCode = 1; }    }
+
+    // [168] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadArray{T}:System.Int32(System.Int64,T{},System.Int32,System.Int32)
+    public static void CustomEntrySubject_168()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadArray{T}(42L, default, 42, 42); } catch { _exitCode = 1; }    }
+
+    // [169] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadBoolean:System.Boolean(System.Int64)
+    public static void CustomEntrySubject_169()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadBoolean(42L); } catch { _exitCode = 1; }    }
+
+    // [170] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadByte:System.Byte(System.Int64)
+    public static void CustomEntrySubject_170()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadByte(42L); } catch { _exitCode = 1; }    }
+
+    // [171] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadChar:System.Char(System.Int64)
+    public static void CustomEntrySubject_171()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadChar(42L); } catch { _exitCode = 1; }    }
+
+    // [172] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDecimal:System.Decimal(System.Int64)
+    public static void CustomEntrySubject_172()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadDecimal(42L); } catch { _exitCode = 1; }    }
+
+    // [173] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadDouble:System.Double(System.Int64)
+    public static void CustomEntrySubject_173()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadDouble(42L); } catch { _exitCode = 1; }    }
+
+    // [174] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt16:System.Int16(System.Int64)
+    public static void CustomEntrySubject_174()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadInt16(42L); } catch { _exitCode = 1; }    }
+
+    // [175] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt32:System.Int32(System.Int64)
+    public static void CustomEntrySubject_175()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadInt32(42L); } catch { _exitCode = 1; }    }
+
+    // [176] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadInt64:System.Int64(System.Int64)
+    public static void CustomEntrySubject_176()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadInt64(42L); } catch { _exitCode = 1; }    }
+
+    // [177] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSByte:System.SByte(System.Int64)
+    public static void CustomEntrySubject_177()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadSByte(42L); } catch { _exitCode = 1; }    }
+
+    // [178] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadSingle:System.Single(System.Int64)
+    public static void CustomEntrySubject_178()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadSingle(42L); } catch { _exitCode = 1; }    }
+
+    // [179] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt16:System.UInt16(System.Int64)
+    public static void CustomEntrySubject_179()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadUInt16(42L); } catch { _exitCode = 1; }    }
+
+    // [180] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt32:System.UInt32(System.Int64)
+    public static void CustomEntrySubject_180()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadUInt32(42L); } catch { _exitCode = 1; }    }
+
+    // [181] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::ReadUInt64:System.UInt64(System.Int64)
+    public static void CustomEntrySubject_181()
+    {        try { _ = default(UnmanagedMemoryAccessor)!.ReadUInt64(42L); } catch { _exitCode = 1; }    }
+
+    // [182] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Boolean)
+    public static void CustomEntrySubject_182()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, true); } catch { _exitCode = 1; }    }
+
+    // [183] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Byte)
+    public static void CustomEntrySubject_183()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, (byte)42); } catch { _exitCode = 1; }    }
+
+    // [184] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Char)
+    public static void CustomEntrySubject_184()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, 'A'); } catch { _exitCode = 1; }    }
+
+    // [185] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int16)
+    public static void CustomEntrySubject_185()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, (short)42); } catch { _exitCode = 1; }    }
+
+    // [186] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int32)
+    public static void CustomEntrySubject_186()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, 42); } catch { _exitCode = 1; }    }
+
+    // [187] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Int64)
+    public static void CustomEntrySubject_187()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, 42L); } catch { _exitCode = 1; }    }
+
+    // [188] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Decimal)
+    public static void CustomEntrySubject_188()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, 42m); } catch { _exitCode = 1; }    }
+
+    // [189] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Single)
+    public static void CustomEntrySubject_189()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, 42.0f); } catch { _exitCode = 1; }    }
+
+    // [190] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.Double)
+    public static void CustomEntrySubject_190()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, 42.0); } catch { _exitCode = 1; }    }
+
+    // [191] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.SByte)
+    public static void CustomEntrySubject_191()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, (sbyte)42); } catch { _exitCode = 1; }    }
+
+    // [192] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt16)
+    public static void CustomEntrySubject_192()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, (ushort)42); } catch { _exitCode = 1; }    }
+
+    // [193] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt32)
+    public static void CustomEntrySubject_193()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, 42u); } catch { _exitCode = 1; }    }
+
+    // [194] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write:System.Void(System.Int64,System.UInt64)
+    public static void CustomEntrySubject_194()
+    {        try { default(UnmanagedMemoryAccessor)!.Write(42L, 42uL); } catch { _exitCode = 1; }    }
+
+    // [195] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::Write{T}:System.Void(System.Int64,T&)
+    public static void CustomEntrySubject_195()
+    {        try { default(UnmanagedMemoryAccessor)!.Write{T}(42L, out default); } catch { _exitCode = 1; }    }
+
+    // [196] System.Runtime.InteropServices/System.IO.UnmanagedMemoryAccessor::WriteArray{T}:System.Void(System.Int64,T{},System.Int32,System.Int32)
+    public static void CustomEntrySubject_196()
+    {        try { default(UnmanagedMemoryAccessor)!.WriteArray{T}(42L, default, 42, 42); } catch { _exitCode = 1; }    }
+
 }

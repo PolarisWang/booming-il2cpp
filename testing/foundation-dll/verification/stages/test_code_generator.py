@@ -88,7 +88,10 @@ _GENERIC_ARGS_MAP: dict[int, str] = _load_int_dict("_GENERIC_ARGS_MAP")
 STATIC_TYPES = frozenset({
     "Convert", "Math", "MemoryMarshal", "RuntimeHelpers",
     "BitConverter", "Buffer", "Activator", "Interlocked", "Monitor",
+    "Marshal", "Parallel", "AsnDecoder", "ZipFile",
+    "Enumerable", "GC", "FormatterServices",
     "ZipFileExtensions", "RuntimeInformation", "JsonSerializer",
+    "ThreadPool", "SecureStringMarshal", "ObjectiveCMarshal",
 })
 
 _ACRONYMS = frozenset({"io", "id", "db", "ui", "os", "ip"})
@@ -662,6 +665,11 @@ def is_auto_callable(parsed: dict[str, Any]) -> bool:
 
     Returns False for operators, protected methods, and other patterns that
     require manual implementation.
+
+    Also rejects instance methods on reference types not in INSTANCE_EXPR_MAP,
+    because ``default(RefType)!`` at runtime becomes null → NRE → caught by
+    catch block → false positive "pass".  These methods require handwritten
+    Custom.cs with real instance creation.
     """
     type_name = parsed["type_name"]
     method_name = parsed["method_name"]
@@ -671,6 +679,63 @@ def is_auto_callable(parsed: dict[str, Any]) -> bool:
     override = METHOD_OVERRIDES.get((type_name, method_name, param_count))
     if override == "skip":
         return False
+    # Method override provides a valid expression → auto-callable
+    if override is not None:
+        return True
+    # Constructor → always valid with default args
+    if method_name in (".ctor", ".cctor"):
+        return True
+    # static methods → always valid
+    if (type_name, method_name, param_count) in _STATIC_BY_SIGNATURE:
+        return True
+    if method_name in STATIC_METHODS_BY_TYPE.get(type_name, frozenset()):
+        return True
+    if type_name in STATIC_TYPES:
+        return True
+    # Instance method — check whether we have a real instance expression
+    bare = type_name.rstrip("&*?").strip()
+    if bare in TYPE_DEFAULT_MAP or bare.endswith("[]"):
+        return True   # value type or array — default(T) is valid
+    # Check INSTANCE_EXPR_MAP for a valid (non-null) instance expression
+    im = INSTANCE_EXPR_MAP
+    alt = INSTANCE_ALTERNATIVE_EXPR_MAP
+    expr = im.get(type_name) or alt.get(type_name)
+    if expr is not None and _is_real_instance_expr(expr, type_name):
+        return True
+    # Reference type without a real instance expression → produces null! at runtime
+    return False
+
+
+# Value types whose default(T) is not null and are not already in TYPE_DEFAULT_MAP
+# but appear in INSTANCE_EXPR_MAP with a default(StructType) entry.
+_KNOWN_VALUE_TYPES_DEFAULT_OK = frozenset({
+    "CancellationToken", "GCHandle", "HashCode", "JsonElement",
+    "Asn1Tag", "AsnReaderOptions", "BrotliDecoder", "BrotliEncoder",
+    "FlushResult", "OSPlatform", "ParallelLoopResult", "ReadResult",
+    "RuntimeInformation", "Utf8JsonReader", "VirtualMethodTableInfo",
+    "SseItem", "SseItem`1",
+})
+
+
+def _is_real_instance_expr(expr: str, type_name: str) -> bool:
+    """Check if an INSTANCE_EXPR_MAP entry produces a non-null instance.
+
+    Returns True for ``new ...``, ``Encoding.UTF8``, ``typeof(byte)``, etc.
+    Returns False for ``default(RefType)!`` (which is null at runtime) and ``null!``.
+    """
+    if expr == "null!":
+        return False
+    # default(SomeType)! where SomeType looks like a reference type
+    m = re.match(r"^default\((\w+(?:`\d+)?)\)!?$", expr)
+    if m:
+        inner = m.group(1)
+        # If the type is a known value type, default is valid
+        if inner in _KNOWN_VALUE_TYPES_DEFAULT_OK or inner in TYPE_DEFAULT_MAP:
+            return True
+        # If the inner type matches the type_name key, it's a fake ref-type entry
+        if inner == type_name or inner.rstrip("!") == type_name.rstrip("!"):
+            return False
+    # All other expressions (new ..., Encoding.UTF8, typeof(...), "hello", etc.)
     return True
 
 
@@ -684,7 +749,29 @@ def method_skip_reason(parsed: dict[str, Any]) -> str:
     override = METHOD_OVERRIDES.get((type_name, method_name, param_count))
     if override == "skip":
         return f"needs-manual — {method_name} with {param_count} params requires manual implementation"
-    return ""
+    # Replicate is_auto_callable checks to produce detailed skip reason
+    if override is not None:
+        return ""
+    if method_name in (".ctor", ".cctor"):
+        return ""
+    if (type_name, method_name, param_count) in _STATIC_BY_SIGNATURE:
+        return ""
+    if method_name in STATIC_METHODS_BY_TYPE.get(type_name, frozenset()):
+        return ""
+    if type_name in STATIC_TYPES:
+        return ""
+    bare = type_name.rstrip("&*?").strip()
+    if bare in TYPE_DEFAULT_MAP or bare.endswith("[]"):
+        return ""
+    # Check if INSTANCE_EXPR_MAP has a real instance expression
+    im = INSTANCE_EXPR_MAP
+    alt = INSTANCE_ALTERNATIVE_EXPR_MAP
+    expr = im.get(type_name) or alt.get(type_name)
+    if expr is not None and _is_real_instance_expr(expr, type_name):
+        return ""
+    if expr is not None:
+        return f"needs-handwritten — {type_name} has default-instance ({expr}), not a real object — cannot auto-generate valid Subject_N"
+    return f"needs-handwritten — {type_name} is a reference type without a known instance expression in INSTANCE_EXPR_MAP"
 
 
 get_skip_reason = method_skip_reason

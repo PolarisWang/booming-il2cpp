@@ -43,7 +43,8 @@ public sealed class CppProjectEmitter
         bool isWindows = true,
         string? projectRoot = null,
         string? codegenDir = null,
-        string? sdkDir = null)
+        string? sdkDir = null,
+        bool verificationEnabled = true)
     {
         Directory.CreateDirectory(outputDir);
 
@@ -58,7 +59,8 @@ public sealed class CppProjectEmitter
             projectName: "entry",
             projectRoot: projectRoot,
             codegenDir: codegenDir,
-            sdkDir: sdkDir);
+            sdkDir: sdkDir,
+            verificationEnabled: verificationEnabled);
 
         // runtime-entry.cpp
         var entryCode = TemplateCatalog.Render("TestProject.RuntimeEntry.cpp.scriban", model);
@@ -87,7 +89,8 @@ public sealed class CppProjectEmitter
         bool isWindows = true,
         string? projectRoot = null,
         string? codegenDir = null,
-        string? sdkDir = null)
+        string? sdkDir = null,
+        bool verificationEnabled = true)
     {
         var isPipeline = projectRoot is not null && codegenDir is not null;
 
@@ -148,7 +151,8 @@ public sealed class CppProjectEmitter
             projectRoot: resolvedProjectRoot,
             codegenDir: resolvedCodegenDir,
             sdkDir: resolvedSdkDir,
-            codegenAssemblyNames: codegenAssemblyNames);
+            codegenAssemblyNames: codegenAssemblyNames,
+            verificationEnabled: verificationEnabled);
 
         // ── 4. Render templates → output files ──
         RenderToFile("TestProject.RuntimeEntry.cpp.scriban", model, outputDir, "runtime-entry.cpp");
@@ -462,9 +466,10 @@ public sealed class CppProjectEmitter
         bool isWindows = true,
         string? projectRoot = null,
         string? codegenDir = null,
-        string? sdkDir = null)
+        string? sdkDir = null,
+        bool verificationEnabled = true)
     {
-        Emit(outputDir, codegen, subjects, isJit, configTier, isWindows, projectRoot, codegenDir, sdkDir);
+        Emit(outputDir, codegen, subjects, isJit, configTier, isWindows, projectRoot, codegenDir, sdkDir, verificationEnabled);
         var exePath = BuildProject(outputDir, isJit, configTier);
         if (exePath is not null)
         {

@@ -11,7 +11,9 @@
     "System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::.ctor:System.Void(System.IntPtr)"
   ],
   "methodSubjectCount": 4,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    1
+  ],
   "functionalObligation": {
     "required": true
   },
@@ -24,5 +26,13 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "reviewBundleRequired": true
+  "reviewBundleRequired": true,
+  "benchmarkMethodIndices": [
+    0,
+    2,
+    3
+  ],
+  "hotupdateMethodIndices": [
+    0
+  ]
 }

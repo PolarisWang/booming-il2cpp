@@ -12,5 +12,21 @@
     "System.Private.CoreLib/System.Exception::ToString:System.String()",
     "System.Private.CoreLib/System.Runtime.ExceptionServices.ExceptionDispatchInfo::Capture:System.Runtime.ExceptionServices.ExceptionDispatchInfo(System.Exception)"
   ],
-  "customEntryIndices": []
+  "customEntryIndices": [],
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ]
 }

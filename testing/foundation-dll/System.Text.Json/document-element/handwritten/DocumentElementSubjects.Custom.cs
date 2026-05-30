@@ -4,27 +4,53 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System;
+using Chaos.TestFramework;
 
 public static partial class DocumentElementSubjects
 {
     // [8] System.Text.Json/System.Text.Json.JsonDocument::ParseValue:System.Text.Json.JsonDocument(System.Text.Json.Utf8JsonReader&)
     public static void CustomEntrySubject_8()
-    {        try { _ = JsonDocument.ParseValue(out default); } catch { _exitCode = 1; }    }
+    {
+        try {
+            Assert.IsNotNull(JsonDocument.ParseValue(out default));
+        }
+        catch { _exitCode = 1; }
+    }
 
     // [9] System.Text.Json/System.Text.Json.JsonDocument::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Text.Json.JsonDocument&)
     public static void CustomEntrySubject_9()
-    {        try { _ = JsonDocument.TryParseValue(out default, out default); } catch { _exitCode = 1; }    }
+    {
+        try {
+            Assert.IsNotNull(JsonDocument.TryParseValue(out default, out default));
+        }
+        catch { _exitCode = 1; }
+    }
 
     // [43] System.Text.Json/System.Text.Json.JsonElement::ParseValue:System.Text.Json.JsonElement(System.Text.Json.Utf8JsonReader&)
     public static void CustomEntrySubject_43()
-    {        try { _ = JsonElement.ParseValue(out default); } catch { _exitCode = 1; }    }
+    {
+        try {
+            Assert.IsNotNull(JsonElement.ParseValue(out default));
+        }
+        catch { _exitCode = 1; }
+    }
 
     // [63] System.Text.Json/System.Text.Json.JsonElement::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Nullable{System.Text.Json.JsonElement}&)
     public static void CustomEntrySubject_63()
-    {        try { _ = JsonElement.TryParseValue(out default, out default); } catch { _exitCode = 1; }    }
+    {
+        try {
+            Assert.IsNotNull(JsonElement.TryParseValue(out default, out default));
+        }
+        catch { _exitCode = 1; }
+    }
 
     // [68] System.Text.Json/System.Text.Json.JsonElement::get_Item:System.Text.Json.JsonElement()
     public static void CustomEntrySubject_68()
-    {        try { _ = default(JsonElement)[]; } catch { _exitCode = 1; }    }
+    {
+        try {
+            Assert.IsNotNull(default(JsonElement)[default]);
+        }
+        catch { _exitCode = 1; }
+    }
 
 }

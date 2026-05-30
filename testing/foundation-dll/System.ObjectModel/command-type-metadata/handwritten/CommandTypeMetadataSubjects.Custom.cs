@@ -7,9 +7,21 @@ using System;
 
 public static partial class CommandTypeMetadataSubjects
 {
+    // [6] System.ObjectModel/System.Reflection.ICustomTypeProvider::GetCustomType:System.Type()
+    public static void CustomEntrySubject_6()
+    {        try { _ = default(ICustomTypeProvider)!.GetCustomType(); } catch { _exitCode = 1; }    }
+
     // [7] System.ObjectModel/System.Windows.Input.ICommand::add_CanExecuteChanged:System.Void(System.EventHandler)
     public static void CustomEntrySubject_7()
     {        try { default(ICommand)!.add_CanExecuteChanged(default); } catch { _exitCode = 1; }    }
+
+    // [8] System.ObjectModel/System.Windows.Input.ICommand::CanExecute:System.Boolean(System.Object)
+    public static void CustomEntrySubject_8()
+    {        try { _ = default(ICommand)!.CanExecute(null!); } catch { _exitCode = 1; }    }
+
+    // [9] System.ObjectModel/System.Windows.Input.ICommand::Execute:System.Void(System.Object)
+    public static void CustomEntrySubject_9()
+    {        try { default(ICommand)!.Execute(null!); } catch { _exitCode = 1; }    }
 
     // [10] System.ObjectModel/System.Windows.Input.ICommand::remove_CanExecuteChanged:System.Void(System.EventHandler)
     public static void CustomEntrySubject_10()

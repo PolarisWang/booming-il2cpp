@@ -14,7 +14,10 @@
     "System.IO.Pipelines/System.IO.Pipelines.Pipe::.ctor:System.Void(System.IO.Pipelines.PipeOptions)"
   ],
   "methodSubjectCount": 7,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    0,
+    1
+  ],
   "functionalObligation": {
     "required": true
   },
@@ -27,5 +30,16 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "reviewBundleRequired": true
+  "reviewBundleRequired": true,
+  "benchmarkMethodIndices": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "hotupdateMethodIndices": [
+    2,
+    3
+  ]
 }

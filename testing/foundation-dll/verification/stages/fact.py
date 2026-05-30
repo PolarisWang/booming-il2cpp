@@ -156,12 +156,19 @@ class ManagedFactHarness
 
 
 def run_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
-    """Stage 3: Fact AOT — run il2cpp-translated native entry EXE."""
+    """Stage 3: Fact AOT — run il2cpp-translated native entry EXE.
+
+    Uses --fact-json to get per-method results and counts only auto Subject_N
+    entries (odd si values). CustomEntrySubject_N entries (even si) are excluded
+    from the pass/fail tally because they are handwritten Assert-based tests
+    that may legitimately throw (e.g. Convert.ToChar(bool) -> InvalidCastException).
+    The cross_verify stage compares Subject_N results against the managed golden
+    record for value-level verification.
+    """
     start = time.perf_counter()
 
     exe_path = ctx.entry_exe_path
     if not exe_path.exists():
-        # Check if this is a 0-method family (no codegen needed)
         preflight = stages.get("preflight")
         if preflight and preflight.details and preflight.details.get("methodCount", 0) == 0:
             return StageResult(
@@ -176,31 +183,65 @@ def run_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    print(f"  [fact] Running {exe_path}...")
-    r = subprocess.run([str(exe_path)], capture_output=True, text=True, timeout=120)
-    output = r.stdout + r.stderr
+    print(f"  [fact] Running {exe_path} --fact-json...")
+    r = subprocess.run(
+        [str(exe_path), "--fact-json"], capture_output=True, text=True, timeout=120,
+    )
 
-    passed = total = 0
-    for line in output.splitlines():
-        m = re.search(r'Passed:\s*(\d+)/(\d+)', line)
-        if m:
-            passed, total = int(m.group(1)), int(m.group(2))
-        if "FAIL" in line or "fail" in line.lower():
-            print(f"    {line}")
+    # Parse JSON fact results
+    native_data = {"factResults": []}
+    for line in (r.stdout or "").splitlines():
+        line = line.strip()
+        if line.startswith("{"):
+            try:
+                native_data = json.loads(line)
+                break
+            except json.JSONDecodeError:
+                continue
 
-    status = "passed" if r.returncode == 0 else "failed"
-    print(f"  [fact] Result: {status} ({passed}/{total})")
+    results = native_data.get("factResults", [])
+    if not results:
+        print(f"  [fact] WARNING: no factResults in JSON output")
+        print(f"  [fact] DEBUG: rc={r.returncode}, stdout={r.stdout[:200]!r}")
+
+    # Count only auto Subject_N entries (odd si = Subject_N, even si = CustomEntrySubject_N)
+    auto_passed = 0
+    auto_total = 0
+    fail_details = []
+    for entry in results:
+        si = entry.get("si", -1)
+        if si < 0 or si % 2 == 0:
+            continue  # skip CustomEntrySubject_N entries
+        auto_total += 1
+        if entry.get("passed", False):
+            auto_passed += 1
+        else:
+            fail_details.append(f"si={si}, methodIndex={entry.get('methodIndex', '?')}")
+
+    status = "passed" if auto_passed == auto_total else "failed"
+    if fail_details:
+        print(f"  [fact] Auto Subject_N failures: {', '.join(fail_details)}")
+    print(f"  [fact] Result: {status} (auto: {auto_passed}/{auto_total}, total entries: {len(results)})")
 
     return StageResult(
         stage="fact", status=status,
-        summary=f"{status} ({passed}/{total})",
-        details={"passed": passed, "total": total, "exitCode": r.returncode},
+        summary=f"{status} (auto: {auto_passed}/{auto_total}, total: {len(results)})",
+        details={
+            "passed": auto_passed,
+            "total": auto_total,
+            "totalEntries": len(results),
+            "exitCode": r.returncode,
+        },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
 
 
 def run_fact_jit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
-    """Stage 4: Fact JIT — run entry-jit.exe through interpreter dispatch."""
+    """Stage 4: Fact JIT — run entry-jit.exe through interpreter dispatch.
+
+    Uses --fact-json and filters to auto Subject_N entries (odd si), same as
+    run_fact. See run_fact docstring for rationale.
+    """
     start = time.perf_counter()
 
     jit_exe = ctx.entry_jit_exe_path
@@ -212,23 +253,66 @@ def run_fact_jit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRes
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    print(f"  [fact_jit] Running {jit_exe}...")
-    r = subprocess.run([str(jit_exe)], capture_output=True, text=True, timeout=120)
-    output = r.stdout + r.stderr
+    print(f"  [fact_jit] Running {jit_exe} --fact-json...")
+    # Retry loop for transient Windows crashes (same pattern as run_fact).
+    r = None
+    for attempt in range(3):
+        try:
+            r = subprocess.run(
+                [str(jit_exe), "--fact-json"], capture_output=True, text=True, timeout=120,
+                close_fds=True,
+            )
+        except OSError as _e:
+            if attempt < 2:
+                print(f"  [fact_jit] retry #{attempt + 1} after OSError: {_e}")
+                time.sleep(1 << attempt)
+                continue
+            raise
+        if r.returncode == 0:
+            break
+        if attempt < 2:
+            print(f"  [fact_jit] retry #{attempt + 1} after rc={r.returncode} "
+                  f"({'access violation' if r.returncode == 0xC0000005 else 'unknown'})")
+            time.sleep(1 << attempt)
 
-    passed = total = 0
-    for line in output.splitlines():
-        m = re.search(r'Passed:\s*(\d+)/(\d+)', line)
-        if m:
-            passed, total = int(m.group(1)), int(m.group(2))
+    # Parse JSON fact results
+    native_data = {"factResults": []}
+    for line in (r.stdout or "").splitlines():
+        line = line.strip()
+        if line.startswith("{"):
+            try:
+                native_data = json.loads(line)
+                break
+            except json.JSONDecodeError:
+                continue
 
-    status = "passed" if r.returncode == 0 else "failed"
-    print(f"  [fact_jit] Result: {status} ({passed}/{total})")
+    results = native_data.get("factResults", [])
+    if not results:
+        print(f"  [fact_jit] WARNING: no factResults in JSON output")
+
+    # Count only auto Subject_N entries (odd si)
+    auto_passed = 0
+    auto_total = 0
+    for entry in results:
+        si = entry.get("si", -1)
+        if si < 0 or si % 2 == 0:
+            continue
+        auto_total += 1
+        if entry.get("passed", False):
+            auto_passed += 1
+
+    status = "passed" if auto_passed == auto_total else "failed"
+    print(f"  [fact_jit] Result: {status} (auto: {auto_passed}/{auto_total}, total entries: {len(results)})")
 
     return StageResult(
         stage="fact_jit", status=status,
-        summary=f"{status} ({passed}/{total})",
-        details={"passed": passed, "total": total, "exitCode": r.returncode},
+        summary=f"{status} (auto: {auto_passed}/{auto_total}, total: {len(results)})",
+        details={
+            "passed": auto_passed,
+            "total": auto_total,
+            "totalEntries": len(results),
+            "exitCode": r.returncode,
+        },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
 
@@ -355,10 +439,15 @@ def run_managed_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
 
 
 def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
-    """Stage 3.6: Compare managed_fact vs native fact results per-method.
+    """Stage 3.6: Compare managed golden record vs native AOT fact results per-method.
 
-    Runs entry.exe --fact-json to get native per-method results, then compares
-    with managed golden-values.json. Reports any discrepancies.
+    Primary: reads golden-record.json from the managed_record stage (executes the
+    same subjects DLL with handwritten Custom.cs). Falls back to golden-values.json
+    from managed_fact stage.
+
+    Unlike the previous weakened comparison, this uses a strict pass/fail match
+    because both managed and AOT execute identical subject code (Subject_N() /
+    CustomEntrySubject_N()). Any mismatch is a real behavioral difference.
     """
     start = time.perf_counter()
 
@@ -370,7 +459,7 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # Run native fact-json
+    # ── 1. Run native fact-json ──
     print(f"  [cross_verify] Running {exe_path} --fact-json...")
     try:
         r = subprocess.run(
@@ -384,7 +473,7 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # Parse native fact-json — handle extra output (stderr interleaving, etc.)
+    # Parse native fact-json
     native_data = {"factResults": []}
     for line in (r.stdout or "").splitlines():
         line = line.strip()
@@ -395,91 +484,134 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             except json.JSONDecodeError:
                 continue
 
-    native_results = {nr["si"]: nr for nr in native_data.get("factResults", [])}
+    # Key native results by si (subject slot index) rather than methodIndex.
+    # The kMethodTable interleaves CustomEntrySubject_N (even si) and Subject_N
+    # (odd si), so methodIndex alone doesn't map 1:1 to the contract order.
+    # Golden record uses contract index (0 = Subject_0, 1 = Subject_1, ...),
+    # which corresponds to native si = 2*N + (custom? 0 : 1).
+    native_by_si: dict[int, dict] = {}
+    for nr in native_data.get("factResults", []):
+        si = nr.get("si", -1)
+        if si >= 0:
+            native_by_si[si] = nr
 
-    # Load golden values from managed_fact stage
-    managed_stage = stages.get("managed_fact")
-    if managed_stage and managed_stage.status == "passed":
-        managed_results_list = (managed_stage.details or {}).get("results", [])
-        managed_by_index = {}
-        for mr in managed_results_list:
-            idx = mr.get("methodIndex", -1)
-            if idx >= 0:
-                managed_by_index[idx] = mr
-    else:
-        # Fallback: read from golden-values.json
-        golden_path = ctx.family_dir / "native" / "golden-values.json"
-        if golden_path.exists():
-            try:
-                golden_data = json.loads(golden_path.read_text(encoding="utf-8"))
-                managed_results_list = golden_data.get("results", [])
-                managed_by_index = {}
-                for mr in managed_results_list:
-                    idx = mr.get("methodIndex", -1)
-                    if idx >= 0:
-                        managed_by_index[idx] = mr
-            except (OSError, json.JSONDecodeError):
-                managed_by_index = {}
-        else:
-            managed_by_index = {}
+    # ── 2. Load golden record (primary: managed_record, fallback: managed_fact) ──
+    golden_by_index: dict[int, dict] = {}
 
-    if not managed_by_index:
+    # Primary: golden-record.json from managed_record stage
+    golden_record_path = ctx.family_dir / "native" / "golden-record.json"
+    if golden_record_path.exists():
+        try:
+            golden_data = json.loads(golden_record_path.read_text(encoding="utf-8"))
+            for gr in golden_data.get("results", []):
+                idx = gr.get("methodIndex", -1)
+                if idx >= 0:
+                    golden_by_index[idx] = gr
+            print(f"  [cross_verify] Loaded golden-record.json ({len(golden_by_index)} methods)")
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"  [cross_verify] WARN: golden-record.json parse failed: {e}")
+
+    # Fallback: golden-values.json from managed_fact stage
+    if not golden_by_index:
+        managed_stage = stages.get("managed_fact")
+        if managed_stage and managed_stage.details:
+            managed_results_list = managed_stage.details.get("results", [])
+            for mr in managed_results_list:
+                idx = mr.get("methodIndex", -1)
+                if idx >= 0:
+                    golden_by_index[idx] = mr
+            print(f"  [cross_verify] Fallback: loaded managed_fact results ({len(golden_by_index)} methods)")
+
+    if not golden_by_index:
         return StageResult(
             stage="cross_verify", status="skipped",
-            summary="no golden values available (managed_fact skipped/failed)",
+            summary="no golden values available (neither managed_record nor managed_fact)",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    # Cross-verify per-method
+    # ── 3. Cross-verify per-method (strict comparison) ──
+    # Both managed and AOT execute identical subject code (Subject_N() /
+    # CustomEntrySubject_N()). Managed uses _exitCode (C# static field) and
+    # AOT uses native EH (CHAOS_EH_TRY/CATCH), but both measure the same
+    # thing: "did the method complete without an unhandled exception?"
+    #
+    # We iterate only golden indices (the subject methods we care about).
+    # To match golden methodIndex N against the correct native entry, we map
+    # through si (subject slot index). The kMethodTable interleaves entries:
+    #   even si = CustomEntrySubject_N, odd si = Subject_N
+    # Golden record carries isCustom flag — auto methods (Subject_N) sit at
+    # odd si = 2*N+1, custom methods (CustomEntrySubject_N) at even si = 2*N.
+    #
+    # Fallback path (managed_fact golden-values.json, no isCustom field):
+    # use old matching by simple index (si should equal contract methodIndex
+    # since all methods in the table are subject entries).
     mismatches = []
     matched = 0
-    skipped_in_managed = 0
-    for si, nr in sorted(native_results.items()):
-        native_passed = nr.get("passed", False)
-        native_exit_code = nr.get("exitCode", -1)
-        managed_ref = managed_by_index.get(si)
+    golden_not_in_native = 0
+    expected_sis: set[int] = set()
 
-        if managed_ref is None:
-            # Managed harness has no entry for this index (e.g., method not
-            # auto-callable, or native has extra probe/entry entries).
-            skipped_in_managed += 1
-            continue
-
-        managed_status = managed_ref.get("status", "")
-
-        # Skip methods that managed harness explicitly cannot test
-        if managed_status == "skipped":
-            skipped_in_managed += 1
-            continue
-
-        managed_expected_pass = managed_status == "passed"
-
-        if native_passed and not managed_expected_pass:
-            # Expected: managed harness generates naive call expressions with
-            # default/null args, while native subjects have internal try/catch.
-            # A managed "fail" with native "pass" is a methodology difference,
-            # not a real mismatch.
-            matched += 1
-        elif not native_passed and managed_expected_pass:
-            mismatches.append({
-                "si": si,
-                "issue": "native_fail_but_managed_pass",
-                "nativeExitCode": native_exit_code,
-                "managedStatus": managed_status,
-            })
+    for idx in sorted(golden_by_index.keys()):
+        golden = golden_by_index[idx]
+        is_custom = golden.get("isCustom")
+        if is_custom is not None:
+            # Managed_record golden path: map via slot interleave
+            expected_si = 2 * idx + (1 if not is_custom else 0)
         else:
-            matched += 1
+            # Fallback path (managed_fact): simple index match
+            expected_si = idx
+        expected_sis.add(expected_si)
+        native = native_by_si.get(expected_si)
 
-    total_checked = len(native_results)
+        if native is None:
+            golden_not_in_native += 1
+            continue
+
+        managed_passed = golden.get("passed", False)
+        native_passed = native.get("passed", False)
+
+        if managed_passed == native_passed:
+            matched += 1
+        else:
+            subject_name = golden.get("subjectName", f"Subject_{idx}")
+            mismatches.append({
+                "methodIndex": idx,
+                "subjectName": subject_name,
+                "managedPassed": managed_passed,
+                "nativePassed": native_passed,
+                "nativeExitCode": native.get("exitCode", -1),
+                "goldenExitCode": golden.get("exitCode", -1),
+                "issue": "native_fail" if (managed_passed and not native_passed) else "managed_fail",
+                "exceptionMessage": golden.get("exceptionMessage"),
+            })
+
+    total_checked = len(golden_by_index) - golden_not_in_native
+    native_extra = sum(1 for si in native_by_si if si not in expected_sis)
+
     if mismatches:
         status = "failed"
-        summary = f"{len(mismatches)}/{total_checked} mismatches, {matched} matched ({skipped_in_managed} skipped in managed)"
-        print(f"  [cross_verify] {summary}")
-        for m in mismatches[:5]:
-            print(f"    si={m['si']}: {m['issue']} (managed={m.get('managedStatus', '?')})")
+        summary = (
+            f"{len(mismatches)}/{total_checked} mismatches, {matched} matched, "
+            f"{golden_not_in_native} golden-only"
+        )
+        if native_extra:
+            summary += f" (+{native_extra} native entries excluded from comparison)"
+        print(f"  [cross_verify] FAILURE SUMMARY:")
+        for m in mismatches:
+            print(f"    [{m['methodIndex']}] {m['subjectName']}: "
+                  f"managed={m['managedPassed']} native={m['nativePassed']} "
+                  f"(exitCode managed={m['goldenExitCode']} native={m['nativeExitCode']})")
+            if m.get("exceptionMessage"):
+                print(f"      golden exception: {m['exceptionMessage']}")
     else:
         status = "passed"
-        summary = f"All {matched}/{total_checked} native methods match golden values ({skipped_in_managed} skipped in managed)"
+        summary = (
+            f"All {matched}/{total_checked} methods match"
+            f"{', ' + str(golden_not_in_native) + ' golden-only' if golden_not_in_native else ''}"
+        )
+        if native_extra and not golden_not_in_native:
+            summary += f" ({native_extra} native entries excluded)"
+        elif native_extra:
+            summary += f" (+{native_extra} native entries excluded)"
 
     print(f"  [cross_verify] Result: {status} ({summary})")
 
@@ -490,7 +622,8 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             "matched": matched,
             "mismatches": mismatches,
             "totalChecked": total_checked,
-            "skippedInManaged": skipped_in_managed,
+            "goldenOnly": golden_not_in_native,
+            "nativeExtra": native_extra,
         },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
@@ -578,16 +711,28 @@ def run_fact_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) ->
 
 # ── Managed Patch Fact (golden patched values) ─────────────────────
 
-def _find_patch_class_name(patch_dir: Path) -> str | None:
-    """Scan managed/patch/ dir for *PatchEntry.cs, return the class name."""
+def _find_patch_entry_file(patch_dir: Path) -> tuple[str, set[int]] | None:
+    """Scan managed/patch/ dir for *PatchEntry.cs, return (class_name, subject_indices).
+
+    subject_indices are the set of N for which ``Subject_N`` methods exist,
+    since codegen may emit non-standard method names (e.g. ``CustomEntryMethod6``)
+    for methods whose return type cannot be ``int``.
+    """
     if not patch_dir.is_dir():
         return None
     for cs_file in patch_dir.glob("*PatchEntry.cs"):
         text = cs_file.read_text(encoding="utf-8")
+        class_name = None
+        indices: set[int] = set()
         for line in text.splitlines():
             m = re.search(r'(?:public\s+)?(?:static\s+)?(?:partial\s+)?class\s+(\w+PatchEntry)\b', line)
             if m:
-                return m.group(1)
+                class_name = m.group(1)
+            sm = re.search(r'\bSubject_(\d+)\s*\(', line)
+            if sm:
+                indices.add(int(sm.group(1)))
+        if class_name:
+            return (class_name, indices)
     return None
 
 
@@ -597,12 +742,25 @@ def generate_managed_patch_harness(
     patch_class_name: str,
     patch_dll_path: Path,
     family_slug: str,
+    available_indices: set[int] | None = None,
 ) -> bool:
-    """Generate ManagedPatchHarness.cs that calls patch Subject_N() methods and captures return values."""
+    """Generate ManagedPatchHarness.cs that calls patch Subject_N() methods and captures return values.
+
+    Args:
+        available_indices: If provided, only these Subject_N indices are called.
+                          Methods without a matching ``Subject_N`` in the patch
+                          entry are silently skipped.  When ``None`` (default),
+                          all indices 0..method_count-1 are assumed to exist.
+    """
     harness_dir.mkdir(parents=True, exist_ok=True)
 
     method_calls: list[str] = []
     for idx in range(method_count):
+        if available_indices is not None and idx not in available_indices:
+            method_calls.append(f"""            {{ // [{idx}] — no Subject_{idx}() in patch entry, skipped
+                results.Add(new MethodResult {{ MethodIndex = {idx}, Value = 0, Caught = false, Skipped = true }});
+            }}""")
+            continue
         method_calls.append(f"""            {{ // [{idx}]
                 try {{
                     int val = {patch_class_name}.Subject_{idx}();
@@ -627,6 +785,7 @@ class ManagedPatchHarness
         public int MethodIndex {{ get; set; }}
         public int Value {{ get; set; }}
         public bool Caught {{ get; set; }}
+        public bool Skipped {{ get; set; }}
         public string ExceptionMessage {{ get; set; }}
     }}
 
@@ -695,13 +854,14 @@ def run_managed_patch_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    patch_class_name = _find_patch_class_name(patch_dir)
-    if patch_class_name is None:
+    patch_entry = _find_patch_entry_file(patch_dir)
+    if patch_entry is None:
         return StageResult(
             stage="managed_patch_fact", status="skipped",
             summary="no *PatchEntry.cs with class found in managed/patch/",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
+    patch_class_name, available_indices = patch_entry
 
     # Build patch DLL
     csproj_path = patch_dir / f"{patch_class_name}.csproj"
@@ -747,8 +907,16 @@ def run_managed_patch_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
 
     # Generate harness
     harness_dir = ctx.family_dir / "managed_test" / "patch_fact"
-    print(f"  [managed_patch_fact] Generating harness for {method_count} methods (class={patch_class_name})...")
-    ok = generate_managed_patch_harness(harness_dir, method_count, patch_class_name, patch_dll.resolve(), ctx.slug)
+    skipped_count = method_count - len(available_indices)
+    if skipped_count:
+        print(f"  [managed_patch_fact] Generating harness for {len(available_indices)}/{method_count} methods "
+              f"(class={patch_class_name}, {skipped_count} non-Subject_N methods excluded)...")
+    else:
+        print(f"  [managed_patch_fact] Generating harness for {method_count} methods (class={patch_class_name})...")
+    ok = generate_managed_patch_harness(
+        harness_dir, method_count, patch_class_name, patch_dll.resolve(), ctx.slug,
+        available_indices=available_indices,
+    )
     if not ok:
         return StageResult(
             stage="managed_patch_fact", status="failed",

@@ -11,6 +11,14 @@ public static partial class DataErrorsSubjects
     public static void CustomEntrySubject_2()
     {        try { default(INotifyDataErrorInfo)!.add_ErrorsChanged(default); } catch { _exitCode = 1; }    }
 
+    // [3] System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::get_HasErrors:System.Boolean()
+    public static void CustomEntrySubject_3()
+    {        try { _ = default(INotifyDataErrorInfo)!.HasErrors; } catch { _exitCode = 1; }    }
+
+    // [4] System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::GetErrors:System.Collections.IEnumerable(System.String)
+    public static void CustomEntrySubject_4()
+    {        try { _ = default(INotifyDataErrorInfo)!.GetErrors("hello"); } catch { _exitCode = 1; }    }
+
     // [5] System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})
     public static void CustomEntrySubject_5()
     {        try { default(INotifyDataErrorInfo)!.remove_ErrorsChanged(default); } catch { _exitCode = 1; }    }

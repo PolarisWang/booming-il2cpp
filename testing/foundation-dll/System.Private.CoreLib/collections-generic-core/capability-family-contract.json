@@ -51,5 +51,16 @@
     13,
     14,
     15
+  ],
+  "benchmarkMethodIndices": [
+    1,
+    5,
+    6,
+    7,
+    9
+  ],
+  "hotupdateMethodIndices": [
+    7,
+    9
   ]
 }

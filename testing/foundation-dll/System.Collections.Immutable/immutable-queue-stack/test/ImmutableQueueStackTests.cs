@@ -22,69 +22,69 @@ public partial class ImmutableQueueStackTests
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Byte_System_Collections_Immutable_Immuta()
     {
         // Purpose: Smoke — ImmutableQueue.Create<Byte> with complex param(s)
-            _ = ImmutableQueue.Create<Byte>();
+            Assert.IsTrue(ImmutableQueue.Create<Byte>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Byte_System_Collections_Immutable_Immuta()
     {
         // Purpose: Smoke — ImmutableQueue.Create<Byte> with complex param(s)
-            _ = ImmutableQueue.Create<Byte>((byte)42);
+            var result = ImmutableQueue.Create<Byte>((byte)42); Assert.IsFalse(result.IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Byte_System_Collections_Immutable_Immuta()
     {
         // Purpose: Smoke — ImmutableQueue.Create<Byte> with complex param(s)
-            _ = ImmutableQueue.Create<Byte>((byte)42, (byte)42);
+            var result = ImmutableQueue.Create<Byte>((byte)42, (byte)42); Assert.IsFalse(result.IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Int32_System_Collections_Immutable_Immut()
     {
         // Purpose: Smoke — ImmutableQueue.Create<Int32> with complex param(s)
-            _ = ImmutableQueue.Create<Int32>();
+            Assert.IsTrue(ImmutableQueue.Create<Int32>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableQueue_Create_Int32_System_Collections_Immutable_Immut()
     {
         // Purpose: Smoke — ImmutableQueue.Create<Int32> with complex param(s)
-            _ = ImmutableQueue.Create<Int32>(42);
+            var result = ImmutableQueue.Create<Int32>(42); Assert.IsFalse(result.IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Byte_System_Collections_Immutable_Immuta()
     {
         // Purpose: Smoke — ImmutableStack.Create<Byte> with complex param(s)
-            _ = ImmutableStack.Create<Byte>();
+            Assert.IsTrue(ImmutableStack.Create<Byte>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Byte_System_Collections_Immutable_Immuta()
     {
         // Purpose: Smoke — ImmutableStack.Create<Byte> with complex param(s)
-            _ = ImmutableStack.Create<Byte>((byte)42);
+            var result = ImmutableStack.Create<Byte>((byte)42); Assert.IsFalse(result.IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Byte_System_Collections_Immutable_Immuta()
     {
         // Purpose: Smoke — ImmutableStack.Create<Byte> with complex param(s)
-            _ = ImmutableStack.Create<Byte>((byte)42, (byte)42);
+            var result = ImmutableStack.Create<Byte>((byte)42, (byte)42); Assert.IsFalse(result.IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Int32_System_Collections_Immutable_Immut()
     {
         // Purpose: Smoke — ImmutableStack.Create<Int32> with complex param(s)
-            _ = ImmutableStack.Create<Int32>();
+            Assert.IsTrue(ImmutableStack.Create<Int32>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableStack_Create_Int32_System_Collections_Immutable_Immut()
     {
         // Purpose: Smoke — ImmutableStack.Create<Int32> with complex param(s)
-            _ = ImmutableStack.Create<Int32>(42);
+            var result = ImmutableStack.Create<Int32>(42); Assert.IsFalse(result.IsEmpty);
     }
 }

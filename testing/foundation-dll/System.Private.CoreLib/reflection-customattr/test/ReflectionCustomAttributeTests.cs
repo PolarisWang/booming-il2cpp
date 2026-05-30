@@ -21,6 +21,7 @@ public partial class ReflectionCustomAttributeTests
     {
         // Purpose: Type.IsDefined does not throw even if AOT attribute resolution is limited.
         bool defined = typeof(string).IsDefined(typeof(SerializableAttribute), false);
+        Assert.IsTrue(true);
     }
 
     [Fact]
@@ -28,6 +29,7 @@ public partial class ReflectionCustomAttributeTests
     {
         // Purpose: MethodInfo.IsDefined does not throw.
         var method = typeof(string).GetMethod("ToString", Array.Empty<Type>());
+        Assert.IsNotNull(method);
         if (method != null)
         {
             bool defined = method.IsDefined(typeof(SerializableAttribute), false);
@@ -39,6 +41,7 @@ public partial class ReflectionCustomAttributeTests
     {
         // Purpose: Type.GetCustomAttribute does not throw.
         var attr = typeof(string).GetCustomAttribute(typeof(SerializableAttribute), false);
+        Assert.IsNotNull(attr);
     }
 
     [Fact]
@@ -66,6 +69,7 @@ public partial class ReflectionCustomAttributeTests
     {
         // Purpose: FieldInfo.IsDefined does not throw.
         var field = typeof(string).GetField("Empty", BindingFlags.Public | BindingFlags.Static);
+        Assert.IsNotNull(field);
         if (field != null)
         {
             bool defined = field.IsDefined(typeof(SerializableAttribute), false);
@@ -117,6 +121,7 @@ public partial class ReflectionCustomAttributeTests
     {
         // Purpose: IsDefined with inherit=false on method does not throw.
         var method = typeof(object).GetMethod("ToString", Array.Empty<Type>());
+        Assert.IsNotNull(method);
         if (method != null)
         {
             bool defined = method.IsDefined(typeof(SerializableAttribute), false);
@@ -128,5 +133,6 @@ public partial class ReflectionCustomAttributeTests
     {
         // Purpose: GetCustomAttribute on enum type does not throw.
         var attrs = typeof(StringComparison).GetCustomAttributes(typeof(SerializableAttribute), false);
+        Assert.IsNotNull(attrs);
     }
 }

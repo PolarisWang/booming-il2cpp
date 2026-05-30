@@ -24,7 +24,7 @@ public static partial class DocumentElementSubjects
     // [0] System.Text.Json/System.Text.Json.JsonDocument::Dispose:System.Void()
     public static void CustomEntrySubject_0()
     {
-        try { var doc = JsonDocument.Parse(TestJson); doc.Dispose(); Assert.IsTrue(true); }
+        try { var doc = JsonDocument.Parse(TestJson); doc.Dispose(); Assert.Throws<ObjectDisposedException>(() => doc.RootElement); }
         catch { _exitCode = 1; }
     }
 
@@ -199,7 +199,7 @@ public static partial class DocumentElementSubjects
     // [25] System.Text.Json/System.Text.Json.JsonElement::GetGuid:System.Guid()
     public static void CustomEntrySubject_25()
     {
-        try { using var doc = JsonDocument.Parse("\"00000001-0002-0003-0004-000000000005\""); var g = doc.RootElement.GetGuid(); Assert.IsTrue(true); }
+        try { using var doc = JsonDocument.Parse("\"00000001-0002-0003-0004-000000000005\""); var g = doc.RootElement.GetGuid(); Assert.AreEqual(new Guid("00000001-0002-0003-0004-000000000005"), g); }
         catch { _exitCode = 1; }
     }
 

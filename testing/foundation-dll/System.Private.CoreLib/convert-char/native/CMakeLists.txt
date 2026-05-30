@@ -40,6 +40,12 @@ if(CHAOS_IL2CPP_JIT_MODE)
     add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
 endif()
 
+# Verification mode: enables if constexpr assertion bodies in generated code
+# Set to 0 for AOT-only builds; the fact stage requires assertions to be DISABLED
+# because the AOT entry point does not have managed exception handling installed
+# during static initialization.
+add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=0)
+
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
 # The SDK root is the codegen output directory from --sdk-out.

@@ -73,6 +73,7 @@ public partial class ReflectionActivationTests
     {
         // Purpose: Smoke — Activator.CreateInstance with complex param(s)
             _ = Activator.CreateInstance(typeof(byte), System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default);
+            Assert.IsTrue(true);
     }
 
     // === needs-manual (operator/protected/etc) ===

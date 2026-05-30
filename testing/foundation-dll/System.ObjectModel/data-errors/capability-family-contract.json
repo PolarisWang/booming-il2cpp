@@ -15,6 +15,8 @@
   "methodSubjectCount": 6,
   "customEntryIndices": [
     2,
+    3,
+    4,
     5
   ],
   "functionalObligation": {
@@ -29,5 +31,12 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "reviewBundleRequired": true
+  "reviewBundleRequired": true,
+  "benchmarkMethodIndices": [
+    0,
+    1
+  ],
+  "hotupdateMethodIndices": [
+    0
+  ]
 }

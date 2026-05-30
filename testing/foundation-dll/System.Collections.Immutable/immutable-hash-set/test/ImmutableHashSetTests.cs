@@ -22,34 +22,34 @@ public partial class ImmutableHashSetTests
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableHashSet_Create_Byte_System_Collections_Immutable_Immu()
     {
         // Purpose: Smoke — ImmutableHashSet.Create<Byte> with complex param(s)
-            _ = ImmutableHashSet.Create<Byte>();
+            Assert.IsTrue(ImmutableHashSet.Create<Byte>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableHashSet_Create_Byte_System_Collections_Immutable_Immu()
     {
         // Purpose: Smoke — ImmutableHashSet.Create<Byte> with complex param(s)
-            _ = ImmutableHashSet.Create<Byte>((byte)42);
+            var result = ImmutableHashSet.Create<Byte>((byte)42); Assert.AreEqual(1, result.Count);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableHashSet_Create_Byte_System_Collections_Immutable_Immu()
     {
         // Purpose: Smoke — ImmutableHashSet.Create<Byte> with complex param(s)
-            _ = ImmutableHashSet.Create<Byte>((byte)42, (byte)42);
+            var result = ImmutableHashSet.Create<Byte>((byte)42, (byte)42); Assert.AreEqual(1, result.Count);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableHashSet_Create_Int32_System_Collections_Immutable_Imm()
     {
         // Purpose: Smoke — ImmutableHashSet.Create<Int32> with complex param(s)
-            _ = ImmutableHashSet.Create<Int32>();
+            Assert.IsTrue(ImmutableHashSet.Create<Int32>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableHashSet_Create_Int32_System_Collections_Immutable_Imm()
     {
         // Purpose: Smoke — ImmutableHashSet.Create<Int32> with complex param(s)
-            _ = ImmutableHashSet.Create<Int32>(42);
+            var result = ImmutableHashSet.Create<Int32>(42); Assert.AreEqual(1, result.Count);
     }
 }

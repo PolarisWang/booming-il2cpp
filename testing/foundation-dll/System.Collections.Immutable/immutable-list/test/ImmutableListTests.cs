@@ -22,41 +22,41 @@ public partial class ImmutableListTests
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableList_Create_Byte_System_Collections_Immutable_Immutab()
     {
         // Purpose: Smoke — ImmutableList.Create<Byte> with complex param(s)
-            _ = ImmutableList.Create<Byte>();
+            Assert.IsTrue(ImmutableList.Create<Byte>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableList_Create_Byte_System_Collections_Immutable_Immutab()
     {
         // Purpose: Smoke — ImmutableList.Create<Byte> with complex param(s)
-            _ = ImmutableList.Create<Byte>((byte)42);
+            var result = ImmutableList.Create<Byte>((byte)42); Assert.AreEqual((byte)42, result[0]);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableList_Create_Byte_System_Collections_Immutable_Immutab()
     {
         // Purpose: Smoke — ImmutableList.Create<Byte> with complex param(s)
-            _ = ImmutableList.Create<Byte>((byte)42, (byte)42);
+            var result = ImmutableList.Create<Byte>((byte)42, (byte)42); Assert.AreEqual(2, result.Count);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableList_Create_Int32_System_Collections_Immutable_Immuta()
     {
         // Purpose: Smoke — ImmutableList.Create<Int32> with complex param(s)
-            _ = ImmutableList.Create<Int32>();
+            Assert.IsTrue(ImmutableList.Create<Int32>().IsEmpty);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableList_Create_Int32_System_Collections_Immutable_Immuta()
     {
         // Purpose: Smoke — ImmutableList.Create<Int32> with complex param(s)
-            _ = ImmutableList.Create<Int32>(42);
+            var result = ImmutableList.Create<Int32>(42); Assert.AreEqual(42, result[0]);
     }
 
     [Fact]
     public void _System_Collections_Immutable_System_Collections_Immutable_ImmutableList_Create_String_System_Collections_Immutable_Immut()
     {
         // Purpose: Smoke — ImmutableList.Create<String> with complex param(s)
-            _ = ImmutableList.Create<String>("hello");
+            var result = ImmutableList.Create<String>("hello"); Assert.AreEqual("hello", result[0]);
     }
 }

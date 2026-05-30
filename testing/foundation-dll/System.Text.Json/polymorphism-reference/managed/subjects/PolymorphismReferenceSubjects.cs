@@ -52,7 +52,7 @@ public static partial class PolymorphismReferenceSubjects
     // [5] System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::AddReference:System.Void(System.String,System.Object)
     public static void CustomEntrySubject_5()
     {
-        try { var r = ReferenceHandler.Preserve.CreateResolver(); r.AddReference("key", new object()); Assert.IsTrue(true); }
+        try { var r = ReferenceHandler.Preserve.CreateResolver(); r.AddReference("key", new object()); Assert.IsNotNull(r.ResolveReference("key")); }
         catch { _exitCode = 1; }
     }
 
