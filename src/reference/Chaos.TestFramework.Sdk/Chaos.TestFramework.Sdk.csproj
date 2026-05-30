@@ -16,4 +16,10 @@
     <RepositoryUrl>https://github.com/chaos-il2cpp</RepositoryUrl>
     <PackageOutputPath>$(MSBuildThisFileDirectory)..\..\..\testing\_packages\</PackageOutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>Chaos.TestFramework.Runtime</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 </Project>

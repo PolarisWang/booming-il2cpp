@@ -1,4 +1,4 @@
-using System;
+using System.Reflection;
 
 namespace Chaos.TestFramework.Runtime;
 
@@ -6,22 +6,43 @@ internal static class Program
 {
     private static int Main(string[] args)
     {
-        // RuntimeTrace reads CHAOS_TRACE_PATH / CHAOS_TRACE_ID from env
-        // (set by Python orchestration). If not set, IsEnabled is false and all calls are no-ops.
-        RuntimeTrace.Point("runtime.start", "runtime");
+        var asmPath = string.Empty;
+        var runFact = false;
+        var runBenchmark = false;
+        var iterations = 100000;
 
-        var hostKind = ChaosManagedHostArguments.ParseHostKind(args);
-        var result = hostKind switch
+        for (int i = 0; i < args.Length; i++)
         {
-            ChaosManagedHostKind.Proof => ChaosProofRunner.Run(args),
-            ChaosManagedHostKind.Benchmark => ChaosBenchmarkRunner.Run(args),
-            _ => throw new ArgumentOutOfRangeException(nameof(args), hostKind, "Unsupported managed host kind."),
-        };
+            if (args[i] == "--assembly" && i + 1 < args.Length)
+                asmPath = args[++i];
+            else if (args[i] == "--kind" && i + 1 < args.Length)
+            {
+                var val = args[++i];
+                if (val == "fact") runFact = true;
+                else if (val == "benchmark") runBenchmark = true;
+            }
+            else if (args[i] == "--iterations" && i + 1 < args.Length)
+                int.TryParse(args[++i], out iterations);
+        }
 
-        RuntimeTrace.Point("runtime.exit", "runtime", new Dictionary<string, object?>
+        if (string.IsNullOrEmpty(asmPath))
         {
-            ["exitCode"] = result,
-        });
-        return result;
+            Console.Error.WriteLine("Usage: runtime.exe --assembly <path> [--kind fact] [--kind benchmark] [--iterations N]");
+            return 1;
+        }
+
+        // Default: run both when no --kind specified
+        if (!runFact && !runBenchmark)
+            runFact = runBenchmark = true;
+
+        var asm = Assembly.LoadFrom(asmPath);
+
+        if (runFact)
+            FactRunner.Run(asm);
+
+        if (runBenchmark)
+            BenchmarkRunner.Run(asm, iterations);
+
+        return 0;
     }
 }

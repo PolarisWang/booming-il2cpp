@@ -52,11 +52,9 @@ class RepoLayoutRegistryBucketsTests(RepoLayoutTestSupport):
 
     def test_phase1_generic_unit_buckets_exist(self) -> None:
         self.assertNotEqual([], list((REPO_ROOT / "tests" / "unit" / "execution").glob("test_subject_executor*.py")))
-        self.assertNotEqual([], list((REPO_ROOT / "tests" / "unit" / "execution").glob("test_subject_workers*.py")))
         self.assertNotEqual([], list((REPO_ROOT / "tests" / "unit" / "reporting").glob("test_subject_reporting*.py")))
         self.assertTrue((REPO_ROOT / "tests" / "unit" / "reporting" / "test_events_schema.py").is_file())
         self.assertNotEqual([], list((REPO_ROOT / "tests" / "unit" / "performance").glob("test_benchmark_command*.py")))
-        self.assertNotEqual([], list((REPO_ROOT / "tests" / "unit" / "performance").glob("test_subject_workers_perf*.py")))
         self.assertNotEqual([], list((REPO_ROOT / "tests" / "unit" / "planning").glob("test_subject_planner*.py")))
         self.assertNotEqual([], list((REPO_ROOT / "tests" / "unit" / "planning").glob("test_project_workspace*.py")))
         self.assertTrue((REPO_ROOT / "tests" / "unit" / "planning" / "test_fingerprints.py").is_file())

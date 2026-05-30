@@ -728,12 +728,10 @@ def _run_native_benchmark_case_with_shared_build(
     matrix_id: str,
     base_run_id: str,
     planner_module: Any | None = None,
-    subject_workers_module: Any | None = None,
     source_entry: str | None = None,
 ) -> dict[str, Any]:
     testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
     planner_mod = planner_module or _load("subject_planner", testing_root / "subject_planner.py")
-    subject_workers_mod = subject_workers_module or _load("subject_workers", testing_root / "subject_workers.py")
     resolved_source_entry = source_entry or _declared_benchmark_host_source_entry(
         repo_root,
         subject_id,
@@ -758,31 +756,7 @@ def _run_native_benchmark_case_with_shared_build(
     if runtime_stage is None:
         return {"error": f"native benchmark plan did not produce a runtime stage for {subject_id}"}
 
-    worker_result = subject_workers_mod.run_native_runtime_perf(
-        repo_root=repo_root,
-        request={
-            "selection": dict(plan["selection"]),
-            "upstream": {
-                "build": {
-                    "manifestPath": build_manifest_path,
-                }
-            },
-            "paths": dict(runtime_stage["paths"]),
-        },
-    )
-    if str(worker_result.get("status") or "") != "ok":
-        return {"error": str(worker_result.get("failure") or f"native benchmark execution failed for {subject_id}")}
-
-    performance = dict(dict(worker_result.get("details") or {}).get("performance") or {})
-    metrics = dict(performance.get("metrics") or {})
-    if not metrics:
-        return {"error": f"native benchmark did not produce runtime metrics for {subject_id}"}
-
-    return {
-        "metrics": metrics,
-        "regressionFound": str(performance.get("regressionStatus") or "") == "regressed",
-        "workerResult": worker_result,
-    }
+    return {"error": "native benchmark execution requires subject_workers module which has been removed"}
 
 
 def _run_native_declared_benchmark_records(
@@ -796,7 +770,6 @@ def _run_native_declared_benchmark_records(
     subjects_module: Any | None = None,
     planner_module: Any | None = None,
     executor_module: Any | None = None,
-    subject_workers_module: Any | None = None,
 ) -> list[dict[str, Any]]:
     testing_root = repo_root / "build" / "toolchains" / "run" / "testing"
     subjects_mod = subjects_module or _load("subjects", testing_root / "subjects.py")
@@ -890,7 +863,6 @@ def _run_native_declared_benchmark_records(
             matrix_id=matrix_id,
             base_run_id=base_run_id,
             planner_module=planner_module,
-            subject_workers_module=subject_workers_module,
             source_entry=source_entry,
         )
         if "error" in case_pipeline_result:

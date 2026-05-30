@@ -10,14 +10,12 @@ try:
     from . import events as events_module
     from . import subject_planner as planner_module
     from . import subject_reporting as subject_reporting_module
-    from . import subject_workers as subject_workers_module
 except ImportError:
     root = Path(__file__).resolve().parents[1]
     sys.path.insert(0, str(root))
     from testing import events as events_module
     from testing import subject_planner as planner_module
     from testing import subject_reporting as subject_reporting_module
-    from testing import subject_workers as subject_workers_module
 
 
 Worker = Callable[..., dict[str, Any]]
@@ -251,7 +249,7 @@ def execute_plan(
     run_id: str | None = None,
     event_writer: Callable[[dict[str, Any]], None] | None = None,
 ) -> dict[str, Any]:
-    registry = dict(subject_workers_module.DEFAULT_STAGE_WORKERS)
+    registry = dict(worker_registry) if worker_registry is not None else {}
     if worker_registry:
         registry.update(worker_registry)
 

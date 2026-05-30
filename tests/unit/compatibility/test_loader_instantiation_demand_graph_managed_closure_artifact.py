@@ -9,7 +9,6 @@ MANAGED_CLOSURE_CONTRACTS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.C
 MANAGED_CLOSURE_ARTIFACT_MODELS_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Contracts" / "ManagedClosureArtifactModels.cs"
 CODEGEN_STAGE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "CodeGenStage.cs"
 DRIVER_ENTRY_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver" / "DriverEntry.cs"
-SUBJECT_WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 
 
 class LoaderInstantiationDemandGraphManagedClosureArtifactTests(unittest.TestCase):
@@ -26,7 +25,6 @@ class LoaderInstantiationDemandGraphManagedClosureArtifactTests(unittest.TestCas
     def test_codegen_driver_and_analysis_manifest_wire_generic_instantiation_demand_graph_artifact(self) -> None:
         codegen_source = CODEGEN_STAGE_PATH.read_text(encoding="utf-8")
         driver_source = DRIVER_ENTRY_PATH.read_text(encoding="utf-8")
-        subject_workers_source = SUBJECT_WORKERS_PATH.read_text(encoding="utf-8")
 
         for required_fragment in [
             "var genericInstantiationDemandGraph = linkedWorld.GenericInstantiationDemandGraph",
@@ -39,12 +37,6 @@ class LoaderInstantiationDemandGraphManagedClosureArtifactTests(unittest.TestCas
             "WriteJson(Path.Combine(result.OutputRootPath, ManagedClosureArtifactNames.GenericInstantiationDemandGraph), result.GenericInstantiationDemandGraph);",
             driver_source,
         )
-
-        for required_fragment in [
-            '"genericInstantiationDemandGraphPath": _relative(repo_root, output_root / "generic-instantiation-demand-graph.json"),',
-            'manifest["artifacts"]["genericInstantiationDemandGraphPath"],',
-        ]:
-            self.assertIn(required_fragment, subject_workers_source)
 
 
 if __name__ == "__main__":

@@ -18,7 +18,6 @@ CATALOG_PATH = (
     / "ReferenceProof"
     / "NativeReferenceProofCatalog.cs"
 )
-SUBJECT_WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 RUNTIME_CORE_PATH = REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_core.cpp"
 RUNTIME_CORE_HEADER_PATH = REPO_ROOT / "src" / "native" / "runtime-core" / "runtime_core.h"
 ENGINE_FIXTURE_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects"
@@ -56,7 +55,6 @@ class EngineBindingTests(unittest.TestCase):
         planner_source = read_native_reference_planner_source(REPO_ROOT)
         emitter_source = EMITTER_PATH.read_text(encoding="utf-8")
         catalog_source = CATALOG_PATH.read_text(encoding="utf-8")
-        workers_source = SUBJECT_WORKERS_PATH.read_text(encoding="utf-8")
         runtime_core_source = RUNTIME_CORE_PATH.read_text(encoding="utf-8")
         runtime_core_header_source = RUNTIME_CORE_HEADER_PATH.read_text(encoding="utf-8")
 
@@ -72,21 +70,6 @@ class EngineBindingTests(unittest.TestCase):
             self.assertIn(lowering_family, catalog_source)
             self.assertIn(f"NativeReferenceProofCatalog.{constant_name}", planner_source)
             self.assertIn(f"NativeReferenceProofCatalog.{constant_name}", emitter_source)
-
-        for stage_kind in [
-            "generated-engine-proof",
-            "runtime-engine-observe",
-            "runtime-engine-trace-compare",
-        ]:
-            self.assertIn(stage_kind, workers_source)
-
-        for required_fragment in [
-            "engineContractSummary",
-            "engineEmissionSummary",
-            "engineObservationSummary",
-            "engineTraceCompareReportPaths",
-        ]:
-            self.assertIn(required_fragment, workers_source)
 
         for helper_name in [
             "EngineLogWrite",

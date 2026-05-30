@@ -38,11 +38,10 @@ from verification.stages.native_code_generator import slug_from_family_id, famil
 _SDK_VERSION = "0.1.0"
 _PACKAGES_DIR = _REPO_ROOT / "testing" / "_packages"
 _SDK_PROJECT = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
-_RUNNER_PROJECT = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Runner" / "Chaos.TestFramework.Runner.csproj"
 
 
 def _ensure_sdk_packed() -> None:
-    """Build and pack SDK + Runner to local NuGet feed if not already cached.
+    """Build and pack SDK to local NuGet feed if not already cached.
 
     The feed at testing/_packages/ is referenced by testing/nuget.config so
     that test projects can use PackageReference instead of ProjectReference.
@@ -51,7 +50,6 @@ def _ensure_sdk_packed() -> None:
     """
     _PACKAGES_DIR.mkdir(parents=True, exist_ok=True)
     sdk_nupkg = _PACKAGES_DIR / f"Chaos.TestFramework.Sdk.{_SDK_VERSION}.nupkg"
-    runner_nupkg = _PACKAGES_DIR / f"Chaos.TestFramework.Runner.{_SDK_VERSION}.nupkg"
     if not sdk_nupkg.exists():
         result = subprocess.run(
             ["dotnet", "pack", str(_SDK_PROJECT), "--configuration", "Release", "-o", str(_PACKAGES_DIR)],
@@ -59,13 +57,6 @@ def _ensure_sdk_packed() -> None:
         )
         if result.returncode != 0:
             print(f"[entrypoint] WARN: SDK pack failed: {result.stderr.strip()[:200]}")
-    if not runner_nupkg.exists():
-        result = subprocess.run(
-            ["dotnet", "pack", str(_RUNNER_PROJECT), "--configuration", "Release", "-o", str(_PACKAGES_DIR)],
-            capture_output=True, text=True, timeout=120,
-        )
-        if result.returncode != 0:
-            print(f"[entrypoint] WARN: Runner pack failed: {result.stderr.strip()[:200]}")
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -527,7 +518,6 @@ def generate_project_file(
     chaos_tf_ref = (
         "  <ItemGroup>\n"
         f'    <PackageReference Include="Chaos.TestFramework.Sdk" Version="{_SDK_VERSION}" />\n'
-        f'    <PackageReference Include="Chaos.TestFramework.Runner" Version="{_SDK_VERSION}" />\n'
         "  </ItemGroup>\n"
     )
 

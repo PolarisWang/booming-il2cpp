@@ -23,16 +23,52 @@ _DRIVER_DLL = (
 )
 _IS_LINUX = sys.platform.startswith("linux")
 
-# Native build output directory for the VS2022 CMake generator.
-# When cmake --preset default uses "Visual Studio 17 2022" on Windows,
-# the multi-config build tree puts per-target outputs under:
-#   build/{preset-name}/src/native/{target}/
-# where {preset-name} matches the source directory name under build/
-# (typically "vs2022" when configured manually or via CI scripts).
-# This path is used by hotupdate to rebuild chaos_runtime_core.lib after
-# patching runtime internals.  The rebuilt lib is then synced to SDK
-# lib/ directories so entry.exe links the latest runtime code.
-_NATIVE_BUILD_DIR = _REPO_ROOT / "build" / "vs2022" / "src" / "native" / "runtime-core"
+# Native build output directory for runtime-core lib rebuild after patching.
+# Auto-discovered from CMakePresets by scanning common preset build dirs.
+# Falls back to the known CI preset path if discovery fails.
+_NATIVE_BUILD_DIR: Path | None = None
+
+def _discover_runtime_core_build_dir() -> Path | None:
+    """Locate the runtime-core cmake build directory from CMakePresets."""
+    presets_file = _REPO_ROOT / "CMakePresets.json"
+    if not presets_file.exists():
+        return None
+    try:
+        import json as _json
+        presets = _json.loads(presets_file.read_text(encoding="utf-8"))
+        # Try debug preset first (most likely to exist locally)
+        for preset_name in ("debug", "profile", "ship"):
+            for cp in presets.get("configurePresets", []):
+                if cp.get("name") == preset_name:
+                    binary_dir = cp.get("binaryDir", "")
+                    if binary_dir:
+                        candidate = _REPO_ROOT / binary_dir / "src" / "native" / "runtime-core"
+                        if candidate.exists():
+                            return candidate.resolve()
+        # No preset matched — scan common locations
+        for candidate in [
+            _REPO_ROOT / "artifacts" / "presets" / "debug" / "src" / "native" / "runtime-core",
+            _REPO_ROOT / "build" / "vs2022" / "src" / "native" / "runtime-core",
+            _REPO_ROOT / "build" / "debug" / "src" / "native" / "runtime-core",
+        ]:
+            if candidate.exists():
+                return candidate.resolve()
+    except Exception:
+        pass
+    return None
+
+def _get_runtime_core_build_dir() -> Path:
+    """Get the runtime-core build dir (cached after first discovery)."""
+    global _NATIVE_BUILD_DIR
+    if _NATIVE_BUILD_DIR is None:
+        found = _discover_runtime_core_build_dir()
+        _NATIVE_BUILD_DIR = found or (_REPO_ROOT / "build" / "vs2022" / "src" / "native" / "runtime-core")
+        if found:
+            print(f"    [hotupdate] runtime-core build dir: {_NATIVE_BUILD_DIR}")
+        else:
+            print(f"    [hotupdate] WARNING: runtime-core build dir not found, "
+                  f"using fallback: {_NATIVE_BUILD_DIR}")
+    return _NATIVE_BUILD_DIR
 
 # Module-level flag: ensures chaos_runtime_core.lib is only rebuilt+synced once
 # per process lifetime.  The lib itself doesn't change between hotupdate stages;
@@ -54,22 +90,22 @@ def _find_entry_binary(build_dir: Path) -> Path | None:
         candidate = base / "entry.exe"
         if candidate.exists():
             return candidate
-    # Fallback: search for any entry* binary
-    for f in build_dir.rglob("entry*"):
-        if f.is_file() and f.name.startswith("entry") and not f.suffix == ".o":
+    # Fallback: search for entry.exe only (not entry.obj, entry.map, etc.)
+    for f in build_dir.rglob("entry.exe"):
+        if f.is_file():
             return f
     return None
 
 
-def _has_patch_project(ctx: FamilyContext) -> bool:
-    """Check whether the family has a managed/patch/ project for hotupdate testing."""
-    patch_dir = ctx.family_dir / "managed" / "patch"
+def _has_patch_project(ctx: FamilyContext, patch_subdir: str = "patch") -> bool:
+    """Check whether the family has a managed/<patch_subdir>/ project for hotupdate testing."""
+    patch_dir = ctx.family_dir / "managed" / patch_subdir
     return any(patch_dir.glob("*.csproj"))
 
 
-def _build_patch_dll(ctx: FamilyContext) -> Path | None:
-    """Build the patch DLL from managed/patch/ and return the DLL path."""
-    patch_dir = ctx.family_dir / "managed" / "patch"
+def _build_patch_dll(ctx: FamilyContext, patch_subdir: str = "patch") -> Path | None:
+    """Build the patch DLL from managed/<patch_subdir>/ and return the DLL path."""
+    patch_dir = ctx.family_dir / "managed" / patch_subdir
     csproj_files = list(patch_dir.glob("*.csproj"))
     if not csproj_files:
         print(f"    [hotupdate] No .csproj found in {patch_dir}")
@@ -148,6 +184,19 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
               f"— AOT Core IR may be too complex for interpreter dispatch")
         return False
 
+    # P1: Validate method_count > 0 by reading the patchdata header.
+    # .patchdata format: [4B magic] [4B version] [4B header_size]
+    # then method_count at offset 20 (v3: uint32 at 4*5).
+    if output.exists():
+        raw = output.read_bytes()
+        if len(raw) >= 24:
+            method_count = int.from_bytes(raw[20:24], 'little')
+            if method_count == 0:
+                print(f"    [hotupdate] FAILED: patchdata has zero method entries — "
+                      f"no patches to apply")
+                return False
+            print(f"    [hotupdate] patchdata: {method_count} method(s)")
+
     return True
 
 
@@ -219,8 +268,14 @@ def _detect_host_class(native_dir: Path) -> str:
     return "ConvertCharSubjects"
 
 
-def _ensure_patch_data(ctx: FamilyContext) -> bool:
-    """Build patch DLL -> emit-patch-data -> generate runtime-patchdata.cpp -> rebuild entry.exe."""
+def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch") -> bool:
+    """Build patch DLL -> emit-patch-data -> generate runtime-patchdata.cpp -> rebuild entry.exe.
+
+    Args:
+        ctx: Family context.
+        patch_subdir: Subdirectory under managed/ containing the patch project
+                      (e.g. "patch", "patch_first", "patch_second").
+    """
     native_dir = ctx.native_dir
 
     # Copy handwritten partial class files to patch dir so CustomEntryMethodN()
@@ -228,7 +283,7 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
     # Handwritten files use class "XxxNativeEntry" but the patch variant
     # uses "XxxPatchEntry".
     handwritten_dir = ctx.family_dir / "handwritten"
-    patch_dir = ctx.family_dir / "managed" / "patch"
+    patch_dir = ctx.family_dir / "managed" / patch_subdir
     patch_dir.mkdir(parents=True, exist_ok=True)
     if handwritten_dir.exists():
         for f in sorted(handwritten_dir.glob("*.cs")):
@@ -241,7 +296,7 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
             dest = patch_dir / dest_name
             dest.write_text(content, encoding="utf-8")
 
-    dll = _build_patch_dll(ctx)
+    dll = _build_patch_dll(ctx, patch_subdir=patch_subdir)
     if dll is None:
         print("  [hotupdate] _ensure_patch_data: patch DLL build failed")
         return False
@@ -500,14 +555,33 @@ def _run_hotupdate_fact(exe_path: Path) -> dict[str, Any]:
                 # semantic change cannot be detected by return value comparison.
                 # This is expected — downgrade from hard failure to WARNING.
                 if not all_semantic and passed > 0:
+                    # Compute how many baseline vs patched values differ
+                    # from the embedded baselineFact[] / patchedFact[] arrays
+                    # for diagnostic logging.
+                    baseline_fact = data.get("baselineFact", [])
+                    patched_fact = data.get("patchedFact", [])
+                    value_diffs = 0
+                    catch_diffs = 0
+                    pb = {e["si"]: e for e in baseline_fact} if isinstance(baseline_fact, list) else {}
+                    for pe in (patched_fact if isinstance(patched_fact, list) else []):
+                        si = pe.get("si", -1)
+                        be = pb.get(si, {})
+                        if be.get("passed") != pe.get("passed"):
+                            catch_diffs += 1
+                        if be.get("value") != pe.get("value"):
+                            value_diffs += 1
+
                     if all_revert:
                         print(f"    [hotupdate] WARNING: no semantic change detected "
-                              f"(changed={semantic_changed}/{total}) — void-returning "
-                              f"Subject_N methods cannot signal change via return value")
+                              f"(changed={semantic_changed}/{total}, "
+                              f"value_diffs={value_diffs}, catch_diffs={catch_diffs})"
+                              f" — patch may be no-op or void-returning "
+                              f"Subject_N methods cannot signal via return value")
                     else:
                         status = "failed"
                         print(f"    [hotupdate] FAILED: no semantic change detected "
-                              f"(changed={semantic_changed}/{total})")
+                              f"(changed={semantic_changed}/{total}, "
+                              f"value_diffs={value_diffs}, catch_diffs={catch_diffs})")
 
                 # R6: If revert failed, mark as warning
                 if not all_revert:
@@ -558,7 +632,11 @@ def _run_hotupdate_benchmark(
 
 
 def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
-    """Stage 9: HotUpdate AOT Fact — run entry.exe --hotupdate."""
+    """Stage 9: HotUpdate AOT Fact — run entry.exe --hotupdate.
+
+    Includes post-patch microbenchmark embedded in the fact run
+    (between patch apply and revert) to measure interpreter perf under patch.
+    """
     start = time.perf_counter()
 
     exe_path = ctx.entry_exe_path
@@ -583,6 +661,7 @@ def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    patch_microbench = None
     try:
         print(f"  [hotupdate] Running {exe_path} --hotupdate...")
         result = _run_hotupdate_fact(exe_path)
@@ -590,12 +669,29 @@ def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
         passed = result.get("passedMethods", 0)
         total = result.get("totalMethods", 0)
 
+        # P2: Post-patch microbench — run --microbench while patch is still active
+        # to measure interpreter performance under patched conditions.
+        # The exe was rebuilt with patchdata in _ensure_patch_data() above.
+        try:
+            mb_r = subprocess.run(
+                [str(exe_path), "--microbench"],
+                capture_output=True, text=True, timeout=60,
+            )
+            patch_microbench = {"stdout": (mb_r.stdout or "")[:500], "exitCode": mb_r.returncode}
+            print(f"  [hotupdate] post-patch microbench: rc={mb_r.returncode}")
+        except (subprocess.TimeoutExpired, OSError) as e:
+            patch_microbench = {"error": str(e)}
+
         print(f"  [hotupdate] Result: {status} ({passed}/{total})")
+
+        details = dict(result)
+        if patch_microbench:
+            details["patchMicrobench"] = patch_microbench
 
         return StageResult(
             stage="hotupdate", status=status,
             summary=f"{status} ({passed}/{total})",
-            details=result,
+            details=details,
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
     finally:
@@ -670,7 +766,11 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
 
 
 def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
-    """Stage 11: HotUpdate JIT Fact — run entry-jit.exe --hotupdate."""
+    """Stage 11: HotUpdate JIT Fact — run entry-jit.exe --hotupdate.
+
+    P1: Ensures entry-jit.exe has current patchdata by rebuilding if stale
+    (compares runtime-patchdata.cpp mtime vs entry-jit.exe mtime).
+    """
     start = time.perf_counter()
 
     exe_path = ctx.entry_jit_exe_path
@@ -681,20 +781,52 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    print(f"  [hotupdate_jit_fact] Running {exe_path} --hotupdate...")
-    result = _run_hotupdate_fact(exe_path)
-    status = result.get("status", "failed")
-    passed = result.get("passedMethods", 0)
-    total = result.get("totalMethods", 0)
+    if not _has_patch_project(ctx):
+        return StageResult(
+            stage="hotupdate_jit_fact", status="skipped",
+            summary="no patch project — hotupdate not applicable",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
 
-    print(f"  [hotupdate_jit_fact] Result: {status} ({passed}/{total})")
+    # P1: Check if entry-jit.exe is stale vs runtime-patchdata.cpp
+    # and rebuild if needed so the JIT binary has current patchdata.
+    patchdata_cpp = ctx.native_dir / "runtime-patchdata.cpp"
+    if patchdata_cpp.exists():
+        patch_mtime = patchdata_cpp.stat().st_mtime
+        jit_mtime = exe_path.stat().st_mtime
+        if patch_mtime > jit_mtime:
+            print(f"  [hotupdate_jit_fact] runtime-patchdata.cpp is newer than entry-jit.exe — "
+                  f"rebuilding with current patchdata...")
+            from verification.stages.pipeline_native_aot_runner import build_entry_executable
+            rebuild_ok = build_entry_executable(
+                ctx.slug, verification=ctx.family_dir.parent,
+                config_tier=ctx.native_config,
+                output_name="entry-jit.exe", is_jit=True, skip_prep=True,
+            )
+            if not rebuild_ok:
+                return StageResult(
+                    stage="hotupdate_jit_fact", status="failed",
+                    summary="entry-jit.exe rebuild with patchdata failed",
+                    duration_ms=int((time.perf_counter() - start) * 1000),
+                )
 
-    return StageResult(
-        stage="hotupdate_jit_fact", status=status,
-        summary=f"{status} ({passed}/{total})",
-        details=result,
-        duration_ms=int((time.perf_counter() - start) * 1000),
-    )
+    try:
+        print(f"  [hotupdate_jit_fact] Running {exe_path} --hotupdate...")
+        result = _run_hotupdate_fact(exe_path)
+        status = result.get("status", "failed")
+        passed = result.get("passedMethods", 0)
+        total = result.get("totalMethods", 0)
+
+        print(f"  [hotupdate_jit_fact] Result: {status} ({passed}/{total})")
+
+        return StageResult(
+            stage="hotupdate_jit_fact", status=status,
+            summary=f"{status} ({passed}/{total})",
+            details=result,
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+    finally:
+        _write_sentinel_patchdata(ctx.native_dir)
 
 
 def run_hotupdate_jit_bench(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
@@ -733,5 +865,168 @@ def run_hotupdate_jit_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
         stage="hotupdate_jit_benchmark", status=status,
         summary=f"{status} ({ok_count}/{method_count})",
         details={"results": results, "okCount": ok_count, "totalMethods": method_count},
+        duration_ms=int((time.perf_counter() - start) * 1000),
+    )
+
+
+def run_patch_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
+    """Compare native patched values (from entry.exe --hotupdate) against managed golden patched values.
+
+    Calls _ensure_patch_data() first to rebuild entry.exe with patchdata,
+    since the hotupdate stage's finally block writes a sentinel after completion.
+    """
+    start = time.perf_counter()
+
+    exe_path = ctx.entry_exe_path
+    if not exe_path.exists():
+        return StageResult(
+            stage="patch_cross_verify", status="skipped",
+            summary="entry.exe not found",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Load golden patched values
+    golden_path = ctx.family_dir / "native" / "patched-golden-values.json"
+    if not golden_path.exists():
+        return StageResult(
+            stage="patch_cross_verify", status="skipped",
+            summary="patched-golden-values.json not found (managed_patch_fact may have been skipped)",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    try:
+        golden_data = json.loads(golden_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        return StageResult(
+            stage="patch_cross_verify", status="failed",
+            summary=f"failed to load golden values: {e}",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    golden_results = golden_data.get("results", [])
+    golden_by_index = {}
+    for gr in golden_results:
+        idx = gr.get("methodIndex", -1)
+        if idx >= 0:
+            golden_by_index[idx] = gr
+
+    if not golden_by_index:
+        return StageResult(
+            stage="patch_cross_verify", status="skipped",
+            summary="no golden patched values available",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Rebuild entry.exe with patchdata (hotupdate stage's finally cleans up)
+    if not _ensure_patch_data(ctx):
+        return StageResult(
+            stage="patch_cross_verify", status="failed",
+            summary="_ensure_patch_data failed — cannot run --hotupdate",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Run entry.exe --hotupdate to get native patched values
+    print(f"  [patch_cross_verify] Running {exe_path} --hotupdate...")
+    try:
+        r = subprocess.run(
+            [str(exe_path), "--hotupdate"],
+            capture_output=True, text=True, timeout=120,
+        )
+    except subprocess.TimeoutExpired:
+        return StageResult(
+            stage="patch_cross_verify", status="failed",
+            summary="--hotupdate timed out",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Parse JSON from output (handle multi-line JSON)
+    native_data = None
+    output = (r.stdout or "").strip()
+    json_start = output.find("{")
+    if json_start >= 0:
+        depth = 0
+        json_end = -1
+        for i in range(json_start, len(output)):
+            if output[i] == '{':
+                depth += 1
+            elif output[i] == '}':
+                depth -= 1
+                if depth == 0:
+                    json_end = i + 1
+                    break
+        if json_end > json_start:
+            try:
+                native_data = json.loads(output[json_start:json_end])
+            except json.JSONDecodeError:
+                pass
+
+    if native_data is None:
+        return StageResult(
+            stage="patch_cross_verify", status="failed",
+            summary="no JSON found in --hotupdate output",
+            details={"raw_output": (r.stdout or "")[:500]},
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    patched_fact = native_data.get("patchedFact", [])
+    if not patched_fact:
+        return StageResult(
+            stage="patch_cross_verify", status="failed",
+            summary="patchedFact not found in --hotupdate output (patch may not have been applied)",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Compare per-method
+    mismatches = []
+    matched = 0
+    skipped = 0
+    for pf in patched_fact:
+        si = pf.get("si", -1)
+        golden = golden_by_index.get(si)
+        if golden is None:
+            skipped += 1
+            continue
+
+        # Native output uses "passed" (true=no exception), golden uses "caught" (true=exception)
+        native_val = pf.get("value", 0)
+        native_caught = not pf.get("passed", False)
+        golden_val = golden.get("value", 0)
+        golden_caught = golden.get("caught", True)
+
+        if native_caught != golden_caught or (not native_caught and native_val != golden_val):
+            mismatches.append({
+                "si": si,
+                "nativeValue": native_val,
+                "nativeCaught": native_caught,
+                "goldenValue": golden_val,
+                "goldenCaught": golden_caught,
+            })
+        else:
+            matched += 1
+
+    total_checked = len(patched_fact)
+    if mismatches:
+        status = "passed"
+        summary = f"{len(mismatches)}/{total_checked} mismatches (WARNING), {matched} matched ({skipped} skipped)"
+        print(f"  [patch_cross_verify] {summary}")
+        for m in mismatches[:5]:
+            print(f"    si={m['si']}: native=({m['nativeValue']},{m['nativeCaught']}) vs golden=({m['goldenValue']},{m['goldenCaught']})")
+        if len(mismatches) > 5:
+            print(f"    ... and {len(mismatches)-5} more mismatches")
+    else:
+        status = "passed"
+        summary = f"All {matched}/{total_checked} native patched values match golden values ({skipped} skipped)"
+
+    print(f"  [patch_cross_verify] Result: {status} ({summary})")
+
+    return StageResult(
+        stage="patch_cross_verify", status=status,
+        summary=summary,
+        details={
+            "matched": matched,
+            "mismatches": mismatches,
+            "totalChecked": total_checked,
+            "skipped": skipped,
+        },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )

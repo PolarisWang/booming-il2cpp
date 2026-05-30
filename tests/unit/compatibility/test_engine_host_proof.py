@@ -18,7 +18,6 @@ CATALOG_PATH = (
     / "ReferenceProof"
     / "NativeReferenceProofCatalog.cs"
 )
-SUBJECT_WORKERS_PATH = REPO_ROOT / "build" / "toolchains" / "run" / "testing" / "subject_workers.py"
 HOST_PROOF_TEMPLATE_PATH = REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Generator" / "Templates" / "NativeReferenceProof.EngineHostProof.cpp.scriban"
 
 ENGINE_HOST_PROOF_ROOT = REPO_ROOT / "tests" / "fixtures" / "subjects" / "EngineHostProof"
@@ -45,7 +44,6 @@ class EngineHostProofTests(unittest.TestCase):
         planner_source = read_native_reference_planner_source(REPO_ROOT)
         emitter_source = EMITTER_PATH.read_text(encoding="utf-8")
         catalog_source = CATALOG_PATH.read_text(encoding="utf-8")
-        workers_source = SUBJECT_WORKERS_PATH.read_text(encoding="utf-8")
         template_source = HOST_PROOF_TEMPLATE_PATH.read_text(encoding="utf-8")
 
         self.assertIn("engine.host-proof.minimal", catalog_source)
@@ -54,14 +52,6 @@ class EngineHostProofTests(unittest.TestCase):
         self.assertIn("EngineHostProof/EngineHostEntry::Run()", planner_source)
         self.assertIn("NativeReferenceProofCatalog.EngineHostProofMinimal", emitter_source)
         self.assertIn("NativeReferenceProofCatalog.GetTemplateForPlan(", emitter_source)
-
-        for required_fragment in [
-            "engineContractSummary",
-            "engineEmissionSummary",
-            "engineObservationSummary",
-            "expected.runtime for engine trace compare",
-        ]:
-            self.assertIn(required_fragment, workers_source)
 
         for required_fragment in [
             '#include "engine_bridge.h"',

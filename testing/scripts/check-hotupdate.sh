@@ -62,28 +62,37 @@ if d3_patch_applied:
 else:
     print(f'semantic_changed=N/A (no patch applied, kind={verification_kind})')
 
-# Check 3: Hotupdate benchmark overhead (only if patch was applied)
-if d3_patch_applied and 'summary' in hu:
-    hu_bench = None
+# Check 3: Hotupdate benchmark overhead — compare post-patch timing
+# vs pre-patch timing from the regular benchmark stage.
+if d3_patch_applied:
     try:
         d = json.load(open('$REPORT'))
         stages = d.get('stages', {})
-        for bench_key in ['hotupdate_aot_benchmark', 'hotupdate_jit_benchmark']:
+        for bench_key, pre_key in [('hotupdate_aot_benchmark', 'native-aot'),
+                                   ('hotupdate_jit_benchmark', 'native-jit')]:
             bench_stage = stages.get(bench_key)
             if bench_stage is None:
                 continue
             details = bench_stage.get('details', {})
-            results = details.get('results', [])
-            if not results:
+            hot_results = details.get('results', [])
+            if not hot_results:
                 continue
-            for r in results:
-                base_ns = r.get('baseElapsedNs', 0) or r.get('elapsedBeforePatchNs', 0) or r.get('prePatchNsPerOp', 0)
-                patch_ns = r.get('patchedElapsedNs', 0) or r.get('elapsedAfterPatchNs', 0) or r.get('postPatchNsPerOp', 0)
-                method = r.get('methodSubjectId', 'unknown')
-                if base_ns > 0 and patch_ns > 0:
-                    overhead = (patch_ns / base_ns - 1.0) * 100
-                    if overhead > 100:
-                        failures.append(f'{bench_key} {method}: overhead {overhead:.1f}% > 100%')
+            # Read pre-patch ops from benchmark stage
+            pre_stage = stages.get('benchmark', {})
+            pre_details = pre_stage.get('details', {}) if isinstance(pre_stage, dict) else {}
+            pre_results = pre_details.get(pre_key, {}).get('results', []) if isinstance(pre_details, dict) else []
+            for idx, r in enumerate(hot_results):
+                post_ops = r.get('opsPerSecond', 0)
+                if post_ops <= 0:
+                    failures.append(f'{bench_key} result[{idx}]: opsPerSecond={post_ops} (expected > 0)')
+                    continue
+                # Compare vs pre-patch timing if available
+                if idx < len(pre_results):
+                    pre_ops = pre_results[idx].get('opsPerSecond', 0) if isinstance(pre_results[idx], dict) else 0
+                    if pre_ops > 0 and post_ops > 0:
+                        overhead = (pre_ops / post_ops - 1.0) * 100
+                        if overhead > 100:
+                            failures.append(f'{bench_key} method[{idx}]: overhead {overhead:.1f}% > 100%')
     except (json.JSONDecodeError, FileNotFoundError):
         warnings.append('Could not read unified report for overhead check')
 

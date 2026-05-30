@@ -28,6 +28,7 @@ from verification.stages.preflight import run_preflight
 from verification.stages.codegen import run_codegen, run_jit_codegen
 from verification.stages.fact import (
     run_fact, run_fact_jit, run_managed_fact, run_cross_verify,
+    run_managed_patch_fact,
 )
 from verification.stages.audit import run_audit
 from verification.stages.asm_compare import run_asm_compare
@@ -38,15 +39,54 @@ from verification.stages.hotupdate import (
     run_hotupdate_aot_bench,
     run_hotupdate_jit_fact,
     run_hotupdate_jit_bench,
+    run_patch_cross_verify,
 )
 from verification.stages.cleanup import run_cleanup
+
+
+# ── Cross-validation: AOT vs JIT hotupdate result consistency ────────
+
+def _cross_validate_hotupdate(stages: dict[str, StageResult]) -> str | None:
+    """Compare AOT and JIT hotupdate fact results for consistency.
+
+    Returns a warning string if discrepancies are found, None if consistent.
+    Skips comparison if either stage was skipped/n-a (no patch project).
+    """
+    aot = stages.get("hotupdate")
+    jit = stages.get("hotupdate_jit_fact")
+    if aot is None or jit is None:
+        return None
+    if aot.status == "n/a" or jit.status == "n/a":
+        return None
+    if aot.status in ("skipped", "n/a") or jit.status in ("skipped", "n/a"):
+        return None
+
+    aot_details = aot.details or {}
+    jit_details = jit.details or {}
+    mismatches = []
+
+    for key, label in [("passedMethods", "passed methods"),
+                        ("allSemantic", "allSemantic"),
+                        ("allRevert", "allRevert")]:
+        av = aot_details.get(key)
+        jv = jit_details.get(key)
+        if av is not None and jv is not None and av != jv:
+            mismatches.append(f"{label}: AOT={av} JIT={jv}")
+
+    if mismatches:
+        msg = f"AOT/JIT hotupdate mismatch: {'; '.join(mismatches)}"
+        print(f"  [cross-validate] WARNING: {msg}")
+        return msg
+    return None
 
 
 # ── Required stages per mode ───────────────────────────────────────
 
 REQUIRED_STAGES_STANDARD = {"preflight", "codegen", "jit_codegen", "fact", "audit"}
 REQUIRED_STAGES_STRICT = {
-    "preflight", "codegen", "jit_codegen", "managed_fact", "fact", "fact_jit",
+    "preflight", "codegen", "jit_codegen", "managed_fact", "cross_verify",
+    "managed_patch_fact", "patch_cross_verify",
+    "fact", "fact_jit",
     "audit", "asm_compare", "microbench", "benchmark",
     "hotupdate", "hotupdate_aot_benchmark",
     "hotupdate_jit_fact", "hotupdate_jit_benchmark",
@@ -113,6 +153,7 @@ class VerificationPipeline:
         ("jit_codegen", run_jit_codegen, "JitCodegen"),
         ("managed_fact", run_managed_fact, "Managed Fact (.NET)"),
         ("cross_verify", run_cross_verify, "Cross-Verify (Managed vs Native)"),
+        ("managed_patch_fact", run_managed_patch_fact, "Managed Patch Fact (.NET)"),
         ParallelGroup([
             ("fact", run_fact, "Fact AOT"),
             ("fact_jit", run_fact_jit, "Fact JIT"),
@@ -122,6 +163,7 @@ class VerificationPipeline:
             ("benchmark", run_benchmark, "Benchmark (3-way)"),
         ]),
         ("hotupdate", run_hotupdate, "HotUpdate AOT Fact"),
+        ("patch_cross_verify", run_patch_cross_verify, "Patch Cross-Verify"),
         ParallelGroup([
             ("hotupdate_aot_benchmark", run_hotupdate_aot_bench, "HotUpdate AOT Bench"),
             ("hotupdate_jit_fact", run_hotupdate_jit_fact, "HotUpdate JIT Fact"),
@@ -132,7 +174,8 @@ class VerificationPipeline:
 
     # Stages that require actual methods (skipped when codegen reports 0 methods)
     METHOD_DEPENDENT_STAGES = {
-        "managed_fact", "cross_verify", "fact", "fact_jit",
+        "managed_fact", "cross_verify", "managed_patch_fact", "patch_cross_verify",
+        "fact", "fact_jit",
         "asm_compare", "microbench", "benchmark",
         "hotupdate", "hotupdate_aot_benchmark",
         "hotupdate_jit_fact", "hotupdate_jit_benchmark",
@@ -278,6 +321,12 @@ class VerificationPipeline:
 
                 elapsed = format_duration(time.perf_counter() - overall_start)
                 print(f"  [{elapsed}] <<< Parallel group done\n")
+                # P0: Cross-validate AOT vs JIT hotupdate results after the
+                # hotupdate parallel group (identified by hotupdate_jit_fact).
+                if any(n == "hotupdate_jit_fact" for n, _, _ in group.stages):
+                    warn = _cross_validate_hotupdate(stages)
+                    if warn:
+                        print(f"  [{elapsed}] CROSS-VALIDATE: {warn}")
 
             else:
                 # ── Sequential stage ──
@@ -415,6 +464,40 @@ def build_dashboard_metrics(stages: dict[str, StageResult]) -> dict[str, Any]:
         ac_inner = ac.details.get("details", {})
         dashboard["irExpansionRatio"] = ac_inner.get("overallIrExpansionRatio", 0)
         dashboard["asmPassRate"] = ac_inner.get("asmPassRate", 0)
+
+    # HotUpdate benchmark performance
+    hu_aot = stages.get("hotupdate_aot_benchmark")
+    hu_jit = stages.get("hotupdate_jit_benchmark")
+    if hu_aot and hu_aot.status == "passed" and hu_jit and hu_jit.status == "passed":
+        hu_aot_details = hu_aot.details or {}
+        hu_jit_details = hu_jit.details or {}
+        hu_aot_results = hu_aot_details.get("results", []) if isinstance(hu_aot_details, dict) else []
+        hu_jit_results = hu_jit_details.get("results", []) if isinstance(hu_jit_details, dict) else []
+
+        hu_faster_count = 0
+        hu_comparable = 0
+        hu_total_speedup = 0.0
+        for aot_r, jit_r in zip(hu_aot_results, hu_jit_results):
+            aot_ops = aot_r.get("opsPerSecond", 0) if isinstance(aot_r, dict) else 0
+            jit_ops = jit_r.get("opsPerSecond", 0) if isinstance(jit_r, dict) else 0
+            if aot_ops > 0 and jit_ops > 0:
+                hu_comparable += 1
+                if aot_ops > jit_ops:
+                    hu_faster_count += 1
+                hu_total_speedup += (aot_ops / jit_ops - 1.0) * 100
+
+        hu_native_faster_ratio = round(hu_faster_count / hu_comparable, 3) if hu_comparable > 0 else 0
+        hu_avg_speedup = round(hu_total_speedup / hu_comparable, 1) if hu_comparable > 0 else 0.0
+
+        hu_aot_avg = hu_aot_details.get("averageOpsPerSecond", 0) if isinstance(hu_aot_details, dict) else 0
+        hu_jit_avg = hu_jit_details.get("averageOpsPerSecond", 0) if isinstance(hu_jit_details, dict) else 0
+
+        dashboard["hotupdateKeyRatios"] = {
+            "hotupdateNativeFasterRatio": hu_native_faster_ratio,
+            "hotupdateNativeAotOpsPerSecond": hu_aot_avg,
+            "hotupdateNativeJitOpsPerSecond": hu_jit_avg,
+        }
+        dashboard["hotupdateAverageSpeedupPercent"] = hu_avg_speedup
 
     return dashboard
 
