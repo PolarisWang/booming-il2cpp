@@ -136,7 +136,6 @@ class VerificationPipeline:
     Sequential stages run one-at-a-time.  Stages wrapped in a ParallelGroup
     execute concurrently via ThreadPoolExecutor.  Currently parallelized:
       - fact (AOT) + fact_jit (JIT)
-      - hotupdate_aot_bench + hotupdate_jit_fact + hotupdate_jit_bench
 
     Supports per-stage timeout (ctx.stage_timeout_seconds) and resuming
     from a previous report (ctx.resume).
@@ -169,11 +168,12 @@ class VerificationPipeline:
         ("hotupdate", run_hotupdate, "HotUpdate AOT Fact"),
         ("patch_cross_verify", run_patch_cross_verify, "Patch Cross-Verify"),
         ("multi_patch_hotupdate", run_multi_patch_hotupdate, "Multi-Patch HotUpdate"),
-        ParallelGroup([
-            ("hotupdate_aot_benchmark", run_hotupdate_aot_bench, "HotUpdate AOT Bench"),
-            ("hotupdate_jit_fact", run_hotupdate_jit_fact, "HotUpdate JIT Fact"),
-            ("hotupdate_jit_benchmark", run_hotupdate_jit_bench, "HotUpdate JIT Bench"),
-        ]),
+        # Sequential: hotupdate stages share mutable state (runtime-patchdata.cpp),
+        # so they cannot run concurrently.  Each stage's finally block writes a
+        # sentinel that would race with the next stage's _ensure_patch_data.
+        ("hotupdate_aot_benchmark", run_hotupdate_aot_bench, "HotUpdate AOT Bench"),
+        ("hotupdate_jit_fact", run_hotupdate_jit_fact, "HotUpdate JIT Fact"),
+        ("hotupdate_jit_benchmark", run_hotupdate_jit_bench, "HotUpdate JIT Bench"),
         ("cleanup", run_cleanup, "Cleanup Build Artifacts"),
     ]
 
