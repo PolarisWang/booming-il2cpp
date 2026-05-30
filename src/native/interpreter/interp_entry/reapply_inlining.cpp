@@ -49,8 +49,19 @@ void ReapplyInlining(PatchMethod* methods, uint32_t method_count) noexcept {
                     instr.op_code == interpreter::IROpCode::CallVirtConstrained) {
                     if (instr.call_target != nullptr) {
                         new_cc[j] = runtime_instantiation::PrecacheCallTarget(instr.call_target);
+                        // Phase 2.3 fallback: when PrecacheCallTarget misses but
+                        // direct_fn is available from JSON deserialization, use it.
+                        if (new_cc[j].ret_tag == 0xFF &&
+                            instr.direct_fn != nullptr &&
+                            instr.direct_ret_tag != 0xFF) {
+                            new_cc[j].ret_tag = instr.direct_ret_tag;
+                            new_cc[j].direct_ptr = instr.direct_fn;
+                            new_cc[j].is_struct_ret = false;
+                            new_cc[j].struct_size = 0;
+                        }
                     } else if (instr.direct_fn != nullptr && instr.direct_ret_tag != 0xFF) {
                         new_cc[j].ret_tag = instr.direct_ret_tag;
+                        new_cc[j].direct_ptr = instr.direct_fn;
                         new_cc[j].is_struct_ret = false;
                         new_cc[j].struct_size = 0;
                     } else {
