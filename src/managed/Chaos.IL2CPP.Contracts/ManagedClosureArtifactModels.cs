@@ -1,12 +1,19 @@
 ﻿namespace Chaos.IL2CPP.Contracts;
 
 /// <summary>Code generation mode for the AOT/JIT switch.</summary>
+[Flags]
 public enum CodegenMode
 {
     /// <summary>Generate native AOT code (default). All methods compiled to C++.</summary>
-    Aot,
+    Aot = 0,
     /// <summary>Generate JIT-friendly entries. All methods routed through JIT dispatch.</summary>
-    Jit,
+    Jit = 1,
+    /// <summary>Disable Subject_N test-method folding for testing purposes.</summary>
+    /// <remarks>When set, PatchDataExtractor emits real AOT Core IR for Subject_N
+    /// methods instead of replacing them with a ldc.i4 sentinel + ret stub.
+    /// Combine with <see cref="Aot"/> or <see cref="Jit"/>:
+    /// <c>CodegenMode.Aot | CodegenMode.TestMode</c>.</remarks>
+    TestMode = 2,
 }
 
 public sealed record AotManifestArtifact

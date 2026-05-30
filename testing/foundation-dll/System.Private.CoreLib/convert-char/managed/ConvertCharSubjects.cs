@@ -12,133 +12,148 @@ using System.Threading;
 
 public static partial class ConvertCharSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Boolean)
+    [Fact]
     public static void Subject_0()
     {
-        try { _ = (int)(Convert.ToChar(true)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(true)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [1] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Byte)
+    [Fact]
     public static void Subject_1()
     {
-        try { _ = (int)(Convert.ToChar((byte)42)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar((byte)42)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [2] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Char)
+    [Fact]
     public static void Subject_2()
     {
-        try { _ = (int)(Convert.ToChar('A')); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar('A')); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [3] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.DateTime)
+    [Fact]
     public static void Subject_3()
     {
-        try { _ = (int)(Convert.ToChar(DateTime.UtcNow)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(DateTime.UtcNow)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [4] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Decimal)
+    [Fact]
     public static void Subject_4()
     {
-        try { _ = (int)(Convert.ToChar(42m)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(42m)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [5] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Double)
+    [Fact]
     public static void Subject_5()
     {
-        try { _ = (int)(Convert.ToChar(42.0)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(42.0)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [6] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int16)
+    [Fact]
     public static void Subject_6()
     {
-        try { _ = (int)(Convert.ToChar((short)42)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar((short)42)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [7] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int32)
+    [Fact]
     public static void Subject_7()
     {
-        try { _ = (int)(Convert.ToChar(42)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(42)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [8] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Int64)
+    [Fact]
     public static void Subject_8()
     {
-        try { _ = (int)(Convert.ToChar(42L)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(42L)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [9] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object)
+    [Fact]
     public static void Subject_9()
     {
-        try { _ = (int)(Convert.ToChar(null!)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(null!)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [10] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Object,System.IFormatProvider)
+    [Fact]
     public static void Subject_10()
     {
-        try { _ = (int)(Convert.ToChar(null!, null)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(null!, null)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [11] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.SByte)
+    [Fact]
     public static void Subject_11()
     {
-        try { _ = (int)(Convert.ToChar((sbyte)42)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar((sbyte)42)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [12] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.Single)
+    [Fact]
     public static void Subject_12()
     {
-        try { _ = (int)(Convert.ToChar(42.0f)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(42.0f)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [13] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String)
+    [Fact]
     public static void Subject_13()
     {
-        try { _ = (int)(Convert.ToChar("hello")); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar("hello")); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [14] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.String,System.IFormatProvider)
+    [Fact]
     public static void Subject_14()
     {
-        try { _ = (int)(Convert.ToChar("hello", null)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar("hello", null)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [15] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt16)
+    [Fact]
     public static void Subject_15()
     {
-        try { _ = (int)(Convert.ToChar((ushort)42)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar((ushort)42)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [16] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt32)
+    [Fact]
     public static void Subject_16()
     {
-        try { _ = (int)(Convert.ToChar(42u)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(42u)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [17] System.Private.CoreLib/System.Convert::ToChar:System.Char(System.UInt64)
+    [Fact]
     public static void Subject_17()
     {
-        try { _ = (int)(Convert.ToChar(42uL)); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(Convert.ToChar(42uL)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
 }

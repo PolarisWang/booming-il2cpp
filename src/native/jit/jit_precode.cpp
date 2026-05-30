@@ -335,6 +335,23 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
 // File-level static initializes during CRT static init (single-threaded).
 static PrecodeArena s_precode_arena;
 
+// ── Original AOT direct_ptr side-map ─────────────────────────────────────
+// Maps HotpatchEntryV0* → original AOT function pointer (saved before JIT
+// trampoline installation).  Used by ResolveDirectFn during patch IR lowering
+// so it gets the real AOT code pointer instead of the JIT trampoline.
+// Key is a pointer → identity hash (no wyhash overhead).
+static CHAOS_IL2CPP_UNORDERED_DENSE_MAP_IDENTITY(void*, void*) g_original_aot_map;
+
+// Callback registered via SetOriginalAotPtrCallback.  Returns the original AOT
+// function pointer for a dispatch entry, or nullptr if this entry was never
+// replaced by JIT (i.e., runs in pure AOT mode).
+static void* GetOriginalAotPtr(HotpatchEntryV0* entry) noexcept {
+    if (!entry) return nullptr;
+    auto it = g_original_aot_map.find(static_cast<void*>(entry));
+    if (it != g_original_aot_map.end()) return it->second;
+    return nullptr;
+}
+
 // ── RegisterJitEntryMethods ───────────────────────────────────────────────
 // Called once at startup (from runtime-entry.cpp) to register all methods
 // for JIT compilation via precode dispatch.  For each entry:
@@ -388,6 +405,9 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
         if (precode->entry && precode->trampoline) {
             precode->original_direct_ptr = precode->entry->direct_ptr;
             precode->entry->direct_ptr = precode->trampoline;
+            // Register in side-map so ResolveDirectFn can find the original
+            // AOT pointer when resolving call targets during patch IR lowering.
+            g_original_aot_map[static_cast<void*>(precode->entry)] = precode->original_direct_ptr;
         } else {
             CHAOS_IL2CPP_LOG_ERROR_M("jit",
                 "RegisterJitEntryMethods: failed for token 0x%x module %u",
@@ -406,6 +426,11 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
         // Invalidate callers that inlined this method (version mismatch → stale)
         g_inline_reverse_map.InvalidateCallers(callee_token, callee_entry);
     });
+
+    // Register the original AOT ptr resolver so ResolveDirectFn (used during
+    // patch IR lowering) gets the real AOT code pointer, not the JIT trampoline.
+    // In AOT mode, this callback returns nullptr and entry->direct_ptr is used as-is.
+    SetOriginalAotPtrCallback(GetOriginalAotPtr);
 }
 
 // ── JitRecompileToTier1 ─────────────────────────────────────────────────

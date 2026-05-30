@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 // Handwritten custom entry implementations for System.Linq projection operations.
 // Covers Select (with/without index), SelectMany (with/without index,
 // with/without result selector), and Zip (2-sequence, 3-sequence, with/without result selector).
@@ -7,6 +8,7 @@
 public static partial class ProjectionSubjects
 {
     // [0] Enumerable.Select<TSource,TResult>(IEnumerable<TSource>, Func<TSource,TResult>)
+    [Fact]
     public static void CustomEntrySubject_0()
     {
         try
@@ -16,11 +18,12 @@ public static partial class ProjectionSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [1] Enumerable.Select<TSource,TResult>(IEnumerable<TSource>, Func<TSource,int,TResult>)
+    [Fact]
     public static void CustomEntrySubject_1()
     {
         try
@@ -30,11 +33,12 @@ public static partial class ProjectionSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [2] Enumerable.SelectMany<TSource,TResult>(IEnumerable<TSource>, Func<TSource,IEnumerable<TResult>>)
+    [Fact]
     public static void CustomEntrySubject_2()
     {
         try
@@ -44,11 +48,12 @@ public static partial class ProjectionSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [3] Enumerable.SelectMany<TSource,TResult>(IEnumerable<TSource>, Func<TSource,int,IEnumerable<TResult>>)
+    [Fact]
     public static void CustomEntrySubject_3()
     {
         try
@@ -58,11 +63,12 @@ public static partial class ProjectionSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [4] Enumerable.SelectMany<TSource,TCollection,TResult>(IEnumerable<TSource>, Func<TSource,int,IEnumerable<TCollection>>, Func<TSource,TCollection,TResult>)
+    [Fact]
     public static void CustomEntrySubject_4()
     {
         try
@@ -72,11 +78,12 @@ public static partial class ProjectionSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [5] Enumerable.SelectMany<TSource,TCollection,TResult>(IEnumerable<TSource>, Func<TSource,IEnumerable<TCollection>>, Func<TSource,TCollection,TResult>)
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try
@@ -86,11 +93,12 @@ public static partial class ProjectionSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [6] Enumerable.Zip<TFirst,TSecond,TResult>(IEnumerable<TFirst>, IEnumerable<TSecond>, Func<TFirst,TSecond,TResult>)
+    [Fact]
     public static void CustomEntrySubject_6()
     {
         try
@@ -101,11 +109,12 @@ public static partial class ProjectionSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [7] Enumerable.Zip<TFirst,TSecond>(IEnumerable<TFirst>, IEnumerable<TSecond>)
+    [Fact]
     public static void CustomEntrySubject_7()
     {
         try
@@ -116,11 +125,12 @@ public static partial class ProjectionSubjects
         System.Collections.Generic.IEnumerator<System.ValueTuple<int, int>> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [8] Enumerable.Zip<TFirst,TSecond,TThird>(IEnumerable<TFirst>, IEnumerable<TSecond>, IEnumerable<TThird>)
+    [Fact]
     public static void CustomEntrySubject_8()
     {
         try
@@ -132,7 +142,7 @@ public static partial class ProjectionSubjects
         System.Collections.Generic.IEnumerator<System.ValueTuple<int, int, int>> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 }

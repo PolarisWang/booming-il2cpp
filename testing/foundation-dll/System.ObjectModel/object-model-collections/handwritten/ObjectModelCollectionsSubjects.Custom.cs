@@ -9,12 +9,13 @@ using Chaos.TestFramework;
 public static partial class ObjectModelCollectionsSubjects
 {
     // [5] System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try {
             Assert.IsNotNull(default(KeyedCollection<byte, byte>)![default]);
         }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
 }

@@ -460,7 +460,7 @@ public sealed class DriverEntry
         if (args.Length == 0)
         {
             Console.Error.WriteLine("Usage:");
-            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>]");
+            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>] [--mode aot|test]");
             Console.Error.WriteLine("  chaos-il2cpp emit-patch-data dump <patchdata-path>");
             Console.Error.WriteLine("  chaos-il2cpp emit-patch-data full <patch-dll-path> <output-patchdata-path>");
             return 1;
@@ -492,7 +492,7 @@ public sealed class DriverEntry
         if (args[0] is "--help" or "-h" or "/?")
         {
             Console.Error.WriteLine("Usage:");
-            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>]");
+            Console.Error.WriteLine("  chaos-il2cpp emit-patch-data <patch-dll-path> <output-patchdata-path> [--aot-core-ir <path>] [--mode aot|test]");
             Console.Error.WriteLine("  chaos-il2cpp emit-patch-data dump <patchdata-path>");
             Console.Error.WriteLine("  chaos-il2cpp emit-patch-data full <patch-dll-path> <output-patchdata-path>");
             return 0;
@@ -510,6 +510,7 @@ public sealed class DriverEntry
         string? direction = null;
         var subjectOnly = false;
         string? subjectIndices = null;
+        var emitPatchDataMode = CodegenMode.Aot;
 
         for (var i = 2; i < args.Length; i++)
         {
@@ -521,6 +522,15 @@ public sealed class DriverEntry
                 subjectOnly = true;
             else if (args[i] == "--subject-indices" && i + 1 < args.Length)
                 subjectIndices = args[++i];
+            else if (args[i] == "--mode" && i + 1 < args.Length)
+            {
+                var modeValue = args[++i].ToLowerInvariant();
+                emitPatchDataMode = modeValue switch
+                {
+                    "test" => CodegenMode.Aot | CodegenMode.TestMode,
+                    _ => CodegenMode.Aot,
+                };
+            }
         }
 
         if (!File.Exists(dllPath))
@@ -535,7 +545,8 @@ public sealed class DriverEntry
         {
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
             new PatchDataExtractor().Extract(dllPath, outputPath, aotCoreIrPath,
-                direction: direction, subjectOnly: subjectOnly, subjectIndices: subjectIndices);
+                direction: direction, subjectOnly: subjectOnly, subjectIndices: subjectIndices,
+                mode: emitPatchDataMode);
             var fileSize = new FileInfo(outputPath).Length;
             Console.WriteLine($"Patch data written: {outputPath} ({fileSize} bytes)");
             return 0;

@@ -10,43 +10,48 @@
 
 using System;
 using System.Collections.Generic;
+using Chaos.TestFramework;
 
 public static partial class AggregationSubjects
 {
     // [0] System.Linq.Enumerable::Aggregate{TSource}:TSource(...)
+    [Fact]
     public static void CustomEntrySubject_0()
     {
         try
         {
         int result = System.Linq.Enumerable.Aggregate(new int[] { 1, 2, 3, 4, 5 }, (int a, int b) => a + b);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [1] System.Linq.Enumerable::Aggregate{TSource,TAccumulate}:TAccumulate(...)
+    [Fact]
     public static void CustomEntrySubject_1()
     {
         try
         {
         int result = System.Linq.Enumerable.Aggregate(new int[] { 1, 2, 3, 4, 5 }, 0, (int acc, int x) => acc + x);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [2] System.Linq.Enumerable::Aggregate{TSource,TAccumulate,TResult}:TResult(...)
+    [Fact]
     public static void CustomEntrySubject_2()
     {
         try
         {
         string result = System.Linq.Enumerable.Aggregate(new int[] { 1, 2, 3 }, 0, (int acc, int x) => acc + x, (int sum) => sum.ToString());
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [3] AggregateBy — replaced .NET 9 API with GroupBy + Select + expression lambda
+    [Fact]
     public static void CustomEntrySubject_3()
     {
         try
@@ -57,11 +62,12 @@ public static partial class AggregationSubjects
             (System.Linq.IGrouping<char, string> g) => new System.Collections.Generic.KeyValuePair<char, int>(g.Key, System.Linq.Enumerable.Aggregate(g, 0, (int acc, string s) => acc + s.Length))
         ).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [4] AggregateBy (seedSelector overload) — replaced .NET 9 API with GroupBy + Select + expression lambda
+    [Fact]
     public static void CustomEntrySubject_4()
     {
         try
@@ -72,33 +78,36 @@ public static partial class AggregationSubjects
             (System.Linq.IGrouping<char, string> g) => new System.Collections.Generic.KeyValuePair<char, int>(g.Key, System.Linq.Enumerable.Aggregate(g, 0, (int acc, string s) => acc + s.Length))
         ).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [5] System.Linq.Enumerable::Count{TSource}:System.Int32(...)
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try
         {
         int count = System.Linq.Enumerable.Count(new int[] { 10, 20, 30, 40, 50 });
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [6] System.Linq.Enumerable::Count{TSource}:System.Int32(...) with predicate
+    [Fact]
     public static void CustomEntrySubject_6()
     {
         try
         {
         int count = System.Linq.Enumerable.Count(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 }, (int x) => x > 5);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [7] CountBy — replaced .NET 9 API with GroupBy + Select + expression lambda
+    [Fact]
     public static void CustomEntrySubject_7()
     {
         try
@@ -109,33 +118,36 @@ public static partial class AggregationSubjects
             (System.Linq.IGrouping<char, string> g) => new System.Collections.Generic.KeyValuePair<char, int>(g.Key, System.Linq.Enumerable.Count(g))
         ).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [8] System.Linq.Enumerable::LongCount{TSource}:System.Int64(...)
+    [Fact]
     public static void CustomEntrySubject_8()
     {
         try
         {
         long count = System.Linq.Enumerable.LongCount(new int[] { 1, 2, 3 });
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [9] System.Linq.Enumerable::LongCount{TSource}:System.Int64(...) with predicate
+    [Fact]
     public static void CustomEntrySubject_9()
     {
         try
         {
         long count = System.Linq.Enumerable.LongCount(new int[] { 1, 2, 3, 4, 5 }, (int x) => x % 2 == 0);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [10] System.Linq.Enumerable::TryGetNonEnumeratedCount{TSource}:System.Boolean(...)
+    [Fact]
     public static void CustomEntrySubject_10()
     {
         try
@@ -143,7 +155,7 @@ public static partial class AggregationSubjects
         int count;
         bool result = System.Linq.Enumerable.TryGetNonEnumeratedCount(new int[] { 1, 2, 3, 4, 5 }, out count);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 }

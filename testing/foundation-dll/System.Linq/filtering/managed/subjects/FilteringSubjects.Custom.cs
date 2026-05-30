@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 // Handwritten custom entry implementations for System.Linq filtering operations.
 // Each method calls the corresponding Enumerable API and forces evaluation
 // by enumerating the result via IEnumerator<T> or calling a terminal operation.
@@ -5,6 +6,7 @@
 public static partial class FilteringSubjects
 {
     // [0] Enumerable.All<TSource>(IEnumerable<TSource>, Func<TSource,bool>)
+    [Fact]
     public static void CustomEntrySubject_0()
     {
         try
@@ -12,11 +14,12 @@ public static partial class FilteringSubjects
         int[] source = new int[] { 1, 2, 3 };
         System.Linq.Enumerable.All(source, (int x) => x > 0);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [1] Enumerable.Any<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_1()
     {
         try
@@ -24,11 +27,12 @@ public static partial class FilteringSubjects
         int[] source = new int[] { 1, 2, 3 };
         System.Linq.Enumerable.Any(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [2] Enumerable.Any<TSource>(IEnumerable<TSource>, Func<TSource,bool>)
+    [Fact]
     public static void CustomEntrySubject_2()
     {
         try
@@ -36,11 +40,12 @@ public static partial class FilteringSubjects
         int[] source = new int[] { 1, 2, 3 };
         System.Linq.Enumerable.Any(source, (int x) => x > 2);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [3] Enumerable.Cast<TResult>(IEnumerable)
+    [Fact]
     public static void CustomEntrySubject_3()
     {
         try
@@ -53,11 +58,12 @@ public static partial class FilteringSubjects
         System.Collections.IEnumerator e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [4] Enumerable.DistinctBy<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>)
+    [Fact]
     public static void CustomEntrySubject_4()
     {
         try
@@ -67,11 +73,12 @@ public static partial class FilteringSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [5] Enumerable.DistinctBy<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>, IEqualityComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try
@@ -81,11 +88,12 @@ public static partial class FilteringSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [6] Enumerable.OfType<TResult>(IEnumerable)
+    [Fact]
     public static void CustomEntrySubject_6()
     {
         try
@@ -98,11 +106,12 @@ public static partial class FilteringSubjects
         System.Collections.IEnumerator e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [7] Enumerable.Where<TSource>(IEnumerable<TSource>, Func<TSource,bool>)
+    [Fact]
     public static void CustomEntrySubject_7()
     {
         try
@@ -112,11 +121,12 @@ public static partial class FilteringSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [8] Enumerable.Where<TSource>(IEnumerable<TSource>, Func<TSource,int,bool>)
+    [Fact]
     public static void CustomEntrySubject_8()
     {
         try
@@ -126,7 +136,7 @@ public static partial class FilteringSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 }

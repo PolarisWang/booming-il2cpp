@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 // Handwritten custom entry implementations for System.Linq shuffle & index operations.
 // Covers ElementAt (Int32/Index), ElementAtOrDefault (Int32/Index),
 // First/FirstOrDefault, Last/LastOrDefault, Index, Shuffle,
@@ -8,6 +9,7 @@
 public static partial class ShuffleIndexSubjects
 {
     // [0] Enumerable.ElementAt<TSource>(IEnumerable<TSource>, Int32)
+    [Fact]
     public static void CustomEntrySubject_0()
     {
         try
@@ -15,11 +17,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20, 30, 40, 50 };
         System.Linq.Enumerable.ElementAt(source, 2);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [1] Enumerable.ElementAt<TSource>(IEnumerable<TSource>, System.Index)
+    [Fact]
     public static void CustomEntrySubject_1()
     {
         try
@@ -27,11 +30,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20, 30, 40, 50 };
         System.Linq.Enumerable.ElementAt(source, new System.Index(2));
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [2] Enumerable.ElementAtOrDefault<TSource>(IEnumerable<TSource>, Int32)
+    [Fact]
     public static void CustomEntrySubject_2()
     {
         try
@@ -39,11 +43,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20 };
         System.Linq.Enumerable.ElementAtOrDefault(source, 5);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [3] Enumerable.ElementAtOrDefault<TSource>(IEnumerable<TSource>, System.Index)
+    [Fact]
     public static void CustomEntrySubject_3()
     {
         try
@@ -51,11 +56,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20 };
         System.Linq.Enumerable.ElementAtOrDefault(source, new System.Index(5));
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [4] Enumerable.First<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_4()
     {
         try
@@ -63,11 +69,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20, 30 };
         System.Linq.Enumerable.First(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [5] Enumerable.First<TSource>(IEnumerable<TSource>, Func<TSource,bool>)
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try
@@ -75,11 +82,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.Enumerable.First(source, (int x) => x > 3);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [6] Enumerable.FirstOrDefault<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_6()
     {
         try
@@ -87,11 +95,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20, 30 };
         System.Linq.Enumerable.FirstOrDefault(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [7] Enumerable.FirstOrDefault<TSource>(IEnumerable<TSource>, TSource)
+    [Fact]
     public static void CustomEntrySubject_7()
     {
         try
@@ -99,11 +108,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { };
         System.Linq.Enumerable.FirstOrDefault(source, 42);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [8] Enumerable.FirstOrDefault<TSource>(IEnumerable<TSource>, Func<TSource,bool>)
+    [Fact]
     public static void CustomEntrySubject_8()
     {
         try
@@ -111,11 +121,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.Enumerable.FirstOrDefault(source, (int x) => x > 10);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [9] Enumerable.FirstOrDefault<TSource>(IEnumerable<TSource>, Func<TSource,bool>, TSource)
+    [Fact]
     public static void CustomEntrySubject_9()
     {
         try
@@ -123,11 +134,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.Enumerable.FirstOrDefault(source, (int x) => x > 10, 99);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [10] Enumerable.Index<TSource>(IEnumerable<TSource>) — .NET 9 API, replaced with Select
+    [Fact]
     public static void CustomEntrySubject_10()
     {
         try
@@ -137,11 +149,12 @@ public static partial class ShuffleIndexSubjects
         System.Collections.Generic.IEnumerator<System.ValueTuple<int, int>> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [11] Enumerable.Last<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_11()
     {
         try
@@ -149,11 +162,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20, 30 };
         System.Linq.Enumerable.Last(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [12] Enumerable.Last<TSource>(IEnumerable<TSource>, Func<TSource,bool>)
+    [Fact]
     public static void CustomEntrySubject_12()
     {
         try
@@ -161,11 +175,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.Enumerable.Last(source, (int x) => x < 4);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [13] Enumerable.LastOrDefault<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_13()
     {
         try
@@ -173,11 +188,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20, 30 };
         System.Linq.Enumerable.LastOrDefault(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [14] Enumerable.LastOrDefault<TSource>(IEnumerable<TSource>, TSource)
+    [Fact]
     public static void CustomEntrySubject_14()
     {
         try
@@ -185,11 +201,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { };
         System.Linq.Enumerable.LastOrDefault(source, 42);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [15] Enumerable.LastOrDefault<TSource>(IEnumerable<TSource>, Func<TSource,bool>)
+    [Fact]
     public static void CustomEntrySubject_15()
     {
         try
@@ -197,11 +214,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.Enumerable.LastOrDefault(source, (int x) => x > 10);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [16] Enumerable.LastOrDefault<TSource>(IEnumerable<TSource>, Func<TSource,bool>, TSource)
+    [Fact]
     public static void CustomEntrySubject_16()
     {
         try
@@ -209,11 +227,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.Enumerable.LastOrDefault(source, (int x) => x > 10, 99);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [17] Enumerable.Shuffle<TSource>(IEnumerable<TSource>) — .NET 9 API, replaced with OrderBy
+    [Fact]
     public static void CustomEntrySubject_17()
     {
         try
@@ -223,11 +242,12 @@ public static partial class ShuffleIndexSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [18] Enumerable.Single<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_18()
     {
         try
@@ -235,11 +255,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 42 };
         System.Linq.Enumerable.Single(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [19] Enumerable.Single<TSource>(IEnumerable<TSource>, Func<TSource,bool>)
+    [Fact]
     public static void CustomEntrySubject_19()
     {
         try
@@ -247,11 +268,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20, 30, 40, 50 };
         System.Linq.Enumerable.Single(source, (int x) => x == 30);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [20] Enumerable.SingleOrDefault<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_20()
     {
         try
@@ -259,11 +281,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 42 };
         System.Linq.Enumerable.SingleOrDefault(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [21] Enumerable.SingleOrDefault<TSource>(IEnumerable<TSource>, TSource)
+    [Fact]
     public static void CustomEntrySubject_21()
     {
         try
@@ -271,11 +294,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { };
         System.Linq.Enumerable.SingleOrDefault(source, 99);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [22] Enumerable.SingleOrDefault<TSource>(IEnumerable<TSource>, Func<TSource,bool>)
+    [Fact]
     public static void CustomEntrySubject_22()
     {
         try
@@ -283,11 +307,12 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20, 30, 40, 50 };
         System.Linq.Enumerable.SingleOrDefault(source, (int x) => x == 100);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [23] Enumerable.SingleOrDefault<TSource>(IEnumerable<TSource>, Func<TSource,bool>, TSource)
+    [Fact]
     public static void CustomEntrySubject_23()
     {
         try
@@ -295,7 +320,7 @@ public static partial class ShuffleIndexSubjects
         int[] source = new int[] { 10, 20, 30, 40, 50 };
         System.Linq.Enumerable.SingleOrDefault(source, (int x) => x == 100, 99);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 }

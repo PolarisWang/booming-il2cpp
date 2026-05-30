@@ -1,8 +1,9 @@
 ---
 name: dev-optimization-campaign
 description: >
-  全自动 family 优化流水线。线性 12 步驱动：Setup → Verify → Fix Loop → Perf Check → 
-  Perf Loop → HotUpdate Check → HotUpdate Loop → Commit → Merge → Cleanup。
+  全自动 family 优化流水线。线性 14 步驱动：Setup → Audit(结构+正确性) → Freeze+Baseline → 
+  Pre-flight → Pipeline → Fix Loop(冻结守卫) → Perf Check+Regression → .NET 8 对比 → 
+  HotUpdate Check → Docs → Commit → Merge → Cleanup → CI → Pull。
   每步 bounded retry（max 3），Worktree 强制，Merge 内置。全流程不中断。
 ---
 
@@ -13,28 +14,30 @@ description: >
 1. **Worktree 强制** — 所有开发必须在 worktree 中完成，无例外
 2. **全自动收口** — merge + push + worktree 清理是流程标准终点，不是可选步骤
 3. **分类修复** — 失败按类型分流：Infrastructure → 1 次重建，Logic → 3 次迭代，Design → 调研后再进入修复。不混用 retry budget
-4. **禁止 hack 测试代码** — 必须直接修复 codegen 或 il2cpp runtime
+4. **禁止 hack 测试代码** — 必须直接修复 codegen 或 il2cpp runtime。Subject 文件在 Step 1.6 冻结后**禁止修改**
 5. **数据完整性是硬要求** — benchmark timing > 0，exception-path 方法自动排除，hotupdate d3PatchApplied 必须先为 true 再检查 semantic_changed > 0
-6. **文档语言统一为中文** — 分析文档、commit message 均用中文（代码片段、数据表、缩写除外）
+6. **Subject 冻结** — Step 1.6 后 managed/subjects/ 和 handwritten/ 下的 .cs 文件被冻结，优化循环中不得修改。Step 4/6/7 每次重跑前自动验证冻结
+7. **文档语言统一为中文** — 分析文档、commit message 均用中文（代码片段、数据表、缩写除外）
 
 ## 流水线概览
 
 ```
-Step  1: Setup Worktree    → EnterWorktree + claim family
-Step  1.5: Test Audit      → pre_verification_audit 审计测试代码完整性
-Step  1.7: Pre-flight Check → 验证构建系统、源文件、二进制合约完整性
-Step  2: Run Pipeline      → python -m verification.entry_points.cli <slug> --mode strict --native-config profile
-Step  3: Classify & Diagnose → 按失败类型分流（Infra / Logic / Design），输出根因
-Step  4: Fix & Rerun       → 按分类使用不同 retry budget 修复 + 重跑
-Step  5: Perf Check        → 从已有报告验证 benchmark timing > 0（不重跑 pipeline）
-Step  6: .NET 8 对比       → 跑 pipeline（--native-config profile），vs .NET 8 ≤ 20%？不满足 → 诊断 + 优化 + 重跑，最多 3 次
-Step  7: HotUpdate Check   → 跑 pipeline（--native-config profile），semantic_changed > 0？overhead ≤ 100%？不满足 → 修复 + 重跑，最多 3 次
-Step  8: 文档              → 写 docs/optimize/YYYY-MM-DD-<slug>/README.md
-Step  9: Commit            → git add + git commit（含性能表）
-Step 10: Push              → git push origin claim/<slug>/<worker-id>
-Step 11: Merge → Cleanup   → checkout main → merge → push → del worktree branch
-Step 12: CI Verify         → 等待 CI 通过（超时 10 min）
-Step 13: Pull              → git pull origin main（确保 main 最新且干净）
+Step  1: Setup Worktree       → EnterWorktree + claim family
+Step  1.5: Pre-audit          → 结构审计 + 正确性审计（两阶段）
+Step  1.6: Freeze + Baseline  → 冻结 subject + 捕获 pre-opt 基线
+Step  1.7: Pre-flight Check   → 验证构建系统、源文件、二进制合约完整性
+Step  2: Run Pipeline         → python -m verification.entry_points.cli <slug> --mode strict --native-config profile
+Step  3: Classify & Diagnose  → 按失败类型分流（Infra / Logic / Design / Regression），输出根因
+Step  4: Fix & Rerun          → 按分类使用不同 retry budget 修复 + 重跑（每轮前 --verify-freeze）
+Step  5: Perf + Regression    → timing 完整性 + 语义回归检查 + 性能回归检查（不重跑 pipeline）
+Step  6: .NET 8 对比          → 跑 pipeline（--native-config profile），vs .NET 8 ≤ 20%？不满足 → 诊断 + 优化 + 重跑，最多 3 次
+Step  7: HotUpdate Check      → 跑 pipeline（--native-config profile），semantic_changed > 0？overhead ≤ 100%？不满足 → 修复 + 重跑，最多 3 次
+Step  8: 文档                 → 写 docs/optimize/YYYY-MM-DD-<slug>/README.md
+Step  9: Commit               → git add + git commit（含性能表）
+Step 10: Push                 → git push origin claim/<slug>/<worker-id>
+Step 11: Merge → Cleanup      → checkout main → merge → push → del worktree branch
+Step 12: CI Verify            → 等待 CI 通过（超时 10 min）
+Step 13: Pull                 → git pull origin main（确保 main 最新且干净）
 ```
 
 ## 自动化执行说明
@@ -85,27 +88,50 @@ git push origin claim/<slug>/<worker-id>
 
 ---
 
-## Step 1.5: Pre-verification Test Audit
+## Step 1.5: Pre-verification Audit — 两阶段审计
 
-在跑完整 pipeline 之前，先审计受试 family 的测试代码完整性，确认测试有意义并在需要时自动补充手写测试。
+在跑完整 pipeline 之前，先审计受试 family 的测试代码完整性和正确性。
 
-### 1.5.1 运行审计
+### Phase A: 结构审计（已有逻辑）
 
 ```bash
 python -m verification.stages.pre_verification_audit <slug> --assembly System.Private.CoreLib --json
 ```
 
-### 1.5.2 解读判决
+检查内容：
+- `customEntryIndices` 与实际情况是否同步
+- 非 auto-callable 方法是否有 handwritten 实现
+- 标注完整性（benchmarkMethodIndices、hotupdateMethodIndices）
+
+### Phase B: 正确性审计（新增）
+
+```bash
+python -m verification.stages.subject_correctness_audit <slug> --assembly System.Private.CoreLib
+```
+
+检查内容：
+
+| 检查项 | 检测目标 | 示例发现 |
+|--------|---------|---------|
+| Assertion Quality | CustomEntrySubject_N() 是否有 Assert.* 调用 | reflection-member-complete: 17 方法 0 Assert |
+| Stub Detection | `_ = 0;` / `_ = default(T)!.Member` | reflection-member-complete: 2 个 `_ = 0;`, 15 个 `_ = default` |
+| Triviality Detection | Subject_N() 是否总走 catch 路径 | — |
+| Benchmark Input Check | benchmark 标注的方法是否始终抛异常 | — |
+
+正确性审计不阻塞 pipeline，但 **WARN 级别的问题必须在优化前修复**。
+
+### 审计判决
 
 读取 stdout 的 JSON 输出，根据 `verdict` 字段决定后续动作：
 
 | 判决 | 含义 | 动作 |
 |------|------|------|
-| `PASS` | 测试代码完整有意义 | → 进入 Step 2 |
-| `MISSING_HANDWRITTEN` | 有方法不可 auto-call 且无 handwritten 实现 | → 执行 1.5.3 补充 |
-| `STALE_METADATA` | contract.json 的 customEntryIndices 与实际情况不同步 | → 执行 1.5.3 自动修复 |
+| `PASS` | 测试代码完整有意义 | → 进入 Step 1.6 |
+| `MISSING_HANDWRITTEN` | 有方法不可 auto-call 且无 handwritten 实现 | → 执行自动修复 |
+| `STALE_METADATA` | contract.json 的 customEntryIndices 与实际情况不同步 | → 执行自动修复 |
+| `ISSUES_FOUND` | 正确性审计发现问题 | → 修复问题后继续 |
 
-### 1.5.3 自动修复
+### 自动修复
 
 ```bash
 python -m verification.stages.pre_verification_audit <slug> --assembly System.Private.CoreLib --fix
@@ -115,17 +141,74 @@ python -m verification.stages.pre_verification_audit <slug> --assembly System.Pr
 1. 更新 `capability-family-contract.json` 的 `customEntryIndices`（添加缺失索引、移除冗余索引）
 2. 在 `handwritten/` 下生成缺失的 `{ClassName}.Custom.cs` 存根文件（含 TODO 注释）
 
-生成后检查 `handwritten/*.Custom.cs` 中的 `TODO` 注释，判断是否需要补充真实实现。然后重新运行审计确认：
+如果 Phase B 发现 assertion 缺失或 stub 问题，手动修复 handwritten 代码。
+
+生成后重新运行审计确认：
 
 ```bash
 python -m verification.stages.pre_verification_audit <slug> --assembly System.Private.CoreLib --json
+python -m verification.stages.subject_correctness_audit <slug> --assembly System.Private.CoreLib
 ```
 
 ### 出口条件
 
-- ✅ 审计 verdict = `PASS` → 进入 Step 2
-- ⚠️ 需要修复且已修复完毕，重审计 PASS → 进入 Step 2
+- ✅ 结构审计 verdict = `PASS` → 进入 Step 1.6
+- ✅ 正确性审计无 WARN 级别问题 → 进入 Step 1.6
+- ⚠️ 已修复完毕，重审计 PASS → 进入 Step 1.6
 - ❌ 非 auto-callable 方法过多（>50%）→ 考虑是否跳过此 family 优化
+
+---
+
+## Step 1.6: Subject Freeze + Baseline Capture
+
+在开始优化前，冻结受试 subject 代码，捕获优化前的语义基线和性能基线。
+
+### 1.6.1 冻结 Subject
+
+```bash
+python -m verification.stages.pre_verification_audit <slug> --assembly System.Private.CoreLib --freeze
+```
+
+此命令：
+1. 计算 `managed/subjects/` 和 `handwritten/` 下所有 .cs 文件的 SHA256 哈希
+2. 写入 `subject-freeze-manifest.json`
+3. 备份冻结副本到 `subject-freeze/` 目录
+
+**冻结期间禁止修改** `managed/subjects/` 和 `handwritten/` 下的任何文件。
+Step 4/6/7 每次重跑 pipeline 前自动验证冻结：
+
+```bash
+python -m verification.stages.pre_verification_audit <slug> --assembly System.Private.CoreLib --verify-freeze
+```
+
+如果冻结被打破 → 恢复 subject 文件，修改必须来自 codegen/runtime 而非 test。
+
+### 1.6.2 捕获优化前基线
+
+```bash
+# 1. 跑 managed_record 捕获 golden record
+python -m verification.entry_points.cli \
+    <slug> --assembly System.Private.CoreLib --mode strict \
+    --stages managed_record --verbose
+
+# 2. 保存基线 golden record
+cp native/golden-record.json native/baseline-golden-record.json
+```
+
+首次完整 pipeline（Step 2）跑完后，性能基线会自动保存在 `perf/benchmark-history.jsonl` 中。
+
+### 1.6.3 记录基线 commit
+
+```bash
+git rev-parse HEAD > native/baseline-commit.txt
+echo "Baseline captured at commit $(cat native/baseline-commit.txt)"
+```
+
+### 出口条件
+
+- [x] subject-freeze-manifest.json 已生成
+- [x] baseline-golden-record.json 已保存
+- [x] baseline-commit.txt 已记录
 
 ---
 
@@ -229,6 +312,7 @@ python -m verification.entry_points.cli \
 |------|---------|---------|-------------|
 | **Infrastructure** | 编译错、链接错、file not found、cmake 失败、entry.exe 缺符号 | 构建缓存过期、源文件缺失、SDK lib 未同步 | 1 次（重建/重配后 100% 恢复） |
 | **Logic** | assert 失败、benchmark timing=-1、hotupdate semanticChangedCount=0 | codegen IR 错误、dispatch ABI 不匹配、运行时 bug | 3 次（现有逻辑） |
+| **Regression** | Post-opt semantic mismatch 或 benchmark degradation >5% | 优化引入的新分支未覆盖所有路径、代码生成遗漏 case | 3 次（Logic 类同） |
 | **Design** | 同一 Logic 失败 3 次仍未解决、架构不支持 | 技术方案设计缺陷、IL 语义与 AOT 不可兼得 | 不 retry，调研后再修复 |
 
 分类依据（按优先级）：
@@ -342,7 +426,15 @@ cmake --build "$build_dir" --config RelWithDebInfo --target entry --parallel
 
 ### 4.2 Logic 类修复（max_attempts=3）
 
-根据 Step 3 的诊断根因修改代码（codegen / runtime / test），然后重跑 pipeline：
+根据 Step 3 的诊断根因修改代码（codegen / runtime），然后重跑 pipeline。**禁止修改已冻结的 subject 文件。**
+
+每轮重跑前先验证 subject freeze：
+```bash
+python -m verification.stages.pre_verification_audit \
+    <slug> --assembly System.Private.CoreLib --verify-freeze
+```
+
+如果 freeze 被打破 → 恢复 subject 文件，确认修改来自 codegen/runtime 而非 test。
 
 ```bash
 python -m verification.entry_points.cli \
@@ -394,20 +486,54 @@ fi
 
 ---
 
-## Step 5: Perf Check + 数据完整性验证（轻量，不重跑 pipeline）
+## Step 5: Perf Check + Regression Check（轻量，不重跑 pipeline）
 
 直接从 Step 4 输出的 `unified-verification-report.json` 和 `multi-run/multi-run-report.json` 中提取 benchmark 数据验证：
 
-1. **Timing 完整性** — 所有 benchmark timing > 0
-2. **Exception-path 检测** — 识别因 null/invalid 输入导致始终抛异常的 method（chaos-aot timing 比 .NET 8 慢 20x+），输出警告并排除
-3. **数据一致性** — okCount == totalMethods
+### 5.1 Timing 完整性 + Exception-path 检测（existing）
 
 ```bash
 bash testing/scripts/check-perf-timings.sh <slug> --verbose
 ```
 
-**出口条件**：
-- passed → 记录 exception-path 列表（供 Step 6 排除），进入 Step 6
+检查项：
+- 所有 benchmark timing > 0
+- Exception-path 检测：识别因 null/invalid 输入导致始终抛异常的 method（chaos-aot timing 比 .NET 8 慢 20x+），输出警告并排除
+- 数据一致性：okCount == totalMethods
+
+### 5.2 语义回归检查（new）
+
+对比优化后的 golden record 与基线，确认语义未被破坏：
+
+```bash
+python -m verification.analysis.semantic_regression_check <slug> --assembly System.Private.CoreLib
+```
+
+检查项：
+- 每个 method 的 pass/fail 状态与基线一致
+- 发生 exception 的 method 的 exception type 与基线一致
+
+任何回归（regression）都必须修复后才能进入 Step 6。
+
+### 5.3 性能回归检查（new）
+
+对比优化后的 benchmark 数据与基线，确认性能未退化：
+
+```bash
+python -m verification.analysis.perf_regression_check <slug> --assembly System.Private.CoreLib --max-degradation 1.05
+```
+
+检查项：
+- 每个 method 的 ns/op 与基线对比
+- 超过 5% degradation 的方法标记为回归
+
+性能回归不阻塞（优化可能有意 trade off 某些路径），但必须在文档中说明。
+
+### 出口条件
+- 5.1 passed → 记录 exception-path 列表（供 Step 6 排除）
+- 5.2 passed（无 semantic regression）→ 继续
+- 5.2 failed → 回到 Step 3 诊断（新增 Regression 分类）
+- 5.3 的结果记入文档 → 进入 Step 6
 - failed（timing 不全） → 回到 Step 3 诊断修复
 
 ---
@@ -661,12 +787,13 @@ docs/optimize/
 | Step | 预估 | 超时处理 |
 |------|------|---------|
 | 1 Setup | 2 min | — |
-| 1.5 Audit | 2 min | — |
+| 1.5 Audit (enhanced) | 3 min | — |
+| 1.6 Freeze + Baseline | 2 min | — |
 | 1.7 Pre-flight | 1 min | 自动修复，不阻塞 |
 | 2 Pipeline | 10-30 min | 每 60s keepalive |
 | 3 Classify & Diagnose | 3 min | — |
 | 4 Fix loop (Infra×1 / Logic×3) | 30 min | max_attempts → Design / abort |
-| 5 Perf Check | 1 min | — |
+| 5 Perf + Regression | 2 min | — |
 | 6 .NET 8 loop (×3) | 60 min | max_attempts → abort |
 | 7 HotUpdate loop (×3) | 30 min | max_attempts → abort |
 | 8 文档 | 5 min | — |
@@ -683,9 +810,12 @@ docs/optimize/
 
 ## 收敛检查
 
+- [ ] Step 1.5: Structural + correctness audit passed
+- [ ] Step 1.6: Subject freeze captured, baseline recorded
 - [ ] Step 4: Pipeline 全部 stage passed（或 blocker.md 已记录）
 - [ ] Step 5: 所有 benchmark timing > 0，数据完整性 OK
 - [ ] Step 5: Exception-path methods 已标记并排除
+- [ ] Step 5: Regression check passed（semantic + benchmark）
 - [ ] Step 6: vs .NET 8 ≤ 20%（AOT + JIT，exception-path 已排除，或 blocker.md 已记录）
 - [ ] Step 7: d3PatchApplied 已确认（为 false 时预期，文档说明原因；为 true 时 semanticChangedCount > 0 + overhead ≤ 100%）
 - [ ] Step 8: docs/optimize/ 完整

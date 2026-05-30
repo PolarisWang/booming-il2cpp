@@ -8,19 +8,31 @@ using System;
 public static partial class CodegenEdgeCasesSubjects
 {
     // [0] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_0:System.Void()
+    [Fact]
     public static void CustomEntrySubject_0()
-    {        try { CodegenEdgeCasesSubjects.Subject_0(); } catch { _exitCode = 1; }    }
+    {
+        CodegenEdgeCasesSubjects.Subject_0();
+    }
 
     // [1] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_1:System.Void(System.Int32)
+    [Fact]
     public static void CustomEntrySubject_1()
-    {        try { CodegenEdgeCasesSubjects.Subject_1(42); } catch { _exitCode = 1; }    }
+    {
+        CodegenEdgeCasesSubjects.Subject_1(42);
+    }
 
     // [2] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_2:System.Void()
+    [Fact]
     public static void CustomEntrySubject_2()
-    {        try { CodegenEdgeCasesSubjects.Subject_2(); } catch { _exitCode = 1; }    }
+    {
+        CodegenEdgeCasesSubjects.Subject_2();
+    }
 
     // [3] System.Private.CoreLib/CodegenEdgeCasesSubjects::Subject_3:System.Int32(System.Int32)
+    [Fact]
     public static void CustomEntrySubject_3()
-    {        try { _ = CodegenEdgeCasesSubjects.Subject_3(42); } catch { _exitCode = 1; }    }
+    {
+        _ = CodegenEdgeCasesSubjects.Subject_3(42);
+    }
 
 }

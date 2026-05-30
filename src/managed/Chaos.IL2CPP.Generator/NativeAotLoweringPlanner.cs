@@ -938,7 +938,7 @@ public sealed partial class NativeAotLoweringPlanner
         // Always define ChaosJitRegisterAll so runtime-entry.cpp can call it unconditionally.
         // In AOT mode it's a no-op; in JIT mode it registers all methods for JIT dispatch.
         // This avoids linker errors in AOT builds where JIT symbols don't exist.
-        if (_codegenMode == CodegenMode.Jit && methodCount > 0)
+        if (_codegenMode.HasFlag(CodegenMode.Jit) && methodCount > 0)
         {
             globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
             var cgNs = SanitizeCppIdentifier(_assemblyName);
@@ -3527,7 +3527,7 @@ public sealed partial class NativeAotLoweringPlanner
 
         var model = new ScriptObject
         {
-            ["is_jit_mode"] = _codegenMode == CodegenMode.Jit,
+            ["is_jit_mode"] = _codegenMode.HasFlag(CodegenMode.Jit),
             ["methods"] = methodEntries,
             ["methods_count"] = methods.Count,
             ["default_string_id"] = (long)defaultStringId,

@@ -8,139 +8,241 @@ using System;
 public static partial class ReflectionFieldPropertySubjects
 {
     // [0] System.Private.CoreLib/System.Reflection.FieldInfo::get_MemberType:System.Reflection.MemberTypes()
+    [Fact]
     public static void CustomEntrySubject_0()
-    {        try { _ = default(FieldInfo)!.MemberType; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.MemberType;
+    }
 
     // [1] System.Private.CoreLib/System.Reflection.FieldInfo::get_Attributes:System.Reflection.FieldAttributes()
+    [Fact]
     public static void CustomEntrySubject_1()
-    {        try { _ = default(FieldInfo)!.Attributes; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.Attributes;
+    }
 
     // [2] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsNotSerialized:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_2()
-    {        try { _ = default(FieldInfo)!.IsNotSerialized; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsNotSerialized;
+    }
 
     // [3] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPinvokeImpl:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_3()
-    {        try { _ = default(FieldInfo)!.IsPinvokeImpl; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsPinvokeImpl;
+    }
 
     // [4] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSpecialName:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_4()
-    {        try { _ = default(FieldInfo)!.IsSpecialName; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsSpecialName;
+    }
 
     // [5] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsAssembly:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_5()
-    {        try { _ = default(FieldInfo)!.IsAssembly; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsAssembly;
+    }
 
     // [6] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamily:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_6()
-    {        try { _ = default(FieldInfo)!.IsFamily; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsFamily;
+    }
 
     // [7] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyAndAssembly:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_7()
-    {        try { _ = default(FieldInfo)!.IsFamilyAndAssembly; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsFamilyAndAssembly;
+    }
 
     // [8] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsFamilyOrAssembly:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_8()
-    {        try { _ = default(FieldInfo)!.IsFamilyOrAssembly; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsFamilyOrAssembly;
+    }
 
     // [9] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPrivate:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_9()
-    {        try { _ = default(FieldInfo)!.IsPrivate; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsPrivate;
+    }
 
     // [10] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsPublic:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_10()
-    {        try { _ = default(FieldInfo)!.IsPublic; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsPublic;
+    }
 
     // [11] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityCritical:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_11()
-    {        try { _ = default(FieldInfo)!.IsSecurityCritical; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsSecurityCritical;
+    }
 
     // [12] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecuritySafeCritical:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_12()
-    {        try { _ = default(FieldInfo)!.IsSecuritySafeCritical; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsSecuritySafeCritical;
+    }
 
     // [13] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsSecurityTransparent:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_13()
-    {        try { _ = default(FieldInfo)!.IsSecurityTransparent; } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.IsSecurityTransparent;
+    }
 
     // [14] System.Private.CoreLib/System.Reflection.FieldInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Globalization.CultureInfo)
+    [Fact]
     public static void CustomEntrySubject_14()
-    {        try { default(FieldInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, default); } catch { _exitCode = 1; }    }
+    {
+        default(FieldInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, default);
+    }
 
     // [15] System.Private.CoreLib/System.Reflection.FieldInfo::GetRawConstantValue:System.Object()
+    [Fact]
     public static void CustomEntrySubject_15()
-    {        try { _ = default(FieldInfo)!.GetRawConstantValue(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.GetRawConstantValue();
+    }
 
     // [16] System.Private.CoreLib/System.Reflection.FieldInfo::GetOptionalCustomModifiers:System.Type[]()
+    [Fact]
     public static void CustomEntrySubject_16()
-    {        try { _ = default(FieldInfo)!.GetOptionalCustomModifiers(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.GetOptionalCustomModifiers();
+    }
 
     // [17] System.Private.CoreLib/System.Reflection.FieldInfo::GetRequiredCustomModifiers:System.Type[]()
+    [Fact]
     public static void CustomEntrySubject_17()
-    {        try { _ = default(FieldInfo)!.GetRequiredCustomModifiers(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(FieldInfo)!.GetRequiredCustomModifiers();
+    }
 
     // [18] System.Private.CoreLib/System.Reflection.PropertyInfo::get_Attributes:System.Reflection.PropertyAttributes()
+    [Fact]
     public static void CustomEntrySubject_18()
-    {        try { _ = default(PropertyInfo)!.Attributes; } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.Attributes;
+    }
 
     // [19] System.Private.CoreLib/System.Reflection.PropertyInfo::get_IsSpecialName:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_19()
-    {        try { _ = default(PropertyInfo)!.IsSpecialName; } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.IsSpecialName;
+    }
 
     // [20] System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[]()
+    [Fact]
     public static void CustomEntrySubject_20()
-    {        try { _ = default(PropertyInfo)!.GetAccessors(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetAccessors();
+    }
 
     // [21] System.Private.CoreLib/System.Reflection.PropertyInfo::GetAccessors:System.Reflection.MethodInfo[](System.Boolean)
+    [Fact]
     public static void CustomEntrySubject_21()
-    {        try { _ = default(PropertyInfo)!.GetAccessors(true); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetAccessors(true);
+    }
 
     // [22] System.Private.CoreLib/System.Reflection.PropertyInfo::get_GetMethod:System.Reflection.MethodInfo()
+    [Fact]
     public static void CustomEntrySubject_22()
-    {        try { _ = default(PropertyInfo)!.GetMethod; } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetMethod;
+    }
 
     // [23] System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo()
+    [Fact]
     public static void CustomEntrySubject_23()
-    {        try { _ = default(PropertyInfo)!.GetGetMethod(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetGetMethod();
+    }
 
     // [24] System.Private.CoreLib/System.Reflection.PropertyInfo::GetGetMethod:System.Reflection.MethodInfo(System.Boolean)
+    [Fact]
     public static void CustomEntrySubject_24()
-    {        try { _ = default(PropertyInfo)!.GetGetMethod(true); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetGetMethod(true);
+    }
 
     // [25] System.Private.CoreLib/System.Reflection.PropertyInfo::get_SetMethod:System.Reflection.MethodInfo()
+    [Fact]
     public static void CustomEntrySubject_25()
-    {        try { _ = default(PropertyInfo)!.SetMethod; } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.SetMethod;
+    }
 
     // [26] System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo()
+    [Fact]
     public static void CustomEntrySubject_26()
-    {        try { _ = default(PropertyInfo)!.GetSetMethod(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetSetMethod();
+    }
 
     // [27] System.Private.CoreLib/System.Reflection.PropertyInfo::GetSetMethod:System.Reflection.MethodInfo(System.Boolean)
+    [Fact]
     public static void CustomEntrySubject_27()
-    {        try { _ = default(PropertyInfo)!.GetSetMethod(true); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetSetMethod(true);
+    }
 
     // [28] System.Private.CoreLib/System.Reflection.PropertyInfo::GetValue:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
+    [Fact]
     public static void CustomEntrySubject_28()
-    {        try { _ = default(PropertyInfo)!.GetValue(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetValue(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default);
+    }
 
     // [29] System.Private.CoreLib/System.Reflection.PropertyInfo::GetConstantValue:System.Object()
+    [Fact]
     public static void CustomEntrySubject_29()
-    {        try { _ = default(PropertyInfo)!.GetConstantValue(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetConstantValue();
+    }
 
     // [30] System.Private.CoreLib/System.Reflection.PropertyInfo::GetRawConstantValue:System.Object()
+    [Fact]
     public static void CustomEntrySubject_30()
-    {        try { _ = default(PropertyInfo)!.GetRawConstantValue(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetRawConstantValue();
+    }
 
     // [31] System.Private.CoreLib/System.Reflection.PropertyInfo::SetValue:System.Void(System.Object,System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
+    [Fact]
     public static void CustomEntrySubject_31()
-    {        try { default(PropertyInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default); } catch { _exitCode = 1; }    }
+    {
+        default(PropertyInfo)!.SetValue(null!, null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default);
+    }
 
     // [32] System.Private.CoreLib/System.Reflection.PropertyInfo::GetOptionalCustomModifiers:System.Type[]()
+    [Fact]
     public static void CustomEntrySubject_32()
-    {        try { _ = default(PropertyInfo)!.GetOptionalCustomModifiers(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetOptionalCustomModifiers();
+    }
 
     // [33] System.Private.CoreLib/System.Reflection.PropertyInfo::GetRequiredCustomModifiers:System.Type[]()
+    [Fact]
     public static void CustomEntrySubject_33()
-    {        try { _ = default(PropertyInfo)!.GetRequiredCustomModifiers(); } catch { _exitCode = 1; }    }
+    {
+        _ = default(PropertyInfo)!.GetRequiredCustomModifiers();
+    }
 
 }

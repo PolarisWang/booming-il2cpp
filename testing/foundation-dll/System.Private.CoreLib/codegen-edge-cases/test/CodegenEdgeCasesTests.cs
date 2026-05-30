@@ -107,14 +107,9 @@ public partial class CodegenEdgeCasesTests
     {
         // This test is verified by the codegen pipeline via codegen-metrics.json
         // Runtime assertion: all subjects must execute without flat-fallback
-        CodegenEdgeCasesSubjects._exitCode = 0;
+        // Subjects now use [Fact] + Assert.* internally — call directly
         CodegenEdgeCasesSubjects.Subject_0();
-        Assert.Equal(0, CodegenEdgeCasesSubjects._exitCode);
-
-        CodegenEdgeCasesSubjects._exitCode = 0;
         CodegenEdgeCasesSubjects.Subject_1(0);
-        Assert.Equal(0, CodegenEdgeCasesSubjects._exitCode);
-
         CodegenEdgeCasesSubjects.Subject_2();
 
         var result = CodegenEdgeCasesSubjects.Subject_3(5);

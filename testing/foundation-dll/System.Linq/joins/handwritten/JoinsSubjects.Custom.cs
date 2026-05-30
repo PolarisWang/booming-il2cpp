@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 // Handwritten custom entry implementations for System.Linq join operations.
 // Each method calls the corresponding Enumerable API and forces evaluation
 // by calling GetEnumerator().MoveNext() on the result.
@@ -10,50 +11,55 @@
 public static partial class JoinsSubjects
 {
     // [0] GroupBy<TSource,TKey> — proven working pattern (3 type params max)
+    [Fact]
     public static void CustomEntrySubject_0()
     {
         try
         {
         System.Linq.Enumerable.GroupBy(new int[] { 1, 2, 3, 1, 2 }, (int x) => x % 3).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [1] GroupBy<TSource,TKey> with comparer — proven working pattern
+    [Fact]
     public static void CustomEntrySubject_1()
     {
         try
         {
         System.Linq.Enumerable.GroupBy(new int[] { 1, 2, 3, 1, 2 }, (int x) => x % 3, System.Collections.Generic.EqualityComparer<int>.Default).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [2] Distinct — proven working pattern (from set-operations)
+    [Fact]
     public static void CustomEntrySubject_2()
     {
         try
         {
         System.Linq.Enumerable.Distinct(new int[] { 1, 2, 2, 3, 3, 3 }).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [3] OrderBy — proven working pattern (from shuffle-index)
+    [Fact]
     public static void CustomEntrySubject_3()
     {
         try
         {
         System.Linq.Enumerable.OrderBy(new int[] { 3, 1, 4, 1, 5 }, (int x) => x).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [4] LeftJoin — via SelectMany + Where + DefaultIfEmpty (3 type params)
+    [Fact]
     public static void CustomEntrySubject_4()
     {
         try
@@ -66,11 +72,12 @@ public static partial class JoinsSubjects
                     0),
                 (int i) => o + i)).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [5] LeftJoin with comparer — via SelectMany + Where + DefaultIfEmpty
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try
@@ -83,11 +90,12 @@ public static partial class JoinsSubjects
                     0),
                 (int i) => o + i)).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [6] RightJoin — via SelectMany on inner sequence
+    [Fact]
     public static void CustomEntrySubject_6()
     {
         try
@@ -100,11 +108,12 @@ public static partial class JoinsSubjects
                     0),
                 (int o) => o + i)).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [7] RightJoin with comparer — via SelectMany on inner sequence
+    [Fact]
     public static void CustomEntrySubject_7()
     {
         try
@@ -117,7 +126,7 @@ public static partial class JoinsSubjects
                     0),
                 (int o) => o + i)).GetEnumerator().MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 }

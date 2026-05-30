@@ -8,27 +8,45 @@ using System;
 public static partial class CustomGenericsSubjects
 {
     // [0] System.Private.CoreLib/CustomGenerics.Box`1::Get:T()
+    [Fact]
     public static void CustomEntrySubject_0()
-    {        try { _ = Box.Get(); } catch { _exitCode = 1; }    }
+    {
+        _ = Box.Get();
+    }
 
     // [1] System.Private.CoreLib/CustomGenerics.Box`1::Set:(T)
+    [Fact]
     public static void CustomEntrySubject_1()
-    {        try { Box.Set(default); } catch { _exitCode = 1; }    }
+    {
+        Box.Set(default);
+    }
 
     // [2] System.Private.CoreLib/CustomGenerics.Pair`2::Deconstruct:(T1&,T2&)
+    [Fact]
     public static void CustomEntrySubject_2()
-    {        try { Pair.Deconstruct(out default, out default); } catch { _exitCode = 1; }    }
+    {
+        Pair.Deconstruct(out default, out default);
+    }
 
     // [3] System.Private.CoreLib/CustomGenerics.Util::Echo:T(T)
+    [Fact]
     public static void CustomEntrySubject_3()
-    {        try { _ = Util.Echo(default); } catch { _exitCode = 1; }    }
+    {
+        _ = Util.Echo(default);
+    }
 
     // [4] System.Private.CoreLib/CustomGenerics.Util::Equal:bool(T,T)
+    [Fact]
     public static void CustomEntrySubject_4()
-    {        try { _ = Util.Equal(default, default); } catch { _exitCode = 1; }    }
+    {
+        _ = Util.Equal(default, default);
+    }
 
     // [5] System.Private.CoreLib/CustomGenerics.Wrapper`1::GetRefType:System.Type()
+    [Fact]
     public static void CustomEntrySubject_5()
-    {        try { _ = Wrapper.GetRefType(); } catch { _exitCode = 1; }    }
+    {
+        _ = Wrapper.GetRefType();
+    }
 
 }

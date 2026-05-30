@@ -138,6 +138,16 @@ void RegisterSlotUpdateCallback(SlotUpdateCallback cb) noexcept;
 // Returns ~0u if not found.
 uint32_t SlotToToken(uint32_t module_id, uint32_t method_token) noexcept;
 
+// ── Original AOT direct_ptr resolution (JIT mode) ──────────────────────────
+// In JIT mode, RegisterJitEntryMethods replaces HotpatchEntryV0::direct_ptr
+// with a JIT trampoline, saving the original AOT function pointer in JitPrecode.
+// ResolveDirectFn (used during patch IR lowering) needs the real AOT code pointer,
+// not the trampoline.  This callback returns the original AOT pointer given a
+// dispatch entry, or nullptr in AOT mode (where direct_ptr IS the real code).
+typedef void* (*OriginalAotPtrCallback)(HotpatchEntryV0* entry) noexcept;
+void SetOriginalAotPtrCallback(OriginalAotPtrCallback cb) noexcept;
+OriginalAotPtrCallback GetOriginalAotPtrCallback() noexcept;
+
 inline HotpatchEntryV0* HotpatchLookup(uint32_t module_id, uint32_t token) noexcept {
     return GetHotpatchNameRegistry().GetDispatchEntry(module_id, token);
 }
