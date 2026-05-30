@@ -54,7 +54,7 @@ class TestVerificationPipeline:
         assert names[3] == "managed_fact"
         assert names[4] == "cross_verify"
         assert names[-1] == "cleanup"
-        assert len(names) == 16
+        assert len(names) == 18
 
     def test_fatal_stages_contains_preflight(self):
         assert "preflight" in VerificationPipeline.FATAL_STAGES

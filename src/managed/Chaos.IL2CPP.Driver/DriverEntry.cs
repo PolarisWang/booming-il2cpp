@@ -507,11 +507,14 @@ public sealed class DriverEntry
         var dllPath = args[0];
         var outputPath = args[1];
         string? aotCoreIrPath = null;
+        string? direction = null;
 
         for (var i = 2; i < args.Length; i++)
         {
             if (args[i] == "--aot-core-ir" && i + 1 < args.Length)
                 aotCoreIrPath = args[++i];
+            else if (args[i] == "--direction" && i + 1 < args.Length)
+                direction = args[++i];
         }
 
         if (!File.Exists(dllPath))
@@ -525,7 +528,7 @@ public sealed class DriverEntry
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
-            new PatchDataExtractor().Extract(dllPath, outputPath, aotCoreIrPath);
+            new PatchDataExtractor().Extract(dllPath, outputPath, aotCoreIrPath, direction: direction);
             var fileSize = new FileInfo(outputPath).Length;
             Console.WriteLine($"Patch data written: {outputPath} ({fileSize} bytes)");
             return 0;

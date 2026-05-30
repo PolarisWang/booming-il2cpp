@@ -18,7 +18,7 @@ public sealed class PatchDataExtractor
     // Track string insertion order for correct offset computation.
     private readonly List<(string Key, uint Offset)> _insertOrder = new();
 
-    public void Extract(string dllPath, string outputPath, string? aotCoreIrPath = null, string? genuineIrPath = null)
+    public void Extract(string dllPath, string outputPath, string? aotCoreIrPath = null, string? genuineIrPath = null, string? direction = null)
     {
         using var stream = File.OpenRead(dllPath);
         using var peReader = new PEReader(stream);
@@ -138,6 +138,17 @@ public sealed class PatchDataExtractor
             [.. asmRefs], [.. typeRefs], [.. typeDefs],
             [.. fieldDefs], [.. methodDefs], [.. memberRefs], bodyData,
             aotCoreIrSection, aotCoreIrCount);
+
+        // Write sidecar metadata (direction, etc.)
+        var metaPath = outputPath + ".meta.json";
+        var meta = new Dictionary<string, object?>
+        {
+            ["direction"] = direction ?? "forward",
+            ["sourceDll"] = Path.GetFileName(dllPath),
+            ["patchdataSize"] = new FileInfo(outputPath).Length,
+        };
+        File.WriteAllText(metaPath, JsonSerializer.Serialize(meta));
+        Console.WriteLine($"      [patchdata] meta: direction={direction ?? "forward"}");
     }
 
     private static List<PatchAssemblyRefEntry> BuildAssemblyRefs(

@@ -315,13 +315,13 @@ void TierManager::BackgroundLoop() noexcept {
 // ── Adaptive threshold ────────────────────────────────────────────────────
 
 uint32_t TierManager::GetAdaptiveT2Threshold() const noexcept {
-    // Base threshold: 500 calls.
-    // Scale: add 25 per 10 optimized methods, capped at +500.
-    // Effective range: 500 (cold) to 1000 (200+ optimized methods).
+    // Base threshold: 50 calls.
+    // Scale: add 5 per 10 optimized methods, capped at +50.
+    // Effective range: 50 (cold) to 100 (200+ optimized methods).
     uint32_t optimized = total_optimized_methods.load(std::memory_order_relaxed);
-    uint32_t adjustment = (optimized / 10) * 25;
-    if (adjustment > 500) adjustment = 500;
-    return 500 + adjustment;
+    uint32_t adjustment = (optimized / 10) * 5;
+    if (adjustment > 50) adjustment = 50;
+    return 50 + adjustment;
 }
 
 }  // namespace chaos::il2cpp::runtime_core

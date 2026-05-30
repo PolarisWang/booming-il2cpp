@@ -32,6 +32,7 @@ from .hotupdate import (
     run_hotupdate_jit_fact,
     run_hotupdate_jit_bench,
     run_patch_cross_verify,
+    run_multi_patch_hotupdate,
 )
 
 # Stage registry: ordered list of (stage_name, function, enabled_by_default)
@@ -54,6 +55,7 @@ STAGE_REGISTRY: list[tuple[str, str, bool]] = [
     ("hotupdate_aot_benchmark","run_hotupdate_aot_bench",     True),
     ("hotupdate_jit_fact",     "run_hotupdate_jit_fact",      True),
     ("hotupdate_jit_benchmark","run_hotupdate_jit_bench",     True),
+    ("multi_patch_hotupdate",  "run_multi_patch_hotupdate",   True),
 ]
 
 
@@ -79,6 +81,7 @@ _FUNC_MODULE_OVERRIDES = {
     "run_jit_codegen": "codegen",
     "run_hotupdate": "hotupdate",
     "run_patch_cross_verify": "hotupdate",
+    "run_multi_patch_hotupdate": "hotupdate",
 }
 
 
@@ -118,5 +121,6 @@ __all__ = [
     "run_hotupdate", "run_hotupdate_aot_bench",
     "run_hotupdate_jit_fact", "run_hotupdate_jit_bench",
     "run_patch_cross_verify",
+    "run_multi_patch_hotupdate",
     "STAGE_REGISTRY", "get_stage_names", "get_default_stages", "lookup_stage",
 ]

@@ -36,8 +36,10 @@ def _discover_runtime_core_build_dir() -> Path | None:
     try:
         import json as _json
         presets = _json.loads(presets_file.read_text(encoding="utf-8"))
-        # Try debug preset first (most likely to exist locally)
-        for preset_name in ("debug", "profile", "ship"):
+        # Try profile/ship first (Release CRT), then debug (Debug CRT).
+        # The entry.exe rebuild uses --config RelWithDebInfo (Release CRT),
+        # so debug-preset libs cause _ITERATOR_DEBUG_LEVEL mismatch.
+        for preset_name in ("profile", "ship", "debug"):
             for cp in presets.get("configurePresets", []):
                 if cp.get("name") == preset_name:
                     binary_dir = cp.get("binaryDir", "")
@@ -154,14 +156,27 @@ def _build_patch_dll(ctx: FamilyContext, patch_subdir: str = "patch") -> Path | 
 
 
 def _run_emit_patch_data(dll_path: str, output_path: str,
-                         aot_core_ir_path: str | None = None) -> bool:
-    """Run chaos-il2cpp emit-patch-data CLI on a patch DLL."""
+                         aot_core_ir_path: str | None = None,
+                         direction: str = "forward") -> bool:
+    """Run chaos-il2cpp emit-patch-data CLI on a patch DLL.
+
+    Args:
+        dll_path: Path to the patch DLL.
+        output_path: Output path for the .patchdata file.
+        aot_core_ir_path: Optional path to aot-core-ir.json for baseline IR comparison.
+        direction: Hot-update direction ("forward" or "bidirectional").
+
+    Returns:
+        True if the patch data was emitted and validated successfully.
+    """
     cmd = [
         "dotnet", "exec", str(_DRIVER_DLL),
         "emit-patch-data", dll_path, output_path,
     ]
     if aot_core_ir_path:
         cmd += ["--aot-core-ir", aot_core_ir_path]
+    if direction:
+        cmd += ["--direction", direction]
 
     r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if r.returncode != 0:
@@ -196,6 +211,21 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
                       f"no patches to apply")
                 return False
             print(f"    [hotupdate] patchdata: {method_count} method(s)")
+
+    # P2: Validate direction metadata from sidecar (.patchdata.meta.json)
+    meta_path = output_path + ".meta.json"
+    if Path(meta_path).exists():
+        try:
+            import json as _json
+            meta = _json.loads(Path(meta_path).read_text(encoding="utf-8"))
+            meta_direction = meta.get("direction", "")
+            if meta_direction != direction:
+                print(f"    [hotupdate] FAILED: direction mismatch — "
+                      f"requested={direction}, meta={meta_direction}")
+                return False
+            print(f"    [hotupdate] direction={meta_direction}")
+        except (OSError, _json.JSONDecodeError) as e:
+            print(f"    [hotupdate] WARNING: failed to read meta sidecar: {e}")
 
     return True
 
@@ -268,13 +298,16 @@ def _detect_host_class(native_dir: Path) -> str:
     return "ConvertCharSubjects"
 
 
-def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch") -> bool:
+def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch",
+                       direction: str = "forward") -> bool:
     """Build patch DLL -> emit-patch-data -> generate runtime-patchdata.cpp -> rebuild entry.exe.
 
     Args:
         ctx: Family context.
         patch_subdir: Subdirectory under managed/ containing the patch project
                       (e.g. "patch", "patch_first", "patch_second").
+        direction: Hot-update direction ("forward" or "bidirectional").
+                   Determines how the patch is validated at the runtime level.
     """
     native_dir = ctx.native_dir
 
@@ -316,7 +349,7 @@ def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch") -> bool:
     dll_str = str(dll)
     pd_str = str(patchdata)
     aot_str = str(aot_core_ir) if aot_core_ir is not None else None
-    ok = _run_emit_patch_data(dll_str, pd_str, aot_core_ir_path=aot_str)
+    ok = _run_emit_patch_data(dll_str, pd_str, aot_core_ir_path=aot_str, direction=direction)
     if not ok or not patchdata.exists():
         print("  [hotupdate] _ensure_patch_data: emit-patch-data failed")
         return False
@@ -324,7 +357,7 @@ def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch") -> bool:
     host_class = _detect_host_class(native_dir)
     _generate_runtime_patchdata_cpp(patchdata, native_dir / "runtime-patchdata.cpp", host_class)
 
-    runtime_core_build = _NATIVE_BUILD_DIR
+    runtime_core_build = _get_runtime_core_build_dir()
     global _runtime_lib_synced
     if runtime_core_build.exists() and not _runtime_lib_synced:
         print(f"  [hotupdate] Rebuilding chaos_runtime_core.lib (once per run)...")
@@ -394,9 +427,21 @@ def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch") -> bool:
         print(f"  [hotupdate] generated fallback microbench.cpp")
 
     if not build_dir.exists():
-        build_dir = native_dir / "build" / "vs2022"
-    if not build_dir.exists():
+        # The build dir may be a generator-specific subdir (e.g. "build/vs2022",
+        # "build/ninja", "build/unix").  Scan subdirs for CMakeCache.txt.
+        build_root = native_dir / "build"
+        build_dir = None
+        if build_root.is_dir():
+            for candidate in sorted(build_root.iterdir()):
+                if candidate.is_dir() and (candidate / "CMakeCache.txt").exists():
+                    build_dir = candidate
+                    break
+            # If no configured subdir found, use the build root directly
+            if build_dir is None and (build_root / "CMakeCache.txt").exists():
+                build_dir = build_root
+    if build_dir is None or not build_dir.exists():
         # Fallback: try to locate CMakeLists.txt and configure
+        build_dir = build_dir or (native_dir / "build")
         cmake_lists = native_dir / "CMakeLists.txt"
         if cmake_lists.exists():
             print(f"  [hotupdate] Configuring CMake at {native_dir}...")
@@ -1028,5 +1073,127 @@ def run_patch_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -
             "totalChecked": total_checked,
             "skipped": skipped,
         },
+        duration_ms=int((time.perf_counter() - start) * 1000),
+    )
+
+
+def run_multi_patch_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
+    """Stage: Multi-patch hotupdate — apply two sequential patches, verify each, revert both.
+
+    Tests that two independent patch projects (managed/patch_first and managed/patch_second)
+    can each be applied to the same entry.exe and produce correct semantic results.
+
+    Flow:
+      1. Rebuild entry.exe with no patchdata (baseline)
+      2. Build patch_first DLL → emit-patch-data → rebuild entry.exe → run --hotupdate fact
+      3. Write sentinel (revert first patch) → rebuild entry.exe
+      4. Build patch_second DLL → emit-patch-data → rebuild entry.exe → run --hotupdate fact
+      5. Write sentinel (revert second patch) → rebuild entry.exe (final cleanup)
+    """
+    start = time.perf_counter()
+
+    exe_path = ctx.entry_exe_path
+    if not exe_path.exists():
+        return StageResult(
+            stage="multi_patch_hotupdate", status="skipped",
+            summary="entry.exe not found",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    # Check if we have at least one patch project
+    has_first = _has_patch_project(ctx, "patch_first")
+    has_second = _has_patch_project(ctx, "patch_second")
+    if not has_first and not has_second:
+        return StageResult(
+            stage="multi_patch_hotupdate", status="skipped",
+            summary="neither patch_first nor patch_second found — multi-patch not applicable",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    round_results: list[dict[str, Any]] = []
+
+    def _rebuild_entry_with_patchdata() -> bool:
+        """Rebuild entry.exe after patchdata change (sentinel or new patch)."""
+        build_dir = ctx.native_dir / "build"
+        if build_dir.exists() and (build_dir / "CMakeCache.txt").exists():
+            r = subprocess.run(
+                ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry", "--parallel"],
+                capture_output=True, text=True, timeout=300,
+            )
+            exe_produced = _find_entry_binary(build_dir)
+            if exe_produced:
+                import shutil as _shutil
+                import time as _time
+                dst = ctx.native_dir / "entry.exe"
+                for _copy_attempt in range(5):
+                    try:
+                        if dst.exists():
+                            dst.unlink()
+                        _shutil.copy2(str(exe_produced), str(dst))
+                        break
+                    except (PermissionError, OSError) as _e:
+                        if _copy_attempt < 4:
+                            _time.sleep(1 << _copy_attempt)
+                        else:
+                            print(f"  [multi_patch] entry.exe copy FAILED: {_e}")
+                            return False
+                return True
+        return False
+
+    # Round 1: first patch
+    if has_first:
+        print(f"  [multi_patch] === Round 1: patch_first ===")
+        # Write sentinel first to ensure clean state
+        _write_sentinel_patchdata(ctx.native_dir)
+        _rebuild_entry_with_patchdata()
+
+        # Build and apply first patch
+        ok = _ensure_patch_data(ctx, patch_subdir="patch_first")
+        if not ok:
+            round_results.append({"round": 1, "patch": "patch_first", "status": "failed",
+                                  "error": "_ensure_patch_data failed"})
+        else:
+            result = _run_hotupdate_fact(exe_path)
+            r1_status = result.get("status", "failed")
+            r1_passed = result.get("passedMethods", 0)
+            print(f"  [multi_patch] Round 1 result: {r1_status} ({r1_passed}/{result.get('totalMethods', 0)})")
+            round_results.append({"round": 1, "patch": "patch_first",
+                                  "status": r1_status, "details": dict(result)})
+
+    # Round 2: second patch (independent from round 1)
+    if has_second:
+        print(f"  [multi_patch] === Round 2: patch_second ===")
+        _write_sentinel_patchdata(ctx.native_dir)
+        _rebuild_entry_with_patchdata()
+
+        ok = _ensure_patch_data(ctx, patch_subdir="patch_second")
+        if not ok:
+            round_results.append({"round": 2, "patch": "patch_second", "status": "failed",
+                                  "error": "_ensure_patch_data failed"})
+        else:
+            result = _run_hotupdate_fact(exe_path)
+            r2_status = result.get("status", "failed")
+            r2_passed = result.get("passedMethods", 0)
+            print(f"  [multi_patch] Round 2 result: {r2_status} ({r2_passed}/{result.get('totalMethods', 0)})")
+            round_results.append({"round": 2, "patch": "patch_second",
+                                  "status": r2_status, "details": dict(result)})
+
+    # Final: write sentinel and rebuild (cleanup)
+    _write_sentinel_patchdata(ctx.native_dir)
+    _rebuild_entry_with_patchdata()
+
+    # Overall status: passed if ALL rounds passed
+    all_passed = all(r.get("status") == "passed" for r in round_results)
+    overall_status = "passed" if all_passed else "failed"
+    passed_total = sum(r.get("details", {}).get("passedMethods", 0) if r.get("status") == "passed" else 0
+                       for r in round_results)
+
+    summary_parts = [f"{r.get('patch','?')}={r.get('status','?')}" for r in round_results]
+    print(f"  [multi_patch] Overall: {overall_status} ({'; '.join(summary_parts)})")
+
+    return StageResult(
+        stage="multi_patch_hotupdate", status=overall_status,
+        summary=f"{overall_status} ({'; '.join(summary_parts)})",
+        details={"rounds": round_results, "passedTotal": passed_total},
         duration_ms=int((time.perf_counter() - start) * 1000),
     )

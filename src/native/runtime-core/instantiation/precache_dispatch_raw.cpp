@@ -1,5 +1,8 @@
 namespace chaos::il2cpp::runtime_instantiation {
 
+// Forward declaration from aot_direct_dispatch.cpp (three-tier resolution fallback)
+namespace runtime_core { void* ResolveDirectFnSafe(const char* subject_id) noexcept; }
+
 // ── PrecacheCallTarget ──────────────────────────────────────────────────────
 // Pre-compute call metadata so InterpreterDispatchRaw can skip all reflection
 // queries at runtime. Called during IR lowering (PatchMethodLowerIR).
@@ -95,6 +98,14 @@ CachedCallInfo PrecacheCallTarget(void* call_target) noexcept {
                 }
             }
         }
+    }
+
+    // Phase 2.2: Fallback to three-tier ResolveDirectFnSafe when manual
+    // subjectId parsing + HotpatchNameRegistry lookup missed (handles
+    // cross-module calls, external runtime function table entries, etc.).
+    if (info.direct_ptr == nullptr && !info.is_struct_ret &&
+        method_desc != nullptr && method_desc->subject_id_utf8 != nullptr) {
+        info.direct_ptr = runtime_core::ResolveDirectFnSafe(method_desc->subject_id_utf8);
     }
 
     return info;
