@@ -217,10 +217,38 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
     # P2: Atomically replace old output with temp file.
     # On Windows, Path.rename() fails with ERROR_ALREADY_EXISTS (183) when the
     # target exists.  os.replace() calls MoveFileExW with
-    # MOVEFILE_REPLACE_EXISTING, which succeeds even when the old target is
-    # held open by a concurrent reader (the old handle continues reading the
-    # old file; new opens see the new file).
-    _os.replace(str(tmp_path), str(output))
+    # MOVEFILE_REPLACE_EXISTING, but this can still fail with ERROR_ACCESS_DENIED
+    # (5) when the target is held open without FILE_SHARE_WRITE (e.g., antivirus
+    # scanning or a concurrent process that hasn't fully released its handle).
+    # Retry with exponential backoff to handle transient lock contention.
+    import time as _time
+    for _replace_attempt in range(10):
+        try:
+            _os.replace(str(tmp_path), str(output))
+            break
+        except OSError as _e:
+            if _replace_attempt < 9:
+                _wait = 0.1 * (1 << _replace_attempt)  # 100ms, 200ms, ... 51.2s
+                print(f"    [hotupdate] replace locked (attempt {_replace_attempt}): {_e}, retry in {_wait*1000:.0f}ms")
+                _time.sleep(_wait)
+            else:
+                print(f"    [hotupdate] replace FAILED after 10 retries: {_e}")
+                # Last resort: copy instead of rename (copy works when the target
+                # is opened with FILE_SHARE_READ even without FILE_SHARE_WRITE).
+                # The temp file will be cleaned up below.
+                import shutil as _shutil
+                try:
+                    _shutil.copy2(str(tmp_path), str(output))
+                    print(f"    [hotupdate] replaced via copy fallback")
+                except OSError as _e2:
+                    print(f"    [hotupdate] copy fallback ALSO FAILED: {_e2}")
+                    if tmp_path.exists():
+                        tmp_path.unlink(missing_ok=True)
+                    return False
+    # Clean up temp file if it still exists (shouldn't after os.replace, but
+    # copy fallback and edge cases on Windows may leave it).
+    if tmp_path.exists():
+        tmp_path.unlink(missing_ok=True)
     last_line = (r.stdout or "").strip().splitlines()[-1] if r.stdout else ""
     print(f"    [hotupdate] {last_line}")
 
