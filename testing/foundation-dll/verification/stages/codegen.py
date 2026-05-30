@@ -7,6 +7,7 @@ import re
 import shutil
 import subprocess
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from verification.orchestration.context import FamilyContext, StageResult, resolve_contract_path, load_contract
@@ -299,12 +300,58 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
     _step = time.perf_counter()
     print(f"    [codegen timing] TPG emit: {step_times['tpg']:.2f}s")
 
-    # 4. Build AOT entry.exe (with prep for codegen sync, incremental after first run)
-    print(f"  [codegen] Building AOT entry.exe...")
-    aot_ok = build_entry_executable(
+    # 4. Prepare native directory (clean, sync codegen→native, sentinels, libs)
+    print(f"  [codegen] Preparing native directory...")
+    build_entry_executable(
         ctx.slug, verification=testing_base, config_tier=ctx.native_config,
-        is_jit=False,
+        prep_only=True,
     )
+
+    # 5. Build AOT entry.exe + JIT entry-jit.exe in parallel
+    # Both builds consume the same codegen C++ files (read-only) but write to
+    # different build dirs (build/ vs build_jit/) and different output binaries
+    # (entry.exe vs entry-jit.exe).  Prep completed in step 4 so no races.
+    jit_exe = native_dir / "entry-jit.exe"
+    jit_needs_build = not jit_exe.exists()
+
+    if jit_needs_build:
+        print(f"  [codegen] Building AOT entry.exe + JIT entry-jit.exe (parallel)...")
+    else:
+        print(f"  [codegen] Building AOT entry.exe (JIT cached)...")
+
+    aot_ok = False
+    jit_ok = False
+    futures = {}
+    with ThreadPoolExecutor(max_workers=2) as pool:
+        aot_future = pool.submit(
+            build_entry_executable, ctx.slug,
+            verification=testing_base, config_tier=ctx.native_config,
+            is_jit=False, skip_prep=True,
+        )
+        futures[aot_future] = "aot"
+        if jit_needs_build:
+            jit_future = pool.submit(
+                build_entry_executable, ctx.slug,
+                verification=testing_base, config_tier=ctx.native_config,
+                is_jit=True, output_name="entry-jit.exe", skip_prep=True,
+            )
+            futures[jit_future] = "jit"
+
+        for future in as_completed(futures):
+            label = futures[future]
+            try:
+                result = future.result()
+                if label == "aot":
+                    aot_ok = result
+                else:
+                    jit_ok = result
+            except Exception as e:
+                print(f"    [codegen] {label} build raised: {e}")
+                if label == "aot":
+                    aot_ok = False
+                else:
+                    jit_ok = False
+
     if not aot_ok:
         return StageResult(
             stage="codegen", status="failed",
@@ -312,30 +359,17 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    step_times["native_aot"] = time.perf_counter() - _step
+    step_times["native_builds"] = time.perf_counter() - _step
     _step = time.perf_counter()
-    print(f"    [codegen timing] AOT build: {step_times['native_aot']:.2f}s")
+    print(f"    [codegen timing] native builds (AOT+JIT parallel): {step_times['native_builds']:.2f}s")
 
-    # 5. Build JIT entry-jit.exe if not already cached (skip_prep — C++ sources
-    # already synced by AOT build). Uses output_name="entry-jit.exe" so the
-    # binary is written directly, avoiding the entry.exe save/restore dance.
-    jit_exe = native_dir / "entry-jit.exe"
-    if not jit_exe.exists():
-        print(f"  [codegen] Building JIT entry-jit.exe...")
-        jit_ok = build_entry_executable(
-            ctx.slug, verification=testing_base, config_tier=ctx.native_config,
-            is_jit=True, output_name="entry-jit.exe", skip_prep=True,
-        )
+    if jit_needs_build:
         if jit_ok:
             print(f"  [codegen] JIT entry-jit.exe built successfully")
         else:
             print(f"  [codegen] WARNING: JIT entry-jit.exe build failed (jit_codegen stage will rebuild)")
     else:
         print(f"  [codegen] entry-jit.exe already exists, skipping JIT pre-build")
-
-    step_times["native_jit"] = time.perf_counter() - _step
-    _step = time.perf_counter()
-    print(f"    [codegen timing] JIT build: {step_times['native_jit']:.2f}s")
 
     # 6. Save AOT binary for jit_codegen stage restore
     entry_exe = native_dir / "entry.exe"
@@ -350,8 +384,7 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
           f"  (entrypoint={step_times['entrypoint']:.2f}s"
           f"  il2cpp={step_times['il2cpp_codegen']:.2f}s"
           f"  tpg={step_times['tpg']:.2f}s"
-          f"  aot={step_times['native_aot']:.2f}s"
-          f"  jit={step_times['native_jit']:.2f}s)")
+          f"  native_builds={step_times['native_builds']:.2f}s)")
 
     return StageResult(
         stage="codegen", status="passed",
