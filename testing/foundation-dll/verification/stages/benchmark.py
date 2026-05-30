@@ -13,6 +13,7 @@ import re
 import shutil
 import subprocess
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Any
 
@@ -1808,23 +1809,14 @@ def _run_all_benchmarks(
     }
 
 
-def run_benchmark(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
-    """Stage 8: 3-way benchmark (native-aot + native-jit + managed)."""
-    start = time.perf_counter()
-
-    method_count = _load_method_count(ctx)
-    if method_count == 0:
-        return StageResult(
-            stage="benchmark", status="skipped",
-            summary="no methods in contract",
-            duration_ms=int((time.perf_counter() - start) * 1000),
-        )
-
-    aot_exe = ctx.entry_exe_path
-    jit_exe = ctx.entry_jit_exe_path
-
+def _run_native_benchmarks(
+    ctx: FamilyContext,
+    aot_exe: Path,
+    jit_exe: Path,
+    collect_profile: bool,
+) -> dict[str, Any]:
+    """Run native AOT and JIT benchmarks (sequential within this call)."""
     benchmarks: dict[str, Any] = {}
-    collect_profile = ctx.native_config == "profile"
 
     if aot_exe.exists():
         aot_result = _run_all_benchmarks(ctx, aot_exe, "native-aot", collect_profile=collect_profile)
@@ -1838,16 +1830,67 @@ def run_benchmark(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
     else:
         benchmarks["native-jit"] = {"status": "skipped", "summary": "entry-jit.exe not found"}
 
+    return benchmarks
+
+
+def run_benchmark(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
+    """Stage 8: 3-way benchmark (native-aot + native-jit + managed), parallelized.
+
+    Managed benchmarks run concurrently with native benchmarks via
+    ThreadPoolExecutor to save ~5s wall-clock time per family.
+    """
+    start = time.perf_counter()
+
+    method_count = _load_method_count(ctx)
+    if method_count == 0:
+        return StageResult(
+            stage="benchmark", status="skipped",
+            summary="no methods in contract",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    aot_exe = ctx.entry_exe_path
+    jit_exe = ctx.entry_jit_exe_path
+    collect_profile = ctx.native_config == "profile"
+
+    benchmarks: dict[str, Any] = {}
     managed_results: dict[str, Any] = {}
-    for tech in _MANAGED_TECHNOLOGIES:
-        sr = run_managed_benchmark(ctx, tech)
-        managed_results[tech] = {"status": sr.status, "summary": sr.summary}
-        if sr.status == "passed":
-            print(f"  [benchmark/managed] {tech}: {sr.summary}")
-        elif sr.status == "skipped":
-            print(f"  [benchmark/managed] {tech}: skipped ({sr.summary})")
-        else:
-            print(f"  [benchmark/managed] {tech}: {sr.status} ({sr.summary})")
+    errors: list[str] = []
+
+    with ThreadPoolExecutor(max_workers=3) as pool:
+        futures: dict[Any, str] = {}
+
+        # Native AOT + JIT (sequential internally) as one parallel unit
+        native_fut = pool.submit(_run_native_benchmarks, ctx, aot_exe, jit_exe, collect_profile)
+        futures[native_fut] = "native"
+
+        # Each managed technology as a separate parallel task
+        for tech in _MANAGED_TECHNOLOGIES:
+            fut = pool.submit(run_managed_benchmark, ctx, tech)
+            futures[fut] = f"managed_{tech}"
+
+        for fut in as_completed(futures):
+            task_name = futures[fut]
+            try:
+                result = fut.result()
+                if task_name == "native":
+                    benchmarks.update(result)
+                elif task_name.startswith("managed_"):
+                    tech = task_name[len("managed_"):]
+                    sr = result  # StageResult from run_managed_benchmark
+                    managed_results[tech] = {"status": sr.status, "summary": sr.summary}
+                    if sr.status == "passed":
+                        print(f"  [benchmark/managed] {tech}: {sr.summary}")
+                    elif sr.status == "skipped":
+                        print(f"  [benchmark/managed] {tech}: skipped ({sr.summary})")
+                    else:
+                        print(f"  [benchmark/managed] {tech}: {sr.status} ({sr.summary})")
+            except Exception as e:
+                errors.append(f"{task_name}: {e}")
+                if task_name == "native":
+                    benchmarks.setdefault("native-aot", {"status": "error", "summary": str(e)})
+                    benchmarks.setdefault("native-jit", {"status": "error", "summary": str(e)})
+
     benchmarks["managed"] = managed_results
 
     total_ok = sum(
@@ -1870,5 +1913,6 @@ def run_benchmark(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
                 f"{sum(1 for m in managed_results.values() if m['status'] == 'passed')}/"
                 f"{len(_MANAGED_TECHNOLOGIES)}",
         details=benchmarks,
+        errors=errors or None,
         duration_ms=int((time.perf_counter() - start) * 1000),
     )

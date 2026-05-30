@@ -12,7 +12,7 @@ description: >
 
 1. **Worktree 强制** — 所有开发必须在 worktree 中完成，无例外
 2. **全自动收口** — merge + push + worktree 清理是流程标准终点，不是可选步骤
-3. **Bounded retry** — 每个修复循环最多 3 次，超出写 `blocker.md` 并终止
+3. **分类修复** — 失败按类型分流：Infrastructure → 1 次重建，Logic → 3 次迭代，Design → 调研后再进入修复。不混用 retry budget
 4. **禁止 hack 测试代码** — 必须直接修复 codegen 或 il2cpp runtime
 5. **数据完整性是硬要求** — benchmark timing > 0，exception-path 方法自动排除，hotupdate d3PatchApplied 必须先为 true 再检查 semantic_changed > 0
 6. **文档语言统一为中文** — 分析文档、commit message 均用中文（代码片段、数据表、缩写除外）
@@ -20,25 +20,30 @@ description: >
 ## 流水线概览
 
 ```
-Step  1: Setup Worktree → EnterWorktree + claim family
-Step  2: Run Pipeline  → python -m verification.entry_points.cli <slug> --mode strict --native-config profile
-Step  3: Diagnose      → 对每个 failed stage 输出根因
-Step  4: Fix & Rerun   → 修复 + 重跑（--native-config check），最多 3 次。超限写 blocker.md → abort
-Step  5: Perf Check    → 从已有报告验证 benchmark timing > 0（不重跑 pipeline）
-Step  6: .NET 8 对比    → 跑 pipeline（--native-config profile），vs .NET 8 ≤ 20%？不满足 → 诊断 + 优化 + 重跑，最多 3 次
-Step  7: HotUpdate Check → 跑 pipeline（--native-config profile），semantic_changed > 0？overhead ≤ 100%？不满足 → 修复 + 重跑，最多 3 次
-Step  8: 文档           → 写 docs/optimize/YYYY-MM-DD-<slug>/README.md
-Step  9: Commit         → git add + git commit（含性能表）
-Step 10: Push           → git push origin claim/<slug>/<worker-id>
-Step 11: Merge → Cleanup → checkout main → merge → push → del worktree branch
-Step 12: CI Verify      → 等待 CI 通过（超时 10 min）
-Step 13: Pull           → git pull origin main（确保 main 最新且干净）
+Step  1: Setup Worktree    → EnterWorktree + claim family
+Step  1.5: Test Audit      → pre_verification_audit 审计测试代码完整性
+Step  1.7: Pre-flight Check → 验证构建系统、源文件、二进制合约完整性
+Step  2: Run Pipeline      → python -m verification.entry_points.cli <slug> --mode strict --native-config profile
+Step  3: Classify & Diagnose → 按失败类型分流（Infra / Logic / Design），输出根因
+Step  4: Fix & Rerun       → 按分类使用不同 retry budget 修复 + 重跑
+Step  5: Perf Check        → 从已有报告验证 benchmark timing > 0（不重跑 pipeline）
+Step  6: .NET 8 对比       → 跑 pipeline（--native-config profile），vs .NET 8 ≤ 20%？不满足 → 诊断 + 优化 + 重跑，最多 3 次
+Step  7: HotUpdate Check   → 跑 pipeline（--native-config profile），semantic_changed > 0？overhead ≤ 100%？不满足 → 修复 + 重跑，最多 3 次
+Step  8: 文档              → 写 docs/optimize/YYYY-MM-DD-<slug>/README.md
+Step  9: Commit            → git add + git commit（含性能表）
+Step 10: Push              → git push origin claim/<slug>/<worker-id>
+Step 11: Merge → Cleanup   → checkout main → merge → push → del worktree branch
+Step 12: CI Verify         → 等待 CI 通过（超时 10 min）
+Step 13: Pull              → git pull origin main（确保 main 最新且干净）
 ```
 
 ## 自动化执行说明
 
 - 每个 Step 执行完自动进入下一个 Step，不等待用户确认
-- Step 4/6/7 的修复循环使用 `max_attempts=3`，超出后写 `blocker.md` 并 abort
+- Step 1.7 预检查出问题 → 自动修复后继续，修复失败不阻塞（标记 infra 信息进入 Step 2）
+- Step 4 的修复循环按分类使用不同 retry budget：Infrastructure 1 次，Logic 3 次，Design 不 retry
+- Step 6/7 的修复循环使用 Logic 类 retry（max_attempts=3），超出后写 `blocker.md` 并 abort
+- Infrastructure 类失败升级为 Logic 类后，**attemp 计数器重置**（infra 尝试不计入 logic quota）
 - 长时间步骤（pipeline run、benchmark）每 60 秒输出一次 keepalive
 - Abort 时输出 `optimization-campaign/workers/<worker-id>/blocker.md`，然后跳到 Step 11 清理，不留在 worktree
 
@@ -124,6 +129,77 @@ python -m verification.stages.pre_verification_audit <slug> --assembly System.Pr
 
 ---
 
+## Step 1.7: Pre-flight Check
+
+在跑完整 pipeline 之前，先验证构建系统和源文件基础设施的完整性。**约 60%+ 的 pipeline 假性失败源于构建系统/缓存/文件缺失问题，预检可以在 30-60 秒内过滤掉。**
+
+### 1.7.1 源文件完整性验证
+
+```bash
+# 检查 native/ 目录下所有关键源文件存在
+_check_file "${native_dir}/runtime-entry.cpp" "runtime-entry.cpp" || fail=1
+_check_file "${native_dir}/verification_dispatch.generated.cpp" "verification_dispatch.generated.cpp" || fail=1
+_check_file "${native_dir}/microbench.cpp" "microbench.cpp" || fail=1
+_check_file "${native_dir}/CMakeLists.txt" "CMakeLists.txt" || fail=1
+```
+
+如果缺失：
+- `runtime-entry.cpp` / `verification_dispatch.generated.cpp` → 需要重新跑 codegen 或从其他 family 复制模板
+- `microbench.cpp` → 自动生成 fallback 版本（技能 Step 4 的 hotupdate rebuild 已有此逻辑）
+
+### 1.7.2 构建系统验证
+
+```bash
+build_dir="${native_dir}/build/vs2022"
+if [ -d "$build_dir" ] && [ -f "$build_dir/CMakeCache.txt" ]; then
+    # CMakeCache 存在 → 验证关键源文件在 vcxproj 中
+    grep -q "runtime-patchdata.cpp" "$build_dir/entry.vcxproj" 2>/dev/null || {
+        echo "WARN: runtime-patchdata.cpp not in vcxproj — cmake reconfigure needed"
+        cmake -S "$native_dir" -B "$build_dir" -DCMAKE_BUILD_TYPE=RelWithDebInfo
+    }
+else
+    # 首次配置
+    cmake -S "$native_dir" -B "$build_dir" -DCMAKE_BUILD_TYPE=RelWithDebInfo
+fi
+```
+
+检查 vcxproj 中是否包含 `runtime-patchdata.cpp`、`verification_dispatch.generated.cpp` 等关键源文件。如果 cmake configure 时这些文件不存在，vcxproj 不会引用它们。
+
+### 1.7.3 二进制合约验证
+
+```bash
+cmake --build "$build_dir" --config RelWithDebInfo --target entry --parallel
+_entry_binary=$(_find_entry_binary "$build_dir")
+
+# 验证 kSubjectEntryCount > 0
+_symbol_count=$(strings "$_entry_binary" | grep -c "kSubjectEntryCount" || echo 0)
+if [ "$_symbol_count" -eq 0 ]; then
+    echo "FAIL: kSubjectEntryCount not found in entry binary"
+    echo "      可能原因: native-aot.generated.cpp 缺失或未编译"
+    echo "      修复: 确认 codegen 输出存在，cmake 配置正确"
+    exit 1
+fi
+```
+
+> 此步仅验证二进制包含预期符号，不验证符号值。完整的符号值验证在 Step 5 通过 benchmark timing 确认。
+
+### 1.7.4 自动修复
+
+如果预检发现问题：
+- **源文件缺失** → 从 codegen 输出拷贝或生成模板
+- **CMakeCache 过期** → 删除后重新 configure
+- **符号不正确** → 确认 codegen 输出 → 确认 cmake 源文件列表 → 重新构建
+
+修复后重新执行 1.7.3 验证。如果仍失败 → 记录为 **Infrastructure 类失败**，进入 Step 3 诊断。
+
+### 出口条件
+
+- ✅ 全部验证通过 → 进入 Step 2
+- ✅ 自动修复后验证通过 → 进入 Step 2
+- ❌ 自动修复仍失败 → 记录 infra 诊断信息，进入 Step 2（不阻塞，pipeline 会暴露根因）
+
+---
+
 ## Step 2: Run Pipeline
 
 ```bash
@@ -141,33 +217,180 @@ python -m verification.entry_points.cli \
 
 ---
 
-## Step 3: Diagnose
+## Step 3: Classify & Diagnose
 
-读取 `unified-verification-report.json`（位于 `testing/foundation-dll/System.Private.CoreLib/<slug>/`），对每个 status=`failed` 或 status=`error` 的 stage 输出诊断：
+读取 `unified-verification-report.json`（位于 `testing/foundation-dll/System.Private.CoreLib/<slug>/`），对每个 status=`failed` 或 status=`error` 的 stage 执行三阶段诊断：
 
-| Stage | 诊断要点 |
-|-------|---------|
-| codegen / jit_codegen | 编译错误 → 读 C++ 错误信息，定位 codegen emitter |
-| fact / fact_jit / managed_fact | assert 失败 → 对比 IL 与生成代码语义 |
-| audit | 原则审计不通过 → 对齐架构规范 |
-| asm_compare | IR 扩展比异常 → 检查 lowering 路径 |
-| benchmark | timing = -1.0？→ dispatch thunks ABI 不匹配；exception-path（timing 100x+ vs .NET 8）→ 检查 subject 是否用 null/invalid 输入，如果是 → 标记为 exception-path 排除 |
-| hotupdate | semanticChangedCount = 0？→ 检查 hotupdate-verification-report.json 的 d3PatchApplied。为 false？→ 无真实 patch，预期行为。为 true？→ dispatch 返回状态码而非返回值 |
+### 3.1 失败类型分类
 
-**出口条件**：所有 failed stage 的根因已写入 `diagnosis.json`。
+诊断的第一件事不是找根因，而是**判断失败类别**。不同类型的失败需要不同的修复策略和 retry budget：
+
+| 类别 | 典型症状 | 常见根因 | Retry budget |
+|------|---------|---------|-------------|
+| **Infrastructure** | 编译错、链接错、file not found、cmake 失败、entry.exe 缺符号 | 构建缓存过期、源文件缺失、SDK lib 未同步 | 1 次（重建/重配后 100% 恢复） |
+| **Logic** | assert 失败、benchmark timing=-1、hotupdate semanticChangedCount=0 | codegen IR 错误、dispatch ABI 不匹配、运行时 bug | 3 次（现有逻辑） |
+| **Design** | 同一 Logic 失败 3 次仍未解决、架构不支持 | 技术方案设计缺陷、IL 语义与 AOT 不可兼得 | 不 retry，调研后再修复 |
+
+分类依据（按优先级）：
+
+**诊断问诊单（按顺序检查）：**
+
+1. **编译/链接错误？** → Infrastructure
+   - 读 C++ 错误信息（`error CXXXX`、`LNKXXXX`、`undefined reference`）
+   - 检查是否是 cmake 缓存过期导致的源文件列表不一致
+   - 如果是 `runtime-patchdata.cpp` 相关错误 → Infrastructure
+
+2. **file not found / 目录不存在？** → Infrastructure
+   - codegen 输出目录不存在 → 检查 pipeline codegen stage 是否成功
+   - `native-aot.generated.cpp` 不在了 → cmake rebuild 时被清理，需重新 codegen
+
+3. **fact assert 失败？** → Logic
+   - 对比 IL 与生成代码语义
+   - 检查 dispatch thunks 的 ABI 是否正确
+
+4. **benchmark timing = -1.0？** → Logic
+   - dispatch thunks ABI 不匹配
+   - 如果 timing 异常高（100x+ vs .NET 8）→ 检查是否为 exception-path（null/invalid 输入）
+   - exception-path → 标记排除，不是 Logic 问题
+
+5. **hotupdate 相关？** → 两步判断：
+   - `d3PatchApplied=false` → Infrastructure（patchdata 未正确嵌入）
+     - 检查 `runtime-patchdata.cpp` 是否被 sentinel 覆盖
+     - 检查 entry.exe rebuild 后 `kPatchDataSize` 符号值
+   - `d3PatchApplied=true` 但 `semanticChangedCount=0` → Logic
+     - dispatch 返回状态码而非返回值
+     - IR 映射错误导致 interpreter hang
+
+6. **同一 Logic 失败进入第 3 次？** → Design
+   - 停止 retry，启动架构调研
+
+### 3.2 根因诊断
+
+根据分类结果执行针对性诊断：
+
+| Stage | Infrastructure 诊断要点 | Logic 诊断要点 |
+|-------|------------------------|----------------|
+| codegen / jit_codegen | SDK 路径解析失败、dotnet SDK 版本不匹配 | 编译错误 → 定位 codegen emitter |
+| fact / fact_jit / managed_fact | entry.exe 未更新、使用了旧缓存 | assert 失败 → 对比 IL 与生成代码语义 |
+| audit | — | 原则审计不通过 → 对齐架构规范 |
+| asm_compare | — | IR 扩展比异常 → 检查 lowering 路径 |
+| benchmark | cmake 构建输出不是最新 binary | timing = -1.0 → dispatch thunks ABI 不匹配；exception-path（timing 100x+ vs .NET 8）→ 标记为 exception-path 排除 |
+| hotupdate | `d3PatchApplied=false`：patchdata 未嵌入（检查 `kPatchDataSize`、`runtime-patchdata.cpp` 内容） | `semanticChangedCount=0`：dispatch 返回状态码而非返回值；IR 映射错误 |
+
+### 3.3 输出
+
+**出口条件**：所有 failed stage 的类别和根因已写入 `diagnosis.json`：
+
+```json
+{
+  "stages": {
+    "hotupdate": {
+      "classification": "infrastructure",
+      "root_cause": "runtime-patchdata.cpp was sentinel (size=0) instead of real patchdata",
+      "fix_strategy": "regenerate patchdata with --aot-core-ir and rebuild entry.exe"
+    }
+  },
+  "patterns": []
+}
+```
 
 ---
 
 ## Step 4: Fix & Rerun
 
-对每个 failed stage 执行修复：
+根据 Step 3 的分类结果执行针对性修复：
 
-1. 根据 Step 3 的诊断根因修改代码（codegen / runtime / test）
-2. 重新跑 pipeline（同 Step 2，但 **切换为 `--native-config check`** 获得完整 ASSERT 和 DEBUG 日志以便验证修复）
-3. 如果修复后仍失败 → `attempt += 1`，回到 Step 3 重新诊断
-4. `attempt > max_attempts(3)` → 写 `blocker.md`，跳到 Step 11 Cleanup
+### 4.1 Infrastructure 类修复（max_attempts=1）
 
-**出口条件**：pipeline 全部 passed，或 max_attempts 超限。
+基础设施问题通常一次重建即可恢复。不要浪费 retry 次数：
+
+```bash
+# 修复 cmake 缓存过期
+rm -rf "$build_dir/CMakeCache.txt" "$build_dir/CMakeFiles"
+cmake -S "$native_dir" -B "$build_dir" -DCMAKE_BUILD_TYPE=RelWithDebInfo
+
+# 修复源文件缺失
+# 从 codegen 输出拷贝或自动生成
+if [ ! -f "${native_dir}/microbench.cpp" ]; then
+    # 自动生成 fallback microbench.cpp
+    cat > "${native_dir}/microbench.cpp" << 'EOF'
+// microbench.cpp — Auto-generated fallback
+#include "fast_frame_pool.h"
+#include <chrono>
+#include <cstdio>
+using Clock = std::chrono::high_resolution_clock;
+using chaos::il2cpp::runtime_core::tls_frame_pool;
+using chaos::il2cpp::runtime_core::FastFramePool;
+using chaos::il2cpp::runtime_core::FastFrame;
+extern "C" const int kAotMethodCount;
+struct BenchmarkResult { double elapsed_ms; int64_t allocated_bytes; bool caught_exception; };
+extern "C" BenchmarkResult RunBenchmark(int, int) { return {-1.0, 0, false}; }
+extern "C" void RunMicrobench() { printf("microbench: no-op (fallback)\\n"); }
+EOF
+fi
+
+# 修复运行时 patchdata 被 sentinel 覆盖
+if [ -f "${native_dir}/subjects.patchdata" ]; then
+    _regenerate_runtime_patchdata_cpp "${native_dir}/subjects.patchdata" "${native_dir}/runtime-patchdata.cpp"
+fi
+
+# 重建
+cmake --build "$build_dir" --config RelWithDebInfo --target entry --parallel
+```
+
+修复后重跑 pipeline（`--native-config check`）验证。如果仍失败 → 升级为 Logic 类，进入 4.2。
+
+### 4.2 Logic 类修复（max_attempts=3）
+
+根据 Step 3 的诊断根因修改代码（codegen / runtime / test），然后重跑 pipeline：
+
+```bash
+python -m verification.entry_points.cli \
+    <slug> \
+    --assembly System.Private.CoreLib \
+    --mode strict \
+    --native-config check \
+    --verbose
+```
+
+- 如果修复后仍失败 → `attempt += 1`，回到 Step 3 重新诊断
+- `attempt > max_attempts(3)` → 升级为 Design 类，进入 4.3
+
+### 4.3 Design 类处理（不 retry）
+
+同一 Logic 失败达到 max_attempts 意味着这不是简单代码 bug，而是架构设计缺陷：
+
+1. 启动 `dev-architecture-first-development` 技能做架构审视
+2. 必要时启动 `dev-brainstorm` 技能做方案探索
+3. 在 `docs/discuss/` 完成设计讨论
+4. 形成实施方案后再进入 Step 4.2 修复
+
+### 4.4 首次发现数据完整性问题的特殊处理
+
+如果 pipeline 全部 passed 但 report 中数据不完整（如 benchmark timing 全为 0.0、hotupdate totalMethods=0），这些不会触发 stage failure，需要单独检查：
+
+```bash
+# 检查 unified-verification-report.json 的 benchmark 数据
+_report="${results_dir}/unified-verification-report.json"
+_bench_timing=$(python3 -c "
+import json
+r = json.load(open('$_report'))
+b = r.get('benchmark', {})
+timings = [m.get('elapsedMilliseconds', 0) or 0 for m in b.get('details', {}).get('results', [])]
+print(','.join(str(t) for t in timings))
+")
+if echo "$_bench_timing" | grep -q '^0\.0,'; then
+    echo "FAIL: benchmark timing is 0.0 — possible infrastructure issue (stale binary)"
+    # 标记为 Infrastructure 类，进入 Step 4.1
+fi
+```
+
+### 出口条件
+
+- ✅ pipeline 全部 passed + 数据完整 → 进入 Step 5
+- ✅ Infrastructure 类已修复 → 进入 Step 5
+- ❌ Logic 类 max_attempts 超限 → 升级 Design 类
+- ❌ Design 类调研未完成 → 写 `blocker.md`，跳到 Step 11 Cleanup
 
 ---
 
@@ -406,7 +629,7 @@ git status  # 确认干净
 
 ## Abort 处理
 
-如果 Step 4/6/7 的修复循环达到 `max_attempts=3`：
+如果 Step 4/6/7 的修复循环达到 max_attempts（Logic 类超限或 Design 类无可行方案）：
 
 1. 写 `blocker.md` 到 `optimization-campaign/workers/<worker-id>/blocker.md`，包含：
    - 哪个 Step 失败
@@ -438,9 +661,11 @@ docs/optimize/
 | Step | 预估 | 超时处理 |
 |------|------|---------|
 | 1 Setup | 2 min | — |
+| 1.5 Audit | 2 min | — |
+| 1.7 Pre-flight | 1 min | 自动修复，不阻塞 |
 | 2 Pipeline | 10-30 min | 每 60s keepalive |
-| 3 Diagnose | 3 min | — |
-| 4 Fix loop (×3) | 60 min | max_attempts → abort |
+| 3 Classify & Diagnose | 3 min | — |
+| 4 Fix loop (Infra×1 / Logic×3) | 30 min | max_attempts → Design / abort |
 | 5 Perf Check | 1 min | — |
 | 6 .NET 8 loop (×3) | 60 min | max_attempts → abort |
 | 7 HotUpdate loop (×3) | 30 min | max_attempts → abort |
@@ -450,7 +675,7 @@ docs/optimize/
 | 11 Merge → Cleanup | 3 min | — |
 | 12 CI Verify | 10 min | 超时后手动检查 |
 | 13 Pull | 1 min | — |
-| **总计** | **~3 hours** | |
+| **总计** | **~2.5 hours** | |
 
 超限写 blocker.md，不是停下来等人。
 

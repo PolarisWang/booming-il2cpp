@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from .._path import _HERE as _VERIFICATION_ROOT
@@ -90,18 +91,17 @@ def main(argv: list[str] | None = None) -> None:
     print(f"  Stages: 6-stage quick mode (skipped: {', '.join(sorted(SKIP_STAGES))})")
 
     total_start = time.perf_counter()
-    passed = 0
-    failed = 0
-    crashed = 0
+    results = {}
 
-    for slug in families:
-        result = run_smoke_family(slug, args.assembly)
-        if result["status"] == "passed":
-            passed += 1
-        elif result["status"] == "crashed":
-            crashed += 1
-        else:
-            failed += 1
+    with ThreadPoolExecutor(max_workers=len(families)) as pool:
+        future_map = {pool.submit(run_smoke_family, slug, args.assembly): slug for slug in families}
+        for fut in as_completed(future_map):
+            slug = future_map[fut]
+            results[slug] = fut.result()
+
+    passed = sum(1 for r in results.values() if r["status"] == "passed")
+    failed = sum(1 for r in results.values() if r["status"] == "failed")
+    crashed = sum(1 for r in results.values() if r["status"] == "crashed")
 
     total_time = time.perf_counter() - total_start
     print(f"\n{'='*60}")

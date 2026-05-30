@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 
-from verification.orchestration.context import FamilyContext, StageResult, UnifiedReport
+from verification.orchestration.context import FamilyContext, ParallelGroup, StageResult, UnifiedReport
 from verification.orchestration.engine import (
     REQUIRED_STAGES_STANDARD,
     REQUIRED_STAGES_STRICT,
@@ -13,6 +13,17 @@ from verification.orchestration.engine import (
     compute_coverage,
     detect_regression,
 )
+
+
+def _flatten_stages(stages):
+    """Flatten ParallelGroup entries for test iteration compatibility."""
+    flat = []
+    for entry in stages:
+        if isinstance(entry, ParallelGroup):
+            flat.extend(entry.stages)
+        else:
+            flat.append(entry)
+    return flat
 
 
 # ── Pipeline Execution ─────────────────────────────────────────────
@@ -27,7 +38,8 @@ class TestVerificationPipeline:
             skip_stages={"benchmark", "hotupdate"},
         )
         pipeline = VerificationPipeline(ctx)
-        skipped = {name for name, _, _ in pipeline.STAGES if name in ctx.skip_stages}
+        flat = _flatten_stages(pipeline.STAGES)
+        skipped = {name for name, _, _ in flat if name in ctx.skip_stages}
         assert "benchmark" in skipped
         assert "hotupdate" in skipped
         assert "preflight" not in skipped
@@ -35,13 +47,14 @@ class TestVerificationPipeline:
     def test_stage_list_order(self):
         ctx = FamilyContext(slug="test", assembly="Test.Asm", family_dir="/tmp")
         pipeline = VerificationPipeline(ctx)
-        names = [name for name, _, _ in pipeline.STAGES]
+        flat = _flatten_stages(pipeline.STAGES)
+        names = [name for name, _, _ in flat]
         assert names[0] == "preflight"
         assert names[2] == "jit_codegen"
         assert names[3] == "managed_fact"
         assert names[4] == "cross_verify"
-        assert names[-1] == "hotupdate_jit_benchmark"
-        assert len(names) == 15
+        assert names[-1] == "cleanup"
+        assert len(names) == 16
 
     def test_fatal_stages_contains_preflight(self):
         assert "preflight" in VerificationPipeline.FATAL_STAGES
@@ -49,11 +62,12 @@ class TestVerificationPipeline:
     def test_run_returns_report(self, tmp_path):
         contract_path = tmp_path / "capability-family-contract.json"
         contract_path.write_text('{"methodSubjectIds": ["Test::Method"]}', encoding="utf-8")
+        flat = _flatten_stages(VerificationPipeline.STAGES)
         ctx = FamilyContext(
             slug="integration-test",
             assembly="Test.Asm",
             family_dir=tmp_path,
-            skip_stages={name for name, _, _ in VerificationPipeline.STAGES if name != "preflight"},
+            skip_stages={name for name, _, _ in flat if name != "preflight"},
         )
         pipeline = VerificationPipeline(ctx)
         report = pipeline.run()
