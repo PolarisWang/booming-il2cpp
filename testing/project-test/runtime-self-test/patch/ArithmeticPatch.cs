@@ -15,7 +15,6 @@ using Chaos.TestFramework;
 ///
 /// When patched, RTS_ARITH_ADD changes from 5 (2+3) to 6 (2*3).
 /// </summary>
-[HotUpdateSubjectId("RuntimeSelfTest/ArithmeticProof::Add(System.Int32,System.Int32)")]
 public static class ArithmeticPatch
 {
     public static int Add(int a, int b)
