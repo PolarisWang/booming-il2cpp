@@ -56,7 +56,7 @@ public static partial class ReaderSubjects
     // [4] System.Text.Json/System.Text.Json.Utf8JsonReader::get_CurrentState:System.Text.Json.JsonReaderState()
     public static void CustomEntrySubject_4()
     {
-        try { var r = MakeBoolReader(); var s = r.CurrentState; Assert.IsTrue(true); }
+        try { var r = MakeBoolReader(); var s = r.CurrentState; Assert.IsNotNull(s); }
         catch { _exitCode = 1; }
     }
 
@@ -77,7 +77,7 @@ public static partial class ReaderSubjects
     // [7] System.Text.Json/System.Text.Json.Utf8JsonReader::get_Position:System.SequencePosition()
     public static void CustomEntrySubject_7()
     {
-        try { var r = MakeBoolReader(); var p = r.Position; Assert.IsTrue(true); }
+        try { var r = MakeBoolReader(); var p = r.Position; Assert.IsNotNull(p); }
         catch { _exitCode = 1; }
     }
 
@@ -105,7 +105,7 @@ public static partial class ReaderSubjects
     // [11] System.Text.Json/System.Text.Json.Utf8JsonReader::get_ValueSequence:System.Buffers.ReadOnlySequence{System.Byte}()
     public static void CustomEntrySubject_11()
     {
-        try { var r = MakeBoolReader(); var vs = r.ValueSequence; Assert.IsTrue(true); }
+        try { var r = MakeBoolReader(); var vs = r.ValueSequence; Assert.IsNotNull(vs); }
         catch { _exitCode = 1; }
     }
 
@@ -175,7 +175,7 @@ public static partial class ReaderSubjects
     // [21] System.Text.Json/System.Text.Json.Utf8JsonReader::GetGuid:System.Guid()
     public static void CustomEntrySubject_21()
     {
-        try { var r = MakeReader("\"00000001-0002-0003-0004-000000000005\""); r.Read(); var g = r.GetGuid(); Assert.IsTrue(true); }
+        try { var r = MakeReader("\"00000001-0002-0003-0004-000000000005\""); r.Read(); var g = r.GetGuid(); Assert.AreEqual(new Guid("00000001-0002-0003-0004-000000000005"), g); }
         catch { _exitCode = 1; }
     }
 
@@ -392,63 +392,63 @@ public static partial class ReaderSubjects
     // [52] System.Text.Json/System.Text.Json.Utf8JsonReader::.ctor:System.Void(System.ReadOnlySpan{System.Byte},System.Boolean,System.Text.Json.JsonReaderState)
     public static void CustomEntrySubject_52()
     {
-        try { var r = new Utf8JsonReader(Encoding.UTF8.GetBytes("true"), true, default(JsonReaderState)); Assert.IsTrue(true); }
+        try { var r = new Utf8JsonReader(Encoding.UTF8.GetBytes("true"), true, default(JsonReaderState)); r.Read(); Assert.IsTrue(r.GetBoolean()); }
         catch { _exitCode = 1; }
     }
 
     // [53] System.Text.Json/System.Text.Json.Utf8JsonReader::.ctor:System.Void(System.ReadOnlySpan{System.Byte},System.Text.Json.JsonReaderOptions)
     public static void CustomEntrySubject_53()
     {
-        try { var r = new Utf8JsonReader(Encoding.UTF8.GetBytes("true"), new JsonReaderOptions()); Assert.IsTrue(true); }
+        try { var r = new Utf8JsonReader(Encoding.UTF8.GetBytes("true"), new JsonReaderOptions()); r.Read(); Assert.IsTrue(r.GetBoolean()); }
         catch { _exitCode = 1; }
     }
 
     // [54] System.Text.Json/System.Text.Json.Utf8JsonReader::.ctor:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Boolean,System.Text.Json.JsonReaderState)
     public static void CustomEntrySubject_54()
     {
-        try { var seq = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("true")); var r = new Utf8JsonReader(seq, true, default(JsonReaderState)); Assert.IsTrue(true); }
+        try { var seq = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("true")); var r = new Utf8JsonReader(seq, true, default(JsonReaderState)); r.Read(); Assert.IsTrue(r.GetBoolean()); }
         catch { _exitCode = 1; }
     }
 
     // [55] System.Text.Json/System.Text.Json.Utf8JsonReader::.ctor:System.Void(System.Buffers.ReadOnlySequence{System.Byte},System.Text.Json.JsonReaderOptions)
     public static void CustomEntrySubject_55()
     {
-        try { var seq = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("true")); var r = new Utf8JsonReader(seq, new JsonReaderOptions()); Assert.IsTrue(true); }
+        try { var seq = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("true")); var r = new Utf8JsonReader(seq, new JsonReaderOptions()); r.Read(); Assert.IsTrue(r.GetBoolean()); }
         catch { _exitCode = 1; }
     }
 
     // [56] System.Text.Json/System.Text.Json.Utf8JsonReader::set_ValueSpan:System.Void(System.ReadOnlySpan{System.Byte})
     public static void CustomEntrySubject_56()
     {
-        try { var r = MakeStrReader(); Assert.IsTrue(true); /* setter tested via constructor */ }
+        try { var r = MakeStrReader(); var span = r.ValueSpan; Assert.IsTrue(span.Length > 0); }
         catch { _exitCode = 1; }
     }
 
     // [57] System.Text.Json/System.Text.Json.Utf8JsonReader::set_TokenStartIndex:System.Void(System.Int64)
     public static void CustomEntrySubject_57()
     {
-        try { var r = MakeBoolReader(); Assert.IsTrue(true); /* setter tested via constructor */ }
+        try { var r = MakeBoolReader(); Assert.AreEqual(0L, r.TokenStartIndex); }
         catch { _exitCode = 1; }
     }
 
     // [58] System.Text.Json/System.Text.Json.Utf8JsonReader::set_HasValueSequence:System.Void(System.Boolean)
     public static void CustomEntrySubject_58()
     {
-        try { var r = MakeBoolReader(); Assert.IsTrue(true); /* setter tested via constructor */ }
+        try { var r = MakeBoolReader(); Assert.IsFalse(r.HasValueSequence); }
         catch { _exitCode = 1; }
     }
 
     // [59] System.Text.Json/System.Text.Json.Utf8JsonReader::set_ValueIsEscaped:System.Void(System.Boolean)
     public static void CustomEntrySubject_59()
     {
-        try { var r = MakeStrReader(); Assert.IsTrue(true); /* setter tested via constructor */ }
+        try { var r = MakeStrReader(); Assert.IsFalse(r.ValueIsEscaped); }
         catch { _exitCode = 1; }
     }
 
     // [60] System.Text.Json/System.Text.Json.Utf8JsonReader::set_ValueSequence:System.Void(System.Buffers.ReadOnlySequence{System.Byte})
     public static void CustomEntrySubject_60()
     {
-        try { var r = MakeBoolReader(); Assert.IsTrue(true); /* setter tested via constructor */ }
+        try { var r = MakeBoolReader(); Assert.IsTrue(r.ValueSequence.IsEmpty); }
         catch { _exitCode = 1; }
     }
 }

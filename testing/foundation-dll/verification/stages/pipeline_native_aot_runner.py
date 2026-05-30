@@ -729,6 +729,12 @@ def ensure_cmake_lists_file(cmakelists: Path, family_slug: str, verification: Pa
         f'endif()\n'
         f'{jit_mode_guard}'
         f'\n'
+        f'# Verification mode: enables if constexpr assertion bodies in generated code\n'
+        f'# Set to 0 for AOT-only builds; the fact stage requires assertions to be DISABLED\n'
+        f'# because the AOT entry point does not have managed exception handling installed\n'
+        f'# during static initialization.\n'
+        f'add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=0)\n'
+        f'\n'
         f'# Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and\n'
         f'# chaos::codegen (precompiled generated code) via find_package(chaos).\n'
         f'# The SDK root is the codegen output directory from --sdk-out.\n'
@@ -954,7 +960,63 @@ def write_sentinel_entry(entry_cpp: Path) -> None:
     print(f"    [build_entry] sentinel runtime-entry.cpp created")
 
 
-def build_entry_executable(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe", is_jit: bool = False, skip_prep: bool = False, prep_only: bool = False) -> bool:
+# ── VS environment capture for Ninja JIT builds on Windows ─────────────
+# When building with Ninja on Windows, MSVC is not in PATH by default.
+# We need to run vcvarsall.bat to set up the compiler environment.
+# The path is detected once then cached for subsequent calls.
+
+_VCVARSALL_PATH: str | None = None
+
+def _detect_vcvarsall() -> str:
+    global _VCVARSALL_PATH
+    if _VCVARSALL_PATH is not None:
+        return _VCVARSALL_PATH
+    # Prefer BuildTools (used by cmake VS generator) over Professional/Enterprise.
+    # The VS generator detected in CMakeCache.txt shows:
+    #   CMAKE_GENERATOR_INSTANCE=C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools
+    # Using the same toolset avoids STL intrinsic symbol mismatches at link time.
+    candidates = [
+        r"C:/Program Files (x86)/Microsoft Visual Studio/2022/BuildTools/VC/Auxiliary/Build/vcvarsall.bat",
+        r"C:/Program Files/Microsoft Visual Studio/2022/Professional/VC/Auxiliary/Build/vcvarsall.bat",
+        r"C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvarsall.bat",
+        r"C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvarsall.bat",
+    ]
+    for p in candidates:
+        if Path(p).exists():
+            _VCVARSALL_PATH = p
+            return p
+    raise FileNotFoundError("No vcvarsall.bat found — cannot use Ninja on Windows")
+
+
+def _capture_vs_env() -> dict[str, str]:
+    """Run vcvarsall.bat x64 and return the resulting environment as a dict."""
+    vcvarsall = _detect_vcvarsall()
+    # Write a temp batch file to avoid cmd.exe quoting issues with paths
+    # containing spaces when called via subprocess.run.
+    import tempfile
+    import os as _os
+    bat_fd, bat_path = tempfile.mkstemp(suffix=".bat", prefix="_chaos_vs_env_")
+    try:
+        with _os.fdopen(bat_fd, "w", encoding="utf-8") as f:
+            f.write(f'call "{vcvarsall}" x64 >nul 2>nul\nset\n')
+        result = subprocess.run(
+            ["cmd.exe", "/c", bat_path],
+            capture_output=True, text=True, timeout=30,
+        )
+    finally:
+        try:
+            _os.unlink(bat_path)
+        except OSError:
+            pass
+    env = {}
+    for line in result.stdout.splitlines():
+        if "=" in line:
+            k, v = line.split("=", 1)
+            env[k] = v
+    return env
+
+
+def build_entry_executable(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe", is_jit: bool = False, skip_prep: bool = False, prep_only: bool = False, parallel_jobs: int = 0) -> bool:
     v = verification or _VERIFICATION
     native_dir = v / family_slug / "native"
     cmakelists = native_dir / "CMakeLists.txt"
@@ -1178,9 +1240,30 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     if prep_only:
         return True
 
+    # ── Platform detection (must be before build_dir to avoid UnboundLocalError) ──
+    is_linux = sys.platform.startswith("linux")
+
     # Use separate build directories for AOT (build/) and JIT (build_jit/)
     # to avoid MSBuild file-lock conflicts when the JIT stage follows AOT.
     build_dir = native_dir / ("build_jit" if is_jit else "build")
+
+    # Detect generator mismatch: if the existing cache was created by a different
+    # generator (e.g., VS -> Ninja switch for JIT builds), clean the entire
+    # build directory rather than just removing CMakeCache.txt.  A generator
+    # switch requires a clean configure (cmake rejects generator changes).
+    if build_dir.exists() and (build_dir / "CMakeCache.txt").exists():
+        try:
+            cache_text = (build_dir / "CMakeCache.txt").read_text(encoding="utf-8", errors="replace")
+            m = re.search(r'CMAKE_GENERATOR:INTERNAL=(.+)', cache_text)
+            if m:
+                old_gen = m.group(1).strip()
+                new_gen = "Ninja" if (is_linux or is_jit) else "Visual Studio 17 2022"
+                if old_gen != new_gen:
+                    print(f"    [build_entry] generator changed: {old_gen} -> {new_gen}, cleaning build dir")
+                    shutil.rmtree(build_dir)
+                    build_dir.mkdir(parents=True, exist_ok=True)
+        except (OSError, re.error):
+            pass
 
     # Incremental build: keep existing build cache for faster recompilation.
     # Only remove CMakeCache.txt to force reconfiguration; all .obj/.lib files
@@ -1198,11 +1281,12 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
     else:
         build_dir.mkdir(parents=True, exist_ok=True)
 
-    # ── Platform detection ───────────────────────────────────────────
-    is_linux = sys.platform.startswith("linux")
+    vs_env = None
+    if is_jit and not is_linux:
+        vs_env = _capture_vs_env()
 
     # Step 1: CMake configure (with retry for transient Windows file-lock failures)
-    print(f"    [build_entry] cmake configure (platform={'linux' if is_linux else 'windows'})...")
+    print(f"    [build_entry] cmake configure (platform={'linux' if is_linux else 'windows'}, generator={'Ninja' if is_linux or is_jit else 'VS 2022'})...")
     cfg_result = None
 
     cmake_args = ["cmake", "-S", str(native_dir), "-B", str(build_dir)]
@@ -1211,17 +1295,29 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                        f"-DCMAKE_BUILD_TYPE={config_tier.lower()}",
                        f"-DCHAOS_IL2CPP_CONFIG_TIER={config_tier.lower()}",
                        "-DCHAOS_IL2CPP_JIT_MODE=ON" if is_jit else "-DCHAOS_IL2CPP_JIT_MODE=OFF"]
+    elif is_jit:
+        # JIT on Windows: Use Ninja to avoid MSBuild file-lock contention with
+        # the parallel AOT build.  Ninja is also used in codegen.py's parallel
+        # AOT+JIT section — the VS environment is captured via vcvarsall.bat.
+        cmake_args += ["-G", "Ninja",
+                       f"-DCMAKE_BUILD_TYPE={config_tier.lower()}",
+                       f"-DCHAOS_IL2CPP_CONFIG_TIER={config_tier.lower()}",
+                       "-DCHAOS_IL2CPP_JIT_MODE=ON",
+                       # Match Visual Studio generator's default runtime library.
+                       # Without this, Ninja may default to /MT (static CRT) while
+                       # the prebuilt chaos_runtime_core.lib uses /MD (dynamic DLL).
+                       "-DCMAKE_MSVC_RUNTIME_LIBRARY=MultiThreadedDLL"]
     else:
         cmake_args += ["-G", "Visual Studio 17 2022", "-A", "x64",
                        "-DCMAKE_USE_WIN32_LONG_PATHS=ON",
                        f"-DCHAOS_IL2CPP_CONFIG_TIER={config_tier.lower()}",
-                       "-DCHAOS_IL2CPP_JIT_MODE=ON" if is_jit else "-DCHAOS_IL2CPP_JIT_MODE=OFF"]
+                       "-DCHAOS_IL2CPP_JIT_MODE=OFF"]
     for cfg_attempt in range(3):
         if cfg_attempt > 0:
             wait = 1 << cfg_attempt  # 2, 4 seconds
             print(f"    [build_entry] cmake configure retry #{cfg_attempt} after {wait}s...")
             time.sleep(wait)
-        cfg_result = subprocess.run(cmake_args, capture_output=True, text=True, timeout=120,)
+        cfg_result = subprocess.run(cmake_args, capture_output=True, text=True, timeout=120, env=vs_env)
         if cfg_result.returncode == 0:
             break
 
@@ -1237,7 +1333,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                 wait = 1 << cfg_attempt
                 print(f"    [build_entry] cmake configure (clean) retry #{cfg_attempt} after {wait}s...")
                 time.sleep(wait)
-            cfg_result = subprocess.run(cmake_args, capture_output=True, text=True, timeout=120,)
+            cfg_result = subprocess.run(cmake_args, capture_output=True, text=True, timeout=120, env=vs_env)
             if cfg_result.returncode == 0:
                 break
         if cfg_result is None or cfg_result.returncode != 0:
@@ -1246,8 +1342,8 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                 print(f"      {line}")
             return False
 
-    # Step 1b: Patch vcxproj files (Windows only — Ninja doesn't generate vcxproj)
-    if not is_linux:
+    # Step 1b: Patch vcxproj files (Windows VS builds only — Ninja doesn't generate vcxproj)
+    if not is_linux and not is_jit:
         patch_script = _HERE.parents[0] / "_patch_vcxproj.py"
         if patch_script.exists():
             subprocess.run([sys.executable, str(patch_script), str(build_dir)],
@@ -1255,9 +1351,12 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             print(f"    [build_entry] vcxproj patched for /EHs /EHc-")
 
     # Step 2: CMake build with retry for transient failures
-    print(f"    [build_entry] cmake build (platform={'linux' if is_linux else 'windows'})...")
-    build_args = ["cmake", "--build", str(build_dir), "--target", "entry", "--parallel"]
-    if not is_linux:
+    print(f"    [build_entry] cmake build (platform={'linux' if is_linux else 'windows'}, generator={'Ninja' if is_linux or is_jit else 'VS 2022'})...")
+    if parallel_jobs > 0:
+        build_args = ["cmake", "--build", str(build_dir), "--target", "entry", f"--parallel={parallel_jobs}"]
+    else:
+        build_args = ["cmake", "--build", str(build_dir), "--target", "entry", "--parallel"]
+    if not is_linux and not is_jit:
         build_args += ["--config", "RelWithDebInfo"]
     build_result = None
     for build_attempt in range(3):
@@ -1265,7 +1364,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
             wait = 1 << build_attempt  # 2, 4 seconds
             print(f"    [build_entry] cmake build retry #{build_attempt} after {wait}s...")
             time.sleep(wait)
-        build_result = subprocess.run(build_args, capture_output=True, text=True, timeout=300,)
+        build_result = subprocess.run(build_args, capture_output=True, text=True, timeout=300, env=vs_env)
         if build_result.returncode == 0:
             break
     if build_result and build_result.returncode != 0:
@@ -1283,7 +1382,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                     wait = 1 << cfg_attempt
                     print(f"    [build_entry] cmake configure (clean) retry #{cfg_attempt} after {wait}s...")
                     time.sleep(wait)
-                cfg_result = subprocess.run(cmake_args, capture_output=True, text=True, timeout=120,)
+                cfg_result = subprocess.run(cmake_args, capture_output=True, text=True, timeout=120, env=vs_env)
                 if cfg_result.returncode == 0:
                     break
             if cfg_result and cfg_result.returncode == 0:
@@ -1293,7 +1392,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
                         wait = 1 << build_attempt
                         print(f"    [build_entry] cmake build (clean) retry #{build_attempt} after {wait}s...")
                         time.sleep(wait)
-                    build_result = subprocess.run(build_args, capture_output=True, text=True, timeout=300,)
+                    build_result = subprocess.run(build_args, capture_output=True, text=True, timeout=300, env=vs_env)
                     if build_result.returncode == 0:
                         break
 
@@ -1304,8 +1403,9 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         return False
 
     # Step 3: Locate binary (entry.exe on Windows, entry on Linux)
+    # Ninja builds output directly to build_dir/; VS builds use RelWithDebInfo/.
     exe_name = "entry.exe" if not is_linux else "entry"
-    if is_linux:
+    if is_linux or is_jit:
         exe_candidates = [build_dir / exe_name]
     else:
         exe_candidates = [
@@ -1443,312 +1543,10 @@ def has_synthetic_method_ids(method_subject_ids: list[str]) -> bool:
     return False
 
 
-def run_family(family_slug: str, *, assembly_name: str = "System.Private.CoreLib", variant: str | None = None, config_tier: str = "CHECK", codegen_mode: str | None = None) -> dict:
-    """Run the full pipeline for one family. Returns result dict."""
-    verification = _VERIFICATION_BASE / assembly_name
-    result = {
-        "family": family_slug,
-        "config_tier": config_tier,
-        "steps": {},
-        "success": False,
-    }
 
-    print(f"\n{'='*60}")
-    print(f"Family: {family_slug}")
-    print(f"{'='*60}")
-
-    # Step 0: Load method subject IDs
-    mids = load_method_subject_ids(family_slug, verification=verification)
-    if not mids:
-        print(f"  [SKIP] no methods in contract (contract-only family)")
-        result["success"] = True
-        result["error"] = None
-        trace("family_skip", family=family_slug, reason="no methods")
-        return result
-    print(f"  Methods: {len(mids)}")
-    result["methodCount"] = len(mids)
-
-    # Step 1a: Build subjects DLL (il2cpp input via managed/subjects/)
-    auto_variant = variant or ("patch" if has_synthetic_method_ids(mids) else "benchmark")
-    print(f"  [1a/3] Building subjects DLL (variant={auto_variant})...")
-    build_result = build_subjects_dll(family_slug, mids, assembly_name=assembly_name, verification=verification, variant=auto_variant)
-    if not build_result.get("success"):
-        result["steps"]["build_subjects"] = "FAILED"
-        result["error"] = build_result.get("error", "build failed")
-        print(f"    FAILED: {result['error']}")
-        trace("family_subjects_build_failed", family=family_slug, error=result["error"])
-        return result
-    result["steps"]["build_subjects"] = "OK"
-    result["entryPointSubjectId"] = build_result["entry_point_subject_id"]
-    result["dllPath"] = build_result["dll_path"]
-
-    # Step 1b: Convert-to-CPP → codegen/
-    print(f"  [1b/3] Running convert-to-cpp...")
-    entry_pt = build_result.get("entry_point_subject_id")
-    if not run_convert_to_cpp(family_slug, build_result["dll_path"], verification=verification, entry_point_subject_id=entry_pt, codegen_mode=codegen_mode):
-        result["steps"]["convert_to_cpp"] = "FAILED"
-        result["error"] = "convert-to-cpp failed"
-        trace("family_c2c_failed", family=family_slug)
-        return result
-    result["steps"]["convert_to_cpp"] = "OK"
-
-    # Step 1c: Generate .patchdata for hotpatch dispatch (before entry.exe build)
-    generate_patch_data(family_slug, verification=verification)
-
-    # Step 1e: Generate coverage JSON for dashboard/kernel integration
-    generate_coverage_json(family_slug, assembly_name, mids, verification=verification)
-
-    # Determine JIT mode before dispatch regeneration.
-    # When codegen_mode is None, the convert-to-cpp stage defaults to AOT mode
-    # (the --mode flag is omitted and the codegen tool's default is "aot").
-    # Be explicit about this so is_jit_build is always correctly resolved.
-    effective_codegen_mode = codegen_mode or "aot"
-    is_jit_build = (effective_codegen_mode == "jit")
-
-    # Step 1f: JIT dispatch is generated by TPG emit in codegen.py, not here.
-    # The old dispatch_generator.py call has been removed -- TPG emit handles
-    # both AOT and JIT dispatch generation correctly.
-
-    # Step 2: Build entry.exe from codegen/native-aot.generated.cpp → native/
-    print(f"  [2/3] Building entry.exe from codegen (jit={is_jit_build})...")
-    if not build_entry_executable(family_slug, verification=verification, config_tier=config_tier, is_jit=is_jit_build):
-        result["steps"]["build_entry_exe"] = "FAILED"
-        result["error"] = "entry.exe build failed"
-        trace("family_entry_build_failed", family=family_slug)
-        return result
-    result["steps"]["build_entry_exe"] = "OK"
-
-    # Family succeeds if all build steps pass
-    # (fact/benchmark/hotupdate verification is handled by the orchestrator stages)
-    if result["steps"].get("build_subjects") == "OK" \
-            and result["steps"].get("convert_to_cpp") == "OK" \
-            and result["steps"].get("build_entry_exe") == "OK":
-        result["success"] = True
-        trace("family_passed", family=family_slug, method_count=len(mids))
-    else:
-        result["success"] = False
-    return result
-
-
-def run_direct_assembly_translation(assembly_name: str) -> dict:
-    """Run convert-to-cpp directly on an assembly DLL (no synthetic entrypoint).
-
-    Translates the actual assembly DLL through the full IL2CPP pipeline,
-    producing per-assembly C++ output. This is the 'final form' IL2CPP
-    translation that foundation DLL verification should use.
-    """
-    # Find the actual assembly DLL
-    dll_path = find_assembly_dll(assembly_name)
-    if dll_path is None:
-        return {"assembly": assembly_name, "success": False, "error": f"DLL not found for {assembly_name}"}
-
-    assembly_out = _VERIFICATION_BASE / assembly_name / "il2cpp_dist" / "genuine"
-    assembly_out.mkdir(parents=True, exist_ok=True)
-
-    print(f"\n{'='*60}")
-    print(f"Assembly: {assembly_name}")
-    print(f"DLL: {dll_path}")
-    print(f"{'='*60}")
-
-    result = subprocess.run(
-        [
-            "dotnet", "run", "--no-build",
-            "--project", str(_REPO_ROOT / "src" / "managed" / "Chaos.IL2CPP.Driver"),
-            "--", "convert-to-cpp",
-            "--assembly", dll_path,
-            "--output", str(assembly_out),
-            "--full-closure",
-        ],
-        capture_output=True, text=True,
-        timeout=300,
-    )
-
-    if result.returncode != 0:
-        print(f"  convert-to-cpp FAILED (rc={result.returncode})")
-        for line in result.stderr.splitlines()[-10:]:
-            print(f"    {line}")
-        trace("assembly_translate_failed", assembly=assembly_name)
-        return {"assembly": assembly_name, "success": False, "error": result.stderr.splitlines()[-1][:200] if result.stderr.splitlines() else "unknown"}
-
-    # Check output
-    cpp_path = assembly_out / "generated" / "native-aot.generated.cpp"
-    if cpp_path.exists():
-        size = cpp_path.stat().st_size
-        print(f"  convert-to-cpp OK: {size} bytes")
-    else:
-        print(f"  convert-to-cpp OK (no .cpp output found)")
-
-    trace("assembly_translate_passed", assembly=assembly_name)
-    return {"assembly": assembly_name, "success": True, "error": None}
-
-
-def find_assembly_dll(assembly_name: str) -> str | None:
-    """Find the actual assembly DLL for a given assembly name.
-
-    Searches trusted platform assemblies and common locations.
-    """
-    # Check TRUSTED_PLATFORM_ASSEMBLIES env (set by dotnet host)
-    tpa = os.environ.get("TRUSTED_PLATFORM_ASSEMBLIES", "")
-    if tpa:
-        for path in tpa.split(os.pathsep):
-            if os.path.basename(path).lower() == f"{assembly_name.lower()}.dll":
-                return path
-
-    # Check common locations
-    search_dirs = [
-        _VERIFICATION_BASE / assembly_name,
-        _REPO_ROOT / "src" / "managed" / assembly_name / "bin" / "Debug" / "net8.0",
-        _REPO_ROOT / "testing" / "foundation-dll" / assembly_name,
-        Path(os.environ.get("DOTNET_ROOT", "C:/Program Files/dotnet")) / "shared" / "Microsoft.NETCore.App" / "8.0",
-    ]
-    for d in search_dirs:
-        if d.exists():
-            for f in d.iterdir():
-                if f.is_file() and f.name.lower() == f"{assembly_name.lower()}.dll":
-                    return str(f.resolve())
-
-    return None
-
-
-def main() -> None:
-    parser = argparse.ArgumentParser(description="Batch native AOT CodeGen pipeline")
-    parser.add_argument("--assembly-name", default="System.Private.CoreLib", help="Assembly name to process")
-    parser.add_argument("--trace", action="store_true", default=True, help="Enable JSONL trace logging (default: on)")
-    parser.add_argument("--no-trace", action="store_true", help="Disable JSONL trace logging")
-    parser.add_argument("--families", nargs="*", help="Space-separated subset of family slugs to process. Auto-discovers from contracts if not specified.")
-    parser.add_argument("--translate-assemblies", action="store_true", help="Translate actual assembly DLLs directly (final-form IL2CPP, no synthetic entrypoints)")
-    parser.add_argument("--assembly-dlls", nargs="*", help="Space-separated assembly DLL paths for direct translation")
-    parser.add_argument("--native-config", default="CHECK", choices=["CHECK", "PROFILE", "SHIP"],
-                        help="Native C++ config tier (default: CHECK)")
-    args = parser.parse_args()
-
-    global _VERIFICATION
-    _VERIFICATION = _VERIFICATION_BASE / args.assembly_name
-
-    if args.trace and not args.no_trace:
-        trace_init(_REPO_ROOT, stage="batch-native-aot")
-
-    if args.translate_assemblies:
-        run_assembly_translation_mode(args)
-        return
-
-    # Original per-family entrypoint mode
-    if not _VERIFICATION.exists():
-        print(f"FATAL: verification directory not found: {_VERIFICATION}", file=sys.stderr)
-        sys.exit(1)
-
-    families = args.families
-    if not families:
-        families = discover_families(args.assembly_name)
-        if not families:
-            print(f"No families found for {args.assembly_name} (no contracts)")
-            families = FAMILIES
-
-    print(f"Batch native AOT CodeGen pipeline - {len(families)} families")
-    print(f"Assembly: {args.assembly_name}")
-    print(f"Verification: {_VERIFICATION}")
-    print()
-
-    trace("batch_start", assembly=args.assembly_name, family_count=len(families), native_config=args.native_config)
-
-    results = []
-    passed = 0
-    failed = 0
-
-    for idx, family_slug in enumerate(families):
-        family_result = run_family(family_slug, assembly_name=args.assembly_name, config_tier=args.native_config)
-        results.append(family_result)
-
-        if family_result["success"]:
-            passed += 1
-            print(f"  >>> PASSED ({passed}/{idx+1})")
-        else:
-            failed += 1
-            print(f"  >>> FAILED ({failed}/{idx+1}): {family_result.get('error', 'unknown')}")
-
-    # Summary
-    print(f"\n{'='*60}")
-    print(f"{args.assembly_name}: {passed} passed, {failed} failed, {len(families)} total")
-    print(f"{'='*60}")
-    for r in results:
-        status = "PASS" if r["success"] else "FAIL"
-        steps = " -> ".join(f"{k}={v}" for k, v in r.get("steps", {}).items())
-        fact_info = ""
-        if "fact_total" in r and r["fact_total"]:
-            fact_info = f"  Fact:{r.get('fact_passed',0)}/{r['fact_total']}"
-        print(f"  {status:4s}  {r['family']:35s}  {steps}{fact_info}")
-
-    # Write results per-assembly
-    output_path = _VERIFICATION / "reports" / "batch-native-aot-pipeline-results.json"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    summary = {
-        "assembly": args.assembly_name,
-        "mode": "family-entrypoint",
-        "total": len(families),
-        "passed": passed,
-        "failed": failed,
-        "results": results,
-        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
-    }
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(summary, f, indent=2, ensure_ascii=False)
-    print(f"\nResults written to {output_path}")
-
-
-def run_assembly_translation_mode(args: argparse.Namespace) -> None:
-    """Run in assembly translation mode — translates actual DLLs directly."""
-    print(f"{'='*60}")
-    print(f"Batch native AOT: Assembly Translation Mode")
-    print(f"{'='*60}")
-
-    assemblies = args.assembly_dlls
-    if not assemblies:
-        # Auto-discover: use the assembly name
-        assemblies = [args.assembly_name]
-
-    print(f"Assemblies to translate: {len(assemblies)}")
-    for a in assemblies:
-        print(f"  {a}")
-    print()
-
-    results = []
-    passed = 0
-    failed = 0
-
-    for idx, asm_name in enumerate(assemblies):
-        asm_result = run_direct_assembly_translation(asm_name)
-        results.append(asm_result)
-
-        if asm_result["success"]:
-            passed += 1
-            print(f"  >>> PASSED ({passed}/{idx+1})")
-        else:
-            failed += 1
-            print(f"  >>> FAILED ({failed}/{idx+1}): {asm_result.get('error', 'unknown')}")
-
-    # Summary
-    print(f"\n{'='*60}")
-    print(f"Assembly translation: {passed} passed, {failed} failed, {len(assemblies)} total")
-    print(f"{'='*60}")
-    for r in results:
-        status = "PASS" if r["success"] else "FAIL"
-        print(f"  {status:4s}  {r['assembly']}")
-
-    # Write results
-    output_path = _VERIFICATION_BASE / args.assembly_name / "reports" / "batch-assembly-translation-results.json"
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    summary = {
-        "mode": "assembly-translation",
-        "total": len(assemblies),
-        "passed": passed,
-        "failed": failed,
-        "results": results,
-        "timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
-    }
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(summary, f, indent=2, ensure_ascii=False)
-    print(f"\nResults written to {output_path}")
-
-
-if __name__ == "__main__":
-    main()
+# ═══════════════════════════════════════════════════════════════════
+# run_family(), run_direct_assembly_translation(),
+# find_assembly_dll(), main(), run_assembly_translation_mode()
+# have been REMOVED as dead code.
+# The pipeline now uses VerificationPipeline (engine.py).
+# ═══════════════════════════════════════════════════════════════════

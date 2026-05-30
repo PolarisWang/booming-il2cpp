@@ -7,7 +7,6 @@ import re
 import shutil
 import subprocess
 import time
-from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from verification.orchestration.context import FamilyContext, StageResult, resolve_contract_path, load_contract
@@ -142,11 +141,24 @@ def _is_sentinel_dispatch(dispatch_cpp: Path) -> bool:
     # Falls through — no sentinel marker and no dispatch call.
     # Conservative: treat as sentinel so the pipeline fails closed.
     return True
-    rebuild = subprocess.run(
-        ["cmake", "--build", str(build_dir), "--config", "RelWithDebInfo", "--target", "entry", "--parallel"],
-        capture_output=True, text=True, timeout=300)
-    if rebuild.returncode != 0:
-        print(f"  [codegen] WARNING: dispatch rebuild failed (continuing)")
+
+
+def _find_built_exe(build_dir: Path) -> Path | None:
+    """Locate ``entry.exe`` (or ``entry`` on Linux) in a cmake build output dir.
+
+    MSVC places the binary under a ``RelWithDebInfo`` / ``Release`` / ``Debug``
+    sub-directory; Ninja places it directly in ``build_dir``.
+    """
+    for candidate in (
+        build_dir / "RelWithDebInfo" / "entry.exe",
+        build_dir / "Release" / "entry.exe",
+        build_dir / "Debug" / "entry.exe",
+        build_dir / "entry.exe",
+        build_dir / "entry",
+    ):
+        if candidate.exists():
+            return candidate
+    return None
 
 
 def _read_contract(assembly: str, slug: str) -> dict | None:
@@ -307,50 +319,44 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
         prep_only=True,
     )
 
-    # 5. Build AOT entry.exe + JIT entry-jit.exe in parallel
-    # Both builds consume the same codegen C++ files (read-only) but write to
-    # different build dirs (build/ vs build_jit/) and different output binaries
-    # (entry.exe vs entry-jit.exe).  Prep completed in step 4 so no races.
+    # 5. Build AOT entry.exe and JIT entry-jit.exe in parallel.
+    # AOT uses Visual Studio generator; JIT uses Ninja generator (avoids
+    # MSBuild file-lock contention between two concurrent cmake builds).
+    # Build directories and output binaries are separate:
+    #   AOT: native/build/ → entry.exe
+    #   JIT: native/build_jit/ → entry-jit.exe
     jit_exe = native_dir / "entry-jit.exe"
     jit_needs_build = not jit_exe.exists()
 
     if jit_needs_build:
         print(f"  [codegen] Building AOT entry.exe + JIT entry-jit.exe (parallel)...")
-    else:
-        print(f"  [codegen] Building AOT entry.exe (JIT cached)...")
-
-    aot_ok = False
-    jit_ok = False
-    futures = {}
-    with ThreadPoolExecutor(max_workers=2) as pool:
-        aot_future = pool.submit(
-            build_entry_executable, ctx.slug,
-            verification=testing_base, config_tier=ctx.native_config,
-            is_jit=False, skip_prep=True,
-        )
-        futures[aot_future] = "aot"
-        if jit_needs_build:
+        import os as _os
+        from concurrent.futures import ThreadPoolExecutor
+        half_cores = max(1, _os.cpu_count() // 2) if _os.cpu_count() else 4
+        aot_future = None
+        jit_future = None
+        with ThreadPoolExecutor(max_workers=2) as pool:
+            aot_future = pool.submit(
+                build_entry_executable, ctx.slug,
+                verification=testing_base, config_tier=ctx.native_config,
+                is_jit=False, skip_prep=True, parallel_jobs=half_cores,
+            )
             jit_future = pool.submit(
                 build_entry_executable, ctx.slug,
                 verification=testing_base, config_tier=ctx.native_config,
                 is_jit=True, output_name="entry-jit.exe", skip_prep=True,
+                parallel_jobs=half_cores,
             )
-            futures[jit_future] = "jit"
-
-        for future in as_completed(futures):
-            label = futures[future]
-            try:
-                result = future.result()
-                if label == "aot":
-                    aot_ok = result
-                else:
-                    jit_ok = result
-            except Exception as e:
-                print(f"    [codegen] {label} build raised: {e}")
-                if label == "aot":
-                    aot_ok = False
-                else:
-                    jit_ok = False
+            aot_ok = aot_future.result()
+            jit_ok = jit_future.result()
+    else:
+        print(f"  [codegen] Building AOT entry.exe (JIT cached)...")
+        aot_ok = build_entry_executable(
+            ctx.slug,
+            verification=testing_base, config_tier=ctx.native_config,
+            is_jit=False, skip_prep=True,
+        )
+        jit_ok = True
 
     if not aot_ok:
         return StageResult(
@@ -361,7 +367,7 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
 
     step_times["native_builds"] = time.perf_counter() - _step
     _step = time.perf_counter()
-    print(f"    [codegen timing] native builds (AOT+JIT parallel): {step_times['native_builds']:.2f}s")
+    print(f"    [codegen timing] native builds: {step_times['native_builds']:.2f}s")
 
     if jit_needs_build:
         if jit_ok:
@@ -445,24 +451,29 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
         _shutil.copy2(str(entry_exe), str(aot_backup))
         print(f"  [jit_codegen] backed up entry.exe -> entry-aot.exe")
 
-    # P0 optimization: if codegen stage already pre-built entry-jit.exe, skip
-    # the expensive _run_old_family() (which re-runs dotnet build + convert-to-cpp).
-    # Only do TPG emit + incremental cmake rebuild from build_jit/.
+    # If codegen stage already pre-built entry-jit.exe, skip the full cmake configure
+    # and go straight to TPG emit + incremental rebuild.  Otherwise build from existing
+    # codegen output via build_entry_executable (no subjects DLL or convert-to-cpp).
     if jit_exe.exists():
         print(f"  [jit_codegen] using pre-built JIT binary from codegen stage, incremental update only...")
         jit_build_ok = True
     else:
-        # Fall back to full JIT codegen pipeline (subjects DLL + convert-to-cpp + cmake build)
-        from verification.stages.pipeline_native_aot_runner import run_family as _run_old_family
-        jit_result = _run_old_family(ctx.slug, assembly_name=ctx.assembly, codegen_mode="jit")
-        jit_build_ok = jit_result.get("success", False)
+        # Build entry-jit.exe directly from existing codegen output (no subjects DLL or
+        # convert-to-cpp).  This is the same build_entry_executable() that run_codegen()
+        # uses for the pre-build — avoid the old run_family() pipeline entirely since it
+        # can re-compile entry.exe with stale dispatch files from git history.
+        from verification.stages.pipeline_native_aot_runner import build_entry_executable
+        jit_build_ok = build_entry_executable(
+            ctx.slug, verification=testing_base, config_tier=ctx.native_config,
+            is_jit=True, output_name="entry-jit.exe",
+        )
         if not jit_build_ok:
             if aot_backup.exists():
                 import shutil as _shutil
                 _shutil.copy2(str(aot_backup), str(entry_exe))
             return StageResult(
                 stage="jit_codegen", status="failed",
-                summary=f"JIT codegen failed: {jit_result.get('message', 'unknown')}",
+                summary=f"JIT entry-jit.exe build failed (old pipeline fallback removed)",
                 duration_ms=int((time.perf_counter() - start) * 1000),
             )
 
@@ -476,8 +487,36 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
     print(f"    [TPG timing] JIT emit took {tpg_elapsed:.2f}s")
     if tpg_ok:
         print(f"  [jit_codegen] Regenerated dispatch via TPG (JIT mode)")
-        # Use build_jit/ (JIT cmake config) for incremental rebuild, not build/ (AOT)
         _incremental_dispatch_rebuild(native_dir, build_subdir="build_jit")
+        # Rebuild JIT binary with the new dispatch file
+        build_jit_dir = native_dir / "build_jit"
+        print(f"  [jit_codegen] Rebuilding JIT binary after TPG emit...")
+        rebuild_r = subprocess.run(
+            ["cmake", "--build", str(build_jit_dir), "--target", "entry", "--parallel", "--config", "RelWithDebInfo"],
+            capture_output=True, text=True, timeout=300,
+        )
+        if rebuild_r.returncode == 0:
+            # Locate rebuilt binary and copy to entry-jit.exe
+            jit_built = _find_built_exe(build_jit_dir)
+            if jit_built and jit_built.exists():
+                import shutil as _shutil
+                import time as _time
+                for _copy_attempt in range(5):
+                    try:
+                        if jit_exe.exists():
+                            jit_exe.unlink()
+                        _shutil.copy2(str(jit_built), str(jit_exe))
+                        print(f"  [jit_codegen] rebuilt entry-jit.exe ({jit_exe.stat().st_size} bytes)")
+                        break
+                    except (PermissionError, OSError) as _e:
+                        if _copy_attempt < 4:
+                            _time.sleep(1 << _copy_attempt)
+                        else:
+                            print(f"  [jit_codegen] WARNING: could not save entry-jit.exe: {_e}")
+        else:
+            print(f"  [jit_codegen] WARNING: JIT incremental rebuild failed, keeping existing entry-jit.exe")
+            for line in (rebuild_r.stderr.splitlines() + rebuild_r.stdout.splitlines())[-10:]:
+                print(f"      {line}")
     else:
         # AOT codegen already validated the dispatch — safe to reuse
         if _is_sentinel_dispatch(dispatch_cpp):
@@ -488,22 +527,7 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
             )
         print(f"  [jit_codegen] TPG emit failed, reusing AOT-generated dispatch")
 
-    if entry_exe.exists():
-        import shutil as _shutil
-        import time as _time
-        for _copy_attempt in range(5):
-            try:
-                if jit_exe.exists():
-                    jit_exe.unlink()
-                _shutil.copy2(str(entry_exe), str(jit_exe))
-                print(f"  [jit_codegen] entry.exe -> entry-jit.exe ({jit_exe.stat().st_size} bytes)")
-                break
-            except (PermissionError, OSError) as _e:
-                if _copy_attempt < 4:
-                    _time.sleep(1 << _copy_attempt)
-                else:
-                    print(f"  [jit_codegen] WARNING: could not save entry-jit.exe: {_e}")
-
+    # Restore AOT entry.exe from backup
     if aot_backup.exists():
         import shutil as _shutil
         import time as _time
