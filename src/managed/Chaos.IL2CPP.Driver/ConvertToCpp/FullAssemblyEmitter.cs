@@ -25,7 +25,8 @@ internal sealed class FullAssemblyEmitter
     public NativeAotResult Emit(
         ManagedClosureResult closureResult,
         string outputRoot,
-        CodegenMode mode = CodegenMode.Aot)
+        CodegenMode mode = CodegenMode.Aot,
+        HashSet<string>? subjectMethods = null)
     {
         ArgumentNullException.ThrowIfNull(closureResult);
 
@@ -37,7 +38,8 @@ internal sealed class FullAssemblyEmitter
             closureResult.MetadataRegistration,
             closureResult.SupplementalMetadataTemplate,
             outputRoot,
-            mode);
+            mode,
+            subjectMethods);
 
         // Write all generated sources to disk
         foreach (var source in emitResult.GeneratedSources)

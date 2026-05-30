@@ -366,6 +366,8 @@ def main() -> None:
                         help="Path to golden-record.json")
     parser.add_argument("--managed-fact", type=Path, default=None,
                         help="Path to managed_fact golden-values.json")
+    parser.add_argument("--force", action="store_true",
+                        help="Skip blocking exit on ISSUES_FOUND (manual override)")
     args = parser.parse_args()
 
     managed_fact_results = None
@@ -382,12 +384,29 @@ def main() -> None:
         managed_fact_results=managed_fact_results,
     )
 
+    # ── Determine exit code and blocking status ──
+    verdict = report.get("correctness_verdict", "")
+
+    if verdict == "ISSUES_FOUND" and args.force:
+        effective_exit_code = 0
+    elif verdict == "BLOCKER":
+        effective_exit_code = 2
+    elif verdict == "ERROR":
+        effective_exit_code = 1
+    elif verdict == "ISSUES_FOUND":
+        effective_exit_code = 1
+    else:  # PASS
+        effective_exit_code = 0
+
+    # Add exit/blocking fields to JSON output (backward-compat: correctness_verdict is unchanged)
+    report["exit_code"] = effective_exit_code
+    report["blocking"] = effective_exit_code != 0
+    if verdict == "ISSUES_FOUND" and effective_exit_code != 0:
+        report["blocking_verdict"] = "ISSUES_FOUND_BLOCKING"
+
     print(json.dumps(report, indent=2, ensure_ascii=False))
 
-    if report.get("correctness_verdict") == "BLOCKER":
-        sys.exit(2)
-    elif report.get("correctness_verdict") == "ERROR":
-        sys.exit(1)
+    sys.exit(effective_exit_code)
 
 
 if __name__ == "__main__":
