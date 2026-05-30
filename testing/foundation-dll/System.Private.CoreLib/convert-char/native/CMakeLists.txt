@@ -14,9 +14,9 @@ add_compile_options(
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wno-error=invalid-offsetof>"
 )
 # Config tier: controlled by CHAOS_IL2CPP_CONFIG_TIER cmake variable
-# (set via -D or CMakePresets.json). Defaults to CHECK (debug).
+# (set via -D or CMakePresets.json). Expected values: check / profile / ship.
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
-  set(CHAOS_IL2CPP_CONFIG_TIER "debug")
+  set(CHAOS_IL2CPP_CONFIG_TIER "check")
 endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
@@ -26,7 +26,12 @@ elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "check")
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 else()
+  message(WARNING "Unknown CHAOS_IL2CPP_CONFIG_TIER: '${CHAOS_IL2CPP_CONFIG_TIER}'. Expected check / profile / ship. Defaulting to CHECK.")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
