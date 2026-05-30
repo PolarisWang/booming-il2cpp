@@ -954,7 +954,7 @@ def write_sentinel_entry(entry_cpp: Path) -> None:
     print(f"    [build_entry] sentinel runtime-entry.cpp created")
 
 
-def build_entry_executable(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe", is_jit: bool = False, skip_prep: bool = False) -> bool:
+def build_entry_executable(family_slug: str, *, verification: Path | None = None, config_tier: str = "CHECK", output_name: str = "entry.exe", is_jit: bool = False, skip_prep: bool = False, prep_only: bool = False) -> bool:
     v = verification or _VERIFICATION
     native_dir = v / family_slug / "native"
     cmakelists = native_dir / "CMakeLists.txt"
@@ -1174,6 +1174,9 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         # but NOT the runtime libs (chaos_common.lib, etc.).  Copy them from
         # codegen/lib/ so find_package(chaos) resolves all dependencies.
         _sync_runtime_libs_to_sdk(codegen_dir, repo_root=_REPO_ROOT)
+
+    if prep_only:
+        return True
 
     # Use separate build directories for AOT (build/) and JIT (build_jit/)
     # to avoid MSBuild file-lock conflicts when the JIT stage follows AOT.
