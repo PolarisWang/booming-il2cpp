@@ -64,21 +64,11 @@ inline int32_t ChaosDispatchMethod(
     if (index < 0 || index >= count) return -1;
     auto& entry = entries[index];
 
-#if defined(CHAOS_IL2CPP_JIT_MODE)
-    // JIT mode: prefer AOT thunks when available (verification pipeline uses
-    // AOT-compiled function bodies).  Only use direct_ptr when thunks are
-    // null (true JIT path with precode trampoline + JIT compilation).
-    if (thunks) {
-        thunks[index]();
-    } else {
-        auto fn = reinterpret_cast<void(*)()>(entry.direct_ptr);
-        if (fn == nullptr) {
-            return -1;
-        }
-        fn();
-    }
-#else
-    // AOT mode: check hotpatch status
+    // Check hotpatch status first (both AOT and JIT modes).
+    // In JIT mode with hotpatch active, route through interpreter so that
+    // patched method semantics replace the AOT body; without this check
+    // the verification pipeline's semantic comparison always reports 0
+    // changes (baseline and patched both call the same AOT thunks).
     if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
         // Route to interpreter: patched method
         uint64_t __chaos_args[4] = {};
@@ -92,7 +82,6 @@ inline int32_t ChaosDispatchMethod(
         // Direct AOT function body (no thunks / JIT codegen compatibility)
         reinterpret_cast<void(*)()>(entry.direct_ptr)();
     }
-#endif
     return 0;
 }
 
@@ -154,13 +143,6 @@ inline int32_t ChaosDispatchMethodBench(
     if (index < 0 || index >= count) return -1;
     auto& entry = entries[index];
 
-#if defined(CHAOS_IL2CPP_JIT_MODE)
-    if (thunks) {
-        thunks[index]();
-    } else {
-        reinterpret_cast<void(*)()>(entry.direct_ptr)();
-    }
-#else
     if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
         InterpreterEntryDirectFast(entry.method_key);
     } else if (thunks) {
@@ -168,7 +150,6 @@ inline int32_t ChaosDispatchMethodBench(
     } else if (entry.direct_ptr) {
         reinterpret_cast<void(*)()>(entry.direct_ptr)();
     }
-#endif
     return 0;
 }
 
@@ -193,15 +174,6 @@ inline int64_t ChaosDispatchMethodGetValue(
     if (index < 0 || index >= count) return INT64_MIN;
     auto& entry = entries[index];
 
-#if defined(CHAOS_IL2CPP_JIT_MODE)
-    if (thunks) {
-        thunks[index]();
-        return 0;
-    }
-    auto fn = reinterpret_cast<int64_t(*)()>(entry.direct_ptr);
-    if (fn == nullptr) return INT64_MIN;
-    return fn();
-#else
     if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
         uint64_t __chaos_args[4] = {};
         uint64_t __chaos_ret[2] = {};
@@ -217,7 +189,6 @@ inline int64_t ChaosDispatchMethodGetValue(
         return fn();
     }
     return 0;
-#endif
 }
 
 }  // namespace runtime_core
