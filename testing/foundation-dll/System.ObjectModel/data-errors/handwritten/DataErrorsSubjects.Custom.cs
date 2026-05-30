@@ -4,15 +4,26 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System;
+using Chaos.TestFramework;
 
 public static partial class DataErrorsSubjects
 {
     // [2] System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::add_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})
     public static void CustomEntrySubject_2()
-    {        try { default(INotifyDataErrorInfo)!.add_ErrorsChanged(default); } catch { _exitCode = 1; }    }
+    {
+        try {
+            default(INotifyDataErrorInfo)!.add_ErrorsChanged(default);
+        }
+        catch { _exitCode = 1; }
+    }
 
     // [5] System.ObjectModel/System.ComponentModel.INotifyDataErrorInfo::remove_ErrorsChanged:System.Void(System.EventHandler{System.ComponentModel.DataErrorsChangedEventArgs})
     public static void CustomEntrySubject_5()
-    {        try { default(INotifyDataErrorInfo)!.remove_ErrorsChanged(default); } catch { _exitCode = 1; }    }
+    {
+        try {
+            default(INotifyDataErrorInfo)!.remove_ErrorsChanged(default);
+        }
+        catch { _exitCode = 1; }
+    }
 
 }

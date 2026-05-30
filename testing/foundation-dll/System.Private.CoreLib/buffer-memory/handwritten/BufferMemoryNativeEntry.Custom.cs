@@ -11,9 +11,10 @@
 // This file is a READ-ONLY source for the pipeline. Pipeline copies it into
 // il2cpp_dist/entrypoint/ before invoking generate_and_build().
 
+using Chaos.TestFramework;
+
 public static partial class BufferMemoryNativeEntry
 {
-    // _exitCode is provided by the auto-generated partial class.
 
     // [0] System.Private.CoreLib/System.Buffer::BlockCopy
     // Manual byte-by-byte copy via array indexers
@@ -35,7 +36,7 @@ public static partial class BufferMemoryNativeEntry
     public static void CustomEntryMethod3()
     {
         byte[] arr = new byte[] { 42, 100 };
-        if (arr[1] != 100) { _exitCode = 1; }
+        Assert.AreEqual(100, arr[1]);
     }
 
     // [9] System.Private.CoreLib/System.Buffer::SetByte

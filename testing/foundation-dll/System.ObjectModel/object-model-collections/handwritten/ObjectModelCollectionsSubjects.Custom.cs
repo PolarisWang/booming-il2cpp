@@ -4,11 +4,17 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System;
+using Chaos.TestFramework;
 
 public static partial class ObjectModelCollectionsSubjects
 {
     // [5] System.ObjectModel/System.Collections.ObjectModel.KeyedCollection`2::get_Item:TItem()
     public static void CustomEntrySubject_5()
-    {        try { _ = default(KeyedCollection<byte, byte>)![]; } catch { _exitCode = 1; }    }
+    {
+        try {
+            Assert.IsNotNull(default(KeyedCollection<byte, byte>)![default]);
+        }
+        catch { _exitCode = 1; }
+    }
 
 }
