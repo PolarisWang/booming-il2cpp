@@ -44,6 +44,16 @@
     "customEntryIndices": {
       "type": "array",
       "items": { "type": "integer" }
+    },
+    "benchmarkMethodIndices": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0 },
+      "description": "Indices into methodSubjectIds that participate in benchmark timing. Omitted or null = benchmark all subjects"
+    },
+    "hotupdateMethodIndices": {
+      "type": "array",
+      "items": { "type": "integer", "minimum": 0 },
+      "description": "Indices into methodSubjectIds checked for hotupdate semantic change (semanticChangedCount). Omitted or null = check all subjects. Methods outside this list still get patched and reverted, but don't affect semanticChangedCount."
     }
   }
 }

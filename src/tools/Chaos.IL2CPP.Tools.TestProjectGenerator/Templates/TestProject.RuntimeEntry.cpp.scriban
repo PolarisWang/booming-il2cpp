@@ -121,8 +121,19 @@ static chaos::il2cpp::runtime_core::PatchContext* ApplyHotpatchIfAvailable() {
 }
 
 static int RunFactMode() {
-    int failed_count = RunFactAll();
-    int passed_count = kSubjectEntryCount - failed_count;
+    const int kCount = kSubjectEntryCount;
+    int passed_count = 0;
+    for (int si = 0; si < kCount; si++) {
+        int i = kSubjectSlotMap[si];
+        CHAOS_EH_TRY
+            chaos::il2cpp::runtime_core::ChaosDispatchMethod(
+                GetHotpatchEntries(), kAotMethodCount, i, CHAOS_USE_DEFAULT_THUNKS);
+            ++passed_count;
+        CHAOS_EH_CATCH_BEGIN
+            // caught — skip increment
+        CHAOS_EH_END
+    }
+    int failed_count = kCount - passed_count;
     printf("Passed: %d/%d\n", passed_count, kSubjectEntryCount);
     std::fflush(stdout);
     return failed_count;

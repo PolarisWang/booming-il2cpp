@@ -15,6 +15,18 @@ public static partial class GeneratedMarshallingSubjects
     public static void CustomEntrySubject_1()
     {        try { new ComExposedClassAttribute<byte>(); } catch { _exitCode = 1; }    }
 
+    // [2] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller`1::ConvertToManaged:T(System.Void*)
+    public static void CustomEntrySubject_2()
+    {        try { _ = ComInterfaceMarshaller.ConvertToManaged(default); } catch { _exitCode = 1; }    }
+
+    // [3] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller`1::ConvertToUnmanaged:System.Void*(T)
+    public static void CustomEntrySubject_3()
+    {        try { _ = ComInterfaceMarshaller.ConvertToUnmanaged(default); } catch { _exitCode = 1; }    }
+
+    // [4] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComInterfaceMarshaller`1::Free:System.Void(System.Void*)
+    public static void CustomEntrySubject_4()
+    {        try { ComInterfaceMarshaller.Free(default); } catch { _exitCode = 1; }    }
+
     // [5] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ComObject::FinalRelease:System.Void()
     public static void CustomEntrySubject_5()
     {        try { default(ComObject)!.FinalRelease(); } catch { _exitCode = 1; }    }
@@ -63,6 +75,42 @@ public static partial class GeneratedMarshallingSubjects
     public static void CustomEntrySubject_16()
     {        try { _ = ExceptionAsNaNMarshaller.ConvertToUnmanaged(default); } catch { _exitCode = 1; }    }
 
+    // [17] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.ExceptionAsVoidMarshaller::ConvertToUnmanaged:System.Void(System.Exception)
+    public static void CustomEntrySubject_17()
+    {        try { ExceptionAsVoidMarshaller.ConvertToUnmanaged(default); } catch { _exitCode = 1; }    }
+
+    // [19] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_ExceptionToUnmanagedMarshaller:System.Type()
+    public static void CustomEntrySubject_19()
+    {        try { _ = default(GeneratedComInterfaceAttribute)!.ExceptionToUnmanagedMarshaller; } catch { _exitCode = 1; }    }
+
+    // [20] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_Options:System.Runtime.InteropServices.Marshalling.ComInterfaceOptions()
+    public static void CustomEntrySubject_20()
+    {        try { _ = default(GeneratedComInterfaceAttribute)!.Options; } catch { _exitCode = 1; }    }
+
+    // [21] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_StringMarshalling:System.Runtime.InteropServices.StringMarshalling()
+    public static void CustomEntrySubject_21()
+    {        try { _ = default(GeneratedComInterfaceAttribute)!.StringMarshalling; } catch { _exitCode = 1; }    }
+
+    // [22] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::get_StringMarshallingCustomType:System.Type()
+    public static void CustomEntrySubject_22()
+    {        try { _ = default(GeneratedComInterfaceAttribute)!.StringMarshallingCustomType; } catch { _exitCode = 1; }    }
+
+    // [23] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::set_ExceptionToUnmanagedMarshaller:System.Void(System.Type)
+    public static void CustomEntrySubject_23()
+    {        try { default(GeneratedComInterfaceAttribute)!.ExceptionToUnmanagedMarshaller = typeof(byte); } catch { _exitCode = 1; }    }
+
+    // [24] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::set_Options:System.Void(System.Runtime.InteropServices.Marshalling.ComInterfaceOptions)
+    public static void CustomEntrySubject_24()
+    {        try { default(GeneratedComInterfaceAttribute)!.Options = default; } catch { _exitCode = 1; }    }
+
+    // [25] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::set_StringMarshalling:System.Void(System.Runtime.InteropServices.StringMarshalling)
+    public static void CustomEntrySubject_25()
+    {        try { default(GeneratedComInterfaceAttribute)!.StringMarshalling = default; } catch { _exitCode = 1; }    }
+
+    // [26] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.GeneratedComInterfaceAttribute::set_StringMarshallingCustomType:System.Void(System.Type)
+    public static void CustomEntrySubject_26()
+    {        try { default(GeneratedComInterfaceAttribute)!.StringMarshallingCustomType = typeof(byte); } catch { _exitCode = 1; }    }
+
     // [28] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IComExposedClass::GetComInterfaceEntries:System.Runtime.InteropServices.ComWrappers+ComInterfaceEntry*(System.Int32&)
     public static void CustomEntrySubject_28()
     {        try { _ = IComExposedClass.GetComInterfaceEntries(out 42); } catch { _exitCode = 1; }    }
@@ -70,6 +118,10 @@ public static partial class GeneratedMarshallingSubjects
     // [29] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IComExposedDetails::GetComInterfaceEntries:System.Runtime.InteropServices.ComWrappers+ComInterfaceEntry*(System.Int32&)
     public static void CustomEntrySubject_29()
     {        try { _ = IComExposedDetails.GetComInterfaceEntries(out 42); } catch { _exitCode = 1; }    }
+
+    // [30] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy::Clear:System.Void(System.Runtime.InteropServices.Marshalling.IIUnknownStrategy)
+    public static void CustomEntrySubject_30()
+    {        try { default(IIUnknownCacheStrategy)!.Clear(default); } catch { _exitCode = 1; }    }
 
     // [31] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy::ConstructTableInfo:System.Runtime.InteropServices.Marshalling.IIUnknownCacheStrategy+TableInfo(System.RuntimeTypeHandle,System.Runtime.InteropServices.Marshalling.IIUnknownDerivedDetails,System.Void*)
     public static void CustomEntrySubject_31()
@@ -169,11 +221,11 @@ public static partial class GeneratedMarshallingSubjects
 
     // [55] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.StrategyBasedComWrappers::get_DefaultIUnknownInterfaceDetailsStrategy:System.Runtime.InteropServices.Marshalling.IIUnknownInterfaceDetailsStrategy()
     public static void CustomEntrySubject_55()
-    {        try { _ = default(StrategyBasedComWrappers)!.DefaultIUnknownInterfaceDetailsStrategy; } catch { _exitCode = 1; }    }
+    {        try { _ = new StrategyBasedComWrappers().DefaultIUnknownInterfaceDetailsStrategy; } catch { _exitCode = 1; }    }
 
     // [56] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.StrategyBasedComWrappers::get_DefaultIUnknownStrategy:System.Runtime.InteropServices.Marshalling.IIUnknownStrategy()
     public static void CustomEntrySubject_56()
-    {        try { _ = default(StrategyBasedComWrappers)!.DefaultIUnknownStrategy; } catch { _exitCode = 1; }    }
+    {        try { _ = new StrategyBasedComWrappers().DefaultIUnknownStrategy; } catch { _exitCode = 1; }    }
 
     // [58] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller`1::ConvertToManaged:T(System.Void*)
     public static void CustomEntrySubject_58()
@@ -182,6 +234,10 @@ public static partial class GeneratedMarshallingSubjects
     // [59] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller`1::ConvertToUnmanaged:System.Void*(T)
     public static void CustomEntrySubject_59()
     {        try { _ = UniqueComInterfaceMarshaller.ConvertToUnmanaged(default); } catch { _exitCode = 1; }    }
+
+    // [60] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.UniqueComInterfaceMarshaller`1::Free:System.Void(System.Void*)
+    public static void CustomEntrySubject_60()
+    {        try { UniqueComInterfaceMarshaller.Free(default); } catch { _exitCode = 1; }    }
 
     // [61] System.Runtime.InteropServices/System.Runtime.InteropServices.Marshalling.VirtualMethodTableInfo::Deconstruct:System.Void(System.Void*&,System.Void**&)
     public static void CustomEntrySubject_61()

@@ -15,7 +15,9 @@
     "System.Private.CoreLib/System.Threading.WaitCallback::.ctor:System.Void(System.Object,System.IntPtr)"
   ],
   "methodSubjectCount": 8,
-  "customEntryIndices": [7],
+  "customEntryIndices": [
+    7
+  ],
   "functionalObligation": {
     "required": true
   },
@@ -28,5 +30,15 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "reviewBundleRequired": true
+  "reviewBundleRequired": true,
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "hotupdateMethodIndices": [
+    1,
+    3
+  ]
 }

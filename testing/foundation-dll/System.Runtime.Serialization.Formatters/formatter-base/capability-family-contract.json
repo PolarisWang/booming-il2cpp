@@ -23,7 +23,24 @@
     "System.Runtime.Serialization.Formatters/System.Runtime.Serialization.IFormatter::set_SurrogateSelector:System.Void(System.Runtime.Serialization.ISurrogateSelector)"
   ],
   "methodSubjectCount": 16,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15
+  ],
   "functionalObligation": {
     "required": true
   },
@@ -36,5 +53,7 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "reviewBundleRequired": true
+  "reviewBundleRequired": true,
+  "benchmarkMethodIndices": [],
+  "hotupdateMethodIndices": []
 }

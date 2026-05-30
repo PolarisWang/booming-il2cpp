@@ -9,10 +9,10 @@
 
 using System.Threading;
 using System.Threading.Tasks;
+using Chaos.TestFramework;
 
 public static partial class ThreadingTasksPrimitivesNativeEntry
 {
-    // _exitCode is provided by the auto-generated partial class.
 
     private static int s_sharedState;
 
@@ -48,21 +48,21 @@ public static partial class ThreadingTasksPrimitivesNativeEntry
     public static void CustomEntryMethod4()
     {
         var t = Task.Delay(1);
-        if (!t.Wait(5000)) _exitCode = 1;
+        Assert.IsTrue(t.Wait(5000));
     }
 
     // [5] System.Threading.Tasks.Task::get_IsCompleted()
     public static void CustomEntryMethod5()
     {
         var t = Task.FromResult(42);
-        if (!t.IsCompleted) _exitCode = 1;
+        Assert.IsTrue(t.IsCompleted);
     }
 
     // [6] System.Threading.Tasks.Task::get_Status()
     public static void CustomEntryMethod6()
     {
         var t = Task.FromResult(42);
-        if (t.Status != TaskStatus.RanToCompletion) _exitCode = 1;
+        Assert.AreEqual((int)TaskStatus.RanToCompletion, (int)t.Status);
     }
 
     // [7] System.Threading.Tasks.Task::ContinueWith(Action<Task>)
@@ -88,14 +88,14 @@ public static partial class ThreadingTasksPrimitivesNativeEntry
         var t2 = Task.FromResult(42);
         var any = Task.WhenAny(t1, t2);
         any.Wait();
-        if (any.Result != t2) _exitCode = 1;
+        Assert.IsTrue(any.Result == t2);
     }
 
     // [10] System.Threading.Tasks.Task::FromResult(TResult)
     public static void CustomEntryMethod10()
     {
         var t = Task.FromResult(42);
-        if (t.Result != 42) _exitCode = 1;
+        Assert.AreEqual(42, t.Result);
     }
 
     // [11] System.Threading.Thread::Start()
@@ -105,7 +105,7 @@ public static partial class ThreadingTasksPrimitivesNativeEntry
         var t = new Thread(() => { s_sharedState = 42; });
         t.Start();
         t.Join();
-        if (s_sharedState != 42) _exitCode = 1;
+        Assert.AreEqual(42, s_sharedState);
     }
 
     // [12] System.Threading.Thread::Sleep(Int32)
@@ -117,6 +117,6 @@ public static partial class ThreadingTasksPrimitivesNativeEntry
     // [14] System.Threading.Thread::get_ManagedThreadId()
     public static void CustomEntryMethod14()
     {
-        if (Thread.CurrentThread.ManagedThreadId < 0) _exitCode = 1;
+        Assert.IsTrue(Thread.CurrentThread.ManagedThreadId >= 0);
     }
 }

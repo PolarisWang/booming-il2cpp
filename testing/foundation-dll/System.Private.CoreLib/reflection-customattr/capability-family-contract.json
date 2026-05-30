@@ -22,5 +22,12 @@
   "hotupdatePerformanceObligation": {
     "required": false
   },
-  "reviewBundleRequired": false
+  "reviewBundleRequired": false,
+  "customEntryIndices": [
+    0,
+    1,
+    2
+  ],
+  "benchmarkMethodIndices": [],
+  "hotupdateMethodIndices": []
 }

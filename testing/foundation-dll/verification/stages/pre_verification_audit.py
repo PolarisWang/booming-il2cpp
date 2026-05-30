@@ -8,6 +8,7 @@ Usage:
     python -m verification.stages.pre_verification_audit <slug> [options]
     python -m verification.stages.pre_verification_audit convert-char --assembly System.Private.CoreLib
     python -m verification.stages.pre_verification_audit convert-char --assembly System.Private.CoreLib --fix
+    python -m verification.stages.pre_verification_audit convert-char --assembly System.Private.CoreLib --fix-annotations
 
 Exit codes:
     0 = PASS (all methods have meaningful test coverage)
@@ -19,7 +20,9 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -205,8 +208,69 @@ def audit_family(
     has_redundant = any(i["type"] == "REDUNDANT_CUSTOM_ENTRY" for i in issues)
     has_index_oob = any(i["type"] == "INDEX_OOB" for i in issues)
 
+    # ── Annotation completeness check (p4) ──
+    has_benchmark_annotation = "benchmarkMethodIndices" in contract
+    has_hotupdate_annotation = "hotupdateMethodIndices" in contract
+    has_annotation_issues = False
+
+    if not has_benchmark_annotation or not has_hotupdate_annotation:
+        annotation_type = []
+        if not has_benchmark_annotation:
+            annotation_type.append("benchmarkMethodIndices")
+        if not has_hotupdate_annotation:
+            annotation_type.append("hotupdateMethodIndices")
+        issues.append({
+            "severity": "WARN",
+            "type": "MISSING_ANNOTATION",
+            "index": -1,
+            "message": (
+                f"Contract missing annotation fields: {', '.join(annotation_type)}. "
+                f"Run --fix-annotations to auto-generate, or add manually."
+            ),
+        })
+        has_annotation_issues = True
+    else:
+        # Validate annotation entries: warn if exception-prone methods are annotated
+        bench_indices = set(contract.get("benchmarkMethodIndices") or [])
+        hotupdate_indices = set(contract.get("hotupdateMethodIndices") or [])
+
+        for idx, mid in enumerate(method_ids):
+            parsed = parse_method_subject_id(mid)
+            auto_callable = is_auto_callable(parsed)
+            skip_reason = method_skip_reason(parsed)
+
+            if idx in bench_indices and not auto_callable:
+                issues.append({
+                    "severity": "WARN",
+                    "type": "BENCHMARK_ANNOTATION_INCLUDES_NON_AUTO_CALLABLE",
+                    "index": idx,
+                    "message": (
+                        f"Method #{idx} ({parsed['type_name']}.{parsed['method_name']}) "
+                        f"is in benchmarkMethodIndices but is not auto-callable "
+                        f"(skip: {skip_reason}) — may produce unreliable timing"
+                    ),
+                })
+                has_annotation_issues = True
+
+            if idx in hotupdate_indices:
+                ret_type = parsed.get("return_type", "").strip()
+                if ret_type in ("System.Void", ""):
+                    issues.append({
+                        "severity": "WARN",
+                        "type": "HOTUPDATE_ANNOTATION_VOID_METHOD",
+                        "index": idx,
+                        "message": (
+                            f"Method #{idx} ({parsed['type_name']}.{parsed['method_name']}) "
+                            f"is in hotupdateMethodIndices but returns void — semantic "
+                            f"change detection via return value is impossible"
+                        ),
+                    })
+                    has_annotation_issues = True
+
     if has_uncovered:
         verdict = "MISSING_HANDWRITTEN"
+    elif has_annotation_issues:
+        verdict = "MISSING_ANNOTATION"
     elif has_redundant or has_index_oob:
         verdict = "STALE_METADATA"
     else:
@@ -276,6 +340,11 @@ def _build_summary(
         return (
             f"{uncovered_count} method(s) need handwritten tests but are missing -- "
             f"run --fix to generate stubs"
+        )
+    if verdict == "MISSING_ANNOTATION":
+        return (
+            f"Contract is missing benchmarkMethodIndices and/or hotupdateMethodIndices "
+            f"— run --fix-annotations to auto-generate"
         )
     if verdict == "STALE_METADATA":
         return (
@@ -398,6 +467,196 @@ def fix_family(report: dict[str, Any]) -> None:
         print(f"  - Removed redundant customEntryIndices entry #{idx}")
 
 
+def fix_annotations(report: dict[str, Any]) -> None:
+    """Auto-generate benchmarkMethodIndices and hotupdateMethodIndices in contract.
+
+    Runs managed_fact to detect exception-throwing methods, then:
+    - benchmarkMethodIndices: all non-exception methods
+    - hotupdateMethodIndices: non-exception methods with non-void return type
+      (semantic change detection depends on return value comparison)
+
+    Always creates both fields when missing. Existing fields are NOT overwritten.
+    """
+    slug = report["family_slug"]
+    assembly = report["assembly"]
+    family_dir = _TESTING_ROOT / assembly / slug
+
+    contract = _load_contract(family_dir)
+    if contract is None:
+        print("[fix-annotations] No contract found")
+        return
+
+    method_ids = contract.get("methodSubjectIds", [])
+    if not method_ids:
+        print("[fix-annotations] No methodSubjectIds in contract")
+        return
+
+    # Check if annotation fields already exist — skip if both present
+    cpath = resolve_contract_path(family_dir)
+    if not cpath.exists():
+        print("[fix-annotations] Contract file not found")
+        return
+
+    try:
+        cdata = json.loads(cpath.read_text(encoding="utf-8"))
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[fix-annotations] ERROR: Could not read contract: {e}")
+        return
+
+    if "benchmarkMethodIndices" in cdata and "hotupdateMethodIndices" in cdata:
+        print(f"[fix-annotations] Both annotation fields already present — skipping")
+        return
+
+    # ── Phase 1: Run managed_fact to detect exception paths ──
+    print(f"[fix-annotations] Running managed_fact to detect exception paths...")
+    exception_indices = _run_managed_fact_for_annotations(slug, assembly, method_ids)
+
+    if exception_indices is None:
+        print(f"[fix-annotations] WARNING: managed_fact failed — falling back to is_auto_callable()")
+        exception_indices = _guess_exception_indices(method_ids)
+    else:
+        print(f"[fix-annotations] managed_fact detected {len(exception_indices)} exception method(s): {sorted(exception_indices)}")
+
+    # ── Phase 2: Build annotation lists ──
+    benchmark_indices = []
+    hotupdate_indices = []
+
+    for idx, mid in enumerate(method_ids):
+        if idx in exception_indices:
+            continue  # Skip exception-path methods
+
+        benchmark_indices.append(idx)
+
+        parsed = parse_method_subject_id(mid)
+        ret_type = parsed.get("return_type", "").strip()
+        if ret_type not in ("System.Void", ""):
+            hotupdate_indices.append(idx)
+
+    # ── Phase 3: Update contract ──
+    changed = False
+
+    if "benchmarkMethodIndices" not in cdata:
+        cdata["benchmarkMethodIndices"] = benchmark_indices
+        print(f"[fix-annotations] Added benchmarkMethodIndices: {len(benchmark_indices)} method(s) "
+              f"(excluded {len(exception_indices)} exception paths)")
+        changed = True
+    else:
+        print(f"[fix-annotations] benchmarkMethodIndices already present "
+              f"({len(cdata['benchmarkMethodIndices'])} method(s)) — skipping")
+
+    if "hotupdateMethodIndices" not in cdata:
+        cdata["hotupdateMethodIndices"] = hotupdate_indices
+        print(f"[fix-annotations] Added hotupdateMethodIndices: {len(hotupdate_indices)} method(s)")
+        changed = True
+    else:
+        print(f"[fix-annotations] hotupdateMethodIndices already present "
+              f"({len(cdata['hotupdateMethodIndices'])} method(s)) — skipping")
+
+    if changed:
+        cpath.write_text(
+            json.dumps(cdata, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        print(f"[fix-annotations] Updated {cpath.name}")
+
+        # Print warning about conditionally-exception methods
+        print(f"[fix-annotations] NOTE: Review the annotation list manually for conditional-exception "
+              f"methods (e.g. Object overloads that throw on null input but work with valid input)")
+    else:
+        print(f"[fix-annotations] No changes needed")
+
+
+def _run_managed_fact_for_annotations(
+    slug: str, assembly: str, method_ids: list[str],
+) -> set[int] | None:
+    """Run managed_fact and return set of method indices that throw exceptions.
+
+    Returns None if managed_fact failed (build/run error), allowing caller
+    to fall back to heuristic detection.
+    """
+    from verification.stages.fact import generate_managed_fact_harness
+
+    family_dir = _TESTING_ROOT / assembly / slug
+    harness_dir = family_dir / "managed_test" / "fact"
+    csproj = harness_dir / "ManagedFactHarness.csproj"
+    golden_path = family_dir / "native" / "golden-values.json"
+
+    # Generate harness
+    ok = generate_managed_fact_harness(harness_dir, method_ids, assembly, slug)
+    if not ok:
+        print(f"    [fix-annotations] Harness generation failed")
+        return None
+
+    # Build
+    print(f"    [fix-annotations] Building managed fact harness...")
+    build_r = subprocess.run(
+        ["dotnet", "build", str(csproj), "--configuration", "Release", "--nologo", "-v", "q"],
+        capture_output=True, timeout=120,
+    )
+    if build_r.returncode != 0:
+        print(f"    [fix-annotations] Build failed (exit={build_r.returncode})")
+        return None
+
+    # Run
+    print(f"    [fix-annotations] Running managed fact harness...")
+    try:
+        r = subprocess.run(
+            ["dotnet", "run", "--no-build", "--project", str(harness_dir),
+             "--configuration", "Release"],
+            capture_output=True, text=True, timeout=120,
+        )
+    except subprocess.TimeoutExpired:
+        print(f"    [fix-annotations] managed_fact timed out")
+        return None
+
+    if r.returncode != 0:
+        print(f"    [fix-annotations] managed_fact run failed (exit={r.returncode})")
+        return None
+
+    # Parse JSON output
+    try:
+        data = json.loads(r.stdout)
+    except json.JSONDecodeError:
+        print(f"    [fix-annotations] JSON parse failed")
+        return None
+
+    # Save golden-values.json for later pipeline use
+    golden_path.parent.mkdir(parents=True, exist_ok=True)
+    golden_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+    print(f"    [fix-annotations] Saved {golden_path.name}")
+
+    # Determine exception indices
+    results = data.get("results", [])
+    exception_indices: set[int] = set()
+    for rr in results:
+        mi = rr.get("methodIndex", -1)
+        if mi < 0:
+            continue
+        # exceptionMessage is null for success, non-null for exception
+        if rr.get("exceptionMessage") is not None:
+            exception_indices.add(mi)
+
+    total = len(results)
+    caught = len(exception_indices)
+    print(f"    [fix-annotations] managed_fact: {total} methods, {caught} exception path(s), "
+          f"{total - caught} normal path(s)")
+
+    return exception_indices
+
+
+def _guess_exception_indices(method_ids: list[str]) -> set[int]:
+    """Fallback: guess exception methods using is_auto_callable().
+
+    Used when managed_fact cannot be run (build failure, etc.).
+    """
+    exception_indices: set[int] = set()
+    for idx, mid in enumerate(method_ids):
+        parsed = parse_method_subject_id(mid)
+        if not is_auto_callable(parsed):
+            exception_indices.add(idx)
+    return exception_indices
+
+
 def _find_contract_path(family_dir: Path) -> Path | None:
     """Return the path to the contract file, using canonical resolution."""
     path = resolve_contract_path(family_dir)
@@ -508,6 +767,10 @@ def main() -> None:
         help="Auto-fix missing handwritten stubs and stale metadata",
     )
     parser.add_argument(
+        "--fix-annotations", action="store_true",
+        help="Auto-generate benchmarkMethodIndices and hotupdateMethodIndices in contract",
+    )
+    parser.add_argument(
         "--fill", action="store_true",
         help="Fill TODO stub bodies with generated call expressions",
     )
@@ -523,6 +786,11 @@ def main() -> None:
         fix_family(report)
         report = audit_family(args.family_slug, args.assembly)
         print("\n--- Re-audit after fix ---")
+
+    if args.fix_annotations:
+        fix_annotations(report)
+        report = audit_family(args.family_slug, args.assembly)
+        print("\n--- Re-audit after fix-annotations ---")
 
     if args.fill:
         filled = fill_handwritten_stubs(args.family_slug, args.assembly)

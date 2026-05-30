@@ -7059,6 +7059,91 @@ public sealed partial class NativeAotLoweringPlanner
                     return null;
                 }));
 
+            // ── Chaos.TestFramework.Assert inline shapes ──────────────────────
+            // These inline expansions replace Assert.AreEqual/IsTrue/IsNull etc.
+            // calls with C++ code that checks the condition and throws a managed
+            // exception on failure.  The exception is caught by the dispatch
+            // wrapper's catch(chaos_managed_exception&) block.
+            //
+            // Benchmark builds define CHAOS_IL2CPP_VERIFICATION_ENABLED=0, causing
+            // if constexpr to discard the assertion body at compile time — zero
+            // runtime overhead.
+
+            // Assert.AreEqual(expected, actual) — all primitive-type overloads
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "AreEqual",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 2) return null;
+                    return """
+                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if (({0}) != ({1})) { throw chaos_managed_exception{}; } } }()
+                        """.Replace("\r\n", "\n").Trim();
+                }));
+
+            // Assert.IsTrue(condition)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "IsTrue",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 1) return null;
+                    return """
+                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if (!({0})) { throw chaos_managed_exception{}; } } }()
+                        """.Replace("\r\n", "\n").Trim();
+                }));
+
+            // Assert.IsFalse(condition)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "IsFalse",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 1) return null;
+                    return """
+                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if ({0}) { throw chaos_managed_exception{}; } } }()
+                        """.Replace("\r\n", "\n").Trim();
+                }));
+
+            // Assert.IsNull(value)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "IsNull",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 1) return null;
+                    return """
+                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if (({0}) != 0) { throw chaos_managed_exception{}; } } }()
+                        """.Replace("\r\n", "\n").Trim();
+                }));
+
+            // Assert.IsNotNull(value)
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "IsNotNull",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count < 1) return null;
+                    return """
+                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { if (({0}) == 0) { throw chaos_managed_exception{}; } } }()
+                        """.Replace("\r\n", "\n").Trim();
+                }));
+
+            // Assert.Fail(message) — always throws
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "Chaos.TestFramework.Assert",
+                MethodName: "Fail",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return """
+                        [&]() -> void { if constexpr (CHAOS_IL2CPP_VERIFICATION_ENABLED) { throw chaos_managed_exception{}; } }()
+                        """.Replace("\r\n", "\n").Trim();
+                }));
+
+            // Assert.Throws<T>(Action) — deferred to follow-up implementation.
+            // Requires recognizing the callvirt Invoke delegate pattern and
+            // emitting a direct try/catch with type check.
+
             return registry;
         }
 

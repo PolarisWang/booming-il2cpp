@@ -1,7 +1,15 @@
 namespace chaos::il2cpp::runtime_instantiation {
 
-// Forward declaration from aot_direct_dispatch.cpp (three-tier resolution fallback)
-namespace runtime_core { void* ResolveDirectFnSafe(const char* subject_id) noexcept; }
+} // namespace chaos::il2cpp::runtime_instantiation
+
+// Forward declaration for ResolveDirectFnSafe (defined in aot_direct_dispatch.cpp).
+// Must be in the chaos::il2cpp::runtime_core namespace. Opening a brief scope
+// here instead of inside runtime_instantiation to avoid namespace shadowing.
+namespace chaos::il2cpp::runtime_core {
+void* ResolveDirectFnSafe(const char* subject_id) noexcept;
+}
+
+namespace chaos::il2cpp::runtime_instantiation {
 
 // ── PrecacheCallTarget ──────────────────────────────────────────────────────
 // Pre-compute call metadata so InterpreterDispatchRaw can skip all reflection

@@ -21,7 +21,8 @@ internal sealed class ProjectModelBuilder
         string? projectRoot = null,
         string? codegenDir = null,
         string? sdkDir = null,
-        List<string>? codegenAssemblyNames = null)
+        List<string>? codegenAssemblyNames = null,
+        bool verificationEnabled = true)
     {
         var model = new ScriptObject();
 
@@ -122,6 +123,8 @@ internal sealed class ProjectModelBuilder
                 break;
         }
         model["defines"] = defines;
+
+        model["verification_enabled"] = verificationEnabled ? "1" : "0";
 
         return model;
     }

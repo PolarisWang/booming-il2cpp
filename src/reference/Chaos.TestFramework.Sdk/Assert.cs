@@ -129,6 +129,14 @@ public static class Assert
         catch { }
     }
 
+    public static void Throws<T>(System.Action action) where T : System.Exception
+    {
+        try { action(); Fail($"Expected {typeof(T).Name} but none thrown"); }
+        catch (AssertionException) { throw; }
+        catch (T) { }
+        catch (System.Exception ex) { Fail($"Expected {typeof(T).Name} but got {ex.GetType().Name}: {ex.Message}"); }
+    }
+
     public static void Fail(string message)
     {
         s_exitCode = 1;
