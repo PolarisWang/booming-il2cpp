@@ -139,7 +139,6 @@ public sealed partial class NativeAotLoweringPlanner
     private List<(string VarName, string Expression)>? _preTryFoldInitializers;
 
     private CodegenMode _codegenMode = CodegenMode.Aot;
-    private HashSet<string>? _subjectMethodSubjectIds;
 
     // Verification dispatch manifest (populated by BuildDispatchEntryCode)
     private string? _manifestJson;
@@ -460,8 +459,7 @@ public sealed partial class NativeAotLoweringPlanner
         MetadataRegistrationArtifact metadataRegistration,
         SupplementalMetadataTemplateArtifact supplementalMetadataTemplate,
         bool fullAssemblyMode = false,
-        CodegenMode mode = CodegenMode.Aot,
-        HashSet<string>? subjectMethods = null)
+        CodegenMode mode = CodegenMode.Aot)
     {
         ArgumentNullException.ThrowIfNull(loweringPlan);
         ArgumentNullException.ThrowIfNull(aotCoreIr);
@@ -473,7 +471,6 @@ public sealed partial class NativeAotLoweringPlanner
             ArgumentNullException.ThrowIfNull(entryMethod);
 
         _codegenMode = mode;
-        _subjectMethodSubjectIds = subjectMethods;
 
         // Skip entry ABI validation for full-closure assembly translation
         if (!closureManifest.FullAssemblyClosure)
@@ -3517,9 +3514,9 @@ public sealed partial class NativeAotLoweringPlanner
 
             methodEntries.Add(entry);
 
-            if (IsSubjectMethod(method.SubjectId))
+            int subjectIdx = ExtractSubjectIndex(method.SubjectId);
+            if (subjectIdx >= 0)
             {
-                int subjectIdx = ExtractSubjectIndex(method.SubjectId);
                 subjectEntries.Add(new ScriptObject
                 {
                     ["subject_index"] = subjectIdx,
@@ -3608,18 +3605,6 @@ public sealed partial class NativeAotLoweringPlanner
             WriteIndented = true,
             PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase,
         });
-    }
-
-    /// <summary>
-    /// Check whether a method is a subject method.
-    /// When _subjectMethodSubjectIds is set (from --subject-methods), uses set-based
-    /// lookup; otherwise falls back to naming convention (::Subject_N / ::CustomEntrySubject_N).
-    /// </summary>
-    private bool IsSubjectMethod(string subjectId)
-    {
-        if (_subjectMethodSubjectIds != null)
-            return _subjectMethodSubjectIds.Contains(subjectId);
-        return ExtractSubjectIndex(subjectId) >= 0;
     }
 
     /// <summary>

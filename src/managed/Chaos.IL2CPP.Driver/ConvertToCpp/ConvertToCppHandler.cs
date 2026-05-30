@@ -53,24 +53,6 @@ internal static class ConvertToCppHandler
             Console.WriteLine($"    {asm}");
         Console.WriteLine($"  Output:   {outputRoot}");
 
-        // Load subject methods if --subject-methods was provided
-        HashSet<string>? subjectMethods = null;
-        if (config.SubjectMethodsPath != null)
-        {
-            if (File.Exists(config.SubjectMethodsPath))
-            {
-                var smJson = JsonSerializer.Deserialize<Dictionary<string, List<string>>>(
-                    File.ReadAllText(config.SubjectMethodsPath), JsonOptions);
-                if (smJson != null && smJson.TryGetValue("subjectMethods", out var ids))
-                    subjectMethods = new HashSet<string>(ids, StringComparer.Ordinal);
-                Console.WriteLine($"  Subject methods: {subjectMethods?.Count ?? 0} IDs loaded from {config.SubjectMethodsPath}");
-            }
-            else
-            {
-                Console.Error.WriteLine($"  WARN: --subject-methods file not found: {config.SubjectMethodsPath}");
-            }
-        }
-
         // ── Step 1: Collect managed dependency DLLs ────────────────────────
         var additionalPaths = new List<string>();
         var entryAssemblyNames = new HashSet<string>(config.AssemblyPaths.Select(Path.GetFileNameWithoutExtension), StringComparer.OrdinalIgnoreCase);
@@ -127,7 +109,7 @@ internal static class ConvertToCppHandler
 
             Console.Write("  [2/3] Emitting C++ (NativeAot, direct)...");
             var emitter = new FullAssemblyEmitter();
-            var emitResult = emitter.Emit(result, outputRoot, config.Mode, subjectMethods);
+            var emitResult = emitter.Emit(result, outputRoot, config.Mode);
             Console.WriteLine($" done ({emitResult.GeneratedSources.Count} files)");
 
             // Write closure artifacts for debugging/reproducibility
@@ -190,7 +172,7 @@ internal static class ConvertToCppHandler
             {
                 var asmOutput = result.OutputRootPath;
                 var asmEmitter = new FullAssemblyEmitter();
-                var asmEmitResult = asmEmitter.Emit(result, asmOutput, config.Mode, subjectMethods);
+                var asmEmitResult = asmEmitter.Emit(result, asmOutput, config.Mode);
                 totalFiles += asmEmitResult.GeneratedSources.Count;
                 emitResults.Add(asmEmitResult);
             }
