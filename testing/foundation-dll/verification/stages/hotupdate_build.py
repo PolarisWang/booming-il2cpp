@@ -123,7 +123,8 @@ def generate_patch_data(family_slug: str, *,
         return write_sentinel_patch_data(family_dir)
 
     if not _run_emit_patch_data(build_result["dll_path"], str(patchdata_path),
-                                aot_core_ir_path=aot_core_ir_path):
+                                aot_core_ir_path=aot_core_ir_path,
+                                test_mode=True):
         print(f"    [gen_patch] emit-patch-data failed")
         return write_sentinel_patch_data(family_dir)
 

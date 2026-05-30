@@ -158,7 +158,8 @@ def _build_patch_dll(ctx: FamilyContext, patch_subdir: str = "patch") -> Path | 
 def _run_emit_patch_data(dll_path: str, output_path: str,
                          aot_core_ir_path: str | None = None,
                          direction: str = "forward",
-                         subject_indices: list[int] | None = None) -> bool:
+                         subject_indices: list[int] | None = None,
+                         test_mode: bool = False) -> bool:
     """Run chaos-il2cpp emit-patch-data CLI on a patch DLL.
 
     Args:
@@ -168,6 +169,7 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
         direction: Hot-update direction ("forward" or "bidirectional").
         subject_indices: If provided and non-empty, pass --subject-only and
                          --subject-indices to emit only subject methods' patch entries.
+        test_mode: If True, pass --mode test to disable Subject_N folding.
 
     Returns:
         True if the patch data was emitted and validated successfully.
@@ -183,6 +185,8 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
     if subject_indices:
         indices_str = ",".join(str(i) for i in subject_indices)
         cmd += ["--subject-only", "--subject-indices", indices_str]
+    if test_mode:
+        cmd += ["--mode", "test"]
 
     # P1: Use a temp output path to avoid Windows file-lock races between
     # successive pipeline stages.  Multiple stages call _ensure_patch_data()
@@ -364,7 +368,8 @@ def _detect_host_class(native_dir: Path) -> str:
 
 def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch",
                        direction: str = "forward",
-                       hotupdate_indices: list[int] | None = None) -> bool:
+                       hotupdate_indices: list[int] | None = None,
+                       test_mode: bool = False) -> bool:
     """Build patch DLL -> emit-patch-data -> generate runtime-patchdata.cpp -> rebuild entry.exe.
 
     Args:
@@ -373,6 +378,9 @@ def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch",
                       (e.g. "patch", "patch_first", "patch_second").
         direction: Hot-update direction ("forward" or "bidirectional").
                    Determines how the patch is validated at the runtime level.
+        hotupdate_indices: Subject indices for hot-update verification.
+        test_mode: If True, pass --mode test to emit-patch-data to disable
+                   Subject_N folding (real AOT Core IR instead of sentinel).
     """
     native_dir = ctx.native_dir
 
@@ -416,7 +424,8 @@ def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch",
     aot_str = str(aot_core_ir) if aot_core_ir is not None else None
     ok = _run_emit_patch_data(dll_str, pd_str, aot_core_ir_path=aot_str,
                                direction=direction,
-                               subject_indices=hotupdate_indices)
+                               subject_indices=hotupdate_indices,
+                               test_mode=test_mode)
     if not ok or not patchdata.exists():
         print("  [hotupdate] _ensure_patch_data: emit-patch-data failed")
         return False
@@ -783,7 +792,7 @@ def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
         )
 
     hu_indices = _load_hotupdate_indices(ctx)
-    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices, test_mode=True):
         return StageResult(
             stage="hotupdate", status="failed",
             summary="patch data build failed",
@@ -865,7 +874,7 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices, test_mode=True):
         return StageResult(
             stage="hotupdate_aot_benchmark", status="failed",
             summary="patch data build failed",
@@ -930,7 +939,7 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
     # would otherwise stale-check against an empty sentinel and never rebuild
     # with real patchdata.
     hu_indices = _load_hotupdate_indices(ctx)
-    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices, test_mode=True):
         return StageResult(
             stage="hotupdate_jit_fact", status="failed",
             summary="_ensure_patch_data failed — cannot rebuild entry-jit.exe with patchdata",
@@ -1121,7 +1130,7 @@ def run_patch_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -
                 summary="no golden values overlap with hotupdateMethodIndices",
                 duration_ms=int((time.perf_counter() - start) * 1000),
             )
-    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices, test_mode=True):
         return StageResult(
             stage="patch_cross_verify", status="failed",
             summary="_ensure_patch_data failed — cannot run --hotupdate",
@@ -1308,7 +1317,7 @@ def run_multi_patch_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]
         _rebuild_entry_with_patchdata()
 
         # Build and apply first patch
-        ok = _ensure_patch_data(ctx, patch_subdir="patch_first", hotupdate_indices=hu_indices)
+        ok = _ensure_patch_data(ctx, patch_subdir="patch_first", hotupdate_indices=hu_indices, test_mode=True)
         if not ok:
             round_results.append({"round": 1, "patch": "patch_first", "status": "failed",
                                   "error": "_ensure_patch_data failed"})
@@ -1326,7 +1335,7 @@ def run_multi_patch_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]
         _write_sentinel_patchdata(ctx.native_dir)
         _rebuild_entry_with_patchdata()
 
-        ok = _ensure_patch_data(ctx, patch_subdir="patch_second", hotupdate_indices=hu_indices)
+        ok = _ensure_patch_data(ctx, patch_subdir="patch_second", hotupdate_indices=hu_indices, test_mode=True)
         if not ok:
             round_results.append({"round": 2, "patch": "patch_second", "status": "failed",
                                   "error": "_ensure_patch_data failed"})
