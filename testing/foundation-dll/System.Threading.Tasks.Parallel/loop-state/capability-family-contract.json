@@ -13,7 +13,14 @@
     "System.Threading.Tasks.Parallel/System.Threading.Tasks.ParallelLoopState::Stop:System.Void()"
   ],
   "methodSubjectCount": 6,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
   "functionalObligation": {
     "required": true
   },

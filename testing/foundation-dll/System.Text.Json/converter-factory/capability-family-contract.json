@@ -9,7 +9,10 @@
     "System.Text.Json/System.Text.Json.Serialization.JsonConverterFactory::get_Type:System.Type()"
   ],
   "methodSubjectCount": 2,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    0,
+    1
+  ],
   "functionalObligation": {
     "required": true
   },

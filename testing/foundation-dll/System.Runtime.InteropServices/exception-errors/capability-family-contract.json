@@ -25,7 +25,9 @@
     "System.Runtime.InteropServices/System.DllNotFoundException::.ctor:System.Void(System.String,System.Exception)"
   ],
   "methodSubjectCount": 18,
-  "customEntryIndices": [],
+  "customEntryIndices": [
+    11
+  ],
   "functionalObligation": {
     "required": true
   },
