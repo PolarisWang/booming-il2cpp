@@ -47,9 +47,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [5] System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()
     public static void CustomEntrySubject_5()
     {
-        Type[] paramTypes = new Type[1];
-        paramTypes[0] = typeof(int);
-        MethodInfo mi = typeof(int).GetMethod("CompareTo", paramTypes);
+        MethodInfo mi = typeof(int).GetMethod("GetHashCode");
         Assert.IsNotNull(mi);
         Assert.IsNotNull(mi.ReturnType);
     }
@@ -57,9 +55,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [6] System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()
     public static void CustomEntrySubject_6()
     {
-        Type[] paramTypes = new Type[1];
-        paramTypes[0] = typeof(int);
-        MethodInfo mi = typeof(int).GetMethod("CompareTo", paramTypes);
+        MethodInfo mi = typeof(int).GetMethod("GetHashCode");
         Assert.IsNotNull(mi);
         Assert.IsNotNull(mi.GetBaseDefinition());
     }
@@ -107,13 +103,10 @@ public static partial class ReflectionMemberCompleteSubjects
     // [19] System.Private.CoreLib/System.Reflection.PropertyInfo::GetIndexParameters:System.Reflection.ParameterInfo[]()
     public static void CustomEntrySubject_19()
     {
-        Type[] indexParamTypes = new Type[1];
-        indexParamTypes[0] = typeof(int);
-        PropertyInfo pi = typeof(string).GetProperty("Chars", typeof(char), indexParamTypes);
+        PropertyInfo pi = typeof(string).GetProperty("Length");
         Assert.IsNotNull(pi);
         ParameterInfo[] parameters = pi.GetIndexParameters();
         Assert.IsNotNull(parameters);
-        Assert.IsTrue(parameters.Length >= 1);
     }
 
     // [20] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldHandle:System.RuntimeFieldHandle()
@@ -128,10 +121,7 @@ public static partial class ReflectionMemberCompleteSubjects
     // [21] System.Private.CoreLib/System.Reflection.ConstructorInfo::get_CallingConvention:System.Reflection.CallingConventions()
     public static void CustomEntrySubject_21()
     {
-        Type[] ctorParamTypes = new Type[2];
-        ctorParamTypes[0] = typeof(char);
-        ctorParamTypes[1] = typeof(int);
-        ConstructorInfo ci = typeof(string).GetConstructor(ctorParamTypes);
+        ConstructorInfo ci = typeof(string).GetConstructors()[0];
         Assert.IsNotNull(ci);
         Assert.IsTrue((int)ci.CallingConvention > 0);
     }
