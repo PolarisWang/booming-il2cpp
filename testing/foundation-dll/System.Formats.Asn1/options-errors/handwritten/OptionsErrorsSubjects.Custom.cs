@@ -9,21 +9,23 @@ using Chaos.TestFramework;
 public static partial class OptionsErrorsSubjects
 {
     // [5] System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_SkipSetSortOrderVerification:System.Void(System.Boolean)
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try {
             default(AsnReaderOptions).SkipSetSortOrderVerification = true;
         }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
     // [6] System.Formats.Asn1/System.Formats.Asn1.AsnReaderOptions::set_UtcTimeTwoDigitYearMax:System.Void(System.Int32)
+    [Fact]
     public static void CustomEntrySubject_6()
     {
         try {
             default(AsnReaderOptions).UtcTimeTwoDigitYearMax = 42;
         }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
 }

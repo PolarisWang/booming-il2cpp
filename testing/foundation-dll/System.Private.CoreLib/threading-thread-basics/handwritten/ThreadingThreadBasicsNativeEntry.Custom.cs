@@ -8,48 +8,54 @@
 
 using System;
 using System.Threading;
+using Chaos.TestFramework;
 
 public static partial class ThreadingThreadBasicsNativeEntry
 {
-    // _exitCode is provided by the auto-generated partial class.
-
     // [0] System.Threading.Thread::get_ThreadState
+    [Fact]
     public static void CustomEntryMethod0()
     {
         var state = Thread.CurrentThread.ThreadState;
     }
 
     // [1] System.Threading.Thread::get_Priority
+    [Fact]
     public static void CustomEntryMethod1()
     {
         var pri = Thread.CurrentThread.Priority;
     }
 
     // [2] System.Threading.Thread::set_Priority(System.Threading.ThreadPriority)
+    [Fact]
     public static void CustomEntryMethod2()
     {
         Thread.CurrentThread.Priority = ThreadPriority.Normal;
     }
 
     // [3] System.Threading.Thread::get_IsBackground
+    [Fact]
     public static void CustomEntryMethod3()
     {
         var bg = Thread.CurrentThread.IsBackground;
     }
 
     // [4] System.Threading.Thread::set_IsBackground(System.Boolean)
+    [Fact]
     public static void CustomEntryMethod4()
     {
         Thread.CurrentThread.IsBackground = false;
     }
 
     // [5] System.Threading.Thread::get_IsThreadPoolThread
+    [Fact]
     public static void CustomEntryMethod5()
     {
         var tp = Thread.CurrentThread.IsThreadPoolThread;
     }
 
     // [6] System.Threading.Thread::Abort
+    [Fact]
     public static void CustomEntryMethod6()
     {
         try { Thread.CurrentThread.Abort(); }
@@ -57,6 +63,7 @@ public static partial class ThreadingThreadBasicsNativeEntry
     }
 
     // [7] System.Threading.Thread::Interrupt
+    [Fact]
     public static void CustomEntryMethod7()
     {
         Thread.CurrentThread.Interrupt();
@@ -65,6 +72,7 @@ public static partial class ThreadingThreadBasicsNativeEntry
     }
 
     // [8] System.Threading.Thread::ResetAbort
+    [Fact]
     public static void CustomEntryMethod8()
     {
         try { Thread.ResetAbort(); }
@@ -72,12 +80,14 @@ public static partial class ThreadingThreadBasicsNativeEntry
     }
 
     // [9] System.Threading.Thread::Yield
+    [Fact]
     public static void CustomEntryMethod9()
     {
         Thread.Yield();
     }
 
     // [10] System.Threading.Thread::Sleep(System.Int32)
+    [Fact]
     public static void CustomEntryMethod10()
     {
         Thread.Sleep(1);

@@ -215,7 +215,7 @@ public sealed partial class NativeAotLoweringPlanner
         for (int i = 0; i < entries.Count; i++)
         {
             var entry = entries[i];
-            string flags = _codegenMode == CodegenMode.Jit
+            string flags = _codegenMode.HasFlag(CodegenMode.Jit)
                 ? "0"
                 : methodsCallingExternal.Contains(entry.SubjectId) ? "kHotpatchKeepNative" : "0";
             entryModels[i] = new ScriptObject

@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 // Handwritten custom entry implementations for Generic Nullable Value.
 //
 // Method 3 (GetValueOrDefault with default value) has a generic parameter
@@ -8,12 +9,11 @@
 
 public static partial class GenericNullableValueNativeEntry
 {
-    public static int _exitCode;
-
     // [3] System.Nullable`1::GetValueOrDefault(T)
+    [Fact]
     public static void CustomEntryMethod3()
     {
         int? val = 42;
-        if (val.GetValueOrDefault(0) != 42) _exitCode = 1;
+        Assert.AreEqual(42, val.GetValueOrDefault(0));
     }
 }

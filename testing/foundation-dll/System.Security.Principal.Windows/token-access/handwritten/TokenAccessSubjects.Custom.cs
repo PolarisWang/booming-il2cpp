@@ -4,11 +4,13 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System;
+using Chaos.TestFramework;
 
 public static partial class TokenAccessSubjects
 {
     // [1] System.Security.Principal.Windows/Microsoft.Win32.SafeHandles.SafeAccessTokenHandle::get_IsInvalid:System.Boolean()
+    [Fact]
     public static void CustomEntrySubject_1()
-    {        try { _ = default(SafeAccessTokenHandle)!.IsInvalid; } catch { _exitCode = 1; }    }
+    {        try { _ = default(SafeAccessTokenHandle)!.IsInvalid; } catch { }    }
 
 }

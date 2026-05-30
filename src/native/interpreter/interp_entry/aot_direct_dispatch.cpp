@@ -119,14 +119,23 @@ static void* ResolveDirectFn(
                 if (slot != ~0u) {
                     auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
                     if (entry != nullptr && entry->direct_ptr != nullptr) {
-                        std::fprintf(stderr, "[hotpatch-resolve] subject='%s' -> module=%u token=%u slot=%u direct_ptr=%p\n",
+                        // In JIT mode, direct_ptr may be a JIT trampoline.
+                        // Query the original AOT ptr callback to get the real code pointer.
+                        void* aot_ptr = entry->direct_ptr;
+                        auto original_cb = chaos::il2cpp::runtime_core::GetOriginalAotPtrCallback();
+                        if (original_cb) {
+                            void* original = original_cb(entry);
+                            if (original) aot_ptr = original;
+                        }
+                        std::fprintf(stderr, "[hotpatch-resolve] subject='%s' -> module=%u token=%u slot=%u direct_ptr=%p aot_ptr=%p\n",
                             subject_id,
                             static_cast<unsigned>(module_id),
                             static_cast<unsigned>(token),
                             static_cast<unsigned>(slot),
-                            entry->direct_ptr);
+                            entry->direct_ptr,
+                            aot_ptr);
                         std::fflush(stderr);
-                        return entry->direct_ptr;
+                        return aot_ptr;
                     }
                 }
             } else {
@@ -198,7 +207,15 @@ void* ResolveDirectFnSafe(
                 if (slot != ~0u) {
                     auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
                     if (entry != nullptr && entry->direct_ptr != nullptr) {
-                        return entry->direct_ptr;
+                        // In JIT mode, direct_ptr may be a JIT trampoline.
+                        // Query the original AOT ptr callback to get the real code pointer.
+                        void* aot_ptr = entry->direct_ptr;
+                        auto original_cb = GetOriginalAotPtrCallback();
+                        if (original_cb) {
+                            void* original = original_cb(entry);
+                            if (original) aot_ptr = original;
+                        }
+                        return aot_ptr;
                     }
                 }
             }

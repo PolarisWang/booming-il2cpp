@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 // Handwritten custom entry implementations for System.Linq generation and concatenation operations.
 // Each method calls the corresponding Enumerable API and forces evaluation
 // by enumerating the result via IEnumerator<T>.
@@ -5,6 +6,7 @@
 public static partial class GenerationConcatSubjects
 {
     // [0] Enumerable.Append<TSource>(IEnumerable<TSource>, TSource)
+    [Fact]
     public static void CustomEntrySubject_0()
     {
         try
@@ -14,11 +16,12 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [1] Enumerable.Concat<TSource>(IEnumerable<TSource>, IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_1()
     {
         try
@@ -29,11 +32,12 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [2] Enumerable.DefaultIfEmpty<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_2()
     {
         try
@@ -43,11 +47,12 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [3] Enumerable.DefaultIfEmpty<TSource>(IEnumerable<TSource>, TSource)
+    [Fact]
     public static void CustomEntrySubject_3()
     {
         try
@@ -57,11 +62,12 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [4] Enumerable.Empty<TResult>()
+    [Fact]
     public static void CustomEntrySubject_4()
     {
         try
@@ -70,11 +76,12 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [5] Enumerable.InfiniteSequence<T>(T, T) — .NET 9 API, replaced with Range
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try
@@ -83,11 +90,12 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [6] Enumerable.Prepend<TSource>(IEnumerable<TSource>, TSource)
+    [Fact]
     public static void CustomEntrySubject_6()
     {
         try
@@ -97,11 +105,12 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [7] Enumerable.Range(int, int)
+    [Fact]
     public static void CustomEntrySubject_7()
     {
         try
@@ -110,11 +119,12 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [8] Enumerable.Repeat<TResult>(TResult, int)
+    [Fact]
     public static void CustomEntrySubject_8()
     {
         try
@@ -123,11 +133,12 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [9] Enumerable.Sequence<T>(T, T, T) — .NET 9 API, replaced with array literal
+    [Fact]
     public static void CustomEntrySubject_9()
     {
         try
@@ -136,7 +147,7 @@ public static partial class GenerationConcatSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 }

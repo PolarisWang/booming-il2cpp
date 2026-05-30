@@ -4,6 +4,7 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.Json;
+using Chaos.IL2CPP.Contracts;
 
 namespace Chaos.IL2CPP.Generator;
 
@@ -20,7 +21,8 @@ public sealed class PatchDataExtractor
 
     public void Extract(string dllPath, string outputPath, string? aotCoreIrPath = null,
         string? genuineIrPath = null, string? direction = null,
-        bool subjectOnly = false, string? subjectIndices = null)
+        bool subjectOnly = false, string? subjectIndices = null,
+        CodegenMode mode = CodegenMode.Aot)
     {
         using var stream = File.OpenRead(dllPath);
         using var peReader = new PEReader(stream);
@@ -761,19 +763,22 @@ public sealed class PatchDataExtractor
 
             if (!string.IsNullOrEmpty(key))
             {
-                if (IsSubjectMethodName(key))
+                if (IsSubjectMethodName(key) && !mode.HasFlag(CodegenMode.TestMode))
                 {
                     // Subject_N / CustomEntrySubject_N / CustomEntryMethod methods are
                     // test entry points whose patch implementation returns a sentinel
-                    // value (0xB0000000+N).  The original AOT Core IR contains complex
-                    // dispatch logic that hangs when the interpreter executes it with
-                    // zero args during hotupdate verification.  Instead of the original
-                    // IR, emit a minimal ldc.i4 0x5EED + ret sequence so the method
-                    // returns a distinctive sentinel value.  This guarantees semantic
-                    // change detection: the baseline thunk returns 0 (or undefined RAX
-                    // garbage for AOT direct_ptr), while the patched interpreter always
+                    // value (0xB0000000+N).  In production mode the original AOT Core IR
+                    // contains complex dispatch logic that hangs when the interpreter
+                    // executes it with zero args during hotupdate verification.  Instead
+                    // of the original IR, emit a minimal ldc.i4 0x5EED + ret sequence
+                    // so the method returns a distinctive sentinel value.  This guarantees
+                    // semantic change detection: the baseline thunk returns 0 (or undefined
+                    // RAX garbage for AOT direct_ptr), while the patched interpreter always
                     // returns 0x5EED.  The chance that RAX garbage coincidentally
                     // equals 0x5EED is negligible (~1e-12).
+                    //
+                    // In TestMode (CodegenMode.TestMode), this folding is skipped and the
+                    // real AOT Core IR is emitted, enabling test-correctness validation.
                     json = "{\"instructions\":[{\"opCode\":0,\"ilOffset\":0,\"operand\":24237},{\"opCode\":53,\"ilOffset\":1}]}";
                 }
                 else if (aotIrLookup.TryGetValue(key, out var found))

@@ -1,14 +1,34 @@
 using System;
 using System.Collections.Immutable;
+using Chaos.TestFramework;
 
 public static partial class ExtensionsMarshalSubjects
 {
+    [Fact]
     public static void CustomEntrySubject_0()
-    { try { var r = ImmutableArray.Create<byte>(); if (r.Length != 0) _exitCode = 1; } catch { _exitCode = 1; } }
+    {
+        var r = ImmutableArray.Create<byte>();
+        Assert.AreEqual(0, r.Length);
+    }
+
+    [Fact]
     public static void CustomEntrySubject_1()
-    { try { var r = ImmutableArray.Create<byte>((byte)42); if (r.Length != 1) _exitCode = 1; } catch { _exitCode = 1; } }
+    {
+        var r = ImmutableArray.Create<byte>((byte)42);
+        Assert.AreEqual(1, r.Length);
+    }
+
+    [Fact]
     public static void CustomEntrySubject_2()
-    { try { var r = ImmutableArray.Create<int>(); if (r.Length != 0) _exitCode = 1; } catch { _exitCode = 1; } }
+    {
+        var r = ImmutableArray.Create<int>();
+        Assert.AreEqual(0, r.Length);
+    }
+
+    [Fact]
     public static void CustomEntrySubject_3()
-    { try { var r = ImmutableArray.Create<int>(42); if (r.Length != 1) _exitCode = 1; } catch { _exitCode = 1; } }
+    {
+        var r = ImmutableArray.Create<int>(42);
+        Assert.AreEqual(1, r.Length);
+    }
 }

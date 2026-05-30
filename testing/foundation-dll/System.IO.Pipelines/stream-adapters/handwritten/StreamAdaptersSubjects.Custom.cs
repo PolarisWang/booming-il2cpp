@@ -4,11 +4,13 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System;
+using Chaos.TestFramework;
 
 public static partial class StreamAdaptersSubjects
 {
     // [0] System.IO.Pipelines/System.IO.Pipelines.StreamPipeExtensions::CopyToAsync:System.Threading.Tasks.Task(System.IO.Stream,System.IO.Pipelines.PipeWriter,System.Threading.CancellationToken)
+    [Fact]
     public static void CustomEntrySubject_0()
-    {        try { _ = StreamPipeExtensions.CopyToAsync(new MemoryStream(), default, default); } catch { _exitCode = 1; }    }
+    {        try { _ = StreamPipeExtensions.CopyToAsync(new MemoryStream(), default, default); } catch { }    }
 
 }

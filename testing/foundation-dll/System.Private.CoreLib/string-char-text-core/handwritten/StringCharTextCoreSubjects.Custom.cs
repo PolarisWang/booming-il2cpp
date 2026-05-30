@@ -8,15 +8,24 @@ using System;
 public static partial class StringCharTextCoreSubjects
 {
     // [17] System.Private.CoreLib/System.Char::IsDigit:System.Boolean(System.Char)
+    [Fact]
     public static void CustomEntrySubject_17()
-    {        try { _ = Char.IsDigit('A'); } catch { _exitCode = 1; }    }
+    {
+        _ = Char.IsDigit('A');
+    }
 
     // [18] System.Private.CoreLib/System.Char::IsLetter:System.Boolean(System.Char)
+    [Fact]
     public static void CustomEntrySubject_18()
-    {        try { _ = Char.IsLetter('A'); } catch { _exitCode = 1; }    }
+    {
+        _ = Char.IsLetter('A');
+    }
 
     // [19] System.Private.CoreLib/System.Char::IsWhiteSpace:System.Boolean(System.Char)
+    [Fact]
     public static void CustomEntrySubject_19()
-    {        try { _ = Char.IsWhiteSpace('A'); } catch { _exitCode = 1; }    }
+    {
+        _ = Char.IsWhiteSpace('A');
+    }
 
 }

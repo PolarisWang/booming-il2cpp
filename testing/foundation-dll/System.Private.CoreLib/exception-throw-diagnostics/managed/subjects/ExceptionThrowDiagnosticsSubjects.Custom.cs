@@ -9,24 +9,16 @@ using Chaos.TestFramework;
 public static partial class ExceptionThrowDiagnosticsSubjects
 {
     // [6] System.Exception::ToString()
+    [Fact]
     public static void CustomEntrySubject_6()
     {
-        try
-        {
         Assert.IsNotNull(new Exception().ToString().Length);
-        }
-        catch { _exitCode = 1; }
-
     }
 
     // [7] System.Exception::GetBaseException()
+    [Fact]
     public static void CustomEntrySubject_7()
     {
-        try
-        {
         Assert.IsNotNull(new Exception().GetBaseException().GetHashCode());
-        }
-        catch { _exitCode = 1; }
-
     }
 }

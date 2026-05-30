@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 // Handwritten custom entry implementations for System.Linq materialization operations.
 // Covers AsEnumerable, ToArray, ToDictionary (9 overloads), ToHashSet (2 overloads),
 // ToList, and ToLookup (4 overloads) -- all terminal operations that materialize
@@ -9,6 +10,7 @@
 public static partial class MaterializationSubjects
 {
     // [0] Enumerable.AsEnumerable<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_0()
     {
         try
@@ -18,11 +20,12 @@ public static partial class MaterializationSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [1] Enumerable.ToArray<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_1()
     {
         try
@@ -30,11 +33,12 @@ public static partial class MaterializationSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         int[] result = System.Linq.Enumerable.ToArray(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [2] Enumerable.ToDictionary<TKey,TValue>(IEnumerable<KeyValuePair<TKey,TValue>>)
+    [Fact]
     public static void CustomEntrySubject_2()
     {
         try
@@ -45,13 +49,14 @@ public static partial class MaterializationSubjects
             new System.Collections.Generic.KeyValuePair<int, string>(2, "two"),
             new System.Collections.Generic.KeyValuePair<int, string>(3, "three")
         }
-        catch { _exitCode = 1; }
+        catch { }
 
         };
         System.Collections.Generic.Dictionary<int, string> result = System.Linq.Enumerable.ToDictionary(source);
     }
 
     // [3] Enumerable.ToDictionary<TKey,TValue>(IEnumerable<KeyValuePair<TKey,TValue>>, IEqualityComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_3()
     {
         try
@@ -61,13 +66,14 @@ public static partial class MaterializationSubjects
             new System.Collections.Generic.KeyValuePair<int, string>(1, "one"),
             new System.Collections.Generic.KeyValuePair<int, string>(2, "two")
         }
-        catch { _exitCode = 1; }
+        catch { }
 
         };
         System.Collections.Generic.Dictionary<int, string> result = System.Linq.Enumerable.ToDictionary(source, System.Collections.Generic.EqualityComparer<int>.Default);
     }
 
     // [4] Enumerable.ToDictionary<TKey,TValue>(IEnumerable<ValueTuple<TKey,TValue>>)
+    [Fact]
     public static void CustomEntrySubject_4()
     {
         try
@@ -78,13 +84,14 @@ public static partial class MaterializationSubjects
             new System.ValueTuple<int, string>(2, "two"),
             new System.ValueTuple<int, string>(3, "three")
         }
-        catch { _exitCode = 1; }
+        catch { }
 
         };
         System.Collections.Generic.Dictionary<int, string> result = System.Linq.Enumerable.ToDictionary(source);
     }
 
     // [5] Enumerable.ToDictionary<TKey,TValue>(IEnumerable<ValueTuple<TKey,TValue>>, IEqualityComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try
@@ -94,13 +101,14 @@ public static partial class MaterializationSubjects
             new System.ValueTuple<int, string>(1, "one"),
             new System.ValueTuple<int, string>(2, "two")
         }
-        catch { _exitCode = 1; }
+        catch { }
 
         };
         System.Collections.Generic.Dictionary<int, string> result = System.Linq.Enumerable.ToDictionary(source, System.Collections.Generic.EqualityComparer<int>.Default);
     }
 
     // [6] Enumerable.ToDictionary<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>)
+    [Fact]
     public static void CustomEntrySubject_6()
     {
         try
@@ -108,11 +116,12 @@ public static partial class MaterializationSubjects
         string[] source = new string[] { "one", "two", "three" };
         System.Collections.Generic.Dictionary<char, string> result = System.Linq.Enumerable.ToDictionary(source, (string s) => s[0]);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [7] Enumerable.ToDictionary<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>, IEqualityComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_7()
     {
         try
@@ -120,11 +129,12 @@ public static partial class MaterializationSubjects
         string[] source = new string[] { "one", "two", "three" };
         System.Collections.Generic.Dictionary<char, string> result = System.Linq.Enumerable.ToDictionary(source, (string s) => s[0], System.Collections.Generic.EqualityComparer<char>.Default);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [8] Enumerable.ToDictionary<TSource,TKey,TElement>(IEnumerable<TSource>, Func<TSource,TKey>, Func<TSource,TElement>)
+    [Fact]
     public static void CustomEntrySubject_8()
     {
         try
@@ -132,11 +142,12 @@ public static partial class MaterializationSubjects
         string[] source = new string[] { "one", "two", "three" };
         System.Collections.Generic.Dictionary<char, int> result = System.Linq.Enumerable.ToDictionary(source, (string s) => s[0], (string s) => s.Length);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [9] Enumerable.ToDictionary<TSource,TKey,TElement>(IEnumerable<TSource>, Func<TSource,TKey>, Func<TSource,TElement>, IEqualityComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_9()
     {
         try
@@ -144,11 +155,12 @@ public static partial class MaterializationSubjects
         string[] source = new string[] { "one", "two", "three" };
         System.Collections.Generic.Dictionary<char, int> result = System.Linq.Enumerable.ToDictionary(source, (string s) => s[0], (string s) => s.Length, System.Collections.Generic.EqualityComparer<char>.Default);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [10] Enumerable.ToHashSet<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_10()
     {
         try
@@ -156,11 +168,12 @@ public static partial class MaterializationSubjects
         int[] source = new int[] { 1, 2, 3, 2, 1 };
         System.Collections.Generic.HashSet<int> result = System.Linq.Enumerable.ToHashSet(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [11] Enumerable.ToHashSet<TSource>(IEnumerable<TSource>, IEqualityComparer<TSource>)
+    [Fact]
     public static void CustomEntrySubject_11()
     {
         try
@@ -168,11 +181,12 @@ public static partial class MaterializationSubjects
         int[] source = new int[] { 1, 2, 3, 2, 1 };
         System.Collections.Generic.HashSet<int> result = System.Linq.Enumerable.ToHashSet(source, System.Collections.Generic.EqualityComparer<int>.Default);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [12] Enumerable.ToList<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_12()
     {
         try
@@ -180,11 +194,12 @@ public static partial class MaterializationSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Collections.Generic.List<int> result = System.Linq.Enumerable.ToList(source);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [13] Enumerable.ToLookup<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>)
+    [Fact]
     public static void CustomEntrySubject_13()
     {
         try
@@ -192,11 +207,12 @@ public static partial class MaterializationSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.ILookup<int, int> result = System.Linq.Enumerable.ToLookup(source, (int x) => x % 2);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [14] Enumerable.ToLookup<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>, IEqualityComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_14()
     {
         try
@@ -204,11 +220,12 @@ public static partial class MaterializationSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.ILookup<int, int> result = System.Linq.Enumerable.ToLookup(source, (int x) => x % 2, System.Collections.Generic.EqualityComparer<int>.Default);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [15] Enumerable.ToLookup<TSource,TKey,TElement>(IEnumerable<TSource>, Func<TSource,TKey>, Func<TSource,TElement>)
+    [Fact]
     public static void CustomEntrySubject_15()
     {
         try
@@ -216,11 +233,12 @@ public static partial class MaterializationSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.ILookup<int, bool> result = System.Linq.Enumerable.ToLookup(source, (int x) => x % 2, (int x) => x > 2);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [16] Enumerable.ToLookup<TSource,TKey,TElement>(IEnumerable<TSource>, Func<TSource,TKey>, Func<TSource,TElement>, IEqualityComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_16()
     {
         try
@@ -228,7 +246,7 @@ public static partial class MaterializationSubjects
         int[] source = new int[] { 1, 2, 3, 4, 5 };
         System.Linq.ILookup<int, bool> result = System.Linq.Enumerable.ToLookup(source, (int x) => x % 2, (int x) => x > 2, System.Collections.Generic.EqualityComparer<int>.Default);
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 }

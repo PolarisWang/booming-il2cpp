@@ -248,6 +248,17 @@ void RegisterSlotUpdateCallback(SlotUpdateCallback cb) noexcept {
     g_slot_update_cb = cb;
 }
 
+// Global original AOT direct_ptr resolver (registered by JIT for ResolveDirectFn).
+static OriginalAotPtrCallback g_original_aot_cb = nullptr;
+
+void SetOriginalAotPtrCallback(OriginalAotPtrCallback cb) noexcept {
+    g_original_aot_cb = cb;
+}
+
+OriginalAotPtrCallback GetOriginalAotPtrCallback() noexcept {
+    return g_original_aot_cb;
+}
+
 void HotpatchNameRegistry::SetPatchedBySlot(uint32_t module_id, uint32_t slot, bool patched,
                                              void* method_key) noexcept {
     HotpatchEntryV0* entry = GetDispatchEntryBySlot(module_id, slot);

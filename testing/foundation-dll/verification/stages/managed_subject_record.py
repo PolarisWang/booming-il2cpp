@@ -8,8 +8,9 @@ for cross-verification with AOT entry.exe --fact-json.
 Design decisions:
   - Uses the pre-built subjects DLL directly (not regenerating call expressions),
     ensuring handwritten Custom.cs methods are included in the golden record.
-  - Calls each Subject_N() / CustomEntrySubject_N() via reflection-like direct
-    invocation, then reads _exitCode to determine pass/fail.
+  - Calls each Subject_N() / CustomEntrySubject_N() directly — methods either
+    return normally (pass) or throw an exception (fail).
+  - Subjects use Assert.* + [Fact] annotations; no _exitCode field needed.
   - Matches the AOT fact-json semantics: both measure "did the subject method
     complete without an unhandled exception?"
 """
@@ -87,7 +88,7 @@ def run_managed_record(ctx: FamilyContext, stages: dict[str, StageResult]) -> St
       1. Read contract for methodSubjectIds and customEntryIndices.
       2. Find the pre-built subjects DLL.
       3. Generate a minimal C# harness that calls each Subject_N() /
-         CustomEntrySubject_N() and captures _exitCode.
+         CustomEntrySubject_N() and captures pass/fail via try/catch.
       4. Build and run the harness under managed .NET.
       5. Save golden-record.json to native/golden-record.json.
     """
@@ -144,11 +145,9 @@ def run_managed_record(ctx: FamilyContext, stages: dict[str, StageResult]) -> St
         method_name = f"CustomEntrySubject_{idx}" if is_custom else f"Subject_{idx}"
         method_entries.append(
             f"            {{ // [{idx}] {method_name}\n"
-            f"                {full_class_ref}._exitCode = 0;\n"
             f"                try {{\n"
             f"                    {full_class_ref}.{method_name}();\n"
-            f"                    int ec = {full_class_ref}._exitCode;\n"
-            f"                    results.Add(new MethodResult {{ MethodIndex = {idx}, SubjectName = \"{method_name}\", IsCustom = {str(is_custom).lower()}, Passed = true, ExitCode = ec, ExceptionMessage = null }});\n"
+            f"                    results.Add(new MethodResult {{ MethodIndex = {idx}, SubjectName = \"{method_name}\", IsCustom = {str(is_custom).lower()}, Passed = true, ExitCode = 0, ExceptionMessage = null }});\n"
             f"                }}\n"
             f"                catch (System.Exception ex) {{\n"
             f"                    results.Add(new MethodResult {{ MethodIndex = {idx}, SubjectName = \"{method_name}\", IsCustom = {str(is_custom).lower()}, Passed = false, ExitCode = -1, ExceptionMessage = ex.GetType().Name + \": \" + ex.Message }});\n"

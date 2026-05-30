@@ -18,6 +18,7 @@ Exit codes:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import subprocess
@@ -750,6 +751,119 @@ def fill_handwritten_stubs(slug: str, assembly: str) -> int:
 
 
 # ---------------------------------------------------------------------------
+# Subject freeze: capture + verify subject file integrity
+# ---------------------------------------------------------------------------
+
+_FREEZE_DIR_NAME = "subject-freeze"
+_FREEZE_MANIFEST_NAME = "subject-freeze-manifest.json"
+
+
+def _get_subject_files(family_dir: Path) -> list[Path]:
+    """Return all subject .cs files under managed/subjects/ and handwritten/."""
+    files: list[Path] = []
+    for base in ("managed/subjects", "handwritten"):
+        d = family_dir / base
+        if d.is_dir():
+            for cs in sorted(d.glob("*.cs")):
+                # Exclude obj/ directories
+                if "obj" not in cs.parts:
+                    files.append(cs)
+    return files
+
+
+def freeze_subjects(slug: str, assembly: str) -> Path | None:
+    """Freeze subject files: compute SHA256 hashes and write manifest.
+
+    Creates subject-freeze-manifest.json in the family directory and
+    backs up frozen copies to subject-freeze/.
+
+    Returns path to manifest file, or None on failure.
+    """
+    family_dir = _TESTING_ROOT / assembly / slug
+    freeze_dir = family_dir / _FREEZE_DIR_NAME
+    freeze_dir.mkdir(parents=True, exist_ok=True)
+
+    subject_files = _get_subject_files(family_dir)
+    if not subject_files:
+        print(f"[freeze] WARNING: No subject files found in {family_dir}")
+        return None
+
+    manifest: dict[str, Any] = {
+        "family": slug,
+        "assembly": assembly,
+        "freeze_timestamp": time.strftime("%Y-%m-%dT%H:%M:%S"),
+        "files": {},
+    }
+
+    for cs_file in subject_files:
+        rel = str(cs_file.relative_to(family_dir))
+        content = cs_file.read_bytes()
+        sha256 = hashlib.sha256(content).hexdigest()
+        manifest["files"][rel] = sha256
+
+        # Backup frozen copy
+        backup_path = freeze_dir / rel
+        backup_path.parent.mkdir(parents=True, exist_ok=True)
+        backup_path.write_bytes(content)
+        print(f"[freeze]  backed up: {rel}")
+
+    # Write manifest
+    manifest_path = family_dir / _FREEZE_MANIFEST_NAME
+    manifest_path.write_text(
+        json.dumps(manifest, indent=2, ensure_ascii=False),
+        encoding="utf-8",
+    )
+    print(f"[freeze] wrote manifest: {manifest_path} ({len(subject_files)} file(s))")
+    return manifest_path
+
+
+def verify_freeze(slug: str, assembly: str) -> bool:
+    """Verify that subject files have not been modified since freeze.
+
+    Re-computes SHA256 hashes and compares against the freeze manifest.
+    Returns True if all files match, False if any file changed.
+    """
+    family_dir = _TESTING_ROOT / assembly / slug
+    manifest_path = family_dir / _FREEZE_MANIFEST_NAME
+
+    if not manifest_path.exists():
+        print(f"[verify-freeze] No freeze manifest found at {manifest_path}")
+        print(f"[verify-freeze] Run --freeze first to capture subject baseline")
+        return False
+
+    try:
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as e:
+        print(f"[verify-freeze] ERROR: Could not read manifest: {e}")
+        return False
+
+    frozen_files = manifest.get("files", {})
+    all_ok = True
+
+    for rel_path, expected_hash in frozen_files.items():
+        full_path = family_dir / rel_path
+        if not full_path.exists():
+            print(f"[verify-freeze] FAIL: {rel_path} was frozen but is now MISSING")
+            all_ok = False
+            continue
+
+        current_hash = hashlib.sha256(full_path.read_bytes()).hexdigest()
+        if current_hash != expected_hash:
+            print(f"[verify-freeze] FAIL: {rel_path} has CHANGED since freeze")
+            print(f"  expected: {expected_hash}")
+            print(f"  current:  {current_hash}")
+            all_ok = False
+
+    if all_ok:
+        print(f"[verify-freeze] OK: All {len(frozen_files)} subject files unchanged since freeze")
+    else:
+        print(f"[verify-freeze] SUBJECT FROZEN — optimization must not modify test code")
+        print(f"[verify-freeze] Revert subject file changes, fix codegen/runtime instead")
+
+    return all_ok
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
@@ -775,10 +889,28 @@ def main() -> None:
         help="Fill TODO stub bodies with generated call expressions",
     )
     parser.add_argument(
+        "--freeze", action="store_true",
+        help="Freeze subject files: compute SHA256 hashes, write manifest and backup",
+    )
+    parser.add_argument(
+        "--verify-freeze", action="store_true",
+        help="Verify subject files match frozen manifest",
+    )
+    parser.add_argument(
         "--json", action="store_true",
         help="Output raw JSON report (default: human-readable summary)",
     )
     args = parser.parse_args()
+
+    # Handle freeze/verify-freeze as standalone commands
+    if args.freeze:
+        freeze_subjects(args.family_slug, args.assembly)
+        return
+
+    if args.verify_freeze:
+        ok = verify_freeze(args.family_slug, args.assembly)
+        sys.exit(0 if ok else 1)
+        return
 
     report = audit_family(args.family_slug, args.assembly)
 

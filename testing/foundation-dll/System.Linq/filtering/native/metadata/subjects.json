@@ -1,0 +1,95 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-05-30T10:51:36.6897059Z",
+  "generator": "Chaos.IL2CPP.Tools.TestProjectGenerator",
+  "entryExecutable": "entry",
+  "subjects": [
+    {
+      "index": 0,
+      "kind": "fact",
+      "subjectId": "System.Linq/System.Linq.Enumerable::All{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "All{TSource}",
+      "isStatic": true
+    },
+    {
+      "index": 1,
+      "kind": "fact",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Any{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource})",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Any{TSource}",
+      "isStatic": true
+    },
+    {
+      "index": 2,
+      "kind": "fact",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Any{TSource}:System.Boolean(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Any{TSource}",
+      "isStatic": true
+    },
+    {
+      "index": 3,
+      "kind": "fact",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Cast{TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.IEnumerable)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Cast{TResult}",
+      "isStatic": true
+    },
+    {
+      "index": 4,
+      "kind": "fact",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DistinctBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey})",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DistinctBy{TSource,TKey}",
+      "isStatic": true
+    },
+    {
+      "index": 5,
+      "kind": "fact",
+      "subjectId": "System.Linq/System.Linq.Enumerable::DistinctBy{TSource,TKey}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,TKey},System.Collections.Generic.IEqualityComparer{TKey})",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "DistinctBy{TSource,TKey}",
+      "isStatic": true
+    },
+    {
+      "index": 6,
+      "kind": "fact",
+      "subjectId": "System.Linq/System.Linq.Enumerable::OfType{TResult}:System.Collections.Generic.IEnumerable{TResult}(System.Collections.IEnumerable)",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "OfType{TResult}",
+      "isStatic": true
+    },
+    {
+      "index": 7,
+      "kind": "fact",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Where{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Boolean})",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Where{TSource}",
+      "isStatic": true
+    },
+    {
+      "index": 8,
+      "kind": "fact",
+      "subjectId": "System.Linq/System.Linq.Enumerable::Where{TSource}:System.Collections.Generic.IEnumerable{TSource}(System.Collections.Generic.IEnumerable{TSource},System.Func{TSource,System.Int32,System.Boolean})",
+      "assemblyName": "System.Linq",
+      "typeName": "System.Linq.Enumerable",
+      "methodName": "Where{TSource}",
+      "isStatic": true
+    }
+  ],
+  "summary": {
+    "totalSubjects": 9,
+    "factCount": 9,
+    "benchmarkCount": 0,
+    "hotUpdateCount": 0
+  }
+}

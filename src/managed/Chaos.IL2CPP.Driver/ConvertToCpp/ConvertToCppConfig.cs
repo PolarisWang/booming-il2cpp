@@ -77,6 +77,7 @@ internal sealed class ConvertToCppConfig
                     {
                         "aot" => CodegenMode.Aot,
                         "jit" => CodegenMode.Jit,
+                        "test" => CodegenMode.Aot | CodegenMode.TestMode,
                         _ => CodegenMode.Aot,
                     };
                     break;
@@ -122,7 +123,7 @@ internal sealed class ConvertToCppConfig
         Console.WriteLine("  --assembly-dir <dir>          Additional dependency search path (repeatable)");
         Console.WriteLine("  --entry-point <subject-id>    Explicit entry point (default: auto-detect Main)");
         Console.WriteLine("  --full-closure                Compile full closure (all reachable methods)");
-        Console.WriteLine("  --mode aot|jit                  Codegen mode: aot (native C++, default) or jit (JIT compile)");
+        Console.WriteLine("  --mode aot|jit|test           Codegen mode: aot (native C++, default), jit (JIT compile), or test (AOT + disable Subject_N folding)");
         Console.WriteLine("  --sdk-out <dir>               Output self-contained chaos-sdk/ CMake package (replaces --output)");
         Console.WriteLine("  --verbose, -v                 Enable verbose diagnostics");
         Console.WriteLine("  --help, -h                    Show this help");

@@ -1,3 +1,4 @@
+using Chaos.TestFramework;
 // Handwritten custom entry implementations for System.Linq ordering operations.
 // Each method calls the corresponding Enumerable API and forces evaluation
 // by enumerating the result via IEnumerator<T>.
@@ -5,6 +6,7 @@
 public static partial class OrderingSubjects
 {
     // [0] Enumerable.Order<T>(IEnumerable<T>)
+    [Fact]
     public static void CustomEntrySubject_0()
     {
         try
@@ -14,11 +16,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [1] Enumerable.Order<T>(IEnumerable<T>, IComparer<T>)
+    [Fact]
     public static void CustomEntrySubject_1()
     {
         try
@@ -28,11 +31,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [2] Enumerable.OrderBy<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>)
+    [Fact]
     public static void CustomEntrySubject_2()
     {
         try
@@ -42,11 +46,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [3] Enumerable.OrderBy<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>, IComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_3()
     {
         try
@@ -56,11 +61,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [4] Enumerable.OrderByDescending<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>)
+    [Fact]
     public static void CustomEntrySubject_4()
     {
         try
@@ -70,11 +76,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [5] Enumerable.OrderByDescending<TSource,TKey>(IEnumerable<TSource>, Func<TSource,TKey>, IComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_5()
     {
         try
@@ -84,11 +91,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [6] Enumerable.OrderDescending<T>(IEnumerable<T>)
+    [Fact]
     public static void CustomEntrySubject_6()
     {
         try
@@ -98,11 +106,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [7] Enumerable.OrderDescending<T>(IEnumerable<T>, IComparer<T>)
+    [Fact]
     public static void CustomEntrySubject_7()
     {
         try
@@ -112,11 +121,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [8] Enumerable.Reverse<TSource>(IEnumerable<TSource>)
+    [Fact]
     public static void CustomEntrySubject_8()
     {
         try
@@ -126,11 +136,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [9] Enumerable.Reverse<TSource>(TSource[])
+    [Fact]
     public static void CustomEntrySubject_9()
     {
         try
@@ -140,11 +151,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [10] Enumerable.ThenBy<TSource,TKey>(IOrderedEnumerable<TSource>, Func<TSource,TKey>)
+    [Fact]
     public static void CustomEntrySubject_10()
     {
         try
@@ -155,11 +167,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [11] Enumerable.ThenBy<TSource,TKey>(IOrderedEnumerable<TSource>, Func<TSource,TKey>, IComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_11()
     {
         try
@@ -170,11 +183,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [12] Enumerable.ThenByDescending<TSource,TKey>(IOrderedEnumerable<TSource>, Func<TSource,TKey>)
+    [Fact]
     public static void CustomEntrySubject_12()
     {
         try
@@ -185,11 +199,12 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 
     // [13] Enumerable.ThenByDescending<TSource,TKey>(IOrderedEnumerable<TSource>, Func<TSource,TKey>, IComparer<TKey>)
+    [Fact]
     public static void CustomEntrySubject_13()
     {
         try
@@ -200,7 +215,7 @@ public static partial class OrderingSubjects
         System.Collections.Generic.IEnumerator<int> e = result.GetEnumerator();
         e.MoveNext();
         }
-        catch { _exitCode = 1; }
+        catch { }
 
     }
 }

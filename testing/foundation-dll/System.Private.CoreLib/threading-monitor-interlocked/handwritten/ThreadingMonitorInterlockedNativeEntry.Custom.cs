@@ -9,12 +9,12 @@
 // il2cpp_dist/entrypoint/ before invoking generate_and_build().
 
 using System.Threading;
+using Chaos.TestFramework;
 
 public static partial class ThreadingMonitorInterlockedNativeEntry
 {
-    // _exitCode is auto-generated in the entry class for non-probe builds.
-
     // [0] System.Threading.Monitor::Enter(System.Object)
+    [Fact]
     public static void CustomEntryMethod0()
     {
         object lockObj = new object();
@@ -23,6 +23,7 @@ public static partial class ThreadingMonitorInterlockedNativeEntry
     }
 
     // [1] System.Threading.Monitor::Exit(System.Object)
+    [Fact]
     public static void CustomEntryMethod1()
     {
         object lockObj = new object();
@@ -31,6 +32,7 @@ public static partial class ThreadingMonitorInterlockedNativeEntry
     }
 
     // [4] System.Threading.Monitor::Pulse(System.Object)
+    [Fact]
     public static void CustomEntryMethod4()
     {
         object lockObj = new object();
@@ -40,6 +42,7 @@ public static partial class ThreadingMonitorInterlockedNativeEntry
     }
 
     // [5] System.Threading.Monitor::PulseAll(System.Object)
+    [Fact]
     public static void CustomEntryMethod5()
     {
         object lockObj = new object();
@@ -49,6 +52,7 @@ public static partial class ThreadingMonitorInterlockedNativeEntry
     }
 
     // [6] System.Threading.Monitor::Wait(System.Object)
+    [Fact]
     public static void CustomEntryMethod6()
     {
         object lockObj = new object();
@@ -59,39 +63,44 @@ public static partial class ThreadingMonitorInterlockedNativeEntry
     }
 
     // [7] System.Threading.Interlocked::Increment(System.Int32&)
+    [Fact]
     public static void CustomEntryMethod7()
     {
         int val = 0;
-        if (Interlocked.Increment(ref val) != 1) _exitCode = 1;
+        Assert.AreEqual(1, Interlocked.Increment(ref val));
     }
 
     // [8] System.Threading.Interlocked::Decrement(System.Int32&)
+    [Fact]
     public static void CustomEntryMethod8()
     {
         int val = 1;
-        if (Interlocked.Decrement(ref val) != 0) _exitCode = 1;
+        Assert.AreEqual(0, Interlocked.Decrement(ref val));
     }
 
     // [9] System.Threading.Interlocked::Exchange(System.Int32&, System.Int32)
+    [Fact]
     public static void CustomEntryMethod9()
     {
         int val = 42;
-        if (Interlocked.Exchange(ref val, 99) != 42) _exitCode = 1;
-        if (val != 99) _exitCode = 1;
+        Assert.AreEqual(42, Interlocked.Exchange(ref val, 99));
+        Assert.AreEqual(99, val);
     }
 
     // [10] System.Threading.Interlocked::CompareExchange(System.Int32&, System.Int32, System.Int32)
+    [Fact]
     public static void CustomEntryMethod10()
     {
         int val = 42;
-        if (Interlocked.CompareExchange(ref val, 99, 42) != 42) _exitCode = 1;
-        if (val != 99) _exitCode = 1;
+        Assert.AreEqual(42, Interlocked.CompareExchange(ref val, 99, 42));
+        Assert.AreEqual(99, val);
     }
 
     // [11] System.Threading.Interlocked::Add(System.Int32&, System.Int32)
+    [Fact]
     public static void CustomEntryMethod11()
     {
         int val = 10;
-        if (Interlocked.Add(ref val, 5) != 15) _exitCode = 1;
+        Assert.AreEqual(15, Interlocked.Add(ref val, 5));
     }
 }
