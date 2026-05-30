@@ -23,6 +23,17 @@ _DRIVER_DLL = (
 )
 _IS_LINUX = sys.platform.startswith("linux")
 
+# Native build output directory for the VS2022 CMake generator.
+# When cmake --preset default uses "Visual Studio 17 2022" on Windows,
+# the multi-config build tree puts per-target outputs under:
+#   build/{preset-name}/src/native/{target}/
+# where {preset-name} matches the source directory name under build/
+# (typically "vs2022" when configured manually or via CI scripts).
+# This path is used by hotupdate to rebuild chaos_runtime_core.lib after
+# patching runtime internals.  The rebuilt lib is then synced to SDK
+# lib/ directories so entry.exe links the latest runtime code.
+_NATIVE_BUILD_DIR = _REPO_ROOT / "build" / "vs2022" / "src" / "native" / "runtime-core"
+
 # Module-level flag: ensures chaos_runtime_core.lib is only rebuilt+synced once
 # per process lifetime.  The lib itself doesn't change between hotupdate stages;
 # only runtime-patchdata.cpp changes (compiled and linked into entry.exe).
@@ -246,7 +257,7 @@ def _ensure_patch_data(ctx: FamilyContext) -> bool:
     host_class = _detect_host_class(native_dir)
     _generate_runtime_patchdata_cpp(patchdata, native_dir / "runtime-patchdata.cpp", host_class)
 
-    runtime_core_build = _REPO_ROOT / "build" / "vs2022" / "src" / "native" / "runtime-core"
+    runtime_core_build = _NATIVE_BUILD_DIR
     global _runtime_lib_synced
     if runtime_core_build.exists() and not _runtime_lib_synced:
         print(f"  [hotupdate] Rebuilding chaos_runtime_core.lib (once per run)...")

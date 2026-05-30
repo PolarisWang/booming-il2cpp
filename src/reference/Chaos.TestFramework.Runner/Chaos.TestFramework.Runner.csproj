@@ -6,6 +6,15 @@
     <AssemblyName>Chaos.TestFramework.Runner</AssemblyName>
     <RootNamespace>Chaos.TestFramework.Runner</RootNamespace>
     <OutputType>Library</OutputType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Chaos.TestFramework.Runner</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Chaos IL2CPP Test Framework Runner — harness for executing managed verification entries.</Description>
+    <Authors>Chaos IL2CPP</Authors>
+    <PackageProjectUrl>https://github.com/chaos-il2cpp</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/chaos-il2cpp</RepositoryUrl>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)..\..\..\testing\_packages\</PackageOutputPath>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />

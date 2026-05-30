@@ -315,7 +315,12 @@ internal sealed class SdkEmitter
     /// stale) chaos_runtime_core.lib.  The .h counterparts are already copied
     /// by CopyRuntimeHeaders into include/runtime_stubs/.
     ///
+    /// Also copies profile_globals.cpp from src/native/common/chaos/ — it must
+    /// be compiled from source (not linked from a lib) so PROFILE_SCOPE globals
+    /// stay synchronized with the current build configuration.
+    ///
     /// Maps: src/native/runtime-core/runtime_stubs/*.cpp → sdkRoot/runtime_stubs/
+    ///       src/native/common/chaos/profile_globals.cpp  → sdkRoot/runtime_stubs/
     /// </summary>
     private static void CopyRuntimeStubSources(string repoRoot, string sdkRoot)
     {
@@ -333,6 +338,21 @@ internal sealed class SdkEmitter
             }
         }
         Console.WriteLine($"    SDK runtime stubs sources: {count} .cpp files copied");
+
+        // ── Also copy profile_globals.cpp ────────────────────────────────
+        // PROFILE_SCOPE globals must be compiled from source (not from prebuilt lib)
+        // to stay synchronized with the current config tier and build flags.
+        var profileGlobalsSrc = Path.Combine(repoRoot, "src", "native", "common", "chaos", "profile_globals.cpp");
+        var profileGlobalsDst = Path.Combine(dstRuntimeStubs, "profile_globals.cpp");
+        if (File.Exists(profileGlobalsSrc))
+        {
+            File.Copy(profileGlobalsSrc, profileGlobalsDst, overwrite: true);
+            Console.WriteLine($"    SDK runtime stubs: profile_globals.cpp copied");
+        }
+        else
+        {
+            Console.WriteLine($"    WARN: profile_globals.cpp not found at {profileGlobalsSrc}");
+        }
     }
 
     /// <summary>

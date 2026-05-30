@@ -32,6 +32,41 @@ from verification.stages.test_code_generator import (METHOD_OVERRIDES, build_cal
                                                      INSTANCE_ALTERNATIVE_EXPR_MAP, TYPE_ALTERNATIVE_MAP)
 from verification.stages.native_code_generator import slug_from_family_id, family_namespace_slug, method_slot_name
 
+# ── NuGet local feed for Chaos.TestFramework.Sdk/Runner ────────────────────
+# Version locked via local feed at testing/_packages/. Bump _SDK_VERSION
+# when the SDK API changes (breaking) or on significant updates (minor).
+_SDK_VERSION = "0.1.0"
+_PACKAGES_DIR = _REPO_ROOT / "testing" / "_packages"
+_SDK_PROJECT = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
+_RUNNER_PROJECT = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Runner" / "Chaos.TestFramework.Runner.csproj"
+
+
+def _ensure_sdk_packed() -> None:
+    """Build and pack SDK + Runner to local NuGet feed if not already cached.
+
+    The feed at testing/_packages/ is referenced by testing/nuget.config so
+    that test projects can use PackageReference instead of ProjectReference.
+    This provides version locking and prevents cascading breakage when the
+    SDK source changes.
+    """
+    _PACKAGES_DIR.mkdir(parents=True, exist_ok=True)
+    sdk_nupkg = _PACKAGES_DIR / f"Chaos.TestFramework.Sdk.{_SDK_VERSION}.nupkg"
+    runner_nupkg = _PACKAGES_DIR / f"Chaos.TestFramework.Runner.{_SDK_VERSION}.nupkg"
+    if not sdk_nupkg.exists():
+        result = subprocess.run(
+            ["dotnet", "pack", str(_SDK_PROJECT), "--configuration", "Release", "-o", str(_PACKAGES_DIR)],
+            capture_output=True, text=True, timeout=120,
+        )
+        if result.returncode != 0:
+            print(f"[entrypoint] WARN: SDK pack failed: {result.stderr.strip()[:200]}")
+    if not runner_nupkg.exists():
+        result = subprocess.run(
+            ["dotnet", "pack", str(_RUNNER_PROJECT), "--configuration", "Release", "-o", str(_PACKAGES_DIR)],
+            capture_output=True, text=True, timeout=120,
+        )
+        if result.returncode != 0:
+            print(f"[entrypoint] WARN: Runner pack failed: {result.stderr.strip()[:200]}")
+
 
 # ═══════════════════════════════════════════════════════════════════
 # Utility helpers
@@ -433,12 +468,10 @@ def generate_project_file(
                             continue
                         extra_cs += f'    <Compile Include="subjects/{f.name}" />\n'
         custom_cs = f'    <Compile Include="{class_name}.Custom.cs" />\n' if has_custom_entry else ""
-        # Always add Chaos.TestFramework.Sdk reference for subjects variant
-        sdk_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
-        all_refs = [str(sdk_csproj)]
-        if extra_refs:
-            all_refs.extend(extra_refs)
-        items = "\n".join(f'    <ProjectReference Include="{r}" />' for r in all_refs)
+        # Always add Chaos.TestFramework.Sdk via PackageReference for version locking
+        sdk_refs = [f'    <PackageReference Include="Chaos.TestFramework.Sdk" Version="{_SDK_VERSION}" />']
+        extra_project_refs = [f'    <ProjectReference Include="{r}" />' for r in (extra_refs or [])]
+        items = "\n".join(sdk_refs + extra_project_refs)
         extra_refs_xml = f"  </ItemGroup>\n  <ItemGroup>\n{items}\n  </ItemGroup>\n"
         remove_test_refs = (
             '  <ItemGroup>\n'
@@ -491,13 +524,10 @@ def generate_project_file(
             "</Project>\n"
         )
 
-    sdk_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Sdk" / "Chaos.TestFramework.Sdk.csproj"
-    runner_csproj = _REPO_ROOT / "src" / "reference" / "Chaos.TestFramework.Runner" / "Chaos.TestFramework.Runner.csproj"
-
     chaos_tf_ref = (
         "  <ItemGroup>\n"
-        f'    <ProjectReference Include="{sdk_csproj}" />\n'
-        f'    <ProjectReference Include="{runner_csproj}" />\n'
+        f'    <PackageReference Include="Chaos.TestFramework.Sdk" Version="{_SDK_VERSION}" />\n'
+        f'    <PackageReference Include="Chaos.TestFramework.Runner" Version="{_SDK_VERSION}" />\n'
         "  </ItemGroup>\n"
     )
 
@@ -705,6 +735,9 @@ def generate_and_build(
       2. Emit: Generate void entry with Assert.Equal(expected, call)
          and Assert.Throws<ExceptionType>(() => call).
     """
+    # Ensure local NuGet packages are available before generating project references
+    _ensure_sdk_packed()
+
     if class_name is None:
         class_name = f"{family_namespace_slug(family_id).title().replace('_', '').replace(',', '')}NativeEntry"
 

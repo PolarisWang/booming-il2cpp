@@ -9,6 +9,12 @@ namespace Chaos.IL2CPP.Generator.BuildSystem;
 /// Each assembly becomes a STATIC library, and a combined entry.exe links them
 /// with the pre-built native runtime libs.
 /// </summary>
+/// <remarks>
+/// DEPRECATED: CMakeLists.txt generation has moved to the TPG pipeline
+/// (TestProjectGenerator, .scriban templates).  This class is retained
+/// only for backward-compat unit tests.  No production code calls it.
+/// </remarks>
+[Obsolete("CMake generation moved to TPG .scriban templates. See TestProject.CMakeLists.txt.scriban.")]
 public sealed class CmakeGenerator
 {
     private readonly string _repoRoot;

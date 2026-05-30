@@ -74,18 +74,18 @@ list(REMOVE_ITEM CHAOS_NATIVE_STUBS
     "${CMAKE_CURRENT_SOURCE_DIR}/jit_stubs.cpp"
 )
 
-# Runtime stubs from the source tree
+# Runtime stubs from the SDK (compiled from source to avoid stale lib)
 file(GLOB CHAOS_RUNTIME_STUB_SOURCES
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/*.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/*.cpp"
 )
 list(REMOVE_ITEM CHAOS_RUNTIME_STUB_SOURCES
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/guid_stubs.cpp"
-    "${CHAOS_PROJECT_ROOT}/src/native/runtime-core/runtime_stubs/threading_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/guid_stubs.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/threading_stubs.cpp"
 )
 
 # PROFILE globals (compiled from source to avoid stale SDK lib dependency)
 set(CHAOS_PROFILE_GLOBALS
-    "${CHAOS_PROJECT_ROOT}/src/native/common/chaos/profile_globals.cpp"
+    "${CHAOS_SDK_DIR}/runtime_stubs/profile_globals.cpp"
 )
 
 set(CHAOS_ENTRY_SOURCES
