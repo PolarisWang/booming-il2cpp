@@ -6,5 +6,14 @@
     <LangVersion>12.0</LangVersion>
     <AssemblyName>Chaos.TestFramework.Sdk</AssemblyName>
     <RootNamespace>Chaos.TestFramework</RootNamespace>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Chaos.TestFramework.Sdk</PackageId>
+    <Version>0.1.0</Version>
+    <Description>Chaos IL2CPP Test Framework SDK — assertion and test infrastructure for managed verification families.</Description>
+    <Authors>Chaos IL2CPP</Authors>
+    <PackageProjectUrl>https://github.com/chaos-il2cpp</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/chaos-il2cpp</RepositoryUrl>
+    <PackageOutputPath>$(MSBuildThisFileDirectory)..\..\..\testing\_packages\</PackageOutputPath>
   </PropertyGroup>
 </Project>

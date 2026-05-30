@@ -238,3 +238,23 @@ extern "C" void ChaosFunction() noexcept;
 
 **经验法则**：查找表、注册表、缓存、id→ptr 映射、type→handler 映射，无脑用 `MAP_IDENTITY`。
 string key 的查找表用 `MAP`。只有依赖 std 链式桶语义时才回退。
+
+## SDK/TPG 输出边界约束（强制）
+
+SDK 输出（`--sdk-out`）和 TPG 测试项目之间必须保持严格的自包含边界：
+
+### 基本原则
+
+1. **SDK 输出必须是自包含的可编译目录** — `chaos-sdk/` 包含消费方编译所需的一切：头文件（`include/`）、预构建库（`lib/`）、CMake 集成（`chaos-config.cmake`、`chaos-targets.cmake`）、运行时存根源文件（`runtime_stubs/`）。消费方只需 `find_package(chaos PATHS <sdk-dir>)` 即可使用。
+2. **TPG 产出只能引用 SDK** — 测试项目的 `CMakeLists.txt` 中头文件搜索路径通过 `chaos::runtime` 目标传递，运行时存根 `.cpp` 必须从 SDK 的 `runtime_stubs/` 目录引用。禁止任何 `CHAOS_PROJECT_ROOT` 路径指向仓库源码树。
+3. **代码生成器（Codegen）不生成 CMake 文件** — CMakeLists.txt 由 TPG 通过 `.scriban` 模板统一生成。`ConvertToCppHandler.cs` 中已移除所有 CMakeLists.txt 生成逻辑。
+
+### 具体规则
+
+| 规则 | 说明 | 违反后果 |
+|------|------|---------|
+| 测试 CMakeLists.txt 不得引用 `CHAOS_PROJECT_ROOT` | 运行时存根、profile_globals 等 .cpp 文件必须从 `${CHAOS_SDK_DIR}/runtime_stubs/` 引用 | 链接期可能使用过时的预构建 lib，或产生不可移植的构建 |
+| 测试项目不得依赖仓库源码树头文件路径 | 头文件搜索通过 `target_link_libraries(entry PRIVATE chaos::runtime)` 传递的 `INTERFACE_INCLUDE_DIRECTORIES` 完成 | 构建环境与 SDK 发布环境不一致，导致 CI 通过但发布失败 |
+| `runtime_stubs/*.cpp` 和 `profile_globals.cpp` 必须由 SdkEmitter 拷贝到 SDK | `SdkEmitter.CopyRuntimeStubSources()` 负责拷贝这些源码文件 | 测试 CMakeLists.txt 无法从 SDK 获取这些源文件，被迫回退到仓库路径 |
+| 构建脚本中的 native lib 路径必须可配置 | `hotupdate.py` 中 native build 输出目录等硬编码路径必须提取为模块级常量 | 切换 CMake generator 或修改构建目录结构时遗漏更新 |
+| 废弃的 codegen 构建代码必须标记 | `CmakeGenerator.cs` 等仅在测试中引用的死代码需添加 `[Obsolete]` 标记 | 新开发者误以为 CmakeGenerator 是当前方案，继续在其上开发 |
