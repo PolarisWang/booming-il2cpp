@@ -34,6 +34,9 @@ internal sealed class ConvertToCppConfig
     /// <summary>Optional SDK output directory for self-contained CMake package</summary>
     public string? SdkOutDir { get; init; }
 
+    /// <summary>Path to subject-methods.json (subset of method IDs treated as subjects)</summary>
+    public string? SubjectMethodsPath { get; init; }
+
     /// <summary>
     /// Parse CLI arguments.
     /// Expected: --assembly &lt;path&gt; [--assembly &lt;path&gt; ...] --output &lt;dir&gt; [options]
@@ -48,6 +51,7 @@ internal sealed class ConvertToCppConfig
         string? entryPoint = null;
         var mode = CodegenMode.Aot;
         string? sdkOutDir = null;
+        string? subjectMethodsPath = null;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -87,6 +91,9 @@ internal sealed class ConvertToCppConfig
                 case "--sdk-out" when i + 1 < args.Length:
                     sdkOutDir = Path.GetFullPath(args[++i]);
                     break;
+                case "--subject-methods" when i + 1 < args.Length:
+                    subjectMethodsPath = Path.GetFullPath(args[++i]);
+                    break;
             }
         }
 
@@ -107,6 +114,7 @@ internal sealed class ConvertToCppConfig
             EntryPoint = entryPoint,
             Mode = mode,
             SdkOutDir = sdkOutDir,
+            SubjectMethodsPath = subjectMethodsPath,
         };
     }
 
@@ -125,6 +133,7 @@ internal sealed class ConvertToCppConfig
         Console.WriteLine("  --full-closure                Compile full closure (all reachable methods)");
         Console.WriteLine("  --mode aot|jit|test           Codegen mode: aot (native C++, default), jit (JIT compile), or test (AOT + disable Subject_N folding)");
         Console.WriteLine("  --sdk-out <dir>               Output self-contained chaos-sdk/ CMake package (replaces --output)");
+        Console.WriteLine("  --subject-methods <path>      Path to subject-methods.json (subset of SubjectIds for dispatch table)");
         Console.WriteLine("  --verbose, -v                 Enable verbose diagnostics");
         Console.WriteLine("  --help, -h                    Show this help");
     }

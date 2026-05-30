@@ -204,14 +204,19 @@ def run_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResult:
         print(f"  [fact] WARNING: no factResults in JSON output")
         print(f"  [fact] DEBUG: rc={r.returncode}, stdout={r.stdout[:200]!r}")
 
-    # Count only auto Subject_N entries (odd si = Subject_N, even si = CustomEntrySubject_N)
+    # Count subject entries.
+    # New format (flat slot map with contractIndex): all entries are valid.
+    # Old format (interleaved slots): skip CustomEntrySubject_N at even si.
+    has_contract_index = any(entry.get("contractIndex") is not None for entry in results)
     auto_passed = 0
     auto_total = 0
     fail_details = []
     for entry in results:
         si = entry.get("si", -1)
-        if si < 0 or si % 2 == 0:
-            continue  # skip CustomEntrySubject_N entries
+        if si < 0:
+            continue
+        if not has_contract_index and si % 2 == 0:
+            continue  # old format: skip CustomEntrySubject_N entries
         auto_total += 1
         if entry.get("passed", False):
             auto_passed += 1
@@ -290,13 +295,16 @@ def run_fact_jit(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRes
     if not results:
         print(f"  [fact_jit] WARNING: no factResults in JSON output")
 
-    # Count only auto Subject_N entries (odd si)
+    # Count subject entries (contractIndex-aware or si-based fallback)
+    has_contract_index = any(entry.get("contractIndex") is not None for entry in results)
     auto_passed = 0
     auto_total = 0
     for entry in results:
         si = entry.get("si", -1)
-        if si < 0 or si % 2 == 0:
+        if si < 0:
             continue
+        if not has_contract_index and si % 2 == 0:
+            continue  # old format: skip CustomEntrySubject_N entries
         auto_total += 1
         if entry.get("passed", False):
             auto_passed += 1
@@ -484,16 +492,42 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             except json.JSONDecodeError:
                 continue
 
-    # Key native results by si (subject slot index) rather than methodIndex.
-    # The kMethodTable interleaves CustomEntrySubject_N (even si) and Subject_N
-    # (odd si), so methodIndex alone doesn't map 1:1 to the contract order.
-    # Golden record uses contract index (0 = Subject_0, 1 = Subject_1, ...),
-    # which corresponds to native si = 2*N + (custom? 0 : 1).
-    native_by_si: dict[int, dict] = {}
-    for nr in native_data.get("factResults", []):
-        si = nr.get("si", -1)
-        if si >= 0:
-            native_by_si[si] = nr
+    native_results = native_data.get("factResults", [])
+
+    # Build native lookup map — two formats:
+    #   New (flat slot map with contractIndex): match via contractIndex directly.
+    #   Old (interleaved slots): map via expected_si = 2*N + (custom?0:1).
+    has_contract_index = any(nr.get("contractIndex") is not None for nr in native_results)
+
+    if has_contract_index:
+        native_lookup: dict[int, dict] = {}
+        for nr in native_results:
+            ci = nr.get("contractIndex")
+            if ci is not None:
+                native_lookup[ci] = nr
+        native_extra = 0  # contractIndex space is dense — extra not meaningful
+    else:
+        native_by_si: dict[int, dict] = {}
+        for nr in native_results:
+            si = nr.get("si", -1)
+            if si >= 0:
+                native_by_si[si] = nr
+
+        native_lookup = {}
+        expected_sis: set[int] = set()
+        for idx in sorted(golden_by_index.keys()):
+            golden = golden_by_index[idx]
+            is_custom = golden.get("isCustom")
+            if is_custom is not None:
+                expected_si = 2 * idx + (1 if not is_custom else 0)
+            else:
+                expected_si = idx
+            expected_sis.add(expected_si)
+            native = native_by_si.get(expected_si)
+            if native is not None:
+                native_lookup[idx] = native
+
+        native_extra = sum(1 for si in native_by_si if si not in expected_sis)
 
     # ── 2. Load golden record (primary: managed_record, fallback: managed_fact) ──
     golden_by_index: dict[int, dict] = {}
@@ -530,37 +564,14 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
         )
 
     # ── 3. Cross-verify per-method (strict comparison) ──
-    # Both managed and AOT execute identical subject code (Subject_N() /
-    # CustomEntrySubject_N()). Managed uses _exitCode (C# static field) and
-    # AOT uses native EH (CHAOS_EH_TRY/CATCH), but both measure the same
-    # thing: "did the method complete without an unhandled exception?"
-    #
-    # We iterate only golden indices (the subject methods we care about).
-    # To match golden methodIndex N against the correct native entry, we map
-    # through si (subject slot index). The kMethodTable interleaves entries:
-    #   even si = CustomEntrySubject_N, odd si = Subject_N
-    # Golden record carries isCustom flag — auto methods (Subject_N) sit at
-    # odd si = 2*N+1, custom methods (CustomEntrySubject_N) at even si = 2*N.
-    #
-    # Fallback path (managed_fact golden-values.json, no isCustom field):
-    # use old matching by simple index (si should equal contract methodIndex
-    # since all methods in the table are subject entries).
+    # Both managed and AOT execute identical subject code. Uses native_lookup
+    # (built above — contractIndex-based or si-based depending on format).
     mismatches = []
     matched = 0
     golden_not_in_native = 0
-    expected_sis: set[int] = set()
 
     for idx in sorted(golden_by_index.keys()):
-        golden = golden_by_index[idx]
-        is_custom = golden.get("isCustom")
-        if is_custom is not None:
-            # Managed_record golden path: map via slot interleave
-            expected_si = 2 * idx + (1 if not is_custom else 0)
-        else:
-            # Fallback path (managed_fact): simple index match
-            expected_si = idx
-        expected_sis.add(expected_si)
-        native = native_by_si.get(expected_si)
+        native = native_lookup.get(idx)
 
         if native is None:
             golden_not_in_native += 1
@@ -585,7 +596,6 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             })
 
     total_checked = len(golden_by_index) - golden_not_in_native
-    native_extra = sum(1 for si in native_by_si if si not in expected_sis)
 
     if mismatches:
         status = "failed"
