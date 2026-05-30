@@ -1,0 +1,10 @@
+{
+  "family": "reflection-member-complete",
+  "assembly": "System.Private.CoreLib",
+  "freeze_timestamp": "2026-05-30T20:01:09",
+  "files": {
+    "managed\\subjects\\ReflectionMemberCompleteSubjects.cs": "4aabc1e8db006fe21635fad0467a622b86cffbc6161b80b7f98e72ea410fe301",
+    "managed\\subjects\\ReflectionMemberCompleteSubjects.Custom.cs": "b9e91c2b1cc35f17a3f923407a3eb02290bbfa37529eb24608c53702fdc6371c",
+    "handwritten\\ReflectionMemberCompleteSubjects.Custom.cs": "b9e91c2b1cc35f17a3f923407a3eb02290bbfa37529eb24608c53702fdc6371c"
+  }
+}

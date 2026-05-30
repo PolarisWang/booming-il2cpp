@@ -141,12 +141,7 @@ public sealed class PatchDataExtractor
         uint aotCoreIrCount = 0;
         if (aotCoreIrPath != null && File.Exists(aotCoreIrPath))
         {
-            (aotCoreIrSection, aotCoreIrCount) = BuildAotCoreIrSection(aotCoreIrPath, methodDefs, mr);
-        }
-        else if (genuineIrPath != null && File.Exists(genuineIrPath))
-        {
-            // Fallback: use the genuine aot-core-ir.json (all methods) when no trimmed one is available.
-            (aotCoreIrSection, aotCoreIrCount) = BuildAotCoreIrSection(genuineIrPath, methodDefs, mr);
+            (aotCoreIrSection, aotCoreIrCount) = BuildAotCoreIrSection(aotCoreIrPath, methodDefs, mr, mode);
         }
 
         // Build binary heaps
@@ -699,7 +694,8 @@ public sealed class PatchDataExtractor
     private static (byte[] Section, uint Count) BuildAotCoreIrSection(
         string aotCoreIrPath,
         List<PatchMethodDefEntry> methodDefs,
-        MetadataReader mr)
+        MetadataReader mr,
+        CodegenMode mode = CodegenMode.Aot)
     {
         // ── Build AotCoreIr lookup: "MethodName" → JSON ──
         // The genuine aot-core-ir.json uses TypeName=NativeEntry but the
@@ -763,7 +759,7 @@ public sealed class PatchDataExtractor
 
             if (!string.IsNullOrEmpty(key))
             {
-                if (IsSubjectMethodName(key) && !mode.HasFlag(CodegenMode.TestMode))
+                if (IsSubjectMethodName(key) && (mode & CodegenMode.TestMode) == 0)
                 {
                     // Subject_N / CustomEntrySubject_N / CustomEntryMethod methods are
                     // test entry points whose patch implementation returns a sentinel

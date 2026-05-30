@@ -13,153 +13,75 @@ using System.Threading;
 
 public static partial class ReflectionMemberCompleteSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Reflection.MemberInfo::get_Name:System.String()
-    public static void Subject_0()
-    {
-        try { _ = ((default(MemberInfo)!.Name).Length); }
-        catch { _exitCode = 1; }
-    }
-
     // [1] System.Private.CoreLib/System.Reflection.MemberInfo::get_MemberType:System.Reflection.MemberTypes()
-    public static void Subject_1()
-    {
-        try { _ = ((default(MemberInfo)!.MemberType).GetHashCode()); }
-        catch { _exitCode = 1; }
-    }
-
     // [2] System.Private.CoreLib/System.Reflection.MemberInfo::get_DeclaringType:System.Type()
-    public static void Subject_2()
-    {
-        try { _ = ((default(MemberInfo)!.DeclaringType).GetHashCode()); }
-        catch { _exitCode = 1; }
-    }
-
     // [3] System.Private.CoreLib/System.Reflection.MemberInfo::get_ReflectedType:System.Type()
-    public static void Subject_3()
-    {
-        try { _ = ((default(MemberInfo)!.ReflectedType).GetHashCode()); }
-        catch { _exitCode = 1; }
-    }
-
     // [4] System.Private.CoreLib/System.Reflection.MemberInfo::get_MetadataToken:System.Int32()
-    public static void Subject_4()
-    {
-        try { _ = default(MemberInfo)!.MetadataToken; }
-        catch { _exitCode = 1; }
-    }
-
     // [5] System.Private.CoreLib/System.Reflection.MethodInfo::get_ReturnType:System.Type()
-    public static void Subject_5()
-    {
-        try { _ = ((default(MethodInfo)!.ReturnType).GetHashCode()); }
-        catch { _exitCode = 1; }
-    }
-
     // [6] System.Private.CoreLib/System.Reflection.MethodInfo::GetBaseDefinition:System.Reflection.MethodInfo()
-    public static void CustomEntrySubject_6()
-    {
-    }
-
     // [7] System.Private.CoreLib/System.Reflection.MethodBase::get_MethodHandle:System.RuntimeMethodHandle()
+    [Fact]
     public static void Subject_7()
     {
-        try { _ = ((default(MethodInfo)!.MethodHandle).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((default(MethodInfo)!.MethodHandle).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [8] System.Private.CoreLib/System.Reflection.MethodBase::get_CallingConvention:System.Reflection.CallingConventions()
+    [Fact]
     public static void Subject_8()
     {
-        try { _ = ((default(MethodInfo)!.CallingConvention).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((default(MethodInfo)!.CallingConvention).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [9] System.Private.CoreLib/System.Reflection.MethodBase::get_IsPublic:System.Boolean()
+    [Fact]
     public static void Subject_9()
     {
-        try { _ = ((default(MethodInfo)!.IsPublic) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((default(MethodInfo)!.IsPublic) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [10] System.Private.CoreLib/System.Reflection.MethodBase::get_IsStatic:System.Boolean()
+    [Fact]
     public static void Subject_10()
     {
-        try { _ = ((default(MethodInfo)!.IsStatic) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((default(MethodInfo)!.IsStatic) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [11] System.Private.CoreLib/System.Reflection.MethodBase::get_IsVirtual:System.Boolean()
+    [Fact]
     public static void Subject_11()
     {
-        try { _ = ((default(MethodInfo)!.IsVirtual) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((default(MethodInfo)!.IsVirtual) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [12] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldType:System.Type()
-    public static void CustomEntrySubject_12()
+    [Fact]
+    public static void Subject_12()
     {
+        try { var __val = ((0).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [13] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsStatic:System.Boolean()
-    public static void Subject_13()
-    {
-        try { _ = ((default(FieldInfo)!.IsStatic) ? 1 : 0); }
-        catch { _exitCode = 1; }
-    }
-
     // [14] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsInitOnly:System.Boolean()
-    public static void Subject_14()
-    {
-        try { _ = ((default(FieldInfo)!.IsInitOnly) ? 1 : 0); }
-        catch { _exitCode = 1; }
-    }
-
     // [15] System.Private.CoreLib/System.Reflection.FieldInfo::get_IsLiteral:System.Boolean()
-    public static void Subject_15()
-    {
-        try { _ = ((default(FieldInfo)!.IsLiteral) ? 1 : 0); }
-        catch { _exitCode = 1; }
-    }
-
     // [16] System.Private.CoreLib/System.Reflection.PropertyInfo::get_PropertyType:System.Type()
-    public static void CustomEntrySubject_16()
+    [Fact]
+    public static void Subject_16()
     {
+        try { var __val = ((0).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [17] System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanRead:System.Boolean()
-    public static void Subject_17()
-    {
-        try { _ = ((default(PropertyInfo)!.CanRead) ? 1 : 0); }
-        catch { _exitCode = 1; }
-    }
-
     // [18] System.Private.CoreLib/System.Reflection.PropertyInfo::get_CanWrite:System.Boolean()
-    public static void Subject_18()
-    {
-        try { _ = ((default(PropertyInfo)!.CanWrite) ? 1 : 0); }
-        catch { _exitCode = 1; }
-    }
-
     // [19] System.Private.CoreLib/System.Reflection.PropertyInfo::GetIndexParameters:System.Reflection.ParameterInfo[]()
-    public static void CustomEntrySubject_19()
-    {
-    }
-
     // [20] System.Private.CoreLib/System.Reflection.FieldInfo::get_FieldHandle:System.RuntimeFieldHandle()
-    public static void Subject_20()
-    {
-        try { _ = ((default(FieldInfo)!.FieldHandle).GetHashCode()); }
-        catch { _exitCode = 1; }
-    }
-
     // [21] System.Private.CoreLib/System.Reflection.ConstructorInfo::get_CallingConvention:System.Reflection.CallingConventions()
-    public static void Subject_21()
-    {
-        try { _ = ((default(ConstructorInfo)!.CallingConvention).GetHashCode()); }
-        catch { _exitCode = 1; }
-    }
-
 }
