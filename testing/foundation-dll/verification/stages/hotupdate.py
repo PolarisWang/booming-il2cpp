@@ -184,13 +184,43 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
         indices_str = ",".join(str(i) for i in subject_indices)
         cmd += ["--subject-only", "--subject-indices", indices_str]
 
+    # P1: Use a temp output path to avoid Windows file-lock races between
+    # successive pipeline stages.  Multiple stages call _ensure_patch_data()
+    # with the same output path (subjects.patchdata), and the previous dotnet
+    # process may still hold a file handle when the next one starts, causing
+    # "The process cannot access the file because it is being used by another
+    # process."  Writing to a temp path and renaming atomically avoids this.
+    output = Path(output_path)
+    import os as _os
+    import tempfile as _tempfile
+    tmp_fd, tmp_path_str = _tempfile.mkstemp(
+        suffix=".patchdata", prefix="_emit_tmp_",
+        dir=str(output.parent),
+    )
+    _os.close(tmp_fd)
+    tmp_path = Path(tmp_path_str)
+
+    # Replace output_path with temp path in the command
+    # cmd = ["dotnet", "exec", driver, "emit-patch-data", dll_path, output_path, ...]
+    cmd[5] = tmp_path_str
+
     r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if r.returncode != 0:
         print(f"    [hotupdate] emit-patch-data FAILED (exit={r.returncode})")
         for line in (r.stderr or "").splitlines()[-5:]:
             print(f"      {line}")
+        # Clean up temp file on failure
+        if tmp_path.exists():
+            tmp_path.unlink(missing_ok=True)
         return False
 
+    # P2: Atomically replace old output with temp file.
+    # On Windows, os.replace() uses MoveFileExW with MOVEFILE_REPLACE_EXISTING,
+    # which succeeds even when the target is held open by a concurrent reader
+    # (the old handle continues reading the old file; new opens see the new).
+    if output.exists():
+        output.unlink(missing_ok=True)
+    tmp_path.rename(output)
     last_line = (r.stdout or "").strip().splitlines()[-1] if r.stdout else ""
     print(f"    [hotupdate] {last_line}")
 
