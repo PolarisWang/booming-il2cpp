@@ -98,6 +98,9 @@ struct PatchMethod {
     mutable std::atomic<uint32_t> call_count{0};
     static constexpr uint32_t kHotCallThreshold = 100;
 
+    // ── DHE: keep-native flag (Phase 3)
+    bool keep_native = false;
+
     // ── Lazy IR lowering state ───────────────────────────────────────────
     // 0=uninitialized, 1=lowering-in-progress, 2=done.
     // CAS-based to avoid global mutex contention across threads.
@@ -117,12 +120,12 @@ struct PatchMethod {
     static constexpr uint32_t kJitted       = 6;
     static constexpr uint32_t kJitSkip        = 7;  // permanent: JIT codegen failed too many times
 
-    // Tier 1→2 transition threshold (matches kHotCallThreshold).
-    static constexpr uint32_t kStackInterpretedThreshold = 100;
+    // Tier 1→2 transition threshold.
+    static constexpr uint32_t kStackInterpretedThreshold = 10;
     // Tier 2→3 transition threshold (requires profile data).
-    static constexpr uint32_t kRegisterMappedThreshold = 500;
+    static constexpr uint32_t kRegisterMappedThreshold = 50;
     // Tier 3→4 transition threshold (hot → very hot, native codegen).
-    static constexpr uint32_t kJitThreshold = 2000;
+    static constexpr uint32_t kJitThreshold = 200;
 };
 
 // ── CallSiteProfile (PGO data collected during T2 execution) ──────────────

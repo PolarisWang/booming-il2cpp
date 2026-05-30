@@ -744,6 +744,23 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         registry.SetPatchedBySlot(module_id, slot, true, &patch_method);
         HOTPATCH_DIAG("DIAG[APFM]: SetPatchedBySlot OK\n");
 
+        // ── Phase 3: DHE — re-set keep-native flag for unchanged methods ──
+        // SetPatchedBySlot unconditionally clears kHotpatchKeepNative. For
+        // methods whose IL hasn't changed (keep_native=true), restore the flag
+        // so ChaosDispatchMethod skips interpreter entry for AOT-speed execution.
+        if (patch_method.keep_native) {
+            auto* entry = registry.GetDispatchEntryBySlot(module_id, slot);
+            if (entry != nullptr) {
+#if defined(_MSC_VER)
+                _InterlockedOr(reinterpret_cast<volatile long*>(&entry->flags),
+                               static_cast<long>(kHotpatchKeepNative));
+#else
+                __sync_fetch_and_or(reinterpret_cast<volatile uint32_t*>(&entry->flags),
+                                    static_cast<uint32_t>(kHotpatchKeepNative));
+#endif
+            }
+        }
+
         ++patched_count;
     }
 
@@ -762,6 +779,26 @@ PatchContext* ApplyPatchFromMemory(const void* data, size_t size,
         }
     }
     HOTPATCH_DIAG("DIAG[APFM]: returning ctx method_count=%u\n", static_cast<unsigned>(ctx->method_count));
+
+    // ── Phase 1.2: Pre-lower all methods + reapply inlining ──────────────
+    // Pre-warm all patched methods by triggering IR lowering eagerly
+    // (eliminates the ~50-200μs first-call latency spike).
+    for (uint32_t i = 0; i < patched_count; ++i) {
+        PatchMethodLowerIR(reinterpret_cast<uintptr_t>(&ctx->methods[i]));
+    }
+
+    // Populate inlining map so InlineLeafCallees can find callee IR.
+    for (uint32_t i = 0; i < patched_count; ++i) {
+        auto& pm = ctx->methods[i];
+        if (pm.token != 0) {
+            cache->AddInliningTarget(pm.module_id, pm.token, &pm);
+        }
+    }
+
+    // Reapply inlining now that all callee IR is available.
+    if (patched_count > 0) {
+        ReapplyInlining(ctx->methods, patched_count);
+    }
 
     // Bump patch generation for CallVirt MIC cache invalidation.
     g_patch_generation.fetch_add(1, std::memory_order_relaxed);

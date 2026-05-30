@@ -573,7 +573,11 @@ def _sync_runtime_libs_to_sdk(codegen_dir: Path, repo_root: Path | None = None) 
             print(f"    [sync_libs] fallback to presets: {presets_dir}")
             for pd in sorted(presets_dir.iterdir()):
                 if pd.name.startswith("windows-x64-reference") and pd.is_dir():
-                    found = list(pd.rglob("*.lib"))
+                    lib_dir = pd / "lib"
+                    if not lib_dir.is_dir():
+                        print(f"    [sync_libs] no lib/ dir in {pd.name}")
+                        continue
+                    found = list(lib_dir.glob("*.lib"))
                     print(f"    [sync_libs] found {len(found)} libs in {pd.name}")
                     for lib_file in sorted(found):
                         for d in sorted(codegen_dir.iterdir()):

@@ -7,7 +7,7 @@
 //   1. Module lifecycle tracking — register/unregister PatchMethod arrays
 //      so that DestroyPatchContext can safely free tier data.
 //   2. Background T2→T3 optimization queue — methods that exceed
-//      kRegisterMappedThreshold (500 calls) are enqueued for background promotion
+//      kRegisterMappedThreshold (50 calls) are enqueued for background promotion
 //      instead of blocking the calling thread.
 //   3. Memory budget enforcement — 64 MB cap on optimized IR.
 //   4. Statistics for diagnostics/benchmarking.
@@ -128,14 +128,14 @@ public:
     std::atomic<uint32_t> optimization_queue_depth{0};
 
     // ── Adaptive thresholds (Phase 4) ──────────────────────────────────────
-    // T1→T2 threshold: fixed at 100 (T1→T2 is fast and cheap, no reason to delay).
-    static uint32_t GetAdaptiveT1Threshold() noexcept { return 100; }
+    // T1→T2 threshold: fixed at 10 (aggressive promotion for hotupdate perf).
+    static uint32_t GetAdaptiveT1Threshold() noexcept { return 10; }
 
     // T2→T3 threshold: scales with total_optimized_methods to prevent
     // background queue overload when many methods go hot simultaneously.
-    //   base = 500
-    //   scale = min(total_optimized / 10 * 25, 500)
-    //   effective range = 500..1000
+    //   base = 50
+    //   scale = min(total_optimized / 10 * 5, 50)
+    //   effective range = 50..100
     uint32_t GetAdaptiveT2Threshold() const noexcept;
 
 private:

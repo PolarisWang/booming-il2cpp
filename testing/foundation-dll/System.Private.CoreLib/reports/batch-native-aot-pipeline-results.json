@@ -6,7 +6,7 @@
   "failed": 0,
   "results": [
     {
-      "family": "boxing-unboxing-casts",
+      "family": "convert-char",
       "config_tier": "CHECK",
       "steps": {
         "build_subjects": "OK",
@@ -14,10 +14,10 @@
         "build_entry_exe": "OK"
       },
       "success": true,
-      "methodCount": 11,
+      "methodCount": 18,
       "entryPointSubjectId": "",
-      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\boxing-unboxing-casts\\managed\\subjects\\build-output\\BoxingUnboxingCastsSubjects.dll"
+      "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\convert-char\\managed\\subjects\\build-output\\ConvertCharSubjects.dll"
     }
   ],
-  "timestamp": "2026-05-27T23:06:15"
+  "timestamp": "2026-05-30T12:32:40"
 }

@@ -40,6 +40,7 @@ from verification.stages.hotupdate import (
     run_hotupdate_jit_fact,
     run_hotupdate_jit_bench,
     run_patch_cross_verify,
+    run_multi_patch_hotupdate,
 )
 from verification.stages.cleanup import run_cleanup
 
@@ -90,6 +91,7 @@ REQUIRED_STAGES_STRICT = {
     "audit", "asm_compare", "microbench", "benchmark",
     "hotupdate", "hotupdate_aot_benchmark",
     "hotupdate_jit_fact", "hotupdate_jit_benchmark",
+    "multi_patch_hotupdate",
 }
 
 
