@@ -215,12 +215,12 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
         return False
 
     # P2: Atomically replace old output with temp file.
-    # On Windows, os.replace() uses MoveFileExW with MOVEFILE_REPLACE_EXISTING,
-    # which succeeds even when the target is held open by a concurrent reader
-    # (the old handle continues reading the old file; new opens see the new).
-    if output.exists():
-        output.unlink(missing_ok=True)
-    tmp_path.rename(output)
+    # On Windows, Path.rename() fails with ERROR_ALREADY_EXISTS (183) when the
+    # target exists.  os.replace() calls MoveFileExW with
+    # MOVEFILE_REPLACE_EXISTING, which succeeds even when the old target is
+    # held open by a concurrent reader (the old handle continues reading the
+    # old file; new opens see the new file).
+    _os.replace(str(tmp_path), str(output))
     last_line = (r.stdout or "").strip().splitlines()[-1] if r.stdout else ""
     print(f"    [hotupdate] {last_line}")
 
