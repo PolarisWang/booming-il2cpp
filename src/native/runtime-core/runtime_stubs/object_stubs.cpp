@@ -9,6 +9,7 @@
 
 #include "gc/gc_layout.h"
 #include "gc/gc_helpers.h"
+#include "core/gc_alloc_stubs.h"
 
 namespace chaos::il2cpp::runtime_core {
 extern "C" {
@@ -80,7 +81,7 @@ CHAOS_IL2CPP_INTPTR ChaosObjectMemberwiseClone(CHAOS_IL2CPP_INTPTR obj) noexcept
         return obj;
     }
 
-    auto* clone = GcAllocate(layout->instance_size);
+    auto* clone = GcAllocateFast(layout->instance_size);
     if (clone == nullptr) return 0;
 
     std::memcpy(clone, src, layout->instance_size);
