@@ -116,11 +116,11 @@ class VerificationPipeline:
         ParallelGroup([
             ("fact", run_fact, "Fact AOT"),
             ("fact_jit", run_fact_jit, "Fact JIT"),
+            ("audit", run_audit, "Mechanism + Principle Audit"),
+            ("asm_compare", run_asm_compare, "AsmCompare (JIT vs AOT)"),
+            ("microbench", run_microbench, "Microbench (Interpreter)"),
+            ("benchmark", run_benchmark, "Benchmark (3-way)"),
         ]),
-        ("audit", run_audit, "Mechanism + Principle Audit"),
-        ("asm_compare", run_asm_compare, "AsmCompare (JIT vs AOT)"),
-        ("microbench", run_microbench, "Microbench (Interpreter)"),
-        ("benchmark", run_benchmark, "Benchmark (3-way)"),
         ("hotupdate", run_hotupdate, "HotUpdate AOT Fact"),
         ParallelGroup([
             ("hotupdate_aot_benchmark", run_hotupdate_aot_bench, "HotUpdate AOT Bench"),
@@ -263,7 +263,7 @@ class VerificationPipeline:
                 elapsed = format_duration(time.perf_counter() - overall_start)
                 print(f"\n  [{elapsed}] >>> Parallel group ({len(group.stages)} stages)")
                 futures = {}
-                with ThreadPoolExecutor(max_workers=min(len(group.stages), 4)) as pool:
+                with ThreadPoolExecutor(max_workers=min(len(group.stages), 8)) as pool:
                     for name, runner, label in group.stages:
                         global_idx += 1
                         fut = pool.submit(run_single_stage, name, runner, label, global_idx)
