@@ -295,12 +295,12 @@ static int RunHotupdateMode() {
         CHAOS_EH_END
     }
     bool all_semantic = (semantic_passed > 0 && semantic_changed_count > 0);
-    printf(
-        "{\"passedMethods\":%d,\"failedMethods\":0,"
-        "\"totalMethods\":%d,\"allSemantic\":%s,\"allRevert\":%s,"
-        "\"semanticChangedCount\":%d}\n",
-        semantic_passed, kCount, all_semantic ? "true" : "false",
-        all_revert ? "true" : "false", semantic_changed_count);
+    printf("\"passedMethods\":%d,", semantic_passed);
+    printf("\"failedMethods\":0,");
+    printf("\"totalMethods\":%d,", kCount);
+    printf("\"allSemantic\":%s,", all_semantic ? "true" : "false");
+    printf("\"allRevert\":%s,", all_revert ? "true" : "false");
+    printf("\"semanticChangedCount\":%d}\n", semantic_changed_count);
     std::fflush(stdout);
     return 0;
 }
