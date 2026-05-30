@@ -33,5 +33,25 @@
   "reviewBundleRequired": true,
   "customEntryIndices": [
     6
+  ],
+  "benchmarkMethodIndices": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10
+  ],
+  "hotupdateMethodIndices": [
+    2,
+    3,
+    4,
+    5,
+    7,
+    8,
+    9,
+    10
   ]
 }

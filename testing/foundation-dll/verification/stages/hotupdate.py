@@ -157,7 +157,8 @@ def _build_patch_dll(ctx: FamilyContext, patch_subdir: str = "patch") -> Path | 
 
 def _run_emit_patch_data(dll_path: str, output_path: str,
                          aot_core_ir_path: str | None = None,
-                         direction: str = "forward") -> bool:
+                         direction: str = "forward",
+                         subject_indices: list[int] | None = None) -> bool:
     """Run chaos-il2cpp emit-patch-data CLI on a patch DLL.
 
     Args:
@@ -165,6 +166,8 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
         output_path: Output path for the .patchdata file.
         aot_core_ir_path: Optional path to aot-core-ir.json for baseline IR comparison.
         direction: Hot-update direction ("forward" or "bidirectional").
+        subject_indices: If provided and non-empty, pass --subject-only and
+                         --subject-indices to emit only subject methods' patch entries.
 
     Returns:
         True if the patch data was emitted and validated successfully.
@@ -177,6 +180,9 @@ def _run_emit_patch_data(dll_path: str, output_path: str,
         cmd += ["--aot-core-ir", aot_core_ir_path]
     if direction:
         cmd += ["--direction", direction]
+    if subject_indices:
+        indices_str = ",".join(str(i) for i in subject_indices)
+        cmd += ["--subject-only", "--subject-indices", indices_str]
 
     r = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
     if r.returncode != 0:
@@ -299,7 +305,8 @@ def _detect_host_class(native_dir: Path) -> str:
 
 
 def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch",
-                       direction: str = "forward") -> bool:
+                       direction: str = "forward",
+                       hotupdate_indices: list[int] | None = None) -> bool:
     """Build patch DLL -> emit-patch-data -> generate runtime-patchdata.cpp -> rebuild entry.exe.
 
     Args:
@@ -349,7 +356,9 @@ def _ensure_patch_data(ctx: FamilyContext, patch_subdir: str = "patch",
     dll_str = str(dll)
     pd_str = str(patchdata)
     aot_str = str(aot_core_ir) if aot_core_ir is not None else None
-    ok = _run_emit_patch_data(dll_str, pd_str, aot_core_ir_path=aot_str, direction=direction)
+    ok = _run_emit_patch_data(dll_str, pd_str, aot_core_ir_path=aot_str,
+                               direction=direction,
+                               subject_indices=hotupdate_indices)
     if not ok or not patchdata.exists():
         print("  [hotupdate] _ensure_patch_data: emit-patch-data failed")
         return False
@@ -549,6 +558,22 @@ def _load_method_count(ctx: FamilyContext) -> int:
         return 0
 
 
+def _load_hotupdate_indices(ctx: FamilyContext) -> list[int]:
+    """Load hotupdateMethodIndices from contract. Fall back to all subjects."""
+    contract_path = ctx.contract_path
+    if not contract_path.exists():
+        return []
+    try:
+        c = json.loads(contract_path.read_text(encoding="utf-8"))
+        indices = c.get("hotupdateMethodIndices")
+        if indices is not None and len(indices) > 0:
+            return sorted(indices)
+        mids = c.get("methodSubjectIds", [])
+        return list(range(len(mids)))
+    except Exception:
+        return []
+
+
 def _run_hotupdate_fact(exe_path: Path) -> dict[str, Any]:
     """Run entry.exe --hotupdate and parse JSON result.
 
@@ -699,7 +724,8 @@ def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    if not _ensure_patch_data(ctx):
+    hu_indices = _load_hotupdate_indices(ctx)
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
         return StageResult(
             stage="hotupdate", status="failed",
             summary="patch data build failed",
@@ -730,6 +756,7 @@ def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
         print(f"  [hotupdate] Result: {status} ({passed}/{total})")
 
         details = dict(result)
+        details["hotupdateMethodIndices"] = hu_indices
         if patch_microbench:
             details["patchMicrobench"] = patch_microbench
 
@@ -765,11 +792,11 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    method_count = _load_method_count(ctx)
-    if method_count == 0:
+    hu_indices = _load_hotupdate_indices(ctx)
+    if not hu_indices:
         return StageResult(
             stage="hotupdate_aot_benchmark", status="skipped",
-            summary="no methods in contract",
+            summary="no hotupdate methods in contract",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
@@ -780,7 +807,7 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    if not _ensure_patch_data(ctx):
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
         return StageResult(
             stage="hotupdate_aot_benchmark", status="failed",
             summary="patch data build failed",
@@ -788,22 +815,22 @@ def run_hotupdate_aot_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
         )
 
     try:
-        print(f"  [hotupdate_aot_bench] Running {method_count} methods...")
+        print(f"  [hotupdate_aot_bench] Running {len(hu_indices)} methods...")
         results: list[dict[str, Any]] = []
         ok_count = 0
-        for i in range(method_count):
+        for i in hu_indices:
             r = _run_hotupdate_benchmark(exe_path, i)
             results.append(r)
             if "error" not in r:
                 ok_count += 1
 
         status = "passed" if ok_count > 0 else "failed"
-        print(f"  [hotupdate_aot_bench] Result: {status} ({ok_count}/{method_count})")
+        print(f"  [hotupdate_aot_bench] Result: {status} ({ok_count}/{len(hu_indices)})")
 
         return StageResult(
             stage="hotupdate_aot_benchmark", status=status,
-            summary=f"{status} ({ok_count}/{method_count})",
-            details={"results": results, "okCount": ok_count, "totalMethods": method_count},
+            summary=f"{status} ({ok_count}/{len(hu_indices)})",
+            details={"results": results, "okCount": ok_count, "totalMethods": len(hu_indices)},
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
     finally:
@@ -864,10 +891,13 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
 
         print(f"  [hotupdate_jit_fact] Result: {status} ({passed}/{total})")
 
+        details = dict(result)
+        details["hotupdateMethodIndices"] = _load_hotupdate_indices(ctx)
+
         return StageResult(
             stage="hotupdate_jit_fact", status=status,
             summary=f"{status} ({passed}/{total})",
-            details=result,
+            details=details,
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
     finally:
@@ -886,30 +916,30 @@ def run_hotupdate_jit_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    method_count = _load_method_count(ctx)
-    if method_count == 0:
+    hu_indices = _load_hotupdate_indices(ctx)
+    if not hu_indices:
         return StageResult(
             stage="hotupdate_jit_benchmark", status="skipped",
-            summary="no methods in contract",
+            summary="no hotupdate methods in contract",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
-    print(f"  [hotupdate_jit_bench] Running {method_count} methods...")
+    print(f"  [hotupdate_jit_bench] Running {len(hu_indices)} methods...")
     results: list[dict[str, Any]] = []
     ok_count = 0
-    for i in range(method_count):
+    for i in hu_indices:
         r = _run_hotupdate_benchmark(exe_path, i)
         results.append(r)
         if "error" not in r:
             ok_count += 1
 
     status = "passed" if ok_count > 0 else "failed"
-    print(f"  [hotupdate_jit_bench] Result: {status} ({ok_count}/{method_count})")
+    print(f"  [hotupdate_jit_bench] Result: {status} ({ok_count}/{len(hu_indices)})")
 
     return StageResult(
         stage="hotupdate_jit_benchmark", status=status,
-        summary=f"{status} ({ok_count}/{method_count})",
-        details={"results": results, "okCount": ok_count, "totalMethods": method_count},
+        summary=f"{status} ({ok_count}/{len(hu_indices)})",
+        details={"results": results, "okCount": ok_count, "totalMethods": len(hu_indices)},
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
 
@@ -963,7 +993,8 @@ def run_patch_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -
         )
 
     # Rebuild entry.exe with patchdata (hotupdate stage's finally cleans up)
-    if not _ensure_patch_data(ctx):
+    hu_indices = _load_hotupdate_indices(ctx)
+    if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices):
         return StageResult(
             stage="patch_cross_verify", status="failed",
             summary="_ensure_patch_data failed — cannot run --hotupdate",
@@ -1072,6 +1103,7 @@ def run_patch_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -
             "mismatches": mismatches,
             "totalChecked": total_checked,
             "skipped": skipped,
+            "hotupdateMethodIndices": hu_indices,
         },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
@@ -1141,6 +1173,7 @@ def run_multi_patch_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]
         return False
 
     # Round 1: first patch
+    hu_indices = _load_hotupdate_indices(ctx)
     if has_first:
         print(f"  [multi_patch] === Round 1: patch_first ===")
         # Write sentinel first to ensure clean state
@@ -1148,7 +1181,7 @@ def run_multi_patch_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]
         _rebuild_entry_with_patchdata()
 
         # Build and apply first patch
-        ok = _ensure_patch_data(ctx, patch_subdir="patch_first")
+        ok = _ensure_patch_data(ctx, patch_subdir="patch_first", hotupdate_indices=hu_indices)
         if not ok:
             round_results.append({"round": 1, "patch": "patch_first", "status": "failed",
                                   "error": "_ensure_patch_data failed"})
@@ -1166,7 +1199,7 @@ def run_multi_patch_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]
         _write_sentinel_patchdata(ctx.native_dir)
         _rebuild_entry_with_patchdata()
 
-        ok = _ensure_patch_data(ctx, patch_subdir="patch_second")
+        ok = _ensure_patch_data(ctx, patch_subdir="patch_second", hotupdate_indices=hu_indices)
         if not ok:
             round_results.append({"round": 2, "patch": "patch_second", "status": "failed",
                                   "error": "_ensure_patch_data failed"})

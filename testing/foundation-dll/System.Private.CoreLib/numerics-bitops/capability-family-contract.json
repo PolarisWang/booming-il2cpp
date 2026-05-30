@@ -14,5 +14,25 @@
     "System.Private.CoreLib/System.Numerics.BitOperations::TrailingZeroCount:System.Int32(System.UInt32)",
     "System.Private.CoreLib/System.Math::DivRem:System.Int32(System.Int32,System.Int32,System.Int32&)"
   ],
-  "customEntryIndices": []
+  "customEntryIndices": [],
+  "benchmarkMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "hotupdateMethodIndices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ]
 }

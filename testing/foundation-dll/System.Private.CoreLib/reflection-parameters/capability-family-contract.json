@@ -40,5 +40,11 @@
     6,
     7,
     8
+  ],
+  "benchmarkMethodIndices": [
+    9
+  ],
+  "hotupdateMethodIndices": [
+    9
   ]
 }

@@ -508,6 +508,8 @@ public sealed class DriverEntry
         var outputPath = args[1];
         string? aotCoreIrPath = null;
         string? direction = null;
+        var subjectOnly = false;
+        string? subjectIndices = null;
 
         for (var i = 2; i < args.Length; i++)
         {
@@ -515,6 +517,10 @@ public sealed class DriverEntry
                 aotCoreIrPath = args[++i];
             else if (args[i] == "--direction" && i + 1 < args.Length)
                 direction = args[++i];
+            else if (args[i] == "--subject-only")
+                subjectOnly = true;
+            else if (args[i] == "--subject-indices" && i + 1 < args.Length)
+                subjectIndices = args[++i];
         }
 
         if (!File.Exists(dllPath))
@@ -528,7 +534,8 @@ public sealed class DriverEntry
         try
         {
             Directory.CreateDirectory(Path.GetDirectoryName(outputPath)!);
-            new PatchDataExtractor().Extract(dllPath, outputPath, aotCoreIrPath, direction: direction);
+            new PatchDataExtractor().Extract(dllPath, outputPath, aotCoreIrPath,
+                direction: direction, subjectOnly: subjectOnly, subjectIndices: subjectIndices);
             var fileSize = new FileInfo(outputPath).Length;
             Console.WriteLine($"Patch data written: {outputPath} ({fileSize} bytes)");
             return 0;
