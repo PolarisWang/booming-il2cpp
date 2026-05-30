@@ -1,4 +1,5 @@
 // entry_direct.cpp — InterpreterEntryDirect hot path
+#include <cstdio>
 #include <tier_manager.h>
 
 #include "vtable_registry.h"
@@ -454,6 +455,12 @@ void InterpreterEntryDirect(
     static std::once_flag g_interp_scanner_once;
     std::call_once(g_interp_scanner_once, RegisterInterpFrameScanner);
     if (method_key == 0) return;
+    {
+        auto* pm = reinterpret_cast<PatchMethod*>(method_key);
+        fprintf(stderr, "[DBG-PM] token=0x%x reg_ir=%p cached_ir=%p cached_reg=%p\n",
+                pm->token, (const void*)pm->reg_ir_data,
+                pm->cached_ir, pm->cached_reg_method);
+    }
 
     CHAOS_IL2CPP_ASSERT(threading::tls_this_thread != nullptr
         && "InterpreterEntryDirect: thread TLS not attached");
@@ -472,7 +479,24 @@ void InterpreterEntryDirect(
     if (ir == nullptr) return;
     if (ir->instructions.empty()) return;
     const auto instr_count = ir->instructions.size();
-    if (instr_count == 1) return;
+    // ── Binary IR fallback: placeholder cached_ir ─────────────────────
+    // When the patch method uses pre-allocated register IR (v2+ binary
+    // path), cached_ir contains a 1-instr placeholder while the real
+    // body lives in cached_reg_method.  Route to tier upgrade and then
+    // RegisterExecute (Step B) instead of returning — ensures real
+    // method body is executed, ret_buf is written, and call_count is
+    // incremented for tier promotion.
+    //
+    // Genuine 1-instr methods (e.g. empty void stubs with no reg_method)
+    // still return fast at this point.
+    if (instr_count == 1) {
+        auto* reg_m = static_cast<interpreter::RegisterMethod*>(
+            patch_method->cached_reg_method);
+        if (reg_m == nullptr || reg_m->instructions.empty()) {
+            return;
+        }
+        // Fall through to tier upgrade + RegisterExecute below.
+    }
 
     // ── Step 1c: 2-instr fast path ───────────────────────────────────
     if (instr_count == 2 && ir->seh_clauses.empty()) {
@@ -675,10 +699,8 @@ void InterpreterEntryDirect(
     // ── Step B: RegisterExecute path (Layer R) ─────────────────────────
     auto* reg_method = static_cast<interpreter::RegisterMethod*>(
         patch_method->cached_reg_method);
-    CHAOS_IL2CPP_LOG_DEBUG_M("diag", "Step-B: reg_method=%p", (void*)reg_method);
-    if (reg_method != nullptr &&
-        instr_count > 2 && interpreter::CanRegisterExecute(*reg_method)) {
-        CHAOS_IL2CPP_LOG_DEBUG("diag", "Step-B: can_reg=true");
+    bool can_reg = reg_method != nullptr && !reg_method->instructions.empty();
+    if (can_reg) {
         GetTierCounters().step_reg.fetch_add(1, std::memory_order_relaxed);
         CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.RegisterExecute");
         if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
@@ -702,7 +724,6 @@ void InterpreterEntryDirect(
         rf.prev_frame = threading::GetCurrentInterpFrame();
         threading::SetCurrentInterpFrame(&rf);
 
-        CHAOS_IL2CPP_LOG_DEBUG_M("diag", "Step-B: before instructions.data() reg_method=%p", (void*)reg_method);
         const interpreter::RegisterInstruction* exec_instrs = reg_method->instructions.data();
         uint32_t exec_instr_count = static_cast<uint32_t>(reg_method->instructions.size());
 
@@ -749,9 +770,10 @@ void InterpreterEntryDirect(
         }
     }
 
-    CHAOS_IL2CPP_LOG_DEBUG("diag", "Step C (FastExecute) entering");
     // ── Step C: FastExecute path (SEH fully supported) ──────────────
-    if (instr_count > 2) {
+    // Step C: only available for v1 JSON path (cached_ir has real instructions).
+    // v2 binary path's cached_ir is a 1-instr placeholder; skip.
+    if (patch_method->reg_ir_data == nullptr && !ir->instructions.empty()) {
         GetTierCounters().step_fast.fetch_add(1, std::memory_order_relaxed);
         CHAOS_IL2CPP_PROFILE_SCOPE("InterpreterEntryDirect.FastExecute");
         if (!patch_method->cached_sig_valid) CacheSignature(patch_method);
