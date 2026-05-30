@@ -127,9 +127,9 @@ struct PatchMethod {
     // Tier 1→2 transition threshold.
     static constexpr uint32_t kStackInterpretedThreshold = 10;
     // Tier 2→3 transition threshold (requires profile data).
-    static constexpr uint32_t kRegisterMappedThreshold = 50;
+    static constexpr uint32_t kRegisterMappedThreshold = 10;
     // Tier 3→4 transition threshold (hot → very hot, native codegen).
-    static constexpr uint32_t kJitThreshold = 200;
+    static constexpr uint32_t kJitThreshold = 50;
 };
 
 // ── CallSiteProfile (PGO data collected during T2 execution) ──────────────

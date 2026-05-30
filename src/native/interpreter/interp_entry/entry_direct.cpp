@@ -708,7 +708,7 @@ void InterpreterEntryDirect(
 
         // T3 optimized instruction swap (when available from background promotion)
         {   auto tier = patch_method->tier_state.load(std::memory_order_acquire);
-            if (tier == PatchMethod::kRegisterMapped && patch_method->cached_optimized_reg_method != nullptr) {
+            if (tier >= PatchMethod::kRegisterMapped && patch_method->cached_optimized_reg_method != nullptr) {
                 auto* opt = static_cast<interpreter::RegisterMethod*>(patch_method->cached_optimized_reg_method);
                 exec_instrs = opt->instructions.data();
                 exec_instr_count = static_cast<uint32_t>(opt->instructions.size());
