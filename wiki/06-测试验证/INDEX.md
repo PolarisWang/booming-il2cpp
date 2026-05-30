@@ -45,6 +45,7 @@
 | [`新增测试接入规范.md`](./新增测试接入规范.md) | 新增测试接入 | 说明如何在 subject source 中声明测试，并接入 collection-driven 主线 |
 | [`ASan-内存错误检测指南.md`](./ASan-%E5%86%85%E5%AD%98%E9%94%99%E8%AF%AF%E6%A3%80%E6%B5%8B%E6%8C%87%E5%8D%97.md) | ASan 内存检测 | 说明 ASan 的构建配置、运行方式、假阳性处理策略与常见问题 |
 | [`../04-工具与集成/scriban-usage-and-codegen-rules.md`](../04-%E5%B7%A5%E5%85%B7%E4%B8%8E%E9%9B%86%E6%88%90/scriban-usage-and-codegen-rules.md) | Scriban 使用与 codegen 规范 | 说明 IL2CPP / Python codegen 默认优先 Scriban，以及能力不足时的扩展顺序 |
+| [`GoldenRecord验证机制.md`](./GoldenRecord验证机制.md) | Golden Record 跨验证 | 说明 managed_record 阶段的 golden record 生成与 cross_verify 严格对比机制 |
 | [`subject-public-entry-and-reporting-cutover.md`](./subject-public-entry-and-reporting-cutover.md) | subject 统一入口 | 说明 subject 入口、public command 和结果落点 |
 | [`subject-perf-and-smoke-baselines.md`](./subject-perf-and-smoke-baselines.md) | perf / smoke baseline | 说明 subject 的 perf baseline、smoke 验证与报告路径 |
 | [`foundation-dll-verification-chain-authenticity.md`](./foundation-dll-verification-chain-authenticity.md) | 验证链路真实性分析 | 追溯 foundation-dll AOT/JIT fact/benchmark 整条链路，确认是否真实测试对应代码路径 |
@@ -82,6 +83,7 @@
 
 ## 最近更新
 
+- `2026-05-30`：新增 [`GoldenRecord验证机制.md`](./GoldenRecord验证机制.md)，说明 managed_record 阶段与 golden record 跨验证方案。新增 verification pipeline stage `managed_record`（Managed Subject Record Golden），增强 `cross_verify` 为严格 pass/fail 对比。
 - `2026-05-29`：新增统一 CLI 入口 `verification/__main__.py`，支持 `--slug`/`--batch`/`--ci`/`--managed-bench` 四种模式。删除 `testing/scripts/robust-batch.py` 和 `run-batch-verification.py`（功能由 `--skip` 参数覆盖）。修复 `ci_smoke.py` 路径 bug。更新 [`foundation-dll-verification-chain-authenticity.md`](./foundation-dll-verification-chain-authenticity.md) 关键文件路径表。
 - `2026-05-24`：新增 [`foundation-dll-verification-chain-authenticity.md`](./foundation-dll-verification-chain-authenticity.md)，追溯 AOT/JIT 验证链路真实性，确认 codegen→构建→运行时整条链路为真实 il2cpp/JIT 路径；JitEntry 新接口迁移状态已确认完成。
 - `2026-05-20`：Native C++ 单元测试全部迁移到 GoogleTest（`testing/` 目录，28 个 ctest 目标）。更新 [`测试方法清单.md`](./测试方法清单.md)，新增第九章 Native C++ 单元测试。
