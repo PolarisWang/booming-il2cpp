@@ -468,29 +468,23 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
     # CustomEntrySubject_N()). Managed uses _exitCode (C# static field) and
     # AOT uses native EH (CHAOS_EH_TRY/CATCH), but both measure the same
     # thing: "did the method complete without an unhandled exception?"
+    #
+    # We iterate only golden indices (the subject methods we care about).
+    # Extra native entries (e.g. probe/helper methods from codegen) are
+    # counted separately as informational and excluded from comparison.
     mismatches = []
     matched = 0
     golden_not_in_native = 0
-    native_not_in_golden = 0
 
-    # Merge all method indices across both sources
-    all_indices = sorted(set(golden_by_index.keys()) | set(native_by_index.keys()))
-
-    for idx in all_indices:
-        golden = golden_by_index.get(idx)
+    for idx in sorted(golden_by_index.keys()):
+        golden = golden_by_index[idx]
         native = native_by_index.get(idx)
 
-        if golden is None:
-            native_not_in_golden += 1
-            continue
         if native is None:
             golden_not_in_native += 1
             continue
 
-        # Determine managed pass/fail from golden record
         managed_passed = golden.get("passed", False)
-
-        # Determine native pass/fail from fact-json
         native_passed = native.get("passed", False)
 
         if managed_passed == native_passed:
@@ -508,13 +502,17 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
                 "exceptionMessage": golden.get("exceptionMessage"),
             })
 
-    total_checked = len(all_indices) - native_not_in_golden - golden_not_in_native
+    total_checked = len(golden_by_index) - golden_not_in_native
+    native_extra = sum(1 for idx in native_by_index if idx not in golden_by_index)
+
     if mismatches:
         status = "failed"
         summary = (
             f"{len(mismatches)}/{total_checked} mismatches, {matched} matched, "
-            f"{golden_not_in_native} golden-only, {native_not_in_golden} native-only"
+            f"{golden_not_in_native} golden-only"
         )
+        if native_extra:
+            summary += f" (+{native_extra} native entries excluded from comparison)"
         print(f"  [cross_verify] FAILURE SUMMARY:")
         for m in mismatches:
             print(f"    [{m['methodIndex']}] {m['subjectName']}: "
@@ -525,9 +523,13 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
     else:
         status = "passed"
         summary = (
-            f"All {matched}/{total_checked} methods match "
-            f"({golden_not_in_native} golden-only, {native_not_in_golden} native-only)"
+            f"All {matched}/{total_checked} methods match"
+            f"{', ' + str(golden_not_in_native) + ' golden-only' if golden_not_in_native else ''}"
         )
+        if native_extra and not golden_not_in_native:
+            summary += f" ({native_extra} native entries excluded)"
+        elif native_extra:
+            summary += f" (+{native_extra} native entries excluded)"
 
     print(f"  [cross_verify] Result: {status} ({summary})")
 
@@ -539,7 +541,7 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             "mismatches": mismatches,
             "totalChecked": total_checked,
             "goldenOnly": golden_not_in_native,
-            "nativeOnly": native_not_in_golden,
+            "nativeExtra": native_extra,
         },
         duration_ms=int((time.perf_counter() - start) * 1000),
     )
