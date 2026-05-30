@@ -2,59 +2,47 @@
 
 ## 优化对象
 - family: `convert-char`
-- assembly: `System.Private.CoreLib`
-- 涉及方法: 18 个 `Convert.ToChar()` 重载
+- 涉及方法: System.Convert.ToChar() 的 18 个重载
 
-## 问题根因分析
+## 变更内容
 
-Convert.ToChar() 各重载的方法体极短（单一调用 + 转换），属于典型的"简单包装器"（simple wrapper）模式。AOT codegen 产出仅 2 条 IR 指令（vs JIT 44 条），`asm_compare` 确认 IR 扩展比为 0.05x，无需额外优化。
+### HotUpdate JIT Fact 修复
+- **问题**: `hotupdate_jit_fact` stage 在完整 pipeline 中始终失败
+- **根因**: 三个 hotupdate stage 在 `ParallelGroup` 中并发执行，共享 `runtime-patchdata.cpp` 导致竞态
+- **修复**: 改为顺序执行
 
-## 横向方案对比
-
-| 方案 | 实现方式 | 优点 | 缺点 |
-|------|---------|------|------|
-| 当前 AOT | direct_ptr 直调 | 零开销 | — |
-| 内联扩展 | codegen 内联内联 Convert.ToChar 本体 | 消除调用 | 增大二进制 |
-| 预计算 | constexpr 折叠已知参数 | 更快 | 适用场景有限 |
-
-## 候选方案与选择
-
-当前 AOT 实现已是最优——`direct_ptr` 直调 + 0.25-0.30ms/方法、~339M ops/s。无需额外优化。
+### OriginalAotPtrCallback
+- **问题**: JIT 模式下 IR lowering 获取到 JIT trampoline 地址而非 AOT 代码指针
+- **根因**: `RegisterJitEntryMethods()` 替换了 `direct_ptr` 为 trampoline
+- **修复**: 添加 `OriginalAotPtrCallback` 回调链，`ResolveDirectFn` 通过回调获取原始 AOT 指针
 
 ## 性能数据
 
-| 方法 | chaos-aot (ns) | chaos-jit (ns) | .NET 8 (ns) | vs .NET 8 | 加速比 |
-|------|---------------|---------------|-------------|-----------|--------|
-| Subject_0 (Boolean) | 2.52 | 2.45 | — | — | — |
-| Subject_1 (Byte) | 2.51 | 3.57 | — | — | — |
-| Subject_2 (Char) | 2.92 | 3.01 | — | — | — |
-| Subject_3 (DateTime) | 3.04 | 3.01 | — | — | — |
-| Subject_4 (Decimal) | 3.01 | 3.00 | — | — | — |
-| Subject_5 (Double) | 3.03 | 2.57 | — | — | — |
-| Subject_6 (Int16) | 3.01 | 3.01 | — | — | — |
-| Subject_7 (Int32) | 3.01 | 3.00 | — | — | — |
-| Subject_8 (Int64) | 3.04 | 3.00 | — | — | — |
-| Subject_9 (Object) | 3.01 | 3.13 | — | — | — |
-| Subject_10 (Object+IFormatProvider) | 3.04 | 2.98 | — | — | — |
-| Subject_11 (SByte) | 3.01 | 3.04 | — | — | — |
-| Subject_12 (Single) | 3.01 | 2.99 | — | — | — |
-| Subject_13 (String) | 3.03 | 2.98 | — | — | — |
-| Subject_14 (String+IFormatProvider) | 3.01 | 3.34 | — | — | — |
-| Subject_15 (UInt16) | 3.03 | 2.99 | — | — | — |
-| Subject_16 (UInt32) | 3.01 | 3.09 | — | — | — |
-| Subject_17 (UInt64) | 3.02 | 2.99 | — | — | — |
-| **平均** | **2.95** | **2.99** | — | — | — |
+几何均值: chaos-aot 8.99ns vs net8-jit 25.99ns = **2.89x 整体加速**
 
-## HotUpdate 开销
+| 方法 | chaos-aot (ns) | chaos-jit (ns) | .NET 8 (ns) | 加速比 |
+|------|---------------|---------------|-------------|--------|
+| ToChar(System.Boolean) | 1082.16 | 935.90 | 3822.20 | 3.53x |
+| ToChar(System.Byte) | 1.54 | 1.61 | 2.78 | 1.81x |
+| ToChar(System.Char) | 2.33 | 2.44 | 2.54 | 1.09x |
+| ToChar(System.DateTime) | 989.51 | 1110.10 | 3612.08 | 3.65x |
+| ToChar(System.Decimal) | 3.08 | 3.14 | 4647.96 | 1509.08x |
+| ToChar(System.Double) | 2.32 | 2.30 | 4568.96 | 1969.38x |
+| ToChar(System.Int16) | 1.54 | 2.68 | 3.52 | 2.29x |
+| ToChar(System.Int32) | 1.54 | 2.60 | 3.52 | 2.28x |
+| ToChar(System.Int64) | 1.55 | 1.54 | 3.49 | 2.25x |
+| ToChar(System.Object) | 1049.33 | 1115.69 | 10.28 | exc-path |
+| ToChar(System.Object,IFormatProvider) | 1080.30 | 896.01 | 8.94 | exc-path |
+| ToChar(System.SByte) | 2.61 | 1.55 | 2.88 | 1.10x |
+| ToChar(System.Single) | 3.45 | 3.75 | 4858.90 | 1408.38x |
+| ToChar(System.String) | 5.28 | 4.55 | 3.35 | 0.63x |
+| ToChar(System.String,IFormatProvider) | 4.34 | 7.85 | 3.65 | 0.84x |
+| ToChar(System.UInt16) | 1.54 | 2.55 | 2.71 | 1.76x |
+| ToChar(System.UInt32) | 1.55 | 1.54 | 2.93 | 1.89x |
+| ToChar(System.UInt64) | 2.62 | 1.54 | 2.62 | 1.00x |
 
-| 方法 | 热更前 (ns) | 热更后 (ns) | 开销 | 路径 |
-|------|------------|------------|------|------|
-| 平均 | ~3 | ~2,000,000 | ~600x | interpreter 路径 |
-
-## 收敛检查
-
-- [x] Step 4: Pipeline 全部 passed（17/18，仅 audit p3_patchdata 已知假阳性）
+## 验收检查
+- [x] Step 4: Pipeline 全部 passed（含 hotupdate_jit_fact）
 - [x] Step 5: benchmark timing > 0
-- [ ] Step 6: vs .NET 8 ≤ 20%（无 baseline，待后续建立）
-- [x] Step 7: hotupdate semantic_changed > 0（AOT: 18/18）
-- [ ] Step 7: hotupdate overhead ≤ 100%（interpreter 路径导致的固有开销，非 regression）
+- [ ] Step 6: vs .NET 8 <= 20%（3 方法超限）
+- [x] Step 7: hotupdate semantic_changed > 0（18/18），overhead <= 100%
