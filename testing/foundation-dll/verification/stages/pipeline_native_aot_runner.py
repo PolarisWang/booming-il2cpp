@@ -1311,7 +1311,7 @@ def build_entry_executable(family_slug: str, *, verification: Path | None = None
         # the parallel AOT build.  Ninja is also used in codegen.py's parallel
         # AOT+JIT section — the VS environment is captured via vcvarsall.bat.
         cmake_args += ["-G", "Ninja",
-                       f"-DCMAKE_BUILD_TYPE={config_tier.lower()}",
+                       "-DCMAKE_BUILD_TYPE=Release",
                        f"-DCHAOS_IL2CPP_CONFIG_TIER={config_tier.lower()}",
                        "-DCHAOS_IL2CPP_JIT_MODE=ON",
                        # Match Visual Studio generator's default runtime library.

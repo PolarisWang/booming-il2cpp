@@ -153,13 +153,20 @@ inline int32_t ChaosDispatchMethodBench(
     return 0;
 }
 
-// ── ChaosDispatchMethodBenchDirect (bypass JIT trampoline) ──────────────
-// Like ChaosDispatchMethodBench but always uses the original AOT function
-// pointer, bypassing both kDefaultArgThunks and the JIT precode trampoline.
-// Uses GetOriginalAotPtrCallback() to resolve the original AOT pointer
-// even when entry.direct_ptr has been replaced by JIT registration.
-// Safe for Subject_N benchmark calls: directly calls the AOT-compiled body.
-// Falls back to entry.direct_ptr if no callback is registered (AOT mode).
+// ── ChaosDispatchMethodBenchDirect (no thunks, no callback lookup) ─────────
+// Fast single-method dispatch for benchmark use.  Always calls entry.direct_ptr
+// (the current function body — AOT body for keep-native Subject_N, or
+// JIT-compiled body for JIT-registered methods).
+//
+// Does NOT use kDefaultArgThunks (avoids indirect-call overhead) and does NOT
+// call GetOriginalAotPtrCallback (avoids toolchain/link dependency).  For JIT
+// benchmarks this is correct: we want to measure JIT-compiled code performance
+// via direct_ptr, not bypass it.
+//
+// Dispatch priority:
+//   1. Subject_N (kHotpatchKeepNative) → entry.direct_ptr directly
+//   2. Hotpatch active (not keep-native) → InterpreterEntryDirectFast
+//   3. Otherwise → entry.direct_ptr (may be JIT-trampoline or AOT body)
 inline int32_t ChaosDispatchMethodBenchDirect(
     const HotpatchEntryV0* entries,
     int32_t count,
@@ -168,17 +175,25 @@ inline int32_t ChaosDispatchMethodBenchDirect(
     if (index < 0 || index >= count) return -1;
     auto& entry = entries[index];
 
-    if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
+    // Subject_N methods with kHotpatchKeepNative: direct_ptr is the original
+    // AOT body.  Single flag check + direct call — ~3ns, matching AOT mode.
+    if (CHAOS_IL2CPP_LIKELY(HotpatchShouldKeepNative(entry))) {
+        if (entry.direct_ptr) {
+            reinterpret_cast<void(*)()>(entry.direct_ptr)();
+        }
+        return 0;
+    }
+
+    if (HotpatchIsActive(entry)) {
         InterpreterEntryDirectFast(entry.method_key);
         return 0;
     }
 
-    auto* orig_ptr = GetOriginalAotPtrCallback()
-        ? GetOriginalAotPtrCallback()(&entry)
-        : nullptr;
-    auto* fn_ptr = orig_ptr ? orig_ptr : entry.direct_ptr;
-    if (fn_ptr) {
-        reinterpret_cast<void(*)()>(fn_ptr)();
+    // Default: call entry.direct_ptr.  In AOT mode this is the AOT body;
+    // in JIT mode this may be the JIT-trampoline (for the first call) or
+    // JIT-compiled code (after compilation).  This is what benchmarks want.
+    if (entry.direct_ptr) {
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
     }
     return 0;
 }
