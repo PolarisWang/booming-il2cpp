@@ -303,6 +303,12 @@ static thread_local CHAOS_IL2CPP_INTPTR s_enum_str_names[64];
 static thread_local CHAOS_IL2CPP_INT64 s_enum_tostring_cache_value = -1;
 static thread_local CHAOS_IL2CPP_INTPTR s_enum_tostring_cache_name = 0;
 
+// Single-entry cache for non-enum fallback formatting (is_g/is_d/is_x paths).
+// Covers types like byte where no enum fields exist — format is pure decimal/hex.
+static thread_local CHAOS_IL2CPP_INT64 s_enum_fallback_cache_val = -1;
+static thread_local bool s_enum_fallback_cache_is_x = false;
+static thread_local CHAOS_IL2CPP_INTPTR s_enum_fallback_cache_result = 0;
+
 // ── Process-level enum field name string cache ────────────────────
 // All threads share this cache so each type's field name strings are
 // allocated only once process-wide (in POH, so they never move).
@@ -1541,12 +1547,20 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormatRaw(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_IN
     }
 
     if (is_g || is_d) {
+        // Single-entry cache for repeated calls with the same value
+        if (s_enum_fallback_cache_val == val && !s_enum_fallback_cache_is_x
+            && s_enum_fallback_cache_result != 0) {
+            return s_enum_fallback_cache_result;
+        }
         char buf[32];
         char* const buf_end = buf + sizeof(buf);
         char* start = format_i64_dec(buf_end, val);
         const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
         write_string_data(result, start, len);
+        s_enum_fallback_cache_val = val;
+        s_enum_fallback_cache_is_x = false;
+        s_enum_fallback_cache_result = result;
         return result;
     }
 
@@ -1560,12 +1574,22 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormatRaw(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_IN
                 } else break;
             }
         }
+        // Single-entry cache: only when width == 0 (no precision qualifier)
+        if (width == 0 && s_enum_fallback_cache_val == val && s_enum_fallback_cache_is_x
+            && s_enum_fallback_cache_result != 0) {
+            return s_enum_fallback_cache_result;
+        }
         char buf[32];
         char* const buf_end = buf + sizeof(buf);
         char* start = format_u64_hex(buf_end, static_cast<uint64_t>(val), width);
         const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
         write_string_data(result, start, len);
+        if (width == 0) {
+            s_enum_fallback_cache_val = val;
+            s_enum_fallback_cache_is_x = true;
+            s_enum_fallback_cache_result = result;
+        }
         return result;
     }
 

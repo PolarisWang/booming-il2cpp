@@ -14,6 +14,7 @@ if (args.Length < 2)
 string dllPath = "";
 string typeFullName = "";
 string? outputDir = null;
+bool listTypes = false;
 
 for (int i = 0; i < args.Length; i++)
 {
@@ -28,6 +29,9 @@ for (int i = 0; i < args.Length; i++)
         case "--output" when i + 1 < args.Length:
             outputDir = args[++i];
             break;
+        case "--list-types":
+            listTypes = true;
+            break;
     }
 }
 
@@ -37,9 +41,20 @@ if (string.IsNullOrEmpty(dllPath) || !File.Exists(dllPath))
     return 1;
 }
 
+// ── List types mode ──
+if (listTypes)
+{
+    var typeLister = new DllScanner();
+    var types = typeLister.ListPublicTypes(dllPath);
+    Console.WriteLine($"Public types in {Path.GetFileName(dllPath)}:");
+    foreach (var (name, methodCount) in types)
+        Console.WriteLine($"  {name} ({methodCount} methods)");
+    return 0;
+}
+
 if (string.IsNullOrEmpty(typeFullName))
 {
-    Console.Error.WriteLine("ERROR: --type is required");
+    Console.Error.WriteLine("ERROR: --type is required (or use --list-types)");
     return 1;
 }
 

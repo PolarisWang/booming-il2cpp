@@ -672,7 +672,7 @@
         },
         "chaos-jit": {
           "runtime": "chaos-jit",
-          "mean_ns": 10.14,
+          "mean_ns": 3.79,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",
@@ -719,7 +719,7 @@
         },
         "chaos-jit": {
           "runtime": "chaos-jit",
-          "mean_ns": 7.85,
+          "mean_ns": 3.77,
           "stddev_ns": 0.0,
           "samples": 100000,
           "status": "ok",

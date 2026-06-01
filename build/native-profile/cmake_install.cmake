@@ -89,6 +89,11 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for the subdirectory.
+  include("D:/agent/booming-il2cpp/build/native-profile/src/native/codegen/cmake_install.cmake")
+endif()
+
+if(NOT CMAKE_INSTALL_LOCAL_ONLY)
+  # Include the install script for the subdirectory.
   include("D:/agent/booming-il2cpp/build/native-profile/src/native/benchmark-host/cmake_install.cmake")
 endif()
 

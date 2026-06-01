@@ -48,12 +48,13 @@ public sealed class DllScanner
             BindingFlags.Public | BindingFlags.Static |
             BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
-            // Skip property accessors
+            // Skip property accessors and operator overloads
             if (rawMethod.IsSpecialName && (
                     rawMethod.Name.StartsWith("get_") ||
                     rawMethod.Name.StartsWith("set_") ||
                     rawMethod.Name.StartsWith("add_") ||
-                    rawMethod.Name.StartsWith("remove_")))
+                    rawMethod.Name.StartsWith("remove_") ||
+                    rawMethod.Name.StartsWith("op_")))
                 continue;
 
             // Skip object inherited methods
@@ -61,6 +62,13 @@ public sealed class DllScanner
                 continue;
 
             var method = rawMethod;
+
+            // Skip methods with ref struct parameters or return types
+            if (HasRefStructParameter(method) || IsRefStructReturn(method))
+            {
+                skippedMethods.Add($"{method.Name} (ref struct)");
+                continue;
+            }
 
             // Try to concretize generic methods
             if (method.ContainsGenericParameters)
@@ -76,6 +84,23 @@ public sealed class DllScanner
                 }
             }
 
+            // Skip methods that still have unresolved generic type parameters in their
+            // signature (e.g. static interface methods from generic math interfaces)
+            if (HasUnresolvedGenericParameters(method))
+            {
+                skippedMethods.Add($"{method.Name} (unresolved generics)");
+                continue;
+            }
+
+            // Capture generic type args for concretized generic methods
+            IReadOnlyList<string>? genericTypeArgs = null;
+            if (method.IsGenericMethod && !method.ContainsGenericParameters)
+            {
+                genericTypeArgs = method.GetGenericArguments()
+                    .Select(a => GetTypeName(a))
+                    .ToList();
+            }
+
             var paramList = method.GetParameters();
             var parameters = new List<MethodParameter>();
             var hasRefParam = false;
@@ -87,7 +112,8 @@ public sealed class DllScanner
                 if (isRef) hasRefParam = true;
 
                 var paramTypeName = GetTypeName(p.ParameterType);
-                parameters.Add(new MethodParameter(p.Name ?? $"p{parameters.Count}", paramTypeName, isOut, isRef));
+                var isRefStruct = IsRefStructType(p.ParameterType);
+                parameters.Add(new MethodParameter(p.Name ?? $"p{parameters.Count}", paramTypeName, isOut, isRef, isRefStruct));
             }
 
             var returnType = method.ReturnType;
@@ -100,11 +126,42 @@ public sealed class DllScanner
                 method.IsStatic,
                 isVoid,
                 hasRefParam,
-                parameters
+                parameters,
+                genericTypeArgs
             ));
         }
 
         return new DllScanResult(assemblyName, typeFullName, signatures, skippedMethods, tfm);
+    }
+
+    /// <summary>
+    /// List all public types in the assembly with their public method counts.
+    /// </summary>
+    public List<(string FullName, int MethodCount)> ListPublicTypes(string dllPath)
+    {
+        var fullPath = Path.GetFullPath(dllPath);
+        var probeDirs = GetProbeDirectories(fullPath);
+        var resolver = new AssemblyResolver(probeDirs);
+        using var mlc = new MetadataLoadContext(resolver, "System.Private.CoreLib");
+        var assembly = mlc.LoadFromAssemblyPath(fullPath);
+
+        var result = new List<(string, int)>();
+        foreach (var t in assembly.GetTypes().OrderBy(t => t.FullName))
+        {
+            if (!t.IsPublic && !t.IsNestedPublic) continue;
+            if (t.IsEnum) continue;
+
+            var count = t.GetMethods(
+                BindingFlags.Public | BindingFlags.Static |
+                BindingFlags.Instance | BindingFlags.DeclaredOnly)
+                .Count(m => m.Name is not ("get_" or "set_" or "add_" or "remove_")
+                    && !m.Name.StartsWith("op_")
+                    && !m.IsSpecialName);
+
+            if (count > 0)
+                result.Add((t.FullName ?? t.Name, count));
+        }
+        return result;
     }
 
     /// <summary>
@@ -144,7 +201,7 @@ public sealed class DllScanner
                     }
                     else
                     {
-                        concreteTypes[i] = constraints[0];
+                        concreteTypes[i] = LoadTypeInContext(mlc, "System.Int32")!;
                     }
                 }
                 else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
@@ -183,6 +240,18 @@ public sealed class DllScanner
 
     private static string GetTypeName(Type type)
     {
+        // Generic parameter (e.g. T, TOther) — use base type constraint or object
+        if (type.IsGenericParameter)
+        {
+            var constraints = type.GetGenericParameterConstraints();
+            if (constraints.Length > 0 &&
+                constraints[0].FullName is { } cn &&
+                cn != "System.ValueType" &&
+                cn != "System.Enum")
+                return cn;
+            return "System.Object";
+        }
+
         if (type.IsGenericType)
         {
             var args = string.Join(",", type.GetGenericArguments().Select(GetTypeName));
@@ -193,7 +262,19 @@ public sealed class DllScanner
         }
 
         var fullName = type.FullName;
-        if (fullName is not null) return fullName;
+        if (fullName is not null)
+        {
+            // CLR nested type: produce C# parent-qualified name, e.g.
+            // "System.Text.StringBuilder+AppendInterpolatedStringHandler"
+            // → "StringBuilder.AppendInterpolatedStringHandler"
+            if (fullName.Contains('+') && type.DeclaringType is not null)
+            {
+                var parentCSharp = CSharpSerializer.MapToCSharpType(
+                    type.DeclaringType.FullName ?? type.DeclaringType.Name);
+                return $"{parentCSharp}.{type.Name}";
+            }
+            return fullName;
+        }
 
         // MetadataLoadContext sometimes loses FullName for constructed generics.
         // Fall back to Name (e.g. "Span`1") and fill arity with byte.
@@ -208,6 +289,76 @@ public sealed class DllScanner
             return $"{name[..bt]}<{args}>";
         }
         return name;
+    }
+
+    /// <summary>
+    /// Check if a method has any ref struct parameters (e.g. ReadOnlySpan&lt;char&gt;).
+    /// </summary>
+    private static bool HasRefStructParameter(MethodInfo method)
+    {
+        try
+        {
+            return method.GetParameters().Any(p => IsRefStructType(p.ParameterType));
+        }
+        catch { return false; }
+    }
+
+    /// <summary>
+    /// Check if a method returns a ref struct type.
+    /// </summary>
+    private static bool IsRefStructReturn(MethodInfo method)
+    {
+        try { return IsRefStructType(method.ReturnType); }
+        catch { return false; }
+    }
+
+    /// <summary>
+    /// Check if a type is a ref struct (IsByRefLike).
+    /// For MLC's limited detection of CLR nested ref structs (e.g.
+    /// StringBuilder+AppendInterpolatedStringHandler), falls back to
+    /// heuristic: value type whose FullName contains '+' (CLR nested marker).
+    /// </summary>
+    private static bool IsRefStructType(Type type)
+    {
+        // Direct IsByRefLike check
+        if (type.IsByRefLike) return true;
+
+        // For ByRef-wrapped types (ref/out parameters)
+        if (type.IsByRef && type.GetElementType() is { } elementType)
+        {
+            if (elementType.IsByRefLike) return true;
+            // Heuristic: CLR nested struct is likely a ref struct
+            if (elementType.IsValueType && elementType.FullName?.Contains('+') == true)
+                return true;
+            return false;
+        }
+
+        // Heuristic: CLR nested value type that isn't a normal struct
+        if (type.IsValueType && type.FullName?.Contains('+') == true)
+            return true;
+
+        return false;
+    }
+
+    /// <summary>
+    /// Check if a method still has unresolved generic parameters in its signature
+    /// after concretization (e.g. interface-level type params from generic math interfaces
+    /// like INumberBase&lt;TOther&gt; where TOther comes from the interface, not the method).
+    /// </summary>
+    private static bool HasUnresolvedGenericParameters(MethodInfo method)
+    {
+        try
+        {
+            if (method.ReturnType.ContainsGenericParameters)
+                return true;
+            if (method.GetParameters().Any(p => p.ParameterType.ContainsGenericParameters))
+                return true;
+            return false;
+        }
+        catch
+        {
+            return true; // conservative: skip if we can't inspect
+        }
     }
 
     private static string[] GetProbeDirectories(string dllPath)

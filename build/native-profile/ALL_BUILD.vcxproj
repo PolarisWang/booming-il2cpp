@@ -205,10 +205,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
       <Project>{32ED7573-772C-30CC-9C55-B017B4DD3D93}</Project>
       <Name>chaos_capacity_stress_test</Name>
     </ProjectReference>
-    <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\tests\contracts\native\runtime-core\chaos_codegen_native_test.vcxproj">
-      <Project>{7122ABD4-97D0-3A21-8E16-C60CFC19874D}</Project>
-      <Name>chaos_codegen_native_test</Name>
-    </ProjectReference>
     <ProjectReference Include="D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj">
       <Project>{460B9BC1-4142-39FE-9D1B-8D912FEB5EB0}</Project>
       <Name>chaos_common</Name>
