@@ -10,6 +10,13 @@ public sealed class CSharpExpressionBuilder
 {
     private readonly CSharpSerializer _serializer;
 
+    // Types with well-known static factory instances (abstract or no default ctor)
+    private static readonly Dictionary<string, string> KnownInstances = new(StringComparer.Ordinal)
+    {
+        ["System.Text.Encoding"] = "Encoding.UTF8",
+        ["System.String"] = "string.Empty",
+    };
+
     public CSharpExpressionBuilder(CSharpSerializer serializer)
     {
         _serializer = serializer;
@@ -19,6 +26,7 @@ public sealed class CSharpExpressionBuilder
     /// Get the best instance expression for a type.
     /// Static types → type name (static call prefix).
     /// Types with default ctor → "new TypeName()".
+    /// Known factory instances → e.g. "Encoding.UTF8".
     /// Fallback → "default(TypeName)!".
     /// </summary>
     public string GetInstanceExpression(string typeFullName, bool isStatic)
@@ -28,11 +36,15 @@ public sealed class CSharpExpressionBuilder
 
         var csType = CSharpSerializer.MapToCSharpType(typeFullName);
 
+        // Check known factory instances
+        if (KnownInstances.TryGetValue(typeFullName, out var knownExpr))
+            return knownExpr;
+
         // Try to find a default constructor via runtime reflection
         try
         {
             var type = Type.GetType(typeFullName, throwOnError: false);
-            if (type is not null && !type.IsAbstract && !type.IsInterface && !type.IsSealed)
+            if (type is not null && !type.IsAbstract && !type.IsInterface)
             {
                 var ctors = type.GetConstructors(BindingFlags.Public | BindingFlags.Instance);
                 if (ctors.Any(c => c.GetParameters().Length == 0))

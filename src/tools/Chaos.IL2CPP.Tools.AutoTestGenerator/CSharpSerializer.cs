@@ -304,6 +304,17 @@ public sealed class CSharpSerializer
             _ => shortName
         };
 
+        // For nested types: if the prefix before last dot is a parent type
+        // (no dot in prefix = single segment = type name, not namespace),
+        // preserve the parent qualification. E.g. "StringBuilder.AppendInterpolatedStringHandler"
+        // → keep "StringBuilder." prefix since it's a type, not a namespace.
+        if (lastDot >= 0 && mapped == shortName)
+        {
+            var prefix = bareTypeName[..lastDot];
+            if (!prefix.Contains('.'))
+                mapped = $"{prefix}.{mapped}";
+        }
+
         if (genericStart >= 0)
         {
             var argsPart = typeName[(genericStart + 1)..^1]; // strip <>

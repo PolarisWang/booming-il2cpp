@@ -57,6 +57,7 @@ public sealed class ProjectWriter
            $"    <TargetFramework>{targetFramework}</TargetFramework>\n" +
             "    <ImplicitUsings>enable</ImplicitUsings>\n" +
             "    <Nullable>enable</Nullable>\n" +
+            "    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>\n" +
             "  </PropertyGroup>\n" +
             "  <ItemGroup>\n" +
            $"    <ProjectReference Include=\"{sdkDir}\" />\n" +

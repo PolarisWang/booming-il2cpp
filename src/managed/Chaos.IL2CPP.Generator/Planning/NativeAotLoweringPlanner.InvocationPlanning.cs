@@ -1638,6 +1638,10 @@ public sealed partial class NativeAotLoweringPlanner
         string enumTypeId = typeProducer.TargetReference.SubjectId;
         if (!enumFieldsByType.TryGetValue(enumTypeId, out var fields))
         {
+            // Not an enum type (e.g. byte, int): only Format with D/X/G can be baked,
+            // since the result is a numeric string independent of enum field names.
+            if (isFormat && paramCount == 3)
+                TryRecordNonEnumFormatBake(callee, methodId, callIndex, instrs, typeProducerIdx, producers, depth, enumTypeId);
             return;
         }
 
@@ -2078,5 +2082,55 @@ public sealed partial class NativeAotLoweringPlanner
     private bool IsTypeAotKnown(string subjectId)
     {
         return _allEmittedTypeSubjectIds?.Contains(subjectId) == true;
+    }
+
+    /// <summary>
+    /// For Enum.Format with a non-enum type (e.g. byte) and a known constant value
+    /// with D/X/G format specifier, bake the result string at compile time.
+    /// Non-enum types are not in _enumTypeSubjectIds so the main bake logic skips them.
+    /// </summary>
+    private void TryRecordNonEnumFormatBake(
+        string callee, string? methodId, int callIndex,
+        IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
+        int typeProducerIdx, int[] producers, int depth, string enumTypeId)
+    {
+        // Stack layout before Format(Type, Object, String) call:
+        //   stack[depth-3] = Type   (0th arg)
+        //   stack[depth-2] = Object (1st arg = value)
+        //   stack[depth-1] = String (2nd arg = format)
+        int valueArgDepthNonEnum = depth - 2;
+        int formatArgDepth = depth - 1;
+        if (valueArgDepthNonEnum < 0 || formatArgDepth < 0) return;
+
+        int valueProdIdx = producers[valueArgDepthNonEnum];
+        int formatProdIdx = producers[formatArgDepth];
+        if (valueProdIdx < 0 || formatProdIdx < 0) return;
+
+        var valueProducer = instrs[valueProdIdx];
+        var formatProducer = instrs[formatProdIdx];
+        if ((valueProducer.Op is not "ldc.i4" and not "ldc.i8") || formatProducer.Op != "ldstr")
+            return;
+
+        string formatStr = formatProducer.Operand?.ToString() ?? "G";
+        long constValue = Convert.ToInt64(valueProducer.Operand);
+        string? result = null;
+
+        if (string.Equals(formatStr, "G", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(formatStr, "D", StringComparison.OrdinalIgnoreCase))
+        {
+            result = constValue.ToString();
+        }
+        else if (string.Equals(formatStr, "X", StringComparison.OrdinalIgnoreCase))
+        {
+            result = constValue.ToString("X");
+        }
+
+        if (result == null) return;
+
+        var bakeKey = (methodId ?? "", instrs[callIndex].IlOffset);
+        var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProdIdx, callIndex);
+        _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
+            enumTypeId, callee, ConstantStr: result, ConstantInt: null, ArgCount: 3, SkipIlOffsets: skipOffsets);
+        PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
     }
 }
