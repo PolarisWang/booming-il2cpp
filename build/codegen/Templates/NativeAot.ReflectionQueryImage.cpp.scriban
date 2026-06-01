@@ -42,7 +42,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[{{ type_group_count }}
 {{~ end ~}}
 };
 
-extern const ReflectionQueryImageDescriptor kReflImage = { "{{ assembly_name_literal }}", kReflTypePtrs, {{ type_group_count }}u, 1, 0, 0, 0 };
+static const ReflectionQueryImageDescriptor kReflImage = { "{{ assembly_name_literal }}", kReflTypePtrs, {{ type_group_count }}u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via

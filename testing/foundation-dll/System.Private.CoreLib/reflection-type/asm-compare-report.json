@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/type",
-  "capturedAt": "2026-05-30T02:55:40",
+  "capturedAt": "2026-05-29T04:58:54",
   "batchMode": true,
   "summary": {
     "totalMethods": 43,
@@ -10,26 +10,26 @@
     "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 64,
-      "max": 64,
-      "avg": 64.0,
-      "total": 2752
+      "min": 44,
+      "max": 44,
+      "avg": 44.0,
+      "total": 1892
     },
     "aotInstructionCount": {
       "min": 1,
       "max": 13,
-      "avg": 10.8,
-      "total": 463
+      "avg": 7.1,
+      "total": 306
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 92
+      "external_runtime_call": 62
     },
-    "overallIrExpansionRatio": 0.17,
-    "averageExpansionRatio": 0.17,
-    "maxExpansionRatio": 0.2,
+    "overallIrExpansionRatio": 0.16,
+    "averageExpansionRatio": 0.16,
+    "maxExpansionRatio": 0.3,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -39,7 +39,7 @@
       "shortName": "Subject_0",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -47,7 +47,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -63,7 +63,7 @@
       "shortName": "Subject_1",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -71,7 +71,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -87,7 +87,7 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -95,7 +95,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -111,15 +111,15 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -148,15 +148,15 @@
       "shortName": "Subject_4",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -190,15 +190,15 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -232,15 +232,15 @@
       "shortName": "Subject_6",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -274,15 +274,15 @@
       "shortName": "Subject_7",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -316,15 +316,15 @@
       "shortName": "Subject_8",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 13,
-        "ratio": 0.2,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -358,15 +358,15 @@
       "shortName": "Subject_9",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -395,15 +395,15 @@
       "shortName": "Subject_10",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -432,15 +432,15 @@
       "shortName": "Subject_11",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -469,15 +469,15 @@
       "shortName": "Subject_12",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -506,15 +506,15 @@
       "shortName": "Subject_13",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -543,15 +543,15 @@
       "shortName": "Subject_14",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -580,15 +580,15 @@
       "shortName": "Subject_15",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -617,15 +617,15 @@
       "shortName": "Subject_16",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -654,15 +654,15 @@
       "shortName": "Subject_17",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -691,15 +691,15 @@
       "shortName": "Subject_18",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -728,15 +728,15 @@
       "shortName": "Subject_19",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -765,15 +765,15 @@
       "shortName": "Subject_20",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -802,15 +802,15 @@
       "shortName": "Subject_21",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -839,15 +839,15 @@
       "shortName": "Subject_22",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -876,15 +876,15 @@
       "shortName": "Subject_23",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -913,15 +913,15 @@
       "shortName": "Subject_24",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -955,15 +955,15 @@
       "shortName": "Subject_25",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -997,15 +997,15 @@
       "shortName": "Subject_26",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -1039,15 +1039,15 @@
       "shortName": "Subject_27",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -1081,36 +1081,23 @@
       "shortName": "Subject_28",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_28",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 29,
@@ -1118,36 +1105,23 @@
       "shortName": "Subject_29",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 13,
-        "ratio": 0.2,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_29",
-        "instructions": 13
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetMethods:System.Reflection.MethodInfo[](System.Reflection.BindingFlags)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 30,
@@ -1155,36 +1129,23 @@
       "shortName": "Subject_30",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_30",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 31,
@@ -1192,36 +1153,23 @@
       "shortName": "Subject_31",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 13,
-        "ratio": 0.2,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_31",
-        "instructions": 13
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetFields:System.Reflection.FieldInfo[](System.Reflection.BindingFlags)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 32,
@@ -1229,36 +1177,23 @@
       "shortName": "Subject_32",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_32",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 33,
@@ -1266,36 +1201,23 @@
       "shortName": "Subject_33",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 13,
-        "ratio": 0.2,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_33",
-        "instructions": 13
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetProperties:System.Reflection.PropertyInfo[](System.Reflection.BindingFlags)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 34,
@@ -1303,36 +1225,23 @@
       "shortName": "Subject_34",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_34",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 35,
@@ -1340,36 +1249,23 @@
       "shortName": "Subject_35",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_35",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 36,
@@ -1377,36 +1273,23 @@
       "shortName": "Subject_36",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 13,
-        "ratio": 0.2,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_36",
-        "instructions": 13
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetConstructors:System.Reflection.ConstructorInfo[](System.Reflection.BindingFlags)' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 37,
@@ -1414,36 +1297,23 @@
       "shortName": "Subject_37",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_37",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetMembers:System.Reflection.MemberInfo[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 38,
@@ -1451,36 +1321,23 @@
       "shortName": "Subject_38",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_38",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetInterfaces:System.Type[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 39,
@@ -1488,41 +1345,23 @@
       "shortName": "Subject_39",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_39",
-        "instructions": 11
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetElementType:System.Type()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 3
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 40,
@@ -1530,36 +1369,23 @@
       "shortName": "Subject_40",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_40",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetNestedTypes:System.Type[]()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 41,
@@ -1567,41 +1393,23 @@
       "shortName": "Subject_41",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 12,
-        "ratio": 0.19,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionTypeSubjects_ReflectionTypeSubjects_Subject_41",
-        "instructions": 12
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Type::GetNestedType:System.Type(System.String)' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 3
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 42,
@@ -1609,15 +1417,15 @@
       "shortName": "Subject_42",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 11,
-        "ratio": 0.17,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",

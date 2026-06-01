@@ -2,9 +2,9 @@
   "family": "metadata-typeinfo",
   "assembly": "System.Text.Json",
   "mode": "standard",
-  "timestamp": "2026-05-29T12:57:11",
-  "duration_ms": 10401,
-  "overall_status": "failed",
+  "timestamp": "2026-05-22T07:18:15",
+  "duration_ms": 94660,
+  "overall_status": "passed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -26,313 +26,69 @@
         ]
       },
       "errors": [],
-      "duration_ms": 4
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
-      "status": "failed",
-      "summary": "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(41,44): error CS1061: “JsonTypeInfo”未包含“ConstructorAttributeProvider”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“ConstructorAttributeProvider”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(41,117): error CS1061: “JsonTypeInfo”未包含“ConstructorAttributeProvider”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“ConstructorAttributeProvider”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(62,44): error CS1061: “JsonTypeInfo”未包含“ElementType”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“ElementType”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(62,100): error CS1061: “JsonTypeInfo”未包含“ElementType”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“ElementType”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(76,44): error CS1061: “JsonTypeInfo”未包含“KeyType”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“KeyType”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(76,96): error CS1061: “JsonTypeInfo”未包含“KeyType”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“KeyType”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n\n生成失败。\n\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(41,44): error CS1061: “JsonTypeInfo”未包含“ConstructorAttributeProvider”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“ConstructorAttributeProvider”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(41,117): error CS1061: “JsonTypeInfo”未包含“ConstructorAttributeProvider”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“ConstructorAttributeProvider”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(62,44): error CS1061: “JsonTypeInfo”未包含“ElementType”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“ElementType”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(62,100): error CS1061: “JsonTypeInfo”未包含“ElementType”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“ElementType”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(76,44): error CS1061: “JsonTypeInfo”未包含“KeyType”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“KeyType”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.cs(76,96): error CS1061: “JsonTypeInfo”未包含“KeyType”的定义，并且找不到可接受第一个“JsonTypeInfo”类型参数的可访问扩展方法“KeyType”(是否缺少 using 指令或程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/metadata-typeinfo/managed/subjects/MetadataTypeinfoSubjects.csproj]\n    0 个警告\n    6 个错误\n\n已用时间 00:00:01.11\n",
+      "status": "passed",
+      "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
-        "steps": {
-          "build_subjects": "FAILED"
-        }
+        "methodCount": 39,
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\metadata-typeinfo\\managed\\subjects\\build-output\\MetadataTypeinfoSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 4954
+      "duration_ms": 35862
     },
     "jit_codegen": {
       "stage": "jit_codegen",
-      "status": "failed",
-      "summary": "JIT codegen failed",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
       "details": {},
       "errors": [],
-      "duration_ms": 1947
-    },
-    "managed_fact": {
-      "stage": "managed_fact",
-      "status": "passed",
-      "summary": "Fact net8.0: passed=0 failed=0 skipped=39",
-      "details": {
-        "totalMethods": 39,
-        "passedMethods": 0,
-        "failedMethods": 0,
-        "skippedMethods": 39,
-        "tfm": "net8.0",
-        "methodResults": [
-          {
-            "methodIndex": 0,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonPropertyInfo:System.Text.Json.Serialization.Metadata.JsonPropertyInfo(System.Type,System.String)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 1,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonTypeInfo{T}:System.Text.Json.Serialization.Metadata.JsonTypeInfo{T}(System.Text.Json.JsonSerializerOptions)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 2,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::CreateJsonTypeInfo:System.Text.Json.Serialization.Metadata.JsonTypeInfo(System.Type,System.Text.Json.JsonSerializerOptions)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 3,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ConstructorAttributeProvider:System.Reflection.ICustomAttributeProvider()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 4,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Converter:System.Text.Json.Serialization.JsonConverter()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 5,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_CreateObject:System.Func{System.Object}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 6,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_ElementType:System.Type()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 7,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_IsReadOnly:System.Boolean()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 8,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_KeyType:System.Type()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 9,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Kind:System.Text.Json.Serialization.Metadata.JsonTypeInfoKind()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 10,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_NumberHandling:System.Nullable{System.Text.Json.Serialization.JsonNumberHandling}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 11,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnDeserialized:System.Action{System.Object}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 12,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnDeserializing:System.Action{System.Object}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 13,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnSerialized:System.Action{System.Object}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 14,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OnSerializing:System.Action{System.Object}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 15,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Options:System.Text.Json.JsonSerializerOptions()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 16,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_OriginatingResolver:System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 17,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_PolymorphismOptions:System.Text.Json.Serialization.Metadata.JsonPolymorphismOptions()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 18,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_PreferredPropertyObjectCreationHandling:System.Nullable{System.Text.Json.Serialization.JsonObjectCreationHandling}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 19,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Properties:System.Collections.Generic.IList{System.Text.Json.Serialization.Metadata.JsonPropertyInfo}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 20,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_Type:System.Type()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 21,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::get_UnmappedMemberHandling:System.Nullable{System.Text.Json.Serialization.JsonUnmappedMemberHandling}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 22,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::MakeReadOnly:System.Void()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 23,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_CreateObject:System.Void(System.Func{System.Object})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 24,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_NumberHandling:System.Void(System.Nullable{System.Text.Json.Serialization.JsonNumberHandling})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 25,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnDeserialized:System.Void(System.Action{System.Object})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 26,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnDeserializing:System.Void(System.Action{System.Object})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 27,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnSerialized:System.Void(System.Action{System.Object})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 28,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OnSerializing:System.Void(System.Action{System.Object})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 29,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_OriginatingResolver:System.Void(System.Text.Json.Serialization.Metadata.IJsonTypeInfoResolver)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 30,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_PolymorphismOptions:System.Void(System.Text.Json.Serialization.Metadata.JsonPolymorphismOptions)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 31,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_PreferredPropertyObjectCreationHandling:System.Void(System.Nullable{System.Text.Json.Serialization.JsonObjectCreationHandling})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 32,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_UnmappedMemberHandling:System.Void(System.Nullable{System.Text.Json.Serialization.JsonUnmappedMemberHandling})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 33,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_IsReadOnly:System.Void(System.Boolean)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 34,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo::set_ConstructorAttributeProvider:System.Void(System.Reflection.ICustomAttributeProvider)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 35,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::get_CreateObject:System.Func{T}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 36,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::get_SerializeHandler:System.Action{System.Text.Json.Utf8JsonWriter,T}()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 37,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::set_CreateObject:System.Void(System.Func{T})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 38,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.Metadata.JsonTypeInfo`1::set_SerializeHandler:System.Void(System.Action{System.Text.Json.Utf8JsonWriter,T})",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          }
-        ]
-      },
-      "errors": [],
-      "duration_ms": 1752
+      "duration_ms": 34534
     },
     "fact": {
       "stage": "fact",
-      "status": "failed",
-      "summary": "Fact verify=skip (0/0)",
+      "status": "passed",
+      "summary": "Fact verify=passed (39/39)",
       "details": {
         "fact": {
-          "status": "skip",
-          "passed": 0,
-          "total": 0
+          "status": "passed",
+          "passed": 39,
+          "total": 39
         }
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 437
     },
     "fact_jit": {
       "stage": "fact_jit",
-      "status": "skipped",
-      "summary": "entry-jit.exe not found — cannot run JIT fact",
-      "details": {},
+      "status": "passed",
+      "summary": "Fact JIT verify=passed (39/39)",
+      "details": {
+        "fact_jit": {
+          "status": "passed",
+          "passed": 39,
+          "total": 39,
+          "exit_code": 0
+        }
+      },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 503
     },
     "audit": {
       "stage": "audit",
-      "status": "failed",
-      "summary": "false_passing=0, principle=VIOLATION (mech_passed=True, strict_on_CONCERN=False)",
+      "status": "passed",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "VIOLATION",
+        "skipsFound": 2,
+        "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 19
+      "duration_ms": 2251
     },
     "asm_compare": {
       "stage": "asm_compare",
@@ -342,119 +98,132 @@
       "errors": [],
       "duration_ms": 0
     },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=3.0ns/op | FastExecute=201.7ns/op | CallVirt dispatch=205.5ns",
+      "details": {
+        "framePool": {
+          "acquireReleaseNsPerOp": 3.0,
+          "batchCount": 1000,
+          "framesPerBatch": 32
+        },
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 201.7
+        },
+        "callVirt": {
+          "handlerDispatchNs": 205.5,
+          "emptyStackNs": 226.1
+        },
+        "poolSize": 32
+      },
+      "errors": [],
+      "duration_ms": 71
+    },
     "benchmark": {
       "stage": "benchmark",
       "status": "failed",
-      "summary": "net8-jit benchmark produced no valid results",
+      "summary": "Benchmark stage crashed: [Errno 22] Invalid argument",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "passed",
+      "summary": "39/39 passed, 0 failed (stub=10)",
       "details": {
-        "runtimesAvailable": [
-          "net8-jit",
-          "chaos-aot",
-          "chaos-jit"
-        ],
-        "runtimesUnavailable": [
-          "net10-jit",
-          "mono"
-        ],
-        "multiRunReportPath": "multi-run/multi-run-report.json",
-        "chaosClassification": {
-          "chaos_faster_than_all": 0,
-          "chaos_faster_than_jit": 0,
-          "chaos_midfield": 0,
-          "chaos_slower_than_jit": 0,
-          "not_benchmarked": 39
-        },
-        "summaries": {}
+        "passedMethods": 39,
+        "failedMethods": 0,
+        "totalMethods": 39,
+        "realMethods": 39,
+        "stubMethods": 10
       },
       "errors": [],
-      "duration_ms": 1471
+      "duration_ms": 30
     },
     "hotupdate_aot_benchmark": {
       "stage": "hotupdate_aot_benchmark",
-      "status": "skipped",
-      "summary": "entry-aot.exe not found",
-      "details": {},
+      "status": "passed",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (AOT patched path)",
+      "details": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
+      },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 817
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "skipped",
-      "summary": "entry-jit.exe not found — cannot run JIT hotupdate",
-      "details": {},
+      "status": "passed",
+      "summary": "39/39 passed, 0 failed",
+      "details": {
+        "passed": 39,
+        "failed": 0,
+        "total": 39
+      },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 37
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
-      "status": "skipped",
-      "summary": "entry-jit.exe not found",
-      "details": {},
-      "errors": [],
-      "duration_ms": 1
-    },
-    "dashboard": {
-      "stage": "dashboard",
       "status": "passed",
-      "summary": "Dashboard built: 6 sections",
+      "summary": "avg_slowdown=0.0% (1.0x) over 0 methods (JIT patched path)",
       "details": {
-        "interpreter": {},
-        "irTranslation": {},
-        "performance": {
-          "averageSpeedupPercent": 0,
-          "nativeFasterCount": 0,
-          "managedFasterCount": 0,
-          "matchedCount": 0,
-          "totalMethods": 0,
-          "invalidCount": 0
-        },
-        "hotupdate": {},
-        "managedFact": {
-          "totalMethods": 39,
-          "passedMethods": 0,
-          "failedMethods": 0,
-          "skippedMethods": 39,
-          "tfm": "net8.0"
-        },
-        "keyRatios": {
-          "nativeFasterRatio": 0,
-          "irExpansionRatio": 0,
-          "interpreterSlowdownFactor": 0,
-          "asmPassRate": 0.0
-        }
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "threshold": 50.0,
+        "nonStubMethods": 0
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 20110
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
-    "testedRate": 100.0,
-    "overall": 100.0
+    "methodCoverage": 100.0,
+    "testedRate": 94.87,
+    "overall": 97.44
   },
   "dashboard": {
-    "interpreter": {},
-    "irTranslation": {},
-    "performance": {
-      "averageSpeedupPercent": 0,
-      "nativeFasterCount": 0,
-      "managedFasterCount": 0,
-      "matchedCount": 0,
-      "totalMethods": 0,
-      "invalidCount": 0
+    "interpreter": {
+      "fastFramePoolNsPerOp": 3.0,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 205.5,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
     },
-    "hotupdate": {},
-    "managedFact": {
-      "totalMethods": 39,
-      "passedMethods": 0,
-      "failedMethods": 0,
-      "skippedMethods": 39,
-      "tfm": "net8.0"
+    "irTranslation": {},
+    "performance": {},
+    "hotupdate": {
+      "aotFunctional": {
+        "passedMethods": 39,
+        "failedMethods": 0,
+        "totalMethods": 39
+      },
+      "aotOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      },
+      "jitFunctional": {
+        "passedMethods": 39,
+        "failedMethods": 0,
+        "totalMethods": 39
+      },
+      "jitOverhead": {
+        "averageSlowdownPercent": 0.0,
+        "slowdownFactor": 1.0,
+        "nonStubMethods": 0
+      }
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 0,
+      "interpreterSlowdownFactor": 1.0,
       "asmPassRate": 0.0
     }
   },

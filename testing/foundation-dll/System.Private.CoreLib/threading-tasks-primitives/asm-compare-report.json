@@ -2,43 +2,60 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/tasks/primitives",
-  "capturedAt": "2026-05-30T04:31:33",
+  "capturedAt": "2026-05-29T05:31:26",
   "batchMode": true,
   "summary": {
     "totalMethods": 15,
-    "okCount": 2,
-    "failedCount": 13,
+    "okCount": 15,
+    "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 64,
-      "max": 64,
-      "avg": 64.0,
-      "total": 128
+      "min": 44,
+      "max": 95,
+      "avg": 47.4,
+      "total": 711
     },
     "aotInstructionCount": {
-      "min": 9,
+      "min": 1,
       "max": 9,
-      "avg": 9.0,
-      "total": 18
+      "avg": 1.5,
+      "total": 23
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 4
+      "external_runtime_call": 2
     },
-    "overallIrExpansionRatio": 0.14,
-    "averageExpansionRatio": 0.14,
-    "maxExpansionRatio": 0.14,
-    "minExpansionRatio": 0.14
+    "overallIrExpansionRatio": 0.03,
+    "averageExpansionRatio": 0.03,
+    "maxExpansionRatio": 0.2,
+    "minExpansionRatio": 0.01
   },
   "methodResults": [
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Run:System.Threading.Tasks.Task(System.Action)",
       "shortName": "Subject_0",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_0",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 1,
@@ -46,113 +63,287 @@
       "shortName": "Subject_1",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
-        "aotInstructionCount": 9,
-        "ratio": 0.14,
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
-        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_Subject_13",
-        "instructions": 9
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_1",
+        "instructions": 1
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Threading.Thread/System.Threading.Thread::get_CurrentThread:System.Threading.Thread()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Delay:System.Threading.Tasks.Task(System.Int32)",
       "shortName": "Subject_2",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_2",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Void()",
       "shortName": "Subject_3",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_3",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::Wait:System.Boolean(System.Int32)",
       "shortName": "Subject_4",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_4",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_IsCompleted:System.Boolean()",
       "shortName": "Subject_5",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_5",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::get_Status:System.Threading.Tasks.TaskStatus()",
       "shortName": "Subject_6",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_6",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::ContinueWith:System.Threading.Tasks.Task(System.Action{System.Threading.Tasks.Task})",
       "shortName": "Subject_7",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_7",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAll:System.Threading.Tasks.Task(System.Threading.Tasks.Task[])",
       "shortName": "Subject_8",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_8",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::WhenAny:System.Threading.Tasks.Task{System.Threading.Tasks.Task}(System.Threading.Tasks.Task[])",
       "shortName": "Subject_9",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_9",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 10,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Tasks.Task::FromResult:System.Threading.Tasks.Task`1(TResult)",
       "shortName": "Subject_10",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_10",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 11,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Start:System.Void()",
       "shortName": "Subject_11",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_11",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 12,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)",
       "shortName": "Subject_12",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 1,
+        "ratio": 0.02,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_12",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 13,
@@ -160,15 +351,15 @@
       "shortName": "Subject_13",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 64,
+        "jitInstructionCount": 44,
         "aotInstructionCount": 9,
-        "ratio": 0.14,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 64
+        "instructions": 44
       },
       "aot": {
         "status": "ok",
@@ -195,8 +386,25 @@
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/System.Threading.Thread::get_ManagedThreadId:System.Int32()",
       "shortName": "Subject_14",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 95,
+        "aotInstructionCount": 1,
+        "ratio": 0.01,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 95
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ThreadingTasksPrimitivesSubjects_ThreadingTasksPrimitivesSubjects_CustomEntrySubject_14",
+        "instructions": 1
+      },
+      "analysis": [],
+      "instructionCategories": {}
     }
   ]
 }

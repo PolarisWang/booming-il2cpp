@@ -17,8 +17,6 @@ target_compile_options(chaos::runtime INTERFACE
     "$<$<CXX_COMPILER_ID:MSVC>:/EHa>"
     "$<$<CXX_COMPILER_ID:MSVC>:/GS->"
     "$<$<CXX_COMPILER_ID:MSVC>:/DWIN32 /D_WINDOWS>"
-    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>"
-    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-finput-charset=utf-8>"
 )
 
 target_compile_features(chaos::runtime INTERFACE
@@ -26,37 +24,20 @@ target_compile_features(chaos::runtime INTERFACE
 )
 
 # Prebuilt native runtime libraries
-# Linux: --start-group/--end-group needed for circular deps between static libs.
+# Includes jit and debugger because the prebuilt runtime libs reference
+# JIT symbols (RegisterJitSehHandler, Compile, etc.) and debugger symbols.
 target_link_libraries(chaos::runtime INTERFACE
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_common.lib>"
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_support.lib>"
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_fmt.lib>"
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_runtime_core.lib>"
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_interpreter.lib>"
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_bootstrap.lib>"
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_hot_update.lib>"
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_eventpipe.lib>"
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_jit.lib>"
-    "$<$<CXX_COMPILER_ID:MSVC>:${CHAOS_SDK_ROOT}/lib/chaos_debugger.lib>"
+    "${CHAOS_SDK_ROOT}/lib/chaos_common.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_support.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_fmt.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_runtime_core.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_interpreter.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_bootstrap.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_hot_update.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_eventpipe.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_jit.lib"
+    "${CHAOS_SDK_ROOT}/lib/chaos_debugger.lib"
 )
-
-if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
-  target_link_libraries(chaos::runtime INTERFACE
-      "-Wl,--start-group"
-      "${CHAOS_SDK_ROOT}/lib/chaos_common.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_support.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_fmt.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_runtime_core.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_interpreter.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_bootstrap.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_hot_update.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_eventpipe.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_jit.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_debugger.lib"
-      "-Wl,--end-group"
-      "-lnuma"
-  )
-endif()
 
 # ── chaos::codegen (STATIC IMPORTED) ────────────────────────────────────
 # Precompiled generated C++ code (native-aot.generated.cpp → .lib).
