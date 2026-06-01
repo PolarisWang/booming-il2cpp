@@ -21,6 +21,7 @@ public sealed record MethodSignature(
     bool IsVoid,
     bool HasRefParam,
     IReadOnlyList<MethodParameter> Parameters,
+    bool IsRefStructReturn = false,
     IReadOnlyList<string>? GenericTypeArgs = null  // populated for concretized generic methods
 );
 

@@ -28,6 +28,27 @@ _IS_LINUX = sys.platform.startswith("linux")
 # Falls back to the known CI preset path if discovery fails.
 _NATIVE_BUILD_DIR: Path | None = None
 
+
+def _is_hotupdate_obligation_required(ctx: FamilyContext) -> bool:
+    """Check if hotupdate verification is required by the family contract.
+
+    Returns True if the contract has hotupdateFunctionalObligation.required == true
+    (or the field is absent, defaulting to required). Returns False when explicitly
+    set to false, allowing the pipeline to skip hotupdate stages entirely.
+    """
+    contract_path = ctx.contract_path
+    if not contract_path.exists():
+        return True  # Default: required if no contract
+    try:
+        import json as _json
+        c = _json.loads(contract_path.read_text(encoding="utf-8"))
+        oblig = c.get("hotupdateFunctionalObligation", {})
+        if isinstance(oblig, dict) and oblig.get("required") is False:
+            return False
+        return True
+    except Exception:
+        return True  # Default: required on parse error
+
 def _discover_runtime_core_build_dir() -> Path | None:
     """Locate the runtime-core cmake build directory from CMakePresets."""
     presets_file = _REPO_ROOT / "CMakePresets.json"
@@ -791,6 +812,13 @@ def run_hotupdate(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageRe
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    if not _is_hotupdate_obligation_required(ctx):
+        return StageResult(
+            stage="hotupdate", status="skipped",
+            summary="hotupdate not required by contract — skipping",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
     hu_indices = _load_hotupdate_indices(ctx)
     if not _ensure_patch_data(ctx, hotupdate_indices=hu_indices, test_mode=True):
         return StageResult(
@@ -933,6 +961,13 @@ def run_hotupdate_jit_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    if not _is_hotupdate_obligation_required(ctx):
+        return StageResult(
+            stage="hotupdate_jit_fact", status="skipped",
+            summary="hotupdate not required by contract — skipping",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
     # Regenerate patchdata and runtime-patchdata.cpp.
     # This is necessary because previous AOT hotupdate stages' finally blocks
     # wrote a sentinel (size=0) over runtime-patchdata.cpp, so entry-jit.exe
@@ -1044,6 +1079,13 @@ def run_hotupdate_jit_bench(ctx: FamilyContext, stages: dict[str, StageResult]) 
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    if not _is_hotupdate_obligation_required(ctx):
+        return StageResult(
+            stage="hotupdate_jit_benchmark", status="skipped",
+            summary="hotupdate not required by contract — skipping",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
     print(f"  [hotupdate_jit_bench] Running {len(hu_indices)} methods...")
     results: list[dict[str, Any]] = []
     ok_count = 0
@@ -1086,6 +1128,13 @@ def run_patch_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -
         return StageResult(
             stage="patch_cross_verify", status="skipped",
             summary="patched-golden-values.json not found (managed_patch_fact may have been skipped)",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
+    if not _is_hotupdate_obligation_required(ctx):
+        return StageResult(
+            stage="patch_cross_verify", status="skipped",
+            summary="hotupdate not required by contract — skipping",
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 

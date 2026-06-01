@@ -56,42 +56,27 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 2, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Parse ---
+        // --- TryFormat ---
         try
         {
-            var result = System.Version.Parse(default(string)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 3, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            int __ref_3_0_0 = default(int);
+            new System.Version().TryFormat(default(Span<char>), out __ref_3_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_3_0_0));
+            results.Add(new { MethodIndex = 3, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 3, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- TryFormat ---
         try
         {
-            var result = System.Version.Parse("");
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 3, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 3, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- TryParse ---
-        try
-        {
-            System.Version __ref_4_0_0 = default(System.Version);
-            var result = System.Version.TryParse(default(string)!, out __ref_4_0_0);
+            int __ref_4_0_0 = default(int);
+            new System.Version().TryFormat(default(Span<char>), default(int), out __ref_4_0_0);
             var _outValues = new System.Collections.Generic.List<string>();
             _outValues.Add(JsonSerializer.Serialize(__ref_4_0_0));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 4, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+            results.Add(new { MethodIndex = 4, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
@@ -99,18 +84,155 @@ public static class Probe
         }
         try
         {
-            System.Version __ref_4_1_0 = default(System.Version);
-            var result = System.Version.TryParse("", out __ref_4_1_0);
+            int __ref_4_1_0 = default(int);
+            new System.Version().TryFormat(default(Span<char>), (int)0, out __ref_4_1_0);
             var _outValues = new System.Collections.Generic.List<string>();
             _outValues.Add(JsonSerializer.Serialize(__ref_4_1_0));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 4, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+            results.Add(new { MethodIndex = 4, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 4, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryFormat ---
+        try
+        {
+            int __ref_5_0_0 = default(int);
+            new System.Version().TryFormat(default(Span<byte>), out __ref_5_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_5_0_0));
+            results.Add(new { MethodIndex = 5, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 5, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryFormat ---
+        try
+        {
+            int __ref_6_0_0 = default(int);
+            new System.Version().TryFormat(default(Span<byte>), default(int), out __ref_6_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_6_0_0));
+            results.Add(new { MethodIndex = 6, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 6, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            int __ref_6_1_0 = default(int);
+            new System.Version().TryFormat(default(Span<byte>), (int)0, out __ref_6_1_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_6_1_0));
+            results.Add(new { MethodIndex = 6, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 6, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Parse ---
+        try
+        {
+            var result = System.Version.Parse(default(string)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 7, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 7, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = System.Version.Parse("");
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 7, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 7, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Parse ---
+        try
+        {
+            System.Version.Parse(default(ReadOnlySpan<char>));
+            results.Add(new { MethodIndex = 8, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 8, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Parse ---
+        try
+        {
+            System.Version.Parse(default(ReadOnlySpan<byte>));
+            results.Add(new { MethodIndex = 9, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 9, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryParse ---
+        try
+        {
+            System.Version __ref_10_0_0 = default(System.Version);
+            var result = System.Version.TryParse(default(string)!, out __ref_10_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_10_0_0));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 10, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 10, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            System.Version __ref_10_1_0 = default(System.Version);
+            var result = System.Version.TryParse("", out __ref_10_1_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_10_1_0));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 10, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 10, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryParse ---
+        try
+        {
+            System.Version __ref_11_0_0 = default(System.Version);
+            System.Version.TryParse(default(ReadOnlySpan<char>), out __ref_11_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_11_0_0));
+            results.Add(new { MethodIndex = 11, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 11, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryParse ---
+        try
+        {
+            System.Version __ref_12_0_0 = default(System.Version);
+            System.Version.TryParse(default(ReadOnlySpan<byte>), out __ref_12_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_12_0_0));
+            results.Add(new { MethodIndex = 12, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 12, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
 
         var json = JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = false });

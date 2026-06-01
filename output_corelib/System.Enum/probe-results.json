@@ -210,6 +210,19 @@
   {
     "methodIndex": 13,
     "setIndex": 0,
+    "subjectId": "System.Enum::Parse:System.Object(System.Type,ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 14,
+    "setIndex": 0,
     "subjectId": "System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)__Set0",
     "isVoid": false,
     "hasException": true,
@@ -221,7 +234,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 13,
+    "methodIndex": 14,
     "setIndex": 1,
     "subjectId": "System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)__Set1",
     "isVoid": false,
@@ -234,7 +247,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 13,
+    "methodIndex": 14,
     "setIndex": 2,
     "subjectId": "System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)__Set2",
     "isVoid": false,
@@ -247,7 +260,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 14,
+    "methodIndex": 15,
+    "setIndex": 0,
+    "subjectId": "System.Enum::Parse:System.Object(System.Type,ReadOnlySpan\u003CSystem.Char\u003E,System.Boolean)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 15,
+    "setIndex": 1,
+    "subjectId": "System.Enum::Parse:System.Object(System.Type,ReadOnlySpan\u003CSystem.Char\u003E,System.Boolean)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 16,
     "setIndex": 0,
     "subjectId": "System.Enum::Parse:System.Int32(System.String)__Set0",
     "isVoid": false,
@@ -260,7 +299,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 14,
+    "methodIndex": 16,
     "setIndex": 1,
     "subjectId": "System.Enum::Parse:System.Int32(System.String)__Set1",
     "isVoid": false,
@@ -273,7 +312,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 15,
+    "methodIndex": 17,
+    "setIndex": 0,
+    "subjectId": "System.Enum::Parse:System.Int32(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 18,
     "setIndex": 0,
     "subjectId": "System.Enum::Parse:System.Int32(System.String,System.Boolean)__Set0",
     "isVoid": false,
@@ -286,7 +338,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 15,
+    "methodIndex": 18,
     "setIndex": 1,
     "subjectId": "System.Enum::Parse:System.Int32(System.String,System.Boolean)__Set1",
     "isVoid": false,
@@ -299,7 +351,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 15,
+    "methodIndex": 18,
     "setIndex": 2,
     "subjectId": "System.Enum::Parse:System.Int32(System.String,System.Boolean)__Set2",
     "isVoid": false,
@@ -312,7 +364,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 16,
+    "methodIndex": 19,
+    "setIndex": 0,
+    "subjectId": "System.Enum::Parse:System.Int32(ReadOnlySpan\u003CSystem.Char\u003E,System.Boolean)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 19,
+    "setIndex": 1,
+    "subjectId": "System.Enum::Parse:System.Int32(ReadOnlySpan\u003CSystem.Char\u003E,System.Boolean)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 20,
     "setIndex": 0,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object\u0026)__Set0",
     "isVoid": false,
@@ -327,7 +405,7 @@
     ]
   },
   {
-    "methodIndex": 16,
+    "methodIndex": 20,
     "setIndex": 1,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Object\u0026)__Set1",
     "isVoid": false,
@@ -340,7 +418,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 17,
+    "methodIndex": 21,
+    "setIndex": 0,
+    "subjectId": "System.Enum::TryParse:System.Boolean(System.Type,ReadOnlySpan\u003CSystem.Char\u003E,System.Object\u0026)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 22,
     "setIndex": 0,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object\u0026)__Set0",
     "isVoid": false,
@@ -355,7 +446,7 @@
     ]
   },
   {
-    "methodIndex": 17,
+    "methodIndex": 22,
     "setIndex": 1,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object\u0026)__Set1",
     "isVoid": false,
@@ -368,7 +459,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 17,
+    "methodIndex": 22,
     "setIndex": 2,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.Type,System.String,System.Boolean,System.Object\u0026)__Set2",
     "isVoid": false,
@@ -383,7 +474,33 @@
     ]
   },
   {
-    "methodIndex": 18,
+    "methodIndex": 23,
+    "setIndex": 0,
+    "subjectId": "System.Enum::TryParse:System.Boolean(System.Type,ReadOnlySpan\u003CSystem.Char\u003E,System.Boolean,System.Object\u0026)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 23,
+    "setIndex": 1,
+    "subjectId": "System.Enum::TryParse:System.Boolean(System.Type,ReadOnlySpan\u003CSystem.Char\u003E,System.Boolean,System.Object\u0026)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 24,
     "setIndex": 0,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.String,System.Int32\u0026)__Set0",
     "isVoid": false,
@@ -398,7 +515,7 @@
     ]
   },
   {
-    "methodIndex": 18,
+    "methodIndex": 24,
     "setIndex": 1,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.String,System.Int32\u0026)__Set1",
     "isVoid": false,
@@ -411,7 +528,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 19,
+    "methodIndex": 25,
+    "setIndex": 0,
+    "subjectId": "System.Enum::TryParse:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 26,
     "setIndex": 0,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.String,System.Boolean,System.Int32\u0026)__Set0",
     "isVoid": false,
@@ -426,7 +556,7 @@
     ]
   },
   {
-    "methodIndex": 19,
+    "methodIndex": 26,
     "setIndex": 1,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.String,System.Boolean,System.Int32\u0026)__Set1",
     "isVoid": false,
@@ -439,7 +569,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 19,
+    "methodIndex": 26,
     "setIndex": 2,
     "subjectId": "System.Enum::TryParse:System.Boolean(System.String,System.Boolean,System.Int32\u0026)__Set2",
     "isVoid": false,
@@ -454,7 +584,33 @@
     ]
   },
   {
-    "methodIndex": 20,
+    "methodIndex": 27,
+    "setIndex": 0,
+    "subjectId": "System.Enum::TryParse:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.Boolean,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 27,
+    "setIndex": 1,
+    "subjectId": "System.Enum::TryParse:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.Boolean,System.Int32\u0026)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 28,
     "setIndex": 0,
     "subjectId": "System.Enum::CompareTo:System.Int32(System.Object)__Set0",
     "isVoid": false,
@@ -467,7 +623,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 21,
+    "methodIndex": 29,
     "setIndex": 0,
     "subjectId": "System.Enum::Format:System.String(System.Type,System.Object,System.String)__Set0",
     "isVoid": false,
@@ -480,7 +636,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 21,
+    "methodIndex": 29,
     "setIndex": 1,
     "subjectId": "System.Enum::Format:System.String(System.Type,System.Object,System.String)__Set1",
     "isVoid": false,
@@ -493,9 +649,35 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 22,
-    "setIndex": 22,
-    "subjectId": "System.Enum::GetTypeCode:System.TypeCode()__Set22",
+    "methodIndex": 30,
+    "setIndex": 0,
+    "subjectId": "System.Enum::TryFormat:System.Boolean(System.Int32,Span\u003CSystem.Char\u003E,System.Int32\u0026,ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 30,
+    "setIndex": 1,
+    "subjectId": "System.Enum::TryFormat:System.Boolean(System.Int32,Span\u003CSystem.Char\u003E,System.Int32\u0026,ReadOnlySpan\u003CSystem.Char\u003E)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 31,
+    "setIndex": 31,
+    "subjectId": "System.Enum::GetTypeCode:System.TypeCode()__Set31",
     "isVoid": false,
     "hasException": true,
     "exceptionType": "System.NullReferenceException",
@@ -506,7 +688,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 23,
+    "methodIndex": 32,
     "setIndex": 0,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.Object)__Set0",
     "isVoid": false,
@@ -519,7 +701,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 24,
+    "methodIndex": 33,
     "setIndex": 0,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.SByte)__Set0",
     "isVoid": false,
@@ -532,7 +714,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 24,
+    "methodIndex": 33,
     "setIndex": 1,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.SByte)__Set1",
     "isVoid": false,
@@ -545,7 +727,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 25,
+    "methodIndex": 34,
     "setIndex": 0,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.Int16)__Set0",
     "isVoid": false,
@@ -558,7 +740,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 25,
+    "methodIndex": 34,
     "setIndex": 1,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.Int16)__Set1",
     "isVoid": false,
@@ -571,7 +753,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 26,
+    "methodIndex": 35,
     "setIndex": 0,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.Int32)__Set0",
     "isVoid": false,
@@ -584,7 +766,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 26,
+    "methodIndex": 35,
     "setIndex": 1,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.Int32)__Set1",
     "isVoid": false,
@@ -597,7 +779,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 27,
+    "methodIndex": 36,
     "setIndex": 0,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.Byte)__Set0",
     "isVoid": false,
@@ -610,7 +792,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 27,
+    "methodIndex": 36,
     "setIndex": 1,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.Byte)__Set1",
     "isVoid": false,
@@ -623,7 +805,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 28,
+    "methodIndex": 37,
     "setIndex": 0,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.UInt16)__Set0",
     "isVoid": false,
@@ -636,7 +818,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 28,
+    "methodIndex": 37,
     "setIndex": 1,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.UInt16)__Set1",
     "isVoid": false,
@@ -649,7 +831,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 29,
+    "methodIndex": 38,
     "setIndex": 0,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.UInt32)__Set0",
     "isVoid": false,
@@ -662,7 +844,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 29,
+    "methodIndex": 38,
     "setIndex": 1,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.UInt32)__Set1",
     "isVoid": false,
@@ -675,7 +857,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 30,
+    "methodIndex": 39,
     "setIndex": 0,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.Int64)__Set0",
     "isVoid": false,
@@ -688,7 +870,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 30,
+    "methodIndex": 39,
     "setIndex": 1,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.Int64)__Set1",
     "isVoid": false,
@@ -701,7 +883,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 31,
+    "methodIndex": 40,
     "setIndex": 0,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.UInt64)__Set0",
     "isVoid": false,
@@ -714,7 +896,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 31,
+    "methodIndex": 40,
     "setIndex": 1,
     "subjectId": "System.Enum::ToObject:System.Object(System.Type,System.UInt64)__Set1",
     "isVoid": false,

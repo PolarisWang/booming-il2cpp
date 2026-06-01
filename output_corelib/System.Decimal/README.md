@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.Decimal
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.Decimal`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 70 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 50 |
-| Benchmark-only (pure void / non-deterministic) | 6 |
-| Skipped (generic / unresolvable) | 14 |
-| Total Subjects | 130 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 70 |
+| Benchmark-only (pure void / non-deterministic) | 0 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 150 |
 
 ## Build
 
@@ -29,20 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `GetBits (ref struct)` — contains generic parameters, needs manual handling
-- `TryGetBits (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling

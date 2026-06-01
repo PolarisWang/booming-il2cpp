@@ -266,72 +266,36 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 8, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Parse ---
+        // --- TryFormat ---
         try
         {
-            var result = decimal.Parse(default(string)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 9, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            int __ref_9_0_0 = default(int);
+            default(decimal).TryFormat(default(Span<char>), out __ref_9_0_0, default(ReadOnlySpan<char>), default(System.IFormatProvider)!);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_9_0_0));
+            results.Add(new { MethodIndex = 9, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 9, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- TryFormat ---
         try
         {
-            var result = decimal.Parse("");
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 9, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 9, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Parse ---
-        try
-        {
-            var result = decimal.Parse(default(string)!, default(NumberStyles)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 10, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            int __ref_10_0_0 = default(int);
+            default(decimal).TryFormat(default(Span<byte>), out __ref_10_0_0, default(ReadOnlySpan<char>), default(System.IFormatProvider)!);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_10_0_0));
+            results.Add(new { MethodIndex = 10, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 10, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        try
-        {
-            var result = decimal.Parse("", default(NumberStyles)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 10, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 10, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        try
-        {
-            var result = decimal.Parse(default(string)!, (NumberStyles)0);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 10, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 10, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
         // --- Parse ---
         try
         {
-            var result = decimal.Parse(default(string)!, default(System.IFormatProvider)!);
+            var result = decimal.Parse(default(string)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -343,7 +307,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Parse("", default(System.IFormatProvider)!);
+            var result = decimal.Parse("");
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -356,7 +320,7 @@ public static class Probe
         // --- Parse ---
         try
         {
-            var result = decimal.Parse(default(string)!, default(NumberStyles)!, default(System.IFormatProvider)!);
+            var result = decimal.Parse(default(string)!, default(NumberStyles)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -368,7 +332,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Parse("", default(NumberStyles)!, default(System.IFormatProvider)!);
+            var result = decimal.Parse("", default(NumberStyles)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -380,7 +344,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Parse(default(string)!, (NumberStyles)0, default(System.IFormatProvider)!);
+            var result = decimal.Parse(default(string)!, (NumberStyles)0);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -390,17 +354,14 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 12, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- TryParse ---
+        // --- Parse ---
         try
         {
-            decimal __ref_13_0_0 = default(decimal);
-            var result = decimal.TryParse(default(string)!, out __ref_13_0_0);
-            var _outValues = new System.Collections.Generic.List<string>();
-            _outValues.Add(JsonSerializer.Serialize(__ref_13_0_0));
+            var result = decimal.Parse(default(string)!, default(System.IFormatProvider)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 13, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+            results.Add(new { MethodIndex = 13, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -408,30 +369,24 @@ public static class Probe
         }
         try
         {
-            decimal __ref_13_1_0 = default(decimal);
-            var result = decimal.TryParse("", out __ref_13_1_0);
-            var _outValues = new System.Collections.Generic.List<string>();
-            _outValues.Add(JsonSerializer.Serialize(__ref_13_1_0));
+            var result = decimal.Parse("", default(System.IFormatProvider)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 13, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+            results.Add(new { MethodIndex = 13, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 13, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- TryParse ---
+        // --- Parse ---
         try
         {
-            decimal __ref_14_0_0 = default(decimal);
-            var result = decimal.TryParse(default(string)!, default(NumberStyles)!, default(System.IFormatProvider)!, out __ref_14_0_0);
-            var _outValues = new System.Collections.Generic.List<string>();
-            _outValues.Add(JsonSerializer.Serialize(__ref_14_0_0));
+            var result = decimal.Parse(default(string)!, default(NumberStyles)!, default(System.IFormatProvider)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 14, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+            results.Add(new { MethodIndex = 14, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -439,14 +394,11 @@ public static class Probe
         }
         try
         {
-            decimal __ref_14_1_0 = default(decimal);
-            var result = decimal.TryParse("", default(NumberStyles)!, default(System.IFormatProvider)!, out __ref_14_1_0);
-            var _outValues = new System.Collections.Generic.List<string>();
-            _outValues.Add(JsonSerializer.Serialize(__ref_14_1_0));
+            var result = decimal.Parse("", default(NumberStyles)!, default(System.IFormatProvider)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 14, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+            results.Add(new { MethodIndex = 14, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -454,27 +406,21 @@ public static class Probe
         }
         try
         {
-            decimal __ref_14_2_0 = default(decimal);
-            var result = decimal.TryParse(default(string)!, (NumberStyles)0, default(System.IFormatProvider)!, out __ref_14_2_0);
-            var _outValues = new System.Collections.Generic.List<string>();
-            _outValues.Add(JsonSerializer.Serialize(__ref_14_2_0));
+            var result = decimal.Parse(default(string)!, (NumberStyles)0, default(System.IFormatProvider)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 14, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+            results.Add(new { MethodIndex = 14, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 14, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- GetBits ---
+        // --- Parse ---
         try
         {
-            var result = decimal.GetBits(default(decimal));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 15, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            decimal.Parse(default(ReadOnlySpan<char>), default(NumberStyles)!, default(System.IFormatProvider)!);
+            results.Add(new { MethodIndex = 15, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -482,24 +428,24 @@ public static class Probe
         }
         try
         {
-            var result = decimal.GetBits((decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 15, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            decimal.Parse(default(ReadOnlySpan<char>), (NumberStyles)0, default(System.IFormatProvider)!);
+            results.Add(new { MethodIndex = 15, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 15, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Remainder ---
+        // --- TryParse ---
         try
         {
-            var result = decimal.Remainder(default(decimal), default(decimal));
+            decimal __ref_16_0_0 = default(decimal);
+            var result = decimal.TryParse(default(string)!, out __ref_16_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_16_0_0));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 16, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 16, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
@@ -507,98 +453,56 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Remainder((decimal)0m, default(decimal));
+            decimal __ref_16_1_0 = default(decimal);
+            var result = decimal.TryParse("", out __ref_16_1_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_16_1_0));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 16, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 16, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 16, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- TryParse ---
         try
         {
-            var result = decimal.Remainder(default(decimal), (decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 16, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 16, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Multiply ---
-        try
-        {
-            var result = decimal.Multiply(default(decimal), default(decimal));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 17, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            decimal __ref_17_0_0 = default(decimal);
+            decimal.TryParse(default(ReadOnlySpan<char>), out __ref_17_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_17_0_0));
+            results.Add(new { MethodIndex = 17, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 17, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- TryParse ---
         try
         {
-            var result = decimal.Multiply((decimal)0m, default(decimal));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 17, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 17, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        try
-        {
-            var result = decimal.Multiply(default(decimal), (decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 17, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 17, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Negate ---
-        try
-        {
-            var result = decimal.Negate(default(decimal));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 18, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            decimal __ref_18_0_0 = default(decimal);
+            decimal.TryParse(default(ReadOnlySpan<byte>), out __ref_18_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_18_0_0));
+            results.Add(new { MethodIndex = 18, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 18, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- TryParse ---
         try
         {
-            var result = decimal.Negate((decimal)0m);
+            decimal __ref_19_0_0 = default(decimal);
+            var result = decimal.TryParse(default(string)!, default(NumberStyles)!, default(System.IFormatProvider)!, out __ref_19_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_19_0_0));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 18, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 18, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Round ---
-        try
-        {
-            var result = decimal.Round(default(decimal));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 19, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 19, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
@@ -606,24 +510,42 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Round((decimal)0m);
+            decimal __ref_19_1_0 = default(decimal);
+            var result = decimal.TryParse("", default(NumberStyles)!, default(System.IFormatProvider)!, out __ref_19_1_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_19_1_0));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 19, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 19, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 19, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Round ---
         try
         {
-            var result = decimal.Round(default(decimal), default(int));
+            decimal __ref_19_2_0 = default(decimal);
+            var result = decimal.TryParse(default(string)!, (NumberStyles)0, default(System.IFormatProvider)!, out __ref_19_2_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_19_2_0));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 20, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 19, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 19, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryParse ---
+        try
+        {
+            decimal __ref_20_0_0 = default(decimal);
+            decimal.TryParse(default(ReadOnlySpan<char>), default(NumberStyles)!, default(System.IFormatProvider)!, out __ref_20_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_20_0_0));
+            results.Add(new { MethodIndex = 20, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
@@ -631,32 +553,20 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Round((decimal)0m, default(int));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 20, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            decimal __ref_20_1_0 = default(decimal);
+            decimal.TryParse(default(ReadOnlySpan<char>), (NumberStyles)0, default(System.IFormatProvider)!, out __ref_20_1_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_20_1_0));
+            results.Add(new { MethodIndex = 20, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 20, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- GetBits ---
         try
         {
-            var result = decimal.Round(default(decimal), (int)0);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 20, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 20, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Round ---
-        try
-        {
-            var result = decimal.Round(default(decimal), default(System.MidpointRounding)!);
+            var result = decimal.GetBits(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -668,7 +578,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Round((decimal)0m, default(System.MidpointRounding)!);
+            var result = decimal.GetBits((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -678,26 +588,11 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 21, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- GetBits ---
         try
         {
-            var result = decimal.Round(default(decimal), (System.MidpointRounding)0);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 21, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 21, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Round ---
-        try
-        {
-            var result = decimal.Round(default(decimal), default(int), default(System.MidpointRounding)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 22, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            decimal.GetBits(default(decimal), default(Span<int>));
+            results.Add(new { MethodIndex = 22, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -705,48 +600,21 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Round((decimal)0m, default(int), default(System.MidpointRounding)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 22, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            decimal.GetBits((decimal)0m, default(Span<int>));
+            results.Add(new { MethodIndex = 22, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 22, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- TryGetBits ---
         try
         {
-            var result = decimal.Round(default(decimal), (int)0, default(System.MidpointRounding)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 22, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 22, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        try
-        {
-            var result = decimal.Round(default(decimal), default(int), (System.MidpointRounding)0);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 22, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 22, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Subtract ---
-        try
-        {
-            var result = decimal.Subtract(default(decimal), default(decimal));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 23, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            int __ref_23_0_0 = default(int);
+            decimal.TryGetBits(default(decimal), default(Span<int>), out __ref_23_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_23_0_0));
+            results.Add(new { MethodIndex = 23, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
@@ -754,32 +622,20 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Subtract((decimal)0m, default(decimal));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 23, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            int __ref_23_1_0 = default(int);
+            decimal.TryGetBits((decimal)0m, default(Span<int>), out __ref_23_1_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_23_1_0));
+            results.Add(new { MethodIndex = 23, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 23, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- Remainder ---
         try
         {
-            var result = decimal.Subtract(default(decimal), (decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 23, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 23, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- ToByte ---
-        try
-        {
-            var result = decimal.ToByte(default(decimal));
+            var result = decimal.Remainder(default(decimal), default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -791,7 +647,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToByte((decimal)0m);
+            var result = decimal.Remainder((decimal)0m, default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -801,10 +657,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 24, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ToSByte ---
         try
         {
-            var result = decimal.ToSByte(default(decimal));
+            var result = decimal.Remainder(default(decimal), (decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 24, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 24, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Multiply ---
+        try
+        {
+            var result = decimal.Multiply(default(decimal), default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -816,7 +684,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToSByte((decimal)0m);
+            var result = decimal.Multiply((decimal)0m, default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -826,10 +694,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 25, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ToInt16 ---
         try
         {
-            var result = decimal.ToInt16(default(decimal));
+            var result = decimal.Multiply(default(decimal), (decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 25, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 25, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Negate ---
+        try
+        {
+            var result = decimal.Negate(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -841,7 +721,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToInt16((decimal)0m);
+            var result = decimal.Negate((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -851,10 +731,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 26, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ToDouble ---
+        // --- Round ---
         try
         {
-            var result = decimal.ToDouble(default(decimal));
+            var result = decimal.Round(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -866,7 +746,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToDouble((decimal)0m);
+            var result = decimal.Round((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -876,10 +756,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 27, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ToInt32 ---
+        // --- Round ---
         try
         {
-            var result = decimal.ToInt32(default(decimal));
+            var result = decimal.Round(default(decimal), default(int));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -891,7 +771,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToInt32((decimal)0m);
+            var result = decimal.Round((decimal)0m, default(int));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -901,10 +781,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 28, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ToInt64 ---
         try
         {
-            var result = decimal.ToInt64(default(decimal));
+            var result = decimal.Round(default(decimal), (int)0);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 28, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 28, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Round ---
+        try
+        {
+            var result = decimal.Round(default(decimal), default(System.MidpointRounding)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -916,7 +808,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToInt64((decimal)0m);
+            var result = decimal.Round((decimal)0m, default(System.MidpointRounding)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -926,10 +818,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 29, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ToUInt16 ---
         try
         {
-            var result = decimal.ToUInt16(default(decimal));
+            var result = decimal.Round(default(decimal), (System.MidpointRounding)0);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 29, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 29, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Round ---
+        try
+        {
+            var result = decimal.Round(default(decimal), default(int), default(System.MidpointRounding)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -941,7 +845,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToUInt16((decimal)0m);
+            var result = decimal.Round((decimal)0m, default(int), default(System.MidpointRounding)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -951,10 +855,34 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 30, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ToUInt32 ---
         try
         {
-            var result = decimal.ToUInt32(default(decimal));
+            var result = decimal.Round(default(decimal), (int)0, default(System.MidpointRounding)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 30, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 30, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.Round(default(decimal), default(int), (System.MidpointRounding)0);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 30, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 30, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Subtract ---
+        try
+        {
+            var result = decimal.Subtract(default(decimal), default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -966,7 +894,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToUInt32((decimal)0m);
+            var result = decimal.Subtract((decimal)0m, default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -976,10 +904,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 31, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ToUInt64 ---
         try
         {
-            var result = decimal.ToUInt64(default(decimal));
+            var result = decimal.Subtract(default(decimal), (decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 31, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 31, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- ToByte ---
+        try
+        {
+            var result = decimal.ToByte(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -991,7 +931,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToUInt64((decimal)0m);
+            var result = decimal.ToByte((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1001,10 +941,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 32, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ToSingle ---
+        // --- ToSByte ---
         try
         {
-            var result = decimal.ToSingle(default(decimal));
+            var result = decimal.ToSByte(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1016,7 +956,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ToSingle((decimal)0m);
+            var result = decimal.ToSByte((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1026,10 +966,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 33, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Truncate ---
+        // --- ToInt16 ---
         try
         {
-            var result = decimal.Truncate(default(decimal));
+            var result = decimal.ToInt16(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1041,7 +981,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Truncate((decimal)0m);
+            var result = decimal.ToInt16((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1051,23 +991,35 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 34, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- GetTypeCode ---
+        // --- ToDouble ---
         try
         {
-            var result = default(decimal).GetTypeCode();
+            var result = decimal.ToDouble(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 35, SetIndex = 35, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 35, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
-            results.Add(new { MethodIndex = 35, SetIndex = 35, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 35, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ConvertToInteger ---
         try
         {
-            var result = decimal.ConvertToInteger<int>(default(decimal));
+            var result = decimal.ToDouble((decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 35, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 35, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- ToInt32 ---
+        try
+        {
+            var result = decimal.ToInt32(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1079,7 +1031,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ConvertToInteger<int>((decimal)0m);
+            var result = decimal.ToInt32((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1089,10 +1041,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 36, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ConvertToIntegerNative ---
+        // --- ToInt64 ---
         try
         {
-            var result = decimal.ConvertToIntegerNative<int>(default(decimal));
+            var result = decimal.ToInt64(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1104,7 +1056,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.ConvertToIntegerNative<int>((decimal)0m);
+            var result = decimal.ToInt64((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1114,10 +1066,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 37, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Clamp ---
+        // --- ToUInt16 ---
         try
         {
-            var result = decimal.Clamp(default(decimal), default(decimal), default(decimal));
+            var result = decimal.ToUInt16(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1129,7 +1081,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Clamp((decimal)0m, default(decimal), default(decimal));
+            var result = decimal.ToUInt16((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1139,34 +1091,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 38, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- ToUInt32 ---
         try
         {
-            var result = decimal.Clamp(default(decimal), (decimal)0m, default(decimal));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 38, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 38, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        try
-        {
-            var result = decimal.Clamp(default(decimal), default(decimal), (decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 38, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 38, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- CopySign ---
-        try
-        {
-            var result = decimal.CopySign(default(decimal), default(decimal));
+            var result = decimal.ToUInt32(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1178,7 +1106,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.CopySign((decimal)0m, default(decimal));
+            var result = decimal.ToUInt32((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1188,22 +1116,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 39, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- ToUInt64 ---
         try
         {
-            var result = decimal.CopySign(default(decimal), (decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 39, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 39, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Max ---
-        try
-        {
-            var result = decimal.Max(default(decimal), default(decimal));
+            var result = decimal.ToUInt64(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1215,7 +1131,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Max((decimal)0m, default(decimal));
+            var result = decimal.ToUInt64((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1225,22 +1141,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 40, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- ToSingle ---
         try
         {
-            var result = decimal.Max(default(decimal), (decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 40, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 40, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Min ---
-        try
-        {
-            var result = decimal.Min(default(decimal), default(decimal));
+            var result = decimal.ToSingle(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1252,7 +1156,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Min((decimal)0m, default(decimal));
+            var result = decimal.ToSingle((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1262,22 +1166,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 41, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- Truncate ---
         try
         {
-            var result = decimal.Min(default(decimal), (decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 41, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 41, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Sign ---
-        try
-        {
-            var result = decimal.Sign(default(decimal));
+            var result = decimal.Truncate(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1289,7 +1181,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.Sign((decimal)0m);
+            var result = decimal.Truncate((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1299,35 +1191,23 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 42, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Abs ---
+        // --- GetTypeCode ---
         try
         {
-            var result = decimal.Abs(default(decimal));
+            var result = default(decimal).GetTypeCode();
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 43, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 43, SetIndex = 43, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
-            results.Add(new { MethodIndex = 43, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 43, SetIndex = 43, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- ConvertToInteger ---
         try
         {
-            var result = decimal.Abs((decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 43, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 43, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- CreateChecked ---
-        try
-        {
-            var result = decimal.CreateChecked<int>(default(int));
+            var result = decimal.ConvertToInteger<int>(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1339,7 +1219,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.CreateChecked<int>((int)0);
+            var result = decimal.ConvertToInteger<int>((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1349,10 +1229,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 44, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- CreateSaturating ---
+        // --- ConvertToIntegerNative ---
         try
         {
-            var result = decimal.CreateSaturating<int>(default(int));
+            var result = decimal.ConvertToIntegerNative<int>(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1364,7 +1244,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.CreateSaturating<int>((int)0);
+            var result = decimal.ConvertToIntegerNative<int>((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1374,10 +1254,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 45, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- CreateTruncating ---
+        // --- Clamp ---
         try
         {
-            var result = decimal.CreateTruncating<int>(default(int));
+            var result = decimal.Clamp(default(decimal), default(decimal), default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1389,7 +1269,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.CreateTruncating<int>((int)0);
+            var result = decimal.Clamp((decimal)0m, default(decimal), default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1399,10 +1279,34 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 46, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- IsCanonical ---
         try
         {
-            var result = decimal.IsCanonical(default(decimal));
+            var result = decimal.Clamp(default(decimal), (decimal)0m, default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 46, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 46, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.Clamp(default(decimal), default(decimal), (decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 46, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 46, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- CopySign ---
+        try
+        {
+            var result = decimal.CopySign(default(decimal), default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1414,7 +1318,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.IsCanonical((decimal)0m);
+            var result = decimal.CopySign((decimal)0m, default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1424,10 +1328,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 47, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- IsEvenInteger ---
         try
         {
-            var result = decimal.IsEvenInteger(default(decimal));
+            var result = decimal.CopySign(default(decimal), (decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 47, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 47, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Max ---
+        try
+        {
+            var result = decimal.Max(default(decimal), default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1439,7 +1355,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.IsEvenInteger((decimal)0m);
+            var result = decimal.Max((decimal)0m, default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1449,10 +1365,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 48, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- IsInteger ---
         try
         {
-            var result = decimal.IsInteger(default(decimal));
+            var result = decimal.Max(default(decimal), (decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 48, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 48, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Min ---
+        try
+        {
+            var result = decimal.Min(default(decimal), default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1464,7 +1392,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.IsInteger((decimal)0m);
+            var result = decimal.Min((decimal)0m, default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1474,10 +1402,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 49, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- IsNegative ---
         try
         {
-            var result = decimal.IsNegative(default(decimal));
+            var result = decimal.Min(default(decimal), (decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 49, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 49, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Sign ---
+        try
+        {
+            var result = decimal.Sign(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1489,7 +1429,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.IsNegative((decimal)0m);
+            var result = decimal.Sign((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1499,10 +1439,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 50, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- IsOddInteger ---
+        // --- Abs ---
         try
         {
-            var result = decimal.IsOddInteger(default(decimal));
+            var result = decimal.Abs(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1514,7 +1454,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.IsOddInteger((decimal)0m);
+            var result = decimal.Abs((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1524,10 +1464,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 51, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- IsPositive ---
+        // --- CreateChecked ---
         try
         {
-            var result = decimal.IsPositive(default(decimal));
+            var result = decimal.CreateChecked<int>(default(int));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1539,7 +1479,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.IsPositive((decimal)0m);
+            var result = decimal.CreateChecked<int>((int)0);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1549,10 +1489,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 52, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- MaxMagnitude ---
+        // --- CreateSaturating ---
         try
         {
-            var result = decimal.MaxMagnitude(default(decimal), default(decimal));
+            var result = decimal.CreateSaturating<int>(default(int));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1564,7 +1504,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.MaxMagnitude((decimal)0m, default(decimal));
+            var result = decimal.CreateSaturating<int>((int)0);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1574,22 +1514,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 53, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- CreateTruncating ---
         try
         {
-            var result = decimal.MaxMagnitude(default(decimal), (decimal)0m);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 53, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 53, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- MinMagnitude ---
-        try
-        {
-            var result = decimal.MinMagnitude(default(decimal), default(decimal));
+            var result = decimal.CreateTruncating<int>(default(int));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1601,7 +1529,7 @@ public static class Probe
         }
         try
         {
-            var result = decimal.MinMagnitude((decimal)0m, default(decimal));
+            var result = decimal.CreateTruncating<int>((int)0);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1611,29 +1539,14 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 54, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- IsCanonical ---
         try
         {
-            var result = decimal.MinMagnitude(default(decimal), (decimal)0m);
+            var result = decimal.IsCanonical(default(decimal));
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 54, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 54, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- TryParse ---
-        try
-        {
-            decimal __ref_55_0_0 = default(decimal);
-            var result = decimal.TryParse(default(string)!, default(System.IFormatProvider)!, out __ref_55_0_0);
-            var _outValues = new System.Collections.Generic.List<string>();
-            _outValues.Add(JsonSerializer.Serialize(__ref_55_0_0));
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 55, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+            results.Add(new { MethodIndex = 55, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1641,18 +1554,335 @@ public static class Probe
         }
         try
         {
-            decimal __ref_55_1_0 = default(decimal);
-            var result = decimal.TryParse("", default(System.IFormatProvider)!, out __ref_55_1_0);
-            var _outValues = new System.Collections.Generic.List<string>();
-            _outValues.Add(JsonSerializer.Serialize(__ref_55_1_0));
+            var result = decimal.IsCanonical((decimal)0m);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 55, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+            results.Add(new { MethodIndex = 55, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 55, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- IsEvenInteger ---
+        try
+        {
+            var result = decimal.IsEvenInteger(default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 56, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 56, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.IsEvenInteger((decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 56, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 56, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- IsInteger ---
+        try
+        {
+            var result = decimal.IsInteger(default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 57, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 57, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.IsInteger((decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 57, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 57, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- IsNegative ---
+        try
+        {
+            var result = decimal.IsNegative(default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 58, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 58, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.IsNegative((decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 58, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 58, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- IsOddInteger ---
+        try
+        {
+            var result = decimal.IsOddInteger(default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 59, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 59, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.IsOddInteger((decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 59, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 59, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- IsPositive ---
+        try
+        {
+            var result = decimal.IsPositive(default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 60, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 60, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.IsPositive((decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 60, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 60, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- MaxMagnitude ---
+        try
+        {
+            var result = decimal.MaxMagnitude(default(decimal), default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 61, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 61, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.MaxMagnitude((decimal)0m, default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 61, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 61, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.MaxMagnitude(default(decimal), (decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 61, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 61, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- MinMagnitude ---
+        try
+        {
+            var result = decimal.MinMagnitude(default(decimal), default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 62, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 62, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.MinMagnitude((decimal)0m, default(decimal));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 62, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 62, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = decimal.MinMagnitude(default(decimal), (decimal)0m);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 62, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 62, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryParse ---
+        try
+        {
+            decimal __ref_63_0_0 = default(decimal);
+            var result = decimal.TryParse(default(string)!, default(System.IFormatProvider)!, out __ref_63_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_63_0_0));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 63, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 63, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            decimal __ref_63_1_0 = default(decimal);
+            var result = decimal.TryParse("", default(System.IFormatProvider)!, out __ref_63_1_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_63_1_0));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 63, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 63, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Parse ---
+        try
+        {
+            decimal.Parse(default(ReadOnlySpan<char>), default(System.IFormatProvider)!);
+            results.Add(new { MethodIndex = 64, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 64, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryParse ---
+        try
+        {
+            decimal __ref_65_0_0 = default(decimal);
+            decimal.TryParse(default(ReadOnlySpan<char>), default(System.IFormatProvider)!, out __ref_65_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_65_0_0));
+            results.Add(new { MethodIndex = 65, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 65, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Parse ---
+        try
+        {
+            decimal.Parse(default(ReadOnlySpan<byte>), default(NumberStyles)!, default(System.IFormatProvider)!);
+            results.Add(new { MethodIndex = 66, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 66, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            decimal.Parse(default(ReadOnlySpan<byte>), (NumberStyles)0, default(System.IFormatProvider)!);
+            results.Add(new { MethodIndex = 66, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 66, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryParse ---
+        try
+        {
+            decimal __ref_67_0_0 = default(decimal);
+            decimal.TryParse(default(ReadOnlySpan<byte>), default(NumberStyles)!, default(System.IFormatProvider)!, out __ref_67_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_67_0_0));
+            results.Add(new { MethodIndex = 67, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 67, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            decimal __ref_67_1_0 = default(decimal);
+            decimal.TryParse(default(ReadOnlySpan<byte>), (NumberStyles)0, default(System.IFormatProvider)!, out __ref_67_1_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_67_1_0));
+            results.Add(new { MethodIndex = 67, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 67, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Parse ---
+        try
+        {
+            decimal.Parse(default(ReadOnlySpan<byte>), default(System.IFormatProvider)!);
+            results.Add(new { MethodIndex = 68, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 68, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- TryParse ---
+        try
+        {
+            decimal __ref_69_0_0 = default(decimal);
+            decimal.TryParse(default(ReadOnlySpan<byte>), default(System.IFormatProvider)!, out __ref_69_0_0);
+            var _outValues = new System.Collections.Generic.List<string>();
+            _outValues.Add(JsonSerializer.Serialize(__ref_69_0_0));
+            results.Add(new { MethodIndex = 69, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)_outValues });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 69, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
 
         var json = JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = false });

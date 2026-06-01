@@ -10,6 +10,22 @@ public sealed class DllScanner
         "ToString", "Equals", "GetHashCode", "Finalize", "MemberwiseClone", "GetType"
     };
 
+    // Methods that require infrastructure not available in isolated tests.
+    private static readonly HashSet<string> UnprobableMethods = new(StringComparer.Ordinal)
+    {
+        "GetObjectData",       // requires SerializationInfo setup
+        "OnDeserialization",   // requires deserialization infrastructure
+    };
+
+    // Types that require complex infrastructure (e.g. JsonSerializerOptions) and
+    // can't produce meaningful results in isolated auto-generated tests.
+    private static readonly HashSet<string> UnprobableTypeNames = new(StringComparer.Ordinal)
+    {
+        "System.Text.Json.Serialization.Metadata.JsonTypeInfo",
+        "System.Text.Json.Serialization.Metadata.JsonPropertyInfo",
+        "System.Text.Json.Serialization.Metadata.JsonParameterInfo",
+    };
+
     public DllScanResult Scan(string dllPath, string typeFullName)
     {
         var assemblyName = Path.GetFileNameWithoutExtension(dllPath);
@@ -41,6 +57,24 @@ public sealed class DllScanner
                 $"Type '{typeFullName}' not found in assembly '{assemblyName}'. " +
                 $"Available types: {string.Join(", ", assembly.GetTypes().Take(20).Select(t => t.FullName))}");
 
+        // ── Concretize generic type definitions (e.g. Stack`1 → Stack<int>) ──
+        if (targetType.IsGenericTypeDefinition)
+        {
+            if (TryConcretizeGenericType(mlc, targetType, out var concreteType))
+            {
+                targetType = concreteType;
+                // Clean up the assembly-qualified FullName for downstream C# generation
+                typeFullName = CSharpSerializer.StripAssemblyQualification(
+                    concreteType.FullName ?? typeFullName);
+            }
+            else
+            {
+                throw new InvalidOperationException(
+                    $"Cannot concretize generic type definition '{typeFullName}'. " +
+                    "Generic type definitions are not directly supported.");
+            }
+        }
+
         var signatures = new List<MethodSignature>();
         var skippedMethods = new List<string>();
 
@@ -61,14 +95,14 @@ public sealed class DllScanner
             if (ObjectMethods.Contains(rawMethod.Name))
                 continue;
 
-            var method = rawMethod;
-
-            // Skip methods with ref struct parameters or return types
-            if (HasRefStructParameter(method) || IsRefStructReturn(method))
+            // Skip methods that need infrastructure not available in isolated tests
+            if (UnprobableMethods.Contains(rawMethod.Name))
             {
-                skippedMethods.Add($"{method.Name} (ref struct)");
+                skippedMethods.Add(rawMethod.Name);
                 continue;
             }
+
+            var method = rawMethod;
 
             // Try to concretize generic methods
             if (method.ContainsGenericParameters)
@@ -112,26 +146,93 @@ public sealed class DllScanner
                 if (isRef) hasRefParam = true;
 
                 var paramTypeName = GetTypeName(p.ParameterType);
+                // Normalize: strip any assembly qualification that may leak from MLC
+                paramTypeName = CSharpSerializer.StripAssemblyQualification(paramTypeName);
+
+                // If GetTypeName returned a short name without namespace or generic args
+                // for a non-primitive type, MLC likely couldn't resolve the type.
+                // Skip this method to avoid generating invalid code.
+                if (LooksIncomplete(paramTypeName))
+                {
+                    skippedMethods.Add($"{method.Name} (unresolved parameter type: {paramTypeName})");
+                    parameters.Clear(); // discard partial param list
+                    break;
+                }
+
                 var isRefStruct = IsRefStructType(p.ParameterType);
                 parameters.Add(new MethodParameter(p.Name ?? $"p{parameters.Count}", paramTypeName, isOut, isRef, isRefStruct));
             }
 
+            // If we broke out due to an incomplete type, skip to next method
+            if (parameters.Count == 0 && skippedMethods.Count > 0 &&
+                skippedMethods[^1].Contains(method.Name))
+                continue;
+
             var returnType = method.ReturnType;
             var isVoid = returnType.FullName == "System.Void";
+            var isRefStructReturn = !isVoid && IsRefStructType(returnType);
+
+            var returnTypeName = GetTypeName(returnType);
+            returnTypeName = CSharpSerializer.StripAssemblyQualification(returnTypeName);
+            if (!isVoid && LooksIncomplete(returnTypeName))
+            {
+                skippedMethods.Add($"{method.Name} (unresolved return type: {returnTypeName})");
+                continue;
+            }
 
             signatures.Add(new MethodSignature(
                 method.Name,
                 targetType.FullName ?? typeFullName,
-                GetTypeName(returnType),
+                returnTypeName,
                 method.IsStatic,
                 isVoid,
                 hasRefParam,
                 parameters,
+                isRefStructReturn,
                 genericTypeArgs
             ));
         }
 
         return new DllScanResult(assemblyName, typeFullName, signatures, skippedMethods, tfm);
+    }
+
+    /// <summary>
+    /// Scan all public types in the assembly that have public methods.
+    /// Returns one DllScanResult per type. Types with no public methods,
+    /// enums, or types that fail to scan are skipped with a warning.
+    /// </summary>
+    public IReadOnlyList<DllScanResult> ScanAll(string dllPath)
+    {
+        var results = new List<DllScanResult>();
+        var types = ListPublicTypes(dllPath);
+
+        Console.WriteLine($"  Scanning {types.Count} types...");
+        int skipCount = 0;
+        foreach (var (typeName, _) in types)
+        {
+            if (UnprobableTypeNames.Contains(typeName))
+            {
+                Console.WriteLine($"  [SKIP] {typeName}: infrastructure-dependent type");
+                skipCount++;
+                continue;
+            }
+            try
+            {
+                var result = Scan(dllPath, typeName);
+                if (result.Methods.Count > 0)
+                    results.Add(result);
+                else
+                    skipCount++;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"  [SKIP] {typeName}: {ex.Message}");
+                skipCount++;
+            }
+        }
+
+        Console.WriteLine($"  Scanned {results.Count} types ({skipCount} skipped)");
+        return results;
     }
 
     /// <summary>
@@ -150,6 +251,7 @@ public sealed class DllScanner
         {
             if (!t.IsPublic && !t.IsNestedPublic) continue;
             if (t.IsEnum) continue;
+            if (t.FullName is not null && UnprobableTypeNames.Contains(t.FullName)) continue;
 
             var count = t.GetMethods(
                 BindingFlags.Public | BindingFlags.Static |
@@ -226,6 +328,68 @@ public sealed class DllScanner
     }
 
     /// <summary>
+    /// Try to concretize a generic type definition (e.g., Stack`1 → Stack&lt;System.Int32&gt;)
+    /// by substituting common type arguments for its type-level generic parameters.
+    /// Works within the MetadataLoadContext using the same heuristic as TryConcretizeGenericMethod.
+    /// </summary>
+    private static bool TryConcretizeGenericType(MetadataLoadContext mlc, Type type, out Type constructed)
+    {
+        constructed = null!;
+        try
+        {
+            var genericParams = type.GetGenericArguments();
+            if (genericParams.Length == 0) return false;
+
+            var concreteTypes = new Type[genericParams.Length];
+
+            for (int i = 0; i < genericParams.Length; i++)
+            {
+                var gp = genericParams[i];
+                var constraints = gp.GetGenericParameterConstraints();
+                var attrs = gp.GenericParameterAttributes;
+
+                if (constraints.Length > 0)
+                {
+                    var hasValueTypeConstraint = constraints.Any(c =>
+                        c.Name is "ValueType" or "Enum" || c.FullName == "System.ValueType" || c.FullName == "System.Enum");
+
+                    if (hasValueTypeConstraint)
+                    {
+                        concreteTypes[i] = constraints.Any(c => c.FullName == "System.Enum")
+                            ? LoadTypeInContext(mlc, "System.DayOfWeek") ?? LoadTypeInContext(mlc, "System.Int32")!
+                            : LoadTypeInContext(mlc, "System.Int32")!;
+                    }
+                    else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
+                    {
+                        concreteTypes[i] = LoadTypeInContext(mlc, "System.String")!;
+                    }
+                    else
+                    {
+                        concreteTypes[i] = LoadTypeInContext(mlc, "System.Int32")!;
+                    }
+                }
+                else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
+                {
+                    concreteTypes[i] = LoadTypeInContext(mlc, "System.String")!;
+                }
+                else
+                {
+                    concreteTypes[i] = LoadTypeInContext(mlc, "System.Int32")!;
+                }
+
+                if (concreteTypes[i] is null) return false;
+            }
+
+            constructed = type.MakeGenericType(concreteTypes);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
     /// Find a type by full name across all assemblies loaded in the MetadataLoadContext.
     /// </summary>
     private static Type? LoadTypeInContext(MetadataLoadContext mlc, string typeFullName)
@@ -254,12 +418,50 @@ public sealed class DllScanner
 
         if (type.IsGenericType)
         {
-            var args = string.Join(",", type.GetGenericArguments().Select(GetTypeName));
+            // For nested types: C# compiler inherits parent type params.
+            // CLR includes ALL args (parent + own), but C# only wants the nested type's own.
+            // Subtract parent arity to get the right C# generic signature.
+            var allArgs = type.GetGenericArguments();
+            var parentArity = type.DeclaringType?.GetGenericArguments().Length ?? 0;
+            var ownArgs = allArgs.Skip(parentArity).ToArray();
+            var args = string.Join(",", ownArgs.Select(GetTypeName));
             var defName = type.GetGenericTypeDefinition().Name;
             var backtick = defName.IndexOf('`');
             if (backtick >= 0) defName = defName[..backtick];
+
+            // Nested types: include parent type name for C# qualification.
+            // MLC may keep DeclaringType as the generic type definition even after
+            // parent concretization — in that case, reconstruct parent name from
+            // the all-inclusive generic arguments.
+            if (type.DeclaringType is { } declaringType)
+            {
+                string parentName;
+                if (parentArity > 0 && declaringType.IsGenericTypeDefinition)
+                {
+                    var parentArgs = allArgs.Take(parentArity).Select(GetTypeName);
+                    var parentDefName = declaringType.Name;
+                    var parentBt = parentDefName.IndexOf('`');
+                    if (parentBt >= 0) parentDefName = parentDefName[..parentBt];
+                    parentName = $"{parentDefName}<{string.Join(",", parentArgs)}>";
+                }
+                else
+                {
+                    parentName = GetTypeName(declaringType);
+                }
+                var csharpName = $"{parentName}.{defName}";
+                if (ownArgs.Length > 0)
+                    csharpName += $"<{args}>";
+                return csharpName;
+            }
+
             return $"{defName}<{args}>";
         }
+
+        // Unwrap ByRef types (ref/out params) before checking FullName,
+        // because MLC may set FullName for ByRef types (including nested generic args)
+        // and the FullName branch below would produce a mangled name.
+        if (type.IsByRef && type.GetElementType() is { } elementType)
+            return GetTypeName(elementType) + "&";
 
         var fullName = type.FullName;
         if (fullName is not null)
@@ -267,18 +469,43 @@ public sealed class DllScanner
             // CLR nested type: produce C# parent-qualified name, e.g.
             // "System.Text.StringBuilder+AppendInterpolatedStringHandler"
             // → "StringBuilder.AppendInterpolatedStringHandler"
-            if (fullName.Contains('+') && type.DeclaringType is not null)
+            if (fullName.Contains('+'))
             {
-                var parentCSharp = CSharpSerializer.MapToCSharpType(
-                    type.DeclaringType.FullName ?? type.DeclaringType.Name);
-                return $"{parentCSharp}.{type.Name}";
+                // MLC may not populate DeclaringType for nested types
+                if (type.DeclaringType is not null)
+                {
+                    var parentCSharp = CSharpSerializer.MapToCSharpType(
+                        type.DeclaringType.FullName ?? type.DeclaringType.Name);
+                    return $"{parentCSharp}.{type.Name}";
+                }
+                // Fallback: extract parent short name for C# compatibility
+                // e.g. "System.Text.StringBuilder+AppendInterpolatedStringHandler"
+                // → "StringBuilder.AppendInterpolatedStringHandler"
+                var plusIdx = fullName.LastIndexOf('+');
+                if (plusIdx >= 0)
+                {
+                    var parentPart = fullName[..plusIdx];
+                    var parentLastDot = parentPart.LastIndexOf('.');
+                    var parentShort = parentLastDot >= 0 ? parentPart[(parentLastDot + 1)..] : parentPart;
+                    return $"{parentShort}.{type.Name}";
+                }
+                return fullName;
             }
             return fullName;
         }
 
-        // MetadataLoadContext sometimes loses FullName for constructed generics.
-        // Fall back to Name (e.g. "Span`1") and fill arity with byte.
+        // MetadataLoadContext sometimes loses FullName for constructed generics
+        // and their nested types. Fall back to Name.
         var name = type.Name;
+
+        // For nested types with no FullName (MLC limitation), qualify with parent name.
+        // E.g. Dictionary<int,int>.Enumerator instead of bare "Enumerator".
+        if (type.DeclaringType is { } dt)
+        {
+            var parentName = GetTypeName(dt);
+            return $"{parentName}.{name}";
+        }
+
         var bt = name.IndexOf('`');
         if (bt < 0) return name;
 
@@ -312,16 +539,28 @@ public sealed class DllScanner
         catch { return false; }
     }
 
+    private static readonly HashSet<string> RefStructTypeNames = new(StringComparer.Ordinal)
+    {
+        "ReadOnlySpan", "ReadOnlySpan`1",
+        "Span", "Span`1",
+    };
+
     /// <summary>
     /// Check if a type is a ref struct (IsByRefLike).
     /// For MLC's limited detection of CLR nested ref structs (e.g.
     /// StringBuilder+AppendInterpolatedStringHandler), falls back to
     /// heuristic: value type whose FullName contains '+' (CLR nested marker).
+    /// Also checks known ref struct type names since MLC may not report
+    /// IsByRefLike for generic instantiations like ReadOnlySpan&lt;char&gt;.
     /// </summary>
     private static bool IsRefStructType(Type type)
     {
-        // Direct IsByRefLike check
+        // Direct IsByRefLike check (may not work for generic instantiations in MLC)
         if (type.IsByRefLike) return true;
+
+        // Name-based check for known ref struct types
+        if (RefStructTypeNames.Contains(type.Name))
+            return true;
 
         // For ByRef-wrapped types (ref/out parameters)
         if (type.IsByRef && type.GetElementType() is { } elementType)
@@ -349,9 +588,12 @@ public sealed class DllScanner
     {
         try
         {
-            if (method.ReturnType.ContainsGenericParameters)
+            if (method.ReturnType.ContainsGenericParameters ||
+                HasIncompleteGenericName(method.ReturnType))
                 return true;
-            if (method.GetParameters().Any(p => p.ParameterType.ContainsGenericParameters))
+            if (method.GetParameters().Any(p =>
+                p.ParameterType.ContainsGenericParameters ||
+                HasIncompleteGenericName(p.ParameterType)))
                 return true;
             return false;
         }
@@ -359,6 +601,53 @@ public sealed class DllScanner
         {
             return true; // conservative: skip if we can't inspect
         }
+    }
+
+    /// <summary>
+    /// Detect types whose FullName is null and Name is a short name without generic
+    /// — this means MLC couldn't resolve the type and GetTypeName will return
+    /// an incomplete name (e.g. "Dictionary" instead of "Dictionary&lt;int,int&gt;").
+    /// </summary>
+    private static bool HasIncompleteGenericName(Type type)
+    {
+        var t = type.IsByRef ? type.GetElementType()! : type;
+        if (t.IsGenericParameter) return false;
+        if (t.IsGenericType) return false;  // has proper generic args
+        if (t.FullName is not null) return false;  // has proper name
+        // Name without FullName and not a generic type — MLC couldn't resolve it
+        return t.Name.Contains('`') || char.IsUpper(t.Name[0]);
+    }
+
+    /// <summary>
+    /// Check if a type name returned by GetTypeName looks incomplete — i.e. is a
+    /// short name without namespace or generic args, and is not a primitive/keyword.
+    /// This catches cases where MLC returns a type with a non-null FullName but
+    /// the constructed generic args are lost (e.g. "Dictionary" instead of "Dictionary&lt;int,int&gt;").
+    /// </summary>
+    private static bool LooksIncomplete(string typeName)
+    {
+        var name = typeName.EndsWith('&') ? typeName[..^1].Trim() : typeName;
+        if (name.Contains('.') || name.Contains('{')) return false;
+
+        // Has generic args but no namespace dot — likely a nested type missing parent
+        // qualification (e.g. "AlternateLookup<int,int,int>" → should be
+        // "Dictionary<int,int>.AlternateLookup<int,int,int>").
+        var ga = name.IndexOf('<');
+        if (ga >= 0)
+        {
+            var baseName = name[..ga];
+            if (baseName is "int" or "uint" or "long" or "ulong" or "short" or "ushort"
+                or "byte" or "sbyte" or "float" or "double" or "decimal" or "char"
+                or "bool" or "string" or "object") return false;
+            return true; // non-primitive with generic args but no namespace → nested type
+        }
+
+        if (name is "bool" or "byte" or "sbyte" or "short" or "ushort"
+            or "int" or "uint" or "long" or "ulong"
+            or "float" or "double" or "decimal" or "char" or "string"
+            or "object" or "void") return false;
+        if (name.Contains('`')) return true;
+        return true;
     }
 
     private static string[] GetProbeDirectories(string dllPath)

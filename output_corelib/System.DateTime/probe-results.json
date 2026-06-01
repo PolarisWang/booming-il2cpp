@@ -613,6 +613,32 @@
   {
     "methodIndex": 25,
     "setIndex": 0,
+    "subjectId": "System.DateTime::Parse:System.DateTime(ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.Globalization.DateTimeStyles)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.FormatException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 25,
+    "setIndex": 1,
+    "subjectId": "System.DateTime::Parse:System.DateTime(ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.Globalization.DateTimeStyles)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.FormatException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 26,
+    "setIndex": 0,
     "subjectId": "System.DateTime::ParseExact:System.DateTime(System.String,System.String,System.IFormatProvider)__Set0",
     "isVoid": false,
     "hasException": true,
@@ -624,7 +650,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 25,
+    "methodIndex": 26,
     "setIndex": 1,
     "subjectId": "System.DateTime::ParseExact:System.DateTime(System.String,System.String,System.IFormatProvider)__Set1",
     "isVoid": false,
@@ -637,7 +663,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 25,
+    "methodIndex": 26,
     "setIndex": 2,
     "subjectId": "System.DateTime::ParseExact:System.DateTime(System.String,System.String,System.IFormatProvider)__Set2",
     "isVoid": false,
@@ -650,7 +676,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 26,
+    "methodIndex": 27,
     "setIndex": 0,
     "subjectId": "System.DateTime::ParseExact:System.DateTime(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)__Set0",
     "isVoid": false,
@@ -663,7 +689,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 26,
+    "methodIndex": 27,
     "setIndex": 1,
     "subjectId": "System.DateTime::ParseExact:System.DateTime(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)__Set1",
     "isVoid": false,
@@ -676,7 +702,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 26,
+    "methodIndex": 27,
     "setIndex": 2,
     "subjectId": "System.DateTime::ParseExact:System.DateTime(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles)__Set2",
     "isVoid": false,
@@ -689,7 +715,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 27,
+    "methodIndex": 28,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::ParseExact:System.DateTime(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.Globalization.DateTimeStyles)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.FormatException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 29,
     "setIndex": 0,
     "subjectId": "System.DateTime::ParseExact:System.DateTime(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)__Set0",
     "isVoid": false,
@@ -702,7 +741,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 27,
+    "methodIndex": 29,
     "setIndex": 1,
     "subjectId": "System.DateTime::ParseExact:System.DateTime(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)__Set1",
     "isVoid": false,
@@ -715,7 +754,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 28,
+    "methodIndex": 30,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::ParseExact:System.DateTime(ReadOnlySpan\u003CSystem.Char\u003E,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 31,
     "setIndex": 0,
     "subjectId": "System.DateTime::Subtract:System.TimeSpan(System.DateTime)__Set0",
     "isVoid": false,
@@ -728,7 +780,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 29,
+    "methodIndex": 32,
     "setIndex": 0,
     "subjectId": "System.DateTime::Subtract:System.DateTime(System.TimeSpan)__Set0",
     "isVoid": false,
@@ -741,7 +793,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 29,
+    "methodIndex": 32,
     "setIndex": 1,
     "subjectId": "System.DateTime::Subtract:System.DateTime(System.TimeSpan)__Set1",
     "isVoid": false,
@@ -754,9 +806,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 30,
-    "setIndex": 30,
-    "subjectId": "System.DateTime::ToOADate:System.Double()__Set30",
+    "methodIndex": 33,
+    "setIndex": 33,
+    "subjectId": "System.DateTime::ToOADate:System.Double()__Set33",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -767,9 +819,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 31,
-    "setIndex": 31,
-    "subjectId": "System.DateTime::ToFileTime:System.Int64()__Set31",
+    "methodIndex": 34,
+    "setIndex": 34,
+    "subjectId": "System.DateTime::ToFileTime:System.Int64()__Set34",
     "isVoid": false,
     "hasException": true,
     "exceptionType": "System.ArgumentOutOfRangeException",
@@ -780,9 +832,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 32,
-    "setIndex": 32,
-    "subjectId": "System.DateTime::ToFileTimeUtc:System.Int64()__Set32",
+    "methodIndex": 35,
+    "setIndex": 35,
+    "subjectId": "System.DateTime::ToFileTimeUtc:System.Int64()__Set35",
     "isVoid": false,
     "hasException": true,
     "exceptionType": "System.ArgumentOutOfRangeException",
@@ -793,9 +845,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 33,
-    "setIndex": 33,
-    "subjectId": "System.DateTime::ToLocalTime:System.DateTime()__Set33",
+    "methodIndex": 36,
+    "setIndex": 36,
+    "subjectId": "System.DateTime::ToLocalTime:System.DateTime()__Set36",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -806,9 +858,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 34,
-    "setIndex": 34,
-    "subjectId": "System.DateTime::ToLongDateString:System.String()__Set34",
+    "methodIndex": 37,
+    "setIndex": 37,
+    "subjectId": "System.DateTime::ToLongDateString:System.String()__Set37",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -819,9 +871,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 35,
-    "setIndex": 35,
-    "subjectId": "System.DateTime::ToLongTimeString:System.String()__Set35",
+    "methodIndex": 38,
+    "setIndex": 38,
+    "subjectId": "System.DateTime::ToLongTimeString:System.String()__Set38",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -832,9 +884,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 36,
-    "setIndex": 36,
-    "subjectId": "System.DateTime::ToShortDateString:System.String()__Set36",
+    "methodIndex": 39,
+    "setIndex": 39,
+    "subjectId": "System.DateTime::ToShortDateString:System.String()__Set39",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -845,9 +897,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 37,
-    "setIndex": 37,
-    "subjectId": "System.DateTime::ToShortTimeString:System.String()__Set37",
+    "methodIndex": 40,
+    "setIndex": 40,
+    "subjectId": "System.DateTime::ToShortTimeString:System.String()__Set40",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -858,9 +910,39 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 38,
-    "setIndex": 38,
-    "subjectId": "System.DateTime::ToUniversalTime:System.DateTime()__Set38",
+    "methodIndex": 41,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::TryFormat:System.Boolean(Span\u003CSystem.Char\u003E,System.Int32\u0026,ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 42,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::TryFormat:System.Boolean(Span\u003CSystem.Byte\u003E,System.Int32\u0026,ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 43,
+    "setIndex": 43,
+    "subjectId": "System.DateTime::ToUniversalTime:System.DateTime()__Set43",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -871,7 +953,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 39,
+    "methodIndex": 44,
     "setIndex": 0,
     "subjectId": "System.DateTime::TryParse:System.Boolean(System.String,System.DateTime\u0026)__Set0",
     "isVoid": false,
@@ -886,7 +968,7 @@
     ]
   },
   {
-    "methodIndex": 39,
+    "methodIndex": 44,
     "setIndex": 1,
     "subjectId": "System.DateTime::TryParse:System.Boolean(System.String,System.DateTime\u0026)__Set1",
     "isVoid": false,
@@ -901,7 +983,22 @@
     ]
   },
   {
-    "methodIndex": 40,
+    "methodIndex": 45,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::TryParse:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.DateTime\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u00220001-01-01T00:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 46,
     "setIndex": 0,
     "subjectId": "System.DateTime::TryParse:System.Boolean(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set0",
     "isVoid": false,
@@ -916,7 +1013,7 @@
     ]
   },
   {
-    "methodIndex": 40,
+    "methodIndex": 46,
     "setIndex": 1,
     "subjectId": "System.DateTime::TryParse:System.Boolean(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set1",
     "isVoid": false,
@@ -931,7 +1028,7 @@
     ]
   },
   {
-    "methodIndex": 40,
+    "methodIndex": 46,
     "setIndex": 2,
     "subjectId": "System.DateTime::TryParse:System.Boolean(System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set2",
     "isVoid": false,
@@ -946,7 +1043,37 @@
     ]
   },
   {
-    "methodIndex": 41,
+    "methodIndex": 47,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::TryParse:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u00220001-01-01T00:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 47,
+    "setIndex": 1,
+    "subjectId": "System.DateTime::TryParse:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u00220001-01-01T00:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 48,
     "setIndex": 0,
     "subjectId": "System.DateTime::TryParseExact:System.Boolean(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set0",
     "isVoid": false,
@@ -961,7 +1088,7 @@
     ]
   },
   {
-    "methodIndex": 41,
+    "methodIndex": 48,
     "setIndex": 1,
     "subjectId": "System.DateTime::TryParseExact:System.Boolean(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set1",
     "isVoid": false,
@@ -976,7 +1103,7 @@
     ]
   },
   {
-    "methodIndex": 41,
+    "methodIndex": 48,
     "setIndex": 2,
     "subjectId": "System.DateTime::TryParseExact:System.Boolean(System.String,System.String,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set2",
     "isVoid": false,
@@ -991,7 +1118,22 @@
     ]
   },
   {
-    "methodIndex": 42,
+    "methodIndex": 49,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::TryParseExact:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u00220001-01-01T00:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 50,
     "setIndex": 0,
     "subjectId": "System.DateTime::TryParseExact:System.Boolean(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set0",
     "isVoid": false,
@@ -1006,7 +1148,7 @@
     ]
   },
   {
-    "methodIndex": 42,
+    "methodIndex": 50,
     "setIndex": 1,
     "subjectId": "System.DateTime::TryParseExact:System.Boolean(System.String,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set1",
     "isVoid": false,
@@ -1021,7 +1163,22 @@
     ]
   },
   {
-    "methodIndex": 43,
+    "methodIndex": 51,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::TryParseExact:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.String[],System.IFormatProvider,System.Globalization.DateTimeStyles,System.DateTime\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u00220001-01-01T00:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 52,
     "setIndex": 0,
     "subjectId": "System.DateTime::Deconstruct:System.Void(System.DateOnly\u0026,System.TimeOnly\u0026)__Set0",
     "isVoid": true,
@@ -1037,7 +1194,7 @@
     ]
   },
   {
-    "methodIndex": 44,
+    "methodIndex": 53,
     "setIndex": 0,
     "subjectId": "System.DateTime::Deconstruct:System.Void(System.Int32\u0026,System.Int32\u0026,System.Int32\u0026)__Set0",
     "isVoid": true,
@@ -1054,9 +1211,9 @@
     ]
   },
   {
-    "methodIndex": 45,
-    "setIndex": 45,
-    "subjectId": "System.DateTime::GetDateTimeFormats:System.String[]()__Set45",
+    "methodIndex": 54,
+    "setIndex": 54,
+    "subjectId": "System.DateTime::GetDateTimeFormats:System.String[]()__Set54",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -1067,7 +1224,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 46,
+    "methodIndex": 55,
     "setIndex": 0,
     "subjectId": "System.DateTime::GetDateTimeFormats:System.String[](System.IFormatProvider)__Set0",
     "isVoid": false,
@@ -1080,7 +1237,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 47,
+    "methodIndex": 56,
     "setIndex": 0,
     "subjectId": "System.DateTime::GetDateTimeFormats:System.String[](System.Char)__Set0",
     "isVoid": false,
@@ -1093,7 +1250,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 47,
+    "methodIndex": 56,
     "setIndex": 1,
     "subjectId": "System.DateTime::GetDateTimeFormats:System.String[](System.Char)__Set1",
     "isVoid": false,
@@ -1106,7 +1263,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 48,
+    "methodIndex": 57,
     "setIndex": 0,
     "subjectId": "System.DateTime::GetDateTimeFormats:System.String[](System.Char,System.IFormatProvider)__Set0",
     "isVoid": false,
@@ -1119,7 +1276,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 48,
+    "methodIndex": 57,
     "setIndex": 1,
     "subjectId": "System.DateTime::GetDateTimeFormats:System.String[](System.Char,System.IFormatProvider)__Set1",
     "isVoid": false,
@@ -1132,9 +1289,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 49,
-    "setIndex": 49,
-    "subjectId": "System.DateTime::GetTypeCode:System.TypeCode()__Set49",
+    "methodIndex": 58,
+    "setIndex": 58,
+    "subjectId": "System.DateTime::GetTypeCode:System.TypeCode()__Set58",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -1145,7 +1302,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 50,
+    "methodIndex": 59,
     "setIndex": 0,
     "subjectId": "System.DateTime::TryParse:System.Boolean(System.String,System.IFormatProvider,System.DateTime\u0026)__Set0",
     "isVoid": false,
@@ -1160,7 +1317,7 @@
     ]
   },
   {
-    "methodIndex": 50,
+    "methodIndex": 59,
     "setIndex": 1,
     "subjectId": "System.DateTime::TryParse:System.Boolean(System.String,System.IFormatProvider,System.DateTime\u0026)__Set1",
     "isVoid": false,
@@ -1169,6 +1326,34 @@
     "returnValue": 0,
     "returnValueJson": "false",
     "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u00220001-01-01T00:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 60,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::Parse:System.DateTime(ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.FormatException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 61,
+    "setIndex": 0,
+    "subjectId": "System.DateTime::TryParse:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.DateTime\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
     "isDeterministic": true,
     "outRefValues": [
       "\u00220001-01-01T00:00:00\u0022"

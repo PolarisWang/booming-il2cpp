@@ -35,6 +35,42 @@ public sealed class ValueGenerator
         ["System.Byte[]"] = new[] { "null!", "System.Array.Empty<byte>()", "new byte[]{0, 1, 255}" },
     };
 
+    // Known BCL delegate type short names (extracted by DllScanner.GetTypeName)
+    private static readonly HashSet<string> DelegateTypeNames = new(StringComparer.Ordinal)
+    {
+        "Predicate", "Action", "Converter", "Comparison", "Func", "EventHandler",
+    };
+
+    // Interface types with known non-null constructible expressions
+    private static readonly HashSet<string> SmartConstructibleInterfaces = new(StringComparer.Ordinal)
+    {
+        "IEnumerable", "IComparer", "IEqualityComparer",
+    };
+
+    // Common interface/abstract types that need non-null expressions to avoid
+    // ArgumentNullException. Maps base type name → factory(generic type args) → C# expression.
+    // These are checked after delegate/array/interface handlers and before default(T).
+    private static readonly Dictionary<string, Func<string[], string>> NullGuardSafeDefaults = new(StringComparer.Ordinal)
+    {
+        ["IList"] = typeArgs => $"System.Array.Empty<{typeArgs[0]}>()",
+        ["ICollection"] = typeArgs => $"System.Array.Empty<{typeArgs[0]}>()",
+        ["IReadOnlyList"] = typeArgs => $"System.Array.Empty<{typeArgs[0]}>()",
+        ["IReadOnlyCollection"] = typeArgs => $"System.Array.Empty<{typeArgs[0]}>()",
+        ["IDictionary"] = typeArgs => $"new System.Collections.Generic.Dictionary<{typeArgs[0]}, {typeArgs[1]}>()",
+        ["IReadOnlyDictionary"] = typeArgs => $"new System.Collections.Generic.Dictionary<{typeArgs[0]}, {typeArgs[1]}>()",
+        ["IEnumerator"] = typeArgs => $"System.Linq.Enumerable.Empty<{typeArgs[0]}>().GetEnumerator()",
+        ["IComparer"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Collections.Generic.Comparer<{typeArgs[0]}>.Default"
+            : "System.Collections.Comparer.Default",
+        ["IEqualityComparer"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Collections.Generic.EqualityComparer<{typeArgs[0]}>.Default"
+            : "System.Collections.EqualityComparer.Default",
+        ["IFormatProvider"] = _ => "System.Globalization.CultureInfo.InvariantCulture",
+        ["Stream"] = _ => "System.IO.Stream.Null",
+        ["TextReader"] = _ => "System.IO.TextReader.Null",
+        ["TextWriter"] = _ => "System.IO.TextWriter.Null",
+    };
+
     public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
     {
         _serializer = serializer;
@@ -52,35 +88,103 @@ public sealed class ValueGenerator
             return new[] { new ValueSet(methodIndex, Array.Empty<string>()) };
 
         var paramTypes = method.Parameters.Select(p => p.TypeName).ToArray();
+        var isRefStructParam = method.Parameters.Select(p => p.IsRefStruct).ToArray();
         var sets = new List<ValueSet>();
         var usedSignatures = new HashSet<string>();
 
         // Set 0: all defaults
         AddUnique(sets, usedSignatures, methodIndex,
-            paramTypes.Select(t => DefaultValue(t)).ToArray());
+            paramTypes.Select((t, i) => DefaultValue(t, isRefStructParam[i])).ToArray());
 
         // Sets 1-3: one boundary at a time (up to 3 params)
-        for (int i = 0; i < Math.Min(paramTypes.Length, 3); i++)
+        // Skip for TrimExcess — boundary value 0 on seeded collection throws ArgumentOutOfRangeException
+        if (method.Name != "TrimExcess")
         {
-            AddUnique(sets, usedSignatures, methodIndex,
-                paramTypes.Select((t, idx) =>
-                    idx == i ? BoundaryValue(t, 0) : DefaultValue(t)).ToArray());
+            for (int i = 0; i < Math.Min(paramTypes.Length, 3); i++)
+            {
+                AddUnique(sets, usedSignatures, methodIndex,
+                    paramTypes.Select((t, idx) =>
+                        idx == i ? BoundaryValue(t, 0, isRefStructParam[idx]) : DefaultValue(t, isRefStructParam[idx])).ToArray());
+            }
         }
 
         // Ensure at least 2 sets
         if (sets.Count < 2 && paramTypes.Length > 0)
         {
             AddUnique(sets, usedSignatures, methodIndex,
-                paramTypes.Select(t => DefaultValue(t)).ToArray());
+                paramTypes.Select((t, i) => DefaultValue(t, isRefStructParam[i])).ToArray());
         }
+
+        // Smart set: non-null values for delegate/interface/array parameters
+        var smartArgs = new string[paramTypes.Length];
+        for (int i = 0; i < paramTypes.Length; i++)
+        {
+            var t = paramTypes[i];
+            if (isRefStructParam[i])
+                smartArgs[i] = DefaultValue(t, true);
+            else if (TryGetDelegateExpression(t, out var delegateExpr))
+                smartArgs[i] = delegateExpr;
+            else if (TryGetArrayExpression(t, out var arrayExpr))
+            {
+                // CopyTo/TryCopyTo methods need arrays with enough capacity for seed data.
+                // Array.Empty<T>() is always too small and causes ArgumentException.
+                if (t.EndsWith("[]") && method.Name is "CopyTo" or "TryCopyTo")
+                {
+                    var elemType = t[..^2];
+                    var csElemType = CSharpSerializer.ToCSharpTypeName(elemType);
+                    smartArgs[i] = $"new {csElemType}[8]";
+                }
+                else
+                {
+                    smartArgs[i] = arrayExpr;
+                }
+            }
+            else if (TryGetInterfaceExpression(t, out var ifaceExpr))
+                smartArgs[i] = ifaceExpr;
+            else if (TryGetNullGuardSafeExpression(t, out var safeExpr))
+                smartArgs[i] = safeExpr;
+            else
+                smartArgs[i] = DefaultValue(t, false);
+        }
+        AddUnique(sets, usedSignatures, methodIndex, smartArgs);
+
+        // Collection state variant: populate the first collection-like parameter with
+        // non-empty data (e.g. List<T> with 2 elements, Dictionary<K,V> with 1 entry).
+        // This exercises methods that behave differently on empty vs. populated collections
+        // (e.g. Contains, Count, indexers, CopyTo buffer sizing).
+        var collArgs = (string[])smartArgs.Clone();
+        bool hasCollection = false;
+        for (int i = 0; i < paramTypes.Length && !hasCollection; i++)
+        {
+            var t = paramTypes[i];
+            if (isRefStructParam[i]) continue;
+
+            if (t.EndsWith("[]"))
+            {
+                var elemType = t[..^2];
+                var csElemType = CSharpSerializer.ToCSharpTypeName(elemType);
+                collArgs[i] = $"new {csElemType}[2] {{ default({csElemType})!, default({csElemType})! }}";
+                hasCollection = true;
+            }
+            else if (TryGetCollectionInterfaceExpression(t, out var populatedExpr))
+            {
+                collArgs[i] = populatedExpr;
+                hasCollection = true;
+            }
+        }
+        if (hasCollection)
+            AddUnique(sets, usedSignatures, methodIndex, collArgs);
 
         // One AutoFixture-generated random set (only for types that serialize cleanly)
         if (_autoFixture is not null)
         {
-            var fixtureArgs = paramTypes.Select(t =>
+            var fixtureArgs = paramTypes.Select((t, i) =>
             {
+                // Ref struct params can't be used with AutoFixture (generic arg restriction)
+                if (isRefStructParam[i])
+                    return DefaultValue(t, true);
                 var expr = _autoFixture.TryGenerateExpression(t);
-                return expr ?? DefaultValue(t);
+                return expr ?? DefaultValue(t, false);
             }).ToArray();
             AddUnique(sets, usedSignatures, methodIndex, fixtureArgs);
         }
@@ -88,10 +192,10 @@ public sealed class ValueGenerator
         return sets;
     }
 
-    private string DefaultValue(string typeName)
+    private string DefaultValue(string typeName, bool isRefStruct = false)
     {
-        // Span<T>: use default
-        if (typeName.StartsWith("System.Span<") || typeName.StartsWith("System.ReadOnlySpan<"))
+        // Ref structs: use default (can't be boxed or used as generic arg)
+        if (isRefStruct)
             return $"default({CSharpSerializer.ToCSharpTypeName(typeName)})";
 
         if (typeName.EndsWith('&'))
@@ -102,10 +206,10 @@ public sealed class ValueGenerator
         return _serializer.DefaultExpression(typeName);
     }
 
-    private string BoundaryValue(string typeName, int variantIndex)
+    private string BoundaryValue(string typeName, int variantIndex, bool isRefStruct = false)
     {
-        // Span<T>/ReadOnlySpan<T>: use default
-        if (typeName.StartsWith("System.Span<") || typeName.StartsWith("System.ReadOnlySpan<"))
+        // Ref structs: use default
+        if (isRefStruct)
             return $"default({CSharpSerializer.ToCSharpTypeName(typeName)})";
 
         if (BoundaryValues.TryGetValue(typeName, out var values) && variantIndex < values.Length)
@@ -152,5 +256,196 @@ public sealed class ValueGenerator
         var sig = string.Join("|", args);
         if (used.Add(sig))
             sets.Add(new ValueSet(sets.Count, args));
+    }
+
+    /// <summary>
+    /// Try to generate a non-null C# lambda expression for a known BCL delegate type.
+    /// Handles Predicate&lt;T&gt;, Action&lt;T...&gt;, Converter&lt;T,TResult&gt;,
+    /// Comparison&lt;T&gt;, Func&lt;T...,TResult&gt;, EventHandler.
+    /// </summary>
+    private static bool TryGetDelegateExpression(string typeName, out string expr)
+    {
+        expr = null!;
+
+        var gaStart = typeName.IndexOf('<');
+        var baseName = gaStart >= 0 ? typeName[..gaStart] : typeName;
+
+        if (!DelegateTypeNames.Contains(baseName))
+            return false;
+
+        string[] csTypeArgs;
+        if (gaStart >= 0)
+        {
+            var argsPart = typeName[(gaStart + 1)..^1];
+            csTypeArgs = CSharpSerializer.SplitGenericArgs(argsPart)
+                .Select(CSharpSerializer.ToCSharpTypeName)
+                .ToArray();
+        }
+        else
+        {
+            csTypeArgs = Array.Empty<string>();
+        }
+
+        expr = baseName switch
+        {
+            "Predicate" when csTypeArgs.Length >= 1
+                => $"({csTypeArgs[0]} x) => true",
+
+            "Action" when csTypeArgs.Length >= 1
+                => $"({string.Join(", ", csTypeArgs.Select((t, i) => $"{t} arg{i}"))}) => {{ }}",
+
+            "Converter" when csTypeArgs.Length >= 2
+                => $"({csTypeArgs[0]} x) => default({csTypeArgs[1]})!",
+
+            "Comparison" when csTypeArgs.Length >= 1
+                => $"({csTypeArgs[0]} x, {csTypeArgs[0]} y) => 0",
+
+            "Func" when csTypeArgs.Length >= 1
+                => $"({string.Join(", ", csTypeArgs[..^1].Select((t, i) => $"{t} arg{i}"))}) => default({csTypeArgs[^1]})!",
+
+            "EventHandler" when csTypeArgs.Length == 0
+                => "(object? sender, System.EventArgs e) => { }",
+
+            "EventHandler" when csTypeArgs.Length >= 1
+                => $"(object? sender, {csTypeArgs[0]} e) => {{ }}",
+
+            _ => null
+        };
+
+        return expr is not null;
+    }
+
+    /// <summary>
+    /// Try to generate a non-null C# expression for an array type parameter.
+    /// Produces System.Array.Empty&lt;T&gt;() for types ending with "[]".
+    /// </summary>
+    private static bool TryGetArrayExpression(string typeName, out string expr)
+    {
+        expr = null!;
+
+        if (!typeName.EndsWith("[]"))
+            return false;
+
+        var elementType = typeName[..^2];
+        var csElementType = CSharpSerializer.ToCSharpTypeName(elementType);
+        expr = $"System.Array.Empty<{csElementType}>()";
+        return true;
+    }
+
+    /// <summary>
+    /// Try to generate a non-null C# expression for a constructible interface type.
+    /// IEnumerable&lt;T&gt; → Enumerable.Empty&lt;T&gt;(),
+    /// IComparer&lt;T&gt; → Comparer&lt;T&gt;.Default,
+    /// IEqualityComparer&lt;T&gt; → EqualityComparer&lt;T&gt;.Default.
+    /// </summary>
+    private static bool TryGetInterfaceExpression(string typeName, out string expr)
+    {
+        expr = null!;
+
+        var gaStart = typeName.IndexOf('<');
+        var baseName = gaStart >= 0 ? typeName[..gaStart] : typeName;
+
+        if (!SmartConstructibleInterfaces.Contains(baseName))
+            return false;
+
+        string[] csTypeArgs;
+        if (gaStart >= 0)
+        {
+            var argsPart = typeName[(gaStart + 1)..^1];
+            csTypeArgs = CSharpSerializer.SplitGenericArgs(argsPart)
+                .Select(CSharpSerializer.ToCSharpTypeName)
+                .ToArray();
+        }
+        else
+        {
+            csTypeArgs = Array.Empty<string>();
+        }
+
+        expr = baseName switch
+        {
+            "IEnumerable" when csTypeArgs.Length >= 1
+                => $"System.Linq.Enumerable.Empty<{csTypeArgs[0]}>()",
+
+            "IComparer" when csTypeArgs.Length >= 1
+                => $"System.Collections.Generic.Comparer<{csTypeArgs[0]}>.Default",
+
+            "IEqualityComparer" when csTypeArgs.Length >= 1
+                => $"System.Collections.Generic.EqualityComparer<{csTypeArgs[0]}>.Default",
+
+            _ => null
+        };
+
+        return expr is not null;
+    }
+
+    /// <summary>
+    /// Try to generate a non-null C# expression for common interface/abstract types
+    /// that would otherwise cause ArgumentNullException when default(T)! is used.
+    /// Handles IList&lt;T&gt;, IDictionary&lt;K,V&gt;, IEnumerator&lt;T&gt;,
+    /// IComparer (non-generic), IFormatProvider, Stream, TextReader, etc.
+    /// Falls back to the NullGuardSafeDefaults dictionary.
+    /// </summary>
+    private static bool TryGetNullGuardSafeExpression(string typeName, out string expr)
+    {
+        expr = null!;
+
+        var gaStart = typeName.IndexOf('<');
+        var baseName = gaStart >= 0 ? typeName[..gaStart] : typeName;
+
+        if (!NullGuardSafeDefaults.TryGetValue(baseName, out var factory))
+            return false;
+
+        string[] csTypeArgs;
+        if (gaStart >= 0)
+        {
+            var argsPart = typeName[(gaStart + 1)..^1];
+            csTypeArgs = CSharpSerializer.SplitGenericArgs(argsPart)
+                .Select(CSharpSerializer.ToCSharpTypeName)
+                .ToArray();
+        }
+        else
+        {
+            csTypeArgs = Array.Empty<string>();
+        }
+
+        expr = factory(csTypeArgs);
+        return true;
+    }
+
+    /// <summary>
+    /// Generate a populated collection expression for collection-like interfaces.
+    /// Returns expressions like "new List&lt;int&gt; { default(int)!, default(int)! }"
+    /// so that methods see non-empty collections (vs. Array.Empty from smart set).
+    /// Supports IList&lt;T&gt;, ICollection&lt;T&gt;, IReadOnlyList&lt;T&gt;,
+    /// IReadOnlyCollection&lt;T&gt;, IDictionary&lt;K,V&gt;, IReadOnlyDictionary&lt;K,V&gt;.
+    /// </summary>
+    private static bool TryGetCollectionInterfaceExpression(string typeName, out string expr)
+    {
+        expr = null!;
+
+        var gaStart = typeName.IndexOf('<');
+        if (gaStart < 0) return false;
+
+        var baseName = typeName[..gaStart];
+        var argsPart = typeName[(gaStart + 1)..^1];
+        var csTypeArgs = CSharpSerializer.SplitGenericArgs(argsPart)
+            .Select(CSharpSerializer.ToCSharpTypeName)
+            .ToArray();
+
+        switch (baseName)
+        {
+            case "IList" or "ICollection" or "IReadOnlyList" or "IReadOnlyCollection"
+                when csTypeArgs.Length >= 1:
+                expr = $"new System.Collections.Generic.List<{csTypeArgs[0]}> {{ default({csTypeArgs[0]})!, default({csTypeArgs[0]})! }}";
+                return true;
+
+            case "IDictionary" or "IReadOnlyDictionary"
+                when csTypeArgs.Length >= 2:
+                expr = $"new System.Collections.Generic.Dictionary<{csTypeArgs[0]}, {csTypeArgs[1]}> {{ {{ default({csTypeArgs[0]})!, default({csTypeArgs[1]})! }} }}";
+                return true;
+
+            default:
+                return false;
+        }
     }
 }

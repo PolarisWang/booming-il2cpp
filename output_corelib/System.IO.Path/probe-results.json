@@ -93,6 +93,19 @@
   {
     "methodIndex": 3,
     "setIndex": 0,
+    "subjectId": "System.IO.Path::GetDirectoryName:ReadOnlySpan\u003CSystem.Char\u003E(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 4,
+    "setIndex": 0,
     "subjectId": "System.IO.Path::GetExtension:System.String(System.String)__Set0",
     "isVoid": false,
     "hasException": false,
@@ -104,7 +117,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 3,
+    "methodIndex": 4,
     "setIndex": 1,
     "subjectId": "System.IO.Path::GetExtension:System.String(System.String)__Set1",
     "isVoid": false,
@@ -117,7 +130,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 4,
+    "methodIndex": 5,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::GetExtension:ReadOnlySpan\u003CSystem.Char\u003E(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 6,
     "setIndex": 0,
     "subjectId": "System.IO.Path::GetFileName:System.String(System.String)__Set0",
     "isVoid": false,
@@ -130,7 +156,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 4,
+    "methodIndex": 6,
     "setIndex": 1,
     "subjectId": "System.IO.Path::GetFileName:System.String(System.String)__Set1",
     "isVoid": false,
@@ -143,7 +169,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 5,
+    "methodIndex": 7,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::GetFileName:ReadOnlySpan\u003CSystem.Char\u003E(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 8,
     "setIndex": 0,
     "subjectId": "System.IO.Path::GetFileNameWithoutExtension:System.String(System.String)__Set0",
     "isVoid": false,
@@ -156,7 +195,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 5,
+    "methodIndex": 8,
     "setIndex": 1,
     "subjectId": "System.IO.Path::GetFileNameWithoutExtension:System.String(System.String)__Set1",
     "isVoid": false,
@@ -169,20 +208,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 6,
-    "setIndex": 6,
-    "subjectId": "System.IO.Path::GetRandomFileName:System.String()__Set6",
+    "methodIndex": 9,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::GetFileNameWithoutExtension:ReadOnlySpan\u003CSystem.Char\u003E(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 10,
+    "setIndex": 10,
+    "subjectId": "System.IO.Path::GetRandomFileName:System.String()__Set10",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
     "returnValue": 12,
-    "returnValueJson": "\u00224haftajr.4l2\u0022",
+    "returnValueJson": "\u0022ketoutek.4x1\u0022",
     "returnValueType": "System.String",
     "isDeterministic": false,
     "outRefValues": null
   },
   {
-    "methodIndex": 7,
+    "methodIndex": 11,
     "setIndex": 0,
     "subjectId": "System.IO.Path::IsPathFullyQualified:System.Boolean(System.String)__Set0",
     "isVoid": false,
@@ -195,7 +247,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 7,
+    "methodIndex": 11,
     "setIndex": 1,
     "subjectId": "System.IO.Path::IsPathFullyQualified:System.Boolean(System.String)__Set1",
     "isVoid": false,
@@ -208,7 +260,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 8,
+    "methodIndex": 12,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::IsPathFullyQualified:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 13,
     "setIndex": 0,
     "subjectId": "System.IO.Path::HasExtension:System.Boolean(System.String)__Set0",
     "isVoid": false,
@@ -221,7 +286,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 8,
+    "methodIndex": 13,
     "setIndex": 1,
     "subjectId": "System.IO.Path::HasExtension:System.Boolean(System.String)__Set1",
     "isVoid": false,
@@ -234,7 +299,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 9,
+    "methodIndex": 14,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::HasExtension:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 15,
     "setIndex": 0,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String)__Set0",
     "isVoid": false,
@@ -247,7 +325,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 9,
+    "methodIndex": 15,
     "setIndex": 1,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String)__Set1",
     "isVoid": false,
@@ -260,7 +338,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 9,
+    "methodIndex": 15,
     "setIndex": 2,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String)__Set2",
     "isVoid": false,
@@ -273,7 +351,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 10,
+    "methodIndex": 16,
     "setIndex": 0,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String,System.String)__Set0",
     "isVoid": false,
@@ -286,7 +364,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 10,
+    "methodIndex": 16,
     "setIndex": 1,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String,System.String)__Set1",
     "isVoid": false,
@@ -299,7 +377,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 10,
+    "methodIndex": 16,
     "setIndex": 2,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String,System.String)__Set2",
     "isVoid": false,
@@ -312,7 +390,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 10,
+    "methodIndex": 16,
     "setIndex": 3,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String,System.String)__Set3",
     "isVoid": false,
@@ -325,7 +403,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 11,
+    "methodIndex": 17,
     "setIndex": 0,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String,System.String,System.String)__Set0",
     "isVoid": false,
@@ -338,7 +416,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 11,
+    "methodIndex": 17,
     "setIndex": 1,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String,System.String,System.String)__Set1",
     "isVoid": false,
@@ -351,7 +429,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 11,
+    "methodIndex": 17,
     "setIndex": 2,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String,System.String,System.String)__Set2",
     "isVoid": false,
@@ -364,7 +442,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 11,
+    "methodIndex": 17,
     "setIndex": 3,
     "subjectId": "System.IO.Path::Combine:System.String(System.String,System.String,System.String,System.String)__Set3",
     "isVoid": false,
@@ -377,7 +455,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 12,
+    "methodIndex": 18,
     "setIndex": 0,
     "subjectId": "System.IO.Path::Combine:System.String(System.String[])__Set0",
     "isVoid": false,
@@ -390,7 +468,59 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 13,
+    "methodIndex": 19,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::Combine:System.String(ReadOnlySpan\u003CSystem.String\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 20,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::Join:System.String(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 21,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::Join:System.String(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 22,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::Join:System.String(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 23,
     "setIndex": 0,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String)__Set0",
     "isVoid": false,
@@ -403,7 +533,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 13,
+    "methodIndex": 23,
     "setIndex": 1,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String)__Set1",
     "isVoid": false,
@@ -416,7 +546,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 13,
+    "methodIndex": 23,
     "setIndex": 2,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String)__Set2",
     "isVoid": false,
@@ -429,7 +559,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 14,
+    "methodIndex": 24,
     "setIndex": 0,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String,System.String)__Set0",
     "isVoid": false,
@@ -442,7 +572,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 14,
+    "methodIndex": 24,
     "setIndex": 1,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String,System.String)__Set1",
     "isVoid": false,
@@ -455,7 +585,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 14,
+    "methodIndex": 24,
     "setIndex": 2,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String,System.String)__Set2",
     "isVoid": false,
@@ -468,7 +598,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 14,
+    "methodIndex": 24,
     "setIndex": 3,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String,System.String)__Set3",
     "isVoid": false,
@@ -481,7 +611,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 15,
+    "methodIndex": 25,
     "setIndex": 0,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String,System.String,System.String)__Set0",
     "isVoid": false,
@@ -494,7 +624,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 15,
+    "methodIndex": 25,
     "setIndex": 1,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String,System.String,System.String)__Set1",
     "isVoid": false,
@@ -507,7 +637,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 15,
+    "methodIndex": 25,
     "setIndex": 2,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String,System.String,System.String)__Set2",
     "isVoid": false,
@@ -520,7 +650,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 15,
+    "methodIndex": 25,
     "setIndex": 3,
     "subjectId": "System.IO.Path::Join:System.String(System.String,System.String,System.String,System.String)__Set3",
     "isVoid": false,
@@ -533,7 +663,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 16,
+    "methodIndex": 26,
     "setIndex": 0,
     "subjectId": "System.IO.Path::Join:System.String(System.String[])__Set0",
     "isVoid": false,
@@ -546,7 +676,50 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 17,
+    "methodIndex": 27,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::Join:System.String(ReadOnlySpan\u003CSystem.String\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 28,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::TryJoin:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,Span\u003CSystem.Char\u003E,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 29,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::TryJoin:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,Span\u003CSystem.Char\u003E,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 30,
     "setIndex": 0,
     "subjectId": "System.IO.Path::GetRelativePath:System.String(System.String,System.String)__Set0",
     "isVoid": false,
@@ -559,7 +732,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 17,
+    "methodIndex": 30,
     "setIndex": 1,
     "subjectId": "System.IO.Path::GetRelativePath:System.String(System.String,System.String)__Set1",
     "isVoid": false,
@@ -572,7 +745,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 17,
+    "methodIndex": 30,
     "setIndex": 2,
     "subjectId": "System.IO.Path::GetRelativePath:System.String(System.String,System.String)__Set2",
     "isVoid": false,
@@ -585,7 +758,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 18,
+    "methodIndex": 31,
     "setIndex": 0,
     "subjectId": "System.IO.Path::TrimEndingDirectorySeparator:System.String(System.String)__Set0",
     "isVoid": false,
@@ -598,7 +771,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 18,
+    "methodIndex": 31,
     "setIndex": 1,
     "subjectId": "System.IO.Path::TrimEndingDirectorySeparator:System.String(System.String)__Set1",
     "isVoid": false,
@@ -611,7 +784,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 19,
+    "methodIndex": 32,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::TrimEndingDirectorySeparator:ReadOnlySpan\u003CSystem.Char\u003E(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 33,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::EndsInDirectorySeparator:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 34,
     "setIndex": 0,
     "subjectId": "System.IO.Path::EndsInDirectorySeparator:System.Boolean(System.String)__Set0",
     "isVoid": false,
@@ -624,7 +823,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 19,
+    "methodIndex": 34,
     "setIndex": 1,
     "subjectId": "System.IO.Path::EndsInDirectorySeparator:System.Boolean(System.String)__Set1",
     "isVoid": false,
@@ -637,9 +836,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 20,
-    "setIndex": 20,
-    "subjectId": "System.IO.Path::GetInvalidFileNameChars:System.Char[]()__Set20",
+    "methodIndex": 35,
+    "setIndex": 35,
+    "subjectId": "System.IO.Path::GetInvalidFileNameChars:System.Char[]()__Set35",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -650,9 +849,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 21,
-    "setIndex": 21,
-    "subjectId": "System.IO.Path::GetInvalidPathChars:System.Char[]()__Set21",
+    "methodIndex": 36,
+    "setIndex": 36,
+    "subjectId": "System.IO.Path::GetInvalidPathChars:System.Char[]()__Set36",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -663,7 +862,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 22,
+    "methodIndex": 37,
     "setIndex": 0,
     "subjectId": "System.IO.Path::GetFullPath:System.String(System.String)__Set0",
     "isVoid": false,
@@ -676,7 +875,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 22,
+    "methodIndex": 37,
     "setIndex": 1,
     "subjectId": "System.IO.Path::GetFullPath:System.String(System.String)__Set1",
     "isVoid": false,
@@ -689,7 +888,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 23,
+    "methodIndex": 38,
     "setIndex": 0,
     "subjectId": "System.IO.Path::GetFullPath:System.String(System.String,System.String)__Set0",
     "isVoid": false,
@@ -702,7 +901,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 23,
+    "methodIndex": 38,
     "setIndex": 1,
     "subjectId": "System.IO.Path::GetFullPath:System.String(System.String,System.String)__Set1",
     "isVoid": false,
@@ -715,7 +914,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 23,
+    "methodIndex": 38,
     "setIndex": 2,
     "subjectId": "System.IO.Path::GetFullPath:System.String(System.String,System.String)__Set2",
     "isVoid": false,
@@ -728,9 +927,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 24,
-    "setIndex": 24,
-    "subjectId": "System.IO.Path::GetTempPath:System.String()__Set24",
+    "methodIndex": 39,
+    "setIndex": 39,
+    "subjectId": "System.IO.Path::GetTempPath:System.String()__Set39",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -741,20 +940,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 25,
-    "setIndex": 25,
-    "subjectId": "System.IO.Path::GetTempFileName:System.String()__Set25",
+    "methodIndex": 40,
+    "setIndex": 40,
+    "subjectId": "System.IO.Path::GetTempFileName:System.String()__Set40",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
     "returnValue": 55,
-    "returnValueJson": "\u0022C:\\\\Users\\\\haochuan.wang\\\\AppData\\\\Local\\\\Temp\\\\tmptbord0.tmp\u0022",
+    "returnValueJson": "\u0022C:\\\\Users\\\\haochuan.wang\\\\AppData\\\\Local\\\\Temp\\\\tmpt5xh1w.tmp\u0022",
     "returnValueType": "System.String",
     "isDeterministic": false,
     "outRefValues": null
   },
   {
-    "methodIndex": 26,
+    "methodIndex": 41,
     "setIndex": 0,
     "subjectId": "System.IO.Path::IsPathRooted:System.Boolean(System.String)__Set0",
     "isVoid": false,
@@ -767,7 +966,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 26,
+    "methodIndex": 41,
     "setIndex": 1,
     "subjectId": "System.IO.Path::IsPathRooted:System.Boolean(System.String)__Set1",
     "isVoid": false,
@@ -780,7 +979,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 27,
+    "methodIndex": 42,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::IsPathRooted:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 43,
     "setIndex": 0,
     "subjectId": "System.IO.Path::GetPathRoot:System.String(System.String)__Set0",
     "isVoid": false,
@@ -793,7 +1005,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 27,
+    "methodIndex": 43,
     "setIndex": 1,
     "subjectId": "System.IO.Path::GetPathRoot:System.String(System.String)__Set1",
     "isVoid": false,
@@ -802,6 +1014,19 @@
     "returnValue": 0,
     "returnValueJson": "null",
     "returnValueType": "",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 44,
+    "setIndex": 0,
+    "subjectId": "System.IO.Path::GetPathRoot:ReadOnlySpan\u003CSystem.Char\u003E(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
     "isDeterministic": true,
     "outRefValues": null
   }

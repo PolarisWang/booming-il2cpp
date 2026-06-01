@@ -14,7 +14,6 @@ public sealed class NativeCodegenMetricsBuilderTests
             generatedSources: new[] { ("file1.cpp", "extern \"C\" void Foo();") },
             structuredMethodCount: 10,
             structuredExceptionBodyCount: 2,
-            flatFallbackCount: 1,
             totalMethodCount: 13,
             aotReachableMethodCount: 12,
             aotUnreachableMethodCount: 1);
@@ -24,7 +23,6 @@ public sealed class NativeCodegenMetricsBuilderTests
         Assert.Equal(1, result.GeneratedCppFileCount);
         Assert.Equal(10, result.StructuredMethodCount);
         Assert.Equal(2, result.StructuredExceptionBodyCount);
-        Assert.Equal(1, result.FlatFallbackCount);
         Assert.Equal(13, result.TotalMethodCount);
         Assert.Equal(12, result.AotReachableMethodCount);
         Assert.Equal(1, result.AotUnreachableMethodCount);

@@ -203,6 +203,16 @@ def run_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> StageResu
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    # Filter out customEntryIndices — these have handwritten implementations
+    # (e.g. OSR::HotLoop, Memory::CopyBlock, Memory::InitBlock) that cannot
+    # be auto-generated as call expressions. generate_and_build also reads
+    # the contract independently, but we filter here to keep codegen.py explicit.
+    custom_entry_indices = set(contract.get("customEntryIndices", []))
+    if custom_entry_indices:
+        filtered_mids = [m for i, m in enumerate(mids) if i not in custom_entry_indices]
+        print(f"  [codegen] Excluded {len(mids) - len(filtered_mids)} custom entries, {len(filtered_mids)} remaining")
+        mids = filtered_mids
+
     # ── Step timing tracking ──
     step_times: dict[str, float] = {}
     _step = time.perf_counter()
