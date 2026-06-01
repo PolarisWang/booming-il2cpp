@@ -4,29 +4,44 @@ set(CMAKE_CXX_STANDARD 20)
 
 # Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions
 # thrown by generated code (throw chaos_managed_exception from unresolved calls).
-add_compile_options(/utf-8 /GS- /FS)
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/utf-8>")
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/GS->")
+add_compile_options("$<$<CXX_COMPILER_ID:MSVC>:/FS>")
+add_compile_options("$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-finput-charset=utf-8>")
+add_compile_options("$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>")
 add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
 add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
 # The SDK root is the codegen output directory from --sdk-out.
-set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/document-element/codegen")
+set(CHAOS_SDK_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/document-element/codegen")
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 
 # Paths
-set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/document-element/codegen")
+set(CHAOS_PROJECT_ROOT "/home/debian/agent/booming-il2cpp")
+set(CHAOS_CODEGEN_DIR "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/document-element/codegen")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
-file(GLOB CHAOS_CODEGEN_CPP "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp")
-# Also search native/ (pipeline syncs codegen output there after convert-to-cpp)
-file(GLOB CHAOS_CODEGEN_NATIVE_CPP "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp")
-# Use codegen path if available, fall back to native path (avoids compiling both)
-if(CHAOS_CODEGEN_CPP)
-  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_CPP})
-else()
+# Flat layout (single file): *Subjects/generated/native-aot.generated.cpp
+# Paged layout (large families): *Subjects/generated/generated/ (page files + module)
+file(GLOB CHAOS_CODEGEN_CPP
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
+    "${CHAOS_CODEGEN_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
+)
+file(GLOB CHAOS_CODEGEN_NATIVE_CPP
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/native-aot.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.generated.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/native-aot.page-*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*Subjects/generated/generated/chaos_generated_module.cpp"
+)
+# Prefer native (pipeline post-processed) copies over codegen originals
+if(CHAOS_CODEGEN_NATIVE_CPP)
   set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_NATIVE_CPP})
+else()
+  set(CHAOS_AOT_GENERATED_CPP ${CHAOS_CODEGEN_CPP})
 endif()
 file(GLOB CHAOS_NATIVE_STUBS "*.cpp")
 list(REMOVE_ITEM CHAOS_NATIVE_STUBS
@@ -63,19 +78,11 @@ set(CHAOS_ENTRY_INCLUDES
 
 add_executable(entry ${CHAOS_ENTRY_SOURCES})
 target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
-target_compile_options(entry PRIVATE /EHa)
+target_compile_options(entry PRIVATE "$<$<CXX_COMPILER_ID:MSVC>:/EHa>")
 target_link_libraries(entry PRIVATE
-
-# Enable link-time optimization (LTO/LTCG) for release/profile builds
-if(MSVC)
-  set_target_properties(entry PROPERTIES
-    INTERPROCEDURAL_OPTIMIZATION_RELEASE TRUE
-    INTERPROCEDURAL_OPTIMIZATION_RELWITHDEBINFO TRUE
-  )
-else()
-  set_target_properties(entry PROPERTIES
-    INTERPROCEDURAL_OPTIMIZATION TRUE
-  )
-endif()
     chaos::runtime
+)
+target_link_options(entry PRIVATE
+    "$<$<CXX_COMPILER_ID:MSVC>:/FORCE:MULTIPLE>"
+    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wl,--allow-multiple-definition>"
 )

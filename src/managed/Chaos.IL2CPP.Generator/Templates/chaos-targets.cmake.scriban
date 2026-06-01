@@ -43,18 +43,20 @@ target_link_libraries(chaos::runtime INTERFACE
 if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
   target_link_libraries(chaos::runtime INTERFACE
       "-Wl,--start-group"
-      "${CHAOS_SDK_ROOT}/lib/chaos_common.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_support.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_fmt.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_runtime_core.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_interpreter.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_bootstrap.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_hot_update.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_eventpipe.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_jit.lib"
-      "${CHAOS_SDK_ROOT}/lib/chaos_debugger.lib"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_common.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_support.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_fmt.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_runtime_core.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_interpreter.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_bootstrap.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_hot_update.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_eventpipe.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_jit.a"
+      "${CHAOS_SDK_ROOT}/lib/libchaos_debugger.a"
       "-Wl,--end-group"
       "-lnuma"
+      "-lpthread"
+      "-ldl"
   )
 endif()
 

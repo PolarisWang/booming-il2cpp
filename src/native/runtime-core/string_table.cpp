@@ -18,6 +18,9 @@ namespace chaos::il2cpp::string_table {
 // can access it via extern thread_local declaration.
 thread_local ResolveCacheEntry g_tls_resolve_cache = {};
 
+const StringEntry* g_aot_table = nullptr;
+CHAOS_IL2CPP_UINT32 g_aot_table_count = 0u;
+
 namespace {
 
 const StringEntry* g_aot_entries = nullptr;
@@ -43,6 +46,8 @@ void InitializeFromAot(const StringEntry* entries, CHAOS_IL2CPP_UINT32 count)
 {
     g_aot_entries = entries;
     g_aot_entry_count = count;
+    g_aot_table = entries;
+    g_aot_table_count = count;
 }
 
 StringView Resolve(StringId id)

@@ -574,27 +574,28 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
 
     for idx in sorted(golden_by_index.keys()):
         native = native_lookup.get(idx)
+        g = golden_by_index[idx]
 
         if native is None:
             golden_not_in_native += 1
             continue
 
-        managed_passed = golden.get("passed", False)
+        managed_passed = g.get("passed", False)
         native_passed = native.get("passed", False)
 
         if managed_passed == native_passed:
             matched += 1
         else:
-            subject_name = golden.get("subjectName", f"Subject_{idx}")
+            subject_name = g.get("subjectName", f"Subject_{idx}")
             mismatches.append({
                 "methodIndex": idx,
                 "subjectName": subject_name,
                 "managedPassed": managed_passed,
                 "nativePassed": native_passed,
                 "nativeExitCode": native.get("exitCode", -1),
-                "goldenExitCode": golden.get("exitCode", -1),
+                "goldenExitCode": g.get("exitCode", -1),
                 "issue": "native_fail" if (managed_passed and not native_passed) else "managed_fail",
-                "exceptionMessage": golden.get("exceptionMessage"),
+                "exceptionMessage": g.get("exceptionMessage"),
             })
 
     total_checked = len(golden_by_index) - golden_not_in_native

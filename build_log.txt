@@ -1,0 +1,586 @@
+'vswhere.exe' is not recognized as an internal or external command,
+operable program or batch file.
+**********************************************************************
+** Visual Studio 2022 Developer Command Prompt v17.0
+** Copyright (c) 2022 Microsoft Corporation
+**********************************************************************
+[vcvarsall.bat] Environment initialized for: 'x64'
+Professional env ready
+MSBuild version 17.12.12+1cce77968 for .NET Framework
+Build started 6/1/2026 2:10:17 PM.
+
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" on node 1 (Rebuild target(s)).
+_PrepareForClean:
+  Deleting file "chaos_jit.dir\Release\chaos_jit.tlog\chaos_jit.lastbuildstate".
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (1) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2) on node 1 (Clean target(s)).
+_PrepareForClean:
+  Deleting file "chaos_bootstrap.dir\Release\chaos_bootstrap.tlog\chaos_bootstrap.lastbuildstate".
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2) is building "D:\agent\booming-il2cpp\build\native-profile\ZERO_CHECK.vcxproj" (3) on node 1 (Clean target(s)).
+_PrepareForClean:
+  Deleting file "x64\Release\ZERO_CHECK\ZERO_CHECK.tlog\ZERO_CHECK.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\ZERO_CHECK.vcxproj" (Clean target(s)).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj" (4) on node 1 (Clean target(s)).
+_PrepareForClean:
+  Deleting file "chaos_common.dir\Release\chaos_common.tlog\chaos_common.lastbuildstate".
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj" (4) is building "D:\agent\booming-il2cpp\build\native-profile\fmt_build\chaos_fmt.vcxproj" (5) on node 1 (Clean target(s)).
+_PrepareForClean:
+  Deleting file "chaos_fmt.dir\Release\chaos_fmt.tlog\chaos_fmt.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\fmt_build\chaos_fmt.vcxproj" (Clean target(s)).
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj" (Clean target(s)).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\chaos_debugger.vcxproj" (6) on node 1 (Clean target(s)).
+_PrepareForClean:
+  Deleting file "chaos_debugger.dir\Release\chaos_debugger.tlog\chaos_debugger.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\chaos_debugger.vcxproj" (Clean target(s)).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\eventpipe\chaos_eventpipe.vcxproj" (7) on node 1 (Clean target(s)).
+_PrepareForClean:
+  Deleting file "chaos_eventpipe.dir\Release\chaos_eventpipe.tlog\chaos_eventpipe.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\eventpipe\chaos_eventpipe.vcxproj" (Clean target(s)).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj" (8) on node 1 (Clean target(s)).
+_PrepareForClean:
+  Deleting file "chaos_hot_update.dir\Release\chaos_hot_update.tlog\chaos_hot_update.lastbuildstate".
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj" (8) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj" (9) on node 1 (Clean target(s)).
+_PrepareForClean:
+  Deleting file "chaos_runtime_core.dir\Release\chaos_ru.FBD330D2.tlog\chaos_runtime_core.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj" (Clean target(s)).
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj" (Clean target(s)).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\support\chaos_support.vcxproj" (10) on node 1 (Clean target(s)).
+_PrepareForClean:
+  Deleting file "chaos_support.dir\Release\chaos_support.tlog\chaos_support.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\support\chaos_support.vcxproj" (Clean target(s)).
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (Clean target(s)).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (1) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2:2) on node 1 (default targets).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2:2) is building "D:\agent\booming-il2cpp\build\native-profile\ZERO_CHECK.vcxproj" (3:9) on node 1 (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "x64\Release\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "x64\Release\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild".
+CustomBuild:
+  Checking Build System
+FinalizeBuildStatus:
+  Deleting file "x64\Release\ZERO_CHECK\ZERO_CHECK.tlog\unsuccessfulbuild".
+  Touching "x64\Release\ZERO_CHECK\ZERO_CHECK.tlog\ZERO_CHECK.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\ZERO_CHECK.vcxproj" (default targets).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2:2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj" (4:5) on node 1 (default targets).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj" (4:5) is building "D:\agent\booming-il2cpp\build\native-profile\fmt_build\chaos_fmt.vcxproj" (5:6) on node 1 (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "chaos_fmt.dir\Release\chaos_fmt.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "chaos_fmt.dir\Release\chaos_fmt.tlog\unsuccessfulbuild".
+CustomBuild:
+  Building Custom Rule D:/agent/booming-il2cpp/third_party/fmt/CMakeLists.txt
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\third_party\fmt\include" /nologo /W1 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D FMT_USE_WINDOWS_H=0 /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_fmt.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\fmt_build\Release\chaos_fmt.pdb" /external:W1 /Gd /TP /errorReport:queue  /w /utf-8 "D:\agent\booming-il2cpp\third_party\fmt\src\format.cc" "D:\agent\booming-il2cpp\third_party\fmt\src\os.cc"
+cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\fmt_build\chaos_fmt.vcxproj]
+  format.cc
+  os.cc
+  Generating Code...
+Lib:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\Lib.exe /OUT:"D:\agent\booming-il2cpp\build\native-profile\fmt_build\Release\chaos_fmt.lib" /NOLOGO /MACHINE:X64  /machine:x64 chaos_fmt.dir\Release\format.obj
+  chaos_fmt.dir\Release\os.obj
+  chaos_fmt.vcxproj -> D:\agent\booming-il2cpp\build\native-profile\fmt_build\Release\chaos_fmt.lib
+FinalizeBuildStatus:
+  Deleting file "chaos_fmt.dir\Release\chaos_fmt.tlog\unsuccessfulbuild".
+  Touching "chaos_fmt.dir\Release\chaos_fmt.tlog\chaos_fmt.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\fmt_build\chaos_fmt.vcxproj" (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "chaos_common.dir\Release\chaos_common.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "chaos_common.dir\Release\chaos_common.tlog\unsuccessfulbuild".
+CustomBuild:
+  Building Custom Rule D:/agent/booming-il2cpp/src/native/common/CMakeLists.txt
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\src\native\common" /I"D:\agent\booming-il2cpp\third_party\fmt\include" /I"D:\agent\booming-il2cpp\third_party\unordered_dense\include" /nologo /W1 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D FMT_USE_WINDOWS_H=0 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_common.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\src\native\common\Release\chaos_common.pdb" /external:W1 /Gd /TP /errorReport:queue  /w "D:\agent\booming-il2cpp\src\native\common\chaos\profile_globals.cpp" "D:\agent\booming-il2cpp\src\native\common\span.cpp" "D:\agent\booming-il2cpp\src\native\common\collection.cpp" "D:\agent\booming-il2cpp\src\native\common\monitor.cpp" "D:\agent\booming-il2cpp\src\native\common\thread.cpp" "D:\agent\booming-il2cpp\src\native\common\async.cpp"
+cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj]
+  profile_globals.cpp
+  span.cpp
+  collection.cpp
+  monitor.cpp
+  thread.cpp
+  async.cpp
+  Generating Code...
+Lib:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\Lib.exe /OUT:"D:\agent\booming-il2cpp\build\native-profile\src\native\common\Release\chaos_common.lib" /NOLOGO /MACHINE:X64  /machine:x64 chaos_common.dir\Release\profile_globals.obj
+  chaos_common.dir\Release\span.obj
+  chaos_common.dir\Release\collection.obj
+  chaos_common.dir\Release\monitor.obj
+  chaos_common.dir\Release\thread.obj
+  chaos_common.dir\Release\async.obj
+  chaos_common.vcxproj -> D:\agent\booming-il2cpp\build\native-profile\src\native\common\Release\chaos_common.lib
+FinalizeBuildStatus:
+  Deleting file "chaos_common.dir\Release\chaos_common.tlog\unsuccessfulbuild".
+  Touching "chaos_common.dir\Release\chaos_common.tlog\chaos_common.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj" (default targets).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2:2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\chaos_debugger.vcxproj" (6:5) on node 1 (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "chaos_debugger.dir\Release\chaos_debugger.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "chaos_debugger.dir\Release\chaos_debugger.tlog\unsuccessfulbuild".
+CustomBuild:
+  Building Custom Rule D:/agent/booming-il2cpp/src/native/diagnostics/debugger/CMakeLists.txt
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\src\native\diagnostics\debugger\.." /I"D:\agent\booming-il2cpp\src\native\common" /I"D:\agent\booming-il2cpp\src\native\runtime-core" /I"D:\agent\booming-il2cpp\contracts\native\v0" /I"D:\agent\booming-il2cpp\third_party\unordered_dense\include" /I"D:\agent\booming-il2cpp\third_party\fmt\include" /nologo /W3 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D _SILENCE_ALL_CXX17_C99_MATH_MACROS /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_debugger.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\Release\chaos_debugger.pdb" /external:W3 /Gd /TP /errorReport:queue  /utf-8 /EHa- "D:\agent\booming-il2cpp\src\native\diagnostics\debugger\dbg_transport.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\debugger\dbg_breakpoint.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\debugger\dbg_stepping.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\debugger\dbg_stack.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\debugger\dbg_variables.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\debugger\dbg_runtime.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\debugger\dbg_server.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\debugger\dbg_instance.cpp"
+  dbg_transport.cpp
+  dbg_breakpoint.cpp
+  dbg_stepping.cpp
+  dbg_stack.cpp
+  dbg_variables.cpp
+  dbg_runtime.cpp
+D:\agent\booming-il2cpp\contracts\native\v0\codegen_bridge.h(194,14): warning C4200: nonstandard extension used: zero-sized array in struct/union [D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\chaos_debugger.vcxproj]
+  (compiling source file '../../../../../../src/native/diagnostics/debugger/dbg_runtime.cpp')
+      D:\agent\booming-il2cpp\contracts\native\v0\codegen_bridge.h(194,14):
+      This member will be ignored by a defaulted constructor or copy/move assignment operator
+  
+D:\agent\booming-il2cpp\src\native\runtime-core\patch_loader.h(84,39): warning C4099: 'chaos::il2cpp::jit::JitMethod': type name first seen using 'struct' now seen using 'class' [D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\chaos_debugger.vcxproj]
+  (compiling source file '../../../../../../src/native/diagnostics/debugger/dbg_runtime.cpp')
+      D:\agent\booming-il2cpp\src\native\runtime-core\patch_loader.h(32,39):
+      see declaration of 'chaos::il2cpp::jit::JitMethod'
+  
+  dbg_server.cpp
+  dbg_instance.cpp
+  Generating Code...
+Lib:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\Lib.exe /OUT:"D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\Release\chaos_debugger.lib" /NOLOGO /MACHINE:X64  /machine:x64 chaos_debugger.dir\Release\dbg_transport.obj
+  chaos_debugger.dir\Release\dbg_breakpoint.obj
+  chaos_debugger.dir\Release\dbg_stepping.obj
+  chaos_debugger.dir\Release\dbg_stack.obj
+  chaos_debugger.dir\Release\dbg_variables.obj
+  chaos_debugger.dir\Release\dbg_runtime.obj
+  chaos_debugger.dir\Release\dbg_server.obj
+  chaos_debugger.dir\Release\dbg_instance.obj
+  chaos_debugger.vcxproj -> D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\Release\chaos_debugger.lib
+FinalizeBuildStatus:
+  Deleting file "chaos_debugger.dir\Release\chaos_debugger.tlog\unsuccessfulbuild".
+  Touching "chaos_debugger.dir\Release\chaos_debugger.tlog\chaos_debugger.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\chaos_debugger.vcxproj" (default targets).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2:2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\eventpipe\chaos_eventpipe.vcxproj" (7:5) on node 1 (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "chaos_eventpipe.dir\Release\chaos_eventpipe.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "chaos_eventpipe.dir\Release\chaos_eventpipe.tlog\unsuccessfulbuild".
+CustomBuild:
+  Building Custom Rule D:/agent/booming-il2cpp/src/native/diagnostics/eventpipe/CMakeLists.txt
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\.." /I"D:\agent\booming-il2cpp\src\native\runtime-core" /I"D:\agent\booming-il2cpp\src\native\common" /nologo /W3 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_eventpipe.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\eventpipe\Release\chaos_eventpipe.pdb" /external:W3 /Gd /TP /errorReport:queue  /utf-8 /EHa- "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_transport.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_event.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_gc_bridge.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_threadpool_bridge.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_exception_bridge.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_hotupdate_bridge.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_reflection_bridge.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_memorydomain_bridge.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_com_bridge.cpp" "D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\ep_instance.cpp"
+  ep_transport.cpp
+  ep_event.cpp
+  ep_gc_bridge.cpp
+  ep_threadpool_bridge.cpp
+  ep_exception_bridge.cpp
+  ep_hotupdate_bridge.cpp
+  ep_reflection_bridge.cpp
+  ep_memorydomain_bridge.cpp
+  ep_com_bridge.cpp
+  ep_instance.cpp
+  Generating Code...
+Lib:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\Lib.exe /OUT:"D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\eventpipe\Release\chaos_eventpipe.lib" /NOLOGO /MACHINE:X64  /machine:x64 chaos_eventpipe.dir\Release\ep_transport.obj
+  chaos_eventpipe.dir\Release\ep_event.obj
+  chaos_eventpipe.dir\Release\ep_gc_bridge.obj
+  chaos_eventpipe.dir\Release\ep_threadpool_bridge.obj
+  chaos_eventpipe.dir\Release\ep_exception_bridge.obj
+  chaos_eventpipe.dir\Release\ep_hotupdate_bridge.obj
+  chaos_eventpipe.dir\Release\ep_reflection_bridge.obj
+  chaos_eventpipe.dir\Release\ep_memorydomain_bridge.obj
+  chaos_eventpipe.dir\Release\ep_com_bridge.obj
+  chaos_eventpipe.dir\Release\ep_instance.obj
+  chaos_eventpipe.vcxproj -> D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\eventpipe\Release\chaos_eventpipe.lib
+FinalizeBuildStatus:
+  Deleting file "chaos_eventpipe.dir\Release\chaos_eventpipe.tlog\unsuccessfulbuild".
+  Touching "chaos_eventpipe.dir\Release\chaos_eventpipe.tlog\chaos_eventpipe.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\eventpipe\chaos_eventpipe.vcxproj" (default targets).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2:2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj" (8:2) on node 1 (default targets).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj" (8:2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj" (9:4) on node 1 (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "chaos_runtime_core.dir\Release\chaos_ru.FBD330D2.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "chaos_runtime_core.dir\Release\chaos_ru.FBD330D2.tlog\unsuccessfulbuild".
+CustomBuild:
+  Building Custom Rule D:/agent/booming-il2cpp/src/native/runtime-core/CMakeLists.txt
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\contracts\native\v0" /I"D:\agent\booming-il2cpp\src\native\common" /I"D:\agent\booming-il2cpp\src\native\interpreter" /I"D:\agent\booming-il2cpp\src\native\interpreter\generated" /I"D:\agent\booming-il2cpp\src\native\runtime-core" /I"D:\agent\booming-il2cpp\src\native\runtime-core\gc" /I"D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs" /I"D:\agent\booming-il2cpp\third_party\unordered_dense\include" /I"D:\agent\booming-il2cpp\src\native" /I"D:\agent\booming-il2cpp\src\native\diagnostics" /I"D:\agent\booming-il2cpp\third_party\fmt\include" /I"D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\.." /I"D:\agent\booming-il2cpp\src\native\diagnostics\debugger\.." /nologo /W1 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D NOMINMAX /D CHAOS_IL2CPP_HAS_TIER_MANAGER /D CHAOS_IL2CPP_GC_BGC=1 /D CHAOS_IL2CPP_GC_PARALLEL_MARK=1 /D CHAOS_IL2CPP_GC_EVENTS=1 /D CHAOS_IL2CPP_GC_LARGE_PAGES=1 /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D FMT_USE_WINDOWS_H=0 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHa /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_runtime_core.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\Release\chaos_runtime_core.pdb" /external:W1 /Gd /TP /errorReport:queue  /utf-8 /FS /w "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_core.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\memory_domain.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\vtable_registry.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\convert.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\parse_convert.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\generic_context.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\string_table.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\type_registry.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\eeclass.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\math_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\array_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\datetime_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\char_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\enum_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\random_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\stream_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\hashcode_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\interlocked_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\string_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\exception_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\object_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\threading_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\monitor_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\mutex_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\threadpool_events.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\convert_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\collection_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\misc_stubs.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\interpreter_entry_direct.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\registration_globals.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\module_registry.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\layout_engine.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\instantiation_engine.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\thread_state.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\jit_demotion.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\jit\jit_debug_contract.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\thread_pool.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\timer_queue.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\wait_handle.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\synchronization.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\execution_context.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\cancellation_token.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\task_runner.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\generic_method_instantiation.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\aot_core_ir_reader.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_helpers.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\method_table.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\reflection_api.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\abi_manifest.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\hotpatch_table.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\patch_loader.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\jit_registration.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\metadata_interface.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\assembly_manager.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\static_var_store.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_scheduler.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_region.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_root_change.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_card_table.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_root_scanner.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_static_roots.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_young_collector.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_old_gen.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_demotion.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_layout.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_loh.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_parallel_mark.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_events.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_etw.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_gen1.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_stats.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_stress.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_worker_pool.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_bgc.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_api.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_coordinator.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_heap_manager.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_low_mem.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\com_rcw.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\com_ccw.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\com_connection_point.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\com_platform.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\com_factory.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\com_typelib.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\domain_unloader.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\native_library.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\exception_api.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\exception_helpers.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\tier_manager.cpp" "D:\agent\booming-il2cpp\src\native\runtime-core\gc\gc_numa_win.cpp"
+cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj]
+  runtime_core.cpp
+  memory_domain.cpp
+  vtable_registry.cpp
+  convert.cpp
+  parse_convert.cpp
+  generic_context.cpp
+  string_table.cpp
+  type_registry.cpp
+  eeclass.cpp
+  math_stubs.cpp
+  array_stubs.cpp
+  datetime_stubs.cpp
+  char_stubs.cpp
+  enum_stubs.cpp
+  random_stubs.cpp
+  stream_stubs.cpp
+  hashcode_stubs.cpp
+  interlocked_stubs.cpp
+  string_stubs.cpp
+  exception_stubs.cpp
+  Generating Code...
+  Compiling...
+  object_stubs.cpp
+  threading_stubs.cpp
+  monitor_stubs.cpp
+  mutex_stubs.cpp
+  threadpool_events.cpp
+  convert_stubs.cpp
+  collection_stubs.cpp
+  misc_stubs.cpp
+  interpreter_entry_direct.cpp
+  registration_globals.cpp
+  module_registry.cpp
+  layout_engine.cpp
+  instantiation_engine.cpp
+  thread_state.cpp
+  jit_demotion.cpp
+  jit_debug_contract.cpp
+  thread_pool.cpp
+  timer_queue.cpp
+  wait_handle.cpp
+  synchronization.cpp
+  Generating Code...
+  Compiling...
+  execution_context.cpp
+  cancellation_token.cpp
+  task_runner.cpp
+  generic_method_instantiation.cpp
+  aot_core_ir_reader.cpp
+  delegate_helpers.cpp
+  method_table.cpp
+  reflection_api.cpp
+  abi_manifest.cpp
+  hotpatch_table.cpp
+  patch_loader.cpp
+  jit_registration.cpp
+  metadata_interface.cpp
+  assembly_manager.cpp
+  static_var_store.cpp
+  gc_scheduler.cpp
+  gc_region.cpp
+  gc_root_change.cpp
+  gc_card_table.cpp
+  gc_root_scanner.cpp
+  Generating Code...
+  Compiling...
+  gc_static_roots.cpp
+  gc_young_collector.cpp
+  gc_old_gen.cpp
+  gc_demotion.cpp
+  gc_layout.cpp
+  gc_loh.cpp
+  gc_parallel_mark.cpp
+  gc_events.cpp
+  gc_etw.cpp
+  gc_gen1.cpp
+  gc_stats.cpp
+  gc_stress.cpp
+  gc_worker_pool.cpp
+  gc_bgc.cpp
+  gc_api.cpp
+  gc_coordinator.cpp
+  gc_heap_manager.cpp
+  gc_low_mem.cpp
+  com_rcw.cpp
+  com_ccw.cpp
+  Generating Code...
+  Compiling...
+  com_connection_point.cpp
+  com_platform.cpp
+  com_factory.cpp
+  com_typelib.cpp
+  domain_unloader.cpp
+  native_library.cpp
+  exception_api.cpp
+  exception_helpers.cpp
+  tier_manager.cpp
+  gc_numa_win.cpp
+  Generating Code...
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\contracts\native\v0" /I"D:\agent\booming-il2cpp\src\native\common" /I"D:\agent\booming-il2cpp\src\native\interpreter" /I"D:\agent\booming-il2cpp\src\native\interpreter\generated" /I"D:\agent\booming-il2cpp\src\native\runtime-core" /I"D:\agent\booming-il2cpp\src\native\runtime-core\gc" /I"D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs" /I"D:\agent\booming-il2cpp\third_party\unordered_dense\include" /I"D:\agent\booming-il2cpp\src\native" /I"D:\agent\booming-il2cpp\src\native\diagnostics" /I"D:\agent\booming-il2cpp\third_party\fmt\include" /I"D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\.." /I"D:\agent\booming-il2cpp\src\native\diagnostics\debugger\.." /nologo /W1 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D NOMINMAX /D CHAOS_IL2CPP_HAS_TIER_MANAGER /D CHAOS_IL2CPP_GC_BGC=1 /D CHAOS_IL2CPP_GC_PARALLEL_MARK=1 /D CHAOS_IL2CPP_GC_EVENTS=1 /D CHAOS_IL2CPP_GC_LARGE_PAGES=1 /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D FMT_USE_WINDOWS_H=0 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHa /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_runtime_core.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\Release\chaos_runtime_core.pdb" /external:W1 /Gd /TP /errorReport:queue  /utf-8 /FS /w -msse4.1 "D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\guid_stubs.cpp"
+cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj]
+cl : command line  warning D9002: ignoring unknown option '-msse4.1' [D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj]
+  guid_stubs.cpp
+Lib:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\Lib.exe /OUT:"D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\Release\chaos_runtime_core.lib" /NOLOGO /MACHINE:X64  /machine:x64 chaos_runtime_core.dir\Release\runtime_core.obj
+  chaos_runtime_core.dir\Release\memory_domain.obj
+  chaos_runtime_core.dir\Release\vtable_registry.obj
+  chaos_runtime_core.dir\Release\convert.obj
+  chaos_runtime_core.dir\Release\parse_convert.obj
+  chaos_runtime_core.dir\Release\generic_context.obj
+  chaos_runtime_core.dir\Release\string_table.obj
+  chaos_runtime_core.dir\Release\type_registry.obj
+  chaos_runtime_core.dir\Release\eeclass.obj
+  chaos_runtime_core.dir\Release\math_stubs.obj
+  chaos_runtime_core.dir\Release\array_stubs.obj
+  chaos_runtime_core.dir\Release\datetime_stubs.obj
+  chaos_runtime_core.dir\Release\char_stubs.obj
+  chaos_runtime_core.dir\Release\guid_stubs.obj
+  chaos_runtime_core.dir\Release\enum_stubs.obj
+  chaos_runtime_core.dir\Release\random_stubs.obj
+  chaos_runtime_core.dir\Release\stream_stubs.obj
+  chaos_runtime_core.dir\Release\hashcode_stubs.obj
+  chaos_runtime_core.dir\Release\interlocked_stubs.obj
+  chaos_runtime_core.dir\Release\string_stubs.obj
+  chaos_runtime_core.dir\Release\exception_stubs.obj
+  chaos_runtime_core.dir\Release\object_stubs.obj
+  chaos_runtime_core.dir\Release\threading_stubs.obj
+  chaos_runtime_core.dir\Release\monitor_stubs.obj
+  chaos_runtime_core.dir\Release\mutex_stubs.obj
+  chaos_runtime_core.dir\Release\threadpool_events.obj
+  chaos_runtime_core.dir\Release\convert_stubs.obj
+  chaos_runtime_core.dir\Release\collection_stubs.obj
+  chaos_runtime_core.dir\Release\misc_stubs.obj
+  chaos_runtime_core.dir\Release\interpreter_entry_direct.obj
+  chaos_runtime_core.dir\Release\registration_globals.obj
+  chaos_runtime_core.dir\Release\module_registry.obj
+  chaos_runtime_core.dir\Release\layout_engine.obj
+  chaos_runtime_core.dir\Release\instantiation_engine.obj
+  chaos_runtime_core.dir\Release\thread_state.obj
+  chaos_runtime_core.dir\Release\jit_demotion.obj
+  chaos_runtime_core.dir\Release\jit_debug_contract.obj
+  chaos_runtime_core.dir\Release\thread_pool.obj
+  chaos_runtime_core.dir\Release\timer_queue.obj
+  chaos_runtime_core.dir\Release\wait_handle.obj
+  chaos_runtime_core.dir\Release\synchronization.obj
+  chaos_runtime_core.dir\Release\execution_context.obj
+  chaos_runtime_core.dir\Release\cancellation_token.obj
+  chaos_runtime_core.dir\Release\task_runner.obj
+  chaos_runtime_core.dir\Release\generic_method_instantiation.obj
+  chaos_runtime_core.dir\Release\aot_core_ir_reader.obj
+  chaos_runtime_core.dir\Release\delegate_helpers.obj
+  chaos_runtime_core.dir\Release\method_table.obj
+  chaos_runtime_core.dir\Release\reflection_api.obj
+  chaos_runtime_core.dir\Release\abi_manifest.obj
+  chaos_runtime_core.dir\Release\hotpatch_table.obj
+  chaos_runtime_core.dir\Release\patch_loader.obj
+  chaos_runtime_core.dir\Release\jit_registration.obj
+  chaos_runtime_core.dir\Release\metadata_interface.obj
+  chaos_runtime_core.dir\Release\assembly_manager.obj
+  chaos_runtime_core.dir\Release\static_var_store.obj
+  chaos_runtime_core.dir\Release\gc_scheduler.obj
+  chaos_runtime_core.dir\Release\gc_region.obj
+  chaos_runtime_core.dir\Release\gc_root_change.obj
+  chaos_runtime_core.dir\Release\gc_card_table.obj
+  chaos_runtime_core.dir\Release\gc_root_scanner.obj
+  chaos_runtime_core.dir\Release\gc_static_roots.obj
+  chaos_runtime_core.dir\Release\gc_young_collector.obj
+  chaos_runtime_core.dir\Release\gc_old_gen.obj
+  chaos_runtime_core.dir\Release\gc_demotion.obj
+  chaos_runtime_core.dir\Release\gc_layout.obj
+  chaos_runtime_core.dir\Release\gc_loh.obj
+  chaos_runtime_core.dir\Release\gc_parallel_mark.obj
+  chaos_runtime_core.dir\Release\gc_events.obj
+  chaos_runtime_core.dir\Release\gc_etw.obj
+  chaos_runtime_core.dir\Release\gc_gen1.obj
+  chaos_runtime_core.dir\Release\gc_stats.obj
+  chaos_runtime_core.dir\Release\gc_stress.obj
+  chaos_runtime_core.dir\Release\gc_worker_pool.obj
+  chaos_runtime_core.dir\Release\gc_bgc.obj
+  chaos_runtime_core.dir\Release\gc_api.obj
+  chaos_runtime_core.dir\Release\gc_coordinator.obj
+  chaos_runtime_core.dir\Release\gc_heap_manager.obj
+  chaos_runtime_core.dir\Release\gc_low_mem.obj
+  chaos_runtime_core.dir\Release\com_rcw.obj
+  chaos_runtime_core.dir\Release\com_ccw.obj
+  chaos_runtime_core.dir\Release\com_connection_point.obj
+  chaos_runtime_core.dir\Release\com_platform.obj
+  chaos_runtime_core.dir\Release\com_factory.obj
+  chaos_runtime_core.dir\Release\com_typelib.obj
+  chaos_runtime_core.dir\Release\domain_unloader.obj
+  chaos_runtime_core.dir\Release\native_library.obj
+  chaos_runtime_core.dir\Release\exception_api.obj
+  chaos_runtime_core.dir\Release\exception_helpers.obj
+  chaos_runtime_core.dir\Release\tier_manager.obj
+  chaos_runtime_core.dir\Release\gc_numa_win.obj
+  chaos_runtime_core.vcxproj -> D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\Release\chaos_runtime_core.lib
+FinalizeBuildStatus:
+  Deleting file "chaos_runtime_core.dir\Release\chaos_ru.FBD330D2.tlog\unsuccessfulbuild".
+  Touching "chaos_runtime_core.dir\Release\chaos_ru.FBD330D2.tlog\chaos_runtime_core.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj" (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "chaos_hot_update.dir\Release\chaos_hot_update.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "chaos_hot_update.dir\Release\chaos_hot_update.tlog\unsuccessfulbuild".
+CustomBuild:
+  Building Custom Rule D:/agent/booming-il2cpp/src/native/hot-update/CMakeLists.txt
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\contracts\native\v0" /I"D:\agent\booming-il2cpp\src\native\runtime-core" /I"D:\agent\booming-il2cpp\src\native\hot-update" /I"D:\agent\booming-il2cpp\third_party\fmt\include" /I"D:\agent\booming-il2cpp\src\native\common" /I"D:\agent\booming-il2cpp\src\native\interpreter" /I"D:\agent\booming-il2cpp\src\native\interpreter\generated" /I"D:\agent\booming-il2cpp\src\native\runtime-core\gc" /I"D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs" /I"D:\agent\booming-il2cpp\third_party\unordered_dense\include" /I"D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\.." /I"D:\agent\booming-il2cpp\src\native\diagnostics\debugger\.." /nologo /W1 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D NOMINMAX /D CHAOS_IL2CPP_HAS_TIER_MANAGER /D FMT_USE_WINDOWS_H=0 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_hot_update.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\Release\chaos_hot_update.pdb" /external:W1 /Gd /TP /errorReport:queue  /utf-8 /w "D:\agent\booming-il2cpp\src\native\hot-update\hot_update.cpp" "D:\agent\booming-il2cpp\src\native\hot-update\method_replacement.cpp"
+cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj]
+  hot_update.cpp
+  method_replacement.cpp
+  Generating Code...
+Lib:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\Lib.exe /OUT:"D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\Release\chaos_hot_update.lib" /NOLOGO /MACHINE:X64  /machine:x64 chaos_hot_update.dir\Release\hot_update.obj
+  chaos_hot_update.dir\Release\method_replacement.obj
+  chaos_hot_update.vcxproj -> D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\Release\chaos_hot_update.lib
+FinalizeBuildStatus:
+  Deleting file "chaos_hot_update.dir\Release\chaos_hot_update.tlog\unsuccessfulbuild".
+  Touching "chaos_hot_update.dir\Release\chaos_hot_update.tlog\chaos_hot_update.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj" (default targets).
+Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (2:2) is building "D:\agent\booming-il2cpp\build\native-profile\src\native\support\chaos_support.vcxproj" (10:2) on node 1 (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "chaos_support.dir\Release\chaos_support.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "chaos_support.dir\Release\chaos_support.tlog\unsuccessfulbuild".
+CustomBuild:
+  Building Custom Rule D:/agent/booming-il2cpp/src/native/support/CMakeLists.txt
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\contracts\native\v0" /I"D:\agent\booming-il2cpp\src\native\support" /I"D:\agent\booming-il2cpp\src\native\runtime-core" /I"D:\agent\booming-il2cpp\third_party\fmt\include" /I"D:\agent\booming-il2cpp\src\native\common" /I"D:\agent\booming-il2cpp\src\native\interpreter" /I"D:\agent\booming-il2cpp\src\native\interpreter\generated" /I"D:\agent\booming-il2cpp\src\native\runtime-core\gc" /I"D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs" /I"D:\agent\booming-il2cpp\third_party\unordered_dense\include" /I"D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\.." /I"D:\agent\booming-il2cpp\src\native\diagnostics\debugger\.." /nologo /W1 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D NOMINMAX /D CHAOS_IL2CPP_HAS_TIER_MANAGER /D FMT_USE_WINDOWS_H=0 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_support.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\src\native\support\Release\chaos_support.pdb" /external:W1 /Gd /TP /errorReport:queue  /utf-8 /w "D:\agent\booming-il2cpp\src\native\support\support.cpp"
+cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\support\chaos_support.vcxproj]
+  support.cpp
+Lib:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\Lib.exe /OUT:"D:\agent\booming-il2cpp\build\native-profile\src\native\support\Release\chaos_support.lib" /NOLOGO /MACHINE:X64  /machine:x64 chaos_support.dir\Release\support.obj
+  chaos_support.vcxproj -> D:\agent\booming-il2cpp\build\native-profile\src\native\support\Release\chaos_support.lib
+FinalizeBuildStatus:
+  Deleting file "chaos_support.dir\Release\chaos_support.tlog\unsuccessfulbuild".
+  Touching "chaos_support.dir\Release\chaos_support.tlog\chaos_support.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\support\chaos_support.vcxproj" (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "chaos_bootstrap.dir\Release\chaos_bootstrap.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "chaos_bootstrap.dir\Release\chaos_bootstrap.tlog\unsuccessfulbuild".
+CustomBuild:
+  Building Custom Rule D:/agent/booming-il2cpp/src/native/bootstrap/CMakeLists.txt
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\contracts\native\v0" /I"D:\agent\booming-il2cpp\src\native\bootstrap" /I"D:\agent\booming-il2cpp\src\native\common" /I"D:\agent\booming-il2cpp\src\native\hot-update" /I"D:\agent\booming-il2cpp\src\native\runtime-core" /I"D:\agent\booming-il2cpp\src\native\support" /I"D:\agent\booming-il2cpp\src\native\interpreter" /I"D:\agent\booming-il2cpp\src\native\interpreter\generated" /I"D:\agent\booming-il2cpp\third_party\fmt\include" /I"D:\agent\booming-il2cpp\src\native\runtime-core\gc" /I"D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs" /I"D:\agent\booming-il2cpp\third_party\unordered_dense\include" /I"D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\.." /I"D:\agent\booming-il2cpp\src\native\diagnostics\debugger\.." /I"D:\agent\booming-il2cpp\src\native\jit" /nologo /W1 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D CHAOS_RUNTIME_ABI_EXPORTS /D _CRT_SECURE_NO_WARNINGS /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D NOMINMAX /D CHAOS_IL2CPP_HAS_TIER_MANAGER /D FMT_USE_WINDOWS_H=0 /D CHAOS_IL2CPP_HAS_T4_SEH_HANDLER=1 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_bootstrap.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\Release\chaos_bootstrap.pdb" /external:W1 /Gd /TP /errorReport:queue  /utf-8 /w "D:\agent\booming-il2cpp\src\native\bootstrap\bootstrap.cpp" "D:\agent\booming-il2cpp\src\native\bootstrap\bootstrap_delegates.cpp" "D:\agent\booming-il2cpp\src\native\bootstrap\bootstrap_icall.cpp"
+cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj]
+  bootstrap.cpp
+  bootstrap_delegates.cpp
+  bootstrap_icall.cpp
+  Generating Code...
+Lib:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\Lib.exe /OUT:"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\Release\chaos_bootstrap.lib" /NOLOGO /MACHINE:X64  /machine:x64 chaos_bootstrap.dir\Release\bootstrap.obj
+  chaos_bootstrap.dir\Release\bootstrap_delegates.obj
+  chaos_bootstrap.dir\Release\bootstrap_icall.obj
+  chaos_bootstrap.vcxproj -> D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\Release\chaos_bootstrap.lib
+FinalizeBuildStatus:
+  Deleting file "chaos_bootstrap.dir\Release\chaos_bootstrap.tlog\unsuccessfulbuild".
+  Touching "chaos_bootstrap.dir\Release\chaos_bootstrap.tlog\chaos_bootstrap.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (default targets).
+PrepareForBuild:
+  Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
+InitializeBuildStatus:
+  Creating "chaos_jit.dir\Release\chaos_jit.tlog\unsuccessfulbuild" because "AlwaysCreate" was specified.
+  Touching "chaos_jit.dir\Release\chaos_jit.tlog\unsuccessfulbuild".
+CustomBuild:
+  Building Custom Rule D:/agent/booming-il2cpp/src/native/jit/CMakeLists.txt
+ClCompile:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\CL.exe /c /I"D:\agent\booming-il2cpp\contracts\native\v0" /I"D:\agent\booming-il2cpp\src\native\runtime-core" /I"D:\agent\booming-il2cpp\src\native\jit" /I"D:\agent\booming-il2cpp\src\native" /I"D:\agent\booming-il2cpp\src\native\interpreter" /I"D:\agent\booming-il2cpp\third_party\fmt\include" /I"D:\agent\booming-il2cpp\src\native\common" /I"D:\agent\booming-il2cpp\src\native\interpreter\generated" /I"D:\agent\booming-il2cpp\src\native\runtime-core\gc" /I"D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs" /I"D:\agent\booming-il2cpp\third_party\unordered_dense\include" /I"D:\agent\booming-il2cpp\src\native\diagnostics\eventpipe\.." /I"D:\agent\booming-il2cpp\src\native\diagnostics\debugger\.." /nologo /W1 /WX- /diagnostics:column /O2 /Ob2 /D _MBCS /D WIN32 /D _WINDOWS /D NDEBUG /D CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1 /D CHAOS_IL2CPP_CONFIG_PROFILE /D CHAOS_IL2CPP_PROFILE_ENABLED=1 /D NOMINMAX /D CHAOS_IL2CPP_HAS_TIER_MANAGER /D FMT_USE_WINDOWS_H=0 /D "CMAKE_INTDIR=\"Release\"" /Gm- /EHsc /MD /GS- /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /std:c++17 /Fo"chaos_jit.dir\Release\\" /Fd"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\Release\chaos_jit.pdb" /external:W1 /Gd /TP /errorReport:queue  /utf-8 /w "D:\agent\booming-il2cpp\src\native\jit\code_buffer.cpp" "D:\agent\booming-il2cpp\src\native\jit\jit_engine.cpp" "D:\agent\booming-il2cpp\src\native\jit\jit_helpers.cpp" "D:\agent\booming-il2cpp\src\native\jit\jit_inline.cpp" "D:\agent\booming-il2cpp\src\native\jit\jit_deopt.cpp" "D:\agent\booming-il2cpp\src\native\jit\jit_seh.cpp" "D:\agent\booming-il2cpp\src\native\jit\jit_unwind.cpp" "D:\agent\booming-il2cpp\src\native\jit\jit_binary_reader.cpp" "D:\agent\booming-il2cpp\src\native\jit\jit_precode.cpp" "D:\agent\booming-il2cpp\src\native\jit\WinSehHandler.cpp" "D:\agent\booming-il2cpp\src\native\jit\tree\jit_intrinsics.cpp" "D:\agent\booming-il2cpp\src\native\jit\tree\jit_bounds_check.cpp" "D:\agent\booming-il2cpp\src\native\jit\tree\jit_cfg.cpp" "D:\agent\booming-il2cpp\src\native\jit\tree\jit_tree_builder.cpp" "D:\agent\booming-il2cpp\src\native\jit\tree\jit_tree_mutator.cpp" "D:\agent\booming-il2cpp\src\native\jit\tree\jit_linearizer.cpp" "D:\agent\booming-il2cpp\src\native\jit\tree\jit_optimizer.cpp"
+cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj]
+  code_buffer.cpp
+  jit_engine.cpp
+  jit_helpers.cpp
+  jit_inline.cpp
+  jit_deopt.cpp
+  jit_seh.cpp
+  jit_unwind.cpp
+  jit_binary_reader.cpp
+  jit_precode.cpp
+  WinSehHandler.cpp
+  jit_intrinsics.cpp
+  jit_bounds_check.cpp
+  jit_cfg.cpp
+  jit_tree_builder.cpp
+  jit_tree_mutator.cpp
+  jit_linearizer.cpp
+  jit_optimizer.cpp
+  Generating Code...
+Lib:
+  C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Tools\MSVC\14.38.33130\bin\HostX64\x64\Lib.exe /OUT:"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\Release\chaos_jit.lib" /NOLOGO /MACHINE:X64  /machine:x64 chaos_jit.dir\Release\code_buffer.obj
+  chaos_jit.dir\Release\jit_engine.obj
+  chaos_jit.dir\Release\jit_helpers.obj
+  chaos_jit.dir\Release\jit_inline.obj
+  chaos_jit.dir\Release\jit_deopt.obj
+  chaos_jit.dir\Release\jit_seh.obj
+  chaos_jit.dir\Release\jit_unwind.obj
+  chaos_jit.dir\Release\jit_binary_reader.obj
+  chaos_jit.dir\Release\jit_precode.obj
+  chaos_jit.dir\Release\WinSehHandler.obj
+  chaos_jit.dir\Release\jit_intrinsics.obj
+  chaos_jit.dir\Release\jit_bounds_check.obj
+  chaos_jit.dir\Release\jit_cfg.obj
+  chaos_jit.dir\Release\jit_tree_builder.obj
+  chaos_jit.dir\Release\jit_tree_mutator.obj
+  chaos_jit.dir\Release\jit_linearizer.obj
+  chaos_jit.dir\Release\jit_optimizer.obj
+  chaos_jit.vcxproj -> D:\agent\booming-il2cpp\build\native-profile\src\native\jit\Release\chaos_jit.lib
+FinalizeBuildStatus:
+  Deleting file "chaos_jit.dir\Release\chaos_jit.tlog\unsuccessfulbuild".
+  Touching "chaos_jit.dir\Release\chaos_jit.tlog\chaos_jit.lastbuildstate".
+Done Building Project "D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target) (1) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (default target) (2:2) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj" (default target) (4:5) ->
+"D:\agent\booming-il2cpp\build\native-profile\fmt_build\chaos_fmt.vcxproj" (default target) (5:6) ->
+(ClCompile target) -> 
+  cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\fmt_build\chaos_fmt.vcxproj]
+
+
+"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target) (1) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (default target) (2:2) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj" (default target) (4:5) ->
+  cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\common\chaos_common.vcxproj]
+
+
+"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target) (1) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (default target) (2:2) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\chaos_debugger.vcxproj" (default target) (6:5) ->
+  D:\agent\booming-il2cpp\contracts\native\v0\codegen_bridge.h(194,14): warning C4200: nonstandard extension used: zero-sized array in struct/union [D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\chaos_debugger.vcxproj]
+  D:\agent\booming-il2cpp\src\native\runtime-core\patch_loader.h(84,39): warning C4099: 'chaos::il2cpp::jit::JitMethod': type name first seen using 'struct' now seen using 'class' [D:\agent\booming-il2cpp\build\native-profile\src\native\diagnostics\debugger\chaos_debugger.vcxproj]
+
+
+"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target) (1) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (default target) (2:2) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj" (default target) (8:2) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj" (default target) (9:4) ->
+  cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj]
+
+
+"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target) (1) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (default target) (2:2) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj" (default target) (8:2) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj" (default target) (9:4) ->
+  cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj]
+  cl : command line  warning D9002: ignoring unknown option '-msse4.1' [D:\agent\booming-il2cpp\build\native-profile\src\native\runtime-core\chaos_runtime_core.vcxproj]
+
+
+"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target) (1) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (default target) (2:2) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj" (default target) (8:2) ->
+  cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\hot-update\chaos_hot_update.vcxproj]
+
+
+"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target) (1) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (default target) (2:2) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\support\chaos_support.vcxproj" (default target) (10:2) ->
+  cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\support\chaos_support.vcxproj]
+
+
+"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target) (1) ->
+"D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj" (default target) (2:2) ->
+  cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\bootstrap\chaos_bootstrap.vcxproj]
+
+
+"D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj" (Rebuild target) (1) ->
+  cl : command line  warning D9025: overriding '/W1' with '/w' [D:\agent\booming-il2cpp\build\native-profile\src\native\jit\chaos_jit.vcxproj]
+
+    11 Warning(s)
+    0 Error(s)
+
+Time Elapsed 00:01:24.72
+        1 file(s) copied.
+chaos_jit.lib rebuilt and copied

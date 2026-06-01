@@ -11,17 +11,40 @@ internal static class FactRunner
 
         foreach (var type in assembly.GetTypes())
         {
-            foreach (var method in type.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic))
+            // Create instance for instance methods (if needed)
+            object? instance = null;
+
+            foreach (var method in type.GetMethods(
+                BindingFlags.Static | BindingFlags.Instance |
+                BindingFlags.Public | BindingFlags.NonPublic))
             {
                 if (method.GetCustomAttribute<FactAttribute>() is null)
                     continue;
                 if (method.GetParameters().Length != 0)
                     continue;
 
+                // For instance methods, create an instance once per type
+                if (!method.IsStatic)
+                {
+                    if (instance is null)
+                    {
+                        try
+                        {
+                            instance = Activator.CreateInstance(type);
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.Error.WriteLine($"FAIL [{type.Name}]: cannot create instance: {ex.Message}");
+                            failed++;
+                            continue;
+                        }
+                    }
+                }
+
                 Assert.Reset();
                 try
                 {
-                    method.Invoke(null, null);
+                    method.Invoke(instance, null);
                     if (Assert.ExitCode == 0)
                         passed++;
                     else

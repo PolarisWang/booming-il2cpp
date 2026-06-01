@@ -18,25 +18,29 @@ public static partial class GenericSupplementSubjects
     // [0] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()
     public static void Subject_0()
     {
-        // non-callable: GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestSupplementalMetadataRoundtrip:System.Int32()
+        try { _ = GenericSupplementNativeEntry.TestSupplementalMetadataRoundtrip(); }
+        catch { _exitCode = 1; }
     }
 
     // [1] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()
     public static void Subject_1()
     {
-        // non-callable: GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupBySubjectId:System.Int32()
+        try { _ = GenericSupplementNativeEntry.TestTypeLookupBySubjectId(); }
+        catch { _exitCode = 1; }
     }
 
     // [2] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()
     public static void Subject_2()
     {
-        // non-callable: GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestTypeLookupByToken:System.Int32()
+        try { _ = GenericSupplementNativeEntry.TestTypeLookupByToken(); }
+        catch { _exitCode = 1; }
     }
 
     // [3] GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()
     public static void Subject_3()
     {
-        // non-callable: GenericSupplementNativeEntry/GenericSupplementNativeEntry::TestGenericInstantiation:System.Int32()
+        try { _ = GenericSupplementNativeEntry.TestGenericInstantiation(); }
+        catch { _exitCode = 1; }
     }
 
 }

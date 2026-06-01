@@ -686,6 +686,26 @@ public sealed partial class NativeAotLoweringPlanner
             }
         }
 
+        // Force-include subject methods: these are callable from the C++ dispatch
+        // table (kMethodTable[]) even though the managed call graph from the entry
+        // point may not reach them (each Subject_N is an independent test method).
+        if (_subjectMethodSubjectIds is { Count: > 0 })
+        {
+            int forcedCount = 0;
+            foreach (var m in methodsForLowering)
+            {
+                if (_subjectMethodSubjectIds.Contains(m.SubjectId) && m.Instructions.Count > 0)
+                {
+                    if (aotReachableSubjectIds.Add(m.SubjectId))
+                        forcedCount++;
+                }
+            }
+            if (forcedCount > 0)
+            {
+                Console.WriteLine($"[subject-methods] force-included {forcedCount} dispatch-visible method(s) into AOT reachable set");
+            }
+        }
+
         // Methods of types that implement COM interfaces are referenced by vtable
         // entries and need real bodies even if not statically reachable via call graph.
         if (_referenceTypeImplementedInterfaceSubjectIds?.Count > 0)
@@ -982,10 +1002,15 @@ public sealed partial class NativeAotLoweringPlanner
             : string.Empty;
 
         // Always define ChaosJitRegisterAll so runtime-entry.cpp can call it unconditionally.
-        // In AOT mode it's a no-op; in JIT mode it registers all methods for JIT dispatch.
-        // This avoids linker errors in AOT builds where JIT symbols don't exist.
+        // In JIT mode (guarded by CHAOS_IL2CPP_JIT_MODE), it registers all methods for
+        // JIT dispatch via precode stubs.  In AOT mode it's always a no-op.
+        // The #ifdef guard is critical: the same generated C++ code is compiled into
+        // both entry.exe (AOT, no JIT_MODE) and entry-jit.exe (JIT, with JIT_MODE).
+        // Without the guard, the AOT build would trigger JIT compilation through
+        // RegisterJitEntryMethods → JitStubDispatchImpl → Compile() in chaos_jit.lib.
         if (_codegenMode.HasFlag(CodegenMode.Jit) && methodCount > 0)
         {
+            globalDeclarations += "\n#ifdef CHAOS_IL2CPP_JIT_MODE\n";
             globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
             var cgNs = SanitizeCppIdentifier(_assemblyName);
             globalDeclarations += $@"
@@ -994,6 +1019,7 @@ extern ""C"" void ChaosJitRegisterAll() {{
     chaos::il2cpp::runtime_core::RegisterHotpatchModule(&chaos::il2cpp::codegen::{cgNs}::s_hotpatch_module);
     RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount);
 }}
+#endif
 ";
         }
         else
@@ -2081,12 +2107,28 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
         var paramList = FormatAbiSlotParameterSignature(paramAbis);
         var symbol = method.NativeSymbol;
 
+        // Phase A+B: detect subject methods (Subject_N / CustomEntrySubject_N) that
+        // would silently produce empty stubs — WARNING at codegen time, FAIL at runtime.
+        bool isSubjectMethod = method.SubjectId is not null &&
+            (method.SubjectId.Contains("::Subject_") || method.SubjectId.Contains("::CustomEntrySubject_"));
+
+        if (isSubjectMethod)
+        {
+            Console.Error.WriteLine($"[WARNING] Subject method '{method.SubjectId}' is AOT-unreachable — generated body will be empty. Add to --subject-methods or fix reachability.");
+        }
+
         var builder = new StringBuilder();
         builder.AppendLine($"// AOT-unreachable stub: {method.SubjectId}");
         builder.AppendLine($"extern \"C\" {returnType} {symbol}({paramList})");
         builder.AppendLine("{");
-        if (!string.IsNullOrEmpty(returnType) && returnType != "void")
+        if (isSubjectMethod)
+        {
+            builder.AppendLine("    CHAOS_IL2CPP_FAIL(\"AOT-unreachable subject method called — missing function body\");");
+        }
+        else if (!string.IsNullOrEmpty(returnType) && returnType != "void")
+        {
             builder.AppendLine($"    return {{}};");
+        }
         builder.AppendLine("}");
 
         // Also emit the generic instantiation stub definition if this method
@@ -2100,8 +2142,14 @@ extern ""C"" CHAOS_IL2CPP_INT32 RunNativeAot(CHAOS_IL2CPP_INT32 entryIndex) {{
             builder.AppendLine($"// AOT-unreachable generic instantiation stub: {method.SubjectId}");
             builder.AppendLine($"extern \"C\" {returnType} {stubSymbol}({paramList})");
             builder.AppendLine("{");
-            if (!string.IsNullOrEmpty(returnType) && returnType != "void")
+            if (isSubjectMethod)
+            {
+                builder.AppendLine("    CHAOS_IL2CPP_FAIL(\"AOT-unreachable subject method called — missing function body\");");
+            }
+            else if (!string.IsNullOrEmpty(returnType) && returnType != "void")
+            {
                 builder.AppendLine($"    return {{}};");
+            }
             builder.AppendLine("}");
         }
 

@@ -43,4 +43,11 @@ extern "C" const int kSubjectContractMap[{{ subject_entries.size }}] = {
 	{{ entry.contract_index }},
 {{~ end ~}}
 };
+{{~ else ~}}
+// ── Subject slot map (empty) ────────────────────────────────────────
+// No subject entries match the ::Subject_N / ::CustomEntrySubject_N
+// pattern, so the map is empty. kSubjectEntryCount is still defined as 0
+// so runtime-entry.cpp / verification_dispatch.generated.cpp can link.
+extern "C" const int kSubjectEntryCount = 0;
+extern "C" const int kSubjectSlotMap[1] = { 0 };
 {{~ end ~}}

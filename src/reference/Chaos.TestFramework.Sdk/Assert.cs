@@ -160,6 +160,31 @@ public static class Assert
     }
 
     [Conditional("VERIFY")]
+    public static void AreEqual<T>(T expected, T actual, string? message = null)
+    {
+        if (!System.Collections.Generic.EqualityComparer<T>.Default.Equals(expected, actual))
+            Fail(message ?? $"Expected [{typeof(T).Name}]{expected}, got [{typeof(T).Name}]{actual}");
+    }
+
+    [Conditional("VERIFY")]
+    public static void AreEqual(byte[] expected, byte[] actual, string? message = null)
+    {
+        if ((expected is null) != (actual is null)) { Fail(message ?? "Expected != actual (null mismatch)"); return; }
+        if (expected is null) return;
+        if (expected.Length != actual!.Length) { Fail(message ?? $"Expected length {expected.Length}, got {actual.Length}"); return; }
+        for (int i = 0; i < expected.Length; i++)
+            if (expected[i] != actual[i])
+                Fail(message ?? $"Byte mismatch at {i}: expected {expected[i]}, got {actual[i]}");
+    }
+
+    [Conditional("VERIFY")]
+    public static void AreNotEqual<T>(T expected, T actual, string? message = null)
+    {
+        if (System.Collections.Generic.EqualityComparer<T>.Default.Equals(expected, actual))
+            Fail(message ?? $"Expected not-equal but both are [{typeof(T).Name}]{expected}");
+    }
+
+    [Conditional("VERIFY")]
     public static void Fail(string message)
     {
         s_exitCode = 1;

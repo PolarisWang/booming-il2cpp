@@ -54,6 +54,7 @@ void TryOsrPromotion(RegisterFrame& frame,
     auto* rm = static_cast<RegisterMethod*>(pm->cached_reg_method);
     if (rm == nullptr) return;
 
+#ifdef CHAOS_IL2CPP_JIT_MODE
     // Generate native code with full deopt support.
     chaos::il2cpp::jit::CompileConfig cfg;
     cfg.enable_deopt = true;
@@ -93,6 +94,10 @@ void TryOsrPromotion(RegisterFrame& frame,
     pm->cached_native_method = nm;
     pm->tier_state.store(PM::kJitted, std::memory_order_release);
     chaos::il2cpp::jit::RegisterNativeCodeSection(nm->code, nm->code_size, nm);
+#else
+    // JIT disabled — no native compilation in AOT-only builds.
+    return;
+#endif
 }
 
 }  // namespace chaos::il2cpp::interpreter

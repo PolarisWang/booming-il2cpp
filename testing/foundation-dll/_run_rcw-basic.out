@@ -1,0 +1,818 @@
+
+============================================================
+Family Verify: rcw-basic [System.Private.CoreLib] mode=strict
+============================================================
+
+[1/20] Preflight... skipped
+  [codegen] Generating entrypoint...
+[probe] Building RcwBasicSubjects probe...
+[probe] Build FAILED: 
+[subjects] Building RcwBasicSubjects DLL...
+  [3s] failed: Entrypoint generation failed: D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(16,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'ISimpleMath' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(25,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'IConstantValue' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(36,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'SimpleMath' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(42,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'ConstantFortyTwo' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(51,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'RcwBasicNativeEntry' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(208,23): error CS0101: The namespace '<global namespace>' already contains a definition for 'RuntimeState' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(38,16): error CS0111: Type 'SimpleMath' already defines a member called 'Add' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(39,16): error CS0111: Type 'SimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(15,2): error CS0579: Duplicate 'Guid' attribute [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(24,2): error CS0579: Duplicate 'Guid' attribute [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(211,26): error CS0111: Type 'RuntimeState' already defines a member called 'Get' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(212,24): error CS0111: Type 'RuntimeState' already defines a member called 'Set' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(27,9): error CS0111: Type 'IConstantValue' already defines a member called 'GetValue' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(18,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Add' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(19,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(44,16): error CS0111: Type 'ConstantFortyTwo' already defines a member called 'GetValue' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(53,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'Run' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(67,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripIdentity' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(89,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripQi' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(122,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwVtableMethodCall' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(143,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwDirectVtable' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(159,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwMultipleWrappers' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(165,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwQiUnknownInterface' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(171,19): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'CreateCcwForSimpleMath' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(186,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateCcw' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(189,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateRcw' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(192,24): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalReleaseRcw' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(195,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalGetRcwUnknown' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(198,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalRcwQueryInterface' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(201,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallComMethod' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(204,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallDirectComMethod' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+
+Build FAILED.
+
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(16,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'ISimpleMath' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(25,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'IConstantValue' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(36,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'SimpleMath' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(42,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'ConstantFortyTwo' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(51,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'RcwBasicNativeEntry' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(208,23): error CS0101: The namespace '<global namespace>' already contains a definition for 'RuntimeState' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(38,16): error CS0111: Type 'SimpleMath' already defines a member called 'Add' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(39,16): error CS0111: Type 'SimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(15,2): error CS0579: Duplicate 'Guid' attribute [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(24,2): error CS0579: Duplicate 'Guid' attribute [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(211,26): error CS0111: Type 'RuntimeState' already defines a member called 'Get' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(212,24): error CS0111: Type 'RuntimeState' already defines a member called 'Set' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(27,9): error CS0111: Type 'IConstantValue' already defines a member called 'GetValue' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(18,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Add' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(19,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(44,16): error CS0111: Type 'ConstantFortyTwo' already defines a member called 'GetValue' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(53,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'Run' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(67,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripIdentity' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(89,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripQi' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(122,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwVtableMethodCall' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(143,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwDirectVtable' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(159,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwMultipleWrappers' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(165,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwQiUnknownInterface' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(171,19): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'CreateCcwForSimpleMath' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(186,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateCcw' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(189,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateRcw' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(192,24): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalReleaseRcw' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(195,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalGetRcwUnknown' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(198,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalRcwQueryInterface' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(201,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallComMethod' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\subjects\RcwBasicNativeEntry.cs(204,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallDirectComMethod' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\rcw-basic\managed\RcwBasicSubjects.csproj]
+    0 Warning(s)
+    45 Error(s)
+
+Time Elapsed 00:00:01.07
+Exception in thread Thread-9 (_readerthread):
+Exception in thread Thread-10 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-11 (_readerthread):
+Exception in thread Thread-12 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+Exception in thread Thread-13 (_readerthread):
+Exception in thread Thread-14 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-15 (_readerthread):
+Exception in thread Thread-16 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-17 (_readerthread):
+Traceback (most recent call last):
+Exception in thread Thread-18 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-19 (_readerthread):
+Traceback (most recent call last):
+Exception in thread Thread-20 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-21 (_readerthread):
+Traceback (most recent call last):
+Exception in thread Thread-22 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+Exception in thread Thread-24 (_readerthread):
+Exception in thread Thread-23 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-26 (_readerthread):
+Traceback (most recent call last):
+Exception in thread Thread-25 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-27 (_readerthread):
+Exception in thread Thread-28 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-29 (_readerthread):
+Traceback (most recent call last):
+Exception in thread Thread-30 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+Exception in thread Thread-32 (_readerthread):
+Exception in thread Thread-31 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+Exception in thread Thread-33 (_readerthread):
+Exception in thread Thread-34 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+Exception in thread Thread-36 (_readerthread):
+Traceback (most recent call last):
+Exception in thread Thread-35 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+    buffer.append(fh.read())
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+Exception in thread Thread-37 (_readerthread):
+Traceback (most recent call last):
+Exception in thread Thread-38 (_readerthread):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+Exception in thread Thread-39 (_readerthread):
+Exception in thread Thread-40 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-41 (_readerthread):
+Exception in thread Thread-42 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+Exception in thread Thread-43 (_readerthread):
+Exception in thread Thread-44 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+  File "C:\Program Files\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self.run()
+  File "C:\Program Files\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 90: illegal multibyte sequence
+    self._target(*self._args, **self._kwargs)
+  File "C:\Program Files\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+UnicodeDecodeError: 'gbk' codec can't decode byte 0x94 in position 156: illegal multibyte sequence
+
+  [jit_codegen] TPG templates updated, rebuilding stale entry-jit.exe...
+  [jit_codegen] Building JIT mode entry-jit.exe...
+  [jit_codegen] backed up entry.exe -> entry-aot.exe
+  [jit_codegen] using pre-built JIT binary from codegen stage, incremental update only...
+        [1/2] Reading subjects from contract...
+              Found 7 subjects
+        [2/2] Emitting dispatch.cpp and metadata...
+              verification_dispatch.generated.cpp, metadata/subjects.json written
+        Done.
+    [TPG timing] JIT emit took 0.12s
+  [jit_codegen] Regenerated dispatch via TPG (JIT mode)
+  [jit_codegen] Rebuilding JIT binary after TPG emit...
+  [jit_codegen] rebuilt entry-jit.exe (3028480 bytes)
+  [jit_codegen] restored entry.exe from entry-aot.exe
+  [8s [ETA 2m32s]] passed: JIT entry-jit.exe built and AOT entry.exe restored
+[4/20] Managed Fact (.NET)... skipped
+[5/20] Managed Subject Record (Golden)... skipped
+[6/20] Cross-Verify (Golden vs AOT)... skipped
+[7/20] Managed Patch Fact (.NET)... skipped
+
+  [8s] >>> Parallel group (6 stages)
+[8/20] Fact AOT... skipped
+[9/20] Fact JIT... skipped
+[10/20] Mechanism + Principle Audit... skipped
+[11/20] AsmCompare (JIT vs AOT)... skipped
+[12/20] Microbench (Interpreter)... skipped
+    [benchmark/native-aot] WARNING: could not parse --fact-json output, skipping value gate
+  [benchmark/native-aot] 0/7 OK (per-method), avg 0 ops/s (0 value-gate skipped)
+    [benchmark/native-jit] WARNING: could not parse --fact-json output, skipping value gate
+  [benchmark/native-jit] 0/7 OK (per-method), avg 0 ops/s (0 value-gate skipped)
+  [9s [ETA 1m23s]] failed: failed: native-aot=0/7, native-jit=0/7
+  [9s] <<< Parallel group done
+
+[14/20] HotUpdate AOT Fact... skipped
+[15/20] Patch Cross-Verify... skipped
+[16/20] Multi-Patch HotUpdate... skipped
+[17/20] HotUpdate AOT Bench... skipped
+[18/20] HotUpdate JIT Fact... skipped
+[19/20] HotUpdate JIT Bench... skipped
+[20/20] Cleanup Build Artifacts... skipped
+
+[20/20] Aggregating...
+
+  ──────────────────────────────────────────────────
+  FAILURE SUMMARY (2 stage(s))
+  ──────────────────────────────────────────────────
+  [3s] codegen: FAILED — Entrypoint generation failed: D:\agent\booming-il2cpp\testing\foundation-dll\Sys..
+  [1s] benchmark: FAILED — failed: native-aot=0/7, native-jit=0/7
+  ──────────────────────────────────────────────────
+
+
+============================================================
+Result: failed
+Duration: 9s
+Coverage: 1/20 passed (33.3%)
+============================================================
+  [perf_store] saved to D:\agent\booming-il2cpp\testing\foundation-dll\results\foundation-dll\System.Private.CoreLib\rcw-basic\perf
+{
+  "family": "rcw-basic",
+  "assembly": "System.Private.CoreLib",
+  "mode": "strict",
+  "timestamp": "2026-05-30T21:28:40",
+  "duration_ms": 9244,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "Entrypoint generation failed: D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(16,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'ISimpleMath' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(25,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'IConstantValue' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(36,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'SimpleMath' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(42,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'ConstantFortyTwo' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(51,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'RcwBasicNativeEntry' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(208,23): error CS0101: The namespace '<global namespace>' already contains a definition for 'RuntimeState' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(38,16): error CS0111: Type 'SimpleMath' already defines a member called 'Add' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(39,16): error CS0111: Type 'SimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(15,2): error CS0579: Duplicate 'Guid' attribute [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(24,2): error CS0579: Duplicate 'Guid' attribute [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(211,26): error CS0111: Type 'RuntimeState' already defines a member called 'Get' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(212,24): error CS0111: Type 'RuntimeState' already defines a member called 'Set' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(27,9): error CS0111: Type 'IConstantValue' already defines a member called 'GetValue' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(18,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Add' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(19,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(44,16): error CS0111: Type 'ConstantFortyTwo' already defines a member called 'GetValue' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(53,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'Run' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(67,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripIdentity' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(89,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripQi' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(122,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwVtableMethodCall' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(143,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwDirectVtable' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(159,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwMultipleWrappers' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(165,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwQiUnknownInterface' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(171,19): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'CreateCcwForSimpleMath' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(186,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateCcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(189,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateRcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(192,24): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalReleaseRcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(195,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalGetRcwUnknown' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(198,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalRcwQueryInterface' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(201,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallComMethod' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(204,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallDirectComMethod' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(16,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'ISimpleMath' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(25,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'IConstantValue' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(36,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'SimpleMath' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(42,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'ConstantFortyTwo' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(51,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'RcwBasicNativeEntry' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(208,23): error CS0101: The namespace '<global namespace>' already contains a definition for 'RuntimeState' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(38,16): error CS0111: Type 'SimpleMath' already defines a member called 'Add' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(39,16): error CS0111: Type 'SimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(15,2): error CS0579: Duplicate 'Guid' attribute [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(24,2): error CS0579: Duplicate 'Guid' attribute [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(211,26): error CS0111: Type 'RuntimeState' already defines a member called 'Get' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(212,24): error CS0111: Type 'RuntimeState' already defines a member called 'Set' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(27,9): error CS0111: Type 'IConstantValue' already defines a member called 'GetValue' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(18,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Add' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(19,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(44,16): error CS0111: Type 'ConstantFortyTwo' already defines a member called 'GetValue' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(53,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'Run' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(67,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripIdentity' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(89,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripQi' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(122,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwVtableMethodCall' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(143,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwDirectVtable' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(159,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwMultipleWrappers' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(165,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwQiUnknownInterface' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(171,19): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'CreateCcwForSimpleMath' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(186,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateCcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(189,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateRcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(192,24): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalReleaseRcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(195,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalGetRcwUnknown' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(198,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalRcwQueryInterface' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(201,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallComMethod' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(204,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallDirectComMethod' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\n    0 Warning(s)\n    45 Error(s)\n\nTime Elapsed 00:00:01.07\n",
+      "details": {
+        "steps": {
+          "entrypoint": {
+            "success": false,
+            "error": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(16,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'ISimpleMath' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(25,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'IConstantValue' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(36,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'SimpleMath' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(42,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'ConstantFortyTwo' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(51,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'RcwBasicNativeEntry' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(208,23): error CS0101: The namespace '<global namespace>' already contains a definition for 'RuntimeState' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(38,16): error CS0111: Type 'SimpleMath' already defines a member called 'Add' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(39,16): error CS0111: Type 'SimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(15,2): error CS0579: Duplicate 'Guid' attribute [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(24,2): error CS0579: Duplicate 'Guid' attribute [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(211,26): error CS0111: Type 'RuntimeState' already defines a member called 'Get' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(212,24): error CS0111: Type 'RuntimeState' already defines a member called 'Set' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(27,9): error CS0111: Type 'IConstantValue' already defines a member called 'GetValue' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(18,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Add' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(19,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(44,16): error CS0111: Type 'ConstantFortyTwo' already defines a member called 'GetValue' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(53,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'Run' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(67,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripIdentity' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(89,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripQi' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(122,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwVtableMethodCall' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(143,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwDirectVtable' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(159,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwMultipleWrappers' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(165,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwQiUnknownInterface' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(171,19): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'CreateCcwForSimpleMath' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(186,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateCcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(189,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateRcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(192,24): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalReleaseRcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(195,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalGetRcwUnknown' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(198,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalRcwQueryInterface' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(201,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallComMethod' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(204,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallDirectComMethod' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(16,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'ISimpleMath' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(25,18): error CS0101: The namespace '<global namespace>' already contains a definition for 'IConstantValue' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(36,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'SimpleMath' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(42,14): error CS0101: The namespace '<global namespace>' already contains a definition for 'ConstantFortyTwo' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(51,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'RcwBasicNativeEntry' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(208,23): error CS0101: The namespace '<global namespace>' already contains a definition for 'RuntimeState' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(38,16): error CS0111: Type 'SimpleMath' already defines a member called 'Add' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(39,16): error CS0111: Type 'SimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(15,2): error CS0579: Duplicate 'Guid' attribute [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(24,2): error CS0579: Duplicate 'Guid' attribute [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(211,26): error CS0111: Type 'RuntimeState' already defines a member called 'Get' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(212,24): error CS0111: Type 'RuntimeState' already defines a member called 'Set' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(27,9): error CS0111: Type 'IConstantValue' already defines a member called 'GetValue' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(18,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Add' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(19,9): error CS0111: Type 'ISimpleMath' already defines a member called 'Multiply' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(44,16): error CS0111: Type 'ConstantFortyTwo' already defines a member called 'GetValue' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(5,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(9,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(13,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(53,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'Run' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(67,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripIdentity' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(89,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwRoundTripQi' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(122,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwVtableMethodCall' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(143,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwDirectVtable' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(159,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwMultipleWrappers' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(165,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'TestRcwQiUnknownInterface' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(171,19): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'CreateCcwForSimpleMath' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(186,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateCcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(189,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCreateRcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(192,24): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalReleaseRcw' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(195,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalGetRcwUnknown' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(198,26): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalRcwQueryInterface' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(201,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallComMethod' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\subjects\\RcwBasicNativeEntry.cs(204,23): error CS0111: Type 'RcwBasicNativeEntry' already defines a member called 'MarshalCallDirectComMethod' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(15,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.Custom.cs(17,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj]\n    0 Warning(s)\n    45 Error(s)\n\nTime Elapsed 00:00:01.07\n",
+            "dll_path": null,
+            "csproj_path": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.csproj",
+            "source_path": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\rcw-basic\\managed\\RcwBasicSubjects.cs",
+            "entry_point_subject_id": ""
+          }
+        }
+      },
+      "errors": [],
+      "duration_ms": 3229
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "details": {},
+      "errors": [],
+      "duration_ms": 4789
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_record": {
+      "stage": "managed_record",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cross_verify": {
+      "stage": "cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_patch_fact": {
+      "stage": "managed_patch_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "failed",
+      "summary": "failed: native-aot=0/7, native-jit=0/7",
+      "details": {
+        "native-aot": {
+          "status": "failed",
+          "label": "native-aot",
+          "results": [
+            {
+              "methodIndex": 0,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 1,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 2,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 3,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 4,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 5,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 6,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            }
+          ],
+          "okCount": 0,
+          "failCount": 7,
+          "totalMethods": 7,
+          "averageOpsPerSecond": 0.0,
+          "valueGateFailures": [],
+          "profile": null
+        },
+        "native-jit": {
+          "status": "failed",
+          "label": "native-jit",
+          "results": [
+            {
+              "methodIndex": 0,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 1,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 2,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 3,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 4,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 5,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            },
+            {
+              "methodIndex": 6,
+              "error": "no JSON output: ",
+              "exitCode": 0
+            }
+          ],
+          "okCount": 0,
+          "failCount": 7,
+          "totalMethods": 7,
+          "averageOpsPerSecond": 0.0,
+          "valueGateFailures": [],
+          "profile": null
+        }
+      },
+      "errors": [],
+      "duration_ms": 1224
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "patch_cross_verify": {
+      "stage": "patch_cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "multi_patch_hotupdate": {
+      "stage": "multi_patch_hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cleanup": {
+      "stage": "cleanup",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    }
+  },
+  "coverage": {
+    "stagePassRate": 33.3,
+    "stagesPassed": 1,
+    "stagesFailed": 2,
+    "stagesSkipped": 17,
+    "stagesN_A": 0,
+    "stagesTotal": 20
+  },
+  "dashboard": {},
+  "regression": {
+    "hasRegression": false,
+    "regressions": [],
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "No baseline established"
+    }
+  }
+}

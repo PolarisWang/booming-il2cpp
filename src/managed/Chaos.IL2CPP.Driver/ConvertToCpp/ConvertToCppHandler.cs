@@ -157,7 +157,7 @@ internal static class ConvertToCppHandler
                 var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
                 var assemblyName = result.ClosureManifest?.AssemblyName ?? "unknown";
                 var sdkEmitter = new SdkEmitter();
-                sdkEmitter.EmitSdk(sdkRoot, outputRoot, repoRoot, nativeLibDir, "RelWithDebInfo", assemblyName);
+                sdkEmitter.EmitSdk(sdkRoot, outputRoot, repoRoot, nativeLibDir, "RelWithDebInfo", assemblyName, config.ConfigTier ?? "check");
                 ValidateSdkOutput(sdkRoot, outputRoot);
                 Console.WriteLine(" done");
             }
@@ -225,7 +225,7 @@ internal static class ConvertToCppHandler
                 var nativeLibDir = Path.Combine(repoRoot, "artifacts", "presets", nativePresetDir);
                 var assemblyName = results.FirstOrDefault()?.ClosureManifest?.AssemblyName ?? "combined";
                 var sdkEmitter = new SdkEmitter();
-                sdkEmitter.EmitSdk(sdkRoot, outputRoot, repoRoot, nativeLibDir, "RelWithDebInfo", assemblyName);
+                sdkEmitter.EmitSdk(sdkRoot, outputRoot, repoRoot, nativeLibDir, "RelWithDebInfo", assemblyName, config.ConfigTier ?? "check");
                 ValidateSdkOutput(sdkRoot, outputRoot);
                 Console.WriteLine(" done");
             }

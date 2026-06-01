@@ -142,9 +142,6 @@
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_helpers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_thunks.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\method_table.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

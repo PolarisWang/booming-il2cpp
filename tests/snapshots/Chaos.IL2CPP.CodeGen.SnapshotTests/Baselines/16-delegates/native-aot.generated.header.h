@@ -4,7 +4,15 @@
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>  // MethodTable, TypeInfoV0 (complete type)
 
-struct chaos_type_System_Func_System_Int32_;
+struct chaos_type_System_Func_System_Int32_ {
+    PureTypeHeader header{};
+    CHAOS_IL2CPP_INTPTR chaos_delegate_target = 0;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_method_ptr = 0;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_list = 0;
+    CHAOS_IL2CPP_INTPTR chaos_delegate_invocation_count = 0;
+    CHAOS_IL2CPP_UINT32 chaos_delegate_method_token = 0;
+    CHAOS_IL2CPP_UINT32 _pad = 0;
+};
 struct chaos_boxed_type_System_Func_System_Int32_;
 struct chaos_type_System_Private_CoreLib_System_Delegate;
 struct chaos_boxed_type_System_Private_CoreLib_System_Delegate;
@@ -20,6 +28,8 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_ConstructorInfo;
 struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_FieldInfo;
+struct chaos_type_System_Private_CoreLib_System_Reflection_MethodBase;
+struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_MethodBase;
 struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo;
 struct chaos_boxed_type_System_Private_CoreLib_System_Reflection_MethodInfo;
 struct chaos_type_System_Private_CoreLib_System_String;
@@ -35,9 +45,23 @@ extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo;
+extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_String;
 extern MethodTable chaos_mt_System_Private_CoreLib_System_Type;
+
+extern const uint64_t chaos_type_id_System_Func_System_Int32_;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Delegate;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_MulticastDelegate;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Object;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_MethodBase;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_String;
+extern const uint64_t chaos_type_id_System_Private_CoreLib_System_Type;
 
 struct HotpatchEntryV0;
 extern "C" HotpatchEntryV0 s_hotpatch_entries[];
