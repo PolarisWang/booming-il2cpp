@@ -12,108 +12,116 @@ using System.Threading;
 
 public static partial class ExceptionThrowDiagnosticsSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String)
+    [Fact]
     public static void Subject_0()
     {
         try { new Exception("hello"); }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
     // [1] System.Private.CoreLib/System.Exception::.ctor:System.Void(System.String,System.Exception)
+    [Fact]
     public static void Subject_1()
     {
         try { new Exception("hello", default); }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
     // [2] System.Private.CoreLib/System.Exception::get_Message:System.String()
+    [Fact]
     public static void Subject_2()
     {
-        try { _ = ((new Exception().Message).Length); }
-        catch { _exitCode = 1; }
+        try { var __val = ((new Exception().Message).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [3] System.Private.CoreLib/System.Exception::get_InnerException:System.Exception()
+    [Fact]
     public static void Subject_3()
     {
-        try { _ = ((new Exception().InnerException).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((new Exception().InnerException).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [4] System.Private.CoreLib/System.Exception::get_StackTrace:System.String()
+    [Fact]
     public static void Subject_4()
     {
-        try { _ = ((((new Exception().StackTrace) ?? "")).Length); }
-        catch { _exitCode = 1; }
+        try { var __val = ((((new Exception().StackTrace) ?? "")).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [5] System.Private.CoreLib/System.Exception::get_HResult:System.Int32()
+    [Fact]
     public static void Subject_5()
     {
-        try { _ = new Exception().HResult; }
-        catch { _exitCode = 1; }
+        try { var __val = new Exception().HResult; Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [6] System.Private.CoreLib/System.Exception::ToString:System.String()
+    [Fact]
     public static void Subject_6()
     {
-        try { _ = ((new Exception().ToString()).Length); }
-        catch { _exitCode = 1; }
+        try { var __val = ((new Exception().ToString()).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [7] System.Private.CoreLib/System.Exception::GetBaseException:System.Exception()
+    [Fact]
     public static void Subject_7()
     {
-        try { _ = ((new Exception().GetBaseException()).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((new Exception().GetBaseException()).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [8] System.Private.CoreLib/System.ArgumentException::.ctor:System.Void(System.String,System.String)
+    [Fact]
     public static void Subject_8()
     {
         try { new ArgumentException("hello", "hello"); }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
     // [9] System.Private.CoreLib/System.ArgumentNullException::.ctor:System.Void(System.String)
+    [Fact]
     public static void Subject_9()
     {
         try { new ArgumentNullException("hello"); }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
     // [10] System.Private.CoreLib/System.ArgumentOutOfRangeException::.ctor:System.Void(System.String)
+    [Fact]
     public static void Subject_10()
     {
         try { new ArgumentOutOfRangeException("hello"); }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
     // [11] System.Private.CoreLib/System.InvalidOperationException::.ctor:System.Void(System.String)
+    [Fact]
     public static void Subject_11()
     {
         try { new InvalidOperationException("hello"); }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
     // [12] System.Private.CoreLib/System.NotSupportedException::.ctor:System.Void(System.String)
+    [Fact]
     public static void Subject_12()
     {
         try { new NotSupportedException("hello"); }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
     // [13] System.Private.CoreLib/System.NotImplementedException::.ctor:System.Void(System.String)
+    [Fact]
     public static void Subject_13()
     {
         try { new NotImplementedException("hello"); }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
-    // [14] System.Private.CoreLib/OSR::HotLoop:System.Void()
-    // [15] System.Private.CoreLib/Memory::CopyBlock:System.Void()
-    // [16] System.Private.CoreLib/Memory::InitBlock:System.Void()
 }

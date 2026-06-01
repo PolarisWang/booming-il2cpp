@@ -214,31 +214,57 @@ public sealed class CSharpSerializer
     /// </summary>
     internal static string ToCSharpTypeName(string typeName)
     {
-        // Handle generic "Name<Arg1,Arg2>" or "Name{Arg1,Arg2}" syntax
+        // Handle generic "Name<Arg1,Arg2>" syntax with proper bracket-depth matching,
+        // supporting nested generic types like "Dictionary<int,int>.AlternateLookup<int>".
+        int depth = 0;
         int genericStart = -1;
+        int genericEnd = -1;
         char genericClose = '\0';
 
-        if (typeName.Contains('<'))
+        for (int i = 0; i < typeName.Length; i++)
         {
-            genericStart = typeName.IndexOf('<');
-            genericClose = '>';
-        }
-        else if (typeName.Contains('{'))
-        {
-            genericStart = typeName.IndexOf('{');
-            genericClose = '}';
+            var c = typeName[i];
+            if (c == '<' && depth == 0 && genericStart < 0)
+            {
+                genericStart = i;
+                genericClose = '>';
+                depth = 1;
+            }
+            else if (c == '{' && depth == 0 && genericStart < 0)
+            {
+                genericStart = i;
+                genericClose = '}';
+                depth = 1;
+            }
+            else if (c == genericClose)
+            {
+                depth--;
+                if (depth == 0)
+                {
+                    // Found matching close bracket at depth 0.
+                    // If there's more content after, it's a nested type suffix
+                    // (e.g. ".AlternateLookup<int>") — recurse to handle it.
+                    genericEnd = i;
+                    break;
+                }
+            }
+            else if ((c == '<' || c == '{') && genericStart >= 0)
+            {
+                depth++;
+            }
+            else if ((c == '>' || c == '}') && genericStart >= 0)
+            {
+                depth--;
+            }
         }
 
-        if (genericStart >= 0)
+        if (genericStart >= 0 && genericEnd > genericStart)
         {
-            var genericEnd = typeName.LastIndexOf(genericClose);
             var bareType = typeName[..genericStart];
-            var argsPart = genericEnd > genericStart
-                ? typeName[(genericStart + 1)..genericEnd]
-                : "";
+            var argsPart = typeName[(genericStart + 1)..genericEnd];
 
-            var args = argsPart.Split(',')
-                .Select(a => MapToCSharpType(a.Trim()))
+            var args = SplitGenericArgs(argsPart)
+                .Select(a => ToCSharpTypeName(a.Trim()))
                 .ToArray();
 
             // Strip backtick arity from bare type name
@@ -246,7 +272,14 @@ public sealed class CSharpSerializer
             if (bt >= 0) bareType = bareType[..bt];
 
             var shortName = GetShortTypeName(bareType);
-            return $"{shortName}<{string.Join(", ", args)}>";
+            var result = $"{shortName}<{string.Join(", ", args)}>";
+
+            // Handle nested type suffix: ">.AlternateLookup<int>" → ".<type>"
+            var suffix = typeName[(genericEnd + 1)..];
+            if (suffix.Length > 0)
+                result += suffix[0] == '.' ? "." + ToCSharpTypeName(suffix[1..]) : suffix;
+
+            return result;
         }
 
         // Handle bare "Span`1" format (no angle brackets, just backtick)
@@ -268,12 +301,24 @@ public sealed class CSharpSerializer
 
     internal static string GetShortTypeName(string fullName)
     {
-        // For namespaced type names, extract the short name
-        // But keep generic type names intact for angle-bracket parsing
-        return MapToCSharpType(fullName);
+        return KeywordMap(fullName);
     }
 
     internal static string MapToCSharpType(string typeName)
+    {
+        // Strip assembly qualification that may come from MLC's Type.FullName
+        typeName = StripAssemblyQualification(typeName);
+
+        // Use ToCSharpTypeName for full generic type name resolution including
+        // nested types like "Dictionary<A,B>.Nested<C>" — it has depth-aware bracket matching.
+        return ToCSharpTypeName(typeName);
+    }
+
+    /// <summary>
+    /// Map a CLR type name to its C# keyword equivalent and handle nested type prefix preservation.
+    /// Does NOT handle generic args or backtick arity — only keyword mapping + parent prefix.
+    /// </summary>
+    private static string KeywordMap(string typeName)
     {
         // Handle generic type names — extract short name for the base type
         var genericStart = typeName.IndexOf('<');
@@ -315,13 +360,6 @@ public sealed class CSharpSerializer
                 mapped = $"{prefix}.{mapped}";
         }
 
-        if (genericStart >= 0)
-        {
-            var argsPart = typeName[(genericStart + 1)..^1]; // strip <>
-            var args = argsPart.Split(',').Select(a => MapToCSharpType(a.Trim()));
-            return $"{mapped}<{string.Join(", ", args)}>";
-        }
-
         return mapped;
     }
 
@@ -356,6 +394,36 @@ public sealed class CSharpSerializer
 
         // Strip '&' suffix for ref/out params
         var cleanType = typeName.EndsWith('&') ? typeName[..^1].Trim() : typeName;
+
+        // Types with CLR nested type marker '+' are implementation details (iterators, etc.)
+        // that can't be constructed in C# test code. Skip before StripAssemblyQualification
+        // since the latter replaces '+' with '.'.
+        if (cleanType.Contains('+'))
+        {
+            var shortName = cleanType.Split('+')[^1];
+            var bt = shortName.IndexOf('`');
+            if (bt >= 0) shortName = shortName[..bt];
+            return $"/* TODO: nested type */ default({shortName})!";
+        }
+
+        // Strip assembly qualification from generic type arguments.
+        // Type.FullName produces e.g. "Type`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, ...]]"
+        // which breaks all downstream type-name parsing. Reduce to "Type<System.Int32>".
+        cleanType = StripAssemblyQualification(cleanType);
+
+        // ── System.Text.Json.JsonElement: use JsonSerializer.Deserialize for any JSON value ──
+        if (cleanType == "System.Text.Json.JsonElement")
+        {
+            var escapedJson = LiteralEscape(json);
+            return $"System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonElement>({escapedJson})";
+        }
+
+        // ── System.Text.Json.JsonDocument: same approach — direct cast from int is invalid ──
+        if (cleanType == "System.Text.Json.JsonDocument")
+        {
+            var escapedJson = LiteralEscape(json);
+            return $"System.Text.Json.JsonSerializer.Deserialize<System.Text.Json.JsonDocument>({escapedJson})";
+        }
 
         // ── Null ──
         if (root.ValueKind == JsonValueKind.Null)
@@ -427,7 +495,18 @@ public sealed class CSharpSerializer
         if (root.ValueKind == JsonValueKind.Array)
         {
             var csType = MapToCSharpType(cleanType);
+
+            // Only use collection initializer for types known to support it
+            // (parameterless ctor + Add method). ReadOnlyCollection<T> does NOT
+            // support collection initializer — fall back to default for everything
+            // except well-known collection types.
+            if (!IsCollectionType(cleanType))
+                return $"default({csType})!";
+
             var elementType = ExtractElementType(cleanType);
+            if (elementType is null)
+                return $"default({csType})!";
+
             var elementExprs = root.EnumerateArray()
                 .Select(e => DeserializeToExpression(e.GetRawText(), elementType ?? "System.Object"))
                 .ToArray();
@@ -450,6 +529,27 @@ public sealed class CSharpSerializer
             return $"({cleanType}){root.GetRawText()}";
         }
         return $"/* unknown type */ ({MapToCSharpType(cleanType)}){root.GetRawText()}";
+    }
+
+    /// <summary>
+    /// Check if a type supports collection-initializer syntax (parameterless ctor + Add(T)).
+    /// Only returns true for well-known BCL collection types that support { } initializer.
+    /// ReadOnlyCollection&lt;T&gt;, Stack&lt;T&gt;, Queue&lt;T&gt;, LinkedList&lt;T&gt; all do NOT.
+    /// </summary>
+    private static bool IsCollectionType(string typeName)
+    {
+        var gaStart = typeName.IndexOf('<');
+        var baseName = gaStart >= 0 ? typeName[..gaStart] : typeName;
+        baseName = StripAssemblyQualification(baseName);
+
+        return baseName switch
+        {
+            "System.Collections.Generic.List" => true,
+            "System.Collections.Generic.HashSet" => true,
+            "System.Collections.Generic.Collection" => true,
+            "System.Collections.Generic.Dictionary" => true,
+            _ => false
+        };
     }
 
     /// <summary>
@@ -484,7 +584,7 @@ public sealed class CSharpSerializer
         };
     }
 
-    private static List<string> SplitGenericArgs(string argsPart)
+    internal static List<string> SplitGenericArgs(string argsPart)
     {
         var result = new List<string>();
         var depth = 0;
@@ -510,5 +610,121 @@ public sealed class CSharpSerializer
         if (start < argsPart.Length)
             result.Add(argsPart[start..].Trim());
         return result;
+    }
+
+    /// <summary>
+    /// Strip assembly qualification from generic type arguments.
+    /// "Type`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=...]]"
+    /// → "Type&lt;System.Int32&gt;"
+    /// Also converts CLR '+' nested type separator to '.'.
+    /// </summary>
+    internal static string StripAssemblyQualification(string typeName)
+    {
+        // Unescape JSON Unicode escapes that Type.FullName writes
+        var name = typeName.Replace("\\u002B", "+").Replace("\\u0060", "`");
+
+        // Strip trailing & (ByRef marker) — it interferes with ^1 bracket stripping below.
+        if (name.EndsWith('&'))
+            name = name[..^1];
+
+        var backtickIdx = name.IndexOf('`');
+        if (backtickIdx < 0)
+        {
+            // No backtick: check for <...>-style assembly qualification embedded in
+            // generic args, e.g. "ArraySegment<System.Byte, System.Private.CoreLib,
+            // Version=10.0.0.0, Culture=neutral, PublicKeyToken=...>".
+            // This happens when MLC's Type.FullName uses angle-bracket qualification
+            // instead of the CLR standard backtick+[[...]] format.
+            var gaStart = name.IndexOf('<');
+            if (gaStart >= 0)
+            {
+                var gaEnd = name.LastIndexOf('>');
+                if (gaEnd > gaStart)
+                {
+                    var basePart = name[..gaStart].Replace('+', '.');
+                    var argsPart = name[(gaStart + 1)..gaEnd];
+                    var args = SplitGenericArgs(argsPart);
+                    // Assembly metadata tokens always contain '=' (Version=, Culture=, etc.)
+                    var hasAssemblyInfo = args.Any(a => a.Contains('='));
+                    if (hasAssemblyInfo)
+                    {
+                        var cleanArgs = args
+                            .Select(a => a.Trim())
+                            .Where(a => !a.Contains('='))
+                            .Select(a => StripAssemblyQualification(a))
+                            .ToArray();
+                        return $"{basePart}<{string.Join(", ", cleanArgs)}>";
+                    }
+                }
+            }
+            return name.Replace('+', '.');
+        }
+
+        // Extract base name (strip arity)
+        var baseName = name[..backtickIdx].Replace('+', '.');
+
+        // Find generic arguments in bracket-enclosed form.
+        // Type.FullName uses: Type`N[[arg1details],[arg2details]] (double-bracket for assembly-qualified)
+        // or:                  Type`N[arg1,arg2] (single-bracket for simple names)
+        var bracketStart = name.IndexOf('[');
+        if (bracketStart < 0)
+            return baseName;
+
+        if (bracketStart + 1 < name.Length && name[bracketStart + 1] == '[')
+        {
+            // Double-bracket: [[Arg1, Assembly, ...], [Arg2, Assembly, ...]]
+            var inner = name[(bracketStart + 1)..^1]; // strip outer []
+            var args = SplitTopLevelBracketArgs(inner);
+            var cleanArgs = args
+                .Select(a => StripSingleAssemblyArg(a))
+                .Select(a => StripAssemblyQualification(a))
+                .ToArray();
+            return $"{baseName}<{string.Join(", ", cleanArgs)}>";
+        }
+        else
+        {
+            // Single-bracket: [simple, args]
+            var inner = name[(bracketStart + 1)..^1];
+            var args = SplitGenericArgs(inner)
+                .Select(a => StripAssemblyQualification(a.Trim()))
+                .ToArray();
+            return $"{baseName}<{string.Join(", ", args)}>";
+        }
+    }
+
+    /// <summary>
+    /// Split top-level bracket-enclosed generic arguments:
+    /// "[A, ver, ...], [B, ver, ...]" → ["A, ver, ...", "B, ver, ..."]
+    /// </summary>
+    private static List<string> SplitTopLevelBracketArgs(string s)
+    {
+        var result = new List<string>();
+        int depth = 0, start = 0;
+        for (int i = 0; i < s.Length; i++)
+        {
+            if (s[i] == '[') { if (depth == 0) start = i + 1; depth++; }
+            else if (s[i] == ']') { depth--; if (depth == 0) result.Add(s[start..i]); }
+        }
+        return result;
+    }
+
+    /// <summary>
+    /// Given a single assembly-qualified generic arg like
+    /// "System.Int32, System.Private.CoreLib, Version=10.0.0.0, ..."
+    /// return just "System.Int32".
+    /// Handles re-entrant generics: "Type`2[[...],[...]], Assembly, ..." → "Type`2[[...],[...]]"
+    /// </summary>
+    private static string StripSingleAssemblyArg(string arg)
+    {
+        arg = arg.Trim();
+        int depth = 0;
+        for (int i = 0; i < arg.Length; i++)
+        {
+            if (arg[i] == '[') depth++;
+            else if (arg[i] == ']') depth--;
+            else if (arg[i] == ',' && depth == 0)
+                return arg[..i].Trim();
+        }
+        return arg;
     }
 }

@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.Convert
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.Convert`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 294 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 221 |
-| Benchmark-only (pure void / non-deterministic) | 58 |
-| Skipped (generic / unresolvable) | 15 |
-| Total Subjects | 534 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 294 |
+| Benchmark-only (pure void / non-deterministic) | 0 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 552 |
 
 ## Build
 
@@ -29,21 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `ToBase64String (ref struct)` — contains generic parameters, needs manual handling
-- `TryToBase64Chars (ref struct)` — contains generic parameters, needs manual handling
-- `TryFromBase64String (ref struct)` — contains generic parameters, needs manual handling
-- `TryFromBase64Chars (ref struct)` — contains generic parameters, needs manual handling
-- `FromHexString (ref struct)` — contains generic parameters, needs manual handling
-- `FromHexString (ref struct)` — contains generic parameters, needs manual handling
-- `FromHexString (ref struct)` — contains generic parameters, needs manual handling
-- `FromHexString (ref struct)` — contains generic parameters, needs manual handling
-- `FromHexString (ref struct)` — contains generic parameters, needs manual handling
-- `ToHexString (ref struct)` — contains generic parameters, needs manual handling
-- `TryToHexString (ref struct)` — contains generic parameters, needs manual handling
-- `TryToHexString (ref struct)` — contains generic parameters, needs manual handling
-- `ToHexStringLower (ref struct)` — contains generic parameters, needs manual handling
-- `TryToHexStringLower (ref struct)` — contains generic parameters, needs manual handling
-- `TryToHexStringLower (ref struct)` — contains generic parameters, needs manual handling

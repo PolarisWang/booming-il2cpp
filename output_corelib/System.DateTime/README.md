@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.DateTime
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.DateTime`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 62 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 37 |
-| Benchmark-only (pure void / non-deterministic) | 14 |
-| Skipped (generic / unresolvable) | 11 |
-| Total Subjects | 88 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 60 |
+| Benchmark-only (pure void / non-deterministic) | 2 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 101 |
 
 ## Build
 
@@ -29,17 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `ParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `ParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `TryParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling

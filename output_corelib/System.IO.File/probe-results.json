@@ -1380,7 +1380,7 @@
   {
     "methodIndex": 52,
     "setIndex": 0,
-    "subjectId": "System.IO.File::WriteAllText:System.Void(System.String,System.String,System.Text.Encoding)__Set0",
+    "subjectId": "System.IO.File::WriteAllText:System.Void(System.String,ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
     "isVoid": true,
     "hasException": true,
     "exceptionType": "System.ArgumentNullException",
@@ -1392,6 +1392,32 @@
   },
   {
     "methodIndex": 52,
+    "setIndex": 1,
+    "subjectId": "System.IO.File::WriteAllText:System.Void(System.String,ReadOnlySpan\u003CSystem.Char\u003E)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 53,
+    "setIndex": 0,
+    "subjectId": "System.IO.File::WriteAllText:System.Void(System.String,System.String,System.Text.Encoding)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 53,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllText:System.Void(System.String,System.String,System.Text.Encoding)__Set1",
     "isVoid": true,
@@ -1404,7 +1430,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 52,
+    "methodIndex": 53,
     "setIndex": 2,
     "subjectId": "System.IO.File::WriteAllText:System.Void(System.String,System.String,System.Text.Encoding)__Set2",
     "isVoid": true,
@@ -1417,7 +1443,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 53,
+    "methodIndex": 54,
+    "setIndex": 0,
+    "subjectId": "System.IO.File::WriteAllText:System.Void(System.String,ReadOnlySpan\u003CSystem.Char\u003E,System.Text.Encoding)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 54,
+    "setIndex": 1,
+    "subjectId": "System.IO.File::WriteAllText:System.Void(System.String,ReadOnlySpan\u003CSystem.Char\u003E,System.Text.Encoding)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 55,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadAllBytes:System.Byte[](System.String)__Set0",
     "isVoid": false,
@@ -1430,7 +1482,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 53,
+    "methodIndex": 55,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadAllBytes:System.Byte[](System.String)__Set1",
     "isVoid": false,
@@ -1443,7 +1495,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 54,
+    "methodIndex": 56,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllBytes:System.Void(System.String,System.Byte[])__Set0",
     "isVoid": true,
@@ -1456,7 +1508,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 54,
+    "methodIndex": 56,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllBytes:System.Void(System.String,System.Byte[])__Set1",
     "isVoid": true,
@@ -1469,7 +1521,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 54,
+    "methodIndex": 56,
     "setIndex": 2,
     "subjectId": "System.IO.File::WriteAllBytes:System.Void(System.String,System.Byte[])__Set2",
     "isVoid": true,
@@ -1482,7 +1534,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 55,
+    "methodIndex": 57,
+    "setIndex": 0,
+    "subjectId": "System.IO.File::WriteAllBytes:System.Void(System.String,ReadOnlySpan\u003CSystem.Byte\u003E)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 57,
+    "setIndex": 1,
+    "subjectId": "System.IO.File::WriteAllBytes:System.Void(System.String,ReadOnlySpan\u003CSystem.Byte\u003E)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 58,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllBytes:System.Void(System.String,System.Byte[])__Set0",
     "isVoid": true,
@@ -1495,7 +1573,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 55,
+    "methodIndex": 58,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllBytes:System.Void(System.String,System.Byte[])__Set1",
     "isVoid": true,
@@ -1508,7 +1586,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 55,
+    "methodIndex": 58,
     "setIndex": 2,
     "subjectId": "System.IO.File::AppendAllBytes:System.Void(System.String,System.Byte[])__Set2",
     "isVoid": true,
@@ -1521,7 +1599,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 56,
+    "methodIndex": 59,
+    "setIndex": 0,
+    "subjectId": "System.IO.File::AppendAllBytes:System.Void(System.String,ReadOnlySpan\u003CSystem.Byte\u003E)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 59,
+    "setIndex": 1,
+    "subjectId": "System.IO.File::AppendAllBytes:System.Void(System.String,ReadOnlySpan\u003CSystem.Byte\u003E)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 60,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllBytesAsync:System.Threading.Tasks.Task(System.String,System.Byte[],System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -1534,7 +1638,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 56,
+    "methodIndex": 60,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllBytesAsync:System.Threading.Tasks.Task(System.String,System.Byte[],System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -1547,7 +1651,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 56,
+    "methodIndex": 60,
     "setIndex": 2,
     "subjectId": "System.IO.File::AppendAllBytesAsync:System.Threading.Tasks.Task(System.String,System.Byte[],System.Threading.CancellationToken)__Set2",
     "isVoid": false,
@@ -1560,7 +1664,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 57,
+    "methodIndex": 61,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllBytesAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -1573,7 +1677,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 57,
+    "methodIndex": 61,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllBytesAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -1586,7 +1690,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 58,
+    "methodIndex": 62,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadAllLines:System.String[](System.String)__Set0",
     "isVoid": false,
@@ -1599,7 +1703,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 58,
+    "methodIndex": 62,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadAllLines:System.String[](System.String)__Set1",
     "isVoid": false,
@@ -1612,7 +1716,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 59,
+    "methodIndex": 63,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadAllLines:System.String[](System.String,System.Text.Encoding)__Set0",
     "isVoid": false,
@@ -1625,7 +1729,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 59,
+    "methodIndex": 63,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadAllLines:System.String[](System.String,System.Text.Encoding)__Set1",
     "isVoid": false,
@@ -1638,7 +1742,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 60,
+    "methodIndex": 64,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadLines:IEnumerable\u003CSystem.String\u003E(System.String)__Set0",
     "isVoid": false,
@@ -1651,7 +1755,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 60,
+    "methodIndex": 64,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadLines:IEnumerable\u003CSystem.String\u003E(System.String)__Set1",
     "isVoid": false,
@@ -1664,7 +1768,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 61,
+    "methodIndex": 65,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadLines:IEnumerable\u003CSystem.String\u003E(System.String,System.Text.Encoding)__Set0",
     "isVoid": false,
@@ -1677,7 +1781,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 61,
+    "methodIndex": 65,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadLines:IEnumerable\u003CSystem.String\u003E(System.String,System.Text.Encoding)__Set1",
     "isVoid": false,
@@ -1690,7 +1794,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 62,
+    "methodIndex": 66,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadLinesAsync:IAsyncEnumerable\u003CSystem.String\u003E(System.String,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -1703,7 +1807,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 62,
+    "methodIndex": 66,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadLinesAsync:IAsyncEnumerable\u003CSystem.String\u003E(System.String,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -1716,7 +1820,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 63,
+    "methodIndex": 67,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadLinesAsync:IAsyncEnumerable\u003CSystem.String\u003E(System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -1729,7 +1833,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 63,
+    "methodIndex": 67,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadLinesAsync:IAsyncEnumerable\u003CSystem.String\u003E(System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -1742,7 +1846,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 64,
+    "methodIndex": 68,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllLines:System.Void(System.String,System.String[])__Set0",
     "isVoid": true,
@@ -1755,7 +1859,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 64,
+    "methodIndex": 68,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllLines:System.Void(System.String,System.String[])__Set1",
     "isVoid": true,
@@ -1768,7 +1872,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 65,
+    "methodIndex": 69,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllLines:System.Void(System.String,IEnumerable\u003CSystem.String\u003E)__Set0",
     "isVoid": true,
@@ -1781,7 +1885,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 65,
+    "methodIndex": 69,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllLines:System.Void(System.String,IEnumerable\u003CSystem.String\u003E)__Set1",
     "isVoid": true,
@@ -1794,7 +1898,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 66,
+    "methodIndex": 70,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllLines:System.Void(System.String,System.String[],System.Text.Encoding)__Set0",
     "isVoid": true,
@@ -1807,7 +1911,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 66,
+    "methodIndex": 70,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllLines:System.Void(System.String,System.String[],System.Text.Encoding)__Set1",
     "isVoid": true,
@@ -1820,7 +1924,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 67,
+    "methodIndex": 71,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllLines:System.Void(System.String,IEnumerable\u003CSystem.String\u003E,System.Text.Encoding)__Set0",
     "isVoid": true,
@@ -1833,7 +1937,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 67,
+    "methodIndex": 71,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllLines:System.Void(System.String,IEnumerable\u003CSystem.String\u003E,System.Text.Encoding)__Set1",
     "isVoid": true,
@@ -1846,7 +1950,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 68,
+    "methodIndex": 72,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,System.String)__Set0",
     "isVoid": true,
@@ -1859,7 +1963,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 68,
+    "methodIndex": 72,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,System.String)__Set1",
     "isVoid": true,
@@ -1872,7 +1976,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 68,
+    "methodIndex": 72,
     "setIndex": 2,
     "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,System.String)__Set2",
     "isVoid": true,
@@ -1885,7 +1989,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 69,
+    "methodIndex": 73,
+    "setIndex": 0,
+    "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 73,
+    "setIndex": 1,
+    "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,ReadOnlySpan\u003CSystem.Char\u003E)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 74,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,System.String,System.Text.Encoding)__Set0",
     "isVoid": true,
@@ -1898,7 +2028,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 69,
+    "methodIndex": 74,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,System.String,System.Text.Encoding)__Set1",
     "isVoid": true,
@@ -1911,7 +2041,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 69,
+    "methodIndex": 74,
     "setIndex": 2,
     "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,System.String,System.Text.Encoding)__Set2",
     "isVoid": true,
@@ -1924,7 +2054,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 70,
+    "methodIndex": 75,
+    "setIndex": 0,
+    "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,ReadOnlySpan\u003CSystem.Char\u003E,System.Text.Encoding)__Set0",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 75,
+    "setIndex": 1,
+    "subjectId": "System.IO.File::AppendAllText:System.Void(System.String,ReadOnlySpan\u003CSystem.Char\u003E,System.Text.Encoding)__Set1",
+    "isVoid": true,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 76,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllLines:System.Void(System.String,IEnumerable\u003CSystem.String\u003E)__Set0",
     "isVoid": true,
@@ -1937,7 +2093,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 70,
+    "methodIndex": 76,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllLines:System.Void(System.String,IEnumerable\u003CSystem.String\u003E)__Set1",
     "isVoid": true,
@@ -1950,7 +2106,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 71,
+    "methodIndex": 77,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllLines:System.Void(System.String,IEnumerable\u003CSystem.String\u003E,System.Text.Encoding)__Set0",
     "isVoid": true,
@@ -1963,7 +2119,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 71,
+    "methodIndex": 77,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllLines:System.Void(System.String,IEnumerable\u003CSystem.String\u003E,System.Text.Encoding)__Set1",
     "isVoid": true,
@@ -1976,7 +2132,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 72,
+    "methodIndex": 78,
     "setIndex": 0,
     "subjectId": "System.IO.File::Replace:System.Void(System.String,System.String,System.String)__Set0",
     "isVoid": true,
@@ -1989,7 +2145,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 72,
+    "methodIndex": 78,
     "setIndex": 1,
     "subjectId": "System.IO.File::Replace:System.Void(System.String,System.String,System.String)__Set1",
     "isVoid": true,
@@ -2002,7 +2158,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 72,
+    "methodIndex": 78,
     "setIndex": 2,
     "subjectId": "System.IO.File::Replace:System.Void(System.String,System.String,System.String)__Set2",
     "isVoid": true,
@@ -2015,7 +2171,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 72,
+    "methodIndex": 78,
     "setIndex": 3,
     "subjectId": "System.IO.File::Replace:System.Void(System.String,System.String,System.String)__Set3",
     "isVoid": true,
@@ -2028,7 +2184,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 73,
+    "methodIndex": 79,
     "setIndex": 0,
     "subjectId": "System.IO.File::Replace:System.Void(System.String,System.String,System.String,System.Boolean)__Set0",
     "isVoid": true,
@@ -2041,7 +2197,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 73,
+    "methodIndex": 79,
     "setIndex": 1,
     "subjectId": "System.IO.File::Replace:System.Void(System.String,System.String,System.String,System.Boolean)__Set1",
     "isVoid": true,
@@ -2054,7 +2210,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 73,
+    "methodIndex": 79,
     "setIndex": 2,
     "subjectId": "System.IO.File::Replace:System.Void(System.String,System.String,System.String,System.Boolean)__Set2",
     "isVoid": true,
@@ -2067,7 +2223,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 73,
+    "methodIndex": 79,
     "setIndex": 3,
     "subjectId": "System.IO.File::Replace:System.Void(System.String,System.String,System.String,System.Boolean)__Set3",
     "isVoid": true,
@@ -2080,7 +2236,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 74,
+    "methodIndex": 80,
     "setIndex": 0,
     "subjectId": "System.IO.File::Move:System.Void(System.String,System.String)__Set0",
     "isVoid": true,
@@ -2093,7 +2249,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 74,
+    "methodIndex": 80,
     "setIndex": 1,
     "subjectId": "System.IO.File::Move:System.Void(System.String,System.String)__Set1",
     "isVoid": true,
@@ -2106,7 +2262,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 74,
+    "methodIndex": 80,
     "setIndex": 2,
     "subjectId": "System.IO.File::Move:System.Void(System.String,System.String)__Set2",
     "isVoid": true,
@@ -2119,7 +2275,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 75,
+    "methodIndex": 81,
     "setIndex": 0,
     "subjectId": "System.IO.File::Move:System.Void(System.String,System.String,System.Boolean)__Set0",
     "isVoid": true,
@@ -2132,7 +2288,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 75,
+    "methodIndex": 81,
     "setIndex": 1,
     "subjectId": "System.IO.File::Move:System.Void(System.String,System.String,System.Boolean)__Set1",
     "isVoid": true,
@@ -2145,7 +2301,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 75,
+    "methodIndex": 81,
     "setIndex": 2,
     "subjectId": "System.IO.File::Move:System.Void(System.String,System.String,System.Boolean)__Set2",
     "isVoid": true,
@@ -2158,7 +2314,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 75,
+    "methodIndex": 81,
     "setIndex": 3,
     "subjectId": "System.IO.File::Move:System.Void(System.String,System.String,System.Boolean)__Set3",
     "isVoid": true,
@@ -2171,7 +2327,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 76,
+    "methodIndex": 82,
     "setIndex": 0,
     "subjectId": "System.IO.File::Encrypt:System.Void(System.String)__Set0",
     "isVoid": true,
@@ -2184,7 +2340,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 76,
+    "methodIndex": 82,
     "setIndex": 1,
     "subjectId": "System.IO.File::Encrypt:System.Void(System.String)__Set1",
     "isVoid": true,
@@ -2197,7 +2353,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 77,
+    "methodIndex": 83,
     "setIndex": 0,
     "subjectId": "System.IO.File::Decrypt:System.Void(System.String)__Set0",
     "isVoid": true,
@@ -2210,7 +2366,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 77,
+    "methodIndex": 83,
     "setIndex": 1,
     "subjectId": "System.IO.File::Decrypt:System.Void(System.String)__Set1",
     "isVoid": true,
@@ -2223,7 +2379,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 78,
+    "methodIndex": 84,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadAllTextAsync:Task\u003CSystem.String\u003E(System.String,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2236,7 +2392,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 78,
+    "methodIndex": 84,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadAllTextAsync:Task\u003CSystem.String\u003E(System.String,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2249,7 +2405,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 79,
+    "methodIndex": 85,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadAllTextAsync:Task\u003CSystem.String\u003E(System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2262,7 +2418,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 79,
+    "methodIndex": 85,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadAllTextAsync:Task\u003CSystem.String\u003E(System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2275,7 +2431,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 80,
+    "methodIndex": 86,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2288,7 +2444,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 80,
+    "methodIndex": 86,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2301,7 +2457,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 80,
+    "methodIndex": 86,
     "setIndex": 2,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Threading.CancellationToken)__Set2",
     "isVoid": false,
@@ -2314,7 +2470,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 81,
+    "methodIndex": 87,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Char\u003E,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2327,7 +2483,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 81,
+    "methodIndex": 87,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Char\u003E,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2340,7 +2496,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 82,
+    "methodIndex": 88,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2353,7 +2509,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 82,
+    "methodIndex": 88,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2366,7 +2522,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 82,
+    "methodIndex": 88,
     "setIndex": 2,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set2",
     "isVoid": false,
@@ -2379,7 +2535,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 83,
+    "methodIndex": 89,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Char\u003E,System.Text.Encoding,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2392,7 +2548,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 83,
+    "methodIndex": 89,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllTextAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Char\u003E,System.Text.Encoding,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2405,7 +2561,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 84,
+    "methodIndex": 90,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadAllBytesAsync:Task\u003CSystem.Byte[]\u003E(System.String,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2418,7 +2574,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 84,
+    "methodIndex": 90,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadAllBytesAsync:Task\u003CSystem.Byte[]\u003E(System.String,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2431,7 +2587,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 85,
+    "methodIndex": 91,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllBytesAsync:System.Threading.Tasks.Task(System.String,System.Byte[],System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2444,7 +2600,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 85,
+    "methodIndex": 91,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllBytesAsync:System.Threading.Tasks.Task(System.String,System.Byte[],System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2457,7 +2613,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 85,
+    "methodIndex": 91,
     "setIndex": 2,
     "subjectId": "System.IO.File::WriteAllBytesAsync:System.Threading.Tasks.Task(System.String,System.Byte[],System.Threading.CancellationToken)__Set2",
     "isVoid": false,
@@ -2470,7 +2626,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 86,
+    "methodIndex": 92,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllBytesAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2483,7 +2639,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 86,
+    "methodIndex": 92,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllBytesAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Byte\u003E,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2496,7 +2652,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 87,
+    "methodIndex": 93,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadAllLinesAsync:Task\u003CSystem.String[]\u003E(System.String,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2509,7 +2665,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 87,
+    "methodIndex": 93,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadAllLinesAsync:Task\u003CSystem.String[]\u003E(System.String,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2522,7 +2678,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 88,
+    "methodIndex": 94,
     "setIndex": 0,
     "subjectId": "System.IO.File::ReadAllLinesAsync:Task\u003CSystem.String[]\u003E(System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2535,7 +2691,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 88,
+    "methodIndex": 94,
     "setIndex": 1,
     "subjectId": "System.IO.File::ReadAllLinesAsync:Task\u003CSystem.String[]\u003E(System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2548,7 +2704,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 89,
+    "methodIndex": 95,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllLinesAsync:System.Threading.Tasks.Task(System.String,IEnumerable\u003CSystem.String\u003E,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2561,7 +2717,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 89,
+    "methodIndex": 95,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllLinesAsync:System.Threading.Tasks.Task(System.String,IEnumerable\u003CSystem.String\u003E,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2574,7 +2730,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 90,
+    "methodIndex": 96,
     "setIndex": 0,
     "subjectId": "System.IO.File::WriteAllLinesAsync:System.Threading.Tasks.Task(System.String,IEnumerable\u003CSystem.String\u003E,System.Text.Encoding,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2587,7 +2743,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 90,
+    "methodIndex": 96,
     "setIndex": 1,
     "subjectId": "System.IO.File::WriteAllLinesAsync:System.Threading.Tasks.Task(System.String,IEnumerable\u003CSystem.String\u003E,System.Text.Encoding,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2600,7 +2756,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 91,
+    "methodIndex": 97,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2613,7 +2769,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 91,
+    "methodIndex": 97,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2626,7 +2782,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 91,
+    "methodIndex": 97,
     "setIndex": 2,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Threading.CancellationToken)__Set2",
     "isVoid": false,
@@ -2639,7 +2795,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 92,
+    "methodIndex": 98,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Char\u003E,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2652,7 +2808,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 92,
+    "methodIndex": 98,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Char\u003E,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2665,7 +2821,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 93,
+    "methodIndex": 99,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2678,7 +2834,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 93,
+    "methodIndex": 99,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2691,7 +2847,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 93,
+    "methodIndex": 99,
     "setIndex": 2,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,System.String,System.Text.Encoding,System.Threading.CancellationToken)__Set2",
     "isVoid": false,
@@ -2704,7 +2860,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 94,
+    "methodIndex": 100,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Char\u003E,System.Text.Encoding,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2717,7 +2873,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 94,
+    "methodIndex": 100,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllTextAsync:System.Threading.Tasks.Task(System.String,ReadOnlyMemory\u003CSystem.Char\u003E,System.Text.Encoding,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2730,7 +2886,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 95,
+    "methodIndex": 101,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllLinesAsync:System.Threading.Tasks.Task(System.String,IEnumerable\u003CSystem.String\u003E,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2743,7 +2899,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 95,
+    "methodIndex": 101,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllLinesAsync:System.Threading.Tasks.Task(System.String,IEnumerable\u003CSystem.String\u003E,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2756,7 +2912,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 96,
+    "methodIndex": 102,
     "setIndex": 0,
     "subjectId": "System.IO.File::AppendAllLinesAsync:System.Threading.Tasks.Task(System.String,IEnumerable\u003CSystem.String\u003E,System.Text.Encoding,System.Threading.CancellationToken)__Set0",
     "isVoid": false,
@@ -2769,7 +2925,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 96,
+    "methodIndex": 102,
     "setIndex": 1,
     "subjectId": "System.IO.File::AppendAllLinesAsync:System.Threading.Tasks.Task(System.String,IEnumerable\u003CSystem.String\u003E,System.Text.Encoding,System.Threading.CancellationToken)__Set1",
     "isVoid": false,
@@ -2782,7 +2938,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 97,
+    "methodIndex": 103,
     "setIndex": 0,
     "subjectId": "System.IO.File::CreateSymbolicLink:System.IO.FileSystemInfo(System.String,System.String)__Set0",
     "isVoid": false,
@@ -2795,7 +2951,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 97,
+    "methodIndex": 103,
     "setIndex": 1,
     "subjectId": "System.IO.File::CreateSymbolicLink:System.IO.FileSystemInfo(System.String,System.String)__Set1",
     "isVoid": false,
@@ -2808,7 +2964,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 97,
+    "methodIndex": 103,
     "setIndex": 2,
     "subjectId": "System.IO.File::CreateSymbolicLink:System.IO.FileSystemInfo(System.String,System.String)__Set2",
     "isVoid": false,
@@ -2821,7 +2977,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 98,
+    "methodIndex": 104,
     "setIndex": 0,
     "subjectId": "System.IO.File::ResolveLinkTarget:System.IO.FileSystemInfo(System.String,System.Boolean)__Set0",
     "isVoid": false,
@@ -2834,7 +2990,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 98,
+    "methodIndex": 104,
     "setIndex": 1,
     "subjectId": "System.IO.File::ResolveLinkTarget:System.IO.FileSystemInfo(System.String,System.Boolean)__Set1",
     "isVoid": false,
@@ -2847,7 +3003,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 98,
+    "methodIndex": 104,
     "setIndex": 2,
     "subjectId": "System.IO.File::ResolveLinkTarget:System.IO.FileSystemInfo(System.String,System.Boolean)__Set2",
     "isVoid": false,

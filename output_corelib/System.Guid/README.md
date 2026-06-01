@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.Guid
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.Guid`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 27 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 7 |
-| Benchmark-only (pure void / non-deterministic) | 6 |
-| Skipped (generic / unresolvable) | 14 |
-| Total Subjects | 22 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 25 |
+| Benchmark-only (pure void / non-deterministic) | 2 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 37 |
 
 ## Build
 
@@ -29,20 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `ParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `TryParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `TryWriteBytes (ref struct)` — contains generic parameters, needs manual handling
-- `TryWriteBytes (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling

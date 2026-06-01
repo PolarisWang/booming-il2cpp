@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.IO.File
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.IO.File`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 105 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 1 |
-| Benchmark-only (pure void / non-deterministic) | 98 |
-| Skipped (generic / unresolvable) | 6 |
-| Total Subjects | 220 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 62 |
+| Benchmark-only (pure void / non-deterministic) | 43 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 232 |
 
 ## Build
 
@@ -29,12 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `WriteAllText (ref struct)` — contains generic parameters, needs manual handling
-- `WriteAllText (ref struct)` — contains generic parameters, needs manual handling
-- `WriteAllBytes (ref struct)` — contains generic parameters, needs manual handling
-- `AppendAllBytes (ref struct)` — contains generic parameters, needs manual handling
-- `AppendAllText (ref struct)` — contains generic parameters, needs manual handling
-- `AppendAllText (ref struct)` — contains generic parameters, needs manual handling

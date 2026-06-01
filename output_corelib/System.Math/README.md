@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.Math
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.Math`
 
 ## Coverage Summary
@@ -8,8 +8,8 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 120 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 93 |
-| Benchmark-only (pure void / non-deterministic) | 27 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 120 |
+| Benchmark-only (pure void / non-deterministic) | 0 |
 | Skipped (generic / unresolvable) | 0 |
 | Total Subjects | 328 |
 

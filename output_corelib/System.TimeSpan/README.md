@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.TimeSpan
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.TimeSpan`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 51 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 32 |
-| Benchmark-only (pure void / non-deterministic) | 8 |
-| Skipped (generic / unresolvable) | 11 |
-| Total Subjects | 91 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 51 |
+| Benchmark-only (pure void / non-deterministic) | 0 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 102 |
 
 ## Build
 
@@ -29,17 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `ParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `ParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `TryParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `TryParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `TryParseExact (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
