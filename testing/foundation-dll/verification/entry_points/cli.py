@@ -26,6 +26,36 @@ def resolve_family_dir(slug: str, assembly: str) -> Path:
     return _TESTING_ROOT / assembly / slug
 
 
+def _check_benchmark_freshness(family_dir: Path) -> bool:
+    """Check if multi-run-report.json is newer than all codegen outputs.
+
+    Returns True if the report is up-to-date (skip benchmark).
+    Returns False if the report is stale or missing (needs run).
+    """
+    report_path = family_dir / "multi-run" / "multi-run-report.json"
+    codegen_dir = family_dir / "codegen"
+
+    if not report_path.exists():
+        return False
+
+    report_mtime = report_path.stat().st_mtime
+
+    if not codegen_dir.exists():
+        return True
+
+    latest_codegen = 0.0
+    for f in codegen_dir.rglob("*"):
+        if f.is_file():
+            try:
+                mtime = f.stat().st_mtime
+                if mtime > latest_codegen:
+                    latest_codegen = mtime
+            except OSError:
+                pass
+
+    return latest_codegen <= report_mtime
+
+
 def _write_hotupdate_report_from_pipeline(report_path: Path, stages: dict[str, Any]) -> None:
     """Bridge: generate a D3-compatible hotupdate-verification-report.json from pipeline stage results.
 
@@ -131,6 +161,8 @@ def main() -> None:
                         help="Per-stage timeout in seconds (0 = no timeout)")
     parser.add_argument("--resume", action="store_true",
                         help="Skip already-passed stages from previous run")
+    parser.add_argument("--incremental", action="store_true",
+                        help="Skip benchmark if multi-run-report.json is newer than codegen outputs")
 
     args = parser.parse_args()
     family_dir = resolve_family_dir(args.family_slug, args.assembly)
@@ -140,12 +172,19 @@ def main() -> None:
         print(f"  Has the family been imported yet?")
         sys.exit(1)
 
+    # --incremental: skip benchmark if multi-run-report.json is up-to-date
+    skip_stages = set(args.skip)
+    if args.incremental and "benchmark" not in skip_stages:
+        if _check_benchmark_freshness(family_dir):
+            print("[incremental] benchmark: SKIPPED (up-to-date)")
+            skip_stages.add("benchmark")
+
     ctx = FamilyContext(
         slug=args.family_slug,
         assembly=args.assembly,
         family_dir=family_dir,
         mode=args.mode,
-        skip_stages=set(args.skip),
+        skip_stages=skip_stages,
         verbose=args.verbose,
         native_config=args.native_config,
         stage_timeout_seconds=args.timeout,

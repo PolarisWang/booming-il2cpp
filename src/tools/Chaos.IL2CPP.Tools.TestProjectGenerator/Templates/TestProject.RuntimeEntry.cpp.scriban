@@ -396,7 +396,13 @@ int main(int argc, char* argv[]) {
 
     if (std::strcmp(argv[1], "--benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --benchmark <index> <iterations>\n"); return 1; }
-        ret = RunBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        int bm_idx = std::atoi(argv[2]);
+        if (bm_idx >= 0 && bm_idx < kSubjectEntryCount) {
+            ret = RunBenchmarkMode(kSubjectSlotMap[bm_idx], std::atoi(argv[3]));
+        } else {
+            printf("{\"elapsedMilliseconds\":-1.0,\"error\":\"subject index out of range\"}\n");
+            ret = 1;
+        }
         goto shutdown;
     }
 
@@ -410,7 +416,13 @@ int main(int argc, char* argv[]) {
 
     if (std::strcmp(argv[1], "--hotupdate-and-benchmark") == 0) {
         if (argc < 4) { printf("Usage: entry.exe --hotupdate-and-benchmark <index> <iterations>\n"); return 1; }
-        ret = RunHotupdateBenchmarkMode(std::atoi(argv[2]), std::atoi(argv[3]));
+        int hb_idx = std::atoi(argv[2]);
+        if (hb_idx >= 0 && hb_idx < kSubjectEntryCount) {
+            ret = RunHotupdateBenchmarkMode(kSubjectSlotMap[hb_idx], std::atoi(argv[3]));
+        } else {
+            printf("{\"elapsedMilliseconds\":-1.0,\"error\":\"subject index out of range\"}\n");
+            ret = 1;
+        }
         goto shutdown;
     }
 

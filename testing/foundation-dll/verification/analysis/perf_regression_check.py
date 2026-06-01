@@ -80,6 +80,57 @@ def _load_benchmark_from_jsonl(
     return list(latest_per_method.values())
 
 
+def _load_benchmark_from_multirun(
+    report_path: Path,
+) -> list[dict[str, Any]]:
+    """Extract per-method benchmark results from multi-run-report.json.
+
+    The multi-run report has the format:
+      { "methods": [{ "subject_id": "...", "samples": { "chaos-aot": { "mean_ns": ... }}}] }
+    """
+    try:
+        data = json.loads(report_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
+
+    methods = data.get("methods", [])
+    if not methods:
+        return []
+
+    entries: list[dict[str, Any]] = []
+    for m in methods:
+        subject_id = m.get("subject_id", "")
+        if not subject_id:
+            continue
+
+        # Prefer chaos-aot sample, fall back to first available
+        samples = m.get("samples", {})
+        chaos = samples.get("chaos-aot")
+        if chaos:
+            mean_ns = chaos.get("mean_ns", 0.0)
+            status = chaos.get("status", "ok")
+            entries.append({
+                "methodSubjectId": subject_id,
+                "method_index": m.get("method_index"),
+                "label": m.get("label"),
+                "mean_ns": mean_ns,
+                "status": status,
+            })
+        elif samples:
+            # Fall back to first available runtime
+            first_runtime = next(iter(samples.values()))
+            if isinstance(first_runtime, dict):
+                entries.append({
+                    "methodSubjectId": subject_id,
+                    "method_index": m.get("method_index"),
+                    "label": m.get("label"),
+                    "mean_ns": first_runtime.get("mean_ns", 0.0),
+                    "status": first_runtime.get("status", "ok"),
+                })
+
+    return entries
+
+
 def _ns_per_op(entry: dict[str, Any]) -> float:
     """Extract ns/op from a benchmark entry.
 
@@ -201,31 +252,45 @@ def check_perf_regression(
     family_dir = _TESTING_ROOT / assembly / slug
     results_dir = _TESTING_ROOT / "results" / assembly / slug
 
-    # Load baseline benchmark history
-    baseline_jsonl = results_dir / "perf" / "benchmark-history.jsonl"
-    if not baseline_jsonl.exists():
+    # ── Load baseline benchmark history ──────────────────────────────────
+    jsonl_candidates = [
+        results_dir / "perf" / "benchmark-history.jsonl",
+        family_dir / "perf" / "benchmark-history.jsonl",
+    ]
+    baseline_jsonl = None
+    for p in jsonl_candidates:
+        if p.exists():
+            baseline_jsonl = p
+            break
+
+    if not baseline_jsonl:
         return {
             "has_regression": False,
-            "error": f"No benchmark history found at {baseline_jsonl}",
+            "no_baseline": True,
+            "error": f"No benchmark history found in: {[str(p) for p in jsonl_candidates]}",
             "details": [],
         }
     baseline_entries = _load_benchmark_from_jsonl(baseline_jsonl)
 
-    # Load current report
-    report_paths = [
+    # ── Load current multi-run report ────────────────────────────────────
+    current_candidates = [
+        family_dir / "multi-run" / "multi-run-report.json",
         family_dir / "unified-verification-report.json",
         results_dir / "unified-verification-report.json",
     ]
     current_entries = []
-    for rp in report_paths:
+    for rp in current_candidates:
         if rp.exists():
-            current_entries = _load_benchmark_from_pipeline_report(rp)
+            if rp.name == "multi-run-report.json":
+                current_entries = _load_benchmark_from_multirun(rp)
+            else:
+                current_entries = _load_benchmark_from_pipeline_report(rp)
             break
 
     if not current_entries:
         return {
             "has_regression": True,
-            "error": "No current benchmark data found in unified-verification-report.json",
+            "error": "No current benchmark data found",
             "details": [],
         }
 
@@ -246,6 +311,30 @@ def main() -> None:
     args = parser.parse_args()
 
     report = check_perf_regression(args.slug, args.assembly, args.max_degradation)
+
+    # NO_BASELINE handling: print status and exit 0
+    if report.get("no_baseline"):
+        print(json.dumps({
+            "status": "NO_BASELINE",
+            "message": report.get("error", "No benchmark history found."),
+            "family": args.slug,
+            "assembly": args.assembly,
+        }, indent=2, ensure_ascii=False))
+        sys.exit(0)
+
+    # Write report to family_dir/regression-check-report.json
+    family_dir = _TESTING_ROOT / args.assembly / args.slug
+    if family_dir.is_dir():
+        report_path = family_dir / "regression-check-report.json"
+        try:
+            report_path.write_text(
+                json.dumps(report, indent=2, ensure_ascii=False),
+                encoding="utf-8",
+            )
+        except OSError as exc:
+            print(f"Warning: failed to write report to {report_path}: {exc}",
+                  file=sys.stderr)
+
     print(json.dumps(report, indent=2, ensure_ascii=False))
     sys.exit(1 if report.get("has_regression") else 0)
 

@@ -39,6 +39,7 @@ from verification.stages.test_code_generator import (
 
 # Canonical contract lookup (single source of truth)
 from verification.orchestration.context import resolve_contract_path, load_contract
+from verification.stages.subject_correctness_audit import run_full_correctness_audit
 
 _HERE = Path(__file__).resolve().parent  # verification/stages/
 _VERIFICATION_ROOT = _HERE.parent          # verification/
@@ -780,15 +781,30 @@ def _get_subject_files(family_dir: Path) -> list[Path]:
     return files
 
 
-def freeze_subjects(slug: str, assembly: str) -> Path | None:
+def freeze_subjects(slug: str, assembly: str, force: bool = False) -> Path | None:
     """Freeze subject files: compute SHA256 hashes and write manifest.
 
     Creates subject-freeze-manifest.json in the family directory and
     backs up frozen copies to subject-freeze/.
 
+    Runs correctness audit first — refuses to freeze if issues found.
+    Use --force-freeze to skip this check.
+
     Returns path to manifest file, or None on failure.
     """
     family_dir = _TESTING_ROOT / assembly / slug
+
+    # Pre-check: correctness audit must pass before freezing
+    if not force:
+        audit_report = run_full_correctness_audit(slug, assembly)
+        if audit_report.get("correctness_verdict") in ("ISSUES_FOUND", "BLOCKER", "ERROR"):
+            n_issues = audit_report.get("total_issues", 0)
+            print(
+                f"[freeze] REFUSED: Correctness audit found {n_issues} issue(s) "
+                f"(verdict={audit_report.get('correctness_verdict')}).\n"
+                f"[freeze] Fix subject code first, or use --force-freeze to override."
+            )
+            return None
     freeze_dir = family_dir / _FREEZE_DIR_NAME
     freeze_dir.mkdir(parents=True, exist_ok=True)
 
@@ -1212,6 +1228,10 @@ def main() -> None:
         help="Verify subject files match frozen manifest",
     )
     parser.add_argument(
+        "--force-freeze", action="store_true",
+        help="Force freeze even if subject correctness audit finds issues",
+    )
+    parser.add_argument(
         "--estimate-roi", action="store_true",
         help="Estimate ROI and classify bottleneck type for this family",
     )
@@ -1223,7 +1243,7 @@ def main() -> None:
 
     # Handle freeze/verify-freeze as standalone commands
     if args.freeze:
-        freeze_subjects(args.family_slug, args.assembly)
+        freeze_subjects(args.family_slug, args.assembly, force=args.force_freeze)
         return
 
     if args.verify_freeze:

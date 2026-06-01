@@ -2863,6 +2863,60 @@ public sealed partial class NativeAotLoweringPlanner
                     return null;
                 }));
 
+            // === Convert.ToChar(String) — inline TLS cache peek + first-byte return ===
+            // Inlines the full string-to-char conversion at the call site, eliminating
+            // the extern "C" bridge function call + string_table::Resolve function call.
+            // ResolveFast() checks the TLS cache inline (1 compare) and only calls the
+            // full Resolve() on cache miss, which is ~0.01% of calls in benchmarks.
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Convert",
+                MethodName: "ToChar",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    if (paramTypes.Count == 1 && paramTypes[0] == "System.String")
+                    {
+                        // {0} is guaranteed to be a string ID for System.String-typed
+                        // parameters — no chaos_is_string_id check needed.
+                        return """
+                            [&]() -> CHAOS_IL2CPP_UINT16 {
+                                auto _v = chaos::il2cpp::string_table::ResolveFast(chaos_extract_string_id({0}));
+                                if (_v.byte_count == 0) {
+                                    chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
+                                    return 0;
+                                }
+                                return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(_v.utf8_data[0]));
+                            }()
+                            """.Replace("\r\n", "\n").Trim();
+                    }
+                    if (paramTypes.Count == 2 && paramTypes[0] == "System.String" && paramTypes[1] == "System.IFormatProvider")
+                    {
+                        return """
+                            [&]() -> CHAOS_IL2CPP_UINT16 {
+                                (void){1};
+                                auto _v = chaos::il2cpp::string_table::ResolveFast(chaos_extract_string_id({0}));
+                                if (_v.byte_count == 0) {
+                                    chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
+                                    return 0;
+                                }
+                                return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(_v.utf8_data[0]));
+                            }()
+                            """.Replace("\r\n", "\n").Trim();
+                    }
+                    return null;
+                }));
+
+            // === Int32.GetHashCode — inline pointer dereference ===
+            // Eliminates ChaosInt32GetHashCode function call overhead. The hash of
+            // an Int32 IS the value itself. Inline C++: (ptr==0?0:*reinterpret_cast<int32_t*>(ptr)).
+            registry.RegisterInline(new InlineShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Int32",
+                MethodName: "GetHashCode",
+                Resolver: static (callee, paramTypes) =>
+                {
+                    return "({0} == 0 ? 0 : *reinterpret_cast<CHAOS_IL2CPP_INT32*>({0}))";
+                })
+            { IsInstanceMethod = true });
+
                         // === Array::Copy (GenericShapeDescriptor -- calls ChaosArrayCopy for 5-param overload) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
                 TypeDisplayNamePrefix: "System.Array",

@@ -183,6 +183,7 @@ def check_regression(
     if not baseline_path:
         return {
             "has_regression": False,
+            "no_baseline": True,
             "error": "No baseline golden record found. Run --freeze first.",
             "details": [],
         }
@@ -227,6 +228,29 @@ def main() -> None:
         report = compare_golden_records(args.baseline, args.current)
     else:
         report = check_regression(args.slug, args.assembly)
+
+    # NO_BASELINE handling: print status and exit 0
+    if report.get("no_baseline"):
+        print(json.dumps({
+            "status": "NO_BASELINE",
+            "message": report.get("error", "No baseline golden record found."),
+            "family": args.slug,
+            "assembly": args.assembly,
+        }, indent=2, ensure_ascii=False))
+        sys.exit(0)
+
+    # Write report to family_dir/regression-check-report.json
+    family_dir = _TESTING_ROOT / args.assembly / args.slug
+    if family_dir.is_dir():
+        report_path = family_dir / "regression-check-report.json"
+        try:
+            report_path.write_text(
+                json.dumps(report, indent=2, ensure_ascii=False),
+                encoding="utf-8",
+            )
+        except OSError as exc:
+            print(f"Warning: failed to write report to {report_path}: {exc}",
+                  file=sys.stderr)
 
     print(json.dumps(report, indent=2, ensure_ascii=False))
     sys.exit(1 if report.get("has_regression") else 0)

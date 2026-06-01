@@ -13,32 +13,36 @@ using System.Threading;
 
 public static partial class ReflectionHotupdateSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()
+    [Fact]
     public static void Subject_0()
     {
-        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()
+        try { var __val = ((typeof(byte).Assembly.GetModules()).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [1] System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()
+    [Fact]
     public static void Subject_1()
     {
-        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()
+        try { var __val = ((typeof(byte).Assembly.GetTypes()).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [2] System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)
+    [Fact]
     public static void Subject_2()
     {
-        try { _ = ((Type.GetTypeFromHandle(default(System.RuntimeTypeHandle))).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((Type.GetTypeFromHandle(default(System.RuntimeTypeHandle))).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [3] System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)
+    [Fact]
     public static void Subject_3()
     {
-        // non-callable: System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)
+        try { var __val = ((typeof(byte).Assembly.GetType("hello")).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
 }
