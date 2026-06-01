@@ -10,6 +10,10 @@
 
 #include <cstring>
 
+#if !defined(_WIN32)
+#include <ctime>
+#endif
+
 namespace chaos::il2cpp::diagnostics {
 
 namespace {
@@ -20,7 +24,12 @@ namespace {
 void SafeStrCpy(char* dst, const char* src, size_t dst_size) noexcept {
     if (dst_size == 0) return;
     if (src == nullptr) { dst[0] = '\0'; return; }
+#if defined(_WIN32)
     strncpy_s(dst, dst_size, src, _TRUNCATE);
+#else
+    ::strncpy(dst, src, dst_size);
+    dst[dst_size - 1] = '\0';
+#endif
 }
 
 }  // anonymous namespace
@@ -202,10 +211,17 @@ void EpEmitEvent(EpEventType event_type, const void* payload, uint32_t payload_s
     header.event_type = event_type;
     header.payload_size = payload_size;
 
-    // Timestamp via QPC.
+    // Timestamp.
+#if defined(_WIN32)
     LARGE_INTEGER qpc;
     QueryPerformanceCounter(&qpc);
     header.timestamp = static_cast<uint64_t>(qpc.QuadPart);
+#else
+    struct timespec ts;
+    ::clock_gettime(CLOCK_MONOTONIC, &ts);
+    header.timestamp = static_cast<uint64_t>(ts.tv_sec) * 1000000000ULL
+                     + static_cast<uint64_t>(ts.tv_nsec);
+#endif
 
     // Check payload size against max.
     if (payload_size > kEpMaxPayloadSize) {

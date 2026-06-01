@@ -64,6 +64,52 @@ static SimdHexResult simd_hex_to_nibble(__m128i chunk) noexcept {
 }
 #endif // x86_64
 
+// ── NEON hex-to-nibble converter (ARM64) ────────────────────────────
+#if defined(__ARM_NEON) || defined(__aarch64__)
+#include <arm_neon.h>
+
+struct SimdHexResult {
+    uint8x16_t nibbles;
+    uint8x16_t valid;
+};
+
+static int movemask_neon(uint8x16_t input) noexcept {
+    // Emulate _mm_movemask_epi8: extract MSB of each byte into 16-bit mask.
+    // Each byte contributes its own power-of-2 weight via the bitmask,
+    // so pairwise-accumulate is equivalent to bitwise OR.
+    static const uint8_t kBitMask[16] = {1,2,4,8,16,32,64,128,1,2,4,8,16,32,64,128};
+    uint8x16_t t = vandq_u8(vshrq_n_u8(input, 7), vld1q_u8(kBitMask));
+    uint32x4_t p = vpaddlq_u16(vpaddlq_u8(t));
+    uint32x2_t r = vpadd_u32(vget_low_u32(p), vget_high_u32(p));
+    return static_cast<int>(vget_lane_u32(r, 0) | (vget_lane_u32(r, 1) << 8));
+}
+
+static SimdHexResult simd_hex_to_nibble(uint8x16_t chunk) noexcept {
+    // Digit path: c - '0', valid if result <= 9
+    uint8x16_t sub0 = vsubq_u8(chunk, vdupq_n_u8('0'));
+    uint8x16_t is_digit = vcltq_s8(vreinterpretq_s8_u8(sub0), vdupq_n_s8(10));
+
+    // Letter path: lowercase, subtract 'a', valid if result < 6
+    uint8x16_t lower = vorrq_u8(chunk, vdupq_n_u8(0x20));
+    uint8x16_t sub_a = vsubq_u8(lower, vdupq_n_u8('a'));
+    uint8x16_t is_letter = vcltq_s8(vreinterpretq_s8_u8(sub_a), vdupq_n_s8(6));
+
+    // Combined validity mask
+    uint8x16_t valid = vorrq_u8(is_digit, is_letter);
+
+    // Letter value = sub_a + 10
+    uint8x16_t letter_val = vaddq_u8(sub_a, vdupq_n_u8(10));
+
+    // Select: digit uses sub0, letter uses letter_val
+    // vbslq_u8(mask, a, b): mask bit=1 -> a, 0 -> b.
+    // _mm_blendv_epi8(a, b, mask): mask MSB=1 -> b, 0 -> a.
+    // So vbslq_u8(is_digit, sub0, letter_val) matches blendv(letter_val, sub0, is_digit).
+    uint8x16_t nibbles = vbslq_u8(is_digit, sub0, letter_val);
+
+    return { nibbles, valid };
+}
+#endif // ARM_NEON
+
 // ── Scalable GUID string parser (SIMD + scalar fallback) ────────────
 // Decodes a "XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX" format string from
 // `value` (StringId or CHAOS_IL2CPP_STRING_TYPE*) into 16 raw bytes.
@@ -119,6 +165,35 @@ static bool parse_guid_string(CHAOS_IL2CPP_INTPTR value, CHAOS_IL2CPP_UINT8 out_
     // Pack adjacent nibble pairs into bytes using kPos table
     // kPos[i] = first hex char position for GUID byte i
     // kPos[i]+1 = second hex char position
+    static constexpr int kPos[16] = {0,2,4,6, 9,11, 14,16, 19,21, 24,26,28,30,32,34};
+    for (int i = 0; i < 16; i++) {
+        int p = kPos[i];
+        uint8_t hi = (p < 16) ? n0[p] : ((p < 32) ? n1[p - 16] : n2[p - 32]);
+        uint8_t lo = (p + 1 < 16) ? n0[p + 1] : ((p + 1 < 32) ? n1[p + 1 - 16] : n2[p + 1 - 32]);
+        out_guid[i] = static_cast<CHAOS_IL2CPP_UINT8>((hi << 4) | lo);
+    }
+    return true;
+#elif defined(__ARM_NEON) || defined(__aarch64__)
+    // NEON SIMD fast path: same algorithm as x86 SSE4.1 path
+    uint8x16_t c0 = vld1q_u8(reinterpret_cast<const uint8_t*>(data));
+    uint8x16_t c1 = vld1q_u8(reinterpret_cast<const uint8_t*>(data + 16));
+    uint8x16_t c2 = vld1q_u8(reinterpret_cast<const uint8_t*>(data + 32));
+
+    auto r0 = simd_hex_to_nibble(c0);
+    auto r1 = simd_hex_to_nibble(c1);
+    auto r2 = simd_hex_to_nibble(c2);
+
+    uint8x16_t all_valid = vandq_u8(r0.valid, r1.valid);
+    int valid_mask = movemask_neon(all_valid);
+    if ((valid_mask & 0xB7FF) != 0xB7FF) return false;
+    int valid2 = movemask_neon(r2.valid);
+    if ((valid2 & 0x0F) != 0x0F) return false;
+
+    alignas(16) uint8_t n0[16], n1[16], n2[16];
+    vst1q_u8(n0, r0.nibbles);
+    vst1q_u8(n1, r1.nibbles);
+    vst1q_u8(n2, r2.nibbles);
+
     static constexpr int kPos[16] = {0,2,4,6, 9,11, 14,16, 19,21, 24,26,28,30,32,34};
     for (int i = 0; i < 16; i++) {
         int p = kPos[i];

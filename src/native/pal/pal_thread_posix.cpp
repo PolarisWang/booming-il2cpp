@@ -1,0 +1,65 @@
+// pal_thread_posix.cpp — POSIX threading primitives (pthreads)
+
+#include <chaos/pal/pal_thread.h>
+
+#include <pthread.h>
+#include <time.h>
+#include <cerrno>
+#include <cstdlib>
+#include <new>
+
+namespace chaos::il2cpp::pal {
+
+PalThread* PalThreadCreate(PalThreadProc proc, void* arg) noexcept {
+    auto* t = new (std::nothrow) pthread_t();
+    if (!t) return nullptr;
+    pthread_attr_t attr;
+    pthread_attr_init(&attr);
+    pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
+    int rc = pthread_create(t, &attr, proc, arg);
+    pthread_attr_destroy(&attr);
+    if (rc != 0) {
+        delete t;
+        return nullptr;
+    }
+    return reinterpret_cast<PalThread*>(t);
+}
+
+void* PalThreadJoin(PalThread* thread) noexcept {
+    if (!thread) return nullptr;
+    void* result = nullptr;
+    pthread_join(*reinterpret_cast<pthread_t*>(thread), &result);
+    delete reinterpret_cast<pthread_t*>(thread);
+    return result;
+}
+
+uint64_t PalGetCurrentThreadId() noexcept {
+    return static_cast<uint64_t>(pthread_self());
+}
+
+void PalSleepMs(uint64_t ms) noexcept {
+    struct timespec ts;
+    ts.tv_sec = static_cast<time_t>(ms / 1000);
+    ts.tv_nsec = static_cast<long>(ms % 1000) * 1'000'000L;
+    // nanosleep may be interrupted by signals; retry if so.
+    while (::nanosleep(&ts, &ts) == -1 && errno == EINTR) {}
+}
+
+void PalYield() noexcept {
+    ::sched_yield();
+}
+
+void PalGetStackBounds(void*& out_base, void*& out_limit) noexcept {
+    pthread_attr_t attr;
+    void* stack_addr;
+    size_t stack_size;
+    if (pthread_getattr_np(pthread_self(), &attr) == 0) {
+        if (pthread_attr_getstack(&attr, &stack_addr, &stack_size) == 0) {
+            out_base  = static_cast<char*>(stack_addr) + stack_size;
+            out_limit = stack_addr;
+        }
+        pthread_attr_destroy(&attr);
+    }
+}
+
+}  // namespace chaos::il2cpp::pal

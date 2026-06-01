@@ -14,7 +14,7 @@
 #include <Windows.h>
 #else
 #include <cstdlib>
-#include <sys/mman.h>
+#include <chaos/pal/pal_mem.h>
 #endif
 
 namespace chaos::il2cpp::memory_domain {
@@ -156,7 +156,7 @@ public:
         for (auto& r : regions_) {
             if (r.ptr != nullptr) {
                 total += static_cast<CHAOS_IL2CPP_INT64>(r.size);
-                ::munmap(r.ptr, r.size);
+                chaos::il2cpp::pal::PalVirtualFree(r.ptr, r.size);
             }
         }
         // Subtract all tracked region sizes from usage (since we can't
@@ -193,9 +193,7 @@ private:
     }
 
     static void* MmapAlloc(CHAOS_IL2CPP_SIZE size) {
-        void* ptr = ::mmap(nullptr, size, PROT_READ | PROT_WRITE,
-                           MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-        return (ptr == MAP_FAILED) ? nullptr : ptr;
+        return chaos::il2cpp::pal::PalVirtualAlloc(size);
     }
 
     void SetupCurrent(void* region, CHAOS_IL2CPP_SIZE size) {

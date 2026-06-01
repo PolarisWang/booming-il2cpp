@@ -38,7 +38,7 @@ created: 2026-05-23
 | batch-1 | completed | wf1-arch → wf1-gc → wf1-liveness → wf1-osr → wf1-unwind → wf1-tests → wf1-ci ✅ | CI baseline workflow + Python scripts 已实现 |
 | batch-2 | completed | wf2-linux ✅, wf4-debug ✅ | wf2-linux: LinuxSehHandler.cpp + DWARF .eh_frame; wf4-debug: JitDebugInfo 发射 + 调试合约 + JIT SOS WinDbg 扩展 + GetMethodName |
 | batch-3 | completed | wf3-tlab ✅ | TLAB inline TLS access 已实现：EmitLoadTlsTlab 替换 3 处 CodegenGetTlab CALL，全 199 JIT 测试通过 |
-| batch-4 | pending | wf5-arm64 | 等待 batch-2 + batch-3
+| batch-4 | completed | wf5-arm64 ✅ | 完整 ARM64 JIT 支持：Arm64Encoder、ArchTraits、jit_engine.cpp 参数化、NEON SIMD、ARM64 prologue/epilogue、precode 跳板、DWARF 展开、SEH ucontext、EmitSimd NEON 分支。x64 回归测试全部通过。
 
 ## 调度状态
 
@@ -46,8 +46,8 @@ created: 2026-05-23
 dispatch_doc: DISPATCH.md
 dispatch_model: hybrid
 active_batches: []
-completed_batches: [batch-1, batch-2, batch-3]
-pending_batches: [batch-4]
+completed_batches: [batch-1, batch-2, batch-3, batch-4]
+pending_batches: []
 ```
 
 ## 子任务映射
@@ -64,7 +64,7 @@ pending_batches: [batch-4]
 | wf2-linux | 2 | completed | main | Linux SEH + DWARF + CI | — | batch-2 | jit_seh.cpp Linux handler, jit_unwind.cpp | Linux x64 T4 JIT 可用（代码完成，CI pending） | src/native/jit/ | 大 |
 | wf3-tlab | 3 | completed | main | TLAB 内联分配 | wf1-arch, wf1-tests | batch-3 | jit_engine.cpp, jit_helpers.cpp | NewObj/Box/NewArr TLAB bump path 无 helper call | src/native/jit/ | 大 |
 | wf4-debug | 4 | completed | main | 调试信息 + SOS | — | batch-2 | jit_engine.cpp, jit_method.h, jit_seh.cpp, jit_debug_contract.h/cpp, jit_sos.cpp, sos_common.h, hotpatch_table.h/cpp, metadata_interface.cpp, gc_sos.cpp | JitDebugInfo 发射 + GetMethodName + 调试合约 + JIT SOS 扩展 + 5 个测试 | src/native/jit/, src/native/runtime-core/jit/ | 大 |
-| wf5-arm64 | 5 | planned | main | ARM64 完整支持 | wf1-arch | batch-4 | arm64_encoder.h | ARM64 回归通过 | src/native/jit/ | 极大 |
+| wf5-arm64 | 5 | completed | main | ARM64 完整支持 | wf1-arch | batch-4 | arm64_encoder.h, ArchTraits.h, jit_engine.cpp (参数化), jit_unwind.cpp (ARM64 DWARF), jit_precode.cpp (ARM64 trampoline), LinuxSehHandler.cpp (ucontext), jit_engine.h (编码器类型选择) | ARM64 回归通过 | src/native/jit/ | 极大 |
 
 ## 最新摘要
 
@@ -73,11 +73,11 @@ batch-2 (wf2-linux + wf4-debug) ✅ 已完成：
 - wf4-debug: JitDebugInfo 发射 + 调试合约 (jit_debug_contract) + JIT SOS WinDbg 扩展 (jit_sos) + GetMethodName 实现 + 5 个单元测试
 batch-3 (wf3-tlab) ✅ 已完成：EmitLoadTlsTlab 替换 3 处 CodegenGetTlab CALL，全 199 JIT 测试通过。
 batch-1 wf1-ci 设计文档已完成（design-wf1-ci.md），待实现 GitHub Actions workflow。
-剩余待办：wf5-arm64（ARM64）。
+batch-4 (wf5-arm64) ✅ 已完成：完整 ARM64 JIT 支持 — Arm64Encoder 160/160 方法、ArchTraits 双架构参数化、jit_engine.cpp (~500 寄存器常量替换)、NEON SIMD 扩展、ARM64 prologue/epilogue、precode trampoline、DWARF 展开、SEH ucontext、EmitSimd NEON 分支。x64 回归测试全部通过。
 
-## 下一步
+## 已完成
 
-启动 wf5-arm64（ARM64 编码器）或实现 wf1-ci GitHub Actions workflow。
+所有 4 个 batch 全部完成（batch-1, batch-2, batch-3, batch-4）。JIT 工业化收官计划的所有工作流已交付。
 
 ## 风险评估
 

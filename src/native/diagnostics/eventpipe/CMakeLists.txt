@@ -1,11 +1,11 @@
 # CMakeLists.txt — EventPipe diagnostic event transport (chaos_eventpipe)
 #
 # Builds a static library providing lightweight IPC-based diagnostic events
-# (GC, ThreadPool, Exception).  Uses Windows Named Pipes for transport.
+# (GC, ThreadPool, Exception).
 #
-# This is a platform-specific module gated on _WIN32.  On unsupported
-# platforms, the library is skipped (the entire subdirectory is only
-# added on Windows by the parent CMakeLists.txt checks).
+# Transport:
+#   Windows: Named Pipes (OVERLAPPED I/O)
+#   Linux:   Unix Domain Sockets (AF_UNIX, SOCK_STREAM)
 
 cmake_minimum_required(VERSION 3.20)
 project(chaos_eventpipe LANGUAGES CXX)

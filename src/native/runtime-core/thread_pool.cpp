@@ -6,6 +6,8 @@
 #include "forbid_suspend.h"
 #include "runtime_stubs/threadpool_events.h"
 
+#include <chaos/pal/pal_time.h>
+
 #include <algorithm>
 #include <atomic>
 #include <chrono>
@@ -22,11 +24,6 @@
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
-#elif defined(__linux__)
-    #include <time.h>
-#elif defined(__APPLE__)
-    #include <sys/resource.h>
-    #include <sys/time.h>
 #endif
 
 namespace chaos::il2cpp::runtime_core::threading {
@@ -71,37 +68,7 @@ thread_local WorkerLocalQueue*            tls_worker_queue = nullptr;
 /// Measure total CPU time consumed by the process (all threads) in nanoseconds.
 /// Returns 0 if the platform does not support process-level CPU time measurement.
 uint64_t GetProcessCpuTimeNs() noexcept {
-#if defined(_WIN32) || defined(_WIN64)
-    FILETIME create_time, exit_time, kernel_time, user_time;
-    if (!GetProcessTimes(GetCurrentProcess(), &create_time, &exit_time, &kernel_time, &user_time)) {
-        return 0;
-    }
-    uint64_t kernel = (static_cast<uint64_t>(kernel_time.dwHighDateTime) << 32)
-                    | static_cast<uint64_t>(kernel_time.dwLowDateTime);
-    uint64_t user = (static_cast<uint64_t>(user_time.dwHighDateTime) << 32)
-                  | static_cast<uint64_t>(user_time.dwLowDateTime);
-    // FILETIME is in 100-ns intervals; convert to ns.
-    return (kernel + user) * 100;
-#elif defined(__linux__)
-    struct timespec ts;
-    if (clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts) == 0) {
-        return static_cast<uint64_t>(ts.tv_sec) * 1'000'000'000ULL
-             + static_cast<uint64_t>(ts.tv_nsec);
-    }
-    return 0;
-#elif defined(__APPLE__)
-    struct rusage usage;
-    if (getrusage(RUSAGE_SELF, &usage) == 0) {
-        uint64_t utime = static_cast<uint64_t>(usage.ru_utime.tv_sec) * 1'000'000'000ULL
-                       + static_cast<uint64_t>(usage.ru_utime.tv_usec) * 1000ULL;
-        uint64_t stime = static_cast<uint64_t>(usage.ru_stime.tv_sec) * 1'000'000'000ULL
-                       + static_cast<uint64_t>(usage.ru_stime.tv_usec) * 1000ULL;
-        return utime + stime;
-    }
-    return 0;
-#else
-    return 0;
-#endif
+    return chaos::il2cpp::pal::PalGetProcessCpuTimeNs();
 }
 
 #if defined(_WIN32) || defined(_WIN64)

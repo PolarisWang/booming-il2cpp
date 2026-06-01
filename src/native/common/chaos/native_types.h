@@ -140,11 +140,17 @@ namespace chaos { namespace il2cpp { namespace common {
 // ── Utility ─────────────────────────────────────────────────
 #define CHAOS_IL2CPP_TO_STRING(v)     std::to_string(v)
 
-// CPU pause hint (spinlock hint, yields pipeline slot on x86/x64).
+// CPU pause hint (spinlock hint, yields pipeline slot).
 #if defined(_MSC_VER)
-    #define CHAOS_IL2CPP_PAUSE_HINT()   _mm_pause()
+    #if defined(_M_ARM64)
+        #define CHAOS_IL2CPP_PAUSE_HINT()  __yield()
+    #else
+        #define CHAOS_IL2CPP_PAUSE_HINT()  _mm_pause()
+    #endif
+#elif defined(__aarch64__) || defined(_M_ARM64)
+    #define CHAOS_IL2CPP_PAUSE_HINT()  __yield()
 #else
-    #define CHAOS_IL2CPP_PAUSE_HINT()   __builtin_ia32_pause()
+    #define CHAOS_IL2CPP_PAUSE_HINT()  __builtin_ia32_pause()
 #endif
 
 // ── Threading ───────────────────────────────────────────────

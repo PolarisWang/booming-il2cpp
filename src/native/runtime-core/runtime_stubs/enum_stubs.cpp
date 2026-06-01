@@ -18,6 +18,7 @@
 #include "gc_static_roots.h"
 #include "reflection_query_model.h"
 #include "reflection_api.h"
+#include <chaos/profile.h>
 #include "reflection_metadata_impl.h"
 #include "exception_helpers.h"
 
@@ -251,6 +252,7 @@ static void enum_insert_box_cache(
 static CHAOS_IL2CPP_INTPTR enum_alloc_boxed_int64(
     CHAOS_IL2CPP_INT64 value, CHAOS_IL2CPP_INTPTR type_key = 0) noexcept
 {
+    CHAOS_IL2CPP_PROFILE_SCOPE("enum_alloc_boxed_int64");
     if (type_key != 0) {
         auto cached = enum_lookup_box_cache(type_key, value);
         if (cached != 0) return cached;
@@ -821,6 +823,7 @@ static void store_type_info_reverse_cache(CHAOS_IL2CPP_INTPTR type_arg,
 /// extract the FNV-1a 24-bit hash and look up metadata directly via
 /// g_chaos_resolve_enum_metadata_by_fnv24 — no resolve_type_arg call needed.
 static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("enum_resolve_meta");
     // Use stable TypeInfoHandle as cache key to handle GC-moved Type objects
     CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type_arg);
     if (handle != 0 && handle == s_enum_meta_type_key) return s_enum_meta_cache;
@@ -1232,6 +1235,7 @@ static CHAOS_IL2CPP_UINT32 enum_metadata_count(
 ///
 /// Returns nullptr if the type cannot be resolved.
 static const ReflectionQueryTypeDescriptor* resolve_type_arg(CHAOS_IL2CPP_INTPTR type_arg) noexcept {
+    CHAOS_IL2CPP_PROFILE_SCOPE("resolve_type_arg");
     if (type_arg == 0) return nullptr;
 
     // Small direct-mapped cache: 4 entries, keyed by type_arg.
@@ -2090,6 +2094,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumToStringWithFormat(CHAOS_IL2CPP_INTPTR this_obj, CH
 /// Returns 1 on success, 0 on failure.
 CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INTPTR result_out) noexcept
 {
+    CHAOS_IL2CPP_PROFILE_SCOPE("ChaosEnumTryParse");
     if (type == 0 || name == 0 || result_out == 0) return 0;
 
     CHAOS_IL2CPP_UINTPTR name_len = 0;
@@ -2178,6 +2183,7 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
 /// Enum.TryParse(Type, String, Boolean, out Object) — tries to parse with ignoreCase.
 CHAOS_IL2CPP_INT32 ChaosEnumTryParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR name, CHAOS_IL2CPP_INT32 ignoreCase, CHAOS_IL2CPP_INTPTR result_out) noexcept
 {
+    CHAOS_IL2CPP_PROFILE_SCOPE("ChaosEnumTryParseWithIgnoreCase");
     if (type == 0 || name == 0 || result_out == 0) return 0;
 
     CHAOS_IL2CPP_UINTPTR name_len = 0;

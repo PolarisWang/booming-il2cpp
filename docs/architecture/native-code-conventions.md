@@ -12,6 +12,7 @@ All native C++ code is organized into modules. Each module has a source director
 | Module | Path | Namespace | Visibility |
 |--------|------|-----------|------------|
 | `chaos_common` | `src/native/common` | `ChaosIl2cpp::Common` | public |
+| `chaos_pal` | `src/native/pal` | `chaos::il2cpp::pal` | public |
 | `chaos_runtime_core` | `src/native/runtime-core` | `chaos::il2cpp::runtime_core` | public |
 | `chaos_hot_update` | `src/native/hot-update` | `chaos::il2cpp::hot_update` | internal |
 | `chaos_interpreter` | `src/native/interpreter` | `chaos::il2cpp::interpreter` | internal |
@@ -23,12 +24,13 @@ All native C++ code is organized into modules. Each module has a source director
 
 ```
 chaos_common      (no dependencies)
-  └→ chaos_runtime_core     (no dependencies)
-       ├→ chaos_hot_update  (depends on: chaos_runtime_core)
-       ├→ chaos_interpreter (depends on: chaos_runtime_core)
-       ├→ chaos_support     (depends on: chaos_runtime_core)
-       └→ chaos_bootstrap   (depends on: chaos_runtime_core, chaos_hot_update, chaos_support)
-            └→ chaos_engine_bridge (depends on: chaos_runtime_core, chaos_bootstrap)
+  └→ chaos_pal     (depends on: chaos_common [via chaos_fmt])
+       └→ chaos_runtime_core     (depends on: chaos_pal)
+            ├→ chaos_hot_update  (depends on: chaos_runtime_core)
+            ├→ chaos_interpreter (depends on: chaos_runtime_core)
+            ├→ chaos_support     (depends on: chaos_runtime_core)
+            └→ chaos_bootstrap   (depends on: chaos_runtime_core, chaos_hot_update, chaos_support)
+                 └→ chaos_engine_bridge (depends on: chaos_runtime_core, chaos_bootstrap)
 ```
 
 Dependencies are directional and enforced by `check_arch.py`. A module may only `#include` headers from modules it explicitly depends on.

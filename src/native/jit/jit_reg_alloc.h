@@ -102,60 +102,98 @@ GraphColoringResult AllocateRegistersGraphColoring(
 
 // ── Internal helpers ───────────────────────────────────────────────────────
 namespace detail {
-
-// Available x64 GPRs for allocation (5 callee-saved + 4 caller-saved = 9 total).
-// On Win64: RDI, R12-R15 are callee-saved (preserved across calls).
-// V2 adds R8-R11 (caller-saved) with post-call reload in code_generator.cpp.
-// RBX(3)=args_buf, RBP(5)=frame, RSI(6)=ret_buf are reserved.
-// RAX(0)/RCX(1)/RDX(2) are excluded — implicitly clobbered by Div/Mul/Shift.
-//
+	
+// ── Architecture-specific register tables ──────────────────────────────────────
+// x64: 9 colors (RDI + R8-R15).  ARM64: 23 colors (13 caller-saved + 10 callee-saved).
+// V1 only uses callee-saved registers to avoid stale-color issues after
+// call instructions.  V2 adds caller-saved regs with post-call reload.
+#if defined(__aarch64__)
+// ARM64 available GPRs (23 registers):
+//   Caller-saved: X5-X17 (13 regs - excludes X0-X4 reserved, X18 platform)
+//   Callee-saved: X19-X28 (10 regs - excludes X29 FP, X30 LR, X31 SP)
+// Reserved: X0(scratchA), X1(scratchB), X2(scratchC), X3(argsBuf), X4(retBuf).
 // Color-to-physical mapping:
-//   Color 0 → RDI  (callee-saved)
-//   Color 1 → R8   (caller-saved)
-//   Color 2 → R9   (caller-saved)
-//   Color 3 → R10  (caller-saved)
-//   Color 4 → R11  (caller-saved)
-//   Color 5 → R12  (callee-saved)
-//   Color 6 → R13  (callee-saved)
-//   Color 7 → R14  (callee-saved)
-//   Color 8 → R15  (callee-saved)
-//
-// Callee-saved color set: {0, 5, 6, 7, 8}  (5 colors)
-// Caller-saved color set: {1, 2, 3, 4}      (4 colors)
+//   Color  0 -> X5   (caller)      Color 12 -> X17  (caller)
+//   Color  1 -> X6   (caller)      Color 13 -> X19  (callee)
+//   Color  2 -> X7   (caller)      Color 14 -> X20  (callee)
+//   Color  3 -> X8   (caller)      Color 15 -> X21  (callee)
+//   Color  4 -> X9   (caller)      Color 16 -> X22  (callee)
+//   Color  5 -> X10  (caller)      Color 17 -> X23  (callee)
+//   Color  6 -> X11  (caller)      Color 18 -> X24  (callee)
+//   Color  7 -> X12  (caller)      Color 19 -> X25  (callee)
+//   Color  8 -> X13  (caller)      Color 20 -> X26  (callee)
+//   Color  9 -> X14  (caller)      Color 21 -> X27  (callee)
+//   Color 10 -> X15  (caller)      Color 22 -> X28  (callee)
+//   Color 11 -> X16  (caller)
 static constexpr uint8_t kPhysicalGprs[] = {
-    7,   // RDI — callee-saved
-    8,   // R8  — caller-saved
-    9,   // R9  — caller-saved
-    10,  // R10 — caller-saved
-    11,  // R11 — caller-saved
-    12,  // R12 — callee-saved
-    13,  // R13 — callee-saved
-    14,  // R14 — callee-saved
-    15,  // R15 — callee-saved
+     5,  6,  7,  8,  9, 10, 11, 12, 13, 14, 15, 16, 17,  // caller: X5-X17
+    19, 20, 21, 22, 23, 24, 25, 26, 27, 28,               // callee: X19-X28
+};
+static constexpr uint32_t kNumColors = 23;
+static constexpr uint32_t kFirstCallerSavedColor = 0;
+static constexpr uint32_t kCallerSavedColorCount = 13;
+static constexpr uint32_t kFirstCalleeSavedColor = 13;
+static constexpr uint8_t kSpilled = 0xFF;
+
+inline bool IsCallerSavedColor(uint32_t color_idx) noexcept {
+    return color_idx < kFirstCalleeSavedColor;
+}
+inline bool IsCalleeSavedColor(uint32_t color_idx) noexcept {
+    return color_idx >= kFirstCalleeSavedColor && color_idx < kNumColors;
+}
+
+// ARM64 NEON: V0-V31 all available. V8-V15 callee-saved (lower 64 bits).
+static constexpr uint8_t kPhysicalVregs[] = {
+     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
+    16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
+};
+static constexpr uint32_t kNumVregColors = 32;
+static constexpr uint32_t kFirstCalleeSavedVregColor = 8;
+static constexpr uint32_t kCalleeSavedVregColorCount = 8;
+#else
+// x64 available GPRs (9 registers):
+// Win64: RDI, R12-R15 callee-saved. R8-R11 caller-saved.
+// RBX(3)=args_buf, RBP(5)=frame, RSI(6)=ret_buf reserved.
+// RAX(0)/RCX(1)/RDX(2) excluded - implicitly clobbered by Div/Mul/Shift.
+// Color-to-physical mapping:
+//   Color 0 -> RDI  (callee)      Color 5 -> R12  (callee)
+//   Color 1 -> R8   (caller)      Color 6 -> R13  (callee)
+//   Color 2 -> R9   (caller)      Color 7 -> R14  (callee)
+//   Color 3 -> R10  (caller)      Color 8 -> R15  (callee)
+//   Color 4 -> R11  (caller)
+static constexpr uint8_t kPhysicalGprs[] = {
+     7,   // RDI - callee-saved
+     8,   // R8  - caller-saved
+     9,   // R9  - caller-saved
+    10,   // R10 - caller-saved
+    11,   // R11 - caller-saved
+    12,   // R12 - callee-saved
+    13,   // R13 - callee-saved
+    14,   // R14 - callee-saved
+    15,   // R15 - callee-saved
 };
 static constexpr uint32_t kNumColors = 9;
-// Color 0 and colors 5-8 are callee-saved (RDI + R12-R15).
-// Colors 1-4 are caller-saved (R8-R11).
 static constexpr uint32_t kFirstCallerSavedColor = 1;
 static constexpr uint32_t kCallerSavedColorCount = 4;
-static constexpr uint8_t kSpilled  = 0xFF;
+static constexpr uint32_t kFirstCalleeSavedColor = 5;
+static constexpr uint8_t kSpilled = 0xFF;
 
-// Returns true if the color index maps to a caller-saved physical register.
 inline bool IsCallerSavedColor(uint32_t color_idx) noexcept {
     return color_idx >= kFirstCallerSavedColor &&
            color_idx < kFirstCallerSavedColor + kCallerSavedColorCount;
 }
-
-// Returns true if the color index maps to a callee-saved physical register.
 inline bool IsCalleeSavedColor(uint32_t color_idx) noexcept {
     return color_idx == 0 ||
            (color_idx >= kFirstCallerSavedColor + kCallerSavedColorCount &&
             color_idx < kNumColors);
 }
 
-// Available XMM registers for FPR allocation (16 registers).
-static constexpr uint8_t kPhysicalXmms[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
-static constexpr uint32_t kNumXmmColors = 16;
+// x64 XMM: 16 registers (XMM0-XMM15). XMM6-XMM15 callee-saved (Win64).
+static constexpr uint8_t kPhysicalVregs[] = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15};
+static constexpr uint32_t kNumVregColors = 16;
+static constexpr uint32_t kFirstCalleeSavedVregColor = 6;
+static constexpr uint32_t kCalleeSavedVregColorCount = 10;
+#endif
 
 // Max instructions for stack-allocated liveness arrays.
 static constexpr uint32_t kMaxStackInstrs = 2048;
@@ -511,8 +549,8 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
         }
     }
 
-    // ── Map to physical x64 registers ──────────────────────────────────────
-    uint8_t color_used[12] = {};
+    // ── Map to physical GPR registers ──────────────────────────────────────
+    uint8_t color_used[32] = {};
     for (uint32_t v = 0; v < 64; ++v) {
         if (color[v] != kSpilled && color[v] < kNumColors) {
             result.gpr_color[v] = kPhysicalGprs[color[v]];
@@ -619,12 +657,12 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
     while (fsp > 0) {
         --fsp;
         uint32_t fv = fpr_stack[fsp];
-        uint32_t available = (1U << kNumXmmColors) - 1;
+        uint32_t available = (1U << kNumVregColors) - 1;
         uint64_t nbits = fpr_adj[fv];
         while (nbits) {
             uint32_t nu = static_cast<uint32_t>(Ctz64(nbits));
             nbits &= nbits - 1;
-            if (fpr_color[nu] != 0xFF && fpr_color[nu] < kNumXmmColors) {
+            if (fpr_color[nu] != 0xFF && fpr_color[nu] < kNumVregColors) {
                 available &= ~(1U << fpr_color[nu]);
             }
         }
@@ -635,15 +673,15 @@ inline GraphColoringResult AllocateRegistersGraphColoring(
         }
     }
 
-    // Map to physical XMM registers.
-    uint8_t xmm_used[16] = {};
+    // Map to physical SIMD registers.
+    uint8_t xmm_used[32] = {};
     for (uint32_t fv = 0; fv < 32; ++fv) {
-        if (fpr_color[fv] != kSpilled && fpr_color[fv] < kNumXmmColors) {
-            result.fpr_color[fv] = kPhysicalXmms[fpr_color[fv]];
+        if (fpr_color[fv] != kSpilled && fpr_color[fv] < kNumVregColors) {
+            result.fpr_color[fv] = kPhysicalVregs[fpr_color[fv]];
             xmm_used[fpr_color[fv]] = 1;
         }
     }
-    for (uint32_t c = 0; c < kNumXmmColors; ++c) {
+    for (uint32_t c = 0; c < kNumVregColors; ++c) {
         if (xmm_used[c]) result.used_fpr_count++;
     }
 

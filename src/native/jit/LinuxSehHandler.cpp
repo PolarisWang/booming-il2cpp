@@ -401,7 +401,13 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
     // For hardware exceptions, use the instruction pointer from the context.
     void* code_addr = (sig == kManagedExceptionSignal)
         ? g_jit_throw_ret_addr
-        : reinterpret_cast<void*>(ctx->uc_mcontext.gregs[REG_RIP]);
+        : reinterpret_cast<void*>(
+#if defined(__aarch64__)
+            ctx->uc_mcontext.pc
+#else
+            ctx->uc_mcontext.gregs[REG_RIP]
+#endif
+        );
 
     if (code_addr == nullptr) return;
 
@@ -476,11 +482,19 @@ static void JitSignalHandler(int sig, siginfo_t* info, void* ucontext) noexcept 
     void* handler_addr = static_cast<uint8_t*>(nm->code) + target_handler_offset;
 
     // Modify the context to redirect execution to the handler.
+#if defined(__aarch64__)
+    ctx->uc_mcontext.pc = reinterpret_cast<unsigned long>(handler_addr);
+    if (sig == kManagedExceptionSignal && g_jit_frame_rsp != nullptr) {
+        ctx->uc_mcontext.sp = reinterpret_cast<unsigned long>(g_jit_frame_rsp);
+        ctx->uc_mcontext.regs[0] = reinterpret_cast<unsigned long>(g_jit_exception_obj);
+    }
+#else
     ctx->uc_mcontext.gregs[REG_RIP] = reinterpret_cast<greg_t>(handler_addr);
     if (sig == kManagedExceptionSignal && g_jit_frame_rsp != nullptr) {
         ctx->uc_mcontext.gregs[REG_RSP] = reinterpret_cast<greg_t>(g_jit_frame_rsp);
         ctx->uc_mcontext.gregs[REG_RCX] = reinterpret_cast<greg_t>(g_jit_exception_obj);
     }
+#endif
 
     // Clear TLS throw state.
     if (sig == kManagedExceptionSignal) {

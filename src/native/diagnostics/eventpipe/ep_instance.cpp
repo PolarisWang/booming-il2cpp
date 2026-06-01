@@ -28,7 +28,11 @@ bool EpInitialize() noexcept {
     bool already = false;
     std::call_once(g_init_flag, [&already]() {
         // Get current process ID for pipe name.
+#if defined(_WIN32)
         uint32_t pid = static_cast<uint32_t>(GetCurrentProcessId());
+#else
+        uint32_t pid = static_cast<uint32_t>(::getpid());
+#endif
 
         // Initialize transport (named pipe server).
         if (!EpTransportInitialize(pid)) {

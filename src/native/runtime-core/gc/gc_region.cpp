@@ -24,11 +24,7 @@
 #include "memory_domain.h"
 #include "thread_state.h"
 
-#if defined(_WIN32) || defined(_WIN64)
-    #include <windows.h>
-#else
-    #include <sys/mman.h>
-#endif
+#include <chaos/pal/pal_mem.h>
 
 #include <cstdlib>
 
@@ -37,27 +33,15 @@
 // On Windows: uses VirtualAlloc with MEM_LARGE_PAGES (requires
 // SeLockMemoryPrivilege).  On Linux: uses mmap with MAP_HUGETLB.
 // Both fall back gracefully — the callers in AllocateRegion check
-// for nullptr and fall through to normal VirtualAlloc/mmap.
+// for nullptr and fall through to normal PalVirtualAlloc.
 #if defined(CHAOS_IL2CPP_GC_LARGE_PAGES) && CHAOS_IL2CPP_GC_LARGE_PAGES == 1
 
 static CHAOS_IL2CPP_SIZE GcGetLargePageMinimum() noexcept {
-#if defined(_WIN32) || defined(_WIN64)
-    return ::GetLargePageMinimum();
-#else
-    return 2 * 1024 * 1024;  // 2 MB — typical huge page size on Linux
-#endif
+    return chaos::il2cpp::pal::PalGetLargePageSize();
 }
 
 static void* GcTryAllocLargePages(CHAOS_IL2CPP_SIZE alloc_size) noexcept {
-#if defined(_WIN32) || defined(_WIN64)
-    return ::VirtualAlloc(nullptr, alloc_size,
-                          MEM_RESERVE | MEM_COMMIT | MEM_LARGE_PAGES,
-                          PAGE_READWRITE);
-#else
-    void* mem = ::mmap(nullptr, alloc_size, PROT_READ | PROT_WRITE,
-                       MAP_PRIVATE | MAP_ANONYMOUS | MAP_HUGETLB, -1, 0);
-    return (mem == MAP_FAILED) ? nullptr : mem;
-#endif
+    return chaos::il2cpp::pal::PalVirtualAllocLarge(alloc_size);
 }
 
 #endif  // CHAOS_IL2CPP_GC_LARGE_PAGES == 1
@@ -91,15 +75,9 @@ static Region* s_poh_current = nullptr;  // current POH bump region
 static std::mutex s_poh_mutex;
 
 // Platform virtual memory helpers for region recycling.
-#if defined(_WIN32) || defined(_WIN64)
 static void VirtualFreeRegion(void* ptr, CHAOS_IL2CPP_SIZE size) {
-    if (ptr) VirtualFree(ptr, 0, MEM_RELEASE);
+    if (ptr) chaos::il2cpp::pal::PalVirtualFree(ptr, size);
 }
-#else
-static void VirtualFreeRegion(void* ptr, CHAOS_IL2CPP_SIZE size) {
-    if (ptr) munmap(ptr, size);
-}
-#endif
 
 // ======================================================================
 // NurseryAllocateSlow
@@ -757,12 +735,7 @@ Region* RegionManager::AllocateRegion(RegionKind kind, CHAOS_IL2CPP_SIZE min_siz
         if (mem == nullptr)  // fallback to normal pages
 #endif
         {
-#if defined(_WIN32) || defined(_WIN64)
-            mem = VirtualAlloc(nullptr, alloc_size, MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
-#else
-            mem = mmap(nullptr, alloc_size, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-            if (mem == MAP_FAILED) mem = nullptr;
-#endif
+            mem = chaos::il2cpp::pal::PalVirtualAlloc(alloc_size);
         }
     }
     if (mem == nullptr) return nullptr;

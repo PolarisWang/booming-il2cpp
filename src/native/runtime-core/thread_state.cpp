@@ -3,6 +3,8 @@
 #include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
+#include <chaos/pal/pal_sync.h>
+#include <chaos/pal/pal_thread.h>
 
 #include "gc_region.h"
 #include "gc_root_scanner.h"
@@ -18,6 +20,8 @@
     #include <intrin.h>
 #else
     #include <pthread.h>
+    #include <signal.h>
+    #include <sys/resource.h>
 #endif
 
 #include "../jit/jit_seh.h"    // FindNativeCodeByAddress for hybrid GC scanning
@@ -31,12 +35,16 @@
 #include <cerrno>
 #include <chrono>
 #include <cstring>
-#if !defined(_WIN32) && !defined(_WIN64) && !defined(__APPLE__)
-#include <signal.h>
-#include <sys/resource.h>
-#endif
 
 namespace chaos::il2cpp::runtime_core::threading {
+
+using chaos::il2cpp::pal::PalEvent;
+using chaos::il2cpp::pal::PalEventCreate;
+using chaos::il2cpp::pal::PalEventDestroy;
+using chaos::il2cpp::pal::PalEventSet;
+using chaos::il2cpp::pal::PalEventWait;
+using chaos::il2cpp::pal::PalGetCurrentThreadId;
+using chaos::il2cpp::pal::PalGetStackBounds;
 
 // ── T4 frame layout constant (mirrors code_generator.cpp kFrameSize) ─
 // The T4 native prologue establishes:
@@ -107,52 +115,23 @@ void RegisterThread(int32_t managed_id, void* managed_obj) noexcept {
     thread->is_running     = true;
     SetThreadState(*thread, ManagedThreadState::Running);
 
-#if defined(_WIN32) || defined(_WIN64)
-    // Set default OS thread priority to THREAD_PRIORITY_NORMAL.
-    ::SetThreadPriority(::GetCurrentThread(), THREAD_PRIORITY_NORMAL);
-
     // Create auto-reset event for safepoint wait (initially non-signaled).
-    thread->suspend_event = ::CreateEventA(nullptr, FALSE, FALSE, nullptr);
+    thread->suspend_event = PalEventCreate(false, false);
 
-    // Store OS thread handle for APC-based safepoint fallback.
-    // Duplicate to get a handle with THREAD_SET_CONTEXT access.
+    // Store OS thread ID for signal-based preemptive suspend (Linux).
+    thread->os_thread_id = PalGetCurrentThreadId();
+
+#if defined(_WIN32) || defined(_WIN64)
+    // Duplicate OS thread handle for APC-based safepoint fallback.
     HANDLE hProcess = ::GetCurrentProcess();
     HANDLE hThread  = ::GetCurrentThread();
     ::DuplicateHandle(hProcess, hThread, hProcess, &hThread,
                       THREAD_SET_CONTEXT, FALSE, 0);
     thread->os_handle = hThread;
-#else
-    // POSIX: allocate and initialize a condition variable + mutex for safepoint wait.
-    auto* cv = new pthread_cond_t;
-    pthread_cond_init(cv, nullptr);
-    thread->suspend_event = cv;
-    auto* mtx = new pthread_mutex_t;
-    pthread_mutex_init(mtx, nullptr);
-    thread->suspend_mutex = mtx;
-#if !defined(__APPLE__)
-    thread->os_thread_id = pthread_self();
-#endif
 #endif
 
     // Capture stack bounds for conservative root scanning during full GC.
-    // Using stack-based address heuristics: the address of a local variable
-    // tells us the current stack pointer, and we estimate the base from
-    // platform APIs.  On Windows, we use the NT_TIB.
-#if defined(_WIN32) || defined(_WIN64)
-    NT_TIB* tib = (NT_TIB*)__readgsqword(0x30);
-    thread->stack_base   = tib->StackBase;
-    thread->stack_limit  = tib->StackLimit;
-#else
-    // POSIX: use pthread_getattr_np / pthread_attr_getstack.
-    pthread_attr_t attr;
-    void* stack_addr;
-    size_t stack_size;
-    pthread_getattr_np(pthread_self(), &attr);
-    pthread_attr_getstack(&attr, &stack_addr, &stack_size);
-    pthread_attr_destroy(&attr);
-    thread->stack_base   = static_cast<char*>(stack_addr) + stack_size;
-    thread->stack_limit  = stack_addr;
-#endif
+    PalGetStackBounds(thread->stack_base, thread->stack_limit);
 
     // Publish to TLS for O(1) self-lookup.
     tls_this_thread    = thread;
@@ -184,30 +163,11 @@ void UnregisterThread() noexcept {
     // safely query the current thread.  The entry is leaked intentionally
     // (lives for process lifetime like most runtime-instantiated metadata).
 
-    // Close the safepoint event handle and the OS thread handle.
-#if defined(_WIN32) || defined(_WIN64)
+    // Close the safepoint event handle.
     if (thread->suspend_event != nullptr) {
-        ::CloseHandle(thread->suspend_event);
+        PalEventDestroy(thread->suspend_event);
         thread->suspend_event = nullptr;
     }
-    if (thread->os_handle != nullptr) {
-        ::CloseHandle(thread->os_handle);
-        thread->os_handle = nullptr;
-    }
-#else
-    if (thread->suspend_event != nullptr) {
-        auto* cv = static_cast<pthread_cond_t*>(thread->suspend_event);
-        pthread_cond_destroy(cv);
-        delete cv;
-        thread->suspend_event = nullptr;
-    }
-    if (thread->suspend_mutex != nullptr) {
-        auto* mtx = static_cast<pthread_mutex_t*>(thread->suspend_mutex);
-        pthread_mutex_destroy(mtx);
-        delete mtx;
-        thread->suspend_mutex = nullptr;
-    }
-#endif
 
     // Server GC: clear heap binding before TLS clear.
     ClearThreadHeap();
@@ -343,37 +303,14 @@ void SafepointPoll() noexcept {
 
     // Cooperative mode: wait on event (zero CPU, infinite wait).
     // ReleaseGlobalSafepoint will set the event when all threads are done.
-#if defined(_WIN32) || defined(_WIN64)
     if (thread->suspend_event != nullptr) {
-        ::WaitForSingleObject(thread->suspend_event, INFINITE);
+        PalEventWait(thread->suspend_event, UINT64_MAX);
     } else {
         // Fallback: spin if event not available.
         while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
-            _mm_pause();
+            CHAOS_IL2CPP_PAUSE_HINT();
         }
     }
-#else
-    // POSIX: wait on condition variable (zero CPU, woken by ReleaseGlobalSafepoint
-    // which broadcasts on all threads' suspend_event condvars after clearing
-    // suspend_seq).  Without this, the thread would spin-yield and burn CPU
-    // during every GC pause.
-    if (thread->suspend_event != nullptr && thread->suspend_mutex != nullptr) {
-        auto* cv = static_cast<pthread_cond_t*>(thread->suspend_event);
-        auto* mtx = static_cast<pthread_mutex_t*>(thread->suspend_mutex);
-        pthread_mutex_lock(mtx);
-        // Re-check suspend_seq under mutex: ReleaseGlobalSafepoint may have
-        // cleared it and broadcast between the check above and the lock.
-        while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
-            pthread_cond_wait(cv, mtx);
-        }
-        pthread_mutex_unlock(mtx);
-    } else {
-        // Fallback: spin if event not available.
-        while (thread->suspend_seq.load(std::memory_order_acquire) != 0) {
-            sched_yield();
-        }
-    }
-#endif
 }
 
 void EnterCooperativeMode() noexcept {
@@ -392,7 +329,7 @@ void EnterPreemptiveMode() noexcept {
     thread->gc_mode.store(kGcModePreemptive, std::memory_order_release);
 }
 
-#if !defined(_WIN32) && !defined(_WIN64) && !defined(__APPLE__)
+#if !defined(_WIN32) && !defined(_WIN64) && !defined(__APPLE__) && !defined(__ANDROID__)
 /// Signal handler for SIGUSR1: preemptive safepoint suspend.
 /// Runs in the target thread's context. Uses spin-wait because
 /// pthread_cond_wait is not async-signal-safe.
@@ -434,7 +371,7 @@ static void __stdcall SuspendApf(ULONG_PTR param) {
     uint32_t epoch = static_cast<uint32_t>(param);
     thread->suspend_ack.store(epoch, std::memory_order_release);
     if (thread->suspend_event != nullptr) {
-        ::WaitForSingleObject(thread->suspend_event, INFINITE);
+        PalEventWait(thread->suspend_event, UINT64_MAX);
     }
 }
 #endif
@@ -633,16 +570,9 @@ extern "C" void ReleaseGlobalSafepoint(uint32_t /*epoch*/) noexcept {
     // Clear suspend_seq for all threads and signal their events.
     EnumerateThreads([](ManagedThread* t) -> bool {
         t->suspend_seq.store(0, std::memory_order_release);
-#if defined(_WIN32) || defined(_WIN64)
         if (t->suspend_event != nullptr) {
-            ::SetEvent(t->suspend_event);
+            PalEventSet(t->suspend_event);
         }
-#else
-        if (t->suspend_event != nullptr && t->suspend_mutex != nullptr) {
-            auto* cv = static_cast<pthread_cond_t*>(t->suspend_event);
-            pthread_cond_broadcast(cv);
-        }
-#endif
         // Resume preemptively suspended threads.
         if (t->preemptive_suspended.load(std::memory_order_acquire)) {
             t->preemptive_suspended.store(false, std::memory_order_release);

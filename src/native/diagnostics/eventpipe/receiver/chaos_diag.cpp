@@ -1,8 +1,8 @@
 // chaos_diag.cpp — EventPipe diagnostic receiver CLI
 //
-// Connects to a running Chaos IL2CPP runtime process via named pipe and
-// receives diagnostic events in real-time.  Outputs events as JSON Lines
-// to stdout or a file.
+// Connects to a running Chaos IL2CPP runtime process via named pipe (Windows)
+// or Unix domain socket (Linux) and receives diagnostic events in real-time.
+// Outputs events as JSON Lines to stdout or a file.
 //
 // Usage:
 //   chaos-diag --pid <pid> [--filter GC|TP|EXC] [--output <file>]
@@ -10,7 +10,7 @@
 // Examples:
 //   chaos-diag --pid 1234
 //   chaos-diag --pid 1234 --filter GC --output gc_events.jsonl
-//   chaos-diag --pid 1234 2>nul | python analyze.py
+//   chaos-diag --pid 1234 2>/dev/null | python analyze.py
 
 #include <cstdint>
 #include <cstdio>
@@ -19,17 +19,23 @@
 #include <string>
 #include <vector>
 
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
+#if defined(_WIN32)
+    #ifndef WIN32_LEAN_AND_MEAN
+        #define WIN32_LEAN_AND_MEAN
+    #endif
+    #ifndef _WIN32_WINNT
+        #define _WIN32_WINNT 0x0601
+    #endif
+    #include <windows.h>
+#else
+    #include <cerrno>
+    #include <poll.h>
+    #include <sys/socket.h>
+    #include <sys/un.h>
+    #include <unistd.h>
 #endif
-#ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0601
-#endif
-#include <windows.h>
 
 #include "ep_receiver.h"
-
-// ── CLI state ───────────────────────────────────────────────────────────
 
 // ── Helpers ─────────────────────────────────────────────────────────────
 
@@ -138,6 +144,8 @@ void WriteJsonEvent(FILE* out, const EpEventHeader& header,
 // ── Main ────────────────────────────────────────────────────────────────
 
 #ifndef CHAOS_DIAG_UNIT_TEST
+
+#if defined(_WIN32)
 
 int main(int argc, char** argv) {
     DiagConfig config;
@@ -282,5 +290,133 @@ int main(int argc, char** argv) {
 
     return 0;
 }
+
+#else  // Linux
+
+static bool ReadExact(int fd, uint8_t* buf, size_t size) noexcept {
+    while (size > 0) {
+        struct pollfd pfd;
+        pfd.fd = fd;
+        pfd.events = POLLIN;
+        int ret = ::poll(&pfd, 1, 5000);
+        if (ret <= 0) {
+            if (ret == 0) continue;  // timeout, retry
+            return false;  // error
+        }
+        ssize_t n = ::read(fd, buf, size);
+        if (n <= 0) return false;
+        buf += n;
+        size -= static_cast<size_t>(n);
+    }
+    return true;
+}
+
+int main(int argc, char** argv) {
+    DiagConfig config;
+    if (!ParseArgs(argc, argv, config)) {
+        return 1;
+    }
+
+    // Build socket path.
+    char pipe_path[128];
+    ::snprintf(pipe_path, sizeof(pipe_path),
+               "/tmp/chaos-il2cpp-diag-%u.sock", config.pid);
+
+    fprintf(stderr, "Connecting to %s ...\n", pipe_path);
+
+    // Open Unix domain socket (client side).
+    int fd = ::socket(AF_UNIX, SOCK_STREAM, 0);
+    if (fd < 0) {
+        fprintf(stderr, "Error: Cannot create socket.\n");
+        return 1;
+    }
+
+    struct sockaddr_un addr;
+    std::memset(&addr, 0, sizeof(addr));
+    addr.sun_family = AF_UNIX;
+    std::strncpy(addr.sun_path, pipe_path, sizeof(addr.sun_path) - 1);
+
+    if (::connect(fd, reinterpret_cast<struct sockaddr*>(&addr), sizeof(addr)) < 0) {
+        fprintf(stderr, "Error: Cannot connect to socket. "
+                        "Is the target process running with EventPipe enabled?\n");
+        ::close(fd);
+        return 1;
+    }
+
+    fprintf(stderr, "Connected. Receiving events... (Ctrl+C to stop)\n");
+
+    // Open output file if requested.
+    FILE* out = stdout;
+    if (config.output_to_file) {
+        out = fopen(config.output_path.c_str(), "w");
+        if (!out) {
+            fprintf(stderr, "Error: Cannot open output file %s\n", config.output_path.c_str());
+            ::close(fd);
+            return 1;
+        }
+    }
+
+    // Read loop.
+    uint8_t read_buf[sizeof(EpEventHeader) + 1024 + sizeof(uint32_t)];
+    bool running = true;
+    uint64_t event_count = 0;
+
+    while (running) {
+        // Read header (24 bytes).
+        if (!ReadExact(fd, read_buf, sizeof(EpEventHeader))) {
+            fprintf(stderr, "\nSocket closed (runtime exited or disconnected).\n");
+            break;
+        }
+
+        // Parse header.
+        EpEventHeader header;
+        std::memcpy(&header, read_buf, sizeof(EpEventHeader));
+
+        // Validate magic.
+        if (header.magic != kEpMagic) {
+            fprintf(stderr, "Bad magic: 0x%08x (expected 0x%08x)\n",
+                    header.magic, kEpMagic);
+            continue;
+        }
+
+        // Check filter.
+        if (!IsEventTypeCategory(header.event_type, config)) {
+            // Skip payload.
+            if (header.payload_size > 0) {
+                ReadExact(fd, read_buf,
+                          header.payload_size + sizeof(uint32_t));
+            }
+            continue;
+        }
+
+        // Read payload + checksum.
+        uint32_t remaining = header.payload_size + sizeof(uint32_t);
+        if (remaining > 0 && remaining <= sizeof(read_buf)) {
+            if (!ReadExact(fd, read_buf, remaining)) {
+                break;
+            }
+        }
+
+        // Write JSON line.
+        WriteJsonEvent(out, header, read_buf, header.payload_size);
+        event_count++;
+
+        // Periodic status to stderr.
+        if (event_count % 100 == 0) {
+            fprintf(stderr, "\rReceived %llu events...", (unsigned long long)event_count);
+        }
+    }
+
+    fprintf(stderr, "\nTotal events received: %llu\n", (unsigned long long)event_count);
+
+    ::close(fd);
+    if (config.output_to_file && out != stdout) {
+        fclose(out);
+    }
+
+    return 0;
+}
+
+#endif  // _WIN32
 
 #endif  // CHAOS_DIAG_UNIT_TEST
