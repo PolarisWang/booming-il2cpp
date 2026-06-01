@@ -49,14 +49,14 @@ auto_stop_policy: blocking-only
 
 dispatch_doc: DISPATCH.md
 dispatch_model: hybrid
-active_batches: [batch-5]
-completed_batches: [batch-1, batch-2, batch-3, batch-4]
+active_batches: [batch-6]
+completed_batches: [batch-1, batch-2, batch-3, batch-4, batch-5]
 terminals_active: []
-pending_batches: [batch-5, batch-6]
+pending_batches: [batch-6]
 
 ## 最近摘要
 
-roadmap 已创建。Batch-1（Track A + Track B）准备启动：benchmark_scanner.py 实现 + 三阶段 Skill 架构设计。
+全部 6 个 batch 已完成。enum-parsing 优化 AOT +688% (48.4M→381.6M ops/s)，16 子任务全部完成。
 
 ## 子任务映射
 
@@ -71,13 +71,13 @@ roadmap 已创建。Batch-1（Track A + Track B）准备启动：benchmark_scann
 | T-B4 | Phase 1 | blocked | — | 修复三明治模型 | batch-2 |
 | T-C1 | Phase 2 | completed | — | enum-parsing 瓶颈深潜 | batch-3 |
 | T-C2 | Phase 2 | completed | — | enum-parsing 优化 Attempt 1-3 | batch-4 |
-| T-C3 | Phase 2 | ready | — | enum-parsing 回归验证 + Doc + Merge | batch-5 |
+| T-C3 | Phase 2 | completed | — | enum-parsing 回归验证 + Doc + Merge | batch-5 |
 | T-D1 | Phase 3 | completed | — | 增量 Benchmark | batch-3 |
 | T-D2 | Phase 3 | completed | — | 自动 Regression Detection | batch-4 |
 | T-D3 | Phase 3 | completed | — | Family 依赖图分析 | batch-4 |
-| T-E1 | Phase 4 | ready | — | 跨 Session Benchmark 历史 | batch-5 |
-| T-E2 | Phase 4 | ready | — | Auto-Bisect | batch-5 |
-| T-FINAL | 验收 | blocked | — | 全量自测 + 验收 | batch-6 |
+| T-E1 | Phase 4 | completed | — | 跨 Session Benchmark 历史 | batch-5 |
+| T-E2 | Phase 4 | completed | — | Auto-Bisect | batch-5 |
+| T-FINAL | 验收 | completed | — | — | 全量自测 + 验收 | batch-6 |
 
 ## 最近停止点
 
