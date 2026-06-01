@@ -27,8 +27,11 @@ extern "C" int32_t GetHotpatchEntryCount() noexcept;
 {{ if is_jit }}
 extern "C" void (*kDefaultArgThunks[])() noexcept;
 #define CHAOS_DISPATCH_THUNKS kDefaultArgThunks
+// Benchmark: use original AOT direct_ptr, bypass indirect thunks overhead
+#define CHAOS_BENCHMARK_THUNKS nullptr
 {{ else }}
 #define CHAOS_DISPATCH_THUNKS nullptr
+#define CHAOS_BENCHMARK_THUNKS nullptr
 {{ end }}
 
 // ── RunFactAll: dispatch ALL methods across ALL registered modules ────
@@ -69,7 +72,7 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     auto* entries = GetHotpatchEntries();
     // Warmup (may throw managed exception — caught via C++ EH)
     try {
-        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_DISPATCH_THUNKS);
+        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_BENCHMARK_THUNKS);
     } catch(...) {
         return {-1.0, 0, true};
     }
@@ -80,7 +83,7 @@ extern "C" BenchmarkResult RunBenchmark(int entry_index, int iterations) {
     auto start = std::chrono::steady_clock::now();
     try {
         for (int i = 0; i < iterations; i++) {
-            ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_DISPATCH_THUNKS);
+            ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_BENCHMARK_THUNKS);
         }
     } catch(...) {
         chaos_gc_leave_no_gc_region();
@@ -127,7 +130,7 @@ extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations)
     auto* entries = GetHotpatchEntries();
     // Warmup (may throw managed exception — caught via C++ EH)
     try {
-        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_DISPATCH_THUNKS);
+        ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_BENCHMARK_THUNKS);
     } catch(...) {
         return {-1.0, 0, true};
     }
@@ -137,7 +140,7 @@ extern "C" BenchmarkResult RunHotpatchBenchmark(int entry_index, int iterations)
     auto start = std::chrono::steady_clock::now();
     try {
         for (int i = 0; i < iterations; i++) {
-            ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_DISPATCH_THUNKS);
+            ChaosDispatchMethod(entries, kAotMethodCount, entry_index, CHAOS_BENCHMARK_THUNKS);
         }
     } catch(...) {
         chaos_gc_leave_no_gc_region();
