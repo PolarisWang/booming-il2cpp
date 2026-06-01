@@ -1499,7 +1499,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                     case "call":
                     case "callvirt":
-                        TryRecordEnumAotBake(instr, instrs, producers, depth, enumFieldsByType, methodId);
+                        TryRecordEnumAotBake(instr, i, instrs, producers, depth, enumFieldsByType, methodId);
                         // Conservative: pop N args (determined by callee), push 1 result
                         int popCount = EstimateCallPopCount(instr, depth);
                         if (depth >= popCount)
@@ -1585,6 +1585,7 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private void TryRecordEnumAotBake(
         AotCoreIrInstructionArtifact callInstr,
+        int callIndex,
         IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
         int[] producers,
         int depth,
@@ -1662,8 +1663,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (fieldName != null)
             {
+                var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                    enumTypeId, callee, ConstantStr: fieldName, ConstantInt: null, ArgCount: 2);
+                    enumTypeId, callee, ConstantStr: fieldName, ConstantInt: null, ArgCount: 2, SkipIlOffsets: skipOffsets);
+                PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
             }
             return;
         }
@@ -1697,8 +1700,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (constValue != null)
             {
+                var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount);
+                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount, SkipIlOffsets: skipOffsets);
+                PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
             }
             return;
         }
@@ -1734,8 +1739,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (constValue != null)
             {
+                var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount);
+                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount, SkipIlOffsets: skipOffsets);
+                PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
             }
             return;
         }
@@ -1775,8 +1782,10 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (result != null)
             {
+                var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                    enumTypeId, callee, ConstantStr: result, ConstantInt: null, ArgCount: 3);
+                    enumTypeId, callee, ConstantStr: result, ConstantInt: null, ArgCount: 3, SkipIlOffsets: skipOffsets);
+                PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
             }
             return;
         }
@@ -1790,9 +1799,47 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 if (kv.Value == constValue) { defined = true; break; }
             }
+            var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
             _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                enumTypeId, callee, ConstantStr: null, ConstantInt: defined ? 1L : 0L, ArgCount: 2);
+                enumTypeId, callee, ConstantStr: null, ConstantInt: defined ? 1L : 0L, ArgCount: 2, SkipIlOffsets: skipOffsets);
+            PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
         }
+    }
+
+    /// <summary>
+    /// Collect IlOffsets of instructions between <paramref name="typeProducerIdx"/>
+    /// and <paramref name="callIndex"/> that can be eliminated (DCE'd) when the
+    /// enum call is AOT-baked. These include the ldtoken, GetTypeFromHandle,
+    /// box, and the constant value producer.
+    /// </summary>
+    private static int[] CollectEnumAotBakeSkipOffsets(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
+        int typeProducerIdx,
+        int valueProducerIdx,
+        int callIndex)
+    {
+        var offsets = new List<int>(callIndex - typeProducerIdx);
+        for (int i = typeProducerIdx; i < callIndex; i++)
+        {
+            offsets.Add(instrs[i].IlOffset);
+        }
+        return offsets.ToArray();
+    }
+
+    /// <summary>
+    /// Populate <see cref="_enumAotBakeSkipIlOffsets"/> with the given skip
+    /// offsets for the given method, enabling DCE in <see cref="EmitInstruction"/>.
+    /// </summary>
+    private void PopulateEnumAotBakeSkipIlOffsets(string? methodId, int[] skipOffsets)
+    {
+        if (methodId == null || skipOffsets.Length == 0) return;
+        if (!_enumAotBakeSkipIlOffsets.TryGetValue(methodId, out var set))
+        {
+            set = new HashSet<int>();
+            _enumAotBakeSkipIlOffsets[methodId] = set;
+        }
+        foreach (var offset in skipOffsets)
+            set.Add(offset);
     }
 
     // ── A2.6: TypeInfo* direct API pre-scan ─────────────────────────────

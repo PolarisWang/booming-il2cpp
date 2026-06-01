@@ -1,8 +1,8 @@
 ---
 parent_task_id: 20260530-optimization-campaign-reboot
 source_task_id: T-B3
-lifecycle_status: active
-phase: executing
+lifecycle_status: completed
+phase: completed
 blocking_questions: []
 question_clearance: cleared
 clearance_confirmed_by_user: true
@@ -66,3 +66,31 @@ entry_skill: dev-writing-plans
 - 预期收益 < 20% 的 family 正确标记
 
 ## 终端备注
+
+T-B3 ROI 预估门禁已实现并验证通过。
+
+### 修改文件
+- `testing/foundation-dll/verification/stages/pre_verification_audit.py` — 新增 `--estimate-roi` 参数及其完整支持功能
+
+### 新增功能
+1. `_safe_float()` — 安全 float 转换辅助函数
+2. `_find_summary_by_runtime()` — 从 multi-run-report.json 中按 runtime 定位 summary
+3. `estimate_roi()` — ROI 估算核心函数：加载 benchmark 数据、逐方法分析三率（dispatch_ratio / alloc_ratio / metadata_ratio）、瓶颈分类、收益估算、门禁判定
+4. `_write_optimization_opportunity()` — 输出 optimization-opportunity.md 到 family 目录
+5. `_print_roi_human_readable()` — 人类可读的 ROI 摘要输出
+
+### 验证结果
+- `enum-parsing` → WARN (metadata-bound, 75% methods, 保守 10% < 20% threshold) — 正确识别 metadata 瓶颈
+- `dispatch-basic` → WARN (default metadata-bound, 所有指标 0%, chaos-aot = 2.23ns 已极快) — 正确识别"无需优化"
+- `--json` 模式输出完整 JSON 报告 — 可用
+- optimization-opportunity.md 在两个 family 目录均正确生成
+
+### 瓶颈分类逻辑
+- **dispatch-bound**: chaos-aot.mean_ns / chaos-jit.mean_ns > 1.5
+- **alloc-bound**: stub_count + throws_count > 20%
+- **metadata-bound**: chaos-aot.mean_ns / net8-jit.mean_ns > 3.0
+- **mixed**: 多项同时命中则加权平均
+
+### 门禁阈值
+- 保守收益 >= 20% → PASS (exit 0)
+- 保守收益 < 20% → WARN (exit 1)

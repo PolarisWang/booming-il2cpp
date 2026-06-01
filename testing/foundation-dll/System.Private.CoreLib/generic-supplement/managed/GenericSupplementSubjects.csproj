@@ -17,7 +17,7 @@
     <Compile Include="subjects/GenericSupplementNativeEntry.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+    <PackageReference Include="Chaos.TestFramework.Sdk" Version="0.1.0" />
     <ProjectReference Include="../../../../../src/managed/Chaos.IL2CPP.HotUpdate/Chaos.IL2CPP.HotUpdate.csproj" />
   </ItemGroup>
   <ItemGroup>

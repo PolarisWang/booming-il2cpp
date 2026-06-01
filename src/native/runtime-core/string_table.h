@@ -22,9 +22,27 @@ struct StringEntry {
     CHAOS_IL2CPP_UINT32 byte_count;
 };
 
+// TLS resolve cache — exposed for fast-path inlining.
+// ResolveFast() checks this inline; Resolve() updates it on cache miss.
+struct ResolveCacheEntry {
+    StringId id;
+    StringView view;
+};
+
+extern thread_local ResolveCacheEntry g_tls_resolve_cache;
+
 void InitializeFromAot(const StringEntry* entries, CHAOS_IL2CPP_UINT32 count);
 
 StringView Resolve(StringId id);
+
+/// Fast path: check TLS cache inline, fall back to full Resolve on miss.
+/// Defined after Resolve() declaration so the compiler can resolve the call.
+inline StringView ResolveFast(StringId id) noexcept
+{
+    if (id == g_tls_resolve_cache.id)
+        return g_tls_resolve_cache.view;
+    return Resolve(id);
+}
 
 StringId Register(const char* utf8_data, CHAOS_IL2CPP_UINT32 byte_count, CHAOS_IL2CPP_UINT32 domain_id = 0u);
 

@@ -489,7 +489,7 @@ def rollback_if_needed(
     print(f"[sandwich_fix_loop] Rolling back: {reason}")
 
     # Execute git revert HEAD
-    reverted_commit = _git_revert_head()
+    reverted_commit = _git_revert_head(hypothesis_id=hypothesis_id)
 
     # Save failure record
     now = _now_iso()
@@ -521,18 +521,59 @@ def rollback_if_needed(
     }
 
 
-def _git_revert_head() -> str | None:
-    """Execute git revert HEAD --no-edit and return the new commit hash."""
+def _git_revert_head(hypothesis_id: str | None = None) -> str | None:
+    """Execute git revert HEAD --no-edit and return the original HEAD hash.
+
+    Performs safety checks:
+      1. Working tree must be clean (no unstaged modifications).
+      2. If hypothesis_id provided, HEAD commit message should reference it
+         or the slug (logged as a warning, not a blocker).
+
+    Returns the original HEAD commit hash on success, None on failure.
+    """
     try:
+        # Check working tree cleanliness
         result = subprocess.run(
-            ["git", "log", "-1", "--format=%H"],
+            ["git", "status", "--porcelain"],
             capture_output=True,
             text=True,
             cwd=str(_PROJECT_ROOT),
-            timeout=30,
+            timeout=15,
         )
-        original_head = result.stdout.strip()
+        if result.stdout.strip():
+            # There are unstaged or untracked files
+            lines = result.stdout.strip().splitlines()
+            unstaged = [l for l in lines if not l.startswith("?? ")]
+            if unstaged:
+                print(
+                    "[sandwich_fix_loop] WARNING: Working tree has uncommitted changes."
+                    " git revert may fail or produce unexpected results."
+                )
+                for line in unstaged[:10]:
+                    print(f"  {line}")
 
+        # Get HEAD info
+        result = subprocess.run(
+            ["git", "log", "-1", "--format=%H%n%s"],
+            capture_output=True,
+            text=True,
+            cwd=str(_PROJECT_ROOT),
+            timeout=15,
+        )
+        head_info = result.stdout.strip().splitlines()
+        original_head = head_info[0] if head_info else ""
+        head_subject = head_info[1] if len(head_info) > 1 else ""
+
+        if hypothesis_id:
+            slug_part = hypothesis_id.rsplit("-", 1)[0]
+            if slug_part and slug_part not in head_subject.lower():
+                print(
+                    f"[sandwich_fix_loop] WARNING: HEAD commit subject does not mention "
+                    f"'{slug_part}'. HEAD='{head_subject}'. "
+                    f"Proceeding with revert anyway."
+                )
+
+        # Execute revert
         result = subprocess.run(
             ["git", "revert", "HEAD", "--no-edit"],
             capture_output=True,
@@ -542,10 +583,12 @@ def _git_revert_head() -> str | None:
         )
 
         if result.returncode != 0:
-            print(f"[sandwich_fix_loop] git revert failed: {result.stderr}")
+            print(f"[sandwich_fix_loop] git revert failed: {result.stderr.strip()}")
             return None
 
-        return original_head
+        if original_head:
+            print(f"[sandwich_fix_loop] Reverted {original_head[:12]} ({head_subject})")
+        return original_head or None
 
     except subprocess.TimeoutExpired:
         print("[sandwich_fix_loop] git revert timed out")
