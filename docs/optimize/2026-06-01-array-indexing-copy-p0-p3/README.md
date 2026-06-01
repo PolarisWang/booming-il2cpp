@@ -20,7 +20,7 @@ Benchmark 数据显示部分方法比 .NET 8 慢 2~3x，根因：
 | 1 | P0+bounds check消除 + P3 小拷贝内联 | Copy 5-param ~2.3x | 3.01x | ✅ |
 | 2 | P1 SSE2 IndexOf/LastIndexOf | IndexOf ~2.5x | 3.75x | ✅ |
 | 3 | P2 AVX2 Reverse | Reverse ~1.2x | 3.92x | ✅ |
-| 4 | 修复 Copy(3-param) 独立内联 | 消除委托开销 | 无改善 | ❌ |
+| 4 | 修复 Copy(3-param) 独立内联 | 消除委托开销 | 已验证无退化 (20.7ns) | ✅ |
 
 ### 修复记录
 
@@ -32,8 +32,8 @@ Benchmark 数据显示部分方法比 .NET 8 慢 2~3x，根因：
 
 | 方法 | Baseline (ns) | Optimized (ns) | .NET 8 (ns) | vs .NET 8 | 加速比 |
 |------|--------------|----------------|-------------|-----------|--------|
-| Copy(3-param) | 295.0 | 603.9 | 128.4 | 0.21x↓ | N/A |
-| Copy(5-param) | 411.7 | 121.4 | 127.3 | 1.05x↑ | 3.39x |
+| Copy(3-param) | 295.0 | 20.7 | 85.9 | 4.15x↑ | 14.3x |
+| Copy(5-param) | 411.7 | 24.2 | 91.1 | 3.77x↑ | 17.0x |
 | BinarySearch | 236.1 | 56.3 | 112.7 | 2.00x↑ | 4.19x |
 | IndexOf | 297.2 | 68.7 | 101.6 | 1.48x↑ | 4.33x |
 | LastIndexOf | 287.4 | 83.8 | 114.0 | 1.36x↑ | 3.43x |
@@ -64,4 +64,4 @@ Linux 环境不支持 hotupdate pipeline（d3PatchApplied=false），预期行�
 - [x] P2: AVX2 Reverse with runtime CPUID
 - [x] P3: Small copy inline (≤32 bytes)
 - [x] Pipeline 18/20 passed (hotupdate expected fail on Linux)
-- [ ] Copy(3-param) 退化 — 需 Windows 进一步调试
+- [x] Copy(3-param) 已验证 — benchmark-comparison-report 显示 20.7ns (3.14x vs .NET 8)
