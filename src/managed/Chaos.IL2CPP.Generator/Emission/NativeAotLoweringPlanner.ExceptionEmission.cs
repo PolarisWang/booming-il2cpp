@@ -715,6 +715,14 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return;
 		}
+		// A2.6 DCE: Skip dead instructions when enum AOT bake fires.
+		if (_enumAotBakeSkipIlOffsets.Count > 0 &&
+		    _currentMethodNativeSymbol != null &&
+		    _enumAotBakeSkipIlOffsets.TryGetValue(_currentMethodNativeSymbol, out var enumSkipOffsets) &&
+		    enumSkipOffsets.Contains(instruction.IlOffset))
+		{
+			return;
+		}
 
 		switch (instruction.Op)
 		{
@@ -3839,11 +3847,45 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			}
 
 		string rawValueExpr = ConsumeEvalStackValueExpression();
-		string typeHandle = $"static_cast<CHAOS_IL2CPP_INTPTR>({GetTypeHandleLiteral(_pendingEnumBoxSubjectId!)})";
+		string enumSubjectId = _pendingEnumBoxSubjectId!;
+		_pendingEnumBoxSubjectId = null;
+
+		// A2.6: Per-enum switch — generate inline C++ switch when the enum type
+		// is known at codegen time and its metadata is available. Enables compiler
+		// jump-table generation for O(1) value→name lookup, avoiding generic stub
+		// dispatch (ChaosEnumToStringRaw) and its caching overhead.
+		if (_enumValueToNameMap.TryGetValue(enumSubjectId, out var valueToName) &&
+			valueToName.Count > 0 && valueToName.Count <= 64)
+		{
+			builder.AppendLine($"{indentation}{{");
+			builder.AppendLine($"{indentation}    switch (static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}))");
+			builder.AppendLine($"{indentation}    {{");
+
+			foreach (var kvp in valueToName)
+			{
+				builder.AppendLine($"{indentation}        case {kvp.Key}:");
+				EmitEvalStackPush(builder, indentation + "            ", $"CHAOS_IL2CPP_STRING_ID({ToCppStringLiteral(kvp.Value)})");
+				builder.AppendLine($"{indentation}            break;");
+			}
+
+			// Default: unrecognized value — delegate to runtime stub for correct
+			// flags-decomposition / decimal formatting behavior.
+			builder.AppendLine($"{indentation}        default:");
+			builder.AppendLine($"{indentation}        {{");
+			string typeHandle = $"static_cast<CHAOS_IL2CPP_INTPTR>({GetTypeHandleLiteral(enumSubjectId)})";
+			builder.AppendLine($"{indentation}            const auto chaos_result = ChaosEnumToStringRaw({typeHandle}, static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
+			EmitEvalStackPush(builder, indentation + "            ", "chaos_result");
+			builder.AppendLine($"{indentation}            break;");
+			builder.AppendLine($"{indentation}        }}");
+
+			builder.AppendLine($"{indentation}    }}");
+			builder.AppendLine($"{indentation}}}");
+			return;
+		}
 
 		// Fallback: large enum (>64 fields) or no metadata — use runtime stub.
 		builder.AppendLine($"{indentation}{{");
-		builder.AppendLine($"{indentation}    const auto chaos_result = ChaosEnumToStringRaw({typeHandle}, static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
+		builder.AppendLine($"{indentation}    const auto chaos_result = ChaosEnumToStringRaw(static_cast<CHAOS_IL2CPP_INTPTR>({GetTypeHandleLiteral(enumSubjectId)}), static_cast<CHAOS_IL2CPP_INT64>({rawValueExpr}));");
 		EmitEvalStackPush(builder, indentation + "    ", "chaos_result");
 		builder.AppendLine($"{indentation}}}");
 	}

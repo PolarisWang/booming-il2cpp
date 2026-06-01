@@ -10,16 +10,18 @@
 
 namespace chaos::il2cpp::string_table {
 
-namespace {
-
-const StringEntry* g_aot_entries = nullptr;
-CHAOS_IL2CPP_UINT32 g_aot_entry_count = 0u;
-
 // Thread-local single-entry cache for Resolve().
 // Hot-path pattern: repeated Resolve of the same interned string (e.g. ldstr
 // "A" in Convert.ToChar(string) benchmark). Covers ~99.99% of calls with a
 // single compare, avoiding mutex lock + hash map + binary search.
-thread_local struct { StringId id; StringView view; } g_tls_resolve = {};
+// Defined at namespace scope (not anonymous) so ResolveFast() in string_table.h
+// can access it via extern thread_local declaration.
+thread_local ResolveCacheEntry g_tls_resolve_cache = {};
+
+namespace {
+
+const StringEntry* g_aot_entries = nullptr;
+CHAOS_IL2CPP_UINT32 g_aot_entry_count = 0u;
 
 // 8-entry TLS circular buffer cache for Intern().
 // Benchmarks that cycle through a small set of strings (e.g. Double→string
@@ -49,9 +51,9 @@ StringView Resolve(StringId id)
     // Must be checked BEFORE the null guard because on the hot path
     // (99.99%+ of calls) id is never null — TLS gives us the answer
     // with a single 8-byte compare, skipping the null branch entirely.
-    if (id == g_tls_resolve.id)
+    if (id == g_tls_resolve_cache.id)
     {
-        return g_tls_resolve.view;
+        return g_tls_resolve_cache.view;
     }
 
     if (id == kStringIdNull)
@@ -71,7 +73,7 @@ StringView Resolve(StringId id)
         if (result != end && result->id == id)
         {
             const StringView view{result->utf8_data, result->byte_count};
-            g_tls_resolve = {id, view};
+            g_tls_resolve_cache = {id, view};
             return view;
         }
     }
@@ -82,7 +84,7 @@ StringView Resolve(StringId id)
         const auto it = g_dynamic_entries.find(id);
         if (it != g_dynamic_entries.end())
         {
-            g_tls_resolve = {id, it->second};
+            g_tls_resolve_cache = {id, it->second};
             return it->second;
         }
     }

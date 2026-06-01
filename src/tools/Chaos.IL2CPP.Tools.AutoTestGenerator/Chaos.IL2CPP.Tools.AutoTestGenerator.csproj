@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <AssemblyName>Chaos.IL2CPP.Tools.AutoTestGenerator</AssemblyName>
+    <RootNamespace>Chaos.IL2CPP.Tools.AutoTestGenerator</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="output/**/*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.18.1" />
+    <PackageReference Include="System.Reflection.MetadataLoadContext" Version="8.0.0" />
+  </ItemGroup>
+</Project>

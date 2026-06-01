@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <TargetFramework>net10.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
     <IsTestProject>false</IsTestProject>
@@ -15,7 +15,7 @@
     <Compile Include="StringConstructionSubjects.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+    <PackageReference Include="Chaos.TestFramework.Sdk" Version="0.1.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />

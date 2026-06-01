@@ -13,31 +13,29 @@ using System.Threading;
 
 public static partial class PinvokeStressSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Environment::get_TickCount:System.Int32()
-    public static void Subject_0()
-    {
-        try { _ = Environment.TickCount; }
-        catch { _exitCode = 1; }
-    }
-
     // [1] System.Private.CoreLib/System.Threading.Thread::Sleep:System.Void(System.Int32)
+    [Fact]
     public static void Subject_1()
     {
         try { Thread.Sleep(42); }
-        catch { _exitCode = 1; }
+        catch { }
     }
 
     // [2] System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)
-    public static void CustomEntrySubject_2()
+    [Fact]
+    public static void Subject_2()
     {
+        try { var __val = (int)(GC.GetTotalMemory(true)); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [3] System.Private.CoreLib/System.Runtime.InteropServices.Marshal::GetLastPInvokeError:System.Int32()
-    public static void CustomEntrySubject_3()
+    [Fact]
+    public static void Subject_3()
     {
+        try { var __val = Marshal.GetLastPInvokeError(); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
 }

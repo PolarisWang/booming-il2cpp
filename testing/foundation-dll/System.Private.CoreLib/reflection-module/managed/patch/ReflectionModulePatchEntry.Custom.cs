@@ -4,13 +4,15 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Chaos.TestFramework;
 public static partial class ReflectionModulePatchEntry
 {
     [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+    [Fact]
     public static void CustomEntryMethod5()
     {
         var attrs = typeof(byte).Module.GetCustomAttributes(typeof(AssemblyDescriptionAttribute));
         var list = new List<Attribute>(attrs);
-        if (list.Count == 0) _exitCode = 1;
+        Assert.IsFalse(list.Count == 0);
     }
 }

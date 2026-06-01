@@ -12,9 +12,6 @@ using System.Threading;
 
 public static partial class PrimitiveNumericConversionsCoreSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestByteToInt:System.Int32()
     // [1] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToLong:System.Int32()
     // [2] PrimitiveNumericConversionsCoreNativeEntry/PrimitiveNumericConversionsCoreNativeEntry::TestIntToShort:System.Int32()

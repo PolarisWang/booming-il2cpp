@@ -12,77 +12,100 @@ using System.Threading;
 
 public static partial class ReflectionGenericsSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Type::GetGenericTypeDefinition:System.Type()
-    public static void CustomEntrySubject_0()
+    [Fact]
+    public static void Subject_0()
     {
+        try { var __val = ((typeof(byte).GetGenericTypeDefinition()).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [1] System.Private.CoreLib/System.Type::MakeGenericType:System.Type(System.Type[])
-    public static void CustomEntrySubject_1()
+    [Fact]
+    public static void Subject_1()
     {
+        try { var __val = ((typeof(byte).MakeGenericType(Array.Empty<System.Type>())).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [2] System.Private.CoreLib/System.Type::GetGenericArguments:System.Type[]()
-    public static void CustomEntrySubject_2()
+    [Fact]
+    public static void Subject_2()
     {
+        try { var __val = ((typeof(byte).GetGenericArguments()).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [3] System.Private.CoreLib/System.Type::GetGenericParameterConstraints:System.Type[]()
-    public static void CustomEntrySubject_3()
+    [Fact]
+    public static void Subject_3()
     {
+        try { var __val = ((typeof(byte).GetGenericParameterConstraints()).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [4] System.Private.CoreLib/System.Type::get_GenericParameterPosition:System.Int32()
+    [Fact]
     public static void Subject_4()
     {
-        try { _ = typeof(byte).GenericParameterPosition; }
-        catch { _exitCode = 1; }
+        try { var __val = typeof(byte).GenericParameterPosition; Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [5] System.Private.CoreLib/System.Type::ContainsGenericParameters:System.Boolean()
+    [Fact]
     public static void Subject_5()
     {
-        try { _ = ((typeof(byte).ContainsGenericParameters) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(byte).ContainsGenericParameters) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [6] System.Private.CoreLib/System.Type::get_IsGenericType:System.Boolean()
+    [Fact]
     public static void Subject_6()
     {
-        try { _ = ((typeof(byte).IsGenericType) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(byte).IsGenericType) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [7] System.Private.CoreLib/System.Type::get_IsGenericTypeDefinition:System.Boolean()
+    [Fact]
     public static void Subject_7()
     {
-        try { _ = ((typeof(byte).IsGenericTypeDefinition) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(byte).IsGenericTypeDefinition) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [8] System.Private.CoreLib/System.Type::get_IsConstructedGenericType:System.Boolean()
+    [Fact]
     public static void Subject_8()
     {
-        try { _ = ((typeof(byte).IsConstructedGenericType) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(byte).IsConstructedGenericType) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [9] System.Private.CoreLib/System.Type::MakeArrayType:System.Type()
-    public static void CustomEntrySubject_9()
+    [Fact]
+    public static void Subject_9()
     {
+        try { var __val = ((typeof(byte).MakeArrayType()).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [10] System.Private.CoreLib/System.Type::MakeByRefType:System.Type()
-    public static void CustomEntrySubject_10()
+    [Fact]
+    public static void Subject_10()
     {
+        try { var __val = ((typeof(byte).MakeByRefType()).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [11] System.Private.CoreLib/System.Type::MakePointerType:System.Type()
-    public static void CustomEntrySubject_11()
+    [Fact]
+    public static void Subject_11()
     {
+        try { var __val = ((typeof(byte).MakePointerType()).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
 }

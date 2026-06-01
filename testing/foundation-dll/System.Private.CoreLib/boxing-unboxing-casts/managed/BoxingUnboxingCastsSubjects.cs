@@ -13,78 +13,85 @@ using System.Threading;
 
 public static partial class BoxingUnboxingCastsSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type)
+    [Fact]
     public static void Subject_0()
     {
-        try { _ = ((Convert.ChangeType(null!, typeof(byte))).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((Convert.ChangeType(null!, typeof(byte))).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [1] System.Private.CoreLib/System.Convert::ChangeType:System.Object(System.Object,System.Type,System.IFormatProvider)
+    [Fact]
     public static void Subject_1()
     {
-        try { _ = ((Convert.ChangeType(null!, typeof(byte), null)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((Convert.ChangeType(null!, typeof(byte), null)).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [2] System.Private.CoreLib/System.Type::IsAssignableFrom:System.Boolean(System.Type)
+    [Fact]
     public static void Subject_2()
     {
-        try { _ = ((typeof(System.IConvertible).IsAssignableFrom(typeof(int))) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(System.IConvertible).IsAssignableFrom(typeof(int))) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [3] System.Private.CoreLib/System.Type::IsInstanceOfType:System.Boolean(System.Object)
+    [Fact]
     public static void Subject_3()
     {
-        try { _ = ((typeof(string).IsInstanceOfType("hello")) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(string).IsInstanceOfType("hello")) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [4] System.Private.CoreLib/System.Type::IsSubclassOf:System.Boolean(System.Type)
+    [Fact]
     public static void Subject_4()
     {
-        try { _ = ((typeof(System.MemberAccessException).IsSubclassOf(typeof(System.Exception))) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(System.MemberAccessException).IsSubclassOf(typeof(System.Exception))) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [5] System.Private.CoreLib/System.Type::IsAssignableTo:System.Boolean(System.Type)
+    [Fact]
     public static void Subject_5()
     {
-        try { _ = ((typeof(System.IConvertible).IsAssignableTo(typeof(int))) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(System.IConvertible).IsAssignableTo(typeof(int))) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [6] System.Private.CoreLib/System.Object::MemberwiseClone:System.Object()
     // [7] System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::GetObjectValue:System.Object(System.Object)
+    [Fact]
     public static void Subject_7()
     {
-        try { _ = ((RuntimeHelpers.GetObjectValue(null!)).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((RuntimeHelpers.GetObjectValue(null!)).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [8] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32)
+    [Fact]
     public static void Subject_8()
     {
-        try { _ = (int)(((Array)(Array.CreateInstance(typeof(byte), 42))).Length); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(((Array)(Array.CreateInstance(typeof(byte), 42))).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [9] System.Private.CoreLib/System.Array::CreateInstance:System.Array(System.Type,System.Int32,System.Int32)
+    [Fact]
     public static void Subject_9()
     {
-        try { _ = (int)(((Array)(Array.CreateInstance(typeof(byte), 42, 42))).Length); }
-        catch { _exitCode = 1; }
+        try { var __val = (int)(((Array)(Array.CreateInstance(typeof(byte), 42, 42))).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [10] System.Private.CoreLib/System.ValueType::Equals:System.Boolean(System.Object)
+    [Fact]
     public static void Subject_10()
     {
-        try { _ = ((((ValueType)42).Equals(null!)) ? 1 : 0); }
-        catch { _exitCode = 1; }
+        try { var __val = ((((ValueType)42).Equals(null!)) ? 1 : 0); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
 }

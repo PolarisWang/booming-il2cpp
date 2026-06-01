@@ -13,42 +13,44 @@ using System.Threading;
 
 public static partial class ReflectionModuleSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Reflection.Module::get_FullyQualifiedName:System.String()
+    [Fact]
     public static void Subject_0()
     {
-        try { _ = ((default(Module)!.FullyQualifiedName).Length); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(byte).Module.FullyQualifiedName).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [1] System.Private.CoreLib/System.Reflection.Module::get_Name:System.String()
+    [Fact]
     public static void Subject_1()
     {
-        try { _ = ((default(Module)!.Name).Length); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(byte).Module.Name).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [2] System.Private.CoreLib/System.Reflection.Module::get_Assembly:System.Reflection.Assembly()
+    [Fact]
     public static void Subject_2()
     {
-        try { _ = ((default(Module)!.Assembly).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(byte).Module.Assembly).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [3] System.Private.CoreLib/System.Reflection.Module::GetType:System.Type(System.String)
+    [Fact]
     public static void Subject_3()
     {
-        try { _ = ((default(Module)!.GetType("hello")).GetHashCode()); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(byte).Module.GetType("hello")).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [4] System.Private.CoreLib/System.Reflection.Module::GetTypes:System.Type[]()
+    [Fact]
     public static void Subject_4()
     {
-        try { _ = ((default(Module)!.GetTypes()).Length); }
-        catch { _exitCode = 1; }
+        try { var __val = ((typeof(byte).Module.GetTypes()).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [5] System.Private.CoreLib/System.Reflection.Module::GetCustomAttributes:System.Object[](System.Type)

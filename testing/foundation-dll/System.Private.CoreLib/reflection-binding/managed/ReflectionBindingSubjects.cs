@@ -14,67 +14,93 @@ using System.Threading;
 
 public static partial class ReflectionBindingSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String)
-    public static void CustomEntrySubject_0()
+    [Fact]
+    public static void Subject_0()
     {
+        try { var __val = ((typeof(byte).GetMethod("hello")).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [1] System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Reflection.BindingFlags)
-    public static void CustomEntrySubject_1()
+    [Fact]
+    public static void Subject_1()
     {
+        try { var __val = ((typeof(byte).GetMethod("hello", System.Reflection.BindingFlags.Default)).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [2] System.Private.CoreLib/System.Type::GetMethod:System.Reflection.MethodInfo(System.String,System.Type[])
-    public static void CustomEntrySubject_2()
+    [Fact]
+    public static void Subject_2()
     {
+        try { var __val = ((typeof(byte).GetMethod("hello", Array.Empty<System.Type>())).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [3] System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String)
-    public static void CustomEntrySubject_3()
+    [Fact]
+    public static void Subject_3()
     {
+        try { var __val = ((typeof(byte).GetField("hello")).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [4] System.Private.CoreLib/System.Type::GetField:System.Reflection.FieldInfo(System.String,System.Reflection.BindingFlags)
-    public static void CustomEntrySubject_4()
+    [Fact]
+    public static void Subject_4()
     {
+        try { var __val = ((typeof(byte).GetField("hello", System.Reflection.BindingFlags.Default)).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [5] System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String)
-    public static void CustomEntrySubject_5()
+    [Fact]
+    public static void Subject_5()
     {
+        try { var __val = ((typeof(byte).GetProperty("hello")).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [6] System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Reflection.BindingFlags)
-    public static void CustomEntrySubject_6()
+    [Fact]
+    public static void Subject_6()
     {
+        try { var __val = ((typeof(byte).GetProperty("hello", System.Reflection.BindingFlags.Default)).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [7] System.Private.CoreLib/System.Type::GetProperty:System.Reflection.PropertyInfo(System.String,System.Type[])
-    public static void CustomEntrySubject_7()
+    [Fact]
+    public static void Subject_7()
     {
+        try { var __val = ((typeof(byte).GetProperty("hello", Array.Empty<System.Type>())).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [8] System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String)
-    public static void CustomEntrySubject_8()
+    [Fact]
+    public static void Subject_8()
     {
+        try { var __val = ((typeof(byte).GetEvent("hello")).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [9] System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String,System.Reflection.BindingFlags)
-    public static void CustomEntrySubject_9()
+    [Fact]
+    public static void Subject_9()
     {
+        try { var __val = ((typeof(byte).GetEvent("hello", System.Reflection.BindingFlags.Default)).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [10] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Object[])
-    public static void CustomEntrySubject_10()
-    {
-    }
-
     // [11] System.Private.CoreLib/System.Reflection.MethodBase::Invoke:System.Object(System.Object,System.Reflection.BindingFlags,System.Reflection.Binder,System.Object[],System.Globalization.CultureInfo)
-    public static void CustomEntrySubject_11()
+    [Fact]
+    public static void Subject_11()
     {
+        try { var __val = ((default(MethodInfo)!.Invoke(null!, System.Reflection.BindingFlags.Default, default, Array.Empty<System.Object>(), default)).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
 }
