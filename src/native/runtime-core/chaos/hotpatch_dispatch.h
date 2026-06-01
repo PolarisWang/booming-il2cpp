@@ -153,6 +153,36 @@ inline int32_t ChaosDispatchMethodBench(
     return 0;
 }
 
+// ── ChaosDispatchMethodBenchDirect (bypass JIT trampoline) ──────────────
+// Like ChaosDispatchMethodBench but always uses the original AOT function
+// pointer, bypassing both kDefaultArgThunks and the JIT precode trampoline.
+// Uses GetOriginalAotPtrCallback() to resolve the original AOT pointer
+// even when entry.direct_ptr has been replaced by JIT registration.
+// Safe for Subject_N benchmark calls: directly calls the AOT-compiled body.
+// Falls back to entry.direct_ptr if no callback is registered (AOT mode).
+inline int32_t ChaosDispatchMethodBenchDirect(
+    const HotpatchEntryV0* entries,
+    int32_t count,
+    int32_t index) noexcept
+{
+    if (index < 0 || index >= count) return -1;
+    auto& entry = entries[index];
+
+    if (HotpatchIsActive(entry) && !HotpatchShouldKeepNative(entry)) {
+        InterpreterEntryDirectFast(entry.method_key);
+        return 0;
+    }
+
+    auto* orig_ptr = GetOriginalAotPtrCallback()
+        ? GetOriginalAotPtrCallback()(&entry)
+        : nullptr;
+    auto* fn_ptr = orig_ptr ? orig_ptr : entry.direct_ptr;
+    if (fn_ptr) {
+        reinterpret_cast<void(*)()>(fn_ptr)();
+    }
+    return 0;
+}
+
 // ── ChaosDispatchMethodGetValue (capture method return value) ────────────
 // Like ChaosDispatchMethod but captures and returns the actual method return
 // value as int64_t (RAX / __chaos_ret[0]) instead of dispatch status code.
