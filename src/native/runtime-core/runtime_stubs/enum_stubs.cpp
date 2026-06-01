@@ -6,6 +6,7 @@
 #include <chaos/log.h>
 #include <cstring>
 #include <cstdio>
+#include <cstdlib>
 #include <mutex>
 
 #include "generated_code_compat.h"
@@ -187,14 +188,85 @@ static CHAOS_IL2CPP_INTPTR enum_alloc_boxed_int32(CHAOS_IL2CPP_INT32 value) noex
     return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
 }
 
-/// Allocate a boxed int64 object.
-static CHAOS_IL2CPP_INTPTR enum_alloc_boxed_int64(CHAOS_IL2CPP_INT64 value) noexcept
+// ── TLS box cache for enum Parse/TryParse ───────────────────────────
+// Small TLS hash table that caches boxed enum values keyed by
+// (type_handle, value). Repeated calls to Enum.Parse("Monday") return
+// the cached box with zero allocation. Cleared on GC young start to
+// prevent dangling managed pointers.
+struct EnumBoxCacheEntry {
+    CHAOS_IL2CPP_INTPTR type_key;  // 0 = empty slot
+    CHAOS_IL2CPP_INT64 value;
+    CHAOS_IL2CPP_INTPTR boxed_ptr;
+};
+static constexpr int kEnumBoxCacheSize = 64;
+static thread_local EnumBoxCacheEntry tls_enum_box_cache[kEnumBoxCacheSize] = {};
+// ── TLS box cache helpers ──────────────────────────────────────────
+// Open-addressing hash table with XOR hash of (type_key, value).
+// type_key == 0 means empty slot. Max 4 probes for lookup.
+static CHAOS_IL2CPP_INTPTR enum_lookup_box_cache(
+    CHAOS_IL2CPP_INTPTR type_key, CHAOS_IL2CPP_INT64 value) noexcept
 {
+    auto h = static_cast<CHAOS_IL2CPP_UINTPTR>(type_key) ^
+             static_cast<CHAOS_IL2CPP_UINTPTR>(value);
+    h ^= h >> 32;
+    h &= (kEnumBoxCacheSize - 1);
+
+    for (int i = 0; i < 4; i++) {
+        auto& entry = tls_enum_box_cache[h];
+        if (entry.type_key == type_key && entry.value == value)
+            return entry.boxed_ptr;
+        if (entry.type_key == 0)
+            return 0;
+        h = (h + 1) & (kEnumBoxCacheSize - 1);
+    }
+    return 0;
+}
+
+static void enum_insert_box_cache(
+    CHAOS_IL2CPP_INTPTR type_key, CHAOS_IL2CPP_INT64 value,
+    CHAOS_IL2CPP_INTPTR boxed_ptr) noexcept
+{
+    auto h = static_cast<CHAOS_IL2CPP_UINTPTR>(type_key) ^
+             static_cast<CHAOS_IL2CPP_UINTPTR>(value);
+    h ^= h >> 32;
+    h &= (kEnumBoxCacheSize - 1);
+
+    for (int i = 0; i < kEnumBoxCacheSize; i++) {
+        auto& entry = tls_enum_box_cache[h];
+        if (entry.type_key == type_key && entry.value == value)
+            return;
+        if (entry.type_key == 0) {
+            entry.type_key = type_key;
+            entry.value = value;
+            entry.boxed_ptr = boxed_ptr;
+            return;
+        }
+        h = (h + 1) & (kEnumBoxCacheSize - 1);
+    }
+}
+
+/// Allocate a boxed int64 object, optionally cached by (type_key, value).
+/// When type_key != 0 and the (type_key, value) pair is in the TLS box cache,
+/// returns the cached pointer with zero allocation.
+static CHAOS_IL2CPP_INTPTR enum_alloc_boxed_int64(
+    CHAOS_IL2CPP_INT64 value, CHAOS_IL2CPP_INTPTR type_key = 0) noexcept
+{
+    if (type_key != 0) {
+        auto cached = enum_lookup_box_cache(type_key, value);
+        if (cached != 0) return cached;
+    }
+
     auto* storage = static_cast<unsigned char*>(GcAllocateAtomic(24));
     if (storage == nullptr) return 0;
     std::memset(storage, 0, 16); // header
     std::memcpy(storage + 16, &value, sizeof(value));
-    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+
+    auto result = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(storage);
+
+    if (type_key != 0)
+        enum_insert_box_cache(type_key, value, result);
+
+    return result;
 }
 
 /// Allocate a managed array of CHAOS_IL2CPP_INTPTR elements (for string/object arrays).
@@ -404,6 +476,7 @@ static void enum_stubs_on_gc_event(GcEvent event, void* /*user_data*/) noexcept 
         s_enum_names_array_key = 0;
         s_enum_values_array_key = 0;
         s_enum_tostring_cache_value = -1;
+        std::memset(tls_enum_box_cache, 0, sizeof(tls_enum_box_cache));
     }
 }
 
@@ -860,6 +933,130 @@ static CHAOS_IL2CPP_UINT32 precompute_name_lengths(
     return cnt;
 }
 
+// ── Numeric/comma-separated parsing helpers (generality) ──────────
+// .NET's Enum.Parse supports:
+//   - "42"       → numeric (decimal)
+//   - "0xFF"     → hex (auto-detected by strtoll base=0)
+//   - "A, B"     → comma-separated names/values OR'd together
+//   - "1, A"     → mixed numeric + name segments
+// These helpers add the missing generality on top of name-only scanning.
+
+/// Try to parse a string segment as a numeric value (decimal or 0x/0X hex).
+/// Returns true and sets out_value on success.
+static bool enum_try_parse_numeric_segment(
+    const char* data, CHAOS_IL2CPP_UINTPTR len,
+    CHAOS_IL2CPP_INT64& out_value) noexcept
+{
+    if (data == nullptr || len == 0) return false;
+    char* end = nullptr;
+    long long val = std::strtoll(data, &end, 0);
+    if (end != data + static_cast<ptrdiff_t>(len)) return false;
+    if (val == 0 && end == data) return false;
+    out_value = static_cast<CHAOS_IL2CPP_INT64>(val);
+    return true;
+}
+
+/// Find a field value by name in a metadata table (case-sensitive, then insensitive).
+/// Returns true and sets out_value on match.
+static bool enum_metadata_lookup_name(
+    const EnumMetadataTable* meta, const char* name,
+    CHAOS_IL2CPP_UINTPTR name_len, CHAOS_IL2CPP_INT64& out_value) noexcept
+{
+    CHAOS_IL2CPP_UINTPTR fname_len[64];
+    CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+        if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name, name_len) == 0) {
+            out_value = meta->fields[i].value;
+            return true;
+        }
+    }
+    for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
+        if (fname_len[i] != name_len) continue;
+        bool match = true;
+        for (CHAOS_IL2CPP_UINTPTR j = 0; j < name_len; j++) {
+            char a = meta->fields[i].name[j];
+            char b = name[j];
+            if (a >= 'A' && a <= 'Z') a = static_cast<char>(a + 32);
+            if (b >= 'A' && b <= 'Z') b = static_cast<char>(b + 32);
+            if (a != b) { match = false; break; }
+        }
+        if (match) { out_value = meta->fields[i].value; return true; }
+    }
+    return false;
+}
+
+/// Split input on ',' trim whitespace, parse each segment as name or
+/// numeric, OR values together. Returns true if at least one segment parsed.
+static bool enum_try_parse_comma_separated_meta(
+    const EnumMetadataTable* meta, const char* data,
+    CHAOS_IL2CPP_UINTPTR len, CHAOS_IL2CPP_INT64& out_value) noexcept
+{
+    CHAOS_IL2CPP_INT64 result = 0;
+    bool any = false;
+    CHAOS_IL2CPP_UINTPTR start = 0;
+    for (CHAOS_IL2CPP_UINTPTR i = 0; i <= len; i++) {
+        if (i == len || data[i] == ',') {
+            CHAOS_IL2CPP_UINTPTR end = i;
+            while (end > start && (data[end - 1] == ' ' || data[end - 1] == '\t')) end--;
+            CHAOS_IL2CPP_UINTPTR seg_start = start;
+            while (seg_start < end && (data[seg_start] == ' ' || data[seg_start] == '\t')) seg_start++;
+            CHAOS_IL2CPP_UINTPTR seg_len = (seg_start < end) ? (end - seg_start) : 0;
+
+            if (seg_len > 0) {
+                CHAOS_IL2CPP_INT64 seg_val = 0;
+                if (!enum_metadata_lookup_name(meta, data + seg_start, seg_len, seg_val)) {
+                    if (!enum_try_parse_numeric_segment(data + seg_start, seg_len, seg_val)) {
+                        return false;
+                    }
+                }
+                result |= seg_val;
+                any = true;
+            }
+            start = i + 1;
+        }
+    }
+    if (!any) return false;
+    out_value = result;
+    return true;
+}
+
+/// Parse comma-separated using reflection descriptor (fallback path).
+static bool enum_try_parse_comma_separated_reflection(
+    const ReflectionQueryTypeDescriptor* desc, const char* data,
+    CHAOS_IL2CPP_UINTPTR len, CHAOS_IL2CPP_INT64& out_value) noexcept
+{
+    CHAOS_IL2CPP_INT64 result = 0;
+    bool any = false;
+    CHAOS_IL2CPP_UINTPTR start = 0;
+    for (CHAOS_IL2CPP_UINTPTR i = 0; i <= len; i++) {
+        if (i == len || data[i] == ',') {
+            CHAOS_IL2CPP_UINTPTR end = i;
+            while (end > start && (data[end - 1] == ' ' || data[end - 1] == '\t')) end--;
+            CHAOS_IL2CPP_UINTPTR seg_start = start;
+            while (seg_start < end && (data[seg_start] == ' ' || data[seg_start] == '\t')) seg_start++;
+            CHAOS_IL2CPP_UINTPTR seg_len = (seg_start < end) ? (end - seg_start) : 0;
+
+            if (seg_len > 0) {
+                CHAOS_IL2CPP_INT64 seg_val = 0;
+                auto* field = find_field_by_name(desc, data + seg_start, seg_len);
+                if (field == nullptr)
+                    field = find_field_by_name_icase(desc, data + seg_start, seg_len);
+                if (field != nullptr) {
+                    seg_val = field->constant_value;
+                } else if (!enum_try_parse_numeric_segment(data + seg_start, seg_len, seg_val)) {
+                    return false;
+                }
+                result |= seg_val;
+                any = true;
+            }
+            start = i + 1;
+        }
+    }
+    if (!any) return false;
+    out_value = result;
+    return true;
+}
+
 /// Fast path: find enum field entry by name using pre-computed metadata.
 static const EnumFieldEntry* enum_find_entry_by_name(
     const ReflectionQueryTypeDescriptor* desc,
@@ -1265,7 +1462,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
             CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
             for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
                 if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
-                    return enum_alloc_boxed_int64(meta->fields[i].value);
+                    return enum_alloc_boxed_int64(meta->fields[i].value, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
                 }
             }
             // Case-insensitive fallback
@@ -1279,7 +1476,17 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
                     if (b >= 'A' && b <= 'Z') b = static_cast<char>(b + 32);
                     if (a != b) { match = false; break; }
                 }
-                if (match) return enum_alloc_boxed_int64(meta->fields[i].value);
+                if (match) return enum_alloc_boxed_int64(meta->fields[i].value, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
+            }
+            // Numeric fallback (e.g., "42", "0xFF") — strtoll with base=0
+            CHAOS_IL2CPP_INT64 numeric_val = 0;
+            if (enum_try_parse_numeric_segment(name_data, name_len, numeric_val)) {
+                return enum_alloc_boxed_int64(numeric_val, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
+            }
+            // Comma-separated fallback (e.g., "Monday, Tuesday", "1, Tuesday")
+            CHAOS_IL2CPP_INT64 combined_val = 0;
+            if (enum_try_parse_comma_separated_meta(meta, name_data, name_len, combined_val)) {
+                return enum_alloc_boxed_int64(combined_val, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
             }
             RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
         }
@@ -1299,9 +1506,19 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPTR
         field = find_field_by_name_icase(desc, name_data, name_len);
     }
     if (field == nullptr) {
+        // Try numeric fallback (e.g., "42", "0xFF")
+        CHAOS_IL2CPP_INT64 numeric_val = 0;
+        if (enum_try_parse_numeric_segment(name_data, name_len, numeric_val)) {
+            return enum_alloc_boxed_int64(numeric_val, type);
+        }
+        // Try comma-separated fallback (e.g., "Monday, Tuesday")
+        CHAOS_IL2CPP_INT64 combined_val = 0;
+        if (enum_try_parse_comma_separated_reflection(desc, name_data, name_len, combined_val)) {
+            return enum_alloc_boxed_int64(combined_val, type);
+        }
         RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
     }
-    return enum_alloc_boxed_int64(field->constant_value);
+    return enum_alloc_boxed_int64(field->constant_value, type);
 }
 
 /// Enum.Parse(Type, String, Boolean) — parses with optional ignoreCase.
@@ -1320,7 +1537,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
             CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
             for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
                 if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
-                    return enum_alloc_boxed_int64(meta->fields[i].value);
+                    return enum_alloc_boxed_int64(meta->fields[i].value, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
                 }
             }
             if (ignoreCase) {
@@ -1334,8 +1551,18 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
                         if (b >= 'A' && b <= 'Z') b = static_cast<char>(b + 32);
                         if (a != b) { match = false; break; }
                     }
-                    if (match) return enum_alloc_boxed_int64(meta->fields[i].value);
+                    if (match) return enum_alloc_boxed_int64(meta->fields[i].value, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
                 }
+            }
+            // Numeric fallback (e.g., "42", "0xFF")
+            CHAOS_IL2CPP_INT64 numeric_val = 0;
+            if (enum_try_parse_numeric_segment(name_data, name_len, numeric_val)) {
+                return enum_alloc_boxed_int64(numeric_val, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
+            }
+            // Comma-separated fallback (e.g., "Monday, Tuesday")
+            CHAOS_IL2CPP_INT64 combined_val = 0;
+            if (enum_try_parse_comma_separated_meta(meta, name_data, name_len, combined_val)) {
+                return enum_alloc_boxed_int64(combined_val, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
             }
             RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
         }
@@ -1355,9 +1582,19 @@ CHAOS_IL2CPP_INTPTR ChaosEnumParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHAOS
         field = find_field_by_name_icase(desc, name_data, name_len);
     }
     if (field == nullptr) {
+        // Try numeric fallback (e.g., "42", "0xFF")
+        CHAOS_IL2CPP_INT64 numeric_val = 0;
+        if (enum_try_parse_numeric_segment(name_data, name_len, numeric_val)) {
+            return enum_alloc_boxed_int64(numeric_val, type);
+        }
+        // Try comma-separated fallback (e.g., "Monday, Tuesday")
+        CHAOS_IL2CPP_INT64 combined_val = 0;
+        if (enum_try_parse_comma_separated_reflection(desc, name_data, name_len, combined_val)) {
+            return enum_alloc_boxed_int64(combined_val, type);
+        }
         RaiseArgumentException((std::string("Requested value '") + std::string(name_data, name_len) + "' was not found.").c_str());
     }
-    return enum_alloc_boxed_int64(field->constant_value);
+    return enum_alloc_boxed_int64(field->constant_value, type);
 }
 
 /// Enum.Format(Type, Object, String) — formats an enum value as a string.
@@ -1804,7 +2041,7 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
             CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
             for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
                 if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
-                    auto boxed = enum_alloc_boxed_int64(meta->fields[i].value);
+                    auto boxed = enum_alloc_boxed_int64(meta->fields[i].value, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
                     std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
                     return 1;
                 }
@@ -1821,10 +2058,24 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
                     if (a != b) { match = false; break; }
                 }
                 if (match) {
-                    auto boxed = enum_alloc_boxed_int64(meta->fields[i].value);
+                    auto boxed = enum_alloc_boxed_int64(meta->fields[i].value, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
                     std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
                     return 1;
                 }
+            }
+            // Numeric fallback (e.g., "42", "0xFF")
+            CHAOS_IL2CPP_INT64 numeric_val = 0;
+            if (enum_try_parse_numeric_segment(name_data, name_len, numeric_val)) {
+                auto boxed = enum_alloc_boxed_int64(numeric_val, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
+                std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
+                return 1;
+            }
+            // Comma-separated fallback (e.g., "Monday, Tuesday")
+            CHAOS_IL2CPP_INT64 combined_val = 0;
+            if (enum_try_parse_comma_separated_meta(meta, name_data, name_len, combined_val)) {
+                auto boxed = enum_alloc_boxed_int64(combined_val, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
+                std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
+                return 1;
             }
             return 0;
         }
@@ -1839,9 +2090,25 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParse(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTP
     if (field == nullptr) {
         field = find_field_by_name_icase(desc, name_data, name_len);
     }
-    if (field == nullptr) return 0;
+    if (field == nullptr) {
+        // Try numeric fallback (e.g., "42", "0xFF")
+        CHAOS_IL2CPP_INT64 numeric_val = 0;
+        if (enum_try_parse_numeric_segment(name_data, name_len, numeric_val)) {
+            auto boxed = enum_alloc_boxed_int64(numeric_val, type);
+            std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
+            return 1;
+        }
+        // Try comma-separated fallback (e.g., "Monday, Tuesday")
+        CHAOS_IL2CPP_INT64 combined_val = 0;
+        if (enum_try_parse_comma_separated_reflection(desc, name_data, name_len, combined_val)) {
+            auto boxed = enum_alloc_boxed_int64(combined_val, type);
+            std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
+            return 1;
+        }
+        return 0;
+    }
 
-    auto boxed = enum_alloc_boxed_int64(field->constant_value);
+    auto boxed = enum_alloc_boxed_int64(field->constant_value, type);
     std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
     return 1;
 }
@@ -1862,7 +2129,7 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHA
             CHAOS_IL2CPP_UINT32 cnt = precompute_name_lengths(meta, fname_len);
             for (CHAOS_IL2CPP_UINT32 i = 0; i < cnt; i++) {
                 if (fname_len[i] == name_len && std::memcmp(meta->fields[i].name, name_data, name_len) == 0) {
-                    auto boxed = enum_alloc_boxed_int64(meta->fields[i].value);
+                    auto boxed = enum_alloc_boxed_int64(meta->fields[i].value, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
                     std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
                     return 1;
                 }
@@ -1879,11 +2146,25 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHA
                         if (a != b) { match = false; break; }
                     }
                     if (match) {
-                        auto boxed = enum_alloc_boxed_int64(meta->fields[i].value);
+                        auto boxed = enum_alloc_boxed_int64(meta->fields[i].value, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
                         std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
                         return 1;
                     }
                 }
+            }
+            // Numeric fallback (e.g., "42", "0xFF")
+            CHAOS_IL2CPP_INT64 numeric_val = 0;
+            if (enum_try_parse_numeric_segment(name_data, name_len, numeric_val)) {
+                auto boxed = enum_alloc_boxed_int64(numeric_val, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
+                std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
+                return 1;
+            }
+            // Comma-separated fallback (e.g., "Monday, Tuesday")
+            CHAOS_IL2CPP_INT64 combined_val = 0;
+            if (enum_try_parse_comma_separated_meta(meta, name_data, name_len, combined_val)) {
+                auto boxed = enum_alloc_boxed_int64(combined_val, reinterpret_cast<CHAOS_IL2CPP_INTPTR>(meta));
+                std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
+                return 1;
             }
             return 0;
         }
@@ -1898,9 +2179,25 @@ CHAOS_IL2CPP_INT32 ChaosEnumTryParseWithIgnoreCase(CHAOS_IL2CPP_INTPTR type, CHA
     if (field == nullptr && ignoreCase) {
         field = find_field_by_name_icase(desc, name_data, name_len);
     }
-    if (field == nullptr) return 0;
+    if (field == nullptr) {
+        // Try numeric fallback (e.g., "42", "0xFF")
+        CHAOS_IL2CPP_INT64 numeric_val = 0;
+        if (enum_try_parse_numeric_segment(name_data, name_len, numeric_val)) {
+            auto boxed = enum_alloc_boxed_int64(numeric_val, type);
+            std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
+            return 1;
+        }
+        // Try comma-separated fallback (e.g., "Monday, Tuesday")
+        CHAOS_IL2CPP_INT64 combined_val = 0;
+        if (enum_try_parse_comma_separated_reflection(desc, name_data, name_len, combined_val)) {
+            auto boxed = enum_alloc_boxed_int64(combined_val, type);
+            std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
+            return 1;
+        }
+        return 0;
+    }
 
-    auto boxed = enum_alloc_boxed_int64(field->constant_value);
+    auto boxed = enum_alloc_boxed_int64(field->constant_value, type);
     std::memcpy(reinterpret_cast<void*>(result_out), &boxed, sizeof(boxed));
     return 1;
 }
