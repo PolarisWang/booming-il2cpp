@@ -42,6 +42,7 @@
   #include <exception_jmp.h>     // CHAOS_SEH_FILTER_ALL (needs DWORD from windows.h)
 #endif
 
+#include <chaos/pal/pal_mem.h>
 #include <chaos/eh.h>            // CHAOS_EH_TRY / CHAOS_EH_CATCH_BEGIN
 #include <generated_code_compat.h>  // chaos_managed_exception for CHAOS_EH_CATCH_BEGIN
 
@@ -50,8 +51,6 @@
 #include <thread>
 
 #if !defined(_WIN32) && !defined(_WIN64)
-  #include <sys/mman.h>
-  #include <unistd.h>
   #include <immintrin.h>
 #endif
 
@@ -59,8 +58,12 @@ namespace chaos::il2cpp::jit {
 
 // ── Constants ──────────────────────────────────────────────────────────
 static constexpr uint32_t kPageSize        = 64 * 1024;  // 64KB per RWX page
-static constexpr uint32_t kSharedEntrySize = 64;          // reserved (actual ~37 B)
-static constexpr uint32_t kTrampolineSize  = 15;          // per-method stub
+static constexpr uint32_t kSharedEntrySize = 64;          // reserved
+#if defined(__aarch64__)
+static constexpr uint32_t kTrampolineSize  = 16;          // LDR + BR + literal pool
+#else
+static constexpr uint32_t kTrampolineSize  = 15;          // mov r10, addr + jmp rel32
+#endif
 
 // ── Per-page descriptor ───────────────────────────────────────────────
 struct Page {
@@ -77,11 +80,7 @@ PrecodeArena::PrecodeArena() noexcept {
 PrecodeArena::~PrecodeArena() noexcept {
     for (auto& pg : pages_) {
         if (pg.base) {
-#if defined(_WIN32) || defined(_WIN64)
-            VirtualFree(pg.base, 0, MEM_RELEASE);
-#else
-            munmap(pg.base, pg.capacity);
-#endif
+            chaos::il2cpp::pal::PalVirtualFree(pg.base, pg.capacity);
         }
     }
 }
@@ -93,17 +92,14 @@ void PrecodeArena::EnsurePage() noexcept {
             return;  // room on current page
     }
 
-    // Allocate a new RWX page
-    uint8_t* base = nullptr;
-#if defined(_WIN32) || defined(_WIN64)
-    base = static_cast<uint8_t*>(
-        VirtualAlloc(nullptr, kPageSize, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE));
-#else
-    base = static_cast<uint8_t*>(
-        mmap(nullptr, kPageSize, PROT_READ | PROT_WRITE | PROT_EXEC,
-             MAP_PRIVATE | MAP_ANONYMOUS, -1, 0));
-    if (base == MAP_FAILED) base = nullptr;
-#endif
+    // Allocate RW memory, then make it RWX for code emission.
+    // This is more secure than allocating RWX directly (W^X principle).
+    uint8_t* base = static_cast<uint8_t*>(
+        chaos::il2cpp::pal::PalVirtualAlloc(kPageSize));
+    if (base) {
+        chaos::il2cpp::pal::PalVirtualProtect(base, kPageSize,
+            chaos::il2cpp::pal::kPalMemReadWriteExec);
+    }
     if (!base) {
         CHAOS_IL2CPP_LOG_ERROR_M("jit", "PrecodeArena: failed to allocate RWX page");
         return;
@@ -133,64 +129,80 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
 
     uint8_t* p = pg.base + pg.pos;
 
-#if defined(_WIN32) || defined(_WIN64)
+#if defined(__aarch64__)
+    // ARM64 shared entry: save X0-X7 stp, call dispatch, restore ldp, tail-call br.
+    //                                                   offset  encoding  bytes (LE)
+    // stp x0, x1, [sp, #-16]!   imm7=-2, rt2=1, rn=31   0       0xA9BF07E0  E0 07 BF A9
+    // stp x2, x3, [sp, #-16]!   imm7=-2, rt2=3, rn=31   4       0xA9BF0FE2  E2 0F BF A9
+    // stp x4, x5, [sp, #-16]!   imm7=-2, rt2=5, rn=31   8       0xA9BF17E4  E4 17 BF A9
+    // stp x6, x7, [sp, #-16]!   imm7=-2, rt2=7, rn=31  12       0xA9BF1FE6  E6 1F BF A9
+    // mov x0, x17                                      16       0xAA1103E0  E0 03 11 AA
+    // ldr x1, [pc, #32]  imm=8, rt=1                   20       0x58000101  01 01 80 58
+    // blr x1                                           24       0xD63F0020  20 00 3F D6
+    // mov x17, x0                                      28       0xAA0003F1  F1 03 00 AA
+    // ldp x6, x7, [sp], #16   imm7=2, rt2=7, rn=31    32       0xA8C11FE6  E6 1F C1 A8
+    // ldp x4, x5, [sp], #16   imm7=2, rt2=5, rn=31    36       0xA8C117E4  E4 17 C1 A8
+    // ldp x2, x3, [sp], #16   imm7=2, rt2=3, rn=31    40       0xA8C10FE2  E2 0F C1 A8
+    // ldp x0, x1, [sp], #16   imm7=2, rt2=1, rn=31    44       0xA8C107E0  E0 07 C1 A8
+    // br x17                                           48       0xD61F0220  20 02 1F D6
+    // 8-byte literal (dispatch address)                52
+    // nop padding to 64                                60       0xD503201F  1F 20 03 D5
+    const uint32_t kSharedEntryInstrs[] = {
+        0xA9BF07E0u, 0xA9BF0FE2u, 0xA9BF17E4u, 0xA9BF1FE6u,
+        0xAA1103E0u, 0x58000101u, 0xD63F0020u, 0xAA0003F1u,
+        0xA8C11FE6u, 0xA8C117E4u, 0xA8C10FE2u, 0xA8C107E0u,
+        0xD61F0220u
+    };
+    std::memcpy(p, kSharedEntryInstrs, sizeof(kSharedEntryInstrs));
+
+    auto dispatch_addr = reinterpret_cast<uintptr_t>(&JitStubDispatchImpl);
+    std::memcpy(p + 52, &dispatch_addr, sizeof(dispatch_addr));
+
+    // Padding to kSharedEntrySize
+    uint32_t nop = 0xD503201Fu;
+    std::memcpy(p + 60, &nop, sizeof(nop));
+#elif defined(_WIN64) || defined(_WIN32)
     // MSVC x64 calling convention: rcx = first arg, shadow space required
     // push rcx                ; 0x51
     p[0] = 0x51;
-
     // push rdx                ; 0x52
     p[1] = 0x52;
-
     // push r8                 ; 0x41 0x50
     p[2] = 0x41; p[3] = 0x50;
-
     // push r9                 ; 0x41 0x51
     p[4] = 0x41; p[5] = 0x51;
-
     // sub rsp, 0x28           ; 40 bytes (32 shadow + 8 alignment)
     p[6] = 0x48; p[7] = 0x83; p[8] = 0xEC; p[9] = 0x28;
-
     // mov rcx, r10            ; 0x4C 0x89 0xD1 — first arg = precode ptr
     p[10] = 0x4C; p[11] = 0x89; p[12] = 0xD1;
-
     // mov rax, <dispatch>     ; 0x48 0xB8 + 8B addr
     auto dispatch_addr = reinterpret_cast<uintptr_t>(&JitStubDispatchImpl);
     p[13] = 0x48; p[14] = 0xB8;
     std::memcpy(p + 15, &dispatch_addr, sizeof(dispatch_addr));
-
     // call rax                ; 0xFF 0xD0
     p[23] = 0xFF; p[24] = 0xD0;
-
     // add rsp, 0x28           ; 0x48 0x83 0xC4 0x28
     p[25] = 0x48; p[26] = 0x83; p[27] = 0xC4; p[28] = 0x28;
-
     // pop r9                  ; 0x41 0x59
     p[29] = 0x41; p[30] = 0x59;
-
     // pop r8                  ; 0x41 0x58
     p[31] = 0x41; p[32] = 0x58;
-
     // pop rdx                 ; 0x5A
     p[33] = 0x5A;
-
     // pop rcx                 ; 0x59
     p[34] = 0x59;
-
     // jmp rax                 ; 0xFF 0xE0
     p[35] = 0xFF; p[36] = 0xE0;
 #else
     // System V AMD64 calling convention: rdi = first arg, no shadow space
     // mov rdi, r10            ; 0x4C 0x89 0xD7 — first arg = precode ptr
     p[0] = 0x4C; p[1] = 0x89; p[2] = 0xD7;
-
     // mov rax, <dispatch>     ; 0x48 0xB8 + 8B addr
     auto dispatch_addr = reinterpret_cast<uintptr_t>(&JitStubDispatchImpl);
     p[3] = 0x48; p[4] = 0xB8;
     std::memcpy(p + 5, &dispatch_addr, sizeof(dispatch_addr));
-
     // call rax                ; 0xFF 0xD0
     p[13] = 0xFF; p[14] = 0xD0;
-
     // jmp rax                 ; 0xFF 0xE0
     p[15] = 0xFF; p[16] = 0xE0;
 #endif
@@ -207,6 +219,19 @@ void* PrecodeArena::AllocateJitTrampoline(JitPrecode* precode) noexcept {
     uint32_t offset = pg.pos;
     uint8_t* p = pg.base + offset;
 
+#if defined(__aarch64__)
+    // ARM64 trampoline (16 bytes):
+    //   LDR X17, [PC, #8]     ; 4B — load precode address from literal pool
+    //   BR X17                 ; 4B — jump to shared entry via X17
+    //   <8-byte literal>       ; 8B — precode address
+    auto precode_addr = reinterpret_cast<uintptr_t>(precode);
+    // LDR X17, literal, imm19=2 (offset 8 bytes)
+    p[0] = 0x51; p[1] = 0x00; p[2] = 0x80; p[3] = 0x58;
+    // BR X17
+    p[4] = 0x20; p[5] = 0x02; p[6] = 0x1F; p[7] = 0xD6;
+    // Literal pool
+    std::memcpy(p + 8, &precode_addr, sizeof(precode_addr));
+#else
     // mov r10, <precode_addr>  ; 0x49 0xBA + 8B addr  (10 bytes)
     auto precode_addr = reinterpret_cast<uintptr_t>(precode);
     p[0] = 0x49; p[1] = 0xBA;
@@ -216,6 +241,7 @@ void* PrecodeArena::AllocateJitTrampoline(JitPrecode* precode) noexcept {
     int32_t rel32 = static_cast<int32_t>(jit_entry_offset_) - static_cast<int32_t>(offset + 15);
     p[10] = 0xE9;
     std::memcpy(p + 11, &rel32, sizeof(rel32));
+#endif
 
     pg.pos += kTrampolineSize;
     return pg.base + offset;
@@ -332,8 +358,8 @@ extern "C" void* JitStubDispatchImpl(JitPrecode* precode) noexcept {
         // Spin-wait with pause/yield
         int spins = 0;
         while (precode->state.load(std::memory_order_acquire) == kPrecodeCompiling) {
-#if defined(_WIN32) || defined(_WIN64)
-            _mm_pause();
+#if defined(__aarch64__)
+            __asm__ __volatile__("yield" ::: "memory");
 #else
             _mm_pause();
 #endif

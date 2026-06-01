@@ -18,9 +18,14 @@
 #define CHAOS_IL2CPP_EVENTPIPE 1  // default: enabled on all platforms
 #endif
 
-// Named pipe name template (Windows).
-// Uses %d for PID substitution: \\.\pipe\chaos-il2cpp-diag-<pid>
+// Named pipe name template.
+// Windows: \\.\pipe\chaos-il2cpp-diag-<pid>
+// Linux:   /tmp/chaos-il2cpp-diag-<pid>.sock (AF_UNIX domain socket path)
+#if defined(_WIN32)
 #define CHAOS_IL2CPP_EP_PIPE_NAME_TEMPLATE L"\\\\.\\pipe\\chaos-il2cpp-diag-%d"
+#else
+#define CHAOS_IL2CPP_EP_PIPE_NAME_TEMPLATE "/tmp/chaos-il2cpp-diag-%d.sock"
+#endif
 
 // Connection timeout for the named pipe server (ConnectNamedPipe).
 // In milliseconds. 0 means wait indefinitely for a client.

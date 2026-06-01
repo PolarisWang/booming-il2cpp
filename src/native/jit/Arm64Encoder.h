@@ -20,6 +20,8 @@ class Arm64Encoder : public IEncoder {
 public:
     explicit Arm64Encoder(CodeBuffer& buf) : buf_(buf) {}
 
+    Arch GetArch() const noexcept override { return Arch::kARM64; }
+
     // ── MOV ──────────────────────────────────────────────────────────────
     void EmitMovRR(uint8_t dst, uint8_t src) override {
         // MOV Xd, Xm = ORR Xd, XZR, Xm
@@ -133,9 +135,10 @@ public:
         EmitStr64(buf_, tmp, base, static_cast<uint16_t>(disp / 8));
     }
     void EmitXorRM(uint8_t dst, uint8_t base, int32_t disp) override {
-        // LDR + EOR
-        EmitLdr64(buf_, dst, base, static_cast<uint16_t>(disp / 8));
-        EmitEor64(buf_, dst, dst, dst);
+        // dst = dst ^ [base+disp]; use X0 as temp
+        uint8_t tmp = 0;
+        EmitLdr64(buf_, tmp, base, static_cast<uint16_t>(disp / 8));
+        EmitEor64(buf_, dst, dst, tmp);
     }
     void EmitXorZR(uint8_t reg) override {
         EmitEor64(buf_, reg, reg, reg);  // XOR Xd, Xd, Xd = zero
@@ -146,7 +149,7 @@ public:
 
     // ── Negation / Not ──────────────────────────────────────────────────────
     void EmitNeg32(uint8_t reg) override {
-        EmitNeg32(buf_, reg, reg);
+        ::chaos::il2cpp::jit::EmitNeg32(buf_, reg, reg);
     }
     void EmitNeg(uint8_t reg) override {
         EmitNeg64(buf_, reg, reg);
@@ -232,14 +235,14 @@ public:
     void EmitCallRel32(int32_t offset) override {
         EmitBl(buf_, offset);
     }
-    void EmitCallRipRel(int32_t disp) override {
-        CHAOS_IL2CPP_FAIL(FATAL);
+    void EmitCallRipRel(int32_t) override {
+        CHAOS_IL2CPP_FAIL();
     }
     void EmitCallReg(uint8_t reg) override {
         EmitBlr(buf_, reg);
     }
     void EmitRet() override {
-        ::chaos::il2cpp::jit::EmitRet(buf_);
+        ::chaos::il2cpp::jit::EmitArm64(buf_, 0xD65F03C0u);  // RET X30 (LR)
     }
     void EmitPush(uint8_t reg) override {
         // STP Xt, XZR, [SP, #-16]!  (pre-indexed store pair, dummy slot)
@@ -349,34 +352,166 @@ public:
         EmitXor16B(buf_, dst, dst, src);
     }
 
-    // SSE2 integer ALU — ARM64 NEON stubs (not implemented; x64-only codegen)
-    void EmitPaddbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPaddwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPadddRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPaddqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPsubbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPsubwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPsubdRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPsubqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPmullwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPmuludqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPandRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPorRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPandnRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPcmpeqbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPcmpeqwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPcmpeqdRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPcmpeqqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPcmpgtbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPcmpgtwRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPcmpgtdRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPcmpgtqRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPshufdRR(uint8_t, uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPabsbRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPabswRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPabsdRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitPopcntRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
-    void EmitLzcntRR(uint8_t, uint8_t) override { CHAOS_IL2CPP_FAIL(FATAL); }
+    // ── 128-bit SIMD moves ─────────────────────────────────────────────────────
+    void EmitMovdqaRR(uint8_t dst, uint8_t src) override {
+        EmitOrr16B(buf_, dst, src, src);  // ORR Vd.16B, Vn.16B, Vn.16B = MOV
+    }
+    void EmitMovdqaMR(uint8_t base, int32_t disp, uint8_t src) override {
+        EmitStrQ(buf_, src, base, static_cast<uint16_t>(disp / 16));
+    }
+    void EmitMovdqaRM(uint8_t dst, uint8_t base, int32_t disp) override {
+        EmitLdrQ(buf_, dst, base, static_cast<uint16_t>(disp / 16));
+    }
+
+    // ── SSE2 integer ALU ───────────────────────────────────────────────────────
+    void EmitPaddbRR(uint8_t dst, uint8_t src) override {
+        EmitAdd16B(buf_, dst, dst, src);
+    }
+    void EmitPaddwRR(uint8_t dst, uint8_t src) override {
+        EmitAdd8H(buf_, dst, dst, src);
+    }
+    void EmitPadddRR(uint8_t dst, uint8_t src) override {
+        EmitAdd4S(buf_, dst, dst, src);
+    }
+    void EmitPaddqRR(uint8_t dst, uint8_t src) override {
+        EmitAdd2D(buf_, dst, dst, src);
+    }
+    void EmitPsubbRR(uint8_t dst, uint8_t src) override {
+        EmitSub16B(buf_, dst, dst, src);
+    }
+    void EmitPsubwRR(uint8_t dst, uint8_t src) override {
+        EmitSub8H(buf_, dst, dst, src);
+    }
+    void EmitPsubdRR(uint8_t dst, uint8_t src) override {
+        EmitSub4S(buf_, dst, dst, src);
+    }
+    void EmitPsubqRR(uint8_t dst, uint8_t src) override {
+        EmitSub2D(buf_, dst, dst, src);
+    }
+    void EmitPmullwRR(uint8_t dst, uint8_t src) override {
+        EmitMul8H(buf_, dst, dst, src);
+    }
+    void EmitPmuludqRR(uint8_t dst, uint8_t src) override {
+        EmitUmull2D(buf_, dst, dst, src);
+    }
+    void EmitPandRR(uint8_t dst, uint8_t src) override {
+        EmitAnd16B(buf_, dst, dst, src);
+    }
+    void EmitPorRR(uint8_t dst, uint8_t src) override {
+        EmitOrr16B(buf_, dst, dst, src);
+    }
+    void EmitPandnRR(uint8_t dst, uint8_t src) override {
+        EmitBic16B(buf_, dst, dst, src);
+    }
+    void EmitPcmpeqbRR(uint8_t dst, uint8_t src) override {
+        EmitCmeq16B(buf_, dst, dst, src);
+    }
+    void EmitPcmpeqwRR(uint8_t dst, uint8_t src) override {
+        EmitCmeq8H(buf_, dst, dst, src);
+    }
+    void EmitPcmpeqdRR(uint8_t dst, uint8_t src) override {
+        EmitCmeq4S(buf_, dst, dst, src);
+    }
+    void EmitPcmpeqqRR(uint8_t dst, uint8_t src) override {
+        EmitCmeq2D(buf_, dst, dst, src);
+    }
+    void EmitPcmpgtbRR(uint8_t dst, uint8_t src) override {
+        EmitCmgt16B(buf_, dst, dst, src);
+    }
+    void EmitPcmpgtwRR(uint8_t dst, uint8_t src) override {
+        EmitCmgt8H(buf_, dst, dst, src);
+    }
+    void EmitPcmpgtdRR(uint8_t dst, uint8_t src) override {
+        EmitCmgt4S(buf_, dst, dst, src);
+    }
+    void EmitPcmpgtqRR(uint8_t dst, uint8_t src) override {
+        EmitCmgt2D(buf_, dst, dst, src);
+    }
+    void EmitPshufdRR(uint8_t dst, uint8_t src, uint8_t imm) override {
+        // PSHUFD: shuffle 4 dwords using 8-bit immediate (2 bits per dword).
+        // ARM64 TBL Vd.16B, {Vn.16B}, Vm.16B does arbitrary byte permutation.
+        //
+        // Code layout: ADR X10, #12 (points to mask after ADR+LDR+TBL)
+        //              LDR Q31, [X10]
+        //              TBL Vd.16B, {Vsrc.16B}, V31.16B
+        //              .byte mask[16]   (literal pool — NOT executed, data only)
+        //
+        // The 16 mask bytes follow immediately.  Since PSHUFD is always inside
+        // a basic block whose next instruction is a branch (JIT engine invariant),
+        // execution never reaches the literal pool data.
+        uint8_t mask[16];
+        for (int i = 0; i < 4; i++) {
+            int sel = (imm >> (i * 2)) & 3;
+            mask[i * 4 + 0] = static_cast<uint8_t>(sel * 4 + 0);
+            mask[i * 4 + 1] = static_cast<uint8_t>(sel * 4 + 1);
+            mask[i * 4 + 2] = static_cast<uint8_t>(sel * 4 + 2);
+            mask[i * 4 + 3] = static_cast<uint8_t>(sel * 4 + 3);
+        }
+        uint8_t tmp_gpr = 10;   // X10 — temp addr register (caller-saved)
+        uint8_t tmp_vec = 31;   // V31 — temp mask register
+        EmitAdr(buf_, tmp_gpr, 12);  // points to mask data after ADR(4)+LDR(4)+TBL(4)
+        EmitLdrQ(buf_, tmp_vec, tmp_gpr, 0);
+        EmitTbl1(buf_, dst, src, tmp_vec);
+        // Emit 16-byte mask as 4 little-endian words
+        for (int i = 0; i < 4; i++) {
+            uint32_t w = (static_cast<uint32_t>(mask[i * 4 + 3]) << 24)
+                       | (static_cast<uint32_t>(mask[i * 4 + 2]) << 16)
+                       | (static_cast<uint32_t>(mask[i * 4 + 1]) << 8)
+                       | (static_cast<uint32_t>(mask[i * 4 + 0]));
+            buf_.Emit32(w);
+        }
+    }
+    void EmitPabsbRR(uint8_t dst, uint8_t src) override {
+        EmitAbs16B(buf_, dst, src);
+    }
+    void EmitPabswRR(uint8_t dst, uint8_t src) override {
+        EmitAbs8H(buf_, dst, src);
+    }
+    void EmitPabsdRR(uint8_t dst, uint8_t src) override {
+        EmitAbs4S(buf_, dst, src);
+    }
+
+    // ── Bit manipulation ───────────────────────────────────────────────────────
+    void EmitPopcntRR(uint8_t dst, uint8_t src) override {
+        // CNT Vsrc.8B + UADDLV Dsrc, Vsrc.8B + FMOV Xdst, Dsrc
+        EmitFmov64Gpr(buf_, src, src);   // FMOV Dsrc, Xsrc (GPR→FP)
+        EmitCnt8B(buf_, src, src);        // CNT Vsrc.8B, Vsrc.8B
+        EmitUaddlv8B(buf_, src, src);     // UADDLV Dsrc, Vsrc.8B
+        EmitFmov64Fpr(buf_, dst, src);    // FMOV Xdst, Dsrc (FP→GPR)
+    }
+    void EmitLzcntRR(uint8_t dst, uint8_t src) override {
+        EmitClz64(buf_, dst, src);  // CLZ Xd, Xn
+    }
+
+    // ── FMA (fused multiply-add, 231 form: acc = src1 * src2 [+-] acc) ────────
+    void EmitVfmadd231psRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        EmitFmla4S(buf_, acc, src1, src2);  // Vacc += Vsrc1 * Vsrc2
+    }
+    void EmitVfmadd231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        EmitFmla2D(buf_, acc, src1, src2);  // Vacc += Vsrc1 * Vsrc2
+    }
+    void EmitVfmsub231psRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        EmitFmls4S(buf_, acc, src1, src2);  // Vacc -= Vsrc1 * Vsrc2
+    }
+    void EmitVfmsub231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        EmitFmls2D(buf_, acc, src1, src2);  // Vacc -= Vsrc1 * Vsrc2
+    }
+    void EmitVfnmadd231psRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        // -(src1*src2) + acc = acc - src1*src2 = same as fmsub
+        EmitFmls4S(buf_, acc, src1, src2);
+    }
+    void EmitVfnmadd231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        EmitFmls2D(buf_, acc, src1, src2);
+    }
+    void EmitVfnmsub231psRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        // -(src1*src2) - acc = -(src1*src2 + acc) = FMLA then FNEG
+        EmitFmla4S(buf_, acc, src1, src2);
+        EmitFneg4S(buf_, acc, acc);
+    }
+    void EmitVfnmsub231pdRR(uint8_t acc, uint8_t src1, uint8_t src2) override {
+        EmitFmla2D(buf_, acc, src1, src2);
+        EmitFneg2D(buf_, acc, acc);
+    }
 
 private:
     // ── Helper: map x64 condition code → ARM64 condition code ────────────

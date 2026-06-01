@@ -3,6 +3,7 @@
 
 #include <chaos/native_types.h>
 #include <chaos/type_info.h>
+#include <chaos/pal/pal_sync.h>
 #include <atomic>
 #include <cstdint>
 
@@ -103,12 +104,8 @@ struct ManagedThread {
     /// Event handle for event-based safepoint wait (infinite wait,
     /// zero CPU).  Created in RegisterThread, closed in UnregisterThread.
     /// Set by ReleaseGlobalSafepoint to wake all waiting threads.
-#if defined(_WIN32) || defined(_WIN64)
-    void* suspend_event{nullptr};  // HANDLE (Windows Event)
-#else
-    void* suspend_event{nullptr};   // pthread_cond_t* (POSIX)
-    void* suspend_mutex{nullptr};   // pthread_mutex_t* (POSIX, paired with suspend_event)
-#endif
+    /// Uses auto-reset PalEvent (pal_sync.h) on all platforms.
+    chaos::il2cpp::pal::PalEvent* suspend_event{nullptr};
 
     // ── Legacy fields (kept for transition compat) ──────────────
     uint32_t                 last_seen_gen{0};     // Legacy: generation-based confirm
@@ -153,10 +150,11 @@ struct ManagedThread {
     /// Set to true when this thread is preemptively suspended (POSIX SIGUSR1).
     std::atomic<bool> preemptive_suspended{false};
 
-#if !defined(__APPLE__) && !defined(_WIN32) && !defined(_WIN64)
-    /// POSIX thread ID for pthread_kill-based preemptive suspend.
-    pthread_t os_thread_id{};
-#endif
+    /// OS thread ID for pthread_kill-based preemptive suspend (Linux).
+    /// Populated by PalGetCurrentThreadId().  Used on Linux (non-Apple,
+    /// non-Android) for SIGUSR1-based preemptive suspend.
+    /// Zero on platforms that don't support signal-based suspend.
+    uint64_t os_thread_id{0};
 
     // ── BGC concurrent root change buffer (G-25) ─────────────────
     /// Ring buffer tracking root slot modifications during BGC concurrent mark.

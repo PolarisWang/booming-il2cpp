@@ -6,14 +6,13 @@
 #include "gc_card_table.h"
 #include "gc_heap.h"
 
+#include <chaos/pal/pal_mem.h>
+
 #include <cstdlib>
 #include <new>
 
 #if defined(_WIN32) || defined(_WIN64)
     #include <windows.h>
-#else
-    #include <sys/mman.h>
-    #include <unistd.h>
 #endif
 
 namespace chaos::il2cpp::runtime_core {
@@ -25,31 +24,17 @@ LargeObjectHeap g_loh;
 // ======================================================================
 
 static void* VirtualAllocPage(CHAOS_IL2CPP_SIZE size) {
-#if defined(_WIN32) || defined(_WIN64)
-    auto* ptr = VirtualAlloc(nullptr, size, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE);
+    auto* ptr = chaos::il2cpp::pal::PalVirtualAlloc(size);
     if (ptr == nullptr) {
-        CHAOS_IL2CPP_LOG_ERROR_M("LOH", "VirtualAlloc failed size={0} error={1}",
-            static_cast<unsigned long long>(size),
-            static_cast<unsigned long>(GetLastError()));
+        CHAOS_IL2CPP_LOG_ERROR_M("LOH", "PalVirtualAlloc failed size={0}",
+            static_cast<unsigned long long>(size));
     }
     return ptr;
-#else
-    void* ptr = mmap(nullptr, size, PROT_READ | PROT_WRITE,
-                     MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
-    if (ptr == MAP_FAILED) {
-        CHAOS_IL2CPP_LOG_ERROR_M("LOH", "mmap failed size={0}", static_cast<unsigned long long>(size));
-        return nullptr;
-    }
-    return ptr;
-#endif
 }
 
 static void VirtualFreePage(void* ptr, CHAOS_IL2CPP_SIZE size) {
-#if defined(_WIN32) || defined(_WIN64)
-    VirtualFree(ptr, 0, MEM_RELEASE);
-#else
-    munmap(ptr, size);
-#endif
+    if (ptr == nullptr) return;
+    chaos::il2cpp::pal::PalVirtualFree(ptr, size);
 }
 
 // ======================================================================

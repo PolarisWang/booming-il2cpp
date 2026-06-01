@@ -143,9 +143,107 @@ RuntimeFunction* AllocRuntimeFunction(uint32_t unwind_info_offset,
 
 #endif  // _WIN64
 
-// ── DWARF .eh_frame (Linux x64) ────────────────────────────────────────────
+// ── DWARF .eh_frame (Linux) ────────────────────────────────────────────────
 
 #if defined(__linux__)
+
+#if defined(__aarch64__)
+
+// ── ARM64 DWARF .eh_frame ──────────────────────────────────────────────────
+//
+// ARM64 DWARF register numbering:
+//   X0-X30  → DWARF 0-30
+//   SP      → DWARF 31
+//   LR(X30) → DWARF 30
+//   FP(X29) → DWARF 29
+
+uint32_t EmitDwarfCie(CodeBuffer& buf) noexcept {
+    uint32_t start = buf.pos();
+    uint32_t length_off = buf.pos();
+    buf.Emit32(0);              // placeholder length
+    buf.Emit32(0);              // cie_id = 0 (CIE marker)
+    buf.EmitByte(1);            // version = 1
+    buf.EmitByte('z');          // augmentation = "zR\0"
+    buf.EmitByte('R');
+    buf.EmitByte(0);
+    buf.EmitByte(1);            // code_align = ULEB128(1)
+    buf.EmitByte(0x78);         // data_align = SLEB128(-8)
+    buf.EmitByte(30);           // ret_addr_reg = ULEB128(30) = LR
+    buf.EmitByte(1);            // aug_len = ULEB128(1)
+    buf.EmitByte(0x1B);         // fde_encoding = DW_EH_PE_pcrel | DW_EH_PE_sdata4
+
+    // Initial: CFA = SP (caller's SP at entry, no pushed return address)
+    buf.EmitByte(0x0C);         // DW_CFA_def_cfa
+    buf.EmitByte(31);           // register 31 (SP)
+    buf.EmitByte(0);            // offset 0
+
+    // Pad to 4-byte boundary
+    uint32_t content = buf.pos() - start - 4;
+    uint32_t pad = (4 - (content % 4)) % 4;
+    for (uint32_t i = 0; i < pad; ++i)
+        buf.EmitByte(0);
+    buf.Patch32(length_off, buf.pos() - start - 4);
+    return start;
+}
+
+uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
+                      uint32_t code_body_size,
+                      uint32_t num_push_regs,
+                      const uint8_t* push_reg_nums) noexcept {
+    uint32_t fde_start = buf.pos();
+    uint32_t length_off = buf.pos();
+    buf.Emit32(0);              // placeholder length
+    uint32_t cie_ptr_val = cie_offset - (fde_start + 4);
+    buf.Emit32(cie_ptr_val);
+
+    uint32_t initial_loc_off = buf.pos() - fde_start;
+    int32_t pcrel_val = 0 - static_cast<int32_t>(fde_start + initial_loc_off + 4);
+    buf.Emit32(static_cast<uint32_t>(pcrel_val));
+    buf.Emit32(code_body_size);
+
+    // Post-prologue frame state (after STP X29, X30 + cache reg STPs):
+    //   CFA = X29 + 16
+    //   X29 at CFA-16  (factored offset 2)
+    //   LR  at CFA-8   (factored offset 1)
+    //   X19 at CFA-32  (factored offset 4) — first cache slot if any
+    //   X20 at CFA-48  (factored offset 6) — etc.
+    //
+    // General formula for cache reg slot i: CFA - 16*(i+2), factored offset 2*(i+2)
+
+    // DW_CFA_def_cfa(29, 16): CFA = X29 + 16
+    buf.EmitByte(0x0C);
+    buf.EmitByte(29);           // X29 (DWARF reg 29)
+    buf.EmitByte(16);
+
+    // DW_CFA_offset(29, 2): X29 at CFA-16
+    buf.EmitByte(0x80 | 29);
+    buf.EmitByte(2);
+
+    // DW_CFA_offset(30, 1): LR at CFA-8
+    buf.EmitByte(0x80 | 30);
+    buf.EmitByte(1);
+
+    // For each callee-saved GPR in prologue order:
+    //   push_reg_nums[0] = X29 (already handled above)
+    //   push_reg_nums[1..] = callee-saved regs (X19-X28)
+    //   Each at CFA - 16*(slot + 2), factored offset = 2*(slot + 2)
+    for (uint32_t i = 1; i < num_push_regs; ++i) {
+        uint8_t dwarf_reg = push_reg_nums[i];  // ARM64: reg# == DWARF#
+        uint8_t factored = static_cast<uint8_t>(2 * (i + 1));  // slot i → CFA - 16*(i+1) → offset 2*(i+1)
+        buf.EmitByte(static_cast<uint8_t>(0x80 | dwarf_reg));
+        buf.EmitByte(factored);
+    }
+
+    // Pad to 4-byte boundary
+    uint32_t content = buf.pos() - fde_start - 4;
+    uint32_t pad = (4 - (content % 4)) % 4;
+    for (uint32_t i = 0; i < pad; ++i)
+        buf.EmitByte(0);
+    buf.Patch32(length_off, buf.pos() - fde_start - 4);
+    return fde_start;
+}
+
+#else  // !__aarch64__ (x64)
 
 // x64 register number → DWARF register number mapping.
 // First 8 x64 regs have different DWARF numbers; R8-R15 map directly.
@@ -261,6 +359,8 @@ uint32_t EmitDwarfFde(CodeBuffer& buf, uint32_t cie_offset,
 
     return fde_start;
 }
+
+#endif  // !__aarch64__ (closes #else block)
 
 #endif  // __linux__
 

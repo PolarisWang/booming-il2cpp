@@ -1,5 +1,6 @@
 #include "gc_old_gen.h"
 
+#include <chaos/pal/pal_mem.h>
 #include <chaos/asan_interface.h>
 #include <chaos/log.h>
 #include <chaos/profile.h>
@@ -41,9 +42,9 @@
     #include <windows.h>
     #include <intrin.h>
     #define CHAOS_OLDGEN_SPIN_HINT()  _mm_pause()
+#elif defined(__aarch64__) || defined(_M_ARM64)
+    #define CHAOS_OLDGEN_SPIN_HINT()  __yield()
 #else
-    #include <sys/mman.h>
-    #include <unistd.h>
     #define CHAOS_OLDGEN_SPIN_HINT()  __builtin_ia32_pause()
 #endif
 
@@ -84,11 +85,7 @@ static void* VirtualAllocPage(CHAOS_IL2CPP_SIZE size) {
 
 static void VirtualFreePage(void* ptr, CHAOS_IL2CPP_SIZE size) {
     if (ptr == nullptr) return;
-#if defined(_WIN32) || defined(_WIN64)
-    VirtualFree(ptr, 0, MEM_RELEASE);
-#else
-    munmap(ptr, size);
-#endif
+    chaos::il2cpp::pal::PalVirtualFree(ptr, size);
 }
 
 // ======================================================================
@@ -287,9 +284,9 @@ OldGenPage* MarkSweepOldGen::AllocatePage(CHAOS_IL2CPP_SIZE size, bool scanning,
             page_pool_.erase(page_pool_.begin() + static_cast<ptrdiff_t>(pool_idx));
 
 #if defined(_WIN32) || defined(_WIN64)
-            // Recommit the decommitted page.  MEM_DECOMMIT in FreeRegion
+            // Recommit the decommitted page.  PalVirtualDecommit in FreeRegion
             // releases physical pages but keeps the VA range reserved.
-            VirtualAlloc(entry.page, entry.page_size, MEM_COMMIT, PAGE_READWRITE);
+            chaos::il2cpp::pal::PalVirtualCommit(entry.page, entry.page_size);
 #endif
             auto* recycled = entry.page;
 
@@ -615,17 +612,10 @@ int MarkSweepOldGen::DiagProtectPayloads() {
     while (page != nullptr) {
         if (page->in_use.load(std::memory_order_acquire) && !page->is_oversized) {
             void* payload = page->Payload();
-#if defined(_WIN32) || defined(_WIN64)
-            DWORD old;
-            if (VirtualProtect(payload, page->payload_size, PAGE_READONLY, &old)) {
+            if (chaos::il2cpp::pal::PalVirtualProtect(payload, page->payload_size,
+                    chaos::il2cpp::pal::kPalMemRead)) {
                 count++;
             }
-#else
-            // On POSIX, use mprotect for read-only protection.
-            if (::mprotect(payload, page->payload_size, PROT_READ) == 0) {
-                count++;
-            }
-#endif
         }
         page = page->next;
     }
@@ -637,12 +627,8 @@ void MarkSweepOldGen::DiagUnprotectPayloads() {
     while (page != nullptr) {
         if (page->in_use.load(std::memory_order_acquire) && !page->is_oversized) {
             void* payload = page->Payload();
-#if defined(_WIN32) || defined(_WIN64)
-            DWORD old;
-            VirtualProtect(payload, page->payload_size, PAGE_READWRITE, &old);
-#else
-            ::mprotect(payload, page->payload_size, PROT_READ | PROT_WRITE);
-#endif
+            chaos::il2cpp::pal::PalVirtualProtect(payload, page->payload_size,
+                chaos::il2cpp::pal::kPalMemReadWrite);
         }
         page = page->next;
     }
@@ -3289,11 +3275,8 @@ void MarkSweepOldGen::BgcSweep() {
                         if (page_pool_[j].numa_node == node) remaining_for_node++;
                     }
                     if (remaining_for_node > keep_for_node) {
-#if defined(_WIN32) || defined(_WIN64)
-                        VirtualFree(page_pool_[i].page, 0, MEM_RELEASE);
-#else
-                        VirtualFreePage(page_pool_[i].page, page_pool_[i].page_size);
-#endif
+                        chaos::il2cpp::pal::PalVirtualFree(
+                            page_pool_[i].page, page_pool_[i].page_size);
                         page_pool_.erase(page_pool_.begin() + i);
                         removed++;
                     }
@@ -3374,9 +3357,7 @@ void MarkSweepOldGen::BgcCompact() {
         // Deferred pool pages: MEM_DECOMMIT (keep VA reserved) and add
         // to page_pool_ for fast recommit on next AllocatePage.
         for (auto& entry : deferred_pool_pages_) {
-#if defined(_WIN32) || defined(_WIN64)
-            VirtualFree(entry.page, entry.page_size, MEM_DECOMMIT);
-#endif
+            chaos::il2cpp::pal::PalVirtualDecommit(entry.page, entry.page_size);
             page_pool_.push_back(entry);
         }
         deferred_pool_pages_.clear();

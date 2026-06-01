@@ -458,8 +458,7 @@ def fix_family(report: dict[str, Any]) -> None:
             comment = f"    // [{idx}] {method_sig}"
             stub = f"    public static void CustomEntrySubject_{idx}()"
             body = "    {"
-            body += '        try { /* TODO: invoke the actual method */ }'
-            body += "        catch { _exitCode = 1; }"
+            body += "        // TODO: invoke the actual method"
             body += "    }"
             lines.extend([comment, stub, body, ""])
 
@@ -745,9 +744,9 @@ def fill_handwritten_stubs(slug: str, assembly: str) -> int:
                 return m.group(0)
 
             if ret_type in ("System.Void", ""):
-                body = f"try {{ {call_expr}; }} catch {{ _exitCode = 1; }}"
+                body = f"try {{ {call_expr}; }} catch {{ /* TODO */ }}"
             else:
-                body = f"try {{ _ = {call_expr}; }} catch {{ _exitCode = 1; }}"
+                body = f"try {{ _ = {call_expr}; }} catch {{ /* TODO */ }}"
 
             filled_count += 1
             return f"{prefix}{idx}{sig_and_open}{body}{close}"

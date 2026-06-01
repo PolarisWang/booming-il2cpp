@@ -17,6 +17,8 @@ class X64Encoder : public IEncoder {
 public:
     explicit X64Encoder(CodeBuffer& buf) : buf_(buf) {}
 
+    Arch GetArch() const noexcept override { return Arch::kX64; }
+
     // ── MOV ──────────────────────────────────────────────────────────────
     void EmitMovRR(uint8_t dst, uint8_t src) override {
         ::chaos::il2cpp::jit::EmitMovRR(buf_, dst, src);

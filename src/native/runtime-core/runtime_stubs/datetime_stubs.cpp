@@ -2,14 +2,9 @@
 
 // datetime_stubs.cpp — DateTime/TimeSpan stub implementations
 #include <chaos/native_types.h>
+#include <chaos/pal/pal_time.h>
 #include <cstdio>
 #include <cstring>
-
-#if defined(_WIN32)
-#include <Windows.h>
-#else
-#include <ctime>
-#endif
 
 #include "generated_code_compat.h"
 #include "runtime_stubs/stub_common.h"
@@ -24,12 +19,12 @@ static constexpr CHAOS_IL2CPP_INT64 kTicksPerMinute = 600000000LL;
 static constexpr CHAOS_IL2CPP_INT64 kTicksPerHour = 36000000000LL;
 static constexpr CHAOS_IL2CPP_INT64 kTicksPerDay = 864000000000LL;
 
-// Offset from .NET epoch (0001-01-01) to FILETIME epoch (1601-01-01).
-static constexpr CHAOS_IL2CPP_INT64 kDotNetToFileTimeOffset = 504911232000000000LL;
 // Offset from .NET epoch to Unix epoch (1970-01-01).
 static constexpr CHAOS_IL2CPP_INT64 kDotNetToUnixEpochOffset = 621355968000000000LL;
 
 namespace chaos::il2cpp::runtime_core {
+
+using chaos::il2cpp::pal::PalGetRealtimeNs;
 extern "C" {
 
 // ── StringId resolution helper ──
@@ -58,19 +53,9 @@ static CHAOS_IL2CPP_INTPTR resolve_string_arg(CHAOS_IL2CPP_INTPTR value) noexcep
 
 CHAOS_IL2CPP_INT64 ChaosDatetimeGetUtcNow(void) noexcept
 {
-#if defined(_WIN32)
-    FILETIME ft;
-    GetSystemTimeAsFileTime(&ft);
-    CHAOS_IL2CPP_INT64 filetime = (static_cast<CHAOS_IL2CPP_INT64>(ft.dwHighDateTime) << 32)
-                                | static_cast<CHAOS_IL2CPP_INT64>(ft.dwLowDateTime);
-    return filetime + kDotNetToFileTimeOffset;
-#else
-    struct timespec ts;
-    clock_gettime(CLOCK_REALTIME, &ts);
-    CHAOS_IL2CPP_INT64 ticks = static_cast<CHAOS_IL2CPP_INT64>(ts.tv_sec) * 10000000LL
-                             + ts.tv_nsec / 100;
+    uint64_t ns = PalGetRealtimeNs();
+    CHAOS_IL2CPP_INT64 ticks = static_cast<CHAOS_IL2CPP_INT64>(ns / 100);  // ns → 100-ns intervals
     return ticks + kDotNetToUnixEpochOffset;
-#endif
 }
 
 CHAOS_IL2CPP_INT32 ChaosDatetimeGetHashCode(CHAOS_IL2CPP_INTPTR datetime) noexcept

@@ -111,35 +111,79 @@
 
     #include <cstddef>
     #include <cstdint>
+    #include <cstring>
+    #include <sys/socket.h>
+    #include <sys/un.h>
+    #include <unistd.h>
 
     namespace chaos::il2cpp::diagnostics {
 
-    /// Platform-specific pipe handle type (Linux stub: uses int fd).
+    /// Platform-specific pipe handle type (Linux: Unix domain socket fd).
     using EpPlatformHandle = int;
 
     /// Invalid handle sentinel.
     #define kEpInvalidHandle (-1)
 
-    /// Create a named pipe server instance (Linux stub — no-op, always fails).
-    inline EpPlatformHandle EpCreatePipe(const wchar_t* /*pipe_name*/) noexcept {
-        return kEpInvalidHandle;
+    /// Create a Unix domain socket server (AF_UNIX, SOCK_STREAM).
+    /// @param pipe_name  Socket path (e.g., "/tmp/chaos-il2cpp-diag-1234.sock")
+    /// @return  Server socket fd, or kEpInvalidHandle on failure.
+    inline EpPlatformHandle EpCreatePipe(const char* pipe_name) noexcept {
+        EpPlatformHandle fd = ::socket(AF_UNIX, SOCK_STREAM, 0);
+        if (fd < 0) return kEpInvalidHandle;
+
+        // Remove any stale socket file before bind.
+        ::unlink(pipe_name);
+
+        struct sockaddr_un addr;
+        std::memset(&addr, 0, sizeof(addr));
+        addr.sun_family = AF_UNIX;
+        std::strncpy(addr.sun_path, pipe_name, sizeof(addr.sun_path) - 1);
+
+        if (::bind(fd, reinterpret_cast<struct sockaddr*>(&addr), sizeof(addr)) < 0) {
+            ::close(fd);
+            return kEpInvalidHandle;
+        }
+
+        // Max 1 pending connection (single client).
+        if (::listen(fd, 1) < 0) {
+            ::close(fd);
+            ::unlink(pipe_name);
+            return kEpInvalidHandle;
+        }
+
+        return fd;
     }
 
-    /// Wait for a client to connect to the pipe (Linux stub — no-op).
-    inline bool EpWaitForClient(EpPlatformHandle /*pipe*/, void* /*overlapped*/) noexcept {
-        return false;
+    /// Wait for a client to connect (blocking accept).
+    /// @param server_fd  Server socket fd (from EpCreatePipe).
+    /// @return  Client fd on success, kEpInvalidHandle on failure/accept error.
+    inline EpPlatformHandle EpWaitForClient(EpPlatformHandle server_fd) noexcept {
+        return ::accept(server_fd, nullptr, nullptr);
     }
 
-    /// Write data to the pipe (Linux stub — no-op).
-    inline bool EpWritePipe(EpPlatformHandle /*pipe*/, const void* /*data*/, uint32_t /*data_size*/, void* /*overlapped*/) noexcept {
-        return false;
+    /// Write data to the client socket (blocking).
+    /// @param client_fd  Client socket fd (from EpWaitForClient).
+    /// @return true if all data_size bytes were written.
+    inline bool EpWritePipe(EpPlatformHandle client_fd, const void* data, uint32_t data_size) noexcept {
+        if (client_fd < 0) return false;
+        return ::write(client_fd, data, data_size) == static_cast<ssize_t>(data_size);
     }
 
-    /// Disconnect the pipe (Linux stub — no-op).
-    inline void EpDisconnectPipe(EpPlatformHandle /*pipe*/) noexcept {}
+    /// Disconnect the client connection (shutdown).
+    /// @param client_fd  Client socket fd.
+    inline void EpDisconnectPipe(EpPlatformHandle client_fd) noexcept {
+        if (client_fd >= 0) {
+            ::shutdown(client_fd, SHUT_RDWR);
+        }
+    }
 
-    /// Close the pipe handle (Linux stub — no-op).
-    inline void EpClosePipe(EpPlatformHandle /*pipe*/) noexcept {}
+    /// Close a socket fd.
+    /// @param fd  Socket fd (may be kEpInvalidHandle, which is a no-op).
+    inline void EpClosePipe(EpPlatformHandle fd) noexcept {
+        if (fd != kEpInvalidHandle) {
+            ::close(fd);
+        }
+    }
 
     }  // namespace chaos::il2cpp::diagnostics
 

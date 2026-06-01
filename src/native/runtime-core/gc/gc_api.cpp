@@ -1,6 +1,7 @@
 #include "gc_api.h"
 
 #include <chaos/log.h>
+#include <chaos/pal/pal_mem.h>
 
 #include "gc_helpers.h"
 #include "gc_gen1.h"
@@ -15,26 +16,18 @@
 
 #include "../core/engine_lifecycle.h"
 
-#if defined(_WIN32)
-#include <windows.h>
-#endif
-
 namespace chaos::il2cpp::runtime_core {
+
+using chaos::il2cpp::pal::PalGetMemoryStatus;
+using chaos::il2cpp::pal::PalMemoryStatus;
 
 // ── Platform memory status ─────────────────────────────────────────
 
 void GetPlatformMemoryStatus(MemoryStatusData& out) noexcept {
-#if defined(_WIN32)
-    MEMORYSTATUSEX ms;
-    ms.dwLength = sizeof(ms);
-    if (GlobalMemoryStatusEx(&ms)) {
-        out.total_phys = static_cast<int64_t>(ms.ullTotalPhys);
-        out.avail_phys = static_cast<int64_t>(ms.ullAvailPhys);
-        return;
-    }
-#endif
-    out.total_phys = 0;
-    out.avail_phys = 0;
+    PalMemoryStatus pal_status;
+    PalGetMemoryStatus(pal_status);
+    out.total_phys = pal_status.total_phys;
+    out.avail_phys = pal_status.avail_phys;
 }
 
 // ── External memory pressure tracking ─────────────────────────────

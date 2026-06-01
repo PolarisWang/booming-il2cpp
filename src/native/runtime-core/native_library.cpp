@@ -14,18 +14,13 @@
 
 #include "native_library.h"
 
+#include <chaos/pal/pal_dl.h>
 #include <chaos/unordered_dense.h>
 
 #include <cstring>
 #include <mutex>
 #include <shared_mutex>
 #include <string>
-
-#if defined(_WIN32)
-#include <Windows.h>
-#else
-#include <dlfcn.h>
-#endif
 
 namespace chaos::il2cpp::runtime_core {
 
@@ -42,39 +37,13 @@ using NativeLibraryMap = CHAOS_IL2CPP_UNORDERED_DENSE_MAP(CHAOS_IL2CPP_STRING, N
 NativeLibraryMap     s_library_map;
 std::shared_mutex    s_map_mutex;
 
-// ── Canonicalise a module name ──────────────────────────────────────
-// Strip directory separators, normalise case on Windows.
-static std::string CanonicaliseName(const char* name) {
-    std::string result;
-    if (name == nullptr) return result;
-
-    // Determine length.
-    const auto len = std::strlen(name);
-    result.reserve(len);
-
-    for (size_t i = 0; i < len; ++i) {
-        char c = name[i];
-#if defined(_WIN32)
-        // Normalise separators to '\' (Windows native).
-        if (c == '/') c = '\\';
-        // Case-insensitive: fold to lowercase.
-        if (c >= 'A' && c <= 'Z') c = static_cast<char>(c - 'A' + 'a');
-#else
-        // POSIX: normalise separators to '/'.
-        if (c == '\\') c = '/';
-#endif
-        result.push_back(c);
-    }
-    return result;
-}
-
 }  // anonymous namespace
 
 void* NativeLibraryLoad(const char* name_utf8) {
     if (name_utf8 == nullptr || name_utf8[0] == '\0') return nullptr;
 
-    const auto canonical = CanonicaliseName(name_utf8);
-    if (canonical.empty()) return nullptr;
+    const char* canonical = chaos::il2cpp::pal::PalDlNormalisePath(name_utf8);
+    if (canonical == nullptr || canonical[0] == '\0') return nullptr;
 
     {
         // Fast path: already loaded.
@@ -86,19 +55,8 @@ void* NativeLibraryLoad(const char* name_utf8) {
         }
     }
 
-    // Slow path: load the library.
-#if defined(_WIN32)
-    // Try the canonical name first; if it doesn't contain '.', try
-    // appending ".dll" so that "kernel32" → "kernel32.dll" works.
-    auto search_name = canonical;
-    if (search_name.find('.') == std::string::npos) {
-        search_name += ".dll";
-    }
-    auto* handle = static_cast<void*>(::LoadLibraryA(search_name.c_str()));
-#else
-    // POSIX: dlopen with RTLD_LAZY | RTLD_LOCAL.
-    auto* handle = ::dlopen(canonical.c_str(), RTLD_LAZY | RTLD_LOCAL);
-#endif
+    // Slow path: load the library via PAL.
+    auto* handle = chaos::il2cpp::pal::PalDlOpen(canonical);
 
     if (handle == nullptr) return nullptr;
 
@@ -113,11 +71,7 @@ void* NativeLibraryLoad(const char* name_utf8) {
         // shared_lock release and unique_lock acquisition.
         // Use their handle and unload ours.
         ++it->second.refcount;
-#if defined(_WIN32)
-        ::FreeLibrary(static_cast<HMODULE>(handle));
-#else
-        ::dlclose(handle);
-#endif
+        chaos::il2cpp::pal::PalDlClose(handle);
         return it->second.handle;
     }
     return handle;
@@ -125,13 +79,7 @@ void* NativeLibraryLoad(const char* name_utf8) {
 
 void* NativeLibraryGetProcAddress(void* handle, const char* symbol_utf8) {
     if (handle == nullptr || symbol_utf8 == nullptr) return nullptr;
-
-#if defined(_WIN32)
-    return reinterpret_cast<void*>(
-        ::GetProcAddress(static_cast<HMODULE>(handle), symbol_utf8));
-#else
-    return ::dlsym(handle, symbol_utf8);
-#endif
+    return chaos::il2cpp::pal::PalDlSym(handle, symbol_utf8);
 }
 
 bool NativeLibraryFree(void* handle) {
@@ -142,11 +90,7 @@ bool NativeLibraryFree(void* handle) {
     for (auto it = s_library_map.begin(); it != s_library_map.end(); ++it) {
         if (it->second.handle == handle) {
             if (--it->second.refcount == 0) {
-#if defined(_WIN32)
-                ::FreeLibrary(static_cast<HMODULE>(handle));
-#else
-                ::dlclose(handle);
-#endif
+                chaos::il2cpp::pal::PalDlClose(handle);
                 s_library_map.erase(it);
             }
             return true;

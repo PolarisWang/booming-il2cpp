@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <cstddef>
 
+#include "ArchTraits.h"
 #include "code_buffer.h"
 #include "interpreter_vm.h"
 
@@ -85,6 +86,9 @@ inline uint8_t CmpToJccSigned(IROpCode op) noexcept {
 class IEncoder {
 public:
     virtual ~IEncoder() = default;
+
+    /// Architecture identification for dispatch.
+    virtual Arch GetArch() const noexcept = 0;
 
     // ── MOV ──────────────────────────────────────────────────────────────
     virtual void EmitMovRR(uint8_t dst, uint8_t src) = 0;

@@ -1,14 +1,8 @@
 #include "code_buffer.h"
 
-#include <cstdlib>
+#include <chaos/pal/pal_mem.h>
 
-#if defined(_WIN32) || defined(_WIN64)
-  #define NOMINMAX
-  #include <windows.h>
-#else
-  #include <sys/mman.h>
-  #include <unistd.h>
-#endif
+#include <cstdlib>
 
 namespace chaos::il2cpp::jit {
 
@@ -69,16 +63,8 @@ void CodeBuffer::Ensure(uint32_t needed) noexcept {
 
 bool CodeBuffer::Grow(uint32_t min_capacity) noexcept {
     uint32_t new_alloc = (min_capacity + 4095) & ~4095u;  // Round up to page
-    uint8_t* new_data = nullptr;
-
-#if defined(_WIN32) || defined(_WIN64)
-    new_data = static_cast<uint8_t*>(
-        VirtualAlloc(nullptr, new_alloc, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
-#else
-    new_data = static_cast<uint8_t*>(
-        mmap(nullptr, new_alloc, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0));
-    if (new_data == MAP_FAILED) new_data = nullptr;
-#endif
+    uint8_t* new_data = static_cast<uint8_t*>(
+        chaos::il2cpp::pal::PalVirtualAlloc(new_alloc));
 
     if (new_data == nullptr) {
         CHAOS_IL2CPP_LOG_ERROR_M("codegen", "CodeBuffer: failed to allocate {} bytes", new_alloc);
@@ -108,12 +94,9 @@ void* CodeBuffer::Seal() noexcept {
     uint32_t needed = (pos_ + 4095) & ~4095u;
     if (needed < alloc_size_) {
         // Free the excess pages
-#if defined(_WIN32) || defined(_WIN64)
-        if (needed < alloc_size_) {
-            VirtualFree(static_cast<uint8_t*>(data_) + needed,
-                        alloc_size_ - needed, MEM_DECOMMIT);
-        }
-#endif
+        chaos::il2cpp::pal::PalVirtualDecommit(
+            static_cast<uint8_t*>(data_) + needed,
+            alloc_size_ - needed);
     }
 
     if (!ProtectPlatform(true)) {
@@ -132,11 +115,7 @@ void* CodeBuffer::Seal() noexcept {
 
 void CodeBuffer::FreePlatform() noexcept {
     if (data_ == nullptr) return;
-#if defined(_WIN32) || defined(_WIN64)
-    VirtualFree(data_, 0, MEM_RELEASE);
-#else
-    munmap(data_, alloc_size_);
-#endif
+    chaos::il2cpp::pal::PalVirtualFree(data_, alloc_size_);
     data_ = nullptr;
     capacity_ = 0;
     alloc_size_ = 0;
@@ -145,14 +124,8 @@ void CodeBuffer::FreePlatform() noexcept {
 
 bool CodeBuffer::AllocPlatform(uint32_t size) noexcept {
     uint32_t alloc = (size + 4095) & ~4095u;
-#if defined(_WIN32) || defined(_WIN64)
     data_ = static_cast<uint8_t*>(
-        VirtualAlloc(nullptr, alloc, MEM_COMMIT | MEM_RESERVE, PAGE_READWRITE));
-#else
-    data_ = static_cast<uint8_t*>(
-        mmap(nullptr, alloc, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0));
-    if (data_ == MAP_FAILED) data_ = nullptr;
-#endif
+        chaos::il2cpp::pal::PalVirtualAlloc(alloc));
     if (data_ == nullptr) return false;
     capacity_ = size;
     alloc_size_ = alloc;
@@ -162,15 +135,10 @@ bool CodeBuffer::AllocPlatform(uint32_t size) noexcept {
 
 bool CodeBuffer::ProtectPlatform(bool executable) noexcept {
     if (data_ == nullptr) return false;
-#if defined(_WIN32) || defined(_WIN64)
-    DWORD old_protect;
-    DWORD new_protect = executable ? PAGE_EXECUTE_READ : PAGE_READWRITE;
-    return VirtualProtect(data_, alloc_size_, new_protect, &old_protect) != 0;
-#else
-    int prot = PROT_READ;
-    if (executable) prot |= PROT_EXEC;
-    return mprotect(data_, alloc_size_, prot) == 0;
-#endif
+    auto prot = executable
+        ? chaos::il2cpp::pal::kPalMemReadExec
+        : chaos::il2cpp::pal::kPalMemReadWrite;
+    return chaos::il2cpp::pal::PalVirtualProtect(data_, alloc_size_, prot);
 }
 
 }  // namespace chaos::il2cpp::jit

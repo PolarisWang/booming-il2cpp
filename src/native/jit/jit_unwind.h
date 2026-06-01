@@ -109,14 +109,18 @@ static constexpr uint32_t kPersonalityThunkSize = 12;
 
 #endif  // _WIN64
 
-// ── DWARF .eh_frame helpers (Linux x64) ────────────────────────────────────
+// ── DWARF .eh_frame helpers (Linux) ─────────────────────────────────────────
 //
 // Emit CIE (Common Information Entry) and FDE (Frame Description Entry) for
-// Linux x64 DWARF CFI stack unwinding.  Registered via __register_frame at
-// runtime in RegisterNativeCodeSection.
+// Linux DWARF CFI stack unwinding.  Registered via __register_frame at runtime
+// in RegisterNativeCodeSection.
 //
 // Uses "zR" augmentation with DW_EH_PE_pcrel | DW_EH_PE_sdata4 (0x1B) encoding,
 // compatible with libgcc's __register_frame implementation.
+//
+// Two architectures supported:
+//   x64:    CFA=RSP+8 (CIE), CFA=RBP+16 (FDE), ret_addr_reg=16
+//   ARM64:  CFA=SP (CIE), CFA=X29+16 (FDE), ret_addr_reg=30
 
 /// Emit a DWARF CIE (Common Information Entry) for .eh_frame.
 /// Returns the byte offset of the CIE from the start of the code buffer.
