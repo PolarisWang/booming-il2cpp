@@ -34,8 +34,11 @@ public sealed record ProbeResult(
     bool IsVoid,
     bool HasException,
     string? ExceptionType,
-    long? ReturnValue,    // null for void
-    bool IsDeterministic  // false if two probe runs differed
+    long? ReturnValue,              // null for void; kept for backward compat
+    string? ReturnValueJson,        // NEW: JSON-serialized return value
+    string? ReturnValueType,        // NEW: Full CLR type name of return value
+    bool IsDeterministic,           // false if two probe runs differed
+    IReadOnlyList<string>? OutRefValues  // NEW: JSON-serialized out/ref param values after call
 );
 
 public sealed record GeneratedSubject(

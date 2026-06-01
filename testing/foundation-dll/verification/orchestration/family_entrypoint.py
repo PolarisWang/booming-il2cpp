@@ -485,6 +485,7 @@ def generate_project_file(
     output_dir: Path | None = None,
     extra_refs: list[str] | None = None,
     target_framework: str | None = None,
+    skip_extra_cs: bool = False,
 ) -> str:
     """Generate the .csproj for the synthetic entry point assembly."""
     namespace_part = f"<RootNamespace>{class_name}</RootNamespace>"
@@ -577,7 +578,7 @@ def generate_project_file(
     )
 
     extra_cs = ""
-    if output_dir is not None and output_dir.is_dir():
+    if not skip_extra_cs and output_dir is not None and output_dir.is_dir():
         for f in sorted(output_dir.iterdir()):
             if f.suffix == ".cs" and f.name not in (cs_file_name, "Program.cs"):
                 if has_custom_entry and f.name == f"{class_name}.Custom.cs":
@@ -869,7 +870,7 @@ def generate_and_build(
             assembly_name=assembly_name, class_name=class_name,
             cs_file_name=cs_file_name, variant="benchmark",
             has_custom_entry=False, target_framework=target_framework,
-            output_dir=output_dir,
+            output_dir=output_dir, skip_extra_cs=True,
         )
 
         output_dir.mkdir(parents=True, exist_ok=True)
