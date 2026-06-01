@@ -46,7 +46,6 @@ public sealed class UtilityCoverageTests
         // CodegenMode enum
         Assert.Equal("Aot", CodegenMode.Aot.ToString());
         Assert.Equal("Jit", CodegenMode.Jit.ToString());
-        Assert.Equal("Hybrid", CodegenMode.Hybrid.ToString());
 
         // BodyAvailabilityCode enum
         Assert.Equal(0, (int)BodyAvailabilityCode.None);

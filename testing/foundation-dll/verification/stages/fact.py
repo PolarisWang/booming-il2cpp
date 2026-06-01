@@ -354,6 +354,15 @@ def run_managed_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
             duration_ms=int((time.perf_counter() - start) * 1000),
         )
 
+    # Filter out customEntryIndices — these have handwritten implementations
+    # (e.g. OSR::HotLoop, Memory::CopyBlock, Memory::InitBlock) that cannot
+    # be auto-called with default-argument expressions. The harness generator
+    # would produce invalid calls like default(Memory<byte>).CopyBlock().
+    custom_entry_indices = set(contract_data.get("customEntryIndices", []))
+    if custom_entry_indices:
+        subject_ids = [sid for i, sid in enumerate(subject_ids) if i not in custom_entry_indices]
+        print(f"  [managed_fact] Excluded {len(custom_entry_indices)} custom entries, {len(subject_ids)} remaining")
+
     print(f"  [managed_fact] Generating harness for {len(subject_ids)} methods...")
     ok = generate_managed_fact_harness(
         harness_dir, subject_ids, ctx.assembly, ctx.slug,
@@ -370,12 +379,13 @@ def run_managed_fact(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
         # Build first quietly to prevent build warnings from mixing with JSON on stdout.
         build_r = subprocess.run(
             ["dotnet", "build", str(csproj), "--configuration", "Release", "--nologo", "-v", "q"],
-            capture_output=True, timeout=120,
+            capture_output=True, text=True, timeout=120,
         )
         if build_r.returncode != 0:
+            err_text = (build_r.stderr or build_r.stdout or "unknown")[:200]
             return StageResult(
                 stage="managed_fact", status="failed",
-                summary=f"build failed: {build_r.stderr[:200] if build_r.stderr else 'unknown'}",
+                summary=f"build failed: {err_text}",
                 duration_ms=int((time.perf_counter() - start) * 1000),
             )
         r = subprocess.run(

@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.Version
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.Version`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 13 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 4 |
-| Benchmark-only (pure void / non-deterministic) | 1 |
-| Skipped (generic / unresolvable) | 8 |
-| Total Subjects | 7 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 13 |
+| Benchmark-only (pure void / non-deterministic) | 0 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 17 |
 
 ## Build
 
@@ -29,14 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling

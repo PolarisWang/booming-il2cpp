@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.Enum
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.Enum`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 41 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 9 |
-| Benchmark-only (pure void / non-deterministic) | 23 |
-| Skipped (generic / unresolvable) | 9 |
-| Total Subjects | 55 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 41 |
+| Benchmark-only (pure void / non-deterministic) | 0 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 69 |
 
 ## Build
 
@@ -29,15 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling

@@ -2,35 +2,35 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/exception/throw/diagnostics",
-  "capturedAt": "2026-05-29T22:36:18",
+  "capturedAt": "2026-06-01T22:24:59",
   "batchMode": true,
   "summary": {
     "totalMethods": 17,
-    "okCount": 14,
-    "failedCount": 3,
+    "okCount": 17,
+    "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
       "min": 44,
       "max": 44,
       "avg": 44.0,
-      "total": 616
+      "total": 748
     },
     "aotInstructionCount": {
-      "min": 9,
-      "max": 14,
-      "avg": 9.8,
-      "total": 137
+      "min": 7,
+      "max": 22,
+      "avg": 9.4,
+      "total": 159
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 11
+      "external_runtime_call": 14
     },
-    "overallIrExpansionRatio": 0.22,
-    "averageExpansionRatio": 0.22,
-    "maxExpansionRatio": 0.32,
-    "minExpansionRatio": 0.2
+    "overallIrExpansionRatio": 0.21,
+    "averageExpansionRatio": 0.21,
+    "maxExpansionRatio": 0.5,
+    "minExpansionRatio": 0.16
   },
   "methodResults": [
     {
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,7 +52,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_0",
-        "instructions": 9
+        "instructions": 7
       },
       "analysis": [],
       "instructionCategories": {}
@@ -64,8 +64,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -76,7 +76,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_1",
-        "instructions": 10
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}
@@ -88,8 +88,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -100,7 +100,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_2",
-        "instructions": 10
+        "instructions": 8
       },
       "analysis": [
         {
@@ -125,8 +125,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -137,7 +137,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_3",
-        "instructions": 10
+        "instructions": 8
       },
       "analysis": [
         {
@@ -162,8 +162,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -174,7 +174,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_4",
-        "instructions": 14
+        "instructions": 12
       },
       "analysis": [
         {
@@ -199,8 +199,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
@@ -211,7 +211,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_5",
-        "instructions": 9
+        "instructions": 7
       },
       "analysis": [
         {
@@ -231,8 +231,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -243,7 +243,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_6",
-        "instructions": 10
+        "instructions": 8
       },
       "analysis": [
         {
@@ -268,8 +268,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -280,7 +280,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_7",
-        "instructions": 10
+        "instructions": 8
       },
       "analysis": [
         {
@@ -305,8 +305,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "aotInstructionCount": 8,
+        "ratio": 0.18,
         "jitCodeSize": 256
       },
       "jit": {
@@ -317,7 +317,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_8",
-        "instructions": 10
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}
@@ -329,8 +329,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
@@ -341,7 +341,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_9",
-        "instructions": 9
+        "instructions": 7
       },
       "analysis": [],
       "instructionCategories": {}
@@ -353,8 +353,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
@@ -365,7 +365,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_10",
-        "instructions": 9
+        "instructions": 7
       },
       "analysis": [],
       "instructionCategories": {}
@@ -377,8 +377,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
@@ -389,7 +389,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_11",
-        "instructions": 9
+        "instructions": 7
       },
       "analysis": [],
       "instructionCategories": {}
@@ -401,8 +401,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
@@ -413,7 +413,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_12",
-        "instructions": 9
+        "instructions": 7
       },
       "analysis": [],
       "instructionCategories": {}
@@ -425,8 +425,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "aotInstructionCount": 7,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
@@ -437,7 +437,7 @@
       "aot": {
         "status": "ok",
         "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_Subject_13",
-        "instructions": 9
+        "instructions": 7
       },
       "analysis": [],
       "instructionCategories": {}
@@ -446,22 +446,94 @@
       "methodIndex": 14,
       "methodSubjectId": "System.Private.CoreLib/OSR::HotLoop:System.Void()",
       "shortName": "Subject_14",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 22,
+        "ratio": 0.5,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_CustomEntrySubject_14",
+        "instructions": 22
+      },
+      "analysis": [],
+      "instructionCategories": {}
     },
     {
       "methodIndex": 15,
       "methodSubjectId": "System.Private.CoreLib/Memory::CopyBlock:System.Void()",
       "shortName": "Subject_15",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 18,
+        "ratio": 0.41,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_CustomEntrySubject_15",
+        "instructions": 18
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.RuntimeHelpers::InitializeArray:System.Void(System.Array,System.RuntimeFieldHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.Unsafe::CopyBlock:System.Void(System.Byte&,System.Byte&,System.UInt32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 16,
       "methodSubjectId": "System.Private.CoreLib/Memory::InitBlock:System.Void()",
       "shortName": "Subject_16",
-      "status": "error",
-      "error": "Method not found in IL2CPP pipeline output"
+      "status": "ok",
+      "metrics": {
+        "jitInstructionCount": 44,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
+        "jitCodeSize": 256
+      },
+      "jit": {
+        "status": "ok",
+        "size": 256,
+        "instructions": 44
+      },
+      "aot": {
+        "status": "ok",
+        "symbol": "ExceptionThrowDiagnosticsSubjects_ExceptionThrowDiagnosticsSubjects_CustomEntrySubject_16",
+        "instructions": 10
+      },
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Runtime.CompilerServices.Unsafe::InitBlock:System.Void(System.Byte&,System.Byte,System.UInt32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     }
   ]
 }

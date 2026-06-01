@@ -1224,7 +1224,7 @@ public static class Probe
         // --- WriteAllText ---
         try
         {
-            File.WriteAllText(default(string)!, default(string)!, default(Encoding)!);
+            File.WriteAllText(default(string)!, default(ReadOnlySpan<char>));
             results.Add(new { MethodIndex = 52, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1233,30 +1233,18 @@ public static class Probe
         }
         try
         {
-            File.WriteAllText("", default(string)!, default(Encoding)!);
+            File.WriteAllText("", default(ReadOnlySpan<char>));
             results.Add(new { MethodIndex = 52, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 52, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- WriteAllText ---
         try
         {
-            File.WriteAllText(default(string)!, "", default(Encoding)!);
-            results.Add(new { MethodIndex = 52, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 52, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- ReadAllBytes ---
-        try
-        {
-            var result = File.ReadAllBytes(default(string)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 53, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.WriteAllText(default(string)!, default(string)!, default(Encoding)!);
+            results.Add(new { MethodIndex = 53, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1264,20 +1252,26 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadAllBytes("");
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 53, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.WriteAllText("", default(string)!, default(Encoding)!);
+            results.Add(new { MethodIndex = 53, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 53, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllBytes ---
         try
         {
-            File.WriteAllBytes(default(string)!, default(System.Byte[])!);
+            File.WriteAllText(default(string)!, "", default(Encoding)!);
+            results.Add(new { MethodIndex = 53, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 53, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- WriteAllText ---
+        try
+        {
+            File.WriteAllText(default(string)!, default(ReadOnlySpan<char>), default(Encoding)!);
             results.Add(new { MethodIndex = 54, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1286,27 +1280,21 @@ public static class Probe
         }
         try
         {
-            File.WriteAllBytes("", default(System.Byte[])!);
+            File.WriteAllText("", default(ReadOnlySpan<char>), default(Encoding)!);
             results.Add(new { MethodIndex = 54, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 54, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- ReadAllBytes ---
         try
         {
-            File.WriteAllBytes(default(string)!, null!);
-            results.Add(new { MethodIndex = 54, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 54, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- AppendAllBytes ---
-        try
-        {
-            File.AppendAllBytes(default(string)!, default(System.Byte[])!);
-            results.Add(new { MethodIndex = 55, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadAllBytes(default(string)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 55, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1314,30 +1302,21 @@ public static class Probe
         }
         try
         {
-            File.AppendAllBytes("", default(System.Byte[])!);
-            results.Add(new { MethodIndex = 55, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadAllBytes("");
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 55, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 55, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- WriteAllBytes ---
         try
         {
-            File.AppendAllBytes(default(string)!, null!);
-            results.Add(new { MethodIndex = 55, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 55, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- AppendAllBytesAsync ---
-        try
-        {
-            var result = File.AppendAllBytesAsync(default(string)!, default(System.Byte[])!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 56, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.WriteAllBytes(default(string)!, default(System.Byte[])!);
+            results.Add(new { MethodIndex = 56, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1345,11 +1324,8 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllBytesAsync("", default(System.Byte[])!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 56, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.WriteAllBytes("", default(System.Byte[])!);
+            results.Add(new { MethodIndex = 56, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1357,24 +1333,18 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllBytesAsync(default(string)!, null!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 56, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.WriteAllBytes(default(string)!, null!);
+            results.Add(new { MethodIndex = 56, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 56, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- AppendAllBytesAsync ---
+        // --- WriteAllBytes ---
         try
         {
-            var result = File.AppendAllBytesAsync(default(string)!, default(ReadOnlyMemory<byte>)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 57, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.WriteAllBytes(default(string)!, default(ReadOnlySpan<byte>));
+            results.Add(new { MethodIndex = 57, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1382,24 +1352,18 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllBytesAsync("", default(ReadOnlyMemory<byte>)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 57, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.WriteAllBytes("", default(ReadOnlySpan<byte>));
+            results.Add(new { MethodIndex = 57, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 57, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadAllLines ---
+        // --- AppendAllBytes ---
         try
         {
-            var result = File.ReadAllLines(default(string)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 58, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.AppendAllBytes(default(string)!, default(System.Byte[])!);
+            results.Add(new { MethodIndex = 58, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1407,24 +1371,27 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadAllLines("");
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 58, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.AppendAllBytes("", default(System.Byte[])!);
+            results.Add(new { MethodIndex = 58, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 58, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadAllLines ---
         try
         {
-            var result = File.ReadAllLines(default(string)!, default(Encoding)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 59, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.AppendAllBytes(default(string)!, null!);
+            results.Add(new { MethodIndex = 58, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 58, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- AppendAllBytes ---
+        try
+        {
+            File.AppendAllBytes(default(string)!, default(ReadOnlySpan<byte>));
+            results.Add(new { MethodIndex = 59, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1432,20 +1399,17 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadAllLines("", default(Encoding)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 59, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.AppendAllBytes("", default(ReadOnlySpan<byte>));
+            results.Add(new { MethodIndex = 59, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 59, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadLines ---
+        // --- AppendAllBytesAsync ---
         try
         {
-            var result = File.ReadLines(default(string)!);
+            var result = File.AppendAllBytesAsync(default(string)!, default(System.Byte[])!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1457,7 +1421,7 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadLines("");
+            var result = File.AppendAllBytesAsync("", default(System.Byte[])!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1467,10 +1431,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 60, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadLines ---
         try
         {
-            var result = File.ReadLines(default(string)!, default(Encoding)!);
+            var result = File.AppendAllBytesAsync(default(string)!, null!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 60, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 60, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- AppendAllBytesAsync ---
+        try
+        {
+            var result = File.AppendAllBytesAsync(default(string)!, default(ReadOnlyMemory<byte>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1482,7 +1458,7 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadLines("", default(Encoding)!);
+            var result = File.AppendAllBytesAsync("", default(ReadOnlyMemory<byte>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1492,10 +1468,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 61, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadLinesAsync ---
+        // --- ReadAllLines ---
         try
         {
-            var result = File.ReadLinesAsync(default(string)!, default(CancellationToken)!);
+            var result = File.ReadAllLines(default(string)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1507,7 +1483,7 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadLinesAsync("", default(CancellationToken)!);
+            var result = File.ReadAllLines("");
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1517,10 +1493,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 62, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadLinesAsync ---
+        // --- ReadAllLines ---
         try
         {
-            var result = File.ReadLinesAsync(default(string)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.ReadAllLines(default(string)!, default(Encoding)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1532,7 +1508,7 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadLinesAsync("", default(Encoding)!, default(CancellationToken)!);
+            var result = File.ReadAllLines("", default(Encoding)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -1542,11 +1518,14 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 63, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllLines ---
+        // --- ReadLines ---
         try
         {
-            File.WriteAllLines(default(string)!, default(System.String[])!);
-            results.Add(new { MethodIndex = 64, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadLines(default(string)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 64, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1554,18 +1533,24 @@ public static class Probe
         }
         try
         {
-            File.WriteAllLines("", default(System.String[])!);
-            results.Add(new { MethodIndex = 64, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadLines("");
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 64, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 64, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllLines ---
+        // --- ReadLines ---
         try
         {
-            File.WriteAllLines(default(string)!, default(IEnumerable<string>)!);
-            results.Add(new { MethodIndex = 65, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadLines(default(string)!, default(Encoding)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 65, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1573,18 +1558,24 @@ public static class Probe
         }
         try
         {
-            File.WriteAllLines("", default(IEnumerable<string>)!);
-            results.Add(new { MethodIndex = 65, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadLines("", default(Encoding)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 65, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 65, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllLines ---
+        // --- ReadLinesAsync ---
         try
         {
-            File.WriteAllLines(default(string)!, default(System.String[])!, default(Encoding)!);
-            results.Add(new { MethodIndex = 66, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadLinesAsync(default(string)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 66, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1592,18 +1583,24 @@ public static class Probe
         }
         try
         {
-            File.WriteAllLines("", default(System.String[])!, default(Encoding)!);
-            results.Add(new { MethodIndex = 66, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadLinesAsync("", default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 66, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 66, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllLines ---
+        // --- ReadLinesAsync ---
         try
         {
-            File.WriteAllLines(default(string)!, default(IEnumerable<string>)!, default(Encoding)!);
-            results.Add(new { MethodIndex = 67, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadLinesAsync(default(string)!, default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 67, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1611,17 +1608,20 @@ public static class Probe
         }
         try
         {
-            File.WriteAllLines("", default(IEnumerable<string>)!, default(Encoding)!);
-            results.Add(new { MethodIndex = 67, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            var result = File.ReadLinesAsync("", default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 67, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 67, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- AppendAllText ---
+        // --- WriteAllLines ---
         try
         {
-            File.AppendAllText(default(string)!, default(string)!);
+            File.WriteAllLines(default(string)!, default(System.String[])!);
             results.Add(new { MethodIndex = 68, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1630,26 +1630,17 @@ public static class Probe
         }
         try
         {
-            File.AppendAllText("", default(string)!);
+            File.WriteAllLines("", default(System.String[])!);
             results.Add(new { MethodIndex = 68, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 68, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- WriteAllLines ---
         try
         {
-            File.AppendAllText(default(string)!, "");
-            results.Add(new { MethodIndex = 68, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 68, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- AppendAllText ---
-        try
-        {
-            File.AppendAllText(default(string)!, default(string)!, default(Encoding)!);
+            File.WriteAllLines(default(string)!, default(IEnumerable<string>)!);
             results.Add(new { MethodIndex = 69, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1658,26 +1649,17 @@ public static class Probe
         }
         try
         {
-            File.AppendAllText("", default(string)!, default(Encoding)!);
+            File.WriteAllLines("", default(IEnumerable<string>)!);
             results.Add(new { MethodIndex = 69, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 69, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- WriteAllLines ---
         try
         {
-            File.AppendAllText(default(string)!, "", default(Encoding)!);
-            results.Add(new { MethodIndex = 69, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 69, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- AppendAllLines ---
-        try
-        {
-            File.AppendAllLines(default(string)!, default(IEnumerable<string>)!);
+            File.WriteAllLines(default(string)!, default(System.String[])!, default(Encoding)!);
             results.Add(new { MethodIndex = 70, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1686,17 +1668,17 @@ public static class Probe
         }
         try
         {
-            File.AppendAllLines("", default(IEnumerable<string>)!);
+            File.WriteAllLines("", default(System.String[])!, default(Encoding)!);
             results.Add(new { MethodIndex = 70, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 70, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- AppendAllLines ---
+        // --- WriteAllLines ---
         try
         {
-            File.AppendAllLines(default(string)!, default(IEnumerable<string>)!, default(Encoding)!);
+            File.WriteAllLines(default(string)!, default(IEnumerable<string>)!, default(Encoding)!);
             results.Add(new { MethodIndex = 71, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1705,17 +1687,17 @@ public static class Probe
         }
         try
         {
-            File.AppendAllLines("", default(IEnumerable<string>)!, default(Encoding)!);
+            File.WriteAllLines("", default(IEnumerable<string>)!, default(Encoding)!);
             results.Add(new { MethodIndex = 71, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 71, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Replace ---
+        // --- AppendAllText ---
         try
         {
-            File.Replace(default(string)!, default(string)!, default(string)!);
+            File.AppendAllText(default(string)!, default(string)!);
             results.Add(new { MethodIndex = 72, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1724,7 +1706,7 @@ public static class Probe
         }
         try
         {
-            File.Replace("", default(string)!, default(string)!);
+            File.AppendAllText("", default(string)!);
             results.Add(new { MethodIndex = 72, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1733,26 +1715,17 @@ public static class Probe
         }
         try
         {
-            File.Replace(default(string)!, "", default(string)!);
+            File.AppendAllText(default(string)!, "");
             results.Add(new { MethodIndex = 72, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 72, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- AppendAllText ---
         try
         {
-            File.Replace(default(string)!, default(string)!, "");
-            results.Add(new { MethodIndex = 72, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 72, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Replace ---
-        try
-        {
-            File.Replace(default(string)!, default(string)!, default(string)!, default(bool));
+            File.AppendAllText(default(string)!, default(ReadOnlySpan<char>));
             results.Add(new { MethodIndex = 73, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1761,35 +1734,17 @@ public static class Probe
         }
         try
         {
-            File.Replace("", default(string)!, default(string)!, default(bool));
+            File.AppendAllText("", default(ReadOnlySpan<char>));
             results.Add(new { MethodIndex = 73, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 73, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- AppendAllText ---
         try
         {
-            File.Replace(default(string)!, "", default(string)!, default(bool));
-            results.Add(new { MethodIndex = 73, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 73, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        try
-        {
-            File.Replace(default(string)!, default(string)!, "", default(bool));
-            results.Add(new { MethodIndex = 73, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 73, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Move ---
-        try
-        {
-            File.Move(default(string)!, default(string)!);
+            File.AppendAllText(default(string)!, default(string)!, default(Encoding)!);
             results.Add(new { MethodIndex = 74, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1798,7 +1753,7 @@ public static class Probe
         }
         try
         {
-            File.Move("", default(string)!);
+            File.AppendAllText("", default(string)!, default(Encoding)!);
             results.Add(new { MethodIndex = 74, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1807,17 +1762,17 @@ public static class Probe
         }
         try
         {
-            File.Move(default(string)!, "");
+            File.AppendAllText(default(string)!, "", default(Encoding)!);
             results.Add(new { MethodIndex = 74, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 74, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Move ---
+        // --- AppendAllText ---
         try
         {
-            File.Move(default(string)!, default(string)!, default(bool));
+            File.AppendAllText(default(string)!, default(ReadOnlySpan<char>), default(Encoding)!);
             results.Add(new { MethodIndex = 75, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1826,35 +1781,17 @@ public static class Probe
         }
         try
         {
-            File.Move("", default(string)!, default(bool));
+            File.AppendAllText("", default(ReadOnlySpan<char>), default(Encoding)!);
             results.Add(new { MethodIndex = 75, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 75, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- AppendAllLines ---
         try
         {
-            File.Move(default(string)!, "", default(bool));
-            results.Add(new { MethodIndex = 75, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 75, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        try
-        {
-            File.Move(default(string)!, default(string)!, false);
-            results.Add(new { MethodIndex = 75, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 75, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- Encrypt ---
-        try
-        {
-            File.Encrypt(default(string)!);
+            File.AppendAllLines(default(string)!, default(IEnumerable<string>)!);
             results.Add(new { MethodIndex = 76, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1863,17 +1800,17 @@ public static class Probe
         }
         try
         {
-            File.Encrypt("");
+            File.AppendAllLines("", default(IEnumerable<string>)!);
             results.Add(new { MethodIndex = 76, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 76, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- Decrypt ---
+        // --- AppendAllLines ---
         try
         {
-            File.Decrypt(default(string)!);
+            File.AppendAllLines(default(string)!, default(IEnumerable<string>)!, default(Encoding)!);
             results.Add(new { MethodIndex = 77, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
@@ -1882,21 +1819,18 @@ public static class Probe
         }
         try
         {
-            File.Decrypt("");
+            File.AppendAllLines("", default(IEnumerable<string>)!, default(Encoding)!);
             results.Add(new { MethodIndex = 77, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 77, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadAllTextAsync ---
+        // --- Replace ---
         try
         {
-            var result = File.ReadAllTextAsync(default(string)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 78, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Replace(default(string)!, default(string)!, default(string)!);
+            results.Add(new { MethodIndex = 78, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1904,24 +1838,36 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadAllTextAsync("", default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 78, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Replace("", default(string)!, default(string)!);
+            results.Add(new { MethodIndex = 78, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 78, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadAllTextAsync ---
         try
         {
-            var result = File.ReadAllTextAsync(default(string)!, default(Encoding)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 79, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Replace(default(string)!, "", default(string)!);
+            results.Add(new { MethodIndex = 78, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 78, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            File.Replace(default(string)!, default(string)!, "");
+            results.Add(new { MethodIndex = 78, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 78, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Replace ---
+        try
+        {
+            File.Replace(default(string)!, default(string)!, default(string)!, default(bool));
+            results.Add(new { MethodIndex = 79, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1929,24 +1875,36 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadAllTextAsync("", default(Encoding)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 79, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Replace("", default(string)!, default(string)!, default(bool));
+            results.Add(new { MethodIndex = 79, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 79, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllTextAsync ---
         try
         {
-            var result = File.WriteAllTextAsync(default(string)!, default(string)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 80, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Replace(default(string)!, "", default(string)!, default(bool));
+            results.Add(new { MethodIndex = 79, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 79, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            File.Replace(default(string)!, default(string)!, "", default(bool));
+            results.Add(new { MethodIndex = 79, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 79, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Move ---
+        try
+        {
+            File.Move(default(string)!, default(string)!);
+            results.Add(new { MethodIndex = 80, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1954,11 +1912,8 @@ public static class Probe
         }
         try
         {
-            var result = File.WriteAllTextAsync("", default(string)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 80, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Move("", default(string)!);
+            results.Add(new { MethodIndex = 80, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1966,24 +1921,18 @@ public static class Probe
         }
         try
         {
-            var result = File.WriteAllTextAsync(default(string)!, "", default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 80, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Move(default(string)!, "");
+            results.Add(new { MethodIndex = 80, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 80, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllTextAsync ---
+        // --- Move ---
         try
         {
-            var result = File.WriteAllTextAsync(default(string)!, default(ReadOnlyMemory<char>)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 81, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Move(default(string)!, default(string)!, default(bool));
+            results.Add(new { MethodIndex = 81, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -1991,24 +1940,36 @@ public static class Probe
         }
         try
         {
-            var result = File.WriteAllTextAsync("", default(ReadOnlyMemory<char>)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 81, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Move("", default(string)!, default(bool));
+            results.Add(new { MethodIndex = 81, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 81, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllTextAsync ---
         try
         {
-            var result = File.WriteAllTextAsync(default(string)!, default(string)!, default(Encoding)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 82, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Move(default(string)!, "", default(bool));
+            results.Add(new { MethodIndex = 81, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 81, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            File.Move(default(string)!, default(string)!, false);
+            results.Add(new { MethodIndex = 81, SetIndex = 3, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 81, SetIndex = 3, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- Encrypt ---
+        try
+        {
+            File.Encrypt(default(string)!);
+            results.Add(new { MethodIndex = 82, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -2016,36 +1977,18 @@ public static class Probe
         }
         try
         {
-            var result = File.WriteAllTextAsync("", default(string)!, default(Encoding)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 82, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Encrypt("");
+            results.Add(new { MethodIndex = 82, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 82, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- Decrypt ---
         try
         {
-            var result = File.WriteAllTextAsync(default(string)!, "", default(Encoding)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 82, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 82, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- WriteAllTextAsync ---
-        try
-        {
-            var result = File.WriteAllTextAsync(default(string)!, default(ReadOnlyMemory<char>)!, default(Encoding)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 83, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Decrypt(default(string)!);
+            results.Add(new { MethodIndex = 83, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
@@ -2053,20 +1996,17 @@ public static class Probe
         }
         try
         {
-            var result = File.WriteAllTextAsync("", default(ReadOnlyMemory<char>)!, default(Encoding)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 83, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            File.Decrypt("");
+            results.Add(new { MethodIndex = 83, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
             results.Add(new { MethodIndex = 83, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadAllBytesAsync ---
+        // --- ReadAllTextAsync ---
         try
         {
-            var result = File.ReadAllBytesAsync(default(string)!, default(CancellationToken)!);
+            var result = File.ReadAllTextAsync(default(string)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2078,7 +2018,7 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadAllBytesAsync("", default(CancellationToken)!);
+            var result = File.ReadAllTextAsync("", default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2088,10 +2028,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 84, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllBytesAsync ---
+        // --- ReadAllTextAsync ---
         try
         {
-            var result = File.WriteAllBytesAsync(default(string)!, default(System.Byte[])!, default(CancellationToken)!);
+            var result = File.ReadAllTextAsync(default(string)!, default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2103,7 +2043,7 @@ public static class Probe
         }
         try
         {
-            var result = File.WriteAllBytesAsync("", default(System.Byte[])!, default(CancellationToken)!);
+            var result = File.ReadAllTextAsync("", default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2113,22 +2053,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 85, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- WriteAllTextAsync ---
         try
         {
-            var result = File.WriteAllBytesAsync(default(string)!, null!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 85, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 85, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- WriteAllBytesAsync ---
-        try
-        {
-            var result = File.WriteAllBytesAsync(default(string)!, default(ReadOnlyMemory<byte>)!, default(CancellationToken)!);
+            var result = File.WriteAllTextAsync(default(string)!, default(string)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2140,7 +2068,7 @@ public static class Probe
         }
         try
         {
-            var result = File.WriteAllBytesAsync("", default(ReadOnlyMemory<byte>)!, default(CancellationToken)!);
+            var result = File.WriteAllTextAsync("", default(string)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2150,10 +2078,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 86, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadAllLinesAsync ---
         try
         {
-            var result = File.ReadAllLinesAsync(default(string)!, default(CancellationToken)!);
+            var result = File.WriteAllTextAsync(default(string)!, "", default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 86, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 86, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- WriteAllTextAsync ---
+        try
+        {
+            var result = File.WriteAllTextAsync(default(string)!, default(ReadOnlyMemory<char>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2165,7 +2105,7 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadAllLinesAsync("", default(CancellationToken)!);
+            var result = File.WriteAllTextAsync("", default(ReadOnlyMemory<char>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2175,10 +2115,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 87, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ReadAllLinesAsync ---
+        // --- WriteAllTextAsync ---
         try
         {
-            var result = File.ReadAllLinesAsync(default(string)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.WriteAllTextAsync(default(string)!, default(string)!, default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2190,7 +2130,7 @@ public static class Probe
         }
         try
         {
-            var result = File.ReadAllLinesAsync("", default(Encoding)!, default(CancellationToken)!);
+            var result = File.WriteAllTextAsync("", default(string)!, default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2200,10 +2140,22 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 88, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllLinesAsync ---
         try
         {
-            var result = File.WriteAllLinesAsync(default(string)!, default(IEnumerable<string>)!, default(CancellationToken)!);
+            var result = File.WriteAllTextAsync(default(string)!, "", default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 88, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 88, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- WriteAllTextAsync ---
+        try
+        {
+            var result = File.WriteAllTextAsync(default(string)!, default(ReadOnlyMemory<char>)!, default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2215,7 +2167,7 @@ public static class Probe
         }
         try
         {
-            var result = File.WriteAllLinesAsync("", default(IEnumerable<string>)!, default(CancellationToken)!);
+            var result = File.WriteAllTextAsync("", default(ReadOnlyMemory<char>)!, default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2225,10 +2177,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 89, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- WriteAllLinesAsync ---
+        // --- ReadAllBytesAsync ---
         try
         {
-            var result = File.WriteAllLinesAsync(default(string)!, default(IEnumerable<string>)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.ReadAllBytesAsync(default(string)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2240,7 +2192,7 @@ public static class Probe
         }
         try
         {
-            var result = File.WriteAllLinesAsync("", default(IEnumerable<string>)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.ReadAllBytesAsync("", default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2250,10 +2202,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 90, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- AppendAllTextAsync ---
+        // --- WriteAllBytesAsync ---
         try
         {
-            var result = File.AppendAllTextAsync(default(string)!, default(string)!, default(CancellationToken)!);
+            var result = File.WriteAllBytesAsync(default(string)!, default(System.Byte[])!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2265,7 +2217,7 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllTextAsync("", default(string)!, default(CancellationToken)!);
+            var result = File.WriteAllBytesAsync("", default(System.Byte[])!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2277,7 +2229,7 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllTextAsync(default(string)!, "", default(CancellationToken)!);
+            var result = File.WriteAllBytesAsync(default(string)!, null!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2287,10 +2239,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 91, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- AppendAllTextAsync ---
+        // --- WriteAllBytesAsync ---
         try
         {
-            var result = File.AppendAllTextAsync(default(string)!, default(ReadOnlyMemory<char>)!, default(CancellationToken)!);
+            var result = File.WriteAllBytesAsync(default(string)!, default(ReadOnlyMemory<byte>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2302,7 +2254,7 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllTextAsync("", default(ReadOnlyMemory<char>)!, default(CancellationToken)!);
+            var result = File.WriteAllBytesAsync("", default(ReadOnlyMemory<byte>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2312,10 +2264,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 92, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- AppendAllTextAsync ---
+        // --- ReadAllLinesAsync ---
         try
         {
-            var result = File.AppendAllTextAsync(default(string)!, default(string)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.ReadAllLinesAsync(default(string)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2327,7 +2279,7 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllTextAsync("", default(string)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.ReadAllLinesAsync("", default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2337,22 +2289,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 93, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- ReadAllLinesAsync ---
         try
         {
-            var result = File.AppendAllTextAsync(default(string)!, "", default(Encoding)!, default(CancellationToken)!);
-            string _rvJson = JsonSerializer.Serialize(result);
-            string _rvType = ((object)result)?.GetType().FullName ?? "";
-            long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 93, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        catch (Exception ex)
-        {
-            results.Add(new { MethodIndex = 93, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
-        }
-        // --- AppendAllTextAsync ---
-        try
-        {
-            var result = File.AppendAllTextAsync(default(string)!, default(ReadOnlyMemory<char>)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.ReadAllLinesAsync(default(string)!, default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2364,7 +2304,7 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllTextAsync("", default(ReadOnlyMemory<char>)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.ReadAllLinesAsync("", default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2374,10 +2314,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 94, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- AppendAllLinesAsync ---
+        // --- WriteAllLinesAsync ---
         try
         {
-            var result = File.AppendAllLinesAsync(default(string)!, default(IEnumerable<string>)!, default(CancellationToken)!);
+            var result = File.WriteAllLinesAsync(default(string)!, default(IEnumerable<string>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2389,7 +2329,7 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllLinesAsync("", default(IEnumerable<string>)!, default(CancellationToken)!);
+            var result = File.WriteAllLinesAsync("", default(IEnumerable<string>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2399,10 +2339,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 95, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- AppendAllLinesAsync ---
+        // --- WriteAllLinesAsync ---
         try
         {
-            var result = File.AppendAllLinesAsync(default(string)!, default(IEnumerable<string>)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.WriteAllLinesAsync(default(string)!, default(IEnumerable<string>)!, default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2414,7 +2354,7 @@ public static class Probe
         }
         try
         {
-            var result = File.AppendAllLinesAsync("", default(IEnumerable<string>)!, default(Encoding)!, default(CancellationToken)!);
+            var result = File.WriteAllLinesAsync("", default(IEnumerable<string>)!, default(Encoding)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2424,10 +2364,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 96, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- CreateSymbolicLink ---
+        // --- AppendAllTextAsync ---
         try
         {
-            var result = File.CreateSymbolicLink(default(string)!, default(string)!);
+            var result = File.AppendAllTextAsync(default(string)!, default(string)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2439,7 +2379,7 @@ public static class Probe
         }
         try
         {
-            var result = File.CreateSymbolicLink("", default(string)!);
+            var result = File.AppendAllTextAsync("", default(string)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2451,7 +2391,7 @@ public static class Probe
         }
         try
         {
-            var result = File.CreateSymbolicLink(default(string)!, "");
+            var result = File.AppendAllTextAsync(default(string)!, "", default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2461,10 +2401,10 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 97, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
-        // --- ResolveLinkTarget ---
+        // --- AppendAllTextAsync ---
         try
         {
-            var result = File.ResolveLinkTarget(default(string)!, default(bool));
+            var result = File.AppendAllTextAsync(default(string)!, default(ReadOnlyMemory<char>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2476,7 +2416,7 @@ public static class Probe
         }
         try
         {
-            var result = File.ResolveLinkTarget("", default(bool));
+            var result = File.AppendAllTextAsync("", default(ReadOnlyMemory<char>)!, default(CancellationToken)!);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
@@ -2486,17 +2426,191 @@ public static class Probe
         {
             results.Add(new { MethodIndex = 98, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
+        // --- AppendAllTextAsync ---
+        try
+        {
+            var result = File.AppendAllTextAsync(default(string)!, default(string)!, default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 99, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 99, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = File.AppendAllTextAsync("", default(string)!, default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 99, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 99, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = File.AppendAllTextAsync(default(string)!, "", default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 99, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 99, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- AppendAllTextAsync ---
+        try
+        {
+            var result = File.AppendAllTextAsync(default(string)!, default(ReadOnlyMemory<char>)!, default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 100, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 100, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = File.AppendAllTextAsync("", default(ReadOnlyMemory<char>)!, default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 100, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 100, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- AppendAllLinesAsync ---
+        try
+        {
+            var result = File.AppendAllLinesAsync(default(string)!, default(IEnumerable<string>)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 101, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 101, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = File.AppendAllLinesAsync("", default(IEnumerable<string>)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 101, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 101, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- AppendAllLinesAsync ---
+        try
+        {
+            var result = File.AppendAllLinesAsync(default(string)!, default(IEnumerable<string>)!, default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 102, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 102, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = File.AppendAllLinesAsync("", default(IEnumerable<string>)!, default(Encoding)!, default(CancellationToken)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 102, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 102, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- CreateSymbolicLink ---
+        try
+        {
+            var result = File.CreateSymbolicLink(default(string)!, default(string)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 103, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 103, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = File.CreateSymbolicLink("", default(string)!);
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 103, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 103, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = File.CreateSymbolicLink(default(string)!, "");
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 103, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 103, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        // --- ResolveLinkTarget ---
+        try
+        {
+            var result = File.ResolveLinkTarget(default(string)!, default(bool));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 104, SetIndex = 0, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 104, SetIndex = 0, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        try
+        {
+            var result = File.ResolveLinkTarget("", default(bool));
+            string _rvJson = JsonSerializer.Serialize(result);
+            string _rvType = ((object)result)?.GetType().FullName ?? "";
+            long _rvLong = ToLong(result);
+            results.Add(new { MethodIndex = 104, SetIndex = 1, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
+        catch (Exception ex)
+        {
+            results.Add(new { MethodIndex = 104, SetIndex = 1, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+        }
         try
         {
             var result = File.ResolveLinkTarget(default(string)!, false);
             string _rvJson = JsonSerializer.Serialize(result);
             string _rvType = ((object)result)?.GetType().FullName ?? "";
             long _rvLong = ToLong(result);
-            results.Add(new { MethodIndex = 98, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 104, SetIndex = 2, HasException = false, ExceptionType = (string?)null, ReturnValueJson = _rvJson, ReturnValueType = _rvType, ReturnValue = (long?)_rvLong, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
         catch (Exception ex)
         {
-            results.Add(new { MethodIndex = 98, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
+            results.Add(new { MethodIndex = 104, SetIndex = 2, HasException = true, ExceptionType = ex.GetType().FullName, ReturnValueJson = (string?)null, ReturnValueType = (string?)null, ReturnValue = (long?)null, OutRefValues = (System.Collections.Generic.List<string>?)null });
         }
 
         var json = JsonSerializer.Serialize(results, new JsonSerializerOptions { WriteIndented = false });

@@ -873,6 +873,19 @@
   {
     "methodIndex": 30,
     "setIndex": 0,
+    "subjectId": "System.TimeSpan::Parse:System.TimeSpan(ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.FormatException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 31,
+    "setIndex": 0,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String,System.IFormatProvider)__Set0",
     "isVoid": false,
     "hasException": true,
@@ -884,7 +897,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 30,
+    "methodIndex": 31,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String,System.IFormatProvider)__Set1",
     "isVoid": false,
@@ -897,7 +910,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 30,
+    "methodIndex": 31,
     "setIndex": 2,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String,System.IFormatProvider)__Set2",
     "isVoid": false,
@@ -910,7 +923,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 31,
+    "methodIndex": 32,
     "setIndex": 0,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String[],System.IFormatProvider)__Set0",
     "isVoid": false,
@@ -923,7 +936,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 31,
+    "methodIndex": 32,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String[],System.IFormatProvider)__Set1",
     "isVoid": false,
@@ -936,7 +949,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 32,
+    "methodIndex": 33,
     "setIndex": 0,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String,System.IFormatProvider,System.Globalization.TimeSpanStyles)__Set0",
     "isVoid": false,
@@ -949,7 +962,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 32,
+    "methodIndex": 33,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String,System.IFormatProvider,System.Globalization.TimeSpanStyles)__Set1",
     "isVoid": false,
@@ -962,7 +975,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 32,
+    "methodIndex": 33,
     "setIndex": 2,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String,System.IFormatProvider,System.Globalization.TimeSpanStyles)__Set2",
     "isVoid": false,
@@ -975,7 +988,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 33,
+    "methodIndex": 34,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.Globalization.TimeSpanStyles)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.FormatException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 35,
     "setIndex": 0,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String[],System.IFormatProvider,System.Globalization.TimeSpanStyles)__Set0",
     "isVoid": false,
@@ -988,7 +1014,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 33,
+    "methodIndex": 35,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(System.String,System.String[],System.IFormatProvider,System.Globalization.TimeSpanStyles)__Set1",
     "isVoid": false,
@@ -1001,7 +1027,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 34,
+    "methodIndex": 36,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::ParseExact:System.TimeSpan(ReadOnlySpan\u003CSystem.Char\u003E,System.String[],System.IFormatProvider,System.Globalization.TimeSpanStyles)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 37,
     "setIndex": 0,
     "subjectId": "System.TimeSpan::TryParse:System.Boolean(System.String,System.TimeSpan\u0026)__Set0",
     "isVoid": false,
@@ -1016,7 +1055,7 @@
     ]
   },
   {
-    "methodIndex": 34,
+    "methodIndex": 37,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::TryParse:System.Boolean(System.String,System.TimeSpan\u0026)__Set1",
     "isVoid": false,
@@ -1031,7 +1070,22 @@
     ]
   },
   {
-    "methodIndex": 35,
+    "methodIndex": 38,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::TryParse:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.TimeSpan\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u002200:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 39,
     "setIndex": 0,
     "subjectId": "System.TimeSpan::TryParse:System.Boolean(System.String,System.IFormatProvider,System.TimeSpan\u0026)__Set0",
     "isVoid": false,
@@ -1046,7 +1100,7 @@
     ]
   },
   {
-    "methodIndex": 35,
+    "methodIndex": 39,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::TryParse:System.Boolean(System.String,System.IFormatProvider,System.TimeSpan\u0026)__Set1",
     "isVoid": false,
@@ -1061,7 +1115,22 @@
     ]
   },
   {
-    "methodIndex": 36,
+    "methodIndex": 40,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::TryParse:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.TimeSpan\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u002200:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 41,
     "setIndex": 0,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String,System.IFormatProvider,System.TimeSpan\u0026)__Set0",
     "isVoid": false,
@@ -1076,7 +1145,7 @@
     ]
   },
   {
-    "methodIndex": 36,
+    "methodIndex": 41,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String,System.IFormatProvider,System.TimeSpan\u0026)__Set1",
     "isVoid": false,
@@ -1091,7 +1160,7 @@
     ]
   },
   {
-    "methodIndex": 36,
+    "methodIndex": 41,
     "setIndex": 2,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String,System.IFormatProvider,System.TimeSpan\u0026)__Set2",
     "isVoid": false,
@@ -1106,7 +1175,22 @@
     ]
   },
   {
-    "methodIndex": 37,
+    "methodIndex": 42,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.TimeSpan\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u002200:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 43,
     "setIndex": 0,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String[],System.IFormatProvider,System.TimeSpan\u0026)__Set0",
     "isVoid": false,
@@ -1121,7 +1205,7 @@
     ]
   },
   {
-    "methodIndex": 37,
+    "methodIndex": 43,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String[],System.IFormatProvider,System.TimeSpan\u0026)__Set1",
     "isVoid": false,
@@ -1136,7 +1220,22 @@
     ]
   },
   {
-    "methodIndex": 38,
+    "methodIndex": 44,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.String[],System.IFormatProvider,System.TimeSpan\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u002200:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 45,
     "setIndex": 0,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String,System.IFormatProvider,System.Globalization.TimeSpanStyles,System.TimeSpan\u0026)__Set0",
     "isVoid": false,
@@ -1151,7 +1250,7 @@
     ]
   },
   {
-    "methodIndex": 38,
+    "methodIndex": 45,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String,System.IFormatProvider,System.Globalization.TimeSpanStyles,System.TimeSpan\u0026)__Set1",
     "isVoid": false,
@@ -1166,7 +1265,7 @@
     ]
   },
   {
-    "methodIndex": 38,
+    "methodIndex": 45,
     "setIndex": 2,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String,System.IFormatProvider,System.Globalization.TimeSpanStyles,System.TimeSpan\u0026)__Set2",
     "isVoid": false,
@@ -1181,7 +1280,22 @@
     ]
   },
   {
-    "methodIndex": 39,
+    "methodIndex": 46,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider,System.Globalization.TimeSpanStyles,System.TimeSpan\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u002200:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 47,
     "setIndex": 0,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String[],System.IFormatProvider,System.Globalization.TimeSpanStyles,System.TimeSpan\u0026)__Set0",
     "isVoid": false,
@@ -1196,7 +1310,7 @@
     ]
   },
   {
-    "methodIndex": 39,
+    "methodIndex": 47,
     "setIndex": 1,
     "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(System.String,System.String[],System.IFormatProvider,System.Globalization.TimeSpanStyles,System.TimeSpan\u0026)__Set1",
     "isVoid": false,
@@ -1208,6 +1322,51 @@
     "isDeterministic": true,
     "outRefValues": [
       "\u002200:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 48,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::TryParseExact:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,System.String[],System.IFormatProvider,System.Globalization.TimeSpanStyles,System.TimeSpan\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "\u002200:00:00\u0022"
+    ]
+  },
+  {
+    "methodIndex": 49,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::TryFormat:System.Boolean(Span\u003CSystem.Char\u003E,System.Int32\u0026,ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 50,
+    "setIndex": 0,
+    "subjectId": "System.TimeSpan::TryFormat:System.Boolean(Span\u003CSystem.Byte\u003E,System.Int32\u0026,ReadOnlySpan\u003CSystem.Char\u003E,System.IFormatProvider)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
     ]
   }
 ]

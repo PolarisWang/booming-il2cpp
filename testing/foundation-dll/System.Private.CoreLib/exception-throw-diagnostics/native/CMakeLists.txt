@@ -14,9 +14,9 @@ add_compile_options(
     "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wno-error=invalid-offsetof>"
 )
 # Config tier: controlled by CHAOS_IL2CPP_CONFIG_TIER cmake variable
-# (set via -D or CMakePresets.json). Defaults to CHECK (debug).
+# (set via -D or CMakePresets.json). Expected values: check / profile / ship.
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
-  set(CHAOS_IL2CPP_CONFIG_TIER "debug")
+  set(CHAOS_IL2CPP_CONFIG_TIER "check")
 endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
@@ -26,12 +26,25 @@ elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "check")
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 else()
+  message(WARNING "Unknown CHAOS_IL2CPP_CONFIG_TIER: '${CHAOS_IL2CPP_CONFIG_TIER}'. Expected check / profile / ship. Defaulting to CHECK.")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 endif()
-add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
+if(CHAOS_IL2CPP_JIT_MODE)
+    add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
+endif()
+
+# Verification mode: enables if constexpr assertion bodies in generated code
+# Set to 0 for AOT-only builds; the fact stage requires assertions to be DISABLED
+# because the AOT entry point does not have managed exception handling installed
+# during static initialization.
+add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=0)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
@@ -44,7 +57,7 @@ set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/exception-throw-diagnostics/codegen")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
-# JIT mode: sources at *Subjects/generated/* (single-level, R1 fix).
+# Sources at *Subjects/generated/* (single-level, R1 fix).
 file(GLOB CHAOS_CODEGEN_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.page-*.cpp"

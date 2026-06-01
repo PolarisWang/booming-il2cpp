@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.String
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.String`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 160 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 107 |
-| Benchmark-only (pure void / non-deterministic) | 33 |
-| Skipped (generic / unresolvable) | 20 |
-| Total Subjects | 328 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 158 |
+| Benchmark-only (pure void / non-deterministic) | 2 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 354 |
 
 ## Build
 
@@ -29,26 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `Create (ref struct)` — contains generic parameters, needs manual handling
-- `Create (ref struct)` — contains generic parameters, needs manual handling
-- `CopyTo (ref struct)` — contains generic parameters, needs manual handling
-- `TryCopyTo (ref struct)` — contains generic parameters, needs manual handling
-- `Concat (ref struct)` — contains generic parameters, needs manual handling
-- `Concat (ref struct)` — contains generic parameters, needs manual handling
-- `Concat (ref struct)` — contains generic parameters, needs manual handling
-- `Concat (ref struct)` — contains generic parameters, needs manual handling
-- `Concat (ref struct)` — contains generic parameters, needs manual handling
-- `Format (ref struct)` — contains generic parameters, needs manual handling
-- `Format (ref struct)` — contains generic parameters, needs manual handling
-- `Format (ref struct)` — contains generic parameters, needs manual handling
-- `Join (ref struct)` — contains generic parameters, needs manual handling
-- `Join (ref struct)` — contains generic parameters, needs manual handling
-- `Join (ref struct)` — contains generic parameters, needs manual handling
-- `Join (ref struct)` — contains generic parameters, needs manual handling
-- `Split (ref struct)` — contains generic parameters, needs manual handling
-- `Trim (ref struct)` — contains generic parameters, needs manual handling
-- `TrimStart (ref struct)` — contains generic parameters, needs manual handling
-- `TrimEnd (ref struct)` — contains generic parameters, needs manual handling

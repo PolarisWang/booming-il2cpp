@@ -3,10 +3,12 @@ using Chaos.IL2CPP.Tools.AutoTestGenerator;
 
 if (args.Length < 2)
 {
-    Console.Error.WriteLine("Usage: --dll <path> --type <FullTypeName> [--output <dir>]");
-    Console.Error.WriteLine("  --dll      Path to the input assembly DLL");
-    Console.Error.WriteLine("  --type     Full type name to scan (e.g. System.Convert)");
-    Console.Error.WriteLine("  --output   Output directory (default: ./output/{AssemblyName}/{TypeName})");
+    Console.Error.WriteLine("Usage: --dll <path> [--type <FullTypeName> | --all-types] [--output <dir>]");
+    Console.Error.WriteLine("  --dll        Path to the input assembly DLL");
+    Console.Error.WriteLine("  --type       Full type name to scan (e.g. System.Convert)");
+    Console.Error.WriteLine("  --all-types  Scan all public types in the assembly");
+    Console.Error.WriteLine("  --output     Output directory (default: ./output/{AssemblyName})");
+    Console.Error.WriteLine("  --list-types List public types in the assembly");
     return 1;
 }
 
@@ -15,6 +17,7 @@ string dllPath = "";
 string typeFullName = "";
 string? outputDir = null;
 bool listTypes = false;
+bool allTypes = false;
 
 for (int i = 0; i < args.Length; i++)
 {
@@ -32,6 +35,34 @@ for (int i = 0; i < args.Length; i++)
         case "--list-types":
             listTypes = true;
             break;
+        case "--all-types":
+            allTypes = true;
+            break;
+    }
+}
+
+// ── Known type-to-DLL mapping for types not in System.Runtime.dll ──
+var knownTypeDlls = new Dictionary<string, string>(StringComparer.Ordinal)
+{
+    ["System.Net.Dns"] = "System.Net.NameResolution.dll",
+};
+
+// ── Resolve known types to their DLL ──
+if (string.IsNullOrEmpty(dllPath) && !string.IsNullOrEmpty(typeFullName) &&
+    knownTypeDlls.TryGetValue(typeFullName, out var knownDll))
+{
+    // Search for the DLL across all available runtime versions, picking the latest.
+    var currentDir = Path.GetDirectoryName(typeof(object).Assembly.Location);
+    // currentDir = ...\shared\Microsoft.NETCore.App\8.0.11\
+    // runtimeRoot = ...\shared\Microsoft.NETCore.App\  (all version dirs)
+    var runtimeRoot = currentDir is not null
+        ? Directory.GetParent(currentDir)?.FullName
+        : null;
+    if (runtimeRoot is not null && Directory.Exists(runtimeRoot))
+    {
+        var latestCandidate = FindLatestFile(runtimeRoot, knownDll);
+        if (latestCandidate is not null)
+            dllPath = latestCandidate;
     }
 }
 
@@ -52,9 +83,112 @@ if (listTypes)
     return 0;
 }
 
+// ── All-types mode: scan every public type in the assembly ──
+if (allTypes)
+{
+    var allAssemblyName = Path.GetFileNameWithoutExtension(dllPath);
+    var baseOutput = outputDir ?? Path.GetFullPath(Path.Combine("output", allAssemblyName));
+
+    Console.WriteLine("╔══════════════════════════════════════════════════╗");
+    Console.WriteLine("║  Chaos IL2CPP AutoTestGenerator (ALL TYPES)    ║");
+    Console.WriteLine("╚══════════════════════════════════════════════════╝");
+    Console.WriteLine($"  DLL:  {dllPath}");
+    Console.WriteLine($"  Out:  {baseOutput}");
+    Console.WriteLine();
+
+    var allScanner = new DllScanner();
+    Console.WriteLine("[Phase 1/5] Scanning DLL for all public types...");
+    IReadOnlyList<DllScanResult> allScanResults;
+    try
+    {
+        allScanResults = allScanner.ScanAll(dllPath);
+    }
+    catch (Exception ex)
+    {
+        Console.Error.WriteLine($"ERROR: ScanAll failed: {ex.Message}");
+        return 1;
+    }
+
+    if (allScanResults.Count == 0)
+    {
+        Console.WriteLine("No types with public methods found. Exiting.");
+        return 0;
+    }
+
+    // Shared pipeline services (reused across all types)
+    var allSerializer = new CSharpSerializer();
+    var allExpressionBuilder = new CSharpExpressionBuilder(allSerializer);
+    var allAutoFixture = new AutoFixtureAllower(allSerializer);
+    var allValueGenerator = new ValueGenerator(allSerializer, allAutoFixture);
+    var allProbeEmitter = new ProbeEmitter(allSerializer, allExpressionBuilder);
+    var allEmitter = new TestEmitter(allSerializer, allExpressionBuilder);
+    var allWriter = new ProjectWriter();
+
+    int totalTypes = allScanResults.Count;
+    int okTypes = 0;
+
+    for (int ti = 0; ti < totalTypes; ti++)
+    {
+        var oneResult = allScanResults[ti];
+        var typeOutputDir = Path.Combine(baseOutput, SanitizePath(oneResult.TypeFullName));
+
+        Console.WriteLine($"\n[{ti + 1}/{totalTypes}] {oneResult.TypeFullName}");
+
+        if (oneResult.Methods.Count == 0)
+        {
+            Console.WriteLine("  No methods to generate. Skipping.");
+            continue;
+        }
+
+        // ── Phase 2: Generate parameter values ──
+        var oneValueSets = new List<IReadOnlyList<ValueSet>>();
+        int totalSetsOne = 0;
+        foreach (var (method, mi) in oneResult.Methods.Select((m, i) => (m, i)))
+        {
+            var sets = allValueGenerator.Generate(method, mi);
+            oneValueSets.Add(sets);
+            totalSetsOne += sets.Count;
+        }
+        Console.WriteLine($"  Generated {totalSetsOne} value sets across {oneResult.Methods.Count} methods");
+
+        // ── Phase 3: Probe ──
+        var oneProbeResults = allProbeEmitter.Probe(
+            typeOutputDir, oneResult.AssemblyName, oneResult.TypeFullName,
+            oneResult.Methods, oneValueSets, dllPath, oneResult.TargetFramework);
+
+        if (oneProbeResults.Count > 0)
+        {
+            int deterministic = oneProbeResults.Count(r => r.IsDeterministic);
+            int nonDeterministic = oneProbeResults.Count(r => !r.IsDeterministic);
+            int exceptions = oneProbeResults.Count(r => r.HasException);
+            Console.WriteLine($"  {deterministic} deterministic, {nonDeterministic} non-deterministic, {exceptions} exception-throwing");
+        }
+
+        // ── Phase 4: Emit test source ──
+        var oneSource = allEmitter.Emit(
+            oneResult.AssemblyName, oneResult.TypeFullName,
+            oneResult.Methods, oneValueSets, oneProbeResults);
+
+        var oneReport = allEmitter.GenerateReport(
+            oneResult.AssemblyName, oneResult.TypeFullName,
+            oneResult.Methods, oneValueSets, oneProbeResults,
+            oneResult.SkippedMethods);
+
+        // ── Phase 5: Write project ──
+        allWriter.WriteAll(typeOutputDir, oneResult.AssemblyName, oneResult.TypeFullName,
+            oneSource, oneProbeResults, oneReport, oneResult.TargetFramework);
+
+        Console.WriteLine($"Coverage: {oneReport.AutoGeneratedMethods} auto / {oneReport.BenchmarkOnlyMethods} bench-only ({oneReport.TotalSubjects} subjects)");
+        okTypes++;
+    }
+
+    Console.WriteLine($"\nDone. {okTypes}/{totalTypes} types processed successfully.");
+    return 0;
+}
+
 if (string.IsNullOrEmpty(typeFullName))
 {
-    Console.Error.WriteLine("ERROR: --type is required (or use --list-types)");
+    Console.Error.WriteLine("ERROR: --type is required (or use --list-types or --all-types)");
     return 1;
 }
 
@@ -118,7 +252,7 @@ Console.WriteLine("[Phase 3/5] Running probe (2-pass) to capture expected values
 var probeEmitter = new ProbeEmitter(serializer, expressionBuilder);
 var probeResults = probeEmitter.Probe(
     outputDir, scanResult.AssemblyName, scanResult.TypeFullName,
-    scanResult.Methods, allValueSets, scanResult.TargetFramework);
+    scanResult.Methods, allValueSets, dllPath, scanResult.TargetFramework);
 
 if (probeResults.Count == 0)
 {
@@ -173,6 +307,25 @@ Console.WriteLine("To build for benchmarks (asserts eliminated):");
 Console.WriteLine($"  dotnet build \"{Path.Combine(outputDir, SanitizePath(typeFullName) + ".csproj")}\"");
 
 return 0;
+
+static string? FindLatestFile(string searchRoot, string fileName)
+{
+    string? latest = null;
+    Version? best = null;
+    foreach (var dir in Directory.EnumerateDirectories(searchRoot))
+    {
+        var versionName = Path.GetFileName(dir);
+        if (!Version.TryParse(versionName, out var version)) continue;
+        var candidate = Path.Combine(dir, fileName);
+        if (!File.Exists(candidate)) continue;
+        if (best is null || version > best)
+        {
+            best = version;
+            latest = candidate;
+        }
+    }
+    return latest;
+}
 
 static string SanitizePath(string name)
 {

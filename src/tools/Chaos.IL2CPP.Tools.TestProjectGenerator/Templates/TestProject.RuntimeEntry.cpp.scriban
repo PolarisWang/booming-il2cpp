@@ -44,7 +44,6 @@ bool g_log_use_stderr = false;
 extern "C" const int kAotMethodCount;
 extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectSlotMap[];
-extern "C" const int kSubjectContractMap[];
 
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
 
@@ -157,7 +156,7 @@ static int RunFactJsonMode() {
         CHAOS_EH_END
         if (!first) printf(",");
         printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":%d,\"passed\":%s,\"exitCode\":%d}",
-               si, i, kSubjectContractMap[si], caught ? "false" : "true", caught ? -1 : (int)result);
+               si, i, i, caught ? "false" : "true", caught ? -1 : (int)result);
         first = false;
     }
     printf("]}\n");

@@ -6593,6 +6593,32 @@
   {
     "methodIndex": 270,
     "setIndex": 0,
+    "subjectId": "System.Convert::ToBase64String:System.String(ReadOnlySpan\u003CSystem.Byte\u003E,System.Base64FormattingOptions)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 270,
+    "setIndex": 1,
+    "subjectId": "System.Convert::ToBase64String:System.String(ReadOnlySpan\u003CSystem.Byte\u003E,System.Base64FormattingOptions)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 271,
+    "setIndex": 0,
     "subjectId": "System.Convert::ToBase64CharArray:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)__Set0",
     "isVoid": false,
     "hasException": true,
@@ -6604,7 +6630,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 270,
+    "methodIndex": 271,
     "setIndex": 1,
     "subjectId": "System.Convert::ToBase64CharArray:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)__Set1",
     "isVoid": false,
@@ -6617,7 +6643,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 270,
+    "methodIndex": 271,
     "setIndex": 2,
     "subjectId": "System.Convert::ToBase64CharArray:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)__Set2",
     "isVoid": false,
@@ -6630,7 +6656,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 270,
+    "methodIndex": 271,
     "setIndex": 3,
     "subjectId": "System.Convert::ToBase64CharArray:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)__Set3",
     "isVoid": false,
@@ -6643,7 +6669,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 271,
+    "methodIndex": 272,
     "setIndex": 0,
     "subjectId": "System.Convert::ToBase64CharArray:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Base64FormattingOptions)__Set0",
     "isVoid": false,
@@ -6656,7 +6682,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 271,
+    "methodIndex": 272,
     "setIndex": 1,
     "subjectId": "System.Convert::ToBase64CharArray:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Base64FormattingOptions)__Set1",
     "isVoid": false,
@@ -6669,7 +6695,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 271,
+    "methodIndex": 272,
     "setIndex": 2,
     "subjectId": "System.Convert::ToBase64CharArray:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Base64FormattingOptions)__Set2",
     "isVoid": false,
@@ -6682,7 +6708,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 271,
+    "methodIndex": 272,
     "setIndex": 3,
     "subjectId": "System.Convert::ToBase64CharArray:System.Int32(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32,System.Base64FormattingOptions)__Set3",
     "isVoid": false,
@@ -6695,7 +6721,22 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 272,
+    "methodIndex": 273,
+    "setIndex": 0,
+    "subjectId": "System.Convert::TryToBase64Chars:System.Boolean(ReadOnlySpan\u003CSystem.Byte\u003E,Span\u003CSystem.Char\u003E,System.Int32\u0026,System.Base64FormattingOptions)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 274,
     "setIndex": 0,
     "subjectId": "System.Convert::FromBase64String:System.Byte[](System.String)__Set0",
     "isVoid": false,
@@ -6708,7 +6749,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 272,
+    "methodIndex": 274,
     "setIndex": 1,
     "subjectId": "System.Convert::FromBase64String:System.Byte[](System.String)__Set1",
     "isVoid": false,
@@ -6721,7 +6762,50 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 273,
+    "methodIndex": 275,
+    "setIndex": 0,
+    "subjectId": "System.Convert::TryFromBase64String:System.Boolean(System.String,Span\u003CSystem.Byte\u003E,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 275,
+    "setIndex": 1,
+    "subjectId": "System.Convert::TryFromBase64String:System.Boolean(System.String,Span\u003CSystem.Byte\u003E,System.Int32\u0026)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 276,
+    "setIndex": 0,
+    "subjectId": "System.Convert::TryFromBase64Chars:System.Boolean(ReadOnlySpan\u003CSystem.Char\u003E,Span\u003CSystem.Byte\u003E,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 277,
     "setIndex": 0,
     "subjectId": "System.Convert::FromBase64CharArray:System.Byte[](System.Char[],System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -6734,7 +6818,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 273,
+    "methodIndex": 277,
     "setIndex": 1,
     "subjectId": "System.Convert::FromBase64CharArray:System.Byte[](System.Char[],System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -6747,7 +6831,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 273,
+    "methodIndex": 277,
     "setIndex": 2,
     "subjectId": "System.Convert::FromBase64CharArray:System.Byte[](System.Char[],System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -6760,7 +6844,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 274,
+    "methodIndex": 278,
     "setIndex": 0,
     "subjectId": "System.Convert::FromHexString:System.Byte[](System.String)__Set0",
     "isVoid": false,
@@ -6773,7 +6857,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 274,
+    "methodIndex": 278,
     "setIndex": 1,
     "subjectId": "System.Convert::FromHexString:System.Byte[](System.String)__Set1",
     "isVoid": false,
@@ -6786,7 +6870,94 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 275,
+    "methodIndex": 279,
+    "setIndex": 0,
+    "subjectId": "System.Convert::FromHexString:System.Byte[](ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 280,
+    "setIndex": 0,
+    "subjectId": "System.Convert::FromHexString:System.Byte[](ReadOnlySpan\u003CSystem.Byte\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 281,
+    "setIndex": 0,
+    "subjectId": "System.Convert::FromHexString:System.Buffers.OperationStatus(System.String,Span\u003CSystem.Byte\u003E,System.Int32\u0026,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 281,
+    "setIndex": 1,
+    "subjectId": "System.Convert::FromHexString:System.Buffers.OperationStatus(System.String,Span\u003CSystem.Byte\u003E,System.Int32\u0026,System.Int32\u0026)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0",
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 282,
+    "setIndex": 0,
+    "subjectId": "System.Convert::FromHexString:System.Buffers.OperationStatus(ReadOnlySpan\u003CSystem.Char\u003E,Span\u003CSystem.Byte\u003E,System.Int32\u0026,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0",
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 283,
+    "setIndex": 0,
+    "subjectId": "System.Convert::FromHexString:System.Buffers.OperationStatus(ReadOnlySpan\u003CSystem.Byte\u003E,Span\u003CSystem.Byte\u003E,System.Int32\u0026,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0",
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 284,
     "setIndex": 0,
     "subjectId": "System.Convert::ToHexString:System.String(System.Byte[])__Set0",
     "isVoid": false,
@@ -6799,7 +6970,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 275,
+    "methodIndex": 284,
     "setIndex": 1,
     "subjectId": "System.Convert::ToHexString:System.String(System.Byte[])__Set1",
     "isVoid": false,
@@ -6812,7 +6983,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 276,
+    "methodIndex": 285,
     "setIndex": 0,
     "subjectId": "System.Convert::ToHexString:System.String(System.Byte[],System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -6825,7 +6996,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 276,
+    "methodIndex": 285,
     "setIndex": 1,
     "subjectId": "System.Convert::ToHexString:System.String(System.Byte[],System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -6838,7 +7009,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 276,
+    "methodIndex": 285,
     "setIndex": 2,
     "subjectId": "System.Convert::ToHexString:System.String(System.Byte[],System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -6851,7 +7022,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 276,
+    "methodIndex": 285,
     "setIndex": 3,
     "subjectId": "System.Convert::ToHexString:System.String(System.Byte[],System.Int32,System.Int32)__Set3",
     "isVoid": false,
@@ -6864,7 +7035,50 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 277,
+    "methodIndex": 286,
+    "setIndex": 0,
+    "subjectId": "System.Convert::ToHexString:System.String(ReadOnlySpan\u003CSystem.Byte\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 287,
+    "setIndex": 0,
+    "subjectId": "System.Convert::TryToHexString:System.Boolean(ReadOnlySpan\u003CSystem.Byte\u003E,Span\u003CSystem.Char\u003E,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 288,
+    "setIndex": 0,
+    "subjectId": "System.Convert::TryToHexString:System.Boolean(ReadOnlySpan\u003CSystem.Byte\u003E,Span\u003CSystem.Byte\u003E,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 289,
     "setIndex": 0,
     "subjectId": "System.Convert::ToHexStringLower:System.String(System.Byte[])__Set0",
     "isVoid": false,
@@ -6877,7 +7091,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 277,
+    "methodIndex": 289,
     "setIndex": 1,
     "subjectId": "System.Convert::ToHexStringLower:System.String(System.Byte[])__Set1",
     "isVoid": false,
@@ -6890,7 +7104,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 278,
+    "methodIndex": 290,
     "setIndex": 0,
     "subjectId": "System.Convert::ToHexStringLower:System.String(System.Byte[],System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -6903,7 +7117,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 278,
+    "methodIndex": 290,
     "setIndex": 1,
     "subjectId": "System.Convert::ToHexStringLower:System.String(System.Byte[],System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -6916,7 +7130,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 278,
+    "methodIndex": 290,
     "setIndex": 2,
     "subjectId": "System.Convert::ToHexStringLower:System.String(System.Byte[],System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -6929,7 +7143,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 278,
+    "methodIndex": 290,
     "setIndex": 3,
     "subjectId": "System.Convert::ToHexStringLower:System.String(System.Byte[],System.Int32,System.Int32)__Set3",
     "isVoid": false,
@@ -6940,5 +7154,48 @@
     "returnValueType": null,
     "isDeterministic": true,
     "outRefValues": null
+  },
+  {
+    "methodIndex": 291,
+    "setIndex": 0,
+    "subjectId": "System.Convert::ToHexStringLower:System.String(ReadOnlySpan\u003CSystem.Byte\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 292,
+    "setIndex": 0,
+    "subjectId": "System.Convert::TryToHexStringLower:System.Boolean(ReadOnlySpan\u003CSystem.Byte\u003E,Span\u003CSystem.Char\u003E,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
+  },
+  {
+    "methodIndex": 293,
+    "setIndex": 0,
+    "subjectId": "System.Convert::TryToHexStringLower:System.Boolean(ReadOnlySpan\u003CSystem.Byte\u003E,Span\u003CSystem.Byte\u003E,System.Int32\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": [
+      "0"
+    ]
   }
 ]

@@ -40,6 +40,19 @@
   },
   {
     "methodIndex": 2,
+    "setIndex": 2,
+    "subjectId": "System.Text.StringBuilder::GetChunks:StringBuilder.ChunkEnumerator()__Set2",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char,System.Int32)__Set0",
     "isVoid": false,
@@ -52,7 +65,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 2,
+    "methodIndex": 3,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char,System.Int32)__Set1",
     "isVoid": false,
@@ -65,7 +78,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 2,
+    "methodIndex": 3,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char,System.Int32)__Set2",
     "isVoid": false,
@@ -78,7 +91,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 3,
+    "methodIndex": 4,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char[],System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -91,7 +104,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 3,
+    "methodIndex": 4,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char[],System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -104,7 +117,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 3,
+    "methodIndex": 4,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char[],System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -117,7 +130,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 4,
+    "methodIndex": 5,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.String)__Set0",
     "isVoid": false,
@@ -130,7 +143,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 4,
+    "methodIndex": 5,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.String)__Set1",
     "isVoid": false,
@@ -143,7 +156,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 5,
+    "methodIndex": 6,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.String,System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -156,7 +169,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 5,
+    "methodIndex": 6,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.String,System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -169,7 +182,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 5,
+    "methodIndex": 6,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.String,System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -182,7 +195,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 5,
+    "methodIndex": 6,
     "setIndex": 3,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.String,System.Int32,System.Int32)__Set3",
     "isVoid": false,
@@ -195,7 +208,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 6,
+    "methodIndex": 7,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Text.StringBuilder)__Set0",
     "isVoid": false,
@@ -208,7 +221,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 7,
+    "methodIndex": 8,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Text.StringBuilder,System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -221,7 +234,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 7,
+    "methodIndex": 8,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Text.StringBuilder,System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -234,7 +247,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 7,
+    "methodIndex": 8,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Text.StringBuilder,System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -247,9 +260,9 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 8,
-    "setIndex": 8,
-    "subjectId": "System.Text.StringBuilder::AppendLine:System.Text.StringBuilder()__Set8",
+    "methodIndex": 9,
+    "setIndex": 9,
+    "subjectId": "System.Text.StringBuilder::AppendLine:System.Text.StringBuilder()__Set9",
     "isVoid": false,
     "hasException": false,
     "exceptionType": null,
@@ -260,7 +273,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 9,
+    "methodIndex": 10,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendLine:System.Text.StringBuilder(System.String)__Set0",
     "isVoid": false,
@@ -273,7 +286,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 9,
+    "methodIndex": 10,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendLine:System.Text.StringBuilder(System.String)__Set1",
     "isVoid": false,
@@ -286,7 +299,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 10,
+    "methodIndex": 11,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::CopyTo:System.Void(System.Int32,System.Char[],System.Int32,System.Int32)__Set0",
     "isVoid": true,
@@ -299,7 +312,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 10,
+    "methodIndex": 11,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::CopyTo:System.Void(System.Int32,System.Char[],System.Int32,System.Int32)__Set1",
     "isVoid": true,
@@ -312,7 +325,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 10,
+    "methodIndex": 11,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::CopyTo:System.Void(System.Int32,System.Char[],System.Int32,System.Int32)__Set2",
     "isVoid": true,
@@ -325,7 +338,46 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 11,
+    "methodIndex": 12,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::CopyTo:System.Void(System.Int32,Span\u003CSystem.Char\u003E,System.Int32)__Set0",
+    "isVoid": true,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 12,
+    "setIndex": 1,
+    "subjectId": "System.Text.StringBuilder::CopyTo:System.Void(System.Int32,Span\u003CSystem.Char\u003E,System.Int32)__Set1",
+    "isVoid": true,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 12,
+    "setIndex": 2,
+    "subjectId": "System.Text.StringBuilder::CopyTo:System.Void(System.Int32,Span\u003CSystem.Char\u003E,System.Int32)__Set2",
+    "isVoid": true,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 13,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.String,System.Int32)__Set0",
     "isVoid": false,
@@ -338,7 +390,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 11,
+    "methodIndex": 13,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.String,System.Int32)__Set1",
     "isVoid": false,
@@ -351,7 +403,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 11,
+    "methodIndex": 13,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.String,System.Int32)__Set2",
     "isVoid": false,
@@ -364,7 +416,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 11,
+    "methodIndex": 13,
     "setIndex": 3,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.String,System.Int32)__Set3",
     "isVoid": false,
@@ -377,7 +429,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 12,
+    "methodIndex": 14,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Remove:System.Text.StringBuilder(System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -390,7 +442,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 12,
+    "methodIndex": 14,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Remove:System.Text.StringBuilder(System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -403,7 +455,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 12,
+    "methodIndex": 14,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Remove:System.Text.StringBuilder(System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -416,7 +468,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 13,
+    "methodIndex": 15,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Boolean)__Set0",
     "isVoid": false,
@@ -429,7 +481,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 13,
+    "methodIndex": 15,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Boolean)__Set1",
     "isVoid": false,
@@ -442,7 +494,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 14,
+    "methodIndex": 16,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char)__Set0",
     "isVoid": false,
@@ -455,7 +507,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 14,
+    "methodIndex": 16,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char)__Set1",
     "isVoid": false,
@@ -468,7 +520,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 15,
+    "methodIndex": 17,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.SByte)__Set0",
     "isVoid": false,
@@ -481,7 +533,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 15,
+    "methodIndex": 17,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.SByte)__Set1",
     "isVoid": false,
@@ -494,7 +546,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 16,
+    "methodIndex": 18,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Byte)__Set0",
     "isVoid": false,
@@ -507,7 +559,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 16,
+    "methodIndex": 18,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Byte)__Set1",
     "isVoid": false,
@@ -520,7 +572,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 17,
+    "methodIndex": 19,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Int16)__Set0",
     "isVoid": false,
@@ -533,7 +585,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 17,
+    "methodIndex": 19,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Int16)__Set1",
     "isVoid": false,
@@ -546,7 +598,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 18,
+    "methodIndex": 20,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Int32)__Set0",
     "isVoid": false,
@@ -559,7 +611,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 18,
+    "methodIndex": 20,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Int32)__Set1",
     "isVoid": false,
@@ -572,7 +624,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 19,
+    "methodIndex": 21,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Int64)__Set0",
     "isVoid": false,
@@ -585,7 +637,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 19,
+    "methodIndex": 21,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Int64)__Set1",
     "isVoid": false,
@@ -598,7 +650,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 20,
+    "methodIndex": 22,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Single)__Set0",
     "isVoid": false,
@@ -611,7 +663,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 20,
+    "methodIndex": 22,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Single)__Set1",
     "isVoid": false,
@@ -624,7 +676,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 21,
+    "methodIndex": 23,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Double)__Set0",
     "isVoid": false,
@@ -637,7 +689,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 21,
+    "methodIndex": 23,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Double)__Set1",
     "isVoid": false,
@@ -650,7 +702,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 22,
+    "methodIndex": 24,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Decimal)__Set0",
     "isVoid": false,
@@ -663,7 +715,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 22,
+    "methodIndex": 24,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Decimal)__Set1",
     "isVoid": false,
@@ -676,7 +728,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 23,
+    "methodIndex": 25,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.UInt16)__Set0",
     "isVoid": false,
@@ -689,7 +741,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 23,
+    "methodIndex": 25,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.UInt16)__Set1",
     "isVoid": false,
@@ -702,7 +754,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 24,
+    "methodIndex": 26,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.UInt32)__Set0",
     "isVoid": false,
@@ -715,7 +767,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 24,
+    "methodIndex": 26,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.UInt32)__Set1",
     "isVoid": false,
@@ -728,7 +780,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 25,
+    "methodIndex": 27,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.UInt64)__Set0",
     "isVoid": false,
@@ -741,7 +793,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 25,
+    "methodIndex": 27,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.UInt64)__Set1",
     "isVoid": false,
@@ -754,7 +806,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 26,
+    "methodIndex": 28,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Object)__Set0",
     "isVoid": false,
@@ -767,7 +819,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 27,
+    "methodIndex": 29,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char[])__Set0",
     "isVoid": false,
@@ -780,7 +832,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 28,
+    "methodIndex": 30,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 31,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(ReadOnlyMemory\u003CSystem.Char\u003E)__Set0",
     "isVoid": false,
@@ -793,7 +858,59 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 29,
+    "methodIndex": 32,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(StringBuilder.AppendInterpolatedStringHandler\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 33,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.IFormatProvider,StringBuilder.AppendInterpolatedStringHandler\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 34,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::AppendLine:System.Text.StringBuilder(StringBuilder.AppendInterpolatedStringHandler\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 35,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::AppendLine:System.Text.StringBuilder(System.IFormatProvider,StringBuilder.AppendInterpolatedStringHandler\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 36,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,System.Object[])__Set0",
     "isVoid": false,
@@ -806,7 +923,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 29,
+    "methodIndex": 36,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,System.Object[])__Set1",
     "isVoid": false,
@@ -819,7 +936,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 30,
+    "methodIndex": 37,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,ReadOnlySpan\u003CSystem.Object\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 37,
+    "setIndex": 1,
+    "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,ReadOnlySpan\u003CSystem.Object\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 38,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -832,7 +975,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 30,
+    "methodIndex": 38,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -845,7 +988,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 31,
+    "methodIndex": 39,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,System.String[])__Set0",
     "isVoid": false,
@@ -858,7 +1001,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 31,
+    "methodIndex": 39,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,System.String[])__Set1",
     "isVoid": false,
@@ -871,7 +1014,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 32,
+    "methodIndex": 40,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,ReadOnlySpan\u003CSystem.String\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 40,
+    "setIndex": 1,
+    "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.String,ReadOnlySpan\u003CSystem.String\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 41,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,System.Object[])__Set0",
     "isVoid": false,
@@ -884,7 +1053,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 32,
+    "methodIndex": 41,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,System.Object[])__Set1",
     "isVoid": false,
@@ -897,7 +1066,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 33,
+    "methodIndex": 42,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,ReadOnlySpan\u003CSystem.Object\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 42,
+    "setIndex": 1,
+    "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,ReadOnlySpan\u003CSystem.Object\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 43,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,IEnumerable\u003CSystem.Int32\u003E)__Set0",
     "isVoid": false,
@@ -910,7 +1105,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 33,
+    "methodIndex": 43,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,IEnumerable\u003CSystem.Int32\u003E)__Set1",
     "isVoid": false,
@@ -923,7 +1118,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 34,
+    "methodIndex": 44,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,System.String[])__Set0",
     "isVoid": false,
@@ -936,7 +1131,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 34,
+    "methodIndex": 44,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,System.String[])__Set1",
     "isVoid": false,
@@ -949,7 +1144,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 35,
+    "methodIndex": 45,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,ReadOnlySpan\u003CSystem.String\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 45,
+    "setIndex": 1,
+    "subjectId": "System.Text.StringBuilder::AppendJoin:System.Text.StringBuilder(System.Char,ReadOnlySpan\u003CSystem.String\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 46,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.String)__Set0",
     "isVoid": false,
@@ -962,7 +1183,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 35,
+    "methodIndex": 46,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.String)__Set1",
     "isVoid": false,
@@ -975,7 +1196,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 35,
+    "methodIndex": 46,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.String)__Set2",
     "isVoid": false,
@@ -988,7 +1209,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 36,
+    "methodIndex": 47,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Boolean)__Set0",
     "isVoid": false,
@@ -1001,7 +1222,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 36,
+    "methodIndex": 47,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Boolean)__Set1",
     "isVoid": false,
@@ -1014,7 +1235,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 36,
+    "methodIndex": 47,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Boolean)__Set2",
     "isVoid": false,
@@ -1027,7 +1248,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 37,
+    "methodIndex": 48,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.SByte)__Set0",
     "isVoid": false,
@@ -1040,7 +1261,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 37,
+    "methodIndex": 48,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.SByte)__Set1",
     "isVoid": false,
@@ -1053,7 +1274,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 37,
+    "methodIndex": 48,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.SByte)__Set2",
     "isVoid": false,
@@ -1066,7 +1287,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 38,
+    "methodIndex": 49,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Byte)__Set0",
     "isVoid": false,
@@ -1079,7 +1300,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 38,
+    "methodIndex": 49,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Byte)__Set1",
     "isVoid": false,
@@ -1092,7 +1313,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 38,
+    "methodIndex": 49,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Byte)__Set2",
     "isVoid": false,
@@ -1105,7 +1326,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 39,
+    "methodIndex": 50,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Int16)__Set0",
     "isVoid": false,
@@ -1118,7 +1339,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 39,
+    "methodIndex": 50,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Int16)__Set1",
     "isVoid": false,
@@ -1131,7 +1352,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 39,
+    "methodIndex": 50,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Int16)__Set2",
     "isVoid": false,
@@ -1144,7 +1365,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 40,
+    "methodIndex": 51,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Char)__Set0",
     "isVoid": false,
@@ -1157,7 +1378,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 40,
+    "methodIndex": 51,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Char)__Set1",
     "isVoid": false,
@@ -1170,7 +1391,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 40,
+    "methodIndex": 51,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Char)__Set2",
     "isVoid": false,
@@ -1183,7 +1404,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 41,
+    "methodIndex": 52,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Char[])__Set0",
     "isVoid": false,
@@ -1196,7 +1417,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 41,
+    "methodIndex": 52,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Char[])__Set1",
     "isVoid": false,
@@ -1209,7 +1430,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 42,
+    "methodIndex": 53,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Char[],System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -1222,7 +1443,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 42,
+    "methodIndex": 53,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Char[],System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -1235,7 +1456,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 42,
+    "methodIndex": 53,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Char[],System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -1248,7 +1469,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 43,
+    "methodIndex": 54,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -1261,7 +1482,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 43,
+    "methodIndex": 54,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -1274,7 +1495,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 43,
+    "methodIndex": 54,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -1287,7 +1508,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 44,
+    "methodIndex": 55,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Int64)__Set0",
     "isVoid": false,
@@ -1300,7 +1521,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 44,
+    "methodIndex": 55,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Int64)__Set1",
     "isVoid": false,
@@ -1313,7 +1534,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 44,
+    "methodIndex": 55,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Int64)__Set2",
     "isVoid": false,
@@ -1326,7 +1547,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 45,
+    "methodIndex": 56,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Single)__Set0",
     "isVoid": false,
@@ -1339,7 +1560,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 45,
+    "methodIndex": 56,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Single)__Set1",
     "isVoid": false,
@@ -1352,7 +1573,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 45,
+    "methodIndex": 56,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Single)__Set2",
     "isVoid": false,
@@ -1365,7 +1586,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 46,
+    "methodIndex": 57,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Double)__Set0",
     "isVoid": false,
@@ -1378,7 +1599,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 46,
+    "methodIndex": 57,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Double)__Set1",
     "isVoid": false,
@@ -1391,7 +1612,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 46,
+    "methodIndex": 57,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Double)__Set2",
     "isVoid": false,
@@ -1404,7 +1625,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 47,
+    "methodIndex": 58,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Decimal)__Set0",
     "isVoid": false,
@@ -1417,7 +1638,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 47,
+    "methodIndex": 58,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Decimal)__Set1",
     "isVoid": false,
@@ -1430,7 +1651,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 47,
+    "methodIndex": 58,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Decimal)__Set2",
     "isVoid": false,
@@ -1443,7 +1664,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 48,
+    "methodIndex": 59,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.UInt16)__Set0",
     "isVoid": false,
@@ -1456,7 +1677,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 48,
+    "methodIndex": 59,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.UInt16)__Set1",
     "isVoid": false,
@@ -1469,7 +1690,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 48,
+    "methodIndex": 59,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.UInt16)__Set2",
     "isVoid": false,
@@ -1482,7 +1703,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 49,
+    "methodIndex": 60,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.UInt32)__Set0",
     "isVoid": false,
@@ -1495,7 +1716,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 49,
+    "methodIndex": 60,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.UInt32)__Set1",
     "isVoid": false,
@@ -1508,7 +1729,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 49,
+    "methodIndex": 60,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.UInt32)__Set2",
     "isVoid": false,
@@ -1521,7 +1742,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 50,
+    "methodIndex": 61,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.UInt64)__Set0",
     "isVoid": false,
@@ -1534,7 +1755,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 50,
+    "methodIndex": 61,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.UInt64)__Set1",
     "isVoid": false,
@@ -1547,7 +1768,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 50,
+    "methodIndex": 61,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.UInt64)__Set2",
     "isVoid": false,
@@ -1560,7 +1781,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 51,
+    "methodIndex": 62,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Object)__Set0",
     "isVoid": false,
@@ -1573,7 +1794,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 51,
+    "methodIndex": 62,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,System.Object)__Set1",
     "isVoid": false,
@@ -1586,7 +1807,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 52,
+    "methodIndex": 63,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 63,
+    "setIndex": 1,
+    "subjectId": "System.Text.StringBuilder::Insert:System.Text.StringBuilder(System.Int32,ReadOnlySpan\u003CSystem.Char\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 64,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,System.Object)__Set0",
     "isVoid": false,
@@ -1599,7 +1846,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 52,
+    "methodIndex": 64,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,System.Object)__Set1",
     "isVoid": false,
@@ -1612,7 +1859,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 53,
+    "methodIndex": 65,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,System.Object,System.Object)__Set0",
     "isVoid": false,
@@ -1625,7 +1872,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 53,
+    "methodIndex": 65,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,System.Object,System.Object)__Set1",
     "isVoid": false,
@@ -1638,7 +1885,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 54,
+    "methodIndex": 66,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,System.Object,System.Object,System.Object)__Set0",
     "isVoid": false,
@@ -1651,7 +1898,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 54,
+    "methodIndex": 66,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,System.Object,System.Object,System.Object)__Set1",
     "isVoid": false,
@@ -1664,7 +1911,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 55,
+    "methodIndex": 67,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,System.Object[])__Set0",
     "isVoid": false,
@@ -1677,7 +1924,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 55,
+    "methodIndex": 67,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,System.Object[])__Set1",
     "isVoid": false,
@@ -1690,7 +1937,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 56,
+    "methodIndex": 68,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,ReadOnlySpan\u003CSystem.Object\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 68,
+    "setIndex": 1,
+    "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.String,ReadOnlySpan\u003CSystem.Object\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 69,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,System.Object)__Set0",
     "isVoid": false,
@@ -1703,7 +1976,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 56,
+    "methodIndex": 69,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,System.Object)__Set1",
     "isVoid": false,
@@ -1716,7 +1989,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 57,
+    "methodIndex": 70,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,System.Object,System.Object)__Set0",
     "isVoid": false,
@@ -1729,7 +2002,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 57,
+    "methodIndex": 70,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,System.Object,System.Object)__Set1",
     "isVoid": false,
@@ -1742,7 +2015,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 58,
+    "methodIndex": 71,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,System.Object,System.Object,System.Object)__Set0",
     "isVoid": false,
@@ -1755,7 +2028,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 58,
+    "methodIndex": 71,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,System.Object,System.Object,System.Object)__Set1",
     "isVoid": false,
@@ -1768,7 +2041,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 59,
+    "methodIndex": 72,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,System.Object[])__Set0",
     "isVoid": false,
@@ -1781,7 +2054,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 59,
+    "methodIndex": 72,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,System.Object[])__Set1",
     "isVoid": false,
@@ -1794,7 +2067,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 60,
+    "methodIndex": 73,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,ReadOnlySpan\u003CSystem.Object\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 73,
+    "setIndex": 1,
+    "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.String,ReadOnlySpan\u003CSystem.Object\u003E)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 74,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.Text.CompositeFormat,System.Int32)__Set0",
     "isVoid": false,
@@ -1807,7 +2106,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 60,
+    "methodIndex": 74,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.Text.CompositeFormat,System.Int32)__Set1",
     "isVoid": false,
@@ -1820,7 +2119,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 61,
+    "methodIndex": 75,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.Text.CompositeFormat,System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -1833,7 +2132,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 61,
+    "methodIndex": 75,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.Text.CompositeFormat,System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -1846,7 +2145,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 62,
+    "methodIndex": 76,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.Text.CompositeFormat,System.Int32,System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -1859,7 +2158,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 62,
+    "methodIndex": 76,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.Text.CompositeFormat,System.Int32,System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -1872,7 +2171,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 63,
+    "methodIndex": 77,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.Text.CompositeFormat,System.Object[])__Set0",
     "isVoid": false,
@@ -1885,7 +2184,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 64,
+    "methodIndex": 78,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::AppendFormat:System.Text.StringBuilder(System.IFormatProvider,System.Text.CompositeFormat,ReadOnlySpan\u003CSystem.Object\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 79,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.String,System.String)__Set0",
     "isVoid": false,
@@ -1898,7 +2210,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 64,
+    "methodIndex": 79,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.String,System.String)__Set1",
     "isVoid": false,
@@ -1911,7 +2223,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 64,
+    "methodIndex": 79,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.String,System.String)__Set2",
     "isVoid": false,
@@ -1924,7 +2236,20 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 65,
+    "methodIndex": 80,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 81,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.String,System.String,System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -1937,7 +2262,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 65,
+    "methodIndex": 81,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.String,System.String,System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -1950,7 +2275,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 65,
+    "methodIndex": 81,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.String,System.String,System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -1963,7 +2288,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 65,
+    "methodIndex": 81,
     "setIndex": 3,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.String,System.String,System.Int32,System.Int32)__Set3",
     "isVoid": false,
@@ -1976,7 +2301,33 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 66,
+    "methodIndex": 82,
+    "setIndex": 0,
+    "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,System.Int32,System.Int32)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 82,
+    "setIndex": 1,
+    "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(ReadOnlySpan\u003CSystem.Char\u003E,ReadOnlySpan\u003CSystem.Char\u003E,System.Int32,System.Int32)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 83,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.Char,System.Char)__Set0",
     "isVoid": false,
@@ -1989,7 +2340,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 66,
+    "methodIndex": 83,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.Char,System.Char)__Set1",
     "isVoid": false,
@@ -2002,7 +2353,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 66,
+    "methodIndex": 83,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.Char,System.Char)__Set2",
     "isVoid": false,
@@ -2015,7 +2366,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 67,
+    "methodIndex": 84,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.Char,System.Char,System.Int32,System.Int32)__Set0",
     "isVoid": false,
@@ -2028,7 +2379,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 67,
+    "methodIndex": 84,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.Char,System.Char,System.Int32,System.Int32)__Set1",
     "isVoid": false,
@@ -2041,7 +2392,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 67,
+    "methodIndex": 84,
     "setIndex": 2,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.Char,System.Char,System.Int32,System.Int32)__Set2",
     "isVoid": false,
@@ -2054,7 +2405,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 67,
+    "methodIndex": 84,
     "setIndex": 3,
     "subjectId": "System.Text.StringBuilder::Replace:System.Text.StringBuilder(System.Char,System.Char,System.Int32,System.Int32)__Set3",
     "isVoid": false,
@@ -2067,7 +2418,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 68,
+    "methodIndex": 85,
     "setIndex": 0,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char*,System.Int32)__Set0",
     "isVoid": false,
@@ -2080,7 +2431,7 @@
     "outRefValues": null
   },
   {
-    "methodIndex": 68,
+    "methodIndex": 85,
     "setIndex": 1,
     "subjectId": "System.Text.StringBuilder::Append:System.Text.StringBuilder(System.Char*,System.Int32)__Set1",
     "isVoid": false,

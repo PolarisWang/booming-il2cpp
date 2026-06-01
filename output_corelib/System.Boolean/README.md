@@ -1,6 +1,6 @@
 # AutoTestGenerator: System.Boolean
 
-- Assembly: `System.Private.CoreLib`
+- Assembly: `System.Runtime`
 - Type: `System.Boolean`
 
 ## Coverage Summary
@@ -8,10 +8,10 @@
 | Metric | Value |
 |--------|-------|
 | Total Methods | 8 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 4 |
-| Benchmark-only (pure void / non-deterministic) | 1 |
-| Skipped (generic / unresolvable) | 3 |
-| Total Subjects | 8 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 8 |
+| Benchmark-only (pure void / non-deterministic) | 0 |
+| Skipped (generic / unresolvable) | 0 |
+| Total Subjects | 11 |
 
 ## Build
 
@@ -29,9 +29,3 @@ dotnet build
 # Run with verification
 dotnet run --project .
 ```
-
-## Skipped Methods
-
-- `TryFormat (ref struct)` — contains generic parameters, needs manual handling
-- `Parse (ref struct)` — contains generic parameters, needs manual handling
-- `TryParse (ref struct)` — contains generic parameters, needs manual handling

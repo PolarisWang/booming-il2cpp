@@ -364,6 +364,12 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine();
 			builder.AppendLine("CHAOS_IL2CPP_INTPTR chaos_reflection_create_type_value(CHAOS_IL2CPP_INTPTR chaos_type_handle)");
 			builder.AppendLine("{");
+			builder.AppendLine("    // TLS single-entry cache: avoids allocating a new System.Type on every call.");
+			builder.AppendLine("    thread_local CHAOS_IL2CPP_INTPTR s_last_handle = 0;");
+			builder.AppendLine("    thread_local CHAOS_IL2CPP_INTPTR s_last_result = 0;");
+			builder.AppendLine("    if (chaos_type_handle == s_last_handle)");
+			builder.AppendLine("        return s_last_result;");
+			builder.AppendLine();
 			stringBuilder = builder;
 			StringBuilder stringBuilder11 = stringBuilder;
 			handler = new StringBuilder.AppendInterpolatedStringHandler(42, 1, stringBuilder);
@@ -381,7 +387,9 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.AppendLine("    chaos_type->runtime_type_handle = chaos_type_handle;");
 			builder.AppendLine("    chaos_type->runtime_name_value = chaos_reflection_get_type_name_value_from_handle(chaos_type_handle);");
 			builder.AppendLine("    chaos_type->runtime_metadata_token_value = chaos_reflection_get_type_metadata_token_from_handle(chaos_type_handle);");
-			builder.AppendLine("    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_type);");
+			builder.AppendLine("    s_last_handle = chaos_type_handle;");
+			builder.AppendLine("    s_last_result = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_type);");
+			builder.AppendLine("    return s_last_result;");
 			builder.AppendLine("}");
 			builder.AppendLine();
 			builder.AppendLine("CHAOS_IL2CPP_INTPTR ChaosReflectionGetMethod_name_value_from_handle(CHAOS_IL2CPP_INTPTR chaos_method_handle) noexcept");
