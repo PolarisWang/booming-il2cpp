@@ -2875,18 +2875,16 @@ public sealed partial class NativeAotLoweringPlanner
                 {
                     if (paramTypes.Count == 1 && paramTypes[0] == "System.String")
                     {
+                        // {0} is guaranteed to be a string ID for System.String-typed
+                        // parameters — no chaos_is_string_id check needed.
                         return """
                             [&]() -> CHAOS_IL2CPP_UINT16 {
-                                if (chaos_is_string_id({0})) {
-                                    auto _v = chaos::il2cpp::string_table::ResolveFast(chaos_extract_string_id({0}));
-                                    if (_v.byte_count == 0) {
-                                        chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
-                                        return 0;
-                                    }
-                                    return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(_v.utf8_data[0]));
+                                auto _v = chaos::il2cpp::string_table::ResolveFast(chaos_extract_string_id({0}));
+                                if (_v.byte_count == 0) {
+                                    chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
+                                    return 0;
                                 }
-                                chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
-                                return 0;
+                                return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(_v.utf8_data[0]));
                             }()
                             """.Replace("\r\n", "\n").Trim();
                     }
@@ -2895,16 +2893,12 @@ public sealed partial class NativeAotLoweringPlanner
                         return """
                             [&]() -> CHAOS_IL2CPP_UINT16 {
                                 (void){1};
-                                if (chaos_is_string_id({0})) {
-                                    auto _v = chaos::il2cpp::string_table::ResolveFast(chaos_extract_string_id({0}));
-                                    if (_v.byte_count == 0) {
-                                        chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
-                                        return 0;
-                                    }
-                                    return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(_v.utf8_data[0]));
+                                auto _v = chaos::il2cpp::string_table::ResolveFast(chaos_extract_string_id({0}));
+                                if (_v.byte_count == 0) {
+                                    chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
+                                    return 0;
                                 }
-                                chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
-                                return 0;
+                                return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(_v.utf8_data[0]));
                             }()
                             """.Replace("\r\n", "\n").Trim();
                     }

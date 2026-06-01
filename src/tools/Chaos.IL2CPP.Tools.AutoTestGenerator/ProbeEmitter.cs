@@ -8,6 +8,13 @@ public sealed class ProbeEmitter
 {
     private readonly CSharpSerializer _serializer;
 
+    private static readonly HashSet<string> CastNeededTypes = new(StringComparer.Ordinal)
+    {
+        "System.Byte", "System.SByte", "System.Int16", "System.UInt16",
+        "System.UInt32", "System.Int64", "System.UInt64", "System.Single",
+        "System.Double", "System.Decimal",
+    };
+
     public ProbeEmitter(CSharpSerializer serializer)
     {
         _serializer = serializer;
@@ -101,18 +108,7 @@ public sealed class ProbeEmitter
                     }
                     else
                     {
-                        // Add explicit cast for overload disambiguation
-                        // e.g. (int)default(int) -> disambiguates Math.DivRem(int,int) vs Math.DivRem(short,short)
-                        var csType = CSharpSerializer.MapToCSharpType(param.TypeName);
-                        if (csType != "int" && !param.TypeName.Contains('.') && !param.TypeName.EndsWith('&'))
-                        {
-                            // It's a primitive type alias like byte, short — add explicit cast
-                            finalArgs.Add($"{argExpr}");
-                        }
-                        else
-                        {
-                            finalArgs.Add($"{argExpr}");
-                        }
+                        finalArgs.Add(DisambiguateArg(param.TypeName, argExpr));
                     }
                 }
 
@@ -271,6 +267,25 @@ public sealed class ProbeEmitter
             Console.Error.WriteLine($"[Probe] Run error: {ex.Message}");
         }
         return results;
+    }
+
+    /// <summary>
+    /// Add explicit type cast for boundary/default values to disambiguate overloads.
+    /// </summary>
+    private static string DisambiguateArg(string paramType, string argExpr)
+    {
+        if (!CastNeededTypes.Contains(paramType))
+            return argExpr;
+
+        if (argExpr.Length == 0) return argExpr;
+        var first = argExpr[0];
+        if (!char.IsDigit(first) && first != '-' && first != '\"')
+            return argExpr;
+        if (argExpr.StartsWith('('))
+            return argExpr;
+
+        var csType = CSharpSerializer.MapToCSharpType(paramType);
+        return $"({csType}){argExpr}";
     }
 
     private static IReadOnlyList<ProbeResult> MergeResults(
