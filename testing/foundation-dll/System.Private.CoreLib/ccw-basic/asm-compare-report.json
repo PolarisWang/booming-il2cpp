@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/ccw/basic",
-  "capturedAt": "2026-05-29T02:23:15",
+  "capturedAt": "2026-05-29T22:39:10",
   "batchMode": true,
   "summary": {
     "totalMethods": 5,
@@ -10,25 +10,25 @@
     "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 220
+      "min": 64,
+      "max": 64,
+      "avg": 64.0,
+      "total": 320
     },
     "aotInstructionCount": {
-      "min": 1,
-      "max": 1,
-      "avg": 1.0,
-      "total": 5
+      "min": 8,
+      "max": 9,
+      "avg": 8.2,
+      "total": 41
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {},
-    "overallIrExpansionRatio": 0.02,
-    "averageExpansionRatio": 0.02,
-    "maxExpansionRatio": 0.02,
-    "minExpansionRatio": 0.02
+    "overallIrExpansionRatio": 0.13,
+    "averageExpansionRatio": 0.12,
+    "maxExpansionRatio": 0.14,
+    "minExpansionRatio": 0.12
   },
   "methodResults": [
     {
@@ -37,20 +37,20 @@
       "shortName": "Subject_0",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 9,
+        "ratio": 0.14,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_0",
-        "instructions": 1
+        "instructions": 9
       },
       "analysis": [],
       "instructionCategories": {}
@@ -61,20 +61,20 @@
       "shortName": "Subject_1",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_1",
-        "instructions": 1
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}
@@ -85,20 +85,20 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_2",
-        "instructions": 1
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}
@@ -109,20 +109,20 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_3",
-        "instructions": 1
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}
@@ -133,20 +133,20 @@
       "shortName": "Subject_4",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "CcwBasicSubjects_CcwBasicSubjects_Subject_4",
-        "instructions": 1
+        "instructions": 8
       },
       "analysis": [],
       "instructionCategories": {}

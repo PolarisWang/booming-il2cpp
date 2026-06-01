@@ -9,6 +9,10 @@ public static partial class CollectionsGenericCorePatchEntry
     public static int _exitCode;
 
     // [0] System.Private.CoreLib/System.Collections.Generic.List`1::Add:System.Void(T)
+    public static void CustomEntryMethod0()
+    {
+    }
+
     // [1] System.Private.CoreLib/System.Collections.Generic.List`1::Clear:System.Void()
     public static int Subject_1()
     {
@@ -16,8 +20,20 @@ public static partial class CollectionsGenericCorePatchEntry
     }
 
     // [2] System.Private.CoreLib/System.Collections.Generic.List`1::Contains:System.Boolean(T)
+    public static void CustomEntryMethod2()
+    {
+    }
+
     // [3] System.Private.CoreLib/System.Collections.Generic.List`1::IndexOf:System.Int32(T)
+    public static void CustomEntryMethod3()
+    {
+    }
+
     // [4] System.Private.CoreLib/System.Collections.Generic.List`1::Remove:System.Boolean(T)
+    public static void CustomEntryMethod4()
+    {
+    }
+
     // [5] System.Private.CoreLib/System.Collections.Generic.List`1::RemoveAt:System.Void(System.Int32)
     public static int Subject_5()
     {
@@ -37,6 +53,10 @@ public static partial class CollectionsGenericCorePatchEntry
     }
 
     // [8] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Add:System.Void(TKey,TValue)
+    public static void CustomEntryMethod8()
+    {
+    }
+
     // [9] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::get_Count:System.Int32()
     public static int Subject_9()
     {
@@ -44,11 +64,35 @@ public static partial class CollectionsGenericCorePatchEntry
     }
 
     // [10] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::TryGetValue:System.Boolean(TKey,TValue&)
+    public static void CustomEntryMethod10()
+    {
+    }
+
     // [11] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::ContainsKey:System.Boolean(TKey)
+    public static void CustomEntryMethod11()
+    {
+    }
+
     // [12] System.Private.CoreLib/System.Collections.Generic.Dictionary`2::Remove:System.Boolean(TKey)
+    public static void CustomEntryMethod12()
+    {
+    }
+
     // [13] System.Private.CoreLib/System.Collections.Generic.HashSet`1::Add:System.Boolean(T)
+    public static void CustomEntryMethod13()
+    {
+    }
+
     // [14] System.Private.CoreLib/System.Collections.Generic.HashSet`1::Contains:System.Boolean(T)
+    public static void CustomEntryMethod14()
+    {
+    }
+
     // [15] System.Private.CoreLib/System.Collections.Generic.HashSet`1::Remove:System.Boolean(T)
+    public static void CustomEntryMethod15()
+    {
+    }
+
     public static void Run(int entryIndex)
     {
         try

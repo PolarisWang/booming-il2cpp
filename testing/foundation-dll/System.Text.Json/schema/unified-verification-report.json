@@ -1,10 +1,10 @@
 {
   "family": "schema",
   "assembly": "System.Text.Json",
-  "mode": "standard",
-  "timestamp": "2026-05-22T07:19:58",
-  "duration_ms": 103557,
-  "overall_status": "passed",
+  "mode": "strict",
+  "timestamp": "2026-05-29T13:00:38",
+  "duration_ms": 1995,
+  "overall_status": "failed",
   "stages": {
     "preflight": {
       "stage": "preflight",
@@ -17,204 +17,35 @@
         "customMethods": []
       },
       "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     },
     "codegen": {
       "stage": "codegen",
-      "status": "passed",
-      "summary": "Entrypoint built and IL2CPP compile OK",
+      "status": "failed",
+      "summary": "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/schema/managed/subjects/SchemaSubjects.cs(11,24): error CS0234: 命名空间“System.Text.Json”中不存在类型或命名空间名“Schema”(是否缺少程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/schema/managed/subjects/SchemaSubjects.csproj]\n\n生成失败。\n\n/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/schema/managed/subjects/SchemaSubjects.cs(11,24): error CS0234: 命名空间“System.Text.Json”中不存在类型或命名空间名“Schema”(是否缺少程序集引用?) [/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/schema/managed/subjects/SchemaSubjects.csproj]\n    0 个警告\n    1 个错误\n\n已用时间 00:00:00.80\n",
       "details": {
-        "methodCount": 2,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\schema\\managed\\subjects\\build-output\\SchemaSubjects.dll"
-      },
-      "errors": [],
-      "duration_ms": 36142
-    },
-    "jit_codegen": {
-      "stage": "jit_codegen",
-      "status": "passed",
-      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
-      "details": {},
-      "errors": [],
-      "duration_ms": 34653
-    },
-    "fact": {
-      "stage": "fact",
-      "status": "passed",
-      "summary": "Fact verify=passed (2/2)",
-      "details": {
-        "fact": {
-          "status": "passed",
-          "passed": 2,
-          "total": 2
+        "steps": {
+          "build_subjects": "FAILED"
         }
       },
       "errors": [],
-      "duration_ms": 364
-    },
-    "fact_jit": {
-      "stage": "fact_jit",
-      "status": "passed",
-      "summary": "Fact JIT verify=passed (2/2)",
-      "details": {
-        "fact_jit": {
-          "status": "passed",
-          "passed": 2,
-          "total": 2,
-          "exit_code": 0
-        }
-      },
-      "errors": [],
-      "duration_ms": 373
-    },
-    "audit": {
-      "stage": "audit",
-      "status": "passed",
-      "summary": "false_passing=0, principle=ALIGNED",
-      "details": {
-        "falsePassing": 0,
-        "stubsFound": 0,
-        "skipsFound": 0,
-        "principleStatus": "ALIGNED",
-        "methodsWithoutLowering": 0
-      },
-      "errors": [],
-      "duration_ms": 1282
-    },
-    "asm_compare": {
-      "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
-      "errors": [],
-      "duration_ms": 0
-    },
-    "microbench": {
-      "stage": "microbench",
-      "status": "passed",
-      "summary": "FramePool=2.9ns/op | FastExecute=196.1ns/op | CallVirt dispatch=205.8ns",
-      "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 2.9,
-          "batchCount": 1000,
-          "framesPerBatch": 32
-        },
-        "fastExecute": {
-          "runCount": 100000,
-          "nsPerCall": 196.1
-        },
-        "callVirt": {
-          "handlerDispatchNs": 205.8,
-          "emptyStackNs": 226.4
-        },
-        "poolSize": 32
-      },
-      "errors": [],
-      "duration_ms": 70
-    },
-    "benchmark": {
-      "stage": "benchmark",
-      "status": "skipped",
-      "summary": "All 2 non-stub methods are invalid (no managed harness)",
-      "details": {},
-      "errors": [],
-      "duration_ms": 28959
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "passed",
-      "summary": "2/2 passed, 0 failed (stub=0)",
-      "details": {
-        "passedMethods": 2,
-        "failedMethods": 0,
-        "totalMethods": 2,
-        "realMethods": 2,
-        "stubMethods": 0
-      },
-      "errors": [],
-      "duration_ms": 30
-    },
-    "hotupdate_aot_benchmark": {
-      "stage": "hotupdate_aot_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=-0.92% (1.0x) over 2 methods (AOT patched path)",
-      "details": {
-        "averageSlowdownPercent": -0.92,
-        "slowdownFactor": 0.9908,
-        "threshold": 50.0,
-        "nonStubMethods": 2
-      },
-      "errors": [],
-      "duration_ms": 61
-    },
-    "hotupdate_jit_fact": {
-      "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "2/2 passed, 0 failed",
-      "details": {
-        "passed": 2,
-        "failed": 0,
-        "total": 2
-      },
-      "errors": [],
-      "duration_ms": 28
-    },
-    "hotupdate_jit_benchmark": {
-      "stage": "hotupdate_jit_benchmark",
-      "status": "passed",
-      "summary": "avg_slowdown=-30.27% (0.7x) over 2 methods (JIT patched path)",
-      "details": {
-        "averageSlowdownPercent": -30.27,
-        "slowdownFactor": 0.6973,
-        "threshold": 50.0,
-        "nonStubMethods": 2
-      },
-      "errors": [],
-      "duration_ms": 1587
+      "duration_ms": 1994
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
-    "testedRate": 100.0,
-    "overall": 100.0
+    "methodCoverage": 0.0,
+    "testedRate": 0.0,
+    "overall": 0.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 2.9,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 205.8,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
-    },
+    "interpreter": {},
     "irTranslation": {},
     "performance": {},
-    "hotupdate": {
-      "aotFunctional": {
-        "passedMethods": 2,
-        "failedMethods": 0,
-        "totalMethods": 2
-      },
-      "aotOverhead": {
-        "averageSlowdownPercent": -0.92,
-        "slowdownFactor": 0.9908,
-        "nonStubMethods": 2
-      },
-      "jitFunctional": {
-        "passedMethods": 2,
-        "failedMethods": 0,
-        "totalMethods": 2
-      },
-      "jitOverhead": {
-        "averageSlowdownPercent": -30.27,
-        "slowdownFactor": 0.6973,
-        "nonStubMethods": 2
-      }
-    },
+    "hotupdate": {},
     "keyRatios": {
       "nativeFasterRatio": 0,
       "irExpansionRatio": 0,
-      "interpreterSlowdownFactor": 0.9908,
+      "interpreterSlowdownFactor": 0,
       "asmPassRate": 0.0
     }
   },

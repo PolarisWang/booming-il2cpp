@@ -746,7 +746,7 @@ def _run_hotupdate_fact(exe_path: Path) -> dict[str, Any]:
 
 
 def _run_hotupdate_benchmark(
-    exe_path: Path, method_index: int, iterations: int = 100000,
+    exe_path: Path, method_index: int, iterations: int = 1000,
 ) -> dict[str, Any]:
     """Run entry.exe --hotupdate-and-benchmark N and parse JSON timing."""
     try:

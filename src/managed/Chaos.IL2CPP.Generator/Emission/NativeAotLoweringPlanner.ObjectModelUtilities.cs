@@ -72,6 +72,14 @@ public sealed partial class NativeAotLoweringPlanner
 		return hashSet;
 	}
 
+	private static readonly HashSet<string> NonDelegateInvokeTypeNames = new(StringComparer.Ordinal)
+	{
+		"System.Reflection.ConstructorInfo",
+		"System.Reflection.MethodInfo",
+		"System.Reflection.MethodBase",
+		"System.Reflection.DynamicMethod",
+	};
+
 	private static IReadOnlyDictionary<string, string?> CollectReferenceTypeBaseSubjectIds(AotCoreIrArtifact aotCoreIr)
 	{
 		Dictionary<string, string?> dictionary = new Dictionary<string, string?>(StringComparer.Ordinal);
@@ -133,7 +141,8 @@ public sealed partial class NativeAotLoweringPlanner
 					string.Equals(GetMethodName(instruction.Callee), "Invoke", StringComparison.Ordinal))
 				{
 					string declaringType = GetMethodDeclaringTypeSubjectId(instruction.Callee);
-					if (!dictionary.TryGetValue(declaringType, out var existingBase) || string.IsNullOrEmpty(existingBase))
+					if ((!dictionary.TryGetValue(declaringType, out var existingBase) || string.IsNullOrEmpty(existingBase))
+						&& !NonDelegateInvokeTypeNames.Contains(ManagedNaming.GetTypeDisplayNameFromSubjectId(declaringType)))
 					{
 						dictionary[declaringType] = "System.Private.CoreLib/System.MulticastDelegate";
 					}

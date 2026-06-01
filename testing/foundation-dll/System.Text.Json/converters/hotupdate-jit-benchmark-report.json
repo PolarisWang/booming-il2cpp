@@ -6,62 +6,56 @@
     {
       "methodIndex": 0,
       "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::CanConvert:System.Boolean(System.Type)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 76660.1,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T12:54:35][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x560c07c5e30f at slot 0\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x560c07c5e30f at slot 1\n[2026-05-29T12:54:35][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
     },
     {
       "methodIndex": 1,
       "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter::get_Type:System.Type()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 67152.9,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T12:54:35][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x5570c6abb30f at slot 0\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x5570c6abb30f at slot 1\n[2026-05-29T12:54:35][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
     },
     {
       "methodIndex": 2,
       "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::CanConvert:System.Boolean(System.Type)",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 82744.8,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T12:54:35][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x55e7a5ca430f at slot 0\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x55e7a5ca430f at slot 1\n[2026-05-29T12:54:35][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
     },
     {
       "methodIndex": 3,
       "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::get_HandleNull:System.Boolean()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 284278.8,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T12:54:35][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x5624c2c9230f at slot 0\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x5624c2c9230f at slot 1\n[2026-05-29T12:54:35][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
     },
     {
       "methodIndex": 4,
       "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::get_Type:System.Type()",
-      "status": "passed",
-      "prePatchNsPerOp": 0.0,
-      "postPatchNsPerOp": 90798.9,
-      "slowdownPercent": 0.0
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T12:54:35][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x564a3422730f at slot 0\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x564a3422730f at slot 1\n[2026-05-29T12:54:35][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
     },
     {
       "methodIndex": 5,
       "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::Read:T(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)",
-      "status": "stub"
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T12:54:35][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x5652ed62230f at slot 0\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x5652ed62230f at slot 1\n[2026-05-29T12:54:35][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::ReadAsPropertyName:T(System.Text.Json.Utf8JsonReader&,System.Type,System.Text.Json.JsonSerializerOptions)",
-      "status": "stub"
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T12:54:35][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x561a1d27530f at slot 0\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x561a1d27530f at slot 1\n[2026-05-29T12:54:35][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::Write:System.Void(System.Text.Json.Utf8JsonWriter,T,System.Text.Json.JsonSerializerOptions)",
-      "status": "stub"
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T12:54:35][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T12:54:35][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:35][DEBUG][GcEvents] registered callback 0x55a5cfc1e30f at slot 0\n[2026-05-29T12:54:36][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:36][DEBUG][GcEvents] registered callback 0x55a5cfc1e30f at slot 1\n[2026-05-29T12:54:36][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.JsonConverter`1::WriteAsPropertyName:System.Void(System.Text.Json.Utf8JsonWriter,T,System.Text.Json.JsonSerializerOptions)",
-      "status": "stub"
+      "status": "failed",
+      "error": "{\"elapsedMilliseconds\":-1.0,\"error\":\"invalid index\"}\nGC|region|active=4|total_allocated=268435456\n[2026-05-29T12:54:36][DEBUG][GcLowMem] low-memory monitor: unsupported platform, skipping\n[2026-05-29T12:54:36][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:36][DEBUG][GcEvents] registered callback 0x5586c573c30f at slot 0\n[2026-05-29T12:54:36][DEBUG][codegen] T4 signal handlers registered (SIGSEGV, SIGBUS, SIGUSR1)\n[2026-05-29T12:54:36][DEBUG][GcEvents] registered callback 0x5586c573c30f at slot 1\n[2026-05-29T12:54:36][WARN][CRAG] slot_map_section_entry_size_mismatch: expected>=%u, got=%u\n"
     }
   ],
   "summary": {

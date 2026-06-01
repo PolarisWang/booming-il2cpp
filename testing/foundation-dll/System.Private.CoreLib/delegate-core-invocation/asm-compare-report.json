@@ -2,24 +2,24 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/delegate/core/invocation",
-  "capturedAt": "2026-05-29T02:35:22",
+  "capturedAt": "2026-05-29T22:56:37",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
-    "okCount": 10,
-    "failedCount": 0,
+    "okCount": 6,
+    "failedCount": 4,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 440
+      "min": 64,
+      "max": 64,
+      "avg": 64.0,
+      "total": 384
     },
     "aotInstructionCount": {
-      "min": 1,
+      "min": 11,
       "max": 19,
-      "avg": 10.0,
-      "total": 100
+      "avg": 16.0,
+      "total": 96
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,10 +27,10 @@
     "topInstructionCategories": {
       "external_runtime_call": 12
     },
-    "overallIrExpansionRatio": 0.23,
-    "averageExpansionRatio": 0.23,
-    "maxExpansionRatio": 0.43,
-    "minExpansionRatio": 0.02
+    "overallIrExpansionRatio": 0.25,
+    "averageExpansionRatio": 0.25,
+    "maxExpansionRatio": 0.3,
+    "minExpansionRatio": 0.17
   },
   "methodResults": [
     {
@@ -39,15 +39,15 @@
       "shortName": "Subject_0",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "ratio": 0.17,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -76,15 +76,15 @@
       "shortName": "Subject_1",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "ratio": 0.17,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -113,15 +113,15 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 19,
-        "ratio": 0.43,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -155,15 +155,15 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 18,
-        "ratio": 0.41,
+        "ratio": 0.28,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -192,15 +192,15 @@
       "shortName": "Subject_4",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 18,
-        "ratio": 0.41,
+        "ratio": 0.28,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -227,49 +227,15 @@
       "methodIndex": 5,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Object,System.String)",
       "shortName": "Subject_5",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_5",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
     },
     {
       "methodIndex": 6,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::CreateDelegate:System.Delegate(System.Type,System.Reflection.MethodInfo)",
       "shortName": "Subject_6",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_6",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
     },
     {
       "methodIndex": 7,
@@ -277,15 +243,15 @@
       "shortName": "Subject_7",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 19,
-        "ratio": 0.43,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -307,49 +273,15 @@
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Equality:System.Boolean(System.Delegate,System.Delegate)",
       "shortName": "Subject_8",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_8",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.Delegate::op_Inequality:System.Boolean(System.Delegate,System.Delegate)",
       "shortName": "Subject_9",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "DelegateCoreInvocationSubjects_DelegateCoreInvocationSubjects_CustomEntrySubject_9",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
     }
   ]
 }
