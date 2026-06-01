@@ -318,6 +318,17 @@ def run_convert_to_cpp(
     if codegen_mode:
         cmd.extend(["--mode", codegen_mode])
 
+    # Write subject-methods.json for annotation-driven dispatch (Phase 2)
+    subject_ids = load_method_subject_ids(family_slug, verification=v)
+    if subject_ids:
+        sm_path = codegen_out / "subject-methods.json"
+        sm_path.write_text(
+            json.dumps({"subjectMethods": subject_ids}, ensure_ascii=False),
+            encoding="utf-8",
+        )
+        cmd.extend(["--subject-methods", str(sm_path)])
+        print(f"    [convert-to-cpp] {len(subject_ids)} subject methods written to subject-methods.json")
+
     result = subprocess.run(cmd, capture_output=True, text=True, encoding='utf-8', errors='replace', timeout=900)
 
     if result.returncode != 0:

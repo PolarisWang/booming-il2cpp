@@ -33,4 +33,14 @@ extern "C" const int kSubjectSlotMap[{{ subject_entries.size }}] = {
 	{{ entry.method_index }},
 {{~ end ~}}
 };
+
+// ── Subject contract map (kSubjectContractMap[]) ───────────────────────
+// Maps subject slot index (si) to contract index (position in contract list).
+// Used by fact-json output to match native results against golden records
+// without assuming slot layout.
+extern "C" const int kSubjectContractMap[{{ subject_entries.size }}] = {
+{{~ for entry in subject_entries ~}}
+	{{ entry.contract_index }},
+{{~ end ~}}
+};
 {{~ end ~}}

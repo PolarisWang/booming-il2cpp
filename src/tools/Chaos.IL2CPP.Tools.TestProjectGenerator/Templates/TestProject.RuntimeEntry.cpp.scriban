@@ -155,8 +155,8 @@ static int RunFactJsonMode() {
             caught = true;
         CHAOS_EH_END
         if (!first) printf(",");
-        printf("{\"si\":%d,\"methodIndex\":%d,\"passed\":%s,\"exitCode\":%d}",
-               si, i, caught ? "false" : "true", caught ? -1 : (int)result);
+        printf("{\"si\":%d,\"methodIndex\":%d,\"contractIndex\":%d,\"passed\":%s,\"exitCode\":%d}",
+               si, i, kSubjectContractMap[si], caught ? "false" : "true", caught ? -1 : (int)result);
         first = false;
     }
     printf("]}\n");
