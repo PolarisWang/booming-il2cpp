@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/enum/parsing",
-  "capturedAt": "2026-05-29T02:41:19",
+  "capturedAt": "2026-06-01T08:58:47",
   "batchMode": true,
   "summary": {
     "totalMethods": 13,
@@ -16,10 +16,10 @@
       "total": 572
     },
     "aotInstructionCount": {
-      "min": 11,
-      "max": 14,
-      "avg": 12.9,
-      "total": 168
+      "min": 4,
+      "max": 15,
+      "avg": 11.0,
+      "total": 143
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
@@ -27,10 +27,10 @@
     "topInstructionCategories": {
       "external_runtime_call": 32
     },
-    "overallIrExpansionRatio": 0.29,
-    "averageExpansionRatio": 0.3,
-    "maxExpansionRatio": 0.32,
-    "minExpansionRatio": 0.25
+    "overallIrExpansionRatio": 0.25,
+    "averageExpansionRatio": 0.25,
+    "maxExpansionRatio": 0.34,
+    "minExpansionRatio": 0.09
   },
   "methodResults": [
     {
@@ -40,8 +40,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -52,7 +52,7 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_0",
-        "instructions": 13
+        "instructions": 11
       },
       "analysis": [
         {
@@ -82,8 +82,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -94,7 +94,7 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_1",
-        "instructions": 13
+        "instructions": 11
       },
       "analysis": [
         {
@@ -124,8 +124,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -136,7 +136,7 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_2",
-        "instructions": 13
+        "instructions": 11
       },
       "analysis": [
         {
@@ -166,8 +166,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -178,7 +178,7 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_3",
-        "instructions": 12
+        "instructions": 10
       },
       "analysis": [
         {
@@ -203,8 +203,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "aotInstructionCount": 9,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
@@ -215,7 +215,7 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_4",
-        "instructions": 11
+        "instructions": 9
       },
       "analysis": [
         {
@@ -245,8 +245,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "aotInstructionCount": 13,
+        "ratio": 0.3,
         "jitCodeSize": 256
       },
       "jit": {
@@ -257,7 +257,7 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_5",
-        "instructions": 12
+        "instructions": 13
       },
       "analysis": [
         {
@@ -282,8 +282,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "aotInstructionCount": 10,
+        "ratio": 0.23,
         "jitCodeSize": 256
       },
       "jit": {
@@ -293,8 +293,8 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_6",
-        "instructions": 12
+        "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_6",
+        "instructions": 10
       },
       "analysis": [
         {
@@ -306,10 +306,15 @@
           "severity": "info",
           "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 3
       }
     },
     {
@@ -319,8 +324,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 11,
+        "ratio": 0.25,
         "jitCodeSize": 256
       },
       "jit": {
@@ -330,8 +335,8 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_7",
-        "instructions": 13
+        "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_7",
+        "instructions": 11
       },
       "analysis": [
         {
@@ -343,10 +348,15 @@
           "severity": "info",
           "category": "external_runtime_call",
           "message": "Call to 'System.Private.CoreLib/System.Enum::Parse:System.Object(System.Type,System.String,System.Boolean)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
         }
       ],
       "instructionCategories": {
-        "external_runtime_call": 2
+        "external_runtime_call": 3
       }
     },
     {
@@ -356,8 +366,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -368,7 +378,7 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_8",
-        "instructions": 14
+        "instructions": 12
       },
       "analysis": [
         {
@@ -398,8 +408,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 12,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
@@ -410,7 +420,7 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_9",
-        "instructions": 14
+        "instructions": 12
       },
       "analysis": [
         {
@@ -440,8 +450,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 15,
+        "ratio": 0.34,
         "jitCodeSize": 256
       },
       "jit": {
@@ -451,8 +461,8 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_10",
-        "instructions": 14
+        "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_10",
+        "instructions": 15
       },
       "analysis": [
         {
@@ -477,8 +487,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 13,
-        "ratio": 0.3,
+        "aotInstructionCount": 14,
+        "ratio": 0.32,
         "jitCodeSize": 256
       },
       "jit": {
@@ -488,8 +498,8 @@
       },
       "aot": {
         "status": "ok",
-        "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_11",
-        "instructions": 13
+        "symbol": "EnumParsingSubjects_EnumParsingSubjects_Subject_11",
+        "instructions": 14
       },
       "analysis": [
         {
@@ -514,8 +524,8 @@
       "status": "ok",
       "metrics": {
         "jitInstructionCount": 44,
-        "aotInstructionCount": 14,
-        "ratio": 0.32,
+        "aotInstructionCount": 4,
+        "ratio": 0.09,
         "jitCodeSize": 256
       },
       "jit": {
@@ -526,23 +536,10 @@
       "aot": {
         "status": "ok",
         "symbol": "EnumParsingSubjects_EnumParsingSubjects_CustomEntrySubject_12",
-        "instructions": 14
+        "instructions": 4
       },
-      "analysis": [
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.Object::ToString:System.String()' uses ExternalRuntime dispatch"
-        },
-        {
-          "severity": "info",
-          "category": "external_runtime_call",
-          "message": "Call to 'System.Private.CoreLib/System.String::get_Length:System.Int32()' uses ExternalRuntime dispatch"
-        }
-      ],
-      "instructionCategories": {
-        "external_runtime_call": 2
-      }
+      "analysis": [],
+      "instructionCategories": {}
     }
   ]
 }

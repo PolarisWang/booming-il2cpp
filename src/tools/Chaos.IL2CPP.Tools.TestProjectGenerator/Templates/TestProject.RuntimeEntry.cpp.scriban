@@ -44,6 +44,7 @@ bool g_log_use_stderr = false;
 extern "C" const int kAotMethodCount;
 extern "C" const int kSubjectEntryCount;
 extern "C" const int kSubjectSlotMap[];
+extern "C" const int kSubjectContractMap[];
 
 extern "C" const HotpatchEntryV0* GetHotpatchEntries() noexcept;
 
