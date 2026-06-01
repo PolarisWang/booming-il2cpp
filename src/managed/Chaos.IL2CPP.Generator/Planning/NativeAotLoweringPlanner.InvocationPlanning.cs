@@ -1866,7 +1866,7 @@ public sealed partial class NativeAotLoweringPlanner
             for (int i = 0; i < instrs.Count; i++)
             {
                 var instr = instrs[i];
-                if (instr.OpCode is not (InstructionOpCode.Call or InstructionOpCode.CallVirt))
+                if (instr.Op is not ("call" or "callvirt"))
                     continue;
 
                 var callee = instr.Callee;
@@ -1919,7 +1919,7 @@ public sealed partial class NativeAotLoweringPlanner
             for (int i = 1; i < instrs.Count; i++)
             {
                 var instr = instrs[i];
-                if (instr.OpCode is not (InstructionOpCode.Call or InstructionOpCode.CallVirt))
+                if (instr.Op is not ("call" or "callvirt"))
                     continue;
 
                 if (!IsGetTypeFromHandle(instr.Callee))
