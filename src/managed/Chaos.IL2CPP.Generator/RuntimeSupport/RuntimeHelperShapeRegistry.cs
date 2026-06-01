@@ -2793,12 +2793,41 @@ public sealed partial class NativeAotLoweringPlanner
                     };
 
                     // Generate thin forwarding body that calls the native function.
+                    // For String overloads: emit inline ResolveWithGlobalCache to eliminate
+                    // the extern "C" call barrier and TLS indirect addressing.
                     var args = abiSlots.Count == 0 ? "" :
                         string.Join(", ", Enumerable.Range(0, abiSlots.Count).Select(i => $"chaos_arg_{i}"));
                     string[] bodyLines;
                     if (abiSlots.Count == 0)
                     {
                         bodyLines = ["    return static_cast<CHAOS_IL2CPP_UINT16>(0);"];
+                    }
+                    else if (abiSlots.Count == 1 && paramTypes[0] == "System.String")
+                    {
+                        bodyLines =
+                        [
+                            "    auto _v = chaos::il2cpp::string_table::ResolveWithGlobalCache(chaos_extract_string_id(chaos_arg_0));",
+                            "    if (_v.byte_count == 0)",
+                            "    {",
+                            "        chaos::il2cpp::runtime_core::chaos_raise_exception(0);",
+                            "        return 0;",
+                            "    }",
+                            "    return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(_v.utf8_data[0]));",
+                        ];
+                    }
+                    else if (abiSlots.Count == 2 && paramTypes[0] == "System.String" && paramTypes[1] == "System.IFormatProvider")
+                    {
+                        bodyLines =
+                        [
+                            "    (void)chaos_arg_1;",
+                            "    auto _v = chaos::il2cpp::string_table::ResolveWithGlobalCache(chaos_extract_string_id(chaos_arg_0));",
+                            "    if (_v.byte_count == 0)",
+                            "    {",
+                            "        chaos::il2cpp::runtime_core::chaos_raise_exception(0);",
+                            "        return 0;",
+                            "    }",
+                            "    return static_cast<CHAOS_IL2CPP_UINT16>(static_cast<unsigned char>(_v.utf8_data[0]));",
+                        ];
                     }
                     else
                     {
@@ -2877,9 +2906,12 @@ public sealed partial class NativeAotLoweringPlanner
                     {
                         // {0} is guaranteed to be a string ID for System.String-typed
                         // parameters — no chaos_is_string_id check needed.
+                        // Uses ResolveWithGlobalCache (direct-mapped global cache,
+                        // no TLS indirect addressing — ~1 global load + 1 compare
+                        // on hit instead of 3 TLS loads).
                         return """
                             [&]() -> CHAOS_IL2CPP_UINT16 {
-                                auto _v = chaos::il2cpp::string_table::ResolveFast(chaos_extract_string_id({0}));
+                                auto _v = chaos::il2cpp::string_table::ResolveWithGlobalCache(chaos_extract_string_id({0}));
                                 if (_v.byte_count == 0) {
                                     chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
                                     return 0;
@@ -2893,7 +2925,7 @@ public sealed partial class NativeAotLoweringPlanner
                         return """
                             [&]() -> CHAOS_IL2CPP_UINT16 {
                                 (void){1};
-                                auto _v = chaos::il2cpp::string_table::ResolveFast(chaos_extract_string_id({0}));
+                                auto _v = chaos::il2cpp::string_table::ResolveWithGlobalCache(chaos_extract_string_id({0}));
                                 if (_v.byte_count == 0) {
                                     chaos::il2cpp::runtime_core::chaos_raise_exception(reinterpret_cast<CHAOS_IL2CPP_INTPTR>(nullptr));
                                     return 0;
