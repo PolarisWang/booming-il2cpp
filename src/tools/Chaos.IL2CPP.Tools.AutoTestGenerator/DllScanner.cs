@@ -86,11 +86,29 @@ public sealed class DllScanner
     {
         if (type.IsGenericType)
         {
-            var name = type.GetGenericTypeDefinition().FullName ?? type.Name;
             var args = string.Join(",", type.GetGenericArguments().Select(GetTypeName));
-            return $"{name}<{args}>";
+            var defName = type.GetGenericTypeDefinition().Name;
+            var backtick = defName.IndexOf('`');
+            if (backtick >= 0) defName = defName[..backtick];
+            return $"{defName}<{args}>";
         }
-        return type.FullName ?? type.Name;
+
+        var fullName = type.FullName;
+        if (fullName is not null) return fullName;
+
+        // MetadataLoadContext sometimes loses FullName for constructed generics.
+        // Fall back to Name (e.g. "Span`1") and fill arity with byte.
+        var name = type.Name;
+        var bt = name.IndexOf('`');
+        if (bt < 0) return name;
+
+        var arityStr = name[(bt + 1)..];
+        if (int.TryParse(arityStr, out var arity) && arity > 0)
+        {
+            var args = string.Join(",", Enumerable.Repeat("System.Byte", arity));
+            return $"{name[..bt]}<{args}>";
+        }
+        return name;
     }
 
     private static string[] GetProbeDirectories(string dllPath)

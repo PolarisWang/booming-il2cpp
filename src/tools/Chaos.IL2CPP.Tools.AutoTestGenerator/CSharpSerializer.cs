@@ -207,76 +207,128 @@ public sealed class CSharpSerializer
         return expr is not null;
     }
 
+    /// <summary>
+    /// Convert a CLR type name to a valid C# type name for use in generated code.
+    /// Handles: Span`1 -> Span, Span<System.Byte> -> Span<byte>, System.Int32 -> int
+    /// </summary>
     internal static string ToCSharpTypeName(string typeName)
     {
-        // Handle generic: "System.Collections.Generic.List`1[[System.Int32,...]]" -> "List<int>"
+        // Handle generic "Name<Arg1,Arg2>" or "Name{Arg1,Arg2}" syntax
+        int genericStart = -1;
+        char genericClose = '\0';
+
+        if (typeName.Contains('<'))
+        {
+            genericStart = typeName.IndexOf('<');
+            genericClose = '>';
+        }
+        else if (typeName.Contains('{'))
+        {
+            genericStart = typeName.IndexOf('{');
+            genericClose = '}';
+        }
+
+        if (genericStart >= 0)
+        {
+            var genericEnd = typeName.LastIndexOf(genericClose);
+            var bareType = typeName[..genericStart];
+            var argsPart = genericEnd > genericStart
+                ? typeName[(genericStart + 1)..genericEnd]
+                : "";
+
+            var args = argsPart.Split(',')
+                .Select(a => MapToCSharpType(a.Trim()))
+                .ToArray();
+
+            // Strip backtick arity from bare type name
+            var bt = bareType.IndexOf('`');
+            if (bt >= 0) bareType = bareType[..bt];
+
+            var shortName = GetShortTypeName(bareType);
+            return $"{shortName}<{string.Join(", ", args)}>";
+        }
+
+        // Handle bare "Span`1" format (no angle brackets, just backtick)
         var backtick = typeName.IndexOf('`');
         if (backtick >= 0)
         {
             var bareName = typeName[..backtick];
-            var shortName = GetShortTypeName(bareName);
-
-            // Extract generic args from brackets
-            var bracket = typeName.IndexOf('[');
-            if (bracket > backtick)
+            var arityStr = typeName[(backtick + 1)..];
+            if (int.TryParse(arityStr, out var arity) && arity > 0)
             {
-                var argsPart = typeName[(bracket + 1)..];
-                if (argsPart.EndsWith(']'))
-                    argsPart = argsPart[..^1];
-
-                var args = SplitGenericArgs(argsPart);
-                var csArgs = string.Join(", ", args.Select(a => MapToCSharpType(a)));
-                return $"{shortName}<{csArgs}>";
+                var args = string.Join(", ", Enumerable.Repeat("byte", arity));
+                return $"{GetShortTypeName(bareName)}<{args}>";
             }
-
-            return shortName;
+            return GetShortTypeName(bareName);
         }
+
         return GetShortTypeName(typeName);
     }
 
-    private static string GetShortTypeName(string fullName)
+    internal static string GetShortTypeName(string fullName)
     {
-        // "System.Collections.Generic.List" -> "List"
-        // "System.Int32" -> "int" (special case)
+        // For namespaced type names, extract the short name
+        // But keep generic type names intact for angle-bracket parsing
         return MapToCSharpType(fullName);
     }
 
     internal static string MapToCSharpType(string typeName)
     {
-        return typeName switch
+        // Handle generic type names — extract short name for the base type
+        var genericStart = typeName.IndexOf('<');
+        var bareTypeName = genericStart >= 0 ? typeName[..genericStart] : typeName;
+
+        // Strip dot prefix from fully-qualified names
+        var lastDot = bareTypeName.LastIndexOf('.');
+        var shortName = lastDot >= 0 ? bareTypeName[(lastDot + 1)..] : bareTypeName;
+
+        var mapped = shortName switch
         {
-            "System.Boolean" => "bool",
-            "System.Byte" => "byte",
-            "System.SByte" => "sbyte",
-            "System.Int16" => "short",
-            "System.UInt16" => "ushort",
-            "System.Int32" => "int",
-            "System.UInt32" => "uint",
-            "System.Int64" => "long",
-            "System.UInt64" => "ulong",
-            "System.Single" => "float",
-            "System.Double" => "double",
-            "System.Decimal" => "decimal",
-            "System.Char" => "char",
-            "System.String" => "string",
-            "System.Object" => "object",
-            "System.Void" => "void",
-            _ => typeName.Split('.').LastOrDefault() ?? typeName
+            "Boolean" => "bool",
+            "Byte" => "byte",
+            "SByte" => "sbyte",
+            "Int16" => "short",
+            "UInt16" => "ushort",
+            "Int32" => "int",
+            "UInt32" => "uint",
+            "Int64" => "long",
+            "UInt64" => "ulong",
+            "Single" => "float",
+            "Double" => "double",
+            "Decimal" => "decimal",
+            "Char" => "char",
+            "String" => "string",
+            "Object" => "object",
+            "Void" => "void",
+            _ => shortName
         };
+
+        if (genericStart >= 0)
+        {
+            var argsPart = typeName[(genericStart + 1)..^1]; // strip <>
+            var args = argsPart.Split(',').Select(a => MapToCSharpType(a.Trim()));
+            return $"{mapped}<{string.Join(", ", args)}>";
+        }
+
+        return mapped;
     }
 
     internal static bool IsValueType(string typeName)
     {
-        return typeName switch
+        // Extract just the type name, stripping namespace and generic args
+        var genericStart = typeName.IndexOf('<');
+        var bareTypeName = genericStart >= 0 ? typeName[..genericStart] : typeName;
+        var lastDot = bareTypeName.LastIndexOf('.');
+        var shortName = lastDot >= 0 ? bareTypeName[(lastDot + 1)..] : bareTypeName;
+
+        return shortName switch
         {
-            "System.Boolean" or "System.Byte" or "System.SByte" or
-            "System.Int16" or "System.UInt16" or "System.Int32" or
-            "System.UInt32" or "System.Int64" or "System.UInt64" or
-            "System.Single" or "System.Double" or "System.Decimal" or
-            "System.Char" or "System.DateTime" or "System.TimeSpan" or
-            "System.Guid" or "System.DateTimeOffset" or "System.IntPtr" or
-            "System.UIntPtr" => true,
-            _ when typeName.Contains("System.Nullable") => true,
+            "Boolean" or "Byte" or "SByte" or "Int16" or "UInt16" or
+            "Int32" or "UInt32" or "Int64" or "UInt64" or
+            "Single" or "Double" or "Decimal" or "Char" or
+            "DateTime" or "TimeSpan" or "Guid" or "DateTimeOffset" or
+            "IntPtr" or "UIntPtr" or "Span" or "ReadOnlySpan" or
+            "Nullable" => true,
             _ => false
         };
     }
