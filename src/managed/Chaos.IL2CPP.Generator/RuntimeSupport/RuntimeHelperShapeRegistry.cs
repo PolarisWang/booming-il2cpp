@@ -1287,12 +1287,25 @@ public sealed partial class NativeAotLoweringPlanner
                 CreateVoidAbiSlot(),
                 new HashSet<int> { 0, 1 });
 
-            // === Array.Empty<T> (SimpleForward — returns null stub) ===
-            registry.Register("System.Array", "Empty", [],
-                ShapeKind.SimpleForward, "ChaosArrayEmpty",
-                Array.Empty<AotCoreIrAbiSlotArtifact>(),
-                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                EmptyRawArgumentIndices);
+            // === Array.Empty<T> (GenericShapeDescriptor -- resolves to ChaosArrayEmpty stub) ===
+            // NOTE: Must be GenericShapeDescriptor, not SimpleForward, because the codegen
+            // includes generic type args in the method name (e.g. "Empty<System.Byte>"),
+            // which causes exact hash lookup to fail against the non-generic registration.
+            registry.RegisterGeneric(new GenericShapeDescriptor(
+                TypeDisplayNamePrefix: "System.Array",
+                MethodName: "Empty",
+                Resolver: static (planner, callee, typeArgs) =>
+                {
+                    var symbol = NativeAotLoweringPlanner.GetExternalRuntimeHelperSymbol(callee);
+                    var body = new[] { "    return ChaosArrayEmpty();" };
+                    var src = RenderSimpleExternalRuntimeHelper("CHAOS_IL2CPP_INTPTR", symbol,
+                        "", body);
+                    return new GenericShapeResolution(src, symbol,
+                        Array.Empty<AotCoreIrAbiSlotArtifact>(),
+                        CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                        EmptyRawArgumentIndices,
+                        DirectNativeSymbol: "ChaosArrayEmpty_Inline");
+                }));
 
             // === Type::GetMethod generic handler (GenericShapeDescriptor -- handles various overloads) ===
             registry.RegisterGeneric(new GenericShapeDescriptor(
@@ -2942,7 +2955,8 @@ public sealed partial class NativeAotLoweringPlanner
                                 CreateInt32AbiSlot(),
                             }),
                             CreateVoidAbiSlot(),
-                            new HashSet<int> { 0, 1, 2, 3, 4 });
+                            new HashSet<int> { 0, 1, 2, 3, 4 },
+                            DirectNativeSymbol: "ChaosArrayCopy_Inline");
                     }
                     if (paramTypes.Count == 0)
                     {
@@ -2954,6 +2968,24 @@ public sealed partial class NativeAotLoweringPlanner
                             Array.Empty<AotCoreIrAbiSlotArtifact>(),
                             CreateVoidAbiSlot(),
                             EmptyRawArgumentIndices);
+                    }
+                    if (paramTypes.Count == 3)
+                    {
+                        var srcThree = RenderSimpleExternalRuntimeHelper("void", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1, CHAOS_IL2CPP_INT32 chaos_arg_2",
+                        [
+                            "    ChaosArrayCopy3(chaos_arg_0, chaos_arg_1, chaos_arg_2);",
+                        ]);
+                        return new GenericShapeResolution(srcThree, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[3]
+                            {
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateInt32AbiSlot(),
+                            }),
+                            CreateVoidAbiSlot(),
+                            new HashSet<int> { 0, 1, 2 },
+                            DirectNativeSymbol: "ChaosArrayCopy3_Inline");
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var pt in paramTypes)
@@ -4154,7 +4186,8 @@ public sealed partial class NativeAotLoweringPlanner
                                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                             }),
                             CreateInt32AbiSlot(),
-                            new HashSet<int> { 0, 1 });
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: "ChaosArrayBinarySearch_Inline");
                     }
                     if (paramTypes.Count == 0)
                     {
@@ -4184,7 +4217,8 @@ public sealed partial class NativeAotLoweringPlanner
                                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                             }),
                             CreateInt32AbiSlot(),
-                            new HashSet<int> { 0, 1, 2, 3 });
+                            new HashSet<int> { 0, 1, 2, 3 },
+                            DirectNativeSymbol: "ChaosArrayBinarySearchRange_Inline");
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var pt in paramTypes)
@@ -4265,7 +4299,8 @@ public sealed partial class NativeAotLoweringPlanner
                                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                             }),
                             CreateInt32AbiSlot(),
-                            new HashSet<int> { 0, 1 });
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: "ChaosArrayIndexOf_Inline");
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var _ in paramTypes)
@@ -4305,7 +4340,8 @@ public sealed partial class NativeAotLoweringPlanner
                                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
                             }),
                             CreateInt32AbiSlot(),
-                            new HashSet<int> { 0, 1 });
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: "ChaosArrayLastIndexOf_Inline");
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var _ in paramTypes)
@@ -4860,7 +4896,25 @@ public sealed partial class NativeAotLoweringPlanner
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                             CreateVoidAbiSlot(),
-                            new HashSet<int> { 0 });
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: "ChaosArraySort_Inline");
+                    }
+                    if (paramTypes.Count == 2)
+                    {
+                        var srcSortCmp = RenderSimpleExternalRuntimeHelper("void", symbol,
+                            "CHAOS_IL2CPP_INTPTR chaos_arg_0, CHAOS_IL2CPP_INTPTR chaos_arg_1",
+                        [
+                            "    ChaosArraySortWithComparer(chaos_arg_0, chaos_arg_1);",
+                        ]);
+                        return new GenericShapeResolution(srcSortCmp, symbol,
+                            new _003C_003Ez__ReadOnlyArray<AotCoreIrAbiSlotArtifact>(new AotCoreIrAbiSlotArtifact[2]
+                            {
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                                CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
+                            }),
+                            CreateVoidAbiSlot(),
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: "ChaosArraySortWithComparer_Inline");
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var _ in paramTypes)
@@ -4896,7 +4950,8 @@ public sealed partial class NativeAotLoweringPlanner
                             new _003C_003Ez__ReadOnlySingleElementList<AotCoreIrAbiSlotArtifact>(
                                 CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType)),
                             CreateVoidAbiSlot(),
-                            new HashSet<int> { 0 });
+                            new HashSet<int> { 0 },
+                            DirectNativeSymbol: "ChaosArrayReverse_Inline");
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var _ in paramTypes)
@@ -5278,7 +5333,8 @@ public sealed partial class NativeAotLoweringPlanner
                                 CreateInt32AbiSlot(),
                             }),
                             CreateNativeIntAbiSlot(null, AotCoreIrTypeShapeKind.ReferenceType),
-                            new HashSet<int> { 0, 1 });
+                            new HashSet<int> { 0, 1 },
+                            DirectNativeSymbol: "ChaosArrayGetValue_Inline");
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>
                     {
