@@ -113,6 +113,13 @@ public sealed partial class NativeAotLoweringPlanner
     private Dictionary<string, HashSet<int>> _enumAotBakeSkipIlOffsets =
         new Dictionary<string, HashSet<int>>();
 
+    /// Counter for AOT-baked enum cache array indexing.
+    /// Incremented during emission to assign sequential indices.
+    private int _enumAotBakeCacheCount;
+
+    /// Total size of the _g_bake_cache_[] array, set before the emission phase.
+    private int _enumAotBakeCacheArraySize;
+
     // ── TypeInfo* direct API (A2.6) ──────────────────────────────────────
     /// Pre-computed fold map for typeof(T).IsAssignableFrom(typeof(U)) type
     /// hierarchy calls where both arguments are typeof() constants known at
@@ -138,6 +145,19 @@ public sealed partial class NativeAotLoweringPlanner
 
     private Dictionary<(string MethodNativeSymbol, int IlOffset), TypeHierarchyPtrFoldEntry> _typeHierarchyPtrFoldMap = new();
     private Dictionary<string, HashSet<int>> _typeHierarchyPtrSkipIlOffsets = new();
+
+    // ── typeof(T) compile-time fold (A2.7) ─────────────────────────────────
+    /// For any <c>ldtoken &lt;const_type&gt; + call GetTypeFromHandle</c> where the
+    /// type is AOT-known, fold both instructions into a direct TypeInfo* pointer
+    /// expression, bypassing the runtime metadata dispatch entirely.
+    /// Affects <c>typeof(byte)</c>, <c>typeof(DayOfWeek)</c>, etc. used as
+    /// arguments to Enum.Format/Parse/TryParse.
+    private readonly record struct TypeOfFoldEntry(
+        string TypeInfoExpr,  // e.g. "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_mt_X.AsTypeInfoHot())"
+        int[] SkipIlOffsets); // [ltoken_offset]
+
+    private Dictionary<(string MethodNativeSymbol, int IlOffset), TypeOfFoldEntry> _typeOfFoldMap = new();
+    private Dictionary<string, HashSet<int>> _typeOfSkipIlOffsets = new();
 
     // Pre-try TypeInfo* fold initializers: emitted BEFORE CHAOS_EH_TRY so the
     // *Ptr call avoids SEH frame setup/teardown overhead.
@@ -798,8 +818,26 @@ public sealed partial class NativeAotLoweringPlanner
         BuildEnumToStringFoldTable(methodsForLowering);
         // A2.5: Pre-scan for Enum::Parse/GetName/Format/IsDefined with constant args
         BuildEnumAotBakeTable(methodsForLowering);
+
+        // Emit file-scope _g_bake_cache_[] array for AOT-baked enum results.
+        // MSVC C2712 forbids function-local static variables with dynamic
+        // initializers inside __try/__except.  The array sits at namespace
+        // scope so method bodies inside CHAOS_EH_TRY can reference it without
+        // triggering the compiler error.
+        _enumAotBakeCacheArraySize = _enumAotBakeMap.Values.Count(e => e.ConstantInt != null);
+        _enumAotBakeCacheCount = 0;  // reset counter for sequential indexing
+        if (_enumAotBakeCacheArraySize > 0)
+        {
+            objectModelBuilder.AppendLine();
+            objectModelBuilder.AppendLine("// File-scope cache for AOT-baked enum box values");
+            objectModelBuilder.AppendLine($"// (avoids MSVC C2712 from function-local static inside __try/__except)");
+            objectModelBuilder.AppendLine($"static CHAOS_IL2CPP_INTPTR _g_bake_cache_[{_enumAotBakeCacheArraySize}] = {{}};");
+            objectModelBuilder.AppendLine();
+        }
         // A2.6: Pre-scan for typeof(T).IsAssignableFrom(typeof(U)) → *Ptr direct API
         BuildTypeHierarchyPtrFoldTable(methodsForLowering);
+        // A2.7: Pre-scan for typeof(const_type) → direct TypeInfo* pointer
+        BuildTypeOfFoldTable(methodsForLowering);
         _tPhase3 = _sw.ElapsedMilliseconds;
 
         var methodDeclarations = BuildMethodDeclarations(methodsForLowering, _sharedContextSymbols, _stubNeedsContext);

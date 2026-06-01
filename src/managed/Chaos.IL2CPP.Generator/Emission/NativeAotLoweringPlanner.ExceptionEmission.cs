@@ -723,6 +723,15 @@ public sealed partial class NativeAotLoweringPlanner
 		{
 			return;
 		}
+		// A2.7 DCE: Skip dead ltoken when typeof(T) compile-time fold fires.
+		if (_typeOfSkipIlOffsets.Count > 0 &&
+		    _currentMethodNativeSymbol != null &&
+		    instruction.Op == "ldtoken" &&
+		    _typeOfSkipIlOffsets.TryGetValue(_currentMethodNativeSymbol, out var typeOfSkipSet) &&
+		    typeOfSkipSet.Contains(instruction.IlOffset))
+		{
+			return;
+		}
 
 		switch (instruction.Op)
 		{
@@ -2764,6 +2773,48 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			return;
 		}
 
+		// A2.7: typeof(const_type) compile-time fold — emit direct TypeInfo* pointer
+		// instead of calling ChaosReflectionGetTypeFromHandle.
+		// The ltoken was already DCE'd in EmitInstruction by A2.7 skip set.
+		if (_typeOfFoldMap.Count > 0 &&
+			_typeOfFoldMap.TryGetValue((_currentMethodNativeSymbol ?? "", instruction.IlOffset), out var typeOfFold))
+		{
+			builder.AppendLine(indentation + "{");
+			EmitEvalStackPush(builder, indentation + "    ", typeOfFold.TypeInfoExpr);
+			builder.AppendLine(indentation + "}");
+			return;
+		}
+
+		// A2.8: String.get_Length inlining — bypass external runtime dispatch.
+		// Emit the body inline at each call site to eliminate function call
+		// overhead and enable compiler inlining of the field read.
+		if (instruction.Callee is { } callee &&
+			callee.IndexOf("::get_Length:", StringComparison.Ordinal) > 0 &&
+			callee.IndexOf("/System.String::", StringComparison.Ordinal) > 0)
+		{
+			var strArg = ConsumeEvalStackValueExpression();
+			builder.AppendLine(indentation + "{");
+			builder.AppendLine(indentation + "    const auto _str_arg = " + strArg + ";");
+			builder.AppendLine(indentation + "    CHAOS_IL2CPP_INT32 _len_result;");
+			builder.AppendLine(indentation + "    if (chaos_is_string_id(_str_arg))");
+			builder.AppendLine(indentation + "    {");
+			builder.AppendLine(indentation + "        _len_result = static_cast<CHAOS_IL2CPP_INT32>(");
+			builder.AppendLine(indentation + "            chaos::il2cpp::string_table::Resolve(");
+			builder.AppendLine(indentation + "                chaos_extract_string_id(_str_arg)).byte_count);");
+			builder.AppendLine(indentation + "    }");
+			builder.AppendLine(indentation + "    else");
+			builder.AppendLine(indentation + "    {");
+			builder.AppendLine(indentation + "        auto* _str = reinterpret_cast<CHAOS_IL2CPP_STRING_TYPE*>(_str_arg);");
+			builder.AppendLine(indentation + "        _len_result = _str->length;");
+			builder.AppendLine(indentation + "    }");
+			if (_activeStructuredSlotContext is not null)
+				EmitEvalStackPush(builder, indentation + "    ", "static_cast<CHAOS_IL2CPP_INTPTR>(_len_result)");
+			else
+				EmitEvalStackPush(builder, indentation + "    ", $"static_cast<CHAOS_IL2CPP_INTPTR>(_len_result)");
+			builder.AppendLine(indentation + "}");
+			return;
+		}
+
 		InvocationTarget invocationTarget = ResolveDirectInvocationTarget(instruction);
 		// IL-level inlining: expand small callee bodies directly at call site.
 		if (invocationTarget.TargetSymbol != null)
@@ -2895,22 +2946,35 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			}
 			else if (isTryParse)
 			{
-				// TryParse: emit box, write through out parameter, push bool result (1 = success)
+				// TryParse (AOT-baked): emit cached box via file-scope static array
+				// (avoids MSVC C2712 from function-local static with dynamic initializer
+				// inside __try/__except).  The _bake_cache_ array is declared at namespace
+				// scope in the generated file preamble.
+				int cacheIdx = Interlocked.Increment(ref _enumAotBakeCacheCount) - 1;
 				builder.AppendLine($"{indentation}    // AOT-baked: {bakeEntry.Callee}");
-				builder.AppendLine($"{indentation}    auto* chaos_bake_box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
-				builder.AppendLine($"{indentation}    chaos_bake_box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)};");
-				builder.AppendLine($"{indentation}    chaos_bake_box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value});");
+				builder.AppendLine($"{indentation}    if (!_g_bake_cache_[{cacheIdx}]) {{");
+				builder.AppendLine($"{indentation}        auto* box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
+				builder.AppendLine($"{indentation}        box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)};");
+				builder.AppendLine($"{indentation}        box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value});");
+				builder.AppendLine($"{indentation}        _g_bake_cache_[{cacheIdx}] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(box);");
+				builder.AppendLine($"{indentation}    }}");
 				if (resultSlotExpr != null)
-					builder.AppendLine($"{indentation}    *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>({resultSlotExpr}) = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_bake_box);");
+					builder.AppendLine($"{indentation}    *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>({resultSlotExpr}) = _g_bake_cache_[{cacheIdx}];");
 				EmitEvalStackPush(builder, indentation + "    ", "1");
 			}
 			else
 			{
+				// Other value-returning baked calls (e.g. Enum.Parse): emit cached box,
+				// push the box pointer as the return value.  Uses file-scope cache array.
+				int cacheIdx = Interlocked.Increment(ref _enumAotBakeCacheCount) - 1;
 				builder.AppendLine($"{indentation}    // AOT-baked: {bakeEntry.Callee}");
-				builder.AppendLine($"{indentation}    auto* chaos_bake_box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
-				builder.AppendLine($"{indentation}    chaos_bake_box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)};");
-				builder.AppendLine($"{indentation}    chaos_bake_box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value});");
-				EmitEvalStackPush(builder, indentation + "    ", $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_bake_box)");
+				builder.AppendLine($"{indentation}    if (!_g_bake_cache_[{cacheIdx}]) {{");
+				builder.AppendLine($"{indentation}        auto* box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
+				builder.AppendLine($"{indentation}        box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)};");
+				builder.AppendLine($"{indentation}        box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value});");
+				builder.AppendLine($"{indentation}        _g_bake_cache_[{cacheIdx}] = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(box);");
+				builder.AppendLine($"{indentation}    }}");
+				EmitEvalStackPush(builder, indentation + "    ", $"_g_bake_cache_[{cacheIdx}]");
 			}
 		}
 
