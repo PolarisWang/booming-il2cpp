@@ -588,7 +588,7 @@ void ChaosThrowComExceptionForHR(CHAOS_IL2CPP_INT32 hr) noexcept {
     // dispatch, which creates a managed COMException from the HRESULT.
     // Store the HR in TLS so the managed-side COMException constructor can
     // retrieve it via ChaosGetComFailureHR().
-    CHAOS_IL2CPP_LOG_WARN_M("COM", "ChaosThrowComExceptionForHR HRESULT 0x{0:x8} — throwing COMException sentinel",
+    CHAOS_IL2CPP_LOG_WARN_M("COM", "ChaosThrowComExceptionForHR HRESULT 0x{0:08x} - throwing COMException sentinel",
                              static_cast<unsigned int>(hr));
     tls_com_failure_hr = hr;
     throw chaos_managed_exception{kManagedExceptionComFailure};

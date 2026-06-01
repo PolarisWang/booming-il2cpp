@@ -85,6 +85,11 @@ CHAOS_IL2CPP_INTPTR ChaosArrayGetValue(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_I
     return ChaosArrayGetValue_Inline(array, index);
 }
 
+CHAOS_IL2CPP_INTPTR ChaosArrayNew1D(const TypeInfo* array_type_info, const TypeInfo* element_type_info, CHAOS_IL2CPP_UINT8 element_type_shape, CHAOS_IL2CPP_INTPTR length) noexcept
+{
+    return ChaosArrayNew1D_Inline(array_type_info, element_type_info, element_type_shape, length);
+}
+
 CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytes(CHAOS_IL2CPP_INTPTR unused, CHAOS_IL2CPP_INT32 value) noexcept
 {
     (void)unused;
