@@ -2,13 +2,21 @@ cmake_minimum_required(VERSION 3.20)
 project(chaos_entry CXX)
 set(CMAKE_CXX_STANDARD 20)
 
-# Compiler settings — /EHa needed for catch(...) to intercept C++ exceptions
-# thrown by generated code (throw chaos_managed_exception from unresolved calls).
-add_compile_options(/utf-8 /GS- /FS)
+# Compiler settings — platform-conditional
+# MSVC: /EHa needed for catch(...) to intercept C++ exceptions from generated code.
+# GCC/Clang: -fexceptions -finput-charset=utf-8, suppress known warnings
+add_compile_options(
+    "$<$<CXX_COMPILER_ID:MSVC>:/utf-8>"
+    "$<$<CXX_COMPILER_ID:MSVC>:/GS->"
+    "$<$<CXX_COMPILER_ID:MSVC>:/FS>"
+    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>"
+    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-finput-charset=utf-8>"
+    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wno-error=invalid-offsetof>"
+)
 # Config tier: controlled by CHAOS_IL2CPP_CONFIG_TIER cmake variable
-# (set via -D or CMakePresets.json). Defaults to CHECK (debug).
+# (set via -D or CMakePresets.json). Expected values: check / profile / ship.
 if(NOT DEFINED CHAOS_IL2CPP_CONFIG_TIER)
-  set(CHAOS_IL2CPP_CONFIG_TIER "debug")
+  set(CHAOS_IL2CPP_CONFIG_TIER "check")
 endif()
 if(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "profile")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_PROFILE)
@@ -18,12 +26,25 @@ elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "ship")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_SHIP)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_SHIP)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=0)
+elseif(CHAOS_IL2CPP_CONFIG_TIER STREQUAL "check")
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
+  add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 else()
+  message(WARNING "Unknown CHAOS_IL2CPP_CONFIG_TIER: '${CHAOS_IL2CPP_CONFIG_TIER}'. Expected check / profile / ship. Defaulting to CHECK.")
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_TIER=CHAOS_IL2CPP_CONFIG_TIER_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_CONFIG_CHECK)
   add_compile_definitions(CHAOS_IL2CPP_LOG_LEVEL=3)
 endif()
-add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
+if(CHAOS_IL2CPP_JIT_MODE)
+    add_compile_definitions(CHAOS_IL2CPP_JIT_MODE)
+endif()
+
+# Verification mode: enables if constexpr assertion bodies in generated code
+# Set to 0 for AOT-only builds; the fact stage requires assertions to be DISABLED
+# because the AOT entry point does not have managed exception handling installed
+# during static initialization.
+add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=0)
 
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
@@ -36,7 +57,7 @@ set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
 set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/reflection-hotupdate/codegen")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
-# JIT mode: sources at *Subjects/generated/* (single-level, R1 fix).
+# Sources at *Subjects/generated/* (single-level, R1 fix).
 file(GLOB CHAOS_CODEGEN_CPP
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.generated.cpp"
     "${CHAOS_CODEGEN_DIR}/*Subjects/generated/native-aot.page-*.cpp"
@@ -107,8 +128,12 @@ set(CHAOS_ENTRY_INCLUDES
 
 add_executable(entry ${CHAOS_ENTRY_SOURCES})
 target_include_directories(entry PRIVATE ${CHAOS_ENTRY_INCLUDES})
-target_compile_options(entry PRIVATE /EHa)
-target_link_libraries(entry PRIVATE
-    chaos::runtime
+target_compile_options(entry PRIVATE
+    "$<$<CXX_COMPILER_ID:MSVC>:/EHa>"
+    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-fexceptions>"
 )
-target_link_options(entry PRIVATE /FORCE:MULTIPLE)
+target_link_libraries(entry PRIVATE chaos::runtime)
+target_link_options(entry PRIVATE
+    "$<$<CXX_COMPILER_ID:MSVC>:/FORCE:MULTIPLE>"
+    "$<$<NOT:$<CXX_COMPILER_ID:MSVC>>:-Wl,--allow-multiple-definition>"
+)

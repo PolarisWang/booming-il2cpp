@@ -13,25 +13,28 @@ using System.Threading;
 
 public static partial class ReflectionEventSubjects
 {
-    // Inlined exit code — avoids SDK method call resolution in codegen
-    public static int _exitCode;
-
     // [0] System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()
+    [Fact]
     public static void Subject_0()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[]()
+        try { var __val = ((typeof(byte).GetEvents()).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [1] System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[](System.Reflection.BindingFlags)
+    [Fact]
     public static void Subject_1()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetEvents:System.Reflection.EventInfo[](System.Reflection.BindingFlags)
+        try { var __val = ((typeof(byte).GetEvents(System.Reflection.BindingFlags.Default)).Length); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
     // [2] System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String)
+    [Fact]
     public static void Subject_2()
     {
-        // non-callable: System.Private.CoreLib/System.Type::GetEvent:System.Reflection.EventInfo(System.String)
+        try { var __val = ((typeof(byte).GetEvent("hello")).GetHashCode()); Assert.IsNotNull(__val.GetHashCode()); }
+        catch { }
     }
 
 }

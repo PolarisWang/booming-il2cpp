@@ -13,10 +13,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ReflectionModuleSubjects.cs" />
+    <Compile Include="subjects/ReflectionModulePatchEntry.Custom.cs" />
     <Compile Include="ReflectionModuleSubjects.Custom.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+    <PackageReference Include="Chaos.TestFramework.Sdk" Version="0.1.0" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />

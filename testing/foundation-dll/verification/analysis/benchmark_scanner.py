@@ -30,6 +30,9 @@ _FOUNDATION_DLL = Path(__file__).resolve().parents[2]
 
 _REPORT_REL = "multi-run/multi-run-report.json"
 
+# Fallback report path (T-A3): used when multi-run report is unavailable
+_UNIFIED_REPORT_REL = "unified-verification-report.json"
+
 # Directories that should not be treated as family slugs
 _NON_FAMILY_DIRS: set[str] = {
     "reports",
@@ -86,6 +89,12 @@ def _safe_float(value: Any) -> float:
 def _extract_family_data(family_dir: Path) -> dict[str, Any] | None:
     """Extract benchmark data from a single family directory.
 
+    Priority:
+      1. multi-run/multi-run-report.json (data_quality = "complete" / "partial")
+      2. unified-verification-report.json → stages.benchmark.details.summaries
+         (data_quality = "from_unified")
+      3. Neither available (data_quality = "missing")
+
     Returns a dict with scanned metrics, or None if the directory
     is not a valid family (infra dir, etc.).
     """
@@ -97,74 +106,109 @@ def _extract_family_data(family_dir: Path) -> dict[str, Any] | None:
 
     report_path = family_dir / _REPORT_REL
 
-    if not report_path.exists():
-        return {
-            "family": slug,
-            "method_count": 0,
-            "chaos_aot_ns": 0.0,
-            "net8_jit_ns": 0.0,
-            "speedup_vs_net8": 0.0,
-            "slowdown_vs_net8": 0.0,
-            "data_timestamp": "",
-            "data_quality": "missing",
-            "method_ok_count": 0,
-            "stub_count": 0,
-            "throws_count": 0,
-            "unsupported_count": 0,
-        }
+    # ── Priority 1: multi-run report ─────────────────────────────────
+    if report_path.exists():
+        try:
+            report = json.loads(report_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            pass  # Fall through to unified fallback
+        else:
+            chaos = _find_summary(report, "chaos-aot")
+            net8 = _find_summary(report, "net8-jit")
 
-    try:
-        report = json.loads(report_path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        return {
-            "family": slug,
-            "method_count": 0,
-            "chaos_aot_ns": 0.0,
-            "net8_jit_ns": 0.0,
-            "speedup_vs_net8": 0.0,
-            "slowdown_vs_net8": 0.0,
-            "data_timestamp": "",
-            "data_quality": "missing",
-            "method_ok_count": 0,
-            "stub_count": 0,
-            "throws_count": 0,
-            "unsupported_count": 0,
-        }
+            chaos_ns = _safe_float(chaos.get("geometric_mean_ns")) if chaos else 0.0
+            net8_ns = _safe_float(net8.get("geometric_mean_ns")) if net8 else 0.0
+            data_quality = _determine_data_quality(report, chaos, net8)
 
-    chaos = _find_summary(report, "chaos-aot")
-    net8 = _find_summary(report, "net8-jit")
+            # Compute speedup / slowdown
+            speedup = (net8_ns / chaos_ns) if chaos_ns > 0 and net8_ns > 0 else 0.0
+            slowdown = (chaos_ns / net8_ns) if chaos_ns > 0 and net8_ns > 0 else 0.0
 
-    chaos_ns = _safe_float(chaos.get("geometric_mean_ns")) if chaos else 0.0
-    net8_ns = _safe_float(net8.get("geometric_mean_ns")) if net8 else 0.0
-    data_quality = _determine_data_quality(report, chaos, net8)
+            # Summaries from chaos-aot (preferred) or net8-jit for global counts
+            ref_summary = chaos or net8
+            method_count = ref_summary.get("method_count", 0) if ref_summary else 0
+            ok_count = chaos.get("ok_count", 0) if chaos else 0
+            stub_count = chaos.get("stub_count", 0) if chaos else 0
+            throws_count = chaos.get("throws_count", 0) if chaos else 0
+            unsupported_count = chaos.get("unsupported_count", 0) if chaos else 0
 
-    # Compute speedup / slowdown
-    speedup = (net8_ns / chaos_ns) if chaos_ns > 0 and net8_ns > 0 else 0.0
-    slowdown = (chaos_ns / net8_ns) if chaos_ns > 0 and net8_ns > 0 else 0.0
+            timestamp = report.get("timestamp", "")
 
-    # Summaries from chaos-aot (preferred) or net8-jit for global counts
-    ref_summary = chaos or net8
-    method_count = ref_summary.get("method_count", 0) if ref_summary else 0
-    ok_count = chaos.get("ok_count", 0) if chaos else 0
-    stub_count = chaos.get("stub_count", 0) if chaos else 0
-    throws_count = chaos.get("throws_count", 0) if chaos else 0
-    unsupported_count = chaos.get("unsupported_count", 0) if chaos else 0
+            return {
+                "family": report.get("family", slug),
+                "method_count": method_count,
+                "chaos_aot_ns": round(chaos_ns, 2) if chaos_ns > 0 else 0.0,
+                "net8_jit_ns": round(net8_ns, 2) if net8_ns > 0 else 0.0,
+                "speedup_vs_net8": round(speedup, 2),
+                "slowdown_vs_net8": round(slowdown, 2),
+                "data_timestamp": timestamp,
+                "data_quality": data_quality,
+                "method_ok_count": ok_count,
+                "stub_count": stub_count,
+                "throws_count": throws_count,
+                "unsupported_count": unsupported_count,
+            }
 
-    timestamp = report.get("timestamp", "")
+    # ── Priority 2: unified-verification-report.json fallback ────────
+    unified_path = family_dir / _UNIFIED_REPORT_REL
+    if unified_path.exists():
+        try:
+            unified = json.loads(unified_path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            pass  # Fall through to missing
+        else:
+            summaries = (
+                unified.get("stages", {})
+                .get("benchmark", {})
+                .get("details", {})
+                .get("summaries", {})
+            )
+            if isinstance(summaries, dict) and summaries:
+                # Unified report uses camelCase field names
+                chaos = summaries.get("chaos-aot")
+                net8 = summaries.get("net8-jit")
 
+                chaos_ns = _safe_float(chaos.get("geometricMeanNs")) if chaos else 0.0
+                net8_ns = _safe_float(net8.get("geometricMeanNs")) if net8 else 0.0
+
+                speedup = (net8_ns / chaos_ns) if chaos_ns > 0 and net8_ns > 0 else 0.0
+                slowdown = (chaos_ns / net8_ns) if chaos_ns > 0 and net8_ns > 0 else 0.0
+
+                ref = chaos or net8
+                method_count = ref.get("totalMethods", 0) if ref else 0
+                ok_count = chaos.get("okCount", 0) if chaos else 0
+                timestamp = unified.get("timestamp", "")
+
+                return {
+                    "family": unified.get("family", slug),
+                    "method_count": method_count,
+                    "chaos_aot_ns": round(chaos_ns, 2) if chaos_ns > 0 else 0.0,
+                    "net8_jit_ns": round(net8_ns, 2) if net8_ns > 0 else 0.0,
+                    "speedup_vs_net8": round(speedup, 2),
+                    "slowdown_vs_net8": round(slowdown, 2),
+                    "data_timestamp": timestamp,
+                    "data_quality": "from_unified",
+                    "method_ok_count": ok_count,
+                    # Unified report does not expose stub/throw/unsupported counts
+                    "stub_count": 0,
+                    "throws_count": 0,
+                    "unsupported_count": 0,
+                }
+
+    # ── Priority 3: no data available ───────────────────────────────
     return {
-        "family": report.get("family", slug),
-        "method_count": method_count,
-        "chaos_aot_ns": round(chaos_ns, 2) if chaos_ns > 0 else 0.0,
-        "net8_jit_ns": round(net8_ns, 2) if net8_ns > 0 else 0.0,
-        "speedup_vs_net8": round(speedup, 2),
-        "slowdown_vs_net8": round(slowdown, 2),
-        "data_timestamp": timestamp,
-        "data_quality": data_quality,
-        "method_ok_count": ok_count,
-        "stub_count": stub_count,
-        "throws_count": throws_count,
-        "unsupported_count": unsupported_count,
+        "family": slug,
+        "method_count": 0,
+        "chaos_aot_ns": 0.0,
+        "net8_jit_ns": 0.0,
+        "speedup_vs_net8": 0.0,
+        "slowdown_vs_net8": 0.0,
+        "data_timestamp": "",
+        "data_quality": "missing",
+        "method_ok_count": 0,
+        "stub_count": 0,
+        "throws_count": 0,
+        "unsupported_count": 0,
     }
 
 
