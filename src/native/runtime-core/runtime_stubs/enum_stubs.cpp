@@ -1650,7 +1650,10 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
         cached_meta = enum_resolve_meta(type);
         if (cached_meta == nullptr) {
             const auto* desc = resolve_type_arg(type);
-            if (check_enum_type(desc) == nullptr) return 0;
+            if (check_enum_type(desc) == nullptr) {
+                // Non-enum type: skip G name lookup, format as decimal/hex directly.
+                // cached_meta stays nullptr -> meta_has_fields = false -> G path falls through.
+            }
         }
     }
 
@@ -1712,12 +1715,20 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
 
     if (is_g || is_d) {
         // "D" format or "G" fallback: decimal representation (manual itoa)
+        // Single-entry cache for repeated calls with the same value
+        if (s_enum_fallback_cache_val == val && !s_enum_fallback_cache_is_x
+            && s_enum_fallback_cache_result != 0) {
+            return s_enum_fallback_cache_result;
+        }
         char buf[32];
         char* const buf_end = buf + sizeof(buf);
         char* start = format_i64_dec(buf_end, val);
         const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
         write_string_data(result, start, len);
+        s_enum_fallback_cache_val = val;
+        s_enum_fallback_cache_is_x = false;
+        s_enum_fallback_cache_result = result;
         return result;
     }
 
@@ -1732,6 +1743,11 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
                 } else break;
             }
         }
+        // Single-entry cache: only when width == 0 (no precision qualifier)
+        if (width == 0 && s_enum_fallback_cache_val == val && s_enum_fallback_cache_is_x
+            && s_enum_fallback_cache_result != 0) {
+            return s_enum_fallback_cache_result;
+        }
         // Manual hex conversion — no snprintf format strings
         char buf[32];
         char* const buf_end = buf + sizeof(buf);
@@ -1739,6 +1755,11 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
         const auto len = static_cast<CHAOS_IL2CPP_UINTPTR>(buf_end - start);
         auto result = enum_alloc_string(len);
         write_string_data(result, start, len);
+        if (width == 0) {
+            s_enum_fallback_cache_val = val;
+            s_enum_fallback_cache_is_x = true;
+            s_enum_fallback_cache_result = result;
+        }
         return result;
     }
 
@@ -1754,12 +1775,15 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormatRaw(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_IN
     const CHAOS_IL2CPP_INT64 val = raw_value;
 
     // Validate enum type before format processing — non-enum types (e.g. byte)
-    // must throw, even for unrecognized format strings like "hello"
+    // must fall through to decimal/hex format instead of NRE from null return.
+    const EnumMetadataTable* meta = nullptr;
     {
-        const auto* meta = enum_resolve_meta(type);
+        meta = enum_resolve_meta(type);
         if (meta == nullptr) {
             const auto* desc = resolve_type_arg(type);
-            if (check_enum_type(desc) == nullptr) return 0;
+            if (check_enum_type(desc) == nullptr) {
+                // Non-enum type: skip G name lookup, format as decimal/hex directly.
+            }
         }
     }
 
@@ -1786,7 +1810,7 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormatRaw(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_IN
             return s_enum_tostring_cache_name;
         }
 
-        const auto* meta = enum_resolve_meta(type);
+        // Reuse meta from validation block to avoid double resolve
         if (meta != nullptr) {
             ensure_enum_str_cache(type, meta);
             auto cached = lookup_cached_enum_name(val);
