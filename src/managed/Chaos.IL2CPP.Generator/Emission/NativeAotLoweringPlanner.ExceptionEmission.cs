@@ -2788,7 +2788,8 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 		// A2.8: String.get_Length inlining — bypass external runtime dispatch.
 		// Emit the body inline at each call site to eliminate function call
 		// overhead and enable compiler inlining of the field read.
-		if (instruction.Callee is { } callee &&
+		if (_activeStructuredSlotContext == null &&
+			instruction.Callee is { } callee &&
 			callee.IndexOf("::get_Length:", StringComparison.Ordinal) > 0 &&
 			callee.IndexOf("/System.String::", StringComparison.Ordinal) > 0)
 		{
