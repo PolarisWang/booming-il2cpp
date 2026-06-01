@@ -445,7 +445,6 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
     }
 #else
     // JIT disabled: stay in optimized interpreter for all methods.
-    (void)t4_tier;
 #endif
 }
 
@@ -604,11 +603,8 @@ void InterpreterEntryDirect(
             }
         }
 #else
-        (void)t4_tier;
 #endif
     }
-
-    // -- Step A.5: T2 deopt path -- reconstruct OsrState -> FastExecute --
     {
         auto* reg_m = static_cast<interpreter::RegisterMethod*>(
             patch_method->cached_reg_method);

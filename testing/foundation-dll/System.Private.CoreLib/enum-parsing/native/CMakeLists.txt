@@ -49,12 +49,12 @@ add_compile_definitions(CHAOS_IL2CPP_VERIFICATION_ENABLED=0)
 # Find chaos SDK — provides chaos::runtime (prebuilt libs + flags) and
 # chaos::codegen (precompiled generated code) via find_package(chaos).
 # The SDK root is the codegen output directory from --sdk-out.
-set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/enum-parsing/codegen/EnumParsingSubjects")
+set(CHAOS_SDK_DIR "D:/agent/booming-il2cpp/.claude/worktrees/enum-parsing-opt/testing/foundation-dll/System.Private.CoreLib/enum-parsing/codegen/EnumParsingSubjects")
 find_package(chaos REQUIRED PATHS "${CHAOS_SDK_DIR}")
 
 # Paths
-set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp")
-set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/enum-parsing/codegen")
+set(CHAOS_PROJECT_ROOT "D:/agent/booming-il2cpp/.claude/worktrees/enum-parsing-opt")
+set(CHAOS_CODEGEN_DIR "D:/agent/booming-il2cpp/.claude/worktrees/enum-parsing-opt/testing/foundation-dll/System.Private.CoreLib/enum-parsing/codegen")
 
 # Source files — codegen outputs to codegen/<AssemblyName>/generated/
 # Sources at *Subjects/generated/* (single-level, R1 fix).
