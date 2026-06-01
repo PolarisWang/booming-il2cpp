@@ -485,6 +485,7 @@ def generate_project_file(
     output_dir: Path | None = None,
     extra_refs: list[str] | None = None,
     target_framework: str | None = None,
+    skip_extra_cs: bool = False,
 ) -> str:
     """Generate the .csproj for the synthetic entry point assembly."""
     namespace_part = f"<RootNamespace>{class_name}</RootNamespace>"
@@ -494,17 +495,22 @@ def generate_project_file(
         extra_cs = ""
         if output_dir is not None and output_dir.is_dir():
             custom_cs_name = f"{class_name}.Custom.cs"
+            included_names: set[str] = set()  # track files included from parent dir
             for f in sorted(output_dir.iterdir()):
                 if f.suffix == ".cs" and f.name != cs_file_name:
                     if has_custom_entry and f.name == custom_cs_name:
                         continue
                     extra_cs += f'    <Compile Include="{f.name}" />\n'
+                    included_names.add(f.name)
             # Also scan subjects/ subdirectory for handwritten .cs files (e.g. compound family NativeEntry.cs)
             subjects_dir = output_dir / "subjects"
             if subjects_dir.is_dir():
                 for f in sorted(subjects_dir.iterdir()):
                     if f.suffix == ".cs" and f.name not in (cs_file_name, "Program.cs"):
-                        # Skip if already included via output_dir scan (e.g. Custom.cs copied for has_custom_entry)
+                        # Skip if already included via output_dir scan (same filename = same partial class)
+                        if f.name in included_names:
+                            continue
+                        # Skip if this is the designated custom file and has_custom_entry is set
                         if has_custom_entry and f.name == custom_cs_name:
                             continue
                         extra_cs += f'    <Compile Include="subjects/{f.name}" />\n'
@@ -572,7 +578,7 @@ def generate_project_file(
     )
 
     extra_cs = ""
-    if output_dir is not None and output_dir.is_dir():
+    if not skip_extra_cs and output_dir is not None and output_dir.is_dir():
         for f in sorted(output_dir.iterdir()):
             if f.suffix == ".cs" and f.name not in (cs_file_name, "Program.cs"):
                 if has_custom_entry and f.name == f"{class_name}.Custom.cs":
@@ -781,6 +787,7 @@ def generate_and_build(
     if class_name is None:
         class_name = f"{family_namespace_slug(family_id).title().replace('_', '').replace(',', '')}NativeEntry"
 
+    original_class_name = class_name  # save pre-rename name for custom file detection
     if variant == "subjects":
         class_name = class_name.replace("NativeEntry", "Subjects")
     elif variant == "patch":
@@ -800,6 +807,16 @@ def generate_and_build(
         if subjects_custom.exists():
             shutil.copy2(str(subjects_custom), str(custom_cs_path))
             print(f"[entrypoint]  copied {subjects_custom.name} from subjects/ for has_custom_entry")
+            has_custom_entry = True
+    if not has_custom_entry and variant in ("subjects",) and original_class_name != class_name:
+        # Also check for Custom.cs using the original class name (before NativeEntry→Subjects rename)
+        orig_custom = output_dir / f"{original_class_name}.Custom.cs"
+        subjects_orig_custom = output_dir / "subjects" / f"{original_class_name}.Custom.cs"
+        if orig_custom.exists():
+            print(f"[entrypoint]  detected custom file: {orig_custom.name} (original class name)")
+            has_custom_entry = True
+        elif subjects_orig_custom.exists():
+            print(f"[entrypoint]  detected custom file in subjects/: {subjects_orig_custom.name}")
             has_custom_entry = True
 
     custom_method_indices: set[int] | None = None
@@ -853,7 +870,7 @@ def generate_and_build(
             assembly_name=assembly_name, class_name=class_name,
             cs_file_name=cs_file_name, variant="benchmark",
             has_custom_entry=False, target_framework=target_framework,
-            output_dir=output_dir,
+            output_dir=output_dir, skip_extra_cs=True,
         )
 
         output_dir.mkdir(parents=True, exist_ok=True)

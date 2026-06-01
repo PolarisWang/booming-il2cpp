@@ -1,0 +1,575 @@
+
+============================================================
+Family Verify: span-memory-buffers [System.Private.CoreLib] mode=strict
+============================================================
+
+[1/20] Preflight... skipped
+  [codegen] Generating entrypoint...
+[probe] Building SpanMemoryBuffersSubjects probe...
+[probe] Build FAILED: 
+[subjects] Building SpanMemoryBuffersSubjects DLL...
+  [3s] failed: Entrypoint generation failed: D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+
+Build FAILED.
+
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\span-memory-buffers\managed\SpanMemoryBuffersSubjects.csproj]
+    0 Warning(s)
+    10 Error(s)
+
+Time Elapsed 00:00:01.12
+
+  [jit_codegen] TPG templates updated, rebuilding stale entry-jit.exe...
+  [jit_codegen] Building JIT mode entry-jit.exe...
+  [jit_codegen] backed up entry.exe -> entry-aot.exe
+  [jit_codegen] using pre-built JIT binary from codegen stage, incremental update only...
+        [1/2] Reading subjects from contract...
+              Found 14 subjects
+        [2/2] Emitting dispatch.cpp and metadata...
+              verification_dispatch.generated.cpp, metadata/subjects.json written
+        Done.
+    [TPG timing] JIT emit took 0.13s
+  [jit_codegen] Regenerated dispatch via TPG (JIT mode)
+  [jit_codegen] Rebuilding JIT binary after TPG emit...
+  [jit_codegen] rebuilt entry-jit.exe (3002880 bytes)
+  [jit_codegen] restored entry.exe from entry-aot.exe
+  [8s [ETA 2m38s]] passed: JIT entry-jit.exe built and AOT entry.exe restored
+[4/20] Managed Fact (.NET)... skipped
+[5/20] Managed Subject Record (Golden)... skipped
+[6/20] Cross-Verify (Golden vs AOT)... skipped
+[7/20] Managed Patch Fact (.NET)... skipped
+
+  [8s] >>> Parallel group (6 stages)
+[8/20] Fact AOT... skipped
+[9/20] Fact JIT... skipped
+[10/20] Mechanism + Principle Audit... skipped
+[11/20] AsmCompare (JIT vs AOT)... skipped
+[12/20] Microbench (Interpreter)... skipped
+  [benchmark/native-aot] 14/14 OK (per-method), avg 104654331 ops/s (0 value-gate skipped)
+  [benchmark/native-jit] 14/14 OK (per-method), avg 70896108 ops/s (0 value-gate skipped)
+  [5m10s [ETA 46m30s]] passed: passed: native-aot=14/14, native-jit=14/14
+  [5m10s] <<< Parallel group done
+
+[14/20] HotUpdate AOT Fact... skipped
+[15/20] Patch Cross-Verify... skipped
+[16/20] Multi-Patch HotUpdate... skipped
+[17/20] HotUpdate AOT Bench... skipped
+[18/20] HotUpdate JIT Fact... skipped
+[19/20] HotUpdate JIT Bench... skipped
+[20/20] Cleanup Build Artifacts... skipped
+
+[20/20] Aggregating...
+
+  ──────────────────────────────────────────────────
+  FAILURE SUMMARY (1 stage(s))
+  ──────────────────────────────────────────────────
+  [3s] codegen: FAILED — Entrypoint generation failed: D:\agent\booming-il2cpp\testing\foundation-dll\Sys..
+  ──────────────────────────────────────────────────
+
+
+============================================================
+Result: failed
+Duration: 5m10s
+Coverage: 2/20 passed (66.7%)
+============================================================
+  [perf_store] saved to D:\agent\booming-il2cpp\testing\foundation-dll\results\foundation-dll\System.Private.CoreLib\span-memory-buffers\perf
+{
+  "family": "span-memory-buffers",
+  "assembly": "System.Private.CoreLib",
+  "mode": "strict",
+  "timestamp": "2026-05-30T21:34:20",
+  "duration_ms": 310040,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "Entrypoint generation failed: D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\n    0 Warning(s)\n    10 Error(s)\n\nTime Elapsed 00:00:01.12\n",
+      "details": {
+        "steps": {
+          "entrypoint": {
+            "success": false,
+            "error": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(7,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(14,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(21,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(28,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.Custom.cs(35,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj]\n    0 Warning(s)\n    10 Error(s)\n\nTime Elapsed 00:00:01.12\n",
+            "dll_path": null,
+            "csproj_path": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.csproj",
+            "source_path": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\span-memory-buffers\\managed\\SpanMemoryBuffersSubjects.cs",
+            "entry_point_subject_id": ""
+          }
+        }
+      },
+      "errors": [],
+      "duration_ms": 3379
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "details": {},
+      "errors": [],
+      "duration_ms": 4960
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_record": {
+      "stage": "managed_record",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cross_verify": {
+      "stage": "cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_patch_fact": {
+      "stage": "managed_patch_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "passed",
+      "summary": "passed: native-aot=14/14, native-jit=14/14",
+      "details": {
+        "native-aot": {
+          "status": "passed",
+          "label": "native-aot",
+          "results": [
+            {
+              "elapsedMilliseconds": 2.129,
+              "calibratedMs": 2.129,
+              "opsPerSecond": 46965997,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 0
+            },
+            {
+              "elapsedMilliseconds": 2.831,
+              "calibratedMs": 2.831,
+              "opsPerSecond": 35320712,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 1
+            },
+            {
+              "elapsedMilliseconds": 1.92,
+              "calibratedMs": 1.92,
+              "opsPerSecond": 52091473,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 2
+            },
+            {
+              "elapsedMilliseconds": 1.1,
+              "calibratedMs": 1.1,
+              "opsPerSecond": 90876045,
+              "iterations": 100000,
+              "allocatedBytes": 4000000,
+              "allocPerOp": 40.0,
+              "methodIndex": 3
+            },
+            {
+              "elapsedMilliseconds": 1.786,
+              "calibratedMs": 1.786,
+              "opsPerSecond": 55987907,
+              "iterations": 100000,
+              "allocatedBytes": 8000000,
+              "allocPerOp": 80.0,
+              "methodIndex": 4
+            },
+            {
+              "elapsedMilliseconds": 0.241,
+              "calibratedMs": 0.241,
+              "opsPerSecond": 414937759,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 5
+            },
+            {
+              "elapsedMilliseconds": 1.786,
+              "calibratedMs": 1.786,
+              "opsPerSecond": 55994177,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 6
+            },
+            {
+              "elapsedMilliseconds": 1.925,
+              "calibratedMs": 1.925,
+              "opsPerSecond": 51934562,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 7
+            },
+            {
+              "elapsedMilliseconds": 1.751,
+              "calibratedMs": 1.751,
+              "opsPerSecond": 57103700,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 8
+            },
+            {
+              "elapsedMilliseconds": 1.875,
+              "calibratedMs": 1.875,
+              "opsPerSecond": 53321958,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 9
+            },
+            {
+              "elapsedMilliseconds": 0.261,
+              "calibratedMs": 0.261,
+              "opsPerSecond": 383141762,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 10
+            },
+            {
+              "elapsedMilliseconds": 1.811,
+              "calibratedMs": 1.811,
+              "opsPerSecond": 55224210,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 11
+            },
+            {
+              "elapsedMilliseconds": 1.754,
+              "calibratedMs": 1.754,
+              "opsPerSecond": 56999544,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 12
+            },
+            {
+              "elapsedMilliseconds": 1.81,
+              "calibratedMs": 1.81,
+              "opsPerSecond": 55260831,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 13
+            }
+          ],
+          "okCount": 14,
+          "failCount": 0,
+          "totalMethods": 14,
+          "averageOpsPerSecond": 104654331.21428572,
+          "valueGateFailures": [],
+          "profile": null
+        },
+        "native-jit": {
+          "status": "passed",
+          "label": "native-jit",
+          "results": [
+            {
+              "elapsedMilliseconds": 1.955,
+              "calibratedMs": 1.955,
+              "opsPerSecond": 51150895,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 0
+            },
+            {
+              "elapsedMilliseconds": 2.106,
+              "calibratedMs": 2.106,
+              "opsPerSecond": 47476618,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 1
+            },
+            {
+              "elapsedMilliseconds": 2.54,
+              "calibratedMs": 2.54,
+              "opsPerSecond": 39373179,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 2
+            },
+            {
+              "elapsedMilliseconds": 1.688,
+              "calibratedMs": 1.688,
+              "opsPerSecond": 59248726,
+              "iterations": 100000,
+              "allocatedBytes": 4000000,
+              "allocPerOp": 40.0,
+              "methodIndex": 3
+            },
+            {
+              "elapsedMilliseconds": 2.763,
+              "calibratedMs": 2.763,
+              "opsPerSecond": 36195164,
+              "iterations": 100000,
+              "allocatedBytes": 8000000,
+              "allocPerOp": 80.0,
+              "methodIndex": 4
+            },
+            {
+              "elapsedMilliseconds": 0.402,
+              "calibratedMs": 0.402,
+              "opsPerSecond": 248632521,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 5
+            },
+            {
+              "elapsedMilliseconds": 2.33,
+              "calibratedMs": 2.33,
+              "opsPerSecond": 42911088,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 6
+            },
+            {
+              "elapsedMilliseconds": 2.881,
+              "calibratedMs": 2.881,
+              "opsPerSecond": 34714990,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 7
+            },
+            {
+              "elapsedMilliseconds": 2.331,
+              "calibratedMs": 2.331,
+              "opsPerSecond": 42892683,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 8
+            },
+            {
+              "elapsedMilliseconds": 2.615,
+              "calibratedMs": 2.615,
+              "opsPerSecond": 38235069,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 9
+            },
+            {
+              "elapsedMilliseconds": 0.508,
+              "calibratedMs": 0.508,
+              "opsPerSecond": 196772924,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 10
+            },
+            {
+              "elapsedMilliseconds": 1.959,
+              "calibratedMs": 1.959,
+              "opsPerSecond": 51038636,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 11
+            },
+            {
+              "elapsedMilliseconds": 1.909,
+              "calibratedMs": 1.909,
+              "opsPerSecond": 52375216,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 12
+            },
+            {
+              "elapsedMilliseconds": 1.941,
+              "calibratedMs": 1.941,
+              "opsPerSecond": 51527799,
+              "iterations": 100000,
+              "allocatedBytes": 7200000,
+              "allocPerOp": 72.0,
+              "methodIndex": 13
+            }
+          ],
+          "okCount": 14,
+          "failCount": 0,
+          "totalMethods": 14,
+          "averageOpsPerSecond": 70896107.71428572,
+          "valueGateFailures": [],
+          "profile": null
+        }
+      },
+      "errors": [],
+      "duration_ms": 301698
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "patch_cross_verify": {
+      "stage": "patch_cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "multi_patch_hotupdate": {
+      "stage": "multi_patch_hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cleanup": {
+      "stage": "cleanup",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    }
+  },
+  "coverage": {
+    "stagePassRate": 66.7,
+    "stagesPassed": 2,
+    "stagesFailed": 1,
+    "stagesSkipped": 17,
+    "stagesN_A": 0,
+    "stagesTotal": 20
+  },
+  "dashboard": {
+    "keyRatios": {
+      "nativeFasterRatio": 0.857,
+      "managedFasterRatio": 0,
+      "nativeAotOpsPerSecond": 104654331.21428572,
+      "nativeJitOpsPerSecond": 70896107.71428572
+    },
+    "averageSpeedupPercent": 31.8
+  },
+  "regression": {
+    "hasRegression": false,
+    "regressions": [],
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "No baseline established"
+    }
+  }
+}

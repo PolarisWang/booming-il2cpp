@@ -36,34 +36,36 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 // Runtime prelude dependencies included at translation unit level
 
 
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_INTPTR>(15228727185366376748ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_INTPTR>(5474029880995115448ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_INTPTR>(17082367815459723707ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {nullptr, nullptr, 4137207361503509124ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_INTPTR>(4137207361503509124ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_INTPTR>(17040031516751226236ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {nullptr, nullptr, 10748947813473285525ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_INTPTR>(10748947813473285525ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_String = {nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_INTPTR>(1782325859292956794ULL);
-inline MethodTable chaos_mt_System_Private_CoreLib_System_Type = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_INTPTR>(3222174513575444759ULL);
 inline MethodTable chaos_mt_System_Private_CoreLib_System_Double = {nullptr, nullptr, 1099026126681926114ULL, 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Double = static_cast<CHAOS_IL2CPP_INTPTR>(1099026126681926114ULL);
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Double = static_cast<CHAOS_IL2CPP_UINT64>(1099026126681926114ULL);
 inline MethodTable chaos_mt_System_Private_CoreLib_System_Int16 = {nullptr, nullptr, 11007710000311077999ULL, 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int16 = static_cast<CHAOS_IL2CPP_INTPTR>(11007710000311077999ULL);
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Int16 = static_cast<CHAOS_IL2CPP_UINT64>(11007710000311077999ULL);
 inline MethodTable chaos_mt_System_Private_CoreLib_System_Int64 = {nullptr, nullptr, 11012495074916106146ULL, 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int64 = static_cast<CHAOS_IL2CPP_INTPTR>(11012495074916106146ULL);
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Int64 = static_cast<CHAOS_IL2CPP_UINT64>(11012495074916106146ULL);
 inline MethodTable chaos_mt_System_Private_CoreLib_System_Int8 = {nullptr, nullptr, 5139897950736228424ULL, 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Int8 = static_cast<CHAOS_IL2CPP_INTPTR>(5139897950736228424ULL);
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Int8 = static_cast<CHAOS_IL2CPP_UINT64>(5139897950736228424ULL);
 inline MethodTable chaos_mt_System_Private_CoreLib_System_Single = {nullptr, nullptr, 4813876735449938439ULL, 0u, 32, 2, 0, nullptr, nullptr, 0, 0, 0, 0};
-inline constexpr CHAOS_IL2CPP_INTPTR chaos_type_id_System_Private_CoreLib_System_Single = static_cast<CHAOS_IL2CPP_INTPTR>(4813876735449938439ULL);
-
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Single = static_cast<CHAOS_IL2CPP_UINT64>(4813876735449938439ULL);
 // ── Virtual method table arrays ──
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Object = {nullptr, nullptr, 15228727185366376748ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Object = static_cast<CHAOS_IL2CPP_UINT64>(15228727185366376748ULL);
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_Assembly = {nullptr, nullptr, 5474029880995115448ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_Assembly = static_cast<CHAOS_IL2CPP_UINT64>(5474029880995115448ULL);
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName = {nullptr, nullptr, 17082367815459723707ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_AssemblyName = static_cast<CHAOS_IL2CPP_UINT64>(17082367815459723707ULL);
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 4197398748135124456ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodBase = static_cast<CHAOS_IL2CPP_UINT64>(4197398748135124456ULL);
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase), nullptr, 4137207361503509124ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_ConstructorInfo = static_cast<CHAOS_IL2CPP_UINT64>(4137207361503509124ULL);
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo = {nullptr, nullptr, 17040031516751226236ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_FieldInfo = static_cast<CHAOS_IL2CPP_UINT64>(17040031516751226236ULL);
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase), nullptr, 10748947813473285525ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Reflection_MethodInfo = static_cast<CHAOS_IL2CPP_UINT64>(10748947813473285525ULL);
+inline MethodTable chaos_mt_System_Private_CoreLib_System_String = {nullptr, nullptr, 1782325859292956794ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_String = static_cast<CHAOS_IL2CPP_UINT64>(1782325859292956794ULL);
+inline MethodTable chaos_mt_System_Private_CoreLib_System_Type = {reinterpret_cast<const MethodTable*>(&chaos_mt_System_Private_CoreLib_System_Object), nullptr, 3222174513575444759ULL, 0u, 32, 1, 1, nullptr, nullptr, 0, 0, 0};
+inline constexpr CHAOS_IL2CPP_UINT64 chaos_type_id_System_Private_CoreLib_System_Type = static_cast<CHAOS_IL2CPP_UINT64>(3222174513575444759ULL);
+
 bool chaos_is_array_store_compatible(const chaos_managed_array* chaos_array, CHAOS_IL2CPP_INTPTR chaos_value) noexcept
 {
 	if (chaos_array == nullptr)
@@ -114,9 +116,12 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName
 	CHAOS_IL2CPP_INTPTR runtime_name_value = 0;
 };
 
-struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo
+struct chaos_type_System_Private_CoreLib_System_Reflection_MethodBase : public chaos_type_System_Private_CoreLib_System_Object
 {
-	ThinLockableHeader header{};
+};
+
+struct chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo : public chaos_type_System_Private_CoreLib_System_Reflection_MethodBase
+{
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
 	CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
@@ -133,9 +138,8 @@ struct chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo
 	CHAOS_IL2CPP_INT32 runtime_metadata_token_value = 0;
 };
 
-struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo
+struct chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo : public chaos_type_System_Private_CoreLib_System_Reflection_MethodBase
 {
-	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR declaring_type_handle = 0;
 	CHAOS_IL2CPP_INTPTR runtime_method_handle = 0;
 	CHAOS_IL2CPP_INTPTR generic_definition_method_handle = 0;
@@ -148,7 +152,7 @@ struct chaos_type_System_Private_CoreLib_System_String
 {
 	ThinLockableHeader header{};
 	CHAOS_IL2CPP_INTPTR length = 0;
-	char* utf8_data = nullptr;
+	const char* utf8_data = nullptr;
 	CHAOS_IL2CPP_UINT64 string_id = 0u;  // stable StringId, 0 = not yet materialized
 };
 
@@ -179,6 +183,7 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.Register(15228727185366376748ULL, sizeof(chaos_type_System_Private_CoreLib_System_Object), nullptr, 0);
 	registry.Register(5474029880995115448ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_Assembly), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_Assembly, 1);
 	registry.Register(17082367815459723707ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_AssemblyName, 1);
+	registry.Register(4197398748135124456ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodBase), nullptr, 0);
 	registry.Register(4137207361503509124ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_ConstructorInfo, 5);
 	registry.Register(17040031516751226236ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_FieldInfo, 2);
 	registry.Register(10748947813473285525ULL, sizeof(chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo), kGcOffsets_chaos_type_System_Private_CoreLib_System_Reflection_MethodInfo, 5);
@@ -189,6 +194,7 @@ extern "C" void ChaosRegisterGcLayouts() {
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Object) + sizeof(chaos_mt_System_Private_CoreLib_System_Object));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_Assembly) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_Assembly));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_AssemblyName));
+	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodBase));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_ConstructorInfo));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_FieldInfo));
 	registry.RegisterTypeInfoRange(reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo), reinterpret_cast<uintptr_t>(&chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo) + sizeof(chaos_mt_System_Private_CoreLib_System_Reflection_MethodInfo));
@@ -1130,8 +1136,9 @@ extern "C" int32_t kChaosExternalRuntimeCount = 5;
 // ── Method table (kMethodTable[]) ──────────────────────────────
 // const function pointer array for dispatch via slot index.
 // NOTE: Pure data only — dispatch routing is in <chaos/hotpatch_dispatch.h>.
-// JIT mode uses direct_ptr (precode trampoline → JIT compilation).
-
+// NOTE: Emitted in ALL modes (AOT + JIT). JIT mode verification dispatch
+// uses kDefaultArgThunks to bypass JIT precode trampoline (verification
+// tests AOT codegen, not JIT compilation).
 static void (*kMethodTable[1])() = {
 	reinterpret_cast<void(*)()>(&SnapshotTestFixtures_StelemAllHelper_TestAllElems),
 };
@@ -1141,9 +1148,16 @@ static void (*kMethodTable[1])() = {
 // String params receive a valid StringId; all others receive 0.
 // Instance methods receive a sentinel this-pointer so they don't crash on null.
 static CHAOS_IL2CPP_UINT8 __g_null_instance = 0;
-extern "C" void (*kDefaultArgThunks[1])() = {
+static void (*kDefaultArgThunks[1])() = {
 	[]() {kMethodTable[0]();},
 };
+
+// ── Subject slot map (empty) ────────────────────────────────────────
+// No subject entries match the ::Subject_N / ::CustomEntrySubject_N
+// pattern, so the map is empty. kSubjectEntryCount is still defined as 0
+// so runtime-entry.cpp / verification_dispatch.generated.cpp can link.
+extern "C" const int kSubjectEntryCount = 0;
+extern "C" const int kSubjectSlotMap[1] = { 0 };
 // ── GC Slot Map Section ───────────────────────────────────────────
 // Auto-generated by chaos-il2cpp codegen for precise stack root scanning.
 // One nested struct entry per method with GC-referencing stack slots.
@@ -1288,7 +1302,7 @@ static const ReflectionQueryTypeDescriptor* kReflTypePtrs[1] = {
 	&kReflTypes[0],
 };
 
-static const ReflectionQueryImageDescriptor kReflImage = { "SnapshotTestFixtures", kReflTypePtrs, 1u, 1, 0, 0, 0 };
+extern const ReflectionQueryImageDescriptor kReflImage = { "SnapshotTestFixtures", kReflTypePtrs, 1u, 1, 0, 0, 0 };
 
 // Fake ImageHandle that ResolveSubjectId will decode back to kReflImage.
 // BootstrapRuntime's aot_image_handle fallback discovers this via
@@ -1336,29 +1350,15 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 	CHAOS_IL2CPP_INTPTR _s0;
 	CHAOS_IL2CPP_INTPTR _s1;
 	CHAOS_IL2CPP_INTPTR _s2;
-	CHAOS_IL2CPP_INTPTR _s3;
-	CHAOS_IL2CPP_INTPTR _s4;
-	CHAOS_IL2CPP_INTPTR _s5;
-	CHAOS_IL2CPP_INTPTR _s6;
-	CHAOS_IL2CPP_INTPTR _s7;
-	CHAOS_IL2CPP_INTPTR _s8;
-	CHAOS_IL2CPP_INTPTR _s9;
-	CHAOS_IL2CPP_INTPTR _s10;
-	CHAOS_IL2CPP_INTPTR _s11;
-	CHAOS_IL2CPP_INTPTR _s12;
-	CHAOS_IL2CPP_INTPTR _s13;
-	CHAOS_IL2CPP_INTPTR _s14;
-	CHAOS_IL2CPP_INTPTR _s15;
-	CHAOS_IL2CPP_INTPTR _s16;
-	CHAOS_IL2CPP_INTPTR _s17;
-	CHAOS_IL2CPP_INTPTR _s18;
-	CHAOS_IL2CPP_INTPTR _s19;
-	CHAOS_IL2CPP_INTPTR _s20;
-	CHAOS_IL2CPP_INTPTR _s21;
-	CHAOS_IL2CPP_INTPTR _s22;
-	CHAOS_IL2CPP_INTPTR _s23;
 	double _d0;
+	double _d1;
+	double _d2;
 	float _f0;
+	float _f1;
+	float _f2;
+	CHAOS_IL2CPP_INT64 _i0;
+	CHAOS_IL2CPP_INT64 _i1;
+	CHAOS_IL2CPP_INT64 _i2;
 	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
 	{
 		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
@@ -1372,17 +1372,17 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		chaos_array->element_type_shape = 2;
 		chaos_array->element_type_info = chaos_mt_System_Private_CoreLib_System_Int8.AsTypeInfoHot();
 		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
-		_s1 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[0] = _s1;
-	_s2 = chaos_locals[0];
-	_s3 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s4 = static_cast<CHAOS_IL2CPP_INTPTR>(127);
+	chaos_locals[0] = _s0;
+	_s0 = chaos_locals[0];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(127);
 	{
-		auto chaos_value_raw = _s4;
-		const auto chaos_value = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw));
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s3);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s2);
+		auto chaos_value_raw = _s2;
+		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT8>(chaos_value_raw);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
@@ -1391,11 +1391,11 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
 		}
-		chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+		*reinterpret_cast<CHAOS_IL2CPP_INT8*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)) = static_cast<CHAOS_IL2CPP_INT8>(chaos_value);
 	}
-	_s5 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
 	{
-		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s5);
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
 		if (chaos_length < 0)
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
@@ -1406,17 +1406,17 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		chaos_array->element_type_shape = 2;
 		chaos_array->element_type_info = chaos_mt_System_Private_CoreLib_System_Int16.AsTypeInfoHot();
 		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
-		_s6 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[1] = _s6;
-	_s7 = chaos_locals[1];
-	_s8 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s9 = static_cast<CHAOS_IL2CPP_INTPTR>(32000);
+	chaos_locals[1] = _s0;
+	_s0 = chaos_locals[1];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_s2 = static_cast<CHAOS_IL2CPP_INTPTR>(32000);
 	{
-		auto chaos_value_raw = _s9;
-		const auto chaos_value = static_cast<CHAOS_IL2CPP_INTPTR>(static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw));
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s8);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s7);
+		auto chaos_value_raw = _s2;
+		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT16>(chaos_value_raw);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
@@ -1425,11 +1425,11 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
 		}
-		chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
+		*reinterpret_cast<CHAOS_IL2CPP_INT16*>(chaos_array_get_elements(chaos_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)) = static_cast<CHAOS_IL2CPP_INT16>(chaos_value);
 	}
-	_s10 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
 	{
-		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s10);
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
 		if (chaos_length < 0)
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
@@ -1440,17 +1440,17 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		chaos_array->element_type_shape = 2;
 		chaos_array->element_type_info = chaos_mt_System_Private_CoreLib_System_Int64.AsTypeInfoHot();
 		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
-		_s11 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[2] = _s11;
-	_s12 = chaos_locals[2];
-	_s13 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_s14 = ChaosStoreInt64(9999999999LL);
+	chaos_locals[2] = _s0;
+	_s0 = chaos_locals[2];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_i2 = 9999999999LL;
 	{
-		auto chaos_value_raw = _s14;
+		auto chaos_value_raw = _i2;
 		const auto chaos_value = static_cast<CHAOS_IL2CPP_INT64>(chaos_value_raw);
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s13);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s12);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
@@ -1461,9 +1461,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		}
 		chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s15 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
 	{
-		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s15);
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
 		if (chaos_length < 0)
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
@@ -1474,17 +1474,17 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		chaos_array->element_type_shape = 2;
 		chaos_array->element_type_info = chaos_mt_System_Private_CoreLib_System_Single.AsTypeInfoHot();
 		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
-		_s16 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[3] = _s16;
-	_s17 = chaos_locals[3];
-	_s18 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_f0 = 3.14f;
+	chaos_locals[3] = ChaosStoreInt64(_s0);
+	_s0 = chaos_locals[3];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_f2 = 3.14f;
 	{
-		auto chaos_value_raw = _f0;
+		auto chaos_value_raw = _f2;
 		const auto chaos_value = ChaosStoreFloat32(static_cast<CHAOS_IL2CPP_FLOAT32>(chaos_value_raw));
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s18);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s17);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
@@ -1495,9 +1495,9 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		}
 		chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s19 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(3);
 	{
-		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s19);
+		const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>(_s0);
 		if (chaos_length < 0)
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
@@ -1508,17 +1508,17 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		chaos_array->element_type_shape = 2;
 		chaos_array->element_type_info = chaos_mt_System_Private_CoreLib_System_Double.AsTypeInfoHot();
 		chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);
-		_s20 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
+		_s0 = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array);
 	}
-	chaos_locals[4] = ChaosStoreFloat32(_s20);
-	_s21 = chaos_locals[4];
-	_s22 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	_d0 = 2.71828;
+	chaos_locals[4] = ChaosStoreFloat32(_s0);
+	_s0 = chaos_locals[4];
+	_s1 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	_d2 = 2.71828;
 	{
-		auto chaos_value_raw = _d0;
+		auto chaos_value_raw = _d2;
 		const auto chaos_value = ChaosStoreFloat64(static_cast<CHAOS_IL2CPP_FLOAT64>(chaos_value_raw));
-		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s22);
-		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s21);
+		const auto chaos_index = static_cast<CHAOS_IL2CPP_INT32>(_s1);
+		auto* chaos_array = reinterpret_cast<chaos_managed_array*>(_s0);
 		if (chaos_array == nullptr)
 		{
 			CHAOS_IL2CPP_FAIL_FAST();
@@ -1529,8 +1529,8 @@ extern "C" CHAOS_IL2CPP_INT32 SnapshotTestFixtures_StelemAllHelper_TestAllElems(
 		}
 		chaos_array_get_elements(chaos_array)[static_cast<CHAOS_IL2CPP_SIZE>(chaos_index)] = chaos_value;
 	}
-	_s23 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
-	return static_cast<CHAOS_IL2CPP_INT32>(_s23);
+	_s0 = static_cast<CHAOS_IL2CPP_INTPTR>(0);
+	return static_cast<CHAOS_IL2CPP_INT32>(_s0);
 }
 
 

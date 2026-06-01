@@ -153,6 +153,51 @@ inline int32_t ChaosDispatchMethodBench(
     return 0;
 }
 
+// ── ChaosDispatchMethodBenchDirect (no thunks, no callback lookup) ─────────
+// Fast single-method dispatch for benchmark use.  Always calls entry.direct_ptr
+// (the current function body — AOT body for keep-native Subject_N, or
+// JIT-compiled body for JIT-registered methods).
+//
+// Does NOT use kDefaultArgThunks (avoids indirect-call overhead) and does NOT
+// call GetOriginalAotPtrCallback (avoids toolchain/link dependency).  For JIT
+// benchmarks this is correct: we want to measure JIT-compiled code performance
+// via direct_ptr, not bypass it.
+//
+// Dispatch priority:
+//   1. Subject_N (kHotpatchKeepNative) → entry.direct_ptr directly
+//   2. Hotpatch active (not keep-native) → InterpreterEntryDirectFast
+//   3. Otherwise → entry.direct_ptr (may be JIT-trampoline or AOT body)
+inline int32_t ChaosDispatchMethodBenchDirect(
+    const HotpatchEntryV0* entries,
+    int32_t count,
+    int32_t index) noexcept
+{
+    if (index < 0 || index >= count) return -1;
+    auto& entry = entries[index];
+
+    // Subject_N methods with kHotpatchKeepNative: direct_ptr is the original
+    // AOT body.  Single flag check + direct call — ~3ns, matching AOT mode.
+    if (CHAOS_IL2CPP_LIKELY(HotpatchShouldKeepNative(entry))) {
+        if (entry.direct_ptr) {
+            reinterpret_cast<void(*)()>(entry.direct_ptr)();
+        }
+        return 0;
+    }
+
+    if (HotpatchIsActive(entry)) {
+        InterpreterEntryDirectFast(entry.method_key);
+        return 0;
+    }
+
+    // Default: call entry.direct_ptr.  In AOT mode this is the AOT body;
+    // in JIT mode this may be the JIT-trampoline (for the first call) or
+    // JIT-compiled code (after compilation).  This is what benchmarks want.
+    if (entry.direct_ptr) {
+        reinterpret_cast<void(*)()>(entry.direct_ptr)();
+    }
+    return 0;
+}
+
 // ── ChaosDispatchMethodGetValue (capture method return value) ────────────
 // Like ChaosDispatchMethod but captures and returns the actual method return
 // value as int64_t (RAX / __chaos_ret[0]) instead of dispatch status code.

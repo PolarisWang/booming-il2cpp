@@ -486,17 +486,6 @@ public sealed partial class NativeAotLoweringPlanner
 			builder.Append(ifaceStableId.ToString());
 			builder.AppendLine("ULL);");
 		}
-		// ── Forward-declare vtable arrays so TypeInfoHot.vtable_array can reference them ──
-			if (referenceTypeSubjectIds.Count > 0)
-			{
-				foreach (string typeId in sortedReferenceTypes)
-					{
-						if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
-					builder.Append("const void* ");
-					builder.Append(GetNativeVTableSymbol(typeId));
-					builder.AppendLine("[];");
-				}
-			}
 		// ── Value type MethodTable definitions (must precede reference types,
 		// because reference types may reference value type MethodTable symbols
 		// as their parent, e.g., AssertionException → System_Exception) ──
@@ -537,7 +526,73 @@ public sealed partial class NativeAotLoweringPlanner
 			}
 			num++;
 		}
-			// ── TypeInfo instances (replace integer type_id system) ──
+
+		// ── VTable arrays (uses pre-computed _vtableSlotMap, _vtableLengths) ──
+		if (referenceTypeSubjectIds.Count > 0)
+		{
+				builder.AppendLine("// ── Virtual method table arrays ──");
+				// RegisterVTable is declared via #include "runtime_vtable.h"
+			foreach (string typeId in sortedReferenceTypes)
+			{
+				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
+				var entries = new AotCoreIrMethodArtifact?[vtLen];
+				// Walk hierarchy to fill entries (most derived first)
+				string? current = typeId;
+				while (current != null && referenceTypeSubjectIds.Contains(current))
+				{
+					if (methodsByDeclaringTypeVT.TryGetValue(current, out var typeMethods))
+					{
+						foreach (var method in typeMethods)
+						{
+							if (method.IsStatic || !CanEmitMethodBody(method)) continue;
+							var sig = GetMethodSignatureSuffix(method.SubjectId);
+							if (_vtableSlotMap.TryGetValue(sig, out int slot) && slot < vtLen && entries[slot] == null)
+							{
+								entries[slot] = method;
+							}
+						}
+					}
+					referenceTypeBaseSubjectIds.TryGetValue(current, out string? nextCurrent);
+					current = nextCurrent;
+				}
+				// Emit extern "C" declarations for methods referenced in vtable array
+				var externDeclared = new HashSet<string>(StringComparer.Ordinal);
+				foreach (var entry in entries)
+				{
+					if (entry is null || !externDeclared.Add(entry.NativeSymbol)) continue;
+					builder.AppendLine(FormatMethodDeclaration(entry, _sharedContextSymbols));
+					var stub = TryGetInstantiationStubSymbol(entry);
+					if (stub != null && externDeclared.Add(stub))
+					{
+						bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
+						builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
+					}
+				}
+				// Emit vtable array
+				StringBuilder stringBuilder = builder;
+				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(24, 1, stringBuilder);
+				handler.AppendLiteral("const void* ");
+				handler.AppendFormatted(GetNativeVTableSymbol(typeId));
+				handler.AppendLiteral("[] =");
+				stringBuilder.AppendLine(ref handler);
+				builder.AppendLine("{");
+				foreach (var entry in entries)
+				{
+					if (entry != null)
+					{
+						builder.Append("    reinterpret_cast<void*>(");
+						builder.Append(TryGetInstantiationStubSymbol(entry) ?? entry.NativeSymbol);
+						builder.AppendLine("),");
+					}
+					else
+					{
+						builder.AppendLine("    nullptr,");
+					}
+				}
+				builder.AppendLine("};");
+
+			}
+		}			// ── TypeInfo instances (replace integer type_id system) ──
 		foreach (string item in sortedReferenceTypes)
 		{
 			ulong stableId = ComputeStableTypeId(item);
@@ -758,72 +813,6 @@ public sealed partial class NativeAotLoweringPlanner
 		if (referenceTypeSubjectIds.Count > 0 || interfaceTypeSubjectIds.Count > 0 || valueTypeSubjectIds.Count > 0 || hashSet3.Count > 0)
 		{
 			builder.AppendLine();
-		}
-		// ── VTable arrays (uses pre-computed _vtableSlotMap, _vtableLengths) ──
-		if (referenceTypeSubjectIds.Count > 0)
-		{
-				builder.AppendLine("// ── Virtual method table arrays ──");
-				// RegisterVTable is declared via #include "runtime_vtable.h"
-			foreach (string typeId in sortedReferenceTypes)
-			{
-				if (!_vtableLengths.TryGetValue(typeId, out int vtLen) || vtLen == 0) continue;
-				var entries = new AotCoreIrMethodArtifact?[vtLen];
-				// Walk hierarchy to fill entries (most derived first)
-				string? current = typeId;
-				while (current != null && referenceTypeSubjectIds.Contains(current))
-				{
-					if (methodsByDeclaringTypeVT.TryGetValue(current, out var typeMethods))
-					{
-						foreach (var method in typeMethods)
-						{
-							if (method.IsStatic || !CanEmitMethodBody(method)) continue;
-							var sig = GetMethodSignatureSuffix(method.SubjectId);
-							if (_vtableSlotMap.TryGetValue(sig, out int slot) && slot < vtLen && entries[slot] == null)
-							{
-								entries[slot] = method;
-							}
-						}
-					}
-					referenceTypeBaseSubjectIds.TryGetValue(current, out string? nextCurrent);
-					current = nextCurrent;
-				}
-				// Emit extern "C" declarations for methods referenced in vtable array
-				var externDeclared = new HashSet<string>(StringComparer.Ordinal);
-				foreach (var entry in entries)
-				{
-					if (entry is null || !externDeclared.Add(entry.NativeSymbol)) continue;
-					builder.AppendLine(FormatMethodDeclaration(entry, _sharedContextSymbols));
-					var stub = TryGetInstantiationStubSymbol(entry);
-					if (stub != null && externDeclared.Add(stub))
-					{
-						bool stubNeedsCtx = _stubNeedsContext.TryGetValue(stub, out bool nc) && nc;
-						builder.AppendLine(FormatMethodDeclaration(stub, entry.ReturnAbi, GetMethodAbiParameterSlots(entry), stubNeedsCtx));
-					}
-				}
-				// Emit vtable array
-				StringBuilder stringBuilder = builder;
-				StringBuilder.AppendInterpolatedStringHandler handler = new StringBuilder.AppendInterpolatedStringHandler(24, 1, stringBuilder);
-				handler.AppendLiteral("const void* ");
-				handler.AppendFormatted(GetNativeVTableSymbol(typeId));
-				handler.AppendLiteral("[] =");
-				stringBuilder.AppendLine(ref handler);
-				builder.AppendLine("{");
-				foreach (var entry in entries)
-				{
-					if (entry != null)
-					{
-						builder.Append("    reinterpret_cast<void*>(");
-						builder.Append(TryGetInstantiationStubSymbol(entry) ?? entry.NativeSymbol);
-						builder.AppendLine("),");
-					}
-					else
-					{
-						builder.AppendLine("    nullptr,");
-					}
-				}
-				builder.AppendLine("};");
-
-			}
 		}
 					// ---- VTableSlot arrays (for BootstrapRuntime TypeVTable registration) ----
 			var tokenLookup = new MetadataTokenLookup(metadataRegistration.Registrations);

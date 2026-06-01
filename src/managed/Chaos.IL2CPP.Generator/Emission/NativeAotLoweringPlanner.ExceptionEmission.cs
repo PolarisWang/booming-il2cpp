@@ -48,7 +48,6 @@ public sealed partial class NativeAotLoweringPlanner
 	// populated by PreScanLoopArraySkips when a loop induction variable
 	// pattern is detected (e.g., for (int i = 0; i < arr.Length; i++) { arr[i]; }).
 	private HashSet<int>? _loopArrayAccessSkipOffsets;
-	private Dictionary<int, int>? _knownArrayLengths;
 
 	// Hoisted loop induction variables: maps chaos_locals slot → C++ local variable name.
 	// When set, ldloc/stloc for these slots emit direct C++ local access instead of
@@ -704,6 +703,24 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}CHAOS_EH_RETHROW;");
 	}
 
+	private void CompensateDceSkipForStructuredSlots(AotCoreIrInstructionArtifact instruction)
+	{
+		if (_activeStructuredSlotContext == null) return;
+		// Call instructions (GetTypeFromHandle) have net 0 stack effect.
+		if (instruction.Op == "call" || instruction.Op == "callvirt") return;
+		// Estimate net stack effect for other DCE-skipped instructions.
+		int net = EstimatePushCount(instruction.Op) - EstimatePopCount(instruction.Op);
+		if (net > 0)
+		{
+			for (int i = 0; i < net; i++)
+				_activeStructuredSlotContext.AllocatePushTarget();
+		}
+		else if (net < 0)
+		{
+			_activeStructuredSlotContext.Discard(-net);
+		}
+	}
+
 	private void EmitInstruction(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation, AotCoreIrInstructionArtifact? nextInstruction = null)
 	{
 		// A2.6 DCE: Skip dead ltoken + GetTypeFromHandle when TypeInfo* fold fires.
@@ -713,6 +730,7 @@ public sealed partial class NativeAotLoweringPlanner
 		    _typeHierarchyPtrSkipIlOffsets.TryGetValue(_currentMethodNativeSymbol, out var skipOffsets) &&
 		    skipOffsets.Contains(instruction.IlOffset))
 		{
+			CompensateDceSkipForStructuredSlots(instruction);
 			return;
 		}
 		// A2.6 DCE: Skip dead instructions when enum AOT bake fires.
@@ -721,6 +739,7 @@ public sealed partial class NativeAotLoweringPlanner
 		    _enumAotBakeSkipIlOffsets.TryGetValue(_currentMethodNativeSymbol, out var enumSkipOffsets) &&
 		    enumSkipOffsets.Contains(instruction.IlOffset))
 		{
+			CompensateDceSkipForStructuredSlots(instruction);
 			return;
 		}
 		// A2.7 DCE: Skip dead ltoken when typeof(T) compile-time fold fires.
@@ -2157,20 +2176,10 @@ public sealed partial class NativeAotLoweringPlanner
 			? requiredTargetReference.ArrayElementTypeShape
 			: requiredTargetReference.TypeShape;
 
-		builder.AppendLine($"{indentation}{{");
-		builder.AppendLine($"{indentation}    const auto chaos_length = static_cast<CHAOS_IL2CPP_INT32>({ConsumeEvalStackValueExpression()});");
-		builder.AppendLine($"{indentation}    if (chaos_length < 0)");
-		builder.AppendLine($"{indentation}    {{");
-		builder.AppendLine($"{indentation}        CHAOS_IL2CPP_FAIL_FAST();");
-		builder.AppendLine($"{indentation}    }}");
-		builder.AppendLine($"{indentation}    const auto chaos_total_size = sizeof(chaos_managed_array) + static_cast<CHAOS_IL2CPP_SIZE>(chaos_length) * sizeof(CHAOS_IL2CPP_INTPTR);");
-		builder.AppendLine($"{indentation}    auto* chaos_array = static_cast<chaos_managed_array*>(CHAOS_IL2CPP_MALLOC_GC(chaos_total_size));");
-		builder.AppendLine($"{indentation}    chaos_array->header.type_info = &chaos_type_info_managed_array.hot;");
-		builder.AppendLine($"{indentation}    chaos_array->element_type_shape = {GetNativeTypeShapeValue(typeShape)};");
-		builder.AppendLine($"{indentation}    chaos_array->element_type_info = {GetRuntimeTypeInfoExpression(subjectId)};");
-		builder.AppendLine($"{indentation}    chaos_array->length = static_cast<CHAOS_IL2CPP_INTPTR>(chaos_length);");
-		EmitEvalStackPush(builder, indentation + "    ", "reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_array)");
-		builder.AppendLine($"{indentation}}}");
+		string lengthExpr = ConsumeEvalStackValueExpression();
+		EmitEvalStackPush(builder, indentation,
+			$"ChaosArrayNew1D_Inline(&chaos_type_info_managed_array.hot, {GetRuntimeTypeInfoExpression(subjectId)}, {GetNativeTypeShapeValue(typeShape)}, {lengthExpr})");
+
 	}
 
 	private void EmitLinearArrayElementAddress(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation)

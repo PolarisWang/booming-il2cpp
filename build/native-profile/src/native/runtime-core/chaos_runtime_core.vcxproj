@@ -292,7 +292,12 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\array_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\datetime_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\char_stubs.cpp" />
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\guid_stubs.cpp" />
+    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\guid_stubs.cpp">
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">%(AdditionalOptions) -msse4.1</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">%(AdditionalOptions) -msse4.1</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">%(AdditionalOptions) -msse4.1</AdditionalOptions>
+      <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">%(AdditionalOptions) -msse4.1</AdditionalOptions>
+    </ClCompile>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\enum_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\random_stubs.cpp" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\runtime_stubs\stream_stubs.cpp" />
@@ -339,7 +344,6 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\aot_core_ir_reader.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\aot_core_ir_reader.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_helpers.cpp" />
-    <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_thunks.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\core\delegate_helpers.h" />
     <ClCompile Include="D:\agent\booming-il2cpp\src\native\runtime-core\method_table.cpp" />
     <ClInclude Include="D:\agent\booming-il2cpp\src\native\runtime-core\method_table.h" />

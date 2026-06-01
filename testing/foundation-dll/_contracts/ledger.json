@@ -1536,7 +1536,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T04:54:36.041010+00:00"
         },
         {
           "familyId": "family/System.Text.Json/document-element",
@@ -1547,7 +1547,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T04:57:00.764573+00:00"
         },
         {
           "familyId": "family/System.Text.Json/metadata-typeinfo",
@@ -1569,7 +1569,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T04:59:38.825147+00:00"
         },
         {
           "familyId": "family/System.Text.Json/polymorphism-reference",
@@ -1580,7 +1580,7 @@
             "functional"
           ],
           "migrationStatus": "migrated",
-          "lastVerified": ""
+          "lastVerified": "2026-05-29T05:00:03.513470+00:00"
         },
         {
           "familyId": "family/System.Text.Json/reader",

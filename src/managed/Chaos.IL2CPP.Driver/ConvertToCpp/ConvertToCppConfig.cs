@@ -37,6 +37,9 @@ internal sealed class ConvertToCppConfig
     /// <summary>Path to subject-methods.json (subset of method IDs treated as subjects)</summary>
     public string? SubjectMethodsPath { get; init; }
 
+    /// <summary>Native build config tier: check, profile, or ship</summary>
+    public string? ConfigTier { get; init; }
+
     /// <summary>
     /// Parse CLI arguments.
     /// Expected: --assembly &lt;path&gt; [--assembly &lt;path&gt; ...] --output &lt;dir&gt; [options]
@@ -52,6 +55,7 @@ internal sealed class ConvertToCppConfig
         var mode = CodegenMode.Aot;
         string? sdkOutDir = null;
         string? subjectMethodsPath = null;
+        string? configTier = null;
 
         for (int i = 0; i < args.Length; i++)
         {
@@ -94,6 +98,9 @@ internal sealed class ConvertToCppConfig
                 case "--subject-methods" when i + 1 < args.Length:
                     subjectMethodsPath = Path.GetFullPath(args[++i]);
                     break;
+                case "--config-tier" when i + 1 < args.Length:
+                    configTier = args[++i].ToLowerInvariant();
+                    break;
             }
         }
 
@@ -115,6 +122,7 @@ internal sealed class ConvertToCppConfig
             Mode = mode,
             SdkOutDir = sdkOutDir,
             SubjectMethodsPath = subjectMethodsPath,
+            ConfigTier = configTier,
         };
     }
 
@@ -134,6 +142,7 @@ internal sealed class ConvertToCppConfig
         Console.WriteLine("  --mode aot|jit|test           Codegen mode: aot (native C++, default), jit (JIT compile), or test (AOT + disable Subject_N folding)");
         Console.WriteLine("  --sdk-out <dir>               Output self-contained chaos-sdk/ CMake package (replaces --output)");
         Console.WriteLine("  --subject-methods <path>      Path to subject-methods.json (subset of SubjectIds for dispatch table)");
+        Console.WriteLine("  --config-tier <tier>           Native build config tier: check (default), profile, or ship");
         Console.WriteLine("  --verbose, -v                 Enable verbose diagnostics");
         Console.WriteLine("  --help, -h                    Show this help");
     }

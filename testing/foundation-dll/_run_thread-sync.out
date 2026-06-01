@@ -1,0 +1,392 @@
+
+============================================================
+Family Verify: thread-sync [System.Private.CoreLib] mode=strict
+============================================================
+
+[1/20] Preflight... skipped
+  [codegen] Generating entrypoint...
+[probe] Building ThreadingThreadSyncSubjects probe...
+[probe] Build FAILED: 
+[subjects] Building ThreadingThreadSyncSubjects DLL...
+  [3s] failed: Entrypoint generation failed: D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\subjects\ThreadSyncSubjects.Custom.cs(12,24): error CS0111: Type 'ThreadSyncSubjects' already defines a member called 'CustomEntrySubject_7' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\ThreadingThreadSyncSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\subjects\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\ThreadingThreadSyncSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\subjects\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\ThreadingThreadSyncSubjects.csproj]
+
+Build FAILED.
+
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\subjects\ThreadSyncSubjects.Custom.cs(12,24): error CS0111: Type 'ThreadSyncSubjects' already defines a member called 'CustomEntrySubject_7' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\ThreadingThreadSyncSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\subjects\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\ThreadingThreadSyncSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\subjects\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\thread-sync\managed\ThreadingThreadSyncSubjects.csproj]
+    0 Warning(s)
+    3 Error(s)
+
+Time Elapsed 00:00:01.04
+
+  [jit_codegen] TPG templates updated, rebuilding stale entry-jit.exe...
+  [jit_codegen] Building JIT mode entry-jit.exe...
+  [jit_codegen] backed up entry.exe -> entry-aot.exe
+  [jit_codegen] using pre-built JIT binary from codegen stage, incremental update only...
+        [1/2] Reading subjects from contract...
+              Found 8 subjects
+        [2/2] Emitting dispatch.cpp and metadata...
+              verification_dispatch.generated.cpp, metadata/subjects.json written
+        Done.
+    [TPG timing] JIT emit took 0.12s
+  [jit_codegen] Regenerated dispatch via TPG (JIT mode)
+  [jit_codegen] Rebuilding JIT binary after TPG emit...
+  [jit_codegen] WARNING: JIT incremental rebuild failed, keeping existing entry-jit.exe
+      
+      
+      CMake Configure step failed.  Build files cannot be regenerated correctly.
+      CMake is re-running because D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/thread-sync/native/build_jit/CMakeFiles/generate.stamp is out-of-date.
+        the file 'D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/thread-sync/codegen/ThreadSyncSubjects/cmake/chaos-targets.cmake'
+        is newer than 'D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/thread-sync/native/build_jit/CMakeFiles/generate.stamp.depend'
+        result='0'
+      -- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.26100.
+      -- Configuring incomplete, errors occurred!
+      See also "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/thread-sync/native/build_jit/CMakeFiles/CMakeOutput.log".
+  [jit_codegen] restored entry.exe from entry-aot.exe
+  [3s [ETA 1m3s]] passed: JIT entry-jit.exe built and AOT entry.exe restored
+[4/20] Managed Fact (.NET)... skipped
+[5/20] Managed Subject Record (Golden)... skipped
+[6/20] Cross-Verify (Golden vs AOT)... skipped
+[7/20] Managed Patch Fact (.NET)... skipped
+
+  [3s] >>> Parallel group (6 stages)
+[8/20] Fact AOT... skipped
+[9/20] Fact JIT... skipped
+[10/20] Mechanism + Principle Audit... skipped
+[11/20] AsmCompare (JIT vs AOT)... skipped
+[12/20] Microbench (Interpreter)... skipped
+  [benchmark/native-aot] 4/4 OK (per-method), avg 96828301 ops/s (0 value-gate skipped)
+    [benchmark/native-jit] WARNING: could not parse --fact-json output, skipping value gate
+  [benchmark/native-jit] 4/4 OK (per-method), avg 25349446 ops/s (0 value-gate skipped)
+  [4s [ETA 33s]] passed: passed: native-aot=4/4, native-jit=4/4
+  [4s] <<< Parallel group done
+
+[14/20] HotUpdate AOT Fact... skipped
+[15/20] Patch Cross-Verify... skipped
+[16/20] Multi-Patch HotUpdate... skipped
+[17/20] HotUpdate AOT Bench... skipped
+[18/20] HotUpdate JIT Fact... skipped
+[19/20] HotUpdate JIT Bench... skipped
+[20/20] Cleanup Build Artifacts... skipped
+
+[20/20] Aggregating...
+
+  ──────────────────────────────────────────────────
+  FAILURE SUMMARY (1 stage(s))
+  ──────────────────────────────────────────────────
+  [3s] codegen: FAILED — Entrypoint generation failed: D:\agent\booming-il2cpp\testing\foundation-dll\Sys..
+  ──────────────────────────────────────────────────
+
+
+============================================================
+Result: failed
+Duration: 4s
+Coverage: 2/20 passed (66.7%)
+============================================================
+  [perf_store] saved to D:\agent\booming-il2cpp\testing\foundation-dll\results\foundation-dll\System.Private.CoreLib\thread-sync\perf
+{
+  "family": "thread-sync",
+  "assembly": "System.Private.CoreLib",
+  "mode": "strict",
+  "timestamp": "2026-05-30T21:35:35",
+  "duration_ms": 3717,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "Entrypoint generation failed: D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(12,24): error CS0111: Type 'ThreadSyncSubjects' already defines a member called 'CustomEntrySubject_7' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(12,24): error CS0111: Type 'ThreadSyncSubjects' already defines a member called 'CustomEntrySubject_7' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\n    0 Warning(s)\n    3 Error(s)\n\nTime Elapsed 00:00:01.04\n",
+      "details": {
+        "steps": {
+          "entrypoint": {
+            "success": false,
+            "error": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(12,24): error CS0111: Type 'ThreadSyncSubjects' already defines a member called 'CustomEntrySubject_7' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(12,24): error CS0111: Type 'ThreadSyncSubjects' already defines a member called 'CustomEntrySubject_7' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'FactAttribute' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\subjects\\ThreadSyncSubjects.Custom.cs(11,6): error CS0246: The type or namespace name 'Fact' could not be found (are you missing a using directive or an assembly reference?) [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj]\n    0 Warning(s)\n    3 Error(s)\n\nTime Elapsed 00:00:01.04\n",
+            "dll_path": null,
+            "csproj_path": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.csproj",
+            "source_path": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\thread-sync\\managed\\ThreadingThreadSyncSubjects.cs",
+            "entry_point_subject_id": ""
+          }
+        }
+      },
+      "errors": [],
+      "duration_ms": 3062
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "details": {},
+      "errors": [],
+      "duration_ms": 262
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_record": {
+      "stage": "managed_record",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cross_verify": {
+      "stage": "cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_patch_fact": {
+      "stage": "managed_patch_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "passed",
+      "summary": "passed: native-aot=4/4, native-jit=4/4",
+      "details": {
+        "native-aot": {
+          "status": "passed",
+          "label": "native-aot",
+          "results": [
+            {
+              "elapsedMilliseconds": 3.569,
+              "calibratedMs": 3.569,
+              "opsPerSecond": 28019053,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 0
+            },
+            {
+              "elapsedMilliseconds": 12.642,
+              "calibratedMs": 12.642,
+              "opsPerSecond": 7910203,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 1
+            },
+            {
+              "elapsedMilliseconds": 0.911,
+              "calibratedMs": 0.911,
+              "opsPerSecond": 109721308,
+              "iterations": 100000,
+              "allocatedBytes": 800000,
+              "allocPerOp": 8.0,
+              "methodIndex": 2
+            },
+            {
+              "elapsedMilliseconds": 0.414,
+              "calibratedMs": 0.414,
+              "opsPerSecond": 241662639,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 3
+            }
+          ],
+          "okCount": 4,
+          "failCount": 0,
+          "totalMethods": 4,
+          "averageOpsPerSecond": 96828300.75,
+          "valueGateFailures": [],
+          "profile": null
+        },
+        "native-jit": {
+          "status": "passed",
+          "label": "native-jit",
+          "results": [
+            {
+              "elapsedMilliseconds": 2.897,
+              "calibratedMs": 2.897,
+              "opsPerSecond": 34512511,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 0
+            },
+            {
+              "elapsedMilliseconds": 2.876,
+              "calibratedMs": 2.876,
+              "opsPerSecond": 34769306,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 1
+            },
+            {
+              "elapsedMilliseconds": 11.746,
+              "calibratedMs": 11.746,
+              "opsPerSecond": 8513247,
+              "iterations": 100000,
+              "allocatedBytes": 6400000,
+              "allocPerOp": 64.0,
+              "methodIndex": 2
+            },
+            {
+              "elapsedMilliseconds": 4.237,
+              "calibratedMs": 4.237,
+              "opsPerSecond": 23602719,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 3
+            }
+          ],
+          "okCount": 4,
+          "failCount": 0,
+          "totalMethods": 4,
+          "averageOpsPerSecond": 25349445.75,
+          "valueGateFailures": [],
+          "profile": null
+        }
+      },
+      "errors": [],
+      "duration_ms": 391
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "patch_cross_verify": {
+      "stage": "patch_cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "multi_patch_hotupdate": {
+      "stage": "multi_patch_hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cleanup": {
+      "stage": "cleanup",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    }
+  },
+  "coverage": {
+    "stagePassRate": 66.7,
+    "stagesPassed": 2,
+    "stagesFailed": 1,
+    "stagesSkipped": 17,
+    "stagesN_A": 0,
+    "stagesTotal": 20
+  },
+  "dashboard": {
+    "keyRatios": {
+      "nativeFasterRatio": 0.5,
+      "managedFasterRatio": 0,
+      "nativeAotOpsPerSecond": 96828300.75,
+      "nativeJitOpsPerSecond": 25349445.75
+    },
+    "averageSpeedupPercent": 504.2
+  },
+  "regression": {
+    "hasRegression": false,
+    "regressions": [],
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "No baseline established"
+    }
+  }
+}

@@ -14,10 +14,9 @@
   <ItemGroup>
     <Compile Include="InterfaceDispatchSubjects.cs" />
     <Compile Include="InterfaceDispatchNativeEntry.cs" />
-    <Compile Include="subjects/InterfaceDispatchNativeEntry.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="D:\agent\booming-il2cpp\src\reference\Chaos.TestFramework.Sdk\Chaos.TestFramework.Sdk.csproj" />
+    <ProjectReference Include="/home/debian/agent/booming-il2cpp/src/reference/Chaos.TestFramework.Sdk/Chaos.TestFramework.Sdk.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Remove="Microsoft.NET.Test.Sdk" />

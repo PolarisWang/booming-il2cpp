@@ -1,10 +1,15 @@
 using System.Collections.Concurrent;
+using System.Reflection;
 
 namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 
 public sealed class ValueGenerator
 {
     private readonly CSharpSerializer _serializer;
+    private readonly AutoFixtureAllower? _autoFixture;
+
+    // Cache for enum type detection (Type.GetType is slow)
+    private static readonly ConcurrentDictionary<string, bool> EnumTypeCache = new(StringComparer.Ordinal);
 
     private static readonly Dictionary<string, string[]> BoundaryValues = new(StringComparer.Ordinal)
     {
@@ -22,21 +27,24 @@ public sealed class ValueGenerator
         ["System.Decimal"] = new[] { "0m", "1m", "-1m", "3.14m" },
         ["System.Char"] = new[] { "'\\0'", "'A'", "'z'" },
         ["System.String"] = new[] { "\"\"", "\"hello\"", "null!" },
-        ["System.IntPtr"] = new[] { "System.IntPtr.Zero" },
-        ["System.UIntPtr"] = new[] { "System.UIntPtr.Zero" },
+        ["System.IntPtr"] = new[] { "System.IntPtr.Zero", "new System.IntPtr(42)", "new System.IntPtr(-1)" },
+        ["System.UIntPtr"] = new[] { "System.UIntPtr.Zero", "new System.UIntPtr(42)" },
         ["System.DateTime"] = new[] { "default(System.DateTime)", "new System.DateTime(2024, 1, 1)" },
         ["System.TimeSpan"] = new[] { "System.TimeSpan.Zero", "System.TimeSpan.FromTicks(42)" },
         ["System.Guid"] = new[] { "default(System.Guid)", "System.Guid.NewGuid()" },
+        ["System.Byte[]"] = new[] { "null!", "System.Array.Empty<byte>()", "new byte[]{0, 1, 255}" },
     };
 
-    public ValueGenerator(CSharpSerializer serializer)
+    public ValueGenerator(CSharpSerializer serializer, AutoFixtureAllower? autoFixture = null)
     {
         _serializer = serializer;
+        _autoFixture = autoFixture;
     }
 
     /// <summary>
     /// Generate 3-4 value sets per method using only pre-defined boundary values + defaults.
     /// No runtime AutoFixture calls — all expressions are statically determined C# strings.
+    /// Handles enum types, byte[], and Span&lt;T&gt;.
     /// </summary>
     public IReadOnlyList<ValueSet> Generate(MethodSignature method, int methodIndex)
     {
@@ -66,11 +74,26 @@ public sealed class ValueGenerator
                 paramTypes.Select(t => DefaultValue(t)).ToArray());
         }
 
+        // One AutoFixture-generated random set (only for types that serialize cleanly)
+        if (_autoFixture is not null)
+        {
+            var fixtureArgs = paramTypes.Select(t =>
+            {
+                var expr = _autoFixture.TryGenerateExpression(t);
+                return expr ?? DefaultValue(t);
+            }).ToArray();
+            AddUnique(sets, usedSignatures, methodIndex, fixtureArgs);
+        }
+
         return sets;
     }
 
     private string DefaultValue(string typeName)
     {
+        // Span<T>: use default
+        if (typeName.StartsWith("System.Span<") || typeName.StartsWith("System.ReadOnlySpan<"))
+            return $"default({CSharpSerializer.ToCSharpTypeName(typeName)})";
+
         if (typeName.EndsWith('&'))
         {
             var baseType = typeName[..^1].Trim();
@@ -81,6 +104,10 @@ public sealed class ValueGenerator
 
     private string BoundaryValue(string typeName, int variantIndex)
     {
+        // Span<T>/ReadOnlySpan<T>: use default
+        if (typeName.StartsWith("System.Span<") || typeName.StartsWith("System.ReadOnlySpan<"))
+            return $"default({CSharpSerializer.ToCSharpTypeName(typeName)})";
+
         if (BoundaryValues.TryGetValue(typeName, out var values) && variantIndex < values.Length)
             return values[variantIndex];
 
@@ -90,7 +117,34 @@ public sealed class ValueGenerator
             return $"out {_serializer.DefaultExpression(baseType)}";
         }
 
+        // Try enum detection for types not in BoundaryValues
+        if (IsEnumType(typeName))
+        {
+            var csType = CSharpSerializer.MapToCSharpType(typeName);
+            return $"({csType})0";
+        }
+
         return _serializer.DefaultExpression(typeName);
+    }
+
+    /// <summary>
+    /// Best-effort check if a type name refers to an enum. Uses runtime Type.GetType()
+    /// which works for BCL types but not MLC-only types.
+    /// </summary>
+    private static bool IsEnumType(string typeName)
+    {
+        return EnumTypeCache.GetOrAdd(typeName, static name =>
+        {
+            try
+            {
+                var type = Type.GetType(name, throwOnError: false);
+                return type?.IsEnum == true;
+            }
+            catch
+            {
+                return false;
+            }
+        });
     }
 
     private static void AddUnique(List<ValueSet> sets, HashSet<string> used, int methodIndex, string[] args)

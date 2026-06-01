@@ -390,6 +390,7 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
     }
 
     // T3→T4: Trigger native codegen (JIT)
+#ifdef CHAOS_IL2CPP_JIT_MODE
     auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
     if (t4_tier == PatchMethod::kJitSkip) {
         // Permanently skipped — never retry codegen
@@ -442,6 +443,9 @@ static void TryTierUpgrade(PatchMethod* patch_method, uint32_t call_count,
             }
         }
     }
+#else
+    // JIT disabled: stay in optimized interpreter for all methods.
+#endif
 }
 
 void InterpreterEntryDirect(
@@ -567,6 +571,7 @@ void InterpreterEntryDirect(
 
     // ── Step A: Native code path (T4) ────────────────────────────────
     {
+#ifdef CHAOS_IL2CPP_JIT_MODE
         auto t4_tier = patch_method->tier_state.load(std::memory_order_acquire);
         if (t4_tier >= PatchMethod::kJitted) {
             auto* nm = patch_method->cached_native_method;
@@ -597,9 +602,9 @@ void InterpreterEntryDirect(
                 }
             }
         }
+#else
+#endif
     }
-
-    // -- Step A.5: T2 deopt path -- reconstruct OsrState -> FastExecute --
     {
         auto* reg_m = static_cast<interpreter::RegisterMethod*>(
             patch_method->cached_reg_method);

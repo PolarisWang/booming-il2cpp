@@ -1,0 +1,495 @@
+
+============================================================
+Family Verify: primitive-numeric-conversions-core [System.Private.CoreLib] mode=strict
+============================================================
+
+[1/20] Preflight... skipped
+  [codegen] Generating entrypoint...
+[probe] Building PrimitiveNumericConversionsCoreSubjects probe...
+[probe] Build FAILED: 
+[subjects] Building PrimitiveNumericConversionsCoreSubjects DLL...
+  [20s] failed: Entrypoint generation failed: D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(8,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'PrimitiveNumericConversionsCoreNativeEntry' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(11,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestByteToInt' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(19,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToLong' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(27,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToShort' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(35,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToByte' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(43,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestFloatToDouble' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(53,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToFloat' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(64,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToDouble' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(73,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToInt' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(81,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestUintToLong' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(89,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestLongToInt' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+
+Build FAILED.
+
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(8,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'PrimitiveNumericConversionsCoreNativeEntry' [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(11,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestByteToInt' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(19,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToLong' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(27,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToShort' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(35,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToByte' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(43,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestFloatToDouble' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(53,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToFloat' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(64,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToDouble' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(73,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToInt' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(81,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestUintToLong' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\subjects\PrimitiveNumericConversionsCoreNativeEntry.cs(89,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestLongToInt' with the same parameter types [D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\managed\PrimitiveNumericConversionsCoreSubjects.csproj]
+    0 Warning(s)
+    11 Error(s)
+
+Time Elapsed 00:00:01.22
+
+  [jit_codegen] TPG templates updated, rebuilding stale entry-jit.exe...
+  [jit_codegen] Building JIT mode entry-jit.exe...
+  [jit_codegen] backed up entry.exe -> entry-aot.exe
+  [jit_codegen] using pre-built JIT binary from codegen stage, incremental update only...
+        [1/2] Reading subjects from contract...
+              Found 10 subjects
+        [2/2] Emitting dispatch.cpp and metadata...
+              verification_dispatch.generated.cpp, metadata/subjects.json written
+        Done.
+    [TPG timing] JIT emit took 0.14s
+  [jit_codegen] Regenerated dispatch via TPG (JIT mode)
+  [jit_codegen] Rebuilding JIT binary after TPG emit...
+  [jit_codegen] rebuilt entry-jit.exe (2946560 bytes)
+  [jit_codegen] restored entry.exe from entry-aot.exe
+  [25s [ETA 8m0s]] passed: JIT entry-jit.exe built and AOT entry.exe restored
+[4/20] Managed Fact (.NET)... skipped
+[5/20] Managed Subject Record (Golden)... skipped
+[6/20] Cross-Verify (Golden vs AOT)... skipped
+[7/20] Managed Patch Fact (.NET)... skipped
+
+  [25s] >>> Parallel group (6 stages)
+[8/20] Fact AOT... skipped
+[9/20] Fact JIT... skipped
+[10/20] Mechanism + Principle Audit... skipped
+[11/20] AsmCompare (JIT vs AOT)... skipped
+[12/20] Microbench (Interpreter)... skipped
+  [benchmark/native-aot] 10/10 OK (per-method), avg 382085566 ops/s (0 value-gate skipped)
+  [benchmark/native-jit] 10/10 OK (batch), avg 218003008 ops/s (0 value-gate skipped)
+  [26s [ETA 3m57s]] passed: passed: native-aot=10/10, native-jit=10/10
+  [26s] <<< Parallel group done
+
+[14/20] HotUpdate AOT Fact... skipped
+[15/20] Patch Cross-Verify... skipped
+[16/20] Multi-Patch HotUpdate... skipped
+[17/20] HotUpdate AOT Bench... skipped
+[18/20] HotUpdate JIT Fact... skipped
+[19/20] HotUpdate JIT Bench... skipped
+[20/20] Cleanup Build Artifacts... skipped
+
+[20/20] Aggregating...
+
+  ──────────────────────────────────────────────────
+  FAILURE SUMMARY (1 stage(s))
+  ──────────────────────────────────────────────────
+  [20s] codegen: FAILED — Entrypoint generation failed: D:\agent\booming-il2cpp\testing\foundation-dll\Sys..
+  ──────────────────────────────────────────────────
+
+
+============================================================
+Result: failed
+Duration: 26s
+Coverage: 2/20 passed (66.7%)
+============================================================
+  [perf_store] saved to D:\agent\booming-il2cpp\testing\foundation-dll\results\foundation-dll\System.Private.CoreLib\primitive-numeric-conversions-core\perf
+{
+  "family": "primitive-numeric-conversions-core",
+  "assembly": "System.Private.CoreLib",
+  "mode": "strict",
+  "timestamp": "2026-05-30T21:28:30",
+  "duration_ms": 26336,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "Entrypoint generation failed: D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(8,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'PrimitiveNumericConversionsCoreNativeEntry' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(11,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestByteToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(19,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToLong' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(27,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToShort' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(35,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToByte' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(43,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestFloatToDouble' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(53,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToFloat' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(64,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToDouble' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(73,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(81,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestUintToLong' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(89,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestLongToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(8,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'PrimitiveNumericConversionsCoreNativeEntry' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(11,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestByteToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(19,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToLong' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(27,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToShort' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(35,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToByte' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(43,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestFloatToDouble' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(53,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToFloat' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(64,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToDouble' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(73,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(81,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestUintToLong' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(89,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestLongToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\n    0 Warning(s)\n    11 Error(s)\n\nTime Elapsed 00:00:01.22\n",
+      "details": {
+        "steps": {
+          "entrypoint": {
+            "success": false,
+            "error": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(8,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'PrimitiveNumericConversionsCoreNativeEntry' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(11,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestByteToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(19,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToLong' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(27,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToShort' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(35,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToByte' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(43,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestFloatToDouble' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(53,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToFloat' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(64,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToDouble' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(73,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(81,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestUintToLong' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(89,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestLongToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\n\nBuild FAILED.\n\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(8,21): error CS0101: The namespace '<global namespace>' already contains a definition for 'PrimitiveNumericConversionsCoreNativeEntry' [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(11,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestByteToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(19,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToLong' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(27,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToShort' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(35,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToByte' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(43,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestFloatToDouble' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(53,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToFloat' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(64,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestIntToDouble' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(73,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestDoubleToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(81,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestUintToLong' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\nD:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\subjects\\PrimitiveNumericConversionsCoreNativeEntry.cs(89,23): error CS0111: Type 'PrimitiveNumericConversionsCoreNativeEntry' already defines a member called 'TestLongToInt' with the same parameter types [D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj]\n    0 Warning(s)\n    11 Error(s)\n\nTime Elapsed 00:00:01.22\n",
+            "dll_path": null,
+            "csproj_path": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.csproj",
+            "source_path": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Private.CoreLib\\primitive-numeric-conversions-core\\managed\\PrimitiveNumericConversionsCoreSubjects.cs",
+            "entry_point_subject_id": ""
+          }
+        }
+      },
+      "errors": [],
+      "duration_ms": 20191
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "passed",
+      "summary": "JIT entry-jit.exe built and AOT entry.exe restored",
+      "details": {},
+      "errors": [],
+      "duration_ms": 5121
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_record": {
+      "stage": "managed_record",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cross_verify": {
+      "stage": "cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_patch_fact": {
+      "stage": "managed_patch_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "passed",
+      "summary": "passed: native-aot=10/10, native-jit=10/10",
+      "details": {
+        "native-aot": {
+          "status": "passed",
+          "label": "native-aot",
+          "results": [
+            {
+              "elapsedMilliseconds": 0.245,
+              "calibratedMs": 0.245,
+              "opsPerSecond": 407996736,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 0
+            },
+            {
+              "elapsedMilliseconds": 0.26,
+              "calibratedMs": 0.26,
+              "opsPerSecond": 384024578,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 1
+            },
+            {
+              "elapsedMilliseconds": 0.265,
+              "calibratedMs": 0.265,
+              "opsPerSecond": 377786173,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 2
+            },
+            {
+              "elapsedMilliseconds": 0.246,
+              "calibratedMs": 0.246,
+              "opsPerSecond": 406504065,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 3
+            },
+            {
+              "elapsedMilliseconds": 0.246,
+              "calibratedMs": 0.246,
+              "opsPerSecond": 407000407,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 4
+            },
+            {
+              "elapsedMilliseconds": 0.255,
+              "calibratedMs": 0.255,
+              "opsPerSecond": 392772977,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 5
+            },
+            {
+              "elapsedMilliseconds": 0.264,
+              "calibratedMs": 0.264,
+              "opsPerSecond": 379075057,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 6
+            },
+            {
+              "elapsedMilliseconds": 0.352,
+              "calibratedMs": 0.352,
+              "opsPerSecond": 283929585,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 7
+            },
+            {
+              "elapsedMilliseconds": 0.264,
+              "calibratedMs": 0.264,
+              "opsPerSecond": 378214826,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 8
+            },
+            {
+              "elapsedMilliseconds": 0.248,
+              "calibratedMs": 0.248,
+              "opsPerSecond": 403551251,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0,
+              "methodIndex": 9
+            }
+          ],
+          "okCount": 10,
+          "failCount": 0,
+          "totalMethods": 10,
+          "averageOpsPerSecond": 382085565.5,
+          "valueGateFailures": [],
+          "profile": null
+        },
+        "native-jit": {
+          "status": "passed",
+          "label": "native-jit",
+          "results": [
+            {
+              "methodIndex": 0,
+              "elapsedMilliseconds": 0.396,
+              "opsPerSecond": 252589038,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            },
+            {
+              "methodIndex": 1,
+              "elapsedMilliseconds": 0.459,
+              "opsPerSecond": 217675229,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            },
+            {
+              "methodIndex": 2,
+              "elapsedMilliseconds": 0.589,
+              "opsPerSecond": 169808117,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            },
+            {
+              "methodIndex": 3,
+              "elapsedMilliseconds": 0.603,
+              "opsPerSecond": 165727544,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            },
+            {
+              "methodIndex": 4,
+              "elapsedMilliseconds": 0.396,
+              "opsPerSecond": 252397779,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            },
+            {
+              "methodIndex": 5,
+              "elapsedMilliseconds": 0.396,
+              "opsPerSecond": 252461500,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            },
+            {
+              "methodIndex": 6,
+              "elapsedMilliseconds": 0.471,
+              "opsPerSecond": 212179079,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            },
+            {
+              "methodIndex": 7,
+              "elapsedMilliseconds": 0.451,
+              "opsPerSecond": 221680337,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            },
+            {
+              "methodIndex": 8,
+              "elapsedMilliseconds": 0.469,
+              "opsPerSecond": 212992545,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            },
+            {
+              "methodIndex": 9,
+              "elapsedMilliseconds": 0.449,
+              "opsPerSecond": 222518914,
+              "iterations": 100000,
+              "allocatedBytes": 0,
+              "allocPerOp": 0.0
+            }
+          ],
+          "okCount": 10,
+          "failCount": 0,
+          "totalMethods": 10,
+          "averageOpsPerSecond": 218003008.2,
+          "valueGateFailures": [],
+          "profile": null
+        }
+      },
+      "errors": [],
+      "duration_ms": 1021
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "patch_cross_verify": {
+      "stage": "patch_cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "multi_patch_hotupdate": {
+      "stage": "multi_patch_hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cleanup": {
+      "stage": "cleanup",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    }
+  },
+  "coverage": {
+    "stagePassRate": 66.7,
+    "stagesPassed": 2,
+    "stagesFailed": 1,
+    "stagesSkipped": 17,
+    "stagesN_A": 0,
+    "stagesTotal": 20
+  },
+  "dashboard": {
+    "keyRatios": {
+      "nativeFasterRatio": 1.0,
+      "managedFasterRatio": 0,
+      "nativeAotOpsPerSecond": 382085565.5,
+      "nativeJitOpsPerSecond": 218003008.2
+    },
+    "averageSpeedupPercent": 78.8
+  },
+  "regression": {
+    "hasRegression": false,
+    "regressions": [],
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "No baseline established"
+    }
+  }
+}

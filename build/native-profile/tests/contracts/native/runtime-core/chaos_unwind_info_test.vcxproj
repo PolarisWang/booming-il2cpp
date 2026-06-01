@@ -86,7 +86,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -104,10 +104,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR=\"Debug\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -115,7 +115,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>chaos_codegen.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/runtime-core/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/runtime-core/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/bootstrap/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/bootstrap/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/interpreter/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/interpreter/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/fmt_build/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/fmt_build/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/common/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/common/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/hot-update/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/hot-update/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/support/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/support/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Release;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -130,7 +130,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -148,10 +148,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR=\"Release\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -159,7 +159,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>chaos_codegen.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/runtime-core/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/runtime-core/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/bootstrap/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/bootstrap/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/interpreter/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/interpreter/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/fmt_build/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/fmt_build/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/common/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/common/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/hot-update/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/hot-update/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/support/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/support/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Release;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -174,7 +174,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -192,10 +192,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR=\"MinSizeRel\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -203,7 +203,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>chaos_codegen.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/runtime-core/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/runtime-core/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/bootstrap/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/bootstrap/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/interpreter/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/interpreter/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/fmt_build/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/fmt_build/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/common/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/common/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/hot-update/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/hot-update/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/support/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/support/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Release;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -218,7 +218,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <ClCompile>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalOptions>%(AdditionalOptions) /utf-8</AdditionalOptions>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
       <BufferSecurityCheck>false</BufferSecurityCheck>
@@ -235,10 +235,10 @@
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>%(PreprocessorDefinitions);WIN32;_WINDOWS;NDEBUG;_CRT_SECURE_NO_WARNINGS;CHAOS_IL2CPP_TARGET_PLATFORM_WINDOWS=1;CHAOS_IL2CPP_CONFIG_PROFILE;CHAOS_IL2CPP_PROFILE_ENABLED=1;CMAKE_INTDIR=\"RelWithDebInfo\"</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ResourceCompile>
     <Midl>
-      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\agent\booming-il2cpp\src\native\codegen;D:\agent\booming-il2cpp\src\native\common;D:\agent\booming-il2cpp\src\native\runtime-core;D:\agent\booming-il2cpp\src\native\jit;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -246,7 +246,7 @@
       <ProxyFileName>%(Filename)_p.c</ProxyFileName>
     </Midl>
     <Link>
-      <AdditionalDependencies>chaos_codegen.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
+      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;comdlg32.lib;advapi32.lib</AdditionalDependencies>
       <AdditionalLibraryDirectories>D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/runtime-core/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/runtime-core/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/bootstrap/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/bootstrap/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/interpreter/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/interpreter/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/fmt_build/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/fmt_build/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/common/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/common/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/hot-update/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/hot-update/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/support/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/support/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Debug;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Debug/$(Configuration);D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Release;D:/agent/booming-il2cpp/artifacts/presets/debug/src/native/codegen/Release/$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalOptions>%(AdditionalOptions) /machine:x64</AdditionalOptions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
