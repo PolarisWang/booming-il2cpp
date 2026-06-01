@@ -322,18 +322,17 @@ extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string(CHAOS_IL2CPP_INTPTR v
 {
     // In Fact Static verification mode, ldstr pushes a tagged StringId.
     // Read the first UTF-8 byte and return it as char.
-    if (chaos_is_string_id(value))
+    // Uses ResolveWithGlobalCache (direct-mapped global cache, no TLS) —
+    // matches the inline shape in RuntimeHelperShapeRegistry.
+    const auto chaos_view = chaos::il2cpp::string_table::ResolveWithGlobalCache(
+        chaos_extract_string_id(value));
+    if (chaos_view.byte_count == 0)
     {
-        const auto chaos_view = chaos::il2cpp::string_table::Resolve(
-            chaos_extract_string_id(value));
-        if (chaos_view.byte_count == 0)
-        {
-            chaos::il2cpp::runtime_core::chaos_raise_exception(0);
-        }
-        return static_cast<CHAOS_IL2CPP_UINT16>(
-            static_cast<unsigned char>(chaos_view.utf8_data[0]));
+        chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+        return 0;
     }
-    chaos::il2cpp::runtime_core::chaos_raise_exception(0);
+    return static_cast<CHAOS_IL2CPP_UINT16>(
+        static_cast<unsigned char>(chaos_view.utf8_data[0]));
 }
 
 extern "C" CHAOS_IL2CPP_UINT16 chaos_convert_tochar_string_provider(
