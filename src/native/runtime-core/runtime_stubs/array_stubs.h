@@ -2,6 +2,7 @@
 #pragma once
 
 #include <chaos/native_types.h>
+#include <chaos/type_info.h>
 #include <chaos/compiler_hints.h>
 #include <cstring>
 #include "runtime_stubs/stub_common.h"
@@ -22,6 +23,7 @@ void ChaosArraySort(CHAOS_IL2CPP_INTPTR array) noexcept;
 void ChaosArraySortWithComparer(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INTPTR comparer) noexcept;
 void ChaosArrayReverse(CHAOS_IL2CPP_INTPTR array) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosArrayGetValue(CHAOS_IL2CPP_INTPTR array, CHAOS_IL2CPP_INT32 index) noexcept;
+CHAOS_IL2CPP_INTPTR ChaosArrayNew1D(const TypeInfo* array_type_info, const TypeInfo* element_type_info, CHAOS_IL2CPP_UINT8 element_type_shape, CHAOS_IL2CPP_INTPTR length) noexcept;
 CHAOS_IL2CPP_INTPTR ChaosBitConverterGetBytes(CHAOS_IL2CPP_INTPTR unused, CHAOS_IL2CPP_INT32 value) noexcept;
 CHAOS_IL2CPP_INT32 ChaosBitConverterToInt32(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept;
 double ChaosBitConverterToDouble(CHAOS_IL2CPP_INTPTR byteArray, CHAOS_IL2CPP_INT32 startIndex) noexcept;
@@ -183,4 +185,34 @@ CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INTPTR ChaosArrayGetValue_Inline(CHAOS_IL2
     CHAOS_IL2CPP_UINTPTR uindex = static_cast<CHAOS_IL2CPP_UINTPTR>(index);
     if (uindex >= static_cast<CHAOS_IL2CPP_UINTPTR>(arr->length)) return 0;
     return accessor_get_elements(arr)[uindex];
+}
+
+// ── Array allocation helper (forceinline) ──────────────────────────
+// Centralizes the newarr allocation pattern emitted by codegen for EVERY
+// array creation site. Replaces ~10 lines of inline code with a single
+// function call, reducing generated code bloat and icache pressure.
+// The caller provides array_type_info (&chaos_type_info_managed_array.hot),
+// element_type_info (the element MethodTable*), element_type_shape, and length.
+// This function handles bounds check, size computation, allocation, and
+// header initialization in one place.
+CHAOS_IL2CPP_FORCEINLINE CHAOS_IL2CPP_INTPTR ChaosArrayNew1D_Inline(
+    const TypeInfo* array_type_info,
+    const TypeInfo* element_type_info,
+    CHAOS_IL2CPP_UINT8 element_type_shape,
+    CHAOS_IL2CPP_INTPTR length) noexcept
+{
+    const auto len32 = static_cast<CHAOS_IL2CPP_INT32>(length);
+    if (len32 < 0)
+    {
+        CHAOS_IL2CPP_FAIL_FAST();
+    }
+    const auto total_size = sizeof(ManagedArrayAccessor) + static_cast<CHAOS_IL2CPP_SIZE>(len32) * sizeof(CHAOS_IL2CPP_INTPTR);
+    auto* arr = static_cast<ManagedArrayAccessor*>(GcAllocateAtomic(total_size));
+    if (arr == nullptr) return 0;
+    // Initialize header: first 8 bytes = type_info pointer (matches ThinLockableHeader layout)
+    *reinterpret_cast<const TypeInfo**>(arr->header_data) = array_type_info;
+    arr->element_type_shape = element_type_shape;
+    arr->element_type_info = element_type_info;
+    arr->length = static_cast<CHAOS_IL2CPP_INTPTR>(len32);
+    return reinterpret_cast<CHAOS_IL2CPP_INTPTR>(arr);
 }

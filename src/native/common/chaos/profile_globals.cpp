@@ -3,7 +3,12 @@
 
 #if CHAOS_IL2CPP_PROFILE_ENABLED
 
+#if defined(_WIN32)
 #include <windows.h>
+#else
+#include <time.h>   // clock_gettime, nanosleep
+#include <thread>   // std::this_thread::sleep_for
+#endif
 
 namespace chaos::il2cpp::common {
 
@@ -26,6 +31,7 @@ double g_ns_per_cycle  = 0.0;
 bool   g_profile_calibrated = false;
 
 void CalibrateProfileTsc() noexcept {
+#if defined(_WIN32)
     LARGE_INTEGER freq;
     if (!QueryPerformanceFrequency(&freq) || freq.QuadPart == 0) {
         g_ns_per_cycle = 1.0;  // fallback: report cycles
@@ -34,7 +40,7 @@ void CalibrateProfileTsc() noexcept {
     }
 
     // Sleep(1) gives a reliable ~1-2ms interval that both RDTSC and QPC
-    // can measure with good SNR.  No busy-wait, no CPU-frequency assumption.
+    // can measure with good SNR.
     LARGE_INTEGER start, end;
     uint64_t tsc_start = __rdtsc();
     QueryPerformanceCounter(&start);
@@ -52,6 +58,31 @@ void CalibrateProfileTsc() noexcept {
     double seconds = static_cast<double>(qpc_elapsed) / freq.QuadPart;
     g_ns_per_cycle = (seconds * 1e9) / tsc_elapsed;
     g_profile_calibrated = true;
+#else
+    // Linux: clock_gettime(CLOCK_MONOTONIC) for wall-time calibration.
+    struct timespec ts_start, ts_end;
+    uint64_t tsc_start = __rdtsc();
+    clock_gettime(CLOCK_MONOTONIC, &ts_start);
+    std::this_thread::sleep_for(std::chrono::milliseconds(1));
+    uint64_t tsc_end = __rdtsc();
+    clock_gettime(CLOCK_MONOTONIC, &ts_end);
+
+    uint64_t tsc_elapsed = tsc_end - tsc_start;
+    if (tsc_elapsed == 0) {
+        g_ns_per_cycle = 1.0;
+        g_profile_calibrated = true;
+        return;
+    }
+    double seconds = (ts_end.tv_sec - ts_start.tv_sec) +
+                     (ts_end.tv_nsec - ts_start.tv_nsec) * 1e-9;
+    if (seconds <= 0.0) {
+        g_ns_per_cycle = 1.0;
+        g_profile_calibrated = true;
+        return;
+    }
+    g_ns_per_cycle = (seconds * 1e9) / tsc_elapsed;
+    g_profile_calibrated = true;
+#endif
 }
 
 } // namespace chaos::il2cpp::common

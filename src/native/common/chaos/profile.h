@@ -63,10 +63,15 @@
 
 // Read current processor number via x64 KPCR (single instruction, no windows.h).
 // This is the offset of ProcessorNumber in the KPCR on x64 Windows.
-#ifdef _M_AMD64
+#if defined(_M_AMD64)
 #define CHAOS_IL2CPP_CURRENT_CORE()  static_cast<uint32_t>(__readgsdword(0x20))
+#elif defined(__x86_64__) || defined(__amd64__)
+// Linux x86_64: sched_getcpu() via vDSO (~20ns) is acceptable for a profiler.
+// Constructor/destructor pair adds ~40ns — negligible compared to scope body.
+#include <sched.h>
+#define CHAOS_IL2CPP_CURRENT_CORE()  static_cast<uint32_t>(sched_getcpu())
 #else
-#error "profile.h requires _M_AMD64 for GetCurrentProcessorNumber"
+#error "profile.h: CHAOS_IL2CPP_CURRENT_CORE not implemented for this platform"
 #endif
 
 namespace chaos::il2cpp::common {
