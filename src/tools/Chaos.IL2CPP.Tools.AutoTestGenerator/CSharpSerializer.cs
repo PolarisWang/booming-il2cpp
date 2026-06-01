@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 
 namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
 
@@ -331,6 +332,122 @@ public sealed class CSharpSerializer
             "Nullable" => true,
             _ => false
         };
+    }
+
+    /// <summary>
+    /// Reconstruct a C# expression string from a JSON-serialized probe value.
+    /// Used to generate assertion expected-values from probe output.
+    /// </summary>
+    public string DeserializeToExpression(string json, string typeName)
+    {
+        using var doc = JsonDocument.Parse(json);
+        var root = doc.RootElement;
+
+        // Strip '&' suffix for ref/out params
+        var cleanType = typeName.EndsWith('&') ? typeName[..^1].Trim() : typeName;
+
+        // ── Null ──
+        if (root.ValueKind == JsonValueKind.Null)
+            return $"default({MapToCSharpType(cleanType)})!";
+
+        // ── String type ──
+        if (cleanType == "System.String")
+            return LiteralEscape(root.GetString() ?? "");
+
+        // ── Char type: JSON stores char as a string ──
+        if (cleanType == "System.Char")
+        {
+            var s = root.GetString() ?? "\0";
+            if (s.Length == 0) s = "\0";
+            return CharEscape(s[0]);
+        }
+
+        // ── Boolean ──
+        if (cleanType == "System.Boolean")
+            return root.GetBoolean() ? "true" : "false";
+
+        // ── byte[] ──
+        if (cleanType == "System.Byte[]")
+        {
+            if (root.ValueKind == JsonValueKind.String)
+            {
+                // System.Text.Json serializes byte[] as Base64 string
+                var base64 = root.GetString() ?? "";
+                var decoded = Convert.FromBase64String(base64);
+                if (decoded.Length == 0)
+                    return "Array.Empty<byte>()";
+                return $"new byte[]{{{string.Join(",", decoded.Select(b => b.ToString()))}}}";
+            }
+            if (root.ValueKind != JsonValueKind.Array)
+                return $"default(byte[])!";
+            var items = root.EnumerateArray().Select(e => e.GetByte().ToString()).ToArray();
+            return $"new byte[]{{{string.Join(",", items)}}}";
+        }
+
+        // ── Numeric types ──
+        if (root.ValueKind == JsonValueKind.Number)
+        {
+            try
+            {
+                return cleanType switch
+                {
+                    "System.Byte" => $"(byte){root.GetByte()}",
+                    "System.SByte" => $"(sbyte){root.GetSByte()}",
+                    "System.Int16" => $"(short){root.GetInt16()}",
+                    "System.UInt16" => $"(ushort){root.GetUInt16()}",
+                    "System.Int32" => root.GetInt32().ToString(),
+                    "System.UInt32" => root.GetUInt32().ToString(),
+                    "System.Int64" => root.GetInt64().ToString(),
+                    "System.UInt64" => root.GetUInt64().ToString(),
+                    "System.Single" => root.GetSingle().ToString("R", CultureInfo.InvariantCulture) + "f",
+                    "System.Double" => root.GetDouble().ToString("R", CultureInfo.InvariantCulture) + "d",
+                    "System.Decimal" => root.GetDecimal().ToString(CultureInfo.InvariantCulture) + "m",
+                    _ => TryEnumExpression(cleanType, root)
+                };
+            }
+            catch (Exception ex)
+            {
+                // JSON number overflow or format mismatch — emit as fallback cast
+                return $"/* deserialize error: {ex.Message} */ ({cleanType}){root.GetRawText()}";
+            }
+        }
+
+        // ── Array types (non-byte) ──
+        if (root.ValueKind == JsonValueKind.Array)
+        {
+            var csType = MapToCSharpType(cleanType);
+            var elementType = ExtractElementType(cleanType);
+            var elementExprs = root.EnumerateArray()
+                .Select(e => DeserializeToExpression(e.GetRawText(), elementType ?? "System.Object"))
+                .ToArray();
+            return $"new {csType} {{{string.Join(", ", elementExprs)}}}";
+        }
+
+        // ── Object / fallback ──
+        return $"/* TODO: manual */ default({MapToCSharpType(cleanType)})!";
+    }
+
+    /// <summary>
+    /// Try to produce an enum expression: (EnumType)underlyingValue
+    /// </summary>
+    private static string TryEnumExpression(string cleanType, JsonElement root)
+    {
+        // Use the full CLR type name (e.g. "System.Buffers.OperationStatus") directly
+        // for enum types, rather than the mapped C# short name which loses namespace info.
+        if (cleanType.Contains('.') && !PrimitiveTypeNames.Contains(cleanType))
+        {
+            return $"({cleanType}){root.GetRawText()}";
+        }
+        return $"/* unknown type */ ({MapToCSharpType(cleanType)}){root.GetRawText()}";
+    }
+
+    /// <summary>
+    /// Extract element type from an array type name like "System.Int32[]" → "System.Int32"
+    /// </summary>
+    private static string? ExtractElementType(string typeName)
+    {
+        var bracketIdx = typeName.IndexOf('[');
+        return bracketIdx >= 0 ? typeName[..bracketIdx] : null;
     }
 
     internal static string ComputeChecksum(string typeName, object? value)

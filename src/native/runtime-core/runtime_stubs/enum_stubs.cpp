@@ -1364,9 +1364,10 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
 
     // Validate enum type before format processing — non-enum types (e.g. byte)
     // must throw, even for unrecognized format strings like "hello"
+    const EnumMetadataTable* cached_meta = nullptr;
     {
-        const auto* meta = enum_resolve_meta(type);
-        if (meta == nullptr) {
+        cached_meta = enum_resolve_meta(type);
+        if (cached_meta == nullptr) {
             const auto* desc = resolve_type_arg(type);
             if (check_enum_type(desc) == nullptr) return 0;
         }
@@ -1380,7 +1381,15 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
     const bool is_x = (fmt_len >= 1 && (fmt_data[0] == 'X' || fmt_data[0] == 'x'));
 
     if (is_g || fmt_len == 0) {
-        // "G" format: return the name if found, otherwise decimal
+        // "G" format: return the name if found, otherwise decimal.
+        //
+        // Fast path: when metadata has no fields (meta->count == 0, e.g. byte
+        // is in the metadata table but is not an actual enum), skip the entire
+        // name lookup chain (dispatch table -> string cache -> metadata scan)
+        // since there are no fields to find. Fall through directly to decimal.
+        const bool meta_has_fields = (cached_meta != nullptr && cached_meta->count > 0);
+
+        if (meta_has_fields) {
         // Per-enum codegen switch dispatch (~5ns, zero allocation)
         if (g_chaos_enum_tostring_dispatch_lookup) {
             CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type);
@@ -1398,44 +1407,26 @@ CHAOS_IL2CPP_INTPTR ChaosEnumFormat(CHAOS_IL2CPP_INTPTR type, CHAOS_IL2CPP_INTPT
             return s_enum_tostring_cache_name;
         }
 
-        // Fast path: direct metadata (no resolve_type_arg)
-        const auto* meta = enum_resolve_meta(type);
-        if (meta != nullptr) {
-            // POH cache: zero-alloc on repeated calls for the same type
-            ensure_enum_str_cache(type, meta);
-            auto cached = lookup_cached_enum_name(val);
-            if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
-            for (CHAOS_IL2CPP_UINT32 i = 0; i < meta->count; i++) {
-                if (meta->fields[i].value == val) {
-                    const auto name_len = std::strlen(meta->fields[i].name);
-                    auto result = enum_alloc_string(name_len);
-                    write_string_data(result, meta->fields[i].name, name_len);
-                    s_enum_tostring_cache_value = val;
-                    s_enum_tostring_cache_name = result;
-                    return result;
-                }
-            }
-            // Not found in metadata — fall through to decimal
-        } else {
-            // Metadata unavailable: try string cache + reflection
-            const auto* desc = resolve_type_arg(type);
-            if (desc != nullptr) {
-                ensure_enum_str_cache(type, nullptr, desc);
-                auto cached = lookup_cached_enum_name(val);
-                if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
-
-                const auto* field = find_field_by_value(desc, val);
-                if (field != nullptr && field->name_utf8 != nullptr) {
-                    const auto name_len = std::strlen(field->name_utf8);
-                    auto result = enum_alloc_string(name_len);
-                    write_string_data(result, field->name_utf8, name_len);
-                    s_enum_tostring_cache_value = val;
-                    s_enum_tostring_cache_name = result;
-                    return result;
-                }
+        // Direct metadata (cached_meta was resolved in validation block).
+        // This path is only reached when meta_has_fields is true AND the
+        // dispatch-lookup / single-entry cache both missed.
+        ensure_enum_str_cache(type, cached_meta);
+        auto cached = lookup_cached_enum_name(val);
+        if (cached != 0) { s_enum_tostring_cache_value = val; s_enum_tostring_cache_name = cached; return cached; }
+        for (CHAOS_IL2CPP_UINT32 i = 0; i < cached_meta->count; i++) {
+            if (cached_meta->fields[i].value == val) {
+                const auto name_len = std::strlen(cached_meta->fields[i].name);
+                auto result = enum_alloc_string(name_len);
+                write_string_data(result, cached_meta->fields[i].name, name_len);
+                s_enum_tostring_cache_value = val;
+                s_enum_tostring_cache_name = result;
+                return result;
             }
         }
-        // Fall through to decimal
+        // Not found in metadata — fall through to decimal
+        } // end if (meta_has_fields)
+        // meta_has_fields = false (e.g. byte is not an enum): fall through
+        // directly to decimal format, skipping all name lookup overhead.
     }
 
     if (is_g || is_d) {

@@ -704,6 +704,24 @@ public sealed partial class NativeAotLoweringPlanner
 		builder.AppendLine($"{indentation}CHAOS_EH_RETHROW;");
 	}
 
+	private void CompensateDceSkipForStructuredSlots(AotCoreIrInstructionArtifact instruction)
+	{
+		if (_activeStructuredSlotContext == null) return;
+		// Call instructions (GetTypeFromHandle) have net 0 stack effect.
+		if (instruction.Op == "call" || instruction.Op == "callvirt") return;
+		// Estimate net stack effect for other DCE-skipped instructions.
+		int net = EstimatePushCount(instruction.Op) - EstimatePopCount(instruction.Op);
+		if (net > 0)
+		{
+			for (int i = 0; i < net; i++)
+				_activeStructuredSlotContext.AllocatePushTarget();
+		}
+		else if (net < 0)
+		{
+			_activeStructuredSlotContext.Discard(-net);
+		}
+	}
+
 	private void EmitInstruction(StringBuilder builder, AotCoreIrInstructionArtifact instruction, string indentation, AotCoreIrInstructionArtifact? nextInstruction = null)
 	{
 		// A2.6 DCE: Skip dead ltoken + GetTypeFromHandle when TypeInfo* fold fires.
@@ -713,6 +731,7 @@ public sealed partial class NativeAotLoweringPlanner
 		    _typeHierarchyPtrSkipIlOffsets.TryGetValue(_currentMethodNativeSymbol, out var skipOffsets) &&
 		    skipOffsets.Contains(instruction.IlOffset))
 		{
+			CompensateDceSkipForStructuredSlots(instruction);
 			return;
 		}
 		// A2.6 DCE: Skip dead instructions when enum AOT bake fires.
@@ -721,6 +740,7 @@ public sealed partial class NativeAotLoweringPlanner
 		    _enumAotBakeSkipIlOffsets.TryGetValue(_currentMethodNativeSymbol, out var enumSkipOffsets) &&
 		    enumSkipOffsets.Contains(instruction.IlOffset))
 		{
+			CompensateDceSkipForStructuredSlots(instruction);
 			return;
 		}
 
