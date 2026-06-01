@@ -1663,7 +1663,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (fieldName != null)
             {
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                    enumTypeId, callee, ConstantStr: fieldName, ConstantInt: null, ArgCount: 2);
+                    enumTypeId, callee, ConstantStr: fieldName, ConstantInt: null, ArgCount: 2, SkipIlOffsets: null);
             }
             return;
         }
@@ -1698,7 +1698,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (constValue != null)
             {
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount);
+                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount, SkipIlOffsets: null);
             }
             return;
         }
@@ -1735,7 +1735,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (constValue != null)
             {
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount);
+                    enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount, SkipIlOffsets: null);
             }
             return;
         }
@@ -1776,7 +1776,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (result != null)
             {
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                    enumTypeId, callee, ConstantStr: result, ConstantInt: null, ArgCount: 3);
+                    enumTypeId, callee, ConstantStr: result, ConstantInt: null, ArgCount: 3, SkipIlOffsets: null);
             }
             return;
         }
@@ -1791,7 +1791,7 @@ public sealed partial class NativeAotLoweringPlanner
                 if (kv.Value == constValue) { defined = true; break; }
             }
             _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
-                enumTypeId, callee, ConstantStr: null, ConstantInt: defined ? 1L : 0L, ArgCount: 2);
+                enumTypeId, callee, ConstantStr: null, ConstantInt: defined ? 1L : 0L, ArgCount: 2, SkipIlOffsets: null);
         }
     }
 
