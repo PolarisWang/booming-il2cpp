@@ -1,0 +1,110 @@
+[
+  {
+    "methodIndex": 0,
+    "setIndex": 0,
+    "subjectId": "System.Boolean::CompareTo:System.Int32(System.Object)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 1,
+    "returnValueJson": "1",
+    "returnValueType": "System.Int32",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 0,
+    "subjectId": "System.Boolean::CompareTo:System.Int32(System.Boolean)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "0",
+    "returnValueType": "System.Int32",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 1,
+    "setIndex": 1,
+    "subjectId": "System.Boolean::CompareTo:System.Int32(System.Boolean)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "0",
+    "returnValueType": "System.Int32",
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 0,
+    "subjectId": "System.Boolean::Parse:System.Boolean(System.String)__Set0",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.ArgumentNullException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 2,
+    "setIndex": 1,
+    "subjectId": "System.Boolean::Parse:System.Boolean(System.String)__Set1",
+    "isVoid": false,
+    "hasException": true,
+    "exceptionType": "System.FormatException",
+    "returnValue": null,
+    "returnValueJson": null,
+    "returnValueType": null,
+    "isDeterministic": true,
+    "outRefValues": null
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 0,
+    "subjectId": "System.Boolean::TryParse:System.Boolean(System.String,System.Boolean\u0026)__Set0",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "false"
+    ]
+  },
+  {
+    "methodIndex": 3,
+    "setIndex": 1,
+    "subjectId": "System.Boolean::TryParse:System.Boolean(System.String,System.Boolean\u0026)__Set1",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 0,
+    "returnValueJson": "false",
+    "returnValueType": "System.Boolean",
+    "isDeterministic": true,
+    "outRefValues": [
+      "false"
+    ]
+  },
+  {
+    "methodIndex": 4,
+    "setIndex": 4,
+    "subjectId": "System.Boolean::GetTypeCode:System.TypeCode()__Set4",
+    "isVoid": false,
+    "hasException": false,
+    "exceptionType": null,
+    "returnValue": 3,
+    "returnValueJson": "3",
+    "returnValueType": "System.TypeCode",
+    "isDeterministic": true,
+    "outRefValues": null
+  }
+]

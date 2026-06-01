@@ -2915,22 +2915,33 @@ private void EmitLinearInitObj(StringBuilder builder, AotCoreIrInstructionArtifa
 			}
 			else if (isTryParse)
 			{
-				// TryParse: emit box, write through out parameter, push bool result (1 = success)
-				builder.AppendLine($"{indentation}    // AOT-baked: {bakeEntry.Callee}");
-				builder.AppendLine($"{indentation}    auto* chaos_bake_box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
-				builder.AppendLine($"{indentation}    chaos_bake_box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)};");
-				builder.AppendLine($"{indentation}    chaos_bake_box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value});");
+				// AOT-baked (cached box): TryParse with compile-time constant result.
+				int cacheId = instruction.IlOffset;
+				builder.AppendLine($"{indentation}    // AOT-baked (cached): {bakeEntry.Callee}");
+				builder.AppendLine($"{indentation}    static CHAOS_IL2CPP_INTPTR _enum_box_{cacheId} = 0;");
+				builder.AppendLine($"{indentation}    if (_enum_box_{cacheId} == 0) {{");
+				builder.AppendLine($"{indentation}        auto* _box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
+				builder.AppendLine($"{indentation}        _box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)};");
+				builder.AppendLine($"{indentation}        _box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value});");
+				builder.AppendLine($"{indentation}        _enum_box_{cacheId} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(_box);");
+				builder.AppendLine($"{indentation}    }}");
 				if (resultSlotExpr != null)
-					builder.AppendLine($"{indentation}    *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>({resultSlotExpr}) = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_bake_box);");
+					builder.AppendLine($"{indentation}    *reinterpret_cast<CHAOS_IL2CPP_INTPTR*>({resultSlotExpr}) = _enum_box_{cacheId};");
 				EmitEvalStackPush(builder, indentation + "    ", "1");
 			}
 			else
 			{
-				builder.AppendLine($"{indentation}    // AOT-baked: {bakeEntry.Callee}");
-				builder.AppendLine($"{indentation}    auto* chaos_bake_box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
-				builder.AppendLine($"{indentation}    chaos_bake_box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)};");
-				builder.AppendLine($"{indentation}    chaos_bake_box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value});");
-				EmitEvalStackPush(builder, indentation + "    ", $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>(chaos_bake_box)");
+				// AOT-baked (cached box): Parse with compile-time constant result.
+				int cacheId = instruction.IlOffset;
+				builder.AppendLine($"{indentation}    // AOT-baked (cached): {bakeEntry.Callee}");
+				builder.AppendLine($"{indentation}    static CHAOS_IL2CPP_INTPTR _enum_box_{cacheId} = 0;");
+				builder.AppendLine($"{indentation}    if (_enum_box_{cacheId} == 0) {{");
+				builder.AppendLine($"{indentation}        auto* _box = CHAOS_IL2CPP_NEW_GC({GetNativeBoxTypeSymbol(bakeEntry.EnumTypeId)}, {{}});");
+				builder.AppendLine($"{indentation}        _box->header.type_info = {GetNativeBoxTypeInfoSymbol(bakeEntry.EnumTypeId)};");
+				builder.AppendLine($"{indentation}        _box->value = static_cast<CHAOS_IL2CPP_INT64>({bakeEntry.ConstantInt.Value});");
+				builder.AppendLine($"{indentation}        _enum_box_{cacheId} = reinterpret_cast<CHAOS_IL2CPP_INTPTR>(_box);");
+				builder.AppendLine($"{indentation}    }}");
+				EmitEvalStackPush(builder, indentation + "    ", $"_enum_box_{cacheId}");
 			}
 		}
 

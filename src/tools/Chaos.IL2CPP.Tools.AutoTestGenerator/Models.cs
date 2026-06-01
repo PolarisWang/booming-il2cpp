@@ -9,7 +9,8 @@ public sealed record MethodParameter(
     string Name,
     string TypeName,
     bool IsOut,
-    bool IsRef
+    bool IsRef,
+    bool IsRefStruct = false
 );
 
 public sealed record MethodSignature(
@@ -19,7 +20,8 @@ public sealed record MethodSignature(
     bool IsStatic,
     bool IsVoid,
     bool HasRefParam,
-    IReadOnlyList<MethodParameter> Parameters
+    IReadOnlyList<MethodParameter> Parameters,
+    IReadOnlyList<string>? GenericTypeArgs = null  // populated for concretized generic methods
 );
 
 public sealed record ValueSet(

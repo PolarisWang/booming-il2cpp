@@ -35,6 +35,27 @@ internal static class Program
         if (!runFact && !runBenchmark)
             runFact = runBenchmark = true;
 
+        // Set up assembly resolution: probe the test assembly directory
+        var asmDir = Path.GetDirectoryName(Path.GetFullPath(asmPath))!;
+        AppDomain.CurrentDomain.AssemblyResolve += (_, args) =>
+        {
+            var name = new AssemblyName(args.Name).Name;
+            // Try test assembly directory first
+            var path = Path.Combine(asmDir, $"{name}.dll");
+            if (File.Exists(path))
+                return Assembly.LoadFrom(path);
+
+            // Try runtime directory
+            var runtimeDir = Path.GetDirectoryName(typeof(Program).Assembly.Location);
+            if (runtimeDir is not null)
+            {
+                path = Path.Combine(runtimeDir, $"{name}.dll");
+                if (File.Exists(path))
+                    return Assembly.LoadFrom(path);
+            }
+            return null;
+        };
+
         var asm = Assembly.LoadFrom(asmPath);
 
         if (runFact)
