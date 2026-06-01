@@ -2988,7 +2988,7 @@ public sealed partial class NativeAotLoweringPlanner
                             }),
                             CreateVoidAbiSlot(),
                             new HashSet<int> { 0, 1, 2, 3, 4 },
-                            DirectNativeSymbol: "ChaosArrayCopy_Inline");
+                            DirectNativeSymbol: "ChaosArrayCopy_Unsafe_Inline");
                     }
                     if (paramTypes.Count == 0)
                     {
@@ -3017,7 +3017,7 @@ public sealed partial class NativeAotLoweringPlanner
                             }),
                             CreateVoidAbiSlot(),
                             new HashSet<int> { 0, 1, 2 },
-                            DirectNativeSymbol: "ChaosArrayCopy3_Inline");
+                            DirectNativeSymbol: "ChaosArrayCopy3_Unsafe_Inline");
                     }
                     var abiSlots = new List<AotCoreIrAbiSlotArtifact>(paramTypes.Count);
                     foreach (var pt in paramTypes)
