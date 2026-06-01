@@ -168,6 +168,7 @@ public sealed partial class NativeAotLoweringPlanner
             if (_depth <= 0)
             {
                 System.Console.Error.WriteLine($"DIAG: PopValue underflow depth={_depth} slotInfo.Cnt={_slotInfo.Count} peakInt={_peakIntDepth} f64={_peakFloat64Depth} f32={_peakFloat32Depth} i64={_peakInt64Depth}");
+			System.Console.Error.WriteLine($"DIAG: PopValue stacktrace: {System.Environment.StackTrace}");
                 throw new InvalidOperationException("structured slot stack underflow.");
             }
 

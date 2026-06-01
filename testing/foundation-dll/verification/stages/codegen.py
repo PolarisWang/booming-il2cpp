@@ -490,6 +490,25 @@ def run_jit_codegen(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stage
         _incremental_dispatch_rebuild(native_dir, build_subdir="build_jit")
         # Rebuild JIT binary with the new dispatch file
         build_jit_dir = native_dir / "build_jit"
+        # If build_jit/ does not exist (e.g. entry-jit.exe was pre-built from a different
+        # session), configure cmake first via build_entry_executable(prep_only=True) so that
+        # the subsequent cmake --build has a configured build directory to work with.
+        if not build_jit_dir.is_dir():
+            from verification.stages.pipeline_native_aot_runner import build_entry_executable
+            print(f"  [jit_codegen] build_jit/ missing, running cmake configure...")
+            if not build_entry_executable(
+                ctx.slug, verification=testing_base, config_tier=ctx.native_config,
+                is_jit=True, output_name="entry-jit.exe", prep_only=True,
+            ):
+                print(f"  [jit_codegen] ERROR: cmake configure for JIT build failed")
+                if aot_backup.exists():
+                    import shutil as _shutil
+                    _shutil.copy2(str(aot_backup), str(entry_exe))
+                return StageResult(
+                    stage="jit_codegen", status="failed",
+                    summary="JIT cmake configure failed (build_jit/ missing, prep_only=True)",
+                    duration_ms=int((time.perf_counter() - start) * 1000),
+                )
         print(f"  [jit_codegen] Rebuilding JIT binary after TPG emit...")
         rebuild_r = subprocess.run(
             ["cmake", "--build", str(build_jit_dir), "--target", "entry", "--parallel", "--config", "RelWithDebInfo"],

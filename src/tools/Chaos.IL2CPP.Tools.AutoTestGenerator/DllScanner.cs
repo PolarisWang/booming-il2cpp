@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Reflection;
 
 namespace Chaos.IL2CPP.Tools.AutoTestGenerator;
@@ -19,6 +20,21 @@ public sealed class DllScanner
         using var mlc = new MetadataLoadContext(resolver, "System.Private.CoreLib");
 
         var assembly = mlc.LoadFromAssemblyPath(fullPath);
+
+        // Read target framework from assembly metadata via MLC
+        var tfm = "";
+        try
+        {
+            var tfaData = assembly.GetCustomAttributesData()
+                .FirstOrDefault(a => a.AttributeType.Name == "TargetFrameworkAttribute");
+            if (tfaData?.ConstructorArguments is { Count: > 0 } args)
+                tfm = TfmFromMoniker(args[0].Value as string ?? "");
+        }
+        catch { /* best-effort — fall back to net8.0 */ }
+
+        // Fallback: detect from DLL path or SDK
+        if (string.IsNullOrEmpty(tfm))
+            tfm = DetectTfm(dllPath);
         var targetType = assembly.GetType(typeFullName);
         if (targetType is null)
             throw new InvalidOperationException(
@@ -28,27 +44,36 @@ public sealed class DllScanner
         var signatures = new List<MethodSignature>();
         var skippedMethods = new List<string>();
 
-        foreach (var method in targetType.GetMethods(
+        foreach (var rawMethod in targetType.GetMethods(
             BindingFlags.Public | BindingFlags.Static |
             BindingFlags.Instance | BindingFlags.DeclaredOnly))
         {
             // Skip property accessors
-            if (method.IsSpecialName && (
-                    method.Name.StartsWith("get_") ||
-                    method.Name.StartsWith("set_") ||
-                    method.Name.StartsWith("add_") ||
-                    method.Name.StartsWith("remove_")))
+            if (rawMethod.IsSpecialName && (
+                    rawMethod.Name.StartsWith("get_") ||
+                    rawMethod.Name.StartsWith("set_") ||
+                    rawMethod.Name.StartsWith("add_") ||
+                    rawMethod.Name.StartsWith("remove_")))
                 continue;
 
             // Skip object inherited methods
-            if (ObjectMethods.Contains(method.Name))
+            if (ObjectMethods.Contains(rawMethod.Name))
                 continue;
 
-            // Skip generic methods that can't be concretized
+            var method = rawMethod;
+
+            // Try to concretize generic methods
             if (method.ContainsGenericParameters)
             {
-                skippedMethods.Add(method.Name);
-                continue;
+                if (TryConcretizeGenericMethod(mlc, method, out var constructed))
+                {
+                    method = constructed;
+                }
+                else
+                {
+                    skippedMethods.Add(method.Name);
+                    continue;
+                }
             }
 
             var paramList = method.GetParameters();
@@ -79,7 +104,81 @@ public sealed class DllScanner
             ));
         }
 
-        return new DllScanResult(assemblyName, typeFullName, signatures, skippedMethods);
+        return new DllScanResult(assemblyName, typeFullName, signatures, skippedMethods, tfm);
+    }
+
+    /// <summary>
+    /// Try to concretize a generic method by substituting common type arguments.
+    /// Works within the MetadataLoadContext.
+    /// </summary>
+    private static bool TryConcretizeGenericMethod(MetadataLoadContext mlc, MethodInfo method, out MethodInfo constructed)
+    {
+        constructed = null!;
+        try
+        {
+            var genericParams = method.GetGenericArguments();
+            if (genericParams.Length == 0) return false;
+
+            var concreteTypes = new Type[genericParams.Length];
+
+            for (int i = 0; i < genericParams.Length; i++)
+            {
+                var gp = genericParams[i];
+                var constraints = gp.GetGenericParameterConstraints();
+                var attrs = gp.GenericParameterAttributes;
+
+                if (constraints.Length > 0)
+                {
+                    var hasValueTypeConstraint = constraints.Any(c =>
+                        c.Name is "ValueType" or "Enum" || c.FullName == "System.ValueType" || c.FullName == "System.Enum");
+
+                    if (hasValueTypeConstraint)
+                    {
+                        concreteTypes[i] = constraints.Any(c => c.FullName == "System.Enum")
+                            ? LoadTypeInContext(mlc, "System.DayOfWeek") ?? LoadTypeInContext(mlc, "System.Int32")!
+                            : LoadTypeInContext(mlc, "System.Int32")!;
+                    }
+                    else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
+                    {
+                        concreteTypes[i] = LoadTypeInContext(mlc, "System.String")!;
+                    }
+                    else
+                    {
+                        concreteTypes[i] = constraints[0];
+                    }
+                }
+                else if (attrs.HasFlag(GenericParameterAttributes.ReferenceTypeConstraint))
+                {
+                    concreteTypes[i] = LoadTypeInContext(mlc, "System.String")!;
+                }
+                else
+                {
+                    concreteTypes[i] = LoadTypeInContext(mlc, "System.Int32")!;
+                }
+
+                if (concreteTypes[i] is null) return false;
+            }
+
+            constructed = method.MakeGenericMethod(concreteTypes);
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    /// <summary>
+    /// Find a type by full name across all assemblies loaded in the MetadataLoadContext.
+    /// </summary>
+    private static Type? LoadTypeInContext(MetadataLoadContext mlc, string typeFullName)
+    {
+        foreach (var asm in mlc.GetAssemblies())
+        {
+            var type = asm.GetType(typeFullName);
+            if (type is not null) return type;
+        }
+        return null;
     }
 
     private static string GetTypeName(Type type)
@@ -129,6 +228,38 @@ public sealed class DllScanner
             dirs.Add(selfDir);
 
         return dirs.ToArray();
+    }
+
+    private static string TfmFromMoniker(string frameworkName)
+    {
+        // ".NETCoreApp,Version=v10.0" → "net10.0"
+        if (string.IsNullOrEmpty(frameworkName)) return "";
+        var parts = frameworkName.Split(',');
+        if (parts.Length < 2) return "";
+        var namePart = parts[0].Trim();
+        var verPart = parts[1].Trim();
+        if (!verPart.StartsWith("Version=v", StringComparison.Ordinal)) return "";
+        var ver = verPart["Version=v".Length..];
+        return namePart switch
+        {
+            ".NETCoreApp" => $"net{ver}",
+            ".NETStandard" => $"netstandard{ver}",
+            ".NETFramework" => $"net{ver.Replace(".", "")}",
+            _ => ""
+        };
+    }
+
+    private static string DetectTfm(string dllPath)
+    {
+        // Try to infer TFM from the directory path:
+        // ".../shared/Microsoft.NETCore.App/10.0.6/System.Runtime.dll" → "net10.0"
+        var parts = dllPath.Replace('\\', '/').Split('/');
+        for (int i = 0; i < parts.Length - 1; i++)
+        {
+            if (parts[i] == "Microsoft.NETCore.App" && System.Version.TryParse(parts[i + 1], out var ver))
+                return $"net{ver.Major}.{ver.Minor}";
+        }
+        return "net8.0";
     }
 
     /// <summary>
@@ -185,5 +316,6 @@ public sealed record DllScanResult(
     string AssemblyName,
     string TypeFullName,
     IReadOnlyList<MethodSignature> Methods,
-    IReadOnlyList<string> SkippedMethods
+    IReadOnlyList<string> SkippedMethods,
+    string TargetFramework
 );

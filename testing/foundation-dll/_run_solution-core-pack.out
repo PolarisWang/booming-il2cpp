@@ -1,0 +1,264 @@
+
+============================================================
+Family Verify: solution-core-pack [System.Private.CoreLib] mode=strict
+============================================================
+
+[1/20] Preflight... skipped
+  [0s] failed: Contract not found for solution-core-pack/System.Private.CoreLib
+  [jit_codegen] Building JIT mode entry-jit.exe...
+  [jit_codegen] backed up entry.exe -> entry-aot.exe
+    [build_entry] cleaned stale: microbench.cpp
+    [build_entry] cleaned stale: runtime-patchdata.cpp
+    [build_entry] auto-generated CMakeLists.txt (chaos-sdk mode) at D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\solution-core-pack\native\CMakeLists.txt
+    [build_entry] sentinel runtime-patchdata.cpp generated
+    [build_entry] auto-generated microbench.cpp at D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\solution-core-pack\native\microbench.cpp
+    [build_entry] auto-generated CMakeLists.txt (chaos-sdk mode) at D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\solution-core-pack\native\CMakeLists.txt
+    [sync_libs] codegen_dir not found: D:\agent\booming-il2cpp\testing\foundation-dll\System.Private.CoreLib\solution-core-pack\codegen
+    [build_entry] cmake configure (platform=windows, generator=Ninja)...
+    [build_entry] cmake configure retry #1 after 2s...
+    [build_entry] cmake configure retry #2 after 4s...
+    [build_entry] incremental configure FAILED after retries, falling back to clean build...
+    [build_entry] cmake configure (clean) retry #1 after 2s...
+    [build_entry] cmake configure (clean) retry #2 after 4s...
+    [build_entry] clean configure ALSO FAILED, giving up
+      CMake Error at CMakeLists.txt:53 (find_package):
+        Could not find a package configuration file provided by "chaos" with any of
+        the following names:
+      
+          chaosConfig.cmake
+          chaos-config.cmake
+      
+        Add the installation prefix of "chaos" to CMAKE_PREFIX_PATH or set
+        "chaos_DIR" to a directory containing one of the above files.  If "chaos"
+        provides a separate development package or SDK, be sure it has been
+        installed.
+      
+      
+      -- Configuring incomplete, errors occurred!
+      See also "D:/agent/booming-il2cpp/testing/foundation-dll/System.Private.CoreLib/solution-core-pack/native/build_jit/CMakeFiles/CMakeOutput.log".
+  [17s [ETA 5m16s]] failed: JIT entry-jit.exe build failed (old pipeline fallback removed)
+[4/20] Managed Fact (.NET)... skipped
+[5/20] Managed Subject Record (Golden)... skipped
+[6/20] Cross-Verify (Golden vs AOT)... skipped
+[7/20] Managed Patch Fact (.NET)... skipped
+
+  [17s] >>> Parallel group (6 stages)
+[8/20] Fact AOT... skipped
+[9/20] Fact JIT... skipped
+[10/20] Mechanism + Principle Audit... skipped
+[11/20] AsmCompare (JIT vs AOT)... skipped
+[12/20] Microbench (Interpreter)... skipped
+  [17s [ETA 2m29s]] skipped: no benchmark methods in contract
+  [17s] <<< Parallel group done
+
+[14/20] HotUpdate AOT Fact... skipped
+[15/20] Patch Cross-Verify... skipped
+[16/20] Multi-Patch HotUpdate... skipped
+[17/20] HotUpdate AOT Bench... skipped
+[18/20] HotUpdate JIT Fact... skipped
+[19/20] HotUpdate JIT Bench... skipped
+[20/20] Cleanup Build Artifacts... skipped
+
+[20/20] Aggregating...
+
+  ──────────────────────────────────────────────────
+  FAILURE SUMMARY (2 stage(s))
+  ──────────────────────────────────────────────────
+  [0s] codegen: FAILED — Contract not found for solution-core-pack/System.Private.CoreLib
+  [17s] jit_codegen: FAILED — JIT entry-jit.exe build failed (old pipeline fallback removed)
+  ──────────────────────────────────────────────────
+
+
+============================================================
+Result: failed
+Duration: 17s
+Coverage: 0/20 passed (0.0%)
+============================================================
+  [perf_store] saved to D:\agent\booming-il2cpp\testing\foundation-dll\results\foundation-dll\System.Private.CoreLib\solution-core-pack\perf
+{
+  "family": "solution-core-pack",
+  "assembly": "System.Private.CoreLib",
+  "mode": "strict",
+  "timestamp": "2026-05-30T21:29:10",
+  "duration_ms": 16662,
+  "overall_status": "failed",
+  "stages": {
+    "preflight": {
+      "stage": "preflight",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "codegen": {
+      "stage": "codegen",
+      "status": "failed",
+      "summary": "Contract not found for solution-core-pack/System.Private.CoreLib",
+      "details": {},
+      "errors": [],
+      "duration_ms": 1
+    },
+    "jit_codegen": {
+      "stage": "jit_codegen",
+      "status": "failed",
+      "summary": "JIT entry-jit.exe build failed (old pipeline fallback removed)",
+      "details": {},
+      "errors": [],
+      "duration_ms": 16660
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_record": {
+      "stage": "managed_record",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cross_verify": {
+      "stage": "cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "managed_patch_fact": {
+      "stage": "managed_patch_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact": {
+      "stage": "fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "fact_jit": {
+      "stage": "fact_jit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "audit": {
+      "stage": "audit",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "asm_compare": {
+      "stage": "asm_compare",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "benchmark": {
+      "stage": "benchmark",
+      "status": "skipped",
+      "summary": "no benchmark methods in contract",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "patch_cross_verify": {
+      "stage": "patch_cross_verify",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "multi_patch_hotupdate": {
+      "stage": "multi_patch_hotupdate",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_aot_benchmark": {
+      "stage": "hotupdate_aot_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_fact": {
+      "stage": "hotupdate_jit_fact",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "hotupdate_jit_benchmark": {
+      "stage": "hotupdate_jit_benchmark",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    },
+    "cleanup": {
+      "stage": "cleanup",
+      "status": "skipped",
+      "summary": "Explicitly skipped",
+      "details": {},
+      "errors": [],
+      "duration_ms": 0
+    }
+  },
+  "coverage": {
+    "stagePassRate": 0.0,
+    "stagesPassed": 0,
+    "stagesFailed": 2,
+    "stagesSkipped": 18,
+    "stagesN_A": 0,
+    "stagesTotal": 20
+  },
+  "dashboard": {},
+  "regression": {
+    "hasRegression": false,
+    "regressions": [],
+    "benchmark": {
+      "status": "no_baseline",
+      "message": "No baseline established"
+    }
+  }
+}
