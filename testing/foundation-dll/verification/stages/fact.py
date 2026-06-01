@@ -494,6 +494,42 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
 
     native_results = native_data.get("factResults", [])
 
+    # ── 2. Load golden record (primary: managed_record, fallback: managed_fact) ──
+    # Must load before building native lookup (old-format path needs golden_by_index
+    # to compute expected si mapping).
+    golden_by_index: dict[int, dict] = {}
+
+    # Primary: golden-record.json from managed_record stage
+    golden_record_path = ctx.family_dir / "native" / "golden-record.json"
+    if golden_record_path.exists():
+        try:
+            golden_data = json.loads(golden_record_path.read_text(encoding="utf-8"))
+            for gr in golden_data.get("results", []):
+                idx = gr.get("methodIndex", -1)
+                if idx >= 0:
+                    golden_by_index[idx] = gr
+            print(f"  [cross_verify] Loaded golden-record.json ({len(golden_by_index)} methods)")
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"  [cross_verify] WARN: golden-record.json parse failed: {e}")
+
+    # Fallback: golden-values.json from managed_fact stage
+    if not golden_by_index:
+        managed_stage = stages.get("managed_fact")
+        if managed_stage and managed_stage.details:
+            managed_results_list = managed_stage.details.get("results", [])
+            for mr in managed_results_list:
+                idx = mr.get("methodIndex", -1)
+                if idx >= 0:
+                    golden_by_index[idx] = mr
+            print(f"  [cross_verify] Fallback: loaded managed_fact results ({len(golden_by_index)} methods)")
+
+    if not golden_by_index:
+        return StageResult(
+            stage="cross_verify", status="skipped",
+            summary="no golden values available (neither managed_record nor managed_fact)",
+            duration_ms=int((time.perf_counter() - start) * 1000),
+        )
+
     # Build native lookup map — two formats:
     #   New (flat slot map with contractIndex): match via contractIndex directly.
     #   Old (interleaved slots): map via expected_si = 2*N + (custom?0:1).
@@ -528,40 +564,6 @@ def run_cross_verify(ctx: FamilyContext, stages: dict[str, StageResult]) -> Stag
                 native_lookup[idx] = native
 
         native_extra = sum(1 for si in native_by_si if si not in expected_sis)
-
-    # ── 2. Load golden record (primary: managed_record, fallback: managed_fact) ──
-    golden_by_index: dict[int, dict] = {}
-
-    # Primary: golden-record.json from managed_record stage
-    golden_record_path = ctx.family_dir / "native" / "golden-record.json"
-    if golden_record_path.exists():
-        try:
-            golden_data = json.loads(golden_record_path.read_text(encoding="utf-8"))
-            for gr in golden_data.get("results", []):
-                idx = gr.get("methodIndex", -1)
-                if idx >= 0:
-                    golden_by_index[idx] = gr
-            print(f"  [cross_verify] Loaded golden-record.json ({len(golden_by_index)} methods)")
-        except (OSError, json.JSONDecodeError) as e:
-            print(f"  [cross_verify] WARN: golden-record.json parse failed: {e}")
-
-    # Fallback: golden-values.json from managed_fact stage
-    if not golden_by_index:
-        managed_stage = stages.get("managed_fact")
-        if managed_stage and managed_stage.details:
-            managed_results_list = managed_stage.details.get("results", [])
-            for mr in managed_results_list:
-                idx = mr.get("methodIndex", -1)
-                if idx >= 0:
-                    golden_by_index[idx] = mr
-            print(f"  [cross_verify] Fallback: loaded managed_fact results ({len(golden_by_index)} methods)")
-
-    if not golden_by_index:
-        return StageResult(
-            stage="cross_verify", status="skipped",
-            summary="no golden values available (neither managed_record nor managed_fact)",
-            duration_ms=int((time.perf_counter() - start) * 1000),
-        )
 
     # ── 3. Cross-verify per-method (strict comparison) ──
     # Both managed and AOT execute identical subject code. Uses native_lookup
