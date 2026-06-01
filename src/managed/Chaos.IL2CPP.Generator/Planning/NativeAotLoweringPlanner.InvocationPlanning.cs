@@ -2199,4 +2199,32 @@ public sealed partial class NativeAotLoweringPlanner
             enumTypeId, callee, ConstantStr: result, ConstantInt: null, ArgCount: 3, SkipIlOffsets: skipOffsets);
         PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
     }
+
+    private static int[] CollectEnumAotBakeSkipOffsets(
+        IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
+        int typeProducerIdx, int valueProdIdx, int callIndex)
+    {
+        // Collect IL offsets of the producers that get folded (type + value)
+        // and the Format call itself.
+        var offsets = new List<int>();
+        if (typeProducerIdx >= 0 && typeProducerIdx < instrs.Count)
+            offsets.Add(instrs[typeProducerIdx].IlOffset);
+        if (valueProdIdx >= 0 && valueProdIdx < instrs.Count)
+            offsets.Add(instrs[valueProdIdx].IlOffset);
+        if (callIndex >= 0 && callIndex < instrs.Count)
+            offsets.Add(instrs[callIndex].IlOffset);
+        return offsets.ToArray();
+    }
+
+    private void PopulateEnumAotBakeSkipIlOffsets(string? methodId, int[] skipOffsets)
+    {
+        if (string.IsNullOrEmpty(methodId) || skipOffsets.Length == 0) return;
+        if (!_enumAotBakeSkipIlOffsets.TryGetValue(methodId, out var set))
+        {
+            set = new HashSet<int>();
+            _enumAotBakeSkipIlOffsets[methodId] = set;
+        }
+        foreach (var offset in skipOffsets)
+            set.Add(offset);
+    }
 }
