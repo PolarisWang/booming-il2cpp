@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/snapshot/prover",
-  "capturedAt": "2026-05-29T05:04:23",
+  "capturedAt": "2026-05-30T03:33:00",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
@@ -10,24 +10,26 @@
     "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 440
+      "min": 64,
+      "max": 64,
+      "avg": 64.0,
+      "total": 640
     },
     "aotInstructionCount": {
       "min": 1,
-      "max": 1,
-      "avg": 1.0,
-      "total": 10
+      "max": 8,
+      "avg": 7.3,
+      "total": 73
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
-    "topInstructionCategories": {},
-    "overallIrExpansionRatio": 0.02,
-    "averageExpansionRatio": 0.02,
-    "maxExpansionRatio": 0.02,
+    "topInstructionCategories": {
+      "external_runtime_call": 9
+    },
+    "overallIrExpansionRatio": 0.11,
+    "averageExpansionRatio": 0.11,
+    "maxExpansionRatio": 0.12,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -37,23 +39,31 @@
       "shortName": "Subject_0",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_0",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'SnapshotTestFixtures/ArithmeticOps::RunAdd:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 1,
@@ -61,23 +71,31 @@
       "shortName": "Subject_1",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_1",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'SnapshotTestFixtures/VoidCaller::DoNothing:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 2,
@@ -85,23 +103,31 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_2",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'SnapshotTestFixtures/MathHelper::RunSquare:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 3,
@@ -109,23 +135,31 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_3",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'SnapshotTestFixtures/FlowControl::IsPositive:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 4,
@@ -133,23 +167,31 @@
       "shortName": "Subject_4",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_4",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'SnapshotTestFixtures/CallVirtHelper::CreateAndUse:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 5,
@@ -157,23 +199,31 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_5",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'SnapshotTestFixtures/BoxingHelper::BoxAndUnbox:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 6,
@@ -181,23 +231,31 @@
       "shortName": "Subject_6",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_6",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'SnapshotTestFixtures/ConversionHelper::ConvertToInt:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 7,
@@ -205,23 +263,31 @@
       "shortName": "Subject_7",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_7",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'SnapshotTestFixtures/LoopHelper::SumToFive:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 8,
@@ -229,7 +295,7 @@
       "shortName": "Subject_8",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -237,7 +303,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -253,23 +319,31 @@
       "shortName": "Subject_9",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "SnapshotProverSubjects_SnapshotProverSubjects_Subject_9",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'SnapshotTestFixtures/GenericsVirtEhDemo::DemoCombine:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     }
   ]
 }

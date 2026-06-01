@@ -133,6 +133,8 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
 
     uint8_t* p = pg.base + pg.pos;
 
+#if defined(_WIN32) || defined(_WIN64)
+    // MSVC x64 calling convention: rcx = first arg, shadow space required
     // push rcx                ; 0x51
     p[0] = 0x51;
 
@@ -145,10 +147,10 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
     // push r9                 ; 0x41 0x51
     p[4] = 0x41; p[5] = 0x51;
 
-    // sub rsp, 0x28           ; 0x48 0x83 0xEC 0x28 — 40 bytes (32 shadow + 8 alignment)
+    // sub rsp, 0x28           ; 40 bytes (32 shadow + 8 alignment)
     p[6] = 0x48; p[7] = 0x83; p[8] = 0xEC; p[9] = 0x28;
 
-    // mov rcx, r10            ; 0x4C 0x89 0xD1
+    // mov rcx, r10            ; 0x4C 0x89 0xD1 — first arg = precode ptr
     p[10] = 0x4C; p[11] = 0x89; p[12] = 0xD1;
 
     // mov rax, <dispatch>     ; 0x48 0xB8 + 8B addr
@@ -176,6 +178,22 @@ void PrecodeArena::EmitJitSharedEntry() noexcept {
 
     // jmp rax                 ; 0xFF 0xE0
     p[35] = 0xFF; p[36] = 0xE0;
+#else
+    // System V AMD64 calling convention: rdi = first arg, no shadow space
+    // mov rdi, r10            ; 0x4C 0x89 0xD7 — first arg = precode ptr
+    p[0] = 0x4C; p[1] = 0x89; p[2] = 0xD7;
+
+    // mov rax, <dispatch>     ; 0x48 0xB8 + 8B addr
+    auto dispatch_addr = reinterpret_cast<uintptr_t>(&JitStubDispatchImpl);
+    p[3] = 0x48; p[4] = 0xB8;
+    std::memcpy(p + 5, &dispatch_addr, sizeof(dispatch_addr));
+
+    // call rax                ; 0xFF 0xD0
+    p[13] = 0xFF; p[14] = 0xD0;
+
+    // jmp rax                 ; 0xFF 0xE0
+    p[15] = 0xFF; p[16] = 0xE0;
+#endif
 
     jit_entry_size_ = kSharedEntrySize;
     pg.pos += kSharedEntrySize;

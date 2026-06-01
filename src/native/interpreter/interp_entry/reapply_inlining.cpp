@@ -1,5 +1,4 @@
 namespace chaos::il2cpp::runtime_core {
-
 // ── ReapplyInlining ──────────────────────────────────────────────────────────
 // Called from ApplyPatchFromMemory after all methods are pre-lowered and the
 // inlining map is fully populated.  Runs InlineLeafCallees on each method
@@ -91,4 +90,4 @@ void ReapplyInlining(PatchMethod* methods, uint32_t method_count) noexcept {
     }
 }
 
-}  // namespace chaos::il2cpp::runtime_core
+}

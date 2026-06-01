@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/threading/monitor/interlocked",
-  "capturedAt": "2026-05-29T05:27:01",
+  "capturedAt": "2026-05-30T04:24:19",
   "batchMode": true,
   "summary": {
     "totalMethods": 14,
@@ -10,26 +10,26 @@
     "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 616
+      "min": 64,
+      "max": 64,
+      "avg": 64.0,
+      "total": 896
     },
     "aotInstructionCount": {
       "min": 1,
       "max": 17,
-      "avg": 2.1,
-      "total": 30
+      "avg": 3.9,
+      "total": 55
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 1
+      "external_runtime_call": 4
     },
-    "overallIrExpansionRatio": 0.05,
-    "averageExpansionRatio": 0.05,
-    "maxExpansionRatio": 0.39,
+    "overallIrExpansionRatio": 0.06,
+    "averageExpansionRatio": 0.07,
+    "maxExpansionRatio": 0.27,
     "minExpansionRatio": 0.02
   },
   "methodResults": [
@@ -39,7 +39,7 @@
       "shortName": "Subject_0",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -47,7 +47,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -63,7 +63,7 @@
       "shortName": "Subject_1",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -71,7 +71,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -87,23 +87,31 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 10,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_2",
-        "instructions": 1
+        "instructions": 10
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Threading/Monitor::TryEnter:System.Boolean(System.Object)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 3,
@@ -111,23 +119,31 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 11,
+        "ratio": 0.17,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_3",
-        "instructions": 1
+        "instructions": 11
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Threading/Monitor::TryEnter:System.Boolean(System.Object,System.Int32)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 4,
@@ -135,7 +151,7 @@
       "shortName": "Subject_4",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -143,7 +159,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -159,7 +175,7 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -167,7 +183,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -183,7 +199,7 @@
       "shortName": "Subject_6",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -191,7 +207,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -207,7 +223,7 @@
       "shortName": "Subject_7",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -215,7 +231,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -231,7 +247,7 @@
       "shortName": "Subject_8",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -239,7 +255,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -255,7 +271,7 @@
       "shortName": "Subject_9",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -263,7 +279,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -279,7 +295,7 @@
       "shortName": "Subject_10",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -287,7 +303,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -303,7 +319,7 @@
       "shortName": "Subject_11",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 1,
         "ratio": 0.02,
         "jitCodeSize": 256
@@ -311,7 +327,7 @@
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -327,23 +343,31 @@
       "shortName": "Subject_12",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 7,
+        "ratio": 0.11,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ThreadingMonitorInterlockedSubjects_ThreadingMonitorInterlockedSubjects_Subject_12",
-        "instructions": 1
+        "instructions": 7
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Threading/Interlocked::MemoryBarrier:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 13,
@@ -351,15 +375,15 @@
       "shortName": "Subject_13",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 17,
-        "ratio": 0.39,
+        "ratio": 0.27,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",

@@ -2,35 +2,35 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/garbage/collection",
-  "capturedAt": "2026-05-29T03:15:57",
+  "capturedAt": "2026-05-29T23:47:36",
   "batchMode": true,
   "summary": {
     "totalMethods": 10,
-    "okCount": 10,
-    "failedCount": 0,
+    "okCount": 7,
+    "failedCount": 3,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 44,
-      "max": 44,
-      "avg": 44.0,
-      "total": 440
+      "min": 64,
+      "max": 64,
+      "avg": 64.0,
+      "total": 448
     },
     "aotInstructionCount": {
-      "min": 1,
+      "min": 7,
       "max": 12,
-      "avg": 2.1,
-      "total": 21
+      "avg": 9.0,
+      "total": 63
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 3
+      "external_runtime_call": 10
     },
-    "overallIrExpansionRatio": 0.05,
-    "averageExpansionRatio": 0.04,
-    "maxExpansionRatio": 0.27,
-    "minExpansionRatio": 0.02
+    "overallIrExpansionRatio": 0.14,
+    "averageExpansionRatio": 0.14,
+    "maxExpansionRatio": 0.19,
+    "minExpansionRatio": 0.11
   },
   "methodResults": [
     {
@@ -39,23 +39,31 @@
       "shortName": "Subject_0",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 7,
+        "ratio": 0.11,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_0",
-        "instructions": 1
+        "instructions": 7
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::Collect:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 1,
@@ -63,23 +71,31 @@
       "shortName": "Subject_1",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 7,
+        "ratio": 0.11,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_1",
-        "instructions": 1
+        "instructions": 7
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::WaitForPendingFinalizers:System.Void()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 2,
@@ -87,23 +103,31 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 8,
+        "ratio": 0.12,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_2",
-        "instructions": 1
+        "instructions": 8
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::KeepAlive:System.Void(System.Object)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 3,
@@ -111,23 +135,31 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 9,
+        "ratio": 0.14,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_3",
-        "instructions": 1
+        "instructions": 9
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::GetGeneration:System.Int32(System.WeakReference)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 4,
@@ -135,15 +167,15 @@
       "shortName": "Subject_4",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "ratio": 0.19,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -177,23 +209,31 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 9,
+        "ratio": 0.14,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_5",
-        "instructions": 1
+        "instructions": 9
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::GetTotalMemory:System.Int64(System.Boolean)' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 1
+      }
     },
     {
       "methodIndex": 6,
@@ -201,95 +241,57 @@
       "shortName": "Subject_6",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 11,
+        "ratio": 0.17,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_6",
-        "instructions": 1
+        "instructions": 11
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GC::GetGCMemoryInfo:System.GCMemoryInfo()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.GCMemoryInfo::get_TotalCommittedBytes:System.Int64()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 2
+      }
     },
     {
       "methodIndex": 7,
       "methodSubjectId": "System.Private.CoreLib/System.GC::Collect(System.Int32,System.GCCollectionMode):System.Void()",
       "shortName": "Subject_7",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_7",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
     },
     {
       "methodIndex": 8,
       "methodSubjectId": "System.Private.CoreLib/System.GC::CollectionCount(System.Int32):System.Int64()",
       "shortName": "Subject_8",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_8",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
     },
     {
       "methodIndex": 9,
       "methodSubjectId": "System.Private.CoreLib/System.GC::GetTotalPauseDuration:System.TimeSpan()",
       "shortName": "Subject_9",
-      "status": "ok",
-      "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
-        "jitCodeSize": 256
-      },
-      "jit": {
-        "status": "ok",
-        "size": 256,
-        "instructions": 44
-      },
-      "aot": {
-        "status": "ok",
-        "symbol": "GarbageCollectionSubjects_GarbageCollectionSubjects_Subject_9",
-        "instructions": 1
-      },
-      "analysis": [],
-      "instructionCategories": {}
+      "status": "error",
+      "error": "Method not found in IL2CPP pipeline output"
     }
   ]
 }

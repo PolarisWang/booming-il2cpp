@@ -342,15 +342,6 @@ static int RunHotupdateBenchmarkMode(int entry_index, int iterations) {
 }
 
 int main(int argc, char* argv[]) {
-{{ if is_jit }}
-#if defined(_WIN32)
-    AddVectoredExceptionHandler(1, JitVehHandler);
-#endif
-    if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
-        chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
-    }
-    ChaosJitRegisterAll();
-{{ end }}
 
     // Redirect diagnostic log output to stderr so that machine-consumed
     // protocol output (benchmark JSON, fact results) on stdout stays clean.
@@ -388,6 +379,15 @@ int main(int argc, char* argv[]) {
         return 1;
     }
     ChaosRegisterGcLayouts();
+{{ if is_jit }}
+#if defined(_WIN32)
+    AddVectoredExceptionHandler(1, JitVehHandler);
+#endif
+    if (chaos_il2cpp_aot_hotpatch_module != nullptr) {
+        chaos::il2cpp::runtime_core::RegisterHotpatchModule(chaos_il2cpp_aot_hotpatch_module);
+    }
+    ChaosJitRegisterAll();
+{{ end }}
 
     int ret = 0;
     if (argc < 2) { ret = RunFactMode(); goto shutdown; }
@@ -436,7 +436,7 @@ shutdown:
 #if defined(_WIN32)
     TerminateProcess(GetCurrentProcess(), static_cast<DWORD>(ret));
 #else
-    std::_Exit(ret);
+    _exit(ret);
 #endif
     // unreachable
 }

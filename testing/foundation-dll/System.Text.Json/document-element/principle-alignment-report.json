@@ -1,12 +1,19 @@
 {
   "family": "document-element",
   "assembly": "System.Text.Json",
-  "generated_at": "2026-05-24T18:00:01.201082",
+  "generated_at": "2026-05-29T12:54:57.929362",
   "checks": {
     "p1_benchmark": {
       "check_id": "p1_benchmark",
       "status": "NOT_APPLICABLE",
       "summary": "No benchmark data available — benchmarks not run for this family",
+      "details": [],
+      "evidence": {}
+    },
+    "p1_combo_slug_expansion": {
+      "check_id": "p1_combo_slug_expansion",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
       "details": [],
       "evidence": {}
     },
@@ -46,6 +53,13 @@
       "details": [],
       "evidence": {}
     },
+    "p2_cross_assembly_coverage": {
+      "check_id": "p2_cross_assembly_coverage",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
     "p2_layer_correctness": {
       "check_id": "p2_layer_correctness",
       "status": "NOT_APPLICABLE",
@@ -62,6 +76,13 @@
     },
     "p2_no_code_duplication": {
       "check_id": "p2_no_code_duplication",
+      "status": "NOT_APPLICABLE",
+      "summary": "Cross-family check — run with CrossFamilyContext",
+      "details": [],
+      "evidence": {}
+    },
+    "p2_shared_type_consistency": {
+      "check_id": "p2_shared_type_consistency",
       "status": "NOT_APPLICABLE",
       "summary": "Cross-family check — run with CrossFamilyContext",
       "details": [],
@@ -102,17 +123,17 @@
         "valid_count": 1,
         "stub_patchdata_count": 0,
         "files": [
-          "System.Text.Json\\document-element\\managed\\patch\\patchdata\\document-element.patchdata"
+          "System.Text.Json/document-element/managed/patch/patchdata/document-element.patchdata"
         ]
       }
     }
   },
   "summary": {
-    "total": 12,
+    "total": 15,
     "aligned": 7,
     "concern": 1,
     "violation": 0,
-    "not_applicable": 4,
+    "not_applicable": 7,
     "overall": "CONCERN"
   }
 }

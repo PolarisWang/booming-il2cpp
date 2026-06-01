@@ -2,8 +2,8 @@
   "family": "document-element",
   "assembly": "System.Text.Json",
   "mode": "standard",
-  "timestamp": "2026-05-24T18:00:01",
-  "duration_ms": 30118,
+  "timestamp": "2026-05-29T12:57:00",
+  "duration_ms": 144715,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -87,7 +87,7 @@
         ]
       },
       "errors": [],
-      "duration_ms": 1
+      "duration_ms": 0
     },
     "codegen": {
       "stage": "codegen",
@@ -95,10 +95,10 @@
       "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
         "methodCount": 69,
-        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\document-element\\managed\\subjects\\build-output\\DocumentElementSubjects.dll"
+        "dllPath": "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/document-element/managed/subjects/build-output/DocumentElementSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 28042
+      "duration_ms": 19436
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -107,6 +107,436 @@
       "details": {},
       "errors": [],
       "duration_ms": 0
+    },
+    "managed_fact": {
+      "stage": "managed_fact",
+      "status": "passed",
+      "summary": "Fact net8.0: passed=0 failed=0 skipped=69",
+      "details": {
+        "totalMethods": 69,
+        "passedMethods": 0,
+        "failedMethods": 0,
+        "skippedMethods": 69,
+        "tfm": "net8.0",
+        "methodResults": [
+          {
+            "methodIndex": 0,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Dispose:System.Void()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 1,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::get_RootElement:System.Text.Json.JsonElement()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 2,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory{System.Byte},System.Text.Json.JsonDocumentOptions)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 3,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.Buffers.ReadOnlySequence{System.Byte},System.Text.Json.JsonDocumentOptions)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 4,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.IO.Stream,System.Text.Json.JsonDocumentOptions)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 5,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.ReadOnlyMemory{System.Char},System.Text.Json.JsonDocumentOptions)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 6,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::Parse:System.Text.Json.JsonDocument(System.String,System.Text.Json.JsonDocumentOptions)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 7,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseAsync:System.Threading.Tasks.Task{System.Text.Json.JsonDocument}(System.IO.Stream,System.Text.Json.JsonDocumentOptions,System.Threading.CancellationToken)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 8,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::ParseValue:System.Text.Json.JsonDocument(System.Text.Json.Utf8JsonReader&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 9,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Text.Json.JsonDocument&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 10,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonDocument::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 11,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Clone:System.Text.Json.JsonElement()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 12,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::DeepEquals:System.Boolean(System.Text.Json.JsonElement,System.Text.Json.JsonElement)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 13,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::EnumerateArray:System.Text.Json.JsonElement+ArrayEnumerator()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 14,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::EnumerateObject:System.Text.Json.JsonElement+ObjectEnumerator()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 15,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::get_Item:System.Text.Json.JsonElement(System.Int32)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 16,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::get_ValueKind:System.Text.Json.JsonValueKind()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 17,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetArrayLength:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 18,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetBoolean:System.Boolean()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 19,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetByte:System.Byte()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 20,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetBytesFromBase64:System.Byte{}()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 21,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetDateTime:System.DateTime()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 22,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetDateTimeOffset:System.DateTimeOffset()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 23,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetDecimal:System.Decimal()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 24,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetDouble:System.Double()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 25,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetGuid:System.Guid()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 26,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetInt16:System.Int16()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 27,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetInt32:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 28,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetInt64:System.Int64()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 29,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.String)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 30,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.ReadOnlySpan{System.Char})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 31,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetProperty:System.Text.Json.JsonElement(System.ReadOnlySpan{System.Byte})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 32,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetPropertyCount:System.Int32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 33,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetRawText:System.String()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 34,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetSByte:System.SByte()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 35,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetSingle:System.Single()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 36,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetString:System.String()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 37,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetUInt16:System.UInt16()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 38,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetUInt32:System.UInt32()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 39,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::GetUInt64:System.UInt64()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 40,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.ReadOnlySpan{System.Byte},System.Text.Json.JsonDocumentOptions)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 41,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.ReadOnlySpan{System.Char},System.Text.Json.JsonDocumentOptions)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 42,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::Parse:System.Text.Json.JsonElement(System.String,System.Text.Json.JsonDocumentOptions)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 43,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ParseValue:System.Text.Json.JsonElement(System.Text.Json.Utf8JsonReader&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 44,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ToString:System.String()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 45,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetByte:System.Boolean(System.Byte&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 46,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetBytesFromBase64:System.Boolean(System.Byte{}&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 47,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDateTime:System.Boolean(System.DateTime&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 48,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDateTimeOffset:System.Boolean(System.DateTimeOffset&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 49,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDecimal:System.Boolean(System.Decimal&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 50,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetDouble:System.Boolean(System.Double&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 51,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetGuid:System.Boolean(System.Guid&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 52,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt16:System.Boolean(System.Int16&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 53,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt32:System.Boolean(System.Int32&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 54,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetInt64:System.Boolean(System.Int64&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 55,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.String,System.Text.Json.JsonElement&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 56,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.ReadOnlySpan{System.Char},System.Text.Json.JsonElement&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 57,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetProperty:System.Boolean(System.ReadOnlySpan{System.Byte},System.Text.Json.JsonElement&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 58,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetSByte:System.Boolean(System.SByte&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 59,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetSingle:System.Boolean(System.Single&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 60,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt16:System.Boolean(System.UInt16&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 61,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt32:System.Boolean(System.UInt32&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 62,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryGetUInt64:System.Boolean(System.UInt64&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 63,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::TryParseValue:System.Boolean(System.Text.Json.Utf8JsonReader&,System.Nullable{System.Text.Json.JsonElement}&)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 64,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.String)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 65,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.ReadOnlySpan{System.Byte})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 66,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::ValueEquals:System.Boolean(System.ReadOnlySpan{System.Char})",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 67,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::WriteTo:System.Void(System.Text.Json.Utf8JsonWriter)",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          },
+          {
+            "methodIndex": 68,
+            "methodSubjectId": "System.Text.Json/System.Text.Json.JsonElement::get_Item:System.Text.Json.JsonElement()",
+            "status": "skipped",
+            "exceptionMessage": "unsupported_signature"
+          }
+        ]
+      },
+      "errors": [],
+      "duration_ms": 1711
     },
     "fact": {
       "stage": "fact",
@@ -120,7 +550,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 48
+      "duration_ms": 10
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -135,7 +565,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 32
+      "duration_ms": 12
     },
     "audit": {
       "stage": "audit",
@@ -144,48 +574,50 @@
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 5,
+        "skipsFound": 0,
         "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 1884
+      "duration_ms": 509
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "skipped",
-      "summary": "Subjects DLL not found — run codegen stage first",
-      "details": {},
-      "errors": [],
-      "duration_ms": 39
-    },
-    "microbench": {
-      "stage": "microbench",
       "status": "passed",
-      "summary": "FramePool=3.1ns/op | FastExecute=0.0ns/op | CallVirt dispatch=0.0ns",
+      "summary": "asm-compare: 67/69 methods OK, avg JIT=64.0 instr, avg AOT IR=1.0 instr, expansion=0.02x",
       "details": {
-        "framePool": {
-          "acquireReleaseNsPerOp": 3.1,
-          "batchCount": 1000,
-          "framesPerBatch": 32
+        "totalMethods": 69,
+        "okCount": 67,
+        "failedCount": 2,
+        "skippedCount": 0,
+        "jitInstructionCount": {
+          "min": 64,
+          "max": 64,
+          "avg": 64.0,
+          "total": 4288
         },
-        "poolSize": 32
+        "aotInstructionCount": {
+          "min": 1,
+          "max": 1,
+          "avg": 1.0,
+          "total": 69
+        },
+        "totalExternalRuntimeCalls": 0,
+        "totalVirtualDispatches": 0,
+        "totalBoxingOps": 0,
+        "topInstructionCategories": {},
+        "overallIrExpansionRatio": 0.02,
+        "averageExpansionRatio": 0.02,
+        "maxExpansionRatio": 0.02,
+        "minExpansionRatio": 0.02
       },
       "errors": [],
-      "duration_ms": 29
+      "duration_ms": 2720
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "skipped",
       "summary": "All methods are stubs — no benchmark possible",
-      "details": {},
-      "errors": [],
-      "duration_ms": 6
-    },
-    "hotupdate": {
-      "stage": "hotupdate",
-      "status": "skipped",
-      "summary": "All methods are stubs — no hotupdate possible",
       "details": {},
       "errors": [],
       "duration_ms": 0
@@ -200,15 +632,11 @@
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "passed",
-      "summary": "69/69 passed, 0 failed",
-      "details": {
-        "passed": 69,
-        "failed": 0,
-        "total": 69
-      },
+      "status": "failed",
+      "summary": "HotUpdate JIT fact crashed: Command '['/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/document-element/native/entry-jit.exe', '--hotupdate']' timed out after 120 seconds",
+      "details": {},
       "errors": [],
-      "duration_ms": 28
+      "duration_ms": 120102
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -216,37 +644,83 @@
       "summary": "All methods are stubs — no benchmark possible",
       "details": {},
       "errors": [],
+      "duration_ms": 0
+    },
+    "dashboard": {
+      "stage": "dashboard",
+      "status": "passed",
+      "summary": "Dashboard built: 6 sections",
+      "details": {
+        "interpreter": {},
+        "irTranslation": {
+          "totalMethods": 69,
+          "okCount": 67,
+          "failedCount": 2,
+          "overallIrExpansionRatio": 0.02,
+          "averageExpansionRatio": 0.02,
+          "maxExpansionRatio": 0.02,
+          "jitInstructionAvg": 64.0,
+          "aotInstructionAvg": 1.0,
+          "totalExternalRuntimeCalls": 0,
+          "totalVirtualDispatches": 0,
+          "totalBoxingOps": 0,
+          "topInstructionCategories": {}
+        },
+        "performance": {},
+        "hotupdate": {},
+        "managedFact": {
+          "totalMethods": 69,
+          "passedMethods": 0,
+          "failedMethods": 0,
+          "skippedMethods": 69,
+          "tfm": "net8.0"
+        },
+        "keyRatios": {
+          "nativeFasterRatio": 0,
+          "irExpansionRatio": 0.02,
+          "interpreterSlowdownFactor": 0,
+          "asmPassRate": 97.1
+        }
+      },
+      "errors": [],
       "duration_ms": 1
     }
   },
   "coverage": {
-    "methodCoverage": 100.0,
-    "testedRate": 92.75,
-    "overall": 96.38
+    "methodCoverage": 0.0,
+    "testedRate": 100.0,
+    "overall": 100.0
   },
   "dashboard": {
-    "interpreter": {
-      "fastFramePoolNsPerOp": 3.1,
-      "fastExecuteNsPerInstr": 0,
-      "callVirtHandlerDispatchNs": 0,
-      "callVirtMicHitNs": 0,
-      "callVirtRawFallbackNs": 0,
-      "poolSize": 32
+    "interpreter": {},
+    "irTranslation": {
+      "totalMethods": 69,
+      "okCount": 67,
+      "failedCount": 2,
+      "overallIrExpansionRatio": 0.02,
+      "averageExpansionRatio": 0.02,
+      "maxExpansionRatio": 0.02,
+      "jitInstructionAvg": 64.0,
+      "aotInstructionAvg": 1.0,
+      "totalExternalRuntimeCalls": 0,
+      "totalVirtualDispatches": 0,
+      "totalBoxingOps": 0,
+      "topInstructionCategories": {}
     },
-    "irTranslation": {},
     "performance": {},
-    "hotupdate": {
-      "jitFunctional": {
-        "passedMethods": 69,
-        "failedMethods": 0,
-        "totalMethods": 69
-      }
+    "hotupdate": {},
+    "managedFact": {
+      "totalMethods": 69,
+      "passedMethods": 0,
+      "failedMethods": 0,
+      "skippedMethods": 69,
+      "tfm": "net8.0"
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0,
+      "irExpansionRatio": 0.02,
       "interpreterSlowdownFactor": 0,
-      "asmPassRate": 0.0
+      "asmPassRate": 97.1
     }
   },
   "regression": {

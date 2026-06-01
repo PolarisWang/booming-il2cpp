@@ -2,7 +2,7 @@
   "schemaVersion": 2,
   "assemblyName": "System.Private.CoreLib",
   "familyId": "family/System.Private.CoreLib/reflection/assembly",
-  "capturedAt": "2026-05-29T04:21:40",
+  "capturedAt": "2026-05-30T00:59:06",
   "batchMode": true,
   "summary": {
     "totalMethods": 22,
@@ -10,27 +10,27 @@
     "failedCount": 0,
     "skippedCount": 0,
     "jitInstructionCount": {
-      "min": 44,
-      "max": 1596,
-      "avg": 114.5,
-      "total": 2520
+      "min": 64,
+      "max": 64,
+      "avg": 64.0,
+      "total": 1408
     },
     "aotInstructionCount": {
-      "min": 1,
-      "max": 12,
-      "avg": 6.2,
-      "total": 136
+      "min": 9,
+      "max": 14,
+      "avg": 11.6,
+      "total": 256
     },
     "totalExternalRuntimeCalls": 0,
     "totalVirtualDispatches": 0,
     "totalBoxingOps": 0,
     "topInstructionCategories": {
-      "external_runtime_call": 33
+      "external_runtime_call": 68
     },
-    "overallIrExpansionRatio": 0.05,
-    "averageExpansionRatio": 0.13,
-    "maxExpansionRatio": 0.27,
-    "minExpansionRatio": 0.01
+    "overallIrExpansionRatio": 0.18,
+    "averageExpansionRatio": 0.18,
+    "maxExpansionRatio": 0.22,
+    "minExpansionRatio": 0.14
   },
   "methodResults": [
     {
@@ -39,15 +39,15 @@
       "shortName": "Subject_0",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "ratio": 0.14,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -76,15 +76,15 @@
       "shortName": "Subject_1",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "ratio": 0.14,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -113,15 +113,15 @@
       "shortName": "Subject_2",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 9,
-        "ratio": 0.2,
+        "ratio": 0.14,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -150,23 +150,46 @@
       "shortName": "Subject_3",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 12,
+        "ratio": 0.19,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_3",
-        "instructions": 1
+        "instructions": 12
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetName:System.Reflection.AssemblyName()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 4
+      }
     },
     {
       "methodIndex": 4,
@@ -174,15 +197,15 @@
       "shortName": "Subject_4",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "ratio": 0.19,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -221,15 +244,15 @@
       "shortName": "Subject_5",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "ratio": 0.19,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -268,15 +291,15 @@
       "shortName": "Subject_6",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 1596,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 12,
-        "ratio": 0.01,
-        "jitCodeSize": 3674
+        "ratio": 0.19,
+        "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
-        "size": 3674,
-        "instructions": 1596
+        "size": 256,
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -315,23 +338,41 @@
       "shortName": "Subject_7",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 13,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_7",
-        "instructions": 1
+        "instructions": 13
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetTypes:System.Type[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
     },
     {
       "methodIndex": 8,
@@ -339,23 +380,41 @@
       "shortName": "Subject_8",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 13,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_8",
-        "instructions": 1
+        "instructions": 13
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetExportedTypes:System.Type[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
     },
     {
       "methodIndex": 9,
@@ -363,23 +422,41 @@
       "shortName": "Subject_9",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 13,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_9",
-        "instructions": 1
+        "instructions": 13
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetForwardedTypes:System.Type[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
     },
     {
       "methodIndex": 10,
@@ -387,23 +464,46 @@
       "shortName": "Subject_10",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 13,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_10",
-        "instructions": 1
+        "instructions": 13
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 4
+      }
     },
     {
       "methodIndex": 11,
@@ -411,23 +511,46 @@
       "shortName": "Subject_11",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 14,
+        "ratio": 0.22,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_11",
-        "instructions": 1
+        "instructions": 14
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetType:System.Type(System.String,System.Boolean)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 4
+      }
     },
     {
       "methodIndex": 12,
@@ -435,23 +558,46 @@
       "shortName": "Subject_12",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 13,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_12",
-        "instructions": 1
+        "instructions": 13
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetModule:System.Reflection.Module(System.String)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 4
+      }
     },
     {
       "methodIndex": 13,
@@ -459,23 +605,41 @@
       "shortName": "Subject_13",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 13,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_13",
-        "instructions": 1
+        "instructions": 13
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetModules:System.Reflection.Module[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
     },
     {
       "methodIndex": 14,
@@ -483,23 +647,46 @@
       "shortName": "Subject_14",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 13,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_14",
-        "instructions": 1
+        "instructions": 13
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceStream:System.IO.Stream(System.String)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Object::GetHashCode:System.Int32()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 4
+      }
     },
     {
       "methodIndex": 15,
@@ -507,23 +694,41 @@
       "shortName": "Subject_15",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
-        "aotInstructionCount": 1,
-        "ratio": 0.02,
+        "jitInstructionCount": 64,
+        "aotInstructionCount": 13,
+        "ratio": 0.2,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
         "symbol": "ReflectionAssemblySubjects_ReflectionAssemblySubjects_Subject_15",
-        "instructions": 1
+        "instructions": 13
       },
-      "analysis": [],
-      "instructionCategories": {}
+      "analysis": [
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::GetTypeFromHandle:System.Type(System.RuntimeTypeHandle)' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Type::get_Assembly:System.Reflection.Assembly()' uses ExternalRuntime dispatch"
+        },
+        {
+          "severity": "info",
+          "category": "external_runtime_call",
+          "message": "Call to 'System.Private.CoreLib/System.Reflection.Assembly::GetManifestResourceNames:System.String[]()' uses ExternalRuntime dispatch"
+        }
+      ],
+      "instructionCategories": {
+        "external_runtime_call": 3
+      }
     },
     {
       "methodIndex": 16,
@@ -531,15 +736,15 @@
       "shortName": "Subject_16",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 12,
-        "ratio": 0.27,
+        "ratio": 0.19,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -578,15 +783,15 @@
       "shortName": "Subject_17",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -615,15 +820,15 @@
       "shortName": "Subject_18",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -652,15 +857,15 @@
       "shortName": "Subject_19",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -689,15 +894,15 @@
       "shortName": "Subject_20",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 11,
-        "ratio": 0.25,
+        "ratio": 0.17,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",
@@ -731,15 +936,15 @@
       "shortName": "Subject_21",
       "status": "ok",
       "metrics": {
-        "jitInstructionCount": 44,
+        "jitInstructionCount": 64,
         "aotInstructionCount": 10,
-        "ratio": 0.23,
+        "ratio": 0.16,
         "jitCodeSize": 256
       },
       "jit": {
         "status": "ok",
         "size": 256,
-        "instructions": 44
+        "instructions": 64
       },
       "aot": {
         "status": "ok",

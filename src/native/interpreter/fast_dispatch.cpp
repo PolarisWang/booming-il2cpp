@@ -2439,6 +2439,7 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                 auto* rm = static_cast<interpreter::RegisterMethod*>(pm->cached_optimized_reg_method);
                 if (rm == nullptr) rm = static_cast<interpreter::RegisterMethod*>(pm->cached_reg_method);
                 if (rm != nullptr && rm->instructions.size() > 0) {
+#ifdef CHAOS_IL2CPP_JIT_MODE
                     chaos::il2cpp::jit::CompileConfig cfg;
                     cfg.enable_deopt = true;
                     cfg.enable_liveness = true;
@@ -2522,6 +2523,11 @@ static bool TryFastOsrPromotion(FastFrame& frame) noexcept {
                             pm->tier_state.store(PM::kOptimizedRegister, std::memory_order_release);
                         }
                     }
+#else
+                    // JIT disabled — no native compilation in AOT-only builds.
+                    // Set permanent skip so the tier-up path is never retried.
+                    pm->tier_state.store(PM::kJitSkip, std::memory_order_release);
+#endif
                 }
             }
         }

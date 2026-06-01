@@ -944,10 +944,15 @@ public sealed partial class NativeAotLoweringPlanner
             : string.Empty;
 
         // Always define ChaosJitRegisterAll so runtime-entry.cpp can call it unconditionally.
-        // In AOT mode it's a no-op; in JIT mode it registers all methods for JIT dispatch.
-        // This avoids linker errors in AOT builds where JIT symbols don't exist.
+        // In JIT mode (guarded by CHAOS_IL2CPP_JIT_MODE), it registers all methods for
+        // JIT dispatch via precode stubs.  In AOT mode it's always a no-op.
+        // The #ifdef guard is critical: the same generated C++ code is compiled into
+        // both entry.exe (AOT, no JIT_MODE) and entry-jit.exe (JIT, with JIT_MODE).
+        // Without the guard, the AOT build would trigger JIT compilation through
+        // RegisterJitEntryMethods → JitStubDispatchImpl → Compile() in chaos_jit.lib.
         if (_codegenMode.HasFlag(CodegenMode.Jit) && methodCount > 0)
         {
+            globalDeclarations += "\n#ifdef CHAOS_IL2CPP_JIT_MODE\n";
             globalDeclarations += "\n" + BuildJitMethodRegistration(methodsForLowering, metadataRegistration);
             var cgNs = SanitizeCppIdentifier(_assemblyName);
             globalDeclarations += $@"
@@ -956,6 +961,7 @@ extern ""C"" void ChaosJitRegisterAll() {{
     chaos::il2cpp::runtime_core::RegisterHotpatchModule(&chaos::il2cpp::codegen::{cgNs}::s_hotpatch_module);
     RegisterJitEntryMethods(kChaosJitEntries, kChaosJitEntryCount);
 }}
+#endif
 ";
         }
         else
