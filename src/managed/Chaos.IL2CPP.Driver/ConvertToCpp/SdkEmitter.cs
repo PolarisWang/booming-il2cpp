@@ -40,7 +40,8 @@ internal sealed class SdkEmitter
         string repoRoot,
         string nativeLibDir,
         string buildConfig,
-        string assemblyName)
+        string assemblyName,
+        string configTier)
     {
         try
         {
@@ -51,6 +52,9 @@ internal sealed class SdkEmitter
             Directory.CreateDirectory(includeDir);
             Directory.CreateDirectory(libDir);
             Directory.CreateDirectory(cmakeDir);
+
+            // ── Platform abstraction ──────────────────────────────────────────
+            var platform = NativePlatformFactory.Create();
 
             // ── Phase 1a: Copy generated headers from generated/ to include/ ──
             CopyGeneratedHeader(generatedRoot, assemblyName, includeDir, "chaos_generated_module.h");
@@ -69,16 +73,12 @@ internal sealed class SdkEmitter
             CopyRuntimeHeaders(repoRoot, includeDir);
 
             // ── Phase 1b": Copy runtime_stubs .cpp sources into SDK ─────────
-            // The prebuilt chaos_runtime_core.lib is stale (may miss newly added
-            // stub functions).  By copying the .cpp sources into the SDK, the
-            // test framework's CMakeLists.txt can glob them directly, avoiding
-            // stale-lib symbol resolution failures without Python-level patching.
             CopyRuntimeStubSources(repoRoot, sdkRoot);
 
             // ── Phase 1c: Generate chaos-config.cmake ────────────────────────
             var configModel = new ScriptObject
             {
-                ["msvc_version"] = DetectMsvcVersion(),
+                ["msvc_version"] = platform.HasPrebuiltLibraries ? DetectMsvcVersion() : null,
             };
             var configContent = SdkTemplateCatalog.RenderChaosConfig(configModel);
             File.WriteAllText(Path.Combine(sdkRoot, "chaos-config.cmake"), configContent);
@@ -92,8 +92,13 @@ internal sealed class SdkEmitter
             // ── Phase 1d': Generate CMakePresets.json ──────────────────────
             EmitCMakePresets(sdkRoot);
 
-            // ── Phase 1e: Copy prebuilt native runtime .lib files ────────────
-            CopyNativeLibs(nativeLibDir, buildConfig, libDir);
+            // ── Phase 1e: Build native libs from source (if needed) ─────────
+            // On Linux there are no prebuilt .a files; build them from the repo
+            // source tree via cmake.  On Windows this is a no-op.
+            platform.BuildNativeLibs(repoRoot, libDir, configTier);
+
+            // ── Phase 1f: Copy prebuilt native runtime library files ───────
+            CopyNativeLibs(nativeLibDir, buildConfig, libDir, platform);
 
             // ── Phase 2: Precompile native-aot.generated.cpp → chaos_codegen.lib ──
             TryPrecompileCodegenLib(generatedRoot, repoRoot, sdkRoot, libDir);
@@ -362,14 +367,9 @@ internal sealed class SdkEmitter
     /// On Linux: source files use .a extension with lib prefix in linux-debug preset.
     /// Creates empty stub archives for Windows-only libraries so CMake validation passes.
     /// </summary>
-    private static void CopyNativeLibs(string nativeLibDir, string buildConfig, string libDir)
+    private static void CopyNativeLibs(string nativeLibDir, string buildConfig, string libDir, INativePlatform platform)
     {
-        // Detect platform
-        var isWindows = System.Runtime.InteropServices.RuntimeInformation.IsOSPlatform(
-            System.Runtime.InteropServices.OSPlatform.Windows);
-
         // Library source paths (relative to nativeLibDir).
-        // On Linux the preset uses .a with lib prefix; on Windows .lib with no prefix.
         // Build config: Windows uses MSVC multi-config (RelWithDebInfo), Linux uses single-config preset.
         var libMappings = new (string SourceRelDir, string TargetName)[]
         {
@@ -389,11 +389,18 @@ internal sealed class SdkEmitter
         int stubCount = 0;
         foreach (var (sourceRelDir, targetName) in libMappings)
         {
-            // Target always .lib (chaos-targets.cmake references .lib names)
-            var targetPath = Path.Combine(libDir, targetName + ".lib");
+            var targetPath = Path.Combine(libDir, platform.GetStaticLibFileName(targetName));
 
-            if (isWindows)
+            // Skip if the target already exists (e.g. built from source on Linux)
+            if (File.Exists(targetPath))
             {
+                copiedCount++;
+                continue;
+            }
+
+            if (platform.HasPrebuiltLibraries)
+            {
+                // Windows: find the .lib in the prebuilt CI output directory.
                 var sourcePath = Path.Combine(nativeLibDir, sourceRelDir.Replace('/', Path.DirectorySeparatorChar),
                     buildConfig, targetName + ".lib");
                 if (File.Exists(sourcePath))
@@ -405,8 +412,7 @@ internal sealed class SdkEmitter
             }
             else
             {
-                // Linux: lib<name>.a in the source dir (no buildConfig subdir for single-config preset)
-                // e.g. src/native/runtime-core/libchaos_runtime_core.a
+                // Linux: try to find a prebuilt .a (fallback if source build didn't produce it).
                 var sourcePath = Path.Combine(nativeLibDir, sourceRelDir.Replace('/', Path.DirectorySeparatorChar),
                     "lib" + targetName + ".a");
                 if (File.Exists(sourcePath))
@@ -415,7 +421,6 @@ internal sealed class SdkEmitter
                     copiedCount++;
                     continue;
                 }
-                // Fallback: try without lib prefix
                 var altPath = Path.Combine(nativeLibDir, sourceRelDir.Replace('/', Path.DirectorySeparatorChar),
                     targetName + ".a");
                 if (File.Exists(altPath))

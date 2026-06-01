@@ -1410,6 +1410,7 @@ public sealed partial class NativeAotLoweringPlanner
     private void BuildEnumAotBakeTable(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
     {
         _enumAotBakeMap.Clear();
+        _enumAotBakeSkipIlOffsets.Clear();
 
         // Collect field entries — prefer reflection metadata, fall back to PE metadata scan
         var fieldEntries = _reflectionMemberSupport.FieldEntries.Count > 0
@@ -1499,7 +1500,7 @@ public sealed partial class NativeAotLoweringPlanner
 
                     case "call":
                     case "callvirt":
-                        TryRecordEnumAotBake(instr, i, instrs, producers, depth, enumFieldsByType, methodId);
+                        TryRecordEnumAotBake(instr, instrs, producers, depth, enumFieldsByType, methodId, i);
                         // Conservative: pop N args (determined by callee), push 1 result
                         int popCount = EstimateCallPopCount(instr, depth);
                         if (depth >= popCount)
@@ -1546,6 +1547,26 @@ public sealed partial class NativeAotLoweringPlanner
                 }
             }
         }
+
+        // Populate _enumAotBakeSkipIlOffsets from entries with SkipIlOffsets
+        foreach (var kv in _enumAotBakeMap)
+        {
+            var entry = kv.Value;
+            if (entry.SkipIlOffsets is { Length: > 0 })
+            {
+                var methodId = kv.Key.MethodId;
+                if (!_enumAotBakeSkipIlOffsets.TryGetValue(methodId, out var set))
+                {
+                    set = new HashSet<int>();
+                    _enumAotBakeSkipIlOffsets[methodId] = set;
+                }
+                foreach (var offset in entry.SkipIlOffsets)
+                {
+                    if (offset > 0)
+                        set.Add(offset);
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -1585,12 +1606,12 @@ public sealed partial class NativeAotLoweringPlanner
     /// </summary>
     private void TryRecordEnumAotBake(
         AotCoreIrInstructionArtifact callInstr,
-        int callIndex,
         IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
         int[] producers,
         int depth,
         Dictionary<string, Dictionary<string, long>> enumFieldsByType,
-        string? methodId)
+        string? methodId,
+        int callIndex)
     {
         var callee = callInstr.Callee;
         if (callee == null) return;
@@ -1647,6 +1668,29 @@ public sealed partial class NativeAotLoweringPlanner
 
         var bakeKey = (methodId ?? "", callInstr.IlOffset);
 
+        // Scan for dead instructions between the ldtoken and this call:
+        //   - call Type::GetTypeFromHandle (present for all — expensive metadata call)
+        //   - box instruction (present for GetName/Format/IsDefined — GC allocation)
+        // These are skipped during emission via _enumAotBakeSkipIlOffsets DCE.
+        int[]? skipOffsets = null;
+        bool isGetNameOrFormatOrIsDefined = isGetName || isFormat || isIsDefined;
+        for (int si = typeProducerIdx + 1; si < callIndex; si++)
+        {
+            var scout = instrs[si];
+            if (scout.Op == "call" && scout.Callee != null &&
+                scout.Callee.Contains("::GetTypeFromHandle:", StringComparison.Ordinal))
+            {
+                (skipOffsets ??= new int[2])[0] = scout.IlOffset;
+            }
+            else if (scout.Op == "box" && isGetNameOrFormatOrIsDefined)
+            {
+                (skipOffsets ??= new int[2])[1] = scout.IlOffset;
+            }
+        }
+        // Compact: remove trailing zero if box not found but GetTypeFromHandle was
+        if (skipOffsets != null && skipOffsets[1] == 0 && skipOffsets[0] != 0)
+            skipOffsets = new[] { skipOffsets[0] };
+
         // Check the value/name/format arguments for compile-time constants
         int valueArgDepth = typeArgDepth + 1; // arg after Type
         if (valueArgDepth >= depth) return;
@@ -1667,10 +1711,8 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (fieldName != null)
             {
-                var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
                     enumTypeId, callee, ConstantStr: fieldName, ConstantInt: null, ArgCount: 2, SkipIlOffsets: skipOffsets);
-                PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
             }
             return;
         }
@@ -1704,10 +1746,8 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (constValue != null)
             {
-                var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
                     enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount, SkipIlOffsets: skipOffsets);
-                PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
             }
             return;
         }
@@ -1743,10 +1783,8 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (constValue != null)
             {
-                var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
                     enumTypeId, callee, ConstantStr: null, ConstantInt: constValue, ArgCount: paramCount, SkipIlOffsets: skipOffsets);
-                PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
             }
             return;
         }
@@ -1786,10 +1824,8 @@ public sealed partial class NativeAotLoweringPlanner
             }
             if (result != null)
             {
-                var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
                 _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
                     enumTypeId, callee, ConstantStr: result, ConstantInt: null, ArgCount: 3, SkipIlOffsets: skipOffsets);
-                PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
             }
             return;
         }
@@ -1803,47 +1839,9 @@ public sealed partial class NativeAotLoweringPlanner
             {
                 if (kv.Value == constValue) { defined = true; break; }
             }
-            var skipOffsets = CollectEnumAotBakeSkipOffsets(instrs, typeProducerIdx, valueProducerIdx, callIndex);
             _enumAotBakeMap[bakeKey] = new EnumAotBakeEntry(
                 enumTypeId, callee, ConstantStr: null, ConstantInt: defined ? 1L : 0L, ArgCount: 2, SkipIlOffsets: skipOffsets);
-            PopulateEnumAotBakeSkipIlOffsets(methodId, skipOffsets);
         }
-    }
-
-    /// <summary>
-    /// Collect IlOffsets of instructions between <paramref name="typeProducerIdx"/>
-    /// and <paramref name="callIndex"/> that can be eliminated (DCE'd) when the
-    /// enum call is AOT-baked. These include the ldtoken, GetTypeFromHandle,
-    /// box, and the constant value producer.
-    /// </summary>
-    private static int[] CollectEnumAotBakeSkipOffsets(
-        IReadOnlyList<AotCoreIrInstructionArtifact> instrs,
-        int typeProducerIdx,
-        int valueProducerIdx,
-        int callIndex)
-    {
-        var offsets = new List<int>(callIndex - typeProducerIdx);
-        for (int i = typeProducerIdx; i < callIndex; i++)
-        {
-            offsets.Add(instrs[i].IlOffset);
-        }
-        return offsets.ToArray();
-    }
-
-    /// <summary>
-    /// Populate <see cref="_enumAotBakeSkipIlOffsets"/> with the given skip
-    /// offsets for the given method, enabling DCE in <see cref="EmitInstruction"/>.
-    /// </summary>
-    private void PopulateEnumAotBakeSkipIlOffsets(string? methodId, int[] skipOffsets)
-    {
-        if (methodId == null || skipOffsets.Length == 0) return;
-        if (!_enumAotBakeSkipIlOffsets.TryGetValue(methodId, out var set))
-        {
-            set = new HashSet<int>();
-            _enumAotBakeSkipIlOffsets[methodId] = set;
-        }
-        foreach (var offset in skipOffsets)
-            set.Add(offset);
     }
 
     // ── A2.6: TypeInfo* direct API pre-scan ─────────────────────────────
@@ -1872,7 +1870,7 @@ public sealed partial class NativeAotLoweringPlanner
             for (int i = 0; i < instrs.Count; i++)
             {
                 var instr = instrs[i];
-                if (instr.OpCode is not (InstructionOpCode.Call or InstructionOpCode.CallVirt))
+                if (instr.Op is not ("call" or "callvirt"))
                     continue;
 
                 var callee = instr.Callee;
@@ -1900,8 +1898,76 @@ public sealed partial class NativeAotLoweringPlanner
         }
     }
 
+    // ── A2.7: typeof(T) compile-time fold pre-scan ─────────────────────────
+
     /// <summary>
-    /// For a call to <c>System.Type::IsAssignableFrom</c> (etc.), check whether
+    /// Pre-scan all methods' IR instructions to detect
+    /// <c>ldtoken &lt;const_type&gt; + call GetTypeFromHandle</c> patterns where the
+    /// type is AOT-known.  Records fold entries that let the emitter bypass
+    /// <c>ChaosReflectionGetTypeFromHandle</c> and emit a direct TypeInfo*
+    /// pointer expression.
+    /// </summary>
+    private void BuildTypeOfFoldTable(IReadOnlyList<AotCoreIrMethodArtifact> methodsForLowering)
+    {
+        _typeOfFoldMap.Clear();
+        _typeOfSkipIlOffsets.Clear();
+        if (_allEmittedTypeSubjectIds is not { Count: > 0 })
+            return;
+        int totalCalls = 0, matchedCalls = 0;
+
+        foreach (var method in methodsForLowering)
+        {
+            var instrs = method.Instructions;
+            if (instrs is null) continue;
+
+            for (int i = 1; i < instrs.Count; i++)
+            {
+                var instr = instrs[i];
+                if (instr.Op is not ("call" or "callvirt"))
+                    continue;
+
+                if (!IsGetTypeFromHandle(instr.Callee))
+                    continue;
+
+                totalCalls++;
+
+                // Check preceding instruction: must be ldtoken <type>
+                var prev = instrs[i - 1];
+                if (prev.Op != "ldtoken")
+                    continue;
+
+                string? subjectId = prev.TargetReference?.SubjectId;
+                if (string.IsNullOrEmpty(subjectId))
+                    continue;
+
+                if (prev.TargetReference?.Kind != AotCoreIrReferenceKind.Type)
+                    continue;
+
+                if (!IsTypeAotKnown(subjectId))
+                    continue;
+
+                matchedCalls++;
+
+                var typeInfoExpr = $"reinterpret_cast<CHAOS_IL2CPP_INTPTR>({GetNativeTypeInfoSymbol(subjectId)})";
+
+                var entry = new TypeOfFoldEntry(
+                    typeInfoExpr,
+                    new[] { prev.IlOffset }); // skip ltoken
+
+                _typeOfFoldMap[(method.NativeSymbol, instr.IlOffset)] = entry;
+
+                // Populate skip offsets for DCE of the ltoken instruction
+                if (!_typeOfSkipIlOffsets.TryGetValue(method.NativeSymbol, out var set))
+                {
+                    set = new HashSet<int>();
+                    _typeOfSkipIlOffsets[method.NativeSymbol] = set;
+                }
+                set.Add(prev.IlOffset);
+            }
+        }
+    }
+
+    /// <summary>
     /// all type arguments are <c>typeof()</c> constants (ldtoken + GetTypeFromHandle).
     /// If so, produce a <see cref="TypeHierarchyPtrFoldEntry"/> that the emitter
     /// uses to emit the <c>*Ptr</c> direct API call with pre-resolved symbols.

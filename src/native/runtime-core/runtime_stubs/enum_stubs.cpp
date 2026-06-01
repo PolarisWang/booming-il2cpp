@@ -753,6 +753,30 @@ static const ReflectionQueryTypeDescriptor* resolve_type_arg(CHAOS_IL2CPP_INTPTR
 static thread_local CHAOS_IL2CPP_INTPTR s_enum_meta_type_key = 0;
 static thread_local const EnumMetadataTable* s_enum_meta_cache = nullptr;
 
+// ── Negative cache: types confirmed NOT to be enum types ─────────────
+// When the full resolution chain determines a type is resolvable but
+// is NOT an enum (e.g. byte, int), the type handle is stored here so
+// subsequent calls to enum_resolve_meta return nullptr immediately
+// without re-entering the expensive resolution chain.
+// 16 direct-mapped entries, slot = (handle >> 3) & 0xF.
+// Thread_local: each thread independently discovers non-enum types.
+static constexpr CHAOS_IL2CPP_UINT32 kNonEnumCacheSize = 16;
+static thread_local CHAOS_IL2CPP_UINTPTR s_non_enum_cache[kNonEnumCacheSize] = {};
+
+/// Check if type_handle is in the non-enum negative cache.
+static bool is_cached_non_enum(CHAOS_IL2CPP_UINTPTR type_handle) noexcept {
+    if (type_handle == 0) return false;
+    auto slot = (type_handle >> 3) & (kNonEnumCacheSize - 1u);
+    return s_non_enum_cache[slot] == type_handle;
+}
+
+/// Store type_handle in the non-enum negative cache.
+static void cache_non_enum(CHAOS_IL2CPP_UINTPTR type_handle) noexcept {
+    if (type_handle == 0) return;
+    auto slot = (type_handle >> 3) & (kNonEnumCacheSize - 1u);
+    s_non_enum_cache[slot] = type_handle;
+}
+
 // ── TypeInfoHot* → EnumMetadataTable* reverse cache ─────────────
 // When enum_resolve_meta receives a raw heap pointer (TypeInfoHot* or
 // managed Type object), the existing fast paths don't recognize it:
@@ -800,6 +824,10 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
     // Use stable TypeInfoHandle as cache key to handle GC-moved Type objects
     CHAOS_IL2CPP_UINTPTR handle = enum_extract_type_handle(type_arg);
     if (handle != 0 && handle == s_enum_meta_type_key) return s_enum_meta_cache;
+
+    // Negative cache: return nullptr immediately for types already confirmed
+    // as non-enum (e.g. byte), skipping the expensive resolution chain entirely.
+    if (is_cached_non_enum(handle)) return nullptr;
 
     // TypeInfoHot* reverse cache: raw heap pointer → metadata.
     // Catches TypeInfoHot* from boxed object headers and managed Type objects
@@ -871,6 +899,16 @@ static const EnumMetadataTable* enum_resolve_meta(CHAOS_IL2CPP_INTPTR type_arg) 
 
     // Fallback: resolve type_arg and look up by subject_id.
     const auto* desc = resolve_type_arg(type_arg);
+
+    // If the type is resolvable but is NOT an enum, cache it in the
+    // negative cache so subsequent calls skip the resolution chain.
+    if (desc != nullptr && check_enum_type(desc) == nullptr) {
+        cache_non_enum(handle);
+        s_enum_meta_type_key = handle != 0 ? handle : static_cast<CHAOS_IL2CPP_UINTPTR>(type_arg);
+        s_enum_meta_cache = nullptr;
+        return nullptr;
+    }
+
     const auto* meta = (desc != nullptr && desc->subject_id_utf8 != nullptr)
         ? (g_chaos_resolve_enum_metadata
             ? g_chaos_resolve_enum_metadata(desc->subject_id_utf8)
