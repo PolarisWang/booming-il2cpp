@@ -30,6 +30,10 @@
 // Forward declaration of ChaosRuntimeHost (defined in chaos_runtime_host.h).
 class ChaosRuntimeHost;
 
+// chaos_valuetype_* typedefs (opaque 32-bit managed value types)
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SnapshotTestFixtures_IComInternal;
+typedef CHAOS_IL2CPP_INT32 chaos_valuetype_SomeOtherAssembly_IComExternal;
+
 
 
 // ═══════════════════════════════════════════════════════════════════════════
