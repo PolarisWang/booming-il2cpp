@@ -2,8 +2,8 @@
   "family": "polymorphism-reference",
   "assembly": "System.Text.Json",
   "mode": "standard",
-  "timestamp": "2026-05-29T13:00:03",
-  "duration_ms": 145406,
+  "timestamp": "2026-05-22T16:00:14",
+  "duration_ms": 35430,
   "overall_status": "passed",
   "stages": {
     "preflight": {
@@ -34,10 +34,10 @@
       "summary": "Entrypoint built and IL2CPP compile OK",
       "details": {
         "methodCount": 8,
-        "dllPath": "/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/polymorphism-reference/managed/subjects/build-output/PolymorphismReferenceSubjects.dll"
+        "dllPath": "D:\\agent\\booming-il2cpp\\testing\\foundation-dll\\System.Text.Json\\polymorphism-reference\\managed\\subjects\\build-output\\PolymorphismReferenceSubjects.dll"
       },
       "errors": [],
-      "duration_ms": 20404
+      "duration_ms": 34220
     },
     "jit_codegen": {
       "stage": "jit_codegen",
@@ -46,70 +46,6 @@
       "details": {},
       "errors": [],
       "duration_ms": 0
-    },
-    "managed_fact": {
-      "stage": "managed_fact",
-      "status": "passed",
-      "summary": "Fact net8.0: passed=0 failed=0 skipped=8",
-      "details": {
-        "totalMethods": 8,
-        "passedMethods": 0,
-        "failedMethods": 0,
-        "skippedMethods": 8,
-        "tfm": "net8.0",
-        "methodResults": [
-          {
-            "methodIndex": 0,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::CreateResolver:System.Text.Json.Serialization.ReferenceResolver()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 1,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::get_IgnoreCycles:System.Text.Json.Serialization.ReferenceHandler()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 2,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler::get_Preserve:System.Text.Json.Serialization.ReferenceHandler()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 3,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler`1::CreateResolver:System.Text.Json.Serialization.ReferenceResolver()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 4,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceHandler`1::.ctor:System.Void()",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 5,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::AddReference:System.Void(System.String,System.Object)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 6,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::GetReference:System.String(System.Object,System.Boolean&)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          },
-          {
-            "methodIndex": 7,
-            "methodSubjectId": "System.Text.Json/System.Text.Json.Serialization.ReferenceResolver::ResolveReference:System.Object(System.String)",
-            "status": "skipped",
-            "exceptionMessage": "unsupported_signature"
-          }
-        ]
-      },
-      "errors": [],
-      "duration_ms": 2137
     },
     "fact": {
       "stage": "fact",
@@ -123,7 +59,7 @@
         }
       },
       "errors": [],
-      "duration_ms": 11
+      "duration_ms": 350
     },
     "fact_jit": {
       "stage": "fact_jit",
@@ -138,61 +74,65 @@
         }
       },
       "errors": [],
-      "duration_ms": 11
+      "duration_ms": 35
     },
     "audit": {
       "stage": "audit",
       "status": "passed",
-      "summary": "false_passing=0, principle=CONCERN (mech_passed=True, strict_on_CONCERN=False)",
+      "summary": "false_passing=0, principle=CONCERN",
       "details": {
         "falsePassing": 0,
         "stubsFound": 0,
-        "skipsFound": 0,
+        "skipsFound": 2,
         "principleStatus": "CONCERN",
         "methodsWithoutLowering": 0
       },
       "errors": [],
-      "duration_ms": 102
+      "duration_ms": 721
     },
     "asm_compare": {
       "stage": "asm_compare",
-      "status": "failed",
-      "summary": "asm-compare: 2/8 methods OK, avg JIT=64.0 instr, avg AOT IR=2.5 instr, expansion=0.08x",
+      "status": "skipped",
+      "summary": "Subjects DLL not found — run codegen stage first",
+      "details": {},
+      "errors": [],
+      "duration_ms": 37
+    },
+    "microbench": {
+      "stage": "microbench",
+      "status": "passed",
+      "summary": "FramePool=6.7ns/op | FastExecute=1.9ns/op | CallVirt dispatch=1.9ns",
       "details": {
-        "totalMethods": 8,
-        "okCount": 2,
-        "failedCount": 6,
-        "skippedCount": 0,
-        "jitInstructionCount": {
-          "min": 64,
-          "max": 64,
-          "avg": 64.0,
-          "total": 128
+        "framePool": {
+          "acquireReleaseNsPerOp": 6.7,
+          "batchCount": 1000,
+          "framesPerBatch": 32
         },
-        "aotInstructionCount": {
-          "min": 2,
-          "max": 3,
-          "avg": 2.5,
-          "total": 10
+        "fastExecute": {
+          "runCount": 100000,
+          "nsPerCall": 1.9
         },
-        "totalExternalRuntimeCalls": 0,
-        "totalVirtualDispatches": 0,
-        "totalBoxingOps": 0,
-        "topInstructionCategories": {
-          "external_runtime_call": 1
+        "callVirt": {
+          "handlerDispatchNs": 1.9,
+          "emptyStackNs": 2.1
         },
-        "overallIrExpansionRatio": 0.08,
-        "averageExpansionRatio": 0.03,
-        "maxExpansionRatio": 0.03,
-        "minExpansionRatio": 0.03
+        "poolSize": 32
       },
       "errors": [],
-      "duration_ms": 2421
+      "duration_ms": 29
     },
     "benchmark": {
       "stage": "benchmark",
       "status": "skipped",
       "summary": "All methods are stubs — no benchmark possible",
+      "details": {},
+      "errors": [],
+      "duration_ms": 2
+    },
+    "hotupdate": {
+      "stage": "hotupdate",
+      "status": "skipped",
+      "summary": "All methods are stubs — no hotupdate possible",
       "details": {},
       "errors": [],
       "duration_ms": 0
@@ -207,11 +147,15 @@
     },
     "hotupdate_jit_fact": {
       "stage": "hotupdate_jit_fact",
-      "status": "failed",
-      "summary": "HotUpdate JIT fact crashed: Command '['/home/debian/agent/booming-il2cpp/testing/foundation-dll/System.Text.Json/polymorphism-reference/native/entry-jit.exe', '--hotupdate']' timed out after 120 seconds",
-      "details": {},
+      "status": "passed",
+      "summary": "8/8 passed, 0 failed",
+      "details": {
+        "passed": 8,
+        "failed": 0,
+        "total": 8
+      },
       "errors": [],
-      "duration_ms": 120097
+      "duration_ms": 26
     },
     "hotupdate_jit_benchmark": {
       "stage": "hotupdate_jit_benchmark",
@@ -219,87 +163,37 @@
       "summary": "All methods are stubs — no benchmark possible",
       "details": {},
       "errors": [],
-      "duration_ms": 0
-    },
-    "dashboard": {
-      "stage": "dashboard",
-      "status": "passed",
-      "summary": "Dashboard built: 6 sections",
-      "details": {
-        "interpreter": {},
-        "irTranslation": {
-          "totalMethods": 8,
-          "okCount": 2,
-          "failedCount": 6,
-          "overallIrExpansionRatio": 0.08,
-          "averageExpansionRatio": 0.03,
-          "maxExpansionRatio": 0.03,
-          "jitInstructionAvg": 64.0,
-          "aotInstructionAvg": 2.5,
-          "totalExternalRuntimeCalls": 0,
-          "totalVirtualDispatches": 0,
-          "totalBoxingOps": 0,
-          "topInstructionCategories": {
-            "external_runtime_call": 1
-          }
-        },
-        "performance": {},
-        "hotupdate": {},
-        "managedFact": {
-          "totalMethods": 8,
-          "passedMethods": 0,
-          "failedMethods": 0,
-          "skippedMethods": 8,
-          "tfm": "net8.0"
-        },
-        "keyRatios": {
-          "nativeFasterRatio": 0,
-          "irExpansionRatio": 0.08,
-          "interpreterSlowdownFactor": 0,
-          "asmPassRate": 25.0
-        }
-      },
-      "errors": [],
-      "duration_ms": 0
+      "duration_ms": 1
     }
   },
   "coverage": {
-    "methodCoverage": 0.0,
-    "testedRate": 100.0,
-    "overall": 100.0
+    "methodCoverage": 100.0,
+    "testedRate": 75.0,
+    "overall": 87.5
   },
   "dashboard": {
-    "interpreter": {},
-    "irTranslation": {
-      "totalMethods": 8,
-      "okCount": 2,
-      "failedCount": 6,
-      "overallIrExpansionRatio": 0.08,
-      "averageExpansionRatio": 0.03,
-      "maxExpansionRatio": 0.03,
-      "jitInstructionAvg": 64.0,
-      "aotInstructionAvg": 2.5,
-      "totalExternalRuntimeCalls": 0,
-      "totalVirtualDispatches": 0,
-      "totalBoxingOps": 0,
-      "topInstructionCategories": {
-        "external_runtime_call": 1
-      }
+    "interpreter": {
+      "fastFramePoolNsPerOp": 6.7,
+      "fastExecuteNsPerInstr": 0,
+      "callVirtHandlerDispatchNs": 1.9,
+      "callVirtMicHitNs": 0,
+      "callVirtRawFallbackNs": 0,
+      "poolSize": 32
     },
+    "irTranslation": {},
     "performance": {},
-    "hotupdate": {},
-    "managedFact": {
-      "totalMethods": 8,
-      "passedMethods": 0,
-      "failedMethods": 0,
-      "skippedMethods": 8,
-      "tfm": "net8.0"
+    "hotupdate": {
+      "jitFunctional": {
+        "passedMethods": 8,
+        "failedMethods": 0,
+        "totalMethods": 8
+      }
     },
     "keyRatios": {
       "nativeFasterRatio": 0,
-      "irExpansionRatio": 0.08,
+      "irExpansionRatio": 0,
       "interpreterSlowdownFactor": 0,
-      "asmPassRate": 25.0
+      "asmPassRate": 0.0
     }
   },
   "regression": {
