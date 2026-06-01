@@ -412,6 +412,16 @@ extern "C" void RegisterJitEntryMethods(const JitEntry* entries, uint32_t count)
         precode->entry = GetHotpatchNameRegistry().GetDispatchEntry(
             entry.module_id, entry.token);
 
+        // Skip keep-native methods (Subject_N/CustomEntrySubject_N): their
+        // direct_ptr must remain pointing to the original AOT function body.
+        // Replacing it with a JIT trampoline would break benchmark dispatch
+        // paths (ChaosDispatchMethodBenchDirect) that rely on direct_ptr for
+        // direct AOT body calls.
+        if (precode->entry && HotpatchShouldKeepNative(*precode->entry)) {
+            delete precode;
+            continue;
+        }
+
         // Step 5: Allocate trampoline from the RWX arena
         precode->trampoline = s_precode_arena.AllocateJitTrampoline(precode);
 
