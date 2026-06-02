@@ -171,6 +171,21 @@ public sealed class ProbeEmitter
                     : "";
                 var callExpr = $"{instanceExpr}.{method.Name}{genericSuffix}({argsStr})";
 
+                // Async unwrapping: Task/ValueTask return types must be awaited
+                // so the probe captures the actual result, not the Task wrapper.
+                // DllScanner.GetTypeName outputs generic types in angle-bracket format
+                // (e.g. "System.Threading.Tasks.Task<System.Int32>"), so check
+                // StartsWith("<") alongside the CLR backtick "`1" format.
+                var asyncReturnType = method.ReturnTypeName;
+                var isPlainAsync = asyncReturnType == "System.Threading.Tasks.Task" ||
+                                   asyncReturnType == "System.Threading.Tasks.ValueTask";
+                var isGenericAsync = asyncReturnType == "System.Threading.Tasks.Task`1" ||
+                                     asyncReturnType == "System.Threading.Tasks.ValueTask`1" ||
+                                     asyncReturnType.StartsWith("System.Threading.Tasks.Task<") ||
+                                     asyncReturnType.StartsWith("System.Threading.Tasks.ValueTask<");
+                if (isPlainAsync || isGenericAsync)
+                    callExpr += ".GetAwaiter().GetResult()";
+
                 sb.AppendLine("        try");
                 sb.AppendLine("        {");
 
@@ -178,7 +193,7 @@ public sealed class ProbeEmitter
                 if (preludeStr.Length > 0)
                     sb.Append(preludeStr);
 
-                if (method.IsVoid)
+                if (method.IsVoid || isPlainAsync)
                 {
                     sb.AppendLine($"            {callExpr};");
 

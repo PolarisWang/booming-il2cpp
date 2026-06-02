@@ -5,6 +5,23 @@ using Chaos.IL2CPP.Tools.TestProjectGenerator.Metadata;
 
 namespace Chaos.IL2CPP.Tools.TestProjectGenerator;
 
+// ── Subjects metadata (from AutoTestGenerator) ──
+// Schema: subjects.metadata.json
+internal sealed record SubjectsMetadata(
+    [property: JsonPropertyName("schemaVersion")] int SchemaVersion,
+    [property: JsonPropertyName("assemblyName")] string AssemblyName,
+    [property: JsonPropertyName("chunkSlug")] string ChunkSlug,
+    [property: JsonPropertyName("totalMethods")] int TotalMethods,
+    [property: JsonPropertyName("customEntryIndices")] IReadOnlyList<int>? CustomEntryIndices,
+    [property: JsonPropertyName("benchmarkMethodIndices")] IReadOnlyList<int>? BenchmarkMethodIndices,
+    [property: JsonPropertyName("hotupdateMethodIndices")] IReadOnlyList<int>? HotupdateMethodIndices,
+    [property: JsonPropertyName("methods")] IReadOnlyList<SubjectMethodEntry> Methods);
+
+internal sealed record SubjectMethodEntry(
+    [property: JsonPropertyName("index")] int Index,
+    [property: JsonPropertyName("kind")] string Kind,
+    [property: JsonPropertyName("methodSubjectId")] string MethodSubjectId);
+
 // ── Server protocol types ─────────────────────────────────────────────
 // Line-delimited JSON on stdin/stdout:
 //   → {"id":1,"cmd":"generate","contract":"...","output":"...","jit":false,...}
@@ -59,6 +76,7 @@ public static class Program
         {
             "scan" => RunScan(args[1..]),
             "generate" => RunGenerate(args[1..]),
+            "generate-dll" => RunGenerateDll(args[1..]),
             "emit" => RunEmit(args[1..]),
             "server" => RunServer(),
             _ => Error($"Unknown command: {command}")
@@ -83,6 +101,12 @@ public static class Program
                        [--codegen-dir <path>]
                   Full project generation: runs IL2CPP codegen, emits complete C++ project,
                   then builds the native executable by default.
+
+              generate-dll --dll <subjects.dll> --metadata <subjects.metadata.json> --output <dir>
+                          [--config-tier check|profile|ship] [--source-only] [--clean]
+                  Generate native entry.exe from AutoTestGenerator output DLL + metadata.
+                  Runs IL2CPP codegen, emits C++ project, builds entry.exe.
+                  --clean removes intermediate files (keeps only entry.exe).
 
               server  (no args)
                   Start TPG server mode. Reads line-delimited JSON commands from stdin,
@@ -438,6 +462,198 @@ public static class Program
 
         Console.WriteLine("  Done.");
         return 0;
+    }
+
+    /// <summary>
+    /// Generate native entry.exe from AutoTestGenerator output DLL + metadata.
+    /// This is the new DLL-mode entry point for the foundation-dll pipeline.
+    /// </summary>
+    private static int RunGenerateDll(string[] args)
+    {
+        string? dllPath = null;
+        string? metadataPath = null;
+        string? outputDir = null;
+        var configTier = "check";
+        var sourceOnly = false;
+        var clean = false;
+
+        for (int i = 0; i < args.Length; i++)
+        {
+            switch (args[i])
+            {
+                case "--dll" when i + 1 < args.Length:
+                    dllPath = Path.GetFullPath(args[++i]);
+                    break;
+                case "--metadata" when i + 1 < args.Length:
+                    metadataPath = Path.GetFullPath(args[++i]);
+                    break;
+                case "--output" when i + 1 < args.Length:
+                    outputDir = Path.GetFullPath(args[++i]);
+                    break;
+                case "--config-tier" when i + 1 < args.Length:
+                    configTier = args[++i];
+                    break;
+                case "--source-only":
+                    sourceOnly = true;
+                    break;
+                case "--clean":
+                    clean = true;
+                    break;
+            }
+        }
+
+        if (dllPath is null || !File.Exists(dllPath))
+            return Error($"DLL not found: {dllPath}");
+        if (metadataPath is null || !File.Exists(metadataPath))
+            return Error($"Metadata not found: {metadataPath}");
+        if (outputDir is null)
+            return Error("No output directory. Use --output <dir>");
+
+        Console.WriteLine("  [1/4] Reading subjects metadata...");
+        var metadata = JsonSerializer.Deserialize<SubjectsMetadata>(
+            File.ReadAllText(metadataPath), JsonOptions);
+        if (metadata is null || metadata.Methods.Count == 0)
+            return Error("No subjects found in metadata");
+
+        // Convert metadata entries to SubjectModel list
+        var subjects = new List<SubjectModel>();
+        foreach (var entry in metadata.Methods)
+        {
+            // Use the ContractReader's parser to convert methodSubjectId → SubjectModel
+            try
+            {
+                var kind = entry.Kind switch
+                {
+                    "benchmark" => SubjectKind.Benchmark,
+                    "hotupdate" => SubjectKind.HotUpdate,
+                    _ => SubjectKind.Fact
+                };
+                var model = Metadata.ContractReader.ParseSingle(entry.MethodSubjectId, kind);
+                subjects.Add(model);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"  [WARN] Skipping {entry.MethodSubjectId}: {ex.Message}");
+            }
+        }
+        Console.WriteLine($"        {subjects.Count} subjects from chunk '{metadata.ChunkSlug}'");
+
+        // Step 2: Run IL2CPP codegen
+        Console.WriteLine("  [2/4] Running IL2CPP codegen...");
+        var codegenBase = Path.Combine(outputDir, "codegen");
+        var orchestrator = new Codegen.CodegenOrchestrator();
+        var codegenResult = orchestrator.Run([dllPath], codegenBase, "aot");
+
+        if (!codegenResult.Success)
+            return Error($"Codegen failed: {codegenResult.Error}");
+
+        // Resolve SDK directory
+        var sdkDir = ResolveSdkDir(codegenBase);
+
+        // Step 3: Emit C++ project
+        Console.WriteLine("  [3/4] Emitting C++ project...");
+        var emitter = new CppProjectEmitter();
+
+        if (sourceOnly)
+        {
+            emitter.Emit(outputDir, codegenResult, subjects,
+                isJit: false, configTier: configTier,
+                isWindows: true, projectRoot: null,
+                codegenDir: codegenBase, sdkDir: sdkDir);
+            Console.WriteLine("        Sources written (source-only mode)");
+            return 0;
+        }
+
+        var exePath = emitter.GenerateAndBuild(outputDir, codegenResult, subjects,
+            isJit: false, configTier: configTier,
+            isWindows: true, projectRoot: null,
+            codegenDir: codegenBase, sdkDir: sdkDir);
+
+        if (exePath is null)
+            return Error("Build failed");
+
+        Console.WriteLine($"        entry.exe: {exePath}");
+
+        // Step 4: Clean up intermediate files (optional)
+        if (clean)
+        {
+            Console.WriteLine("  [4/4] Cleaning intermediate files...");
+            CleanIntermediateFiles(outputDir);
+            Console.WriteLine("        Kept only entry.exe");
+        }
+
+        Console.WriteLine("  Done.");
+        return 0;
+    }
+
+    /// <summary>
+    /// Resolve SDK directory from codegen output.
+    /// </summary>
+    private static string ResolveSdkDir(string codegenBase)
+    {
+        if (!Directory.Exists(codegenBase))
+            return codegenBase;
+
+        // Check if codegenBase itself has chaos-config.cmake
+        if (File.Exists(Path.Combine(codegenBase, "chaos-config.cmake")))
+            return codegenBase;
+
+        // Check subdirectories
+        foreach (var subDir in Directory.GetDirectories(codegenBase))
+        {
+            if (File.Exists(Path.Combine(subDir, "chaos-config.cmake")))
+                return subDir;
+        }
+
+        // Check parent (pipeline layout: generated/ in subdir, config in parent)
+        var parent = Path.GetDirectoryName(codegenBase);
+        if (parent is not null && File.Exists(Path.Combine(parent, "chaos-config.cmake")))
+            return parent;
+
+        return codegenBase;
+    }
+
+    /// <summary>
+    /// Remove intermediate build artifacts, keeping only entry.exe.
+    /// </summary>
+    private static void CleanIntermediateFiles(string outputDir)
+    {
+        var keepDirs = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "build",           // CMake build output (entry.exe lives here)
+        };
+        var keepFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "entry.exe",
+            "entry",
+        };
+
+        foreach (var dir in Directory.GetDirectories(outputDir))
+        {
+            var name = Path.GetFileName(dir);
+            if (keepDirs.Contains(name)) continue;
+
+            try { Directory.Delete(dir, recursive: true); }
+            catch { /* best-effort */ }
+        }
+
+        foreach (var file in Directory.GetFiles(outputDir, "*.cpp"))
+        {
+            try { File.Delete(file); }
+            catch { /* best-effort */ }
+        }
+        foreach (var file in Directory.GetFiles(outputDir, "*.h"))
+        {
+            try { File.Delete(file); }
+            catch { /* best-effort */ }
+        }
+        foreach (var file in Directory.GetFiles(outputDir, "*.json"))
+        {
+            var name = Path.GetFileName(file);
+            if (keepFiles.Contains(name)) continue;
+            try { File.Delete(file); }
+            catch { /* best-effort */ }
+        }
     }
 
     private static int RunEmit(string[] args)

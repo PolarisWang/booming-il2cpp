@@ -1,8 +1,0 @@
-{
-  "status": "failed",
-  "passed": 13,
-  "total": 13,
-  "all_semantic": true,
-  "all_revert": true,
-  "exit_code": 3221225477
-}

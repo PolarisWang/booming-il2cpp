@@ -1,3 +1,0 @@
-[2026-05-26T20:48:26][DEBUG][codegen] T4 VEH handler registered
-[2026-05-26T20:48:26][DEBUG][codegen] T4 VEH handler registered
-{"elapsedMilliseconds":1.043,"calibratedMs":1.043,"opsPerSecond":958405,"iterations":1000,"allocatedBytes":0,"allocPerOp":0.0}

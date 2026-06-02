@@ -149,9 +149,17 @@ public sealed class TestEmitter
 
                 // Task-returning methods: unwrap with GetAwaiter().GetResult() so assertions
                 // see the actual result value and exceptions propagate synchronously.
-                var isPlainTask = method.ReturnTypeName == "System.Threading.Tasks.Task";
-                var isGenericTask = method.ReturnTypeName.StartsWith("System.Threading.Tasks.Task") &&
-                                    !isPlainTask;
+                // Covers Task, Task`1, ValueTask, ValueTask`1.
+                // DllScanner.GetTypeName outputs generic types in angle-bracket format
+                // (e.g. "System.Threading.Tasks.Task<System.Int32>") so we must also
+                // match the StartsWith("<") variant alongside the CLR backtick "`1" format.
+                var rt = method.ReturnTypeName;
+                var isPlainTask = rt == "System.Threading.Tasks.Task" ||
+                                  rt == "System.Threading.Tasks.ValueTask";
+                var isGenericTask = rt == "System.Threading.Tasks.Task`1" ||
+                                    rt == "System.Threading.Tasks.ValueTask`1" ||
+                                    rt.StartsWith("System.Threading.Tasks.Task<") ||
+                                    rt.StartsWith("System.Threading.Tasks.ValueTask<");
                 var isTaskReturn = isPlainTask || isGenericTask;
                 if (isTaskReturn)
                     callExpr += ".GetAwaiter().GetResult()";

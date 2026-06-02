@@ -152,4 +152,23 @@ public sealed class ContractReader
 
         return result;
     }
+
+    /// <summary>
+    /// Parse a single methodSubjectId into a SubjectModel.
+    /// </summary>
+    public static SubjectModel ParseSingle(string subjectId, SubjectKind kind = SubjectKind.Fact)
+    {
+        var (assemblyName, fullTypeName, methodName, returnType, parameters) = ParseMethodSubjectId(subjectId);
+        return new SubjectModel
+        {
+            Kind = kind,
+            AssemblyName = assemblyName ?? "",
+            FullTypeName = fullTypeName ?? "",
+            MethodName = methodName ?? "",
+            IsStatic = true,
+            ReturnTypeFullName = returnType ?? "",
+            Parameters = parameters,
+            SubjectId = subjectId,
+        };
+    }
 }

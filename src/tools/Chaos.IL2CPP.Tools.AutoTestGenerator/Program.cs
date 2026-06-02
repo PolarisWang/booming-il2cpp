@@ -10,6 +10,9 @@ if (args.Length < 2)
     Console.Error.WriteLine("  --output     Output directory (default: ./output/{AssemblyName})");
     Console.Error.WriteLine("  --list-types List public types in the assembly");
     Console.Error.WriteLine("  --report     Aggregate coverage from output directory into SUMMARY.md");
+    Console.Error.WriteLine("  --emit-metadata <path>  Emit subjects.metadata.json for all-types mode");
+    Console.Error.WriteLine("  --chunk-slug <slug>     Chunk slug for metadata (default: assembly name)");
+    Console.Error.WriteLine("  --namespace-filter <ns1,ns2,...>  Filter by namespace prefix (for chunk builds)");
     return args is ["--report", ..] ? 0 : 1;
 }
 
@@ -17,6 +20,9 @@ if (args.Length < 2)
 string dllPath = "";
 string typeFullName = "";
 string? outputDir = null;
+string? emitMetadataPath = null;
+string? chunkSlug = null;
+string? namespaceFilter = null;
 bool listTypes = false;
 bool allTypes = false;
 
@@ -32,6 +38,15 @@ for (int i = 0; i < args.Length; i++)
             break;
         case "--output" when i + 1 < args.Length:
             outputDir = args[++i];
+            break;
+        case "--emit-metadata" when i + 1 < args.Length:
+            emitMetadataPath = args[++i];
+            break;
+        case "--chunk-slug" when i + 1 < args.Length:
+            chunkSlug = args[++i];
+            break;
+        case "--namespace-filter" when i + 1 < args.Length:
+            namespaceFilter = args[++i];
             break;
         case "--list-types":
             listTypes = true;
@@ -117,7 +132,7 @@ if (allTypes)
     IReadOnlyList<DllScanResult> allScanResults;
     try
     {
-        allScanResults = allScanner.ScanAll(dllPath);
+        allScanResults = allScanner.ScanAll(dllPath, namespaceFilter);
     }
     catch (Exception ex)
     {
@@ -142,6 +157,7 @@ if (allTypes)
 
     int totalTypes = allScanResults.Count;
     int okTypes = 0;
+    var allProbeResults = new List<ProbeResult>();
 
     for (int ti = 0; ti < totalTypes; ti++)
     {
@@ -178,6 +194,7 @@ if (allTypes)
             int nonDeterministic = oneProbeResults.Count(r => !r.IsDeterministic);
             int exceptions = oneProbeResults.Count(r => r.HasException);
             Console.WriteLine($"  {deterministic} deterministic, {nonDeterministic} non-deterministic, {exceptions} exception-throwing");
+            allProbeResults.AddRange(oneProbeResults);
         }
 
         // ── Phase 4: Emit test source ──
@@ -199,6 +216,88 @@ if (allTypes)
     }
 
     Console.WriteLine($"\nDone. {okTypes}/{totalTypes} types processed successfully.");
+
+    // ── Emit subjects.metadata.json ──
+    if (emitMetadataPath is not null)
+    {
+        var slug = chunkSlug ?? allAssemblyName;
+        var methodEntries = new List<SubjectMethodEntry>();
+        var customEntryIndices = new List<int>();
+        var benchmarkMethodIndices = new List<int>();
+        var hotupdateMethodIndices = new List<int>();
+
+        // Build a lookup: SubjectId → ProbeResult
+        var probeLookup = new Dictionary<string, ProbeResult>(StringComparer.Ordinal);
+        foreach (var pr in allProbeResults)
+            probeLookup.TryAdd(pr.SubjectId, pr);
+
+        int globalIdx = 0;
+        foreach (var scan in allScanResults)
+        {
+            foreach (var method in scan.Methods)
+            {
+                var paramsStr = string.Join(",", method.Parameters.Select(p => p.TypeName));
+                var subjectId = $"{scan.AssemblyName}/{method.DeclaringTypeFullName}::{method.Name}:{method.ReturnTypeName}({paramsStr})";
+
+                string kind;
+                bool isBenchmark;
+
+                if (probeLookup.TryGetValue(subjectId, out var pr))
+                {
+                    if (pr.HasException)
+                    {
+                        kind = "fact";
+                        isBenchmark = false;
+                    }
+                    else if (pr.IsDeterministic && !pr.IsVoid)
+                    {
+                        kind = "fact";
+                        isBenchmark = false;
+                    }
+                    else
+                    {
+                        kind = "benchmark";
+                        isBenchmark = true;
+                    }
+                }
+                else
+                {
+                    // No probe result (probe build failed) — default to benchmark
+                    kind = "benchmark";
+                    isBenchmark = true;
+                }
+
+                methodEntries.Add(new SubjectMethodEntry(globalIdx, kind, subjectId));
+                if (isBenchmark)
+                    benchmarkMethodIndices.Add(globalIdx);
+                else
+                    customEntryIndices.Add(globalIdx);
+                globalIdx++;
+            }
+        }
+
+        var metadata = new SubjectsMetadata(
+            SchemaVersion: 1,
+            AssemblyName: allAssemblyName,
+            ChunkSlug: slug,
+            TotalMethods: globalIdx,
+            CustomEntryIndices: customEntryIndices.Count > 0 ? customEntryIndices : null,
+            BenchmarkMethodIndices: benchmarkMethodIndices.Count > 0 ? benchmarkMethodIndices : null,
+            HotupdateMethodIndices: null,
+            Methods: methodEntries);
+
+        var metaJson = JsonSerializer.Serialize(metadata, new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+        });
+        var metaDir = Path.GetDirectoryName(emitMetadataPath)!;
+        if (!string.IsNullOrEmpty(metaDir))
+            Directory.CreateDirectory(metaDir);
+        File.WriteAllText(emitMetadataPath, metaJson);
+        Console.WriteLine($"[Metadata] {emitMetadataPath}  ({globalIdx} subjects)");
+    }
+
     return 0;
 }
 
@@ -347,3 +446,19 @@ static string SanitizePath(string name)
 {
     return name.Replace('.', '_').Replace('<', '_').Replace('>', '_').Replace('`', '_');
 }
+
+// ── Subjects metadata records (mirrors TPG format for pipeline interop) ──
+internal sealed record SubjectsMetadata(
+    int SchemaVersion,
+    string AssemblyName,
+    string ChunkSlug,
+    int TotalMethods,
+    IReadOnlyList<int>? CustomEntryIndices,
+    IReadOnlyList<int>? BenchmarkMethodIndices,
+    IReadOnlyList<int>? HotupdateMethodIndices,
+    IReadOnlyList<SubjectMethodEntry> Methods);
+
+internal sealed record SubjectMethodEntry(
+    int Index,
+    string Kind,
+    string MethodSubjectId);
