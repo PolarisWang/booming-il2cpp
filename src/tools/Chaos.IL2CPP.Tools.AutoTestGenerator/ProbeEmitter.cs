@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
 
@@ -490,7 +491,7 @@ public sealed class ProbeEmitter
                     if (b is null) continue;
                     if (a.HasException == b.HasException &&
                         a.ExceptionType == b.ExceptionType &&
-                        a.ReturnValueJson == b.ReturnValueJson &&
+                        JsonValuesEqual(a.ReturnValueJson, b.ReturnValueJson) &&
                         OutRefValuesEqual(a.OutRefValues, b.OutRefValues))
                     {
                         agreeCount++;
@@ -523,8 +524,56 @@ public sealed class ProbeEmitter
         if (a is null || b is null) return false;
         if (a.Count != b.Count) return false;
         for (int i = 0; i < a.Count; i++)
-            if (a[i] != b[i]) return false;
+            if (!JsonValuesEqual(a[i], b[i])) return false;
         return true;
+    }
+
+    /// <summary>
+    /// Compare two JSON strings structurally (order-independent for object keys).
+    /// Falls back to string equality if parsing fails.
+    /// </summary>
+    private static bool JsonValuesEqual(string? a, string? b)
+    {
+        if (a == null && b == null) return true;
+        if (a == null || b == null) return false;
+        try
+        {
+            using var docA = JsonDocument.Parse(a);
+            using var docB = JsonDocument.Parse(b);
+            return JsonElementsEqual(docA.RootElement, docB.RootElement);
+        }
+        catch (JsonException)
+        {
+            return a == b;
+        }
+    }
+
+    /// <summary>Recursive structural comparison of two JsonElement trees.</summary>
+    private static bool JsonElementsEqual(JsonElement a, JsonElement b)
+    {
+        if (a.ValueKind != b.ValueKind) return false;
+        switch (a.ValueKind)
+        {
+            case JsonValueKind.Object:
+                var aProps = a.EnumerateObject().OrderBy(p => p.Name).ToList();
+                var bProps = b.EnumerateObject().OrderBy(p => p.Name).ToList();
+                if (aProps.Count != bProps.Count) return false;
+                for (int i = 0; i < aProps.Count; i++)
+                    if (aProps[i].Name != bProps[i].Name ||
+                        !JsonElementsEqual(aProps[i].Value, bProps[i].Value))
+                        return false;
+                return true;
+            case JsonValueKind.Array:
+                var aArr = a.EnumerateArray().ToList();
+                var bArr = b.EnumerateArray().ToList();
+                if (aArr.Count != bArr.Count) return false;
+                for (int i = 0; i < aArr.Count; i++)
+                    if (!JsonElementsEqual(aArr[i], bArr[i]))
+                        return false;
+                return true;
+            default:
+                return a.ToString() == b.ToString();
+        }
     }
 
     internal static string BuildSubjectId(MethodSignature method, int setIndex)

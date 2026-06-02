@@ -64,16 +64,22 @@
 
 ## 已生成的覆盖范围
 
-最新覆盖率摘要（2026-06-02）：
+最新覆盖率摘要（2026-06-02, Phase 2）：
 
 | Metric | Value |
 |--------|-------|
-| Total Types | 585 |
-| Total Methods | 6403 |
-| Auto-generated (Fact + Benchmark + HotUpdate) | 1872 |
-| Benchmark-only | 4528 |
+| Total Types | 809 |
+| Total Methods | 8177 |
+| Auto-generated (Fact + Benchmark + HotUpdate) | 2240 |
+| Benchmark-only | 5934 |
 | Skipped | 3 |
-| Total Subjects | 11368 |
+| Total Subjects | 14721 |
+
+Key improvements in Phase 2:
+- **Probe 确定性判定**：`MergeResults()` 从 JSON 精确字符串比较改为结构化 `JsonElement` 比较（排序无关的 Object key 比较、Array 逐元素比较），消除 Dictionary key 顺序、浮点数精度等导致的假非确定
+- **OutRef 值比较**：`OutRefValuesEqual` 同样使用结构化 JSON 比较
+- **Ref struct 报告修正**：无法生成断言的 ref struct 返回值不再计入 auto-generated 计数
+- **BCL 扩展**：新增 14 个 DLL（System.Linq、System.Text.Json、System.Net.Http、System.Collections.Immutable 等），类型覆盖面从 585 → 809
 
 聚合报告命令：`dotnet run --project src/tools/... -- --report <output_dir>` 生成 `SUMMARY.md`。
 
@@ -108,5 +114,7 @@
 | `src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/ProjectWriter.cs` | 项目文件输出（csproj/Program.cs/README） |
 | `src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/CSharpSerializer.cs` | JSON ↔ C# 表达式序列化 |
 | `src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/CoverageAggregator.cs` | 多项目覆盖率聚合 |
+| `src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/ProbeEmitter.cs` | 探针生成、3-pass build+run、**结构化 JSON 确定性判定** |
+| `src/tools/Chaos.IL2CPP.Tools.AutoTestGenerator/TestEmitter.cs` | **Ref struct 报告修正** |
 | `src/reference/Chaos.TestFramework.Sdk/Assert.cs` | Assert API（Conditional VERIFY guard） |
 | `run-autotest-generator.sh` | 批量生成入口脚本 |
