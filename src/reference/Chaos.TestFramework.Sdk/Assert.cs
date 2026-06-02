@@ -162,6 +162,52 @@ public static class Assert
     [Conditional("VERIFY")]
     public static void AreEqual<T>(T expected, T actual, string? message = null)
     {
+        // Null handling
+        if (expected is null && actual is null) return;
+        if (expected is null || actual is null)
+        {
+            Fail(message ?? $"Expected [{typeof(T).Name}]{expected}, got [{typeof(T).Name}]{actual}");
+            return;
+        }
+
+        // Runtime collection structural comparison (List<T>, arrays, HashSet<T>, etc.)
+        // Note: we cannot use IEnumerable<T> overloads — C# resolves the generic T=T overload
+        // over IEnumerable<T> for concrete types like List<int>, so runtime detection is needed.
+        // Exclude string (which implements IEnumerable<char>) to keep clear string-level error messages.
+        if (expected is not string &&
+            actual is not string &&
+            expected is System.Collections.IEnumerable expectedEnum &&
+            actual is System.Collections.IEnumerable actualEnum)
+        {
+            var eIter = expectedEnum.GetEnumerator();
+            var aIter = actualEnum.GetEnumerator();
+            using (eIter as IDisposable)
+            using (aIter as IDisposable)
+            {
+                int index = 0;
+                while (eIter.MoveNext())
+                {
+                    if (!aIter.MoveNext())
+                    {
+                        Fail(message ?? $"Expected longer collection at index {index}");
+                        return;
+                    }
+                    if (!System.Collections.Generic.EqualityComparer<object?>.Default.Equals(eIter.Current, aIter.Current))
+                    {
+                        Fail(message ?? $"Element mismatch at index {index}: expected [{eIter.Current?.GetType().Name}]{eIter.Current}, got [{aIter.Current?.GetType().Name}]{aIter.Current}");
+                        return;
+                    }
+                    index++;
+                }
+                if (aIter.MoveNext())
+                {
+                    Fail(message ?? $"Expected shorter collection — extra element at index {index}");
+                }
+            }
+            return;
+        }
+
+        // Default equality (value types, strings, IEquatable<T> types)
         if (!System.Collections.Generic.EqualityComparer<T>.Default.Equals(expected, actual))
             Fail(message ?? $"Expected [{typeof(T).Name}]{expected}, got [{typeof(T).Name}]{actual}");
     }

@@ -29,9 +29,9 @@ public sealed class CSharpSerializer
     /// </summary>
     public string? Serialize(string typeName, object? value)
     {
-        // Tier 1: null
+        // Tier 1: null — use typed default() so overload resolution has type info
         if (value is null)
-            return "null!";
+            return $"default({ToCSharpTypeName(typeName)})!";
 
         // Tier 1: primitives
         if (PrimitiveTypeNames.Contains(typeName))

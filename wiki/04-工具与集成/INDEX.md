@@ -8,6 +8,7 @@
 
 最近更新：
 
+- `2026-06-02`：新增 `autotest-generator.md`，记录 AutoTestGenerator 5-phase 管线结构与批量运行方式。
 - `2026-05-28`：新增 `linux-dev-toolchain.md`，记录 Linux 推荐工具链与配置。
 - `2026-05-21`：新增 `il2cpp-generator-project-structure.md`，收口 `CodeGen → Generator` 重命名后的项目结构、命名空间与三层分离约束。
 - `2026-04-17`：更新 `il2cpp-core-structure-and-scriban-governance.md`，收口 `ObjectModel` / `ExternalRuntimeHelpers`，并同步 `LoaderStage` / `LinkerStage` / `ManagedClosureContracts` 的结构治理结论。
@@ -44,6 +45,7 @@
 | [`unified-project-workspaces-and-deploy-core.md`](./unified-project-workspaces-and-deploy-core.md) | project workspaces and deploy core | 固化 `generate/build project`、`deploy core`、`subject-exec` 与 `artifacts/projects/**` / `deploy/core/**` 边界。 |
 | [`asm-compare-diagnostic-tool.md`](./asm-compare-diagnostic-tool.md) | ASM-COMPARE 诊断工具 | JIT vs IL2CPP AOT 方法级汇编对比工具，支持分段报告和 IL offset 对齐的 side-by-side 对比。 |
 | [`chaos-sdk-usage.md`](./chaos-sdk-usage.md) | Chaos SDK 使用指南 | `find_package(chaos)` CMake 集成方式、SDK 目录结构、`chaos::runtime` / `chaos::codegen` target 说明、Foundation-DLL 管线集成说明。 |
+| [`autotest-generator.md`](./autotest-generator.md) | AutoTestGenerator | BCL 方法级自动测试生成管线：5-phase pipeline (Scan/ValueGen/Probe/TestEmit/ProjectWrite)、边界值策略、NullGuard 安全表达式、批量 CoreLib 覆盖。 |
 
 ## 维护约定
 
