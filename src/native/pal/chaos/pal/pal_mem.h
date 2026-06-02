@@ -57,6 +57,20 @@ struct PalMemoryStatus {
 /// Returns zeros on failure or unsupported platform.
 void PalGetMemoryStatus(PalMemoryStatus& out) noexcept;
 
+/// Query memory region information for a given address.
+/// On Win32: wraps ::VirtualQuery, returns sizeof(MEMORY_BASIC_INFORMATION) on success.
+/// On POSIX: returns 0 (not supported — mmap'd regions are always valid).
+/// @param addr      Address to query.
+/// @param out_info  Output buffer (MEMORY_BASIC_INFORMATION on Win32).
+/// @param info_size Size of the output buffer.
+/// @return Size written to out_info, or 0 on failure/unsupported.
+size_t PalVirtualQuery(const void* addr, void* out_info, size_t info_size) noexcept;
+
+/// Returns true if @a ptr points to a valid committed VirtualAlloc allocation.
+/// On Win32: calls VirtualQuery and checks State == MEM_COMMIT.
+/// On POSIX: always returns true (munmap is safe on any mapped address).
+bool PalVirtualAllocIsValid(const void* ptr) noexcept;
+
 }  // namespace chaos::il2cpp::pal
 
 #endif  // CHAOS_IL2CPP_PAL_MEM_H_

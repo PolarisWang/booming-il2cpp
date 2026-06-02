@@ -66,4 +66,16 @@ void PalGetMemoryStatus(PalMemoryStatus& out) noexcept {
     }
 }
 
+size_t PalVirtualQuery(const void* addr, void* out_info, size_t info_size) noexcept {
+    return ::VirtualQuery(addr, static_cast<MEMORY_BASIC_INFORMATION*>(out_info),
+                          static_cast<SIZE_T>(info_size));
+}
+
+bool PalVirtualAllocIsValid(const void* ptr) noexcept {
+    MEMORY_BASIC_INFORMATION mbi;
+    return ::VirtualQuery(ptr, &mbi, sizeof(mbi)) == sizeof(mbi) &&
+           mbi.State == MEM_COMMIT &&
+           mbi.AllocationBase == ptr;
+}
+
 }  // namespace chaos::il2cpp::pal

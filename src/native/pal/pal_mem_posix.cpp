@@ -95,4 +95,12 @@ void PalGetMemoryStatus(PalMemoryStatus& out) noexcept {
     ::fclose(f);
 }
 
+size_t PalVirtualQuery(const void* /*addr*/, void* /*out_info*/, size_t /*info_size*/) noexcept {
+    return 0;  // Not supported on POSIX — mmap'd regions are always valid.
+}
+
+bool PalVirtualAllocIsValid(const void* /*ptr*/) noexcept {
+    return true;  // POSIX: munmap is safe on any mapped address.
+}
+
 }  // namespace chaos::il2cpp::pal

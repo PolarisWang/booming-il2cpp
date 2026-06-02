@@ -38,4 +38,21 @@ void PalYield() noexcept;
 /// @param out_limit  Output: low address of the stack (lowest valid address).
 void PalGetStackBounds(void*& out_base, void*& out_limit) noexcept;
 
+/// Duplicate the current thread's OS handle for cross-thread operations.
+/// On Windows: returns a duplicated HANDLE via DuplicateHandle with
+///             THREAD_SET_CONTEXT access (for QueueUserAPC).
+/// On POSIX: returns nullptr (signal-based preemption uses os_thread_id).
+/// The returned handle must be closed via PalCloseThreadHandle.
+void* PalDuplicateCurrentThreadHandle() noexcept;
+
+/// Close a thread handle returned by PalDuplicateCurrentThreadHandle.
+/// On Windows: calls CloseHandle.  On POSIX: no-op.
+void PalCloseThreadHandle(void* handle) noexcept;
+
+/// Set the OS thread priority from a managed priority level (0=Lowest..4=Highest).
+/// On Windows: maps to THREAD_PRIORITY_LOWEST..THREAD_PRIORITY_HIGHEST.
+/// On POSIX: uses setpriority with nice value 19..-20.
+/// Returns true on success, false on failure.
+bool PalSetThreadPriority(int level) noexcept;
+
 }  // namespace chaos::il2cpp::pal
