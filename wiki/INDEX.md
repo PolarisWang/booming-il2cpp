@@ -36,6 +36,7 @@
 
 ## 最近变更
 
+- `2026-06-02`: 新增 `04-工具与集成/autotest-generator.md`，记录 AutoTestGenerator 管线结构与批量运行方式。
 - `2026-04-20`: 更新 `04-工具与集成/统一测试框架.md` 与 `04-工具与集成/INDEX.md`，明确 managed proof / benchmark 统一走 shared runtime host，现存 `Program.cs` / `ProofEntry` 仅可保留为 native 过渡契约。
 - `2026-04-12`: 更新 `04-工具与集成/INDEX.md`，新增 `hot-update-interpreter-vm-v1.md` 与 `hot-update-e2e-runtime-baseline-v1.md`，沉淀 Phase C 的原生 Interpreter VM 与热更端到端基线。
 - `2026-04-11`: 更新 `04-工具与集成/INDEX.md`，补充 Phase 7 的 same-assembly `CallVirt` 真实执行、`ManagedInstructionModel.IlOffset` 与真实 EH lowering，以及 `try/catch` / `rethrow` / `try/finally` 最小 managed proof。

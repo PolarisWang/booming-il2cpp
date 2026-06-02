@@ -9,7 +9,8 @@ if (args.Length < 2)
     Console.Error.WriteLine("  --all-types  Scan all public types in the assembly");
     Console.Error.WriteLine("  --output     Output directory (default: ./output/{AssemblyName})");
     Console.Error.WriteLine("  --list-types List public types in the assembly");
-    return 1;
+    Console.Error.WriteLine("  --report     Aggregate coverage from output directory into SUMMARY.md");
+    return args is ["--report", ..] ? 0 : 1;
 }
 
 // ── Parse CLI arguments ──
@@ -39,6 +40,21 @@ for (int i = 0; i < args.Length; i++)
             allTypes = true;
             break;
     }
+}
+
+// ── Coverage report mode ──
+var reportIdx = Array.IndexOf(args, "--report");
+if (reportIdx >= 0 && reportIdx + 1 < args.Length)
+{
+    var reportDir = args[reportIdx + 1];
+    var aggregator = new CoverageAggregator();
+    var items = aggregator.Aggregate(reportDir);
+    var summary = aggregator.GenerateReport(items);
+    var summaryPath = Path.Combine(reportDir, "SUMMARY.md");
+    File.WriteAllText(summaryPath, summary);
+    Console.WriteLine(summary);
+    Console.WriteLine($"[Output] {summaryPath}");
+    return 0;
 }
 
 // ── Known type-to-DLL mapping for types not in System.Runtime.dll ──
@@ -329,5 +345,5 @@ static string? FindLatestFile(string searchRoot, string fileName)
 
 static string SanitizePath(string name)
 {
-    return name.Replace('.', '_').Replace('<', '_').Replace('>', '_');
+    return name.Replace('.', '_').Replace('<', '_').Replace('>', '_').Replace('`', '_');
 }

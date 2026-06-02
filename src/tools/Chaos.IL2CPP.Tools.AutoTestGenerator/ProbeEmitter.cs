@@ -431,6 +431,11 @@ public sealed class ProbeEmitter
     /// </summary>
     private static string DisambiguateArg(string paramType, string argExpr)
     {
+        // Safety net: untyped null! creates ambiguity for overloaded reference types
+        // (e.g. byte[] vs Stream). Cast to the parameter type to disambiguate.
+        if (argExpr == "null!")
+            return $"({CSharpSerializer.MapToCSharpType(paramType)})null!";
+
         if (!CastNeededTypes.Contains(paramType))
             return argExpr;
 

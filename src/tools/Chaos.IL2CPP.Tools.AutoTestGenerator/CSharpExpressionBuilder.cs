@@ -16,6 +16,12 @@ public sealed class CSharpExpressionBuilder
     {
         ["System.Text.Encoding"] = "Encoding.UTF8",
         ["System.String"] = "string.Empty",
+        // Crypto abstract type factories — .Create() returns concrete instances
+        ["System.Security.Cryptography.HashAlgorithm"] = "System.Security.Cryptography.SHA256.Create()",
+        ["System.Security.Cryptography.SymmetricAlgorithm"] = "System.Security.Cryptography.Aes.Create()",
+        ["System.Security.Cryptography.AsymmetricAlgorithm"] = "System.Security.Cryptography.RSA.Create()",
+        ["System.Security.Cryptography.RSA"] = "System.Security.Cryptography.RSA.Create()",
+        ["System.Security.Cryptography.SHA256"] = "System.Security.Cryptography.SHA256.Create()",
     };
 
     /// <summary>

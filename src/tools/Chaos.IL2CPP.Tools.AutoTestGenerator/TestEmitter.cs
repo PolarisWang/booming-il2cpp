@@ -72,10 +72,15 @@ public sealed class TestEmitter
 
         // Add using for the tested type's namespace so the generated code can reference
         // the type directly (e.g. `using System.Text.RegularExpressions;` for Regex).
-        var nsIndex = typeFullName.LastIndexOf('.');
+        // Strip generic args (e.g. "List<System.Int32>" → "List") before namespace extraction,
+        // otherwise LastIndexOf('.') finds the dot inside generic args (".Int32").
+        var nsTypePart = typeFullName.IndexOf('<') >= 0
+            ? typeFullName[..typeFullName.IndexOf('<')]
+            : typeFullName;
+        var nsIndex = nsTypePart.LastIndexOf('.');
         if (nsIndex > 0)
         {
-            var ns = typeFullName[..nsIndex];
+            var ns = nsTypePart[..nsIndex];
             if (ns.StartsWith("System.") || ns == "System")
                 sb.AppendLine($"using {ns};");
         }
@@ -314,6 +319,11 @@ public sealed class TestEmitter
     /// </summary>
     private static string DisambiguateArg(string paramType, string argExpr)
     {
+        // Safety net: untyped null! creates ambiguity for overloaded reference types
+        // (e.g. byte[] vs Stream). Cast to the parameter type to disambiguate.
+        if (argExpr == "null!")
+            return $"({CSharpSerializer.MapToCSharpType(paramType)})null!";
+
         if (!CastNeededTypes.Contains(paramType))
             return argExpr;
 

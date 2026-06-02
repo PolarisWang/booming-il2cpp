@@ -26,13 +26,23 @@ public sealed class ValueGenerator
         ["System.Double"] = new[] { "0d", "1d", "-1d", "3.14d" },
         ["System.Decimal"] = new[] { "0m", "1m", "-1m", "3.14m" },
         ["System.Char"] = new[] { "'\\0'", "'A'", "'z'" },
-        ["System.String"] = new[] { "\"\"", "\"hello\"", "null!" },
+        ["System.String"] = new[] { "\"\"", "\"hello\"", "null!", "\"\\0\"", "\"ABC123\"" },
         ["System.IntPtr"] = new[] { "System.IntPtr.Zero", "new System.IntPtr(42)", "new System.IntPtr(-1)" },
         ["System.UIntPtr"] = new[] { "System.UIntPtr.Zero", "new System.UIntPtr(42)" },
         ["System.DateTime"] = new[] { "default(System.DateTime)", "new System.DateTime(2024, 1, 1)" },
         ["System.TimeSpan"] = new[] { "System.TimeSpan.Zero", "System.TimeSpan.FromTicks(42)" },
         ["System.Guid"] = new[] { "default(System.Guid)", "System.Guid.NewGuid()" },
-        ["System.Byte[]"] = new[] { "null!", "System.Array.Empty<byte>()", "new byte[]{0, 1, 255}" },
+        ["System.Byte[]"] = new[] { "default(System.Byte[])!", "System.Array.Empty<byte>()", "new byte[]{0, 1, 255}" },
+        ["System.Int32[]"] = new[] { "default(System.Int32[])!", "System.Array.Empty<int>()", "new int[]{0, -1, 42}" },
+        ["System.Int64[]"] = new[] { "default(System.Int64[])!", "System.Array.Empty<long>()", "new long[]{0, -1, 42}" },
+        ["System.DateTimeOffset"] = new[] { "default(System.DateTimeOffset)", "new System.DateTimeOffset(2024, 1, 1, 0, 0, 0, System.TimeSpan.Zero)", "System.DateTimeOffset.MaxValue" },
+        ["System.Version"] = new[] { "default(System.Version)!", "new System.Version(1, 0)", "new System.Version(1, 2, 3, 4)" },
+        ["System.Uri"] = new[] { "default(System.Uri)!", "new System.Uri(\"https://example.com\")", "new System.Uri(\"/relative\", System.UriKind.Relative)" },
+        ["System.Half"] = new[] { "default(System.Half)", "(System.Half)0f", "(System.Half)1f" },
+        ["System.Numerics.BigInteger"] = new[] { "default(System.Numerics.BigInteger)", "System.Numerics.BigInteger.Zero", "System.Numerics.BigInteger.One" },
+        ["System.Numerics.Complex"] = new[] { "default(System.Numerics.Complex)", "new System.Numerics.Complex(0, 0)", "new System.Numerics.Complex(1, 1)" },
+        ["System.Int128"] = new[] { "default(System.Int128)", "(System.Int128)0", "(System.Int128)42" },
+        ["System.UInt128"] = new[] { "default(System.UInt128)", "(System.UInt128)0", "(System.UInt128)42" },
     };
 
     // Known BCL delegate type short names (extracted by DllScanner.GetTypeName)
@@ -66,6 +76,15 @@ public sealed class ValueGenerator
             ? $"System.Collections.Generic.EqualityComparer<{typeArgs[0]}>.Default"
             : "System.Collections.EqualityComparer.Default",
         ["IFormatProvider"] = _ => "System.Globalization.CultureInfo.InvariantCulture",
+        ["ISet"] = typeArgs => $"new System.Collections.Generic.HashSet<{typeArgs[0]}>()",
+        ["IComparable"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Collections.Generic.Comparer<{typeArgs[0]}>.Default"
+            : "System.Collections.Comparer.Default",
+        ["IConvertible"] = _ => "42",
+        ["IEnumerable"] = typeArgs => typeArgs.Length > 0
+            ? $"System.Linq.Enumerable.Empty<{typeArgs[0]}>()"
+            : "System.Linq.Enumerable.Empty<object>()",
+        ["IOrderedEnumerable"] = typeArgs => $"System.Linq.Enumerable.Empty<{typeArgs[0]}>().OrderBy(x => x)",
         ["Stream"] = _ => "System.IO.Stream.Null",
         ["TextReader"] = _ => "System.IO.TextReader.Null",
         ["TextWriter"] = _ => "System.IO.TextWriter.Null",
