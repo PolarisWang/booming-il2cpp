@@ -16,8 +16,8 @@
 #if defined(_MSC_VER)
 #include <intrin.h>  // _ReturnAddress(), __readgsqword
 #else
-#include <x86intrin.h>
-// _ReturnAddress is MSVC-specific; GCC/Clang use __builtin_return_address.
+// _ReturnAddress via __builtin_return_address works on all GCC/Clang targets
+// (no x86intrin.h needed — that header is x86-only and breaks ARM64 cross-compile).
 #define _ReturnAddress() __builtin_return_address(0)
 #endif
 

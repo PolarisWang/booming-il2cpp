@@ -1,0 +1,11 @@
+set(ROADMAP0_TARGET_NAME "linux-arm64" CACHE STRING "Roadmap 0 target id")
+if(ROADMAP0_TOOLCHAIN_VALIDATE_ONLY)
+  set(ROADMAP0_TOOLCHAIN_VALIDATE_ONLY ON CACHE BOOL "Validate preset routing without real toolchain")
+  return()
+endif()
+
+set(CMAKE_SYSTEM_NAME Linux)
+set(CMAKE_SYSTEM_PROCESSOR aarch64)
+set(CMAKE_C_COMPILER aarch64-linux-gnu-gcc)
+set(CMAKE_CXX_COMPILER aarch64-linux-gnu-g++)
+set(ROADMAP0_PLATFORM_GATE "linux-packaging" CACHE STRING "Roadmap 0 gate id")

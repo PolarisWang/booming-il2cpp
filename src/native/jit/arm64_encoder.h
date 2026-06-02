@@ -168,32 +168,32 @@ inline void EmitMvn32(CodeBuffer& buf, uint8_t rd, uint8_t rm) noexcept {
 
 /// 64-bit ADD Rd, Rn, #imm12 (shift=0)
 inline void EmitAdd64Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12) noexcept {
-    EmitArm64(buf, 0x91000000u | (static_cast<uint32_t>(imm12) << 10) | (rn << 5) | rd);
+    EmitArm64(buf, 0x91000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
 }
 
 /// 32-bit ADD Wd, Wn, #imm12
 inline void EmitAdd32Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12) noexcept {
-    EmitArm64(buf, 0x11000000u | (static_cast<uint32_t>(imm12) << 10) | (rn << 5) | rd);
+    EmitArm64(buf, 0x11000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
 }
 
 /// 64-bit SUB Rd, Rn, #imm12
 inline void EmitSub64Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12) noexcept {
-    EmitArm64(buf, 0xD1000000u | (static_cast<uint32_t>(imm12) << 10) | (rn << 5) | rd);
+    EmitArm64(buf, 0xD1000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
 }
 
 /// 32-bit SUB Wd, Wn, #imm12
 inline void EmitSub32Imm(CodeBuffer& buf, uint8_t rd, uint8_t rn, uint16_t imm12) noexcept {
-    EmitArm64(buf, 0x51000000u | (static_cast<uint32_t>(imm12) << 10) | (rn << 5) | rd);
+    EmitArm64(buf, 0x51000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5) | rd);
 }
 
 /// 64-bit CMP Rn, #imm12 (alias for SUBS XZR, Rn, #imm12)
 inline void EmitCmp64Imm(CodeBuffer& buf, uint8_t rn, uint16_t imm12) noexcept {
-    EmitArm64(buf, 0xF1000000u | (static_cast<uint32_t>(imm12) << 10) | (rn << 5));
+    EmitArm64(buf, 0xF1000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5));
 }
 
 /// 32-bit CMP Wn, #imm12
 inline void EmitCmp32Imm(CodeBuffer& buf, uint8_t rn, uint16_t imm12) noexcept {
-    EmitArm64(buf, 0x71000000u | (static_cast<uint32_t>(imm12) << 10) | (rn << 5));
+    EmitArm64(buf, 0x71000000u | (static_cast<uint32_t>(imm12 & 0xFFF) << 10) | (rn << 5));
 }
 
 // ═══════════════════════════════════════════════════════════════════════════

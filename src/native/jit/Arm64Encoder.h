@@ -22,6 +22,49 @@ public:
 
     Arch GetArch() const noexcept override { return Arch::kARM64; }
 
+private:
+    // Decompose large immediate (>12 bits) for ADD/SUB/CMP by loading into
+    // the intra-procedure-call scratch register X17 (IP1).  X17 is always
+    // available as a temporary — it is caller-saved and not used by the
+    // ARM64 register allocator.
+    static constexpr uint8_t kImmScratch = 17;  // X17 (IP1)
+
+    // ── Large immediate decomposition helpers ────────────────────────────
+    void EmitAddRIDecomposed(uint8_t rd, uint8_t rn, int32_t imm) noexcept {
+        if (static_cast<uint32_t>(imm) <= 4095) {
+            EmitAdd64Imm(buf_, rd, rn, static_cast<uint16_t>(imm));
+        } else {
+            EmitLoadImm64(buf_, kImmScratch, static_cast<uint64_t>(static_cast<int64_t>(imm)));
+            EmitAdd64(buf_, rd, rn, kImmScratch);
+        }
+    }
+    void EmitSubRIDecomposed(uint8_t rd, uint8_t rn, int32_t imm) noexcept {
+        if (static_cast<uint32_t>(imm) <= 4095) {
+            EmitSub64Imm(buf_, rd, rn, static_cast<uint16_t>(imm));
+        } else {
+            EmitLoadImm64(buf_, kImmScratch, static_cast<uint64_t>(static_cast<int64_t>(imm)));
+            EmitSub64(buf_, rd, rn, kImmScratch);
+        }
+    }
+    void EmitCmpRIDecomposed(uint8_t rn, int32_t imm) noexcept {
+        if (static_cast<uint32_t>(imm) <= 4095) {
+            EmitCmp64Imm(buf_, rn, static_cast<uint16_t>(imm));
+        } else {
+            EmitLoadImm64(buf_, kImmScratch, static_cast<uint64_t>(static_cast<int64_t>(imm)));
+            EmitCmpRR(rn, kImmScratch);
+        }
+    }
+    void EmitLeaRMDecomposed(uint8_t dst, uint8_t base, int32_t disp) noexcept {
+        if (static_cast<uint32_t>(disp) <= 4095) {
+            EmitAdd64Imm(buf_, dst, base, static_cast<uint16_t>(disp));
+        } else {
+            EmitLoadImm64(buf_, kImmScratch, static_cast<uint64_t>(static_cast<int64_t>(disp)));
+            EmitAdd64(buf_, dst, base, kImmScratch);
+        }
+    }
+
+public:
+
     // ── MOV ──────────────────────────────────────────────────────────────
     void EmitMovRR(uint8_t dst, uint8_t src) override {
         // MOV Xd, Xm = ORR Xd, XZR, Xm
@@ -31,7 +74,7 @@ public:
         EmitLdr64(buf_, dst, base, static_cast<uint16_t>(disp / 8));
     }
     void EmitMovMR(uint8_t base, int32_t disp, uint8_t src) override {
-        EmitStr64(buf_, src, base, static_cast<uint16_t>(disp / 8));
+        chaos::il2cpp::jit::EmitStr64(buf_, src, base, static_cast<uint16_t>(disp / 8));
     }
     void EmitMovImm64(uint8_t dst, uint64_t imm) override {
         EmitLoadImm64(buf_, dst, imm);
@@ -55,10 +98,24 @@ public:
         EmitStr32(buf_, 0, base, static_cast<uint16_t>(disp / 4));
     }
     void EmitLeaRM(uint8_t dst, uint8_t base, int32_t disp) override {
-        EmitAdd64Imm(buf_, dst, base, static_cast<uint16_t>(disp));
+        EmitLeaRMDecomposed(dst, base, disp);
     }
     void EmitLeaRipRel(uint8_t dst, int32_t disp) override {
-        EmitAdr(buf_, dst, disp);
+        chaos::il2cpp::jit::EmitAdr(buf_, dst, disp);
+    }
+
+    // ── ARM64-specific overrides (stub on x64) ─────────────────────────
+    void EmitAdr(uint8_t reg, int32_t imm) noexcept override {
+        chaos::il2cpp::jit::EmitAdr(buf_, reg, imm);
+    }
+    void EmitBr(uint8_t reg) noexcept override {
+        chaos::il2cpp::jit::EmitBr(buf_, reg);
+    }
+    void EmitAddRI(uint8_t dst, uint8_t src, int32_t imm) noexcept override {
+        EmitAddRIDecomposed(dst, src, imm);
+    }
+    void EmitStr64(uint8_t base, uint16_t scaled_offset, uint8_t data) noexcept override {
+        chaos::il2cpp::jit::EmitStr64(buf_, data, base, scaled_offset);
     }
 
     // ── Addition ─────────────────────────────────────────────────────────
@@ -66,7 +123,7 @@ public:
         EmitAdd64(buf_, dst, dst, src);
     }
     void EmitAddRI(uint8_t dst, int32_t imm) override {
-        EmitAdd64Imm(buf_, dst, dst, static_cast<uint16_t>(imm));
+        EmitAddRIDecomposed(dst, dst, imm);
     }
     void EmitAddMR(uint8_t base, int32_t disp, uint8_t src) override {
         // ARM64 LDR + ADD + STR sequence
@@ -76,7 +133,7 @@ public:
         uint8_t tmp = 0;
         EmitLdr64(buf_, tmp, base, static_cast<uint16_t>(disp / 8));
         EmitAdd64(buf_, tmp, tmp, src);
-        EmitStr64(buf_, tmp, base, static_cast<uint16_t>(disp / 8));
+        chaos::il2cpp::jit::EmitStr64(buf_, tmp, base, static_cast<uint16_t>(disp / 8));
     }
     void EmitAdd32RR(uint8_t dst, uint8_t src) override {
         EmitAdd32(buf_, dst, dst, src);
@@ -84,7 +141,7 @@ public:
 
     // ── Subtraction ──────────────────────────────────────────────────────
     void EmitSubRI(uint8_t dst, int32_t imm) override {
-        EmitSub64Imm(buf_, dst, dst, static_cast<uint16_t>(imm));
+        EmitSubRIDecomposed(dst, dst, imm);
     }
     void EmitSubRR(uint8_t dst, uint8_t src) override {
         EmitSub64(buf_, dst, dst, src);
@@ -132,7 +189,7 @@ public:
         uint8_t tmp = 0;
         EmitLdr64(buf_, tmp, base, static_cast<uint16_t>(disp / 8));
         EmitEor64(buf_, tmp, tmp, src);
-        EmitStr64(buf_, tmp, base, static_cast<uint16_t>(disp / 8));
+        chaos::il2cpp::jit::EmitStr64(buf_, tmp, base, static_cast<uint16_t>(disp / 8));
     }
     void EmitXorRM(uint8_t dst, uint8_t base, int32_t disp) override {
         // dst = dst ^ [base+disp]; use X0 as temp
@@ -191,8 +248,7 @@ public:
         EmitArm64(buf_, 0x6B000000u | (rhs << 16) | (lhs << 5) | 31);
     }
     void EmitCmpRI(uint8_t reg, int32_t imm) override {
-        // CMP Xn, #imm = SUBS XZR, Xn, #imm
-        EmitArm64(buf_, 0xF1000000u | (static_cast<uint32_t>(imm) << 10) | (reg << 5));
+        EmitCmpRIDecomposed(reg, imm);
     }
     void EmitCmpMI(uint8_t base, int32_t disp, int32_t imm) override {
         // LDR + CMP sequence
@@ -230,7 +286,7 @@ public:
         EmitBCond(buf_, arm_cond, offset);
     }
     void EmitJmpReg(uint8_t reg) override {
-        EmitBr(buf_, reg);
+        chaos::il2cpp::jit::EmitBr(buf_, reg);
     }
     void EmitCallRel32(int32_t offset) override {
         EmitBl(buf_, offset);
@@ -449,7 +505,7 @@ public:
         }
         uint8_t tmp_gpr = 10;   // X10 — temp addr register (caller-saved)
         uint8_t tmp_vec = 31;   // V31 — temp mask register
-        EmitAdr(buf_, tmp_gpr, 12);  // points to mask data after ADR(4)+LDR(4)+TBL(4)
+        chaos::il2cpp::jit::EmitAdr(buf_, tmp_gpr, 12);  // points to mask data after ADR(4)+LDR(4)+TBL(4)
         EmitLdrQ(buf_, tmp_vec, tmp_gpr, 0);
         EmitTbl1(buf_, dst, src, tmp_vec);
         // Emit 16-byte mask as 4 little-endian words

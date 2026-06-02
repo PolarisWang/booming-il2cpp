@@ -108,6 +108,17 @@
       "cacheVariables": {
         "ROADMAP0_PRESET_TARGET": "linux-x64-packaging"
       }
+    },
+    {
+      "name": "linux-arm64-smoke",
+      "displayName": "Roadmap0 Linux arm64 Smoke",
+      "description": "Linux ARM64 cross-compile smoke test (aarch64-linux-gnu-gcc + QEMU).",
+      "generator": "Ninja",
+      "binaryDir": "artifacts/presets/linux-arm64-smoke",
+      "toolchainFile": "build/toolchains/linux-arm64.cmake",
+      "cacheVariables": {
+        "ROADMAP0_PRESET_TARGET": "linux-arm64-smoke"
+      }
     }
   ]
 }

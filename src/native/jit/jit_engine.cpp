@@ -124,6 +124,27 @@ static constexpr uint32_t kLocalRegBase  = 8;
 // Used by the hotpatch callback to update RX slot tables when a method is patched.
 ReverseSlotMap g_reverse_slot_map;
 
+// ARM64: patch a forward B.cond instruction (local forward jump).
+// On ARM64, B.cond has a 19-bit imm19 field (±1MB).  For forward jumps
+// within the same basic block (always < 1MB), reconstruct the instruction
+// with the correct imm19 encoding.
+#if defined(__aarch64__)
+inline void PatchArm64Bcond(CodeBuffer& buf, uint32_t patch_pos, uint32_t target_pos) noexcept {
+    int32_t disp = static_cast<int32_t>(target_pos - (patch_pos + 4));
+    uint32_t instr = buf.Load32(patch_pos);
+    uint32_t imm19 = (static_cast<uint32_t>(disp) >> 2) & 0x7FFFF;
+    buf.Patch32(patch_pos, (instr & 0xFF00001Fu) | (imm19 << 5));
+}
+/// ARM64: patch a forward B (unconditional) instruction.
+/// B has a 26-bit imm26 field (±128MB), sufficient for any method-local jump.
+inline void PatchArm64B(CodeBuffer& buf, uint32_t patch_pos, uint32_t target_pos) noexcept {
+    int32_t disp = static_cast<int32_t>(target_pos - (patch_pos + 4));
+    uint32_t instr = buf.Load32(patch_pos);
+    uint32_t imm26 = (static_cast<uint32_t>(disp) >> 2) & 0x3FFFFFF;
+    buf.Patch32(patch_pos, (instr & 0xFC000000u) | imm26);
+}
+#endif
+
 // Internal class that drives code generation.
 class NativeCodeGenerator {
 public:
@@ -869,6 +890,41 @@ void NativeCodeGenerator::EmitShift(
 
 void NativeCodeGenerator::ResolveBranches() noexcept {
     CHAOS_IL2CPP_PROFILE_SCOPE("Codegen::ResolveBranches");
+#if defined(__aarch64__)
+    for (auto& bp : branch_patches_) {
+        if (bp.target_instr >= instr_offsets_.size()) {
+            // Out of bounds target — patch to B #4 (skip next instruction, i.e. no-op).
+            buf_.Patch32(bp.patch_offset, 0x14000001u);  // B #4
+            continue;
+        }
+        uint32_t target_off = instr_offsets_[bp.target_instr];
+        uint32_t current_off = bp.patch_offset;
+        int64_t disp = static_cast<int64_t>(target_off) - static_cast<int64_t>(current_off);
+        uint32_t instr = buf_.Load32(bp.patch_offset);
+        uint8_t opcode = static_cast<uint8_t>(instr >> 24);
+        if (opcode == 0x54) {
+            // B.cond (condition code at bits [0:4], imm19 at bits [5:23])
+            int64_t max_disp = 1048576;  // ±1MB
+            if (disp < -max_disp || disp > max_disp) {
+                // Out of range — emit trampoline B at end of buffer
+                uint32_t tramp_off = buf_.pos();
+                int64_t tramp_disp = static_cast<int64_t>(target_off) - static_cast<int64_t>(tramp_off + 4);
+                uint32_t tramp_imm26 = (static_cast<uint32_t>(tramp_disp) >> 2) & 0x3FFFFFF;
+                buf_.Emit32(0x14000000u | tramp_imm26);  // B target
+                // Redirect original B.cond to trampoline
+                disp = static_cast<int64_t>(tramp_off) - current_off;
+            }
+            uint32_t imm19 = (static_cast<uint32_t>(disp) >> 2) & 0x7FFFF;
+            uint32_t new_instr = (instr & 0xFF00001Fu) | (imm19 << 5);
+            buf_.Patch32(bp.patch_offset, new_instr);
+        } else {
+            // B (unconditional, 26-bit imm26, ±128MB range)
+            uint32_t imm26 = (static_cast<uint32_t>(disp) >> 2) & 0x3FFFFFF;
+            uint32_t new_instr = (instr & 0xFC000000u) | imm26;
+            buf_.Patch32(bp.patch_offset, new_instr);
+        }
+    }
+#else
     for (auto& bp : branch_patches_) {
         if (bp.target_instr >= instr_offsets_.size()) {
             buf_.Patch32(bp.patch_offset, 0);
@@ -879,6 +935,7 @@ void NativeCodeGenerator::ResolveBranches() noexcept {
         int32_t disp = static_cast<int32_t>(target_off - current_off);
         buf_.Patch32(bp.patch_offset, static_cast<uint32_t>(disp));
     }
+#endif
     uint32_t deopt_ret_off = deopt_return_pos_;
     for (auto& djp : deopt_jump_patches_) {
         int32_t disp = static_cast<int32_t>(deopt_ret_off - (djp.patch_offset + 4));
@@ -1401,10 +1458,14 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             }
             EmitDeoptSequence(current_instr_index_, osr_pc);
             uint32_t no_overflow = buf_.pos();
+#if defined(__aarch64__)
+            PatchArm64Bcond(buf_, jno_pos, no_overflow);
+#else
             // JccRel32 is 6 bytes: 0F 8x + 4-byte offset at jno_pos+2.
             // Displacement is from end of instruction (jno_pos + 6).
             int32_t disp = static_cast<int32_t>(no_overflow - (jno_pos + 6));
             buf_.Patch32(jno_pos + 2, static_cast<uint32_t>(disp));
+#endif
         }
         StoreGpr(op_reg, instr.dst_reg());
         return true;
@@ -1451,7 +1512,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         LoadGpr(cmp_a, instr.src1_reg()); LoadGpr(cmp_b, instr.src2_reg());
         enc_.EmitCmpRR(cmp_a, cmp_b);
         uint8_t jcc = (instr.op_code() == IROpCode::Beq) ? kCC_E : kCC_NE;
-        uint32_t patch_off = buf_.pos() + 2;
+        uint32_t patch_off
+#if defined(__aarch64__)
+            = buf_.pos();
+#else
+            = buf_.pos() + 2;
+#endif
         enc_.EmitJccRel32(jcc, 0);
         branch_patches_.push_back({patch_off, instr.imm.branch_target});
         return true;
@@ -1477,7 +1543,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         LoadGpr(cmp_a, instr.src1_reg()); LoadGpr(cmp_b, instr.src2_reg());
         enc_.EmitCmp32RR(cmp_a, cmp_b);
         uint8_t jcc = CmpToJccSigned(instr.op_code());
-        uint32_t patch_off = buf_.pos() + 2;
+        uint32_t patch_off
+#if defined(__aarch64__)
+            = buf_.pos();
+#else
+            = buf_.pos() + 2;
+#endif
         enc_.EmitJccRel32(jcc, 0);
         branch_patches_.push_back({patch_off, instr.imm.branch_target});
         return true;
@@ -1495,7 +1566,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         LoadGpr(test_reg, instr.src1_reg());
         enc_.EmitTestRR(test_reg, test_reg);
         uint8_t jcc = (instr.op_code() == IROpCode::BrTrue) ? kCC_NE : kCC_E;
-        uint32_t patch_off = buf_.pos() + 2;
+        uint32_t patch_off
+#if defined(__aarch64__)
+            = buf_.pos();
+#else
+            = buf_.pos() + 2;
+#endif
         enc_.EmitJccRel32(jcc, 0);
         branch_patches_.push_back({patch_off, target});
         return true;
@@ -1521,7 +1597,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
             // Bounds check: if (value >= target_count) goto default
             enc_.EmitCmpRI(AT::kScratchA, static_cast<int32_t>(target_count));
-            uint32_t default_patch_off = buf_.pos() + 2;
+            uint32_t default_patch_off
+#if defined(__aarch64__)
+                = buf_.pos();
+#else
+                = buf_.pos() + 2;
+#endif
             enc_.EmitJccRel32(kCC_AE, 0);
             branch_patches_.push_back({default_patch_off, targets[target_count]});
 
@@ -1561,12 +1642,22 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             // ── Linear chain for small switches (< 4 cases) ──────────
             for (uint32_t i = 0; i < target_count; ++i) {
                 enc_.EmitCmpRI(AT::kScratchA, static_cast<int32_t>(i));
-                uint32_t patch_off = buf_.pos() + 2;
+                uint32_t patch_off
+#if defined(__aarch64__)
+                    = buf_.pos();
+#else
+                    = buf_.pos() + 2;
+#endif
                 enc_.EmitJccRel32(kCC_E, 0);
                 branch_patches_.push_back({patch_off, targets[i]});
             }
             // No match: jump to default target at targets[target_count]
-            uint32_t default_patch_off = buf_.pos() + 1;
+            uint32_t default_patch_off
+#if defined(__aarch64__)
+                = buf_.pos();
+#else
+                = buf_.pos() + 1;
+#endif
             enc_.EmitJmpRel32(0);
             branch_patches_.push_back({default_patch_off, targets[target_count]});
         }
@@ -1605,17 +1696,31 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             enc_.EmitJmpReg(AT::kScratchA);                            // jmp rax → handler
             // .normal_jmp: fall through to normal leave JMP
             uint32_t normal_pos = buf_.pos();
+#if defined(__aarch64__)
+            PatchArm64Bcond(buf_, jz_pos, normal_pos);
+#else
             int32_t jz_disp = static_cast<int32_t>(normal_pos - (jz_pos + 6));
             buf_.Patch32(jz_pos + 2, static_cast<uint32_t>(jz_disp));
+#endif
             // Normal JMP to leave target (JitLeaveHelper returned 0 or
             // finally chain completed and returned to leave path).
-            uint32_t patch_off = buf_.pos() + 1;
+            uint32_t patch_off
+#if defined(__aarch64__)
+                = buf_.pos();
+#else
+                = buf_.pos() + 1;
+#endif
             enc_.EmitJmpRel32(0);
             branch_patches_.push_back({patch_off, target});
         } else {
             // No finally/fault covering — normal JMP (current behavior).
             if (target < current_instr_index_) EmitSafepointPoll();
-            uint32_t patch_off = buf_.pos() + 1;
+            uint32_t patch_off
+#if defined(__aarch64__)
+                = buf_.pos();
+#else
+                = buf_.pos() + 1;
+#endif
             enc_.EmitJmpRel32(0);
             branch_patches_.push_back({patch_off, target});
         }
@@ -1633,8 +1738,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         enc_.EmitJmpReg(AT::kScratchA);            // jmp rax → next handler/leave target
         // .continue: normal fall-through
         uint32_t continue_pos = buf_.pos();
+#if defined(__aarch64__)
+        PatchArm64Bcond(buf_, jz_pos, continue_pos);
+#else
         int32_t jz_disp = static_cast<int32_t>(continue_pos - (jz_pos + 6));
         buf_.Patch32(jz_pos + 2, static_cast<uint32_t>(jz_disp));
+#endif
         return true;
     }
 
@@ -1666,10 +1775,15 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         enc_.EmitJmpReg(AT::kScratchA);                    // jmp to next handler
         // .accept: fall through to the handler block (sequentially after EndFilter).
         uint32_t accept_pos = buf_.pos();
+#if defined(__aarch64__)
+        PatchArm64Bcond(buf_, jne_pos, accept_pos);
+        PatchArm64Bcond(buf_, jz_pos, accept_pos);
+#else
         int32_t jne_disp = static_cast<int32_t>(accept_pos - (jne_pos + 6));
         buf_.Patch32(jne_pos + 2, static_cast<uint32_t>(jne_disp));
         int32_t jz_disp = static_cast<int32_t>(accept_pos - (jz_pos + 6));
         buf_.Patch32(jz_pos + 2, static_cast<uint32_t>(jz_disp));
+#endif
         return true;
     }
 
@@ -1747,8 +1861,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             enc_.EmitJccRel32(kCC_NE, 0);      // jne → deopt (overflow)
             EmitDeoptSequence(current_instr_index_);
             uint32_t no_overflow = buf_.pos();
+#if defined(__aarch64__)
+            PatchArm64Bcond(buf_, jne_pos, no_overflow);
+#else
             int32_t disp = static_cast<int32_t>(no_overflow - (jne_pos + 6));
             buf_.Patch32(jne_pos + 2, static_cast<uint32_t>(disp));
+#endif
         }
         // Result: truncated 32-bit value in EAX (zero-extended to 64-bit in RAX)
         StoreGpr(AT::kScratchA, instr.dst_reg());
@@ -1769,8 +1887,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             enc_.EmitJccRel32(kCC_NE, 0);
             EmitDeoptSequence(current_instr_index_);
             uint32_t no_overflow = buf_.pos();
+#if defined(__aarch64__)
+            PatchArm64Bcond(buf_, jne_pos, no_overflow);
+#else
             int32_t disp = static_cast<int32_t>(no_overflow - (jne_pos + 6));
             buf_.Patch32(jne_pos + 2, static_cast<uint32_t>(disp));
+#endif
         } else {
             // ConvOvfU / ConvOvfU8: check sign bit
             enc_.EmitTestRR(AT::kScratchA, AT::kScratchA);
@@ -1778,8 +1900,12 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             enc_.EmitJccRel32(kCC_S, 0);
             EmitDeoptSequence(current_instr_index_);
             uint32_t non_neg = buf_.pos();
+#if defined(__aarch64__)
+            PatchArm64Bcond(buf_, js_pos, non_neg);
+#else
             int32_t disp = static_cast<int32_t>(non_neg - (js_pos + 6));
             buf_.Patch32(js_pos + 2, static_cast<uint32_t>(disp));
+#endif
         }
         StoreGpr(AT::kScratchA, instr.dst_reg());
         return true;
@@ -1909,14 +2035,22 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         enc_.EmitJmpRel32(0);                       // jmp .done
         // Slow path: marking → CodegenStFld (full SATB barrier)
         uint32_t marking_pos = buf_.pos();
+#if defined(__aarch64__)
+        PatchArm64Bcond(buf_, marking_jmp_pos, marking_pos);
+#else
         buf_.Patch32(marking_jmp_pos + 2, marking_pos - (marking_jmp_pos + 6));
+#endif
         // Reload args (spilled/colored regs may differ in slow path)
         LoadGpr(AT::kScratchB, instr.src1_reg());
         enc_.EmitMovRIImm32(AT::kScratchC, instr.imm.field_offset);
         LoadGpr(AT::kExtraScratch0, instr.src2_reg());
         EmitRuntimeHelperCall(::CodegenStFld);
         uint32_t done_pos = buf_.pos();
+#if defined(__aarch64__)
+        PatchArm64B(buf_, done_jmp_pos, done_pos);
+#else
         buf_.Patch32(done_jmp_pos + 1, done_pos - (done_jmp_pos + 5));
+#endif
         return true;
     }
 
@@ -1968,7 +2102,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
             // ═══ Slow path (TLAB miss) ═══
             uint32_t newobj_slow_pos = buf_.pos();
+#if defined(__aarch64__)
+            PatchArm64Bcond(buf_, newobj_ja_pos, newobj_slow_pos);
+#else
             buf_.Patch32(newobj_ja_pos + 2, newobj_slow_pos - (newobj_ja_pos + 6));
+#endif
 
             {
                 enc_.EmitMovRIImm32(AT::kScratchB, type_token);
@@ -1988,7 +2126,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
             }
 
             uint32_t newobj_done_pos = buf_.pos();
+#if defined(__aarch64__)
+            PatchArm64B(buf_, newobj_jmp_done_pos, newobj_done_pos);
+#else
             buf_.Patch32(newobj_jmp_done_pos + 1, newobj_done_pos - (newobj_jmp_done_pos + 5));
+#endif
         } else {
             // Object too large for TLAB inline — direct GC allocation
             enc_.EmitMovRIImm32(AT::kScratchB, type_token);
@@ -2049,7 +2191,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
         // ═══ Slow path (TLAB miss) ═══
         uint32_t box_slow_pos = buf_.pos();
+#if defined(__aarch64__)
+        PatchArm64Bcond(buf_, box_ja_pos, box_slow_pos);
+#else
         buf_.Patch32(box_ja_pos + 2, box_slow_pos - (box_ja_pos + 6));
+#endif
 
         {
             LoadGpr(AT::kScratchB, instr.src1_reg());
@@ -2070,7 +2216,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         }
 
         uint32_t box_done_pos = buf_.pos();
+#if defined(__aarch64__)
+        PatchArm64B(buf_, box_jmp_done_pos, box_done_pos);
+#else
         buf_.Patch32(box_jmp_done_pos + 1, box_done_pos - (box_jmp_done_pos + 5));
+#endif
         return true;
     }
 
@@ -2129,7 +2279,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
 
         // ═══ Slow path (TLAB miss) ═══
         uint32_t newarr_slow_pos = buf_.pos();
+#if defined(__aarch64__)
+        PatchArm64Bcond(buf_, newarr_ja_pos, newarr_slow_pos);
+#else
         buf_.Patch32(newarr_ja_pos + 2, newarr_slow_pos - (newarr_ja_pos + 6));
+#endif
 
         LoadGpr(AT::kScratchB, instr.src1_reg());
         uint32_t call_pos = EmitRuntimeHelperCall(::CodegenNewArr);
@@ -2146,7 +2300,11 @@ bool NativeCodeGenerator::EmitInstruction(const interpreter::RegisterInstruction
         StoreGpr(AT::kScratchA, instr.dst_reg());
 
         uint32_t newarr_done_pos = buf_.pos();
+#if defined(__aarch64__)
+        PatchArm64B(buf_, newarr_jmp_done_pos, newarr_done_pos);
+#else
         buf_.Patch32(newarr_jmp_done_pos + 1, newarr_done_pos - (newarr_jmp_done_pos + 5));
+#endif
         return true;
     }
 

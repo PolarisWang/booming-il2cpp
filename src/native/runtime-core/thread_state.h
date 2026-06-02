@@ -147,12 +147,12 @@ struct ManagedThread {
     /// Safepoint wait start timestamp (ns since epoch), for timeout detection.
     uint64_t safepoint_wait_start_ns{0};
 
-    /// Set to true when this thread is preemptively suspended (POSIX SIGUSR1).
+    /// Set to true when this thread is preemptively suspended (POSIX SIGUSR2).
     std::atomic<bool> preemptive_suspended{false};
 
     /// OS thread ID for pthread_kill-based preemptive suspend (Linux).
     /// Populated by PalGetCurrentThreadId().  Used on Linux (non-Apple,
-    /// non-Android) for SIGUSR1-based preemptive suspend.
+    /// non-Android) for SIGUSR2-based preemptive suspend.
     /// Zero on platforms that don't support signal-based suspend.
     uint64_t os_thread_id{0};
 

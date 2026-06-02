@@ -148,7 +148,7 @@ namespace chaos { namespace il2cpp { namespace common {
         #define CHAOS_IL2CPP_PAUSE_HINT()  _mm_pause()
     #endif
 #elif defined(__aarch64__) || defined(_M_ARM64)
-    #define CHAOS_IL2CPP_PAUSE_HINT()  __yield()
+    #define CHAOS_IL2CPP_PAUSE_HINT()  __asm__ __volatile__("yield" ::: "memory")
 #else
     #define CHAOS_IL2CPP_PAUSE_HINT()  __builtin_ia32_pause()
 #endif

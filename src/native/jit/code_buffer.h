@@ -100,6 +100,16 @@ public:
         data_[offset + 3] = static_cast<uint8_t>(v >> 24);
     }
 
+    /// Read a 4-byte value at a given offset (for branch fixups on ARM64,
+    /// where we need to reconstruct the instruction with new imm19/imm26).
+    uint32_t Load32(uint32_t offset) const noexcept {
+        if (offset + 4 > pos_) return 0;
+        return static_cast<uint32_t>(data_[offset])
+             | (static_cast<uint32_t>(data_[offset + 1]) << 8)
+             | (static_cast<uint32_t>(data_[offset + 2]) << 16)
+             | (static_cast<uint32_t>(data_[offset + 3]) << 24);
+    }
+
     /// Patch a 1-byte value at a given offset.
     void Patch8(uint32_t offset, uint8_t v) noexcept {
         if (offset < pos_) data_[offset] = v;

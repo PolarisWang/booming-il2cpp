@@ -48,13 +48,9 @@ bool chaos::il2cpp::common::log_internal::g_log_use_stderr = false;
 #include "gc_transition.h"
 
 
-// Spin-loop hint (x86 PAUSE / ARM YIELD)
-#if defined(_M_ARM64) || defined(__aarch64__)
-    #define CHAOS_SPIN_HINT()  __yield()
-#else
-    #include <immintrin.h>
-    #define CHAOS_SPIN_HINT()  _mm_pause()
-#endif
+// Spin-loop hint — delegates to the portable CHAOS_IL2CPP_PAUSE_HINT macro
+// (__yield on ARM64, _mm_pause on x86, defined in chaos/native_types.h)
+#define CHAOS_SPIN_HINT()  CHAOS_IL2CPP_PAUSE_HINT()
 #include <cstring>
 #include <memory>
 #include <mutex>
